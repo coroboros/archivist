@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/python/beta/skills/list"
 category: "api"
 generated: true
 ---
----
-title: List Skills
-url: https://platform.claude.com/docs/en/api/python/beta/skills/list
----
+# List Skills
 
-## List Skills
+`beta.skills.list(**kwargs)  -> SyncPageCursor[SkillListResponse]`
 
-`beta.skills.list(SkillListParams**kwargs)  -> SyncPageCursor[SkillListResponse]`
-
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
-### Parameters
+## Parameters
 
 - `limit: Optional[int]`
 
   Number of results to return per page.
 
   Maximum value is 100. Defaults to 20.
+
+  default: 20
 
 - `page: Optional[str]`
 
@@ -116,7 +113,7 @@ List Skills
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class SkillListResponse: …`
 
@@ -157,11 +154,13 @@ List Skills
 
     For Skills, this is always `"skill"`.
 
+    default: skill
+
   - `updated_at: str`
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```python
 import os
@@ -177,7 +176,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

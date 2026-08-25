@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/ruby/messages/batches"
 category: "api"
 generated: true
 ---
----
-title: Batches
-url: https://platform.claude.com/docs/en/api/ruby/messages/batches
----
-
 # Batches
 
 ## Create a Message Batch
 
 `messages.batches.create(**kwargs) -> MessageBatch`
 
-**post** `/v1/messages/batches`
+**POST** `/v1/messages/batches`
 
 Send a batch of Message creation requests.
 
@@ -25,9 +20,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `requests: Array[Request{ custom_id, params}]`
+- `requests: Array[Request]`
 
   List of requests for prompt completion. Each is an individual request to create a Message.
+
+  maxItems: 100000, minItems: 1
 
   - `custom_id: String`
 
@@ -35,7 +32,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Must be unique for each request within the Message Batch.
 
-  - `params: Params{ max_tokens, messages, model, 15 more}`
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
+
+  - `params: Params`
 
     Messages API creation parameters for the individual request.
 
@@ -50,6 +49,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       Set to `0` to populate the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md#pre-warming-the-cache) without generating a response.
 
       Different models have different maximum values for this parameter.  See [models](../about-claude/about-claude-models-overview.md) for details.
+
+      minimum: 0
 
     - `messages: Array[MessageParam]`
 
@@ -112,17 +113,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `text: String`
 
-            - `type: :text`
+              minLength: 1
 
-              - `:text`
+            - `type: :text`
 
             - `cache_control: CacheControlEphemeral`
 
               Create a cache control breakpoint at this content block.
 
               - `type: :ephemeral`
-
-                - `:ephemeral`
 
               - `ttl: :"5m" | :"1h"`
 
@@ -147,15 +146,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: Integer`
 
+                  minimum: 0
+
                 - `document_title: String`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_char_index: Integer`
 
                 - `start_char_index: Integer`
 
-                - `type: :char_location`
+                  minimum: 0
 
-                  - `:char_location`
+                - `type: :char_location`
 
               - `class CitationPageLocationParam`
 
@@ -163,15 +166,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: Integer`
 
+                  minimum: 0
+
                 - `document_title: String`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_page_number: Integer`
 
                 - `start_page_number: Integer`
 
-                - `type: :page_location`
+                  minimum: 1
 
-                  - `:page_location`
+                - `type: :page_location`
 
               - `class CitationContentBlockLocationParam`
 
@@ -183,7 +190,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: Integer`
 
+                  minimum: 0
+
                 - `document_title: String`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_block_index: Integer`
 
@@ -195,9 +206,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `type: :content_block_location`
+                  minimum: 0
 
-                  - `:content_block_location`
+                - `type: :content_block_location`
 
               - `class CitationWebSearchResultLocationParam`
 
@@ -207,11 +218,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
+                  maxLength: 512, minLength: 1
+
                 - `type: :web_search_result_location`
 
-                  - `:web_search_result_location`
-
                 - `url: String`
+
+                  minLength: 1
 
               - `class CitationSearchResultLocationParam`
 
@@ -233,17 +246,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: String`
 
                 - `start_block_index: Integer`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: String`
 
                 - `type: :search_result_location`
-
-                  - `:search_result_location`
 
           - `class ImageBlockParam`
 
@@ -252,6 +267,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `class Base64ImageSource`
 
                 - `data: String`
+
+                  format: byte
 
                 - `media_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"`
 
@@ -265,13 +282,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :base64`
 
-                  - `:base64`
-
               - `class URLImageSource`
 
                 - `type: :url`
-
-                  - `:url`
 
                 - `url: String`
 
@@ -281,11 +294,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :file`
 
-                  - `:file`
-
             - `type: :image`
-
-              - `:image`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -311,13 +320,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `data: String`
 
+                  format: byte
+
                 - `media_type: :"application/pdf"`
 
-                  - `:"application/pdf"`
-
                 - `type: :base64`
-
-                  - `:base64`
 
               - `class PlainTextSource`
 
@@ -325,11 +332,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `media_type: :"text/plain"`
 
-                  - `:"text/plain"`
-
                 - `type: :text`
-
-                  - `:text`
 
               - `class ContentBlockSource`
 
@@ -345,13 +348,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :content`
 
-                  - `:content`
-
               - `class URLPDFSource`
 
                 - `type: :url`
-
-                  - `:url`
 
                 - `url: String`
 
@@ -361,11 +360,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :file`
 
-                  - `:file`
-
             - `type: :document`
-
-              - `:document`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -377,13 +372,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `context: String`
 
+              minLength: 1
+
             - `title: String`
+
+              maxLength: 500, minLength: 1
 
           - `class SearchResultBlockParam`
 
             - `content: Array[TextBlockParam]`
 
               - `text: String`
+
+                minLength: 1
 
               - `type: :text`
 
@@ -398,8 +399,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `title: String`
 
             - `type: :search_result`
-
-              - `:search_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -421,8 +420,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :thinking`
 
-              - `:thinking`
-
           - `class RedactedThinkingBlockParam`
 
             - `data: String`
@@ -431,19 +428,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :redacted_thinking`
 
-              - `:redacted_thinking`
-
           - `class ToolUseBlockParam`
 
             - `id: String`
+
+              pattern: ^[a-zA-Z0-9_-]+$
 
             - `input: Hash[Symbol, untyped]`
 
             - `name: String`
 
-            - `type: :tool_use`
+              maxLength: 200, minLength: 1
 
-              - `:tool_use`
+            - `type: :tool_use`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -459,37 +456,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :direct`
 
-                  - `:direct`
-
               - `class ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20250825`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20250825`
+                - `type: :code_execution_20250825`
 
               - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20260120`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20260120`
+                - `type: :code_execution_20260120`
 
             - `toolset_name: String`
 
               For a toolset member tool_use, the toolset family this member belongs to.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ToolResultBlockParam`
 
             - `tool_use_id: String`
 
-            - `type: :tool_result`
+              pattern: ^[a-zA-Z0-9_-]+$
 
-              - `:tool_result`
+            - `type: :tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -515,9 +512,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `tool_name: String`
 
-                  - `type: :tool_reference`
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `:tool_reference`
+                  - `type: :tool_reference`
 
                   - `cache_control: CacheControlEphemeral`
 
@@ -537,25 +534,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                    maxItems: 100
+
                     - `tab_id: String`
 
                       The caller-assigned identifier for this tab, unique within the inventory.
+
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `title: String`
 
                       The title of the page the tab is showing. May be empty.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `url: String`
 
                       The URL of the page the tab is showing. May be empty.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `active: bool`
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
                   - `type: :browser_state`
-
-                    - `:browser_state`
 
                   - `cache_control: CacheControlEphemeral`
 
@@ -564,6 +567,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `state_changes: Array[BrowserStateChange]`
 
                     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                    maxItems: 200, minItems: 1
 
                     - `class BrowserStateChangeTabOpened`
 
@@ -579,9 +584,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
-                      - `type: :tab_opened`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `:tab_opened`
+                      - `type: :tab_opened`
 
                     - `class BrowserStateChangeDownloadStarted`
 
@@ -591,13 +596,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: :download_started`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `:download_started`
+                      - `type: :download_started`
 
                       - `url: String`
 
                         The final post-redirect URL the download was served from.
+
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `class BrowserStateChangeDownloadCompleted`
 
@@ -610,21 +617,27 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: :download_completed`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `:download_completed`
+                      - `type: :download_completed`
 
                       - `url: String`
 
                         The final post-redirect URL the download was served from.
 
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                       - `path: String`
 
                         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                       - `size_bytes: Integer`
 
                         The completed download's size.
+
+                        minimum: 0
 
                     - `class BrowserStateChangeDownloadFailed`
 
@@ -634,17 +647,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: :download_failed`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `:download_failed`
+                      - `type: :download_failed`
 
                       - `url: String`
 
                         The final post-redirect URL the download was served from.
 
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                       - `error: String`
 
                         The failure or cancellation detail, when known.
+
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
             - `is_error: bool`
 
@@ -652,9 +669,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               For a toolset member tool_result, the toolset family of the paired tool_use.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlockParam`
 
             - `id: String`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `input: Hash[Symbol, untyped]`
 
@@ -675,8 +696,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `:tool_search_tool_bm25`
 
             - `type: :server_tool_use`
-
-              - `:server_tool_use`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -708,8 +727,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_search_result`
 
-                  - `:web_search_result`
-
                 - `url: String`
 
                 - `page_age: String`
@@ -732,13 +749,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_search_tool_result_error`
 
-                  - `:web_search_tool_result_error`
-
             - `tool_use_id: String`
 
-            - `type: :web_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_search_tool_result`
+            - `type: :web_search_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -786,15 +801,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_fetch_tool_result_error`
 
-                  - `:web_fetch_tool_result_error`
-
               - `class WebFetchBlockParam`
 
                 - `content: DocumentBlockParam`
 
                 - `type: :web_fetch_result`
-
-                  - `:web_fetch_result`
 
                 - `url: String`
 
@@ -806,9 +817,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: String`
 
-            - `type: :web_fetch_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_fetch_tool_result`
+            - `type: :web_fetch_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -848,8 +859,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :code_execution_tool_result_error`
 
-                  - `:code_execution_tool_result_error`
-
               - `class CodeExecutionResultBlockParam`
 
                 - `content: Array[CodeExecutionOutputBlockParam]`
@@ -858,8 +867,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: :code_execution_output`
 
-                    - `:code_execution_output`
-
                 - `return_code: Integer`
 
                 - `stderr: String`
@@ -867,8 +874,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `stdout: String`
 
                 - `type: :code_execution_result`
-
-                  - `:code_execution_result`
 
               - `class EncryptedCodeExecutionResultBlockParam`
 
@@ -888,13 +893,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :encrypted_code_execution_result`
 
-                  - `:encrypted_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:code_execution_tool_result`
+            - `type: :code_execution_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -920,8 +923,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :bash_code_execution_tool_result_error`
 
-                  - `:bash_code_execution_tool_result_error`
-
               - `class BashCodeExecutionResultBlockParam`
 
                 - `content: Array[BashCodeExecutionOutputBlockParam]`
@@ -929,8 +930,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `file_id: String`
 
                   - `type: :bash_code_execution_output`
-
-                    - `:bash_code_execution_output`
 
                 - `return_code: Integer`
 
@@ -940,13 +939,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :bash_code_execution_result`
 
-                  - `:bash_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :bash_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:bash_code_execution_tool_result`
+            - `type: :bash_code_execution_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -972,8 +969,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_tool_result_error`
 
-                  - `:text_editor_code_execution_tool_result_error`
-
                 - `error_message: String`
 
               - `class TextEditorCodeExecutionViewResultBlockParam`
@@ -990,8 +985,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_view_result`
 
-                  - `:text_editor_code_execution_view_result`
-
                 - `num_lines: Integer`
 
                 - `start_line: Integer`
@@ -1004,13 +997,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_create_result`
 
-                  - `:text_editor_code_execution_create_result`
-
               - `class TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                 - `type: :text_editor_code_execution_str_replace_result`
-
-                  - `:text_editor_code_execution_str_replace_result`
 
                 - `lines: Array[String]`
 
@@ -1024,9 +1013,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: String`
 
-            - `type: :text_editor_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:text_editor_code_execution_tool_result`
+            - `type: :text_editor_code_execution_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -1050,8 +1039,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :tool_search_tool_result_error`
 
-                  - `:tool_search_tool_result_error`
-
                 - `error_message: String`
 
               - `class ToolSearchToolSearchResultBlockParam`
@@ -1059,6 +1046,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `tool_references: Array[ToolReferenceBlockParam]`
 
                   - `tool_name: String`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                   - `type: :tool_reference`
 
@@ -1068,13 +1057,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :tool_search_tool_search_result`
 
-                  - `:tool_search_tool_search_result`
-
             - `tool_use_id: String`
 
-            - `type: :tool_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:tool_search_tool_result`
+            - `type: :tool_search_tool_result`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -1088,8 +1075,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `file_id: String`
 
             - `type: :container_upload`
-
-              - `:container_upload`
 
             - `cache_control: CacheControlEphemeral`
 
@@ -1197,9 +1182,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           List of skills to load in the container
 
+          maxItems: 20
+
           - `skill_id: String`
 
             Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `type: :anthropic | :custom`
 
@@ -1212,6 +1201,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `version: String`
 
             Skill version or 'latest' for most recent version
+
+            maxLength: 64, minLength: 1
 
       - `String = String`
 
@@ -1228,6 +1219,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         An external identifier for the user who is associated with the request.
 
         This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+        maxLength: 512
 
     - `output_config: OutputConfig`
 
@@ -1256,8 +1249,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           The JSON schema of the format
 
         - `type: :json_schema`
-
-          - `:json_schema`
 
     - `service_tier: :auto | :standard_only`
 
@@ -1295,6 +1286,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `text: String`
 
+          minLength: 1
+
         - `type: :text`
 
         - `cache_control: CacheControlEphemeral`
@@ -1302,14 +1295,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Create a cache control breakpoint at this content block.
 
         - `citations: Array[TextCitationParam]`
-
-    - `temperature: Float`
-
-      Amount of randomness injected into the response.
-
-      Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-      Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
     - `thinking: ThinkingConfigParam`
 
@@ -1329,9 +1314,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-        - `type: :enabled`
+          minimum: 1024
 
-          - `:enabled`
+        - `type: :enabled`
 
         - `display_: :summarized | :omitted`
 
@@ -1345,13 +1330,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: :disabled`
 
-          - `:disabled`
-
       - `class ThinkingConfigAdaptive`
 
         - `type: :adaptive`
-
-          - `:adaptive`
 
         - `display_: :summarized | :omitted`
 
@@ -1371,8 +1352,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: :auto`
 
-          - `:auto`
-
         - `disable_parallel_tool_use: bool`
 
           Whether to disable parallel tool use.
@@ -1384,8 +1363,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         The model will use any available tools.
 
         - `type: :any`
-
-          - `:any`
 
         - `disable_parallel_tool_use: bool`
 
@@ -1403,8 +1380,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: :tool`
 
-          - `:tool`
-
         - `disable_parallel_tool_use: bool`
 
           Whether to disable parallel tool use.
@@ -1416,8 +1391,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         The model will not be allowed to use tools.
 
         - `type: :none`
-
-          - `:none`
 
     - `tools: Array[ToolUnion]`
 
@@ -1485,15 +1458,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `class Tool`
 
-        - `input_schema: InputSchema{ type, properties, required}`
+        - `input_schema: InputSchema`
 
           [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
           This defines the shape of the `input` that your tool accepts and that the model will produce.
 
           - `type: :object`
-
-            - `:object`
 
           - `properties: Hash[Symbol, untyped]`
 
@@ -1504,6 +1475,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
+
+          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1541,8 +1514,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: :custom`
 
-          - `:custom`
-
       - `class ToolBash20250124`
 
         - `name: :bash`
@@ -1551,11 +1522,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:bash`
-
         - `type: :bash_20250124`
-
-          - `:bash_20250124`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1589,11 +1556,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:code_execution`
-
         - `type: :code_execution_20250522`
-
-          - `:code_execution_20250522`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1625,11 +1588,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:code_execution`
-
         - `type: :code_execution_20250825`
-
-          - `:code_execution_20250825`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1663,11 +1622,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:code_execution`
-
         - `type: :code_execution_20260120`
-
-          - `:code_execution_20260120`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1701,11 +1656,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:code_execution`
-
         - `type: :code_execution_20260521`
-
-          - `:code_execution_20260521`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1737,8 +1688,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         from its schema.
 
         - `type: :browser_toolset_20260801`
-
-          - `:browser_toolset_20260801`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2143,11 +2092,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:memory`
-
         - `type: :memory_20250818`
-
-          - `:memory_20250818`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2185,8 +2130,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         via `configs.zoom.enabled`.
 
         - `type: :computer_toolset_20260801`
-
-          - `:computer_toolset_20260801`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2423,11 +2366,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:str_replace_editor`
-
         - `type: :text_editor_20250124`
-
-          - `:text_editor_20250124`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2461,11 +2400,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:str_replace_based_edit_tool`
-
         - `type: :text_editor_20250429`
-
-          - `:text_editor_20250429`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2499,11 +2434,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:str_replace_based_edit_tool`
-
         - `type: :text_editor_20250728`
-
-          - `:text_editor_20250728`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2529,6 +2460,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+          minimum: 1
+
         - `strict: bool`
 
           When true, guarantees schema validation on tool names and inputs
@@ -2541,11 +2474,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_search`
-
         - `type: :web_search_20250305`
-
-          - `:web_search_20250305`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2577,6 +2506,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of times the tool can be used in the API request.
 
+          exclusiveMinimum: 0
+
         - `strict: bool`
 
           When true, guarantees schema validation on tool names and inputs
@@ -2587,23 +2518,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `type: :approximate`
 
-            - `:approximate`
-
           - `city: String`
 
             The city of the user.
+
+            maxLength: 255, minLength: 1
 
           - `country: String`
 
             The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+            maxLength: 2, minLength: 2
+
           - `region: String`
 
             The region of the user.
 
+            maxLength: 255, minLength: 1
+
           - `timezone: String`
 
             The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+            maxLength: 255, minLength: 1
 
       - `class WebFetchTool20250910`
 
@@ -2613,11 +2550,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_fetch`
-
         - `type: :web_fetch_20250910`
-
-          - `:web_fetch_20250910`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2653,9 +2586,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: bool`
 
@@ -2669,11 +2606,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_search`
-
         - `type: :web_search_20260209`
-
-          - `:web_search_20260209`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2704,6 +2637,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: bool`
 
@@ -2721,11 +2656,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_fetch`
-
         - `type: :web_fetch_20260209`
-
-          - `:web_fetch_20260209`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2761,9 +2692,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: bool`
 
@@ -2779,11 +2714,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_fetch`
-
         - `type: :web_fetch_20260309`
-
-          - `:web_fetch_20260309`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2819,9 +2750,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: bool`
 
@@ -2839,11 +2774,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_search`
-
         - `type: :web_search_20260318`
-
-          - `:web_search_20260318`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2874,6 +2805,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `response_inclusion: :full | :excluded`
 
@@ -2899,11 +2832,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:web_fetch`
-
         - `type: :web_fetch_20260318`
-
-          - `:web_fetch_20260318`
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2939,9 +2868,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `response_inclusion: :full | :excluded`
 
@@ -2966,8 +2899,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `:tool_search_tool_bm25`
 
         - `type: :tool_search_tool_bm25_20251119 | :tool_search_tool_bm25`
 
@@ -3005,8 +2936,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `:tool_search_tool_regex`
-
         - `type: :tool_search_tool_regex_20251119 | :tool_search_tool_regex`
 
           - `:tool_search_tool_regex_20251119`
@@ -3035,7 +2964,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           When true, guarantees schema validation on tool names and inputs
 
+    - `temperature: Float`
+
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+      Amount of randomness injected into the response.
+
+      Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+      Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+      maximum: 1, minimum: 0
+
     - `top_k: Integer`
+
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
       Only sample from the top K options for each subsequent token.
 
@@ -3043,13 +2986,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Recommended for advanced use cases only.
 
+      minimum: 0
+
     - `top_p: Float`
+
+      **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
       Use nucleus sampling.
 
       In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
       Recommended for advanced use cases only.
+
+      maximum: 1, minimum: 0
 
 - `user_profile_id: String`
 
@@ -3069,13 +3018,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Time`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Time`
 
@@ -3083,9 +3038,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: :in_progress | :canceling | :ended`
 
@@ -3143,8 +3102,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `:message_batch`
-
 ### Example
 
 ```ruby
@@ -3164,7 +3121,7 @@ message_batch = anthropic.messages.batches.create(
 puts(message_batch)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3191,7 +3148,7 @@ puts(message_batch)
 
 `messages.batches.retrieve(message_batch_id) -> MessageBatch`
 
-**get** `/v1/messages/batches/{message_batch_id}`
+**GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
@@ -3217,13 +3174,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Time`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Time`
 
@@ -3231,9 +3194,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: :in_progress | :canceling | :ended`
 
@@ -3291,8 +3258,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `:message_batch`
-
 ### Example
 
 ```ruby
@@ -3305,7 +3270,7 @@ message_batch = anthropic.messages.batches.retrieve("message_batch_id")
 puts(message_batch)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3332,7 +3297,7 @@ puts(message_batch)
 
 `messages.batches.list(**kwargs) -> Page<MessageBatch>`
 
-**get** `/v1/messages/batches`
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
@@ -3354,6 +3319,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  maximum: 1000, minimum: 1
+
 ### Returns
 
 - `class MessageBatch`
@@ -3368,13 +3335,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Time`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Time`
 
@@ -3382,9 +3355,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: :in_progress | :canceling | :ended`
 
@@ -3442,8 +3419,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `:message_batch`
-
 ### Example
 
 ```ruby
@@ -3456,7 +3431,7 @@ page = anthropic.messages.batches.list
 puts(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3490,7 +3465,7 @@ puts(page)
 
 `messages.batches.cancel(message_batch_id) -> MessageBatch`
 
-**post** `/v1/messages/batches/{message_batch_id}/cancel`
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -3518,13 +3493,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Time`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Time`
 
@@ -3532,9 +3513,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: :in_progress | :canceling | :ended`
 
@@ -3592,8 +3577,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `:message_batch`
-
 ### Example
 
 ```ruby
@@ -3606,7 +3589,7 @@ message_batch = anthropic.messages.batches.cancel("message_batch_id")
 puts(message_batch)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3633,7 +3616,7 @@ puts(message_batch)
 
 `messages.batches.delete(message_batch_id) -> DeletedMessageBatch`
 
-**delete** `/v1/messages/batches/{message_batch_id}`
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -3661,8 +3644,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-    - `:message_batch_deleted`
-
 ### Example
 
 ```ruby
@@ -3675,7 +3656,7 @@ deleted_message_batch = anthropic.messages.batches.delete("message_batch_id")
 puts(deleted_message_batch)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3688,7 +3669,7 @@ puts(deleted_message_batch)
 
 `messages.batches.results(message_batch_id) -> MessageBatchIndividualResponse`
 
-**get** `/v1/messages/batches/{message_batch_id}/results`
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -3742,6 +3723,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The time at which the container will expire.
 
+            format: date-time
+
           - `skills: Array[ContainerSkill]`
 
             Skills loaded in the container
@@ -3749,6 +3732,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `skill_id: String`
 
               Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `type: :anthropic | :custom`
 
@@ -3761,6 +3746,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `version: String`
 
               The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
 
         - `content: Array[ContentBlock]`
 
@@ -3805,6 +3792,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: Integer`
 
+                  minimum: 0
+
                 - `document_title: String`
 
                 - `end_char_index: Integer`
@@ -3813,15 +3802,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `start_char_index: Integer`
 
-                - `type: :char_location`
+                  minimum: 0
 
-                  - `:char_location`
+                - `type: :char_location`
 
               - `class CitationPageLocation`
 
                 - `cited_text: String`
 
                 - `document_index: Integer`
+
+                  minimum: 0
 
                 - `document_title: String`
 
@@ -3831,9 +3822,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `start_page_number: Integer`
 
-                - `type: :page_location`
+                  minimum: 1
 
-                  - `:page_location`
+                - `type: :page_location`
 
               - `class CitationContentBlockLocation`
 
@@ -3844,6 +3835,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
                 - `document_index: Integer`
+
+                  minimum: 0
 
                 - `document_title: String`
 
@@ -3859,9 +3852,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `type: :content_block_location`
+                  minimum: 0
 
-                  - `:content_block_location`
+                - `type: :content_block_location`
 
               - `class CitationsWebSearchResultLocation`
 
@@ -3871,9 +3864,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
-                - `type: :web_search_result_location`
+                  maxLength: 512
 
-                  - `:web_search_result_location`
+                - `type: :web_search_result_location`
 
                 - `url: String`
 
@@ -3897,23 +3890,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: String`
 
                 - `start_block_index: Integer`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: String`
 
                 - `type: :search_result_location`
 
-                  - `:search_result_location`
-
             - `text: String`
 
-            - `type: :text`
+              maxLength: 5000000, minLength: 0
 
-              - `:text`
+            - `type: :text`
 
           - `class ThinkingBlock`
 
@@ -3931,8 +3926,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :thinking`
 
-              - `:thinking`
-
           - `class RedactedThinkingBlock`
 
             - `data: String`
@@ -3945,11 +3938,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :redacted_thinking`
 
-              - `:redacted_thinking`
-
           - `class ToolUseBlock`
 
             - `id: String`
+
+              pattern: ^[a-zA-Z0-9_-]+$
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -3961,41 +3954,43 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :direct`
 
-                  - `:direct`
-
               - `class ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20250825`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20250825`
+                - `type: :code_execution_20250825`
 
               - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20260120`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20260120`
+                - `type: :code_execution_20260120`
 
             - `input: Hash[Symbol, untyped]`
 
             - `name: String`
 
-            - `type: :tool_use`
+              minLength: 1
 
-              - `:tool_use`
+            - `type: :tool_use`
 
             - `toolset_name: String`
 
               For a toolset member tool_use, the toolset family.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlock`
 
             - `id: String`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -4030,8 +4025,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `:tool_search_tool_bm25`
 
             - `type: :server_tool_use`
-
-              - `:server_tool_use`
 
           - `class WebSearchToolResultBlock`
 
@@ -4069,8 +4062,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_search_tool_result_error`
 
-                  - `:web_search_tool_result_error`
-
               - `UnionMember1 = Array[WebSearchResultBlock]`
 
                 - `encrypted_content: String`
@@ -4081,15 +4072,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_search_result`
 
-                  - `:web_search_result`
-
                 - `url: String`
 
             - `tool_use_id: String`
 
-            - `type: :web_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_search_tool_result`
+            - `type: :web_search_tool_result`
 
           - `class WebFetchToolResultBlock`
 
@@ -4133,8 +4122,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :web_fetch_tool_result_error`
 
-                  - `:web_fetch_tool_result_error`
-
               - `class WebFetchBlock`
 
                 - `content: DocumentBlock`
@@ -4151,13 +4138,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `data: String`
 
+                        format: byte
+
                       - `media_type: :"application/pdf"`
 
-                        - `:"application/pdf"`
-
                       - `type: :base64`
-
-                        - `:base64`
 
                     - `class PlainTextSource`
 
@@ -4165,11 +4150,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `media_type: :"text/plain"`
 
-                        - `:"text/plain"`
-
                       - `type: :text`
-
-                        - `:text`
 
                   - `title: String`
 
@@ -4177,15 +4158,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: :document`
 
-                    - `:document`
-
                 - `retrieved_at: String`
 
                   ISO 8601 timestamp when the content was retrieved
 
                 - `type: :web_fetch_result`
-
-                  - `:web_fetch_result`
 
                 - `url: String`
 
@@ -4193,9 +4170,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: String`
 
-            - `type: :web_fetch_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_fetch_tool_result`
+            - `type: :web_fetch_tool_result`
 
           - `class CodeExecutionToolResultBlock`
 
@@ -4217,8 +4194,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :code_execution_tool_result_error`
 
-                  - `:code_execution_tool_result_error`
-
               - `class CodeExecutionResultBlock`
 
                 - `content: Array[CodeExecutionOutputBlock]`
@@ -4227,8 +4202,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: :code_execution_output`
 
-                    - `:code_execution_output`
-
                 - `return_code: Integer`
 
                 - `stderr: String`
@@ -4236,8 +4209,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `stdout: String`
 
                 - `type: :code_execution_result`
-
-                  - `:code_execution_result`
 
               - `class EncryptedCodeExecutionResultBlock`
 
@@ -4257,13 +4228,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :encrypted_code_execution_result`
 
-                  - `:encrypted_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:code_execution_tool_result`
+            - `type: :code_execution_tool_result`
 
           - `class BashCodeExecutionToolResultBlock`
 
@@ -4285,8 +4254,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :bash_code_execution_tool_result_error`
 
-                  - `:bash_code_execution_tool_result_error`
-
               - `class BashCodeExecutionResultBlock`
 
                 - `content: Array[BashCodeExecutionOutputBlock]`
@@ -4294,8 +4261,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `file_id: String`
 
                   - `type: :bash_code_execution_output`
-
-                    - `:bash_code_execution_output`
 
                 - `return_code: Integer`
 
@@ -4305,13 +4270,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :bash_code_execution_result`
 
-                  - `:bash_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :bash_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:bash_code_execution_tool_result`
+            - `type: :bash_code_execution_tool_result`
 
           - `class TextEditorCodeExecutionToolResultBlock`
 
@@ -4335,8 +4298,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_tool_result_error`
 
-                  - `:text_editor_code_execution_tool_result_error`
-
               - `class TextEditorCodeExecutionViewResultBlock`
 
                 - `content: String`
@@ -4357,15 +4318,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_view_result`
 
-                  - `:text_editor_code_execution_view_result`
-
               - `class TextEditorCodeExecutionCreateResultBlock`
 
                 - `is_file_update: bool`
 
                 - `type: :text_editor_code_execution_create_result`
-
-                  - `:text_editor_code_execution_create_result`
 
               - `class TextEditorCodeExecutionStrReplaceResultBlock`
 
@@ -4381,13 +4338,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :text_editor_code_execution_str_replace_result`
 
-                  - `:text_editor_code_execution_str_replace_result`
-
             - `tool_use_id: String`
 
-            - `type: :text_editor_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:text_editor_code_execution_tool_result`
+            - `type: :text_editor_code_execution_tool_result`
 
           - `class ToolSearchToolResultBlock`
 
@@ -4409,27 +4364,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: :tool_search_tool_result_error`
 
-                  - `:tool_search_tool_result_error`
-
               - `class ToolSearchToolSearchResultBlock`
 
                 - `tool_references: Array[ToolReferenceBlock]`
 
                   - `tool_name: String`
 
-                  - `type: :tool_reference`
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `:tool_reference`
+                  - `type: :tool_reference`
 
                 - `type: :tool_search_tool_search_result`
 
-                  - `:tool_search_tool_search_result`
-
             - `tool_use_id: String`
 
-            - `type: :tool_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:tool_search_tool_result`
+            - `type: :tool_search_tool_result`
 
           - `class ContainerUploadBlock`
 
@@ -4438,8 +4389,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `file_id: String`
 
             - `type: :container_upload`
-
-              - `:container_upload`
 
         - `model: Model`
 
@@ -4521,8 +4470,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This will always be `"assistant"`.
 
-          - `:assistant`
-
         - `stop_details: RefusalStopDetails`
 
           Structured information about a refusal.
@@ -4558,8 +4505,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
           - `type: :refusal`
-
-            - `:refusal`
 
         - `stop_reason: StopReason`
 
@@ -4603,8 +4548,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           For Messages, this is always `"message"`.
 
-          - `:message`
-
         - `usage: Usage`
 
           Billing and rate-limit usage.
@@ -4625,17 +4568,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of input tokens used to create the 1 hour cache entry.
 
+              minimum: 0
+
             - `ephemeral_5m_input_tokens: Integer`
 
               The number of input tokens used to create the 5 minute cache entry.
+
+              minimum: 0
 
           - `cache_creation_input_tokens: Integer`
 
             The number of input tokens used to create the cache entry.
 
+            minimum: 0
+
           - `cache_read_input_tokens: Integer`
 
             The number of input tokens read from the cache.
+
+            minimum: 0
 
           - `inference_geo: String`
 
@@ -4645,9 +4596,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The number of input tokens which were used.
 
+            minimum: 0
+
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
+
+            minimum: 0
 
           - `output_tokens_details: OutputTokensDetails`
 
@@ -4669,6 +4624,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+              minimum: 0
+
           - `server_tool_use: ServerToolUsage`
 
             The number of server tool requests.
@@ -4677,9 +4634,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of web fetch tool requests.
 
+              minimum: 0
+
             - `web_search_requests: Integer`
 
               The number of web search tool requests.
+
+              minimum: 0
 
           - `service_tier: :standard | :priority | :batch`
 
@@ -4693,8 +4654,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `type: :succeeded`
 
-        - `:succeeded`
-
     - `class MessageBatchErroredResult`
 
       - `error: ErrorResponse`
@@ -4707,15 +4666,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :invalid_request_error`
 
-              - `:invalid_request_error`
-
           - `class AuthenticationError`
 
             - `message: String`
 
             - `type: :authentication_error`
-
-              - `:authentication_error`
 
           - `class BillingError`
 
@@ -4723,15 +4678,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :billing_error`
 
-              - `:billing_error`
-
           - `class PermissionError`
 
             - `message: String`
 
             - `type: :permission_error`
-
-              - `:permission_error`
 
           - `class NotFoundError`
 
@@ -4739,15 +4690,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :not_found_error`
 
-              - `:not_found_error`
-
           - `class RateLimitError`
 
             - `message: String`
 
             - `type: :rate_limit_error`
-
-              - `:rate_limit_error`
 
           - `class GatewayTimeoutError`
 
@@ -4755,15 +4702,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :timeout_error`
 
-              - `:timeout_error`
-
           - `class APIErrorObject`
 
             - `message: String`
 
             - `type: :api_error`
-
-              - `:api_error`
 
           - `class OverloadedError`
 
@@ -4771,29 +4714,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: :overloaded_error`
 
-              - `:overloaded_error`
-
         - `request_id: String`
 
         - `type: :error`
 
-          - `:error`
-
       - `type: :errored`
-
-        - `:errored`
 
     - `class MessageBatchCanceledResult`
 
       - `type: :canceled`
 
-        - `:canceled`
-
     - `class MessageBatchExpiredResult`
 
       - `type: :expired`
-
-        - `:expired`
 
 ### Example
 
@@ -4807,7 +4740,7 @@ message_batch_individual_response = anthropic.messages.batches.results("message_
 puts(message_batch_individual_response)
 ```
 
-## Domain Types
+## Domain types
 
 ### Deleted Message Batch
 
@@ -4823,8 +4756,6 @@ puts(message_batch_individual_response)
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-    - `:message_batch_deleted`
-
 ### Message Batch
 
 - `class MessageBatch`
@@ -4839,13 +4770,19 @@ puts(message_batch_individual_response)
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Time`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Time`
 
@@ -4853,9 +4790,13 @@ puts(message_batch_individual_response)
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: Time`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: :in_progress | :canceling | :ended`
 
@@ -4913,15 +4854,11 @@ puts(message_batch_individual_response)
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `:message_batch`
-
 ### Message Batch Canceled Result
 
 - `class MessageBatchCanceledResult`
 
   - `type: :canceled`
-
-    - `:canceled`
 
 ### Message Batch Errored Result
 
@@ -4937,15 +4874,11 @@ puts(message_batch_individual_response)
 
         - `type: :invalid_request_error`
 
-          - `:invalid_request_error`
-
       - `class AuthenticationError`
 
         - `message: String`
 
         - `type: :authentication_error`
-
-          - `:authentication_error`
 
       - `class BillingError`
 
@@ -4953,15 +4886,11 @@ puts(message_batch_individual_response)
 
         - `type: :billing_error`
 
-          - `:billing_error`
-
       - `class PermissionError`
 
         - `message: String`
 
         - `type: :permission_error`
-
-          - `:permission_error`
 
       - `class NotFoundError`
 
@@ -4969,15 +4898,11 @@ puts(message_batch_individual_response)
 
         - `type: :not_found_error`
 
-          - `:not_found_error`
-
       - `class RateLimitError`
 
         - `message: String`
 
         - `type: :rate_limit_error`
-
-          - `:rate_limit_error`
 
       - `class GatewayTimeoutError`
 
@@ -4985,15 +4910,11 @@ puts(message_batch_individual_response)
 
         - `type: :timeout_error`
 
-          - `:timeout_error`
-
       - `class APIErrorObject`
 
         - `message: String`
 
         - `type: :api_error`
-
-          - `:api_error`
 
       - `class OverloadedError`
 
@@ -5001,25 +4922,17 @@ puts(message_batch_individual_response)
 
         - `type: :overloaded_error`
 
-          - `:overloaded_error`
-
     - `request_id: String`
 
     - `type: :error`
 
-      - `:error`
-
   - `type: :errored`
-
-    - `:errored`
 
 ### Message Batch Expired Result
 
 - `class MessageBatchExpiredResult`
 
   - `type: :expired`
-
-    - `:expired`
 
 ### Message Batch Individual Response
 
@@ -5061,6 +4974,8 @@ puts(message_batch_individual_response)
 
             The time at which the container will expire.
 
+            format: date-time
+
           - `skills: Array[ContainerSkill]`
 
             Skills loaded in the container
@@ -5068,6 +4983,8 @@ puts(message_batch_individual_response)
             - `skill_id: String`
 
               Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `type: :anthropic | :custom`
 
@@ -5080,6 +4997,8 @@ puts(message_batch_individual_response)
             - `version: String`
 
               The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
 
         - `content: Array[ContentBlock]`
 
@@ -5124,6 +5043,8 @@ puts(message_batch_individual_response)
 
                 - `document_index: Integer`
 
+                  minimum: 0
+
                 - `document_title: String`
 
                 - `end_char_index: Integer`
@@ -5132,15 +5053,17 @@ puts(message_batch_individual_response)
 
                 - `start_char_index: Integer`
 
-                - `type: :char_location`
+                  minimum: 0
 
-                  - `:char_location`
+                - `type: :char_location`
 
               - `class CitationPageLocation`
 
                 - `cited_text: String`
 
                 - `document_index: Integer`
+
+                  minimum: 0
 
                 - `document_title: String`
 
@@ -5150,9 +5073,9 @@ puts(message_batch_individual_response)
 
                 - `start_page_number: Integer`
 
-                - `type: :page_location`
+                  minimum: 1
 
-                  - `:page_location`
+                - `type: :page_location`
 
               - `class CitationContentBlockLocation`
 
@@ -5163,6 +5086,8 @@ puts(message_batch_individual_response)
                   Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
                 - `document_index: Integer`
+
+                  minimum: 0
 
                 - `document_title: String`
 
@@ -5178,9 +5103,9 @@ puts(message_batch_individual_response)
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `type: :content_block_location`
+                  minimum: 0
 
-                  - `:content_block_location`
+                - `type: :content_block_location`
 
               - `class CitationsWebSearchResultLocation`
 
@@ -5190,9 +5115,9 @@ puts(message_batch_individual_response)
 
                 - `title: String`
 
-                - `type: :web_search_result_location`
+                  maxLength: 512
 
-                  - `:web_search_result_location`
+                - `type: :web_search_result_location`
 
                 - `url: String`
 
@@ -5216,23 +5141,25 @@ puts(message_batch_individual_response)
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: String`
 
                 - `start_block_index: Integer`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: String`
 
                 - `type: :search_result_location`
 
-                  - `:search_result_location`
-
             - `text: String`
 
-            - `type: :text`
+              maxLength: 5000000, minLength: 0
 
-              - `:text`
+            - `type: :text`
 
           - `class ThinkingBlock`
 
@@ -5250,8 +5177,6 @@ puts(message_batch_individual_response)
 
             - `type: :thinking`
 
-              - `:thinking`
-
           - `class RedactedThinkingBlock`
 
             - `data: String`
@@ -5264,11 +5189,11 @@ puts(message_batch_individual_response)
 
             - `type: :redacted_thinking`
 
-              - `:redacted_thinking`
-
           - `class ToolUseBlock`
 
             - `id: String`
+
+              pattern: ^[a-zA-Z0-9_-]+$
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -5280,41 +5205,43 @@ puts(message_batch_individual_response)
 
                 - `type: :direct`
 
-                  - `:direct`
-
               - `class ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20250825`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20250825`
+                - `type: :code_execution_20250825`
 
               - `class ServerToolCaller20260120`
 
                 - `tool_id: String`
 
-                - `type: :code_execution_20260120`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `:code_execution_20260120`
+                - `type: :code_execution_20260120`
 
             - `input: Hash[Symbol, untyped]`
 
             - `name: String`
 
-            - `type: :tool_use`
+              minLength: 1
 
-              - `:tool_use`
+            - `type: :tool_use`
 
             - `toolset_name: String`
 
               For a toolset member tool_use, the toolset family.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlock`
 
             - `id: String`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -5349,8 +5276,6 @@ puts(message_batch_individual_response)
               - `:tool_search_tool_bm25`
 
             - `type: :server_tool_use`
-
-              - `:server_tool_use`
 
           - `class WebSearchToolResultBlock`
 
@@ -5388,8 +5313,6 @@ puts(message_batch_individual_response)
 
                 - `type: :web_search_tool_result_error`
 
-                  - `:web_search_tool_result_error`
-
               - `UnionMember1 = Array[WebSearchResultBlock]`
 
                 - `encrypted_content: String`
@@ -5400,15 +5323,13 @@ puts(message_batch_individual_response)
 
                 - `type: :web_search_result`
 
-                  - `:web_search_result`
-
                 - `url: String`
 
             - `tool_use_id: String`
 
-            - `type: :web_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_search_tool_result`
+            - `type: :web_search_tool_result`
 
           - `class WebFetchToolResultBlock`
 
@@ -5452,8 +5373,6 @@ puts(message_batch_individual_response)
 
                 - `type: :web_fetch_tool_result_error`
 
-                  - `:web_fetch_tool_result_error`
-
               - `class WebFetchBlock`
 
                 - `content: DocumentBlock`
@@ -5470,13 +5389,11 @@ puts(message_batch_individual_response)
 
                       - `data: String`
 
+                        format: byte
+
                       - `media_type: :"application/pdf"`
 
-                        - `:"application/pdf"`
-
                       - `type: :base64`
-
-                        - `:base64`
 
                     - `class PlainTextSource`
 
@@ -5484,11 +5401,7 @@ puts(message_batch_individual_response)
 
                       - `media_type: :"text/plain"`
 
-                        - `:"text/plain"`
-
                       - `type: :text`
-
-                        - `:text`
 
                   - `title: String`
 
@@ -5496,15 +5409,11 @@ puts(message_batch_individual_response)
 
                   - `type: :document`
 
-                    - `:document`
-
                 - `retrieved_at: String`
 
                   ISO 8601 timestamp when the content was retrieved
 
                 - `type: :web_fetch_result`
-
-                  - `:web_fetch_result`
 
                 - `url: String`
 
@@ -5512,9 +5421,9 @@ puts(message_batch_individual_response)
 
             - `tool_use_id: String`
 
-            - `type: :web_fetch_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:web_fetch_tool_result`
+            - `type: :web_fetch_tool_result`
 
           - `class CodeExecutionToolResultBlock`
 
@@ -5536,8 +5445,6 @@ puts(message_batch_individual_response)
 
                 - `type: :code_execution_tool_result_error`
 
-                  - `:code_execution_tool_result_error`
-
               - `class CodeExecutionResultBlock`
 
                 - `content: Array[CodeExecutionOutputBlock]`
@@ -5546,8 +5453,6 @@ puts(message_batch_individual_response)
 
                   - `type: :code_execution_output`
 
-                    - `:code_execution_output`
-
                 - `return_code: Integer`
 
                 - `stderr: String`
@@ -5555,8 +5460,6 @@ puts(message_batch_individual_response)
                 - `stdout: String`
 
                 - `type: :code_execution_result`
-
-                  - `:code_execution_result`
 
               - `class EncryptedCodeExecutionResultBlock`
 
@@ -5576,13 +5479,11 @@ puts(message_batch_individual_response)
 
                 - `type: :encrypted_code_execution_result`
 
-                  - `:encrypted_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:code_execution_tool_result`
+            - `type: :code_execution_tool_result`
 
           - `class BashCodeExecutionToolResultBlock`
 
@@ -5604,8 +5505,6 @@ puts(message_batch_individual_response)
 
                 - `type: :bash_code_execution_tool_result_error`
 
-                  - `:bash_code_execution_tool_result_error`
-
               - `class BashCodeExecutionResultBlock`
 
                 - `content: Array[BashCodeExecutionOutputBlock]`
@@ -5613,8 +5512,6 @@ puts(message_batch_individual_response)
                   - `file_id: String`
 
                   - `type: :bash_code_execution_output`
-
-                    - `:bash_code_execution_output`
 
                 - `return_code: Integer`
 
@@ -5624,13 +5521,11 @@ puts(message_batch_individual_response)
 
                 - `type: :bash_code_execution_result`
 
-                  - `:bash_code_execution_result`
-
             - `tool_use_id: String`
 
-            - `type: :bash_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:bash_code_execution_tool_result`
+            - `type: :bash_code_execution_tool_result`
 
           - `class TextEditorCodeExecutionToolResultBlock`
 
@@ -5654,8 +5549,6 @@ puts(message_batch_individual_response)
 
                 - `type: :text_editor_code_execution_tool_result_error`
 
-                  - `:text_editor_code_execution_tool_result_error`
-
               - `class TextEditorCodeExecutionViewResultBlock`
 
                 - `content: String`
@@ -5676,15 +5569,11 @@ puts(message_batch_individual_response)
 
                 - `type: :text_editor_code_execution_view_result`
 
-                  - `:text_editor_code_execution_view_result`
-
               - `class TextEditorCodeExecutionCreateResultBlock`
 
                 - `is_file_update: bool`
 
                 - `type: :text_editor_code_execution_create_result`
-
-                  - `:text_editor_code_execution_create_result`
 
               - `class TextEditorCodeExecutionStrReplaceResultBlock`
 
@@ -5700,13 +5589,11 @@ puts(message_batch_individual_response)
 
                 - `type: :text_editor_code_execution_str_replace_result`
 
-                  - `:text_editor_code_execution_str_replace_result`
-
             - `tool_use_id: String`
 
-            - `type: :text_editor_code_execution_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:text_editor_code_execution_tool_result`
+            - `type: :text_editor_code_execution_tool_result`
 
           - `class ToolSearchToolResultBlock`
 
@@ -5728,27 +5615,23 @@ puts(message_batch_individual_response)
 
                 - `type: :tool_search_tool_result_error`
 
-                  - `:tool_search_tool_result_error`
-
               - `class ToolSearchToolSearchResultBlock`
 
                 - `tool_references: Array[ToolReferenceBlock]`
 
                   - `tool_name: String`
 
-                  - `type: :tool_reference`
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `:tool_reference`
+                  - `type: :tool_reference`
 
                 - `type: :tool_search_tool_search_result`
 
-                  - `:tool_search_tool_search_result`
-
             - `tool_use_id: String`
 
-            - `type: :tool_search_tool_result`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:tool_search_tool_result`
+            - `type: :tool_search_tool_result`
 
           - `class ContainerUploadBlock`
 
@@ -5757,8 +5640,6 @@ puts(message_batch_individual_response)
             - `file_id: String`
 
             - `type: :container_upload`
-
-              - `:container_upload`
 
         - `model: Model`
 
@@ -5840,8 +5721,6 @@ puts(message_batch_individual_response)
 
           This will always be `"assistant"`.
 
-          - `:assistant`
-
         - `stop_details: RefusalStopDetails`
 
           Structured information about a refusal.
@@ -5877,8 +5756,6 @@ puts(message_batch_individual_response)
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
           - `type: :refusal`
-
-            - `:refusal`
 
         - `stop_reason: StopReason`
 
@@ -5922,8 +5799,6 @@ puts(message_batch_individual_response)
 
           For Messages, this is always `"message"`.
 
-          - `:message`
-
         - `usage: Usage`
 
           Billing and rate-limit usage.
@@ -5944,17 +5819,25 @@ puts(message_batch_individual_response)
 
               The number of input tokens used to create the 1 hour cache entry.
 
+              minimum: 0
+
             - `ephemeral_5m_input_tokens: Integer`
 
               The number of input tokens used to create the 5 minute cache entry.
+
+              minimum: 0
 
           - `cache_creation_input_tokens: Integer`
 
             The number of input tokens used to create the cache entry.
 
+            minimum: 0
+
           - `cache_read_input_tokens: Integer`
 
             The number of input tokens read from the cache.
+
+            minimum: 0
 
           - `inference_geo: String`
 
@@ -5964,9 +5847,13 @@ puts(message_batch_individual_response)
 
             The number of input tokens which were used.
 
+            minimum: 0
+
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
+
+            minimum: 0
 
           - `output_tokens_details: OutputTokensDetails`
 
@@ -5988,6 +5875,8 @@ puts(message_batch_individual_response)
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+              minimum: 0
+
           - `server_tool_use: ServerToolUsage`
 
             The number of server tool requests.
@@ -5996,9 +5885,13 @@ puts(message_batch_individual_response)
 
               The number of web fetch tool requests.
 
+              minimum: 0
+
             - `web_search_requests: Integer`
 
               The number of web search tool requests.
+
+              minimum: 0
 
           - `service_tier: :standard | :priority | :batch`
 
@@ -6012,8 +5905,6 @@ puts(message_batch_individual_response)
 
       - `type: :succeeded`
 
-        - `:succeeded`
-
     - `class MessageBatchErroredResult`
 
       - `error: ErrorResponse`
@@ -6026,15 +5917,11 @@ puts(message_batch_individual_response)
 
             - `type: :invalid_request_error`
 
-              - `:invalid_request_error`
-
           - `class AuthenticationError`
 
             - `message: String`
 
             - `type: :authentication_error`
-
-              - `:authentication_error`
 
           - `class BillingError`
 
@@ -6042,15 +5929,11 @@ puts(message_batch_individual_response)
 
             - `type: :billing_error`
 
-              - `:billing_error`
-
           - `class PermissionError`
 
             - `message: String`
 
             - `type: :permission_error`
-
-              - `:permission_error`
 
           - `class NotFoundError`
 
@@ -6058,15 +5941,11 @@ puts(message_batch_individual_response)
 
             - `type: :not_found_error`
 
-              - `:not_found_error`
-
           - `class RateLimitError`
 
             - `message: String`
 
             - `type: :rate_limit_error`
-
-              - `:rate_limit_error`
 
           - `class GatewayTimeoutError`
 
@@ -6074,15 +5953,11 @@ puts(message_batch_individual_response)
 
             - `type: :timeout_error`
 
-              - `:timeout_error`
-
           - `class APIErrorObject`
 
             - `message: String`
 
             - `type: :api_error`
-
-              - `:api_error`
 
           - `class OverloadedError`
 
@@ -6090,29 +5965,19 @@ puts(message_batch_individual_response)
 
             - `type: :overloaded_error`
 
-              - `:overloaded_error`
-
         - `request_id: String`
 
         - `type: :error`
 
-          - `:error`
-
       - `type: :errored`
-
-        - `:errored`
 
     - `class MessageBatchCanceledResult`
 
       - `type: :canceled`
 
-        - `:canceled`
-
     - `class MessageBatchExpiredResult`
 
       - `type: :expired`
-
-        - `:expired`
 
 ### Message Batch Request Counts
 
@@ -6176,6 +6041,8 @@ puts(message_batch_individual_response)
 
           The time at which the container will expire.
 
+          format: date-time
+
         - `skills: Array[ContainerSkill]`
 
           Skills loaded in the container
@@ -6183,6 +6050,8 @@ puts(message_batch_individual_response)
           - `skill_id: String`
 
             Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `type: :anthropic | :custom`
 
@@ -6195,6 +6064,8 @@ puts(message_batch_individual_response)
           - `version: String`
 
             The resolved version: a skill version ID for custom skills.
+
+            maxLength: 64, minLength: 1
 
       - `content: Array[ContentBlock]`
 
@@ -6239,6 +6110,8 @@ puts(message_batch_individual_response)
 
               - `document_index: Integer`
 
+                minimum: 0
+
               - `document_title: String`
 
               - `end_char_index: Integer`
@@ -6247,15 +6120,17 @@ puts(message_batch_individual_response)
 
               - `start_char_index: Integer`
 
-              - `type: :char_location`
+                minimum: 0
 
-                - `:char_location`
+              - `type: :char_location`
 
             - `class CitationPageLocation`
 
               - `cited_text: String`
 
               - `document_index: Integer`
+
+                minimum: 0
 
               - `document_title: String`
 
@@ -6265,9 +6140,9 @@ puts(message_batch_individual_response)
 
               - `start_page_number: Integer`
 
-              - `type: :page_location`
+                minimum: 1
 
-                - `:page_location`
+              - `type: :page_location`
 
             - `class CitationContentBlockLocation`
 
@@ -6278,6 +6153,8 @@ puts(message_batch_individual_response)
                 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
               - `document_index: Integer`
+
+                minimum: 0
 
               - `document_title: String`
 
@@ -6293,9 +6170,9 @@ puts(message_batch_individual_response)
 
                 0-based index of the first cited block in the source's `content` array.
 
-              - `type: :content_block_location`
+                minimum: 0
 
-                - `:content_block_location`
+              - `type: :content_block_location`
 
             - `class CitationsWebSearchResultLocation`
 
@@ -6305,9 +6182,9 @@ puts(message_batch_individual_response)
 
               - `title: String`
 
-              - `type: :web_search_result_location`
+                maxLength: 512
 
-                - `:web_search_result_location`
+              - `type: :web_search_result_location`
 
               - `url: String`
 
@@ -6331,23 +6208,25 @@ puts(message_batch_individual_response)
 
                 Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                minimum: 0
+
               - `source: String`
 
               - `start_block_index: Integer`
 
                 0-based index of the first cited block in the source's `content` array.
 
+                minimum: 0
+
               - `title: String`
 
               - `type: :search_result_location`
 
-                - `:search_result_location`
-
           - `text: String`
 
-          - `type: :text`
+            maxLength: 5000000, minLength: 0
 
-            - `:text`
+          - `type: :text`
 
         - `class ThinkingBlock`
 
@@ -6365,8 +6244,6 @@ puts(message_batch_individual_response)
 
           - `type: :thinking`
 
-            - `:thinking`
-
         - `class RedactedThinkingBlock`
 
           - `data: String`
@@ -6379,11 +6256,11 @@ puts(message_batch_individual_response)
 
           - `type: :redacted_thinking`
 
-            - `:redacted_thinking`
-
         - `class ToolUseBlock`
 
           - `id: String`
+
+            pattern: ^[a-zA-Z0-9_-]+$
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -6395,41 +6272,43 @@ puts(message_batch_individual_response)
 
               - `type: :direct`
 
-                - `:direct`
-
             - `class ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
               - `tool_id: String`
 
-              - `type: :code_execution_20250825`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `:code_execution_20250825`
+              - `type: :code_execution_20250825`
 
             - `class ServerToolCaller20260120`
 
               - `tool_id: String`
 
-              - `type: :code_execution_20260120`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `:code_execution_20260120`
+              - `type: :code_execution_20260120`
 
           - `input: Hash[Symbol, untyped]`
 
           - `name: String`
 
-          - `type: :tool_use`
+            minLength: 1
 
-            - `:tool_use`
+          - `type: :tool_use`
 
           - `toolset_name: String`
 
             For a toolset member tool_use, the toolset family.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class ServerToolUseBlock`
 
           - `id: String`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -6464,8 +6343,6 @@ puts(message_batch_individual_response)
             - `:tool_search_tool_bm25`
 
           - `type: :server_tool_use`
-
-            - `:server_tool_use`
 
         - `class WebSearchToolResultBlock`
 
@@ -6503,8 +6380,6 @@ puts(message_batch_individual_response)
 
               - `type: :web_search_tool_result_error`
 
-                - `:web_search_tool_result_error`
-
             - `UnionMember1 = Array[WebSearchResultBlock]`
 
               - `encrypted_content: String`
@@ -6515,15 +6390,13 @@ puts(message_batch_individual_response)
 
               - `type: :web_search_result`
 
-                - `:web_search_result`
-
               - `url: String`
 
           - `tool_use_id: String`
 
-          - `type: :web_search_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:web_search_tool_result`
+          - `type: :web_search_tool_result`
 
         - `class WebFetchToolResultBlock`
 
@@ -6567,8 +6440,6 @@ puts(message_batch_individual_response)
 
               - `type: :web_fetch_tool_result_error`
 
-                - `:web_fetch_tool_result_error`
-
             - `class WebFetchBlock`
 
               - `content: DocumentBlock`
@@ -6585,13 +6456,11 @@ puts(message_batch_individual_response)
 
                     - `data: String`
 
+                      format: byte
+
                     - `media_type: :"application/pdf"`
 
-                      - `:"application/pdf"`
-
                     - `type: :base64`
-
-                      - `:base64`
 
                   - `class PlainTextSource`
 
@@ -6599,11 +6468,7 @@ puts(message_batch_individual_response)
 
                     - `media_type: :"text/plain"`
 
-                      - `:"text/plain"`
-
                     - `type: :text`
-
-                      - `:text`
 
                 - `title: String`
 
@@ -6611,15 +6476,11 @@ puts(message_batch_individual_response)
 
                 - `type: :document`
 
-                  - `:document`
-
               - `retrieved_at: String`
 
                 ISO 8601 timestamp when the content was retrieved
 
               - `type: :web_fetch_result`
-
-                - `:web_fetch_result`
 
               - `url: String`
 
@@ -6627,9 +6488,9 @@ puts(message_batch_individual_response)
 
           - `tool_use_id: String`
 
-          - `type: :web_fetch_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:web_fetch_tool_result`
+          - `type: :web_fetch_tool_result`
 
         - `class CodeExecutionToolResultBlock`
 
@@ -6651,8 +6512,6 @@ puts(message_batch_individual_response)
 
               - `type: :code_execution_tool_result_error`
 
-                - `:code_execution_tool_result_error`
-
             - `class CodeExecutionResultBlock`
 
               - `content: Array[CodeExecutionOutputBlock]`
@@ -6661,8 +6520,6 @@ puts(message_batch_individual_response)
 
                 - `type: :code_execution_output`
 
-                  - `:code_execution_output`
-
               - `return_code: Integer`
 
               - `stderr: String`
@@ -6670,8 +6527,6 @@ puts(message_batch_individual_response)
               - `stdout: String`
 
               - `type: :code_execution_result`
-
-                - `:code_execution_result`
 
             - `class EncryptedCodeExecutionResultBlock`
 
@@ -6691,13 +6546,11 @@ puts(message_batch_individual_response)
 
               - `type: :encrypted_code_execution_result`
 
-                - `:encrypted_code_execution_result`
-
           - `tool_use_id: String`
 
-          - `type: :code_execution_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:code_execution_tool_result`
+          - `type: :code_execution_tool_result`
 
         - `class BashCodeExecutionToolResultBlock`
 
@@ -6719,8 +6572,6 @@ puts(message_batch_individual_response)
 
               - `type: :bash_code_execution_tool_result_error`
 
-                - `:bash_code_execution_tool_result_error`
-
             - `class BashCodeExecutionResultBlock`
 
               - `content: Array[BashCodeExecutionOutputBlock]`
@@ -6728,8 +6579,6 @@ puts(message_batch_individual_response)
                 - `file_id: String`
 
                 - `type: :bash_code_execution_output`
-
-                  - `:bash_code_execution_output`
 
               - `return_code: Integer`
 
@@ -6739,13 +6588,11 @@ puts(message_batch_individual_response)
 
               - `type: :bash_code_execution_result`
 
-                - `:bash_code_execution_result`
-
           - `tool_use_id: String`
 
-          - `type: :bash_code_execution_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:bash_code_execution_tool_result`
+          - `type: :bash_code_execution_tool_result`
 
         - `class TextEditorCodeExecutionToolResultBlock`
 
@@ -6769,8 +6616,6 @@ puts(message_batch_individual_response)
 
               - `type: :text_editor_code_execution_tool_result_error`
 
-                - `:text_editor_code_execution_tool_result_error`
-
             - `class TextEditorCodeExecutionViewResultBlock`
 
               - `content: String`
@@ -6791,15 +6636,11 @@ puts(message_batch_individual_response)
 
               - `type: :text_editor_code_execution_view_result`
 
-                - `:text_editor_code_execution_view_result`
-
             - `class TextEditorCodeExecutionCreateResultBlock`
 
               - `is_file_update: bool`
 
               - `type: :text_editor_code_execution_create_result`
-
-                - `:text_editor_code_execution_create_result`
 
             - `class TextEditorCodeExecutionStrReplaceResultBlock`
 
@@ -6815,13 +6656,11 @@ puts(message_batch_individual_response)
 
               - `type: :text_editor_code_execution_str_replace_result`
 
-                - `:text_editor_code_execution_str_replace_result`
-
           - `tool_use_id: String`
 
-          - `type: :text_editor_code_execution_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:text_editor_code_execution_tool_result`
+          - `type: :text_editor_code_execution_tool_result`
 
         - `class ToolSearchToolResultBlock`
 
@@ -6843,27 +6682,23 @@ puts(message_batch_individual_response)
 
               - `type: :tool_search_tool_result_error`
 
-                - `:tool_search_tool_result_error`
-
             - `class ToolSearchToolSearchResultBlock`
 
               - `tool_references: Array[ToolReferenceBlock]`
 
                 - `tool_name: String`
 
-                - `type: :tool_reference`
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `:tool_reference`
+                - `type: :tool_reference`
 
               - `type: :tool_search_tool_search_result`
 
-                - `:tool_search_tool_search_result`
-
           - `tool_use_id: String`
 
-          - `type: :tool_search_tool_result`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `:tool_search_tool_result`
+          - `type: :tool_search_tool_result`
 
         - `class ContainerUploadBlock`
 
@@ -6872,8 +6707,6 @@ puts(message_batch_individual_response)
           - `file_id: String`
 
           - `type: :container_upload`
-
-            - `:container_upload`
 
       - `model: Model`
 
@@ -6955,8 +6788,6 @@ puts(message_batch_individual_response)
 
         This will always be `"assistant"`.
 
-        - `:assistant`
-
       - `stop_details: RefusalStopDetails`
 
         Structured information about a refusal.
@@ -6992,8 +6823,6 @@ puts(message_batch_individual_response)
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
         - `type: :refusal`
-
-          - `:refusal`
 
       - `stop_reason: StopReason`
 
@@ -7037,8 +6866,6 @@ puts(message_batch_individual_response)
 
         For Messages, this is always `"message"`.
 
-        - `:message`
-
       - `usage: Usage`
 
         Billing and rate-limit usage.
@@ -7059,17 +6886,25 @@ puts(message_batch_individual_response)
 
             The number of input tokens used to create the 1 hour cache entry.
 
+            minimum: 0
+
           - `ephemeral_5m_input_tokens: Integer`
 
             The number of input tokens used to create the 5 minute cache entry.
+
+            minimum: 0
 
         - `cache_creation_input_tokens: Integer`
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `cache_read_input_tokens: Integer`
 
           The number of input tokens read from the cache.
+
+          minimum: 0
 
         - `inference_geo: String`
 
@@ -7079,9 +6914,13 @@ puts(message_batch_individual_response)
 
           The number of input tokens which were used.
 
+          minimum: 0
+
         - `output_tokens: Integer`
 
           The number of output tokens which were used.
+
+          minimum: 0
 
         - `output_tokens_details: OutputTokensDetails`
 
@@ -7103,6 +6942,8 @@ puts(message_batch_individual_response)
             generation count by a small number of tokens. Always ≤ `output_tokens`;
             `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+            minimum: 0
+
         - `server_tool_use: ServerToolUsage`
 
           The number of server tool requests.
@@ -7111,9 +6952,13 @@ puts(message_batch_individual_response)
 
             The number of web fetch tool requests.
 
+            minimum: 0
+
           - `web_search_requests: Integer`
 
             The number of web search tool requests.
+
+            minimum: 0
 
         - `service_tier: :standard | :priority | :batch`
 
@@ -7127,8 +6972,6 @@ puts(message_batch_individual_response)
 
     - `type: :succeeded`
 
-      - `:succeeded`
-
   - `class MessageBatchErroredResult`
 
     - `error: ErrorResponse`
@@ -7141,15 +6984,11 @@ puts(message_batch_individual_response)
 
           - `type: :invalid_request_error`
 
-            - `:invalid_request_error`
-
         - `class AuthenticationError`
 
           - `message: String`
 
           - `type: :authentication_error`
-
-            - `:authentication_error`
 
         - `class BillingError`
 
@@ -7157,15 +6996,11 @@ puts(message_batch_individual_response)
 
           - `type: :billing_error`
 
-            - `:billing_error`
-
         - `class PermissionError`
 
           - `message: String`
 
           - `type: :permission_error`
-
-            - `:permission_error`
 
         - `class NotFoundError`
 
@@ -7173,15 +7008,11 @@ puts(message_batch_individual_response)
 
           - `type: :not_found_error`
 
-            - `:not_found_error`
-
         - `class RateLimitError`
 
           - `message: String`
 
           - `type: :rate_limit_error`
-
-            - `:rate_limit_error`
 
         - `class GatewayTimeoutError`
 
@@ -7189,15 +7020,11 @@ puts(message_batch_individual_response)
 
           - `type: :timeout_error`
 
-            - `:timeout_error`
-
         - `class APIErrorObject`
 
           - `message: String`
 
           - `type: :api_error`
-
-            - `:api_error`
 
         - `class OverloadedError`
 
@@ -7205,29 +7032,19 @@ puts(message_batch_individual_response)
 
           - `type: :overloaded_error`
 
-            - `:overloaded_error`
-
       - `request_id: String`
 
       - `type: :error`
 
-        - `:error`
-
     - `type: :errored`
-
-      - `:errored`
 
   - `class MessageBatchCanceledResult`
 
     - `type: :canceled`
 
-      - `:canceled`
-
   - `class MessageBatchExpiredResult`
 
     - `type: :expired`
-
-      - `:expired`
 
 ### Message Batch Succeeded Result
 
@@ -7253,6 +7070,8 @@ puts(message_batch_individual_response)
 
         The time at which the container will expire.
 
+        format: date-time
+
       - `skills: Array[ContainerSkill]`
 
         Skills loaded in the container
@@ -7260,6 +7079,8 @@ puts(message_batch_individual_response)
         - `skill_id: String`
 
           Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `type: :anthropic | :custom`
 
@@ -7272,6 +7093,8 @@ puts(message_batch_individual_response)
         - `version: String`
 
           The resolved version: a skill version ID for custom skills.
+
+          maxLength: 64, minLength: 1
 
     - `content: Array[ContentBlock]`
 
@@ -7316,6 +7139,8 @@ puts(message_batch_individual_response)
 
             - `document_index: Integer`
 
+              minimum: 0
+
             - `document_title: String`
 
             - `end_char_index: Integer`
@@ -7324,15 +7149,17 @@ puts(message_batch_individual_response)
 
             - `start_char_index: Integer`
 
-            - `type: :char_location`
+              minimum: 0
 
-              - `:char_location`
+            - `type: :char_location`
 
           - `class CitationPageLocation`
 
             - `cited_text: String`
 
             - `document_index: Integer`
+
+              minimum: 0
 
             - `document_title: String`
 
@@ -7342,9 +7169,9 @@ puts(message_batch_individual_response)
 
             - `start_page_number: Integer`
 
-            - `type: :page_location`
+              minimum: 1
 
-              - `:page_location`
+            - `type: :page_location`
 
           - `class CitationContentBlockLocation`
 
@@ -7355,6 +7182,8 @@ puts(message_batch_individual_response)
               Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
             - `document_index: Integer`
+
+              minimum: 0
 
             - `document_title: String`
 
@@ -7370,9 +7199,9 @@ puts(message_batch_individual_response)
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: :content_block_location`
+              minimum: 0
 
-              - `:content_block_location`
+            - `type: :content_block_location`
 
           - `class CitationsWebSearchResultLocation`
 
@@ -7382,9 +7211,9 @@ puts(message_batch_individual_response)
 
             - `title: String`
 
-            - `type: :web_search_result_location`
+              maxLength: 512
 
-              - `:web_search_result_location`
+            - `type: :web_search_result_location`
 
             - `url: String`
 
@@ -7408,23 +7237,25 @@ puts(message_batch_individual_response)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: String`
 
             - `start_block_index: Integer`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: String`
 
             - `type: :search_result_location`
 
-              - `:search_result_location`
-
         - `text: String`
 
-        - `type: :text`
+          maxLength: 5000000, minLength: 0
 
-          - `:text`
+        - `type: :text`
 
       - `class ThinkingBlock`
 
@@ -7442,8 +7273,6 @@ puts(message_batch_individual_response)
 
         - `type: :thinking`
 
-          - `:thinking`
-
       - `class RedactedThinkingBlock`
 
         - `data: String`
@@ -7456,11 +7285,11 @@ puts(message_batch_individual_response)
 
         - `type: :redacted_thinking`
 
-          - `:redacted_thinking`
-
       - `class ToolUseBlock`
 
         - `id: String`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -7472,41 +7301,43 @@ puts(message_batch_individual_response)
 
             - `type: :direct`
 
-              - `:direct`
-
           - `class ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: String`
 
-            - `type: :code_execution_20250825`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:code_execution_20250825`
+            - `type: :code_execution_20250825`
 
           - `class ServerToolCaller20260120`
 
             - `tool_id: String`
 
-            - `type: :code_execution_20260120`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `:code_execution_20260120`
+            - `type: :code_execution_20260120`
 
         - `input: Hash[Symbol, untyped]`
 
         - `name: String`
 
-        - `type: :tool_use`
+          minLength: 1
 
-          - `:tool_use`
+        - `type: :tool_use`
 
         - `toolset_name: String`
 
           For a toolset member tool_use, the toolset family.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ServerToolUseBlock`
 
         - `id: String`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -7541,8 +7372,6 @@ puts(message_batch_individual_response)
           - `:tool_search_tool_bm25`
 
         - `type: :server_tool_use`
-
-          - `:server_tool_use`
 
       - `class WebSearchToolResultBlock`
 
@@ -7580,8 +7409,6 @@ puts(message_batch_individual_response)
 
             - `type: :web_search_tool_result_error`
 
-              - `:web_search_tool_result_error`
-
           - `UnionMember1 = Array[WebSearchResultBlock]`
 
             - `encrypted_content: String`
@@ -7592,15 +7419,13 @@ puts(message_batch_individual_response)
 
             - `type: :web_search_result`
 
-              - `:web_search_result`
-
             - `url: String`
 
         - `tool_use_id: String`
 
-        - `type: :web_search_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:web_search_tool_result`
+        - `type: :web_search_tool_result`
 
       - `class WebFetchToolResultBlock`
 
@@ -7644,8 +7469,6 @@ puts(message_batch_individual_response)
 
             - `type: :web_fetch_tool_result_error`
 
-              - `:web_fetch_tool_result_error`
-
           - `class WebFetchBlock`
 
             - `content: DocumentBlock`
@@ -7662,13 +7485,11 @@ puts(message_batch_individual_response)
 
                   - `data: String`
 
+                    format: byte
+
                   - `media_type: :"application/pdf"`
 
-                    - `:"application/pdf"`
-
                   - `type: :base64`
-
-                    - `:base64`
 
                 - `class PlainTextSource`
 
@@ -7676,11 +7497,7 @@ puts(message_batch_individual_response)
 
                   - `media_type: :"text/plain"`
 
-                    - `:"text/plain"`
-
                   - `type: :text`
-
-                    - `:text`
 
               - `title: String`
 
@@ -7688,15 +7505,11 @@ puts(message_batch_individual_response)
 
               - `type: :document`
 
-                - `:document`
-
             - `retrieved_at: String`
 
               ISO 8601 timestamp when the content was retrieved
 
             - `type: :web_fetch_result`
-
-              - `:web_fetch_result`
 
             - `url: String`
 
@@ -7704,9 +7517,9 @@ puts(message_batch_individual_response)
 
         - `tool_use_id: String`
 
-        - `type: :web_fetch_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:web_fetch_tool_result`
+        - `type: :web_fetch_tool_result`
 
       - `class CodeExecutionToolResultBlock`
 
@@ -7728,8 +7541,6 @@ puts(message_batch_individual_response)
 
             - `type: :code_execution_tool_result_error`
 
-              - `:code_execution_tool_result_error`
-
           - `class CodeExecutionResultBlock`
 
             - `content: Array[CodeExecutionOutputBlock]`
@@ -7738,8 +7549,6 @@ puts(message_batch_individual_response)
 
               - `type: :code_execution_output`
 
-                - `:code_execution_output`
-
             - `return_code: Integer`
 
             - `stderr: String`
@@ -7747,8 +7556,6 @@ puts(message_batch_individual_response)
             - `stdout: String`
 
             - `type: :code_execution_result`
-
-              - `:code_execution_result`
 
           - `class EncryptedCodeExecutionResultBlock`
 
@@ -7768,13 +7575,11 @@ puts(message_batch_individual_response)
 
             - `type: :encrypted_code_execution_result`
 
-              - `:encrypted_code_execution_result`
-
         - `tool_use_id: String`
 
-        - `type: :code_execution_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:code_execution_tool_result`
+        - `type: :code_execution_tool_result`
 
       - `class BashCodeExecutionToolResultBlock`
 
@@ -7796,8 +7601,6 @@ puts(message_batch_individual_response)
 
             - `type: :bash_code_execution_tool_result_error`
 
-              - `:bash_code_execution_tool_result_error`
-
           - `class BashCodeExecutionResultBlock`
 
             - `content: Array[BashCodeExecutionOutputBlock]`
@@ -7805,8 +7608,6 @@ puts(message_batch_individual_response)
               - `file_id: String`
 
               - `type: :bash_code_execution_output`
-
-                - `:bash_code_execution_output`
 
             - `return_code: Integer`
 
@@ -7816,13 +7617,11 @@ puts(message_batch_individual_response)
 
             - `type: :bash_code_execution_result`
 
-              - `:bash_code_execution_result`
-
         - `tool_use_id: String`
 
-        - `type: :bash_code_execution_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:bash_code_execution_tool_result`
+        - `type: :bash_code_execution_tool_result`
 
       - `class TextEditorCodeExecutionToolResultBlock`
 
@@ -7846,8 +7645,6 @@ puts(message_batch_individual_response)
 
             - `type: :text_editor_code_execution_tool_result_error`
 
-              - `:text_editor_code_execution_tool_result_error`
-
           - `class TextEditorCodeExecutionViewResultBlock`
 
             - `content: String`
@@ -7868,15 +7665,11 @@ puts(message_batch_individual_response)
 
             - `type: :text_editor_code_execution_view_result`
 
-              - `:text_editor_code_execution_view_result`
-
           - `class TextEditorCodeExecutionCreateResultBlock`
 
             - `is_file_update: bool`
 
             - `type: :text_editor_code_execution_create_result`
-
-              - `:text_editor_code_execution_create_result`
 
           - `class TextEditorCodeExecutionStrReplaceResultBlock`
 
@@ -7892,13 +7685,11 @@ puts(message_batch_individual_response)
 
             - `type: :text_editor_code_execution_str_replace_result`
 
-              - `:text_editor_code_execution_str_replace_result`
-
         - `tool_use_id: String`
 
-        - `type: :text_editor_code_execution_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:text_editor_code_execution_tool_result`
+        - `type: :text_editor_code_execution_tool_result`
 
       - `class ToolSearchToolResultBlock`
 
@@ -7920,27 +7711,23 @@ puts(message_batch_individual_response)
 
             - `type: :tool_search_tool_result_error`
 
-              - `:tool_search_tool_result_error`
-
           - `class ToolSearchToolSearchResultBlock`
 
             - `tool_references: Array[ToolReferenceBlock]`
 
               - `tool_name: String`
 
-              - `type: :tool_reference`
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `:tool_reference`
+              - `type: :tool_reference`
 
             - `type: :tool_search_tool_search_result`
 
-              - `:tool_search_tool_search_result`
-
         - `tool_use_id: String`
 
-        - `type: :tool_search_tool_result`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `:tool_search_tool_result`
+        - `type: :tool_search_tool_result`
 
       - `class ContainerUploadBlock`
 
@@ -7949,8 +7736,6 @@ puts(message_batch_individual_response)
         - `file_id: String`
 
         - `type: :container_upload`
-
-          - `:container_upload`
 
     - `model: Model`
 
@@ -8032,8 +7817,6 @@ puts(message_batch_individual_response)
 
       This will always be `"assistant"`.
 
-      - `:assistant`
-
     - `stop_details: RefusalStopDetails`
 
       Structured information about a refusal.
@@ -8069,8 +7852,6 @@ puts(message_batch_individual_response)
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
       - `type: :refusal`
-
-        - `:refusal`
 
     - `stop_reason: StopReason`
 
@@ -8114,8 +7895,6 @@ puts(message_batch_individual_response)
 
       For Messages, this is always `"message"`.
 
-      - `:message`
-
     - `usage: Usage`
 
       Billing and rate-limit usage.
@@ -8136,17 +7915,25 @@ puts(message_batch_individual_response)
 
           The number of input tokens used to create the 1 hour cache entry.
 
+          minimum: 0
+
         - `ephemeral_5m_input_tokens: Integer`
 
           The number of input tokens used to create the 5 minute cache entry.
+
+          minimum: 0
 
       - `cache_creation_input_tokens: Integer`
 
         The number of input tokens used to create the cache entry.
 
+        minimum: 0
+
       - `cache_read_input_tokens: Integer`
 
         The number of input tokens read from the cache.
+
+        minimum: 0
 
       - `inference_geo: String`
 
@@ -8156,9 +7943,13 @@ puts(message_batch_individual_response)
 
         The number of input tokens which were used.
 
+        minimum: 0
+
       - `output_tokens: Integer`
 
         The number of output tokens which were used.
+
+        minimum: 0
 
       - `output_tokens_details: OutputTokensDetails`
 
@@ -8180,6 +7971,8 @@ puts(message_batch_individual_response)
           generation count by a small number of tokens. Always ≤ `output_tokens`;
           `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+          minimum: 0
+
       - `server_tool_use: ServerToolUsage`
 
         The number of server tool requests.
@@ -8188,9 +7981,13 @@ puts(message_batch_individual_response)
 
           The number of web fetch tool requests.
 
+          minimum: 0
+
         - `web_search_requests: Integer`
 
           The number of web search tool requests.
+
+          minimum: 0
 
       - `service_tier: :standard | :priority | :batch`
 
@@ -8203,5 +8000,3 @@ puts(message_batch_individual_response)
         - `:batch`
 
   - `type: :succeeded`
-
-    - `:succeeded`

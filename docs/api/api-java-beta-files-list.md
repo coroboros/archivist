@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files/list"
 category: "api"
 generated: true
 ---
----
-title: List Files
-url: https://platform.claude.com/docs/en/api/java/beta/files/list
----
+# List Files
 
-## List Files
+`FileListPage beta().files().list(params = FileListParams.none(), requestOptions = RequestOptions.none())`
 
-`FileListPage beta().files().list(FileListParamsparams = FileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/files`
+**GET** `/v1/files`
 
 List Files
 
-### Parameters
+## Parameters
 
 - `FileListParams params`
 
@@ -34,6 +29,8 @@ List Files
     Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
+
+    maximum: 1000, minimum: 1
 
   - `Optional<String> scopeId`
 
@@ -111,7 +108,7 @@ List Files
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaFileMetadata:`
 
@@ -125,25 +122,31 @@ List Files
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -157,13 +160,11 @@ List Files
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
 
-      - `SESSION("session")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -184,7 +185,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

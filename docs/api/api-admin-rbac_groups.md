@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups"
 category: "api"
 generated: true
 ---
----
-title: RBAC Groups
-url: https://platform.claude.com/docs/en/api/admin/rbac_groups
----
-
 # RBAC Groups
 
 ## List RBAC Groups
 
-**get** `/v1/organizations/rbac_groups`
+**GET** `/v1/organizations/rbac_groups`
 
 List RBAC Groups in the Claude Enterprise tenant.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Query Parameters
+### Query parameters
 
 - `limit: optional number`
 
@@ -27,11 +22,13 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  default: 20, maximum: 1000, minimum: 1
+
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -50,6 +47,8 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
   - `created_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -73,11 +72,13 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Groups, this is always `"rbac_group"`.
 
-    - `"rbac_group"`
+    default: rbac_group
 
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
+
+    format: date-time
 
 - `has_more: boolean`
 
@@ -89,13 +90,13 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -119,19 +120,19 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
 
 ## Get RBAC Group
 
-**get** `/v1/organizations/rbac_groups/{group_id}`
+**GET** `/v1/organizations/rbac_groups/{group_id}`
 
 Retrieve an RBAC Group by ID.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+### Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -141,7 +142,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
 ### Returns
 
-- `RbacGroup object { id, created_at, name, 4 more }`
+- `RbacGroup object`
 
   - `id: string`
 
@@ -150,6 +151,8 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
   - `created_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -173,21 +176,23 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Groups, this is always `"rbac_group"`.
 
-    - `"rbac_group"`
+    default: rbac_group
 
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
+    format: date-time
+
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -205,13 +210,13 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
 ## Create RBAC Group
 
-**post** `/v1/organizations/rbac_groups`
+**POST** `/v1/organizations/rbac_groups`
 
 Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API have source type `"direct"`.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -219,15 +224,17 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+### Body parameters
 
 - `name: string`
 
   Name of the RBAC Group. Not uniqueness-enforced.
 
+  maxLength: 255, minLength: 1
+
 ### Returns
 
-- `RbacGroup object { id, created_at, name, 4 more }`
+- `RbacGroup object`
 
   - `id: string`
 
@@ -236,6 +243,8 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
   - `created_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -259,15 +268,17 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Groups, this is always `"rbac_group"`.
 
-    - `"rbac_group"`
+    default: rbac_group
 
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
+    format: date-time
+
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -277,7 +288,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -295,19 +306,19 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
 
 ## Update RBAC Group
 
-**post** `/v1/organizations/rbac_groups/{group_id}`
+**POST** `/v1/organizations/rbac_groups/{group_id}`
 
 Update an RBAC Group's name. Groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+### Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -315,15 +326,17 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+### Body parameters
 
 - `name: optional string or null`
 
   Name of the RBAC Group. Not uniqueness-enforced.
 
+  maxLength: 255, minLength: 1
+
 ### Returns
 
-- `RbacGroup object { id, created_at, name, 4 more }`
+- `RbacGroup object`
 
   - `id: string`
 
@@ -332,6 +345,8 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
   - `created_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -355,15 +370,17 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Groups, this is always `"rbac_group"`.
 
-    - `"rbac_group"`
+    default: rbac_group
 
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
+    format: date-time
+
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -373,7 +390,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -391,19 +408,19 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
 ## Delete RBAC Group
 
-**delete** `/v1/organizations/rbac_groups/{group_id}`
+**DELETE** `/v1/organizations/rbac_groups/{group_id}`
 
 Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+### Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -413,7 +430,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
 ### Returns
 
-- `RbacGroupDeleted object { id, type }`
+- `RbacGroupDeleted object`
 
   - `id: string`
 
@@ -425,18 +442,18 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Groups, this is always `"rbac_group_deleted"`.
 
-    - `"rbac_group_deleted"`
+    default: rbac_group_deleted
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -445,11 +462,11 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Rbac Group
 
-- `RbacGroup object { id, created_at, name, 4 more }`
+- `RbacGroup object`
 
   - `id: string`
 
@@ -458,6 +475,8 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
   - `created_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -481,15 +500,17 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
     For RBAC Groups, this is always `"rbac_group"`.
 
-    - `"rbac_group"`
+    default: rbac_group
 
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
+    format: date-time
+
 ### Rbac Group Deleted
 
-- `RbacGroupDeleted object { id, type }`
+- `RbacGroupDeleted object`
 
   - `id: string`
 
@@ -501,25 +522,25 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
     For RBAC Groups, this is always `"rbac_group_deleted"`.
 
-    - `"rbac_group_deleted"`
+    default: rbac_group_deleted
 
-# Members
+## RBAC Groups › Members
 
-## List RBAC Group Members
+### List RBAC Group Members
 
-**get** `/v1/organizations/rbac_groups/{group_id}/members`
+**GET** `/v1/organizations/rbac_groups/{group_id}/members`
 
 List members of an RBAC Group.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+#### Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Query Parameters
+#### Query parameters
 
 - `limit: optional number`
 
@@ -527,11 +548,13 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  default: 20, maximum: 1000, minimum: 1
+
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -539,13 +562,15 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+#### Returns
 
 - `data: array of RbacGroupMember`
 
   - `created_at: string`
 
     RFC 3339 timestamp of when the User was added to the RBAC Group.
+
+    format: date-time
 
   - `email: string`
 
@@ -561,7 +586,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Group Members, this is always `"rbac_group_member"`.
 
-    - `"rbac_group_member"`
+    default: rbac_group_member
 
   - `user_id: string`
 
@@ -575,15 +600,15 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -601,21 +626,21 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
 }
 ```
 
-## Add RBAC Group Member
+### Add RBAC Group Member
 
-**post** `/v1/organizations/rbac_groups/{group_id}/members`
+**POST** `/v1/organizations/rbac_groups/{group_id}/members`
 
 Add a User to an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+#### Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -623,19 +648,21 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+#### Body parameters
 
 - `user_id: string`
 
   ID of the User.
 
-### Returns
+#### Returns
 
-- `RbacGroupMember object { created_at, email, group_id, 2 more }`
+- `RbacGroupMember object`
 
   - `created_at: string`
 
     RFC 3339 timestamp of when the User was added to the RBAC Group.
+
+    format: date-time
 
   - `email: string`
 
@@ -651,15 +678,15 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Group Members, this is always `"rbac_group_member"`.
 
-    - `"rbac_group_member"`
+    default: rbac_group_member
 
   - `user_id: string`
 
     ID of the User.
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -669,7 +696,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
         }'
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -681,15 +708,15 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
 }
 ```
 
-## Remove RBAC Group Member
+### Remove RBAC Group Member
 
-**delete** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`
+**DELETE** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`
 
 Remove a User from an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API.
 
 The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
 
-### Path Parameters
+#### Path parameters
 
 - `group_id: string`
 
@@ -699,7 +726,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   ID of the User.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -707,9 +734,9 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+#### Returns
 
-- `RbacGroupMemberDeleted object { group_id, type, user_id }`
+- `RbacGroupMemberDeleted object`
 
   - `group_id: string`
 
@@ -719,22 +746,22 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
-    - `"rbac_group_member_deleted"`
+    default: rbac_group_member_deleted
 
   - `user_id: string`
 
     ID of the User.
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -743,51 +770,3 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$U
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
 }
 ```
-
-## Domain Types
-
-### Rbac Group Member
-
-- `RbacGroupMember object { created_at, email, group_id, 2 more }`
-
-  - `created_at: string`
-
-    RFC 3339 timestamp of when the User was added to the RBAC Group.
-
-  - `email: string`
-
-    Email of the User.
-
-  - `group_id: string`
-
-    ID of the RBAC Group.
-
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    - `"rbac_group_member"`
-
-  - `user_id: string`
-
-    ID of the User.
-
-### Rbac Group Member Deleted
-
-- `RbacGroupMemberDeleted object { group_id, type, user_id }`
-
-  - `group_id: string`
-
-    ID of the RBAC Group.
-
-  - `type: "rbac_group_member_deleted"`
-
-    Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
-
-    - `"rbac_group_member_deleted"`
-
-  - `user_id: string`
-
-    ID of the User.

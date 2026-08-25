@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/skills/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Skill
-url: https://platform.claude.com/docs/en/api/go/beta/skills/retrieve
----
-
-## Get Skill
+# Get Skill
 
 `client.Beta.Skills.Get(ctx, skillID, query) (*BetaSkillGetResponse, error)`
 
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-### Parameters
+## Parameters
 
 - `skillID string`
 
@@ -27,7 +22,7 @@ Get Skill
 
 - `query BetaSkillGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -103,7 +98,7 @@ Get Skill
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSkillGetResponse struct{…}`
 
@@ -144,11 +139,13 @@ Get Skill
 
     For Skills, this is always `"skill"`.
 
+    default: skill
+
   - `UpdatedAt string`
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```go
 package main
@@ -177,7 +174,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

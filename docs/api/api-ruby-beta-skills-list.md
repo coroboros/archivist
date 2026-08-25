@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/list"
 category: "api"
 generated: true
 ---
----
-title: List Skills
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills/list
----
-
-## List Skills
+# List Skills
 
 `beta.skills.list(**kwargs) -> PageCursor<SkillListResponse>`
 
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
-### Parameters
+## Parameters
 
 - `limit: Integer`
 
@@ -116,7 +111,7 @@ List Skills
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class SkillListResponse`
 
@@ -161,7 +156,7 @@ List Skills
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -173,7 +168,7 @@ page = anthropic.beta.skills.list
 puts(page)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

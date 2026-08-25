@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/files"
 category: "api"
 generated: true
 ---
----
-title: Files
-url: https://platform.claude.com/docs/en/api/cli/beta/files
----
-
 # Files
 
 ## Upload File
 
 `$ ant beta:files upload`
 
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
@@ -25,13 +20,15 @@ Upload File
 
   Body param: The file to upload
 
+  format: binary
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object`
 
   - `id: string`
 
@@ -43,17 +40,25 @@ Upload File
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `filename: string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `mime_type: string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `size_bytes: number`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `type: "file"`
 
@@ -65,7 +70,7 @@ Upload File
 
     Whether the file can be downloaded.
 
-  - `scope: optional object { id, type }`
+  - `scope: optional object`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -79,13 +84,13 @@ Upload File
 
 ### Example
 
-```cli
+```bash
 ant beta:files upload \
   --api-key my-anthropic-api-key \
   --file 'Example data'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -107,7 +112,7 @@ ant beta:files upload \
 
 `$ ant beta:files list`
 
-**get** `/v1/files`
+**GET** `/v1/files`
 
 List Files
 
@@ -127,6 +132,8 @@ List Files
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  maximum: 1000, minimum: 1
+
 - `--scope-id: optional string`
 
   Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
@@ -137,7 +144,7 @@ List Files
 
 ### Returns
 
-- `BetaFileListResponse: object { data, first_id, has_more, last_id }`
+- `BetaFileListResponse: object`
 
   - `data: array of BetaFileMetadata`
 
@@ -153,17 +160,25 @@ List Files
 
       RFC 3339 datetime string representing when the file was created.
 
+      format: date-time
+
     - `filename: string`
 
       Original filename of the uploaded file.
+
+      maxLength: 500, minLength: 1
 
     - `mime_type: string`
 
       MIME type of the file.
 
+      maxLength: 255, minLength: 1
+
     - `size_bytes: number`
 
       Size of the file in bytes.
+
+      minimum: 0
 
     - `type: "file"`
 
@@ -175,7 +190,7 @@ List Files
 
       Whether the file can be downloaded.
 
-    - `scope: optional object { id, type }`
+    - `scope: optional object`
 
       The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -201,12 +216,12 @@ List Files
 
 ### Example
 
-```cli
+```bash
 ant beta:files list \
   --api-key my-anthropic-api-key
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -235,7 +250,7 @@ ant beta:files list \
 
 `$ ant beta:files download`
 
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
@@ -255,7 +270,7 @@ Download File
 
 ### Example
 
-```cli
+```bash
 ant beta:files download \
   --api-key my-anthropic-api-key \
   --file-id file_id
@@ -265,7 +280,7 @@ ant beta:files download \
 
 `$ ant beta:files retrieve-metadata`
 
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
@@ -281,7 +296,7 @@ Get File Metadata
 
 ### Returns
 
-- `beta_file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object`
 
   - `id: string`
 
@@ -293,17 +308,25 @@ Get File Metadata
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `filename: string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `mime_type: string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `size_bytes: number`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `type: "file"`
 
@@ -315,7 +338,7 @@ Get File Metadata
 
     Whether the file can be downloaded.
 
-  - `scope: optional object { id, type }`
+  - `scope: optional object`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -329,13 +352,13 @@ Get File Metadata
 
 ### Example
 
-```cli
+```bash
 ant beta:files retrieve-metadata \
   --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -357,7 +380,7 @@ ant beta:files retrieve-metadata \
 
 `$ ant beta:files delete`
 
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
@@ -373,7 +396,7 @@ Delete File
 
 ### Returns
 
-- `beta_deleted_file: object { id, type }`
+- `beta_deleted_file: object`
 
   - `id: string`
 
@@ -385,17 +408,15 @@ Delete File
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `"file_deleted"`
-
 ### Example
 
-```cli
+```bash
 ant beta:files delete \
   --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -404,11 +425,11 @@ ant beta:files delete \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Deleted File
 
-- `beta_deleted_file: object { id, type }`
+- `beta_deleted_file: object`
 
   - `id: string`
 
@@ -420,11 +441,9 @@ ant beta:files delete \
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `"file_deleted"`
-
 ### Beta File Metadata
 
-- `beta_file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object`
 
   - `id: string`
 
@@ -436,17 +455,25 @@ ant beta:files delete \
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `filename: string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `mime_type: string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `size_bytes: number`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `type: "file"`
 
@@ -458,7 +485,7 @@ ant beta:files delete \
 
     Whether the file can be downloaded.
 
-  - `scope: optional object { id, type }`
+  - `scope: optional object`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -472,7 +499,7 @@ ant beta:files delete \
 
 ### Beta File Scope
 
-- `beta_file_scope: object { id, type }`
+- `beta_file_scope: object`
 
   - `id: string`
 

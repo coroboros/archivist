@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
----
-title: Delete a memory
-url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories/delete
----
-
-## Delete a memory
+# Delete a memory
 
 `$ ant beta:memory-stores:memories delete`
 
-**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Delete a memory
 
-### Parameters
+## Parameters
 
 - `--memory-store-id: string`
 
@@ -35,9 +30,9 @@ Delete a memory
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
-- `beta_managed_agents_deleted_memory: object { id, type }`
+- `beta_managed_agents_deleted_memory: object`
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
 
@@ -47,18 +42,16 @@ Delete a memory
 
   - `type: "memory_deleted"`
 
-    - `"memory_deleted"`
+## Example
 
-### Example
-
-```cli
+```bash
 ant beta:memory-stores:memories delete \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

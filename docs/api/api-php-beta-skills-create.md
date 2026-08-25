@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/create"
 category: "api"
 generated: true
 ---
----
-title: Create Skill
-url: https://platform.claude.com/docs/en/api/php/beta/skills/create
----
-
-## Create Skill
+# Create Skill
 
 `$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): SkillNewResponse`
 
-**post** `/v1/skills`
+**POST** `/v1/skills`
 
 Create Skill
 
-### Parameters
+## Parameters
 
 - `files: list<string>`
 
@@ -35,7 +30,7 @@ Create Skill
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `SkillNewResponse`
 
@@ -80,7 +75,7 @@ Create Skill
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -100,7 +95,7 @@ $skill = $client->beta->skills->create(
 var_dump($skill);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

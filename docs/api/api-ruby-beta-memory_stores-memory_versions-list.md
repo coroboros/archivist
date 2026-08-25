@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memory_
 category: "api"
 generated: true
 ---
----
-title: List memory versions
-url: https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memory_versions/list
----
-
-## List memory versions
+# List memory versions
 
 `beta.memory_stores.memory_versions.list(memory_store_id, **kwargs) -> PageCursor<BetaManagedAgentsMemoryVersion>`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
 List memory versions
 
-### Parameters
+## Parameters
 
 - `memory_store_id: String`
 
@@ -29,13 +24,19 @@ List memory versions
 
   Return versions created at or after this time (inclusive).
 
+  format: date-time
+
 - `created_at_lte: Time`
 
   Return versions created at or before this time (inclusive).
 
+  format: date-time
+
 - `limit: Integer`
 
   Query parameter for limit
+
+  format: int32
 
 - `memory_id: String`
 
@@ -147,7 +148,7 @@ List memory versions
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsMemoryVersion`
 
@@ -160,6 +161,8 @@ List memory versions
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_id: String`
 
@@ -181,8 +184,6 @@ List memory versions
 
   - `type: :memory_version`
 
-    - `:memory_version`
-
   - `content: String`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -194,6 +195,8 @@ List memory versions
   - `content_size_bytes: Integer`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `created_by: BetaManagedAgentsActor`
 
@@ -207,9 +210,9 @@ List memory versions
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `type: :session_actor`
+        minLength: 1
 
-        - `:session_actor`
+      - `type: :session_actor`
 
     - `class BetaManagedAgentsAPIActor`
 
@@ -219,9 +222,9 @@ List memory versions
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `type: :api_actor`
+        minLength: 1
 
-        - `:api_actor`
+      - `type: :api_actor`
 
     - `class BetaManagedAgentsUserActor`
 
@@ -229,11 +232,11 @@ List memory versions
 
       - `type: :user_actor`
 
-        - `:user_actor`
-
       - `user_id: String`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor`
 
@@ -243,9 +246,9 @@ List memory versions
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `type: :service_account_actor`
+        minLength: 1
 
-        - `:service_account_actor`
+      - `type: :service_account_actor`
 
   - `path: String`
 
@@ -255,11 +258,13 @@ List memory versions
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `redacted_by: BetaManagedAgentsActor`
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -271,7 +276,7 @@ page = anthropic.beta.memory_stores.memory_versions.list("memory_store_id")
 puts(page)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

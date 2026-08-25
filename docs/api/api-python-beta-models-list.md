@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/python/beta/models/list"
 category: "api"
 generated: true
 ---
----
-title: List Models
-url: https://platform.claude.com/docs/en/api/python/beta/models/list
----
+# List Models
 
-## List Models
+`beta.models.list(**kwargs)  -> SyncPage[BetaModelInfo]`
 
-`beta.models.list(ModelListParams**kwargs)  -> SyncPage[BetaModelInfo]`
-
-**get** `/v1/models`
+**GET** `/v1/models`
 
 List available models.
 
 The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-### Parameters
+## Parameters
 
 - `after_id: Optional[str]`
 
@@ -34,6 +29,8 @@ The Models API response can be used to determine which models are available for 
   Number of items to return per page.
 
   Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20, maximum: 1000, minimum: 1
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -111,7 +108,7 @@ The Models API response can be used to determine which models are available for 
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaModelInfo: …`
 
@@ -227,6 +224,8 @@ The Models API response can be used to determine which models are available for 
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
+    format: date-time
+
   - `display_name: str`
 
     A human-readable name for the model.
@@ -245,9 +244,9 @@ The Models API response can be used to determine which models are available for 
 
     For Models, this is always `"model"`.
 
-    - `"model"`
+    default: model
 
-### Example
+## Example
 
 ```python
 import os
@@ -263,7 +262,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

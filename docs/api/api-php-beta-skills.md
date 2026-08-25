@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills"
 category: "api"
 generated: true
 ---
----
-title: Skills
-url: https://platform.claude.com/docs/en/api/php/beta/skills
----
-
 # Skills
 
 ## Create Skill
 
 `$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): SkillNewResponse`
 
-**post** `/v1/skills`
+**POST** `/v1/skills`
 
 Create Skill
 
@@ -102,7 +97,7 @@ $skill = $client->beta->skills->create(
 var_dump($skill);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -120,7 +115,7 @@ var_dump($skill);
 
 `$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<SkillListResponse>`
 
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
@@ -131,6 +126,8 @@ List Skills
   Number of results to return per page.
 
   Maximum value is 100. Defaults to 20.
+
+  default: 20
 
 - `page?:optional string`
 
@@ -215,7 +212,7 @@ $page = $client->beta->skills->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -239,7 +236,7 @@ var_dump($page);
 
 `$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): SkillGetResponse`
 
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
@@ -316,7 +313,7 @@ $skill = $client->beta->skills->retrieve(
 var_dump($skill);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -334,7 +331,7 @@ var_dump($skill);
 
 `$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): SkillDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}`
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
@@ -382,7 +379,7 @@ $skill = $client->beta->skills->delete(
 var_dump($skill);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -391,17 +388,17 @@ var_dump($skill);
 }
 ```
 
-# Versions
+## Skills › Versions
 
-## Create Skill Version
+### Create Skill Version
 
 `$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): VersionNewResponse`
 
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-### Parameters
+#### Parameters
 
 - `skillID: string`
 
@@ -419,7 +416,7 @@ Create Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
 - `VersionNewResponse`
 
@@ -467,7 +464,7 @@ Create Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```php
 <?php
@@ -487,7 +484,7 @@ $version = $client->beta->skills->versions->create(
 var_dump($version);
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -502,15 +499,15 @@ var_dump($version);
 }
 ```
 
-## List Skill Versions
+### List Skill Versions
 
 `$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<VersionListResponse>`
 
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-### Parameters
+#### Parameters
 
 - `skillID: string`
 
@@ -532,7 +529,7 @@ List Skill Versions
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
 - `VersionListResponse`
 
@@ -580,7 +577,7 @@ List Skill Versions
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```php
 <?php
@@ -599,7 +596,7 @@ $page = $client->beta->skills->versions->list(
 var_dump($page);
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -620,15 +617,15 @@ var_dump($page);
 }
 ```
 
-## Download Skill Version Content
+### Download Skill Version Content
 
 `$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-### Parameters
+#### Parameters
 
 - `skillID: string`
 
@@ -646,11 +643,11 @@ Download a skill version's content as a zip archive.
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
 - `mixed`
 
-### Example
+#### Example
 
 ```php
 <?php
@@ -668,15 +665,15 @@ $response = $client->beta->skills->versions->download(
 var_dump($response);
 ```
 
-## Get Skill Version
+### Get Skill Version
 
 `$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): VersionGetResponse`
 
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-### Parameters
+#### Parameters
 
 - `skillID: string`
 
@@ -694,7 +691,7 @@ Get Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
 - `VersionGetResponse`
 
@@ -742,7 +739,7 @@ Get Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```php
 <?php
@@ -760,7 +757,7 @@ $version = $client->beta->skills->versions->retrieve(
 var_dump($version);
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -775,15 +772,15 @@ var_dump($version);
 }
 ```
 
-## Delete Skill Version
+### Delete Skill Version
 
 `$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): VersionDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-### Parameters
+#### Parameters
 
 - `skillID: string`
 
@@ -801,7 +798,7 @@ Delete Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
 - `VersionDeleteResponse`
 
@@ -817,7 +814,7 @@ Delete Skill Version
 
     For Skill Versions, this is always `"skill_version_deleted"`.
 
-### Example
+#### Example
 
 ```php
 <?php
@@ -835,7 +832,7 @@ $version = $client->beta->skills->versions->delete(
 var_dump($version);
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {

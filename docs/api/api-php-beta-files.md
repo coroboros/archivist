@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/beta/files"
 category: "api"
 generated: true
 ---
----
-title: Files
-url: https://platform.claude.com/docs/en/api/php/beta/files
----
-
 # Files
 
 ## Upload File
 
 `$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
@@ -86,7 +81,7 @@ $betaFileMetadata = $client->beta->files->upload(
 var_dump($betaFileMetadata);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -108,7 +103,7 @@ var_dump($betaFileMetadata);
 
 `$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<BetaFileMetadata>`
 
-**get** `/v1/files`
+**GET** `/v1/files`
 
 List Files
 
@@ -127,6 +122,8 @@ List Files
   Number of items to return per page.
 
   Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20
 
 - `scopeID?:optional string`
 
@@ -196,7 +193,7 @@ $page = $client->beta->files->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -225,7 +222,7 @@ var_dump($page);
 
 `$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download`
 
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
@@ -263,7 +260,7 @@ var_dump($response);
 
 `$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
@@ -333,7 +330,7 @@ $betaFileMetadata = $client->beta->files->retrieveMetadata(
 var_dump($betaFileMetadata);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -355,7 +352,7 @@ var_dump($betaFileMetadata);
 
 `$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): BetaDeletedFile`
 
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
@@ -399,7 +396,7 @@ $betaDeletedFile = $client->beta->files->delete(
 var_dump($betaDeletedFile);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -408,7 +405,7 @@ var_dump($betaDeletedFile);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Deleted File
 

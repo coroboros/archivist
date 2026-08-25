@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/threads/list
 category: "api"
 generated: true
 ---
----
-title: List Session Threads
-url: https://platform.claude.com/docs/en/api/java/beta/sessions/threads/list
----
+# List Session Threads
 
-## List Session Threads
+`ThreadListPage beta().sessions().threads().list(params = ThreadListParams.none(), requestOptions = RequestOptions.none())`
 
-`ThreadListPage beta().sessions().threads().list(ThreadListParamsparams = ThreadListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/sessions/{session_id}/threads`
+**GET** `/v1/sessions/{session_id}/threads`
 
 List Session Threads
 
-### Parameters
+## Parameters
 
 - `ThreadListParams params`
 
@@ -26,6 +21,8 @@ List Session Threads
   - `Optional<Long> limit`
 
     Maximum results per page. Defaults to 1000.
+
+    format: int32
 
   - `Optional<String> page`
 
@@ -103,7 +100,7 @@ List Session Threads
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsSessionThread:`
 
@@ -130,8 +127,6 @@ List Session Threads
         - `String name`
 
         - `Type type`
-
-          - `URL("url")`
 
         - `String url`
 
@@ -207,15 +202,11 @@ List Session Threads
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -223,23 +214,17 @@ List Session Threads
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -265,8 +250,6 @@ List Session Threads
 
           - `Type type`
 
-            - `ANTHROPIC("anthropic")`
-
           - `String version`
 
         - `class BetaManagedAgentsCustomSkill:`
@@ -276,8 +259,6 @@ List Session Threads
           - `String skillId`
 
           - `Type type`
-
-            - `CUSTOM("custom")`
 
           - `String version`
 
@@ -295,9 +276,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -309,19 +288,13 @@ List Session Threads
 
                   - `Type type`
 
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type type`
 
-                    - `ALWAYS_ASK("always_ask")`
-
-              - `JsonValue; type "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
@@ -329,9 +302,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -345,9 +316,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsReadToolConfig:`
 
@@ -355,9 +324,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "read"constant`
-
-                - `READ("read")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -371,9 +338,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "read"constant`
-
-                - `READ("read")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -381,9 +346,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -397,9 +360,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -407,9 +368,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -423,9 +382,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -433,9 +390,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -449,9 +404,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -459,9 +412,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -475,9 +426,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -485,15 +434,15 @@ List Session Threads
 
               - `Optional<Long> maxContentTokens`
 
+                format: int32
+
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -507,9 +456,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -519,15 +466,15 @@ List Session Threads
 
                 Approximate user location for search result localization.
 
-                - `JsonValue; type "approximate"constant`
+                - `JsonValue type constant`
 
                   Location precision. Only "approximate" is supported.
-
-                  - `APPROXIMATE("approximate")`
 
                 - `Optional<String> city`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `Optional<String> country`
 
@@ -537,9 +484,13 @@ List Session Threads
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `Optional<String> timezone`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -560,8 +511,6 @@ List Session Threads
                 Tool calls require user confirmation before execution.
 
           - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
         - `class BetaManagedAgentsMcpToolset:`
 
@@ -605,8 +554,6 @@ List Session Threads
 
           - `Type type`
 
-            - `MCP_TOOLSET("mcp_toolset")`
-
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
@@ -617,9 +564,7 @@ List Session Threads
 
             JSON Schema for custom tool input parameters.
 
-            - `JsonValue; type "object"constant`
-
-              - `OBJECT("object")`
+            - `JsonValue type constant`
 
             - `Optional<Properties> properties`
 
@@ -629,13 +574,11 @@ List Session Threads
 
           - `Type type`
 
-            - `CUSTOM("custom")`
-
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor:`
 
@@ -647,15 +590,17 @@ List Session Threads
 
       - `Type type`
 
-        - `ADVISOR("advisor")`
-
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> parentThreadId`
 
@@ -673,13 +618,19 @@ List Session Threads
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `Optional<Double> durationSeconds`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `Optional<Double> startupSeconds`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `BetaManagedAgentsSessionThreadStatus status`
 
@@ -695,11 +646,11 @@ List Session Threads
 
   - `Type type`
 
-    - `SESSION_THREAD("session_thread")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
 
@@ -709,6 +660,8 @@ List Session Threads
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -717,17 +670,25 @@ List Session Threads
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `Optional<Long> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `Optional<Long> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `Optional<Long> inputTokens`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `Optional<BetaMonetaryAmount> listCost`
 
@@ -741,11 +702,11 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Optional<Long> outputTokens`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -755,11 +716,15 @@ List Session Threads
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `Optional<Long> webSearchRequests`
 
         Number of server-executed web search requests.
 
-### Example
+        format: int32
+
+## Example
 
 ```java
 package com.anthropic.example;
@@ -780,7 +745,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/credentials/re
 category: "api"
 generated: true
 ---
----
-title: Get Credential
-url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/credentials/retrieve
----
-
-## Get Credential
+# Get Credential
 
 `beta.vaults.credentials.retrieve(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
-**get** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Get Credential
 
-### Parameters
+## Parameters
 
 - `vault_id: String`
 
@@ -99,7 +94,7 @@ Get Credential
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsCredential`
 
@@ -112,6 +107,8 @@ Get Credential
   - `archived_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -127,11 +124,11 @@ Get Credential
 
       - `type: :mcp_oauth`
 
-        - `:mcp_oauth`
-
       - `expires_at: Time`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: BetaManagedAgentsMCPOAuthRefreshResponse`
 
@@ -155,23 +152,17 @@ Get Credential
 
             - `type: :none`
 
-              - `:none`
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: :client_secret_basic`
 
-              - `:client_secret_basic`
-
           - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: :client_secret_post`
-
-              - `:client_secret_post`
 
         - `resource: String`
 
@@ -190,8 +181,6 @@ Get Credential
         URL of the MCP server this credential authenticates against.
 
       - `type: :static_bearer`
-
-        - `:static_bearer`
 
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -219,8 +208,6 @@ Get Credential
 
           - `type: :unrestricted`
 
-            - `:unrestricted`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -231,19 +218,17 @@ Get Credential
 
           - `type: :limited`
 
-            - `:limited`
-
       - `secret_name: String`
 
         Name of the environment variable.
 
       - `type: :environment_variable`
 
-        - `:environment_variable`
-
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Hash[Symbol, String]`
 
@@ -251,11 +236,11 @@ Get Credential
 
   - `type: :vault_credential`
 
-    - `:vault_credential`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: String`
 
@@ -265,7 +250,7 @@ Get Credential
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -280,7 +265,7 @@ beta_managed_agents_credential = anthropic.beta.vaults.credentials.retrieve(
 puts(beta_managed_agents_credential)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

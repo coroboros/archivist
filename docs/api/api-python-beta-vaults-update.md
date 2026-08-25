@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/python/beta/vaults/update"
 category: "api"
 generated: true
 ---
----
-title: Update Vault
-url: https://platform.claude.com/docs/en/api/python/beta/vaults/update
----
+# Update Vault
 
-## Update Vault
+`beta.vaults.update(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
-`beta.vaults.update(strvault_id, VaultUpdateParams**kwargs)  -> BetaManagedAgentsVault`
-
-**post** `/v1/vaults/{vault_id}`
+**POST** `/v1/vaults/{vault_id}`
 
 Update Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: str`
 
 - `display_name: Optional[str]`
 
   Updated human-readable name for the vault. 1-255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `metadata: Optional[Dict[str, Optional[str]]]`
 
@@ -105,7 +102,7 @@ Update Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault: …`
 
@@ -119,9 +116,13 @@ Update Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: str`
 
@@ -133,13 +134,13 @@ Update Vault
 
   - `type: Literal["vault"]`
 
-    - `"vault"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```python
 import os
@@ -156,7 +157,7 @@ beta_managed_agents_vault = client.beta.vaults.update(
 print(beta_managed_agents_vault.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

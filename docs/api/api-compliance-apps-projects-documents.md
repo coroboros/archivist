@@ -4,26 +4,21 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/docume
 category: "api"
 generated: true
 ---
----
-title: Documents
-url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents
----
-
 # Documents
 
 ## Get project document content
 
-**get** `/v1/compliance/apps/projects/documents/{document_id}`
+**GET** `/v1/compliance/apps/projects/documents/{document_id}`
 
 Get detailed information for a specific project document.
 
-### Path Parameters
+### Path parameters
 
 - `document_id: string`
 
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-### Header Parameters
+### Headers
 
 - `"x-api-key": optional string`
 
@@ -41,11 +36,13 @@ Get detailed information for a specific project document.
 
   Document creation timestamp
 
+  format: date-time
+
 - `filename: string`
 
   Document filename
 
-- `user: object { id, email_address }  or null`
+- `user: object or null`
 
   The user who created a project or project document.
 
@@ -63,12 +60,12 @@ Get detailed information for a specific project document.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -85,7 +82,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ## Get project document metadata
 
-**get** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
+**GET** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
 Returns metadata for a project document, without the content body.
 
@@ -94,13 +91,13 @@ endpoint to fetch the document text. The `md5` and `size_bytes`
 fields here are computed over the UTF-8 encoding of that text, so a DLP
 consumer can dedupe or match hashes without downloading every document.
 
-### Path Parameters
+### Path parameters
 
 - `document_id: string`
 
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-### Header Parameters
+### Headers
 
 - `"x-api-key": optional string`
 
@@ -118,6 +115,8 @@ consumer can dedupe or match hashes without downloading every document.
 
   Document creation timestamp
 
+  format: date-time
+
 - `filename: string`
 
   Document filename
@@ -130,13 +129,13 @@ consumer can dedupe or match hashes without downloading every document.
 
   MIME type of the document content, always plain text
 
-  - `"text/plain"`
+  default: text/plain
 
 - `size_bytes: number`
 
   Size in bytes of the document content (UTF-8 encoded)
 
-- `user: object { id, email_address }  or null`
+- `user: object or null`
 
   The user who created a project or project document.
 
@@ -154,12 +153,12 @@ consumer can dedupe or match hashes without downloading every document.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -179,19 +178,19 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ## Delete project document
 
-**delete** `/v1/compliance/apps/projects/documents/{document_id}`
+**DELETE** `/v1/compliance/apps/projects/documents/{document_id}`
 
 Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
 
-### Path Parameters
+### Path parameters
 
 - `document_id: string`
 
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
-### Header Parameters
+### Headers
 
 - `"x-api-key": optional string`
 
@@ -205,17 +204,17 @@ Hard-deletes the project document permanently.
 
   Constant string confirming deletion.
 
-  - `"claude_project_document_deleted"`
+  default: claude_project_document_deleted
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -224,11 +223,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Document Retrieve Response
 
-- `DocumentRetrieveResponse object { id, content, created_at, 2 more }`
+- `DocumentRetrieveResponse object`
 
   Project document information for compliance responses.
 
@@ -244,11 +243,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     Document creation timestamp
 
+    format: date-time
+
   - `filename: string`
 
     Document filename
 
-  - `user: object { id, email_address }  or null`
+  - `user: object or null`
 
     The user who created a project or project document.
 
@@ -266,7 +267,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Metadata Response
 
-- `DocumentMetadataResponse object { id, claude_project_id, created_at, 5 more }`
+- `DocumentMetadataResponse object`
 
   Project document metadata for GET /v1/compliance/apps/projects/documents/{document_id}/metadata.
 
@@ -285,6 +286,8 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     Document creation timestamp
 
+    format: date-time
+
   - `filename: string`
 
     Document filename
@@ -297,13 +300,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     MIME type of the document content, always plain text
 
-    - `"text/plain"`
+    default: text/plain
 
   - `size_bytes: number`
 
     Size in bytes of the document content (UTF-8 encoded)
 
-  - `user: object { id, email_address }  or null`
+  - `user: object or null`
 
     The user who created a project or project document.
 
@@ -321,7 +324,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Delete Response
 
-- `DocumentDeleteResponse object { id, type }`
+- `DocumentDeleteResponse object`
 
   Response for deleting a project document.
 
@@ -333,4 +336,4 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     Constant string confirming deletion.
 
-    - `"claude_project_document_deleted"`
+    default: claude_project_document_deleted

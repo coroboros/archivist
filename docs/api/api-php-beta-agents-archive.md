@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Agent
-url: https://platform.claude.com/docs/en/api/php/beta/agents/archive
----
-
-## Archive Agent
+# Archive Agent
 
 `$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-**post** `/v1/agents/{agent_id}/archive`
+**POST** `/v1/agents/{agent_id}/archive`
 
 Archive Agent
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -25,7 +20,7 @@ Archive Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -71,7 +66,7 @@ Archive Agent
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -88,7 +83,7 @@ $betaManagedAgentsAgent = $client->beta->agents->archive(
 var_dump($betaManagedAgentsAgent);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

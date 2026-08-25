@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/work/hea
 category: "api"
 generated: true
 ---
----
-title: Record Heartbeat
-url: https://platform.claude.com/docs/en/api/ruby/beta/environments/work/heartbeat
----
-
-## Record Heartbeat
+# Record Heartbeat
 
 `beta.environments.work.heartbeat(work_id, **kwargs) -> BetaSelfHostedWorkHeartbeatResponse`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Record a heartbeat for a work item to maintain the lease.
 
-### Parameters
+## Parameters
 
 - `environment_id: String`
 
@@ -109,7 +104,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
 
@@ -145,9 +140,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     The type of response
 
-    - `:work_heartbeat`
-
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -159,7 +152,7 @@ beta_self_hosted_work_heartbeat_response = anthropic.beta.environments.work.hear
 puts(beta_self_hosted_work_heartbeat_response)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

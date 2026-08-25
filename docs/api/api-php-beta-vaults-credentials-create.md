@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/cre
 category: "api"
 generated: true
 ---
----
-title: Create Credential
-url: https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/create
----
-
-## Create Credential
+# Create Credential
 
 `$client->beta->vaults->credentials->create(string vaultID, Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas): ManagedAgentsCredential`
 
-**post** `/v1/vaults/{vault_id}/credentials`
+**POST** `/v1/vaults/{vault_id}/credentials`
 
 Create Credential
 
-### Parameters
+## Parameters
 
 - `vaultID: string`
 
@@ -37,7 +32,7 @@ Create Credential
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsCredential`
 
@@ -75,7 +70,7 @@ Create Credential
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -99,7 +94,7 @@ $betaManagedAgentsCredential = $client->beta->vaults->credentials->create(
 var_dump($betaManagedAgentsCredential);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

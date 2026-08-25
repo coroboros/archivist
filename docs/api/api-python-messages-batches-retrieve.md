@@ -4,28 +4,23 @@ source: "https://platform.claude.com/docs/en/api/python/messages/batches/retriev
 category: "api"
 generated: true
 ---
----
-title: Retrieve a Message Batch
-url: https://platform.claude.com/docs/en/api/python/messages/batches/retrieve
----
+# Retrieve a Message Batch
 
-## Retrieve a Message Batch
+`messages.batches.retrieve(message_batch_id)  -> MessageBatch`
 
-`messages.batches.retrieve(strmessage_batch_id)  -> MessageBatch`
-
-**get** `/v1/messages/batches/{message_batch_id}`
+**GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `message_batch_id: str`
 
   ID of the Message Batch.
 
-### Returns
+## Returns
 
 - `class MessageBatch: …`
 
@@ -39,13 +34,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Optional[datetime]`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Optional[datetime]`
 
@@ -53,9 +54,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
@@ -79,11 +84,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: int`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: int`
 
@@ -91,15 +100,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: int`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: int`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: Optional[str]`
 
@@ -113,9 +128,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+## Example
 
 ```python
 import os
@@ -132,7 +147,7 @@ message_batch = client.messages.batches.retrieve(
 print(message_batch.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,36 +4,33 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/list"
 category: "api"
 generated: true
 ---
----
-title: List Work Items
-url: https://platform.claude.com/docs/en/api/go/beta/environments/work/list
----
-
-## List Work Items
+# List Work Items
 
 `client.Beta.Environments.Work.List(ctx, environmentID, params) (*PageCursor[BetaSelfHostedWork], error)`
 
-**get** `/v1/environments/{environment_id}/work`
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-### Parameters
+## Parameters
 
 - `environmentID string`
 
 - `params BetaEnvironmentWorkListParams`
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of work items to return
 
-  - `Page param.Field[string]`
+    maximum: 1000, minimum: 1
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque cursor from previous response for pagination
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -109,7 +106,7 @@ List work items in an environment.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -142,8 +139,6 @@ List work items in an environment.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -191,9 +186,9 @@ List work items in an environment.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+## Example
 
 ```go
 package main
@@ -222,7 +217,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

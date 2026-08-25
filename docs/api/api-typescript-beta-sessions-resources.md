@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/sessions/resour
 category: "api"
 generated: true
 ---
----
-title: Resources
-url: https://platform.claude.com/docs/en/api/typescript/beta/sessions/resources
----
-
 # Resources
 
 ## Add Session Resource
 
-`client.beta.sessions.resources.add(stringsessionID, ResourceAddParamsparams, RequestOptionsoptions?): BetaManagedAgentsFileResource`
+`client.beta.sessions.resources.add(sessionID, params, options?): BetaManagedAgentsFileResource`
 
-**post** `/v1/sessions/{session_id}/resources`
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
@@ -29,15 +24,17 @@ Add Session Resource
 
     Body param: ID of a previously uploaded file.
 
+    minLength: 1, maxLength: 128
+
   - `type: "file"`
 
     Body param
 
-    - `"file"`
-
   - `mount_path?: string | null`
 
     Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    minLength: 1, maxLength: 4096
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -125,17 +122,19 @@ Add Session Resource
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `file_id: string`
 
   - `mount_path: string`
 
   - `type: "file"`
 
-    - `"file"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Example
 
@@ -154,7 +153,7 @@ const betaManagedAgentsFileResource = await client.beta.sessions.resources.add(
 console.log(betaManagedAgentsFileResource.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -169,9 +168,9 @@ console.log(betaManagedAgentsFileResource.id);
 
 ## List Session Resources
 
-`client.beta.sessions.resources.list(stringsessionID, ResourceListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionResource>`
+`client.beta.sessions.resources.list(sessionID, params?, options?): PageCursor<BetaManagedAgentsSessionResource>`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
@@ -184,6 +183,8 @@ List Session Resources
   - `limit?: number`
 
     Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+    format: int32
 
   - `page?: string`
 
@@ -279,15 +280,17 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -299,9 +302,9 @@ List Session Resources
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -309,9 +312,9 @@ List Session Resources
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -321,17 +324,19 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -342,8 +347,6 @@ List Session Resources
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -360,6 +363,8 @@ List Session Resources
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 
@@ -386,7 +391,7 @@ for await (const betaManagedAgentsSessionResource of client.beta.sessions.resour
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -418,9 +423,9 @@ for await (const betaManagedAgentsSessionResource of client.beta.sessions.resour
 
 ## Get Session Resource
 
-`client.beta.sessions.resources.retrieve(stringresourceID, ResourceRetrieveParamsparams, RequestOptionsoptions?): ResourceRetrieveResponse`
+`client.beta.sessions.resources.retrieve(resourceID, params, options?): ResourceRetrieveResponse`
 
-**get** `/v1/sessions/{session_id}/resources/{resource_id}`
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
@@ -524,15 +529,17 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -544,9 +551,9 @@ Get Session Resource
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -554,9 +561,9 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -566,17 +573,19 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -587,8 +596,6 @@ Get Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -605,6 +612,8 @@ Get Session Resource
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 
@@ -631,7 +640,7 @@ const resource = await client.beta.sessions.resources.retrieve(
 console.log(resource);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -650,9 +659,9 @@ console.log(resource);
 
 ## Update Session Resource
 
-`client.beta.sessions.resources.update(stringresourceID, ResourceUpdateParamsparams, RequestOptionsoptions?): ResourceUpdateResponse`
+`client.beta.sessions.resources.update(resourceID, params, options?): ResourceUpdateResponse`
 
-**post** `/v1/sessions/{session_id}/resources/{resource_id}`
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Update Session Resource
 
@@ -669,6 +678,8 @@ Update Session Resource
   - `authorization_token: string`
 
     Body param: New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+    minLength: 1, maxLength: 4096
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -760,15 +771,17 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -780,9 +793,9 @@ Update Session Resource
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -790,9 +803,9 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -802,17 +815,19 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -823,8 +838,6 @@ Update Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -841,6 +854,8 @@ Update Session Resource
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 
@@ -867,7 +882,7 @@ const resource = await client.beta.sessions.resources.update(
 console.log(resource);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -886,9 +901,9 @@ console.log(resource);
 
 ## Delete Session Resource
 
-`client.beta.sessions.resources.delete(stringresourceID, ResourceDeleteParamsparams, RequestOptionsoptions?): BetaManagedAgentsDeleteSessionResource`
+`client.beta.sessions.resources.delete(resourceID, params, options?): BetaManagedAgentsDeleteSessionResource`
 
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
@@ -988,8 +1003,6 @@ Delete Session Resource
 
   - `type: "session_resource_deleted"`
 
-    - `"session_resource_deleted"`
-
 ### Example
 
 ```typescript
@@ -1007,7 +1020,7 @@ const betaManagedAgentsDeleteSessionResource = await client.beta.sessions.resour
 console.log(betaManagedAgentsDeleteSessionResource.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1016,7 +1029,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Delete Session Resource
 
@@ -1028,8 +1041,6 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
   - `type: "session_resource_deleted"`
 
-    - `"session_resource_deleted"`
-
 ### Beta Managed Agents File Resource
 
 - `BetaManagedAgentsFileResource`
@@ -1040,17 +1051,19 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `file_id: string`
 
   - `mount_path: string`
 
   - `type: "file"`
 
-    - `"file"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Beta Managed Agents GitHub Repository Resource
 
@@ -1062,15 +1075,17 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `mount_path: string`
 
   - `type: "github_repository"`
 
-    - `"github_repository"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `url: string`
 
@@ -1082,9 +1097,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
         Branch name to check out.
 
-      - `type: "branch"`
+        minLength: 1, maxLength: 255
 
-        - `"branch"`
+      - `type: "branch"`
 
     - `BetaManagedAgentsCommitCheckout`
 
@@ -1092,9 +1107,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
         Full commit SHA to check out.
 
-      - `type: "commit"`
+        minLength: 7, maxLength: 64
 
-        - `"commit"`
+      - `type: "commit"`
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1107,8 +1122,6 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
   - `type: "memory_store"`
-
-    - `"memory_store"`
 
   - `access?: "read_write" | "read_only" | null`
 
@@ -1125,6 +1138,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
   - `instructions?: string | null`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    maxLength: 4096
 
   - `mount_path?: string | null`
 
@@ -1148,15 +1163,17 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -1168,9 +1185,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -1178,9 +1195,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -1190,17 +1207,19 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -1211,8 +1230,6 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1229,6 +1246,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 
@@ -1252,15 +1271,17 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -1272,9 +1293,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -1282,9 +1303,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -1294,17 +1315,19 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -1315,8 +1338,6 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1333,6 +1354,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 
@@ -1356,15 +1379,17 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
@@ -1376,9 +1401,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Branch name to check out.
 
-        - `type: "branch"`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: "branch"`
 
       - `BetaManagedAgentsCommitCheckout`
 
@@ -1386,9 +1411,9 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-        - `type: "commit"`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: "commit"`
 
   - `BetaManagedAgentsFileResource`
 
@@ -1398,17 +1423,19 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: string`
 
     - `mount_path: string`
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `BetaManagedAgentsMemoryStoreResource`
 
@@ -1419,8 +1446,6 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1437,6 +1462,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `instructions?: string | null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path?: string | null`
 

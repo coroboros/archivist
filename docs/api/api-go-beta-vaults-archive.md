@@ -4,26 +4,21 @@ source: "https://platform.claude.com/docs/en/api/go/beta/vaults/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Vault
-url: https://platform.claude.com/docs/en/api/go/beta/vaults/archive
----
-
-## Archive Vault
+# Archive Vault
 
 `client.Beta.Vaults.Archive(ctx, vaultID, body) (*BetaManagedAgentsVault, error)`
 
-**post** `/v1/vaults/{vault_id}/archive`
+**POST** `/v1/vaults/{vault_id}/archive`
 
 Archive Vault
 
-### Parameters
+## Parameters
 
 - `vaultID string`
 
 - `body BetaVaultArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -99,7 +94,7 @@ Archive Vault
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsVault struct{…}`
 
@@ -113,9 +108,13 @@ Archive Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `DisplayName string`
 
@@ -127,13 +126,13 @@ Archive Vault
 
   - `Type BetaManagedAgentsVaultType`
 
-    - `const BetaManagedAgentsVaultTypeVault BetaManagedAgentsVaultType = "vault"`
-
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```go
 package main
@@ -162,7 +161,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

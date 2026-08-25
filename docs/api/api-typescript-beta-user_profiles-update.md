@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/u
 category: "api"
 generated: true
 ---
----
-title: Update User Profile
-url: https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/update
----
+# Update User Profile
 
-## Update User Profile
+`client.beta.userProfiles.update(userProfileID, params, options?): BetaUserProfile`
 
-`client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParamsparams, RequestOptionsoptions?): BetaUserProfile`
-
-**post** `/v1/user_profiles/{user_profile_id}`
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
-### Parameters
+## Parameters
 
 - `userProfileID: string`
 
@@ -35,6 +30,8 @@ Update User Profile
 
     Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `metadata?: Record<string, string>`
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
@@ -42,6 +39,8 @@ Update User Profile
   - `name?: string | null`
 
     Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+    minLength: 1, maxLength: 255
 
   - `relationship?: "external" | "resold" | "internal" | null`
 
@@ -129,7 +128,7 @@ Update User Profile
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaUserProfile`
 
@@ -140,6 +139,8 @@ Update User Profile
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -163,11 +164,11 @@ Update User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -195,7 +196,7 @@ Update User Profile
 
     - `"internal"`
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -211,7 +212,7 @@ const betaUserProfile = await client.beta.userProfiles.update(
 console.log(betaUserProfile.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

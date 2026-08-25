@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/sessions/thread
 category: "api"
 generated: true
 ---
----
-title: List Session Threads
-url: https://platform.claude.com/docs/en/api/typescript/beta/sessions/threads/list
----
+# List Session Threads
 
-## List Session Threads
+`client.beta.sessions.threads.list(sessionID, params?, options?): PageCursor<BetaManagedAgentsSessionThread>`
 
-`client.beta.sessions.threads.list(stringsessionID, ThreadListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsSessionThread>`
-
-**get** `/v1/sessions/{session_id}/threads`
+**GET** `/v1/sessions/{session_id}/threads`
 
 List Session Threads
 
-### Parameters
+## Parameters
 
 - `sessionID: string`
 
@@ -26,6 +21,8 @@ List Session Threads
   - `limit?: number`
 
     Query param: Maximum results per page. Defaults to 1000.
+
+    format: int32
 
   - `page?: string`
 
@@ -107,7 +104,7 @@ List Session Threads
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsSessionThread`
 
@@ -134,8 +131,6 @@ List Session Threads
         - `name: string`
 
         - `type: "url"`
-
-          - `"url"`
 
         - `url: string`
 
@@ -215,15 +210,11 @@ List Session Threads
 
             - `type: "low"`
 
-              - `"low"`
-
           - `BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
-
-              - `"medium"`
 
           - `BetaManagedAgentsEffortHigh`
 
@@ -231,23 +222,17 @@ List Session Threads
 
             - `type: "high"`
 
-              - `"high"`
-
           - `BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
           - `BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo?: string`
 
@@ -273,8 +258,6 @@ List Session Threads
 
           - `type: "anthropic"`
 
-            - `"anthropic"`
-
           - `version: string`
 
         - `BetaManagedAgentsCustomSkill`
@@ -284,8 +267,6 @@ List Session Threads
           - `skill_id: string`
 
           - `type: "custom"`
-
-            - `"custom"`
 
           - `version: string`
 
@@ -305,8 +286,6 @@ List Session Threads
 
               - `name: "bash"`
 
-                - `"bash"`
-
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
                 Permission policy for tool execution.
@@ -317,19 +296,13 @@ List Session Threads
 
                   - `type: "always_allow"`
 
-                    - `"always_allow"`
-
                 - `BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `type: "always_ask"`
 
-                    - `"always_ask"`
-
               - `type: "bash"`
-
-                - `"bash"`
 
             - `BetaManagedAgentsEditToolConfig`
 
@@ -338,8 +311,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "edit"`
-
-                - `"edit"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -355,8 +326,6 @@ List Session Threads
 
               - `type: "edit"`
 
-                - `"edit"`
-
             - `BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
@@ -364,8 +333,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "read"`
-
-                - `"read"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -381,8 +348,6 @@ List Session Threads
 
               - `type: "read"`
 
-                - `"read"`
-
             - `BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
@@ -390,8 +355,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "write"`
-
-                - `"write"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -407,8 +370,6 @@ List Session Threads
 
               - `type: "write"`
 
-                - `"write"`
-
             - `BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
@@ -416,8 +377,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "glob"`
-
-                - `"glob"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -433,8 +392,6 @@ List Session Threads
 
               - `type: "glob"`
 
-                - `"glob"`
-
             - `BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
@@ -442,8 +399,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "grep"`
-
-                - `"grep"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -459,8 +414,6 @@ List Session Threads
 
               - `type: "grep"`
 
-                - `"grep"`
-
             - `BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
@@ -468,8 +421,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "web_fetch"`
-
-                - `"web_fetch"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -485,13 +436,13 @@ List Session Threads
 
               - `type: "web_fetch"`
 
-                - `"web_fetch"`
-
               - `allowed_domains?: Array<string>`
 
               - `blocked_domains?: Array<string>`
 
               - `max_content_tokens?: number | null`
+
+                format: int32
 
             - `BetaManagedAgentsWebSearchToolConfig`
 
@@ -500,8 +451,6 @@ List Session Threads
               - `enabled: boolean`
 
               - `name: "web_search"`
-
-                - `"web_search"`
 
               - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -517,8 +466,6 @@ List Session Threads
 
               - `type: "web_search"`
 
-                - `"web_search"`
-
               - `allowed_domains?: Array<string>`
 
               - `blocked_domains?: Array<string>`
@@ -531,11 +478,11 @@ List Session Threads
 
                   Location precision. Only "approximate" is supported.
 
-                  - `"approximate"`
-
                 - `city?: string | null`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `country?: string | null`
 
@@ -545,9 +492,13 @@ List Session Threads
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `timezone?: string | null`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -568,8 +519,6 @@ List Session Threads
                 Tool calls require user confirmation before execution.
 
           - `type: "agent_toolset_20260401"`
-
-            - `"agent_toolset_20260401"`
 
         - `BetaManagedAgentsMCPToolset`
 
@@ -613,8 +562,6 @@ List Session Threads
 
           - `type: "mcp_toolset"`
 
-            - `"mcp_toolset"`
-
         - `BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
@@ -627,8 +574,6 @@ List Session Threads
 
             - `type: "object"`
 
-              - `"object"`
-
             - `properties?: Record<string, unknown> | null`
 
             - `required?: Array<string> | null`
@@ -637,13 +582,11 @@ List Session Threads
 
           - `type: "custom"`
 
-            - `"custom"`
-
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `BetaManagedAgentsAdvisor`
 
@@ -655,15 +598,17 @@ List Session Threads
 
       - `type: "advisor"`
 
-        - `"advisor"`
-
   - `archived_at: string | null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `parent_thread_id: string | null`
 
@@ -681,13 +626,19 @@ List Session Threads
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `duration_seconds?: number`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `startup_seconds?: number`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `status: BetaManagedAgentsSessionThreadStatus`
 
@@ -703,11 +654,11 @@ List Session Threads
 
   - `type: "session_thread"`
 
-    - `"session_thread"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `usage: BetaManagedAgentsSessionThreadUsage | null`
 
@@ -717,6 +668,8 @@ List Session Threads
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `cache_creation?: BetaManagedAgentsCacheCreationUsage`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -725,17 +678,25 @@ List Session Threads
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `ephemeral_5m_input_tokens?: number`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `cache_read_input_tokens?: number`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `input_tokens?: number`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `list_cost?: BetaMonetaryAmount | null`
 
@@ -749,11 +710,11 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `output_tokens?: number`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `server_tool_use?: BetaManagedAgentsServerToolUsage | null`
 
@@ -763,11 +724,15 @@ List Session Threads
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `web_search_requests?: number`
 
         Number of server-executed web search requests.
 
-### Example
+        format: int32
+
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -784,7 +749,7 @@ for await (const betaManagedAgentsSessionThread of client.beta.sessions.threads.
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

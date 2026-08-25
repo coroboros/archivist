@@ -4,28 +4,23 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Retrieve a Message Batch
-url: https://platform.claude.com/docs/en/api/php/messages/batches/retrieve
----
-
-## Retrieve a Message Batch
+# Retrieve a Message Batch
 
 `$client->messages->batches->retrieve(string messageBatchID): MessageBatch`
 
-**get** `/v1/messages/batches/{message_batch_id}`
+**GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `messageBatchID: string`
 
   ID of the Message Batch.
 
-### Returns
+## Returns
 
 - `MessageBatch`
 
@@ -79,7 +74,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -93,7 +88,7 @@ $messageBatch = $client->messages->batches->retrieve('message_batch_id');
 var_dump($messageBatch);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

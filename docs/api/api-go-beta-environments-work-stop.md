@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/stop"
 category: "api"
 generated: true
 ---
----
-title: Stop Work
-url: https://platform.claude.com/docs/en/api/go/beta/environments/work/stop
----
-
-## Stop Work
+# Stop Work
 
 `client.Beta.Environments.Work.Stop(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/stop`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
-### Parameters
+## Parameters
 
 - `workID string`
 
@@ -33,7 +28,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     Body param: Request to stop a work item.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -109,7 +104,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -142,8 +137,6 @@ Stop a work item, initiating graceful or forced shutdown.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -191,9 +184,9 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+## Example
 
 ```go
 package main
@@ -225,7 +218,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

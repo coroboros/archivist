@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/files/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete File
-url: https://platform.claude.com/docs/en/api/python/beta/files/delete
----
+# Delete File
 
-## Delete File
+`beta.files.delete(file_id, **kwargs)  -> BetaDeletedFile`
 
-`beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> BetaDeletedFile`
-
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-### Parameters
+## Parameters
 
 - `file_id: str`
 
@@ -99,7 +94,7 @@ Delete File
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaDeletedFile: …`
 
@@ -113,9 +108,9 @@ Delete File
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `"file_deleted"`
+    default: file_deleted
 
-### Example
+## Example
 
 ```python
 import os
@@ -132,7 +127,7 @@ beta_deleted_file = client.beta.files.delete(
 print(beta_deleted_file.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

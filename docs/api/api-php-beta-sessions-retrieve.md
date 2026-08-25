@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Session
-url: https://platform.claude.com/docs/en/api/php/beta/sessions/retrieve
----
-
-## Get Session
+# Get Session
 
 `$client->beta->sessions->retrieve(string sessionID, ?list<AnthropicBeta> betas): BetaManagedAgentsSession`
 
-**get** `/v1/sessions/{session_id}`
+**GET** `/v1/sessions/{session_id}`
 
 Get Session
 
-### Parameters
+## Parameters
 
 - `sessionID: string`
 
@@ -25,7 +20,7 @@ Get Session
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsSession`
 
@@ -85,7 +80,7 @@ Get Session
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -102,7 +97,7 @@ $betaManagedAgentsSession = $client->beta->sessions->retrieve(
 var_dump($betaManagedAgentsSession);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

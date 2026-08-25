@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/work/ack
 category: "api"
 generated: true
 ---
----
-title: Acknowledge Work
-url: https://platform.claude.com/docs/en/api/java/beta/environments/work/ack
----
+# Acknowledge Work
 
-## Acknowledge Work
+`BetaSelfHostedWork beta().environments().work().ack(params, requestOptions = RequestOptions.none())`
 
-`BetaSelfHostedWork beta().environments().work().ack(WorkAckParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
 
-### Parameters
+## Parameters
 
 - `WorkAckParams params`
 
@@ -99,7 +94,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaSelfHostedWork:`
 
@@ -129,11 +124,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       Session identifier (e.g., 'session_...')
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       Type of work data
-
-      - `SESSION("session")`
 
   - `String environmentId`
 
@@ -177,13 +170,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     RFC 3339 timestamp when work execution stopped
 
-  - `JsonValue; type "work"constant`
+  - `JsonValue type constant`
 
     The type of object (always 'work')
 
-    - `WORK("work")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -208,7 +199,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

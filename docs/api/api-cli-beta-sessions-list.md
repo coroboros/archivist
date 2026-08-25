@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/list"
 category: "api"
 generated: true
 ---
----
-title: List Sessions
-url: https://platform.claude.com/docs/en/api/cli/beta/sessions/list
----
-
-## List Sessions
+# List Sessions
 
 `$ ant beta:sessions list`
 
-**get** `/v1/sessions`
+**GET** `/v1/sessions`
 
 List Sessions
 
-### Parameters
+## Parameters
 
 - `--agent-id: optional string`
 
@@ -27,21 +22,31 @@ List Sessions
 
   Query param: Filter by agent version. Only applies when agent_id is also set.
 
+  format: int32
+
 - `--created-at-gt: optional string`
 
   Query param: Return sessions created after this time (exclusive).
+
+  format: date-time
 
 - `--created-at-gte: optional string`
 
   Query param: Return sessions created at or after this time (inclusive).
 
+  format: date-time
+
 - `--created-at-lt: optional string`
 
   Query param: Return sessions created before this time (exclusive).
 
+  format: date-time
+
 - `--created-at-lte: optional string`
 
   Query param: Return sessions created at or before this time (inclusive).
+
+  format: date-time
 
 - `--deployment-id: optional string`
 
@@ -54,6 +59,8 @@ List Sessions
 - `--limit: optional number`
 
   Query param: Maximum number of results to return.
+
+  format: int32
 
 - `--memory-store-id: optional string`
 
@@ -75,9 +82,9 @@ List Sessions
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
-- `BetaManagedAgentsListSessions: object { data, next_page, prev_page }`
+- `BetaManagedAgentsListSessions: object`
 
   Paginated list of sessions.
 
@@ -87,7 +94,7 @@ List Sessions
 
     - `id: string`
 
-    - `agent: object { id, description, mcp_servers, 8 more }`
+    - `agent: object`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -101,11 +108,9 @@ List Sessions
 
         - `type: "url"`
 
-          - `"url"`
-
         - `url: string`
 
-      - `model: object { id, effort, inference_geo, speed }`
+      - `model: object`
 
         Model identifier and configuration.
 
@@ -171,45 +176,35 @@ List Sessions
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `beta_managed_agents_effort_low: object { type }`
+          - `beta_managed_agents_effort_low: object`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: "low"`
 
-              - `"low"`
-
-          - `beta_managed_agents_effort_medium: object { type }`
+          - `beta_managed_agents_effort_medium: object`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: "medium"`
 
-              - `"medium"`
-
-          - `beta_managed_agents_effort_high: object { type }`
+          - `beta_managed_agents_effort_high: object`
 
             High effort. Favors reasoning depth.
 
             - `type: "high"`
 
-              - `"high"`
-
-          - `beta_managed_agents_effort_xhigh: object { type }`
+          - `beta_managed_agents_effort_xhigh: object`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: "xhigh"`
 
-              - `"xhigh"`
-
-          - `beta_managed_agents_effort_max: object { type }`
+          - `beta_managed_agents_effort_max: object`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: "max"`
-
-              - `"max"`
 
         - `inference_geo: optional string`
 
@@ -223,7 +218,7 @@ List Sessions
 
           - `"fast"`
 
-      - `multiagent: object { agents, type }`
+      - `multiagent: object`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -231,7 +226,7 @@ List Sessions
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `beta_managed_agents_session_thread_agent: object { id, description, mcp_servers, 7 more }`
+          - `beta_managed_agents_session_thread_agent: object`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -247,7 +242,7 @@ List Sessions
 
               - `url: string`
 
-            - `model: object { id, effort, inference_geo, speed }`
+            - `model: object`
 
               Model identifier and configuration.
 
@@ -273,7 +268,7 @@ List Sessions
 
             - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-              - `beta_managed_agents_anthropic_skill: object { skill_id, type, version }`
+              - `beta_managed_agents_anthropic_skill: object`
 
                 A resolved Anthropic-managed skill.
 
@@ -281,11 +276,9 @@ List Sessions
 
                 - `type: "anthropic"`
 
-                  - `"anthropic"`
-
                 - `version: string`
 
-              - `beta_managed_agents_custom_skill: object { skill_id, type, version }`
+              - `beta_managed_agents_custom_skill: object`
 
                 A resolved user-created custom skill.
 
@@ -293,19 +286,17 @@ List Sessions
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
                 - `version: string`
 
             - `system: string`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-              - `beta_managed_agents_agent_toolset20260401: object { configs, default_config, type }`
+              - `beta_managed_agents_agent_toolset20260401: object`
 
                 - `configs: array of BetaManagedAgentsAgentToolConfig`
 
-                  - `beta_managed_agents_bash_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_bash_tool_config: object`
 
                     Configuration for the bash tool.
 
@@ -317,25 +308,21 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: "always_allow"`
 
-                          - `"always_allow"`
-
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: "always_ask"`
 
-                          - `"always_ask"`
-
                     - `type: "bash"`
 
-                  - `beta_managed_agents_edit_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_edit_tool_config: object`
 
                     Configuration for the edit tool.
 
@@ -347,17 +334,17 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "edit"`
 
-                  - `beta_managed_agents_read_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_read_tool_config: object`
 
                     Configuration for the read tool.
 
@@ -369,17 +356,17 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "read"`
 
-                  - `beta_managed_agents_write_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_write_tool_config: object`
 
                     Configuration for the write tool.
 
@@ -391,17 +378,17 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "write"`
 
-                  - `beta_managed_agents_glob_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_glob_tool_config: object`
 
                     Configuration for the glob tool.
 
@@ -413,17 +400,17 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "glob"`
 
-                  - `beta_managed_agents_grep_tool_config: object { enabled, name, permission_policy, type }`
+                  - `beta_managed_agents_grep_tool_config: object`
 
                     Configuration for the grep tool.
 
@@ -435,17 +422,17 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
                     - `type: "grep"`
 
-                  - `beta_managed_agents_web_fetch_tool_config: object { enabled, name, permission_policy, 4 more }`
+                  - `beta_managed_agents_web_fetch_tool_config: object`
 
                     Configuration for the web_fetch tool.
 
@@ -457,11 +444,11 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
@@ -473,7 +460,9 @@ List Sessions
 
                     - `max_content_tokens: optional number`
 
-                  - `beta_managed_agents_web_search_tool_config: object { enabled, name, permission_policy, 4 more }`
+                      format: int32
+
+                  - `beta_managed_agents_web_search_tool_config: object`
 
                     Configuration for the web_search tool.
 
@@ -485,11 +474,11 @@ List Sessions
 
                       Permission policy for tool execution.
 
-                      - `beta_managed_agents_always_allow_policy: object { type }`
+                      - `beta_managed_agents_always_allow_policy: object`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `beta_managed_agents_always_ask_policy: object { type }`
+                      - `beta_managed_agents_always_ask_policy: object`
 
                         Tool calls require user confirmation before execution.
 
@@ -499,7 +488,7 @@ List Sessions
 
                     - `blocked_domains: optional array of string`
 
-                    - `user_location: optional object { type, city, country, 2 more }`
+                    - `user_location: optional object`
 
                       Approximate user location for search result localization.
 
@@ -511,6 +500,8 @@ List Sessions
 
                         City name.
 
+                        minLength: 1, maxLength: 255
+
                       - `country: optional string`
 
                         Two-letter ISO 3166-1 country code, uppercase.
@@ -519,11 +510,15 @@ List Sessions
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: optional string`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
 
-                - `default_config: object { enabled, permission_policy }`
+                        minLength: 1, maxLength: 255
+
+                - `default_config: object`
 
                   Resolved default configuration for agent tools.
 
@@ -533,19 +528,17 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `beta_managed_agents_always_allow_policy: object { type }`
+                    - `beta_managed_agents_always_allow_policy: object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `beta_managed_agents_always_ask_policy: object { type }`
+                    - `beta_managed_agents_always_ask_policy: object`
 
                       Tool calls require user confirmation before execution.
 
                 - `type: "agent_toolset_20260401"`
 
-                  - `"agent_toolset_20260401"`
-
-              - `beta_managed_agents_mcp_toolset: object { configs, default_config, mcp_server_name, type }`
+              - `beta_managed_agents_mcp_toolset: object`
 
                 - `configs: array of BetaManagedAgentsMCPToolConfig`
 
@@ -557,15 +550,15 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `beta_managed_agents_always_allow_policy: object { type }`
+                    - `beta_managed_agents_always_allow_policy: object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `beta_managed_agents_always_ask_policy: object { type }`
+                    - `beta_managed_agents_always_ask_policy: object`
 
                       Tool calls require user confirmation before execution.
 
-                - `default_config: object { enabled, permission_policy }`
+                - `default_config: object`
 
                   Resolved default configuration for all tools from an MCP server.
 
@@ -575,11 +568,11 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `beta_managed_agents_always_allow_policy: object { type }`
+                    - `beta_managed_agents_always_allow_policy: object`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `beta_managed_agents_always_ask_policy: object { type }`
+                    - `beta_managed_agents_always_ask_policy: object`
 
                       Tool calls require user confirmation before execution.
 
@@ -587,15 +580,13 @@ List Sessions
 
                 - `type: "mcp_toolset"`
 
-                  - `"mcp_toolset"`
-
-              - `beta_managed_agents_custom_tool: object { description, input_schema, name, type }`
+              - `beta_managed_agents_custom_tool: object`
 
                 A custom tool as returned in API responses.
 
                 - `description: string`
 
-                - `input_schema: object { type, properties, required }`
+                - `input_schema: object`
 
                   JSON Schema for custom tool input parameters.
 
@@ -609,15 +600,13 @@ List Sessions
 
                 - `type: "custom"`
 
-                  - `"custom"`
-
             - `type: "agent"`
-
-              - `"agent"`
 
             - `version: number`
 
-          - `beta_managed_agents_advisor: object { model, type }`
+              format: int32
+
+          - `beta_managed_agents_advisor: object`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -627,21 +616,17 @@ List Sessions
 
             - `type: "advisor"`
 
-              - `"advisor"`
-
         - `type: "coordinator"`
-
-          - `"coordinator"`
 
       - `name: string`
 
       - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
 
-        - `beta_managed_agents_anthropic_skill: object { skill_id, type, version }`
+        - `beta_managed_agents_anthropic_skill: object`
 
           A resolved Anthropic-managed skill.
 
-        - `beta_managed_agents_custom_skill: object { skill_id, type, version }`
+        - `beta_managed_agents_custom_skill: object`
 
           A resolved user-created custom skill.
 
@@ -649,29 +634,31 @@ List Sessions
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
-        - `beta_managed_agents_agent_toolset20260401: object { configs, default_config, type }`
+        - `beta_managed_agents_agent_toolset20260401: object`
 
-        - `beta_managed_agents_mcp_toolset: object { configs, default_config, mcp_server_name, type }`
+        - `beta_managed_agents_mcp_toolset: object`
 
-        - `beta_managed_agents_custom_tool: object { description, input_schema, name, type }`
+        - `beta_managed_agents_custom_tool: object`
 
           A custom tool as returned in API responses.
 
       - `type: "agent"`
 
-        - `"agent"`
-
       - `version: number`
+
+        format: int32
 
     - `archived_at: string`
 
       A timestamp in RFC 3339 format
 
-    - `budget: object { max_list_cost, type }`
+      format: date-time
+
+    - `budget: object`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-      - `max_list_cost: object { amount, currency }`
+      - `max_list_cost: object`
 
         A monetary amount in a specific currency.
 
@@ -683,15 +670,13 @@ List Sessions
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: "limit"`
-
-        - `"limit"`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `environment_id: string`
 
@@ -705,6 +690,8 @@ List Sessions
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `description: string`
 
         What the agent should produce.
@@ -717,6 +704,8 @@ List Sessions
 
         0-indexed revision cycle the outcome is currently on.
 
+        format: int32
+
       - `outcome_id: string`
 
         Server-generated outc_ ID for this outcome.
@@ -727,59 +716,61 @@ List Sessions
 
       - `type: "outcome_evaluation"`
 
-        - `"outcome_evaluation"`
-
     - `resources: array of BetaManagedAgentsSessionResource`
 
-      - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+      - `beta_managed_agents_github_repository_resource: object`
 
         - `id: string`
 
         - `created_at: string`
 
           A timestamp in RFC 3339 format
+
+          format: date-time
 
         - `mount_path: string`
 
         - `type: "github_repository"`
 
-          - `"github_repository"`
-
         - `updated_at: string`
 
           A timestamp in RFC 3339 format
+
+          format: date-time
 
         - `url: string`
 
         - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-          - `beta_managed_agents_branch_checkout: object { name, type }`
+          - `beta_managed_agents_branch_checkout: object`
 
             - `name: string`
 
               Branch name to check out.
 
+              minLength: 1, maxLength: 255
+
             - `type: "branch"`
 
-              - `"branch"`
-
-          - `beta_managed_agents_commit_checkout: object { sha, type }`
+          - `beta_managed_agents_commit_checkout: object`
 
             - `sha: string`
 
               Full commit SHA to check out.
 
+              minLength: 7, maxLength: 64
+
             - `type: "commit"`
 
-              - `"commit"`
-
-      - `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+      - `beta_managed_agents_file_resource: object`
 
         - `id: string`
 
         - `created_at: string`
 
           A timestamp in RFC 3339 format
+
+          format: date-time
 
         - `file_id: string`
 
@@ -787,13 +778,13 @@ List Sessions
 
         - `type: "file"`
 
-          - `"file"`
-
         - `updated_at: string`
 
           A timestamp in RFC 3339 format
 
-      - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+          format: date-time
+
+      - `beta_managed_agents_memory_store_resource: object`
 
         A memory store attached to an agent session.
 
@@ -802,8 +793,6 @@ List Sessions
           The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
         - `type: "memory_store"`
-
-          - `"memory_store"`
 
         - `access: optional "read_write" or "read_only"`
 
@@ -821,6 +810,8 @@ List Sessions
 
           Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+          maxLength: 4096
+
         - `mount_path: optional string`
 
           Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -829,7 +820,7 @@ List Sessions
 
           Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-    - `stats: object { active_seconds, duration_seconds }`
+    - `stats: object`
 
       Timing statistics for a session.
 
@@ -837,9 +828,13 @@ List Sessions
 
         Cumulative time in seconds the session spent in running status. Excludes idle time.
 
+        format: double
+
       - `duration_seconds: optional number`
 
         Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+        format: double
 
     - `status: "rescheduling" or "running" or "idle" or "terminated"`
 
@@ -857,13 +852,13 @@ List Sessions
 
     - `type: "session"`
 
-      - `"session"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
 
-    - `usage: object { active_seconds, cache_creation, cache_read_input_tokens, 4 more }`
+      format: date-time
+
+    - `usage: object`
 
       Cumulative token usage for a session across all turns.
 
@@ -871,7 +866,9 @@ List Sessions
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once, unlike `stats.active_seconds`, which sums each thread's own active time. This is the duration the session's runtime cost is priced on.
 
-      - `cache_creation: optional object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+        format: double
+
+      - `cache_creation: optional object`
 
         Prompt-cache creation token usage broken down by cache lifetime.
 
@@ -879,19 +876,27 @@ List Sessions
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: optional number`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: optional number`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: optional number`
 
         Total input tokens consumed across all turns.
 
-      - `list_cost: optional object { amount, currency }`
+        format: int32
+
+      - `list_cost: optional object`
 
         A monetary amount in a specific currency.
 
@@ -907,7 +912,9 @@ List Sessions
 
         Total output tokens generated across all turns.
 
-      - `server_tool_use: optional object { web_fetch_requests, web_search_requests }`
+        format: int32
+
+      - `server_tool_use: optional object`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -915,9 +922,13 @@ List Sessions
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: optional number`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `vault_ids: array of string`
 
@@ -935,14 +946,14 @@ List Sessions
 
     Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
 
-### Example
+## Example
 
-```cli
+```bash
 ant beta:sessions list \
   --api-key my-anthropic-api-key
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

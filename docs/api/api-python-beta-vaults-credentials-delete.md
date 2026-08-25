@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/vaults/credentials/
 category: "api"
 generated: true
 ---
----
-title: Delete Credential
-url: https://platform.claude.com/docs/en/api/python/beta/vaults/credentials/delete
----
+# Delete Credential
 
-## Delete Credential
+`beta.vaults.credentials.delete(credential_id, **kwargs)  -> BetaManagedAgentsDeletedCredential`
 
-`beta.vaults.credentials.delete(strcredential_id, CredentialDeleteParams**kwargs)  -> BetaManagedAgentsDeletedCredential`
-
-**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Delete Credential
 
-### Parameters
+## Parameters
 
 - `vault_id: str`
 
@@ -99,7 +94,7 @@ Delete Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedCredential: …`
 
@@ -111,9 +106,7 @@ Delete Credential
 
   - `type: Literal["vault_credential_deleted"]`
 
-    - `"vault_credential_deleted"`
-
-### Example
+## Example
 
 ```python
 import os
@@ -131,7 +124,7 @@ beta_managed_agents_deleted_credential = client.beta.vaults.credentials.delete(
 print(beta_managed_agents_deleted_credential.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

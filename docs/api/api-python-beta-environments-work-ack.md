@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments/work/a
 category: "api"
 generated: true
 ---
----
-title: Acknowledge Work
-url: https://platform.claude.com/docs/en/api/python/beta/environments/work/ack
----
+# Acknowledge Work
 
-## Acknowledge Work
+`beta.environments.work.ack(work_id, **kwargs)  -> BetaSelfHostedWork`
 
-`beta.environments.work.ack(strwork_id, WorkAckParams**kwargs)  -> BetaSelfHostedWork`
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
 
-### Parameters
+## Parameters
 
 - `environment_id: str`
 
@@ -101,7 +96,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaSelfHostedWork: …`
 
@@ -134,8 +129,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `type: Literal["session"]`
 
       Type of work data
-
-      - `"session"`
 
   - `environment_id: str`
 
@@ -183,9 +176,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The type of object (always 'work')
 
-    - `"work"`
+    default: work
 
-### Example
+## Example
 
 ```python
 import os
@@ -203,7 +196,7 @@ beta_self_hosted_work = client.beta.environments.work.ack(
 print(beta_self_hosted_work.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

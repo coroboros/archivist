@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/versions"
 category: "api"
 generated: true
 ---
----
-title: Versions
-url: https://platform.claude.com/docs/en/api/php/beta/skills/versions
----
-
 # Versions
 
 ## Create Skill Version
 
 `$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): VersionNewResponse`
 
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
@@ -105,7 +100,7 @@ $version = $client->beta->skills->versions->create(
 var_dump($version);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -124,7 +119,7 @@ var_dump($version);
 
 `$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<VersionListResponse>`
 
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
@@ -217,7 +212,7 @@ $page = $client->beta->skills->versions->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -242,7 +237,7 @@ var_dump($page);
 
 `$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
@@ -290,7 +285,7 @@ var_dump($response);
 
 `$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): VersionGetResponse`
 
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
@@ -378,7 +373,7 @@ $version = $client->beta->skills->versions->retrieve(
 var_dump($version);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -397,7 +392,7 @@ var_dump($version);
 
 `$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): VersionDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
@@ -453,7 +448,7 @@ $version = $client->beta->skills->versions->delete(
 var_dump($version);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions
 category: "api"
 generated: true
 ---
----
-title: Delete Skill Version
-url: https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/delete
----
+# Delete Skill Version
 
-## Delete Skill Version
+`client.beta.skills.versions.delete(version, params, options?): VersionDeleteResponse`
 
-`client.beta.skills.versions.delete(stringversion, VersionDeleteParamsparams, RequestOptionsoptions?): VersionDeleteResponse`
-
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-### Parameters
+## Parameters
 
 - `version: string`
 
@@ -109,7 +104,7 @@ Delete Skill Version
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `VersionDeleteResponse`
 
@@ -125,7 +120,9 @@ Delete Skill Version
 
     For Skill Versions, this is always `"skill_version_deleted"`.
 
-### Example
+    default: skill_version_deleted
+
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -139,7 +136,7 @@ const version = await client.beta.skills.versions.delete("version", { skill_id: 
 console.log(version.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

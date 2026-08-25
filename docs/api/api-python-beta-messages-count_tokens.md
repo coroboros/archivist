@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/messages/count_toke
 category: "api"
 generated: true
 ---
----
-title: Count tokens in a Message
-url: https://platform.claude.com/docs/en/api/python/beta/messages/count_tokens
----
+# Count tokens in a Message
 
-## Count tokens in a Message
+`beta.messages.count_tokens(**kwargs)  -> BetaMessageTokensCount`
 
-`beta.messages.count_tokens(MessageCountTokensParams**kwargs)  -> BetaMessageTokensCount`
-
-**post** `/v1/messages/count_tokens`
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -21,7 +16,7 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 
 Learn more about token counting in our [user guide](../build-with-claude/build-with-claude-token-counting.md)
 
-### Parameters
+## Parameters
 
 - `messages: Iterable[BetaMessageParam]`
 
@@ -84,17 +79,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -119,15 +112,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class BetaCitationPageLocationParam: …`
 
@@ -135,15 +132,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class BetaCitationContentBlockLocationParam: …`
 
@@ -155,7 +156,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -167,9 +172,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class BetaCitationWebSearchResultLocationParam: …`
 
@@ -179,11 +184,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class BetaCitationSearchResultLocationParam: …`
 
@@ -205,17 +212,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class BetaImageBlockParam: …`
 
@@ -224,6 +233,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `class BetaBase64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -237,13 +248,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class BetaURLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -253,11 +260,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -283,13 +286,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class BetaPlainTextSource: …`
 
@@ -297,11 +298,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaContentBlockSource: …`
 
@@ -317,13 +314,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class BetaURLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -333,11 +326,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -349,13 +338,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
       - `class BetaSearchResultBlockParam: …`
 
         - `content: List[BetaTextBlockParam]`
 
           - `text: str`
+
+            minLength: 1
 
           - `type: Literal["text"]`
 
@@ -370,8 +365,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `title: str`
 
         - `type: Literal["search_result"]`
-
-          - `"search_result"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -393,8 +386,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["thinking"]`
 
-          - `"thinking"`
-
       - `class BetaRedactedThinkingBlockParam: …`
 
         - `data: str`
@@ -403,19 +394,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["redacted_thinking"]`
 
-          - `"redacted_thinking"`
-
       - `class BetaToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `input: Dict[str, object]`
 
         - `name: str`
 
-        - `type: Literal["tool_use"]`
+          maxLength: 200, minLength: 1
 
-          - `"tool_use"`
+        - `type: Literal["tool_use"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -431,37 +422,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["direct"]`
 
-              - `"direct"`
-
           - `class BetaServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20250825"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20250825"`
+            - `type: Literal["code_execution_20250825"]`
 
           - `class BetaServerToolCaller20260120: …`
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20260120"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20260120"`
+            - `type: Literal["code_execution_20260120"]`
 
         - `toolset_name: Optional[str]`
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class BetaToolResultBlockParam: …`
 
         - `tool_use_id: str`
 
-        - `type: Literal["tool_result"]`
+          pattern: ^[a-zA-Z0-9_-]+$
 
-          - `"tool_result"`
+        - `type: Literal["tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -487,9 +478,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `tool_name: str`
 
-              - `type: Literal["tool_reference"]`
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `"tool_reference"`
+              - `type: Literal["tool_reference"]`
 
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -509,25 +500,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                maxItems: 100
+
                 - `tab_id: str`
 
                   The caller-assigned identifier for this tab, unique within the inventory.
+
+                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: str`
 
                   The title of the page the tab is showing. May be empty.
 
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                 - `url: str`
 
                   The URL of the page the tab is showing. May be empty.
+
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `active: Optional[bool]`
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
               - `type: Literal["browser_state"]`
-
-                - `"browser_state"`
 
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -536,6 +533,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               - `state_changes: Optional[List[BetaBrowserStateChange]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                maxItems: 200, minItems: 1
 
                 - `class BetaBrowserStateChangeTabOpened: …`
 
@@ -551,9 +550,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                  - `type: Literal["tab_opened"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"tab_opened"`
+                  - `type: Literal["tab_opened"]`
 
                 - `class BetaBrowserStateChangeDownloadStarted: …`
 
@@ -563,13 +562,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_started"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_started"`
+                  - `type: Literal["download_started"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
+
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `class BetaBrowserStateChangeDownloadCompleted: …`
 
@@ -582,21 +583,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_completed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_completed"`
+                  - `type: Literal["download_completed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `path: Optional[str]`
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                   - `size_bytes: Optional[int]`
 
                     The completed download's size.
+
+                    minimum: 0
 
                 - `class BetaBrowserStateChangeDownloadFailed: …`
 
@@ -606,17 +613,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_failed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_failed"`
+                  - `type: Literal["download_failed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `error: Optional[str]`
 
                     The failure or cancellation detail, when known.
+
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
         - `is_error: Optional[bool]`
 
@@ -624,9 +635,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class BetaServerToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `input: Dict[str, object]`
 
@@ -649,8 +664,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `"tool_search_tool_bm25"`
 
         - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -682,8 +695,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_search_result"]`
 
-              - `"web_search_result"`
-
             - `url: str`
 
             - `page_age: Optional[str]`
@@ -706,13 +717,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_search_tool_result_error"]`
 
-              - `"web_search_tool_result_error"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["web_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_search_tool_result"`
+        - `type: Literal["web_search_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -760,15 +769,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
-              - `"web_fetch_tool_result_error"`
-
           - `class BetaWebFetchBlockParam: …`
 
             - `content: BetaRequestDocumentBlock`
 
             - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
 
             - `url: str`
 
@@ -780,9 +785,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool_use_id: str`
 
-        - `type: Literal["web_fetch_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_fetch_tool_result"`
+        - `type: Literal["web_fetch_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -826,15 +831,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["advisor_tool_result_error"]`
 
-              - `"advisor_tool_result_error"`
-
           - `class BetaAdvisorResultBlockParam: …`
 
             - `text: str`
 
             - `type: Literal["advisor_result"]`
-
-              - `"advisor_result"`
 
             - `stop_reason: Optional[str]`
 
@@ -846,15 +847,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["advisor_redacted_result"]`
 
-              - `"advisor_redacted_result"`
-
             - `stop_reason: Optional[str]`
 
         - `tool_use_id: str`
 
-        - `type: Literal["advisor_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"advisor_tool_result"`
+        - `type: Literal["advisor_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -880,8 +879,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["code_execution_tool_result_error"]`
 
-              - `"code_execution_tool_result_error"`
-
           - `class BetaCodeExecutionResultBlockParam: …`
 
             - `content: List[BetaCodeExecutionOutputBlockParam]`
@@ -890,8 +887,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `return_code: int`
 
             - `stderr: str`
@@ -899,8 +894,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             - `stdout: str`
 
             - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
 
           - `class BetaEncryptedCodeExecutionResultBlockParam: …`
 
@@ -920,13 +913,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-              - `"encrypted_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_tool_result"`
+        - `type: Literal["code_execution_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -952,8 +943,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
-              - `"bash_code_execution_tool_result_error"`
-
           - `class BetaBashCodeExecutionResultBlockParam: …`
 
             - `content: List[BetaBashCodeExecutionOutputBlockParam]`
@@ -961,8 +950,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               - `file_id: str`
 
               - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
 
             - `return_code: int`
 
@@ -972,13 +959,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["bash_code_execution_result"]`
 
-              - `"bash_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["bash_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"bash_code_execution_tool_result"`
+        - `type: Literal["bash_code_execution_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1004,8 +989,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-              - `"text_editor_code_execution_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class BetaTextEditorCodeExecutionViewResultBlockParam: …`
@@ -1022,8 +1005,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
-              - `"text_editor_code_execution_view_result"`
-
             - `num_lines: Optional[int]`
 
             - `start_line: Optional[int]`
@@ -1036,13 +1017,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
-              - `"text_editor_code_execution_create_result"`
-
           - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
 
             - `lines: Optional[List[str]]`
 
@@ -1056,9 +1033,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool_use_id: str`
 
-        - `type: Literal["text_editor_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"text_editor_code_execution_tool_result"`
+        - `type: Literal["text_editor_code_execution_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1082,8 +1059,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["tool_search_tool_result_error"]`
 
-              - `"tool_search_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class BetaToolSearchToolSearchResultBlockParam: …`
@@ -1091,6 +1066,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             - `tool_references: List[BetaToolReferenceBlockParam]`
 
               - `tool_name: str`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `type: Literal["tool_reference"]`
 
@@ -1100,13 +1077,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-              - `"tool_search_tool_search_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["tool_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"tool_search_tool_result"`
+        - `type: Literal["tool_search_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1115,6 +1090,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `class BetaMCPToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `input: Dict[str, object]`
 
@@ -1126,8 +1103,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["mcp_tool_use"]`
 
-          - `"mcp_tool_use"`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
@@ -1136,9 +1111,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool_use_id: str`
 
-        - `type: Literal["mcp_tool_result"]`
+          pattern: ^[a-zA-Z0-9_-]+$
 
-          - `"mcp_tool_result"`
+        - `type: Literal["mcp_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1151,6 +1126,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `List[BetaTextBlockParam]`
 
             - `text: str`
+
+              minLength: 1
 
             - `type: Literal["text"]`
 
@@ -1171,8 +1148,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["container_upload"]`
 
-          - `"container_upload"`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
@@ -1188,8 +1163,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         treats these as no-ops. Empty string content is not allowed.
 
         - `type: Literal["compaction"]`
-
-          - `"compaction"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1227,9 +1200,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `name: str`
 
-            - `type: Literal["tool_reference"]`
+              pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-              - `"tool_reference"`
+            - `type: Literal["tool_reference"]`
 
           - `class BetaToolChangeMCPToolReference: …`
 
@@ -1242,8 +1215,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["mcp_tool_reference"]`
 
-              - `"mcp_tool_reference"`
-
           - `class BetaToolChangeMCPToolsetReference: …`
 
             Reference to every tool in the named MCP server's toolset.
@@ -1252,11 +1223,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["mcp_toolset_reference"]`
 
-              - `"mcp_toolset_reference"`
-
         - `type: Literal["tool_addition"]`
-
-          - `"tool_addition"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1294,8 +1261,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Reference to every tool in the named MCP server's toolset.
 
         - `type: Literal["tool_removal"]`
-
-          - `"tool_removal"`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1417,8 +1382,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["fallback"]`
 
-          - `"fallback"`
-
         - `trigger: Optional[object]`
 
           The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1451,11 +1414,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     List of context management edits to apply
 
+    minItems: 0
+
     - `class BetaClearToolUses20250919Edit: …`
 
       - `type: Literal["clear_tool_uses_20250919"]`
-
-        - `"clear_tool_uses_20250919"`
 
       - `clear_at_least: Optional[BetaInputTokensClearAtLeast]`
 
@@ -1463,9 +1426,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["input_tokens"]`
 
-          - `"input_tokens"`
-
         - `value: int`
+
+          minimum: 0
 
       - `clear_tool_inputs: Optional[Union[bool, List[str], null]]`
 
@@ -1485,9 +1448,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["tool_uses"]`
 
-          - `"tool_uses"`
-
         - `value: int`
+
+          minimum: 0
 
       - `trigger: Optional[Trigger]`
 
@@ -1497,23 +1460,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `type: Literal["input_tokens"]`
 
-            - `"input_tokens"`
-
           - `value: int`
+
+            minimum: 1
 
         - `class BetaToolUsesTrigger: …`
 
           - `type: Literal["tool_uses"]`
 
-            - `"tool_uses"`
-
           - `value: int`
+
+            minimum: 1
 
     - `class BetaClearThinking20251015Edit: …`
 
       - `type: Literal["clear_thinking_20251015"]`
-
-        - `"clear_thinking_20251015"`
 
       - `keep: Optional[Keep]`
 
@@ -1523,27 +1484,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `type: Literal["thinking_turns"]`
 
-            - `"thinking_turns"`
-
           - `value: int`
+
+            minimum: 1
 
         - `class BetaAllThinkingTurns: …`
 
           - `type: Literal["all"]`
 
-            - `"all"`
-
         - `Literal["all"]`
-
-          - `"all"`
 
     - `class BetaCompact20260112Edit: …`
 
       Automatically compact older context when reaching the configured trigger threshold.
 
       - `type: Literal["compact_20260112"]`
-
-        - `"compact_20260112"`
 
       - `instructions: Optional[str]`
 
@@ -1561,11 +1516,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   MCP servers to be utilized in this request
 
+  maxItems: 20
+
   - `name: str`
 
   - `type: Literal["url"]`
-
-    - `"url"`
 
   - `url: str`
 
@@ -1605,8 +1560,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["json_schema"]`
 
-      - `"json_schema"`
-
   - `task_budget: Optional[BetaTokenTaskBudget]`
 
     User-configurable total token budget across contexts.
@@ -1615,21 +1568,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Total token budget across all contexts in the session.
 
+      minimum: 1024
+
     - `type: Literal["tokens"]`
 
       The budget type. Currently only 'tokens' is supported.
-
-      - `"tokens"`
 
     - `remaining: Optional[int]`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-- `output_format: Optional[BetaJSONOutputFormatParam]`
-
-  Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+      minimum: 0
 
 - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1650,6 +1599,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
   - `Iterable[BetaTextBlockParam]`
 
     - `text: str`
+
+      minLength: 1
 
     - `type: Literal["text"]`
 
@@ -1677,9 +1628,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-    - `type: Literal["enabled"]`
+      minimum: 1024
 
-      - `"enabled"`
+    - `type: Literal["enabled"]`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -1693,13 +1644,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["disabled"]`
 
-      - `"disabled"`
-
   - `class BetaThinkingConfigAdaptive: …`
 
     - `type: Literal["adaptive"]`
-
-      - `"adaptive"`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -1719,8 +1666,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["auto"]`
 
-      - `"auto"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -1732,8 +1677,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     The model will use any available tools.
 
     - `type: Literal["any"]`
-
-      - `"any"`
 
     - `disable_parallel_tool_use: Optional[bool]`
 
@@ -1751,8 +1694,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["tool"]`
 
-      - `"tool"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -1764,8 +1705,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     The model will not be allowed to use tools.
 
     - `type: Literal["none"]`
-
-      - `"none"`
 
 - `tools: Optional[Iterable[Tool]]`
 
@@ -1841,8 +1780,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `type: Literal["object"]`
 
-        - `"object"`
-
       - `properties: Optional[Dict[str, object]]`
 
       - `required: Optional[List[str]]`
@@ -1852,6 +1789,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
+
+      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1889,8 +1828,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Optional[Literal["custom"]]`
 
-      - `"custom"`
-
   - `class BetaToolBash20241022: …`
 
     - `name: Literal["bash"]`
@@ -1899,11 +1836,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20241022"]`
-
-      - `"bash_20241022"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1937,11 +1870,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20250124"]`
-
-      - `"bash_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1975,11 +1904,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250522"]`
-
-      - `"code_execution_20250522"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2011,11 +1936,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250825"]`
-
-      - `"code_execution_20250825"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2049,11 +1970,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260120"]`
-
-      - `"code_execution_20260120"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2087,11 +2004,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260521"]`
-
-      - `"code_execution_20260521"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2123,8 +2036,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     from its schema.
 
     - `type: Literal["browser_toolset_20260801"]`
-
-      - `"browser_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2527,9 +2438,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The height of the display in pixels.
 
+      minimum: 1
+
     - `display_width_px: int`
 
       The width of the display in pixels.
+
+      minimum: 1
 
     - `name: Literal["computer"]`
 
@@ -2537,11 +2452,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"computer"`
-
     - `type: Literal["computer_20241022"]`
-
-      - `"computer_20241022"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2565,6 +2476,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The X11 display number (e.g. 0, 1) for the display.
 
+      minimum: 0
+
     - `input_examples: Optional[List[Dict[str, object]]]`
 
     - `strict: Optional[bool]`
@@ -2579,11 +2492,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"memory"`
-
     - `type: Literal["memory_20250818"]`
-
-      - `"memory_20250818"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2615,9 +2524,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The height of the display in pixels.
 
+      minimum: 1
+
     - `display_width_px: int`
 
       The width of the display in pixels.
+
+      minimum: 1
 
     - `name: Literal["computer"]`
 
@@ -2625,11 +2538,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"computer"`
-
     - `type: Literal["computer_20250124"]`
-
-      - `"computer_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2653,6 +2562,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The X11 display number (e.g. 0, 1) for the display.
 
+      minimum: 0
+
     - `input_examples: Optional[List[Dict[str, object]]]`
 
     - `strict: Optional[bool]`
@@ -2667,11 +2578,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20241022"]`
-
-      - `"text_editor_20241022"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2703,9 +2610,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The height of the display in pixels.
 
+      minimum: 1
+
     - `display_width_px: int`
 
       The width of the display in pixels.
+
+      minimum: 1
 
     - `name: Literal["computer"]`
 
@@ -2713,11 +2624,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"computer"`
-
     - `type: Literal["computer_20251124"]`
-
-      - `"computer_20251124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2741,6 +2648,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The X11 display number (e.g. 0, 1) for the display.
 
+      minimum: 0
+
     - `enable_zoom: Optional[bool]`
 
       Whether to enable an action to take a zoomed-in screenshot of the screen.
@@ -2763,8 +2672,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-      - `"computer_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3001,11 +2908,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20250124"]`
-
-      - `"text_editor_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3039,11 +2942,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250429"]`
-
-      - `"text_editor_20250429"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3077,11 +2976,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250728"]`
-
-      - `"text_editor_20250728"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3107,6 +3002,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+      minimum: 1
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -3119,11 +3016,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20250305"]`
-
-      - `"web_search_20250305"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3155,6 +3048,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of times the tool can be used in the API request.
 
+      exclusiveMinimum: 0
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -3165,23 +3060,29 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `type: Literal["approximate"]`
 
-        - `"approximate"`
-
       - `city: Optional[str]`
 
         The city of the user.
+
+        maxLength: 255, minLength: 1
 
       - `country: Optional[str]`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+        maxLength: 2, minLength: 2
+
       - `region: Optional[str]`
 
         The region of the user.
 
+        maxLength: 255, minLength: 1
+
       - `timezone: Optional[str]`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+        maxLength: 255, minLength: 1
 
   - `class BetaWebFetchTool20250910: …`
 
@@ -3191,11 +3092,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20250910"]`
-
-      - `"web_fetch_20250910"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3231,9 +3128,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -3247,11 +3148,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260209"]`
-
-      - `"web_search_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3282,6 +3179,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -3299,11 +3198,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260209"]`
-
-      - `"web_fetch_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3339,9 +3234,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -3357,11 +3256,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260309"]`
-
-      - `"web_fetch_20260309"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3397,9 +3292,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -3417,11 +3316,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260318"]`
-
-      - `"web_search_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3452,6 +3347,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -3477,11 +3374,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260318"]`
-
-      - `"web_fetch_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3517,9 +3410,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -3551,11 +3448,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"advisor"`
-
     - `type: Literal["advisor_20260301"]`
-
-      - `"advisor_20260301"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3583,9 +3476,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
+      minimum: 1024
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -3598,8 +3495,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_bm25"`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -3636,8 +3531,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_regex"`
 
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
@@ -3678,9 +3571,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Name of the MCP server to configure tools for
 
-    - `type: Literal["mcp_toolset"]`
+      maxLength: 255, minLength: 1
 
-      - `"mcp_toolset"`
+    - `type: Literal["mcp_toolset"]`
 
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -3782,7 +3675,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-### Returns
+- `output_format: Optional[BetaJSONOutputFormatParam]`
+
+  **Deprecated**
+
+  Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+  A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+## Returns
 
 - `class BetaMessageTokensCount: …`
 
@@ -3798,7 +3699,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
-### Example
+## Example
 
 ```python
 import os
@@ -3821,7 +3722,7 @@ beta_message_tokens_count = client.beta.messages.count_tokens(
 print(beta_message_tokens_count.context_management)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

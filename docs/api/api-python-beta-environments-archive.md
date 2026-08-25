@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments/archiv
 category: "api"
 generated: true
 ---
----
-title: Archive Environment
-url: https://platform.claude.com/docs/en/api/python/beta/environments/archive
----
+# Archive Environment
 
-## Archive Environment
+`beta.environments.archive(environment_id, **kwargs)  -> BetaEnvironment`
 
-`beta.environments.archive(strenvironment_id, EnvironmentArchiveParams**kwargs)  -> BetaEnvironment`
-
-**post** `/v1/environments/{environment_id}/archive`
+**POST** `/v1/environments/{environment_id}/archive`
 
 Archive an environment by ID. Archived environments cannot be used to create new sessions.
 
-### Parameters
+## Parameters
 
 - `environment_id: str`
 
@@ -97,7 +92,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaEnvironment: …`
 
@@ -131,8 +126,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-            - `"unrestricted"`
-
         - `class BetaLimitedNetwork: …`
 
           Limited network access.
@@ -152,8 +145,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
           - `type: Literal["limited"]`
 
             Network policy type
-
-            - `"limited"`
 
       - `packages: BetaPackages`
 
@@ -187,13 +178,11 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Package configuration type
 
-          - `"packages"`
+          default: packages
 
       - `type: Literal["cloud"]`
 
         Environment type
-
-        - `"cloud"`
 
     - `class BetaSelfHostedConfig: …`
 
@@ -202,8 +191,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `type: Literal["self_hosted"]`
 
         Environment type
-
-        - `"self_hosted"`
 
   - `created_at: str`
 
@@ -225,7 +212,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     The type of object (always 'environment')
 
-    - `"environment"`
+    default: environment
 
   - `updated_at: str`
 
@@ -239,7 +226,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"account"`
 
-### Example
+## Example
 
 ```python
 import os
@@ -256,7 +243,7 @@ beta_environment = client.beta.environments.archive(
 print(beta_environment.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

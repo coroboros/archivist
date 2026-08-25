@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Agent
-url: https://platform.claude.com/docs/en/api/php/beta/agents/retrieve
----
-
-## Get Agent
+# Get Agent
 
 `$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-**get** `/v1/agents/{agent_id}`
+**GET** `/v1/agents/{agent_id}`
 
 Get Agent
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -29,7 +24,7 @@ Get Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -75,7 +70,7 @@ Get Agent
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -93,7 +88,7 @@ $betaManagedAgentsAgent = $client->beta->agents->retrieve(
 var_dump($betaManagedAgentsAgent);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

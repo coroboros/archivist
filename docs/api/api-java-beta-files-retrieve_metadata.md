@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metada
 category: "api"
 generated: true
 ---
----
-title: Get File Metadata
-url: https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metadata
----
+# Get File Metadata
 
-## Get File Metadata
+`BetaFileMetadata beta().files().retrieveMetadata(params = FileRetrieveMetadataParams.none(), requestOptions = RequestOptions.none())`
 
-`BetaFileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-### Parameters
+## Parameters
 
 - `FileRetrieveMetadataParams params`
 
@@ -97,7 +92,7 @@ Get File Metadata
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaFileMetadata:`
 
@@ -111,25 +106,31 @@ Get File Metadata
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -143,13 +144,11 @@ Get File Metadata
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
 
-      - `SESSION("session")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -170,7 +169,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

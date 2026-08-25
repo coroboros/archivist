@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/user_profiles/create"
 category: "api"
 generated: true
 ---
----
-title: Create User Profile
-url: https://platform.claude.com/docs/en/api/ruby/beta/user_profiles/create
----
-
-## Create User Profile
+# Create User Profile
 
 `beta.user_profiles.create(**kwargs) -> BetaUserProfile`
 
-**post** `/v1/user_profiles`
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
-### Parameters
+## Parameters
 
 - `access_type: :application | :passthrough`
 
@@ -31,6 +26,8 @@ Create User Profile
 
   Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: Hash[Symbol, String]`
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -38,6 +35,8 @@ Create User Profile
 - `name: String`
 
   Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: :external | :resold | :internal`
 
@@ -125,7 +124,7 @@ Create User Profile
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaUserProfile`
 
@@ -136,6 +135,8 @@ Create User Profile
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Hash[Symbol, String]`
 
@@ -159,11 +160,11 @@ Create User Profile
 
     Object type. Always `user_profile`.
 
-    - `:user_profile`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: :application | :passthrough`
 
@@ -191,7 +192,7 @@ Create User Profile
 
     - `:internal`
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -203,7 +204,7 @@ beta_user_profile = anthropic.beta.user_profiles.create
 puts(beta_user_profile)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

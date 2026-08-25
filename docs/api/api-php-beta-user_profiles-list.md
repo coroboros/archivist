@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/user_profiles/list"
 category: "api"
 generated: true
 ---
----
-title: List User Profiles
-url: https://platform.claude.com/docs/en/api/php/beta/user_profiles/list
----
-
-## List User Profiles
+# List User Profiles
 
 `$client->beta->userProfiles->list(?int limit, ?Order order, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaUserProfile>`
 
-**get** `/v1/user_profiles`
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-### Parameters
+## Parameters
 
 - `limit?:optional int`
 
@@ -35,7 +30,7 @@ List User Profiles
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaUserProfile`
 
@@ -79,7 +74,7 @@ List User Profiles
 
     How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -98,7 +93,7 @@ $page = $client->beta->userProfiles->list(
 var_dump($page);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

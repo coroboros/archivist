@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work/retr
 category: "api"
 generated: true
 ---
----
-title: Get Work Item
-url: https://platform.claude.com/docs/en/api/php/beta/environments/work/retrieve
----
-
-## Get Work Item
+# Get Work Item
 
 `$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
 
-**get** `/v1/environments/{environment_id}/work/{work_id}`
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Retrieve detailed information about a specific work item.
 
-### Parameters
+## Parameters
 
 - `environmentID: string`
 
@@ -29,7 +24,7 @@ Retrieve detailed information about a specific work item.
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `SelfHostedWork`
 
@@ -85,7 +80,7 @@ Retrieve detailed information about a specific work item.
 
     The type of object (always 'work')
 
-### Example
+## Example
 
 ```php
 <?php
@@ -103,7 +98,7 @@ $betaSelfHostedWork = $client->beta->environments->work->retrieve(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

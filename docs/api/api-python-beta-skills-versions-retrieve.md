@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/skills/versions/ret
 category: "api"
 generated: true
 ---
----
-title: Get Skill Version
-url: https://platform.claude.com/docs/en/api/python/beta/skills/versions/retrieve
----
+# Get Skill Version
 
-## Get Skill Version
+`beta.skills.versions.retrieve(version, **kwargs)  -> VersionRetrieveResponse`
 
-`beta.skills.versions.retrieve(strversion, VersionRetrieveParams**kwargs)  -> VersionRetrieveResponse`
-
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-### Parameters
+## Parameters
 
 - `skill_id: str`
 
@@ -107,7 +102,7 @@ Get Skill Version
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class VersionRetrieveResponse: …`
 
@@ -149,13 +144,15 @@ Get Skill Version
 
     For Skill Versions, this is always `"skill_version"`.
 
+    default: skill_version
+
   - `version: str`
 
     Version identifier for the skill.
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+## Example
 
 ```python
 import os
@@ -173,7 +170,7 @@ version = client.beta.skills.versions.retrieve(
 print(version.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

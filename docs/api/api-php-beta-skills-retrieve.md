@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Skill
-url: https://platform.claude.com/docs/en/api/php/beta/skills/retrieve
----
-
-## Get Skill
+# Get Skill
 
 `$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): SkillGetResponse`
 
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-### Parameters
+## Parameters
 
 - `skillID: string`
 
@@ -29,7 +24,7 @@ Get Skill
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `SkillGetResponse`
 
@@ -74,7 +69,7 @@ Get Skill
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -90,7 +85,7 @@ $skill = $client->beta->skills->retrieve(
 var_dump($skill);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

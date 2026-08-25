@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Vault
-url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/retrieve
----
-
-## Get Vault
+# Get Vault
 
 `beta.vaults.retrieve(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
-**get** `/v1/vaults/{vault_id}`
+**GET** `/v1/vaults/{vault_id}`
 
 Get Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: String`
 
@@ -97,7 +92,7 @@ Get Vault
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault`
 
@@ -111,9 +106,13 @@ Get Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: String`
 
@@ -125,13 +124,13 @@ Get Vault
 
   - `type: :vault`
 
-    - `:vault`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```ruby
 require "anthropic"
@@ -143,7 +142,7 @@ beta_managed_agents_vault = anthropic.beta.vaults.retrieve("vlt_011CZkZDLs7fYzm1
 puts(beta_managed_agents_vault)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

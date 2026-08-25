@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/threads/retri
 category: "api"
 generated: true
 ---
----
-title: Get Session Thread
-url: https://platform.claude.com/docs/en/api/php/beta/sessions/threads/retrieve
----
-
-## Get Session Thread
+# Get Session Thread
 
 `$client->beta->sessions->threads->retrieve(string threadID, string sessionID, ?list<AnthropicBeta> betas): ManagedAgentsSessionThread`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}`
 
 Get Session Thread
 
-### Parameters
+## Parameters
 
 - `sessionID: string`
 
@@ -27,7 +22,7 @@ Get Session Thread
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsSessionThread`
 
@@ -73,7 +68,7 @@ Get Session Thread
 
     Cumulative token usage for a session thread across all turns.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -91,7 +86,7 @@ $betaManagedAgentsSessionThread = $client->beta->sessions->threads->retrieve(
 var_dump($betaManagedAgentsSessionThread);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

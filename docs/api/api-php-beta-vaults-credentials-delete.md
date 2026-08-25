@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/del
 category: "api"
 generated: true
 ---
----
-title: Delete Credential
-url: https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/delete
----
-
-## Delete Credential
+# Delete Credential
 
 `$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas): ManagedAgentsDeletedCredential`
 
-**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Delete Credential
 
-### Parameters
+## Parameters
 
 - `vaultID: string`
 
@@ -27,7 +22,7 @@ Delete Credential
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsDeletedCredential`
 
@@ -37,7 +32,7 @@ Delete Credential
 
   - `Type type`
 
-### Example
+## Example
 
 ```php
 <?php
@@ -59,7 +54,7 @@ $betaManagedAgentsDeletedCredential = $client
 var_dump($betaManagedAgentsDeletedCredential);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

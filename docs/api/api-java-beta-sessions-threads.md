@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/threads"
 category: "api"
 generated: true
 ---
----
-title: Threads
-url: https://platform.claude.com/docs/en/api/java/beta/sessions/threads
----
-
 # Threads
 
 ## List Session Threads
 
-`ThreadListPage beta().sessions().threads().list(ThreadListParamsparams = ThreadListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`ThreadListPage beta().sessions().threads().list(params = ThreadListParams.none(), requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/threads`
+**GET** `/v1/sessions/{session_id}/threads`
 
 List Session Threads
 
@@ -28,6 +23,8 @@ List Session Threads
   - `Optional<Long> limit`
 
     Maximum results per page. Defaults to 1000.
+
+    format: int32
 
   - `Optional<String> page`
 
@@ -133,8 +130,6 @@ List Session Threads
 
         - `Type type`
 
-          - `URL("url")`
-
         - `String url`
 
       - `BetaManagedAgentsModelConfig model`
@@ -209,15 +204,11 @@ List Session Threads
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -225,23 +216,17 @@ List Session Threads
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -267,8 +252,6 @@ List Session Threads
 
           - `Type type`
 
-            - `ANTHROPIC("anthropic")`
-
           - `String version`
 
         - `class BetaManagedAgentsCustomSkill:`
@@ -278,8 +261,6 @@ List Session Threads
           - `String skillId`
 
           - `Type type`
-
-            - `CUSTOM("custom")`
 
           - `String version`
 
@@ -297,9 +278,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -311,19 +290,13 @@ List Session Threads
 
                   - `Type type`
 
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type type`
 
-                    - `ALWAYS_ASK("always_ask")`
-
-              - `JsonValue; type "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
@@ -331,9 +304,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -347,9 +318,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsReadToolConfig:`
 
@@ -357,9 +326,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "read"constant`
-
-                - `READ("read")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -373,9 +340,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "read"constant`
-
-                - `READ("read")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -383,9 +348,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -399,9 +362,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -409,9 +370,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -425,9 +384,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -435,9 +392,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -451,9 +406,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -461,9 +414,7 @@ List Session Threads
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -477,9 +428,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -487,15 +436,15 @@ List Session Threads
 
               - `Optional<Long> maxContentTokens`
 
+                format: int32
+
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -509,9 +458,7 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -521,15 +468,15 @@ List Session Threads
 
                 Approximate user location for search result localization.
 
-                - `JsonValue; type "approximate"constant`
+                - `JsonValue type constant`
 
                   Location precision. Only "approximate" is supported.
-
-                  - `APPROXIMATE("approximate")`
 
                 - `Optional<String> city`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `Optional<String> country`
 
@@ -539,9 +486,13 @@ List Session Threads
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `Optional<String> timezone`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -562,8 +513,6 @@ List Session Threads
                 Tool calls require user confirmation before execution.
 
           - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
         - `class BetaManagedAgentsMcpToolset:`
 
@@ -607,8 +556,6 @@ List Session Threads
 
           - `Type type`
 
-            - `MCP_TOOLSET("mcp_toolset")`
-
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
@@ -619,9 +566,7 @@ List Session Threads
 
             JSON Schema for custom tool input parameters.
 
-            - `JsonValue; type "object"constant`
-
-              - `OBJECT("object")`
+            - `JsonValue type constant`
 
             - `Optional<Properties> properties`
 
@@ -631,13 +576,11 @@ List Session Threads
 
           - `Type type`
 
-            - `CUSTOM("custom")`
-
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor:`
 
@@ -649,15 +592,17 @@ List Session Threads
 
       - `Type type`
 
-        - `ADVISOR("advisor")`
-
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> parentThreadId`
 
@@ -675,13 +620,19 @@ List Session Threads
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `Optional<Double> durationSeconds`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `Optional<Double> startupSeconds`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `BetaManagedAgentsSessionThreadStatus status`
 
@@ -697,11 +648,11 @@ List Session Threads
 
   - `Type type`
 
-    - `SESSION_THREAD("session_thread")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
 
@@ -711,6 +662,8 @@ List Session Threads
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -719,17 +672,25 @@ List Session Threads
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `Optional<Long> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `Optional<Long> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `Optional<Long> inputTokens`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `Optional<BetaMonetaryAmount> listCost`
 
@@ -743,11 +704,11 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Optional<Long> outputTokens`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -757,9 +718,13 @@ List Session Threads
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `Optional<Long> webSearchRequests`
 
         Number of server-executed web search requests.
+
+        format: int32
 
 ### Example
 
@@ -782,7 +747,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -878,9 +843,9 @@ public final class Main {
 
 ## Get Session Thread
 
-`BetaManagedAgentsSessionThread beta().sessions().threads().retrieve(ThreadRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaManagedAgentsSessionThread beta().sessions().threads().retrieve(params, requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}`
 
 Get Session Thread
 
@@ -992,8 +957,6 @@ Get Session Thread
 
         - `Type type`
 
-          - `URL("url")`
-
         - `String url`
 
       - `BetaManagedAgentsModelConfig model`
@@ -1068,15 +1031,11 @@ Get Session Thread
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -1084,23 +1043,17 @@ Get Session Thread
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -1126,8 +1079,6 @@ Get Session Thread
 
           - `Type type`
 
-            - `ANTHROPIC("anthropic")`
-
           - `String version`
 
         - `class BetaManagedAgentsCustomSkill:`
@@ -1137,8 +1088,6 @@ Get Session Thread
           - `String skillId`
 
           - `Type type`
-
-            - `CUSTOM("custom")`
 
           - `String version`
 
@@ -1156,9 +1105,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1170,19 +1117,13 @@ Get Session Thread
 
                   - `Type type`
 
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type type`
 
-                    - `ALWAYS_ASK("always_ask")`
-
-              - `JsonValue; type "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
@@ -1190,9 +1131,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1206,9 +1145,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsReadToolConfig:`
 
@@ -1216,9 +1153,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "read"constant`
-
-                - `READ("read")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1232,9 +1167,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "read"constant`
-
-                - `READ("read")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -1242,9 +1175,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1258,9 +1189,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -1268,9 +1197,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1284,9 +1211,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -1294,9 +1219,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1310,9 +1233,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -1320,9 +1241,7 @@ Get Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1336,9 +1255,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -1346,15 +1263,15 @@ Get Session Thread
 
               - `Optional<Long> maxContentTokens`
 
+                format: int32
+
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -1368,9 +1285,7 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -1380,15 +1295,15 @@ Get Session Thread
 
                 Approximate user location for search result localization.
 
-                - `JsonValue; type "approximate"constant`
+                - `JsonValue type constant`
 
                   Location precision. Only "approximate" is supported.
-
-                  - `APPROXIMATE("approximate")`
 
                 - `Optional<String> city`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `Optional<String> country`
 
@@ -1398,9 +1313,13 @@ Get Session Thread
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `Optional<String> timezone`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -1421,8 +1340,6 @@ Get Session Thread
                 Tool calls require user confirmation before execution.
 
           - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
         - `class BetaManagedAgentsMcpToolset:`
 
@@ -1466,8 +1383,6 @@ Get Session Thread
 
           - `Type type`
 
-            - `MCP_TOOLSET("mcp_toolset")`
-
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
@@ -1478,9 +1393,7 @@ Get Session Thread
 
             JSON Schema for custom tool input parameters.
 
-            - `JsonValue; type "object"constant`
-
-              - `OBJECT("object")`
+            - `JsonValue type constant`
 
             - `Optional<Properties> properties`
 
@@ -1490,13 +1403,11 @@ Get Session Thread
 
           - `Type type`
 
-            - `CUSTOM("custom")`
-
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor:`
 
@@ -1508,15 +1419,17 @@ Get Session Thread
 
       - `Type type`
 
-        - `ADVISOR("advisor")`
-
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> parentThreadId`
 
@@ -1534,13 +1447,19 @@ Get Session Thread
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `Optional<Double> durationSeconds`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `Optional<Double> startupSeconds`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `BetaManagedAgentsSessionThreadStatus status`
 
@@ -1556,11 +1475,11 @@ Get Session Thread
 
   - `Type type`
 
-    - `SESSION_THREAD("session_thread")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
 
@@ -1570,6 +1489,8 @@ Get Session Thread
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -1578,17 +1499,25 @@ Get Session Thread
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `Optional<Long> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `Optional<Long> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `Optional<Long> inputTokens`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `Optional<BetaMonetaryAmount> listCost`
 
@@ -1602,11 +1531,11 @@ Get Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Optional<Long> outputTokens`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -1616,9 +1545,13 @@ Get Session Thread
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `Optional<Long> webSearchRequests`
 
         Number of server-executed web search requests.
+
+        format: int32
 
 ### Example
 
@@ -1645,7 +1578,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1736,9 +1669,9 @@ public final class Main {
 
 ## Archive Session Thread
 
-`BetaManagedAgentsSessionThread beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaManagedAgentsSessionThread beta().sessions().threads().archive(params, requestOptions = RequestOptions.none())`
 
-**post** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
+**POST** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
 
 Archive Session Thread
 
@@ -1850,8 +1783,6 @@ Archive Session Thread
 
         - `Type type`
 
-          - `URL("url")`
-
         - `String url`
 
       - `BetaManagedAgentsModelConfig model`
@@ -1926,15 +1857,11 @@ Archive Session Thread
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -1942,23 +1869,17 @@ Archive Session Thread
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -1984,8 +1905,6 @@ Archive Session Thread
 
           - `Type type`
 
-            - `ANTHROPIC("anthropic")`
-
           - `String version`
 
         - `class BetaManagedAgentsCustomSkill:`
@@ -1995,8 +1914,6 @@ Archive Session Thread
           - `String skillId`
 
           - `Type type`
-
-            - `CUSTOM("custom")`
 
           - `String version`
 
@@ -2014,9 +1931,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2028,19 +1943,13 @@ Archive Session Thread
 
                   - `Type type`
 
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type type`
 
-                    - `ALWAYS_ASK("always_ask")`
-
-              - `JsonValue; type "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
@@ -2048,9 +1957,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2064,9 +1971,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsReadToolConfig:`
 
@@ -2074,9 +1979,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "read"constant`
-
-                - `READ("read")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2090,9 +1993,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "read"constant`
-
-                - `READ("read")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -2100,9 +2001,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2116,9 +2015,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -2126,9 +2023,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2142,9 +2037,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -2152,9 +2045,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2168,9 +2059,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -2178,9 +2067,7 @@ Archive Session Thread
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2194,9 +2081,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -2204,15 +2089,15 @@ Archive Session Thread
 
               - `Optional<Long> maxContentTokens`
 
+                format: int32
+
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2226,9 +2111,7 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -2238,15 +2121,15 @@ Archive Session Thread
 
                 Approximate user location for search result localization.
 
-                - `JsonValue; type "approximate"constant`
+                - `JsonValue type constant`
 
                   Location precision. Only "approximate" is supported.
-
-                  - `APPROXIMATE("approximate")`
 
                 - `Optional<String> city`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `Optional<String> country`
 
@@ -2256,9 +2139,13 @@ Archive Session Thread
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `Optional<String> timezone`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -2279,8 +2166,6 @@ Archive Session Thread
                 Tool calls require user confirmation before execution.
 
           - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
         - `class BetaManagedAgentsMcpToolset:`
 
@@ -2324,8 +2209,6 @@ Archive Session Thread
 
           - `Type type`
 
-            - `MCP_TOOLSET("mcp_toolset")`
-
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
@@ -2336,9 +2219,7 @@ Archive Session Thread
 
             JSON Schema for custom tool input parameters.
 
-            - `JsonValue; type "object"constant`
-
-              - `OBJECT("object")`
+            - `JsonValue type constant`
 
             - `Optional<Properties> properties`
 
@@ -2348,13 +2229,11 @@ Archive Session Thread
 
           - `Type type`
 
-            - `CUSTOM("custom")`
-
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor:`
 
@@ -2366,15 +2245,17 @@ Archive Session Thread
 
       - `Type type`
 
-        - `ADVISOR("advisor")`
-
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> parentThreadId`
 
@@ -2392,13 +2273,19 @@ Archive Session Thread
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `Optional<Double> durationSeconds`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `Optional<Double> startupSeconds`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `BetaManagedAgentsSessionThreadStatus status`
 
@@ -2414,11 +2301,11 @@ Archive Session Thread
 
   - `Type type`
 
-    - `SESSION_THREAD("session_thread")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
 
@@ -2428,6 +2315,8 @@ Archive Session Thread
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -2436,17 +2325,25 @@ Archive Session Thread
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `Optional<Long> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `Optional<Long> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `Optional<Long> inputTokens`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `Optional<BetaMonetaryAmount> listCost`
 
@@ -2460,11 +2357,11 @@ Archive Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Optional<Long> outputTokens`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -2474,9 +2371,13 @@ Archive Session Thread
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `Optional<Long> webSearchRequests`
 
         Number of server-executed web search requests.
+
+        format: int32
 
 ### Example
 
@@ -2503,7 +2404,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2592,7 +2493,7 @@ public final class Main {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Session Thread
 
@@ -2621,8 +2522,6 @@ public final class Main {
         - `String name`
 
         - `Type type`
-
-          - `URL("url")`
 
         - `String url`
 
@@ -2698,15 +2597,11 @@ public final class Main {
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -2714,23 +2609,17 @@ public final class Main {
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -2756,8 +2645,6 @@ public final class Main {
 
           - `Type type`
 
-            - `ANTHROPIC("anthropic")`
-
           - `String version`
 
         - `class BetaManagedAgentsCustomSkill:`
@@ -2767,8 +2654,6 @@ public final class Main {
           - `String skillId`
 
           - `Type type`
-
-            - `CUSTOM("custom")`
 
           - `String version`
 
@@ -2786,9 +2671,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2800,19 +2683,13 @@ public final class Main {
 
                   - `Type type`
 
-                    - `ALWAYS_ALLOW("always_allow")`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type type`
 
-                    - `ALWAYS_ASK("always_ask")`
-
-              - `JsonValue; type "bash"constant`
-
-                - `BASH("bash")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
@@ -2820,9 +2697,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2836,9 +2711,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "edit"constant`
-
-                - `EDIT("edit")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsReadToolConfig:`
 
@@ -2846,9 +2719,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "read"constant`
-
-                - `READ("read")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2862,9 +2733,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "read"constant`
-
-                - `READ("read")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -2872,9 +2741,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2888,9 +2755,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "write"constant`
-
-                - `WRITE("write")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -2898,9 +2763,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2914,9 +2777,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "glob"constant`
-
-                - `GLOB("glob")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -2924,9 +2785,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2940,9 +2799,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "grep"constant`
-
-                - `GREP("grep")`
+              - `JsonValue type constant`
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -2950,9 +2807,7 @@ public final class Main {
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2966,9 +2821,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_fetch"constant`
-
-                - `WEB_FETCH("web_fetch")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -2976,15 +2829,15 @@ public final class Main {
 
               - `Optional<Long> maxContentTokens`
 
+                format: int32
+
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
 
               - `boolean enabled`
 
-              - `JsonValue; name "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue name constant`
 
               - `PermissionPolicy permissionPolicy`
 
@@ -2998,9 +2851,7 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue; type "web_search"constant`
-
-                - `WEB_SEARCH("web_search")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> allowedDomains`
 
@@ -3010,15 +2861,15 @@ public final class Main {
 
                 Approximate user location for search result localization.
 
-                - `JsonValue; type "approximate"constant`
+                - `JsonValue type constant`
 
                   Location precision. Only "approximate" is supported.
-
-                  - `APPROXIMATE("approximate")`
 
                 - `Optional<String> city`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `Optional<String> country`
 
@@ -3028,9 +2879,13 @@ public final class Main {
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `Optional<String> timezone`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -3051,8 +2906,6 @@ public final class Main {
                 Tool calls require user confirmation before execution.
 
           - `Type type`
-
-            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
         - `class BetaManagedAgentsMcpToolset:`
 
@@ -3096,8 +2949,6 @@ public final class Main {
 
           - `Type type`
 
-            - `MCP_TOOLSET("mcp_toolset")`
-
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
@@ -3108,9 +2959,7 @@ public final class Main {
 
             JSON Schema for custom tool input parameters.
 
-            - `JsonValue; type "object"constant`
-
-              - `OBJECT("object")`
+            - `JsonValue type constant`
 
             - `Optional<Properties> properties`
 
@@ -3120,13 +2969,11 @@ public final class Main {
 
           - `Type type`
 
-            - `CUSTOM("custom")`
-
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor:`
 
@@ -3138,15 +2985,17 @@ public final class Main {
 
       - `Type type`
 
-        - `ADVISOR("advisor")`
-
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> parentThreadId`
 
@@ -3164,13 +3013,19 @@ public final class Main {
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `Optional<Double> durationSeconds`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `Optional<Double> startupSeconds`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `BetaManagedAgentsSessionThreadStatus status`
 
@@ -3186,11 +3041,11 @@ public final class Main {
 
   - `Type type`
 
-    - `SESSION_THREAD("session_thread")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
 
@@ -3200,6 +3055,8 @@ public final class Main {
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -3208,17 +3065,25 @@ public final class Main {
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `Optional<Long> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `Optional<Long> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `Optional<Long> inputTokens`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `Optional<BetaMonetaryAmount> listCost`
 
@@ -3232,11 +3097,11 @@ public final class Main {
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Optional<Long> outputTokens`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -3246,9 +3111,13 @@ public final class Main {
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `Optional<Long> webSearchRequests`
 
         Number of server-executed web search requests.
+
+        format: int32
 
 ### Beta Managed Agents Session Thread Stats
 
@@ -3260,13 +3129,19 @@ public final class Main {
 
     Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+    format: double
+
   - `Optional<Double> durationSeconds`
 
     Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+    format: double
+
   - `Optional<Double> startupSeconds`
 
     Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+    format: double
 
 ### Beta Managed Agents Session Thread Status
 
@@ -3292,6 +3167,8 @@ public final class Main {
 
     Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+    format: double
+
   - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
     Prompt-cache creation token usage broken down by cache lifetime.
@@ -3300,17 +3177,25 @@ public final class Main {
 
       Tokens used to create 1-hour ephemeral cache entries.
 
+      format: int32
+
     - `Optional<Long> ephemeral5mInputTokens`
 
       Tokens used to create 5-minute ephemeral cache entries.
+
+      format: int32
 
   - `Optional<Long> cacheReadInputTokens`
 
     Total tokens read from prompt cache.
 
+    format: int32
+
   - `Optional<Long> inputTokens`
 
     Total input tokens consumed across all turns.
+
+    format: int32
 
   - `Optional<BetaMonetaryAmount> listCost`
 
@@ -3324,11 +3209,11 @@ public final class Main {
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `USD("USD")`
-
   - `Optional<Long> outputTokens`
 
     Total output tokens generated across all turns.
+
+    format: int32
 
   - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
@@ -3338,13 +3223,17 @@ public final class Main {
 
       Number of server-executed web fetch requests.
 
+      format: int32
+
     - `Optional<Long> webSearchRequests`
 
       Number of server-executed web search requests.
 
+      format: int32
+
 ### Beta Managed Agents Stream Session Thread Events
 
-- `class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union`
+- `class BetaManagedAgentsStreamSessionThreadEvents: union`
 
   Server-sent event in a single thread's stream.
 
@@ -3368,9 +3257,9 @@ public final class Main {
 
           The text content.
 
-        - `Type type`
+          minLength: 1
 
-          - `TEXT("text")`
+        - `Type type`
 
       - `class BetaManagedAgentsImageBlock:`
 
@@ -3388,13 +3277,15 @@ public final class Main {
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -3402,11 +3293,11 @@ public final class Main {
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource:`
 
@@ -3416,13 +3307,11 @@ public final class Main {
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
@@ -3440,13 +3329,15 @@ public final class Main {
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
@@ -3456,15 +3347,13 @@ public final class Main {
 
               The plain text content.
 
+              minLength: 1
+
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `TEXT_PLAIN("text/plain")`
-
             - `Type type`
-
-              - `TEXT("text")`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -3472,11 +3361,11 @@ public final class Main {
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource:`
 
@@ -3486,13 +3375,11 @@ public final class Main {
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `DOCUMENT("document")`
 
         - `Optional<String> context`
 
@@ -3508,15 +3395,13 @@ public final class Main {
 
         - `Type type`
 
-          - `REDACTED("redacted")`
-
     - `Type type`
-
-      - `USER_MESSAGE("user.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent:`
 
@@ -3528,11 +3413,11 @@ public final class Main {
 
     - `Type type`
 
-      - `USER_INTERRUPT("user.interrupt")`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -3560,15 +3445,17 @@ public final class Main {
 
     - `Type type`
 
-      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
-
     - `Optional<String> denyMessage`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -3587,8 +3474,6 @@ public final class Main {
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -3626,21 +3511,23 @@ public final class Main {
 
             The text content.
 
-          - `Type type`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `Type type`
 
         - `String source`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `String title`
 
           The title of the search result.
 
-        - `Type type`
+          minLength: 1
 
-          - `SEARCH_RESULT("search_result")`
+        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -3649,6 +3536,8 @@ public final class Main {
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -3674,9 +3563,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+    - `Type type`
 
     - `Optional<String> sessionThreadId`
 
@@ -3706,9 +3595,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MESSAGE("agent.message")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
@@ -3722,9 +3611,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THINKING("agent.thinking")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
@@ -3750,9 +3639,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -3784,9 +3673,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -3832,9 +3721,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_TOOL_USE("agent.tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -3862,13 +3751,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `Type type`
-
-      - `AGENT_TOOL_RESULT("agent.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -3930,9 +3819,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+    - `Type type`
 
     - `Optional<String> fromAgentName`
 
@@ -3970,13 +3859,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toSessionThreadId`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `Type type`
-
-      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
 
     - `Optional<String> toAgentName`
 
@@ -3994,9 +3883,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionErrorEvent:`
 
@@ -4028,15 +3917,11 @@ public final class Main {
 
             - `Type type`
 
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type type`
-
-              - `EXHAUSTED("exhausted")`
 
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
@@ -4044,11 +3929,7 @@ public final class Main {
 
             - `Type type`
 
-              - `TERMINAL("terminal")`
-
         - `Type type`
-
-          - `UNKNOWN_ERROR("unknown_error")`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
@@ -4076,8 +3957,6 @@ public final class Main {
 
         - `Type type`
 
-          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
-
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
@@ -4104,8 +3983,6 @@ public final class Main {
 
         - `Type type`
 
-          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
-
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -4131,8 +4008,6 @@ public final class Main {
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
 
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
@@ -4164,8 +4039,6 @@ public final class Main {
 
         - `Type type`
 
-          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
@@ -4196,8 +4069,6 @@ public final class Main {
 
         - `Type type`
 
-          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -4223,8 +4094,6 @@ public final class Main {
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `BILLING_ERROR("billing_error")`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
@@ -4256,8 +4125,6 @@ public final class Main {
 
         - `Type type`
 
-          - `CREDENTIAL_HOST_UNREACHABLE_ERROR("credential_host_unreachable_error")`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -4266,9 +4133,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_ERROR("session.error")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
@@ -4282,9 +4149,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
@@ -4298,9 +4165,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RUNNING("session.status_running")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
@@ -4314,6 +4181,8 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `StopReason stopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -4323,8 +4192,6 @@ public final class Main {
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type type`
-
-          - `END_TURN("end_turn")`
 
       - `class BetaManagedAgentsSessionRequiresAction:`
 
@@ -4336,15 +4203,11 @@ public final class Main {
 
         - `Type type`
 
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
       - `class BetaManagedAgentsSessionBudgetReached:`
 
@@ -4352,11 +4215,7 @@ public final class Main {
 
         - `Type type`
 
-          - `BUDGET_REACHED("budget_reached")`
-
     - `Type type`
-
-      - `SESSION_STATUS_IDLE("session.status_idle")`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
@@ -4370,9 +4229,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
@@ -4390,13 +4249,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public `sthr_` ID of the newly created thread.
 
     - `Type type`
-
-      - `SESSION_THREAD_CREATED("session.thread_created")`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
@@ -4410,6 +4269,8 @@ public final class Main {
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4418,9 +4279,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
@@ -4438,6 +4299,8 @@ public final class Main {
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeEvaluationStartId`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -4450,13 +4313,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `Type type`
-
-      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -4466,17 +4329,25 @@ public final class Main {
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `long cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `long inputTokens`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `long outputTokens`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `Optional<Speed> speed`
 
@@ -4498,9 +4369,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
@@ -4526,9 +4397,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
@@ -4542,6 +4413,8 @@ public final class Main {
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4550,9 +4423,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+    - `Type type`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
@@ -4570,6 +4443,8 @@ public final class Main {
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `String outcomeId`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -4577,6 +4452,8 @@ public final class Main {
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Rubric rubric`
 
@@ -4592,8 +4469,6 @@ public final class Main {
 
         - `Type type`
 
-          - `FILE("file")`
-
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
@@ -4604,11 +4479,7 @@ public final class Main {
 
         - `Type type`
 
-          - `TEXT("text")`
-
     - `Type type`
-
-      - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
@@ -4622,9 +4493,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_DELETED("session.deleted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
@@ -4642,13 +4513,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that started running.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
@@ -4665,6 +4536,8 @@ public final class Main {
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String sessionThreadId`
 
@@ -4692,8 +4565,6 @@ public final class Main {
 
     - `Type type`
 
-      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -4710,13 +4581,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that terminated.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
 
   - `class BetaManagedAgentsUserToolResultEvent:`
 
@@ -4731,8 +4602,6 @@ public final class Main {
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_TOOL_RESULT("user.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -4762,6 +4631,8 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `Optional<String> sessionThreadId`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -4782,13 +4653,13 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
@@ -4802,9 +4673,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_UPDATED("session.updated")`
+    - `Type type`
 
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
@@ -4819,8 +4690,6 @@ public final class Main {
         - `String name`
 
         - `Type type`
-
-          - `URL("url")`
 
         - `String url`
 
@@ -4896,15 +4765,11 @@ public final class Main {
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -4912,23 +4777,17 @@ public final class Main {
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -4982,8 +4841,6 @@ public final class Main {
 
                 - `Type type`
 
-                  - `ANTHROPIC("anthropic")`
-
                 - `String version`
 
               - `class BetaManagedAgentsCustomSkill:`
@@ -4993,8 +4850,6 @@ public final class Main {
                 - `String skillId`
 
                 - `Type type`
-
-                  - `CUSTOM("custom")`
 
                 - `String version`
 
@@ -5012,9 +4867,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5026,19 +4879,13 @@ public final class Main {
 
                         - `Type type`
 
-                          - `ALWAYS_ALLOW("always_allow")`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type type`
 
-                          - `ALWAYS_ASK("always_ask")`
-
-                    - `JsonValue; type "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
@@ -5046,9 +4893,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5062,9 +4907,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
@@ -5072,9 +4915,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5088,9 +4929,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -5098,9 +4937,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5114,9 +4951,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -5124,9 +4959,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5140,9 +4973,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -5150,9 +4981,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5166,9 +4995,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -5176,9 +5003,7 @@ public final class Main {
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5192,9 +5017,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -5202,15 +5025,15 @@ public final class Main {
 
                     - `Optional<Long> maxContentTokens`
 
+                      format: int32
+
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -5224,9 +5047,7 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -5236,15 +5057,15 @@ public final class Main {
 
                       Approximate user location for search result localization.
 
-                      - `JsonValue; type "approximate"constant`
+                      - `JsonValue type constant`
 
                         Location precision. Only "approximate" is supported.
-
-                        - `APPROXIMATE("approximate")`
 
                       - `Optional<String> city`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `Optional<String> country`
 
@@ -5254,9 +5075,13 @@ public final class Main {
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `Optional<String> timezone`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -5277,8 +5102,6 @@ public final class Main {
                       Tool calls require user confirmation before execution.
 
                 - `Type type`
-
-                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
               - `class BetaManagedAgentsMcpToolset:`
 
@@ -5322,8 +5145,6 @@ public final class Main {
 
                 - `Type type`
 
-                  - `MCP_TOOLSET("mcp_toolset")`
-
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
@@ -5334,9 +5155,7 @@ public final class Main {
 
                   JSON Schema for custom tool input parameters.
 
-                  - `JsonValue; type "object"constant`
-
-                    - `OBJECT("object")`
+                  - `JsonValue type constant`
 
                   - `Optional<Properties> properties`
 
@@ -5346,13 +5165,11 @@ public final class Main {
 
                 - `Type type`
 
-                  - `CUSTOM("custom")`
-
             - `Type type`
 
-              - `AGENT("agent")`
-
             - `long version`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor:`
 
@@ -5364,11 +5181,7 @@ public final class Main {
 
             - `Type type`
 
-              - `ADVISOR("advisor")`
-
         - `Type type`
-
-          - `COORDINATOR("coordinator")`
 
       - `String name`
 
@@ -5396,9 +5209,9 @@ public final class Main {
 
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
@@ -5416,11 +5229,7 @@ public final class Main {
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `USD("USD")`
-
       - `Type type`
-
-        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -5446,8 +5255,6 @@ public final class Main {
 
         - `Type type`
 
-          - `AGENT_MESSAGE("agent.message")`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
 
         - `String id`
@@ -5456,11 +5263,7 @@ public final class Main {
 
         - `Type type`
 
-          - `AGENT_THINKING("agent.thinking")`
-
     - `Type type`
-
-      - `EVENT_START("event_start")`
 
   - `class BetaManagedAgentsDeltaEvent:`
 
@@ -5476,19 +5279,17 @@ public final class Main {
 
       - `Type type`
 
-        - `CONTENT_DELTA("content_delta")`
-
       - `Optional<Long> index`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `String eventId`
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
     - `Type type`
-
-      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -5506,17 +5307,17 @@ public final class Main {
 
         The text content.
 
+        minLength: 1
+
       - `Type type`
 
-        - `TEXT("text")`
-
     - `Type type`
-
-      - `SYSTEM_MESSAGE("system.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent:`
 
@@ -5530,9 +5331,9 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_USAGE("session.usage")`
+    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -5542,6 +5343,8 @@ public final class Main {
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -5550,17 +5353,25 @@ public final class Main {
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `Optional<Long> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `Optional<Long> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `Optional<Long> inputTokens`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `Optional<BetaMonetaryAmount> listCost`
 
@@ -5570,6 +5381,8 @@ public final class Main {
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -5578,25 +5391,29 @@ public final class Main {
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `Optional<Long> webSearchRequests`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-# Events
+## Threads › Events
 
-## List Session Thread Events
+### List Session Thread Events
 
-`EventListPage beta().sessions().threads().events().list(EventListParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`EventListPage beta().sessions().threads().events().list(params, requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}/events`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/events`
 
 List Session Thread Events
 
-### Parameters
+#### Parameters
 
 - `EventListParams params`
 
@@ -5607,6 +5424,8 @@ List Session Thread Events
   - `Optional<Long> limit`
 
     Query parameter for limit
+
+    format: int32
 
   - `Optional<String> page`
 
@@ -5684,9 +5503,9 @@ List Session Thread Events
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+#### Returns
 
-- `class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union`
+- `class BetaManagedAgentsSessionEvent: union`
 
   Union type for all event types in a session.
 
@@ -5710,9 +5529,9 @@ List Session Thread Events
 
           The text content.
 
-        - `Type type`
+          minLength: 1
 
-          - `TEXT("text")`
+        - `Type type`
 
       - `class BetaManagedAgentsImageBlock:`
 
@@ -5730,13 +5549,15 @@ List Session Thread Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -5744,11 +5565,11 @@ List Session Thread Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource:`
 
@@ -5758,13 +5579,11 @@ List Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
@@ -5782,13 +5601,15 @@ List Session Thread Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
@@ -5798,15 +5619,13 @@ List Session Thread Events
 
               The plain text content.
 
+              minLength: 1
+
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `TEXT_PLAIN("text/plain")`
-
             - `Type type`
-
-              - `TEXT("text")`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -5814,11 +5633,11 @@ List Session Thread Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource:`
 
@@ -5828,13 +5647,11 @@ List Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `DOCUMENT("document")`
 
         - `Optional<String> context`
 
@@ -5850,15 +5667,13 @@ List Session Thread Events
 
         - `Type type`
 
-          - `REDACTED("redacted")`
-
     - `Type type`
-
-      - `USER_MESSAGE("user.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent:`
 
@@ -5870,11 +5685,11 @@ List Session Thread Events
 
     - `Type type`
 
-      - `USER_INTERRUPT("user.interrupt")`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -5902,15 +5717,17 @@ List Session Thread Events
 
     - `Type type`
 
-      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
-
     - `Optional<String> denyMessage`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -5929,8 +5746,6 @@ List Session Thread Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -5968,21 +5783,23 @@ List Session Thread Events
 
             The text content.
 
-          - `Type type`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `Type type`
 
         - `String source`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `String title`
 
           The title of the search result.
 
-        - `Type type`
+          minLength: 1
 
-          - `SEARCH_RESULT("search_result")`
+        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -5991,6 +5808,8 @@ List Session Thread Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -6016,9 +5835,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+    - `Type type`
 
     - `Optional<String> sessionThreadId`
 
@@ -6048,9 +5867,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MESSAGE("agent.message")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
@@ -6064,9 +5883,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THINKING("agent.thinking")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
@@ -6092,9 +5911,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -6126,9 +5945,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -6174,9 +5993,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_TOOL_USE("agent.tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -6204,13 +6023,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `Type type`
-
-      - `AGENT_TOOL_RESULT("agent.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -6272,9 +6091,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+    - `Type type`
 
     - `Optional<String> fromAgentName`
 
@@ -6312,13 +6131,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toSessionThreadId`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `Type type`
-
-      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
 
     - `Optional<String> toAgentName`
 
@@ -6336,9 +6155,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionErrorEvent:`
 
@@ -6370,15 +6189,11 @@ List Session Thread Events
 
             - `Type type`
 
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type type`
-
-              - `EXHAUSTED("exhausted")`
 
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
@@ -6386,11 +6201,7 @@ List Session Thread Events
 
             - `Type type`
 
-              - `TERMINAL("terminal")`
-
         - `Type type`
-
-          - `UNKNOWN_ERROR("unknown_error")`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
@@ -6418,8 +6229,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
-
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
@@ -6446,8 +6255,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
-
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -6473,8 +6280,6 @@ List Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
 
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
@@ -6506,8 +6311,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
@@ -6538,8 +6341,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -6565,8 +6366,6 @@ List Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `BILLING_ERROR("billing_error")`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
@@ -6598,8 +6397,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `CREDENTIAL_HOST_UNREACHABLE_ERROR("credential_host_unreachable_error")`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -6608,9 +6405,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_ERROR("session.error")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
@@ -6624,9 +6421,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
@@ -6640,9 +6437,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RUNNING("session.status_running")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
@@ -6656,6 +6453,8 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `StopReason stopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -6665,8 +6464,6 @@ List Session Thread Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type type`
-
-          - `END_TURN("end_turn")`
 
       - `class BetaManagedAgentsSessionRequiresAction:`
 
@@ -6678,15 +6475,11 @@ List Session Thread Events
 
         - `Type type`
 
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
       - `class BetaManagedAgentsSessionBudgetReached:`
 
@@ -6694,11 +6487,7 @@ List Session Thread Events
 
         - `Type type`
 
-          - `BUDGET_REACHED("budget_reached")`
-
     - `Type type`
-
-      - `SESSION_STATUS_IDLE("session.status_idle")`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
@@ -6712,9 +6501,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
@@ -6732,13 +6521,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public `sthr_` ID of the newly created thread.
 
     - `Type type`
-
-      - `SESSION_THREAD_CREATED("session.thread_created")`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
@@ -6752,6 +6541,8 @@ List Session Thread Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -6760,9 +6551,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
@@ -6780,6 +6571,8 @@ List Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeEvaluationStartId`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -6792,13 +6585,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `Type type`
-
-      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -6808,17 +6601,25 @@ List Session Thread Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `long cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `long inputTokens`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `long outputTokens`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `Optional<Speed> speed`
 
@@ -6840,9 +6641,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
@@ -6868,9 +6669,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
@@ -6884,6 +6685,8 @@ List Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -6892,9 +6695,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+    - `Type type`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
@@ -6912,6 +6715,8 @@ List Session Thread Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `String outcomeId`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -6919,6 +6724,8 @@ List Session Thread Events
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Rubric rubric`
 
@@ -6934,8 +6741,6 @@ List Session Thread Events
 
         - `Type type`
 
-          - `FILE("file")`
-
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
@@ -6946,11 +6751,7 @@ List Session Thread Events
 
         - `Type type`
 
-          - `TEXT("text")`
-
     - `Type type`
-
-      - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
@@ -6964,9 +6765,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_DELETED("session.deleted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
@@ -6984,13 +6785,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that started running.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
@@ -7007,6 +6808,8 @@ List Session Thread Events
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String sessionThreadId`
 
@@ -7034,8 +6837,6 @@ List Session Thread Events
 
     - `Type type`
 
-      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -7052,13 +6853,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that terminated.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
 
   - `class BetaManagedAgentsUserToolResultEvent:`
 
@@ -7073,8 +6874,6 @@ List Session Thread Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_TOOL_RESULT("user.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -7104,6 +6903,8 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `Optional<String> sessionThreadId`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -7124,13 +6925,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
@@ -7144,9 +6945,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_UPDATED("session.updated")`
+    - `Type type`
 
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
@@ -7161,8 +6962,6 @@ List Session Thread Events
         - `String name`
 
         - `Type type`
-
-          - `URL("url")`
 
         - `String url`
 
@@ -7238,15 +7037,11 @@ List Session Thread Events
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -7254,23 +7049,17 @@ List Session Thread Events
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -7324,8 +7113,6 @@ List Session Thread Events
 
                 - `Type type`
 
-                  - `ANTHROPIC("anthropic")`
-
                 - `String version`
 
               - `class BetaManagedAgentsCustomSkill:`
@@ -7335,8 +7122,6 @@ List Session Thread Events
                 - `String skillId`
 
                 - `Type type`
-
-                  - `CUSTOM("custom")`
 
                 - `String version`
 
@@ -7354,9 +7139,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7368,19 +7151,13 @@ List Session Thread Events
 
                         - `Type type`
 
-                          - `ALWAYS_ALLOW("always_allow")`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type type`
 
-                          - `ALWAYS_ASK("always_ask")`
-
-                    - `JsonValue; type "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
@@ -7388,9 +7165,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7404,9 +7179,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
@@ -7414,9 +7187,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7430,9 +7201,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -7440,9 +7209,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7456,9 +7223,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -7466,9 +7231,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7482,9 +7245,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -7492,9 +7253,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7508,9 +7267,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -7518,9 +7275,7 @@ List Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7534,9 +7289,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -7544,15 +7297,15 @@ List Session Thread Events
 
                     - `Optional<Long> maxContentTokens`
 
+                      format: int32
+
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -7566,9 +7319,7 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -7578,15 +7329,15 @@ List Session Thread Events
 
                       Approximate user location for search result localization.
 
-                      - `JsonValue; type "approximate"constant`
+                      - `JsonValue type constant`
 
                         Location precision. Only "approximate" is supported.
-
-                        - `APPROXIMATE("approximate")`
 
                       - `Optional<String> city`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `Optional<String> country`
 
@@ -7596,9 +7347,13 @@ List Session Thread Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `Optional<String> timezone`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -7619,8 +7374,6 @@ List Session Thread Events
                       Tool calls require user confirmation before execution.
 
                 - `Type type`
-
-                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
               - `class BetaManagedAgentsMcpToolset:`
 
@@ -7664,8 +7417,6 @@ List Session Thread Events
 
                 - `Type type`
 
-                  - `MCP_TOOLSET("mcp_toolset")`
-
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
@@ -7676,9 +7427,7 @@ List Session Thread Events
 
                   JSON Schema for custom tool input parameters.
 
-                  - `JsonValue; type "object"constant`
-
-                    - `OBJECT("object")`
+                  - `JsonValue type constant`
 
                   - `Optional<Properties> properties`
 
@@ -7688,13 +7437,11 @@ List Session Thread Events
 
                 - `Type type`
 
-                  - `CUSTOM("custom")`
-
             - `Type type`
 
-              - `AGENT("agent")`
-
             - `long version`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor:`
 
@@ -7706,11 +7453,7 @@ List Session Thread Events
 
             - `Type type`
 
-              - `ADVISOR("advisor")`
-
         - `Type type`
-
-          - `COORDINATOR("coordinator")`
 
       - `String name`
 
@@ -7738,9 +7481,9 @@ List Session Thread Events
 
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
@@ -7758,11 +7501,7 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `USD("USD")`
-
       - `Type type`
-
-        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -7788,17 +7527,17 @@ List Session Thread Events
 
         The text content.
 
+        minLength: 1
+
       - `Type type`
 
-        - `TEXT("text")`
-
     - `Type type`
-
-      - `SYSTEM_MESSAGE("system.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent:`
 
@@ -7812,9 +7551,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_USAGE("session.usage")`
+    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -7824,6 +7563,8 @@ List Session Thread Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -7832,17 +7573,25 @@ List Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `Optional<Long> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `Optional<Long> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `Optional<Long> inputTokens`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `Optional<BetaMonetaryAmount> listCost`
 
@@ -7852,6 +7601,8 @@ List Session Thread Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -7860,15 +7611,19 @@ List Session Thread Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `Optional<Long> webSearchRequests`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-### Example
+#### Example
 
 ```java
 package com.anthropic.example;
@@ -7893,7 +7648,7 @@ public final class Main {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -7914,15 +7669,15 @@ public final class Main {
 }
 ```
 
-## Stream Session Thread Events
+### Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaManagedAgentsStreamSessionThreadEvents beta().sessions().threads().events().streamStreaming(params, requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
 Stream Session Thread Events
 
-### Parameters
+#### Parameters
 
 - `EventStreamParams params`
 
@@ -8010,9 +7765,9 @@ Stream Session Thread Events
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+#### Returns
 
-- `class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union`
+- `class BetaManagedAgentsStreamSessionThreadEvents: union`
 
   Server-sent event in a single thread's stream.
 
@@ -8036,9 +7791,9 @@ Stream Session Thread Events
 
           The text content.
 
-        - `Type type`
+          minLength: 1
 
-          - `TEXT("text")`
+        - `Type type`
 
       - `class BetaManagedAgentsImageBlock:`
 
@@ -8056,13 +7811,15 @@ Stream Session Thread Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -8070,11 +7827,11 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource:`
 
@@ -8084,13 +7841,11 @@ Stream Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `IMAGE("image")`
 
       - `class BetaManagedAgentsDocumentBlock:`
 
@@ -8108,13 +7863,15 @@ Stream Session Thread Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `String mediaType`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `Type type`
+              minLength: 1
 
-              - `BASE64("base64")`
+            - `Type type`
 
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
@@ -8124,15 +7881,13 @@ Stream Session Thread Events
 
               The plain text content.
 
+              minLength: 1
+
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `TEXT_PLAIN("text/plain")`
-
             - `Type type`
-
-              - `TEXT("text")`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -8140,11 +7895,11 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `URL("url")`
-
             - `String url`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource:`
 
@@ -8154,13 +7909,11 @@ Stream Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `Type type`
 
-              - `FILE("file")`
-
         - `Type type`
-
-          - `DOCUMENT("document")`
 
         - `Optional<String> context`
 
@@ -8176,15 +7929,13 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `REDACTED("redacted")`
-
     - `Type type`
-
-      - `USER_MESSAGE("user.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent:`
 
@@ -8196,11 +7947,11 @@ Stream Session Thread Events
 
     - `Type type`
 
-      - `USER_INTERRUPT("user.interrupt")`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -8228,15 +7979,17 @@ Stream Session Thread Events
 
     - `Type type`
 
-      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
-
     - `Optional<String> denyMessage`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -8255,8 +8008,6 @@ Stream Session Thread Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -8294,21 +8045,23 @@ Stream Session Thread Events
 
             The text content.
 
-          - `Type type`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `Type type`
 
         - `String source`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `String title`
 
           The title of the search result.
 
-        - `Type type`
+          minLength: 1
 
-          - `SEARCH_RESULT("search_result")`
+        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -8317,6 +8070,8 @@ Stream Session Thread Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<String> sessionThreadId`
 
@@ -8342,9 +8097,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+    - `Type type`
 
     - `Optional<String> sessionThreadId`
 
@@ -8374,9 +8129,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MESSAGE("agent.message")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
@@ -8390,9 +8145,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THINKING("agent.thinking")`
+    - `Type type`
 
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
@@ -8418,9 +8173,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -8452,9 +8207,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -8500,9 +8255,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_TOOL_USE("agent.tool_use")`
+    - `Type type`
 
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
@@ -8530,13 +8285,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `Type type`
-
-      - `AGENT_TOOL_RESULT("agent.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -8598,9 +8353,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+    - `Type type`
 
     - `Optional<String> fromAgentName`
 
@@ -8638,13 +8393,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String toSessionThreadId`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `Type type`
-
-      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
 
     - `Optional<String> toAgentName`
 
@@ -8662,9 +8417,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionErrorEvent:`
 
@@ -8696,15 +8451,11 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `RETRYING("retrying")`
-
           - `class BetaManagedAgentsRetryStatusExhausted:`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type type`
-
-              - `EXHAUSTED("exhausted")`
 
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
@@ -8712,11 +8463,7 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `TERMINAL("terminal")`
-
         - `Type type`
-
-          - `UNKNOWN_ERROR("unknown_error")`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
@@ -8744,8 +8491,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
-
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
@@ -8772,8 +8517,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
-
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -8799,8 +8542,6 @@ Stream Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
 
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
@@ -8832,8 +8573,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
@@ -8864,8 +8603,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -8891,8 +8628,6 @@ Stream Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `Type type`
-
-          - `BILLING_ERROR("billing_error")`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
@@ -8924,8 +8659,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `CREDENTIAL_HOST_UNREACHABLE_ERROR("credential_host_unreachable_error")`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -8934,9 +8667,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_ERROR("session.error")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
@@ -8950,9 +8683,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
@@ -8966,9 +8699,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_RUNNING("session.status_running")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
@@ -8982,6 +8715,8 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `StopReason stopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -8991,8 +8726,6 @@ Stream Session Thread Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type type`
-
-          - `END_TURN("end_turn")`
 
       - `class BetaManagedAgentsSessionRequiresAction:`
 
@@ -9004,15 +8737,11 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `REQUIRES_ACTION("requires_action")`
-
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type type`
-
-          - `RETRIES_EXHAUSTED("retries_exhausted")`
 
       - `class BetaManagedAgentsSessionBudgetReached:`
 
@@ -9020,11 +8749,7 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `BUDGET_REACHED("budget_reached")`
-
     - `Type type`
-
-      - `SESSION_STATUS_IDLE("session.status_idle")`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
@@ -9038,9 +8763,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
@@ -9058,13 +8783,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public `sthr_` ID of the newly created thread.
 
     - `Type type`
-
-      - `SESSION_THREAD_CREATED("session.thread_created")`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
@@ -9078,6 +8803,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9086,9 +8813,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
@@ -9106,6 +8833,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeEvaluationStartId`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -9118,13 +8847,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `Type type`
-
-      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -9134,17 +8863,25 @@ Stream Session Thread Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `long cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `long inputTokens`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `long outputTokens`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `Optional<Speed> speed`
 
@@ -9166,9 +8903,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
@@ -9194,9 +8931,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+    - `Type type`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
@@ -9210,6 +8947,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `String outcomeId`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9218,9 +8957,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+    - `Type type`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
@@ -9238,6 +8977,8 @@ Stream Session Thread Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `String outcomeId`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -9245,6 +8986,8 @@ Stream Session Thread Events
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Rubric rubric`
 
@@ -9260,8 +9003,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `FILE("file")`
-
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
@@ -9272,11 +9013,7 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `TEXT("text")`
-
     - `Type type`
-
-      - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
@@ -9290,9 +9027,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_DELETED("session.deleted")`
+    - `Type type`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
@@ -9310,13 +9047,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that started running.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
@@ -9333,6 +9070,8 @@ Stream Session Thread Events
     - `LocalDateTime processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String sessionThreadId`
 
@@ -9360,8 +9099,6 @@ Stream Session Thread Events
 
     - `Type type`
 
-      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -9378,13 +9115,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that terminated.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
 
   - `class BetaManagedAgentsUserToolResultEvent:`
 
@@ -9399,8 +9136,6 @@ Stream Session Thread Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `Type type`
-
-      - `USER_TOOL_RESULT("user.tool_result")`
 
     - `Optional<List<Content>> content`
 
@@ -9430,6 +9165,8 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `Optional<String> sessionThreadId`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -9450,13 +9187,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String sessionThreadId`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `Type type`
-
-      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
@@ -9470,9 +9207,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_UPDATED("session.updated")`
+    - `Type type`
 
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
@@ -9487,8 +9224,6 @@ Stream Session Thread Events
         - `String name`
 
         - `Type type`
-
-          - `URL("url")`
 
         - `String url`
 
@@ -9564,15 +9299,11 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `LOW("low")`
-
           - `class BetaManagedAgentsEffortMedium:`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type type`
-
-              - `MEDIUM("medium")`
 
           - `class BetaManagedAgentsEffortHigh:`
 
@@ -9580,23 +9311,17 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `HIGH("high")`
-
           - `class BetaManagedAgentsEffortXhigh:`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type type`
 
-              - `XHIGH("xhigh")`
-
           - `class BetaManagedAgentsEffortMax:`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `Type type`
-
-              - `MAX("max")`
 
         - `Optional<String> inferenceGeo`
 
@@ -9650,8 +9375,6 @@ Stream Session Thread Events
 
                 - `Type type`
 
-                  - `ANTHROPIC("anthropic")`
-
                 - `String version`
 
               - `class BetaManagedAgentsCustomSkill:`
@@ -9661,8 +9384,6 @@ Stream Session Thread Events
                 - `String skillId`
 
                 - `Type type`
-
-                  - `CUSTOM("custom")`
 
                 - `String version`
 
@@ -9680,9 +9401,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9694,19 +9413,13 @@ Stream Session Thread Events
 
                         - `Type type`
 
-                          - `ALWAYS_ALLOW("always_allow")`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy:`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type type`
 
-                          - `ALWAYS_ASK("always_ask")`
-
-                    - `JsonValue; type "bash"constant`
-
-                      - `BASH("bash")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
@@ -9714,9 +9427,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9730,9 +9441,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "edit"constant`
-
-                      - `EDIT("edit")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
@@ -9740,9 +9449,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9756,9 +9463,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "read"constant`
-
-                      - `READ("read")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -9766,9 +9471,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9782,9 +9485,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "write"constant`
-
-                      - `WRITE("write")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -9792,9 +9493,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9808,9 +9507,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "glob"constant`
-
-                      - `GLOB("glob")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -9818,9 +9515,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9834,9 +9529,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "grep"constant`
-
-                      - `GREP("grep")`
+                    - `JsonValue type constant`
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -9844,9 +9537,7 @@ Stream Session Thread Events
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9860,9 +9551,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_fetch"constant`
-
-                      - `WEB_FETCH("web_fetch")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -9870,15 +9559,15 @@ Stream Session Thread Events
 
                     - `Optional<Long> maxContentTokens`
 
+                      format: int32
+
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
 
                     - `boolean enabled`
 
-                    - `JsonValue; name "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue name constant`
 
                     - `PermissionPolicy permissionPolicy`
 
@@ -9892,9 +9581,7 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue; type "web_search"constant`
-
-                      - `WEB_SEARCH("web_search")`
+                    - `JsonValue type constant`
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -9904,15 +9591,15 @@ Stream Session Thread Events
 
                       Approximate user location for search result localization.
 
-                      - `JsonValue; type "approximate"constant`
+                      - `JsonValue type constant`
 
                         Location precision. Only "approximate" is supported.
-
-                        - `APPROXIMATE("approximate")`
 
                       - `Optional<String> city`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `Optional<String> country`
 
@@ -9922,9 +9609,13 @@ Stream Session Thread Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `Optional<String> timezone`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
@@ -9945,8 +9636,6 @@ Stream Session Thread Events
                       Tool calls require user confirmation before execution.
 
                 - `Type type`
-
-                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
 
               - `class BetaManagedAgentsMcpToolset:`
 
@@ -9990,8 +9679,6 @@ Stream Session Thread Events
 
                 - `Type type`
 
-                  - `MCP_TOOLSET("mcp_toolset")`
-
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
@@ -10002,9 +9689,7 @@ Stream Session Thread Events
 
                   JSON Schema for custom tool input parameters.
 
-                  - `JsonValue; type "object"constant`
-
-                    - `OBJECT("object")`
+                  - `JsonValue type constant`
 
                   - `Optional<Properties> properties`
 
@@ -10014,13 +9699,11 @@ Stream Session Thread Events
 
                 - `Type type`
 
-                  - `CUSTOM("custom")`
-
             - `Type type`
 
-              - `AGENT("agent")`
-
             - `long version`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor:`
 
@@ -10032,11 +9715,7 @@ Stream Session Thread Events
 
             - `Type type`
 
-              - `ADVISOR("advisor")`
-
         - `Type type`
-
-          - `COORDINATOR("coordinator")`
 
       - `String name`
 
@@ -10064,9 +9743,9 @@ Stream Session Thread Events
 
       - `Type type`
 
-        - `AGENT("agent")`
-
       - `long version`
+
+        format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
@@ -10084,11 +9763,7 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `USD("USD")`
-
       - `Type type`
-
-        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -10114,8 +9789,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `AGENT_MESSAGE("agent.message")`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
 
         - `String id`
@@ -10124,11 +9797,7 @@ Stream Session Thread Events
 
         - `Type type`
 
-          - `AGENT_THINKING("agent.thinking")`
-
     - `Type type`
-
-      - `EVENT_START("event_start")`
 
   - `class BetaManagedAgentsDeltaEvent:`
 
@@ -10144,19 +9813,17 @@ Stream Session Thread Events
 
       - `Type type`
 
-        - `CONTENT_DELTA("content_delta")`
-
       - `Optional<Long> index`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `String eventId`
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
     - `Type type`
-
-      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -10174,17 +9841,17 @@ Stream Session Thread Events
 
         The text content.
 
+        minLength: 1
+
       - `Type type`
 
-        - `TEXT("text")`
-
     - `Type type`
-
-      - `SYSTEM_MESSAGE("system.message")`
 
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent:`
 
@@ -10198,9 +9865,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `Type type`
+      format: date-time
 
-      - `SESSION_USAGE("session.usage")`
+    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -10210,6 +9877,8 @@ Stream Session Thread Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -10218,17 +9887,25 @@ Stream Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `Optional<Long> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `Optional<Long> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `Optional<Long> inputTokens`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `Optional<BetaMonetaryAmount> listCost`
 
@@ -10238,6 +9915,8 @@ Stream Session Thread Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -10246,15 +9925,23 @@ Stream Session Thread Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `Optional<Long> webSearchRequests`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-### Example
+- `class BetaManagedAgentsStreamSessionThreadEvents: union`
+
+  Server-sent event in a single thread's stream.
+
+#### Example
 
 ```java
 package com.anthropic.example;
@@ -10280,7 +9967,7 @@ public final class Main {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {

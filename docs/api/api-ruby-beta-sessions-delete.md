@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete Session
-url: https://platform.claude.com/docs/en/api/ruby/beta/sessions/delete
----
-
-## Delete Session
+# Delete Session
 
 `beta.sessions.delete(session_id, **kwargs) -> BetaManagedAgentsDeletedSession`
 
-**delete** `/v1/sessions/{session_id}`
+**DELETE** `/v1/sessions/{session_id}`
 
 Delete Session
 
-### Parameters
+## Parameters
 
 - `session_id: String`
 
@@ -97,7 +92,7 @@ Delete Session
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedSession`
 
@@ -107,9 +102,7 @@ Delete Session
 
   - `type: :session_deleted`
 
-    - `:session_deleted`
-
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -121,7 +114,7 @@ beta_managed_agents_deleted_session = anthropic.beta.sessions.delete("sesn_011CZ
 puts(beta_managed_agents_deleted_session)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

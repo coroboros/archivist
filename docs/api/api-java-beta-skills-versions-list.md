@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/skills/versions/list"
 category: "api"
 generated: true
 ---
----
-title: List Skill Versions
-url: https://platform.claude.com/docs/en/api/java/beta/skills/versions/list
----
+# List Skill Versions
 
-## List Skill Versions
+`VersionListPage beta().skills().versions().list(params = VersionListParams.none(), requestOptions = RequestOptions.none())`
 
-`VersionListPage beta().skills().versions().list(VersionListParamsparams = VersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-### Parameters
+## Parameters
 
 - `VersionListParams params`
 
@@ -109,7 +104,7 @@ List Skill Versions
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class VersionListResponse:`
 
@@ -157,7 +152,7 @@ List Skill Versions
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -178,7 +173,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

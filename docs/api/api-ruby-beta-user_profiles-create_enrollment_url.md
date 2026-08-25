@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/user_profiles/create_
 category: "api"
 generated: true
 ---
----
-title: Create Enrollment URL
-url: https://platform.claude.com/docs/en/api/ruby/beta/user_profiles/create_enrollment_url
----
-
-## Create Enrollment URL
+# Create Enrollment URL
 
 `beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs) -> BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-### Parameters
+## Parameters
 
 - `user_profile_id: String`
 
@@ -97,7 +92,7 @@ Create Enrollment URL
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaUserProfileEnrollmentURL`
 
@@ -105,17 +100,17 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: :enrollment_url`
 
     Object type. Always `enrollment_url`.
-
-    - `:enrollment_url`
 
   - `url: String`
 
     Enrollment URL to send to the end user. Valid until `expires_at`.
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -127,7 +122,7 @@ beta_user_profile_enrollment_url = anthropic.beta.user_profiles.create_enrollmen
 puts(beta_user_profile_enrollment_url)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
----
-title: Create a memory
-url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories/create
----
-
-## Create a memory
+# Create a memory
 
 `$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
 
-**post** `/v1/memory_stores/{memory_store_id}/memories`
+**POST** `/v1/memory_stores/{memory_store_id}/memories`
 
 Create a memory
 
-### Parameters
+## Parameters
 
 - `memoryStoreID: string`
 
@@ -37,7 +32,7 @@ Create a memory
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsMemory`
 
@@ -79,7 +74,7 @@ Create a memory
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-### Example
+## Example
 
 ```php
 <?php
@@ -99,7 +94,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->create(
 var_dump($betaManagedAgentsMemory);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

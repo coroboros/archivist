@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/list"
 category: "api"
 generated: true
 ---
----
-title: List Environments
-url: https://platform.claude.com/docs/en/api/ruby/beta/environments/list
----
-
-## List Environments
+# List Environments
 
 `beta.environments.list(**kwargs) -> PageCursor<BetaEnvironment>`
 
-**get** `/v1/environments`
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-### Parameters
+## Parameters
 
 - `include_archived: bool`
 
@@ -26,6 +21,8 @@ List environments with pagination support.
 - `limit: Integer`
 
   Maximum number of environments to return
+
+  maximum: 1000, minimum: 1
 
 - `page: String`
 
@@ -107,7 +104,7 @@ List environments with pagination support.
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaEnvironment`
 
@@ -141,8 +138,6 @@ List environments with pagination support.
 
             Network policy type
 
-            - `:unrestricted`
-
         - `class BetaLimitedNetwork`
 
           Limited network access.
@@ -162,8 +157,6 @@ List environments with pagination support.
           - `type: :limited`
 
             Network policy type
-
-            - `:limited`
 
       - `packages: BetaPackages`
 
@@ -197,13 +190,9 @@ List environments with pagination support.
 
           Package configuration type
 
-          - `:packages`
-
       - `type: :cloud`
 
         Environment type
-
-        - `:cloud`
 
     - `class BetaSelfHostedConfig`
 
@@ -212,8 +201,6 @@ List environments with pagination support.
       - `type: :self_hosted`
 
         Environment type
-
-        - `:self_hosted`
 
   - `created_at: String`
 
@@ -235,8 +222,6 @@ List environments with pagination support.
 
     The type of object (always 'environment')
 
-    - `:environment`
-
   - `updated_at: String`
 
     RFC 3339 timestamp when environment was last updated
@@ -249,7 +234,7 @@ List environments with pagination support.
 
     - `:account`
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -261,7 +246,7 @@ page = anthropic.beta.environments.list
 puts(page)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

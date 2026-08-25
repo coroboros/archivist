@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/agents/update"
 category: "api"
 generated: true
 ---
----
-title: Update Agent
-url: https://platform.claude.com/docs/en/api/typescript/beta/agents/update
----
+# Update Agent
 
-## Update Agent
+`client.beta.agents.update(agentID, params, options?): BetaManagedAgentsAgent`
 
-`client.beta.agents.update(stringagentID, AgentUpdateParamsparams, RequestOptionsoptions?): BetaManagedAgentsAgent`
-
-**post** `/v1/agents/{agent_id}`
+**POST** `/v1/agents/{agent_id}`
 
 Update Agent
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -27,6 +22,8 @@ Update Agent
 
     Body param: Description. Omit to preserve; send empty string or null to clear.
 
+    maxLength: 2048
+
   - `mcp_servers?: Array<BetaManagedAgentsURLMCPServerParams> | null`
 
     Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
@@ -35,13 +32,15 @@ Update Agent
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
-    - `type: "url"`
+      minLength: 1, maxLength: 255
 
-      - `"url"`
+    - `type: "url"`
 
     - `url: string`
 
       Endpoint URL for the MCP server.
+
+      maxLength: 2048
 
   - `metadata?: Record<string, string | null> | null`
 
@@ -145,15 +144,11 @@ Update Agent
 
           - `type: "low"`
 
-            - `"low"`
-
         - `BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `type: "medium"`
-
-            - `"medium"`
 
         - `BetaManagedAgentsEffortHigh`
 
@@ -161,23 +156,17 @@ Update Agent
 
           - `type: "high"`
 
-            - `"high"`
-
         - `BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `type: "xhigh"`
 
-            - `"xhigh"`
-
         - `BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
           - `type: "max"`
-
-            - `"max"`
 
       - `inference_geo?: string | null`
 
@@ -209,21 +198,21 @@ Update Agent
 
           The `agent` ID.
 
-        - `type: "agent"`
+          minLength: 1, maxLength: 128
 
-          - `"agent"`
+        - `type: "agent"`
 
         - `version?: number`
 
           The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+          format: int32
 
       - `BetaManagedAgentsMultiagentSelfParams`
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
         - `type: "self"`
-
-          - `"self"`
 
       - `BetaManagedAgentsAdvisorParams`
 
@@ -233,17 +222,17 @@ Update Agent
 
           A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
+          minLength: 1, maxLength: 256
+
         - `type: "advisor"`
 
-          - `"advisor"`
-
     - `type: "coordinator"`
-
-      - `"coordinator"`
 
   - `name?: string`
 
     Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+
+    maxLength: 256
 
   - `skills?: Array<BetaManagedAgentsSkillParams> | null`
 
@@ -257,13 +246,15 @@ Update Agent
 
         Identifier of the Anthropic skill (e.g., "xlsx").
 
-      - `type: "anthropic"`
+        minLength: 1, maxLength: 64
 
-        - `"anthropic"`
+      - `type: "anthropic"`
 
       - `version?: string | null`
 
         Version to pin. Defaults to latest if omitted.
+
+        minLength: 1, maxLength: 64
 
     - `BetaManagedAgentsCustomSkillParams`
 
@@ -273,17 +264,21 @@ Update Agent
 
         Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
-      - `type: "custom"`
+        minLength: 1, maxLength: 64
 
-        - `"custom"`
+      - `type: "custom"`
 
       - `version?: string | null`
 
         Version to pin. Defaults to latest if omitted.
 
+        minLength: 1, maxLength: 64
+
   - `system?: string | null`
 
     Body param: System prompt. Omit to preserve; send empty string or null to clear.
+
+    maxLength: 100000
 
   - `tools?: Array<BetaManagedAgentsAgentToolset20260401Params | BetaManagedAgentsMCPToolsetParams | BetaManagedAgentsCustomToolParams> | null`
 
@@ -294,8 +289,6 @@ Update Agent
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `type: "agent_toolset_20260401"`
-
-        - `"agent_toolset_20260401"`
 
       - `configs?: Array<BetaManagedAgentsAgentToolConfigParams>`
 
@@ -308,8 +301,6 @@ Update Agent
           - `name: "bash"`
 
             Must be "bash".
-
-            - `"bash"`
 
           - `enabled?: boolean | null`
 
@@ -325,19 +316,13 @@ Update Agent
 
               - `type: "always_allow"`
 
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `type: "always_ask"`
 
-                - `"always_ask"`
-
           - `type?: "bash"`
-
-            - `"bash"`
 
         - `BetaManagedAgentsEditToolConfigParams`
 
@@ -346,8 +331,6 @@ Update Agent
           - `name: "edit"`
 
             Must be "edit".
-
-            - `"edit"`
 
           - `enabled?: boolean | null`
 
@@ -367,8 +350,6 @@ Update Agent
 
           - `type?: "edit"`
 
-            - `"edit"`
-
         - `BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
@@ -376,8 +357,6 @@ Update Agent
           - `name: "read"`
 
             Must be "read".
-
-            - `"read"`
 
           - `enabled?: boolean | null`
 
@@ -397,8 +376,6 @@ Update Agent
 
           - `type?: "read"`
 
-            - `"read"`
-
         - `BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
@@ -406,8 +383,6 @@ Update Agent
           - `name: "write"`
 
             Must be "write".
-
-            - `"write"`
 
           - `enabled?: boolean | null`
 
@@ -427,8 +402,6 @@ Update Agent
 
           - `type?: "write"`
 
-            - `"write"`
-
         - `BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
@@ -436,8 +409,6 @@ Update Agent
           - `name: "glob"`
 
             Must be "glob".
-
-            - `"glob"`
 
           - `enabled?: boolean | null`
 
@@ -457,8 +428,6 @@ Update Agent
 
           - `type?: "glob"`
 
-            - `"glob"`
-
         - `BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
@@ -466,8 +435,6 @@ Update Agent
           - `name: "grep"`
 
             Must be "grep".
-
-            - `"grep"`
 
           - `enabled?: boolean | null`
 
@@ -487,8 +454,6 @@ Update Agent
 
           - `type?: "grep"`
 
-            - `"grep"`
-
         - `BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
@@ -496,8 +461,6 @@ Update Agent
           - `name: "web_fetch"`
 
             Must be "web_fetch".
-
-            - `"web_fetch"`
 
           - `allowed_domains?: Array<string>`
 
@@ -515,6 +478,8 @@ Update Agent
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
+            format: int32
+
           - `permission_policy?: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | null`
 
             Permission policy for tool execution.
@@ -529,8 +494,6 @@ Update Agent
 
           - `type?: "web_fetch"`
 
-            - `"web_fetch"`
-
         - `BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
@@ -538,8 +501,6 @@ Update Agent
           - `name: "web_search"`
 
             Must be "web_search".
-
-            - `"web_search"`
 
           - `allowed_domains?: Array<string>`
 
@@ -567,8 +528,6 @@ Update Agent
 
           - `type?: "web_search"`
 
-            - `"web_search"`
-
           - `user_location?: BetaManagedAgentsUserLocation | null`
 
             Approximate user location for search result localization.
@@ -577,11 +536,11 @@ Update Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `"approximate"`
-
             - `city?: string | null`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country?: string | null`
 
@@ -591,9 +550,13 @@ Update Agent
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone?: string | null`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config?: BetaManagedAgentsAgentToolsetDefaultConfigParams | null`
 
@@ -623,9 +586,9 @@ Update Agent
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
-      - `type: "mcp_toolset"`
+        minLength: 1, maxLength: 255
 
-        - `"mcp_toolset"`
+      - `type: "mcp_toolset"`
 
       - `configs?: Array<BetaManagedAgentsMCPToolConfigParams>`
 
@@ -634,6 +597,8 @@ Update Agent
         - `name: string`
 
           Name of the MCP tool to configure. 1-128 characters.
+
+          minLength: 1, maxLength: 128
 
         - `enabled?: boolean | null`
 
@@ -679,13 +644,13 @@ Update Agent
 
         Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
+        minLength: 1
+
       - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
         JSON Schema for custom tool input parameters.
 
         - `type: "object"`
-
-          - `"object"`
 
         - `properties?: Record<string, unknown> | null`
 
@@ -695,13 +660,15 @@ Update Agent
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-      - `type: "custom"`
+        minLength: 1, maxLength: 128
 
-        - `"custom"`
+      - `type: "custom"`
 
   - `version?: number`
 
     Body param: The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
+    format: int32
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -779,7 +746,7 @@ Update Agent
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -791,9 +758,13 @@ Update Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string | null`
 
@@ -802,8 +773,6 @@ Update Agent
     - `name: string`
 
     - `type: "url"`
-
-      - `"url"`
 
     - `url: string`
 
@@ -885,15 +854,11 @@ Update Agent
 
         - `type: "low"`
 
-          - `"low"`
-
       - `BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: "medium"`
-
-          - `"medium"`
 
       - `BetaManagedAgentsEffortHigh`
 
@@ -901,23 +866,17 @@ Update Agent
 
         - `type: "high"`
 
-          - `"high"`
-
       - `BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: "xhigh"`
 
-          - `"xhigh"`
-
       - `BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: "max"`
-
-          - `"max"`
 
     - `inference_geo?: string`
 
@@ -947,9 +906,9 @@ Update Agent
 
         - `type: "agent"`
 
-          - `"agent"`
-
         - `version: number`
+
+          format: int32
 
       - `BetaManagedAgentsAdvisor`
 
@@ -961,11 +920,7 @@ Update Agent
 
         - `type: "advisor"`
 
-          - `"advisor"`
-
     - `type: "coordinator"`
-
-      - `"coordinator"`
 
   - `name: string`
 
@@ -979,8 +934,6 @@ Update Agent
 
       - `type: "anthropic"`
 
-        - `"anthropic"`
-
       - `version: string`
 
     - `BetaManagedAgentsCustomSkill`
@@ -990,8 +943,6 @@ Update Agent
       - `skill_id: string`
 
       - `type: "custom"`
-
-        - `"custom"`
 
       - `version: string`
 
@@ -1011,8 +962,6 @@ Update Agent
 
           - `name: "bash"`
 
-            - `"bash"`
-
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
             Permission policy for tool execution.
@@ -1023,19 +972,13 @@ Update Agent
 
               - `type: "always_allow"`
 
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `type: "always_ask"`
 
-                - `"always_ask"`
-
           - `type: "bash"`
-
-            - `"bash"`
 
         - `BetaManagedAgentsEditToolConfig`
 
@@ -1044,8 +987,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "edit"`
-
-            - `"edit"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1061,8 +1002,6 @@ Update Agent
 
           - `type: "edit"`
 
-            - `"edit"`
-
         - `BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
@@ -1070,8 +1009,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "read"`
-
-            - `"read"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1087,8 +1024,6 @@ Update Agent
 
           - `type: "read"`
 
-            - `"read"`
-
         - `BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
@@ -1096,8 +1031,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "write"`
-
-            - `"write"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1113,8 +1046,6 @@ Update Agent
 
           - `type: "write"`
 
-            - `"write"`
-
         - `BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
@@ -1122,8 +1053,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "glob"`
-
-            - `"glob"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1139,8 +1068,6 @@ Update Agent
 
           - `type: "glob"`
 
-            - `"glob"`
-
         - `BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
@@ -1148,8 +1075,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "grep"`
-
-            - `"grep"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1165,8 +1090,6 @@ Update Agent
 
           - `type: "grep"`
 
-            - `"grep"`
-
         - `BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
@@ -1174,8 +1097,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "web_fetch"`
-
-            - `"web_fetch"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1191,13 +1112,13 @@ Update Agent
 
           - `type: "web_fetch"`
 
-            - `"web_fetch"`
-
           - `allowed_domains?: Array<string>`
 
           - `blocked_domains?: Array<string>`
 
           - `max_content_tokens?: number | null`
+
+            format: int32
 
         - `BetaManagedAgentsWebSearchToolConfig`
 
@@ -1206,8 +1127,6 @@ Update Agent
           - `enabled: boolean`
 
           - `name: "web_search"`
-
-            - `"web_search"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -1223,8 +1142,6 @@ Update Agent
 
           - `type: "web_search"`
 
-            - `"web_search"`
-
           - `allowed_domains?: Array<string>`
 
           - `blocked_domains?: Array<string>`
@@ -1237,11 +1154,11 @@ Update Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `"approximate"`
-
             - `city?: string | null`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country?: string | null`
 
@@ -1251,9 +1168,13 @@ Update Agent
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone?: string | null`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -1274,8 +1195,6 @@ Update Agent
             Tool calls require user confirmation before execution.
 
       - `type: "agent_toolset_20260401"`
-
-        - `"agent_toolset_20260401"`
 
     - `BetaManagedAgentsMCPToolset`
 
@@ -1319,8 +1238,6 @@ Update Agent
 
       - `type: "mcp_toolset"`
 
-        - `"mcp_toolset"`
-
     - `BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
@@ -1333,8 +1250,6 @@ Update Agent
 
         - `type: "object"`
 
-          - `"object"`
-
         - `properties?: Record<string, unknown> | null`
 
         - `required?: Array<string> | null`
@@ -1343,21 +1258,21 @@ Update Agent
 
       - `type: "custom"`
 
-        - `"custom"`
-
   - `type: "agent"`
-
-    - `"agent"`
 
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `version: number`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -1374,7 +1289,7 @@ const betaManagedAgentsAgent = await client.beta.agents.update(
 console.log(betaManagedAgentsAgent.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/deployment_runs"
 category: "api"
 generated: true
 ---
----
-title: Deployment Runs
-url: https://platform.claude.com/docs/en/api/csharp/beta/deployment_runs
----
-
 # Deployment Runs
 
 ## List Deployment Runs
 
-`DeploymentRunListPageResponse Beta.DeploymentRuns.List(DeploymentRunListParams?parameters, CancellationTokencancellationToken = default)`
+`DeploymentRunListPageResponse Beta.DeploymentRuns.List(parameters, cancellationToken = default)`
 
-**get** `/v1/deployment_runs`
+**GET** `/v1/deployment_runs`
 
 List Deployment Runs
 
@@ -27,29 +22,39 @@ List Deployment Runs
 
     Query param: Return runs created strictly after this time (exclusive).
 
+    format: date-time
+
   - `DateTimeOffset createdAtGte`
 
     Query param: Return runs created at or after this time (inclusive).
+
+    format: date-time
 
   - `DateTimeOffset createdAtLt`
 
     Query param: Return runs created strictly before this time (exclusive).
 
+    format: date-time
+
   - `DateTimeOffset createdAtLte`
 
     Query param: Return runs created at or before this time (inclusive).
+
+    format: date-time
 
   - `string deploymentID`
 
     Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment_id returns 200 with empty data.
 
-  - `Boolean hasError`
+  - `bool hasError`
 
     Query param: Filter: true for runs with non-null error, false for runs with non-null session_id. Omit for all.
 
-  - `Int limit`
+  - `int limit`
 
     Query param: Maximum results per page. Default 20, maximum 1000.
+
+    format: int32
 
   - `string page`
 
@@ -63,73 +68,73 @@ List Deployment Runs
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+    - `MessageBatches2024_09_24`
 
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+    - `PromptCaching2024_07_31`
 
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+    - `ComputerUse2024_10_22`
 
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+    - `ComputerUse2025_01_24`
 
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+    - `Pdfs2024_09_25`
 
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+    - `TokenCounting2024_11_01`
 
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+    - `TokenEfficientTools2025_02_19`
 
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
+    - `Output128k2025_02_19`
 
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
+    - `FilesApi2025_04_14`
 
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+    - `McpClient2025_04_04`
 
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+    - `McpClient2025_11_20`
 
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+    - `DevFullThinking2025_05_14`
 
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+    - `InterleavedThinking2025_05_14`
 
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+    - `CodeExecution2025_05_22`
 
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+    - `ExtendedCacheTtl2025_04_11`
 
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
+    - `Context1m2025_08_07`
 
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+    - `ContextManagement2025_06_27`
 
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+    - `ModelContextWindowExceeded2025_08_26`
 
-    - `"skills-2025-10-02"Skills2025_10_02`
+    - `Skills2025_10_02`
 
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+    - `FastMode2026_02_01`
 
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
+    - `Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+    - `UserProfiles2026_03_24`
 
-    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+    - `UserProfiles2026_08_18`
 
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+    - `AdvisorTool2026_03_01`
 
-    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+    - `ManagedAgents2026_04_01`
 
-    - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+    - `CacheDiagnosis2026_04_07`
 
-    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+    - `Dreaming2026_04_21`
 
-    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+    - `ThinkingTokenCount2026_05_13`
 
-    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+    - `ServerSideFallback2026_06_01`
 
-    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+    - `ServerSideFallback2026_07_01`
 
-    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+    - `FallbackCredit2026_06_01`
 
-    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
+    - `FallbackCredit2026_07_01`
 
-    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+    - `AgentMemory2026_07_22`
 
-    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+    - `MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -153,13 +158,15 @@ List Deployment Runs
 
       - `required Type Type`
 
-        - `"agent"Agent`
+      - `required int Version`
 
-      - `required Int Version`
+        format: int32
 
     - `required DateTimeOffset CreatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `required string DeploymentID`
 
@@ -179,8 +186,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"environment_archived_error"EnvironmentArchivedError`
-
       - `class BetaManagedAgentsAgentArchivedRunError:`
 
         The deployment's agent was archived.
@@ -190,8 +195,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"agent_archived_error"AgentArchivedError`
 
       - `class BetaManagedAgentsEnvironmentNotFoundRunError:`
 
@@ -203,8 +206,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"environment_not_found_error"EnvironmentNotFoundError`
-
       - `class BetaManagedAgentsVaultNotFoundRunError:`
 
         A vault referenced by the deployment no longer exists.
@@ -214,8 +215,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"vault_not_found_error"VaultNotFoundError`
 
       - `class BetaManagedAgentsVaultArchivedRunError:`
 
@@ -227,8 +226,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"vault_archived_error"VaultArchivedError`
-
       - `class BetaManagedAgentsFileNotFoundRunError:`
 
         A file resource referenced by the deployment no longer exists.
@@ -238,8 +235,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"file_not_found_error"FileNotFoundError`
 
       - `class BetaManagedAgentsMemoryStoreArchivedRunError:`
 
@@ -251,8 +246,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"memory_store_archived_error"MemoryStoreArchivedError`
-
       - `class BetaManagedAgentsSkillNotFoundRunError:`
 
         A skill referenced by the deployment's agent no longer exists.
@@ -262,8 +255,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"skill_not_found_error"SkillNotFoundError`
 
       - `class BetaManagedAgentsSessionResourceNotFoundRunError:`
 
@@ -275,8 +266,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"session_resource_not_found_error"SessionResourceNotFoundError`
-
       - `class BetaManagedAgentsWorkspaceArchivedRunError:`
 
         The deployment's workspace was archived.
@@ -286,8 +275,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"workspace_archived_error"WorkspaceArchivedError`
 
       - `class BetaManagedAgentsOrganizationDisabledRunError:`
 
@@ -299,8 +286,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"organization_disabled_error"OrganizationDisabledError`
-
       - `class BetaManagedAgentsSessionRateLimitedRunError:`
 
         Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
@@ -310,8 +295,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"session_rate_limited_error"SessionRateLimitedError`
 
       - `class BetaManagedAgentsSessionCreationRejectedRunError:`
 
@@ -323,8 +306,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"session_creation_rejected_error"SessionCreationRejectedError`
-
       - `class BetaManagedAgentsUnknownRunError:`
 
         An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
@@ -334,8 +315,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"unknown_error"UnknownError`
 
       - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError:`
 
@@ -347,8 +326,6 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"self_hosted_resources_unsupported_error"SelfHostedResourcesUnsupportedError`
-
       - `class BetaManagedAgentsMcpEgressBlockedRunError:`
 
         An MCP server host used by the deployment's agent is blocked by the environment's network policy.
@@ -358,8 +335,6 @@ List Deployment Runs
           Human-readable error description.
 
         - `required Type Type`
-
-          - `"mcp_egress_blocked_error"McpEgressBlockedError`
 
     - `required string? SessionID`
 
@@ -377,9 +352,9 @@ List Deployment Runs
 
           A timestamp in RFC 3339 format
 
-        - `required Type Type`
+          format: date-time
 
-          - `"schedule"Schedule`
+        - `required Type Type`
 
       - `class BetaManagedAgentsManualTriggerContext:`
 
@@ -387,11 +362,7 @@ List Deployment Runs
 
         - `required Type Type`
 
-          - `"manual"Manual`
-
     - `required Type Type`
-
-      - `"deployment_run"DeploymentRun`
 
   - `string? NextPage`
 
@@ -409,7 +380,7 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -441,9 +412,9 @@ await foreach (var item in page.Paginate())
 
 ## Get Deployment Run
 
-`BetaManagedAgentsDeploymentRun Beta.DeploymentRuns.Retrieve(DeploymentRunRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+`BetaManagedAgentsDeploymentRun Beta.DeploymentRuns.Retrieve(parameters, cancellationToken = default)`
 
-**get** `/v1/deployment_runs/{deployment_run_id}`
+**GET** `/v1/deployment_runs/{deployment_run_id}`
 
 Get Deployment Run
 
@@ -459,73 +430,73 @@ Get Deployment Run
 
     Optional header to specify the beta version(s) you want to use.
 
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+    - `MessageBatches2024_09_24`
 
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+    - `PromptCaching2024_07_31`
 
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+    - `ComputerUse2024_10_22`
 
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+    - `ComputerUse2025_01_24`
 
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+    - `Pdfs2024_09_25`
 
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+    - `TokenCounting2024_11_01`
 
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+    - `TokenEfficientTools2025_02_19`
 
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
+    - `Output128k2025_02_19`
 
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
+    - `FilesApi2025_04_14`
 
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+    - `McpClient2025_04_04`
 
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+    - `McpClient2025_11_20`
 
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+    - `DevFullThinking2025_05_14`
 
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+    - `InterleavedThinking2025_05_14`
 
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+    - `CodeExecution2025_05_22`
 
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+    - `ExtendedCacheTtl2025_04_11`
 
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
+    - `Context1m2025_08_07`
 
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+    - `ContextManagement2025_06_27`
 
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+    - `ModelContextWindowExceeded2025_08_26`
 
-    - `"skills-2025-10-02"Skills2025_10_02`
+    - `Skills2025_10_02`
 
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+    - `FastMode2026_02_01`
 
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
+    - `Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+    - `UserProfiles2026_03_24`
 
-    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+    - `UserProfiles2026_08_18`
 
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+    - `AdvisorTool2026_03_01`
 
-    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+    - `ManagedAgents2026_04_01`
 
-    - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+    - `CacheDiagnosis2026_04_07`
 
-    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+    - `Dreaming2026_04_21`
 
-    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+    - `ThinkingTokenCount2026_05_13`
 
-    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+    - `ServerSideFallback2026_06_01`
 
-    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+    - `ServerSideFallback2026_07_01`
 
-    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+    - `FallbackCredit2026_06_01`
 
-    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
+    - `FallbackCredit2026_07_01`
 
-    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+    - `AgentMemory2026_07_22`
 
-    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+    - `MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -545,13 +516,15 @@ Get Deployment Run
 
     - `required Type Type`
 
-      - `"agent"Agent`
+    - `required int Version`
 
-    - `required Int Version`
+      format: int32
 
   - `required DateTimeOffset CreatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `required string DeploymentID`
 
@@ -571,8 +544,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"environment_archived_error"EnvironmentArchivedError`
-
     - `class BetaManagedAgentsAgentArchivedRunError:`
 
       The deployment's agent was archived.
@@ -582,8 +553,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"agent_archived_error"AgentArchivedError`
 
     - `class BetaManagedAgentsEnvironmentNotFoundRunError:`
 
@@ -595,8 +564,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"environment_not_found_error"EnvironmentNotFoundError`
-
     - `class BetaManagedAgentsVaultNotFoundRunError:`
 
       A vault referenced by the deployment no longer exists.
@@ -606,8 +573,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"vault_not_found_error"VaultNotFoundError`
 
     - `class BetaManagedAgentsVaultArchivedRunError:`
 
@@ -619,8 +584,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"vault_archived_error"VaultArchivedError`
-
     - `class BetaManagedAgentsFileNotFoundRunError:`
 
       A file resource referenced by the deployment no longer exists.
@@ -630,8 +593,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"file_not_found_error"FileNotFoundError`
 
     - `class BetaManagedAgentsMemoryStoreArchivedRunError:`
 
@@ -643,8 +604,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"memory_store_archived_error"MemoryStoreArchivedError`
-
     - `class BetaManagedAgentsSkillNotFoundRunError:`
 
       A skill referenced by the deployment's agent no longer exists.
@@ -654,8 +613,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"skill_not_found_error"SkillNotFoundError`
 
     - `class BetaManagedAgentsSessionResourceNotFoundRunError:`
 
@@ -667,8 +624,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"session_resource_not_found_error"SessionResourceNotFoundError`
-
     - `class BetaManagedAgentsWorkspaceArchivedRunError:`
 
       The deployment's workspace was archived.
@@ -678,8 +633,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"workspace_archived_error"WorkspaceArchivedError`
 
     - `class BetaManagedAgentsOrganizationDisabledRunError:`
 
@@ -691,8 +644,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"organization_disabled_error"OrganizationDisabledError`
-
     - `class BetaManagedAgentsSessionRateLimitedRunError:`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
@@ -702,8 +653,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"session_rate_limited_error"SessionRateLimitedError`
 
     - `class BetaManagedAgentsSessionCreationRejectedRunError:`
 
@@ -715,8 +664,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"session_creation_rejected_error"SessionCreationRejectedError`
-
     - `class BetaManagedAgentsUnknownRunError:`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
@@ -726,8 +673,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"unknown_error"UnknownError`
 
     - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError:`
 
@@ -739,8 +684,6 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"self_hosted_resources_unsupported_error"SelfHostedResourcesUnsupportedError`
-
     - `class BetaManagedAgentsMcpEgressBlockedRunError:`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
@@ -750,8 +693,6 @@ Get Deployment Run
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"mcp_egress_blocked_error"McpEgressBlockedError`
 
   - `required string? SessionID`
 
@@ -769,9 +710,9 @@ Get Deployment Run
 
         A timestamp in RFC 3339 format
 
-      - `required Type Type`
+        format: date-time
 
-        - `"schedule"Schedule`
+      - `required Type Type`
 
     - `class BetaManagedAgentsManualTriggerContext:`
 
@@ -779,11 +720,7 @@ Get Deployment Run
 
       - `required Type Type`
 
-        - `"manual"Manual`
-
   - `required Type Type`
-
-    - `"deployment_run"DeploymentRun`
 
 ### Example
 
@@ -798,7 +735,7 @@ var betaManagedAgentsDeploymentRun = await client.Beta.DeploymentRuns.Retrieve(p
 Console.WriteLine(betaManagedAgentsDeploymentRun);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -823,7 +760,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Agent Archived Run Error
 
@@ -836,8 +773,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"agent_archived_error"AgentArchivedError`
 
 ### Beta Managed Agents Deployment Run
 
@@ -857,13 +792,15 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     - `required Type Type`
 
-      - `"agent"Agent`
+    - `required int Version`
 
-    - `required Int Version`
+      format: int32
 
   - `required DateTimeOffset CreatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `required string DeploymentID`
 
@@ -883,8 +820,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"environment_archived_error"EnvironmentArchivedError`
-
     - `class BetaManagedAgentsAgentArchivedRunError:`
 
       The deployment's agent was archived.
@@ -894,8 +829,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"agent_archived_error"AgentArchivedError`
 
     - `class BetaManagedAgentsEnvironmentNotFoundRunError:`
 
@@ -907,8 +840,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"environment_not_found_error"EnvironmentNotFoundError`
-
     - `class BetaManagedAgentsVaultNotFoundRunError:`
 
       A vault referenced by the deployment no longer exists.
@@ -918,8 +849,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"vault_not_found_error"VaultNotFoundError`
 
     - `class BetaManagedAgentsVaultArchivedRunError:`
 
@@ -931,8 +860,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"vault_archived_error"VaultArchivedError`
-
     - `class BetaManagedAgentsFileNotFoundRunError:`
 
       A file resource referenced by the deployment no longer exists.
@@ -942,8 +869,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"file_not_found_error"FileNotFoundError`
 
     - `class BetaManagedAgentsMemoryStoreArchivedRunError:`
 
@@ -955,8 +880,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"memory_store_archived_error"MemoryStoreArchivedError`
-
     - `class BetaManagedAgentsSkillNotFoundRunError:`
 
       A skill referenced by the deployment's agent no longer exists.
@@ -966,8 +889,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"skill_not_found_error"SkillNotFoundError`
 
     - `class BetaManagedAgentsSessionResourceNotFoundRunError:`
 
@@ -979,8 +900,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"session_resource_not_found_error"SessionResourceNotFoundError`
-
     - `class BetaManagedAgentsWorkspaceArchivedRunError:`
 
       The deployment's workspace was archived.
@@ -990,8 +909,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"workspace_archived_error"WorkspaceArchivedError`
 
     - `class BetaManagedAgentsOrganizationDisabledRunError:`
 
@@ -1003,8 +920,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"organization_disabled_error"OrganizationDisabledError`
-
     - `class BetaManagedAgentsSessionRateLimitedRunError:`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
@@ -1014,8 +929,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"session_rate_limited_error"SessionRateLimitedError`
 
     - `class BetaManagedAgentsSessionCreationRejectedRunError:`
 
@@ -1027,8 +940,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"session_creation_rejected_error"SessionCreationRejectedError`
-
     - `class BetaManagedAgentsUnknownRunError:`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
@@ -1038,8 +949,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"unknown_error"UnknownError`
 
     - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError:`
 
@@ -1051,8 +960,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"self_hosted_resources_unsupported_error"SelfHostedResourcesUnsupportedError`
-
     - `class BetaManagedAgentsMcpEgressBlockedRunError:`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
@@ -1062,8 +969,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
         Human-readable error description.
 
       - `required Type Type`
-
-        - `"mcp_egress_blocked_error"McpEgressBlockedError`
 
   - `required string? SessionID`
 
@@ -1081,9 +986,9 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
         A timestamp in RFC 3339 format
 
-      - `required Type Type`
+        format: date-time
 
-        - `"schedule"Schedule`
+      - `required Type Type`
 
     - `class BetaManagedAgentsManualTriggerContext:`
 
@@ -1091,11 +996,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `required Type Type`
 
-        - `"manual"Manual`
-
   - `required Type Type`
-
-    - `"deployment_run"DeploymentRun`
 
 ### Beta Managed Agents Environment Archived Run Error
 
@@ -1109,8 +1010,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"environment_archived_error"EnvironmentArchivedError`
-
 ### Beta Managed Agents Environment Not Found Run Error
 
 - `class BetaManagedAgentsEnvironmentNotFoundRunError:`
@@ -1122,8 +1021,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"environment_not_found_error"EnvironmentNotFoundError`
 
 ### Beta Managed Agents File Not Found Run Error
 
@@ -1137,8 +1034,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"file_not_found_error"FileNotFoundError`
-
 ### Beta Managed Agents Manual Trigger Context
 
 - `class BetaManagedAgentsManualTriggerContext:`
@@ -1146,8 +1041,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
   The run was started manually by creating a session directly against the deployment.
 
   - `required Type Type`
-
-    - `"manual"Manual`
 
 ### Beta Managed Agents MCP Egress Blocked Run Error
 
@@ -1161,8 +1054,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"mcp_egress_blocked_error"McpEgressBlockedError`
-
 ### Beta Managed Agents Memory Store Archived Run Error
 
 - `class BetaManagedAgentsMemoryStoreArchivedRunError:`
@@ -1174,8 +1065,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"memory_store_archived_error"MemoryStoreArchivedError`
 
 ### Beta Managed Agents Organization Disabled Run Error
 
@@ -1189,8 +1078,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"organization_disabled_error"OrganizationDisabledError`
-
 ### Beta Managed Agents Schedule Trigger Context
 
 - `class BetaManagedAgentsScheduleTriggerContext:`
@@ -1201,9 +1088,9 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     A timestamp in RFC 3339 format
 
-  - `required Type Type`
+    format: date-time
 
-    - `"schedule"Schedule`
+  - `required Type Type`
 
 ### Beta Managed Agents Self Hosted Resources Unsupported Run Error
 
@@ -1217,8 +1104,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"self_hosted_resources_unsupported_error"SelfHostedResourcesUnsupportedError`
-
 ### Beta Managed Agents Session Creation Rejected Run Error
 
 - `class BetaManagedAgentsSessionCreationRejectedRunError:`
@@ -1230,8 +1115,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"session_creation_rejected_error"SessionCreationRejectedError`
 
 ### Beta Managed Agents Session Rate Limited Run Error
 
@@ -1245,8 +1128,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"session_rate_limited_error"SessionRateLimitedError`
-
 ### Beta Managed Agents Session Resource Not Found Run Error
 
 - `class BetaManagedAgentsSessionResourceNotFoundRunError:`
@@ -1258,8 +1139,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"session_resource_not_found_error"SessionResourceNotFoundError`
 
 ### Beta Managed Agents Skill Not Found Run Error
 
@@ -1273,11 +1152,9 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"skill_not_found_error"SkillNotFoundError`
-
 ### Beta Managed Agents Trigger Context
 
-- `class BetaManagedAgentsTriggerContext: A class that can be one of several variants.union`
+- `class BetaManagedAgentsTriggerContext: union`
 
   Describes what triggered a deployment run, with trigger-specific metadata.
 
@@ -1289,9 +1166,9 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       A timestamp in RFC 3339 format
 
-    - `required Type Type`
+      format: date-time
 
-      - `"schedule"Schedule`
+    - `required Type Type`
 
   - `class BetaManagedAgentsManualTriggerContext:`
 
@@ -1299,17 +1176,15 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     - `required Type Type`
 
-      - `"manual"Manual`
-
 ### Beta Managed Agents Trigger Type
 
 - `enum BetaManagedAgentsTriggerType:`
 
   What triggered a deployment run.
 
-  - `"schedule"Schedule`
+  - `Schedule`
 
-  - `"manual"Manual`
+  - `Manual`
 
 ### Beta Managed Agents Unknown Run Error
 
@@ -1323,8 +1198,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"unknown_error"UnknownError`
-
 ### Beta Managed Agents Vault Archived Run Error
 
 - `class BetaManagedAgentsVaultArchivedRunError:`
@@ -1336,8 +1209,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"vault_archived_error"VaultArchivedError`
 
 ### Beta Managed Agents Vault Not Found Run Error
 
@@ -1351,8 +1222,6 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `required Type Type`
 
-    - `"vault_not_found_error"VaultNotFoundError`
-
 ### Beta Managed Agents Workspace Archived Run Error
 
 - `class BetaManagedAgentsWorkspaceArchivedRunError:`
@@ -1364,5 +1233,3 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
     Human-readable error description.
 
   - `required Type Type`
-
-    - `"workspace_archived_error"WorkspaceArchivedError`

@@ -4,30 +4,27 @@ source: "https://platform.claude.com/docs/en/api/go/beta/agents/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Agent
-url: https://platform.claude.com/docs/en/api/go/beta/agents/retrieve
----
-
-## Get Agent
+# Get Agent
 
 `client.Beta.Agents.Get(ctx, agentID, params) (*BetaManagedAgentsAgent, error)`
 
-**get** `/v1/agents/{agent_id}`
+**GET** `/v1/agents/{agent_id}`
 
 Get Agent
 
-### Parameters
+## Parameters
 
 - `agentID string`
 
 - `params BetaAgentGetParams`
 
-  - `Version param.Field[int64]`
+  - `Version param.Field[int64] Optional`
 
     Query param: Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    format: int32
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -103,7 +100,7 @@ Get Agent
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
 
@@ -115,9 +112,13 @@ Get Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -126,8 +127,6 @@ Get Agent
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -203,7 +202,7 @@ Get Agent
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -213,15 +212,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -229,15 +224,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -245,13 +236,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -275,9 +264,9 @@ Get Agent
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -289,11 +278,7 @@ Get Agent
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -307,8 +292,6 @@ Get Agent
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -318,8 +301,6 @@ Get Agent
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -339,8 +320,6 @@ Get Agent
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -351,19 +330,13 @@ Get Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -372,8 +345,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -389,8 +360,6 @@ Get Agent
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -398,8 +367,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -415,8 +382,6 @@ Get Agent
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -424,8 +389,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -441,8 +404,6 @@ Get Agent
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -450,8 +411,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -467,8 +426,6 @@ Get Agent
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -476,8 +433,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -493,8 +448,6 @@ Get Agent
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -502,8 +455,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -519,13 +470,13 @@ Get Agent
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -534,8 +485,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -551,13 +500,11 @@ Get Agent
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -565,23 +512,27 @@ Get Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -602,8 +553,6 @@ Get Agent
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -647,8 +596,6 @@ Get Agent
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -661,31 +608,29 @@ Get Agent
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+## Example
 
 ```go
 package main
@@ -714,7 +659,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

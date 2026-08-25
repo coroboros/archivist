@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/agents/versions"
 category: "api"
 generated: true
 ---
----
-title: Versions
-url: https://platform.claude.com/docs/en/api/ruby/beta/agents/versions
----
-
 # Versions
 
 ## List Agent Versions
 
 `beta.agents.versions.list(agent_id, **kwargs) -> PageCursor<BetaManagedAgentsAgent>`
 
-**get** `/v1/agents/{agent_id}/versions`
+**GET** `/v1/agents/{agent_id}/versions`
 
 List Agent Versions
 
@@ -26,6 +21,8 @@ List Agent Versions
 - `limit: Integer`
 
   Maximum results per page. Default 20, maximum 100.
+
+  format: int32
 
 - `page: String`
 
@@ -119,9 +116,13 @@ List Agent Versions
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: String`
 
@@ -130,8 +131,6 @@ List Agent Versions
     - `name: String`
 
     - `type: :url`
-
-      - `:url`
 
     - `url: String`
 
@@ -217,15 +216,11 @@ List Agent Versions
 
         - `type: :low`
 
-          - `:low`
-
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: :medium`
-
-          - `:medium`
 
       - `class BetaManagedAgentsEffortHigh`
 
@@ -233,23 +228,17 @@ List Agent Versions
 
         - `type: :high`
 
-          - `:high`
-
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: :xhigh`
 
-          - `:xhigh`
-
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: :max`
-
-          - `:max`
 
     - `inference_geo: String`
 
@@ -279,9 +268,9 @@ List Agent Versions
 
         - `type: :agent`
 
-          - `:agent`
-
         - `version: Integer`
+
+          format: int32
 
       - `class BetaManagedAgentsAdvisor`
 
@@ -293,11 +282,7 @@ List Agent Versions
 
         - `type: :advisor`
 
-          - `:advisor`
-
     - `type: :coordinator`
-
-      - `:coordinator`
 
   - `name: String`
 
@@ -311,8 +296,6 @@ List Agent Versions
 
       - `type: :anthropic`
 
-        - `:anthropic`
-
       - `version: String`
 
     - `class BetaManagedAgentsCustomSkill`
@@ -322,8 +305,6 @@ List Agent Versions
       - `skill_id: String`
 
       - `type: :custom`
-
-        - `:custom`
 
       - `version: String`
 
@@ -343,8 +324,6 @@ List Agent Versions
 
           - `name: :bash`
 
-            - `:bash`
-
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
             Permission policy for tool execution.
@@ -355,19 +334,13 @@ List Agent Versions
 
               - `type: :always_allow`
 
-                - `:always_allow`
-
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `type: :always_ask`
 
-                - `:always_ask`
-
           - `type: :bash`
-
-            - `:bash`
 
         - `class BetaManagedAgentsEditToolConfig`
 
@@ -376,8 +349,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :edit`
-
-            - `:edit`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -393,8 +364,6 @@ List Agent Versions
 
           - `type: :edit`
 
-            - `:edit`
-
         - `class BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
@@ -402,8 +371,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :read`
-
-            - `:read`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -419,8 +386,6 @@ List Agent Versions
 
           - `type: :read`
 
-            - `:read`
-
         - `class BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
@@ -428,8 +393,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :write`
-
-            - `:write`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -445,8 +408,6 @@ List Agent Versions
 
           - `type: :write`
 
-            - `:write`
-
         - `class BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
@@ -454,8 +415,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :glob`
-
-            - `:glob`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -471,8 +430,6 @@ List Agent Versions
 
           - `type: :glob`
 
-            - `:glob`
-
         - `class BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
@@ -480,8 +437,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :grep`
-
-            - `:grep`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -497,8 +452,6 @@ List Agent Versions
 
           - `type: :grep`
 
-            - `:grep`
-
         - `class BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
@@ -506,8 +459,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :web_fetch`
-
-            - `:web_fetch`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -523,13 +474,13 @@ List Agent Versions
 
           - `type: :web_fetch`
 
-            - `:web_fetch`
-
           - `allowed_domains: Array[String]`
 
           - `blocked_domains: Array[String]`
 
           - `max_content_tokens: Integer`
+
+            format: int32
 
         - `class BetaManagedAgentsWebSearchToolConfig`
 
@@ -538,8 +489,6 @@ List Agent Versions
           - `enabled: bool`
 
           - `name: :web_search`
-
-            - `:web_search`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -555,8 +504,6 @@ List Agent Versions
 
           - `type: :web_search`
 
-            - `:web_search`
-
           - `allowed_domains: Array[String]`
 
           - `blocked_domains: Array[String]`
@@ -569,11 +516,11 @@ List Agent Versions
 
               Location precision. Only "approximate" is supported.
 
-              - `:approximate`
-
             - `city: String`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country: String`
 
@@ -583,9 +530,13 @@ List Agent Versions
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone: String`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -606,8 +557,6 @@ List Agent Versions
             Tool calls require user confirmation before execution.
 
       - `type: :agent_toolset_20260401`
-
-        - `:agent_toolset_20260401`
 
     - `class BetaManagedAgentsMCPToolset`
 
@@ -651,8 +600,6 @@ List Agent Versions
 
       - `type: :mcp_toolset`
 
-        - `:mcp_toolset`
-
     - `class BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
@@ -665,8 +612,6 @@ List Agent Versions
 
         - `type: :object`
 
-          - `:object`
-
         - `properties: Hash[Symbol, untyped]`
 
         - `required: Array[String]`
@@ -675,19 +620,19 @@ List Agent Versions
 
       - `type: :custom`
 
-        - `:custom`
-
   - `type: :agent`
-
-    - `:agent`
 
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `version: Integer`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -701,7 +646,7 @@ page = anthropic.beta.agents.versions.list("agent_011CZkYpogX7uDKUyvBTophP")
 puts(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {

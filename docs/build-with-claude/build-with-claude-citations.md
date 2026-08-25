@@ -16,7 +16,7 @@ description: Ground Claude's responses in your source documents. Citations retur
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](../about-claude/about-claude-models-overview.md) support citations.
+All [active models](../general/general-models-overview.md) support citations.
 
 <Tip>
   Share your feedback and suggestions about the citations feature using the [citations feedback form](https://forms.gle/9n9hSrKnKe3rpowH9).

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/d
 category: "api"
 generated: true
 ---
----
-title: Delete a memory store
-url: https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/delete
----
+# Delete a memory store
 
-## Delete a memory store
+`client.beta.memoryStores.delete(memoryStoreID, params?, options?): BetaManagedAgentsDeletedMemoryStore`
 
-`client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedMemoryStore`
-
-**delete** `/v1/memory_stores/{memory_store_id}`
+**DELETE** `/v1/memory_stores/{memory_store_id}`
 
 Delete a memory store
 
-### Parameters
+## Parameters
 
 - `memoryStoreID: string`
 
@@ -99,7 +94,7 @@ Delete a memory store
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsDeletedMemoryStore`
 
@@ -111,9 +106,7 @@ Delete a memory store
 
   - `type: "memory_store_deleted"`
 
-    - `"memory_store_deleted"`
-
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -129,7 +122,7 @@ const betaManagedAgentsDeletedMemoryStore = await client.beta.memoryStores.delet
 console.log(betaManagedAgentsDeletedMemoryStore.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

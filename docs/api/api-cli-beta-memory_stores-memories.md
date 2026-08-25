@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
----
-title: Memories
-url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
----
-
 # Memories
 
 ## Create a memory
 
 `$ ant beta:memory-stores:memories create`
 
-**post** `/v1/memory_stores/{memory_store_id}/memories`
+**POST** `/v1/memory_stores/{memory_store_id}/memories`
 
 Create a memory
 
@@ -33,6 +28,8 @@ Create a memory
 
   Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
 
+  minLength: 2, maxLength: 1024
+
 - `--view: optional "basic" or "full"`
 
   Query param: Query parameter for view
@@ -43,7 +40,7 @@ Create a memory
 
 ### Returns
 
-- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+- `beta_managed_agents_memory: object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -59,9 +56,13 @@ Create a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -77,11 +78,11 @@ Create a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string`
 
@@ -89,7 +90,7 @@ Create a memory
 
 ### Example
 
-```cli
+```bash
 ant beta:memory-stores:memories create \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
@@ -97,7 +98,7 @@ ant beta:memory-stores:memories create \
   --path xx
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -118,7 +119,7 @@ ant beta:memory-stores:memories create \
 
 `$ ant beta:memory-stores:memories list`
 
-**get** `/v1/memory_stores/{memory_store_id}/memories`
+**GET** `/v1/memory_stores/{memory_store_id}/memories`
 
 List memories
 
@@ -132,9 +133,13 @@ List memories
 
   Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
+  format: int32
+
 - `--limit: optional number`
 
   Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+
+  format: int32
 
 - `--page: optional string`
 
@@ -154,7 +159,7 @@ List memories
 
 ### Returns
 
-- `BetaManagedAgentsListMemoriesResult: object { data, next_page }`
+- `BetaManagedAgentsListMemoriesResult: object`
 
   Response payload for [List memories](./api-beta-memory_stores-memories-list.md).
 
@@ -162,7 +167,7 @@ List memories
 
     One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items are returned in a stable, server-defined order.
 
-    - `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+    - `beta_managed_agents_memory: object`
 
       A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -178,9 +183,13 @@ List memories
 
         Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+        format: int32
+
       - `created_at: string`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `memory_store_id: string`
 
@@ -196,17 +205,17 @@ List memories
 
       - `type: "memory"`
 
-        - `"memory"`
-
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `content: optional string`
 
         The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-    - `beta_managed_agents_memory_prefix: object { path, type }`
+    - `beta_managed_agents_memory_prefix: object`
 
       A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -216,21 +225,19 @@ List memories
 
       - `type: "memory_prefix"`
 
-        - `"memory_prefix"`
-
   - `next_page: optional string`
 
     Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
 
 ### Example
 
-```cli
+```bash
 ant beta:memory-stores:memories list \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -256,7 +263,7 @@ ant beta:memory-stores:memories list \
 
 `$ ant beta:memory-stores:memories retrieve`
 
-**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Retrieve a memory
 
@@ -280,7 +287,7 @@ Retrieve a memory
 
 ### Returns
 
-- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+- `beta_managed_agents_memory: object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -296,9 +303,13 @@ Retrieve a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -314,11 +325,11 @@ Retrieve a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string`
 
@@ -326,14 +337,14 @@ Retrieve a memory
 
 ### Example
 
-```cli
+```bash
 ant beta:memory-stores:memories retrieve \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -354,7 +365,7 @@ ant beta:memory-stores:memories retrieve \
 
 `$ ant beta:memory-stores:memories update`
 
-**post** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Update a memory
 
@@ -380,7 +391,9 @@ Update a memory
 
   Body param: New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
-- `--precondition: optional object { type, content_sha256 }`
+  minLength: 2, maxLength: 1024
+
+- `--precondition: optional object`
 
   Body param: Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -390,7 +403,7 @@ Update a memory
 
 ### Returns
 
-- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+- `beta_managed_agents_memory: object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -406,9 +419,13 @@ Update a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -424,11 +441,11 @@ Update a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string`
 
@@ -436,14 +453,14 @@ Update a memory
 
 ### Example
 
-```cli
+```bash
 ant beta:memory-stores:memories update \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -464,7 +481,7 @@ ant beta:memory-stores:memories update \
 
 `$ ant beta:memory-stores:memories delete`
 
-**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Delete a memory
 
@@ -488,7 +505,7 @@ Delete a memory
 
 ### Returns
 
-- `beta_managed_agents_deleted_memory: object { id, type }`
+- `beta_managed_agents_deleted_memory: object`
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
 
@@ -498,18 +515,16 @@ Delete a memory
 
   - `type: "memory_deleted"`
 
-    - `"memory_deleted"`
-
 ### Example
 
-```cli
+```bash
 ant beta:memory-stores:memories delete \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -518,27 +533,23 @@ ant beta:memory-stores:memories delete \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Conflict Error
 
-- `beta_managed_agents_conflict_error: object { type, message }`
+- `beta_managed_agents_conflict_error: object`
 
   - `type: "conflict_error"`
-
-    - `"conflict_error"`
 
   - `message: optional string`
 
 ### Beta Managed Agents Content Sha256 Precondition
 
-- `beta_managed_agents_content_sha256_precondition: object { type, content_sha256 }`
+- `beta_managed_agents_content_sha256_precondition: object`
 
   Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
   - `type: "content_sha256"`
-
-    - `"content_sha256"`
 
   - `content_sha256: optional string`
 
@@ -546,7 +557,7 @@ ant beta:memory-stores:memories delete \
 
 ### Beta Managed Agents Deleted Memory
 
-- `beta_managed_agents_deleted_memory: object { id, type }`
+- `beta_managed_agents_deleted_memory: object`
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
 
@@ -556,79 +567,73 @@ ant beta:memory-stores:memories delete \
 
   - `type: "memory_deleted"`
 
-    - `"memory_deleted"`
-
 ### Beta Managed Agents Error
 
 - `beta_managed_agents_error: BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 9 more`
 
-  - `beta_invalid_request_error: object { message, type }`
+  - `beta_invalid_request_error: object`
 
     - `message: string`
 
     - `type: "invalid_request_error"`
 
-  - `beta_authentication_error: object { message, type }`
+  - `beta_authentication_error: object`
 
     - `message: string`
 
     - `type: "authentication_error"`
 
-  - `beta_billing_error: object { message, type }`
+  - `beta_billing_error: object`
 
     - `message: string`
 
     - `type: "billing_error"`
 
-  - `beta_permission_error: object { message, type }`
+  - `beta_permission_error: object`
 
     - `message: string`
 
     - `type: "permission_error"`
 
-  - `beta_not_found_error: object { message, type }`
+  - `beta_not_found_error: object`
 
     - `message: string`
 
     - `type: "not_found_error"`
 
-  - `beta_rate_limit_error: object { message, type }`
+  - `beta_rate_limit_error: object`
 
     - `message: string`
 
     - `type: "rate_limit_error"`
 
-  - `beta_gateway_timeout_error: object { message, type }`
+  - `beta_gateway_timeout_error: object`
 
     - `message: string`
 
     - `type: "timeout_error"`
 
-  - `beta_api_error: object { message, type }`
+  - `beta_api_error: object`
 
     - `message: string`
 
     - `type: "api_error"`
 
-  - `beta_overloaded_error: object { message, type }`
+  - `beta_overloaded_error: object`
 
     - `message: string`
 
     - `type: "overloaded_error"`
 
-  - `beta_managed_agents_memory_precondition_failed_error: object { type, message }`
+  - `beta_managed_agents_memory_precondition_failed_error: object`
 
     - `type: "memory_precondition_failed_error"`
 
-      - `"memory_precondition_failed_error"`
-
     - `message: optional string`
 
-  - `beta_managed_agents_memory_path_conflict_error: object { type, conflicting_memory_id, conflicting_path, message }`
+  - `beta_managed_agents_memory_path_conflict_error: object`
 
     - `type: "memory_path_conflict_error"`
-
-      - `"memory_path_conflict_error"`
 
     - `conflicting_memory_id: optional string`
 
@@ -636,17 +641,15 @@ ant beta:memory-stores:memories delete \
 
     - `message: optional string`
 
-  - `beta_managed_agents_conflict_error: object { type, message }`
+  - `beta_managed_agents_conflict_error: object`
 
     - `type: "conflict_error"`
-
-      - `"conflict_error"`
 
     - `message: optional string`
 
 ### Beta Managed Agents Memory
 
-- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+- `beta_managed_agents_memory: object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -662,9 +665,13 @@ ant beta:memory-stores:memories delete \
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -680,11 +687,11 @@ ant beta:memory-stores:memories delete \
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string`
 
@@ -696,7 +703,7 @@ ant beta:memory-stores:memories delete \
 
   One item in a [List memories](./api-beta-memory_stores-memories-list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-  - `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+  - `beta_managed_agents_memory: object`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -712,9 +719,13 @@ ant beta:memory-stores:memories delete \
 
       Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+      format: int32
+
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `memory_store_id: string`
 
@@ -730,17 +741,17 @@ ant beta:memory-stores:memories delete \
 
     - `type: "memory"`
 
-      - `"memory"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `content: optional string`
 
       The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-  - `beta_managed_agents_memory_prefix: object { path, type }`
+  - `beta_managed_agents_memory_prefix: object`
 
     A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -750,15 +761,11 @@ ant beta:memory-stores:memories delete \
 
     - `type: "memory_prefix"`
 
-      - `"memory_prefix"`
-
 ### Beta Managed Agents Memory Path Conflict Error
 
-- `beta_managed_agents_memory_path_conflict_error: object { type, conflicting_memory_id, conflicting_path, message }`
+- `beta_managed_agents_memory_path_conflict_error: object`
 
   - `type: "memory_path_conflict_error"`
-
-    - `"memory_path_conflict_error"`
 
   - `conflicting_memory_id: optional string`
 
@@ -768,17 +775,15 @@ ant beta:memory-stores:memories delete \
 
 ### Beta Managed Agents Memory Precondition Failed Error
 
-- `beta_managed_agents_memory_precondition_failed_error: object { type, message }`
+- `beta_managed_agents_memory_precondition_failed_error: object`
 
   - `type: "memory_precondition_failed_error"`
-
-    - `"memory_precondition_failed_error"`
 
   - `message: optional string`
 
 ### Beta Managed Agents Memory Prefix
 
-- `beta_managed_agents_memory_prefix: object { path, type }`
+- `beta_managed_agents_memory_prefix: object`
 
   A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -787,8 +792,6 @@ ant beta:memory-stores:memories delete \
     The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
 
   - `type: "memory_prefix"`
-
-    - `"memory_prefix"`
 
 ### Beta Managed Agents Memory View
 
@@ -802,13 +805,11 @@ ant beta:memory-stores:memories delete \
 
 ### Beta Managed Agents Precondition
 
-- `beta_managed_agents_precondition: object { type, content_sha256 }`
+- `beta_managed_agents_precondition: object`
 
   Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
   - `type: "content_sha256"`
-
-    - `"content_sha256"`
 
   - `content_sha256: optional string`
 

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/tunnels/certifi
 category: "api"
 generated: true
 ---
----
-title: Certificates
-url: https://platform.claude.com/docs/en/api/typescript/beta/tunnels/certificates
----
-
 # Certificates
 
 ## Create Tunnel Certificate
 
-`client.beta.tunnels.certificates.create(stringtunnelID, CertificateCreateParamsparams, RequestOptionsoptions?): BetaTunnelCertificate`
+`client.beta.tunnels.certificates.create(tunnelID, params, options?): BetaTunnelCertificate`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates`
+**POST** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -30,6 +25,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
   - `ca_certificate_pem: string`
 
     Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
+
+    maxLength: 8192
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -121,13 +118,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -138,8 +141,6 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     ID of the tunnel the certificate is registered against.
 
   - `type: "tunnel_certificate"`
-
-    - `"tunnel_certificate"`
 
 ### Example
 
@@ -157,7 +158,7 @@ const betaTunnelCertificate = await client.beta.tunnels.certificates.create("tun
 console.log(betaTunnelCertificate.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -173,9 +174,9 @@ console.log(betaTunnelCertificate.id);
 
 ## Get Tunnel Certificate
 
-`client.beta.tunnels.certificates.retrieve(stringcertificateID, CertificateRetrieveParamsparams, RequestOptionsoptions?): BetaTunnelCertificate`
+`client.beta.tunnels.certificates.retrieve(certificateID, params, options?): BetaTunnelCertificate`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+**GET** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -281,13 +282,19 @@ Fetches a tunnel certificate by ID.
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -298,8 +305,6 @@ Fetches a tunnel certificate by ID.
     ID of the tunnel the certificate is registered against.
 
   - `type: "tunnel_certificate"`
-
-    - `"tunnel_certificate"`
 
 ### Example
 
@@ -318,7 +323,7 @@ const betaTunnelCertificate = await client.beta.tunnels.certificates.retrieve(
 console.log(betaTunnelCertificate.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -334,9 +339,9 @@ console.log(betaTunnelCertificate.id);
 
 ## List Tunnel Certificates
 
-`client.beta.tunnels.certificates.list(stringtunnelID, CertificateListParamsparams?, RequestOptionsoptions?): PageCursor<BetaTunnelCertificate>`
+`client.beta.tunnels.certificates.list(tunnelID, params?, options?): PageCursor<BetaTunnelCertificate>`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates`
+**GET** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -355,6 +360,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
   - `limit?: number`
 
     Query param: Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
+
+    format: int32
 
   - `page?: string`
 
@@ -450,13 +457,19 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -467,8 +480,6 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     ID of the tunnel the certificate is registered against.
 
   - `type: "tunnel_certificate"`
-
-    - `"tunnel_certificate"`
 
 ### Example
 
@@ -485,7 +496,7 @@ for await (const betaTunnelCertificate of client.beta.tunnels.certificates.list(
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -506,9 +517,9 @@ for await (const betaTunnelCertificate of client.beta.tunnels.certificates.list(
 
 ## Archive Tunnel Certificate
 
-`client.beta.tunnels.certificates.archive(stringcertificateID, CertificateArchiveParamsparams, RequestOptionsoptions?): BetaTunnelCertificate`
+`client.beta.tunnels.certificates.archive(certificateID, params, options?): BetaTunnelCertificate`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+**POST** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -614,13 +625,19 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -631,8 +648,6 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     ID of the tunnel the certificate is registered against.
 
   - `type: "tunnel_certificate"`
-
-    - `"tunnel_certificate"`
 
 ### Example
 
@@ -651,7 +666,7 @@ const betaTunnelCertificate = await client.beta.tunnels.certificates.archive(
 console.log(betaTunnelCertificate.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -665,7 +680,7 @@ console.log(betaTunnelCertificate.id);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Tunnel Certificate
 
@@ -681,13 +696,19 @@ console.log(betaTunnelCertificate.id);
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -698,5 +719,3 @@ console.log(betaTunnelCertificate.id);
     ID of the tunnel the certificate is registered against.
 
   - `type: "tunnel_certificate"`
-
-    - `"tunnel_certificate"`

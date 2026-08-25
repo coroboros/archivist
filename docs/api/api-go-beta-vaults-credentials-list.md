@@ -4,38 +4,35 @@ source: "https://platform.claude.com/docs/en/api/go/beta/vaults/credentials/list
 category: "api"
 generated: true
 ---
----
-title: List Credentials
-url: https://platform.claude.com/docs/en/api/go/beta/vaults/credentials/list
----
-
-## List Credentials
+# List Credentials
 
 `client.Beta.Vaults.Credentials.List(ctx, vaultID, params) (*PageCursor[BetaManagedAgentsCredential], error)`
 
-**get** `/v1/vaults/{vault_id}/credentials`
+**GET** `/v1/vaults/{vault_id}/credentials`
 
 List Credentials
 
-### Parameters
+## Parameters
 
 - `vaultID string`
 
 - `params BetaVaultCredentialListParams`
 
-  - `IncludeArchived param.Field[bool]`
+  - `IncludeArchived param.Field[bool] Optional`
 
     Query param: Whether to include archived credentials in the results.
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-  - `Page param.Field[string]`
+    format: int32
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque pagination token from a previous `list_credentials` response.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -111,7 +108,7 @@ List Credentials
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsCredential struct{…}`
 
@@ -124,6 +121,8 @@ List Credentials
   - `ArchivedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Auth BetaManagedAgentsCredentialAuthUnion`
 
@@ -139,13 +138,13 @@ List Credentials
 
       - `Type BetaManagedAgentsMCPOAuthAuthResponseType`
 
-        - `const BetaManagedAgentsMCPOAuthAuthResponseTypeMCPOAuth BetaManagedAgentsMCPOAuthAuthResponseType = "mcp_oauth"`
-
-      - `ExpiresAt Time`
+      - `ExpiresAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-      - `Refresh BetaManagedAgentsMCPOAuthRefreshResponse`
+        format: date-time
+
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshResponse Optional`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -167,15 +166,11 @@ List Credentials
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-              - `const BetaManagedAgentsTokenEndpointAuthNoneResponseTypeNone BetaManagedAgentsTokenEndpointAuthNoneResponseType = "none"`
-
           - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
-
-              - `const BetaManagedAgentsTokenEndpointAuthBasicResponseTypeClientSecretBasic BetaManagedAgentsTokenEndpointAuthBasicResponseType = "client_secret_basic"`
 
           - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
 
@@ -183,13 +178,11 @@ List Credentials
 
             - `Type BetaManagedAgentsTokenEndpointAuthPostResponseType`
 
-              - `const BetaManagedAgentsTokenEndpointAuthPostResponseTypeClientSecretPost BetaManagedAgentsTokenEndpointAuthPostResponseType = "client_secret_post"`
-
-        - `Resource string`
+        - `Resource string Optional`
 
           OAuth resource indicator.
 
-        - `Scope string`
+        - `Scope string Optional`
 
           OAuth scope for the refresh request.
 
@@ -202,8 +195,6 @@ List Credentials
         URL of the MCP server this credential authenticates against.
 
       - `Type BetaManagedAgentsStaticBearerAuthResponseType`
-
-        - `const BetaManagedAgentsStaticBearerAuthResponseTypeStaticBearer BetaManagedAgentsStaticBearerAuthResponseType = "static_bearer"`
 
     - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
 
@@ -231,8 +222,6 @@ List Credentials
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-            - `const BetaManagedAgentsUnrestrictedCredentialNetworkingResponseTypeUnrestricted BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType = "unrestricted"`
-
         - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
 
           The secret is substituted only on requests to the listed hosts.
@@ -243,19 +232,17 @@ List Credentials
 
           - `Type BetaManagedAgentsLimitedCredentialNetworkingResponseType`
 
-            - `const BetaManagedAgentsLimitedCredentialNetworkingResponseTypeLimited BetaManagedAgentsLimitedCredentialNetworkingResponseType = "limited"`
-
       - `SecretName string`
 
         Name of the environment variable.
 
       - `Type BetaManagedAgentsEnvironmentVariableAuthResponseType`
 
-        - `const BetaManagedAgentsEnvironmentVariableAuthResponseTypeEnvironmentVariable BetaManagedAgentsEnvironmentVariableAuthResponseType = "environment_variable"`
-
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Metadata map[string, string]`
 
@@ -263,21 +250,21 @@ List Credentials
 
   - `Type BetaManagedAgentsCredentialType`
 
-    - `const BetaManagedAgentsCredentialTypeVaultCredential BetaManagedAgentsCredentialType = "vault_credential"`
-
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `VaultID string`
 
     Identifier of the vault this credential belongs to.
 
-  - `DisplayName string`
+  - `DisplayName string Optional`
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```go
 package main
@@ -306,7 +293,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

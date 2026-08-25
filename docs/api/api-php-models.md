@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/models"
 category: "api"
 generated: true
 ---
----
-title: Models
-url: https://platform.claude.com/docs/en/api/php/models
----
-
 # Models
 
 ## List Models
 
 `$client->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<ModelInfo>`
 
-**get** `/v1/models`
+**GET** `/v1/models`
 
 List available models.
 
@@ -36,6 +31,8 @@ The Models API response can be used to determine which models are available for 
   Number of items to return per page.
 
   Defaults to `20`. Ranges from `1` to `1000`.
+
+  default: 20
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -94,7 +91,7 @@ $page = $client->models->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -179,7 +176,7 @@ var_dump($page);
 
 `$client->models->retrieve(string modelID, ?list<AnthropicBeta> betas): ModelInfo`
 
-**get** `/v1/models/{model_id}`
+**GET** `/v1/models/{model_id}`
 
 Get a specific model.
 
@@ -245,7 +242,7 @@ $modelInfo = $client->models->retrieve(
 var_dump($modelInfo);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -319,7 +316,7 @@ var_dump($modelInfo);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Capability Support
 

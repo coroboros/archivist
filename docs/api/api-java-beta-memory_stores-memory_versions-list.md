@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/memory_
 category: "api"
 generated: true
 ---
----
-title: List memory versions
-url: https://platform.claude.com/docs/en/api/java/beta/memory_stores/memory_versions/list
----
+# List memory versions
 
-## List memory versions
+`MemoryVersionListPage beta().memoryStores().memoryVersions().list(params = MemoryVersionListParams.none(), requestOptions = RequestOptions.none())`
 
-`MemoryVersionListPage beta().memoryStores().memoryVersions().list(MemoryVersionListParamsparams = MemoryVersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
 List memory versions
 
-### Parameters
+## Parameters
 
 - `MemoryVersionListParams params`
 
@@ -31,13 +26,19 @@ List memory versions
 
     Return versions created at or after this time (inclusive).
 
+    format: date-time
+
   - `Optional<LocalDateTime> createdAtLte`
 
     Return versions created at or before this time (inclusive).
 
+    format: date-time
+
   - `Optional<Long> limit`
 
     Query parameter for limit
+
+    format: int32
 
   - `Optional<String> memoryId`
 
@@ -135,7 +136,7 @@ List memory versions
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
 
@@ -148,6 +149,8 @@ List memory versions
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String memoryId`
 
@@ -169,8 +172,6 @@ List memory versions
 
   - `Type type`
 
-    - `MEMORY_VERSION("memory_version")`
-
   - `Optional<String> content`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -182,6 +183,8 @@ List memory versions
   - `Optional<Long> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `Optional<BetaManagedAgentsActor> createdBy`
 
@@ -195,9 +198,9 @@ List memory versions
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `Type type`
+        minLength: 1
 
-        - `SESSION_ACTOR("session_actor")`
+      - `Type type`
 
     - `class BetaManagedAgentsApiActor:`
 
@@ -207,9 +210,9 @@ List memory versions
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `Type type`
+        minLength: 1
 
-        - `API_ACTOR("api_actor")`
+      - `Type type`
 
     - `class BetaManagedAgentsUserActor:`
 
@@ -217,11 +220,11 @@ List memory versions
 
       - `Type type`
 
-        - `USER_ACTOR("user_actor")`
-
       - `String userId`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor:`
 
@@ -231,9 +234,9 @@ List memory versions
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `JsonValue; type "service_account_actor"constant`
+        minLength: 1
 
-        - `SERVICE_ACCOUNT_ACTOR("service_account_actor")`
+      - `JsonValue type constant`
 
   - `Optional<String> path`
 
@@ -243,11 +246,13 @@ List memory versions
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Optional<BetaManagedAgentsActor> redactedBy`
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -268,7 +273,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

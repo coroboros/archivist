@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/memor
 category: "api"
 generated: true
 ---
----
-title: Delete a memory
-url: https://platform.claude.com/docs/en/api/python/beta/memory_stores/memories/delete
----
+# Delete a memory
 
-## Delete a memory
+`beta.memory_stores.memories.delete(memory_id, **kwargs)  -> BetaManagedAgentsDeletedMemory`
 
-`beta.memory_stores.memories.delete(strmemory_id, MemoryDeleteParams**kwargs)  -> BetaManagedAgentsDeletedMemory`
-
-**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Delete a memory
 
-### Parameters
+## Parameters
 
 - `memory_store_id: str`
 
@@ -103,7 +98,7 @@ Delete a memory
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedMemory: …`
 
@@ -115,9 +110,7 @@ Delete a memory
 
   - `type: Literal["memory_deleted"]`
 
-    - `"memory_deleted"`
-
-### Example
+## Example
 
 ```python
 import os
@@ -135,7 +128,7 @@ beta_managed_agents_deleted_memory = client.beta.memory_stores.memories.delete(
 print(beta_managed_agents_deleted_memory.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

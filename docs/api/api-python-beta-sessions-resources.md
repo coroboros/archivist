@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/resources"
 category: "api"
 generated: true
 ---
----
-title: Resources
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/resources
----
-
 # Resources
 
 ## Add Session Resource
 
-`beta.sessions.resources.add(strsession_id, ResourceAddParams**kwargs)  -> BetaManagedAgentsFileResource`
+`beta.sessions.resources.add(session_id, **kwargs)  -> BetaManagedAgentsFileResource`
 
-**post** `/v1/sessions/{session_id}/resources`
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
@@ -27,13 +22,15 @@ Add Session Resource
 
   ID of a previously uploaded file.
 
-- `type: Literal["file"]`
+  minLength: 1, maxLength: 128
 
-  - `"file"`
+- `type: Literal["file"]`
 
 - `mount_path: Optional[str]`
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  minLength: 1, maxLength: 4096
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -121,17 +118,19 @@ Add Session Resource
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `file_id: str`
 
   - `mount_path: str`
 
   - `type: Literal["file"]`
 
-    - `"file"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Example
 
@@ -152,7 +151,7 @@ beta_managed_agents_file_resource = client.beta.sessions.resources.add(
 print(beta_managed_agents_file_resource.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -167,9 +166,9 @@ print(beta_managed_agents_file_resource.id)
 
 ## List Session Resources
 
-`beta.sessions.resources.list(strsession_id, ResourceListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionResource]`
+`beta.sessions.resources.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionResource]`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
@@ -180,6 +179,8 @@ List Session Resources
 - `limit: Optional[int]`
 
   Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+  format: int32
 
 - `page: Optional[str]`
 
@@ -275,15 +276,17 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -295,9 +298,9 @@ List Session Resources
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -305,9 +308,9 @@ List Session Resources
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -317,17 +320,19 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -338,8 +343,6 @@ List Session Resources
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -356,6 +359,8 @@ List Session Resources
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 
@@ -383,7 +388,7 @@ page = page.data[0]
 print(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -415,9 +420,9 @@ print(page)
 
 ## Get Session Resource
 
-`beta.sessions.resources.retrieve(strresource_id, ResourceRetrieveParams**kwargs)  -> ResourceRetrieveResponse`
+`beta.sessions.resources.retrieve(resource_id, **kwargs)  -> ResourceRetrieveResponse`
 
-**get** `/v1/sessions/{session_id}/resources/{resource_id}`
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
@@ -517,15 +522,17 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -537,9 +544,9 @@ Get Session Resource
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -547,9 +554,9 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -559,17 +566,19 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -580,8 +589,6 @@ Get Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -598,6 +605,8 @@ Get Session Resource
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 
@@ -625,7 +634,7 @@ resource = client.beta.sessions.resources.retrieve(
 print(resource)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -644,9 +653,9 @@ print(resource)
 
 ## Update Session Resource
 
-`beta.sessions.resources.update(strresource_id, ResourceUpdateParams**kwargs)  -> ResourceUpdateResponse`
+`beta.sessions.resources.update(resource_id, **kwargs)  -> ResourceUpdateResponse`
 
-**post** `/v1/sessions/{session_id}/resources/{resource_id}`
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Update Session Resource
 
@@ -659,6 +668,8 @@ Update Session Resource
 - `authorization_token: str`
 
   New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+
+  minLength: 1, maxLength: 4096
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -750,15 +761,17 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -770,9 +783,9 @@ Update Session Resource
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -780,9 +793,9 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -792,17 +805,19 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -813,8 +828,6 @@ Update Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -831,6 +844,8 @@ Update Session Resource
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 
@@ -859,7 +874,7 @@ resource = client.beta.sessions.resources.update(
 print(resource)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -878,9 +893,9 @@ print(resource)
 
 ## Delete Session Resource
 
-`beta.sessions.resources.delete(strresource_id, ResourceDeleteParams**kwargs)  -> BetaManagedAgentsDeleteSessionResource`
+`beta.sessions.resources.delete(resource_id, **kwargs)  -> BetaManagedAgentsDeleteSessionResource`
 
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
@@ -976,8 +991,6 @@ Delete Session Resource
 
   - `type: Literal["session_resource_deleted"]`
 
-    - `"session_resource_deleted"`
-
 ### Example
 
 ```python
@@ -996,7 +1009,7 @@ beta_managed_agents_delete_session_resource = client.beta.sessions.resources.del
 print(beta_managed_agents_delete_session_resource.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1005,7 +1018,7 @@ print(beta_managed_agents_delete_session_resource.id)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Delete Session Resource
 
@@ -1017,8 +1030,6 @@ print(beta_managed_agents_delete_session_resource.id)
 
   - `type: Literal["session_resource_deleted"]`
 
-    - `"session_resource_deleted"`
-
 ### Beta Managed Agents File Resource
 
 - `class BetaManagedAgentsFileResource: …`
@@ -1029,17 +1040,19 @@ print(beta_managed_agents_delete_session_resource.id)
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `file_id: str`
 
   - `mount_path: str`
 
   - `type: Literal["file"]`
 
-    - `"file"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Beta Managed Agents GitHub Repository Resource
 
@@ -1051,15 +1064,17 @@ print(beta_managed_agents_delete_session_resource.id)
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `mount_path: str`
 
   - `type: Literal["github_repository"]`
 
-    - `"github_repository"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `url: str`
 
@@ -1071,9 +1086,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
         Branch name to check out.
 
-      - `type: Literal["branch"]`
+        minLength: 1, maxLength: 255
 
-        - `"branch"`
+      - `type: Literal["branch"]`
 
     - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -1081,9 +1096,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
         Full commit SHA to check out.
 
-      - `type: Literal["commit"]`
+        minLength: 7, maxLength: 64
 
-        - `"commit"`
+      - `type: Literal["commit"]`
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1096,8 +1111,6 @@ print(beta_managed_agents_delete_session_resource.id)
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
   - `type: Literal["memory_store"]`
-
-    - `"memory_store"`
 
   - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -1114,6 +1127,8 @@ print(beta_managed_agents_delete_session_resource.id)
   - `instructions: Optional[str]`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    maxLength: 4096
 
   - `mount_path: Optional[str]`
 
@@ -1137,15 +1152,17 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -1157,9 +1174,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -1167,9 +1184,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -1179,17 +1196,19 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -1200,8 +1219,6 @@ print(beta_managed_agents_delete_session_resource.id)
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -1218,6 +1235,8 @@ print(beta_managed_agents_delete_session_resource.id)
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 
@@ -1241,15 +1260,17 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -1261,9 +1282,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -1271,9 +1292,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -1283,17 +1304,19 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -1304,8 +1327,6 @@ print(beta_managed_agents_delete_session_resource.id)
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -1322,6 +1343,8 @@ print(beta_managed_agents_delete_session_resource.id)
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 
@@ -1345,15 +1368,17 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: str`
 
     - `type: Literal["github_repository"]`
 
-      - `"github_repository"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: str`
 
@@ -1365,9 +1390,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Branch name to check out.
 
-        - `type: Literal["branch"]`
+          minLength: 1, maxLength: 255
 
-          - `"branch"`
+        - `type: Literal["branch"]`
 
       - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -1375,9 +1400,9 @@ print(beta_managed_agents_delete_session_resource.id)
 
           Full commit SHA to check out.
 
-        - `type: Literal["commit"]`
+          minLength: 7, maxLength: 64
 
-          - `"commit"`
+        - `type: Literal["commit"]`
 
   - `class BetaManagedAgentsFileResource: …`
 
@@ -1387,17 +1412,19 @@ print(beta_managed_agents_delete_session_resource.id)
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: str`
 
     - `mount_path: str`
 
     - `type: Literal["file"]`
 
-      - `"file"`
-
     - `updated_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -1408,8 +1435,6 @@ print(beta_managed_agents_delete_session_resource.id)
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: Literal["memory_store"]`
-
-      - `"memory_store"`
 
     - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -1426,6 +1451,8 @@ print(beta_managed_agents_delete_session_resource.id)
     - `instructions: Optional[str]`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: Optional[str]`
 

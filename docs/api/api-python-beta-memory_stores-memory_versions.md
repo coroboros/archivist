@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/memor
 category: "api"
 generated: true
 ---
----
-title: Memory Versions
-url: https://platform.claude.com/docs/en/api/python/beta/memory_stores/memory_versions
----
-
 # Memory Versions
 
 ## List memory versions
 
-`beta.memory_stores.memory_versions.list(strmemory_store_id, MemoryVersionListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryVersion]`
+`beta.memory_stores.memory_versions.list(memory_store_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryVersion]`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
 List memory versions
 
@@ -31,13 +26,19 @@ List memory versions
 
   Return versions created at or after this time (inclusive).
 
+  format: date-time
+
 - `created_at_lte: Optional[Union[str, datetime]]`
 
   Return versions created at or before this time (inclusive).
 
+  format: date-time
+
 - `limit: Optional[int]`
 
   Query parameter for limit
+
+  format: int32
 
 - `memory_id: Optional[str]`
 
@@ -163,6 +164,8 @@ List memory versions
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `memory_id: str`
 
     ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
@@ -183,8 +186,6 @@ List memory versions
 
   - `type: Literal["memory_version"]`
 
-    - `"memory_version"`
-
   - `content: Optional[str]`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -196,6 +197,8 @@ List memory versions
   - `content_size_bytes: Optional[int]`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
@@ -209,9 +212,9 @@ List memory versions
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `type: Literal["session_actor"]`
+        minLength: 1
 
-        - `"session_actor"`
+      - `type: Literal["session_actor"]`
 
     - `class BetaManagedAgentsAPIActor: …`
 
@@ -221,9 +224,9 @@ List memory versions
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `type: Literal["api_actor"]`
+        minLength: 1
 
-        - `"api_actor"`
+      - `type: Literal["api_actor"]`
 
     - `class BetaManagedAgentsUserActor: …`
 
@@ -231,11 +234,11 @@ List memory versions
 
       - `type: Literal["user_actor"]`
 
-        - `"user_actor"`
-
       - `user_id: str`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor: …`
 
@@ -245,9 +248,9 @@ List memory versions
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `type: Literal["service_account_actor"]`
+        minLength: 1
 
-        - `"service_account_actor"`
+      - `type: Literal["service_account_actor"]`
 
   - `path: Optional[str]`
 
@@ -256,6 +259,8 @@ List memory versions
   - `redacted_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
@@ -279,7 +284,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -312,9 +317,9 @@ print(page.id)
 
 ## Retrieve a memory version
 
-`beta.memory_stores.memory_versions.retrieve(strmemory_version_id, MemoryVersionRetrieveParams**kwargs)  -> BetaManagedAgentsMemoryVersion`
+`beta.memory_stores.memory_versions.retrieve(memory_version_id, **kwargs)  -> BetaManagedAgentsMemoryVersion`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
 Retrieve a memory version
 
@@ -422,6 +427,8 @@ Retrieve a memory version
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `memory_id: str`
 
     ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
@@ -442,8 +449,6 @@ Retrieve a memory version
 
   - `type: Literal["memory_version"]`
 
-    - `"memory_version"`
-
   - `content: Optional[str]`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -455,6 +460,8 @@ Retrieve a memory version
   - `content_size_bytes: Optional[int]`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
@@ -468,9 +475,9 @@ Retrieve a memory version
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `type: Literal["session_actor"]`
+        minLength: 1
 
-        - `"session_actor"`
+      - `type: Literal["session_actor"]`
 
     - `class BetaManagedAgentsAPIActor: …`
 
@@ -480,9 +487,9 @@ Retrieve a memory version
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `type: Literal["api_actor"]`
+        minLength: 1
 
-        - `"api_actor"`
+      - `type: Literal["api_actor"]`
 
     - `class BetaManagedAgentsUserActor: …`
 
@@ -490,11 +497,11 @@ Retrieve a memory version
 
       - `type: Literal["user_actor"]`
 
-        - `"user_actor"`
-
       - `user_id: str`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor: …`
 
@@ -504,9 +511,9 @@ Retrieve a memory version
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `type: Literal["service_account_actor"]`
+        minLength: 1
 
-        - `"service_account_actor"`
+      - `type: Literal["service_account_actor"]`
 
   - `path: Optional[str]`
 
@@ -515,6 +522,8 @@ Retrieve a memory version
   - `redacted_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
@@ -538,7 +547,7 @@ beta_managed_agents_memory_version = client.beta.memory_stores.memory_versions.r
 print(beta_managed_agents_memory_version.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -566,9 +575,9 @@ print(beta_managed_agents_memory_version.id)
 
 ## Redact a memory version
 
-`beta.memory_stores.memory_versions.redact(strmemory_version_id, MemoryVersionRedactParams**kwargs)  -> BetaManagedAgentsMemoryVersion`
+`beta.memory_stores.memory_versions.redact(memory_version_id, **kwargs)  -> BetaManagedAgentsMemoryVersion`
 
-**post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+**POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
 Redact a memory version
 
@@ -668,6 +677,8 @@ Redact a memory version
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `memory_id: str`
 
     ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
@@ -688,8 +699,6 @@ Redact a memory version
 
   - `type: Literal["memory_version"]`
 
-    - `"memory_version"`
-
   - `content: Optional[str]`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -701,6 +710,8 @@ Redact a memory version
   - `content_size_bytes: Optional[int]`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
@@ -714,9 +725,9 @@ Redact a memory version
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `type: Literal["session_actor"]`
+        minLength: 1
 
-        - `"session_actor"`
+      - `type: Literal["session_actor"]`
 
     - `class BetaManagedAgentsAPIActor: …`
 
@@ -726,9 +737,9 @@ Redact a memory version
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `type: Literal["api_actor"]`
+        minLength: 1
 
-        - `"api_actor"`
+      - `type: Literal["api_actor"]`
 
     - `class BetaManagedAgentsUserActor: …`
 
@@ -736,11 +747,11 @@ Redact a memory version
 
       - `type: Literal["user_actor"]`
 
-        - `"user_actor"`
-
       - `user_id: str`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor: …`
 
@@ -750,9 +761,9 @@ Redact a memory version
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `type: Literal["service_account_actor"]`
+        minLength: 1
 
-        - `"service_account_actor"`
+      - `type: Literal["service_account_actor"]`
 
   - `path: Optional[str]`
 
@@ -761,6 +772,8 @@ Redact a memory version
   - `redacted_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
@@ -784,7 +797,7 @@ beta_managed_agents_memory_version = client.beta.memory_stores.memory_versions.r
 print(beta_managed_agents_memory_version.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -810,7 +823,7 @@ print(beta_managed_agents_memory_version.id)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Actor
 
@@ -826,9 +839,9 @@ print(beta_managed_agents_memory_version.id)
 
       ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-    - `type: Literal["session_actor"]`
+      minLength: 1
 
-      - `"session_actor"`
+    - `type: Literal["session_actor"]`
 
   - `class BetaManagedAgentsAPIActor: …`
 
@@ -838,9 +851,9 @@ print(beta_managed_agents_memory_version.id)
 
       ID of the API key that performed the write. This identifies the key, not the secret.
 
-    - `type: Literal["api_actor"]`
+      minLength: 1
 
-      - `"api_actor"`
+    - `type: Literal["api_actor"]`
 
   - `class BetaManagedAgentsUserActor: …`
 
@@ -848,11 +861,11 @@ print(beta_managed_agents_memory_version.id)
 
     - `type: Literal["user_actor"]`
 
-      - `"user_actor"`
-
     - `user_id: str`
 
       ID of the user who performed the write (a `user_...` value).
+
+      minLength: 1
 
   - `class BetaManagedAgentsServiceAccountActor: …`
 
@@ -862,9 +875,9 @@ print(beta_managed_agents_memory_version.id)
 
       ID of the service account that performed the write (a `svac_...` value).
 
-    - `type: Literal["service_account_actor"]`
+      minLength: 1
 
-      - `"service_account_actor"`
+    - `type: Literal["service_account_actor"]`
 
 ### Beta Managed Agents API Actor
 
@@ -876,9 +889,9 @@ print(beta_managed_agents_memory_version.id)
 
     ID of the API key that performed the write. This identifies the key, not the secret.
 
-  - `type: Literal["api_actor"]`
+    minLength: 1
 
-    - `"api_actor"`
+  - `type: Literal["api_actor"]`
 
 ### Beta Managed Agents Memory Version
 
@@ -893,6 +906,8 @@ print(beta_managed_agents_memory_version.id)
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_id: str`
 
@@ -914,8 +929,6 @@ print(beta_managed_agents_memory_version.id)
 
   - `type: Literal["memory_version"]`
 
-    - `"memory_version"`
-
   - `content: Optional[str]`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -927,6 +940,8 @@ print(beta_managed_agents_memory_version.id)
   - `content_size_bytes: Optional[int]`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
+    format: int32
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
@@ -940,9 +955,9 @@ print(beta_managed_agents_memory_version.id)
 
         ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-      - `type: Literal["session_actor"]`
+        minLength: 1
 
-        - `"session_actor"`
+      - `type: Literal["session_actor"]`
 
     - `class BetaManagedAgentsAPIActor: …`
 
@@ -952,9 +967,9 @@ print(beta_managed_agents_memory_version.id)
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
-      - `type: Literal["api_actor"]`
+        minLength: 1
 
-        - `"api_actor"`
+      - `type: Literal["api_actor"]`
 
     - `class BetaManagedAgentsUserActor: …`
 
@@ -962,11 +977,11 @@ print(beta_managed_agents_memory_version.id)
 
       - `type: Literal["user_actor"]`
 
-        - `"user_actor"`
-
       - `user_id: str`
 
         ID of the user who performed the write (a `user_...` value).
+
+        minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor: …`
 
@@ -976,9 +991,9 @@ print(beta_managed_agents_memory_version.id)
 
         ID of the service account that performed the write (a `svac_...` value).
 
-      - `type: Literal["service_account_actor"]`
+        minLength: 1
 
-        - `"service_account_actor"`
+      - `type: Literal["service_account_actor"]`
 
   - `path: Optional[str]`
 
@@ -987,6 +1002,8 @@ print(beta_managed_agents_memory_version.id)
   - `redacted_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
@@ -1014,9 +1031,9 @@ print(beta_managed_agents_memory_version.id)
 
     ID of the service account that performed the write (a `svac_...` value).
 
-  - `type: Literal["service_account_actor"]`
+    minLength: 1
 
-    - `"service_account_actor"`
+  - `type: Literal["service_account_actor"]`
 
 ### Beta Managed Agents Session Actor
 
@@ -1028,9 +1045,9 @@ print(beta_managed_agents_memory_version.id)
 
     ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
-  - `type: Literal["session_actor"]`
+    minLength: 1
 
-    - `"session_actor"`
+  - `type: Literal["session_actor"]`
 
 ### Beta Managed Agents User Actor
 
@@ -1040,8 +1057,8 @@ print(beta_managed_agents_memory_version.id)
 
   - `type: Literal["user_actor"]`
 
-    - `"user_actor"`
-
   - `user_id: str`
 
     ID of the user who performed the write (a `user_...` value).
+
+    minLength: 1

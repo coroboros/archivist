@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/update"
 category: "api"
 generated: true
 ---
----
-title: Update Vault
-url: https://platform.claude.com/docs/en/api/java/beta/vaults/update
----
+# Update Vault
 
-## Update Vault
+`BetaManagedAgentsVault beta().vaults().update(params = VaultUpdateParams.none(), requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsVault beta().vaults().update(VaultUpdateParamsparams = VaultUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/vaults/{vault_id}`
+**POST** `/v1/vaults/{vault_id}`
 
 Update Vault
 
-### Parameters
+## Parameters
 
 - `VaultUpdateParams params`
 
@@ -99,11 +94,13 @@ Update Vault
 
     Updated human-readable name for the vault. 1-255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `Optional<Metadata> metadata`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault:`
 
@@ -117,9 +114,13 @@ Update Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String displayName`
 
@@ -131,13 +132,13 @@ Update Vault
 
   - `Type type`
 
-    - `VAULT("vault")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```java
 package com.anthropic.example;
@@ -158,7 +159,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

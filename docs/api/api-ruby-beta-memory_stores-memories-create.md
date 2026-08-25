@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memorie
 category: "api"
 generated: true
 ---
----
-title: Create a memory
-url: https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memories/create
----
-
-## Create a memory
+# Create a memory
 
 `beta.memory_stores.memories.create(memory_store_id, **kwargs) -> BetaManagedAgentsMemory`
 
-**post** `/v1/memory_stores/{memory_store_id}/memories`
+**POST** `/v1/memory_stores/{memory_store_id}/memories`
 
 Create a memory
 
-### Parameters
+## Parameters
 
 - `memory_store_id: String`
 
@@ -28,6 +23,8 @@ Create a memory
 - `path: String`
 
   Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive.
+
+  minLength: 2, maxLength: 1024
 
 - `view: BetaManagedAgentsMemoryView`
 
@@ -113,7 +110,7 @@ Create a memory
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsMemory`
 
@@ -131,9 +128,13 @@ Create a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: String`
 
@@ -149,17 +150,17 @@ Create a memory
 
   - `type: :memory`
 
-    - `:memory`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: String`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -171,7 +172,7 @@ beta_managed_agents_memory = anthropic.beta.memory_stores.memories.create("memor
 puts(beta_managed_agents_memory)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/vaults/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Vault
-url: https://platform.claude.com/docs/en/api/python/beta/vaults/archive
----
+# Archive Vault
 
-## Archive Vault
+`beta.vaults.archive(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
-`beta.vaults.archive(strvault_id, VaultArchiveParams**kwargs)  -> BetaManagedAgentsVault`
-
-**post** `/v1/vaults/{vault_id}/archive`
+**POST** `/v1/vaults/{vault_id}/archive`
 
 Archive Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: str`
 
@@ -97,7 +92,7 @@ Archive Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault: …`
 
@@ -111,9 +106,13 @@ Archive Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: str`
 
@@ -125,13 +124,13 @@ Archive Vault
 
   - `type: Literal["vault"]`
 
-    - `"vault"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```python
 import os
@@ -148,7 +147,7 @@ beta_managed_agents_vault = client.beta.vaults.archive(
 print(beta_managed_agents_vault.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

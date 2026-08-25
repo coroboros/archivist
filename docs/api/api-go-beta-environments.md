@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments"
 category: "api"
 generated: true
 ---
----
-title: Environments
-url: https://platform.claude.com/docs/en/api/go/beta/environments
----
-
 # Environments
 
 ## Create Environment
 
 `client.Beta.Environments.New(ctx, params) (*BetaEnvironment, error)`
 
-**post** `/v1/environments`
+**POST** `/v1/environments`
 
 Create a new environment with the specified configuration.
 
@@ -27,7 +22,9 @@ Create a new environment with the specified configuration.
 
     Body param: Human-readable name for the environment
 
-  - `Config param.Field[BetaEnvironmentNewParamsConfigUnion]`
+    maxLength: 256, minLength: 1
+
+  - `Config param.Field[BetaEnvironmentNewParamsConfigUnion] Optional`
 
     Body param: Environment configuration
 
@@ -42,9 +39,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-        - `const CloudCloud Cloud = "cloud"`
-
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp`
+      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -55,8 +50,6 @@ Create a new environment with the specified configuration.
           - `Type Unrestricted`
 
             Network policy type
-
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
         - `type BetaLimitedNetworkParamsResp struct{…}`
 
@@ -69,55 +62,53 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-            - `const LimitedLimited Limited = "limited"`
-
-          - `AllowMCPServers bool`
+          - `AllowMCPServers bool Optional`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-          - `AllowPackageManagers bool`
+          - `AllowPackageManagers bool Optional`
 
             Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-          - `AllowedHosts []string`
+          - `AllowedHosts []string Optional`
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp`
+      - `Packages BetaPackagesParamsResp Optional`
 
         Specify packages (and optionally their versions) available in this environment.
 
         When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-        - `Apt []string`
+        - `Apt []string Optional`
 
           Ubuntu/Debian packages to install
 
-        - `Cargo []string`
+        - `Cargo []string Optional`
 
           Rust packages to install
 
-        - `Gem []string`
+        - `Gem []string Optional`
 
           Ruby packages to install
 
-        - `Go []string`
+        - `Go []string Optional`
 
           Go packages to install
 
-        - `Npm []string`
+        - `Npm []string Optional`
 
           Node.js packages to install
 
-        - `Pip []string`
+        - `Pip []string Optional`
 
           Python packages to install
 
-        - `Type BetaPackagesParamsType`
+        - `Type BetaPackagesParamsType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesParamsTypePackages BetaPackagesParamsType = "packages"`
+          default: packages
 
     - `type BetaSelfHostedConfigParamsResp struct{…}`
 
@@ -127,17 +118,17 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
-
-  - `Description param.Field[string]`
+  - `Description param.Field[string] Optional`
 
     Body param: Optional description of the environment
 
-  - `Metadata param.Field[map[string, string]]`
+    maxLength: 1024
+
+  - `Metadata param.Field[map[string, string]] Optional`
 
     Body param: User-provided metadata key-value pairs
 
-  - `Scope param.Field[BetaEnvironmentNewParamsScope]`
+  - `Scope param.Field[BetaEnvironmentNewParamsScope] Optional`
 
     Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
@@ -145,7 +136,7 @@ Create a new environment with the specified configuration.
 
     - `const BetaEnvironmentNewParamsScopeAccount BetaEnvironmentNewParamsScope = "account"`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -255,8 +246,6 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -276,8 +265,6 @@ Create a new environment with the specified configuration.
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -307,17 +294,15 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -326,8 +311,6 @@ Create a new environment with the specified configuration.
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -349,13 +332,13 @@ Create a new environment with the specified configuration.
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -390,7 +373,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -443,7 +426,7 @@ func main() {
 
 `client.Beta.Environments.List(ctx, params) (*PageCursor[BetaEnvironment], error)`
 
-**get** `/v1/environments`
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
@@ -451,19 +434,21 @@ List environments with pagination support.
 
 - `params BetaEnvironmentListParams`
 
-  - `IncludeArchived param.Field[bool]`
+  - `IncludeArchived param.Field[bool] Optional`
 
     Query param: Include archived environments in the response
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of environments to return
 
-  - `Page param.Field[string]`
+    maximum: 1000, minimum: 1
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -573,8 +558,6 @@ List environments with pagination support.
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -594,8 +577,6 @@ List environments with pagination support.
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -625,17 +606,15 @@ List environments with pagination support.
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -644,8 +623,6 @@ List environments with pagination support.
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -667,13 +644,13 @@ List environments with pagination support.
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -706,7 +683,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -764,7 +741,7 @@ func main() {
 
 `client.Beta.Environments.Get(ctx, environmentID, query) (*BetaEnvironment, error)`
 
-**get** `/v1/environments/{environment_id}`
+**GET** `/v1/environments/{environment_id}`
 
 Retrieve a specific environment by ID.
 
@@ -774,7 +751,7 @@ Retrieve a specific environment by ID.
 
 - `query BetaEnvironmentGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -884,8 +861,6 @@ Retrieve a specific environment by ID.
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -905,8 +880,6 @@ Retrieve a specific environment by ID.
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -936,17 +909,15 @@ Retrieve a specific environment by ID.
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -955,8 +926,6 @@ Retrieve a specific environment by ID.
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -978,13 +947,13 @@ Retrieve a specific environment by ID.
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -1021,7 +990,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1074,7 +1043,7 @@ func main() {
 
 `client.Beta.Environments.Update(ctx, environmentID, params) (*BetaEnvironment, error)`
 
-**post** `/v1/environments/{environment_id}`
+**POST** `/v1/environments/{environment_id}`
 
 Update an existing environment's configuration.
 
@@ -1084,7 +1053,7 @@ Update an existing environment's configuration.
 
 - `params BetaEnvironmentUpdateParams`
 
-  - `Config param.Field[BetaEnvironmentUpdateParamsConfigUnion]`
+  - `Config param.Field[BetaEnvironmentUpdateParamsConfigUnion] Optional`
 
     Body param: Updated environment configuration
 
@@ -1099,9 +1068,7 @@ Update an existing environment's configuration.
 
         Environment type
 
-        - `const CloudCloud Cloud = "cloud"`
-
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp`
+      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -1112,8 +1079,6 @@ Update an existing environment's configuration.
           - `Type Unrestricted`
 
             Network policy type
-
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
         - `type BetaLimitedNetworkParamsResp struct{…}`
 
@@ -1126,55 +1091,53 @@ Update an existing environment's configuration.
 
             Network policy type
 
-            - `const LimitedLimited Limited = "limited"`
-
-          - `AllowMCPServers bool`
+          - `AllowMCPServers bool Optional`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-          - `AllowPackageManagers bool`
+          - `AllowPackageManagers bool Optional`
 
             Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-          - `AllowedHosts []string`
+          - `AllowedHosts []string Optional`
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp`
+      - `Packages BetaPackagesParamsResp Optional`
 
         Specify packages (and optionally their versions) available in this environment.
 
         When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-        - `Apt []string`
+        - `Apt []string Optional`
 
           Ubuntu/Debian packages to install
 
-        - `Cargo []string`
+        - `Cargo []string Optional`
 
           Rust packages to install
 
-        - `Gem []string`
+        - `Gem []string Optional`
 
           Ruby packages to install
 
-        - `Go []string`
+        - `Go []string Optional`
 
           Go packages to install
 
-        - `Npm []string`
+        - `Npm []string Optional`
 
           Node.js packages to install
 
-        - `Pip []string`
+        - `Pip []string Optional`
 
           Python packages to install
 
-        - `Type BetaPackagesParamsType`
+        - `Type BetaPackagesParamsType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesParamsTypePackages BetaPackagesParamsType = "packages"`
+          default: packages
 
     - `type BetaSelfHostedConfigParamsResp struct{…}`
 
@@ -1184,21 +1147,23 @@ Update an existing environment's configuration.
 
         Environment type
 
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
-
-  - `Description param.Field[string]`
+  - `Description param.Field[string] Optional`
 
     Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
-  - `Metadata param.Field[map[string, string]]`
+    maxLength: 1024
+
+  - `Metadata param.Field[map[string, string]] Optional`
 
     Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-  - `Name param.Field[string]`
+  - `Name param.Field[string] Optional`
 
     Body param: Updated name for the environment
 
-  - `Scope param.Field[BetaEnvironmentUpdateParamsScope]`
+    maxLength: 256, minLength: 1
+
+  - `Scope param.Field[BetaEnvironmentUpdateParamsScope] Optional`
 
     Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -1206,7 +1171,7 @@ Update an existing environment's configuration.
 
     - `const BetaEnvironmentUpdateParamsScopeAccount BetaEnvironmentUpdateParamsScope = "account"`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -1316,8 +1281,6 @@ Update an existing environment's configuration.
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -1337,8 +1300,6 @@ Update an existing environment's configuration.
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -1368,17 +1329,15 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -1387,8 +1346,6 @@ Update an existing environment's configuration.
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -1410,13 +1367,13 @@ Update an existing environment's configuration.
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -1453,7 +1410,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1506,7 +1463,7 @@ func main() {
 
 `client.Beta.Environments.Delete(ctx, environmentID, body) (*BetaEnvironmentDeleteResponse, error)`
 
-**delete** `/v1/environments/{environment_id}`
+**DELETE** `/v1/environments/{environment_id}`
 
 Delete an environment by ID. Returns a confirmation of the deletion.
 
@@ -1516,7 +1473,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `body BetaEnvironmentDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1606,7 +1563,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     The type of response
 
-    - `const BetaEnvironmentDeleteResponseTypeEnvironmentDeleted BetaEnvironmentDeleteResponseType = "environment_deleted"`
+    default: environment_deleted
 
 ### Example
 
@@ -1637,7 +1594,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1650,7 +1607,7 @@ func main() {
 
 `client.Beta.Environments.Archive(ctx, environmentID, body) (*BetaEnvironment, error)`
 
-**post** `/v1/environments/{environment_id}/archive`
+**POST** `/v1/environments/{environment_id}/archive`
 
 Archive an environment by ID. Archived environments cannot be used to create new sessions.
 
@@ -1660,7 +1617,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `body BetaEnvironmentArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1770,8 +1727,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -1791,8 +1746,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -1822,17 +1775,15 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -1841,8 +1792,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -1864,13 +1813,13 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -1907,7 +1856,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1956,7 +1905,7 @@ func main() {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Cloud Config
 
@@ -1975,8 +1924,6 @@ func main() {
       - `Type Unrestricted`
 
         Network policy type
-
-        - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
     - `type BetaLimitedNetwork struct{…}`
 
@@ -1997,8 +1944,6 @@ func main() {
       - `Type Limited`
 
         Network policy type
-
-        - `const LimitedLimited Limited = "limited"`
 
   - `Packages BetaPackages`
 
@@ -2028,17 +1973,15 @@ func main() {
 
       Python packages to install
 
-    - `Type BetaPackagesType`
+    - `Type BetaPackagesType Optional`
 
       Package configuration type
 
-      - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+      default: packages
 
   - `Type Cloud`
 
     Environment type
-
-    - `const CloudCloud Cloud = "cloud"`
 
 ### Beta Cloud Config Params
 
@@ -2053,9 +1996,7 @@ func main() {
 
     Environment type
 
-    - `const CloudCloud Cloud = "cloud"`
-
-  - `Networking BetaCloudConfigParamsNetworkingUnionResp`
+  - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
 
     Network configuration policy. Omit on update to preserve the existing value.
 
@@ -2066,8 +2007,6 @@ func main() {
       - `Type Unrestricted`
 
         Network policy type
-
-        - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
 
     - `type BetaLimitedNetworkParamsResp struct{…}`
 
@@ -2080,55 +2019,53 @@ func main() {
 
         Network policy type
 
-        - `const LimitedLimited Limited = "limited"`
-
-      - `AllowMCPServers bool`
+      - `AllowMCPServers bool Optional`
 
         Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-      - `AllowPackageManagers bool`
+      - `AllowPackageManagers bool Optional`
 
         Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-      - `AllowedHosts []string`
+      - `AllowedHosts []string Optional`
 
         Specifies domains the container can reach.
 
-  - `Packages BetaPackagesParamsResp`
+  - `Packages BetaPackagesParamsResp Optional`
 
     Specify packages (and optionally their versions) available in this environment.
 
     When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-    - `Apt []string`
+    - `Apt []string Optional`
 
       Ubuntu/Debian packages to install
 
-    - `Cargo []string`
+    - `Cargo []string Optional`
 
       Rust packages to install
 
-    - `Gem []string`
+    - `Gem []string Optional`
 
       Ruby packages to install
 
-    - `Go []string`
+    - `Go []string Optional`
 
       Go packages to install
 
-    - `Npm []string`
+    - `Npm []string Optional`
 
       Node.js packages to install
 
-    - `Pip []string`
+    - `Pip []string Optional`
 
       Python packages to install
 
-    - `Type BetaPackagesParamsType`
+    - `Type BetaPackagesParamsType Optional`
 
       Package configuration type
 
-      - `const BetaPackagesParamsTypePackages BetaPackagesParamsType = "packages"`
+      default: packages
 
 ### Beta Environment
 
@@ -2164,8 +2101,6 @@ func main() {
 
             Network policy type
 
-            - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
-
         - `type BetaLimitedNetwork struct{…}`
 
           Limited network access.
@@ -2185,8 +2120,6 @@ func main() {
           - `Type Limited`
 
             Network policy type
-
-            - `const LimitedLimited Limited = "limited"`
 
       - `Packages BetaPackages`
 
@@ -2216,17 +2149,15 @@ func main() {
 
           Python packages to install
 
-        - `Type BetaPackagesType`
+        - `Type BetaPackagesType Optional`
 
           Package configuration type
 
-          - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+          default: packages
 
       - `Type Cloud`
 
         Environment type
-
-        - `const CloudCloud Cloud = "cloud"`
 
     - `type BetaSelfHostedConfig struct{…}`
 
@@ -2235,8 +2166,6 @@ func main() {
       - `Type SelfHosted`
 
         Environment type
-
-        - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
   - `CreatedAt string`
 
@@ -2258,13 +2187,13 @@ func main() {
 
     The type of object (always 'environment')
 
-    - `const EnvironmentEnvironment Environment = "environment"`
+    default: environment
 
   - `UpdatedAt string`
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope BetaEnvironmentScope`
+  - `Scope BetaEnvironmentScope Optional`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -2286,7 +2215,7 @@ func main() {
 
     The type of response
 
-    - `const BetaEnvironmentDeleteResponseTypeEnvironmentDeleted BetaEnvironmentDeleteResponseType = "environment_deleted"`
+    default: environment_deleted
 
 ### Beta Limited Network
 
@@ -2310,8 +2239,6 @@ func main() {
 
     Network policy type
 
-    - `const LimitedLimited Limited = "limited"`
-
 ### Beta Limited Network Params
 
 - `type BetaLimitedNetworkParamsResp struct{…}`
@@ -2325,17 +2252,15 @@ func main() {
 
     Network policy type
 
-    - `const LimitedLimited Limited = "limited"`
-
-  - `AllowMCPServers bool`
+  - `AllowMCPServers bool Optional`
 
     Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-  - `AllowPackageManagers bool`
+  - `AllowPackageManagers bool Optional`
 
     Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-  - `AllowedHosts []string`
+  - `AllowedHosts []string Optional`
 
     Specifies domains the container can reach.
 
@@ -2369,11 +2294,11 @@ func main() {
 
     Python packages to install
 
-  - `Type BetaPackagesType`
+  - `Type BetaPackagesType Optional`
 
     Package configuration type
 
-    - `const BetaPackagesTypePackages BetaPackagesType = "packages"`
+    default: packages
 
 ### Beta Packages Params
 
@@ -2383,35 +2308,35 @@ func main() {
 
   When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-  - `Apt []string`
+  - `Apt []string Optional`
 
     Ubuntu/Debian packages to install
 
-  - `Cargo []string`
+  - `Cargo []string Optional`
 
     Rust packages to install
 
-  - `Gem []string`
+  - `Gem []string Optional`
 
     Ruby packages to install
 
-  - `Go []string`
+  - `Go []string Optional`
 
     Go packages to install
 
-  - `Npm []string`
+  - `Npm []string Optional`
 
     Node.js packages to install
 
-  - `Pip []string`
+  - `Pip []string Optional`
 
     Python packages to install
 
-  - `Type BetaPackagesParamsType`
+  - `Type BetaPackagesParamsType Optional`
 
     Package configuration type
 
-    - `const BetaPackagesParamsTypePackages BetaPackagesParamsType = "packages"`
+    default: packages
 
 ### Beta Self Hosted Config
 
@@ -2423,8 +2348,6 @@ func main() {
 
     Environment type
 
-    - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
-
 ### Beta Self Hosted Config Params
 
 - `type BetaSelfHostedConfigParamsResp struct{…}`
@@ -2434,8 +2357,6 @@ func main() {
   - `Type SelfHosted`
 
     Environment type
-
-    - `const SelfHostedSelfHosted SelfHosted = "self_hosted"`
 
 ### Beta Unrestricted Network
 
@@ -2447,21 +2368,19 @@ func main() {
 
     Network policy type
 
-    - `const UnrestrictedUnrestricted Unrestricted = "unrestricted"`
+## Environments › Work
 
-# Work
-
-## Get Work Item
+### Get Work Item
 
 `client.Beta.Environments.Work.Get(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**get** `/v1/environments/{environment_id}/work/{work_id}`
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Retrieve detailed information about a specific work item.
 
-### Parameters
+#### Parameters
 
 - `workID string`
 
@@ -2471,7 +2390,7 @@ Retrieve detailed information about a specific work item.
 
     Path param
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -2547,7 +2466,7 @@ Retrieve detailed information about a specific work item.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -2580,8 +2499,6 @@ Retrieve detailed information about a specific work item.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -2629,9 +2546,9 @@ Retrieve detailed information about a specific work item.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -2662,7 +2579,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -2687,31 +2604,35 @@ func main() {
 }
 ```
 
-## Poll for Work
+### Poll for Work
 
 `client.Beta.Environments.Work.Poll(ctx, environmentID, params) (*BetaSelfHostedWork, error)`
 
-**get** `/v1/environments/{environment_id}/work/poll`
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-### Parameters
+#### Parameters
 
 - `environmentID string`
 
 - `params BetaEnvironmentWorkPollParams`
 
-  - `BlockMs param.Field[int64]`
+  - `BlockMs param.Field[int64] Optional`
 
     Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-  - `ReclaimOlderThanMs param.Field[int64]`
+    minimum: 1
+
+  - `ReclaimOlderThanMs param.Field[int64] Optional`
 
     Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    minimum: 1
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -2787,11 +2708,11 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-  - `AnthropicWorkerID param.Field[string]`
+  - `AnthropicWorkerID param.Field[string] Optional`
 
     Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -2824,8 +2745,6 @@ Long poll for work items in the queue.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -2873,9 +2792,9 @@ Long poll for work items in the queue.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -2904,7 +2823,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -2929,17 +2848,17 @@ func main() {
 }
 ```
 
-## Acknowledge Work
+### Acknowledge Work
 
 `client.Beta.Environments.Work.Ack(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
 
-### Parameters
+#### Parameters
 
 - `workID string`
 
@@ -2949,7 +2868,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     Path param
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3025,7 +2944,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -3058,8 +2977,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -3107,9 +3024,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -3140,7 +3057,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -3165,17 +3082,17 @@ func main() {
 }
 ```
 
-## Record Heartbeat
+### Record Heartbeat
 
 `client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (*BetaSelfHostedWorkHeartbeatResponse, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Record a heartbeat for a work item to maintain the lease.
 
-### Parameters
+#### Parameters
 
 - `workID string`
 
@@ -3185,15 +3102,15 @@ Record a heartbeat for a work item to maintain the lease.
 
     Path param
 
-  - `DesiredTTLSeconds param.Field[int64]`
+  - `DesiredTTLSeconds param.Field[int64] Optional`
 
     Query param: Desired TTL in seconds
 
-  - `ExpectedLastHeartbeat param.Field[string]`
+  - `ExpectedLastHeartbeat param.Field[string] Optional`
 
     Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3269,7 +3186,7 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWorkHeartbeatResponse struct{…}`
 
@@ -3305,9 +3222,9 @@ Record a heartbeat for a work item to maintain the lease.
 
     The type of response
 
-    - `const WorkHeartbeatWorkHeartbeat WorkHeartbeat = "work_heartbeat"`
+    default: work_heartbeat
 
-### Example
+#### Example
 
 ```go
 package main
@@ -3338,7 +3255,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -3350,17 +3267,17 @@ func main() {
 }
 ```
 
-## Stop Work
+### Stop Work
 
 `client.Beta.Environments.Work.Stop(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/stop`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
-### Parameters
+#### Parameters
 
 - `workID string`
 
@@ -3374,7 +3291,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     Body param: Request to stop a work item.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3450,7 +3367,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -3483,8 +3400,6 @@ Stop a work item, initiating graceful or forced shutdown.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -3532,9 +3447,9 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -3566,7 +3481,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -3591,31 +3506,33 @@ func main() {
 }
 ```
 
-## List Work Items
+### List Work Items
 
 `client.Beta.Environments.Work.List(ctx, environmentID, params) (*PageCursor[BetaSelfHostedWork], error)`
 
-**get** `/v1/environments/{environment_id}/work`
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 List work items in an environment.
 
-### Parameters
+#### Parameters
 
 - `environmentID string`
 
 - `params BetaEnvironmentWorkListParams`
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of work items to return
 
-  - `Page param.Field[string]`
+    maximum: 1000, minimum: 1
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque cursor from previous response for pagination
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3691,7 +3608,7 @@ List work items in an environment.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -3724,8 +3641,6 @@ List work items in an environment.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -3773,9 +3688,9 @@ List work items in an environment.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -3804,7 +3719,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -3834,17 +3749,17 @@ func main() {
 }
 ```
 
-## Update Work Item
+### Update Work Item
 
 `client.Beta.Environments.Work.Update(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}`
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Update work item metadata with merge semantics.
 
-### Parameters
+#### Parameters
 
 - `workID string`
 
@@ -3858,7 +3773,7 @@ Update work item metadata with merge semantics.
 
     Body param: Request to update work item metadata.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3934,7 +3849,7 @@ Update work item metadata with merge semantics.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWork struct{…}`
 
@@ -3967,8 +3882,6 @@ Update work item metadata with merge semantics.
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -4016,9 +3929,9 @@ Update work item metadata with merge semantics.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
-### Example
+#### Example
 
 ```go
 package main
@@ -4054,7 +3967,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -4079,21 +3992,21 @@ func main() {
 }
 ```
 
-## Get Queue Statistics
+### Get Queue Statistics
 
 `client.Beta.Environments.Work.Stats(ctx, environmentID, query) (*BetaSelfHostedWorkQueueStats, error)`
 
-**get** `/v1/environments/{environment_id}/work/stats`
+**GET** `/v1/environments/{environment_id}/work/stats`
 
 Get statistics about the work queue for an environment.
 
-### Parameters
+#### Parameters
 
 - `environmentID string`
 
 - `query BetaEnvironmentWorkStatsParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4169,7 +4082,7 @@ Get statistics about the work queue for an environment.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaSelfHostedWorkQueueStats struct{…}`
 
@@ -4189,17 +4102,19 @@ Get statistics about the work queue for an environment.
 
     Number of work items being processed (polled but not acknowledged)
 
+    default: 0
+
   - `Type WorkQueueStats`
 
     The type of object
 
-    - `const WorkQueueStatsWorkQueueStats WorkQueueStats = "work_queue_stats"`
+    default: work_queue_stats
 
   - `WorkersPolling int64`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
 
-### Example
+#### Example
 
 ```go
 package main
@@ -4228,7 +4143,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -4239,284 +4154,3 @@ func main() {
   "workers_polling": 0
 }
 ```
-
-## Domain Types
-
-### Beta Self Hosted Work
-
-- `type BetaSelfHostedWork struct{…}`
-
-  Work resource representing a unit of work in a self-hosted environment.
-
-  Work items are queued when sessions are created or when long-dormant sessions
-  receive new messages. The environment worker polls for work to execute in a
-  self-hosted sandbox.
-
-  - `ID string`
-
-    Work identifier (e.g., 'work_...')
-
-  - `AcknowledgedAt string`
-
-    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
-
-  - `CreatedAt string`
-
-    RFC 3339 timestamp when work was created
-
-  - `Data BetaSessionWorkData`
-
-    The actual work to be performed
-
-    - `ID string`
-
-      Session identifier (e.g., 'session_...')
-
-    - `Type Session`
-
-      Type of work data
-
-      - `const SessionSession Session = "session"`
-
-  - `EnvironmentID string`
-
-    Environment identifier this work belongs to (e.g., `env_...`)
-
-  - `LatestHeartbeatAt string`
-
-    RFC 3339 timestamp of the most recent heartbeat
-
-  - `Metadata map[string, string]`
-
-    User-provided metadata key-value pairs associated with this work item
-
-  - `Secret string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
-
-  - `StartedAt string`
-
-    RFC 3339 timestamp when work execution started
-
-  - `State BetaSelfHostedWorkState`
-
-    Current state of the work item
-
-    - `const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"`
-
-    - `const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"`
-
-    - `const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"`
-
-    - `const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"`
-
-    - `const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"`
-
-  - `StopRequestedAt string`
-
-    RFC 3339 timestamp when stop was requested
-
-  - `StoppedAt string`
-
-    RFC 3339 timestamp when work execution stopped
-
-  - `Type Work`
-
-    The type of object (always 'work')
-
-    - `const WorkWork Work = "work"`
-
-### Beta Self Hosted Work Heartbeat Response
-
-- `type BetaSelfHostedWorkHeartbeatResponse struct{…}`
-
-  Response after recording a heartbeat for a work item.
-
-  - `LastHeartbeat string`
-
-    RFC 3339 timestamp of the actual heartbeat from DB
-
-  - `LeaseExtended bool`
-
-    Whether the heartbeat succeeded in extending the lease
-
-  - `State BetaSelfHostedWorkHeartbeatResponseState`
-
-    Current state of the work item (active/stopping/stopped)
-
-    - `const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"`
-
-    - `const BetaSelfHostedWorkHeartbeatResponseStateStarting BetaSelfHostedWorkHeartbeatResponseState = "starting"`
-
-    - `const BetaSelfHostedWorkHeartbeatResponseStateActive BetaSelfHostedWorkHeartbeatResponseState = "active"`
-
-    - `const BetaSelfHostedWorkHeartbeatResponseStateStopping BetaSelfHostedWorkHeartbeatResponseState = "stopping"`
-
-    - `const BetaSelfHostedWorkHeartbeatResponseStateStopped BetaSelfHostedWorkHeartbeatResponseState = "stopped"`
-
-  - `TTLSeconds int64`
-
-    Effective TTL applied to the lease
-
-  - `Type WorkHeartbeat`
-
-    The type of response
-
-    - `const WorkHeartbeatWorkHeartbeat WorkHeartbeat = "work_heartbeat"`
-
-### Beta Self Hosted Work List Response
-
-- `type BetaSelfHostedWorkListResponse struct{…}`
-
-  Response when listing work items with cursor-based pagination.
-
-  - `Data []BetaSelfHostedWork`
-
-    List of work items
-
-    - `ID string`
-
-      Work identifier (e.g., 'work_...')
-
-    - `AcknowledgedAt string`
-
-      RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
-
-    - `CreatedAt string`
-
-      RFC 3339 timestamp when work was created
-
-    - `Data BetaSessionWorkData`
-
-      The actual work to be performed
-
-      - `ID string`
-
-        Session identifier (e.g., 'session_...')
-
-      - `Type Session`
-
-        Type of work data
-
-        - `const SessionSession Session = "session"`
-
-    - `EnvironmentID string`
-
-      Environment identifier this work belongs to (e.g., `env_...`)
-
-    - `LatestHeartbeatAt string`
-
-      RFC 3339 timestamp of the most recent heartbeat
-
-    - `Metadata map[string, string]`
-
-      User-provided metadata key-value pairs associated with this work item
-
-    - `Secret string`
-
-      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
-
-    - `StartedAt string`
-
-      RFC 3339 timestamp when work execution started
-
-    - `State BetaSelfHostedWorkState`
-
-      Current state of the work item
-
-      - `const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"`
-
-      - `const BetaSelfHostedWorkStateStarting BetaSelfHostedWorkState = "starting"`
-
-      - `const BetaSelfHostedWorkStateActive BetaSelfHostedWorkState = "active"`
-
-      - `const BetaSelfHostedWorkStateStopping BetaSelfHostedWorkState = "stopping"`
-
-      - `const BetaSelfHostedWorkStateStopped BetaSelfHostedWorkState = "stopped"`
-
-    - `StopRequestedAt string`
-
-      RFC 3339 timestamp when stop was requested
-
-    - `StoppedAt string`
-
-      RFC 3339 timestamp when work execution stopped
-
-    - `Type Work`
-
-      The type of object (always 'work')
-
-      - `const WorkWork Work = "work"`
-
-  - `NextPage string`
-
-    Opaque cursor for fetching the next page of results
-
-### Beta Self Hosted Work Queue Stats
-
-- `type BetaSelfHostedWorkQueueStats struct{…}`
-
-  Statistics about the work queue for an environment.
-
-  Uses Redis Stream consumer group metrics for O(1) queries.
-
-  - `Depth int64`
-
-    Number of work items waiting to be picked up (lag from consumer group)
-
-  - `OldestQueuedAt string`
-
-    RFC 3339 timestamp of oldest item in the work stream (includes both queued and pending items), null if stream empty
-
-  - `Pending int64`
-
-    Number of work items being processed (polled but not acknowledged)
-
-  - `Type WorkQueueStats`
-
-    The type of object
-
-    - `const WorkQueueStatsWorkQueueStats WorkQueueStats = "work_queue_stats"`
-
-  - `WorkersPolling int64`
-
-    Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
-
-### Beta Self Hosted Work Stop Request
-
-- `type BetaSelfHostedWorkStopRequest struct{…}`
-
-  Request to stop a work item.
-
-  - `Force bool`
-
-    If true, immediately stop work without graceful shutdown
-
-### Beta Self Hosted Work Update Request
-
-- `type BetaSelfHostedWorkUpdateRequest struct{…}`
-
-  Request to update work item metadata.
-
-  - `Metadata map[string, string]`
-
-    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
-
-### Beta Session Work Data
-
-- `type BetaSessionWorkData struct{…}`
-
-  Work data for session work items.
-
-  This resource type is used when work represents a session that needs to be executed
-  in a self-hosted environment.
-
-  - `ID string`
-
-    Session identifier (e.g., 'session_...')
-
-  - `Type Session`
-
-    Type of work data
-
-    - `const SessionSession Session = "session"`

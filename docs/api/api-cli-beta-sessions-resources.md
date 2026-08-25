@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/resources"
 category: "api"
 generated: true
 ---
----
-title: Resources
-url: https://platform.claude.com/docs/en/api/cli/beta/sessions/resources
----
-
 # Resources
 
 ## Add Session Resource
 
 `$ ant beta:sessions:resources add`
 
-**post** `/v1/sessions/{session_id}/resources`
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
@@ -29,6 +24,8 @@ Add Session Resource
 
   Body param: ID of a previously uploaded file.
 
+  minLength: 1, maxLength: 128
+
 - `--type: "file"`
 
   Body param
@@ -37,13 +34,15 @@ Add Session Resource
 
   Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
+  minLength: 1, maxLength: 4096
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+- `beta_managed_agents_file_resource: object`
 
   - `id: string`
 
@@ -51,21 +50,23 @@ Add Session Resource
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `file_id: string`
 
   - `mount_path: string`
 
   - `type: "file"`
 
-    - `"file"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
 ### Example
 
-```cli
+```bash
 ant beta:sessions:resources add \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
@@ -73,7 +74,7 @@ ant beta:sessions:resources add \
   --type file
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -90,7 +91,7 @@ ant beta:sessions:resources add \
 
 `$ ant beta:sessions:resources list`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
@@ -104,6 +105,8 @@ List Session Resources
 
   Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
+  format: int32
+
 - `--page: optional string`
 
   Query param: Opaque cursor from a previous response's next_page field.
@@ -114,7 +117,7 @@ List Session Resources
 
 ### Returns
 
-- `BetaManagedAgentsListSessionResources: object { data, next_page }`
+- `BetaManagedAgentsListSessionResources: object`
 
   Paginated list of resources attached to a session.
 
@@ -122,55 +125,59 @@ List Session Resources
 
     Resources for the session, ordered by `created_at`.
 
-    - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+    - `beta_managed_agents_github_repository_resource: object`
 
       - `id: string`
 
       - `created_at: string`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `mount_path: string`
 
       - `type: "github_repository"`
 
-        - `"github_repository"`
-
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `url: string`
 
       - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-        - `beta_managed_agents_branch_checkout: object { name, type }`
+        - `beta_managed_agents_branch_checkout: object`
 
           - `name: string`
 
             Branch name to check out.
 
+            minLength: 1, maxLength: 255
+
           - `type: "branch"`
 
-            - `"branch"`
-
-        - `beta_managed_agents_commit_checkout: object { sha, type }`
+        - `beta_managed_agents_commit_checkout: object`
 
           - `sha: string`
 
             Full commit SHA to check out.
 
+            minLength: 7, maxLength: 64
+
           - `type: "commit"`
 
-            - `"commit"`
-
-    - `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+    - `beta_managed_agents_file_resource: object`
 
       - `id: string`
 
       - `created_at: string`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `file_id: string`
 
@@ -178,13 +185,13 @@ List Session Resources
 
       - `type: "file"`
 
-        - `"file"`
-
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
 
-    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+        format: date-time
+
+    - `beta_managed_agents_memory_store_resource: object`
 
       A memory store attached to an agent session.
 
@@ -193,8 +200,6 @@ List Session Resources
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access: optional "read_write" or "read_only"`
 
@@ -212,6 +217,8 @@ List Session Resources
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+        maxLength: 4096
+
       - `mount_path: optional string`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -226,13 +233,13 @@ List Session Resources
 
 ### Example
 
-```cli
+```bash
 ant beta:sessions:resources list \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -266,7 +273,7 @@ ant beta:sessions:resources list \
 
 `$ ant beta:sessions:resources retrieve`
 
-**get** `/v1/sessions/{session_id}/resources/{resource_id}`
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
@@ -290,55 +297,59 @@ Get Session Resource
 
   The requested session resource.
 
-  - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+  - `beta_managed_agents_github_repository_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-      - `beta_managed_agents_branch_checkout: object { name, type }`
+      - `beta_managed_agents_branch_checkout: object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `beta_managed_agents_commit_checkout: object { sha, type }`
+      - `beta_managed_agents_commit_checkout: object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
+          minLength: 7, maxLength: 64
+
         - `type: "commit"`
 
-          - `"commit"`
-
-  - `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+  - `beta_managed_agents_file_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `file_id: string`
 
@@ -346,13 +357,13 @@ Get Session Resource
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
 
-  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+      format: date-time
+
+  - `beta_managed_agents_memory_store_resource: object`
 
     A memory store attached to an agent session.
 
@@ -361,8 +372,6 @@ Get Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only"`
 
@@ -380,6 +389,8 @@ Get Session Resource
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+      maxLength: 4096
+
     - `mount_path: optional string`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -390,14 +401,14 @@ Get Session Resource
 
 ### Example
 
-```cli
+```bash
 ant beta:sessions:resources retrieve \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -418,7 +429,7 @@ ant beta:sessions:resources retrieve \
 
 `$ ant beta:sessions:resources update`
 
-**post** `/v1/sessions/{session_id}/resources/{resource_id}`
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Update Session Resource
 
@@ -436,6 +447,8 @@ Update Session Resource
 
   Body param: New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
+  minLength: 1, maxLength: 4096
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
@@ -446,55 +459,59 @@ Update Session Resource
 
   The updated session resource.
 
-  - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+  - `beta_managed_agents_github_repository_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-      - `beta_managed_agents_branch_checkout: object { name, type }`
+      - `beta_managed_agents_branch_checkout: object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `beta_managed_agents_commit_checkout: object { sha, type }`
+      - `beta_managed_agents_commit_checkout: object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
+          minLength: 7, maxLength: 64
+
         - `type: "commit"`
 
-          - `"commit"`
-
-  - `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+  - `beta_managed_agents_file_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `file_id: string`
 
@@ -502,13 +519,13 @@ Update Session Resource
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
 
-  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+      format: date-time
+
+  - `beta_managed_agents_memory_store_resource: object`
 
     A memory store attached to an agent session.
 
@@ -517,8 +534,6 @@ Update Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only"`
 
@@ -536,6 +551,8 @@ Update Session Resource
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+      maxLength: 4096
+
     - `mount_path: optional string`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -546,7 +563,7 @@ Update Session Resource
 
 ### Example
 
-```cli
+```bash
 ant beta:sessions:resources update \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
@@ -554,7 +571,7 @@ ant beta:sessions:resources update \
   --authorization-token ghp_exampletoken
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -575,7 +592,7 @@ ant beta:sessions:resources update \
 
 `$ ant beta:sessions:resources delete`
 
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
@@ -595,7 +612,7 @@ Delete Session Resource
 
 ### Returns
 
-- `beta_managed_agents_delete_session_resource: object { id, type }`
+- `beta_managed_agents_delete_session_resource: object`
 
   Confirmation of resource deletion.
 
@@ -603,18 +620,16 @@ Delete Session Resource
 
   - `type: "session_resource_deleted"`
 
-    - `"session_resource_deleted"`
-
 ### Example
 
-```cli
+```bash
 ant beta:sessions:resources delete \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -623,11 +638,11 @@ ant beta:sessions:resources delete \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Delete Session Resource
 
-- `beta_managed_agents_delete_session_resource: object { id, type }`
+- `beta_managed_agents_delete_session_resource: object`
 
   Confirmation of resource deletion.
 
@@ -635,17 +650,17 @@ ant beta:sessions:resources delete \
 
   - `type: "session_resource_deleted"`
 
-    - `"session_resource_deleted"`
-
 ### Beta Managed Agents File Resource
 
-- `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+- `beta_managed_agents_file_resource: object`
 
   - `id: string`
 
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `file_id: string`
 
@@ -653,15 +668,15 @@ ant beta:sessions:resources delete \
 
   - `type: "file"`
 
-    - `"file"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
 ### Beta Managed Agents GitHub Repository Resource
 
-- `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+- `beta_managed_agents_github_repository_resource: object`
 
   - `id: string`
 
@@ -669,43 +684,45 @@ ant beta:sessions:resources delete \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `mount_path: string`
 
   - `type: "github_repository"`
-
-    - `"github_repository"`
 
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `url: string`
 
   - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-    - `beta_managed_agents_branch_checkout: object { name, type }`
+    - `beta_managed_agents_branch_checkout: object`
 
       - `name: string`
 
         Branch name to check out.
 
+        minLength: 1, maxLength: 255
+
       - `type: "branch"`
 
-        - `"branch"`
-
-    - `beta_managed_agents_commit_checkout: object { sha, type }`
+    - `beta_managed_agents_commit_checkout: object`
 
       - `sha: string`
 
         Full commit SHA to check out.
 
-      - `type: "commit"`
+        minLength: 7, maxLength: 64
 
-        - `"commit"`
+      - `type: "commit"`
 
 ### Beta Managed Agents Memory Store Resource
 
-- `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+- `beta_managed_agents_memory_store_resource: object`
 
   A memory store attached to an agent session.
 
@@ -714,8 +731,6 @@ ant beta:sessions:resources delete \
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
   - `type: "memory_store"`
-
-    - `"memory_store"`
 
   - `access: optional "read_write" or "read_only"`
 
@@ -733,6 +748,8 @@ ant beta:sessions:resources delete \
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+    maxLength: 4096
+
   - `mount_path: optional string`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -747,55 +764,59 @@ ant beta:sessions:resources delete \
 
   A memory store attached to an agent session.
 
-  - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
+  - `beta_managed_agents_github_repository_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `mount_path: string`
 
     - `type: "github_repository"`
 
-      - `"github_repository"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: string`
 
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-      - `beta_managed_agents_branch_checkout: object { name, type }`
+      - `beta_managed_agents_branch_checkout: object`
 
         - `name: string`
 
           Branch name to check out.
 
+          minLength: 1, maxLength: 255
+
         - `type: "branch"`
 
-          - `"branch"`
-
-      - `beta_managed_agents_commit_checkout: object { sha, type }`
+      - `beta_managed_agents_commit_checkout: object`
 
         - `sha: string`
 
           Full commit SHA to check out.
 
+          minLength: 7, maxLength: 64
+
         - `type: "commit"`
 
-          - `"commit"`
-
-  - `beta_managed_agents_file_resource: object { id, created_at, file_id, 3 more }`
+  - `beta_managed_agents_file_resource: object`
 
     - `id: string`
 
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `file_id: string`
 
@@ -803,13 +824,13 @@ ant beta:sessions:resources delete \
 
     - `type: "file"`
 
-      - `"file"`
-
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
 
-  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+      format: date-time
+
+  - `beta_managed_agents_memory_store_resource: object`
 
     A memory store attached to an agent session.
 
@@ -818,8 +839,6 @@ ant beta:sessions:resources delete \
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: "memory_store"`
-
-      - `"memory_store"`
 
     - `access: optional "read_write" or "read_only"`
 
@@ -836,6 +855,8 @@ ant beta:sessions:resources delete \
     - `instructions: optional string`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `mount_path: optional string`
 

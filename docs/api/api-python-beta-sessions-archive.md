@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Session
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/archive
----
+# Archive Session
 
-## Archive Session
+`beta.sessions.archive(session_id, **kwargs)  -> BetaManagedAgentsSession`
 
-`beta.sessions.archive(strsession_id, SessionArchiveParams**kwargs)  -> BetaManagedAgentsSession`
-
-**post** `/v1/sessions/{session_id}/archive`
+**POST** `/v1/sessions/{session_id}/archive`
 
 Archive Session
 
-### Parameters
+## Parameters
 
 - `session_id: str`
 
@@ -97,7 +92,7 @@ Archive Session
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsSession: …`
 
@@ -118,8 +113,6 @@ Archive Session
       - `name: str`
 
       - `type: Literal["url"]`
-
-        - `"url"`
 
       - `url: str`
 
@@ -217,15 +210,11 @@ Archive Session
 
           - `type: Literal["low"]`
 
-            - `"low"`
-
         - `class BetaManagedAgentsEffortMedium: …`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `type: Literal["medium"]`
-
-            - `"medium"`
 
         - `class BetaManagedAgentsEffortHigh: …`
 
@@ -233,23 +222,17 @@ Archive Session
 
           - `type: Literal["high"]`
 
-            - `"high"`
-
         - `class BetaManagedAgentsEffortXhigh: …`
 
           Extra-high effort. Not all models accept this level.
 
           - `type: Literal["xhigh"]`
 
-            - `"xhigh"`
-
         - `class BetaManagedAgentsEffortMax: …`
 
           Maximum effort. Favors reasoning depth over latency.
 
           - `type: Literal["max"]`
-
-            - `"max"`
 
       - `inference_geo: Optional[str]`
 
@@ -303,8 +286,6 @@ Archive Session
 
               - `type: Literal["anthropic"]`
 
-                - `"anthropic"`
-
               - `version: str`
 
             - `class BetaManagedAgentsCustomSkill: …`
@@ -314,8 +295,6 @@ Archive Session
               - `skill_id: str`
 
               - `type: Literal["custom"]`
-
-                - `"custom"`
 
               - `version: str`
 
@@ -335,8 +314,6 @@ Archive Session
 
                   - `name: Literal["bash"]`
 
-                    - `"bash"`
-
                   - `permission_policy: PermissionPolicy`
 
                     Permission policy for tool execution.
@@ -347,19 +324,13 @@ Archive Session
 
                       - `type: Literal["always_allow"]`
 
-                        - `"always_allow"`
-
                     - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                       Tool calls require user confirmation before execution.
 
                       - `type: Literal["always_ask"]`
 
-                        - `"always_ask"`
-
                   - `type: Literal["bash"]`
-
-                    - `"bash"`
 
                 - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -368,8 +339,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["edit"]`
-
-                    - `"edit"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -385,8 +354,6 @@ Archive Session
 
                   - `type: Literal["edit"]`
 
-                    - `"edit"`
-
                 - `class BetaManagedAgentsReadToolConfig: …`
 
                   Configuration for the read tool.
@@ -394,8 +361,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["read"]`
-
-                    - `"read"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -411,8 +376,6 @@ Archive Session
 
                   - `type: Literal["read"]`
 
-                    - `"read"`
-
                 - `class BetaManagedAgentsWriteToolConfig: …`
 
                   Configuration for the write tool.
@@ -420,8 +383,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["write"]`
-
-                    - `"write"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -437,8 +398,6 @@ Archive Session
 
                   - `type: Literal["write"]`
 
-                    - `"write"`
-
                 - `class BetaManagedAgentsGlobToolConfig: …`
 
                   Configuration for the glob tool.
@@ -446,8 +405,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["glob"]`
-
-                    - `"glob"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -463,8 +420,6 @@ Archive Session
 
                   - `type: Literal["glob"]`
 
-                    - `"glob"`
-
                 - `class BetaManagedAgentsGrepToolConfig: …`
 
                   Configuration for the grep tool.
@@ -472,8 +427,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["grep"]`
-
-                    - `"grep"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -489,8 +442,6 @@ Archive Session
 
                   - `type: Literal["grep"]`
 
-                    - `"grep"`
-
                 - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                   Configuration for the web_fetch tool.
@@ -498,8 +449,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["web_fetch"]`
-
-                    - `"web_fetch"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -515,13 +464,13 @@ Archive Session
 
                   - `type: Literal["web_fetch"]`
 
-                    - `"web_fetch"`
-
                   - `allowed_domains: Optional[List[str]]`
 
                   - `blocked_domains: Optional[List[str]]`
 
                   - `max_content_tokens: Optional[int]`
+
+                    format: int32
 
                 - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -530,8 +479,6 @@ Archive Session
                   - `enabled: bool`
 
                   - `name: Literal["web_search"]`
-
-                    - `"web_search"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -547,8 +494,6 @@ Archive Session
 
                   - `type: Literal["web_search"]`
 
-                    - `"web_search"`
-
                   - `allowed_domains: Optional[List[str]]`
 
                   - `blocked_domains: Optional[List[str]]`
@@ -561,11 +506,11 @@ Archive Session
 
                       Location precision. Only "approximate" is supported.
 
-                      - `"approximate"`
-
                     - `city: Optional[str]`
 
                       City name.
+
+                      minLength: 1, maxLength: 255
 
                     - `country: Optional[str]`
 
@@ -575,9 +520,13 @@ Archive Session
 
                       Region or state name.
 
+                      minLength: 1, maxLength: 255
+
                     - `timezone: Optional[str]`
 
                       IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                      minLength: 1, maxLength: 255
 
               - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -598,8 +547,6 @@ Archive Session
                     Tool calls require user confirmation before execution.
 
               - `type: Literal["agent_toolset_20260401"]`
-
-                - `"agent_toolset_20260401"`
 
             - `class BetaManagedAgentsMCPToolset: …`
 
@@ -643,8 +590,6 @@ Archive Session
 
               - `type: Literal["mcp_toolset"]`
 
-                - `"mcp_toolset"`
-
             - `class BetaManagedAgentsCustomTool: …`
 
               A custom tool as returned in API responses.
@@ -657,8 +602,6 @@ Archive Session
 
                 - `type: Literal["object"]`
 
-                  - `"object"`
-
                 - `properties: Optional[Dict[str, object]]`
 
                 - `required: Optional[List[str]]`
@@ -667,13 +610,11 @@ Archive Session
 
               - `type: Literal["custom"]`
 
-                - `"custom"`
-
           - `type: Literal["agent"]`
 
-            - `"agent"`
-
           - `version: int`
+
+            format: int32
 
         - `class BetaManagedAgentsAdvisor: …`
 
@@ -685,11 +626,7 @@ Archive Session
 
           - `type: Literal["advisor"]`
 
-            - `"advisor"`
-
       - `type: Literal["coordinator"]`
-
-        - `"coordinator"`
 
     - `name: str`
 
@@ -717,13 +654,15 @@ Archive Session
 
     - `type: Literal["agent"]`
 
-      - `"agent"`
-
     - `version: int`
+
+      format: int32
 
   - `archived_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -741,15 +680,13 @@ Archive Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: Literal["limit"]`
-
-      - `"limit"`
 
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `environment_id: str`
 
@@ -763,6 +700,8 @@ Archive Session
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `description: str`
 
       What the agent should produce.
@@ -775,6 +714,8 @@ Archive Session
 
       0-indexed revision cycle the outcome is currently on.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated outc_ ID for this outcome.
@@ -784,8 +725,6 @@ Archive Session
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
     - `type: Literal["outcome_evaluation"]`
-
-      - `"outcome_evaluation"`
 
   - `resources: List[BetaManagedAgentsSessionResource]`
 
@@ -797,15 +736,17 @@ Archive Session
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `mount_path: str`
 
       - `type: Literal["github_repository"]`
 
-        - `"github_repository"`
-
       - `updated_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `url: str`
 
@@ -817,9 +758,9 @@ Archive Session
 
             Branch name to check out.
 
-          - `type: Literal["branch"]`
+            minLength: 1, maxLength: 255
 
-            - `"branch"`
+          - `type: Literal["branch"]`
 
         - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -827,9 +768,9 @@ Archive Session
 
             Full commit SHA to check out.
 
-          - `type: Literal["commit"]`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: Literal["commit"]`
 
     - `class BetaManagedAgentsFileResource: …`
 
@@ -839,17 +780,19 @@ Archive Session
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `file_id: str`
 
       - `mount_path: str`
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
       - `updated_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
     - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -860,8 +803,6 @@ Archive Session
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: Literal["memory_store"]`
-
-        - `"memory_store"`
 
       - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -879,6 +820,8 @@ Archive Session
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+        maxLength: 4096
+
       - `mount_path: Optional[str]`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -895,9 +838,13 @@ Archive Session
 
       Cumulative time in seconds the session spent in running status. Excludes idle time.
 
+      format: double
+
     - `duration_seconds: Optional[float]`
 
       Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+      format: double
 
   - `status: Literal["rescheduling", "running", "idle", "terminated"]`
 
@@ -915,11 +862,11 @@ Archive Session
 
   - `type: Literal["session"]`
 
-    - `"session"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `usage: BetaManagedAgentsSessionUsage`
 
@@ -929,6 +876,8 @@ Archive Session
 
       Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once, unlike `stats.active_seconds`, which sums each thread's own active time. This is the duration the session's runtime cost is priced on.
 
+      format: double
+
     - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -937,17 +886,25 @@ Archive Session
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `ephemeral_5m_input_tokens: Optional[int]`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `cache_read_input_tokens: Optional[int]`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `input_tokens: Optional[int]`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -957,6 +914,8 @@ Archive Session
 
       Total output tokens generated across all turns.
 
+      format: int32
+
     - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
@@ -965,9 +924,13 @@ Archive Session
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `web_search_requests: Optional[int]`
 
         Number of server-executed web search requests.
+
+        format: int32
 
   - `vault_ids: List[str]`
 
@@ -977,7 +940,7 @@ Archive Session
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-### Example
+## Example
 
 ```python
 import os
@@ -994,7 +957,7 @@ beta_managed_agents_session = client.beta.sessions.archive(
 print(beta_managed_agents_session.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

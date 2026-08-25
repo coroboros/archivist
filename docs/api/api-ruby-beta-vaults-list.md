@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/list"
 category: "api"
 generated: true
 ---
----
-title: List Vaults
-url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/list
----
-
-## List Vaults
+# List Vaults
 
 `beta.vaults.list(**kwargs) -> PageCursor<BetaManagedAgentsVault>`
 
-**get** `/v1/vaults`
+**GET** `/v1/vaults`
 
 List Vaults
 
-### Parameters
+## Parameters
 
 - `include_archived: bool`
 
@@ -26,6 +21,8 @@ List Vaults
 - `limit: Integer`
 
   Maximum number of vaults to return per page. Defaults to 20, maximum 100.
+
+  format: int32
 
 - `page: String`
 
@@ -107,7 +104,7 @@ List Vaults
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault`
 
@@ -121,9 +118,13 @@ List Vaults
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: String`
 
@@ -135,13 +136,13 @@ List Vaults
 
   - `type: :vault`
 
-    - `:vault`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```ruby
 require "anthropic"
@@ -153,7 +154,7 @@ page = anthropic.beta.vaults.list
 puts(page)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

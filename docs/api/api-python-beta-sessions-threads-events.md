@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/threads/ev
 category: "api"
 generated: true
 ---
----
-title: Events
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/threads/events
----
-
 # Events
 
 ## List Session Thread Events
 
-`beta.sessions.threads.events.list(strthread_id, EventListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
+`beta.sessions.threads.events.list(thread_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}/events`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/events`
 
 List Session Thread Events
 
@@ -28,6 +23,8 @@ List Session Thread Events
 - `limit: Optional[int]`
 
   Query parameter for limit
+
+  format: int32
 
 - `page: Optional[str]`
 
@@ -135,9 +132,9 @@ List Session Thread Events
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -155,13 +152,15 @@ List Session Thread Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -169,11 +168,11 @@ List Session Thread Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -183,13 +182,11 @@ List Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -207,13 +204,15 @@ List Session Thread Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -223,15 +222,13 @@ List Session Thread Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -239,11 +236,11 @@ List Session Thread Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -253,13 +250,11 @@ List Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -275,15 +270,13 @@ List Session Thread Events
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -295,11 +288,11 @@ List Session Thread Events
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -327,15 +320,17 @@ List Session Thread Events
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -354,8 +349,6 @@ List Session Thread Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -393,21 +386,23 @@ List Session Thread Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -416,6 +411,8 @@ List Session Thread Events
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -441,9 +438,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -473,9 +470,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -489,9 +486,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -517,9 +514,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -551,9 +548,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -599,9 +596,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -629,13 +626,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -697,9 +694,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -737,13 +734,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -761,9 +758,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -795,15 +792,11 @@ List Session Thread Events
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -811,11 +804,7 @@ List Session Thread Events
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -843,8 +832,6 @@ List Session Thread Events
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -871,8 +858,6 @@ List Session Thread Events
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -898,8 +883,6 @@ List Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -931,8 +914,6 @@ List Session Thread Events
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -963,8 +944,6 @@ List Session Thread Events
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -990,8 +969,6 @@ List Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -1023,8 +1000,6 @@ List Session Thread Events
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -1033,9 +1008,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -1049,9 +1024,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -1065,9 +1040,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -1081,6 +1056,8 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -1090,8 +1067,6 @@ List Session Thread Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -1103,15 +1078,11 @@ List Session Thread Events
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -1119,11 +1090,7 @@ List Session Thread Events
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -1137,9 +1104,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -1157,13 +1124,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -1177,6 +1144,8 @@ List Session Thread Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1185,9 +1154,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -1205,6 +1174,8 @@ List Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -1217,13 +1188,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -1233,17 +1204,25 @@ List Session Thread Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1265,9 +1244,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -1293,9 +1272,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -1309,6 +1288,8 @@ List Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1317,9 +1298,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -1337,6 +1318,8 @@ List Session Thread Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -1344,6 +1327,8 @@ List Session Thread Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -1359,8 +1344,6 @@ List Session Thread Events
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -1371,11 +1354,7 @@ List Session Thread Events
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -1389,9 +1368,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -1409,13 +1388,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -1432,6 +1411,8 @@ List Session Thread Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -1459,8 +1440,6 @@ List Session Thread Events
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -1477,13 +1456,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -1498,8 +1477,6 @@ List Session Thread Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -1529,6 +1506,8 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -1549,13 +1528,13 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -1569,9 +1548,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -1586,8 +1565,6 @@ List Session Thread Events
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -1685,15 +1662,11 @@ List Session Thread Events
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -1701,23 +1674,17 @@ List Session Thread Events
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -1771,8 +1738,6 @@ List Session Thread Events
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -1782,8 +1747,6 @@ List Session Thread Events
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -1803,8 +1766,6 @@ List Session Thread Events
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -1815,19 +1776,13 @@ List Session Thread Events
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -1836,8 +1791,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1853,8 +1806,6 @@ List Session Thread Events
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -1862,8 +1813,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1879,8 +1828,6 @@ List Session Thread Events
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -1888,8 +1835,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1905,8 +1850,6 @@ List Session Thread Events
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -1914,8 +1857,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1931,8 +1872,6 @@ List Session Thread Events
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -1940,8 +1879,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1957,8 +1894,6 @@ List Session Thread Events
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -1966,8 +1901,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1983,13 +1916,13 @@ List Session Thread Events
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -1998,8 +1931,6 @@ List Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -2015,8 +1946,6 @@ List Session Thread Events
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -2029,11 +1958,11 @@ List Session Thread Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -2043,9 +1972,13 @@ List Session Thread Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -2066,8 +1999,6 @@ List Session Thread Events
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -2111,8 +2042,6 @@ List Session Thread Events
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -2125,8 +2054,6 @@ List Session Thread Events
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -2135,13 +2062,11 @@ List Session Thread Events
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -2153,11 +2078,7 @@ List Session Thread Events
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -2185,9 +2106,9 @@ List Session Thread Events
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -2205,11 +2126,7 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -2235,17 +2152,17 @@ List Session Thread Events
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -2259,9 +2176,9 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -2271,6 +2188,8 @@ List Session Thread Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -2279,17 +2198,25 @@ List Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -2299,6 +2226,8 @@ List Session Thread Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -2307,9 +2236,13 @@ List Session Thread Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -2334,7 +2267,7 @@ page = page.data[0]
 print(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2357,9 +2290,9 @@ print(page)
 
 ## Stream Session Thread Events
 
-`beta.sessions.threads.events.stream(strthread_id, EventStreamParams**kwargs)  -> BetaManagedAgentsStreamSessionThreadEvents`
+`beta.sessions.threads.events.stream(thread_id, **kwargs)  -> BetaManagedAgentsStreamSessionThreadEvents`
 
-**get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
+**GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
 Stream Session Thread Events
 
@@ -2479,9 +2412,9 @@ Stream Session Thread Events
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -2499,13 +2432,15 @@ Stream Session Thread Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -2513,11 +2448,11 @@ Stream Session Thread Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -2527,13 +2462,11 @@ Stream Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -2551,13 +2484,15 @@ Stream Session Thread Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -2567,15 +2502,13 @@ Stream Session Thread Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -2583,11 +2516,11 @@ Stream Session Thread Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -2597,13 +2530,11 @@ Stream Session Thread Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -2619,15 +2550,13 @@ Stream Session Thread Events
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -2639,11 +2568,11 @@ Stream Session Thread Events
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -2671,15 +2600,17 @@ Stream Session Thread Events
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -2698,8 +2629,6 @@ Stream Session Thread Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -2737,21 +2666,23 @@ Stream Session Thread Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -2760,6 +2691,8 @@ Stream Session Thread Events
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -2785,9 +2718,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -2817,9 +2750,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -2833,9 +2766,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -2861,9 +2794,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -2895,9 +2828,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -2943,9 +2876,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -2973,13 +2906,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -3041,9 +2974,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -3081,13 +3014,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -3105,9 +3038,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -3139,15 +3072,11 @@ Stream Session Thread Events
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -3155,11 +3084,7 @@ Stream Session Thread Events
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -3187,8 +3112,6 @@ Stream Session Thread Events
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -3215,8 +3138,6 @@ Stream Session Thread Events
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -3242,8 +3163,6 @@ Stream Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -3275,8 +3194,6 @@ Stream Session Thread Events
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -3307,8 +3224,6 @@ Stream Session Thread Events
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -3334,8 +3249,6 @@ Stream Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -3367,8 +3280,6 @@ Stream Session Thread Events
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -3377,9 +3288,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -3393,9 +3304,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -3409,9 +3320,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -3425,6 +3336,8 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -3434,8 +3347,6 @@ Stream Session Thread Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -3447,15 +3358,11 @@ Stream Session Thread Events
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -3463,11 +3370,7 @@ Stream Session Thread Events
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -3481,9 +3384,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -3501,13 +3404,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -3521,6 +3424,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -3529,9 +3434,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -3549,6 +3454,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -3561,13 +3468,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -3577,17 +3484,25 @@ Stream Session Thread Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -3609,9 +3524,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -3637,9 +3552,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -3653,6 +3568,8 @@ Stream Session Thread Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -3661,9 +3578,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -3681,6 +3598,8 @@ Stream Session Thread Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -3688,6 +3607,8 @@ Stream Session Thread Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -3703,8 +3624,6 @@ Stream Session Thread Events
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -3715,11 +3634,7 @@ Stream Session Thread Events
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -3733,9 +3648,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -3753,13 +3668,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -3776,6 +3691,8 @@ Stream Session Thread Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -3803,8 +3720,6 @@ Stream Session Thread Events
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -3821,13 +3736,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -3842,8 +3757,6 @@ Stream Session Thread Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -3873,6 +3786,8 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -3893,13 +3808,13 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -3913,9 +3828,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -3930,8 +3845,6 @@ Stream Session Thread Events
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -4029,15 +3942,11 @@ Stream Session Thread Events
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -4045,23 +3954,17 @@ Stream Session Thread Events
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -4115,8 +4018,6 @@ Stream Session Thread Events
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -4126,8 +4027,6 @@ Stream Session Thread Events
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -4147,8 +4046,6 @@ Stream Session Thread Events
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -4159,19 +4056,13 @@ Stream Session Thread Events
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -4180,8 +4071,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4197,8 +4086,6 @@ Stream Session Thread Events
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -4206,8 +4093,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4223,8 +4108,6 @@ Stream Session Thread Events
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -4232,8 +4115,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4249,8 +4130,6 @@ Stream Session Thread Events
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -4258,8 +4137,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4275,8 +4152,6 @@ Stream Session Thread Events
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -4284,8 +4159,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4301,8 +4174,6 @@ Stream Session Thread Events
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -4310,8 +4181,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4327,13 +4196,13 @@ Stream Session Thread Events
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -4342,8 +4211,6 @@ Stream Session Thread Events
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -4359,8 +4226,6 @@ Stream Session Thread Events
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -4373,11 +4238,11 @@ Stream Session Thread Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -4387,9 +4252,13 @@ Stream Session Thread Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -4410,8 +4279,6 @@ Stream Session Thread Events
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -4455,8 +4322,6 @@ Stream Session Thread Events
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -4469,8 +4334,6 @@ Stream Session Thread Events
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -4479,13 +4342,11 @@ Stream Session Thread Events
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -4497,11 +4358,7 @@ Stream Session Thread Events
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -4529,9 +4386,9 @@ Stream Session Thread Events
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -4549,11 +4406,7 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -4579,8 +4432,6 @@ Stream Session Thread Events
 
         - `type: Literal["agent.message"]`
 
-          - `"agent.message"`
-
       - `class BetaManagedAgentsAgentThinkingPreview: …`
 
         - `id: str`
@@ -4589,11 +4440,7 @@ Stream Session Thread Events
 
         - `type: Literal["agent.thinking"]`
 
-          - `"agent.thinking"`
-
     - `type: Literal["event_start"]`
-
-      - `"event_start"`
 
   - `class BetaManagedAgentsDeltaEvent: …`
 
@@ -4609,19 +4456,17 @@ Stream Session Thread Events
 
       - `type: Literal["content_delta"]`
 
-        - `"content_delta"`
-
       - `index: Optional[int]`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `event_id: str`
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
     - `type: Literal["event_delta"]`
-
-      - `"event_delta"`
 
   - `class BetaManagedAgentsSystemMessageEvent: …`
 
@@ -4639,17 +4484,17 @@ Stream Session Thread Events
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -4663,9 +4508,9 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -4675,6 +4520,8 @@ Stream Session Thread Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -4683,17 +4530,25 @@ Stream Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -4703,6 +4558,8 @@ Stream Session Thread Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -4711,13 +4568,21 @@ Stream Session Thread Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
 
+          format: int32
+
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+- `BetaManagedAgentsStreamSessionThreadEvents`
+
+  Server-sent event in a single thread's stream.
 
 ### Example
 
@@ -4737,7 +4602,7 @@ for event in client.beta.sessions.threads.events.stream(
     print(event)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {

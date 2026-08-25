@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/events"
 category: "api"
 generated: true
 ---
----
-title: Events
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/events
----
-
 # Events
 
 ## List Events
 
-`beta.sessions.events.list(strsession_id, EventListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
+`beta.sessions.events.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
 
-**get** `/v1/sessions/{session_id}/events`
+**GET** `/v1/sessions/{session_id}/events`
 
 List Events
 
@@ -27,21 +22,31 @@ List Events
 
   Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `created_at_gte: Optional[Union[str, datetime]]`
 
   Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
+
+  format: date-time
 
 - `created_at_lt: Optional[Union[str, datetime]]`
 
   Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `created_at_lte: Optional[Union[str, datetime]]`
 
   Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
+  format: date-time
+
 - `limit: Optional[int]`
 
   Query parameter for limit
+
+  format: int32
 
 - `order: Optional[Literal["asc", "desc"]]`
 
@@ -161,9 +166,9 @@ List Events
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -181,13 +186,15 @@ List Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -195,11 +202,11 @@ List Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -209,13 +216,11 @@ List Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -233,13 +238,15 @@ List Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -249,15 +256,13 @@ List Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -265,11 +270,11 @@ List Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -279,13 +284,11 @@ List Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -301,15 +304,13 @@ List Events
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -321,11 +322,11 @@ List Events
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -353,15 +354,17 @@ List Events
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -380,8 +383,6 @@ List Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -419,21 +420,23 @@ List Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -442,6 +445,8 @@ List Events
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -467,9 +472,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -499,9 +504,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -515,9 +520,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -543,9 +548,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -577,9 +582,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -625,9 +630,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -655,13 +660,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -723,9 +728,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -763,13 +768,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -787,9 +792,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -821,15 +826,11 @@ List Events
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -837,11 +838,7 @@ List Events
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -869,8 +866,6 @@ List Events
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -897,8 +892,6 @@ List Events
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -924,8 +917,6 @@ List Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -957,8 +948,6 @@ List Events
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -989,8 +978,6 @@ List Events
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -1016,8 +1003,6 @@ List Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -1049,8 +1034,6 @@ List Events
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -1059,9 +1042,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -1075,9 +1058,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -1091,9 +1074,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -1107,6 +1090,8 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -1116,8 +1101,6 @@ List Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -1129,15 +1112,11 @@ List Events
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -1145,11 +1124,7 @@ List Events
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -1163,9 +1138,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -1183,13 +1158,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -1203,6 +1178,8 @@ List Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1211,9 +1188,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -1231,6 +1208,8 @@ List Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -1243,13 +1222,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -1259,17 +1238,25 @@ List Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1291,9 +1278,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -1319,9 +1306,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -1335,6 +1322,8 @@ List Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -1343,9 +1332,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -1363,6 +1352,8 @@ List Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -1370,6 +1361,8 @@ List Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -1385,8 +1378,6 @@ List Events
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -1397,11 +1388,7 @@ List Events
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -1415,9 +1402,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -1435,13 +1422,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -1458,6 +1445,8 @@ List Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -1485,8 +1474,6 @@ List Events
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -1503,13 +1490,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -1524,8 +1511,6 @@ List Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -1555,6 +1540,8 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -1575,13 +1562,13 @@ List Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -1595,9 +1582,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -1612,8 +1599,6 @@ List Events
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -1711,15 +1696,11 @@ List Events
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -1727,23 +1708,17 @@ List Events
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -1797,8 +1772,6 @@ List Events
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -1808,8 +1781,6 @@ List Events
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -1829,8 +1800,6 @@ List Events
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -1841,19 +1810,13 @@ List Events
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -1862,8 +1825,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1879,8 +1840,6 @@ List Events
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -1888,8 +1847,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1905,8 +1862,6 @@ List Events
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -1914,8 +1869,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1931,8 +1884,6 @@ List Events
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -1940,8 +1891,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1957,8 +1906,6 @@ List Events
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -1966,8 +1913,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -1983,8 +1928,6 @@ List Events
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -1992,8 +1935,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -2009,13 +1950,13 @@ List Events
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -2024,8 +1965,6 @@ List Events
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -2041,8 +1980,6 @@ List Events
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -2055,11 +1992,11 @@ List Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -2069,9 +2006,13 @@ List Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -2092,8 +2033,6 @@ List Events
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -2137,8 +2076,6 @@ List Events
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -2151,8 +2088,6 @@ List Events
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -2161,13 +2096,11 @@ List Events
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -2179,11 +2112,7 @@ List Events
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -2211,9 +2140,9 @@ List Events
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -2231,11 +2160,7 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -2261,17 +2186,17 @@ List Events
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -2285,9 +2210,9 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -2297,6 +2222,8 @@ List Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -2305,17 +2232,25 @@ List Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -2325,6 +2260,8 @@ List Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -2333,9 +2270,13 @@ List Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -2359,7 +2300,7 @@ page = page.data[0]
 print(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2393,9 +2334,9 @@ print(page)
 
 ## Send Events
 
-`beta.sessions.events.send(strsession_id, EventSendParams**kwargs)  -> BetaManagedAgentsSendSessionEvents`
+`beta.sessions.events.send(session_id, **kwargs)  -> BetaManagedAgentsSendSessionEvents`
 
-**post** `/v1/sessions/{session_id}/events`
+**POST** `/v1/sessions/{session_id}/events`
 
 Send Events
 
@@ -2423,9 +2364,9 @@ Send Events
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -2443,13 +2384,15 @@ Send Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -2457,11 +2400,11 @@ Send Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -2471,13 +2414,11 @@ Send Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -2495,13 +2436,15 @@ Send Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -2511,15 +2454,13 @@ Send Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -2527,11 +2468,11 @@ Send Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -2541,13 +2482,11 @@ Send Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -2563,19 +2502,13 @@ Send Events
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
   - `class BetaManagedAgentsUserInterruptEventParams: …`
 
     Parameters for sending an interrupt to pause the agent.
 
     - `type: Literal["user.interrupt"]`
-
-      - `"user.interrupt"`
 
     - `session_thread_id: Optional[str]`
 
@@ -2597,13 +2530,15 @@ Send Events
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.tool_confirmation"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_confirmation"`
+    - `type: Literal["user.tool_confirmation"]`
 
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
   - `class BetaManagedAgentsUserCustomToolResultEventParams: …`
 
@@ -2613,9 +2548,9 @@ Send Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.custom_tool_result"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.custom_tool_result"`
+    - `type: Literal["user.custom_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -2653,21 +2588,23 @@ Send Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -2695,8 +2632,6 @@ Send Events
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubricParams: …`
 
         Rubric content provided inline as text.
@@ -2705,17 +2640,17 @@ Send Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: Optional[int]`
 
       Eval→revision cycles before giving up. Default 3, max 20.
+
+      format: int32
 
   - `class BetaManagedAgentsUserToolResultEventParams: …`
 
@@ -2725,9 +2660,9 @@ Send Events
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.tool_result"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_result"`
+    - `type: Literal["user.tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -2765,13 +2700,11 @@ Send Events
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -2879,9 +2812,9 @@ Send Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `class BetaManagedAgentsImageBlock: …`
 
@@ -2899,13 +2832,15 @@ Send Events
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: str`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `type: Literal["base64"]`
+                minLength: 1
 
-                - `"base64"`
+              - `type: Literal["base64"]`
 
             - `class BetaManagedAgentsURLImageSource: …`
 
@@ -2913,11 +2848,11 @@ Send Events
 
               - `type: Literal["url"]`
 
-                - `"url"`
-
               - `url: str`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileImageSource: …`
 
@@ -2927,13 +2862,11 @@ Send Events
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: Literal["file"]`
 
-                - `"file"`
-
           - `type: Literal["image"]`
-
-            - `"image"`
 
         - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -2951,13 +2884,15 @@ Send Events
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: str`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `type: Literal["base64"]`
+                minLength: 1
 
-                - `"base64"`
+              - `type: Literal["base64"]`
 
             - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -2967,15 +2902,13 @@ Send Events
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: Literal["text/plain"]`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: Literal["text"]`
-
-                - `"text"`
 
             - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -2983,11 +2916,11 @@ Send Events
 
               - `type: Literal["url"]`
 
-                - `"url"`
-
               - `url: str`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -2997,13 +2930,11 @@ Send Events
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: Literal["file"]`
 
-                - `"file"`
-
           - `type: Literal["document"]`
-
-            - `"document"`
 
           - `context: Optional[str]`
 
@@ -3019,15 +2950,13 @@ Send Events
 
           - `type: Literal["redacted"]`
 
-            - `"redacted"`
-
       - `type: Literal["user.message"]`
-
-        - `"user.message"`
 
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
     - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -3039,11 +2968,11 @@ Send Events
 
       - `type: Literal["user.interrupt"]`
 
-        - `"user.interrupt"`
-
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -3071,15 +3000,17 @@ Send Events
 
       - `type: Literal["user.tool_confirmation"]`
 
-        - `"user.tool_confirmation"`
-
       - `deny_message: Optional[str]`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+        maxLength: 10000
+
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -3098,8 +3029,6 @@ Send Events
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: Literal["user.custom_tool_result"]`
-
-        - `"user.custom_tool_result"`
 
       - `content: Optional[List[Content]]`
 
@@ -3137,21 +3066,23 @@ Send Events
 
               The text content.
 
-            - `type: Literal["text"]`
+              minLength: 1
 
-              - `"text"`
+            - `type: Literal["text"]`
 
           - `source: str`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `title: str`
 
             The title of the search result.
 
-          - `type: Literal["search_result"]`
+            minLength: 1
 
-            - `"search_result"`
+          - `type: Literal["search_result"]`
 
       - `is_error: Optional[bool]`
 
@@ -3160,6 +3091,8 @@ Send Events
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -3181,6 +3114,8 @@ Send Events
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+        format: int32
+
       - `outcome_id: str`
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -3188,6 +3123,8 @@ Send Events
       - `processed_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `rubric: Rubric`
 
@@ -3203,8 +3140,6 @@ Send Events
 
           - `type: Literal["file"]`
 
-            - `"file"`
-
         - `class BetaManagedAgentsTextRubric: …`
 
           Rubric content provided inline as text.
@@ -3215,11 +3150,7 @@ Send Events
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
       - `type: Literal["user.define_outcome"]`
-
-        - `"user.define_outcome"`
 
     - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -3234,8 +3165,6 @@ Send Events
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: Literal["user.tool_result"]`
-
-        - `"user.tool_result"`
 
       - `content: Optional[List[Content]]`
 
@@ -3265,6 +3194,8 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: Optional[str]`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -3285,17 +3216,17 @@ Send Events
 
           The text content.
 
+          minLength: 1
+
         - `type: Literal["text"]`
 
-          - `"text"`
-
       - `type: Literal["system.message"]`
-
-        - `"system.message"`
 
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
 ### Example
 
@@ -3325,7 +3256,7 @@ beta_managed_agents_send_session_events = client.beta.sessions.events.send(
 print(beta_managed_agents_send_session_events.data)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -3347,9 +3278,9 @@ print(beta_managed_agents_send_session_events.data)
 
 ## Stream Events
 
-`beta.sessions.events.stream(strsession_id, EventStreamParams**kwargs)  -> BetaManagedAgentsStreamSessionEvents`
+`beta.sessions.events.stream(session_id, **kwargs)  -> BetaManagedAgentsStreamSessionEvents`
 
-**get** `/v1/sessions/{session_id}/events/stream`
+**GET** `/v1/sessions/{session_id}/events/stream`
 
 Stream Events
 
@@ -3467,9 +3398,9 @@ Stream Events
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -3487,13 +3418,15 @@ Stream Events
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -3501,11 +3434,11 @@ Stream Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -3515,13 +3448,11 @@ Stream Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -3539,13 +3470,15 @@ Stream Events
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -3555,15 +3488,13 @@ Stream Events
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -3571,11 +3502,11 @@ Stream Events
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -3585,13 +3516,11 @@ Stream Events
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -3607,15 +3536,13 @@ Stream Events
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -3627,11 +3554,11 @@ Stream Events
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -3659,15 +3586,17 @@ Stream Events
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -3686,8 +3615,6 @@ Stream Events
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -3725,21 +3652,23 @@ Stream Events
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -3748,6 +3677,8 @@ Stream Events
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -3773,9 +3704,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -3805,9 +3736,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -3821,9 +3752,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -3849,9 +3780,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -3883,9 +3814,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -3931,9 +3862,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -3961,13 +3892,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -4029,9 +3960,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -4069,13 +4000,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -4093,9 +4024,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -4127,15 +4058,11 @@ Stream Events
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -4143,11 +4070,7 @@ Stream Events
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -4175,8 +4098,6 @@ Stream Events
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -4203,8 +4124,6 @@ Stream Events
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -4230,8 +4149,6 @@ Stream Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -4263,8 +4180,6 @@ Stream Events
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -4295,8 +4210,6 @@ Stream Events
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -4322,8 +4235,6 @@ Stream Events
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -4355,8 +4266,6 @@ Stream Events
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -4365,9 +4274,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -4381,9 +4290,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -4397,9 +4306,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -4413,6 +4322,8 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -4422,8 +4333,6 @@ Stream Events
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -4435,15 +4344,11 @@ Stream Events
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -4451,11 +4356,7 @@ Stream Events
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -4469,9 +4370,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -4489,13 +4390,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -4509,6 +4410,8 @@ Stream Events
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4517,9 +4420,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -4537,6 +4440,8 @@ Stream Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -4549,13 +4454,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -4565,17 +4470,25 @@ Stream Events
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -4597,9 +4510,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -4625,9 +4538,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -4641,6 +4554,8 @@ Stream Events
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -4649,9 +4564,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -4669,6 +4584,8 @@ Stream Events
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -4676,6 +4593,8 @@ Stream Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -4691,8 +4610,6 @@ Stream Events
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -4703,11 +4620,7 @@ Stream Events
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -4721,9 +4634,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -4741,13 +4654,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -4764,6 +4677,8 @@ Stream Events
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -4791,8 +4706,6 @@ Stream Events
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -4809,13 +4722,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -4830,8 +4743,6 @@ Stream Events
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -4861,6 +4772,8 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -4881,13 +4794,13 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -4901,9 +4814,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -4918,8 +4831,6 @@ Stream Events
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -5017,15 +4928,11 @@ Stream Events
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -5033,23 +4940,17 @@ Stream Events
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -5103,8 +5004,6 @@ Stream Events
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -5114,8 +5013,6 @@ Stream Events
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -5135,8 +5032,6 @@ Stream Events
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -5147,19 +5042,13 @@ Stream Events
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -5168,8 +5057,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5185,8 +5072,6 @@ Stream Events
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -5194,8 +5079,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5211,8 +5094,6 @@ Stream Events
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -5220,8 +5101,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5237,8 +5116,6 @@ Stream Events
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -5246,8 +5123,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5263,8 +5138,6 @@ Stream Events
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -5272,8 +5145,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5289,8 +5160,6 @@ Stream Events
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -5298,8 +5167,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5315,13 +5182,13 @@ Stream Events
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -5330,8 +5197,6 @@ Stream Events
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -5347,8 +5212,6 @@ Stream Events
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -5361,11 +5224,11 @@ Stream Events
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -5375,9 +5238,13 @@ Stream Events
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -5398,8 +5265,6 @@ Stream Events
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -5443,8 +5308,6 @@ Stream Events
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -5457,8 +5320,6 @@ Stream Events
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -5467,13 +5328,11 @@ Stream Events
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -5485,11 +5344,7 @@ Stream Events
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -5517,9 +5372,9 @@ Stream Events
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -5537,11 +5392,7 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -5567,8 +5418,6 @@ Stream Events
 
         - `type: Literal["agent.message"]`
 
-          - `"agent.message"`
-
       - `class BetaManagedAgentsAgentThinkingPreview: …`
 
         - `id: str`
@@ -5577,11 +5426,7 @@ Stream Events
 
         - `type: Literal["agent.thinking"]`
 
-          - `"agent.thinking"`
-
     - `type: Literal["event_start"]`
-
-      - `"event_start"`
 
   - `class BetaManagedAgentsDeltaEvent: …`
 
@@ -5597,19 +5442,17 @@ Stream Events
 
       - `type: Literal["content_delta"]`
 
-        - `"content_delta"`
-
       - `index: Optional[int]`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `event_id: str`
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
     - `type: Literal["event_delta"]`
-
-      - `"event_delta"`
 
   - `class BetaManagedAgentsSystemMessageEvent: …`
 
@@ -5627,17 +5470,17 @@ Stream Events
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -5651,9 +5494,9 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -5663,6 +5506,8 @@ Stream Events
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -5671,17 +5516,25 @@ Stream Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -5691,6 +5544,8 @@ Stream Events
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -5699,13 +5554,21 @@ Stream Events
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
 
+          format: int32
+
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+- `BetaManagedAgentsStreamSessionEvents`
+
+  Server-sent event in the session stream.
 
 ### Example
 
@@ -5724,7 +5587,7 @@ for event in client.beta.sessions.events.stream(
     print(event)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -5740,7 +5603,7 @@ for event in client.beta.sessions.events.stream(
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Agent Custom Tool Use Event
 
@@ -5764,9 +5627,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.custom_tool_use"]`
+    format: date-time
 
-    - `"agent.custom_tool_use"`
+  - `type: Literal["agent.custom_tool_use"]`
 
   - `session_thread_id: Optional[str]`
 
@@ -5790,9 +5653,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.mcp_tool_result"]`
+    format: date-time
 
-    - `"agent.mcp_tool_result"`
+  - `type: Literal["agent.mcp_tool_result"]`
 
   - `content: Optional[List[Content]]`
 
@@ -5806,9 +5669,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -5826,13 +5689,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -5840,11 +5705,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -5854,13 +5719,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -5878,13 +5741,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -5894,15 +5759,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -5910,11 +5773,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -5924,13 +5787,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -5960,21 +5821,23 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `source: str`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: str`
 
         The title of the search result.
 
-      - `type: Literal["search_result"]`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: Literal["search_result"]`
 
   - `is_error: Optional[bool]`
 
@@ -6006,9 +5869,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.mcp_tool_use"]`
+    format: date-time
 
-    - `"agent.mcp_tool_use"`
+  - `type: Literal["agent.mcp_tool_use"]`
 
   - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -6046,9 +5909,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsRedactedBlock: …`
 
@@ -6056,15 +5919,13 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["redacted"]`
 
-        - `"redacted"`
-
   - `processed_at: datetime`
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.message"]`
+    format: date-time
 
-    - `"agent.message"`
+  - `type: Literal["agent.message"]`
 
 ### Beta Managed Agents Agent Thinking Event
 
@@ -6080,9 +5941,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.thinking"]`
+    format: date-time
 
-    - `"agent.thinking"`
+  - `type: Literal["agent.thinking"]`
 
 ### Beta Managed Agents Agent Thread Context Compacted Event
 
@@ -6098,9 +5959,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.thread_context_compacted"]`
+    format: date-time
 
-    - `"agent.thread_context_compacted"`
+  - `type: Literal["agent.thread_context_compacted"]`
 
 ### Beta Managed Agents Agent Thread Message Received Event
 
@@ -6124,9 +5985,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -6144,13 +6005,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -6158,11 +6021,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -6172,13 +6035,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -6196,13 +6057,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -6212,15 +6075,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -6228,11 +6089,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -6242,13 +6103,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -6264,8 +6123,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["redacted"]`
 
-        - `"redacted"`
-
   - `from_session_thread_id: str`
 
     Public `sthr_` ID of the thread that sent the message.
@@ -6274,9 +6131,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.thread_message_received"]`
+    format: date-time
 
-    - `"agent.thread_message_received"`
+  - `type: Literal["agent.thread_message_received"]`
 
   - `from_agent_name: Optional[str]`
 
@@ -6304,9 +6161,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -6324,13 +6181,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -6338,11 +6197,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -6352,13 +6211,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -6376,13 +6233,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -6392,15 +6251,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -6408,11 +6265,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -6422,13 +6279,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -6444,19 +6299,17 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["redacted"]`
 
-        - `"redacted"`
-
   - `processed_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `to_session_thread_id: str`
 
     Public `sthr_` ID of the thread the message was sent to.
 
   - `type: Literal["agent.thread_message_sent"]`
-
-    - `"agent.thread_message_sent"`
 
   - `to_agent_name: Optional[str]`
 
@@ -6476,13 +6329,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `tool_use_id: str`
 
     The id of the `agent.tool_use` event this result corresponds to.
 
   - `type: Literal["agent.tool_result"]`
-
-    - `"agent.tool_result"`
 
   - `content: Optional[List[Content]]`
 
@@ -6496,9 +6349,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -6516,13 +6369,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -6530,11 +6385,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -6544,13 +6399,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -6568,13 +6421,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -6584,15 +6439,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -6600,11 +6453,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -6614,13 +6467,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -6650,21 +6501,23 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `source: str`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: str`
 
         The title of the search result.
 
-      - `type: Literal["search_result"]`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: Literal["search_result"]`
 
   - `is_error: Optional[bool]`
 
@@ -6692,9 +6545,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["agent.tool_use"]`
+    format: date-time
 
-    - `"agent.tool_use"`
+  - `type: Literal["agent.tool_use"]`
 
   - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -6720,13 +6573,15 @@ for event in client.beta.sessions.events.stream(
 
     Base64-encoded document data.
 
+    minLength: 1
+
   - `media_type: str`
 
     MIME type of the document (e.g., "application/pdf").
 
-  - `type: Literal["base64"]`
+    minLength: 1
 
-    - `"base64"`
+  - `type: Literal["base64"]`
 
 ### Beta Managed Agents Base64 Image Source
 
@@ -6738,13 +6593,15 @@ for event in client.beta.sessions.events.stream(
 
     Base64-encoded image data.
 
+    minLength: 1
+
   - `media_type: str`
 
     MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-  - `type: Literal["base64"]`
+    minLength: 1
 
-    - `"base64"`
+  - `type: Literal["base64"]`
 
 ### Beta Managed Agents Billing Error
 
@@ -6766,15 +6623,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -6782,11 +6635,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["billing_error"]`
-
-    - `"billing_error"`
 
 ### Beta Managed Agents Credential Host Unreachable Error
 
@@ -6812,15 +6661,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -6828,11 +6673,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["credential_host_unreachable_error"]`
-
-    - `"credential_host_unreachable_error"`
 
   - `vault_id: str`
 
@@ -6856,13 +6697,15 @@ for event in client.beta.sessions.events.stream(
 
         Base64-encoded document data.
 
+        minLength: 1
+
       - `media_type: str`
 
         MIME type of the document (e.g., "application/pdf").
 
-      - `type: Literal["base64"]`
+        minLength: 1
 
-        - `"base64"`
+      - `type: Literal["base64"]`
 
     - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -6872,15 +6715,13 @@ for event in client.beta.sessions.events.stream(
 
         The plain text content.
 
+        minLength: 1
+
       - `media_type: Literal["text/plain"]`
 
         MIME type of the text content. Must be "text/plain".
 
-        - `"text/plain"`
-
       - `type: Literal["text"]`
-
-        - `"text"`
 
     - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -6888,11 +6729,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["url"]`
 
-        - `"url"`
-
       - `url: str`
 
         URL of the document to fetch.
+
+        minLength: 1
 
     - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -6902,13 +6743,11 @@ for event in client.beta.sessions.events.stream(
 
         ID of a previously uploaded file.
 
+        minLength: 1
+
       - `type: Literal["file"]`
 
-        - `"file"`
-
   - `type: Literal["document"]`
-
-    - `"document"`
 
   - `context: Optional[str]`
 
@@ -6940,9 +6779,9 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -6960,13 +6799,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -6974,11 +6815,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -6988,13 +6829,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -7012,13 +6851,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -7028,15 +6869,13 @@ for event in client.beta.sessions.events.stream(
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -7044,11 +6883,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -7058,13 +6897,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -7080,19 +6917,13 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
   - `class BetaManagedAgentsUserInterruptEventParams: …`
 
     Parameters for sending an interrupt to pause the agent.
 
     - `type: Literal["user.interrupt"]`
-
-      - `"user.interrupt"`
 
     - `session_thread_id: Optional[str]`
 
@@ -7114,13 +6945,15 @@ for event in client.beta.sessions.events.stream(
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.tool_confirmation"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_confirmation"`
+    - `type: Literal["user.tool_confirmation"]`
 
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+      maxLength: 10000
 
   - `class BetaManagedAgentsUserCustomToolResultEventParams: …`
 
@@ -7130,9 +6963,9 @@ for event in client.beta.sessions.events.stream(
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.custom_tool_result"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.custom_tool_result"`
+    - `type: Literal["user.custom_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -7170,21 +7003,23 @@ for event in client.beta.sessions.events.stream(
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -7212,8 +7047,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubricParams: …`
 
         Rubric content provided inline as text.
@@ -7222,17 +7055,17 @@ for event in client.beta.sessions.events.stream(
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+          maxLength: 262144
+
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
     - `max_iterations: Optional[int]`
 
       Eval→revision cycles before giving up. Default 3, max 20.
+
+      format: int32
 
   - `class BetaManagedAgentsUserToolResultEventParams: …`
 
@@ -7242,9 +7075,9 @@ for event in client.beta.sessions.events.stream(
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `type: Literal["user.tool_result"]`
+      minLength: 1, maxLength: 128
 
-      - `"user.tool_result"`
+    - `type: Literal["user.tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -7282,13 +7115,11 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
 ### Beta Managed Agents File Document Source
 
@@ -7300,9 +7131,9 @@ for event in client.beta.sessions.events.stream(
 
     ID of a previously uploaded file.
 
-  - `type: Literal["file"]`
+    minLength: 1
 
-    - `"file"`
+  - `type: Literal["file"]`
 
 ### Beta Managed Agents File Image Source
 
@@ -7314,9 +7145,9 @@ for event in client.beta.sessions.events.stream(
 
     ID of a previously uploaded file.
 
-  - `type: Literal["file"]`
+    minLength: 1
 
-    - `"file"`
+  - `type: Literal["file"]`
 
 ### Beta Managed Agents File Rubric
 
@@ -7330,8 +7161,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["file"]`
 
-    - `"file"`
-
 ### Beta Managed Agents File Rubric Params
 
 - `class BetaManagedAgentsFileRubricParams: …`
@@ -7343,8 +7172,6 @@ for event in client.beta.sessions.events.stream(
     ID of the rubric file.
 
   - `type: Literal["file"]`
-
-    - `"file"`
 
 ### Beta Managed Agents Image Block
 
@@ -7364,13 +7191,15 @@ for event in client.beta.sessions.events.stream(
 
         Base64-encoded image data.
 
+        minLength: 1
+
       - `media_type: str`
 
         MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-      - `type: Literal["base64"]`
+        minLength: 1
 
-        - `"base64"`
+      - `type: Literal["base64"]`
 
     - `class BetaManagedAgentsURLImageSource: …`
 
@@ -7378,11 +7207,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["url"]`
 
-        - `"url"`
-
       - `url: str`
 
         URL of the image to fetch.
+
+        minLength: 1
 
     - `class BetaManagedAgentsFileImageSource: …`
 
@@ -7392,13 +7221,11 @@ for event in client.beta.sessions.events.stream(
 
         ID of a previously uploaded file.
 
+        minLength: 1
+
       - `type: Literal["file"]`
 
-        - `"file"`
-
   - `type: Literal["image"]`
-
-    - `"image"`
 
 ### Beta Managed Agents MCP Authentication Failed Error
 
@@ -7424,15 +7251,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -7440,11 +7263,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["mcp_authentication_failed_error"]`
-
-    - `"mcp_authentication_failed_error"`
 
 ### Beta Managed Agents MCP Connection Failed Error
 
@@ -7470,15 +7289,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -7486,11 +7301,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["mcp_connection_failed_error"]`
-
-    - `"mcp_connection_failed_error"`
 
 ### Beta Managed Agents Model Overloaded Error
 
@@ -7512,15 +7323,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -7528,11 +7335,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["model_overloaded_error"]`
-
-    - `"model_overloaded_error"`
 
 ### Beta Managed Agents Model Rate Limited Error
 
@@ -7554,15 +7357,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -7570,11 +7369,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["model_rate_limited_error"]`
-
-    - `"model_rate_limited_error"`
 
 ### Beta Managed Agents Model Request Failed Error
 
@@ -7596,15 +7391,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -7612,11 +7403,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["model_request_failed_error"]`
-
-    - `"model_request_failed_error"`
 
 ### Beta Managed Agents Plain Text Document Source
 
@@ -7628,15 +7415,13 @@ for event in client.beta.sessions.events.stream(
 
     The plain text content.
 
+    minLength: 1
+
   - `media_type: Literal["text/plain"]`
 
     MIME type of the text content. Must be "text/plain".
 
-    - `"text/plain"`
-
   - `type: Literal["text"]`
-
-    - `"text"`
 
 ### Beta Managed Agents Redacted Block
 
@@ -7646,8 +7431,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["redacted"]`
 
-    - `"redacted"`
-
 ### Beta Managed Agents Retry Status Exhausted
 
 - `class BetaManagedAgentsRetryStatusExhausted: …`
@@ -7655,8 +7438,6 @@ for event in client.beta.sessions.events.stream(
   This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
   - `type: Literal["exhausted"]`
-
-    - `"exhausted"`
 
 ### Beta Managed Agents Retry Status Retrying
 
@@ -7666,8 +7447,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["retrying"]`
 
-    - `"retrying"`
-
 ### Beta Managed Agents Retry Status Terminal
 
 - `class BetaManagedAgentsRetryStatusTerminal: …`
@@ -7675,8 +7454,6 @@ for event in client.beta.sessions.events.stream(
   The session encountered a terminal error and will transition to `terminated` state.
 
   - `type: Literal["terminal"]`
-
-    - `"terminal"`
 
 ### Beta Managed Agents Search Result Block
 
@@ -7700,21 +7477,23 @@ for event in client.beta.sessions.events.stream(
 
       The text content.
 
-    - `type: Literal["text"]`
+      minLength: 1
 
-      - `"text"`
+    - `type: Literal["text"]`
 
   - `source: str`
 
     The URL source of the search result.
 
+    minLength: 1
+
   - `title: str`
 
     The title of the search result.
 
-  - `type: Literal["search_result"]`
+    minLength: 1
 
-    - `"search_result"`
+  - `type: Literal["search_result"]`
 
 ### Beta Managed Agents Search Result Citations
 
@@ -7736,9 +7515,9 @@ for event in client.beta.sessions.events.stream(
 
     The text content.
 
-  - `type: Literal["text"]`
+    minLength: 1
 
-    - `"text"`
+  - `type: Literal["text"]`
 
 ### Beta Managed Agents Send Session Events
 
@@ -7770,9 +7549,9 @@ for event in client.beta.sessions.events.stream(
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `class BetaManagedAgentsImageBlock: …`
 
@@ -7790,13 +7569,15 @@ for event in client.beta.sessions.events.stream(
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: str`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `type: Literal["base64"]`
+                minLength: 1
 
-                - `"base64"`
+              - `type: Literal["base64"]`
 
             - `class BetaManagedAgentsURLImageSource: …`
 
@@ -7804,11 +7585,11 @@ for event in client.beta.sessions.events.stream(
 
               - `type: Literal["url"]`
 
-                - `"url"`
-
               - `url: str`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileImageSource: …`
 
@@ -7818,13 +7599,11 @@ for event in client.beta.sessions.events.stream(
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: Literal["file"]`
 
-                - `"file"`
-
           - `type: Literal["image"]`
-
-            - `"image"`
 
         - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -7842,13 +7621,15 @@ for event in client.beta.sessions.events.stream(
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: str`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `type: Literal["base64"]`
+                minLength: 1
 
-                - `"base64"`
+              - `type: Literal["base64"]`
 
             - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -7858,15 +7639,13 @@ for event in client.beta.sessions.events.stream(
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: Literal["text/plain"]`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: Literal["text"]`
-
-                - `"text"`
 
             - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -7874,11 +7653,11 @@ for event in client.beta.sessions.events.stream(
 
               - `type: Literal["url"]`
 
-                - `"url"`
-
               - `url: str`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -7888,13 +7667,11 @@ for event in client.beta.sessions.events.stream(
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: Literal["file"]`
 
-                - `"file"`
-
           - `type: Literal["document"]`
-
-            - `"document"`
 
           - `context: Optional[str]`
 
@@ -7910,15 +7687,13 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["redacted"]`
 
-            - `"redacted"`
-
       - `type: Literal["user.message"]`
-
-        - `"user.message"`
 
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
     - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -7930,11 +7705,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["user.interrupt"]`
 
-        - `"user.interrupt"`
-
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -7962,15 +7737,17 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["user.tool_confirmation"]`
 
-        - `"user.tool_confirmation"`
-
       - `deny_message: Optional[str]`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+        maxLength: 10000
+
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -7989,8 +7766,6 @@ for event in client.beta.sessions.events.stream(
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: Literal["user.custom_tool_result"]`
-
-        - `"user.custom_tool_result"`
 
       - `content: Optional[List[Content]]`
 
@@ -8028,21 +7803,23 @@ for event in client.beta.sessions.events.stream(
 
               The text content.
 
-            - `type: Literal["text"]`
+              minLength: 1
 
-              - `"text"`
+            - `type: Literal["text"]`
 
           - `source: str`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `title: str`
 
             The title of the search result.
 
-          - `type: Literal["search_result"]`
+            minLength: 1
 
-            - `"search_result"`
+          - `type: Literal["search_result"]`
 
       - `is_error: Optional[bool]`
 
@@ -8051,6 +7828,8 @@ for event in client.beta.sessions.events.stream(
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `session_thread_id: Optional[str]`
 
@@ -8072,6 +7851,8 @@ for event in client.beta.sessions.events.stream(
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+        format: int32
+
       - `outcome_id: str`
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -8079,6 +7860,8 @@ for event in client.beta.sessions.events.stream(
       - `processed_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `rubric: Rubric`
 
@@ -8094,8 +7877,6 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["file"]`
 
-            - `"file"`
-
         - `class BetaManagedAgentsTextRubric: …`
 
           Rubric content provided inline as text.
@@ -8106,11 +7887,7 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["text"]`
 
-            - `"text"`
-
       - `type: Literal["user.define_outcome"]`
-
-        - `"user.define_outcome"`
 
     - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -8125,8 +7902,6 @@ for event in client.beta.sessions.events.stream(
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: Literal["user.tool_result"]`
-
-        - `"user.tool_result"`
 
       - `content: Optional[List[Content]]`
 
@@ -8156,6 +7931,8 @@ for event in client.beta.sessions.events.stream(
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `session_thread_id: Optional[str]`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -8176,17 +7953,17 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
+          minLength: 1
+
         - `type: Literal["text"]`
 
-          - `"text"`
-
       - `type: Literal["system.message"]`
-
-        - `"system.message"`
 
       - `processed_at: Optional[datetime]`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
 ### Beta Managed Agents Session Budget Reached
 
@@ -8195,8 +7972,6 @@ for event in client.beta.sessions.events.stream(
   The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
   - `type: Literal["budget_reached"]`
-
-    - `"budget_reached"`
 
 ### Beta Managed Agents Session Deleted Event
 
@@ -8212,9 +7987,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["session.deleted"]`
+    format: date-time
 
-    - `"session.deleted"`
+  - `type: Literal["session.deleted"]`
 
 ### Beta Managed Agents Session End Turn
 
@@ -8223,8 +7998,6 @@ for event in client.beta.sessions.events.stream(
   The agent completed its turn naturally and is ready for the next user message.
 
   - `type: Literal["end_turn"]`
-
-    - `"end_turn"`
 
 ### Beta Managed Agents Session Error Event
 
@@ -8258,15 +8031,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["retrying"]`
 
-            - `"retrying"`
-
         - `class BetaManagedAgentsRetryStatusExhausted: …`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
           - `type: Literal["exhausted"]`
-
-            - `"exhausted"`
 
         - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -8274,11 +8043,7 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["terminal"]`
 
-            - `"terminal"`
-
       - `type: Literal["unknown_error"]`
-
-        - `"unknown_error"`
 
     - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -8306,8 +8071,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["model_overloaded_error"]`
 
-        - `"model_overloaded_error"`
-
     - `class BetaManagedAgentsModelRateLimitedError: …`
 
       The model request was rate-limited.
@@ -8334,8 +8097,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["model_rate_limited_error"]`
 
-        - `"model_rate_limited_error"`
-
     - `class BetaManagedAgentsModelRequestFailedError: …`
 
       A model request failed for a reason other than overload or rate-limiting.
@@ -8361,8 +8122,6 @@ for event in client.beta.sessions.events.stream(
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: Literal["model_request_failed_error"]`
-
-        - `"model_request_failed_error"`
 
     - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -8394,8 +8153,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["mcp_connection_failed_error"]`
 
-        - `"mcp_connection_failed_error"`
-
     - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
       Authentication to an MCP server failed.
@@ -8426,8 +8183,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["mcp_authentication_failed_error"]`
 
-        - `"mcp_authentication_failed_error"`
-
     - `class BetaManagedAgentsBillingError: …`
 
       The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -8453,8 +8208,6 @@ for event in client.beta.sessions.events.stream(
           The session encountered a terminal error and will transition to `terminated` state.
 
       - `type: Literal["billing_error"]`
-
-        - `"billing_error"`
 
     - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -8486,8 +8239,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["credential_host_unreachable_error"]`
 
-        - `"credential_host_unreachable_error"`
-
       - `vault_id: str`
 
         ID of the vault containing the affected credential.
@@ -8496,9 +8247,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["session.error"]`
+    format: date-time
 
-    - `"session.error"`
+  - `type: Literal["session.error"]`
 
 ### Beta Managed Agents Session Event
 
@@ -8526,9 +8277,9 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -8546,13 +8297,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -8560,11 +8313,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -8574,13 +8327,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -8598,13 +8349,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -8614,15 +8367,13 @@ for event in client.beta.sessions.events.stream(
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -8630,11 +8381,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -8644,13 +8395,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -8666,15 +8415,13 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -8686,11 +8433,11 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -8718,15 +8465,17 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -8745,8 +8494,6 @@ for event in client.beta.sessions.events.stream(
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -8784,21 +8531,23 @@ for event in client.beta.sessions.events.stream(
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -8807,6 +8556,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -8832,9 +8583,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -8864,9 +8615,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -8880,9 +8631,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -8908,9 +8659,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -8942,9 +8693,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -8990,9 +8741,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -9020,13 +8771,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -9088,9 +8839,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -9128,13 +8879,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -9152,9 +8903,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -9186,15 +8937,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -9202,11 +8949,7 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -9234,8 +8977,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -9262,8 +9003,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -9289,8 +9028,6 @@ for event in client.beta.sessions.events.stream(
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -9322,8 +9059,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -9354,8 +9089,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -9381,8 +9114,6 @@ for event in client.beta.sessions.events.stream(
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -9414,8 +9145,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -9424,9 +9153,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -9440,9 +9169,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -9456,9 +9185,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -9472,6 +9201,8 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -9481,8 +9212,6 @@ for event in client.beta.sessions.events.stream(
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -9494,15 +9223,11 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -9510,11 +9235,7 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -9528,9 +9249,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -9548,13 +9269,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -9568,6 +9289,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9576,9 +9299,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -9596,6 +9319,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -9608,13 +9333,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -9624,17 +9349,25 @@ for event in client.beta.sessions.events.stream(
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -9656,9 +9389,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -9684,9 +9417,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -9700,6 +9433,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -9708,9 +9443,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -9728,6 +9463,8 @@ for event in client.beta.sessions.events.stream(
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -9735,6 +9472,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -9750,8 +9489,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -9762,11 +9499,7 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -9780,9 +9513,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -9800,13 +9533,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -9823,6 +9556,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -9850,8 +9585,6 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -9868,13 +9601,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -9889,8 +9622,6 @@ for event in client.beta.sessions.events.stream(
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -9920,6 +9651,8 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -9940,13 +9673,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -9960,9 +9693,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -9977,8 +9710,6 @@ for event in client.beta.sessions.events.stream(
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -10076,15 +9807,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -10092,23 +9819,17 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -10162,8 +9883,6 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -10173,8 +9892,6 @@ for event in client.beta.sessions.events.stream(
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -10194,8 +9911,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -10206,19 +9921,13 @@ for event in client.beta.sessions.events.stream(
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -10227,8 +9936,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10244,8 +9951,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -10253,8 +9958,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10270,8 +9973,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -10279,8 +9980,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10296,8 +9995,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -10305,8 +10002,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10322,8 +10017,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -10331,8 +10024,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10348,8 +10039,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -10357,8 +10046,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10374,13 +10061,13 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -10389,8 +10076,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -10406,8 +10091,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -10420,11 +10103,11 @@ for event in client.beta.sessions.events.stream(
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -10434,9 +10117,13 @@ for event in client.beta.sessions.events.stream(
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -10457,8 +10144,6 @@ for event in client.beta.sessions.events.stream(
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -10502,8 +10187,6 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -10516,8 +10199,6 @@ for event in client.beta.sessions.events.stream(
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -10526,13 +10207,11 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -10544,11 +10223,7 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -10576,9 +10251,9 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -10596,11 +10271,7 @@ for event in client.beta.sessions.events.stream(
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -10626,17 +10297,17 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -10650,9 +10321,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -10662,6 +10333,8 @@ for event in client.beta.sessions.events.stream(
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -10670,17 +10343,25 @@ for event in client.beta.sessions.events.stream(
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -10690,6 +10371,8 @@ for event in client.beta.sessions.events.stream(
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -10698,9 +10381,13 @@ for event in client.beta.sessions.events.stream(
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -10718,8 +10405,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["requires_action"]`
 
-    - `"requires_action"`
-
 ### Beta Managed Agents Session Retries Exhausted
 
 - `class BetaManagedAgentsSessionRetriesExhausted: …`
@@ -10727,8 +10412,6 @@ for event in client.beta.sessions.events.stream(
   The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: Literal["retries_exhausted"]`
-
-    - `"retries_exhausted"`
 
 ### Beta Managed Agents Session Status Idle Event
 
@@ -10744,6 +10427,8 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `stop_reason: StopReason`
 
     The agent completed its turn naturally and is ready for the next user message.
@@ -10753,8 +10438,6 @@ for event in client.beta.sessions.events.stream(
       The agent completed its turn naturally and is ready for the next user message.
 
       - `type: Literal["end_turn"]`
-
-        - `"end_turn"`
 
     - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -10766,15 +10449,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["requires_action"]`
 
-        - `"requires_action"`
-
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
-
-        - `"retries_exhausted"`
 
     - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -10782,11 +10461,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["budget_reached"]`
 
-        - `"budget_reached"`
-
   - `type: Literal["session.status_idle"]`
-
-    - `"session.status_idle"`
 
 ### Beta Managed Agents Session Status Rescheduled Event
 
@@ -10802,9 +10477,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["session.status_rescheduled"]`
+    format: date-time
 
-    - `"session.status_rescheduled"`
+  - `type: Literal["session.status_rescheduled"]`
 
 ### Beta Managed Agents Session Status Running Event
 
@@ -10820,9 +10495,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["session.status_running"]`
+    format: date-time
 
-    - `"session.status_running"`
+  - `type: Literal["session.status_running"]`
 
 ### Beta Managed Agents Session Status Terminated Event
 
@@ -10838,9 +10513,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["session.status_terminated"]`
+    format: date-time
 
-    - `"session.status_terminated"`
+  - `type: Literal["session.status_terminated"]`
 
 ### Beta Managed Agents Session Thread Created Event
 
@@ -10860,13 +10535,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: str`
 
     Public `sthr_` ID of the newly created thread.
 
   - `type: Literal["session.thread_created"]`
-
-    - `"session.thread_created"`
 
 ### Beta Managed Agents Session Thread Status Idle Event
 
@@ -10886,6 +10561,8 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: str`
 
     Public sthr_ ID of the thread that went idle.
@@ -10900,8 +10577,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["end_turn"]`
 
-        - `"end_turn"`
-
     - `class BetaManagedAgentsSessionRequiresAction: …`
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
@@ -10912,15 +10587,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["requires_action"]`
 
-        - `"requires_action"`
-
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
-
-        - `"retries_exhausted"`
 
     - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -10928,11 +10599,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["budget_reached"]`
 
-        - `"budget_reached"`
-
   - `type: Literal["session.thread_status_idle"]`
-
-    - `"session.thread_status_idle"`
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
@@ -10952,13 +10619,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: str`
 
     Public sthr_ ID of the thread that is retrying.
 
   - `type: Literal["session.thread_status_rescheduled"]`
-
-    - `"session.thread_status_rescheduled"`
 
 ### Beta Managed Agents Session Thread Status Running Event
 
@@ -10978,13 +10645,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: str`
 
     Public sthr_ ID of the thread that started running.
 
   - `type: Literal["session.thread_status_running"]`
-
-    - `"session.thread_status_running"`
 
 ### Beta Managed Agents Session Thread Status Terminated Event
 
@@ -11004,13 +10671,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `session_thread_id: str`
 
     Public sthr_ ID of the thread that terminated.
 
   - `type: Literal["session.thread_status_terminated"]`
-
-    - `"session.thread_status_terminated"`
 
 ### Beta Managed Agents Session Usage Snapshot
 
@@ -11022,6 +10689,8 @@ for event in client.beta.sessions.events.stream(
 
     Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+    format: double
+
   - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
     Prompt-cache creation token usage broken down by cache lifetime.
@@ -11030,17 +10699,25 @@ for event in client.beta.sessions.events.stream(
 
       Tokens used to create 1-hour ephemeral cache entries.
 
+      format: int32
+
     - `ephemeral_5m_input_tokens: Optional[int]`
 
       Tokens used to create 5-minute ephemeral cache entries.
+
+      format: int32
 
   - `cache_read_input_tokens: Optional[int]`
 
     Total tokens read from prompt cache.
 
+    format: int32
+
   - `input_tokens: Optional[int]`
 
     Total input tokens consumed across all turns.
+
+    format: int32
 
   - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -11054,11 +10731,11 @@ for event in client.beta.sessions.events.stream(
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `"USD"`
-
   - `output_tokens: Optional[int]`
 
     Total output tokens generated across all turns.
+
+    format: int32
 
   - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
@@ -11068,9 +10745,13 @@ for event in client.beta.sessions.events.stream(
 
       Number of server-executed web fetch requests.
 
+      format: int32
+
     - `web_search_requests: Optional[int]`
 
       Number of server-executed web search requests.
+
+      format: int32
 
 ### Beta Managed Agents Span Model Request End Event
 
@@ -11098,17 +10779,25 @@ for event in client.beta.sessions.events.stream(
 
       Tokens used to create prompt cache in this request.
 
+      format: int32
+
     - `cache_read_input_tokens: int`
 
       Tokens read from prompt cache in this request.
+
+      format: int32
 
     - `input_tokens: int`
 
       Input tokens consumed by this request.
 
+      format: int32
+
     - `output_tokens: int`
 
       Output tokens generated by this request.
+
+      format: int32
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -11122,9 +10811,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["span.model_request_end"]`
+    format: date-time
 
-    - `"span.model_request_end"`
+  - `type: Literal["span.model_request_end"]`
 
 ### Beta Managed Agents Span Model Request Start Event
 
@@ -11140,9 +10829,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["span.model_request_start"]`
+    format: date-time
 
-    - `"span.model_request_start"`
+  - `type: Literal["span.model_request_start"]`
 
 ### Beta Managed Agents Span Model Usage
 
@@ -11154,17 +10843,25 @@ for event in client.beta.sessions.events.stream(
 
     Tokens used to create prompt cache in this request.
 
+    format: int32
+
   - `cache_read_input_tokens: int`
 
     Tokens read from prompt cache in this request.
+
+    format: int32
 
   - `input_tokens: int`
 
     Input tokens consumed by this request.
 
+    format: int32
+
   - `output_tokens: int`
 
     Output tokens generated by this request.
+
+    format: int32
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -11192,6 +10889,8 @@ for event in client.beta.sessions.events.stream(
 
     0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+    format: int32
+
   - `outcome_evaluation_start_id: str`
 
     The id of the corresponding `span.outcome_evaluation_start` event.
@@ -11204,13 +10903,13 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `result: str`
 
     Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
   - `type: Literal["span.outcome_evaluation_end"]`
-
-    - `"span.outcome_evaluation_end"`
 
   - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -11220,17 +10919,25 @@ for event in client.beta.sessions.events.stream(
 
       Tokens used to create prompt cache in this request.
 
+      format: int32
+
     - `cache_read_input_tokens: int`
 
       Tokens read from prompt cache in this request.
+
+      format: int32
 
     - `input_tokens: int`
 
       Input tokens consumed by this request.
 
+      format: int32
+
     - `output_tokens: int`
 
       Output tokens generated by this request.
+
+      format: int32
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -11254,6 +10961,8 @@ for event in client.beta.sessions.events.stream(
 
     0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+    format: int32
+
   - `outcome_id: str`
 
     The `outc_` ID of the outcome being evaluated.
@@ -11262,9 +10971,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["span.outcome_evaluation_ongoing"]`
+    format: date-time
 
-    - `"span.outcome_evaluation_ongoing"`
+  - `type: Literal["span.outcome_evaluation_ongoing"]`
 
 ### Beta Managed Agents Span Outcome Evaluation Start Event
 
@@ -11280,6 +10989,8 @@ for event in client.beta.sessions.events.stream(
 
     0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+    format: int32
+
   - `outcome_id: str`
 
     The `outc_` ID of the outcome being evaluated.
@@ -11288,9 +10999,9 @@ for event in client.beta.sessions.events.stream(
 
     A timestamp in RFC 3339 format
 
-  - `type: Literal["span.outcome_evaluation_start"]`
+    format: date-time
 
-    - `"span.outcome_evaluation_start"`
+  - `type: Literal["span.outcome_evaluation_start"]`
 
 ### Beta Managed Agents Stream Session Events
 
@@ -11318,9 +11029,9 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `class BetaManagedAgentsImageBlock: …`
 
@@ -11338,13 +11049,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded image data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsURLImageSource: …`
 
@@ -11352,11 +11065,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the image to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileImageSource: …`
 
@@ -11366,13 +11079,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
       - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -11390,13 +11101,15 @@ for event in client.beta.sessions.events.stream(
 
               Base64-encoded document data.
 
+              minLength: 1
+
             - `media_type: str`
 
               MIME type of the document (e.g., "application/pdf").
 
-            - `type: Literal["base64"]`
+              minLength: 1
 
-              - `"base64"`
+            - `type: Literal["base64"]`
 
           - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -11406,15 +11119,13 @@ for event in client.beta.sessions.events.stream(
 
               The plain text content.
 
+              minLength: 1
+
             - `media_type: Literal["text/plain"]`
 
               MIME type of the text content. Must be "text/plain".
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -11422,11 +11133,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["url"]`
 
-              - `"url"`
-
             - `url: str`
 
               URL of the document to fetch.
+
+              minLength: 1
 
           - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -11436,13 +11147,11 @@ for event in client.beta.sessions.events.stream(
 
               ID of a previously uploaded file.
 
+              minLength: 1
+
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `context: Optional[str]`
 
@@ -11458,15 +11167,13 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["redacted"]`
 
-          - `"redacted"`
-
     - `type: Literal["user.message"]`
-
-      - `"user.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsUserInterruptEvent: …`
 
@@ -11478,11 +11185,11 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["user.interrupt"]`
 
-      - `"user.interrupt"`
-
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -11510,15 +11217,17 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["user.tool_confirmation"]`
 
-      - `"user.tool_confirmation"`
-
     - `deny_message: Optional[str]`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+      maxLength: 10000
+
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -11537,8 +11246,6 @@ for event in client.beta.sessions.events.stream(
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.custom_tool_result"]`
-
-      - `"user.custom_tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -11576,21 +11283,23 @@ for event in client.beta.sessions.events.stream(
 
             The text content.
 
-          - `type: Literal["text"]`
+            minLength: 1
 
-            - `"text"`
+          - `type: Literal["text"]`
 
         - `source: str`
 
           The URL source of the search result.
 
+          minLength: 1
+
         - `title: str`
 
           The title of the search result.
 
-        - `type: Literal["search_result"]`
+          minLength: 1
 
-          - `"search_result"`
+        - `type: Literal["search_result"]`
 
     - `is_error: Optional[bool]`
 
@@ -11599,6 +11308,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: Optional[str]`
 
@@ -11624,9 +11335,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.custom_tool_use"]`
+      format: date-time
 
-      - `"agent.custom_tool_use"`
+    - `type: Literal["agent.custom_tool_use"]`
 
     - `session_thread_id: Optional[str]`
 
@@ -11656,9 +11367,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.message"]`
+      format: date-time
 
-      - `"agent.message"`
+    - `type: Literal["agent.message"]`
 
   - `class BetaManagedAgentsAgentThinkingEvent: …`
 
@@ -11672,9 +11383,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thinking"]`
+      format: date-time
 
-      - `"agent.thinking"`
+    - `type: Literal["agent.thinking"]`
 
   - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
 
@@ -11700,9 +11411,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_use"]`
+      format: date-time
 
-      - `"agent.mcp_tool_use"`
+    - `type: Literal["agent.mcp_tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -11734,9 +11445,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.mcp_tool_result"]`
+      format: date-time
 
-      - `"agent.mcp_tool_result"`
+    - `type: Literal["agent.mcp_tool_result"]`
 
     - `content: Optional[List[Content]]`
 
@@ -11782,9 +11493,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.tool_use"]`
+      format: date-time
 
-      - `"agent.tool_use"`
+    - `type: Literal["agent.tool_use"]`
 
     - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
 
@@ -11812,13 +11523,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `tool_use_id: str`
 
       The id of the `agent.tool_use` event this result corresponds to.
 
     - `type: Literal["agent.tool_result"]`
-
-      - `"agent.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -11880,9 +11591,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_message_received"]`
+      format: date-time
 
-      - `"agent.thread_message_received"`
+    - `type: Literal["agent.thread_message_received"]`
 
     - `from_agent_name: Optional[str]`
 
@@ -11920,13 +11631,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `to_session_thread_id: str`
 
       Public `sthr_` ID of the thread the message was sent to.
 
     - `type: Literal["agent.thread_message_sent"]`
-
-      - `"agent.thread_message_sent"`
 
     - `to_agent_name: Optional[str]`
 
@@ -11944,9 +11655,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["agent.thread_context_compacted"]`
+      format: date-time
 
-      - `"agent.thread_context_compacted"`
+    - `type: Literal["agent.thread_context_compacted"]`
 
   - `class BetaManagedAgentsSessionErrorEvent: …`
 
@@ -11978,15 +11689,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["retrying"]`
 
-              - `"retrying"`
-
           - `class BetaManagedAgentsRetryStatusExhausted: …`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
-
-              - `"exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -11994,11 +11701,7 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["terminal"]`
 
-              - `"terminal"`
-
         - `type: Literal["unknown_error"]`
-
-          - `"unknown_error"`
 
       - `class BetaManagedAgentsModelOverloadedError: …`
 
@@ -12026,8 +11729,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["model_overloaded_error"]`
 
-          - `"model_overloaded_error"`
-
       - `class BetaManagedAgentsModelRateLimitedError: …`
 
         The model request was rate-limited.
@@ -12054,8 +11755,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["model_rate_limited_error"]`
 
-          - `"model_rate_limited_error"`
-
       - `class BetaManagedAgentsModelRequestFailedError: …`
 
         A model request failed for a reason other than overload or rate-limiting.
@@ -12081,8 +11780,6 @@ for event in client.beta.sessions.events.stream(
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["model_request_failed_error"]`
-
-          - `"model_request_failed_error"`
 
       - `class BetaManagedAgentsMCPConnectionFailedError: …`
 
@@ -12114,8 +11811,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["mcp_connection_failed_error"]`
 
-          - `"mcp_connection_failed_error"`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
 
         Authentication to an MCP server failed.
@@ -12146,8 +11841,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["mcp_authentication_failed_error"]`
 
-          - `"mcp_authentication_failed_error"`
-
       - `class BetaManagedAgentsBillingError: …`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
@@ -12173,8 +11866,6 @@ for event in client.beta.sessions.events.stream(
             The session encountered a terminal error and will transition to `terminated` state.
 
         - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
 
       - `class BetaManagedAgentsCredentialHostUnreachableError: …`
 
@@ -12206,8 +11897,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["credential_host_unreachable_error"]`
 
-          - `"credential_host_unreachable_error"`
-
         - `vault_id: str`
 
           ID of the vault containing the affected credential.
@@ -12216,9 +11905,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.error"]`
+      format: date-time
 
-      - `"session.error"`
+    - `type: Literal["session.error"]`
 
   - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
 
@@ -12232,9 +11921,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_rescheduled"]`
+      format: date-time
 
-      - `"session.status_rescheduled"`
+    - `type: Literal["session.status_rescheduled"]`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent: …`
 
@@ -12248,9 +11937,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_running"]`
+      format: date-time
 
-      - `"session.status_running"`
+    - `type: Literal["session.status_running"]`
 
   - `class BetaManagedAgentsSessionStatusIdleEvent: …`
 
@@ -12264,6 +11953,8 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `stop_reason: StopReason`
 
       The agent completed its turn naturally and is ready for the next user message.
@@ -12273,8 +11964,6 @@ for event in client.beta.sessions.events.stream(
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
-
-          - `"end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction: …`
 
@@ -12286,15 +11975,11 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["requires_action"]`
 
-          - `"requires_action"`
-
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
-
-          - `"retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached: …`
 
@@ -12302,11 +11987,7 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["budget_reached"]`
 
-          - `"budget_reached"`
-
     - `type: Literal["session.status_idle"]`
-
-      - `"session.status_idle"`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
 
@@ -12320,9 +12001,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.status_terminated"]`
+      format: date-time
 
-      - `"session.status_terminated"`
+    - `type: Literal["session.status_terminated"]`
 
   - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
 
@@ -12340,13 +12021,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public `sthr_` ID of the newly created thread.
 
     - `type: Literal["session.thread_created"]`
-
-      - `"session.thread_created"`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
 
@@ -12360,6 +12041,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -12368,9 +12051,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_start"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_start"`
+    - `type: Literal["span.outcome_evaluation_start"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
 
@@ -12388,6 +12071,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_evaluation_start_id: str`
 
       The id of the corresponding `span.outcome_evaluation_start` event.
@@ -12400,13 +12085,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `result: str`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
 
     - `type: Literal["span.outcome_evaluation_end"]`
-
-      - `"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -12416,17 +12101,25 @@ for event in client.beta.sessions.events.stream(
 
         Tokens used to create prompt cache in this request.
 
+        format: int32
+
       - `cache_read_input_tokens: int`
 
         Tokens read from prompt cache in this request.
+
+        format: int32
 
       - `input_tokens: int`
 
         Input tokens consumed by this request.
 
+        format: int32
+
       - `output_tokens: int`
 
         Output tokens generated by this request.
+
+        format: int32
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -12448,9 +12141,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_start"]`
+      format: date-time
 
-      - `"span.model_request_start"`
+    - `type: Literal["span.model_request_start"]`
 
   - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
 
@@ -12476,9 +12169,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.model_request_end"]`
+      format: date-time
 
-      - `"span.model_request_end"`
+    - `type: Literal["span.model_request_end"]`
 
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
 
@@ -12492,6 +12185,8 @@ for event in client.beta.sessions.events.stream(
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
+      format: int32
+
     - `outcome_id: str`
 
       The `outc_` ID of the outcome being evaluated.
@@ -12500,9 +12195,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["span.outcome_evaluation_ongoing"]`
+      format: date-time
 
-      - `"span.outcome_evaluation_ongoing"`
+    - `type: Literal["span.outcome_evaluation_ongoing"]`
 
   - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
 
@@ -12520,6 +12215,8 @@ for event in client.beta.sessions.events.stream(
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -12527,6 +12224,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `rubric: Rubric`
 
@@ -12542,8 +12241,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
       - `class BetaManagedAgentsTextRubric: …`
 
         Rubric content provided inline as text.
@@ -12554,11 +12251,7 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["text"]`
 
-          - `"text"`
-
     - `type: Literal["user.define_outcome"]`
-
-      - `"user.define_outcome"`
 
   - `class BetaManagedAgentsSessionDeletedEvent: …`
 
@@ -12572,9 +12265,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.deleted"]`
+      format: date-time
 
-      - `"session.deleted"`
+    - `type: Literal["session.deleted"]`
 
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
 
@@ -12592,13 +12285,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that started running.
 
     - `type: Literal["session.thread_status_running"]`
-
-      - `"session.thread_status_running"`
 
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
 
@@ -12615,6 +12308,8 @@ for event in client.beta.sessions.events.stream(
     - `processed_at: datetime`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `session_thread_id: str`
 
@@ -12642,8 +12337,6 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["session.thread_status_idle"]`
 
-      - `"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
@@ -12660,13 +12353,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that terminated.
 
     - `type: Literal["session.thread_status_terminated"]`
-
-      - `"session.thread_status_terminated"`
 
   - `class BetaManagedAgentsUserToolResultEvent: …`
 
@@ -12681,8 +12374,6 @@ for event in client.beta.sessions.events.stream(
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: Literal["user.tool_result"]`
-
-      - `"user.tool_result"`
 
     - `content: Optional[List[Content]]`
 
@@ -12712,6 +12403,8 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: Optional[str]`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
@@ -12732,13 +12425,13 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `session_thread_id: str`
 
       Public sthr_ ID of the thread that is retrying.
 
     - `type: Literal["session.thread_status_rescheduled"]`
-
-      - `"session.thread_status_rescheduled"`
 
   - `class BetaManagedAgentsSessionUpdatedEvent: …`
 
@@ -12752,9 +12445,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.updated"]`
+      format: date-time
 
-      - `"session.updated"`
+    - `type: Literal["session.updated"]`
 
     - `agent: Optional[BetaManagedAgentsSessionAgent]`
 
@@ -12769,8 +12462,6 @@ for event in client.beta.sessions.events.stream(
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -12868,15 +12559,11 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -12884,23 +12571,17 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -12954,8 +12635,6 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["anthropic"]`
 
-                  - `"anthropic"`
-
                 - `version: str`
 
               - `class BetaManagedAgentsCustomSkill: …`
@@ -12965,8 +12644,6 @@ for event in client.beta.sessions.events.stream(
                 - `skill_id: str`
 
                 - `type: Literal["custom"]`
-
-                  - `"custom"`
 
                 - `version: str`
 
@@ -12986,8 +12663,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `name: Literal["bash"]`
 
-                      - `"bash"`
-
                     - `permission_policy: PermissionPolicy`
 
                       Permission policy for tool execution.
@@ -12998,19 +12673,13 @@ for event in client.beta.sessions.events.stream(
 
                         - `type: Literal["always_allow"]`
 
-                          - `"always_allow"`
-
                       - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                          - `"always_ask"`
-
                     - `type: Literal["bash"]`
-
-                      - `"bash"`
 
                   - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -13019,8 +12688,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["edit"]`
-
-                      - `"edit"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13036,8 +12703,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["edit"]`
 
-                      - `"edit"`
-
                   - `class BetaManagedAgentsReadToolConfig: …`
 
                     Configuration for the read tool.
@@ -13045,8 +12710,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["read"]`
-
-                      - `"read"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13062,8 +12725,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["read"]`
 
-                      - `"read"`
-
                   - `class BetaManagedAgentsWriteToolConfig: …`
 
                     Configuration for the write tool.
@@ -13071,8 +12732,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["write"]`
-
-                      - `"write"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13088,8 +12747,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["write"]`
 
-                      - `"write"`
-
                   - `class BetaManagedAgentsGlobToolConfig: …`
 
                     Configuration for the glob tool.
@@ -13097,8 +12754,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["glob"]`
-
-                      - `"glob"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13114,8 +12769,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["glob"]`
 
-                      - `"glob"`
-
                   - `class BetaManagedAgentsGrepToolConfig: …`
 
                     Configuration for the grep tool.
@@ -13123,8 +12776,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["grep"]`
-
-                      - `"grep"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13140,8 +12791,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["grep"]`
 
-                      - `"grep"`
-
                   - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                     Configuration for the web_fetch tool.
@@ -13149,8 +12798,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["web_fetch"]`
-
-                      - `"web_fetch"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13166,13 +12813,13 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["web_fetch"]`
 
-                      - `"web_fetch"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
 
                     - `max_content_tokens: Optional[int]`
+
+                      format: int32
 
                   - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -13181,8 +12828,6 @@ for event in client.beta.sessions.events.stream(
                     - `enabled: bool`
 
                     - `name: Literal["web_search"]`
-
-                      - `"web_search"`
 
                     - `permission_policy: PermissionPolicy`
 
@@ -13198,8 +12843,6 @@ for event in client.beta.sessions.events.stream(
 
                     - `type: Literal["web_search"]`
 
-                      - `"web_search"`
-
                     - `allowed_domains: Optional[List[str]]`
 
                     - `blocked_domains: Optional[List[str]]`
@@ -13212,11 +12855,11 @@ for event in client.beta.sessions.events.stream(
 
                         Location precision. Only "approximate" is supported.
 
-                        - `"approximate"`
-
                       - `city: Optional[str]`
 
                         City name.
+
+                        minLength: 1, maxLength: 255
 
                       - `country: Optional[str]`
 
@@ -13226,9 +12869,13 @@ for event in client.beta.sessions.events.stream(
 
                         Region or state name.
 
+                        minLength: 1, maxLength: 255
+
                       - `timezone: Optional[str]`
 
                         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                        minLength: 1, maxLength: 255
 
                 - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -13249,8 +12896,6 @@ for event in client.beta.sessions.events.stream(
                       Tool calls require user confirmation before execution.
 
                 - `type: Literal["agent_toolset_20260401"]`
-
-                  - `"agent_toolset_20260401"`
 
               - `class BetaManagedAgentsMCPToolset: …`
 
@@ -13294,8 +12939,6 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["mcp_toolset"]`
 
-                  - `"mcp_toolset"`
-
               - `class BetaManagedAgentsCustomTool: …`
 
                 A custom tool as returned in API responses.
@@ -13308,8 +12951,6 @@ for event in client.beta.sessions.events.stream(
 
                   - `type: Literal["object"]`
 
-                    - `"object"`
-
                   - `properties: Optional[Dict[str, object]]`
 
                   - `required: Optional[List[str]]`
@@ -13318,13 +12959,11 @@ for event in client.beta.sessions.events.stream(
 
                 - `type: Literal["custom"]`
 
-                  - `"custom"`
-
             - `type: Literal["agent"]`
 
-              - `"agent"`
-
             - `version: int`
+
+              format: int32
 
           - `class BetaManagedAgentsAdvisor: …`
 
@@ -13336,11 +12975,7 @@ for event in client.beta.sessions.events.stream(
 
             - `type: Literal["advisor"]`
 
-              - `"advisor"`
-
         - `type: Literal["coordinator"]`
-
-          - `"coordinator"`
 
       - `name: str`
 
@@ -13368,9 +13003,9 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -13388,11 +13023,7 @@ for event in client.beta.sessions.events.stream(
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-          - `"USD"`
-
       - `type: Literal["limit"]`
-
-        - `"limit"`
 
     - `metadata: Optional[Dict[str, str]]`
 
@@ -13418,8 +13049,6 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["agent.message"]`
 
-          - `"agent.message"`
-
       - `class BetaManagedAgentsAgentThinkingPreview: …`
 
         - `id: str`
@@ -13428,11 +13057,7 @@ for event in client.beta.sessions.events.stream(
 
         - `type: Literal["agent.thinking"]`
 
-          - `"agent.thinking"`
-
     - `type: Literal["event_start"]`
-
-      - `"event_start"`
 
   - `class BetaManagedAgentsDeltaEvent: …`
 
@@ -13448,19 +13073,17 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["content_delta"]`
 
-        - `"content_delta"`
-
       - `index: Optional[int]`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+        format: uint32
 
     - `event_id: str`
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
     - `type: Literal["event_delta"]`
-
-      - `"event_delta"`
 
   - `class BetaManagedAgentsSystemMessageEvent: …`
 
@@ -13478,17 +13101,17 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
+        minLength: 1
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
     - `type: Literal["system.message"]`
-
-      - `"system.message"`
 
     - `processed_at: Optional[datetime]`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsSessionUsageEvent: …`
 
@@ -13502,9 +13125,9 @@ for event in client.beta.sessions.events.stream(
 
       A timestamp in RFC 3339 format
 
-    - `type: Literal["session.usage"]`
+      format: date-time
 
-      - `"session.usage"`
+    - `type: Literal["session.usage"]`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -13514,6 +13137,8 @@ for event in client.beta.sessions.events.stream(
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
+        format: double
+
       - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
         Prompt-cache creation token usage broken down by cache lifetime.
@@ -13522,17 +13147,25 @@ for event in client.beta.sessions.events.stream(
 
           Tokens used to create 1-hour ephemeral cache entries.
 
+          format: int32
+
         - `ephemeral_5m_input_tokens: Optional[int]`
 
           Tokens used to create 5-minute ephemeral cache entries.
+
+          format: int32
 
       - `cache_read_input_tokens: Optional[int]`
 
         Total tokens read from prompt cache.
 
+        format: int32
+
       - `input_tokens: Optional[int]`
 
         Total input tokens consumed across all turns.
+
+        format: int32
 
       - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -13542,6 +13175,8 @@ for event in client.beta.sessions.events.stream(
 
         Total output tokens generated across all turns.
 
+        format: int32
+
       - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
         Cumulative count of server-executed tool invocations, broken down by tool.
@@ -13550,9 +13185,13 @@ for event in client.beta.sessions.events.stream(
 
           Number of server-executed web fetch requests.
 
+          format: int32
+
         - `web_search_requests: Optional[int]`
 
           Number of server-executed web search requests.
+
+          format: int32
 
     - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -13572,13 +13211,11 @@ for event in client.beta.sessions.events.stream(
 
       The text content.
 
+      minLength: 1
+
     - `type: Literal["text"]`
 
-      - `"text"`
-
   - `type: Literal["system.message"]`
-
-    - `"system.message"`
 
 ### Beta Managed Agents Text Block
 
@@ -13590,9 +13227,9 @@ for event in client.beta.sessions.events.stream(
 
     The text content.
 
-  - `type: Literal["text"]`
+    minLength: 1
 
-    - `"text"`
+  - `type: Literal["text"]`
 
 ### Beta Managed Agents Text Rubric
 
@@ -13606,8 +13243,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["text"]`
 
-    - `"text"`
-
 ### Beta Managed Agents Text Rubric Params
 
 - `class BetaManagedAgentsTextRubricParams: …`
@@ -13618,9 +13253,9 @@ for event in client.beta.sessions.events.stream(
 
     Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-  - `type: Literal["text"]`
+    maxLength: 262144
 
-    - `"text"`
+  - `type: Literal["text"]`
 
 ### Beta Managed Agents Unknown Error
 
@@ -13642,15 +13277,11 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["retrying"]`
 
-        - `"retrying"`
-
     - `class BetaManagedAgentsRetryStatusExhausted: …`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
-
-        - `"exhausted"`
 
     - `class BetaManagedAgentsRetryStatusTerminal: …`
 
@@ -13658,11 +13289,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["terminal"]`
 
-        - `"terminal"`
-
   - `type: Literal["unknown_error"]`
-
-    - `"unknown_error"`
 
 ### Beta Managed Agents URL Document Source
 
@@ -13672,11 +13299,11 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["url"]`
 
-    - `"url"`
-
   - `url: str`
 
     URL of the document to fetch.
+
+    minLength: 1
 
 ### Beta Managed Agents URL Image Source
 
@@ -13686,11 +13313,11 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["url"]`
 
-    - `"url"`
-
   - `url: str`
 
     URL of the image to fetch.
+
+    minLength: 1
 
 ### Beta Managed Agents User Custom Tool Result Event
 
@@ -13708,8 +13335,6 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["user.custom_tool_result"]`
 
-    - `"user.custom_tool_result"`
-
   - `content: Optional[List[Content]]`
 
     The result content returned by the tool.
@@ -13722,9 +13347,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -13742,13 +13367,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -13756,11 +13383,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -13770,13 +13397,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -13794,13 +13419,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -13810,15 +13437,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -13826,11 +13451,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -13840,13 +13465,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -13876,21 +13499,23 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `source: str`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: str`
 
         The title of the search result.
 
-      - `type: Literal["search_result"]`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: Literal["search_result"]`
 
   - `is_error: Optional[bool]`
 
@@ -13899,6 +13524,8 @@ for event in client.beta.sessions.events.stream(
   - `processed_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `session_thread_id: Optional[str]`
 
@@ -13914,9 +13541,9 @@ for event in client.beta.sessions.events.stream(
 
     The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: Literal["user.custom_tool_result"]`
+    minLength: 1, maxLength: 128
 
-    - `"user.custom_tool_result"`
+  - `type: Literal["user.custom_tool_result"]`
 
   - `content: Optional[List[Content]]`
 
@@ -13930,9 +13557,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -13950,13 +13577,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -13964,11 +13593,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -13978,13 +13607,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -14002,13 +13629,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -14018,15 +13647,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -14034,11 +13661,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -14048,13 +13675,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -14084,21 +13709,23 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `source: str`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: str`
 
         The title of the search result.
 
-      - `type: Literal["search_result"]`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: Literal["search_result"]`
 
   - `is_error: Optional[bool]`
 
@@ -14122,6 +13749,8 @@ for event in client.beta.sessions.events.stream(
 
     Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+    format: int32
+
   - `outcome_id: str`
 
     Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -14129,6 +13758,8 @@ for event in client.beta.sessions.events.stream(
   - `processed_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `rubric: Rubric`
 
@@ -14144,8 +13775,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
     - `class BetaManagedAgentsTextRubric: …`
 
       Rubric content provided inline as text.
@@ -14156,11 +13785,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["text"]`
 
-        - `"text"`
-
   - `type: Literal["user.define_outcome"]`
-
-    - `"user.define_outcome"`
 
 ### Beta Managed Agents User Define Outcome Event Params
 
@@ -14186,8 +13811,6 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
     - `class BetaManagedAgentsTextRubricParams: …`
 
       Rubric content provided inline as text.
@@ -14196,17 +13819,17 @@ for event in client.beta.sessions.events.stream(
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+        maxLength: 262144
+
       - `type: Literal["text"]`
 
-        - `"text"`
-
   - `type: Literal["user.define_outcome"]`
-
-    - `"user.define_outcome"`
 
   - `max_iterations: Optional[int]`
 
     Eval→revision cycles before giving up. Default 3, max 20.
+
+    format: int32
 
 ### Beta Managed Agents User Interrupt Event
 
@@ -14220,11 +13843,11 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["user.interrupt"]`
 
-    - `"user.interrupt"`
-
   - `processed_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `session_thread_id: Optional[str]`
 
@@ -14237,8 +13860,6 @@ for event in client.beta.sessions.events.stream(
   Parameters for sending an interrupt to pause the agent.
 
   - `type: Literal["user.interrupt"]`
-
-    - `"user.interrupt"`
 
   - `session_thread_id: Optional[str]`
 
@@ -14266,9 +13887,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -14286,13 +13907,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -14300,11 +13923,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -14314,13 +13937,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -14338,13 +13959,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -14354,15 +13977,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -14370,11 +13991,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -14384,13 +14005,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -14406,15 +14025,13 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["redacted"]`
 
-        - `"redacted"`
-
   - `type: Literal["user.message"]`
-
-    - `"user.message"`
 
   - `processed_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Beta Managed Agents User Message Event Params
 
@@ -14434,9 +14051,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -14454,13 +14071,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -14468,11 +14087,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -14482,13 +14101,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -14506,13 +14123,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -14522,15 +14141,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -14538,11 +14155,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -14552,13 +14169,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -14574,11 +14189,7 @@ for event in client.beta.sessions.events.stream(
 
       - `type: Literal["redacted"]`
 
-        - `"redacted"`
-
   - `type: Literal["user.message"]`
-
-    - `"user.message"`
 
 ### Beta Managed Agents User Tool Confirmation Event
 
@@ -14604,15 +14215,17 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["user.tool_confirmation"]`
 
-    - `"user.tool_confirmation"`
-
   - `deny_message: Optional[str]`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
+    maxLength: 10000
+
   - `processed_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `session_thread_id: Optional[str]`
 
@@ -14636,13 +14249,15 @@ for event in client.beta.sessions.events.stream(
 
     The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: Literal["user.tool_confirmation"]`
+    minLength: 1, maxLength: 128
 
-    - `"user.tool_confirmation"`
+  - `type: Literal["user.tool_confirmation"]`
 
   - `deny_message: Optional[str]`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    maxLength: 10000
 
 ### Beta Managed Agents User Tool Result Event Params
 
@@ -14654,9 +14269,9 @@ for event in client.beta.sessions.events.stream(
 
     The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `type: Literal["user.tool_result"]`
+    minLength: 1, maxLength: 128
 
-    - `"user.tool_result"`
+  - `type: Literal["user.tool_result"]`
 
   - `content: Optional[List[Content]]`
 
@@ -14670,9 +14285,9 @@ for event in client.beta.sessions.events.stream(
 
         The text content.
 
-      - `type: Literal["text"]`
+        minLength: 1
 
-        - `"text"`
+      - `type: Literal["text"]`
 
     - `class BetaManagedAgentsImageBlock: …`
 
@@ -14690,13 +14305,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded image data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsURLImageSource: …`
 
@@ -14704,11 +14321,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the image to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileImageSource: …`
 
@@ -14718,13 +14335,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["image"]`
-
-        - `"image"`
 
     - `class BetaManagedAgentsDocumentBlock: …`
 
@@ -14742,13 +14357,15 @@ for event in client.beta.sessions.events.stream(
 
             Base64-encoded document data.
 
+            minLength: 1
+
           - `media_type: str`
 
             MIME type of the document (e.g., "application/pdf").
 
-          - `type: Literal["base64"]`
+            minLength: 1
 
-            - `"base64"`
+          - `type: Literal["base64"]`
 
         - `class BetaManagedAgentsPlainTextDocumentSource: …`
 
@@ -14758,15 +14375,13 @@ for event in client.beta.sessions.events.stream(
 
             The plain text content.
 
+            minLength: 1
+
           - `media_type: Literal["text/plain"]`
 
             MIME type of the text content. Must be "text/plain".
 
-            - `"text/plain"`
-
           - `type: Literal["text"]`
-
-            - `"text"`
 
         - `class BetaManagedAgentsURLDocumentSource: …`
 
@@ -14774,11 +14389,11 @@ for event in client.beta.sessions.events.stream(
 
           - `type: Literal["url"]`
 
-            - `"url"`
-
           - `url: str`
 
             URL of the document to fetch.
+
+            minLength: 1
 
         - `class BetaManagedAgentsFileDocumentSource: …`
 
@@ -14788,13 +14403,11 @@ for event in client.beta.sessions.events.stream(
 
             ID of a previously uploaded file.
 
+            minLength: 1
+
           - `type: Literal["file"]`
 
-            - `"file"`
-
       - `type: Literal["document"]`
-
-        - `"document"`
 
       - `context: Optional[str]`
 
@@ -14824,21 +14437,23 @@ for event in client.beta.sessions.events.stream(
 
           The text content.
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
       - `source: str`
 
         The URL source of the search result.
 
+        minLength: 1
+
       - `title: str`
 
         The title of the search result.
 
-      - `type: Literal["search_result"]`
+        minLength: 1
 
-        - `"search_result"`
+      - `type: Literal["search_result"]`
 
   - `is_error: Optional[bool]`
 

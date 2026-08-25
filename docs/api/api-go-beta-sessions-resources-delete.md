@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/sessions/resources/dele
 category: "api"
 generated: true
 ---
----
-title: Delete Session Resource
-url: https://platform.claude.com/docs/en/api/go/beta/sessions/resources/delete
----
-
-## Delete Session Resource
+# Delete Session Resource
 
 `client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (*BetaManagedAgentsDeleteSessionResource, error)`
 
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
-### Parameters
+## Parameters
 
 - `resourceID string`
 
@@ -27,7 +22,7 @@ Delete Session Resource
 
     Path param: Path parameter session_id
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -103,7 +98,7 @@ Delete Session Resource
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsDeleteSessionResource struct{…}`
 
@@ -113,9 +108,7 @@ Delete Session Resource
 
   - `Type BetaManagedAgentsDeleteSessionResourceType`
 
-    - `const BetaManagedAgentsDeleteSessionResourceTypeSessionResourceDeleted BetaManagedAgentsDeleteSessionResourceType = "session_resource_deleted"`
-
-### Example
+## Example
 
 ```go
 package main
@@ -146,7 +139,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

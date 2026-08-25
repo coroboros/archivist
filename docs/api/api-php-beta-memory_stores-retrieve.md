@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/retrieve
 category: "api"
 generated: true
 ---
----
-title: Retrieve a memory store
-url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/retrieve
----
-
-## Retrieve a memory store
+# Retrieve a memory store
 
 `$client->beta->memoryStores->retrieve(string memoryStoreID, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
 
-**get** `/v1/memory_stores/{memory_store_id}`
+**GET** `/v1/memory_stores/{memory_store_id}`
 
 Retrieve a memory store
 
-### Parameters
+## Parameters
 
 - `memoryStoreID: string`
 
@@ -25,7 +20,7 @@ Retrieve a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsMemoryStore`
 
@@ -59,7 +54,7 @@ Retrieve a memory store
 
     Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -75,7 +70,7 @@ $betaManagedAgentsMemoryStore = $client->beta->memoryStores->retrieve(
 var_dump($betaManagedAgentsMemoryStore);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work"
 category: "api"
 generated: true
 ---
----
-title: Work
-url: https://platform.claude.com/docs/en/api/php/beta/environments/work
----
-
 # Work
 
 ## Get Work Item
 
 `$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
 
-**get** `/v1/environments/{environment_id}/work/{work_id}`
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -105,7 +100,7 @@ $betaSelfHostedWork = $client->beta->environments->work->retrieve(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -134,7 +129,7 @@ var_dump($betaSelfHostedWork);
 
 `$client->beta->environments->work->poll(string environmentID, ?int blockMs, ?int reclaimOlderThanMs, ?list<AnthropicBeta> betas, ?string anthropicWorkerID): SelfHostedWork`
 
-**get** `/v1/environments/{environment_id}/work/poll`
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -236,7 +231,7 @@ $betaSelfHostedWork = $client->beta->environments->work->poll(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -265,7 +260,7 @@ var_dump($betaSelfHostedWork);
 
 `$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -355,7 +350,7 @@ $betaSelfHostedWork = $client->beta->environments->work->ack(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -384,7 +379,7 @@ var_dump($betaSelfHostedWork);
 
 `$client->beta->environments->work->heartbeat(string workID, string environmentID, ?int desiredTTLSeconds, ?string expectedLastHeartbeat, ?list<AnthropicBeta> betas): SelfHostedWorkHeartbeatResponse`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -456,7 +451,7 @@ $betaSelfHostedWorkHeartbeatResponse = $client
 var_dump($betaSelfHostedWorkHeartbeatResponse);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -472,7 +467,7 @@ var_dump($betaSelfHostedWorkHeartbeatResponse);
 
 `$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): SelfHostedWork`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/stop`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -487,6 +482,8 @@ Stop a work item, initiating graceful or forced shutdown.
 - `force?:optional bool`
 
   If true, immediately stop work without graceful shutdown
+
+  default: false
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -567,7 +564,7 @@ $betaSelfHostedWork = $client->beta->environments->work->stop(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -596,7 +593,7 @@ var_dump($betaSelfHostedWork);
 
 `$client->beta->environments->work->list(string environmentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<SelfHostedWork>`
 
-**get** `/v1/environments/{environment_id}/work`
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -609,6 +606,8 @@ List work items in an environment.
 - `limit?:optional int`
 
   Maximum number of work items to return
+
+  default: 20
 
 - `page?:optional string`
 
@@ -693,7 +692,7 @@ $page = $client->beta->environments->work->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -727,7 +726,7 @@ var_dump($page);
 
 `$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): SelfHostedWork`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}`
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -822,7 +821,7 @@ $betaSelfHostedWork = $client->beta->environments->work->update(
 var_dump($betaSelfHostedWork);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -851,7 +850,7 @@ var_dump($betaSelfHostedWork);
 
 `$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): SelfHostedWorkQueueStats`
 
-**get** `/v1/environments/{environment_id}/work/stats`
+**GET** `/v1/environments/{environment_id}/work/stats`
 
 Get statistics about the work queue for an environment.
 
@@ -904,7 +903,7 @@ $betaSelfHostedWorkQueueStats = $client->beta->environments->work->stats(
 var_dump($betaSelfHostedWorkQueueStats);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -916,7 +915,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Self Hosted Work
 

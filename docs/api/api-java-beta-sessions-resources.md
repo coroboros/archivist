@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources"
 category: "api"
 generated: true
 ---
----
-title: Resources
-url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources
----
-
 # Resources
 
 ## Add Session Resource
 
-`BetaManagedAgentsFileResource beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaManagedAgentsFileResource beta().sessions().resources().add(params, requestOptions = RequestOptions.none())`
 
-**post** `/v1/sessions/{session_id}/resources`
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
@@ -111,17 +106,19 @@ Add Session Resource
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `String fileId`
 
   - `String mountPath`
 
   - `Type type`
 
-    - `FILE("file")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Example
 
@@ -152,7 +149,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -167,9 +164,9 @@ public final class Main {
 
 ## List Session Resources
 
-`ResourceListPage beta().sessions().resources().list(ResourceListParamsparams = ResourceListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`ResourceListPage beta().sessions().resources().list(params = ResourceListParams.none(), requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
@@ -182,6 +179,8 @@ List Session Resources
   - `Optional<Long> limit`
 
     Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+    format: int32
 
   - `Optional<String> page`
 
@@ -261,7 +260,7 @@ List Session Resources
 
 ### Returns
 
-- `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+- `class BetaManagedAgentsSessionResource: union`
 
   A memory store attached to an agent session.
 
@@ -273,15 +272,17 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String mountPath`
 
     - `Type type`
 
-      - `GITHUB_REPOSITORY("github_repository")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String url`
 
@@ -293,9 +294,9 @@ List Session Resources
 
           Branch name to check out.
 
-        - `Type type`
+          minLength: 1, maxLength: 255
 
-          - `BRANCH("branch")`
+        - `Type type`
 
       - `class BetaManagedAgentsCommitCheckout:`
 
@@ -303,9 +304,9 @@ List Session Resources
 
           Full commit SHA to check out.
 
-        - `Type type`
+          minLength: 7, maxLength: 64
 
-          - `COMMIT("commit")`
+        - `Type type`
 
   - `class BetaManagedAgentsFileResource:`
 
@@ -315,17 +316,19 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String fileId`
 
     - `String mountPath`
 
     - `Type type`
 
-      - `FILE("file")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource:`
 
@@ -336,8 +339,6 @@ List Session Resources
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `Type type`
-
-      - `MEMORY_STORE("memory_store")`
 
     - `Optional<Access> access`
 
@@ -354,6 +355,8 @@ List Session Resources
     - `Optional<String> instructions`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `Optional<String> mountPath`
 
@@ -384,7 +387,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -416,9 +419,9 @@ public final class Main {
 
 ## Get Session Resource
 
-`ResourceRetrieveResponse beta().sessions().resources().retrieve(ResourceRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`ResourceRetrieveResponse beta().sessions().resources().retrieve(params, requestOptions = RequestOptions.none())`
 
-**get** `/v1/sessions/{session_id}/resources/{resource_id}`
+**GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Get Session Resource
 
@@ -504,7 +507,7 @@ Get Session Resource
 
 ### Returns
 
-- `class ResourceRetrieveResponse: A class that can be one of several variants.union`
+- `class ResourceRetrieveResponse: union`
 
   The requested session resource.
 
@@ -516,15 +519,17 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String mountPath`
 
     - `Type type`
 
-      - `GITHUB_REPOSITORY("github_repository")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String url`
 
@@ -536,9 +541,9 @@ Get Session Resource
 
           Branch name to check out.
 
-        - `Type type`
+          minLength: 1, maxLength: 255
 
-          - `BRANCH("branch")`
+        - `Type type`
 
       - `class BetaManagedAgentsCommitCheckout:`
 
@@ -546,9 +551,9 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-        - `Type type`
+          minLength: 7, maxLength: 64
 
-          - `COMMIT("commit")`
+        - `Type type`
 
   - `class BetaManagedAgentsFileResource:`
 
@@ -558,17 +563,19 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String fileId`
 
     - `String mountPath`
 
     - `Type type`
 
-      - `FILE("file")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource:`
 
@@ -579,8 +586,6 @@ Get Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `Type type`
-
-      - `MEMORY_STORE("memory_store")`
 
     - `Optional<Access> access`
 
@@ -597,6 +602,8 @@ Get Session Resource
     - `Optional<String> instructions`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `Optional<String> mountPath`
 
@@ -631,7 +638,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -650,9 +657,9 @@ public final class Main {
 
 ## Update Session Resource
 
-`ResourceUpdateResponse beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`ResourceUpdateResponse beta().sessions().resources().update(params, requestOptions = RequestOptions.none())`
 
-**post** `/v1/sessions/{session_id}/resources/{resource_id}`
+**POST** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Update Session Resource
 
@@ -740,9 +747,11 @@ Update Session Resource
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
+    minLength: 1, maxLength: 4096
+
 ### Returns
 
-- `class ResourceUpdateResponse: A class that can be one of several variants.union`
+- `class ResourceUpdateResponse: union`
 
   The updated session resource.
 
@@ -754,15 +763,17 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String mountPath`
 
     - `Type type`
 
-      - `GITHUB_REPOSITORY("github_repository")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String url`
 
@@ -774,9 +785,9 @@ Update Session Resource
 
           Branch name to check out.
 
-        - `Type type`
+          minLength: 1, maxLength: 255
 
-          - `BRANCH("branch")`
+        - `Type type`
 
       - `class BetaManagedAgentsCommitCheckout:`
 
@@ -784,9 +795,9 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-        - `Type type`
+          minLength: 7, maxLength: 64
 
-          - `COMMIT("commit")`
+        - `Type type`
 
   - `class BetaManagedAgentsFileResource:`
 
@@ -796,17 +807,19 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String fileId`
 
     - `String mountPath`
 
     - `Type type`
 
-      - `FILE("file")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource:`
 
@@ -817,8 +830,6 @@ Update Session Resource
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `Type type`
-
-      - `MEMORY_STORE("memory_store")`
 
     - `Optional<Access> access`
 
@@ -835,6 +846,8 @@ Update Session Resource
     - `Optional<String> instructions`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `Optional<String> mountPath`
 
@@ -870,7 +883,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -889,9 +902,9 @@ public final class Main {
 
 ## Delete Session Resource
 
-`BetaManagedAgentsDeleteSessionResource beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaManagedAgentsDeleteSessionResource beta().sessions().resources().delete(params, requestOptions = RequestOptions.none())`
 
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
@@ -985,8 +998,6 @@ Delete Session Resource
 
   - `Type type`
 
-    - `SESSION_RESOURCE_DELETED("session_resource_deleted")`
-
 ### Example
 
 ```java
@@ -1012,7 +1023,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1021,7 +1032,7 @@ public final class Main {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Delete Session Resource
 
@@ -1033,8 +1044,6 @@ public final class Main {
 
   - `Type type`
 
-    - `SESSION_RESOURCE_DELETED("session_resource_deleted")`
-
 ### Beta Managed Agents File Resource
 
 - `class BetaManagedAgentsFileResource:`
@@ -1045,17 +1054,19 @@ public final class Main {
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `String fileId`
 
   - `String mountPath`
 
   - `Type type`
 
-    - `FILE("file")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 ### Beta Managed Agents GitHub Repository Resource
 
@@ -1067,15 +1078,17 @@ public final class Main {
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `String mountPath`
 
   - `Type type`
 
-    - `GITHUB_REPOSITORY("github_repository")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String url`
 
@@ -1087,9 +1100,9 @@ public final class Main {
 
         Branch name to check out.
 
-      - `Type type`
+        minLength: 1, maxLength: 255
 
-        - `BRANCH("branch")`
+      - `Type type`
 
     - `class BetaManagedAgentsCommitCheckout:`
 
@@ -1097,9 +1110,9 @@ public final class Main {
 
         Full commit SHA to check out.
 
-      - `Type type`
+        minLength: 7, maxLength: 64
 
-        - `COMMIT("commit")`
+      - `Type type`
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1112,8 +1125,6 @@ public final class Main {
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
   - `Type type`
-
-    - `MEMORY_STORE("memory_store")`
 
   - `Optional<Access> access`
 
@@ -1131,6 +1142,8 @@ public final class Main {
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+    maxLength: 4096
+
   - `Optional<String> mountPath`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -1141,7 +1154,7 @@ public final class Main {
 
 ### Beta Managed Agents Session Resource
 
-- `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+- `class BetaManagedAgentsSessionResource: union`
 
   A memory store attached to an agent session.
 
@@ -1153,15 +1166,17 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String mountPath`
 
     - `Type type`
 
-      - `GITHUB_REPOSITORY("github_repository")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `String url`
 
@@ -1173,9 +1188,9 @@ public final class Main {
 
           Branch name to check out.
 
-        - `Type type`
+          minLength: 1, maxLength: 255
 
-          - `BRANCH("branch")`
+        - `Type type`
 
       - `class BetaManagedAgentsCommitCheckout:`
 
@@ -1183,9 +1198,9 @@ public final class Main {
 
           Full commit SHA to check out.
 
-        - `Type type`
+          minLength: 7, maxLength: 64
 
-          - `COMMIT("commit")`
+        - `Type type`
 
   - `class BetaManagedAgentsFileResource:`
 
@@ -1195,17 +1210,19 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `String fileId`
 
     - `String mountPath`
 
     - `Type type`
 
-      - `FILE("file")`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource:`
 
@@ -1216,8 +1233,6 @@ public final class Main {
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `Type type`
-
-      - `MEMORY_STORE("memory_store")`
 
     - `Optional<Access> access`
 
@@ -1234,6 +1249,8 @@ public final class Main {
     - `Optional<String> instructions`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      maxLength: 4096
 
     - `Optional<String> mountPath`
 

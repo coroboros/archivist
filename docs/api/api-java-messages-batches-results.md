@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/messages/batches/results"
 category: "api"
 generated: true
 ---
----
-title: Retrieve Message Batch results
-url: https://platform.claude.com/docs/en/api/java/messages/batches/results
----
+# Retrieve Message Batch results
 
-## Retrieve Message Batch results
+`MessageBatchIndividualResponse messages().batches().resultsStreaming(params = BatchResultsParams.none(), requestOptions = RequestOptions.none())`
 
-`MessageBatchIndividualResponse messages().batches().resultsStreaming(BatchResultsParamsparams = BatchResultsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/messages/batches/{message_batch_id}/results`
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -21,7 +16,7 @@ Each line in the file is a JSON object containing the result of a single request
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `BatchResultsParams params`
 
@@ -29,7 +24,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     ID of the Message Batch.
 
-### Returns
+## Returns
 
 - `class MessageBatchIndividualResponse:`
 
@@ -69,6 +64,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The time at which the container will expire.
 
+            format: date-time
+
           - `Optional<List<ContainerSkill>> skills`
 
             Skills loaded in the container
@@ -76,6 +73,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `String skillId`
 
               Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `Type type`
 
@@ -88,6 +87,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `String version`
 
               The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
 
         - `List<ContentBlock> content`
 
@@ -132,6 +133,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `long documentIndex`
 
+                  minimum: 0
+
                 - `Optional<String> documentTitle`
 
                 - `long endCharIndex`
@@ -140,15 +143,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `long startCharIndex`
 
-                - `JsonValue; type "char_location"constant`
+                  minimum: 0
 
-                  - `CHAR_LOCATION("char_location")`
+                - `JsonValue type constant`
 
               - `class CitationPageLocation:`
 
                 - `String citedText`
 
                 - `long documentIndex`
+
+                  minimum: 0
 
                 - `Optional<String> documentTitle`
 
@@ -158,9 +163,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `long startPageNumber`
 
-                - `JsonValue; type "page_location"constant`
+                  minimum: 1
 
-                  - `PAGE_LOCATION("page_location")`
+                - `JsonValue type constant`
 
               - `class CitationContentBlockLocation:`
 
@@ -171,6 +176,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
                 - `long documentIndex`
+
+                  minimum: 0
 
                 - `Optional<String> documentTitle`
 
@@ -186,9 +193,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `JsonValue; type "content_block_location"constant`
+                  minimum: 0
 
-                  - `CONTENT_BLOCK_LOCATION("content_block_location")`
+                - `JsonValue type constant`
 
               - `class CitationsWebSearchResultLocation:`
 
@@ -198,9 +205,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Optional<String> title`
 
-                - `JsonValue; type "web_search_result_location"constant`
+                  maxLength: 512
 
-                  - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
+                - `JsonValue type constant`
 
                 - `String url`
 
@@ -224,23 +231,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `String source`
 
                 - `long startBlockIndex`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `Optional<String> title`
 
-                - `JsonValue; type "search_result_location"constant`
-
-                  - `SEARCH_RESULT_LOCATION("search_result_location")`
+                - `JsonValue type constant`
 
             - `String text`
 
-            - `JsonValue; type "text"constant`
+              maxLength: 5000000, minLength: 0
 
-              - `TEXT("text")`
+            - `JsonValue type constant`
 
           - `class ThinkingBlock:`
 
@@ -256,9 +265,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `JsonValue; type "thinking"constant`
-
-              - `THINKING("thinking")`
+            - `JsonValue type constant`
 
           - `class RedactedThinkingBlock:`
 
@@ -270,13 +277,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `JsonValue; type "redacted_thinking"constant`
-
-              - `REDACTED_THINKING("redacted_thinking")`
+            - `JsonValue type constant`
 
           - `class ToolUseBlock:`
 
             - `String id`
+
+              pattern: ^[a-zA-Z0-9_-]+$
 
             - `Caller caller`
 
@@ -286,9 +293,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation directly from the model.
 
-                - `JsonValue; type "direct"constant`
-
-                  - `DIRECT("direct")`
+                - `JsonValue type constant`
 
               - `class ServerToolCaller:`
 
@@ -296,33 +301,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `String toolId`
 
-                - `JsonValue; type "code_execution_20250825"constant`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `CODE_EXECUTION_20250825("code_execution_20250825")`
+                - `JsonValue type constant`
 
               - `class ServerToolCaller20260120:`
 
                 - `String toolId`
 
-                - `JsonValue; type "code_execution_20260120"constant`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `CODE_EXECUTION_20260120("code_execution_20260120")`
+                - `JsonValue type constant`
 
             - `Input input`
 
             - `String name`
 
-            - `JsonValue; type "tool_use"constant`
+              minLength: 1
 
-              - `TOOL_USE("tool_use")`
+            - `JsonValue type constant`
 
             - `Optional<String> toolsetName`
 
               For a toolset member tool_use, the toolset family.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlock:`
 
             - `String id`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `Caller caller`
 
@@ -356,9 +365,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-            - `JsonValue; type "server_tool_use"constant`
-
-              - `SERVER_TOOL_USE("server_tool_use")`
+            - `JsonValue type constant`
 
           - `class WebSearchToolResultBlock:`
 
@@ -394,9 +401,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `REQUEST_TOO_LARGE("request_too_large")`
 
-                - `JsonValue; type "web_search_tool_result_error"constant`
-
-                  - `WEB_SEARCH_TOOL_RESULT_ERROR("web_search_tool_result_error")`
+                - `JsonValue type constant`
 
               - `List<WebSearchResultBlock>`
 
@@ -406,17 +411,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `String title`
 
-                - `JsonValue; type "web_search_result"constant`
-
-                  - `WEB_SEARCH_RESULT("web_search_result")`
+                - `JsonValue type constant`
 
                 - `String url`
 
             - `String toolUseId`
 
-            - `JsonValue; type "web_search_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `WEB_SEARCH_TOOL_RESULT("web_search_tool_result")`
+            - `JsonValue type constant`
 
           - `class WebFetchToolResultBlock:`
 
@@ -458,9 +461,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `UNAVAILABLE("unavailable")`
 
-                - `JsonValue; type "web_fetch_tool_result_error"constant`
-
-                  - `WEB_FETCH_TOOL_RESULT_ERROR("web_fetch_tool_result_error")`
+                - `JsonValue type constant`
 
               - `class WebFetchBlock:`
 
@@ -478,41 +479,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `String data`
 
-                      - `JsonValue; mediaType "application/pdf"constant`
+                        format: byte
 
-                        - `APPLICATION_PDF("application/pdf")`
+                      - `JsonValue mediaType constant`
 
-                      - `JsonValue; type "base64"constant`
-
-                        - `BASE64("base64")`
+                      - `JsonValue type constant`
 
                     - `class PlainTextSource:`
 
                       - `String data`
 
-                      - `JsonValue; mediaType "text/plain"constant`
+                      - `JsonValue mediaType constant`
 
-                        - `TEXT_PLAIN("text/plain")`
-
-                      - `JsonValue; type "text"constant`
-
-                        - `TEXT("text")`
+                      - `JsonValue type constant`
 
                   - `Optional<String> title`
 
                     The title of the document
 
-                  - `JsonValue; type "document"constant`
-
-                    - `DOCUMENT("document")`
+                  - `JsonValue type constant`
 
                 - `Optional<String> retrievedAt`
 
                   ISO 8601 timestamp when the content was retrieved
 
-                - `JsonValue; type "web_fetch_result"constant`
-
-                  - `WEB_FETCH_RESULT("web_fetch_result")`
+                - `JsonValue type constant`
 
                 - `String url`
 
@@ -520,9 +511,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String toolUseId`
 
-            - `JsonValue; type "web_fetch_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `WEB_FETCH_TOOL_RESULT("web_fetch_tool_result")`
+            - `JsonValue type constant`
 
           - `class CodeExecutionToolResultBlock:`
 
@@ -542,9 +533,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-                - `JsonValue; type "code_execution_tool_result_error"constant`
-
-                  - `CODE_EXECUTION_TOOL_RESULT_ERROR("code_execution_tool_result_error")`
+                - `JsonValue type constant`
 
               - `class CodeExecutionResultBlock:`
 
@@ -552,9 +541,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String fileId`
 
-                  - `JsonValue; type "code_execution_output"constant`
-
-                    - `CODE_EXECUTION_OUTPUT("code_execution_output")`
+                  - `JsonValue type constant`
 
                 - `long returnCode`
 
@@ -562,9 +549,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `String stdout`
 
-                - `JsonValue; type "code_execution_result"constant`
-
-                  - `CODE_EXECUTION_RESULT("code_execution_result")`
+                - `JsonValue type constant`
 
               - `class EncryptedCodeExecutionResultBlock:`
 
@@ -574,7 +559,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String fileId`
 
-                  - `JsonValue; type "code_execution_output"constant`
+                  - `JsonValue type constant`
 
                 - `String encryptedStdout`
 
@@ -582,15 +567,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `String stderr`
 
-                - `JsonValue; type "encrypted_code_execution_result"constant`
-
-                  - `ENCRYPTED_CODE_EXECUTION_RESULT("encrypted_code_execution_result")`
+                - `JsonValue type constant`
 
             - `String toolUseId`
 
-            - `JsonValue; type "code_execution_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CODE_EXECUTION_TOOL_RESULT("code_execution_tool_result")`
+            - `JsonValue type constant`
 
           - `class BashCodeExecutionToolResultBlock:`
 
@@ -610,9 +593,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-                - `JsonValue; type "bash_code_execution_tool_result_error"constant`
-
-                  - `BASH_CODE_EXECUTION_TOOL_RESULT_ERROR("bash_code_execution_tool_result_error")`
+                - `JsonValue type constant`
 
               - `class BashCodeExecutionResultBlock:`
 
@@ -620,9 +601,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String fileId`
 
-                  - `JsonValue; type "bash_code_execution_output"constant`
-
-                    - `BASH_CODE_EXECUTION_OUTPUT("bash_code_execution_output")`
+                  - `JsonValue type constant`
 
                 - `long returnCode`
 
@@ -630,15 +609,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `String stdout`
 
-                - `JsonValue; type "bash_code_execution_result"constant`
-
-                  - `BASH_CODE_EXECUTION_RESULT("bash_code_execution_result")`
+                - `JsonValue type constant`
 
             - `String toolUseId`
 
-            - `JsonValue; type "bash_code_execution_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `BASH_CODE_EXECUTION_TOOL_RESULT("bash_code_execution_tool_result")`
+            - `JsonValue type constant`
 
           - `class TextEditorCodeExecutionToolResultBlock:`
 
@@ -660,9 +637,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Optional<String> errorMessage`
 
-                - `JsonValue; type "text_editor_code_execution_tool_result_error"constant`
-
-                  - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT_ERROR("text_editor_code_execution_tool_result_error")`
+                - `JsonValue type constant`
 
               - `class TextEditorCodeExecutionViewResultBlock:`
 
@@ -682,17 +657,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Optional<Long> totalLines`
 
-                - `JsonValue; type "text_editor_code_execution_view_result"constant`
-
-                  - `TEXT_EDITOR_CODE_EXECUTION_VIEW_RESULT("text_editor_code_execution_view_result")`
+                - `JsonValue type constant`
 
               - `class TextEditorCodeExecutionCreateResultBlock:`
 
                 - `boolean isFileUpdate`
 
-                - `JsonValue; type "text_editor_code_execution_create_result"constant`
-
-                  - `TEXT_EDITOR_CODE_EXECUTION_CREATE_RESULT("text_editor_code_execution_create_result")`
+                - `JsonValue type constant`
 
               - `class TextEditorCodeExecutionStrReplaceResultBlock:`
 
@@ -706,15 +677,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Optional<Long> oldStart`
 
-                - `JsonValue; type "text_editor_code_execution_str_replace_result"constant`
-
-                  - `TEXT_EDITOR_CODE_EXECUTION_STR_REPLACE_RESULT("text_editor_code_execution_str_replace_result")`
+                - `JsonValue type constant`
 
             - `String toolUseId`
 
-            - `JsonValue; type "text_editor_code_execution_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT("text_editor_code_execution_tool_result")`
+            - `JsonValue type constant`
 
           - `class ToolSearchToolResultBlock:`
 
@@ -734,9 +703,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Optional<String> errorMessage`
 
-                - `JsonValue; type "tool_search_tool_result_error"constant`
-
-                  - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
+                - `JsonValue type constant`
 
               - `class ToolSearchToolSearchResultBlock:`
 
@@ -744,19 +711,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String toolName`
 
-                  - `JsonValue; type "tool_reference"constant`
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `TOOL_REFERENCE("tool_reference")`
+                  - `JsonValue type constant`
 
-                - `JsonValue; type "tool_search_tool_search_result"constant`
-
-                  - `TOOL_SEARCH_TOOL_SEARCH_RESULT("tool_search_tool_search_result")`
+                - `JsonValue type constant`
 
             - `String toolUseId`
 
-            - `JsonValue; type "tool_search_tool_result"constant`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `TOOL_SEARCH_TOOL_RESULT("tool_search_tool_result")`
+            - `JsonValue type constant`
 
           - `class ContainerUploadBlock:`
 
@@ -764,9 +729,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String fileId`
 
-            - `JsonValue; type "container_upload"constant`
-
-              - `CONTAINER_UPLOAD("container_upload")`
+            - `JsonValue type constant`
 
         - `Model model`
 
@@ -834,13 +797,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             High-performance model for agents and coding
 
-        - `JsonValue; role "assistant"constant`
+        - `JsonValue role constant`
 
           Conversational role of the generated message.
 
           This will always be `"assistant"`.
-
-          - `ASSISTANT("assistant")`
 
         - `Optional<RefusalStopDetails> stopDetails`
 
@@ -876,9 +837,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-          - `JsonValue; type "refusal"constant`
-
-            - `REFUSAL("refusal")`
+          - `JsonValue type constant`
 
         - `Optional<StopReason> stopReason`
 
@@ -916,13 +875,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This value will be a non-null string if one of your custom stop sequences was generated.
 
-        - `JsonValue; type "message"constant`
+        - `JsonValue type constant`
 
           Object type.
 
           For Messages, this is always `"message"`.
-
-          - `MESSAGE("message")`
 
         - `Usage usage`
 
@@ -944,17 +901,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of input tokens used to create the 1 hour cache entry.
 
+              minimum: 0
+
             - `long ephemeral5mInputTokens`
 
               The number of input tokens used to create the 5 minute cache entry.
+
+              minimum: 0
 
           - `Optional<Long> cacheCreationInputTokens`
 
             The number of input tokens used to create the cache entry.
 
+            minimum: 0
+
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+            minimum: 0
 
           - `Optional<String> inferenceGeo`
 
@@ -964,9 +929,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The number of input tokens which were used.
 
+            minimum: 0
+
           - `long outputTokens`
 
             The number of output tokens which were used.
+
+            minimum: 0
 
           - `Optional<OutputTokensDetails> outputTokensDetails`
 
@@ -988,6 +957,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+              minimum: 0
+
           - `Optional<ServerToolUsage> serverToolUse`
 
             The number of server tool requests.
@@ -996,9 +967,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of web fetch tool requests.
 
+              minimum: 0
+
             - `long webSearchRequests`
 
               The number of web search tool requests.
+
+              minimum: 0
 
           - `Optional<ServiceTier> serviceTier`
 
@@ -1010,9 +985,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BATCH("batch")`
 
-      - `JsonValue; type "succeeded"constant`
-
-        - `SUCCEEDED("succeeded")`
+      - `JsonValue type constant`
 
     - `class MessageBatchErroredResult:`
 
@@ -1024,97 +997,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String message`
 
-            - `JsonValue; type "invalid_request_error"constant`
-
-              - `INVALID_REQUEST_ERROR("invalid_request_error")`
+            - `JsonValue type constant`
 
           - `class AuthenticationError:`
 
             - `String message`
 
-            - `JsonValue; type "authentication_error"constant`
-
-              - `AUTHENTICATION_ERROR("authentication_error")`
+            - `JsonValue type constant`
 
           - `class BillingError:`
 
             - `String message`
 
-            - `JsonValue; type "billing_error"constant`
-
-              - `BILLING_ERROR("billing_error")`
+            - `JsonValue type constant`
 
           - `class PermissionError:`
 
             - `String message`
 
-            - `JsonValue; type "permission_error"constant`
-
-              - `PERMISSION_ERROR("permission_error")`
+            - `JsonValue type constant`
 
           - `class NotFoundError:`
 
             - `String message`
 
-            - `JsonValue; type "not_found_error"constant`
-
-              - `NOT_FOUND_ERROR("not_found_error")`
+            - `JsonValue type constant`
 
           - `class RateLimitError:`
 
             - `String message`
 
-            - `JsonValue; type "rate_limit_error"constant`
-
-              - `RATE_LIMIT_ERROR("rate_limit_error")`
+            - `JsonValue type constant`
 
           - `class GatewayTimeoutError:`
 
             - `String message`
 
-            - `JsonValue; type "timeout_error"constant`
-
-              - `TIMEOUT_ERROR("timeout_error")`
+            - `JsonValue type constant`
 
           - `class ApiErrorObject:`
 
             - `String message`
 
-            - `JsonValue; type "api_error"constant`
-
-              - `API_ERROR("api_error")`
+            - `JsonValue type constant`
 
           - `class OverloadedError:`
 
             - `String message`
 
-            - `JsonValue; type "overloaded_error"constant`
-
-              - `OVERLOADED_ERROR("overloaded_error")`
+            - `JsonValue type constant`
 
         - `Optional<String> requestId`
 
-        - `JsonValue; type "error"constant`
+        - `JsonValue type constant`
 
-          - `ERROR("error")`
-
-      - `JsonValue; type "errored"constant`
-
-        - `ERRORED("errored")`
+      - `JsonValue type constant`
 
     - `class MessageBatchCanceledResult:`
 
-      - `JsonValue; type "canceled"constant`
-
-        - `CANCELED("canceled")`
+      - `JsonValue type constant`
 
     - `class MessageBatchExpiredResult:`
 
-      - `JsonValue; type "expired"constant`
+      - `JsonValue type constant`
 
-        - `EXPIRED("expired")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;

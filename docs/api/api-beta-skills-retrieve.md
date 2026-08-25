@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/beta/skills/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Skill
-url: https://platform.claude.com/docs/en/api/beta/skills/retrieve
----
+# Get Skill
 
-## Get Skill
-
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -23,7 +18,7 @@ Get Skill
 
   The format and length of IDs may change over time.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -101,7 +96,7 @@ Get Skill
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `id: string`
 
@@ -140,20 +135,22 @@ Get Skill
 
   For Skills, this is always `"skill"`.
 
+  default: skill
+
 - `updated_at: string`
 
   ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

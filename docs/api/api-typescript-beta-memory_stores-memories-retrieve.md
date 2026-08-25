@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/m
 category: "api"
 generated: true
 ---
----
-title: Retrieve a memory
-url: https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/memories/retrieve
----
+# Retrieve a memory
 
-## Retrieve a memory
+`client.beta.memoryStores.memories.retrieve(memoryID, params, options?): BetaManagedAgentsMemory`
 
-`client.beta.memoryStores.memories.retrieve(stringmemoryID, MemoryRetrieveParamsparams, RequestOptionsoptions?): BetaManagedAgentsMemory`
-
-**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Retrieve a memory
 
-### Parameters
+## Parameters
 
 - `memoryID: string`
 
@@ -111,7 +106,7 @@ Retrieve a memory
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsMemory`
 
@@ -129,9 +124,13 @@ Retrieve a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -147,17 +146,17 @@ Retrieve a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content?: string | null`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -173,7 +172,7 @@ const betaManagedAgentsMemory = await client.beta.memoryStores.memories.retrieve
 console.log(betaManagedAgentsMemory.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

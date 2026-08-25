@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/messages/batches/delete
 category: "api"
 generated: true
 ---
----
-title: Delete a Message Batch
-url: https://platform.claude.com/docs/en/api/go/beta/messages/batches/delete
----
-
-## Delete a Message Batch
+# Delete a Message Batch
 
 `client.Beta.Messages.Batches.Delete(ctx, messageBatchID, body) (*BetaDeletedMessageBatch, error)`
 
-**delete** `/v1/messages/batches/{message_batch_id}`
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -21,7 +16,7 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `messageBatchID string`
 
@@ -29,7 +24,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `body BetaMessageBatchDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -105,7 +100,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaDeletedMessageBatch struct{…}`
 
@@ -119,9 +114,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-    - `const MessageBatchDeletedMessageBatchDeleted MessageBatchDeleted = "message_batch_deleted"`
+    default: message_batch_deleted
 
-### Example
+## Example
 
 ```go
 package main
@@ -150,7 +145,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

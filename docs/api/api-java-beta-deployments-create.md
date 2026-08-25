@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/deployments/create"
 category: "api"
 generated: true
 ---
----
-title: Create Deployment
-url: https://platform.claude.com/docs/en/api/java/beta/deployments/create
----
+# Create Deployment
 
-## Create Deployment
+`BetaManagedAgentsDeployment beta().deployments().create(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsDeployment beta().deployments().create(DeploymentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/deployments`
+**POST** `/v1/deployments`
 
 Create Deployment
 
-### Parameters
+## Parameters
 
 - `DeploymentCreateParams params`
 
@@ -107,17 +102,21 @@ Create Deployment
 
         The `agent` ID.
 
-      - `Type type`
+        minLength: 1, maxLength: 128
 
-        - `AGENT("agent")`
+      - `Type type`
 
       - `Optional<Long> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+        format: int32
+
   - `String environmentId`
 
     ID of the `environment` defining the container configuration for sessions created from this deployment.
+
+    minLength: 1, maxLength: 128
 
   - `List<BetaManagedAgentsDeploymentInitialEventParams> initialEvents`
 
@@ -139,9 +138,9 @@ Create Deployment
 
             The text content.
 
-          - `Type type`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `Type type`
 
         - `class BetaManagedAgentsImageBlock:`
 
@@ -159,13 +158,15 @@ Create Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `String mediaType`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `Type type`
+                minLength: 1
 
-                - `BASE64("base64")`
+              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -173,11 +174,11 @@ Create Deployment
 
               - `Type type`
 
-                - `URL("url")`
-
               - `String url`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileImageSource:`
 
@@ -187,13 +188,11 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type type`
 
-                - `FILE("file")`
-
           - `Type type`
-
-            - `IMAGE("image")`
 
         - `class BetaManagedAgentsDocumentBlock:`
 
@@ -211,13 +210,15 @@ Create Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `String mediaType`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `Type type`
+                minLength: 1
 
-                - `BASE64("base64")`
+              - `Type type`
 
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
@@ -227,15 +228,13 @@ Create Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `TEXT_PLAIN("text/plain")`
-
               - `Type type`
-
-                - `TEXT("text")`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -243,11 +242,11 @@ Create Deployment
 
               - `Type type`
 
-                - `URL("url")`
-
               - `String url`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileDocumentSource:`
 
@@ -257,13 +256,11 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type type`
 
-                - `FILE("file")`
-
           - `Type type`
-
-            - `DOCUMENT("document")`
 
           - `Optional<String> context`
 
@@ -279,11 +276,7 @@ Create Deployment
 
           - `Type type`
 
-            - `REDACTED("redacted")`
-
       - `Type type`
-
-        - `USER_MESSAGE("user.message")`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
@@ -307,8 +300,6 @@ Create Deployment
 
           - `Type type`
 
-            - `FILE("file")`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
@@ -317,17 +308,17 @@ Create Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
+            maxLength: 262144
+
           - `Type type`
 
-            - `TEXT("text")`
-
       - `Type type`
-
-        - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
       - `Optional<Long> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
+
+        format: int32
 
     - `class BetaManagedAgentsSystemMessageEventParams:`
 
@@ -341,17 +332,17 @@ Create Deployment
 
           The text content.
 
+          minLength: 1
+
         - `Type type`
 
-          - `TEXT("text")`
-
       - `Type type`
-
-        - `SYSTEM_MESSAGE("system.message")`
 
   - `String name`
 
     Human-readable name for the deployment.
+
+    minLength: 1, maxLength: 256
 
   - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
@@ -360,6 +351,8 @@ Create Deployment
   - `Optional<String> description`
 
     Description of what the deployment does.
+
+    maxLength: 2048
 
   - `Optional<Metadata> metadata`
 
@@ -377,13 +370,15 @@ Create Deployment
 
         GitHub authorization token used to clone the repository.
 
-      - `Type type`
+        minLength: 1, maxLength: 4096
 
-        - `GITHUB_REPOSITORY("github_repository")`
+      - `Type type`
 
       - `String url`
 
         Github URL of the repository
+
+        minLength: 1, maxLength: 2048
 
       - `Optional<Checkout> checkout`
 
@@ -395,9 +390,9 @@ Create Deployment
 
             Branch name to check out.
 
-          - `Type type`
+            minLength: 1, maxLength: 255
 
-            - `BRANCH("branch")`
+          - `Type type`
 
         - `class BetaManagedAgentsCommitCheckout:`
 
@@ -405,13 +400,15 @@ Create Deployment
 
             Full commit SHA to check out.
 
-          - `Type type`
+            minLength: 7, maxLength: 64
 
-            - `COMMIT("commit")`
+          - `Type type`
 
       - `Optional<String> mountPath`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+        minLength: 1, maxLength: 4096
 
     - `class BetaManagedAgentsFileResourceParams:`
 
@@ -421,13 +418,15 @@ Create Deployment
 
         ID of a previously uploaded file.
 
-      - `Type type`
+        minLength: 1, maxLength: 128
 
-        - `FILE("file")`
+      - `Type type`
 
       - `Optional<String> mountPath`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+        minLength: 1, maxLength: 4096
 
     - `class BetaManagedAgentsMemoryStoreResourceParam:`
 
@@ -438,8 +437,6 @@ Create Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `Type type`
-
-        - `MEMORY_STORE("memory_store")`
 
       - `Optional<Access> access`
 
@@ -453,6 +450,8 @@ Create Deployment
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+        maxLength: 4096
+
   - `Optional<BetaManagedAgentsScheduleParams> schedule`
 
     5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
@@ -461,7 +460,7 @@ Create Deployment
 
     Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeployment:`
 
@@ -479,17 +478,21 @@ Create Deployment
 
     - `Type type`
 
-      - `AGENT("agent")`
-
     - `long version`
+
+      format: int32
 
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> description`
 
@@ -519,9 +522,9 @@ Create Deployment
 
             The text content.
 
-          - `Type type`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `Type type`
 
         - `class BetaManagedAgentsImageBlock:`
 
@@ -539,13 +542,15 @@ Create Deployment
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `String mediaType`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `Type type`
+                minLength: 1
 
-                - `BASE64("base64")`
+              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -553,11 +558,11 @@ Create Deployment
 
               - `Type type`
 
-                - `URL("url")`
-
               - `String url`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileImageSource:`
 
@@ -567,13 +572,11 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type type`
 
-                - `FILE("file")`
-
           - `Type type`
-
-            - `IMAGE("image")`
 
         - `class BetaManagedAgentsDocumentBlock:`
 
@@ -591,13 +594,15 @@ Create Deployment
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `String mediaType`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `Type type`
+                minLength: 1
 
-                - `BASE64("base64")`
+              - `Type type`
 
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
@@ -607,15 +612,13 @@ Create Deployment
 
                 The plain text content.
 
+                minLength: 1
+
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `TEXT_PLAIN("text/plain")`
-
               - `Type type`
-
-                - `TEXT("text")`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -623,11 +626,11 @@ Create Deployment
 
               - `Type type`
 
-                - `URL("url")`
-
               - `String url`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `class BetaManagedAgentsFileDocumentSource:`
 
@@ -637,13 +640,11 @@ Create Deployment
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type type`
 
-                - `FILE("file")`
-
           - `Type type`
-
-            - `DOCUMENT("document")`
 
           - `Optional<String> context`
 
@@ -659,11 +660,7 @@ Create Deployment
 
           - `Type type`
 
-            - `REDACTED("redacted")`
-
       - `Type type`
-
-        - `USER_MESSAGE("user.message")`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
@@ -687,8 +684,6 @@ Create Deployment
 
           - `Type type`
 
-            - `FILE("file")`
-
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
@@ -699,15 +694,13 @@ Create Deployment
 
           - `Type type`
 
-            - `TEXT("text")`
-
       - `Type type`
-
-        - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
       - `Optional<Long> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
+
+        format: int32
 
     - `class BetaManagedAgentsDeploymentSystemMessageEvent:`
 
@@ -721,13 +714,11 @@ Create Deployment
 
           The text content.
 
+          minLength: 1
+
         - `Type type`
 
-          - `TEXT("text")`
-
       - `Type type`
-
-        - `SYSTEM_MESSAGE("system.message")`
 
   - `Metadata metadata`
 
@@ -747,8 +738,6 @@ Create Deployment
 
       - `Type type`
 
-        - `MANUAL("manual")`
-
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
@@ -763,15 +752,11 @@ Create Deployment
 
           - `Type type`
 
-            - `ENVIRONMENT_ARCHIVED_ERROR("environment_archived_error")`
-
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError:`
 
           The deployment's agent was archived.
 
           - `Type type`
-
-            - `AGENT_ARCHIVED_ERROR("agent_archived_error")`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError:`
 
@@ -779,15 +764,11 @@ Create Deployment
 
           - `Type type`
 
-            - `ENVIRONMENT_NOT_FOUND_ERROR("environment_not_found_error")`
-
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError:`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type type`
-
-            - `VAULT_NOT_FOUND_ERROR("vault_not_found_error")`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError:`
 
@@ -795,15 +776,11 @@ Create Deployment
 
           - `Type type`
 
-            - `FILE_NOT_FOUND_ERROR("file_not_found_error")`
-
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError:`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type type`
-
-            - `SESSION_RESOURCE_NOT_FOUND_ERROR("session_resource_not_found_error")`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError:`
 
@@ -811,15 +788,11 @@ Create Deployment
 
           - `Type type`
 
-            - `WORKSPACE_ARCHIVED_ERROR("workspace_archived_error")`
-
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError:`
 
           The deployment's organization is disabled.
 
           - `Type type`
-
-            - `ORGANIZATION_DISABLED_ERROR("organization_disabled_error")`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError:`
 
@@ -827,15 +800,11 @@ Create Deployment
 
           - `Type type`
 
-            - `MEMORY_STORE_ARCHIVED_ERROR("memory_store_archived_error")`
-
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError:`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type type`
-
-            - `SKILL_NOT_FOUND_ERROR("skill_not_found_error")`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError:`
 
@@ -843,15 +812,11 @@ Create Deployment
 
           - `Type type`
 
-            - `VAULT_ARCHIVED_ERROR("vault_archived_error")`
-
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError:`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type type`
-
-            - `UNKNOWN_ERROR("unknown_error")`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError:`
 
@@ -859,19 +824,13 @@ Create Deployment
 
           - `Type type`
 
-            - `SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR("self_hosted_resources_unsupported_error")`
-
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError:`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `Type type`
 
-            - `MCP_EGRESS_BLOCKED_ERROR("mcp_egress_blocked_error")`
-
       - `Type type`
-
-        - `ERROR("error")`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -882,8 +841,6 @@ Create Deployment
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `Type type`
-
-        - `GITHUB_REPOSITORY("github_repository")`
 
       - `String url`
 
@@ -899,9 +856,9 @@ Create Deployment
 
             Branch name to check out.
 
-          - `Type type`
+            minLength: 1, maxLength: 255
 
-            - `BRANCH("branch")`
+          - `Type type`
 
         - `class BetaManagedAgentsCommitCheckout:`
 
@@ -909,9 +866,9 @@ Create Deployment
 
             Full commit SHA to check out.
 
-          - `Type type`
+            minLength: 7, maxLength: 64
 
-            - `COMMIT("commit")`
+          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -927,8 +884,6 @@ Create Deployment
 
       - `Type type`
 
-        - `FILE("file")`
-
       - `Optional<String> mountPath`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
@@ -942,8 +897,6 @@ Create Deployment
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `Type type`
-
-        - `MEMORY_STORE("memory_store")`
 
       - `Optional<Access> access`
 
@@ -965,17 +918,21 @@ Create Deployment
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `String timezone`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `Type type`
+      minLength: 1
 
-      - `CRON("cron")`
+    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `Optional<List<LocalDateTime>> upcomingRunsAt`
 
@@ -991,11 +948,11 @@ Create Deployment
 
   - `Type type`
 
-    - `DEPLOYMENT("deployment")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `List<String> vaultIds`
 
@@ -1017,13 +974,9 @@ Create Deployment
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `USD("USD")`
-
     - `Type type`
 
-      - `LIMIT("limit")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -1056,7 +1009,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

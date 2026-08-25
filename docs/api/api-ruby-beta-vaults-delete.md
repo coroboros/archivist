@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete Vault
-url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/delete
----
-
-## Delete Vault
+# Delete Vault
 
 `beta.vaults.delete(vault_id, **kwargs) -> BetaManagedAgentsDeletedVault`
 
-**delete** `/v1/vaults/{vault_id}`
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: String`
 
@@ -97,7 +92,7 @@ Delete Vault
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedVault`
 
@@ -109,9 +104,7 @@ Delete Vault
 
   - `type: :vault_deleted`
 
-    - `:vault_deleted`
-
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -123,7 +116,7 @@ beta_managed_agents_deleted_vault = anthropic.beta.vaults.delete("vlt_011CZkZDLs
 puts(beta_managed_agents_deleted_vault)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

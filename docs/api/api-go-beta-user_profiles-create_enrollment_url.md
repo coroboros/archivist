@@ -4,26 +4,21 @@ source: "https://platform.claude.com/docs/en/api/go/beta/user_profiles/create_en
 category: "api"
 generated: true
 ---
----
-title: Create Enrollment URL
-url: https://platform.claude.com/docs/en/api/go/beta/user_profiles/create_enrollment_url
----
-
-## Create Enrollment URL
+# Create Enrollment URL
 
 `client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (*BetaUserProfileEnrollmentURL, error)`
 
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-### Parameters
+## Parameters
 
 - `userProfileID string`
 
 - `body BetaUserProfileNewEnrollmentURLParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -99,7 +94,7 @@ Create Enrollment URL
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaUserProfileEnrollmentURL struct{…}`
 
@@ -107,17 +102,17 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Type BetaUserProfileEnrollmentURLType`
 
     Object type. Always `enrollment_url`.
-
-    - `const BetaUserProfileEnrollmentURLTypeEnrollmentURL BetaUserProfileEnrollmentURLType = "enrollment_url"`
 
   - `URL string`
 
     Enrollment URL to send to the end user. Valid until `expires_at`.
 
-### Example
+## Example
 
 ```go
 package main
@@ -146,7 +141,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

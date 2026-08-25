@@ -4,36 +4,31 @@ source: "https://platform.claude.com/docs/en/api/go/beta/skills/list"
 category: "api"
 generated: true
 ---
----
-title: List Skills
-url: https://platform.claude.com/docs/en/api/go/beta/skills/list
----
-
-## List Skills
+# List Skills
 
 `client.Beta.Skills.List(ctx, params) (*PageCursor[BetaSkillListResponse], error)`
 
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
-### Parameters
+## Parameters
 
 - `params BetaSkillListParams`
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Number of results to return per page.
 
     Maximum value is 100. Defaults to 20.
 
-  - `Page param.Field[string]`
+  - `Page param.Field[string] Optional`
 
     Query param: Pagination token for fetching a specific page of results.
 
     Pass the value from a previous response's `next_page` field to get the next page of results.
 
-  - `Source param.Field[string]`
+  - `Source param.Field[string] Optional`
 
     Query param: Filter skills by source.
 
@@ -42,7 +37,7 @@ List Skills
     * `"custom"`: only return user-created skills
     * `"anthropic"`: only return Anthropic-created skills
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -118,7 +113,7 @@ List Skills
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSkillListResponse struct{…}`
 
@@ -159,11 +154,13 @@ List Skills
 
     For Skills, this is always `"skill"`.
 
+    default: skill
+
   - `UpdatedAt string`
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```go
 package main
@@ -188,7 +185,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

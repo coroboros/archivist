@@ -4,28 +4,27 @@ source: "https://platform.claude.com/docs/en/api/python/beta/agents/list"
 category: "api"
 generated: true
 ---
----
-title: List Agents
-url: https://platform.claude.com/docs/en/api/python/beta/agents/list
----
+# List Agents
 
-## List Agents
+`beta.agents.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
 
-`beta.agents.list(AgentListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
-
-**get** `/v1/agents`
+**GET** `/v1/agents`
 
 List Agents
 
-### Parameters
+## Parameters
 
 - `created_at_gte: Optional[Union[str, datetime]]`
 
   Return agents created at or after this time (inclusive).
 
+  format: date-time
+
 - `created_at_lte: Optional[Union[str, datetime]]`
 
   Return agents created at or before this time (inclusive).
+
+  format: date-time
 
 - `include_archived: Optional[bool]`
 
@@ -34,6 +33,8 @@ List Agents
 - `limit: Optional[int]`
 
   Maximum results per page. Default 20, maximum 100.
+
+  format: int32
 
 - `page: Optional[str]`
 
@@ -115,7 +116,7 @@ List Agents
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsAgent: …`
 
@@ -127,9 +128,13 @@ List Agents
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: Optional[str]`
 
@@ -138,8 +143,6 @@ List Agents
     - `name: str`
 
     - `type: Literal["url"]`
-
-      - `"url"`
 
     - `url: str`
 
@@ -239,15 +242,11 @@ List Agents
 
         - `type: Literal["low"]`
 
-          - `"low"`
-
       - `class BetaManagedAgentsEffortMedium: …`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: Literal["medium"]`
-
-          - `"medium"`
 
       - `class BetaManagedAgentsEffortHigh: …`
 
@@ -255,23 +254,17 @@ List Agents
 
         - `type: Literal["high"]`
 
-          - `"high"`
-
       - `class BetaManagedAgentsEffortXhigh: …`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: Literal["xhigh"]`
 
-          - `"xhigh"`
-
       - `class BetaManagedAgentsEffortMax: …`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: Literal["max"]`
-
-          - `"max"`
 
     - `inference_geo: Optional[str]`
 
@@ -301,9 +294,9 @@ List Agents
 
         - `type: Literal["agent"]`
 
-          - `"agent"`
-
         - `version: int`
+
+          format: int32
 
       - `class BetaManagedAgentsAdvisor: …`
 
@@ -315,11 +308,7 @@ List Agents
 
         - `type: Literal["advisor"]`
 
-          - `"advisor"`
-
     - `type: Literal["coordinator"]`
-
-      - `"coordinator"`
 
   - `name: str`
 
@@ -333,8 +322,6 @@ List Agents
 
       - `type: Literal["anthropic"]`
 
-        - `"anthropic"`
-
       - `version: str`
 
     - `class BetaManagedAgentsCustomSkill: …`
@@ -344,8 +331,6 @@ List Agents
       - `skill_id: str`
 
       - `type: Literal["custom"]`
-
-        - `"custom"`
 
       - `version: str`
 
@@ -365,8 +350,6 @@ List Agents
 
           - `name: Literal["bash"]`
 
-            - `"bash"`
-
           - `permission_policy: PermissionPolicy`
 
             Permission policy for tool execution.
@@ -377,19 +360,13 @@ List Agents
 
               - `type: Literal["always_allow"]`
 
-                - `"always_allow"`
-
             - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
               Tool calls require user confirmation before execution.
 
               - `type: Literal["always_ask"]`
 
-                - `"always_ask"`
-
           - `type: Literal["bash"]`
-
-            - `"bash"`
 
         - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -398,8 +375,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["edit"]`
-
-            - `"edit"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -415,8 +390,6 @@ List Agents
 
           - `type: Literal["edit"]`
 
-            - `"edit"`
-
         - `class BetaManagedAgentsReadToolConfig: …`
 
           Configuration for the read tool.
@@ -424,8 +397,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["read"]`
-
-            - `"read"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -441,8 +412,6 @@ List Agents
 
           - `type: Literal["read"]`
 
-            - `"read"`
-
         - `class BetaManagedAgentsWriteToolConfig: …`
 
           Configuration for the write tool.
@@ -450,8 +419,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["write"]`
-
-            - `"write"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -467,8 +434,6 @@ List Agents
 
           - `type: Literal["write"]`
 
-            - `"write"`
-
         - `class BetaManagedAgentsGlobToolConfig: …`
 
           Configuration for the glob tool.
@@ -476,8 +441,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["glob"]`
-
-            - `"glob"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -493,8 +456,6 @@ List Agents
 
           - `type: Literal["glob"]`
 
-            - `"glob"`
-
         - `class BetaManagedAgentsGrepToolConfig: …`
 
           Configuration for the grep tool.
@@ -502,8 +463,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["grep"]`
-
-            - `"grep"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -519,8 +478,6 @@ List Agents
 
           - `type: Literal["grep"]`
 
-            - `"grep"`
-
         - `class BetaManagedAgentsWebFetchToolConfig: …`
 
           Configuration for the web_fetch tool.
@@ -528,8 +485,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["web_fetch"]`
-
-            - `"web_fetch"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -545,13 +500,13 @@ List Agents
 
           - `type: Literal["web_fetch"]`
 
-            - `"web_fetch"`
-
           - `allowed_domains: Optional[List[str]]`
 
           - `blocked_domains: Optional[List[str]]`
 
           - `max_content_tokens: Optional[int]`
+
+            format: int32
 
         - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -560,8 +515,6 @@ List Agents
           - `enabled: bool`
 
           - `name: Literal["web_search"]`
-
-            - `"web_search"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -577,8 +530,6 @@ List Agents
 
           - `type: Literal["web_search"]`
 
-            - `"web_search"`
-
           - `allowed_domains: Optional[List[str]]`
 
           - `blocked_domains: Optional[List[str]]`
@@ -591,11 +542,11 @@ List Agents
 
               Location precision. Only "approximate" is supported.
 
-              - `"approximate"`
-
             - `city: Optional[str]`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country: Optional[str]`
 
@@ -605,9 +556,13 @@ List Agents
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone: Optional[str]`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -628,8 +583,6 @@ List Agents
             Tool calls require user confirmation before execution.
 
       - `type: Literal["agent_toolset_20260401"]`
-
-        - `"agent_toolset_20260401"`
 
     - `class BetaManagedAgentsMCPToolset: …`
 
@@ -673,8 +626,6 @@ List Agents
 
       - `type: Literal["mcp_toolset"]`
 
-        - `"mcp_toolset"`
-
     - `class BetaManagedAgentsCustomTool: …`
 
       A custom tool as returned in API responses.
@@ -687,8 +638,6 @@ List Agents
 
         - `type: Literal["object"]`
 
-          - `"object"`
-
         - `properties: Optional[Dict[str, object]]`
 
         - `required: Optional[List[str]]`
@@ -697,21 +646,21 @@ List Agents
 
       - `type: Literal["custom"]`
 
-        - `"custom"`
-
   - `type: Literal["agent"]`
-
-    - `"agent"`
 
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `version: int`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+## Example
 
 ```python
 import os
@@ -727,7 +676,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

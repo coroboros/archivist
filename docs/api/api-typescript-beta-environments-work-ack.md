@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/wo
 category: "api"
 generated: true
 ---
----
-title: Acknowledge Work
-url: https://platform.claude.com/docs/en/api/typescript/beta/environments/work/ack
----
+# Acknowledge Work
 
-## Acknowledge Work
+`client.beta.environments.work.ack(workID, params, options?): BetaSelfHostedWork`
 
-`client.beta.environments.work.ack(stringworkID, WorkAckParamsparams, RequestOptionsoptions?): BetaSelfHostedWork`
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting' and removing it from the queue.
 
-### Parameters
+## Parameters
 
 - `workID: string`
 
@@ -105,7 +100,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaSelfHostedWork`
 
@@ -138,8 +133,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `type: "session"`
 
       Type of work data
-
-      - `"session"`
 
   - `environment_id: string`
 
@@ -187,9 +180,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The type of object (always 'work')
 
-    - `"work"`
+    default: work
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -205,7 +198,7 @@ const betaSelfHostedWork = await client.beta.environments.work.ack("work_id", {
 console.log(betaSelfHostedWork.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

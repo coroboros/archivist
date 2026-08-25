@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/skills/versions/downloa
 category: "api"
 generated: true
 ---
----
-title: Download Skill Version Content
-url: https://platform.claude.com/docs/en/api/go/beta/skills/versions/download
----
-
-## Download Skill Version Content
+# Download Skill Version Content
 
 `client.Beta.Skills.Versions.Download(ctx, version, params) (*Response, error)`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-### Parameters
+## Parameters
 
 - `version string`
 
@@ -33,7 +28,7 @@ Download a skill version's content as a zip archive.
 
     The format and length of IDs may change over time.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -109,11 +104,11 @@ Download a skill version's content as a zip archive.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSkillVersionDownloadResponse interface{…}`
 
-### Example
+## Example
 
 ```go
 package main

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/skills/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get Skill
-url: https://platform.claude.com/docs/en/api/java/beta/skills/retrieve
----
+# Get Skill
 
-## Get Skill
+`SkillRetrieveResponse beta().skills().retrieve(params = SkillRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
-`SkillRetrieveResponse beta().skills().retrieve(SkillRetrieveParamsparams = SkillRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-### Parameters
+## Parameters
 
 - `SkillRetrieveParams params`
 
@@ -99,7 +94,7 @@ Get Skill
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class SkillRetrieveResponse:`
 
@@ -144,7 +139,7 @@ Get Skill
 
     ISO 8601 timestamp of when the skill was last updated.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -165,7 +160,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

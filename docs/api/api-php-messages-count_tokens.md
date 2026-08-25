@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/messages/count_tokens"
 category: "api"
 generated: true
 ---
----
-title: Count tokens in a Message
-url: https://platform.claude.com/docs/en/api/php/messages/count_tokens
----
-
-## Count tokens in a Message
+# Count tokens in a Message
 
 `$client->messages->countTokens(list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?OutputConfig outputConfig, ?System system, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<MessageCountTokensTool> tools, ?string userProfileID): MessageTokensCount`
 
-**post** `/v1/messages/count_tokens`
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -21,7 +16,7 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 
 Learn more about token counting in our [user guide](../build-with-claude/build-with-claude-token-counting.md)
 
-### Parameters
+## Parameters
 
 - `messages: list<MessageParam>`
 
@@ -174,7 +169,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-### Returns
+## Returns
 
 - `MessageTokensCount`
 
@@ -182,7 +177,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -242,7 +237,7 @@ $messageTokensCount = $client->messages->countTokens(
 var_dump($messageTokensCount);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills"
 category: "api"
 generated: true
 ---
----
-title: Skills
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills
----
-
 # Skills
 
 ## Create Skill
 
 `beta.skills.create(**kwargs) -> SkillCreateResponse`
 
-**post** `/v1/skills`
+**POST** `/v1/skills`
 
 Create Skill
 
@@ -166,7 +161,7 @@ skill = anthropic.beta.skills.create(files: [StringIO.new("Example data")])
 puts(skill)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -184,7 +179,7 @@ puts(skill)
 
 `beta.skills.list(**kwargs) -> PageCursor<SkillListResponse>`
 
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
@@ -344,7 +339,7 @@ page = anthropic.beta.skills.list
 puts(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -368,7 +363,7 @@ puts(page)
 
 `beta.skills.retrieve(skill_id, **kwargs) -> SkillRetrieveResponse`
 
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
@@ -513,7 +508,7 @@ skill = anthropic.beta.skills.retrieve("skill_id")
 puts(skill)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -531,7 +526,7 @@ puts(skill)
 
 `beta.skills.delete(skill_id, **kwargs) -> SkillDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}`
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
@@ -647,7 +642,7 @@ skill = anthropic.beta.skills.delete("skill_id")
 puts(skill)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -656,7 +651,7 @@ puts(skill)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Skill Create Response
 
@@ -809,17 +804,17 @@ puts(skill)
 
     For Skills, this is always `"skill_deleted"`.
 
-# Versions
+## Skills › Versions
 
-## Create Skill Version
+### Create Skill Version
 
 `beta.skills.versions.create(skill_id, **kwargs) -> VersionCreateResponse`
 
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-### Parameters
+#### Parameters
 
 - `skill_id: String`
 
@@ -909,7 +904,7 @@ Create Skill Version
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `class VersionCreateResponse`
 
@@ -957,7 +952,7 @@ Create Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```ruby
 require "anthropic"
@@ -969,7 +964,7 @@ version = anthropic.beta.skills.versions.create("skill_id", files: [StringIO.new
 puts(version)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -984,15 +979,15 @@ puts(version)
 }
 ```
 
-## List Skill Versions
+### List Skill Versions
 
 `beta.skills.versions.list(skill_id, **kwargs) -> PageCursor<VersionListResponse>`
 
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-### Parameters
+#### Parameters
 
 - `skill_id: String`
 
@@ -1086,7 +1081,7 @@ List Skill Versions
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `class VersionListResponse`
 
@@ -1134,7 +1129,7 @@ List Skill Versions
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```ruby
 require "anthropic"
@@ -1146,7 +1141,7 @@ page = anthropic.beta.skills.versions.list("skill_id")
 puts(page)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -1167,15 +1162,15 @@ puts(page)
 }
 ```
 
-## Download Skill Version Content
+### Download Skill Version Content
 
 `beta.skills.versions.download(version, **kwargs) -> StringIO`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-### Parameters
+#### Parameters
 
 - `skill_id: String`
 
@@ -1265,11 +1260,11 @@ Download a skill version's content as a zip archive.
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `StringIO`
 
-### Example
+#### Example
 
 ```ruby
 require "anthropic"
@@ -1281,15 +1276,15 @@ response = anthropic.beta.skills.versions.download("version", skill_id: "skill_i
 puts(response)
 ```
 
-## Get Skill Version
+### Get Skill Version
 
 `beta.skills.versions.retrieve(version, **kwargs) -> VersionRetrieveResponse`
 
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-### Parameters
+#### Parameters
 
 - `skill_id: String`
 
@@ -1379,7 +1374,7 @@ Get Skill Version
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `class VersionRetrieveResponse`
 
@@ -1427,7 +1422,7 @@ Get Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+#### Example
 
 ```ruby
 require "anthropic"
@@ -1439,7 +1434,7 @@ version = anthropic.beta.skills.versions.retrieve("version", skill_id: "skill_id
 puts(version)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -1454,15 +1449,15 @@ puts(version)
 }
 ```
 
-## Delete Skill Version
+### Delete Skill Version
 
 `beta.skills.versions.delete(version, **kwargs) -> VersionDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-### Parameters
+#### Parameters
 
 - `skill_id: String`
 
@@ -1552,7 +1547,7 @@ Delete Skill Version
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `class VersionDeleteResponse`
 
@@ -1568,7 +1563,7 @@ Delete Skill Version
 
     For Skill Versions, this is always `"skill_version_deleted"`.
 
-### Example
+#### Example
 
 ```ruby
 require "anthropic"
@@ -1580,7 +1575,7 @@ version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 puts(version)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -1588,165 +1583,3 @@ puts(version)
   "type": "type"
 }
 ```
-
-## Domain Types
-
-### Version Create Response
-
-- `class VersionCreateResponse`
-
-  - `id: String`
-
-    Unique identifier for the skill version.
-
-    The format and length of IDs may change over time.
-
-  - `created_at: String`
-
-    ISO 8601 timestamp of when the skill version was created.
-
-  - `description: String`
-
-    Description of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `directory: String`
-
-    Directory name of the skill version.
-
-    This is the top-level directory name that was extracted from the uploaded files.
-
-  - `name: String`
-
-    Human-readable name of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `skill_id: String`
-
-    Identifier for the skill that this version belongs to.
-
-  - `type: String`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-  - `version: String`
-
-    Version identifier for the skill.
-
-    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-### Version List Response
-
-- `class VersionListResponse`
-
-  - `id: String`
-
-    Unique identifier for the skill version.
-
-    The format and length of IDs may change over time.
-
-  - `created_at: String`
-
-    ISO 8601 timestamp of when the skill version was created.
-
-  - `description: String`
-
-    Description of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `directory: String`
-
-    Directory name of the skill version.
-
-    This is the top-level directory name that was extracted from the uploaded files.
-
-  - `name: String`
-
-    Human-readable name of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `skill_id: String`
-
-    Identifier for the skill that this version belongs to.
-
-  - `type: String`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-  - `version: String`
-
-    Version identifier for the skill.
-
-    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-### Version Retrieve Response
-
-- `class VersionRetrieveResponse`
-
-  - `id: String`
-
-    Unique identifier for the skill version.
-
-    The format and length of IDs may change over time.
-
-  - `created_at: String`
-
-    ISO 8601 timestamp of when the skill version was created.
-
-  - `description: String`
-
-    Description of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `directory: String`
-
-    Directory name of the skill version.
-
-    This is the top-level directory name that was extracted from the uploaded files.
-
-  - `name: String`
-
-    Human-readable name of the skill version.
-
-    This is extracted from the SKILL.md file in the skill upload.
-
-  - `skill_id: String`
-
-    Identifier for the skill that this version belongs to.
-
-  - `type: String`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-  - `version: String`
-
-    Version identifier for the skill.
-
-    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-### Version Delete Response
-
-- `class VersionDeleteResponse`
-
-  - `id: String`
-
-    Version identifier for the skill.
-
-    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-  - `type: String`
-
-    Deleted object type.
-
-    For Skill Versions, this is always `"skill_version_deleted"`.

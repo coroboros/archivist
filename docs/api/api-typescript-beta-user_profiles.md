@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/user_profiles"
 category: "api"
 generated: true
 ---
----
-title: User Profiles
-url: https://platform.claude.com/docs/en/api/typescript/beta/user_profiles
----
-
 # User Profiles
 
 ## Create User Profile
 
-`client.beta.userProfiles.create(UserProfileCreateParamsparams, RequestOptionsoptions?): BetaUserProfile`
+`client.beta.userProfiles.create(params, options?): BetaUserProfile`
 
-**post** `/v1/user_profiles`
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
@@ -35,6 +30,8 @@ Create User Profile
 
     Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `metadata?: Record<string, string>`
 
     Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -42,6 +39,8 @@ Create User Profile
   - `name?: string | null`
 
     Body param: Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+
+    minLength: 1, maxLength: 255
 
   - `relationship?: "external" | "resold" | "internal"`
 
@@ -141,6 +140,8 @@ Create User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -163,11 +164,11 @@ Create User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -209,7 +210,7 @@ const betaUserProfile = await client.beta.userProfiles.create();
 console.log(betaUserProfile.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -232,9 +233,9 @@ console.log(betaUserProfile.id);
 
 ## List User Profiles
 
-`client.beta.userProfiles.list(UserProfileListParamsparams?, RequestOptionsoptions?): PageCursor<BetaUserProfile>`
+`client.beta.userProfiles.list(params?, options?): PageCursor<BetaUserProfile>`
 
-**get** `/v1/user_profiles`
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
@@ -245,6 +246,8 @@ List User Profiles
   - `limit?: number`
 
     Query param: Query parameter for limit
+
+    format: int32
 
   - `order?: "asc" | "desc"`
 
@@ -346,6 +349,8 @@ List User Profiles
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -368,11 +373,11 @@ List User Profiles
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -415,7 +420,7 @@ for await (const betaUserProfile of client.beta.userProfiles.list()) {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -443,9 +448,9 @@ for await (const betaUserProfile of client.beta.userProfiles.list()) {
 
 ## Get User Profile
 
-`client.beta.userProfiles.retrieve(stringuserProfileID, UserProfileRetrieveParamsparams?, RequestOptionsoptions?): BetaUserProfile`
+`client.beta.userProfiles.retrieve(userProfileID, params?, options?): BetaUserProfile`
 
-**get** `/v1/user_profiles/{user_profile_id}`
+**GET** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
@@ -543,6 +548,8 @@ Get User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -565,11 +572,11 @@ Get User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -613,7 +620,7 @@ const betaUserProfile = await client.beta.userProfiles.retrieve(
 console.log(betaUserProfile.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -636,9 +643,9 @@ console.log(betaUserProfile.id);
 
 ## Update User Profile
 
-`client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParamsparams, RequestOptionsoptions?): BetaUserProfile`
+`client.beta.userProfiles.update(userProfileID, params, options?): BetaUserProfile`
 
-**post** `/v1/user_profiles/{user_profile_id}`
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
@@ -660,6 +667,8 @@ Update User Profile
 
     Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `metadata?: Record<string, string>`
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
@@ -667,6 +676,8 @@ Update User Profile
   - `name?: string | null`
 
     Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+    minLength: 1, maxLength: 255
 
   - `relationship?: "external" | "resold" | "internal" | null`
 
@@ -766,6 +777,8 @@ Update User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -788,11 +801,11 @@ Update User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -836,7 +849,7 @@ const betaUserProfile = await client.beta.userProfiles.update(
 console.log(betaUserProfile.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -859,9 +872,9 @@ console.log(betaUserProfile.id);
 
 ## Create Enrollment URL
 
-`client.beta.userProfiles.createEnrollmentURL(stringuserProfileID, UserProfileCreateEnrollmentURLParamsparams?, RequestOptionsoptions?): BetaUserProfileEnrollmentURL`
+`client.beta.userProfiles.createEnrollmentURL(userProfileID, params?, options?): BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
@@ -955,11 +968,11 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: string`
 
@@ -981,7 +994,7 @@ const betaUserProfileEnrollmentURL = await client.beta.userProfiles.createEnroll
 console.log(betaUserProfileEnrollmentURL.expires_at);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -991,7 +1004,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta User Profile
 
@@ -1004,6 +1017,8 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -1027,11 +1042,11 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type?: "application" | "passthrough"`
 
@@ -1067,11 +1082,11 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: string`
 

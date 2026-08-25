@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/heart
 category: "api"
 generated: true
 ---
----
-title: Record Heartbeat
-url: https://platform.claude.com/docs/en/api/go/beta/environments/work/heartbeat
----
-
-## Record Heartbeat
+# Record Heartbeat
 
 `client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (*BetaSelfHostedWorkHeartbeatResponse, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Record a heartbeat for a work item to maintain the lease.
 
-### Parameters
+## Parameters
 
 - `workID string`
 
@@ -29,15 +24,15 @@ Record a heartbeat for a work item to maintain the lease.
 
     Path param
 
-  - `DesiredTTLSeconds param.Field[int64]`
+  - `DesiredTTLSeconds param.Field[int64] Optional`
 
     Query param: Desired TTL in seconds
 
-  - `ExpectedLastHeartbeat param.Field[string]`
+  - `ExpectedLastHeartbeat param.Field[string] Optional`
 
     Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -113,7 +108,7 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaSelfHostedWorkHeartbeatResponse struct{…}`
 
@@ -149,9 +144,9 @@ Record a heartbeat for a work item to maintain the lease.
 
     The type of response
 
-    - `const WorkHeartbeatWorkHeartbeat WorkHeartbeat = "work_heartbeat"`
+    default: work_heartbeat
 
-### Example
+## Example
 
 ```go
 package main
@@ -182,7 +177,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

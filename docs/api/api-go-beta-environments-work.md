@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work"
 category: "api"
 generated: true
 ---
----
-title: Work
-url: https://platform.claude.com/docs/en/api/go/beta/environments/work
----
-
 # Work
 
 ## Get Work Item
 
 `client.Beta.Environments.Work.Get(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**get** `/v1/environments/{environment_id}/work/{work_id}`
+**GET** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -31,7 +26,7 @@ Retrieve detailed information about a specific work item.
 
     Path param
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -141,8 +136,6 @@ Retrieve detailed information about a specific work item.
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -189,7 +182,7 @@ Retrieve detailed information about a specific work item.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -222,7 +215,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -251,7 +244,7 @@ func main() {
 
 `client.Beta.Environments.Work.Poll(ctx, environmentID, params) (*BetaSelfHostedWork, error)`
 
-**get** `/v1/environments/{environment_id}/work/poll`
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -263,15 +256,19 @@ Long poll for work items in the queue.
 
 - `params BetaEnvironmentWorkPollParams`
 
-  - `BlockMs param.Field[int64]`
+  - `BlockMs param.Field[int64] Optional`
 
     Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-  - `ReclaimOlderThanMs param.Field[int64]`
+    minimum: 1
+
+  - `ReclaimOlderThanMs param.Field[int64] Optional`
 
     Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    minimum: 1
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -347,7 +344,7 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-  - `AnthropicWorkerID param.Field[string]`
+  - `AnthropicWorkerID param.Field[string] Optional`
 
     Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
@@ -385,8 +382,6 @@ Long poll for work items in the queue.
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -433,7 +428,7 @@ Long poll for work items in the queue.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -464,7 +459,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -493,7 +488,7 @@ func main() {
 
 `client.Beta.Environments.Work.Ack(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/ack`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -509,7 +504,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     Path param
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -619,8 +614,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -667,7 +660,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -700,7 +693,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -729,7 +722,7 @@ func main() {
 
 `client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (*BetaSelfHostedWorkHeartbeatResponse, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -745,15 +738,15 @@ Record a heartbeat for a work item to maintain the lease.
 
     Path param
 
-  - `DesiredTTLSeconds param.Field[int64]`
+  - `DesiredTTLSeconds param.Field[int64] Optional`
 
     Query param: Desired TTL in seconds
 
-  - `ExpectedLastHeartbeat param.Field[string]`
+  - `ExpectedLastHeartbeat param.Field[string] Optional`
 
     Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -865,7 +858,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     The type of response
 
-    - `const WorkHeartbeatWorkHeartbeat WorkHeartbeat = "work_heartbeat"`
+    default: work_heartbeat
 
 ### Example
 
@@ -898,7 +891,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -914,7 +907,7 @@ func main() {
 
 `client.Beta.Environments.Work.Stop(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}/stop`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -934,7 +927,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     Body param: Request to stop a work item.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -1044,8 +1037,6 @@ Stop a work item, initiating graceful or forced shutdown.
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -1092,7 +1083,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -1126,7 +1117,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1155,7 +1146,7 @@ func main() {
 
 `client.Beta.Environments.Work.List(ctx, environmentID, params) (*PageCursor[BetaSelfHostedWork], error)`
 
-**get** `/v1/environments/{environment_id}/work`
+**GET** `/v1/environments/{environment_id}/work`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -1167,15 +1158,17 @@ List work items in an environment.
 
 - `params BetaEnvironmentWorkListParams`
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of work items to return
 
-  - `Page param.Field[string]`
+    maximum: 1000, minimum: 1
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque cursor from previous response for pagination
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -1285,8 +1278,6 @@ List work items in an environment.
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -1333,7 +1324,7 @@ List work items in an environment.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -1364,7 +1355,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1398,7 +1389,7 @@ func main() {
 
 `client.Beta.Environments.Work.Update(ctx, workID, params) (*BetaSelfHostedWork, error)`
 
-**post** `/v1/environments/{environment_id}/work/{work_id}`
+**POST** `/v1/environments/{environment_id}/work/{work_id}`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
@@ -1418,7 +1409,7 @@ Update work item metadata with merge semantics.
 
     Body param: Request to update work item metadata.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -1528,8 +1519,6 @@ Update work item metadata with merge semantics.
 
       Type of work data
 
-      - `const SessionSession Session = "session"`
-
   - `EnvironmentID string`
 
     Environment identifier this work belongs to (e.g., `env_...`)
@@ -1576,7 +1565,7 @@ Update work item metadata with merge semantics.
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Example
 
@@ -1614,7 +1603,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1643,7 +1632,7 @@ func main() {
 
 `client.Beta.Environments.Work.Stats(ctx, environmentID, query) (*BetaSelfHostedWorkQueueStats, error)`
 
-**get** `/v1/environments/{environment_id}/work/stats`
+**GET** `/v1/environments/{environment_id}/work/stats`
 
 Get statistics about the work queue for an environment.
 
@@ -1653,7 +1642,7 @@ Get statistics about the work queue for an environment.
 
 - `query BetaEnvironmentWorkStatsParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1749,11 +1738,13 @@ Get statistics about the work queue for an environment.
 
     Number of work items being processed (polled but not acknowledged)
 
+    default: 0
+
   - `Type WorkQueueStats`
 
     The type of object
 
-    - `const WorkQueueStatsWorkQueueStats WorkQueueStats = "work_queue_stats"`
+    default: work_queue_stats
 
   - `WorkersPolling int64`
 
@@ -1788,7 +1779,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1800,7 +1791,7 @@ func main() {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Self Hosted Work
 
@@ -1835,8 +1826,6 @@ func main() {
     - `Type Session`
 
       Type of work data
-
-      - `const SessionSession Session = "session"`
 
   - `EnvironmentID string`
 
@@ -1884,7 +1873,7 @@ func main() {
 
     The type of object (always 'work')
 
-    - `const WorkWork Work = "work"`
+    default: work
 
 ### Beta Self Hosted Work Heartbeat Response
 
@@ -1922,7 +1911,7 @@ func main() {
 
     The type of response
 
-    - `const WorkHeartbeatWorkHeartbeat WorkHeartbeat = "work_heartbeat"`
+    default: work_heartbeat
 
 ### Beta Self Hosted Work List Response
 
@@ -1957,8 +1946,6 @@ func main() {
       - `Type Session`
 
         Type of work data
-
-        - `const SessionSession Session = "session"`
 
     - `EnvironmentID string`
 
@@ -2006,7 +1993,7 @@ func main() {
 
       The type of object (always 'work')
 
-      - `const WorkWork Work = "work"`
+      default: work
 
   - `NextPage string`
 
@@ -2032,11 +2019,13 @@ func main() {
 
     Number of work items being processed (polled but not acknowledged)
 
+    default: 0
+
   - `Type WorkQueueStats`
 
     The type of object
 
-    - `const WorkQueueStatsWorkQueueStats WorkQueueStats = "work_queue_stats"`
+    default: work_queue_stats
 
   - `WorkersPolling int64`
 
@@ -2048,9 +2037,11 @@ func main() {
 
   Request to stop a work item.
 
-  - `Force bool`
+  - `Force bool Optional`
 
     If true, immediately stop work without graceful shutdown
+
+    default: false
 
 ### Beta Self Hosted Work Update Request
 
@@ -2078,5 +2069,3 @@ func main() {
   - `Type Session`
 
     Type of work data
-
-    - `const SessionSession Session = "session"`

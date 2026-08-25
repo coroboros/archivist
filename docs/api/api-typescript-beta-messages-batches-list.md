@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/messages/batche
 category: "api"
 generated: true
 ---
----
-title: List Message Batches
-url: https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/list
----
+# List Message Batches
 
-## List Message Batches
+`client.beta.messages.batches.list(params?, options?): Page<BetaMessageBatch>`
 
-`client.beta.messages.batches.list(BatchListParamsparams?, RequestOptionsoptions?): Page<BetaMessageBatch>`
-
-**get** `/v1/messages/batches`
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `params: BatchListParams`
 
@@ -36,6 +31,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     Query param: Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
+
+    maximum: 1000, minimum: 1
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -113,7 +110,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaMessageBatch`
 
@@ -127,13 +124,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: string | null`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: string | null`
 
@@ -141,9 +144,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: "in_progress" | "canceling" | "ended"`
 
@@ -167,11 +174,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: number`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: number`
 
@@ -179,15 +190,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: number`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: number`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: string | null`
 
@@ -201,9 +218,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -218,7 +235,7 @@ for await (const betaMessageBatch of client.beta.messages.batches.list()) {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

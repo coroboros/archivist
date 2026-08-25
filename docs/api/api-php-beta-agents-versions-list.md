@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/versions/list"
 category: "api"
 generated: true
 ---
----
-title: List Agent Versions
-url: https://platform.claude.com/docs/en/api/php/beta/agents/versions/list
----
-
-## List Agent Versions
+# List Agent Versions
 
 `$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
 
-**get** `/v1/agents/{agent_id}/versions`
+**GET** `/v1/agents/{agent_id}/versions`
 
 List Agent Versions
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -33,7 +28,7 @@ List Agent Versions
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -79,7 +74,7 @@ List Agent Versions
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -98,7 +93,7 @@ $page = $client->beta->agents->versions->list(
 var_dump($page);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

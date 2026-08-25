@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/files/download"
 category: "api"
 generated: true
 ---
----
-title: Download File
-url: https://platform.claude.com/docs/en/api/python/beta/files/download
----
+# Download File
 
-## Download File
+`beta.files.download(file_id, **kwargs)  -> BinaryResponseContent`
 
-`beta.files.download(strfile_id, FileDownloadParams**kwargs)  -> BinaryResponseContent`
-
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-### Parameters
+## Parameters
 
 - `file_id: str`
 
@@ -99,11 +94,11 @@ Download File
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BinaryResponseContent`
 
-### Example
+## Example
 
 ```python
 import os

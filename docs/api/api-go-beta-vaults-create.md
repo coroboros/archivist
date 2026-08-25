@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/vaults/create"
 category: "api"
 generated: true
 ---
----
-title: Create Vault
-url: https://platform.claude.com/docs/en/api/go/beta/vaults/create
----
-
-## Create Vault
+# Create Vault
 
 `client.Beta.Vaults.New(ctx, params) (*BetaManagedAgentsVault, error)`
 
-**post** `/v1/vaults`
+**POST** `/v1/vaults`
 
 Create Vault
 
-### Parameters
+## Parameters
 
 - `params BetaVaultNewParams`
 
@@ -25,11 +20,13 @@ Create Vault
 
     Body param: Human-readable name for the vault. 1-255 characters.
 
-  - `Metadata param.Field[map[string, string]]`
+    minLength: 1, maxLength: 255
+
+  - `Metadata param.Field[map[string, string]] Optional`
 
     Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -105,7 +102,7 @@ Create Vault
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsVault struct{…}`
 
@@ -119,9 +116,13 @@ Create Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `DisplayName string`
 
@@ -133,13 +134,13 @@ Create Vault
 
   - `Type BetaManagedAgentsVaultType`
 
-    - `const BetaManagedAgentsVaultTypeVault BetaManagedAgentsVaultType = "vault"`
-
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```go
 package main
@@ -166,7 +167,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/vaults/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Vault
-url: https://platform.claude.com/docs/en/api/php/beta/vaults/archive
----
-
-## Archive Vault
+# Archive Vault
 
 `$client->beta->vaults->archive(string vaultID, ?list<AnthropicBeta> betas): BetaManagedAgentsVault`
 
-**post** `/v1/vaults/{vault_id}/archive`
+**POST** `/v1/vaults/{vault_id}/archive`
 
 Archive Vault
 
-### Parameters
+## Parameters
 
 - `vaultID: string`
 
@@ -25,7 +20,7 @@ Archive Vault
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsVault`
 
@@ -55,7 +50,7 @@ Archive Vault
 
     A timestamp in RFC 3339 format
 
-### Example
+## Example
 
 ```php
 <?php
@@ -72,7 +67,7 @@ $betaManagedAgentsVault = $client->beta->vaults->archive(
 var_dump($betaManagedAgentsVault);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

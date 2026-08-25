@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/de
 category: "api"
 generated: true
 ---
----
-title: Delete Environment
-url: https://platform.claude.com/docs/en/api/typescript/beta/environments/delete
----
+# Delete Environment
 
-## Delete Environment
+`client.beta.environments.delete(environmentID, params?, options?): BetaEnvironmentDeleteResponse`
 
-`client.beta.environments.delete(stringenvironmentID, EnvironmentDeleteParamsparams?, RequestOptionsoptions?): BetaEnvironmentDeleteResponse`
-
-**delete** `/v1/environments/{environment_id}`
+**DELETE** `/v1/environments/{environment_id}`
 
 Delete an environment by ID. Returns a confirmation of the deletion.
 
-### Parameters
+## Parameters
 
 - `environmentID: string`
 
@@ -99,7 +94,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaEnvironmentDeleteResponse`
 
@@ -113,9 +108,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     The type of response
 
-    - `"environment_deleted"`
+    default: environment_deleted
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -131,7 +126,7 @@ const betaEnvironmentDeleteResponse = await client.beta.environments.delete(
 console.log(betaEnvironmentDeleteResponse.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

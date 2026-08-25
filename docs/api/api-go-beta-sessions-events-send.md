@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/sessions/events/send"
 category: "api"
 generated: true
 ---
----
-title: Send Events
-url: https://platform.claude.com/docs/en/api/go/beta/sessions/events/send
----
-
-## Send Events
+# Send Events
 
 `client.Beta.Sessions.Events.Send(ctx, sessionID, params) (*BetaManagedAgentsSendSessionEvents, error)`
 
-**post** `/v1/sessions/{session_id}/events`
+**POST** `/v1/sessions/{session_id}/events`
 
 Send Events
 
-### Parameters
+## Parameters
 
 - `sessionID string`
 
@@ -43,9 +38,9 @@ Send Events
 
             The text content.
 
-          - `Type BetaManagedAgentsTextBlockType`
+            minLength: 1
 
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+          - `Type BetaManagedAgentsTextBlockType`
 
         - `type BetaManagedAgentsImageBlock struct{…}`
 
@@ -63,13 +58,15 @@ Send Events
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `MediaType string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `Type BetaManagedAgentsBase64ImageSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
             - `type BetaManagedAgentsURLImageSource struct{…}`
 
@@ -77,11 +74,11 @@ Send Events
 
               - `Type BetaManagedAgentsURLImageSourceType`
 
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
               - `URL string`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `type BetaManagedAgentsFileImageSource struct{…}`
 
@@ -91,13 +88,11 @@ Send Events
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type BetaManagedAgentsFileImageSourceType`
 
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
           - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
@@ -115,13 +110,15 @@ Send Events
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `MediaType string`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
             - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
@@ -131,15 +128,13 @@ Send Events
 
                 The plain text content.
 
+                minLength: 1
+
               - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
               - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
 
             - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
@@ -147,11 +142,11 @@ Send Events
 
               - `Type BetaManagedAgentsURLDocumentSourceType`
 
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
               - `URL string`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
@@ -161,19 +156,17 @@ Send Events
 
                 ID of a previously uploaded file.
 
-              - `Type BetaManagedAgentsFileDocumentSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
           - `Type BetaManagedAgentsDocumentBlockType`
 
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
+          - `Context string Optional`
 
             Additional context about the document for the model.
 
-          - `Title string`
+          - `Title string Optional`
 
             The title of the document.
 
@@ -183,11 +176,7 @@ Send Events
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-            - `const BetaManagedAgentsRedactedBlockTypeRedacted BetaManagedAgentsRedactedBlockType = "redacted"`
-
       - `Type BetaManagedAgentsUserMessageEventParamsType`
-
-        - `const BetaManagedAgentsUserMessageEventParamsTypeUserMessage BetaManagedAgentsUserMessageEventParamsType = "user.message"`
 
     - `type BetaManagedAgentsUserInterruptEventParamsResp struct{…}`
 
@@ -195,9 +184,7 @@ Send Events
 
       - `Type BetaManagedAgentsUserInterruptEventParamsType`
 
-        - `const BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt BetaManagedAgentsUserInterruptEventParamsType = "user.interrupt"`
-
-      - `SessionThreadID string`
+      - `SessionThreadID string Optional`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -217,13 +204,15 @@ Send Events
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsUserToolConfirmationEventParamsType`
 
-        - `const BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation BetaManagedAgentsUserToolConfirmationEventParamsType = "user.tool_confirmation"`
-
-      - `DenyMessage string`
+      - `DenyMessage string Optional`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+        maxLength: 10000
 
     - `type BetaManagedAgentsUserCustomToolResultEventParamsResp struct{…}`
 
@@ -233,11 +222,11 @@ Send Events
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsUserCustomToolResultEventParamsType`
 
-        - `const BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult BetaManagedAgentsUserCustomToolResultEventParamsType = "user.custom_tool_result"`
-
-      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
 
         The result content returned by the tool.
 
@@ -273,23 +262,25 @@ Send Events
 
               The text content.
 
-            - `Type BetaManagedAgentsSearchResultContentType`
+              minLength: 1
 
-              - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
+            - `Type BetaManagedAgentsSearchResultContentType`
 
           - `Source string`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `Title string`
 
             The title of the search result.
 
+            minLength: 1
+
           - `Type BetaManagedAgentsSearchResultBlockType`
 
-            - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
-
-      - `IsError bool`
+      - `IsError bool Optional`
 
         Whether the tool execution resulted in an error.
 
@@ -315,8 +306,6 @@ Send Events
 
           - `Type BetaManagedAgentsFileRubricParamsType`
 
-            - `const BetaManagedAgentsFileRubricParamsTypeFile BetaManagedAgentsFileRubricParamsType = "file"`
-
         - `type BetaManagedAgentsTextRubricParams struct{…}`
 
           Rubric content provided inline as text.
@@ -325,17 +314,17 @@ Send Events
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
-          - `Type BetaManagedAgentsTextRubricParamsType`
+            maxLength: 262144
 
-            - `const BetaManagedAgentsTextRubricParamsTypeText BetaManagedAgentsTextRubricParamsType = "text"`
+          - `Type BetaManagedAgentsTextRubricParamsType`
 
       - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
 
-        - `const BetaManagedAgentsUserDefineOutcomeEventParamsTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventParamsType = "user.define_outcome"`
-
-      - `MaxIterations int64`
+      - `MaxIterations int64 Optional`
 
         Eval→revision cycles before giving up. Default 3, max 20.
+
+        format: int32
 
     - `type BetaManagedAgentsUserToolResultEventParamsResp struct{…}`
 
@@ -345,11 +334,11 @@ Send Events
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsUserToolResultEventParamsType`
 
-        - `const BetaManagedAgentsUserToolResultEventParamsTypeUserToolResult BetaManagedAgentsUserToolResultEventParamsType = "user.tool_result"`
-
-      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
 
         The result content returned by the tool.
 
@@ -369,7 +358,7 @@ Send Events
 
           A block containing a web search result.
 
-      - `IsError bool`
+      - `IsError bool Optional`
 
         Whether the tool execution resulted in an error.
 
@@ -385,15 +374,13 @@ Send Events
 
           The text content.
 
-        - `Type BetaManagedAgentsSystemContentBlockType`
+          minLength: 1
 
-          - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-        - `const BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage BetaManagedAgentsSystemMessageEventParamsType = "system.message"`
-
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -469,13 +456,13 @@ Send Events
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsSendSessionEvents struct{…}`
 
   Events that were successfully sent to the session.
 
-  - `Data []BetaManagedAgentsSendSessionEventsDataUnion`
+  - `Data []BetaManagedAgentsSendSessionEventsDataUnion Optional`
 
     Sent events
 
@@ -499,9 +486,9 @@ Send Events
 
             The text content.
 
-          - `Type BetaManagedAgentsTextBlockType`
+            minLength: 1
 
-            - `const BetaManagedAgentsTextBlockTypeText BetaManagedAgentsTextBlockType = "text"`
+          - `Type BetaManagedAgentsTextBlockType`
 
         - `type BetaManagedAgentsImageBlock struct{…}`
 
@@ -519,13 +506,15 @@ Send Events
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `MediaType string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `Type BetaManagedAgentsBase64ImageSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsBase64ImageSourceTypeBase64 BetaManagedAgentsBase64ImageSourceType = "base64"`
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
             - `type BetaManagedAgentsURLImageSource struct{…}`
 
@@ -533,11 +522,11 @@ Send Events
 
               - `Type BetaManagedAgentsURLImageSourceType`
 
-                - `const BetaManagedAgentsURLImageSourceTypeURL BetaManagedAgentsURLImageSourceType = "url"`
-
               - `URL string`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `type BetaManagedAgentsFileImageSource struct{…}`
 
@@ -547,13 +536,11 @@ Send Events
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `Type BetaManagedAgentsFileImageSourceType`
 
-                - `const BetaManagedAgentsFileImageSourceTypeFile BetaManagedAgentsFileImageSourceType = "file"`
-
           - `Type BetaManagedAgentsImageBlockType`
-
-            - `const BetaManagedAgentsImageBlockTypeImage BetaManagedAgentsImageBlockType = "image"`
 
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
@@ -571,13 +558,15 @@ Send Events
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `MediaType string`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsBase64DocumentSourceTypeBase64 BetaManagedAgentsBase64DocumentSourceType = "base64"`
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
             - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
@@ -587,15 +576,13 @@ Send Events
 
                 The plain text content.
 
+                minLength: 1
+
               - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `const BetaManagedAgentsPlainTextDocumentSourceMediaTypeTextPlain BetaManagedAgentsPlainTextDocumentSourceMediaType = "text/plain"`
-
               - `Type BetaManagedAgentsPlainTextDocumentSourceType`
-
-                - `const BetaManagedAgentsPlainTextDocumentSourceTypeText BetaManagedAgentsPlainTextDocumentSourceType = "text"`
 
             - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
@@ -603,11 +590,11 @@ Send Events
 
               - `Type BetaManagedAgentsURLDocumentSourceType`
 
-                - `const BetaManagedAgentsURLDocumentSourceTypeURL BetaManagedAgentsURLDocumentSourceType = "url"`
-
               - `URL string`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `type BetaManagedAgentsFileDocumentSource struct{…}`
 
@@ -617,19 +604,17 @@ Send Events
 
                 ID of a previously uploaded file.
 
-              - `Type BetaManagedAgentsFileDocumentSourceType`
+                minLength: 1
 
-                - `const BetaManagedAgentsFileDocumentSourceTypeFile BetaManagedAgentsFileDocumentSourceType = "file"`
+              - `Type BetaManagedAgentsFileDocumentSourceType`
 
           - `Type BetaManagedAgentsDocumentBlockType`
 
-            - `const BetaManagedAgentsDocumentBlockTypeDocument BetaManagedAgentsDocumentBlockType = "document"`
-
-          - `Context string`
+          - `Context string Optional`
 
             Additional context about the document for the model.
 
-          - `Title string`
+          - `Title string Optional`
 
             The title of the document.
 
@@ -639,15 +624,13 @@ Send Events
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-            - `const BetaManagedAgentsRedactedBlockTypeRedacted BetaManagedAgentsRedactedBlockType = "redacted"`
-
       - `Type BetaManagedAgentsUserMessageEventType`
 
-        - `const BetaManagedAgentsUserMessageEventTypeUserMessage BetaManagedAgentsUserMessageEventType = "user.message"`
-
-      - `ProcessedAt Time`
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
     - `type BetaManagedAgentsUserInterruptEvent struct{…}`
 
@@ -659,13 +642,13 @@ Send Events
 
       - `Type BetaManagedAgentsUserInterruptEventType`
 
-        - `const BetaManagedAgentsUserInterruptEventTypeUserInterrupt BetaManagedAgentsUserInterruptEventType = "user.interrupt"`
-
-      - `ProcessedAt Time`
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-      - `SessionThreadID string`
+        format: date-time
+
+      - `SessionThreadID string Optional`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -691,17 +674,19 @@ Send Events
 
       - `Type BetaManagedAgentsUserToolConfirmationEventType`
 
-        - `const BetaManagedAgentsUserToolConfirmationEventTypeUserToolConfirmation BetaManagedAgentsUserToolConfirmationEventType = "user.tool_confirmation"`
-
-      - `DenyMessage string`
+      - `DenyMessage string Optional`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-      - `ProcessedAt Time`
+        maxLength: 10000
+
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-      - `SessionThreadID string`
+        format: date-time
+
+      - `SessionThreadID string Optional`
 
         When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -719,9 +704,7 @@ Send Events
 
       - `Type BetaManagedAgentsUserCustomToolResultEventType`
 
-        - `const BetaManagedAgentsUserCustomToolResultEventTypeUserCustomToolResult BetaManagedAgentsUserCustomToolResultEventType = "user.custom_tool_result"`
-
-      - `Content []BetaManagedAgentsUserCustomToolResultEventContentUnion`
+      - `Content []BetaManagedAgentsUserCustomToolResultEventContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -757,31 +740,35 @@ Send Events
 
               The text content.
 
-            - `Type BetaManagedAgentsSearchResultContentType`
+              minLength: 1
 
-              - `const BetaManagedAgentsSearchResultContentTypeText BetaManagedAgentsSearchResultContentType = "text"`
+            - `Type BetaManagedAgentsSearchResultContentType`
 
           - `Source string`
 
             The URL source of the search result.
 
+            minLength: 1
+
           - `Title string`
 
             The title of the search result.
 
+            minLength: 1
+
           - `Type BetaManagedAgentsSearchResultBlockType`
 
-            - `const BetaManagedAgentsSearchResultBlockTypeSearchResult BetaManagedAgentsSearchResultBlockType = "search_result"`
-
-      - `IsError bool`
+      - `IsError bool Optional`
 
         Whether the tool execution resulted in an error.
 
-      - `ProcessedAt Time`
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-      - `SessionThreadID string`
+        format: date-time
+
+      - `SessionThreadID string Optional`
 
         Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -801,6 +788,8 @@ Send Events
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
+        format: int32
+
       - `OutcomeID string`
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
@@ -808,6 +797,8 @@ Send Events
       - `ProcessedAt Time`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion`
 
@@ -823,8 +814,6 @@ Send Events
 
           - `Type BetaManagedAgentsFileRubricType`
 
-            - `const BetaManagedAgentsFileRubricTypeFile BetaManagedAgentsFileRubricType = "file"`
-
         - `type BetaManagedAgentsTextRubric struct{…}`
 
           Rubric content provided inline as text.
@@ -835,11 +824,7 @@ Send Events
 
           - `Type BetaManagedAgentsTextRubricType`
 
-            - `const BetaManagedAgentsTextRubricTypeText BetaManagedAgentsTextRubricType = "text"`
-
       - `Type BetaManagedAgentsUserDefineOutcomeEventType`
-
-        - `const BetaManagedAgentsUserDefineOutcomeEventTypeUserDefineOutcome BetaManagedAgentsUserDefineOutcomeEventType = "user.define_outcome"`
 
     - `type BetaManagedAgentsUserToolResultEvent struct{…}`
 
@@ -855,9 +840,7 @@ Send Events
 
       - `Type BetaManagedAgentsUserToolResultEventType`
 
-        - `const BetaManagedAgentsUserToolResultEventTypeUserToolResult BetaManagedAgentsUserToolResultEventType = "user.tool_result"`
-
-      - `Content []BetaManagedAgentsUserToolResultEventContentUnion`
+      - `Content []BetaManagedAgentsUserToolResultEventContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -877,15 +860,17 @@ Send Events
 
           A block containing a web search result.
 
-      - `IsError bool`
+      - `IsError bool Optional`
 
         Whether the tool execution resulted in an error.
 
-      - `ProcessedAt Time`
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-      - `SessionThreadID string`
+        format: date-time
+
+      - `SessionThreadID string Optional`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -905,19 +890,19 @@ Send Events
 
           The text content.
 
-        - `Type BetaManagedAgentsSystemContentBlockType`
+          minLength: 1
 
-          - `const BetaManagedAgentsSystemContentBlockTypeText BetaManagedAgentsSystemContentBlockType = "text"`
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
       - `Type BetaManagedAgentsSystemMessageEventType`
 
-        - `const BetaManagedAgentsSystemMessageEventTypeSystemMessage BetaManagedAgentsSystemMessageEventType = "system.message"`
-
-      - `ProcessedAt Time`
+      - `ProcessedAt Time Optional`
 
         A timestamp in RFC 3339 format
 
-### Example
+        format: date-time
+
+## Example
 
 ```go
 package main
@@ -958,7 +943,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

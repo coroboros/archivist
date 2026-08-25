@@ -47,7 +47,7 @@ For every model with a 1M-token context window, 1M is the default: you don't nee
 
 A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). If you send many images or large documents, you might reach [request size limits](../api/api-overview.md#request-size-limits) before the token limit.
 
-See the [model comparison](../about-claude/about-claude-models-overview.md#latest-models-comparison) table for a list of context window sizes by model.
+See the [model comparison](../general/general-models-overview.md#latest-models-comparison) table for a list of context window sizes by model.
 
 ## The context window with thinking
 
@@ -167,7 +167,7 @@ To stay within context window limits, use the [token counting API](./build-with-
     Automatically manage conversation context as it grows with context editing.
   </Card>
 
-  <Card title="Model comparison table" icon="scales" href="../about-claude/about-claude-models-overview.md">
+  <Card title="Model comparison table" icon="scales" href="../general/general-models-overview.md">
     See the model comparison table for a list of context window sizes and input/output token pricing by model.
   </Card>
 

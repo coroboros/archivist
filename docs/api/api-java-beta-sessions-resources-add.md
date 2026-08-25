@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources/ad
 category: "api"
 generated: true
 ---
----
-title: Add Session Resource
-url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources/add
----
+# Add Session Resource
 
-## Add Session Resource
+`BetaManagedAgentsFileResource beta().sessions().resources().add(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsFileResource beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/sessions/{session_id}/resources`
+**POST** `/v1/sessions/{session_id}/resources`
 
 Add Session Resource
 
-### Parameters
+## Parameters
 
 - `ResourceAddParams params`
 
@@ -99,7 +94,7 @@ Add Session Resource
 
     Mount a file uploaded via the Files API into the session.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsFileResource:`
 
@@ -109,19 +104,21 @@ Add Session Resource
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `String fileId`
 
   - `String mountPath`
 
   - `Type type`
 
-    - `FILE("file")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```java
 package com.anthropic.example;
@@ -150,7 +147,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

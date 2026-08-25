@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/messages/batches/cance
 category: "api"
 generated: true
 ---
----
-title: Cancel a Message Batch
-url: https://platform.claude.com/docs/en/api/cli/beta/messages/batches/cancel
----
-
-## Cancel a Message Batch
+# Cancel a Message Batch
 
 `$ ant beta:messages:batches cancel`
 
-**post** `/v1/messages/batches/{message_batch_id}/cancel`
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -21,7 +16,7 @@ The number of canceled requests is specified in `request_counts`. To determine w
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `--message-batch-id: string`
 
@@ -31,9 +26,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
-- `beta_message_batch: object { id, archived_at, cancel_initiated_at, 7 more }`
+- `beta_message_batch: object`
 
   - `id: string`
 
@@ -45,13 +40,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: string`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: string`
 
@@ -59,9 +60,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: "in_progress" or "canceling" or "ended"`
 
@@ -73,7 +78,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"ended"`
 
-  - `request_counts: object { canceled, errored, expired, 2 more }`
+  - `request_counts: object`
 
     Tallies requests within the Message Batch, categorized by their status.
 
@@ -119,15 +124,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-### Example
+## Example
 
-```cli
+```bash
 ant beta:messages:batches cancel \
   --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

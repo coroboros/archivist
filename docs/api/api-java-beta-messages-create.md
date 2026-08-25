@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/messages/create"
 category: "api"
 generated: true
 ---
----
-title: Create a Message
-url: https://platform.claude.com/docs/en/api/java/beta/messages/create
----
+# Create a Message
 
-## Create a Message
+`BetaMessage beta().messages().create(params, requestOptions = RequestOptions.none())`
 
-`BetaMessage beta().messages().create(MessageCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/messages`
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -21,7 +16,7 @@ The Messages API can be used for either single queries or stateless multi-turn c
 
 Learn more about the Messages API in our [user guide](./api-get-started.md)
 
-### Parameters
+## Parameters
 
 - `MessageCreateParams params`
 
@@ -111,6 +106,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Different models have different maximum values for this parameter.  See [models](../about-claude/about-claude-models-overview.md) for details.
 
+    minimum: 0
+
   - `List<BetaMessageParam> messages`
 
     Input messages.
@@ -172,17 +169,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String text`
 
-          - `JsonValue; type "text"constant`
+            minLength: 1
 
-            - `TEXT("text")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonValue; type "ephemeral"constant`
-
-              - `EPHEMERAL("ephemeral")`
+            - `JsonValue type constant`
 
             - `Optional<Ttl> ttl`
 
@@ -207,15 +202,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `long documentIndex`
 
+                minimum: 0
+
               - `Optional<String> documentTitle`
+
+                maxLength: 500, minLength: 1
 
               - `long endCharIndex`
 
               - `long startCharIndex`
 
-              - `JsonValue; type "char_location"constant`
+                minimum: 0
 
-                - `CHAR_LOCATION("char_location")`
+              - `JsonValue type constant`
 
             - `class BetaCitationPageLocationParam:`
 
@@ -223,15 +222,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `long documentIndex`
 
+                minimum: 0
+
               - `Optional<String> documentTitle`
+
+                maxLength: 500, minLength: 1
 
               - `long endPageNumber`
 
               - `long startPageNumber`
 
-              - `JsonValue; type "page_location"constant`
+                minimum: 1
 
-                - `PAGE_LOCATION("page_location")`
+              - `JsonValue type constant`
 
             - `class BetaCitationContentBlockLocationParam:`
 
@@ -243,7 +246,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `long documentIndex`
 
+                minimum: 0
+
               - `Optional<String> documentTitle`
+
+                maxLength: 500, minLength: 1
 
               - `long endBlockIndex`
 
@@ -255,9 +262,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 0-based index of the first cited block in the source's `content` array.
 
-              - `JsonValue; type "content_block_location"constant`
+                minimum: 0
 
-                - `CONTENT_BLOCK_LOCATION("content_block_location")`
+              - `JsonValue type constant`
 
             - `class BetaCitationWebSearchResultLocationParam:`
 
@@ -267,11 +274,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> title`
 
-              - `JsonValue; type "web_search_result_location"constant`
+                maxLength: 512, minLength: 1
 
-                - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
+              - `JsonValue type constant`
 
               - `String url`
+
+                minLength: 1
 
             - `class BetaCitationSearchResultLocationParam:`
 
@@ -293,17 +302,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                minimum: 0
+
               - `String source`
 
               - `long startBlockIndex`
 
                 0-based index of the first cited block in the source's `content` array.
 
+                minimum: 0
+
               - `Optional<String> title`
 
-              - `JsonValue; type "search_result_location"constant`
-
-                - `SEARCH_RESULT_LOCATION("search_result_location")`
+              - `JsonValue type constant`
 
         - `class BetaImageBlockParam:`
 
@@ -312,6 +323,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `class BetaBase64ImageSource:`
 
               - `String data`
+
+                format: byte
 
               - `MediaType mediaType`
 
@@ -323,15 +336,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `IMAGE_WEBP("image/webp")`
 
-              - `JsonValue; type "base64"constant`
-
-                - `BASE64("base64")`
+              - `JsonValue type constant`
 
             - `class BetaUrlImageSource:`
 
-              - `JsonValue; type "url"constant`
-
-                - `URL("url")`
+              - `JsonValue type constant`
 
               - `String url`
 
@@ -339,13 +348,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String fileId`
 
-              - `JsonValue; type "file"constant`
+              - `JsonValue type constant`
 
-                - `FILE("file")`
-
-          - `JsonValue; type "image"constant`
-
-            - `IMAGE("image")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -371,25 +376,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String data`
 
-              - `JsonValue; mediaType "application/pdf"constant`
+                format: byte
 
-                - `APPLICATION_PDF("application/pdf")`
+              - `JsonValue mediaType constant`
 
-              - `JsonValue; type "base64"constant`
-
-                - `BASE64("base64")`
+              - `JsonValue type constant`
 
             - `class BetaPlainTextSource:`
 
               - `String data`
 
-              - `JsonValue; mediaType "text/plain"constant`
+              - `JsonValue mediaType constant`
 
-                - `TEXT_PLAIN("text/plain")`
-
-              - `JsonValue; type "text"constant`
-
-                - `TEXT("text")`
+              - `JsonValue type constant`
 
             - `class BetaContentBlockSource:`
 
@@ -403,15 +402,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `class BetaImageBlockParam:`
 
-              - `JsonValue; type "content"constant`
-
-                - `CONTENT("content")`
+              - `JsonValue type constant`
 
             - `class BetaUrlPdfSource:`
 
-              - `JsonValue; type "url"constant`
-
-                - `URL("url")`
+              - `JsonValue type constant`
 
               - `String url`
 
@@ -419,13 +414,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String fileId`
 
-              - `JsonValue; type "file"constant`
+              - `JsonValue type constant`
 
-                - `FILE("file")`
-
-          - `JsonValue; type "document"constant`
-
-            - `DOCUMENT("document")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -437,7 +428,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> context`
 
+            minLength: 1
+
           - `Optional<String> title`
+
+            maxLength: 500, minLength: 1
 
         - `class BetaSearchResultBlockParam:`
 
@@ -445,7 +440,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String text`
 
-            - `JsonValue; type "text"constant`
+              minLength: 1
+
+            - `JsonValue type constant`
 
             - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -457,9 +454,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String title`
 
-          - `JsonValue; type "search_result"constant`
-
-            - `SEARCH_RESULT("search_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -479,9 +474,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-          - `JsonValue; type "thinking"constant`
-
-            - `THINKING("thinking")`
+          - `JsonValue type constant`
 
         - `class BetaRedactedThinkingBlockParam:`
 
@@ -489,21 +482,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `JsonValue; type "redacted_thinking"constant`
-
-            - `REDACTED_THINKING("redacted_thinking")`
+          - `JsonValue type constant`
 
         - `class BetaToolUseBlockParam:`
 
           - `String id`
 
+            pattern: ^[a-zA-Z0-9_-]+$
+
           - `Input input`
 
           - `String name`
 
-          - `JsonValue; type "tool_use"constant`
+            maxLength: 200, minLength: 1
 
-            - `TOOL_USE("tool_use")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -517,9 +510,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Tool invocation directly from the model.
 
-              - `JsonValue; type "direct"constant`
-
-                - `DIRECT("direct")`
+              - `JsonValue type constant`
 
             - `class BetaServerToolCaller:`
 
@@ -527,29 +518,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String toolId`
 
-              - `JsonValue; type "code_execution_20250825"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `CODE_EXECUTION_20250825("code_execution_20250825")`
+              - `JsonValue type constant`
 
             - `class BetaServerToolCaller20260120:`
 
               - `String toolId`
 
-              - `JsonValue; type "code_execution_20260120"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `CODE_EXECUTION_20260120("code_execution_20260120")`
+              - `JsonValue type constant`
 
           - `Optional<String> toolsetName`
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class BetaToolResultBlockParam:`
 
           - `String toolUseId`
 
-          - `JsonValue; type "tool_result"constant`
+            pattern: ^[a-zA-Z0-9_-]+$
 
-            - `TOOL_RESULT("tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -575,9 +568,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String toolName`
 
-                - `JsonValue; type "tool_reference"constant`
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `TOOL_REFERENCE("tool_reference")`
+                - `JsonValue type constant`
 
                 - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -597,25 +590,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                  maxItems: 100
+
                   - `String tabId`
 
                     The caller-assigned identifier for this tab, unique within the inventory.
+
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `String title`
 
                     The title of the page the tab is showing. May be empty.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `String url`
 
                     The URL of the page the tab is showing. May be empty.
+
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `Optional<Boolean> active`
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `JsonValue; type "browser_state"constant`
-
-                  - `BROWSER_STATE("browser_state")`
+                - `JsonValue type constant`
 
                 - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -624,6 +623,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                 - `Optional<List<BetaBrowserStateChange>> stateChanges`
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  maxItems: 200, minItems: 1
 
                   - `class BetaBrowserStateChangeTabOpened:`
 
@@ -639,9 +640,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                    - `JsonValue; type "tab_opened"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `TAB_OPENED("tab_opened")`
+                    - `JsonValue type constant`
 
                   - `class BetaBrowserStateChangeDownloadStarted:`
 
@@ -651,13 +652,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonValue; type "download_started"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `DOWNLOAD_STARTED("download_started")`
+                    - `JsonValue type constant`
 
                     - `String url`
 
                       The final post-redirect URL the download was served from.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `class BetaBrowserStateChangeDownloadCompleted:`
 
@@ -670,21 +673,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonValue; type "download_completed"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `DOWNLOAD_COMPLETED("download_completed")`
+                    - `JsonValue type constant`
 
                     - `String url`
 
                       The final post-redirect URL the download was served from.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `Optional<String> path`
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                     - `Optional<Long> sizeBytes`
 
                       The completed download's size.
+
+                      minimum: 0
 
                   - `class BetaBrowserStateChangeDownloadFailed:`
 
@@ -694,17 +703,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonValue; type "download_failed"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `DOWNLOAD_FAILED("download_failed")`
+                    - `JsonValue type constant`
 
                     - `String url`
 
                       The final post-redirect URL the download was served from.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `Optional<String> error`
 
                       The failure or cancellation detail, when known.
+
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
           - `Optional<Boolean> isError`
 
@@ -712,9 +725,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class BetaServerToolUseBlockParam:`
 
           - `String id`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `Input input`
 
@@ -736,9 +753,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-          - `JsonValue; type "server_tool_use"constant`
-
-            - `SERVER_TOOL_USE("server_tool_use")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -768,9 +783,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String title`
 
-              - `JsonValue; type "web_search_result"constant`
-
-                - `WEB_SEARCH_RESULT("web_search_result")`
+              - `JsonValue type constant`
 
               - `String url`
 
@@ -792,15 +805,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `REQUEST_TOO_LARGE("request_too_large")`
 
-              - `JsonValue; type "web_search_tool_result_error"constant`
-
-                - `WEB_SEARCH_TOOL_RESULT_ERROR("web_search_tool_result_error")`
+              - `JsonValue type constant`
 
           - `String toolUseId`
 
-          - `JsonValue; type "web_search_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `WEB_SEARCH_TOOL_RESULT("web_search_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -846,17 +857,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `UNAVAILABLE("unavailable")`
 
-              - `JsonValue; type "web_fetch_tool_result_error"constant`
-
-                - `WEB_FETCH_TOOL_RESULT_ERROR("web_fetch_tool_result_error")`
+              - `JsonValue type constant`
 
             - `class BetaWebFetchBlockParam:`
 
               - `BetaRequestDocumentBlock content`
 
-              - `JsonValue; type "web_fetch_result"constant`
-
-                - `WEB_FETCH_RESULT("web_fetch_result")`
+              - `JsonValue type constant`
 
               - `String url`
 
@@ -868,9 +875,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String toolUseId`
 
-          - `JsonValue; type "web_fetch_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `WEB_FETCH_TOOL_RESULT("web_fetch_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -912,17 +919,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `MODEL_NOT_FOUND("model_not_found")`
 
-              - `JsonValue; type "advisor_tool_result_error"constant`
-
-                - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+              - `JsonValue type constant`
 
             - `class BetaAdvisorResultBlockParam:`
 
               - `String text`
 
-              - `JsonValue; type "advisor_result"constant`
-
-                - `ADVISOR_RESULT("advisor_result")`
+              - `JsonValue type constant`
 
               - `Optional<String> stopReason`
 
@@ -932,17 +935,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-              - `JsonValue; type "advisor_redacted_result"constant`
-
-                - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+              - `JsonValue type constant`
 
               - `Optional<String> stopReason`
 
           - `String toolUseId`
 
-          - `JsonValue; type "advisor_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -966,9 +967,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-              - `JsonValue; type "code_execution_tool_result_error"constant`
-
-                - `CODE_EXECUTION_TOOL_RESULT_ERROR("code_execution_tool_result_error")`
+              - `JsonValue type constant`
 
             - `class BetaCodeExecutionResultBlockParam:`
 
@@ -976,9 +975,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String fileId`
 
-                - `JsonValue; type "code_execution_output"constant`
-
-                  - `CODE_EXECUTION_OUTPUT("code_execution_output")`
+                - `JsonValue type constant`
 
               - `long returnCode`
 
@@ -986,9 +983,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stdout`
 
-              - `JsonValue; type "code_execution_result"constant`
-
-                - `CODE_EXECUTION_RESULT("code_execution_result")`
+              - `JsonValue type constant`
 
             - `class BetaEncryptedCodeExecutionResultBlockParam:`
 
@@ -998,7 +993,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String fileId`
 
-                - `JsonValue; type "code_execution_output"constant`
+                - `JsonValue type constant`
 
               - `String encryptedStdout`
 
@@ -1006,15 +1001,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stderr`
 
-              - `JsonValue; type "encrypted_code_execution_result"constant`
-
-                - `ENCRYPTED_CODE_EXECUTION_RESULT("encrypted_code_execution_result")`
+              - `JsonValue type constant`
 
           - `String toolUseId`
 
-          - `JsonValue; type "code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `CODE_EXECUTION_TOOL_RESULT("code_execution_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1038,9 +1031,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-              - `JsonValue; type "bash_code_execution_tool_result_error"constant`
-
-                - `BASH_CODE_EXECUTION_TOOL_RESULT_ERROR("bash_code_execution_tool_result_error")`
+              - `JsonValue type constant`
 
             - `class BetaBashCodeExecutionResultBlockParam:`
 
@@ -1048,9 +1039,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String fileId`
 
-                - `JsonValue; type "bash_code_execution_output"constant`
-
-                  - `BASH_CODE_EXECUTION_OUTPUT("bash_code_execution_output")`
+                - `JsonValue type constant`
 
               - `long returnCode`
 
@@ -1058,15 +1047,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stdout`
 
-              - `JsonValue; type "bash_code_execution_result"constant`
-
-                - `BASH_CODE_EXECUTION_RESULT("bash_code_execution_result")`
+              - `JsonValue type constant`
 
           - `String toolUseId`
 
-          - `JsonValue; type "bash_code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `BASH_CODE_EXECUTION_TOOL_RESULT("bash_code_execution_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1090,9 +1077,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `FILE_NOT_FOUND("file_not_found")`
 
-              - `JsonValue; type "text_editor_code_execution_tool_result_error"constant`
-
-                - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT_ERROR("text_editor_code_execution_tool_result_error")`
+              - `JsonValue type constant`
 
               - `Optional<String> errorMessage`
 
@@ -1108,9 +1093,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `PDF("pdf")`
 
-              - `JsonValue; type "text_editor_code_execution_view_result"constant`
-
-                - `TEXT_EDITOR_CODE_EXECUTION_VIEW_RESULT("text_editor_code_execution_view_result")`
+              - `JsonValue type constant`
 
               - `Optional<Long> numLines`
 
@@ -1122,15 +1105,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `boolean isFileUpdate`
 
-              - `JsonValue; type "text_editor_code_execution_create_result"constant`
-
-                - `TEXT_EDITOR_CODE_EXECUTION_CREATE_RESULT("text_editor_code_execution_create_result")`
+              - `JsonValue type constant`
 
             - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-              - `JsonValue; type "text_editor_code_execution_str_replace_result"constant`
-
-                - `TEXT_EDITOR_CODE_EXECUTION_STR_REPLACE_RESULT("text_editor_code_execution_str_replace_result")`
+              - `JsonValue type constant`
 
               - `Optional<List<String>> lines`
 
@@ -1144,9 +1123,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String toolUseId`
 
-          - `JsonValue; type "text_editor_code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT("text_editor_code_execution_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1168,9 +1147,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-              - `JsonValue; type "tool_search_tool_result_error"constant`
-
-                - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
+              - `JsonValue type constant`
 
               - `Optional<String> errorMessage`
 
@@ -1180,21 +1157,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String toolName`
 
-                - `JsonValue; type "tool_reference"constant`
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                - `JsonValue type constant`
 
                 - `Optional<BetaCacheControlEphemeral> cacheControl`
 
                   Create a cache control breakpoint at this content block.
 
-              - `JsonValue; type "tool_search_tool_search_result"constant`
-
-                - `TOOL_SEARCH_TOOL_SEARCH_RESULT("tool_search_tool_search_result")`
+              - `JsonValue type constant`
 
           - `String toolUseId`
 
-          - `JsonValue; type "tool_search_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `TOOL_SEARCH_TOOL_RESULT("tool_search_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1204,6 +1181,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String id`
 
+            pattern: ^[a-zA-Z0-9_-]+$
+
           - `Input input`
 
           - `String name`
@@ -1212,9 +1191,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The name of the MCP server
 
-          - `JsonValue; type "mcp_tool_use"constant`
-
-            - `MCP_TOOL_USE("mcp_tool_use")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1224,9 +1201,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String toolUseId`
 
-          - `JsonValue; type "mcp_tool_result"constant`
+            pattern: ^[a-zA-Z0-9_-]+$
 
-            - `MCP_TOOL_RESULT("mcp_tool_result")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1240,7 +1217,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String text`
 
-              - `JsonValue; type "text"constant`
+                minLength: 1
+
+              - `JsonValue type constant`
 
               - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1257,9 +1236,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String fileId`
 
-          - `JsonValue; type "container_upload"constant`
-
-            - `CONTAINER_UPLOAD("container_upload")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1275,9 +1252,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `JsonValue; type "compaction"constant`
-
-            - `COMPACTION("compaction")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1315,9 +1290,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String name`
 
-              - `JsonValue; type "tool_reference"constant`
+                pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `TOOL_REFERENCE("tool_reference")`
+              - `JsonValue type constant`
 
             - `class BetaToolChangeMcpToolReference:`
 
@@ -1328,9 +1303,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String serverName`
 
-              - `JsonValue; type "mcp_tool_reference"constant`
-
-                - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+              - `JsonValue type constant`
 
             - `class BetaToolChangeMcpToolsetReference:`
 
@@ -1338,13 +1311,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String serverName`
 
-              - `JsonValue; type "mcp_toolset_reference"constant`
+              - `JsonValue type constant`
 
-                - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-          - `JsonValue; type "tool_addition"constant`
-
-            - `TOOL_ADDITION("tool_addition")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1381,9 +1350,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Reference to every tool in the named MCP server's toolset.
 
-          - `JsonValue; type "tool_removal"constant`
-
-            - `TOOL_REMOVAL("tool_removal")`
+          - `JsonValue type constant`
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1479,9 +1446,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Identifies one hop of a fallback transition.
 
-          - `JsonValue; type "fallback"constant`
-
-            - `FALLBACK("fallback")`
+          - `JsonValue type constant`
 
           - `Optional<JsonValue> trigger`
 
@@ -1521,9 +1486,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         List of skills to load in the container
 
+        maxItems: 20
+
         - `String skillId`
 
           Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `Type type`
 
@@ -1536,6 +1505,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `Optional<String> version`
 
           Skill version or 'latest' for most recent version
+
+          maxLength: 64, minLength: 1
 
     - `String`
 
@@ -1589,6 +1560,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
+        maxLength: 2048, minLength: 1
+
       - `Optional<Mode> mode`
 
         How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
@@ -1609,11 +1582,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     MCP servers to be utilized in this request
 
+    maxItems: 20
+
     - `String name`
 
-    - `JsonValue; type "url"constant`
-
-      - `URL("url")`
+    - `JsonValue type constant`
 
     - `String url`
 
@@ -1632,12 +1605,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `Optional<BetaOutputConfig> outputConfig`
 
     Configuration options for the model's output, such as the output format.
-
-  - `Optional<BetaJsonOutputFormat> outputFormat`
-
-    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-    A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
   - `Optional<ServiceTier> serviceTier`
 
@@ -1677,21 +1644,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String text`
 
-      - `JsonValue; type "text"constant`
+        minLength: 1
+
+      - `JsonValue type constant`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
         Create a cache control breakpoint at this content block.
 
       - `Optional<List<BetaTextCitationParam>> citations`
-
-  - `Optional<Double> temperature`
-
-    Amount of randomness injected into the response.
-
-    Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-    Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
   - `Optional<BetaThinkingConfigParam> thinking`
 
@@ -1777,9 +1738,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-        - `JsonValue; type "object"constant`
-
-          - `OBJECT("object")`
+        - `JsonValue type constant`
 
         - `Optional<Properties> properties`
 
@@ -1790,6 +1749,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
+
+        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1827,21 +1788,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Optional<Type> type`
 
-        - `CUSTOM("custom")`
-
     - `class BetaToolBash20241022:`
 
-      - `JsonValue; name "bash"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `BASH("bash")`
-
-      - `JsonValue; type "bash_20241022"constant`
-
-        - `BASH_20241022("bash_20241022")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1869,17 +1824,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolBash20250124:`
 
-      - `JsonValue; name "bash"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `BASH("bash")`
-
-      - `JsonValue; type "bash_20250124"constant`
-
-        - `BASH_20250124("bash_20250124")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1907,17 +1858,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaCodeExecutionTool20250522:`
 
-      - `JsonValue; name "code_execution"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `CODE_EXECUTION("code_execution")`
-
-      - `JsonValue; type "code_execution_20250522"constant`
-
-        - `CODE_EXECUTION_20250522("code_execution_20250522")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1943,17 +1890,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaCodeExecutionTool20250825:`
 
-      - `JsonValue; name "code_execution"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `CODE_EXECUTION("code_execution")`
-
-      - `JsonValue; type "code_execution_20250825"constant`
-
-        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1981,17 +1924,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-      - `JsonValue; name "code_execution"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `CODE_EXECUTION("code_execution")`
-
-      - `JsonValue; type "code_execution_20260120"constant`
-
-        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2019,17 +1958,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Code execution tool with REPL state persistence.
 
-      - `JsonValue; name "code_execution"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `CODE_EXECUTION("code_execution")`
-
-      - `JsonValue; type "code_execution_20260521"constant`
-
-        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2060,9 +1995,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       the family's tool with any members disabled via `configs` removed
       from its schema.
 
-      - `JsonValue; type "browser_toolset_20260801"constant`
-
-        - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2465,21 +2398,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The height of the display in pixels.
 
+        minimum: 1
+
       - `long displayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonValue; name "computer"constant`
+        minimum: 1
+
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `COMPUTER("computer")`
-
-      - `JsonValue; type "computer_20241022"constant`
-
-        - `COMPUTER_20241022("computer_20241022")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2503,6 +2436,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The X11 display number (e.g. 0, 1) for the display.
 
+        minimum: 0
+
       - `Optional<List<InputExample>> inputExamples`
 
       - `Optional<Boolean> strict`
@@ -2511,17 +2446,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaMemoryTool20250818:`
 
-      - `JsonValue; name "memory"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `MEMORY("memory")`
-
-      - `JsonValue; type "memory_20250818"constant`
-
-        - `MEMORY_20250818("memory_20250818")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2553,21 +2484,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The height of the display in pixels.
 
+        minimum: 1
+
       - `long displayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonValue; name "computer"constant`
+        minimum: 1
+
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `COMPUTER("computer")`
-
-      - `JsonValue; type "computer_20250124"constant`
-
-        - `COMPUTER_20250124("computer_20250124")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2591,6 +2522,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The X11 display number (e.g. 0, 1) for the display.
 
+        minimum: 0
+
       - `Optional<List<InputExample>> inputExamples`
 
       - `Optional<Boolean> strict`
@@ -2599,17 +2532,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolTextEditor20241022:`
 
-      - `JsonValue; name "str_replace_editor"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `STR_REPLACE_EDITOR("str_replace_editor")`
-
-      - `JsonValue; type "text_editor_20241022"constant`
-
-        - `TEXT_EDITOR_20241022("text_editor_20241022")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2641,21 +2570,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The height of the display in pixels.
 
+        minimum: 1
+
       - `long displayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonValue; name "computer"constant`
+        minimum: 1
+
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `COMPUTER("computer")`
-
-      - `JsonValue; type "computer_20251124"constant`
-
-        - `COMPUTER_20251124("computer_20251124")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2679,6 +2608,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The X11 display number (e.g. 0, 1) for the display.
 
+        minimum: 0
+
       - `Optional<Boolean> enableZoom`
 
         Whether to enable an action to take a zoomed-in screenshot of the screen.
@@ -2700,9 +2631,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       `type`, `configs`, and `cache_control`; zoom is controlled
       via `configs.zoom.enabled`.
 
-      - `JsonValue; type "computer_toolset_20260801"constant`
-
-        - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2933,17 +2862,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolTextEditor20250124:`
 
-      - `JsonValue; name "str_replace_editor"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `STR_REPLACE_EDITOR("str_replace_editor")`
-
-      - `JsonValue; type "text_editor_20250124"constant`
-
-        - `TEXT_EDITOR_20250124("text_editor_20250124")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2971,17 +2896,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolTextEditor20250429:`
 
-      - `JsonValue; name "str_replace_based_edit_tool"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `STR_REPLACE_BASED_EDIT_TOOL("str_replace_based_edit_tool")`
-
-      - `JsonValue; type "text_editor_20250429"constant`
-
-        - `TEXT_EDITOR_20250429("text_editor_20250429")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3009,17 +2930,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolTextEditor20250728:`
 
-      - `JsonValue; name "str_replace_based_edit_tool"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `STR_REPLACE_BASED_EDIT_TOOL("str_replace_based_edit_tool")`
-
-      - `JsonValue; type "text_editor_20250728"constant`
-
-        - `TEXT_EDITOR_20250728("text_editor_20250728")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3045,23 +2962,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+        minimum: 1
+
       - `Optional<Boolean> strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaWebSearchTool20250305:`
 
-      - `JsonValue; name "web_search"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_SEARCH("web_search")`
-
-      - `JsonValue; type "web_search_20250305"constant`
-
-        - `WEB_SEARCH_20250305("web_search_20250305")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3093,6 +3008,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
+        exclusiveMinimum: 0
+
       - `Optional<Boolean> strict`
 
         When true, guarantees schema validation on tool names and inputs
@@ -3101,39 +3018,41 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-        - `JsonValue; type "approximate"constant`
-
-          - `APPROXIMATE("approximate")`
+        - `JsonValue type constant`
 
         - `Optional<String> city`
 
           The city of the user.
 
+          maxLength: 255, minLength: 1
+
         - `Optional<String> country`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+          maxLength: 2, minLength: 2
 
         - `Optional<String> region`
 
           The region of the user.
 
+          maxLength: 255, minLength: 1
+
         - `Optional<String> timezone`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+          maxLength: 255, minLength: 1
+
     - `class BetaWebFetchTool20250910:`
 
-      - `JsonValue; name "web_fetch"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_FETCH("web_fetch")`
-
-      - `JsonValue; type "web_fetch_20250910"constant`
-
-        - `WEB_FETCH_20250910("web_fetch_20250910")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3169,9 +3088,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+        exclusiveMinimum: 0
+
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<Boolean> strict`
 
@@ -3179,17 +3102,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebSearchTool20260209:`
 
-      - `JsonValue; name "web_search"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_SEARCH("web_search")`
-
-      - `JsonValue; type "web_search_20260209"constant`
-
-        - `WEB_SEARCH_20260209("web_search_20260209")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3220,6 +3139,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<Boolean> strict`
 
@@ -3231,17 +3152,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebFetchTool20260209:`
 
-      - `JsonValue; name "web_fetch"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_FETCH("web_fetch")`
-
-      - `JsonValue; type "web_fetch_20260209"constant`
-
-        - `WEB_FETCH_20260209("web_fetch_20260209")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3277,9 +3194,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+        exclusiveMinimum: 0
+
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<Boolean> strict`
 
@@ -3289,17 +3210,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
-      - `JsonValue; name "web_fetch"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_FETCH("web_fetch")`
-
-      - `JsonValue; type "web_fetch_20260309"constant`
-
-        - `WEB_FETCH_20260309("web_fetch_20260309")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3335,9 +3252,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+        exclusiveMinimum: 0
+
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<Boolean> strict`
 
@@ -3349,17 +3270,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebSearchTool20260318:`
 
-      - `JsonValue; name "web_search"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_SEARCH("web_search")`
-
-      - `JsonValue; type "web_search_20260318"constant`
-
-        - `WEB_SEARCH_20260318("web_search_20260318")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3390,6 +3307,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<ResponseInclusion> responseInclusion`
 
@@ -3409,17 +3328,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebFetchTool20260318:`
 
-      - `JsonValue; name "web_fetch"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `WEB_FETCH("web_fetch")`
-
-      - `JsonValue; type "web_fetch_20260318"constant`
-
-        - `WEB_FETCH_20260318("web_fetch_20260318")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3455,9 +3370,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+        exclusiveMinimum: 0
+
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<ResponseInclusion> responseInclusion`
 
@@ -3483,17 +3402,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `JsonValue; name "advisor"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        - `ADVISOR("advisor")`
-
-      - `JsonValue; type "advisor_20260301"constant`
-
-        - `ADVISOR_20260301("advisor_20260301")`
+      - `JsonValue type constant`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -3521,9 +3436,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
+        minimum: 1024
+
       - `Optional<Long> maxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `Optional<Boolean> strict`
 
@@ -3531,13 +3450,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolSearchToolBm25_20251119:`
 
-      - `JsonValue; name "tool_search_tool_bm25"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
       - `Type type`
 
@@ -3569,13 +3486,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaToolSearchToolRegex20251119:`
 
-      - `JsonValue; name "tool_search_tool_regex"constant`
+      - `JsonValue name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
 
       - `Type type`
 
@@ -3616,9 +3531,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Name of the MCP server to configure tools for
 
-      - `JsonValue; type "mcp_toolset"constant`
+        maxLength: 255, minLength: 1
 
-        - `MCP_TOOLSET("mcp_toolset")`
+      - `JsonValue type constant`
 
       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3640,7 +3555,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `Optional<Boolean> enabled`
 
+  - `Optional<BetaJsonOutputFormat> outputFormat`
+
+    **Deprecated**
+
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+    A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+  - `Optional<Double> temperature`
+
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+    Amount of randomness injected into the response.
+
+    Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+    Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+    maximum: 1, minimum: 0
+
   - `Optional<Long> topK`
+
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
     Only sample from the top K options for each subsequent token.
 
@@ -3648,7 +3585,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Recommended for advanced use cases only.
 
+    minimum: 0
+
   - `Optional<Double> topP`
+
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
     Use nucleus sampling.
 
@@ -3656,7 +3597,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Recommended for advanced use cases only.
 
-### Returns
+    maximum: 1, minimum: 0
+
+## Returns
 
 - `class BetaMessage:`
 
@@ -3678,6 +3621,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The time at which the container will expire.
 
+      format: date-time
+
     - `Optional<List<BetaSkill>> skills`
 
       Skills loaded in the container
@@ -3685,6 +3630,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `String skillId`
 
         Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `Type type`
 
@@ -3697,6 +3644,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `String version`
 
         The resolved version: a skill version ID for custom skills.
+
+        maxLength: 64, minLength: 1
 
   - `List<BetaContentBlock> content`
 
@@ -3741,6 +3690,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `long documentIndex`
 
+            minimum: 0
+
           - `Optional<String> documentTitle`
 
           - `long endCharIndex`
@@ -3749,15 +3700,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `long startCharIndex`
 
-          - `JsonValue; type "char_location"constant`
+            minimum: 0
 
-            - `CHAR_LOCATION("char_location")`
+          - `JsonValue type constant`
 
         - `class BetaCitationPageLocation:`
 
           - `String citedText`
 
           - `long documentIndex`
+
+            minimum: 0
 
           - `Optional<String> documentTitle`
 
@@ -3767,9 +3720,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `long startPageNumber`
 
-          - `JsonValue; type "page_location"constant`
+            minimum: 1
 
-            - `PAGE_LOCATION("page_location")`
+          - `JsonValue type constant`
 
         - `class BetaCitationContentBlockLocation:`
 
@@ -3780,6 +3733,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
           - `long documentIndex`
+
+            minimum: 0
 
           - `Optional<String> documentTitle`
 
@@ -3795,9 +3750,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             0-based index of the first cited block in the source's `content` array.
 
-          - `JsonValue; type "content_block_location"constant`
+            minimum: 0
 
-            - `CONTENT_BLOCK_LOCATION("content_block_location")`
+          - `JsonValue type constant`
 
         - `class BetaCitationsWebSearchResultLocation:`
 
@@ -3807,9 +3762,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> title`
 
-          - `JsonValue; type "web_search_result_location"constant`
+            maxLength: 512
 
-            - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
+          - `JsonValue type constant`
 
           - `String url`
 
@@ -3833,23 +3788,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Counted separately from `document_index`; server-side web search results are not included in this count.
 
+            minimum: 0
+
           - `String source`
 
           - `long startBlockIndex`
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `Optional<String> title`
 
-          - `JsonValue; type "search_result_location"constant`
-
-            - `SEARCH_RESULT_LOCATION("search_result_location")`
+          - `JsonValue type constant`
 
       - `String text`
 
-      - `JsonValue; type "text"constant`
+        maxLength: 5000000, minLength: 0
 
-        - `TEXT("text")`
+      - `JsonValue type constant`
 
     - `class BetaThinkingBlock:`
 
@@ -3865,9 +3822,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `JsonValue; type "thinking"constant`
-
-        - `THINKING("thinking")`
+      - `JsonValue type constant`
 
     - `class BetaRedactedThinkingBlock:`
 
@@ -3879,21 +3834,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `JsonValue; type "redacted_thinking"constant`
-
-        - `REDACTED_THINKING("redacted_thinking")`
+      - `JsonValue type constant`
 
     - `class BetaToolUseBlock:`
 
       - `String id`
 
+        pattern: ^[a-zA-Z0-9_-]+$
+
       - `Input input`
 
       - `String name`
 
-      - `JsonValue; type "tool_use"constant`
+        minLength: 1
 
-        - `TOOL_USE("tool_use")`
+      - `JsonValue type constant`
 
       - `Optional<Caller> caller`
 
@@ -3903,9 +3858,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation directly from the model.
 
-          - `JsonValue; type "direct"constant`
-
-            - `DIRECT("direct")`
+          - `JsonValue type constant`
 
         - `class BetaServerToolCaller:`
 
@@ -3913,25 +3866,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String toolId`
 
-          - `JsonValue; type "code_execution_20250825"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+          - `JsonValue type constant`
 
         - `class BetaServerToolCaller20260120:`
 
           - `String toolId`
 
-          - `JsonValue; type "code_execution_20260120"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+          - `JsonValue type constant`
 
       - `Optional<String> toolsetName`
 
         For a toolset member tool_use, the toolset family.
 
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
     - `class BetaServerToolUseBlock:`
 
       - `String id`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `Input input`
 
@@ -3953,9 +3910,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-      - `JsonValue; type "server_tool_use"constant`
-
-        - `SERVER_TOOL_USE("server_tool_use")`
+      - `JsonValue type constant`
 
       - `Optional<Caller> caller`
 
@@ -3991,9 +3946,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `REQUEST_TOO_LARGE("request_too_large")`
 
-          - `JsonValue; type "web_search_tool_result_error"constant`
-
-            - `WEB_SEARCH_TOOL_RESULT_ERROR("web_search_tool_result_error")`
+          - `JsonValue type constant`
 
         - `List<BetaWebSearchResultBlock>`
 
@@ -4003,17 +3956,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String title`
 
-          - `JsonValue; type "web_search_result"constant`
-
-            - `WEB_SEARCH_RESULT("web_search_result")`
+          - `JsonValue type constant`
 
           - `String url`
 
       - `String toolUseId`
 
-      - `JsonValue; type "web_search_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `WEB_SEARCH_TOOL_RESULT("web_search_tool_result")`
+      - `JsonValue type constant`
 
       - `Optional<Caller> caller`
 
@@ -4055,9 +4006,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `UNAVAILABLE("unavailable")`
 
-          - `JsonValue; type "web_fetch_tool_result_error"constant`
-
-            - `WEB_FETCH_TOOL_RESULT_ERROR("web_fetch_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaWebFetchBlock:`
 
@@ -4075,41 +4024,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String data`
 
-                - `JsonValue; mediaType "application/pdf"constant`
+                  format: byte
 
-                  - `APPLICATION_PDF("application/pdf")`
+                - `JsonValue mediaType constant`
 
-                - `JsonValue; type "base64"constant`
-
-                  - `BASE64("base64")`
+                - `JsonValue type constant`
 
               - `class BetaPlainTextSource:`
 
                 - `String data`
 
-                - `JsonValue; mediaType "text/plain"constant`
+                - `JsonValue mediaType constant`
 
-                  - `TEXT_PLAIN("text/plain")`
-
-                - `JsonValue; type "text"constant`
-
-                  - `TEXT("text")`
+                - `JsonValue type constant`
 
             - `Optional<String> title`
 
               The title of the document
 
-            - `JsonValue; type "document"constant`
-
-              - `DOCUMENT("document")`
+            - `JsonValue type constant`
 
           - `Optional<String> retrievedAt`
 
             ISO 8601 timestamp when the content was retrieved
 
-          - `JsonValue; type "web_fetch_result"constant`
-
-            - `WEB_FETCH_RESULT("web_fetch_result")`
+          - `JsonValue type constant`
 
           - `String url`
 
@@ -4117,9 +4056,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String toolUseId`
 
-      - `JsonValue; type "web_fetch_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `WEB_FETCH_TOOL_RESULT("web_fetch_tool_result")`
+      - `JsonValue type constant`
 
       - `Optional<Caller> caller`
 
@@ -4157,9 +4096,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `MODEL_NOT_FOUND("model_not_found")`
 
-          - `JsonValue; type "advisor_tool_result_error"constant`
-
-            - `ADVISOR_TOOL_RESULT_ERROR("advisor_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaAdvisorResultBlock:`
 
@@ -4169,9 +4106,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String text`
 
-          - `JsonValue; type "advisor_result"constant`
-
-            - `ADVISOR_RESULT("advisor_result")`
+          - `JsonValue type constant`
 
         - `class BetaAdvisorRedactedResultBlock:`
 
@@ -4183,15 +4118,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `JsonValue; type "advisor_redacted_result"constant`
-
-            - `ADVISOR_REDACTED_RESULT("advisor_redacted_result")`
+          - `JsonValue type constant`
 
       - `String toolUseId`
 
-      - `JsonValue; type "advisor_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ADVISOR_TOOL_RESULT("advisor_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaCodeExecutionToolResultBlock:`
 
@@ -4211,9 +4144,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-          - `JsonValue; type "code_execution_tool_result_error"constant`
-
-            - `CODE_EXECUTION_TOOL_RESULT_ERROR("code_execution_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaCodeExecutionResultBlock:`
 
@@ -4221,9 +4152,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String fileId`
 
-            - `JsonValue; type "code_execution_output"constant`
-
-              - `CODE_EXECUTION_OUTPUT("code_execution_output")`
+            - `JsonValue type constant`
 
           - `long returnCode`
 
@@ -4231,9 +4160,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stdout`
 
-          - `JsonValue; type "code_execution_result"constant`
-
-            - `CODE_EXECUTION_RESULT("code_execution_result")`
+          - `JsonValue type constant`
 
         - `class BetaEncryptedCodeExecutionResultBlock:`
 
@@ -4243,7 +4170,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String fileId`
 
-            - `JsonValue; type "code_execution_output"constant`
+            - `JsonValue type constant`
 
           - `String encryptedStdout`
 
@@ -4251,15 +4178,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stderr`
 
-          - `JsonValue; type "encrypted_code_execution_result"constant`
-
-            - `ENCRYPTED_CODE_EXECUTION_RESULT("encrypted_code_execution_result")`
+          - `JsonValue type constant`
 
       - `String toolUseId`
 
-      - `JsonValue; type "code_execution_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `CODE_EXECUTION_TOOL_RESULT("code_execution_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaBashCodeExecutionToolResultBlock:`
 
@@ -4279,9 +4204,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-          - `JsonValue; type "bash_code_execution_tool_result_error"constant`
-
-            - `BASH_CODE_EXECUTION_TOOL_RESULT_ERROR("bash_code_execution_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaBashCodeExecutionResultBlock:`
 
@@ -4289,9 +4212,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String fileId`
 
-            - `JsonValue; type "bash_code_execution_output"constant`
-
-              - `BASH_CODE_EXECUTION_OUTPUT("bash_code_execution_output")`
+            - `JsonValue type constant`
 
           - `long returnCode`
 
@@ -4299,15 +4220,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stdout`
 
-          - `JsonValue; type "bash_code_execution_result"constant`
-
-            - `BASH_CODE_EXECUTION_RESULT("bash_code_execution_result")`
+          - `JsonValue type constant`
 
       - `String toolUseId`
 
-      - `JsonValue; type "bash_code_execution_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `BASH_CODE_EXECUTION_TOOL_RESULT("bash_code_execution_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaTextEditorCodeExecutionToolResultBlock:`
 
@@ -4329,9 +4248,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> errorMessage`
 
-          - `JsonValue; type "text_editor_code_execution_tool_result_error"constant`
-
-            - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT_ERROR("text_editor_code_execution_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaTextEditorCodeExecutionViewResultBlock:`
 
@@ -4351,17 +4268,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Long> totalLines`
 
-          - `JsonValue; type "text_editor_code_execution_view_result"constant`
-
-            - `TEXT_EDITOR_CODE_EXECUTION_VIEW_RESULT("text_editor_code_execution_view_result")`
+          - `JsonValue type constant`
 
         - `class BetaTextEditorCodeExecutionCreateResultBlock:`
 
           - `boolean isFileUpdate`
 
-          - `JsonValue; type "text_editor_code_execution_create_result"constant`
-
-            - `TEXT_EDITOR_CODE_EXECUTION_CREATE_RESULT("text_editor_code_execution_create_result")`
+          - `JsonValue type constant`
 
         - `class BetaTextEditorCodeExecutionStrReplaceResultBlock:`
 
@@ -4375,15 +4288,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Long> oldStart`
 
-          - `JsonValue; type "text_editor_code_execution_str_replace_result"constant`
-
-            - `TEXT_EDITOR_CODE_EXECUTION_STR_REPLACE_RESULT("text_editor_code_execution_str_replace_result")`
+          - `JsonValue type constant`
 
       - `String toolUseId`
 
-      - `JsonValue; type "text_editor_code_execution_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT("text_editor_code_execution_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaToolSearchToolResultBlock:`
 
@@ -4403,9 +4314,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> errorMessage`
 
-          - `JsonValue; type "tool_search_tool_result_error"constant`
-
-            - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
+          - `JsonValue type constant`
 
         - `class BetaToolSearchToolSearchResultBlock:`
 
@@ -4413,23 +4322,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String toolName`
 
-            - `JsonValue; type "tool_reference"constant`
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `TOOL_REFERENCE("tool_reference")`
+            - `JsonValue type constant`
 
-          - `JsonValue; type "tool_search_tool_search_result"constant`
-
-            - `TOOL_SEARCH_TOOL_SEARCH_RESULT("tool_search_tool_search_result")`
+          - `JsonValue type constant`
 
       - `String toolUseId`
 
-      - `JsonValue; type "tool_search_tool_result"constant`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `TOOL_SEARCH_TOOL_RESULT("tool_search_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaMcpToolUseBlock:`
 
       - `String id`
+
+        pattern: ^[a-zA-Z0-9_-]+$
 
       - `Input input`
 
@@ -4441,9 +4350,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The name of the MCP server
 
-      - `JsonValue; type "mcp_tool_use"constant`
-
-        - `MCP_TOOL_USE("mcp_tool_use")`
+      - `JsonValue type constant`
 
     - `class BetaMcpToolResultBlock:`
 
@@ -4461,15 +4368,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String text`
 
-          - `JsonValue; type "text"constant`
+            maxLength: 5000000, minLength: 0
+
+          - `JsonValue type constant`
 
       - `boolean isError`
 
       - `String toolUseId`
 
-      - `JsonValue; type "mcp_tool_result"constant`
+        pattern: ^[a-zA-Z0-9_-]+$
 
-        - `MCP_TOOL_RESULT("mcp_tool_result")`
+      - `JsonValue type constant`
 
     - `class BetaContainerUploadBlock:`
 
@@ -4477,9 +4386,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String fileId`
 
-      - `JsonValue; type "container_upload"constant`
-
-        - `CONTAINER_UPLOAD("container_upload")`
+      - `JsonValue type constant`
 
     - `class BetaCompactionBlock:`
 
@@ -4497,9 +4404,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `JsonValue; type "compaction"constant`
-
-        - `COMPACTION("compaction")`
+      - `JsonValue type constant`
 
     - `class BetaFallbackBlock:`
 
@@ -4617,13 +4522,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `JsonValue; type "refusal"constant`
+        - `JsonValue type constant`
 
-          - `REFUSAL("refusal")`
-
-      - `JsonValue; type "fallback"constant`
-
-        - `FALLBACK("fallback")`
+      - `JsonValue type constant`
 
   - `Optional<BetaContextManagementResponse> contextManagement`
 
@@ -4641,15 +4542,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Number of input tokens cleared by this edit.
 
+          minimum: 0
+
         - `long clearedToolUses`
 
           Number of tool uses that were cleared.
 
-        - `JsonValue; type "clear_tool_uses_20250919"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           The type of context management edit applied.
-
-          - `CLEAR_TOOL_USES_20250919("clear_tool_uses_20250919")`
 
       - `class BetaClearThinking20251015EditResponse:`
 
@@ -4657,15 +4560,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Number of input tokens cleared by this edit.
 
+          minimum: 0
+
         - `long clearedThinkingTurns`
 
           Number of thinking turns that were cleared.
 
-        - `JsonValue; type "clear_thinking_20251015"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           The type of context management edit applied.
-
-          - `CLEAR_THINKING_20251015("clear_thinking_20251015")`
 
   - `Optional<BetaDiagnostics> diagnostics`
 
@@ -4682,9 +4587,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `JsonValue; type "model_changed"constant`
-
-          - `MODEL_CHANGED("model_changed")`
+        - `JsonValue type constant`
 
       - `class BetaCacheMissSystemChanged:`
 
@@ -4692,9 +4595,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `JsonValue; type "system_changed"constant`
-
-          - `SYSTEM_CHANGED("system_changed")`
+        - `JsonValue type constant`
 
       - `class BetaCacheMissToolsChanged:`
 
@@ -4702,9 +4603,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `JsonValue; type "tools_changed"constant`
-
-          - `TOOLS_CHANGED("tools_changed")`
+        - `JsonValue type constant`
 
       - `class BetaCacheMissMessagesChanged:`
 
@@ -4712,21 +4611,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `JsonValue; type "messages_changed"constant`
-
-          - `MESSAGES_CHANGED("messages_changed")`
+        - `JsonValue type constant`
 
       - `class BetaCacheMissPreviousMessageNotFound:`
 
-        - `JsonValue; type "previous_message_not_found"constant`
-
-          - `PREVIOUS_MESSAGE_NOT_FOUND("previous_message_not_found")`
+        - `JsonValue type constant`
 
       - `class BetaCacheMissUnavailable:`
 
-        - `JsonValue; type "unavailable"constant`
-
-          - `UNAVAILABLE("unavailable")`
+        - `JsonValue type constant`
 
   - `Model model`
 
@@ -4734,13 +4627,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `JsonValue; role "assistant"constant`
+  - `JsonValue role constant`
 
     Conversational role of the generated message.
 
     This will always be `"assistant"`.
-
-    - `ASSISTANT("assistant")`
 
   - `Optional<BetaRefusalStopDetails> stopDetails`
 
@@ -4825,9 +4716,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `JsonValue; type "refusal"constant`
-
-      - `REFUSAL("refusal")`
+    - `JsonValue type constant`
 
   - `Optional<BetaStopReason> stopReason`
 
@@ -4867,13 +4756,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     This value will be a non-null string if one of your custom stop sequences was generated.
 
-  - `JsonValue; type "message"constant`
+  - `JsonValue type constant`
 
     Object type.
 
     For Messages, this is always `"message"`.
-
-    - `MESSAGE("message")`
 
   - `BetaUsage usage`
 
@@ -4895,17 +4782,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The number of input tokens used to create the 1 hour cache entry.
 
+        minimum: 0
+
       - `long ephemeral5mInputTokens`
 
         The number of input tokens used to create the 5 minute cache entry.
+
+        minimum: 0
 
     - `Optional<Long> cacheCreationInputTokens`
 
       The number of input tokens used to create the cache entry.
 
+      minimum: 0
+
     - `Optional<Long> cacheReadInputTokens`
 
       The number of input tokens read from the cache.
+
+      minimum: 0
 
     - `Optional<BetaFallbackCreditUsage> fallbackCredit`
 
@@ -4925,9 +4820,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The reprice was applied: the retry is billed as if the conversation
           had been on the retry model all along.
 
-          - `JsonValue; type "redeemed"constant`
-
-            - `REDEEMED("redeemed")`
+          - `JsonValue type constant`
 
         - `class BetaFallbackCreditNotApplied:`
 
@@ -4964,9 +4857,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `WRONG_WORKSPACE("wrong_workspace")`
 
-          - `JsonValue; type "not_applied"constant`
-
-            - `NOT_APPLIED("not_applied")`
+          - `JsonValue type constant`
 
           - `Optional<List<String>> removeToRedeem`
 
@@ -4986,6 +4877,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `long inputTokens`
 
       The number of input tokens which were used.
+
+      minimum: 0
 
     - `Optional<List<BetaIterationsUsageItems>> iterations`
 
@@ -5009,13 +4902,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `long cacheReadInputTokens`
 
           The number of input tokens read from the cache.
 
+          minimum: 0
+
         - `long inputTokens`
 
           The number of input tokens which were used.
+
+          minimum: 0
 
         - `Model model`
 
@@ -5027,11 +4926,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of output tokens which were used.
 
-        - `JsonValue; type "message"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           Usage for a sampling iteration
-
-          - `MESSAGE("message")`
 
       - `class BetaCompactionIterationUsage:`
 
@@ -5045,23 +4944,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `long cacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+          minimum: 0
 
         - `long inputTokens`
 
           The number of input tokens which were used.
 
+          minimum: 0
+
         - `long outputTokens`
 
           The number of output tokens which were used.
 
-        - `JsonValue; type "compaction"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           Usage for a compaction iteration
-
-          - `COMPACTION("compaction")`
 
       - `class BetaAdvisorMessageIterationUsage:`
 
@@ -5075,13 +4980,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `long cacheReadInputTokens`
 
           The number of input tokens read from the cache.
 
+          minimum: 0
+
         - `long inputTokens`
 
           The number of input tokens which were used.
+
+          minimum: 0
 
         - `Model model`
 
@@ -5093,11 +5004,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of output tokens which were used.
 
-        - `JsonValue; type "advisor_message"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           Usage for an advisor sub-inference iteration
-
-          - `ADVISOR_MESSAGE("advisor_message")`
 
       - `class BetaFallbackMessageIterationUsage:`
 
@@ -5116,13 +5027,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `long cacheReadInputTokens`
 
           The number of input tokens read from the cache.
 
+          minimum: 0
+
         - `long inputTokens`
 
           The number of input tokens which were used.
+
+          minimum: 0
 
         - `Model model`
 
@@ -5134,15 +5051,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The number of output tokens which were used.
 
-        - `JsonValue; type "fallback_message"constant`
+          minimum: 0
+
+        - `JsonValue type constant`
 
           Usage for the fallback-model attempt that served the response
-
-          - `FALLBACK_MESSAGE("fallback_message")`
 
     - `long outputTokens`
 
       The number of output tokens which were used.
+
+      minimum: 0
 
     - `Optional<BetaOutputTokensDetails> outputTokensDetails`
 
@@ -5164,6 +5083,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+        minimum: 0
+
     - `Optional<BetaServerToolUsage> serverToolUse`
 
       The number of server tool requests.
@@ -5172,9 +5093,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The number of web fetch tool requests.
 
+        minimum: 0
+
       - `long webSearchRequests`
 
         The number of web search tool requests.
+
+        minimum: 0
 
     - `Optional<ServiceTier> serviceTier`
 
@@ -5194,7 +5119,259 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `FAST("fast")`
 
-### Example
+- `class BetaRawMessageStreamEvent: union`
+
+  - `class BetaRawMessageStartEvent:`
+
+    - `BetaMessage message`
+
+    - `JsonValue type constant`
+
+  - `class BetaRawMessageDeltaEvent:`
+
+    - `Optional<BetaContextManagementResponse> contextManagement`
+
+      Information about context management strategies applied during the request
+
+    - `Delta delta`
+
+      - `Optional<BetaContainer> container`
+
+        Information about the container used in the request (for the code execution tool)
+
+      - `Optional<BetaRefusalStopDetails> stopDetails`
+
+        Structured information about a refusal.
+
+      - `Optional<BetaStopReason> stopReason`
+
+      - `Optional<String> stopSequence`
+
+    - `JsonValue type constant`
+
+    - `BetaMessageDeltaUsage usage`
+
+      Billing and rate-limit usage.
+
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+      - `Optional<Long> cacheCreationInputTokens`
+
+        The cumulative number of input tokens used to create the cache entry.
+
+        minimum: 0
+
+      - `Optional<Long> cacheReadInputTokens`
+
+        The cumulative number of input tokens read from the cache.
+
+        minimum: 0
+
+      - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+      - `Optional<Long> inputTokens`
+
+        The cumulative number of input tokens which were used.
+
+        minimum: 0
+
+      - `Optional<List<BetaIterationsUsageItems>> iterations`
+
+        Per-iteration token usage breakdown.
+
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+
+        - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        - Calculate the true context window size from the last iteration
+        - Understand token accumulation across server-side tool use loops
+
+        - `class BetaMessageIterationUsage:`
+
+          Token usage for a sampling iteration.
+
+        - `class BetaCompactionIterationUsage:`
+
+          Token usage for a compaction iteration.
+
+        - `class BetaAdvisorMessageIterationUsage:`
+
+          Token usage for an advisor sub-inference iteration.
+
+        - `class BetaFallbackMessageIterationUsage:`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+      - `long outputTokens`
+
+        The cumulative number of output tokens which were used.
+
+      - `Optional<BetaOutputTokensDetails> outputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+      - `Optional<BetaServerToolUsage> serverToolUse`
+
+        The number of server tool requests.
+
+  - `class BetaRawMessageStopEvent:`
+
+    - `JsonValue type constant`
+
+  - `class BetaRawContentBlockStartEvent:`
+
+    - `ContentBlock contentBlock`
+
+      Response model for a file uploaded to the container.
+
+      - `class BetaTextBlock:`
+
+      - `class BetaThinkingBlock:`
+
+      - `class BetaRedactedThinkingBlock:`
+
+      - `class BetaToolUseBlock:`
+
+      - `class BetaServerToolUseBlock:`
+
+      - `class BetaWebSearchToolResultBlock:`
+
+      - `class BetaWebFetchToolResultBlock:`
+
+      - `class BetaAdvisorToolResultBlock:`
+
+      - `class BetaCodeExecutionToolResultBlock:`
+
+      - `class BetaBashCodeExecutionToolResultBlock:`
+
+      - `class BetaTextEditorCodeExecutionToolResultBlock:`
+
+      - `class BetaToolSearchToolResultBlock:`
+
+      - `class BetaMcpToolUseBlock:`
+
+      - `class BetaMcpToolResultBlock:`
+
+      - `class BetaContainerUploadBlock:`
+
+        Response model for a file uploaded to the container.
+
+      - `class BetaCompactionBlock:`
+
+        A compaction block returned when autocompact is triggered.
+
+        When content is None, it indicates the compaction failed to produce a valid
+        summary (e.g., malformed output from the model). Clients may round-trip
+        compaction blocks with null content; the server treats them as no-ops.
+
+      - `class BetaFallbackBlock:`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn where no preceding model ran and declined has no such
+        boundary and carries no block — the signal for whether a fallback model
+        served the response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+    - `long index`
+
+    - `JsonValue type constant`
+
+  - `class BetaRawContentBlockDeltaEvent:`
+
+    - `BetaRawContentBlockDelta delta`
+
+      - `class BetaTextDelta:`
+
+        - `String text`
+
+        - `JsonValue type constant`
+
+      - `class BetaInputJsonDelta:`
+
+        - `String partialJson`
+
+        - `JsonValue type constant`
+
+      - `class BetaCitationsDelta:`
+
+        - `Citation citation`
+
+          - `class BetaCitationCharLocation:`
+
+          - `class BetaCitationPageLocation:`
+
+          - `class BetaCitationContentBlockLocation:`
+
+          - `class BetaCitationsWebSearchResultLocation:`
+
+          - `class BetaCitationSearchResultLocation:`
+
+        - `JsonValue type constant`
+
+      - `class BetaThinkingDelta:`
+
+        - `Optional<Long> estimatedTokens`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
+        - `String thinking`
+
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
+        - `JsonValue type constant`
+
+      - `class BetaSignatureDelta:`
+
+        - `String signature`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
+        - `JsonValue type constant`
+
+      - `class BetaCompactionContentBlockDelta:`
+
+        - `Optional<String> content`
+
+        - `Optional<String> encryptedContent`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
+
+        - `JsonValue type constant`
+
+    - `long index`
+
+    - `JsonValue type constant`
+
+  - `class BetaRawContentBlockStopEvent:`
+
+    - `long index`
+
+    - `JsonValue type constant`
+
+## Example
 
 ```java
 package com.anthropic.example;
@@ -5221,7 +5398,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

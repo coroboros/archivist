@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/messages"
 category: "api"
 generated: true
 ---
----
-title: Messages
-url: https://platform.claude.com/docs/en/api/python/messages
----
-
 # Messages
 
 ## Create a Message
 
-`messages.create(MessageCreateParams**kwargs)  -> Message`
+`messages.create(**kwargs)  -> Message`
 
-**post** `/v1/messages`
+**POST** `/v1/messages`
 
 Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
 
@@ -34,6 +29,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   Set to `0` to populate the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md#pre-warming-the-cache) without generating a response.
 
   Different models have different maximum values for this parameter.  See [models](../about-claude/about-claude-models-overview.md) for details.
+
+  minimum: 0
 
 - `messages: Iterable[MessageParam]`
 
@@ -96,17 +93,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -131,15 +126,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class CitationPageLocationParam: …`
 
@@ -147,15 +146,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class CitationContentBlockLocationParam: …`
 
@@ -167,7 +170,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -179,9 +186,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class CitationWebSearchResultLocationParam: …`
 
@@ -191,11 +198,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class CitationSearchResultLocationParam: …`
 
@@ -217,17 +226,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class ImageBlockParam: …`
 
@@ -236,6 +247,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `class Base64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -249,13 +262,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class URLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -265,11 +274,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -295,13 +300,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -309,11 +312,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class ContentBlockSource: …`
 
@@ -329,13 +328,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class URLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -345,11 +340,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -361,13 +352,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
       - `class SearchResultBlockParam: …`
 
         - `content: List[TextBlockParam]`
 
           - `text: str`
+
+            minLength: 1
 
           - `type: Literal["text"]`
 
@@ -382,8 +379,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `title: str`
 
         - `type: Literal["search_result"]`
-
-          - `"search_result"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -405,8 +400,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["thinking"]`
 
-          - `"thinking"`
-
       - `class RedactedThinkingBlockParam: …`
 
         - `data: str`
@@ -415,19 +408,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["redacted_thinking"]`
 
-          - `"redacted_thinking"`
-
       - `class ToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `input: Dict[str, object]`
 
         - `name: str`
 
-        - `type: Literal["tool_use"]`
+          maxLength: 200, minLength: 1
 
-          - `"tool_use"`
+        - `type: Literal["tool_use"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -443,37 +436,37 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["direct"]`
 
-              - `"direct"`
-
           - `class ServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20250825"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20250825"`
+            - `type: Literal["code_execution_20250825"]`
 
           - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20260120"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20260120"`
+            - `type: Literal["code_execution_20260120"]`
 
         - `toolset_name: Optional[str]`
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ToolResultBlockParam: …`
 
         - `tool_use_id: str`
 
-        - `type: Literal["tool_result"]`
+          pattern: ^[a-zA-Z0-9_-]+$
 
-          - `"tool_result"`
+        - `type: Literal["tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -499,9 +492,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `tool_name: str`
 
-              - `type: Literal["tool_reference"]`
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `"tool_reference"`
+              - `type: Literal["tool_reference"]`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -521,25 +514,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                maxItems: 100
+
                 - `tab_id: str`
 
                   The caller-assigned identifier for this tab, unique within the inventory.
+
+                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: str`
 
                   The title of the page the tab is showing. May be empty.
 
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                 - `url: str`
 
                   The URL of the page the tab is showing. May be empty.
+
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `active: Optional[bool]`
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
               - `type: Literal["browser_state"]`
-
-                - `"browser_state"`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -548,6 +547,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               - `state_changes: Optional[List[BrowserStateChange]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                maxItems: 200, minItems: 1
 
                 - `class BrowserStateChangeTabOpened: …`
 
@@ -563,9 +564,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                  - `type: Literal["tab_opened"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"tab_opened"`
+                  - `type: Literal["tab_opened"]`
 
                 - `class BrowserStateChangeDownloadStarted: …`
 
@@ -575,13 +576,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_started"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_started"`
+                  - `type: Literal["download_started"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
+
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -594,21 +597,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_completed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_completed"`
+                  - `type: Literal["download_completed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `path: Optional[str]`
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                   - `size_bytes: Optional[int]`
 
                     The completed download's size.
+
+                    minimum: 0
 
                 - `class BrowserStateChangeDownloadFailed: …`
 
@@ -618,17 +627,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_failed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_failed"`
+                  - `type: Literal["download_failed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `error: Optional[str]`
 
                     The failure or cancellation detail, when known.
+
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
         - `is_error: Optional[bool]`
 
@@ -636,9 +649,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ServerToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `input: Dict[str, object]`
 
@@ -659,8 +676,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `"tool_search_tool_bm25"`
 
         - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -692,8 +707,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["web_search_result"]`
 
-              - `"web_search_result"`
-
             - `url: str`
 
             - `page_age: Optional[str]`
@@ -716,13 +729,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["web_search_tool_result_error"]`
 
-              - `"web_search_tool_result_error"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["web_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_search_tool_result"`
+        - `type: Literal["web_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -770,15 +781,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
-              - `"web_fetch_tool_result_error"`
-
           - `class WebFetchBlockParam: …`
 
             - `content: DocumentBlockParam`
 
             - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
 
             - `url: str`
 
@@ -790,9 +797,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `tool_use_id: str`
 
-        - `type: Literal["web_fetch_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_fetch_tool_result"`
+        - `type: Literal["web_fetch_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -832,8 +839,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["code_execution_tool_result_error"]`
 
-              - `"code_execution_tool_result_error"`
-
           - `class CodeExecutionResultBlockParam: …`
 
             - `content: List[CodeExecutionOutputBlockParam]`
@@ -842,8 +847,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `return_code: int`
 
             - `stderr: str`
@@ -851,8 +854,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `stdout: str`
 
             - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
 
           - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -872,13 +873,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-              - `"encrypted_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_tool_result"`
+        - `type: Literal["code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -904,8 +903,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
-              - `"bash_code_execution_tool_result_error"`
-
           - `class BashCodeExecutionResultBlockParam: …`
 
             - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -913,8 +910,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               - `file_id: str`
 
               - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
 
             - `return_code: int`
 
@@ -924,13 +919,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["bash_code_execution_result"]`
 
-              - `"bash_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["bash_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"bash_code_execution_tool_result"`
+        - `type: Literal["bash_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -956,8 +949,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-              - `"text_editor_code_execution_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -974,8 +965,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
-              - `"text_editor_code_execution_view_result"`
-
             - `num_lines: Optional[int]`
 
             - `start_line: Optional[int]`
@@ -988,13 +977,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
-              - `"text_editor_code_execution_create_result"`
-
           - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
 
             - `lines: Optional[List[str]]`
 
@@ -1008,9 +993,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `tool_use_id: str`
 
-        - `type: Literal["text_editor_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"text_editor_code_execution_tool_result"`
+        - `type: Literal["text_editor_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -1034,8 +1019,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["tool_search_tool_result_error"]`
 
-              - `"tool_search_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class ToolSearchToolSearchResultBlockParam: …`
@@ -1043,6 +1026,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `tool_references: List[ToolReferenceBlockParam]`
 
               - `tool_name: str`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `type: Literal["tool_reference"]`
 
@@ -1052,13 +1037,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-              - `"tool_search_tool_search_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["tool_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"tool_search_tool_result"`
+        - `type: Literal["tool_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -1072,8 +1055,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `file_id: str`
 
         - `type: Literal["container_upload"]`
-
-          - `"container_upload"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -1197,9 +1178,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       List of skills to load in the container
 
+      maxItems: 20
+
       - `skill_id: str`
 
         Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `type: Literal["anthropic", "custom"]`
 
@@ -1212,6 +1197,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `version: Optional[str]`
 
         Skill version or 'latest' for most recent version
+
+        maxLength: 64, minLength: 1
 
   - `str`
 
@@ -1228,6 +1215,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+    maxLength: 512
 
 - `output_config: Optional[OutputConfigParam]`
 
@@ -1257,8 +1246,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["json_schema"]`
 
-      - `"json_schema"`
-
 - `service_tier: Optional[Literal["auto", "standard_only"]]`
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
@@ -1283,8 +1270,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
 
-  - `false`
-
 - `system: Optional[Union[str, Iterable[TextBlockParam]]]`
 
   System prompt.
@@ -1296,6 +1281,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `Iterable[TextBlockParam]`
 
     - `text: str`
+
+      minLength: 1
 
     - `type: Literal["text"]`
 
@@ -1323,9 +1310,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-    - `type: Literal["enabled"]`
+      minimum: 1024
 
-      - `"enabled"`
+    - `type: Literal["enabled"]`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -1339,13 +1326,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["disabled"]`
 
-      - `"disabled"`
-
   - `class ThinkingConfigAdaptive: …`
 
     - `type: Literal["adaptive"]`
-
-      - `"adaptive"`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -1365,8 +1348,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["auto"]`
 
-      - `"auto"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -1378,8 +1359,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     The model will use any available tools.
 
     - `type: Literal["any"]`
-
-      - `"any"`
 
     - `disable_parallel_tool_use: Optional[bool]`
 
@@ -1397,8 +1376,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["tool"]`
 
-      - `"tool"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -1410,8 +1387,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     The model will not be allowed to use tools.
 
     - `type: Literal["none"]`
-
-      - `"none"`
 
 - `tools: Optional[Iterable[ToolUnionParam]]`
 
@@ -1487,8 +1462,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["object"]`
 
-        - `"object"`
-
       - `properties: Optional[Dict[str, object]]`
 
       - `required: Optional[List[str]]`
@@ -1498,6 +1471,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
+
+      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1535,8 +1510,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Optional[Literal["custom"]]`
 
-      - `"custom"`
-
   - `class ToolBash20250124: …`
 
     - `name: Literal["bash"]`
@@ -1545,11 +1518,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20250124"]`
-
-      - `"bash_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1583,11 +1552,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250522"]`
-
-      - `"code_execution_20250522"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1619,11 +1584,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250825"]`
-
-      - `"code_execution_20250825"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1657,11 +1618,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260120"]`
-
-      - `"code_execution_20260120"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1695,11 +1652,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260521"]`
-
-      - `"code_execution_20260521"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -1731,8 +1684,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     from its schema.
 
     - `type: Literal["browser_toolset_20260801"]`
-
-      - `"browser_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2137,11 +2088,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"memory"`
-
     - `type: Literal["memory_20250818"]`
-
-      - `"memory_20250818"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2179,8 +2126,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-      - `"computer_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2417,11 +2362,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20250124"]`
-
-      - `"text_editor_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2455,11 +2396,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250429"]`
-
-      - `"text_editor_20250429"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2493,11 +2430,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250728"]`
-
-      - `"text_editor_20250728"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2523,6 +2456,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+      minimum: 1
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -2535,11 +2470,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20250305"]`
-
-      - `"web_search_20250305"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2571,6 +2502,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of times the tool can be used in the API request.
 
+      exclusiveMinimum: 0
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -2581,23 +2514,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["approximate"]`
 
-        - `"approximate"`
-
       - `city: Optional[str]`
 
         The city of the user.
+
+        maxLength: 255, minLength: 1
 
       - `country: Optional[str]`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+        maxLength: 2, minLength: 2
+
       - `region: Optional[str]`
 
         The region of the user.
 
+        maxLength: 255, minLength: 1
+
       - `timezone: Optional[str]`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+        maxLength: 255, minLength: 1
 
   - `class WebFetchTool20250910: …`
 
@@ -2607,11 +2546,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20250910"]`
-
-      - `"web_fetch_20250910"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2647,9 +2582,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -2663,11 +2602,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260209"]`
-
-      - `"web_search_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2698,6 +2633,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -2715,11 +2652,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260209"]`
-
-      - `"web_fetch_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2755,9 +2688,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -2773,11 +2710,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260309"]`
-
-      - `"web_fetch_20260309"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2813,9 +2746,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -2833,11 +2770,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260318"]`
-
-      - `"web_search_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2868,6 +2801,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -2893,11 +2828,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260318"]`
-
-      - `"web_fetch_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2933,9 +2864,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -2960,8 +2895,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_bm25"`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -2998,8 +2931,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_regex"`
 
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
@@ -3055,6 +2986,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The time at which the container will expire.
 
+      format: date-time
+
     - `skills: Optional[List[ContainerSkill]]`
 
       Skills loaded in the container
@@ -3062,6 +2995,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `skill_id: str`
 
         Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `type: Literal["anthropic", "custom"]`
 
@@ -3074,6 +3009,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `version: str`
 
         The resolved version: a skill version ID for custom skills.
+
+        maxLength: 64, minLength: 1
 
   - `content: List[ContentBlock]`
 
@@ -3118,6 +3055,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `document_index: int`
 
+            minimum: 0
+
           - `document_title: Optional[str]`
 
           - `end_char_index: int`
@@ -3126,15 +3065,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `start_char_index: int`
 
+            minimum: 0
+
           - `type: Literal["char_location"]`
 
-            - `"char_location"`
+            default: char_location
 
         - `class CitationPageLocation: …`
 
           - `cited_text: str`
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -3144,9 +3087,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `start_page_number: int`
 
+            minimum: 1
+
           - `type: Literal["page_location"]`
 
-            - `"page_location"`
+            default: page_location
 
         - `class CitationContentBlockLocation: …`
 
@@ -3157,6 +3102,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -3172,9 +3119,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `type: Literal["content_block_location"]`
 
-            - `"content_block_location"`
+            default: content_block_location
 
         - `class CitationsWebSearchResultLocation: …`
 
@@ -3184,9 +3133,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: Optional[str]`
 
+            maxLength: 512
+
           - `type: Literal["web_search_result_location"]`
 
-            - `"web_search_result_location"`
+            default: web_search_result_location
 
           - `url: str`
 
@@ -3210,23 +3161,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Counted separately from `document_index`; server-side web search results are not included in this count.
 
+            minimum: 0
+
           - `source: str`
 
           - `start_block_index: int`
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `title: Optional[str]`
 
           - `type: Literal["search_result_location"]`
 
-            - `"search_result_location"`
+            default: search_result_location
 
       - `text: str`
 
+        maxLength: 5000000, minLength: 0
+
       - `type: Literal["text"]`
 
-        - `"text"`
+        default: text
 
     - `class ThinkingBlock: …`
 
@@ -3244,7 +3201,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["thinking"]`
 
-        - `"thinking"`
+        default: thinking
 
     - `class RedactedThinkingBlock: …`
 
@@ -3258,15 +3215,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["redacted_thinking"]`
 
-        - `"redacted_thinking"`
+        default: redacted_thinking
 
     - `class ToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^[a-zA-Z0-9_-]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -3274,45 +3235,51 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["direct"]`
 
-            - `"direct"`
-
         - `class ServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20250825"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20250825"`
+          - `type: Literal["code_execution_20250825"]`
 
         - `class ServerToolCaller20260120: …`
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20260120"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20260120"`
+          - `type: Literal["code_execution_20260120"]`
 
       - `input: Dict[str, object]`
 
       - `name: str`
 
+        minLength: 1
+
       - `type: Literal["tool_use"]`
 
-        - `"tool_use"`
+        default: tool_use
 
       - `toolset_name: Optional[str]`
 
         For a toolset member tool_use, the toolset family.
 
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
     - `class ServerToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -3344,13 +3311,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["server_tool_use"]`
 
-        - `"server_tool_use"`
+        default: server_tool_use
 
     - `class WebSearchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -3382,7 +3351,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["web_search_tool_result_error"]`
 
-            - `"web_search_tool_result_error"`
+            default: web_search_tool_result_error
 
         - `List[WebSearchResultBlock]`
 
@@ -3394,21 +3363,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["web_search_result"]`
 
-            - `"web_search_result"`
+            default: web_search_result
 
           - `url: str`
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_search_tool_result"]`
 
-        - `"web_search_tool_result"`
+        default: web_search_tool_result
 
     - `class WebFetchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -3446,7 +3419,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["web_fetch_tool_result_error"]`
 
-            - `"web_fetch_tool_result_error"`
+            default: web_fetch_tool_result_error
 
         - `class WebFetchBlock: …`
 
@@ -3458,19 +3431,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `enabled: bool`
 
+                default: false
+
             - `source: Source`
 
               - `class Base64PDFSource: …`
 
                 - `data: str`
 
+                  format: byte
+
                 - `media_type: Literal["application/pdf"]`
 
-                  - `"application/pdf"`
-
                 - `type: Literal["base64"]`
-
-                  - `"base64"`
 
               - `class PlainTextSource: …`
 
@@ -3478,11 +3451,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `media_type: Literal["text/plain"]`
 
-                  - `"text/plain"`
-
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
             - `title: Optional[str]`
 
@@ -3490,7 +3459,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["document"]`
 
-              - `"document"`
+              default: document
 
           - `retrieved_at: Optional[str]`
 
@@ -3498,7 +3467,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["web_fetch_result"]`
 
-            - `"web_fetch_result"`
+            default: web_fetch_result
 
           - `url: str`
 
@@ -3506,9 +3475,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_fetch_tool_result"]`
 
-        - `"web_fetch_tool_result"`
+        default: web_fetch_tool_result
 
     - `class CodeExecutionToolResultBlock: …`
 
@@ -3530,7 +3501,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["code_execution_tool_result_error"]`
 
-            - `"code_execution_tool_result_error"`
+            default: code_execution_tool_result_error
 
         - `class CodeExecutionResultBlock: …`
 
@@ -3540,7 +3511,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["code_execution_output"]`
 
-              - `"code_execution_output"`
+              default: code_execution_output
 
           - `return_code: int`
 
@@ -3550,7 +3521,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["code_execution_result"]`
 
-            - `"code_execution_result"`
+            default: code_execution_result
 
         - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -3562,6 +3533,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["code_execution_output"]`
 
+              default: code_execution_output
+
           - `encrypted_stdout: str`
 
           - `return_code: int`
@@ -3570,13 +3543,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["encrypted_code_execution_result"]`
 
-            - `"encrypted_code_execution_result"`
+            default: encrypted_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["code_execution_tool_result"]`
 
-        - `"code_execution_tool_result"`
+        default: code_execution_tool_result
 
     - `class BashCodeExecutionToolResultBlock: …`
 
@@ -3598,7 +3573,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["bash_code_execution_tool_result_error"]`
 
-            - `"bash_code_execution_tool_result_error"`
+            default: bash_code_execution_tool_result_error
 
         - `class BashCodeExecutionResultBlock: …`
 
@@ -3608,7 +3583,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["bash_code_execution_output"]`
 
-              - `"bash_code_execution_output"`
+              default: bash_code_execution_output
 
           - `return_code: int`
 
@@ -3618,13 +3593,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["bash_code_execution_result"]`
 
-            - `"bash_code_execution_result"`
+            default: bash_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["bash_code_execution_tool_result"]`
 
-        - `"bash_code_execution_tool_result"`
+        default: bash_code_execution_tool_result
 
     - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -3648,7 +3625,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-            - `"text_editor_code_execution_tool_result_error"`
+            default: text_editor_code_execution_tool_result_error
 
         - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -3670,7 +3647,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["text_editor_code_execution_view_result"]`
 
-            - `"text_editor_code_execution_view_result"`
+            default: text_editor_code_execution_view_result
 
         - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -3678,7 +3655,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["text_editor_code_execution_create_result"]`
 
-            - `"text_editor_code_execution_create_result"`
+            default: text_editor_code_execution_create_result
 
         - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -3694,13 +3671,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-            - `"text_editor_code_execution_str_replace_result"`
+            default: text_editor_code_execution_str_replace_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["text_editor_code_execution_tool_result"]`
 
-        - `"text_editor_code_execution_tool_result"`
+        default: text_editor_code_execution_tool_result
 
     - `class ToolSearchToolResultBlock: …`
 
@@ -3722,7 +3701,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `type: Literal["tool_search_tool_result_error"]`
 
-            - `"tool_search_tool_result_error"`
+            default: tool_search_tool_result_error
 
         - `class ToolSearchToolSearchResultBlock: …`
 
@@ -3730,19 +3709,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool_name: str`
 
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `type: Literal["tool_reference"]`
 
-              - `"tool_reference"`
+              default: tool_reference
 
           - `type: Literal["tool_search_tool_search_result"]`
 
-            - `"tool_search_tool_search_result"`
+            default: tool_search_tool_search_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["tool_search_tool_result"]`
 
-        - `"tool_search_tool_result"`
+        default: tool_search_tool_result
 
     - `class ContainerUploadBlock: …`
 
@@ -3752,7 +3735,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `type: Literal["container_upload"]`
 
-        - `"container_upload"`
+        default: container_upload
 
   - `model: Model`
 
@@ -3850,7 +3833,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     This will always be `"assistant"`.
 
-    - `"assistant"`
+    default: assistant
 
   - `stop_details: Optional[RefusalStopDetails]`
 
@@ -3888,7 +3871,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["refusal"]`
 
-      - `"refusal"`
+      default: refusal
 
   - `stop_reason: Optional[StopReason]`
 
@@ -3932,7 +3915,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     For Messages, this is always `"message"`.
 
-    - `"message"`
+    default: message
 
   - `usage: Usage`
 
@@ -3954,17 +3937,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The number of input tokens used to create the 1 hour cache entry.
 
+        default: 0, minimum: 0
+
       - `ephemeral_5m_input_tokens: int`
 
         The number of input tokens used to create the 5 minute cache entry.
+
+        default: 0, minimum: 0
 
     - `cache_creation_input_tokens: Optional[int]`
 
       The number of input tokens used to create the cache entry.
 
+      minimum: 0
+
     - `cache_read_input_tokens: Optional[int]`
 
       The number of input tokens read from the cache.
+
+      minimum: 0
 
     - `inference_geo: Optional[str]`
 
@@ -3974,9 +3965,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The number of input tokens which were used.
 
+      minimum: 0
+
     - `output_tokens: int`
 
       The number of output tokens which were used.
+
+      minimum: 0
 
     - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -3998,6 +3993,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+        default: 0, minimum: 0
+
     - `server_tool_use: Optional[ServerToolUsage]`
 
       The number of server tool requests.
@@ -4006,9 +4003,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The number of web fetch tool requests.
 
+        default: 0, minimum: 0
+
       - `web_search_requests: int`
 
         The number of web search tool requests.
+
+        default: 0, minimum: 0
 
     - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -4019,6 +4020,199 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `"priority"`
 
       - `"batch"`
+
+- `RawMessageStreamEvent`
+
+  - `class RawMessageStartEvent: …`
+
+    - `message: Message`
+
+    - `type: Literal["message_start"]`
+
+      default: message_start
+
+  - `class RawMessageDeltaEvent: …`
+
+    - `delta: Delta`
+
+      - `container: Optional[Container]`
+
+        Information about the container used in the request (for the code execution tool)
+
+      - `stop_details: Optional[RefusalStopDetails]`
+
+        Structured information about a refusal.
+
+      - `stop_reason: Optional[StopReason]`
+
+      - `stop_sequence: Optional[str]`
+
+    - `type: Literal["message_delta"]`
+
+      default: message_delta
+
+    - `usage: MessageDeltaUsage`
+
+      Billing and rate-limit usage.
+
+      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+
+      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+
+      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+
+      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+
+      - `cache_creation_input_tokens: Optional[int]`
+
+        The cumulative number of input tokens used to create the cache entry.
+
+        minimum: 0
+
+      - `cache_read_input_tokens: Optional[int]`
+
+        The cumulative number of input tokens read from the cache.
+
+        minimum: 0
+
+      - `input_tokens: Optional[int]`
+
+        The cumulative number of input tokens which were used.
+
+        minimum: 0
+
+      - `output_tokens: int`
+
+        The cumulative number of output tokens which were used.
+
+      - `output_tokens_details: Optional[OutputTokensDetails]`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+      - `server_tool_use: Optional[ServerToolUsage]`
+
+        The number of server tool requests.
+
+  - `class RawMessageStopEvent: …`
+
+    - `type: Literal["message_stop"]`
+
+      default: message_stop
+
+  - `class RawContentBlockStartEvent: …`
+
+    - `content_block: ContentBlock`
+
+      Response model for a file uploaded to the container.
+
+      - `class TextBlock: …`
+
+      - `class ThinkingBlock: …`
+
+      - `class RedactedThinkingBlock: …`
+
+      - `class ToolUseBlock: …`
+
+      - `class ServerToolUseBlock: …`
+
+      - `class WebSearchToolResultBlock: …`
+
+      - `class WebFetchToolResultBlock: …`
+
+      - `class CodeExecutionToolResultBlock: …`
+
+      - `class BashCodeExecutionToolResultBlock: …`
+
+      - `class TextEditorCodeExecutionToolResultBlock: …`
+
+      - `class ToolSearchToolResultBlock: …`
+
+      - `class ContainerUploadBlock: …`
+
+        Response model for a file uploaded to the container.
+
+    - `index: int`
+
+    - `type: Literal["content_block_start"]`
+
+      default: content_block_start
+
+  - `class RawContentBlockDeltaEvent: …`
+
+    - `delta: RawContentBlockDelta`
+
+      - `class TextDelta: …`
+
+        - `text: str`
+
+        - `type: Literal["text_delta"]`
+
+          default: text_delta
+
+      - `class InputJSONDelta: …`
+
+        - `partial_json: str`
+
+        - `type: Literal["input_json_delta"]`
+
+          default: input_json_delta
+
+      - `class CitationsDelta: …`
+
+        - `citation: Citation`
+
+          - `class CitationCharLocation: …`
+
+          - `class CitationPageLocation: …`
+
+          - `class CitationContentBlockLocation: …`
+
+          - `class CitationsWebSearchResultLocation: …`
+
+          - `class CitationsSearchResultLocation: …`
+
+        - `type: Literal["citations_delta"]`
+
+          default: citations_delta
+
+      - `class ThinkingDelta: …`
+
+        - `thinking: str`
+
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
+        - `type: Literal["thinking_delta"]`
+
+          default: thinking_delta
+
+      - `class SignatureDelta: …`
+
+        - `signature: str`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
+        - `type: Literal["signature_delta"]`
+
+          default: signature_delta
+
+    - `index: int`
+
+    - `type: Literal["content_block_delta"]`
+
+      default: content_block_delta
+
+  - `class RawContentBlockStopEvent: …`
+
+    - `index: int`
+
+    - `type: Literal["content_block_stop"]`
+
+      default: content_block_stop
 
 ### Example
 
@@ -4044,7 +4238,7 @@ message = client.messages.create(
 print(message.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -4111,9 +4305,9 @@ print(message.id)
 
 ## Count tokens in a Message
 
-`messages.count_tokens(MessageCountTokensParams**kwargs)  -> MessageTokensCount`
+`messages.count_tokens(**kwargs)  -> MessageTokensCount`
 
-**post** `/v1/messages/count_tokens`
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -4184,17 +4378,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -4219,15 +4411,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class CitationPageLocationParam: …`
 
@@ -4235,15 +4431,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class CitationContentBlockLocationParam: …`
 
@@ -4255,7 +4455,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -4267,9 +4471,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class CitationWebSearchResultLocationParam: …`
 
@@ -4279,11 +4483,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class CitationSearchResultLocationParam: …`
 
@@ -4305,17 +4511,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class ImageBlockParam: …`
 
@@ -4324,6 +4532,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `class Base64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -4337,13 +4547,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class URLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -4353,11 +4559,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4383,13 +4585,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -4397,11 +4597,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class ContentBlockSource: …`
 
@@ -4417,13 +4613,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class URLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -4433,11 +4625,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4449,13 +4637,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
       - `class SearchResultBlockParam: …`
 
         - `content: List[TextBlockParam]`
 
           - `text: str`
+
+            minLength: 1
 
           - `type: Literal["text"]`
 
@@ -4470,8 +4664,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `title: str`
 
         - `type: Literal["search_result"]`
-
-          - `"search_result"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4493,8 +4685,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["thinking"]`
 
-          - `"thinking"`
-
       - `class RedactedThinkingBlockParam: …`
 
         - `data: str`
@@ -4503,19 +4693,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["redacted_thinking"]`
 
-          - `"redacted_thinking"`
-
       - `class ToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `input: Dict[str, object]`
 
         - `name: str`
 
-        - `type: Literal["tool_use"]`
+          maxLength: 200, minLength: 1
 
-          - `"tool_use"`
+        - `type: Literal["tool_use"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4531,37 +4721,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["direct"]`
 
-              - `"direct"`
-
           - `class ServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20250825"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20250825"`
+            - `type: Literal["code_execution_20250825"]`
 
           - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20260120"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20260120"`
+            - `type: Literal["code_execution_20260120"]`
 
         - `toolset_name: Optional[str]`
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ToolResultBlockParam: …`
 
         - `tool_use_id: str`
 
-        - `type: Literal["tool_result"]`
+          pattern: ^[a-zA-Z0-9_-]+$
 
-          - `"tool_result"`
+        - `type: Literal["tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4587,9 +4777,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `tool_name: str`
 
-              - `type: Literal["tool_reference"]`
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `"tool_reference"`
+              - `type: Literal["tool_reference"]`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4609,25 +4799,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                maxItems: 100
+
                 - `tab_id: str`
 
                   The caller-assigned identifier for this tab, unique within the inventory.
+
+                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: str`
 
                   The title of the page the tab is showing. May be empty.
 
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                 - `url: str`
 
                   The URL of the page the tab is showing. May be empty.
+
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `active: Optional[bool]`
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
               - `type: Literal["browser_state"]`
-
-                - `"browser_state"`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4636,6 +4832,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               - `state_changes: Optional[List[BrowserStateChange]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                maxItems: 200, minItems: 1
 
                 - `class BrowserStateChangeTabOpened: …`
 
@@ -4651,9 +4849,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                  - `type: Literal["tab_opened"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"tab_opened"`
+                  - `type: Literal["tab_opened"]`
 
                 - `class BrowserStateChangeDownloadStarted: …`
 
@@ -4663,13 +4861,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_started"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_started"`
+                  - `type: Literal["download_started"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
+
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -4682,21 +4882,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_completed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_completed"`
+                  - `type: Literal["download_completed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `path: Optional[str]`
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                   - `size_bytes: Optional[int]`
 
                     The completed download's size.
+
+                    minimum: 0
 
                 - `class BrowserStateChangeDownloadFailed: …`
 
@@ -4706,17 +4912,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_failed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_failed"`
+                  - `type: Literal["download_failed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `error: Optional[str]`
 
                     The failure or cancellation detail, when known.
+
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
         - `is_error: Optional[bool]`
 
@@ -4724,9 +4934,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ServerToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `input: Dict[str, object]`
 
@@ -4747,8 +4961,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `"tool_search_tool_bm25"`
 
         - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4780,8 +4992,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_search_result"]`
 
-              - `"web_search_result"`
-
             - `url: str`
 
             - `page_age: Optional[str]`
@@ -4804,13 +5014,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_search_tool_result_error"]`
 
-              - `"web_search_tool_result_error"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["web_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_search_tool_result"`
+        - `type: Literal["web_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4858,15 +5066,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
-              - `"web_fetch_tool_result_error"`
-
           - `class WebFetchBlockParam: …`
 
             - `content: DocumentBlockParam`
 
             - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
 
             - `url: str`
 
@@ -4878,9 +5082,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool_use_id: str`
 
-        - `type: Literal["web_fetch_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_fetch_tool_result"`
+        - `type: Literal["web_fetch_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4920,8 +5124,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["code_execution_tool_result_error"]`
 
-              - `"code_execution_tool_result_error"`
-
           - `class CodeExecutionResultBlockParam: …`
 
             - `content: List[CodeExecutionOutputBlockParam]`
@@ -4930,8 +5132,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `return_code: int`
 
             - `stderr: str`
@@ -4939,8 +5139,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             - `stdout: str`
 
             - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
 
           - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -4960,13 +5158,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-              - `"encrypted_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_tool_result"`
+        - `type: Literal["code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -4992,8 +5188,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
-              - `"bash_code_execution_tool_result_error"`
-
           - `class BashCodeExecutionResultBlockParam: …`
 
             - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -5001,8 +5195,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               - `file_id: str`
 
               - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
 
             - `return_code: int`
 
@@ -5012,13 +5204,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["bash_code_execution_result"]`
 
-              - `"bash_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["bash_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"bash_code_execution_tool_result"`
+        - `type: Literal["bash_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -5044,8 +5234,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-              - `"text_editor_code_execution_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -5062,8 +5250,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
-              - `"text_editor_code_execution_view_result"`
-
             - `num_lines: Optional[int]`
 
             - `start_line: Optional[int]`
@@ -5076,13 +5262,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
-              - `"text_editor_code_execution_create_result"`
-
           - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
 
             - `lines: Optional[List[str]]`
 
@@ -5096,9 +5278,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool_use_id: str`
 
-        - `type: Literal["text_editor_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"text_editor_code_execution_tool_result"`
+        - `type: Literal["text_editor_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -5122,8 +5304,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["tool_search_tool_result_error"]`
 
-              - `"tool_search_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class ToolSearchToolSearchResultBlockParam: …`
@@ -5131,6 +5311,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             - `tool_references: List[ToolReferenceBlockParam]`
 
               - `tool_name: str`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `type: Literal["tool_reference"]`
 
@@ -5140,13 +5322,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-              - `"tool_search_tool_search_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["tool_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"tool_search_tool_result"`
+        - `type: Literal["tool_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -5160,8 +5340,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `file_id: str`
 
         - `type: Literal["container_upload"]`
-
-          - `"container_upload"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -5297,8 +5475,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["json_schema"]`
 
-      - `"json_schema"`
-
 - `system: Optional[Union[str, Iterable[TextBlockParam]]]`
 
   System prompt.
@@ -5310,6 +5486,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
   - `Iterable[TextBlockParam]`
 
     - `text: str`
+
+      minLength: 1
 
     - `type: Literal["text"]`
 
@@ -5337,9 +5515,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-    - `type: Literal["enabled"]`
+      minimum: 1024
 
-      - `"enabled"`
+    - `type: Literal["enabled"]`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -5353,13 +5531,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["disabled"]`
 
-      - `"disabled"`
-
   - `class ThinkingConfigAdaptive: …`
 
     - `type: Literal["adaptive"]`
-
-      - `"adaptive"`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -5379,8 +5553,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["auto"]`
 
-      - `"auto"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -5392,8 +5564,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     The model will use any available tools.
 
     - `type: Literal["any"]`
-
-      - `"any"`
 
     - `disable_parallel_tool_use: Optional[bool]`
 
@@ -5411,8 +5581,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Literal["tool"]`
 
-      - `"tool"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -5424,8 +5592,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     The model will not be allowed to use tools.
 
     - `type: Literal["none"]`
-
-      - `"none"`
 
 - `tools: Optional[Iterable[MessageCountTokensToolParam]]`
 
@@ -5501,8 +5667,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `type: Literal["object"]`
 
-        - `"object"`
-
       - `properties: Optional[Dict[str, object]]`
 
       - `required: Optional[List[str]]`
@@ -5512,6 +5676,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
+
+      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5549,8 +5715,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type: Optional[Literal["custom"]]`
 
-      - `"custom"`
-
   - `class ToolBash20250124: …`
 
     - `name: Literal["bash"]`
@@ -5559,11 +5723,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20250124"]`
-
-      - `"bash_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5597,11 +5757,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250522"]`
-
-      - `"code_execution_20250522"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5633,11 +5789,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250825"]`
-
-      - `"code_execution_20250825"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5671,11 +5823,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260120"]`
-
-      - `"code_execution_20260120"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5709,11 +5857,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260521"]`
-
-      - `"code_execution_20260521"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -5745,8 +5889,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     from its schema.
 
     - `type: Literal["browser_toolset_20260801"]`
-
-      - `"browser_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6151,11 +6293,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"memory"`
-
     - `type: Literal["memory_20250818"]`
-
-      - `"memory_20250818"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6193,8 +6331,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-      - `"computer_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6431,11 +6567,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20250124"]`
-
-      - `"text_editor_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6469,11 +6601,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250429"]`
-
-      - `"text_editor_20250429"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6507,11 +6635,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250728"]`
-
-      - `"text_editor_20250728"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6537,6 +6661,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+      minimum: 1
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -6549,11 +6675,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20250305"]`
-
-      - `"web_search_20250305"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6585,6 +6707,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of times the tool can be used in the API request.
 
+      exclusiveMinimum: 0
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -6595,23 +6719,29 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `type: Literal["approximate"]`
 
-        - `"approximate"`
-
       - `city: Optional[str]`
 
         The city of the user.
+
+        maxLength: 255, minLength: 1
 
       - `country: Optional[str]`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+        maxLength: 2, minLength: 2
+
       - `region: Optional[str]`
 
         The region of the user.
 
+        maxLength: 255, minLength: 1
+
       - `timezone: Optional[str]`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+        maxLength: 255, minLength: 1
 
   - `class WebFetchTool20250910: …`
 
@@ -6621,11 +6751,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20250910"]`
-
-      - `"web_fetch_20250910"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6661,9 +6787,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -6677,11 +6807,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260209"]`
-
-      - `"web_search_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6712,6 +6838,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -6729,11 +6857,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260209"]`
-
-      - `"web_fetch_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6769,9 +6893,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -6787,11 +6915,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260309"]`
-
-      - `"web_fetch_20260309"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6827,9 +6951,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -6847,11 +6975,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260318"]`
-
-      - `"web_search_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6882,6 +7006,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -6907,11 +7033,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260318"]`
-
-      - `"web_fetch_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -6947,9 +7069,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -6974,8 +7100,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_bm25"`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -7012,8 +7136,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_regex"`
 
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
@@ -7078,7 +7200,7 @@ message_tokens_count = client.messages.count_tokens(
 print(message_tokens_count.input_tokens)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -7086,13 +7208,15 @@ print(message_tokens_count.input_tokens)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Base64 Image Source
 
 - `class Base64ImageSource: …`
 
   - `data: str`
+
+    format: byte
 
   - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -7106,21 +7230,17 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["base64"]`
 
-    - `"base64"`
-
 ### Base64 PDF Source
 
 - `class Base64PDFSource: …`
 
   - `data: str`
 
+    format: byte
+
   - `media_type: Literal["application/pdf"]`
 
-    - `"application/pdf"`
-
   - `type: Literal["base64"]`
-
-    - `"base64"`
 
 ### Bash Code Execution Output Block
 
@@ -7130,7 +7250,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["bash_code_execution_output"]`
 
-    - `"bash_code_execution_output"`
+    default: bash_code_execution_output
 
 ### Bash Code Execution Output Block Param
 
@@ -7139,8 +7259,6 @@ print(message_tokens_count.input_tokens)
   - `file_id: str`
 
   - `type: Literal["bash_code_execution_output"]`
-
-    - `"bash_code_execution_output"`
 
 ### Bash Code Execution Result Block
 
@@ -7152,7 +7270,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["bash_code_execution_output"]`
 
-      - `"bash_code_execution_output"`
+      default: bash_code_execution_output
 
   - `return_code: int`
 
@@ -7162,7 +7280,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["bash_code_execution_result"]`
 
-    - `"bash_code_execution_result"`
+    default: bash_code_execution_result
 
 ### Bash Code Execution Result Block Param
 
@@ -7174,8 +7292,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["bash_code_execution_output"]`
 
-      - `"bash_code_execution_output"`
-
   - `return_code: int`
 
   - `stderr: str`
@@ -7183,8 +7299,6 @@ print(message_tokens_count.input_tokens)
   - `stdout: str`
 
   - `type: Literal["bash_code_execution_result"]`
-
-    - `"bash_code_execution_result"`
 
 ### Bash Code Execution Tool Result Block
 
@@ -7208,7 +7322,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["bash_code_execution_tool_result_error"]`
 
-        - `"bash_code_execution_tool_result_error"`
+        default: bash_code_execution_tool_result_error
 
     - `class BashCodeExecutionResultBlock: …`
 
@@ -7218,7 +7332,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["bash_code_execution_output"]`
 
-          - `"bash_code_execution_output"`
+          default: bash_code_execution_output
 
       - `return_code: int`
 
@@ -7228,13 +7342,15 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["bash_code_execution_result"]`
 
-        - `"bash_code_execution_result"`
+        default: bash_code_execution_result
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["bash_code_execution_tool_result"]`
 
-    - `"bash_code_execution_tool_result"`
+    default: bash_code_execution_tool_result
 
 ### Bash Code Execution Tool Result Block Param
 
@@ -7258,8 +7374,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["bash_code_execution_tool_result_error"]`
 
-        - `"bash_code_execution_tool_result_error"`
-
     - `class BashCodeExecutionResultBlockParam: …`
 
       - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -7267,8 +7381,6 @@ print(message_tokens_count.input_tokens)
         - `file_id: str`
 
         - `type: Literal["bash_code_execution_output"]`
-
-          - `"bash_code_execution_output"`
 
       - `return_code: int`
 
@@ -7278,21 +7390,17 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["bash_code_execution_result"]`
 
-        - `"bash_code_execution_result"`
-
   - `tool_use_id: str`
 
-  - `type: Literal["bash_code_execution_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"bash_code_execution_tool_result"`
+  - `type: Literal["bash_code_execution_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -7327,7 +7435,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["bash_code_execution_tool_result_error"]`
 
-    - `"bash_code_execution_tool_result_error"`
+    default: bash_code_execution_tool_result_error
 
 ### Bash Code Execution Tool Result Error Code
 
@@ -7360,8 +7468,6 @@ print(message_tokens_count.input_tokens)
     - `"output_file_too_large"`
 
   - `type: Literal["bash_code_execution_tool_result_error"]`
-
-    - `"bash_code_execution_tool_result_error"`
 
 ### Browser Close Tab Config
 
@@ -7743,17 +7849,25 @@ print(message_tokens_count.input_tokens)
 
     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+    maxItems: 100
+
     - `tab_id: str`
 
       The caller-assigned identifier for this tab, unique within the inventory.
+
+      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `title: str`
 
       The title of the page the tab is showing. May be empty.
 
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
     - `url: str`
 
       The URL of the page the tab is showing. May be empty.
+
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `active: Optional[bool]`
 
@@ -7761,15 +7875,11 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["browser_state"]`
 
-    - `"browser_state"`
-
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -7790,6 +7900,8 @@ print(message_tokens_count.input_tokens)
 
     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
+    maxItems: 200, minItems: 1
+
     - `class BrowserStateChangeTabOpened: …`
 
       A tab this call's execution opened that remains open at its end —
@@ -7804,9 +7916,9 @@ print(message_tokens_count.input_tokens)
 
         The `tab_id` of the opened tab, present in `tabs`.
 
-      - `type: Literal["tab_opened"]`
+        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-        - `"tab_opened"`
+      - `type: Literal["tab_opened"]`
 
     - `class BrowserStateChangeDownloadStarted: …`
 
@@ -7816,13 +7928,15 @@ print(message_tokens_count.input_tokens)
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      - `type: Literal["download_started"]`
+        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-        - `"download_started"`
+      - `type: Literal["download_started"]`
 
       - `url: str`
 
         The final post-redirect URL the download was served from.
+
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -7835,21 +7949,27 @@ print(message_tokens_count.input_tokens)
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      - `type: Literal["download_completed"]`
+        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-        - `"download_completed"`
+      - `type: Literal["download_completed"]`
 
       - `url: str`
 
         The final post-redirect URL the download was served from.
 
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
       - `path: Optional[str]`
 
         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
       - `size_bytes: Optional[int]`
 
         The completed download's size.
+
+        minimum: 0
 
     - `class BrowserStateChangeDownloadFailed: …`
 
@@ -7859,17 +7979,21 @@ print(message_tokens_count.input_tokens)
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      - `type: Literal["download_failed"]`
+        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-        - `"download_failed"`
+      - `type: Literal["download_failed"]`
 
       - `url: str`
 
         The final post-redirect URL the download was served from.
 
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
       - `error: Optional[str]`
 
         The failure or cancellation detail, when known.
+
+        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
 ### Browser State Change
 
@@ -7897,9 +8021,9 @@ print(message_tokens_count.input_tokens)
 
       The `tab_id` of the opened tab, present in `tabs`.
 
-    - `type: Literal["tab_opened"]`
+      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `"tab_opened"`
+    - `type: Literal["tab_opened"]`
 
   - `class BrowserStateChangeDownloadStarted: …`
 
@@ -7909,13 +8033,15 @@ print(message_tokens_count.input_tokens)
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    - `type: Literal["download_started"]`
+      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `"download_started"`
+    - `type: Literal["download_started"]`
 
     - `url: str`
 
       The final post-redirect URL the download was served from.
+
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -7928,21 +8054,27 @@ print(message_tokens_count.input_tokens)
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    - `type: Literal["download_completed"]`
+      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `"download_completed"`
+    - `type: Literal["download_completed"]`
 
     - `url: str`
 
       The final post-redirect URL the download was served from.
 
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
     - `path: Optional[str]`
 
       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
     - `size_bytes: Optional[int]`
 
       The completed download's size.
+
+      minimum: 0
 
   - `class BrowserStateChangeDownloadFailed: …`
 
@@ -7952,17 +8084,21 @@ print(message_tokens_count.input_tokens)
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    - `type: Literal["download_failed"]`
+      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `"download_failed"`
+    - `type: Literal["download_failed"]`
 
     - `url: str`
 
       The final post-redirect URL the download was served from.
 
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
     - `error: Optional[str]`
 
       The failure or cancellation detail, when known.
+
+      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
 ### Browser State Change Download Completed
 
@@ -7977,21 +8113,27 @@ print(message_tokens_count.input_tokens)
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-  - `type: Literal["download_completed"]`
+    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `"download_completed"`
+  - `type: Literal["download_completed"]`
 
   - `url: str`
 
     The final post-redirect URL the download was served from.
 
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
   - `path: Optional[str]`
 
     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
   - `size_bytes: Optional[int]`
 
     The completed download's size.
+
+    minimum: 0
 
 ### Browser State Change Download Failed
 
@@ -8003,17 +8145,21 @@ print(message_tokens_count.input_tokens)
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-  - `type: Literal["download_failed"]`
+    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `"download_failed"`
+  - `type: Literal["download_failed"]`
 
   - `url: str`
 
     The final post-redirect URL the download was served from.
 
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
   - `error: Optional[str]`
 
     The failure or cancellation detail, when known.
+
+    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
 ### Browser State Change Download Started
 
@@ -8025,13 +8171,15 @@ print(message_tokens_count.input_tokens)
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-  - `type: Literal["download_started"]`
+    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `"download_started"`
+  - `type: Literal["download_started"]`
 
   - `url: str`
 
     The final post-redirect URL the download was served from.
+
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change Tab Opened
 
@@ -8049,9 +8197,9 @@ print(message_tokens_count.input_tokens)
 
     The `tab_id` of the opened tab, present in `tabs`.
 
-  - `type: Literal["tab_opened"]`
+    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `"tab_opened"`
+  - `type: Literal["tab_opened"]`
 
 ### Browser State Tab Entry
 
@@ -8070,13 +8218,19 @@ print(message_tokens_count.input_tokens)
 
     The caller-assigned identifier for this tab, unique within the inventory.
 
+    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
   - `title: str`
 
     The title of the page the tab is showing. May be empty.
 
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
   - `url: str`
 
     The URL of the page the tab is showing. May be empty.
+
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `active: Optional[bool]`
 
@@ -8107,8 +8261,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["browser_toolset_20260801"]`
 
-    - `"browser_toolset_20260801"`
-
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
     - `"direct"`
@@ -8124,8 +8276,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -8968,8 +9118,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["ephemeral"]`
 
-    - `"ephemeral"`
-
   - `ttl: Optional[Literal["5m", "1h"]]`
 
     The time-to-live for the cache control breakpoint.
@@ -8993,9 +9141,13 @@ print(message_tokens_count.input_tokens)
 
     The number of input tokens used to create the 1 hour cache entry.
 
+    default: 0, minimum: 0
+
   - `ephemeral_5m_input_tokens: int`
 
     The number of input tokens used to create the 5 minute cache entry.
+
+    default: 0, minimum: 0
 
 ### Citation Char Location
 
@@ -9005,6 +9157,8 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
 
   - `end_char_index: int`
@@ -9013,9 +9167,11 @@ print(message_tokens_count.input_tokens)
 
   - `start_char_index: int`
 
+    minimum: 0
+
   - `type: Literal["char_location"]`
 
-    - `"char_location"`
+    default: char_location
 
 ### Citation Char Location Param
 
@@ -9025,15 +9181,19 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
+
+    maxLength: 500, minLength: 1
 
   - `end_char_index: int`
 
   - `start_char_index: int`
 
-  - `type: Literal["char_location"]`
+    minimum: 0
 
-    - `"char_location"`
+  - `type: Literal["char_location"]`
 
 ### Citation Content Block Location
 
@@ -9047,6 +9207,8 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
 
   - `end_block_index: int`
@@ -9061,9 +9223,11 @@ print(message_tokens_count.input_tokens)
 
     0-based index of the first cited block in the source's `content` array.
 
+    minimum: 0
+
   - `type: Literal["content_block_location"]`
 
-    - `"content_block_location"`
+    default: content_block_location
 
 ### Citation Content Block Location Param
 
@@ -9077,7 +9241,11 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
+
+    maxLength: 500, minLength: 1
 
   - `end_block_index: int`
 
@@ -9089,9 +9257,9 @@ print(message_tokens_count.input_tokens)
 
     0-based index of the first cited block in the source's `content` array.
 
-  - `type: Literal["content_block_location"]`
+    minimum: 0
 
-    - `"content_block_location"`
+  - `type: Literal["content_block_location"]`
 
 ### Citation Page Location
 
@@ -9101,6 +9269,8 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
 
   - `end_page_number: int`
@@ -9109,9 +9279,11 @@ print(message_tokens_count.input_tokens)
 
   - `start_page_number: int`
 
+    minimum: 1
+
   - `type: Literal["page_location"]`
 
-    - `"page_location"`
+    default: page_location
 
 ### Citation Page Location Param
 
@@ -9121,15 +9293,19 @@ print(message_tokens_count.input_tokens)
 
   - `document_index: int`
 
+    minimum: 0
+
   - `document_title: Optional[str]`
+
+    maxLength: 500, minLength: 1
 
   - `end_page_number: int`
 
   - `start_page_number: int`
 
-  - `type: Literal["page_location"]`
+    minimum: 1
 
-    - `"page_location"`
+  - `type: Literal["page_location"]`
 
 ### Citation Search Result Location Param
 
@@ -9153,17 +9329,19 @@ print(message_tokens_count.input_tokens)
 
     Counted separately from `document_index`; server-side web search results are not included in this count.
 
+    minimum: 0
+
   - `source: str`
 
   - `start_block_index: int`
 
     0-based index of the first cited block in the source's `content` array.
 
+    minimum: 0
+
   - `title: Optional[str]`
 
   - `type: Literal["search_result_location"]`
-
-    - `"search_result_location"`
 
 ### Citation Web Search Result Location Param
 
@@ -9175,17 +9353,21 @@ print(message_tokens_count.input_tokens)
 
   - `title: Optional[str]`
 
+    maxLength: 512, minLength: 1
+
   - `type: Literal["web_search_result_location"]`
 
-    - `"web_search_result_location"`
-
   - `url: str`
+
+    minLength: 1
 
 ### Citations Config
 
 - `class CitationsConfig: …`
 
   - `enabled: bool`
+
+    default: false
 
 ### Citations Config Param
 
@@ -9205,6 +9387,8 @@ print(message_tokens_count.input_tokens)
 
       - `document_index: int`
 
+        minimum: 0
+
       - `document_title: Optional[str]`
 
       - `end_char_index: int`
@@ -9213,15 +9397,19 @@ print(message_tokens_count.input_tokens)
 
       - `start_char_index: int`
 
+        minimum: 0
+
       - `type: Literal["char_location"]`
 
-        - `"char_location"`
+        default: char_location
 
     - `class CitationPageLocation: …`
 
       - `cited_text: str`
 
       - `document_index: int`
+
+        minimum: 0
 
       - `document_title: Optional[str]`
 
@@ -9231,9 +9419,11 @@ print(message_tokens_count.input_tokens)
 
       - `start_page_number: int`
 
+        minimum: 1
+
       - `type: Literal["page_location"]`
 
-        - `"page_location"`
+        default: page_location
 
     - `class CitationContentBlockLocation: …`
 
@@ -9244,6 +9434,8 @@ print(message_tokens_count.input_tokens)
         Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
       - `document_index: int`
+
+        minimum: 0
 
       - `document_title: Optional[str]`
 
@@ -9259,9 +9451,11 @@ print(message_tokens_count.input_tokens)
 
         0-based index of the first cited block in the source's `content` array.
 
+        minimum: 0
+
       - `type: Literal["content_block_location"]`
 
-        - `"content_block_location"`
+        default: content_block_location
 
     - `class CitationsWebSearchResultLocation: …`
 
@@ -9271,9 +9465,11 @@ print(message_tokens_count.input_tokens)
 
       - `title: Optional[str]`
 
+        maxLength: 512
+
       - `type: Literal["web_search_result_location"]`
 
-        - `"web_search_result_location"`
+        default: web_search_result_location
 
       - `url: str`
 
@@ -9297,21 +9493,25 @@ print(message_tokens_count.input_tokens)
 
         Counted separately from `document_index`; server-side web search results are not included in this count.
 
+        minimum: 0
+
       - `source: str`
 
       - `start_block_index: int`
 
         0-based index of the first cited block in the source's `content` array.
 
+        minimum: 0
+
       - `title: Optional[str]`
 
       - `type: Literal["search_result_location"]`
 
-        - `"search_result_location"`
+        default: search_result_location
 
   - `type: Literal["citations_delta"]`
 
-    - `"citations_delta"`
+    default: citations_delta
 
 ### Citations Search Result Location
 
@@ -9335,17 +9535,21 @@ print(message_tokens_count.input_tokens)
 
     Counted separately from `document_index`; server-side web search results are not included in this count.
 
+    minimum: 0
+
   - `source: str`
 
   - `start_block_index: int`
 
     0-based index of the first cited block in the source's `content` array.
 
+    minimum: 0
+
   - `title: Optional[str]`
 
   - `type: Literal["search_result_location"]`
 
-    - `"search_result_location"`
+    default: search_result_location
 
 ### Citations Web Search Result Location
 
@@ -9357,9 +9561,11 @@ print(message_tokens_count.input_tokens)
 
   - `title: Optional[str]`
 
+    maxLength: 512
+
   - `type: Literal["web_search_result_location"]`
 
-    - `"web_search_result_location"`
+    default: web_search_result_location
 
   - `url: str`
 
@@ -9371,7 +9577,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["code_execution_output"]`
 
-    - `"code_execution_output"`
+    default: code_execution_output
 
 ### Code Execution Output Block Param
 
@@ -9380,8 +9586,6 @@ print(message_tokens_count.input_tokens)
   - `file_id: str`
 
   - `type: Literal["code_execution_output"]`
-
-    - `"code_execution_output"`
 
 ### Code Execution Result Block
 
@@ -9393,7 +9597,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_output"]`
 
-      - `"code_execution_output"`
+      default: code_execution_output
 
   - `return_code: int`
 
@@ -9403,7 +9607,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["code_execution_result"]`
 
-    - `"code_execution_result"`
+    default: code_execution_result
 
 ### Code Execution Result Block Param
 
@@ -9415,8 +9619,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_output"]`
 
-      - `"code_execution_output"`
-
   - `return_code: int`
 
   - `stderr: str`
@@ -9424,8 +9626,6 @@ print(message_tokens_count.input_tokens)
   - `stdout: str`
 
   - `type: Literal["code_execution_result"]`
-
-    - `"code_execution_result"`
 
 ### Code Execution Tool 20250522
 
@@ -9437,11 +9637,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"code_execution"`
-
   - `type: Literal["code_execution_20250522"]`
-
-    - `"code_execution_20250522"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -9458,8 +9654,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -9494,11 +9688,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"code_execution"`
-
   - `type: Literal["code_execution_20250825"]`
-
-    - `"code_execution_20250825"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -9515,8 +9705,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -9553,11 +9741,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"code_execution"`
-
   - `type: Literal["code_execution_20260120"]`
-
-    - `"code_execution_20260120"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -9574,8 +9758,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -9612,11 +9794,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"code_execution"`
-
   - `type: Literal["code_execution_20260521"]`
-
-    - `"code_execution_20260521"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -9633,8 +9811,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -9681,7 +9857,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_tool_result_error"]`
 
-        - `"code_execution_tool_result_error"`
+        default: code_execution_tool_result_error
 
     - `class CodeExecutionResultBlock: …`
 
@@ -9691,7 +9867,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_output"]`
 
-          - `"code_execution_output"`
+          default: code_execution_output
 
       - `return_code: int`
 
@@ -9701,7 +9877,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_result"]`
 
-        - `"code_execution_result"`
+        default: code_execution_result
 
     - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -9713,6 +9889,8 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_output"]`
 
+          default: code_execution_output
+
       - `encrypted_stdout: str`
 
       - `return_code: int`
@@ -9721,13 +9899,15 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["encrypted_code_execution_result"]`
 
-        - `"encrypted_code_execution_result"`
+        default: encrypted_code_execution_result
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["code_execution_tool_result"]`
 
-    - `"code_execution_tool_result"`
+    default: code_execution_tool_result
 
 ### Code Execution Tool Result Block Content
 
@@ -9749,7 +9929,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_tool_result_error"]`
 
-      - `"code_execution_tool_result_error"`
+      default: code_execution_tool_result_error
 
   - `class CodeExecutionResultBlock: …`
 
@@ -9759,7 +9939,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_output"]`
 
-        - `"code_execution_output"`
+        default: code_execution_output
 
     - `return_code: int`
 
@@ -9769,7 +9949,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_result"]`
 
-      - `"code_execution_result"`
+      default: code_execution_result
 
   - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -9781,6 +9961,8 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_output"]`
 
+        default: code_execution_output
+
     - `encrypted_stdout: str`
 
     - `return_code: int`
@@ -9789,7 +9971,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["encrypted_code_execution_result"]`
 
-      - `"encrypted_code_execution_result"`
+      default: encrypted_code_execution_result
 
 ### Code Execution Tool Result Block Param
 
@@ -9813,8 +9995,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_tool_result_error"]`
 
-        - `"code_execution_tool_result_error"`
-
     - `class CodeExecutionResultBlockParam: …`
 
       - `content: List[CodeExecutionOutputBlockParam]`
@@ -9823,8 +10003,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_output"]`
 
-          - `"code_execution_output"`
-
       - `return_code: int`
 
       - `stderr: str`
@@ -9832,8 +10010,6 @@ print(message_tokens_count.input_tokens)
       - `stdout: str`
 
       - `type: Literal["code_execution_result"]`
-
-        - `"code_execution_result"`
 
     - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -9853,21 +10029,17 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["encrypted_code_execution_result"]`
 
-        - `"encrypted_code_execution_result"`
-
   - `tool_use_id: str`
 
-  - `type: Literal["code_execution_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"code_execution_tool_result"`
+  - `type: Literal["code_execution_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -9904,8 +10076,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_tool_result_error"]`
 
-      - `"code_execution_tool_result_error"`
-
   - `class CodeExecutionResultBlockParam: …`
 
     - `content: List[CodeExecutionOutputBlockParam]`
@@ -9914,8 +10084,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["code_execution_output"]`
 
-        - `"code_execution_output"`
-
     - `return_code: int`
 
     - `stderr: str`
@@ -9923,8 +10091,6 @@ print(message_tokens_count.input_tokens)
     - `stdout: str`
 
     - `type: Literal["code_execution_result"]`
-
-      - `"code_execution_result"`
 
   - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -9944,8 +10110,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["encrypted_code_execution_result"]`
 
-      - `"encrypted_code_execution_result"`
-
 ### Code Execution Tool Result Error
 
 - `class CodeExecutionToolResultError: …`
@@ -9962,7 +10126,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["code_execution_tool_result_error"]`
 
-    - `"code_execution_tool_result_error"`
+    default: code_execution_tool_result_error
 
 ### Code Execution Tool Result Error Code
 
@@ -9991,8 +10155,6 @@ print(message_tokens_count.input_tokens)
     - `"execution_time_exceeded"`
 
   - `type: Literal["code_execution_tool_result_error"]`
-
-    - `"code_execution_tool_result_error"`
 
 ### Computer Cursor Position Config
 
@@ -10191,8 +10353,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["computer_toolset_20260801"]`
 
-    - `"computer_toolset_20260801"`
-
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
     - `"direct"`
@@ -10208,8 +10368,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -10724,6 +10882,8 @@ print(message_tokens_count.input_tokens)
 
     The time at which the container will expire.
 
+    format: date-time
+
   - `skills: Optional[List[ContainerSkill]]`
 
     Skills loaded in the container
@@ -10731,6 +10891,8 @@ print(message_tokens_count.input_tokens)
     - `skill_id: str`
 
       Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `type: Literal["anthropic", "custom"]`
 
@@ -10743,6 +10905,8 @@ print(message_tokens_count.input_tokens)
     - `version: str`
 
       The resolved version: a skill version ID for custom skills.
+
+      maxLength: 64, minLength: 1
 
 ### Container Params
 
@@ -10758,9 +10922,13 @@ print(message_tokens_count.input_tokens)
 
     List of skills to load in the container
 
+    maxItems: 20
+
     - `skill_id: str`
 
       Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `type: Literal["anthropic", "custom"]`
 
@@ -10774,6 +10942,8 @@ print(message_tokens_count.input_tokens)
 
       Skill version or 'latest' for most recent version
 
+      maxLength: 64, minLength: 1
+
 ### Container Skill
 
 - `class ContainerSkill: …`
@@ -10783,6 +10953,8 @@ print(message_tokens_count.input_tokens)
   - `skill_id: str`
 
     Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `type: Literal["anthropic", "custom"]`
 
@@ -10796,6 +10968,8 @@ print(message_tokens_count.input_tokens)
 
     The resolved version: a skill version ID for custom skills.
 
+    maxLength: 64, minLength: 1
+
 ### Container Upload Block
 
 - `class ContainerUploadBlock: …`
@@ -10806,7 +10980,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["container_upload"]`
 
-    - `"container_upload"`
+    default: container_upload
 
 ### Container Upload Block Param
 
@@ -10819,15 +10993,11 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["container_upload"]`
 
-    - `"container_upload"`
-
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -10864,6 +11034,8 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
 
         - `end_char_index: int`
@@ -10872,15 +11044,19 @@ print(message_tokens_count.input_tokens)
 
         - `start_char_index: int`
 
+          minimum: 0
+
         - `type: Literal["char_location"]`
 
-          - `"char_location"`
+          default: char_location
 
       - `class CitationPageLocation: …`
 
         - `cited_text: str`
 
         - `document_index: int`
+
+          minimum: 0
 
         - `document_title: Optional[str]`
 
@@ -10890,9 +11066,11 @@ print(message_tokens_count.input_tokens)
 
         - `start_page_number: int`
 
+          minimum: 1
+
         - `type: Literal["page_location"]`
 
-          - `"page_location"`
+          default: page_location
 
       - `class CitationContentBlockLocation: …`
 
@@ -10903,6 +11081,8 @@ print(message_tokens_count.input_tokens)
           Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
         - `document_index: int`
+
+          minimum: 0
 
         - `document_title: Optional[str]`
 
@@ -10918,9 +11098,11 @@ print(message_tokens_count.input_tokens)
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `type: Literal["content_block_location"]`
 
-          - `"content_block_location"`
+          default: content_block_location
 
       - `class CitationsWebSearchResultLocation: …`
 
@@ -10930,9 +11112,11 @@ print(message_tokens_count.input_tokens)
 
         - `title: Optional[str]`
 
+          maxLength: 512
+
         - `type: Literal["web_search_result_location"]`
 
-          - `"web_search_result_location"`
+          default: web_search_result_location
 
         - `url: str`
 
@@ -10956,23 +11140,29 @@ print(message_tokens_count.input_tokens)
 
           Counted separately from `document_index`; server-side web search results are not included in this count.
 
+          minimum: 0
+
         - `source: str`
 
         - `start_block_index: int`
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `title: Optional[str]`
 
         - `type: Literal["search_result_location"]`
 
-          - `"search_result_location"`
+          default: search_result_location
 
     - `text: str`
 
+      maxLength: 5000000, minLength: 0
+
     - `type: Literal["text"]`
 
-      - `"text"`
+      default: text
 
   - `class ThinkingBlock: …`
 
@@ -10990,7 +11180,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["thinking"]`
 
-      - `"thinking"`
+      default: thinking
 
   - `class RedactedThinkingBlock: …`
 
@@ -11004,15 +11194,19 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["redacted_thinking"]`
 
-      - `"redacted_thinking"`
+      default: redacted_thinking
 
   - `class ToolUseBlock: …`
 
     - `id: str`
 
+      pattern: ^[a-zA-Z0-9_-]+$
+
     - `caller: Caller`
 
       Tool invocation directly from the model.
+
+      default: {"type":"direct"}
 
       - `class DirectCaller: …`
 
@@ -11020,45 +11214,51 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["direct"]`
 
-          - `"direct"`
-
       - `class ServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
         - `tool_id: str`
 
-        - `type: Literal["code_execution_20250825"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_20250825"`
+        - `type: Literal["code_execution_20250825"]`
 
       - `class ServerToolCaller20260120: …`
 
         - `tool_id: str`
 
-        - `type: Literal["code_execution_20260120"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_20260120"`
+        - `type: Literal["code_execution_20260120"]`
 
     - `input: Dict[str, object]`
 
     - `name: str`
 
+      minLength: 1
+
     - `type: Literal["tool_use"]`
 
-      - `"tool_use"`
+      default: tool_use
 
     - `toolset_name: Optional[str]`
 
       For a toolset member tool_use, the toolset family.
 
+      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
   - `class ServerToolUseBlock: …`
 
     - `id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `caller: Caller`
 
       Tool invocation directly from the model.
+
+      default: {"type":"direct"}
 
       - `class DirectCaller: …`
 
@@ -11090,13 +11290,15 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["server_tool_use"]`
 
-      - `"server_tool_use"`
+      default: server_tool_use
 
   - `class WebSearchToolResultBlock: …`
 
     - `caller: Caller`
 
       Tool invocation directly from the model.
+
+      default: {"type":"direct"}
 
       - `class DirectCaller: …`
 
@@ -11128,7 +11330,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_search_tool_result_error"]`
 
-          - `"web_search_tool_result_error"`
+          default: web_search_tool_result_error
 
       - `List[WebSearchResultBlock]`
 
@@ -11140,21 +11342,25 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_search_result"]`
 
-          - `"web_search_result"`
+          default: web_search_result
 
         - `url: str`
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["web_search_tool_result"]`
 
-      - `"web_search_tool_result"`
+      default: web_search_tool_result
 
   - `class WebFetchToolResultBlock: …`
 
     - `caller: Caller`
 
       Tool invocation directly from the model.
+
+      default: {"type":"direct"}
 
       - `class DirectCaller: …`
 
@@ -11192,7 +11398,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_fetch_tool_result_error"]`
 
-          - `"web_fetch_tool_result_error"`
+          default: web_fetch_tool_result_error
 
       - `class WebFetchBlock: …`
 
@@ -11204,19 +11410,19 @@ print(message_tokens_count.input_tokens)
 
             - `enabled: bool`
 
+              default: false
+
           - `source: Source`
 
             - `class Base64PDFSource: …`
 
               - `data: str`
 
+                format: byte
+
               - `media_type: Literal["application/pdf"]`
 
-                - `"application/pdf"`
-
               - `type: Literal["base64"]`
-
-                - `"base64"`
 
             - `class PlainTextSource: …`
 
@@ -11224,11 +11430,7 @@ print(message_tokens_count.input_tokens)
 
               - `media_type: Literal["text/plain"]`
 
-                - `"text/plain"`
-
               - `type: Literal["text"]`
-
-                - `"text"`
 
           - `title: Optional[str]`
 
@@ -11236,7 +11438,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["document"]`
 
-            - `"document"`
+            default: document
 
         - `retrieved_at: Optional[str]`
 
@@ -11244,7 +11446,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_fetch_result"]`
 
-          - `"web_fetch_result"`
+          default: web_fetch_result
 
         - `url: str`
 
@@ -11252,9 +11454,11 @@ print(message_tokens_count.input_tokens)
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["web_fetch_tool_result"]`
 
-      - `"web_fetch_tool_result"`
+      default: web_fetch_tool_result
 
   - `class CodeExecutionToolResultBlock: …`
 
@@ -11276,7 +11480,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_tool_result_error"]`
 
-          - `"code_execution_tool_result_error"`
+          default: code_execution_tool_result_error
 
       - `class CodeExecutionResultBlock: …`
 
@@ -11286,7 +11490,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_output"]`
 
-            - `"code_execution_output"`
+            default: code_execution_output
 
         - `return_code: int`
 
@@ -11296,7 +11500,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_result"]`
 
-          - `"code_execution_result"`
+          default: code_execution_result
 
       - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -11308,6 +11512,8 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_output"]`
 
+            default: code_execution_output
+
         - `encrypted_stdout: str`
 
         - `return_code: int`
@@ -11316,13 +11522,15 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["encrypted_code_execution_result"]`
 
-          - `"encrypted_code_execution_result"`
+          default: encrypted_code_execution_result
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["code_execution_tool_result"]`
 
-      - `"code_execution_tool_result"`
+      default: code_execution_tool_result
 
   - `class BashCodeExecutionToolResultBlock: …`
 
@@ -11344,7 +11552,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["bash_code_execution_tool_result_error"]`
 
-          - `"bash_code_execution_tool_result_error"`
+          default: bash_code_execution_tool_result_error
 
       - `class BashCodeExecutionResultBlock: …`
 
@@ -11354,7 +11562,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["bash_code_execution_output"]`
 
-            - `"bash_code_execution_output"`
+            default: bash_code_execution_output
 
         - `return_code: int`
 
@@ -11364,13 +11572,15 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["bash_code_execution_result"]`
 
-          - `"bash_code_execution_result"`
+          default: bash_code_execution_result
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["bash_code_execution_tool_result"]`
 
-      - `"bash_code_execution_tool_result"`
+      default: bash_code_execution_tool_result
 
   - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -11394,7 +11604,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-          - `"text_editor_code_execution_tool_result_error"`
+          default: text_editor_code_execution_tool_result_error
 
       - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -11416,7 +11626,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_view_result"]`
 
-          - `"text_editor_code_execution_view_result"`
+          default: text_editor_code_execution_view_result
 
       - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -11424,7 +11634,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_create_result"]`
 
-          - `"text_editor_code_execution_create_result"`
+          default: text_editor_code_execution_create_result
 
       - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -11440,13 +11650,15 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-          - `"text_editor_code_execution_str_replace_result"`
+          default: text_editor_code_execution_str_replace_result
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["text_editor_code_execution_tool_result"]`
 
-      - `"text_editor_code_execution_tool_result"`
+      default: text_editor_code_execution_tool_result
 
   - `class ToolSearchToolResultBlock: …`
 
@@ -11468,7 +11680,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["tool_search_tool_result_error"]`
 
-          - `"tool_search_tool_result_error"`
+          default: tool_search_tool_result_error
 
       - `class ToolSearchToolSearchResultBlock: …`
 
@@ -11476,19 +11688,23 @@ print(message_tokens_count.input_tokens)
 
           - `tool_name: str`
 
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
           - `type: Literal["tool_reference"]`
 
-            - `"tool_reference"`
+            default: tool_reference
 
         - `type: Literal["tool_search_tool_search_result"]`
 
-          - `"tool_search_tool_search_result"`
+          default: tool_search_tool_search_result
 
     - `tool_use_id: str`
 
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
     - `type: Literal["tool_search_tool_result"]`
 
-      - `"tool_search_tool_result"`
+      default: tool_search_tool_result
 
   - `class ContainerUploadBlock: …`
 
@@ -11498,7 +11714,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["container_upload"]`
 
-      - `"container_upload"`
+      default: container_upload
 
 ### Content Block Param
 
@@ -11510,17 +11726,15 @@ print(message_tokens_count.input_tokens)
 
     - `text: str`
 
-    - `type: Literal["text"]`
+      minLength: 1
 
-      - `"text"`
+    - `type: Literal["text"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -11545,15 +11759,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_char_index: int`
 
         - `start_char_index: int`
 
-        - `type: Literal["char_location"]`
+          minimum: 0
 
-          - `"char_location"`
+        - `type: Literal["char_location"]`
 
       - `class CitationPageLocationParam: …`
 
@@ -11561,15 +11779,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_page_number: int`
 
         - `start_page_number: int`
 
-        - `type: Literal["page_location"]`
+          minimum: 1
 
-          - `"page_location"`
+        - `type: Literal["page_location"]`
 
       - `class CitationContentBlockLocationParam: …`
 
@@ -11581,7 +11803,11 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_block_index: int`
 
@@ -11593,9 +11819,9 @@ print(message_tokens_count.input_tokens)
 
           0-based index of the first cited block in the source's `content` array.
 
-        - `type: Literal["content_block_location"]`
+          minimum: 0
 
-          - `"content_block_location"`
+        - `type: Literal["content_block_location"]`
 
       - `class CitationWebSearchResultLocationParam: …`
 
@@ -11605,11 +11831,13 @@ print(message_tokens_count.input_tokens)
 
         - `title: Optional[str]`
 
+          maxLength: 512, minLength: 1
+
         - `type: Literal["web_search_result_location"]`
 
-          - `"web_search_result_location"`
-
         - `url: str`
+
+          minLength: 1
 
       - `class CitationSearchResultLocationParam: …`
 
@@ -11631,17 +11859,19 @@ print(message_tokens_count.input_tokens)
 
           Counted separately from `document_index`; server-side web search results are not included in this count.
 
+          minimum: 0
+
         - `source: str`
 
         - `start_block_index: int`
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `title: Optional[str]`
 
         - `type: Literal["search_result_location"]`
-
-          - `"search_result_location"`
 
   - `class ImageBlockParam: …`
 
@@ -11650,6 +11880,8 @@ print(message_tokens_count.input_tokens)
       - `class Base64ImageSource: …`
 
         - `data: str`
+
+          format: byte
 
         - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -11663,13 +11895,9 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["base64"]`
 
-          - `"base64"`
-
       - `class URLImageSource: …`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -11679,11 +11907,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
     - `type: Literal["image"]`
-
-      - `"image"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11709,13 +11933,11 @@ print(message_tokens_count.input_tokens)
 
         - `data: str`
 
+          format: byte
+
         - `media_type: Literal["application/pdf"]`
 
-          - `"application/pdf"`
-
         - `type: Literal["base64"]`
-
-          - `"base64"`
 
       - `class PlainTextSource: …`
 
@@ -11723,11 +11945,7 @@ print(message_tokens_count.input_tokens)
 
         - `media_type: Literal["text/plain"]`
 
-          - `"text/plain"`
-
         - `type: Literal["text"]`
-
-          - `"text"`
 
       - `class ContentBlockSource: …`
 
@@ -11743,13 +11961,9 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["content"]`
 
-          - `"content"`
-
       - `class URLPDFSource: …`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -11759,11 +11973,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
     - `type: Literal["document"]`
-
-      - `"document"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11775,13 +11985,19 @@ print(message_tokens_count.input_tokens)
 
     - `context: Optional[str]`
 
+      minLength: 1
+
     - `title: Optional[str]`
+
+      maxLength: 500, minLength: 1
 
   - `class SearchResultBlockParam: …`
 
     - `content: List[TextBlockParam]`
 
       - `text: str`
+
+        minLength: 1
 
       - `type: Literal["text"]`
 
@@ -11796,8 +12012,6 @@ print(message_tokens_count.input_tokens)
     - `title: str`
 
     - `type: Literal["search_result"]`
-
-      - `"search_result"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11819,8 +12033,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["thinking"]`
 
-      - `"thinking"`
-
   - `class RedactedThinkingBlockParam: …`
 
     - `data: str`
@@ -11829,19 +12041,19 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["redacted_thinking"]`
 
-      - `"redacted_thinking"`
-
   - `class ToolUseBlockParam: …`
 
     - `id: str`
+
+      pattern: ^[a-zA-Z0-9_-]+$
 
     - `input: Dict[str, object]`
 
     - `name: str`
 
-    - `type: Literal["tool_use"]`
+      maxLength: 200, minLength: 1
 
-      - `"tool_use"`
+    - `type: Literal["tool_use"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11857,37 +12069,37 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["direct"]`
 
-          - `"direct"`
-
       - `class ServerToolCaller: …`
 
         Tool invocation generated by a server-side tool.
 
         - `tool_id: str`
 
-        - `type: Literal["code_execution_20250825"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_20250825"`
+        - `type: Literal["code_execution_20250825"]`
 
       - `class ServerToolCaller20260120: …`
 
         - `tool_id: str`
 
-        - `type: Literal["code_execution_20260120"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_20260120"`
+        - `type: Literal["code_execution_20260120"]`
 
     - `toolset_name: Optional[str]`
 
       For a toolset member tool_use, the toolset family this member belongs to.
 
+      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
   - `class ToolResultBlockParam: …`
 
     - `tool_use_id: str`
 
-    - `type: Literal["tool_result"]`
+      pattern: ^[a-zA-Z0-9_-]+$
 
-      - `"tool_result"`
+    - `type: Literal["tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11913,9 +12125,9 @@ print(message_tokens_count.input_tokens)
 
           - `tool_name: str`
 
-          - `type: Literal["tool_reference"]`
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-            - `"tool_reference"`
+          - `type: Literal["tool_reference"]`
 
           - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11935,25 +12147,31 @@ print(message_tokens_count.input_tokens)
 
             All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+            maxItems: 100
+
             - `tab_id: str`
 
               The caller-assigned identifier for this tab, unique within the inventory.
+
+              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `title: str`
 
               The title of the page the tab is showing. May be empty.
 
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
             - `url: str`
 
               The URL of the page the tab is showing. May be empty.
+
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `active: Optional[bool]`
 
               Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
           - `type: Literal["browser_state"]`
-
-            - `"browser_state"`
 
           - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -11962,6 +12180,8 @@ print(message_tokens_count.input_tokens)
           - `state_changes: Optional[List[BrowserStateChange]]`
 
             Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+            maxItems: 200, minItems: 1
 
             - `class BrowserStateChangeTabOpened: …`
 
@@ -11977,9 +12197,9 @@ print(message_tokens_count.input_tokens)
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
-              - `type: Literal["tab_opened"]`
+                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `"tab_opened"`
+              - `type: Literal["tab_opened"]`
 
             - `class BrowserStateChangeDownloadStarted: …`
 
@@ -11989,13 +12209,15 @@ print(message_tokens_count.input_tokens)
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              - `type: Literal["download_started"]`
+                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `"download_started"`
+              - `type: Literal["download_started"]`
 
               - `url: str`
 
                 The final post-redirect URL the download was served from.
+
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -12008,21 +12230,27 @@ print(message_tokens_count.input_tokens)
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              - `type: Literal["download_completed"]`
+                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `"download_completed"`
+              - `type: Literal["download_completed"]`
 
               - `url: str`
 
                 The final post-redirect URL the download was served from.
 
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
               - `path: Optional[str]`
 
                 Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
               - `size_bytes: Optional[int]`
 
                 The completed download's size.
+
+                minimum: 0
 
             - `class BrowserStateChangeDownloadFailed: …`
 
@@ -12032,17 +12260,21 @@ print(message_tokens_count.input_tokens)
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              - `type: Literal["download_failed"]`
+                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `"download_failed"`
+              - `type: Literal["download_failed"]`
 
               - `url: str`
 
                 The final post-redirect URL the download was served from.
 
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
               - `error: Optional[str]`
 
                 The failure or cancellation detail, when known.
+
+                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
     - `is_error: Optional[bool]`
 
@@ -12050,9 +12282,13 @@ print(message_tokens_count.input_tokens)
 
       For a toolset member tool_result, the toolset family of the paired tool_use.
 
+      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
   - `class ServerToolUseBlockParam: …`
 
     - `id: str`
+
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
     - `input: Dict[str, object]`
 
@@ -12073,8 +12309,6 @@ print(message_tokens_count.input_tokens)
       - `"tool_search_tool_bm25"`
 
     - `type: Literal["server_tool_use"]`
-
-      - `"server_tool_use"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12106,8 +12340,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_search_result"]`
 
-          - `"web_search_result"`
-
         - `url: str`
 
         - `page_age: Optional[str]`
@@ -12130,13 +12362,11 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_search_tool_result_error"]`
 
-          - `"web_search_tool_result_error"`
-
     - `tool_use_id: str`
 
-    - `type: Literal["web_search_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"web_search_tool_result"`
+    - `type: Literal["web_search_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12184,15 +12414,11 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["web_fetch_tool_result_error"]`
 
-          - `"web_fetch_tool_result_error"`
-
       - `class WebFetchBlockParam: …`
 
         - `content: DocumentBlockParam`
 
         - `type: Literal["web_fetch_result"]`
-
-          - `"web_fetch_result"`
 
         - `url: str`
 
@@ -12204,9 +12430,9 @@ print(message_tokens_count.input_tokens)
 
     - `tool_use_id: str`
 
-    - `type: Literal["web_fetch_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"web_fetch_tool_result"`
+    - `type: Literal["web_fetch_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12246,8 +12472,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["code_execution_tool_result_error"]`
 
-          - `"code_execution_tool_result_error"`
-
       - `class CodeExecutionResultBlockParam: …`
 
         - `content: List[CodeExecutionOutputBlockParam]`
@@ -12256,8 +12480,6 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_output"]`
 
-            - `"code_execution_output"`
-
         - `return_code: int`
 
         - `stderr: str`
@@ -12265,8 +12487,6 @@ print(message_tokens_count.input_tokens)
         - `stdout: str`
 
         - `type: Literal["code_execution_result"]`
-
-          - `"code_execution_result"`
 
       - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -12286,13 +12506,11 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["encrypted_code_execution_result"]`
 
-          - `"encrypted_code_execution_result"`
-
     - `tool_use_id: str`
 
-    - `type: Literal["code_execution_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"code_execution_tool_result"`
+    - `type: Literal["code_execution_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12318,8 +12536,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["bash_code_execution_tool_result_error"]`
 
-          - `"bash_code_execution_tool_result_error"`
-
       - `class BashCodeExecutionResultBlockParam: …`
 
         - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -12327,8 +12543,6 @@ print(message_tokens_count.input_tokens)
           - `file_id: str`
 
           - `type: Literal["bash_code_execution_output"]`
-
-            - `"bash_code_execution_output"`
 
         - `return_code: int`
 
@@ -12338,13 +12552,11 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["bash_code_execution_result"]`
 
-          - `"bash_code_execution_result"`
-
     - `tool_use_id: str`
 
-    - `type: Literal["bash_code_execution_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"bash_code_execution_tool_result"`
+    - `type: Literal["bash_code_execution_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12370,8 +12582,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-          - `"text_editor_code_execution_tool_result_error"`
-
         - `error_message: Optional[str]`
 
       - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -12388,8 +12598,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_view_result"]`
 
-          - `"text_editor_code_execution_view_result"`
-
         - `num_lines: Optional[int]`
 
         - `start_line: Optional[int]`
@@ -12402,13 +12610,9 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_editor_code_execution_create_result"]`
 
-          - `"text_editor_code_execution_create_result"`
-
       - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
         - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-          - `"text_editor_code_execution_str_replace_result"`
 
         - `lines: Optional[List[str]]`
 
@@ -12422,9 +12626,9 @@ print(message_tokens_count.input_tokens)
 
     - `tool_use_id: str`
 
-    - `type: Literal["text_editor_code_execution_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"text_editor_code_execution_tool_result"`
+    - `type: Literal["text_editor_code_execution_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12448,8 +12652,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["tool_search_tool_result_error"]`
 
-          - `"tool_search_tool_result_error"`
-
         - `error_message: Optional[str]`
 
       - `class ToolSearchToolSearchResultBlockParam: …`
@@ -12457,6 +12659,8 @@ print(message_tokens_count.input_tokens)
         - `tool_references: List[ToolReferenceBlockParam]`
 
           - `tool_name: str`
+
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `type: Literal["tool_reference"]`
 
@@ -12466,13 +12670,11 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["tool_search_tool_search_result"]`
 
-          - `"tool_search_tool_search_result"`
-
     - `tool_use_id: str`
 
-    - `type: Literal["tool_search_tool_result"]`
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `"tool_search_tool_result"`
+    - `type: Literal["tool_search_tool_result"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12486,8 +12688,6 @@ print(message_tokens_count.input_tokens)
     - `file_id: str`
 
     - `type: Literal["container_upload"]`
-
-      - `"container_upload"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12507,17 +12707,15 @@ print(message_tokens_count.input_tokens)
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -12542,15 +12740,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class CitationPageLocationParam: …`
 
@@ -12558,15 +12760,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class CitationContentBlockLocationParam: …`
 
@@ -12578,7 +12784,11 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -12590,9 +12800,9 @@ print(message_tokens_count.input_tokens)
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class CitationWebSearchResultLocationParam: …`
 
@@ -12602,11 +12812,13 @@ print(message_tokens_count.input_tokens)
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class CitationSearchResultLocationParam: …`
 
@@ -12628,17 +12840,19 @@ print(message_tokens_count.input_tokens)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class ImageBlockParam: …`
 
@@ -12647,6 +12861,8 @@ print(message_tokens_count.input_tokens)
           - `class Base64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -12660,13 +12876,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class URLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -12676,11 +12888,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12700,8 +12908,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["content"]`
 
-    - `"content"`
-
 ### Content Block Source Content
 
 - `ContentBlockSourceContent`
@@ -12710,17 +12916,15 @@ print(message_tokens_count.input_tokens)
 
     - `text: str`
 
-    - `type: Literal["text"]`
+      minLength: 1
 
-      - `"text"`
+    - `type: Literal["text"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -12745,15 +12949,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_char_index: int`
 
         - `start_char_index: int`
 
-        - `type: Literal["char_location"]`
+          minimum: 0
 
-          - `"char_location"`
+        - `type: Literal["char_location"]`
 
       - `class CitationPageLocationParam: …`
 
@@ -12761,15 +12969,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_page_number: int`
 
         - `start_page_number: int`
 
-        - `type: Literal["page_location"]`
+          minimum: 1
 
-          - `"page_location"`
+        - `type: Literal["page_location"]`
 
       - `class CitationContentBlockLocationParam: …`
 
@@ -12781,7 +12993,11 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_block_index: int`
 
@@ -12793,9 +13009,9 @@ print(message_tokens_count.input_tokens)
 
           0-based index of the first cited block in the source's `content` array.
 
-        - `type: Literal["content_block_location"]`
+          minimum: 0
 
-          - `"content_block_location"`
+        - `type: Literal["content_block_location"]`
 
       - `class CitationWebSearchResultLocationParam: …`
 
@@ -12805,11 +13021,13 @@ print(message_tokens_count.input_tokens)
 
         - `title: Optional[str]`
 
+          maxLength: 512, minLength: 1
+
         - `type: Literal["web_search_result_location"]`
 
-          - `"web_search_result_location"`
-
         - `url: str`
+
+          minLength: 1
 
       - `class CitationSearchResultLocationParam: …`
 
@@ -12831,17 +13049,19 @@ print(message_tokens_count.input_tokens)
 
           Counted separately from `document_index`; server-side web search results are not included in this count.
 
+          minimum: 0
+
         - `source: str`
 
         - `start_block_index: int`
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `title: Optional[str]`
 
         - `type: Literal["search_result_location"]`
-
-          - `"search_result_location"`
 
   - `class ImageBlockParam: …`
 
@@ -12850,6 +13070,8 @@ print(message_tokens_count.input_tokens)
       - `class Base64ImageSource: …`
 
         - `data: str`
+
+          format: byte
 
         - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -12863,13 +13085,9 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["base64"]`
 
-          - `"base64"`
-
       - `class URLImageSource: …`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -12879,11 +13097,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
     - `type: Literal["image"]`
-
-      - `"image"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -12909,8 +13123,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["direct"]`
 
-    - `"direct"`
-
 ### Document Block
 
 - `class DocumentBlock: …`
@@ -12921,19 +13133,19 @@ print(message_tokens_count.input_tokens)
 
     - `enabled: bool`
 
+      default: false
+
   - `source: Source`
 
     - `class Base64PDFSource: …`
 
       - `data: str`
 
+        format: byte
+
       - `media_type: Literal["application/pdf"]`
 
-        - `"application/pdf"`
-
       - `type: Literal["base64"]`
-
-        - `"base64"`
 
     - `class PlainTextSource: …`
 
@@ -12941,11 +13153,7 @@ print(message_tokens_count.input_tokens)
 
       - `media_type: Literal["text/plain"]`
 
-        - `"text/plain"`
-
       - `type: Literal["text"]`
-
-        - `"text"`
 
   - `title: Optional[str]`
 
@@ -12953,7 +13161,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["document"]`
 
-    - `"document"`
+    default: document
 
 ### Document Block Param
 
@@ -12965,13 +13173,11 @@ print(message_tokens_count.input_tokens)
 
       - `data: str`
 
+        format: byte
+
       - `media_type: Literal["application/pdf"]`
 
-        - `"application/pdf"`
-
       - `type: Literal["base64"]`
-
-        - `"base64"`
 
     - `class PlainTextSource: …`
 
@@ -12979,11 +13185,7 @@ print(message_tokens_count.input_tokens)
 
       - `media_type: Literal["text/plain"]`
 
-        - `"text/plain"`
-
       - `type: Literal["text"]`
-
-        - `"text"`
 
     - `class ContentBlockSource: …`
 
@@ -12997,17 +13199,15 @@ print(message_tokens_count.input_tokens)
 
             - `text: str`
 
-            - `type: Literal["text"]`
+              minLength: 1
 
-              - `"text"`
+            - `type: Literal["text"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
 
               - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
 
               - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -13032,15 +13232,19 @@ print(message_tokens_count.input_tokens)
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_char_index: int`
 
                 - `start_char_index: int`
 
-                - `type: Literal["char_location"]`
+                  minimum: 0
 
-                  - `"char_location"`
+                - `type: Literal["char_location"]`
 
               - `class CitationPageLocationParam: …`
 
@@ -13048,15 +13252,19 @@ print(message_tokens_count.input_tokens)
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_page_number: int`
 
                 - `start_page_number: int`
 
-                - `type: Literal["page_location"]`
+                  minimum: 1
 
-                  - `"page_location"`
+                - `type: Literal["page_location"]`
 
               - `class CitationContentBlockLocationParam: …`
 
@@ -13068,7 +13276,11 @@ print(message_tokens_count.input_tokens)
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_block_index: int`
 
@@ -13080,9 +13292,9 @@ print(message_tokens_count.input_tokens)
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `type: Literal["content_block_location"]`
+                  minimum: 0
 
-                  - `"content_block_location"`
+                - `type: Literal["content_block_location"]`
 
               - `class CitationWebSearchResultLocationParam: …`
 
@@ -13092,11 +13304,13 @@ print(message_tokens_count.input_tokens)
 
                 - `title: Optional[str]`
 
+                  maxLength: 512, minLength: 1
+
                 - `type: Literal["web_search_result_location"]`
 
-                  - `"web_search_result_location"`
-
                 - `url: str`
+
+                  minLength: 1
 
               - `class CitationSearchResultLocationParam: …`
 
@@ -13118,17 +13332,19 @@ print(message_tokens_count.input_tokens)
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: str`
 
                 - `start_block_index: int`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: Optional[str]`
 
                 - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
 
           - `class ImageBlockParam: …`
 
@@ -13137,6 +13353,8 @@ print(message_tokens_count.input_tokens)
               - `class Base64ImageSource: …`
 
                 - `data: str`
+
+                  format: byte
 
                 - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -13150,13 +13368,9 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["base64"]`
 
-                  - `"base64"`
-
               - `class URLImageSource: …`
 
                 - `type: Literal["url"]`
-
-                  - `"url"`
 
                 - `url: str`
 
@@ -13166,11 +13380,7 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["file"]`
 
-                  - `"file"`
-
             - `type: Literal["image"]`
-
-              - `"image"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -13190,13 +13400,9 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["content"]`
 
-        - `"content"`
-
     - `class URLPDFSource: …`
 
       - `type: Literal["url"]`
-
-        - `"url"`
 
       - `url: str`
 
@@ -13206,11 +13412,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
   - `type: Literal["document"]`
-
-    - `"document"`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -13222,7 +13424,11 @@ print(message_tokens_count.input_tokens)
 
   - `context: Optional[str]`
 
+    minLength: 1
+
   - `title: Optional[str]`
+
+    maxLength: 500, minLength: 1
 
 ### Encrypted Code Execution Result Block
 
@@ -13236,7 +13442,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_output"]`
 
-      - `"code_execution_output"`
+      default: code_execution_output
 
   - `encrypted_stdout: str`
 
@@ -13246,7 +13452,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["encrypted_code_execution_result"]`
 
-    - `"encrypted_code_execution_result"`
+    default: encrypted_code_execution_result
 
 ### Encrypted Code Execution Result Block Param
 
@@ -13260,8 +13466,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["code_execution_output"]`
 
-      - `"code_execution_output"`
-
   - `encrypted_stdout: str`
 
   - `return_code: int`
@@ -13269,8 +13473,6 @@ print(message_tokens_count.input_tokens)
   - `stderr: str`
 
   - `type: Literal["encrypted_code_execution_result"]`
-
-    - `"encrypted_code_execution_result"`
 
 ### File Document Source
 
@@ -13280,8 +13482,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["file"]`
 
-    - `"file"`
-
 ### File Image Source
 
 - `class FileImageSource: …`
@@ -13289,8 +13489,6 @@ print(message_tokens_count.input_tokens)
   - `file_id: str`
 
   - `type: Literal["file"]`
-
-    - `"file"`
 
 ### Image Block Param
 
@@ -13301,6 +13499,8 @@ print(message_tokens_count.input_tokens)
     - `class Base64ImageSource: …`
 
       - `data: str`
+
+        format: byte
 
       - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -13314,13 +13514,9 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["base64"]`
 
-        - `"base64"`
-
     - `class URLImageSource: …`
 
       - `type: Literal["url"]`
-
-        - `"url"`
 
       - `url: str`
 
@@ -13330,19 +13526,13 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
   - `type: Literal["image"]`
-
-    - `"image"`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -13393,7 +13583,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["input_json_delta"]`
 
-    - `"input_json_delta"`
+    default: input_json_delta
 
 ### JSON Output Format
 
@@ -13405,8 +13595,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["json_schema"]`
 
-    - `"json_schema"`
-
 ### Memory Tool 20250818
 
 - `class MemoryTool20250818: …`
@@ -13417,11 +13605,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"memory"`
-
   - `type: Literal["memory_20250818"]`
-
-    - `"memory_20250818"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -13438,8 +13622,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -13488,6 +13670,8 @@ print(message_tokens_count.input_tokens)
 
       The time at which the container will expire.
 
+      format: date-time
+
     - `skills: Optional[List[ContainerSkill]]`
 
       Skills loaded in the container
@@ -13495,6 +13679,8 @@ print(message_tokens_count.input_tokens)
       - `skill_id: str`
 
         Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `type: Literal["anthropic", "custom"]`
 
@@ -13507,6 +13693,8 @@ print(message_tokens_count.input_tokens)
       - `version: str`
 
         The resolved version: a skill version ID for custom skills.
+
+        maxLength: 64, minLength: 1
 
   - `content: List[ContentBlock]`
 
@@ -13551,6 +13739,8 @@ print(message_tokens_count.input_tokens)
 
           - `document_index: int`
 
+            minimum: 0
+
           - `document_title: Optional[str]`
 
           - `end_char_index: int`
@@ -13559,15 +13749,19 @@ print(message_tokens_count.input_tokens)
 
           - `start_char_index: int`
 
+            minimum: 0
+
           - `type: Literal["char_location"]`
 
-            - `"char_location"`
+            default: char_location
 
         - `class CitationPageLocation: …`
 
           - `cited_text: str`
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -13577,9 +13771,11 @@ print(message_tokens_count.input_tokens)
 
           - `start_page_number: int`
 
+            minimum: 1
+
           - `type: Literal["page_location"]`
 
-            - `"page_location"`
+            default: page_location
 
         - `class CitationContentBlockLocation: …`
 
@@ -13590,6 +13786,8 @@ print(message_tokens_count.input_tokens)
             Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -13605,9 +13803,11 @@ print(message_tokens_count.input_tokens)
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `type: Literal["content_block_location"]`
 
-            - `"content_block_location"`
+            default: content_block_location
 
         - `class CitationsWebSearchResultLocation: …`
 
@@ -13617,9 +13817,11 @@ print(message_tokens_count.input_tokens)
 
           - `title: Optional[str]`
 
+            maxLength: 512
+
           - `type: Literal["web_search_result_location"]`
 
-            - `"web_search_result_location"`
+            default: web_search_result_location
 
           - `url: str`
 
@@ -13643,23 +13845,29 @@ print(message_tokens_count.input_tokens)
 
             Counted separately from `document_index`; server-side web search results are not included in this count.
 
+            minimum: 0
+
           - `source: str`
 
           - `start_block_index: int`
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `title: Optional[str]`
 
           - `type: Literal["search_result_location"]`
 
-            - `"search_result_location"`
+            default: search_result_location
 
       - `text: str`
 
+        maxLength: 5000000, minLength: 0
+
       - `type: Literal["text"]`
 
-        - `"text"`
+        default: text
 
     - `class ThinkingBlock: …`
 
@@ -13677,7 +13885,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["thinking"]`
 
-        - `"thinking"`
+        default: thinking
 
     - `class RedactedThinkingBlock: …`
 
@@ -13691,15 +13899,19 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["redacted_thinking"]`
 
-        - `"redacted_thinking"`
+        default: redacted_thinking
 
     - `class ToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^[a-zA-Z0-9_-]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -13707,45 +13919,51 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["direct"]`
 
-            - `"direct"`
-
         - `class ServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20250825"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20250825"`
+          - `type: Literal["code_execution_20250825"]`
 
         - `class ServerToolCaller20260120: …`
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20260120"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20260120"`
+          - `type: Literal["code_execution_20260120"]`
 
       - `input: Dict[str, object]`
 
       - `name: str`
 
+        minLength: 1
+
       - `type: Literal["tool_use"]`
 
-        - `"tool_use"`
+        default: tool_use
 
       - `toolset_name: Optional[str]`
 
         For a toolset member tool_use, the toolset family.
 
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
     - `class ServerToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -13777,13 +13995,15 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["server_tool_use"]`
 
-        - `"server_tool_use"`
+        default: server_tool_use
 
     - `class WebSearchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -13815,7 +14035,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_search_tool_result_error"]`
 
-            - `"web_search_tool_result_error"`
+            default: web_search_tool_result_error
 
         - `List[WebSearchResultBlock]`
 
@@ -13827,21 +14047,25 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_search_result"]`
 
-            - `"web_search_result"`
+            default: web_search_result
 
           - `url: str`
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_search_tool_result"]`
 
-        - `"web_search_tool_result"`
+        default: web_search_tool_result
 
     - `class WebFetchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -13879,7 +14103,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_fetch_tool_result_error"]`
 
-            - `"web_fetch_tool_result_error"`
+            default: web_fetch_tool_result_error
 
         - `class WebFetchBlock: …`
 
@@ -13891,19 +14115,19 @@ print(message_tokens_count.input_tokens)
 
               - `enabled: bool`
 
+                default: false
+
             - `source: Source`
 
               - `class Base64PDFSource: …`
 
                 - `data: str`
 
+                  format: byte
+
                 - `media_type: Literal["application/pdf"]`
 
-                  - `"application/pdf"`
-
                 - `type: Literal["base64"]`
-
-                  - `"base64"`
 
               - `class PlainTextSource: …`
 
@@ -13911,11 +14135,7 @@ print(message_tokens_count.input_tokens)
 
                 - `media_type: Literal["text/plain"]`
 
-                  - `"text/plain"`
-
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
             - `title: Optional[str]`
 
@@ -13923,7 +14143,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["document"]`
 
-              - `"document"`
+              default: document
 
           - `retrieved_at: Optional[str]`
 
@@ -13931,7 +14151,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_fetch_result"]`
 
-            - `"web_fetch_result"`
+            default: web_fetch_result
 
           - `url: str`
 
@@ -13939,9 +14159,11 @@ print(message_tokens_count.input_tokens)
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_fetch_tool_result"]`
 
-        - `"web_fetch_tool_result"`
+        default: web_fetch_tool_result
 
     - `class CodeExecutionToolResultBlock: …`
 
@@ -13963,7 +14185,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_tool_result_error"]`
 
-            - `"code_execution_tool_result_error"`
+            default: code_execution_tool_result_error
 
         - `class CodeExecutionResultBlock: …`
 
@@ -13973,7 +14195,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_output"]`
 
-              - `"code_execution_output"`
+              default: code_execution_output
 
           - `return_code: int`
 
@@ -13983,7 +14205,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_result"]`
 
-            - `"code_execution_result"`
+            default: code_execution_result
 
         - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -13995,6 +14217,8 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_output"]`
 
+              default: code_execution_output
+
           - `encrypted_stdout: str`
 
           - `return_code: int`
@@ -14003,13 +14227,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["encrypted_code_execution_result"]`
 
-            - `"encrypted_code_execution_result"`
+            default: encrypted_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["code_execution_tool_result"]`
 
-        - `"code_execution_tool_result"`
+        default: code_execution_tool_result
 
     - `class BashCodeExecutionToolResultBlock: …`
 
@@ -14031,7 +14257,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["bash_code_execution_tool_result_error"]`
 
-            - `"bash_code_execution_tool_result_error"`
+            default: bash_code_execution_tool_result_error
 
         - `class BashCodeExecutionResultBlock: …`
 
@@ -14041,7 +14267,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_output"]`
 
-              - `"bash_code_execution_output"`
+              default: bash_code_execution_output
 
           - `return_code: int`
 
@@ -14051,13 +14277,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["bash_code_execution_result"]`
 
-            - `"bash_code_execution_result"`
+            default: bash_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["bash_code_execution_tool_result"]`
 
-        - `"bash_code_execution_tool_result"`
+        default: bash_code_execution_tool_result
 
     - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -14081,7 +14309,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-            - `"text_editor_code_execution_tool_result_error"`
+            default: text_editor_code_execution_tool_result_error
 
         - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -14103,7 +14331,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_view_result"]`
 
-            - `"text_editor_code_execution_view_result"`
+            default: text_editor_code_execution_view_result
 
         - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -14111,7 +14339,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_create_result"]`
 
-            - `"text_editor_code_execution_create_result"`
+            default: text_editor_code_execution_create_result
 
         - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -14127,13 +14355,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-            - `"text_editor_code_execution_str_replace_result"`
+            default: text_editor_code_execution_str_replace_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["text_editor_code_execution_tool_result"]`
 
-        - `"text_editor_code_execution_tool_result"`
+        default: text_editor_code_execution_tool_result
 
     - `class ToolSearchToolResultBlock: …`
 
@@ -14155,7 +14385,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["tool_search_tool_result_error"]`
 
-            - `"tool_search_tool_result_error"`
+            default: tool_search_tool_result_error
 
         - `class ToolSearchToolSearchResultBlock: …`
 
@@ -14163,19 +14393,23 @@ print(message_tokens_count.input_tokens)
 
             - `tool_name: str`
 
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `type: Literal["tool_reference"]`
 
-              - `"tool_reference"`
+              default: tool_reference
 
           - `type: Literal["tool_search_tool_search_result"]`
 
-            - `"tool_search_tool_search_result"`
+            default: tool_search_tool_search_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["tool_search_tool_result"]`
 
-        - `"tool_search_tool_result"`
+        default: tool_search_tool_result
 
     - `class ContainerUploadBlock: …`
 
@@ -14185,7 +14419,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["container_upload"]`
 
-        - `"container_upload"`
+        default: container_upload
 
   - `model: Model`
 
@@ -14283,7 +14517,7 @@ print(message_tokens_count.input_tokens)
 
     This will always be `"assistant"`.
 
-    - `"assistant"`
+    default: assistant
 
   - `stop_details: Optional[RefusalStopDetails]`
 
@@ -14321,7 +14555,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["refusal"]`
 
-      - `"refusal"`
+      default: refusal
 
   - `stop_reason: Optional[StopReason]`
 
@@ -14365,7 +14599,7 @@ print(message_tokens_count.input_tokens)
 
     For Messages, this is always `"message"`.
 
-    - `"message"`
+    default: message
 
   - `usage: Usage`
 
@@ -14387,17 +14621,25 @@ print(message_tokens_count.input_tokens)
 
         The number of input tokens used to create the 1 hour cache entry.
 
+        default: 0, minimum: 0
+
       - `ephemeral_5m_input_tokens: int`
 
         The number of input tokens used to create the 5 minute cache entry.
+
+        default: 0, minimum: 0
 
     - `cache_creation_input_tokens: Optional[int]`
 
       The number of input tokens used to create the cache entry.
 
+      minimum: 0
+
     - `cache_read_input_tokens: Optional[int]`
 
       The number of input tokens read from the cache.
+
+      minimum: 0
 
     - `inference_geo: Optional[str]`
 
@@ -14407,9 +14649,13 @@ print(message_tokens_count.input_tokens)
 
       The number of input tokens which were used.
 
+      minimum: 0
+
     - `output_tokens: int`
 
       The number of output tokens which were used.
+
+      minimum: 0
 
     - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -14431,6 +14677,8 @@ print(message_tokens_count.input_tokens)
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+        default: 0, minimum: 0
+
     - `server_tool_use: Optional[ServerToolUsage]`
 
       The number of server tool requests.
@@ -14439,9 +14687,13 @@ print(message_tokens_count.input_tokens)
 
         The number of web fetch tool requests.
 
+        default: 0, minimum: 0
+
       - `web_search_requests: int`
 
         The number of web search tool requests.
+
+        default: 0, minimum: 0
 
     - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -14469,8 +14721,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["object"]`
 
-        - `"object"`
-
       - `properties: Optional[Dict[str, object]]`
 
       - `required: Optional[List[str]]`
@@ -14480,6 +14730,8 @@ print(message_tokens_count.input_tokens)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
+
+      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14496,8 +14748,6 @@ print(message_tokens_count.input_tokens)
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -14536,8 +14786,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Optional[Literal["custom"]]`
 
-      - `"custom"`
-
   - `class ToolBash20250124: …`
 
     - `name: Literal["bash"]`
@@ -14546,11 +14794,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20250124"]`
-
-      - `"bash_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14584,11 +14828,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250522"]`
-
-      - `"code_execution_20250522"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14620,11 +14860,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250825"]`
-
-      - `"code_execution_20250825"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14658,11 +14894,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260120"]`
-
-      - `"code_execution_20260120"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14696,11 +14928,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260521"]`
-
-      - `"code_execution_20260521"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -14732,8 +14960,6 @@ print(message_tokens_count.input_tokens)
     from its schema.
 
     - `type: Literal["browser_toolset_20260801"]`
-
-      - `"browser_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15138,11 +15364,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"memory"`
-
     - `type: Literal["memory_20250818"]`
-
-      - `"memory_20250818"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15180,8 +15402,6 @@ print(message_tokens_count.input_tokens)
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-      - `"computer_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15418,11 +15638,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20250124"]`
-
-      - `"text_editor_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15456,11 +15672,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250429"]`
-
-      - `"text_editor_20250429"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15494,11 +15706,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250728"]`
-
-      - `"text_editor_20250728"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15524,6 +15732,8 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+      minimum: 1
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -15536,11 +15746,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20250305"]`
-
-      - `"web_search_20250305"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15572,6 +15778,8 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of times the tool can be used in the API request.
 
+      exclusiveMinimum: 0
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -15582,23 +15790,29 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["approximate"]`
 
-        - `"approximate"`
-
       - `city: Optional[str]`
 
         The city of the user.
+
+        maxLength: 255, minLength: 1
 
       - `country: Optional[str]`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+        maxLength: 2, minLength: 2
+
       - `region: Optional[str]`
 
         The region of the user.
 
+        maxLength: 255, minLength: 1
+
       - `timezone: Optional[str]`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+        maxLength: 255, minLength: 1
 
   - `class WebFetchTool20250910: …`
 
@@ -15608,11 +15822,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20250910"]`
-
-      - `"web_fetch_20250910"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15650,9 +15860,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -15666,11 +15880,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260209"]`
-
-      - `"web_search_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15701,6 +15911,8 @@ print(message_tokens_count.input_tokens)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -15718,11 +15930,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260209"]`
-
-      - `"web_fetch_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15758,9 +15966,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -15776,11 +15988,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260309"]`
-
-      - `"web_fetch_20260309"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15816,9 +16024,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -15836,11 +16048,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260318"]`
-
-      - `"web_search_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15871,6 +16079,8 @@ print(message_tokens_count.input_tokens)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -15896,11 +16106,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260318"]`
-
-      - `"web_fetch_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -15936,9 +16142,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -15963,8 +16173,6 @@ print(message_tokens_count.input_tokens)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_bm25"`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -16001,8 +16209,6 @@ print(message_tokens_count.input_tokens)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_regex"`
 
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
@@ -16050,9 +16256,13 @@ print(message_tokens_count.input_tokens)
 
       List of skills to load in the container
 
+      maxItems: 20
+
       - `skill_id: str`
 
         Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `type: Literal["anthropic", "custom"]`
 
@@ -16066,6 +16276,8 @@ print(message_tokens_count.input_tokens)
 
         Skill version or 'latest' for most recent version
 
+        maxLength: 64, minLength: 1
+
   - `str`
 
 ### Message Delta Usage
@@ -16076,13 +16288,19 @@ print(message_tokens_count.input_tokens)
 
     The cumulative number of input tokens used to create the cache entry.
 
+    minimum: 0
+
   - `cache_read_input_tokens: Optional[int]`
 
     The cumulative number of input tokens read from the cache.
 
+    minimum: 0
+
   - `input_tokens: Optional[int]`
 
     The cumulative number of input tokens which were used.
+
+    minimum: 0
 
   - `output_tokens: int`
 
@@ -16108,6 +16326,8 @@ print(message_tokens_count.input_tokens)
       generation count by a small number of tokens. Always ≤ `output_tokens`;
       `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+      default: 0, minimum: 0
+
   - `server_tool_use: Optional[ServerToolUsage]`
 
     The number of server tool requests.
@@ -16116,9 +16336,13 @@ print(message_tokens_count.input_tokens)
 
       The number of web fetch tool requests.
 
+      default: 0, minimum: 0
+
     - `web_search_requests: int`
 
       The number of web search tool requests.
+
+      default: 0, minimum: 0
 
 ### Message Param
 
@@ -16134,17 +16358,15 @@ print(message_tokens_count.input_tokens)
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -16169,15 +16391,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class CitationPageLocationParam: …`
 
@@ -16185,15 +16411,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class CitationContentBlockLocationParam: …`
 
@@ -16205,7 +16435,11 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -16217,9 +16451,9 @@ print(message_tokens_count.input_tokens)
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class CitationWebSearchResultLocationParam: …`
 
@@ -16229,11 +16463,13 @@ print(message_tokens_count.input_tokens)
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class CitationSearchResultLocationParam: …`
 
@@ -16255,17 +16491,19 @@ print(message_tokens_count.input_tokens)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class ImageBlockParam: …`
 
@@ -16274,6 +16512,8 @@ print(message_tokens_count.input_tokens)
           - `class Base64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -16287,13 +16527,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class URLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -16303,11 +16539,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16333,13 +16565,11 @@ print(message_tokens_count.input_tokens)
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -16347,11 +16577,7 @@ print(message_tokens_count.input_tokens)
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class ContentBlockSource: …`
 
@@ -16367,13 +16593,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class URLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -16383,11 +16605,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16399,13 +16617,19 @@ print(message_tokens_count.input_tokens)
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
       - `class SearchResultBlockParam: …`
 
         - `content: List[TextBlockParam]`
 
           - `text: str`
+
+            minLength: 1
 
           - `type: Literal["text"]`
 
@@ -16420,8 +16644,6 @@ print(message_tokens_count.input_tokens)
         - `title: str`
 
         - `type: Literal["search_result"]`
-
-          - `"search_result"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16443,8 +16665,6 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["thinking"]`
 
-          - `"thinking"`
-
       - `class RedactedThinkingBlockParam: …`
 
         - `data: str`
@@ -16453,19 +16673,19 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["redacted_thinking"]`
 
-          - `"redacted_thinking"`
-
       - `class ToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^[a-zA-Z0-9_-]+$
 
         - `input: Dict[str, object]`
 
         - `name: str`
 
-        - `type: Literal["tool_use"]`
+          maxLength: 200, minLength: 1
 
-          - `"tool_use"`
+        - `type: Literal["tool_use"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16481,37 +16701,37 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["direct"]`
 
-              - `"direct"`
-
           - `class ServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20250825"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20250825"`
+            - `type: Literal["code_execution_20250825"]`
 
           - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20260120"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20260120"`
+            - `type: Literal["code_execution_20260120"]`
 
         - `toolset_name: Optional[str]`
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ToolResultBlockParam: …`
 
         - `tool_use_id: str`
 
-        - `type: Literal["tool_result"]`
+          pattern: ^[a-zA-Z0-9_-]+$
 
-          - `"tool_result"`
+        - `type: Literal["tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16537,9 +16757,9 @@ print(message_tokens_count.input_tokens)
 
               - `tool_name: str`
 
-              - `type: Literal["tool_reference"]`
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `"tool_reference"`
+              - `type: Literal["tool_reference"]`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16559,25 +16779,31 @@ print(message_tokens_count.input_tokens)
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                maxItems: 100
+
                 - `tab_id: str`
 
                   The caller-assigned identifier for this tab, unique within the inventory.
+
+                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: str`
 
                   The title of the page the tab is showing. May be empty.
 
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                 - `url: str`
 
                   The URL of the page the tab is showing. May be empty.
+
+                  maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `active: Optional[bool]`
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
               - `type: Literal["browser_state"]`
-
-                - `"browser_state"`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16586,6 +16812,8 @@ print(message_tokens_count.input_tokens)
               - `state_changes: Optional[List[BrowserStateChange]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                maxItems: 200, minItems: 1
 
                 - `class BrowserStateChangeTabOpened: …`
 
@@ -16601,9 +16829,9 @@ print(message_tokens_count.input_tokens)
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                  - `type: Literal["tab_opened"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"tab_opened"`
+                  - `type: Literal["tab_opened"]`
 
                 - `class BrowserStateChangeDownloadStarted: …`
 
@@ -16613,13 +16841,15 @@ print(message_tokens_count.input_tokens)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_started"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_started"`
+                  - `type: Literal["download_started"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
+
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -16632,21 +16862,27 @@ print(message_tokens_count.input_tokens)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_completed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_completed"`
+                  - `type: Literal["download_completed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `path: Optional[str]`
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                   - `size_bytes: Optional[int]`
 
                     The completed download's size.
+
+                    minimum: 0
 
                 - `class BrowserStateChangeDownloadFailed: …`
 
@@ -16656,17 +16892,21 @@ print(message_tokens_count.input_tokens)
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                  - `type: Literal["download_failed"]`
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `"download_failed"`
+                  - `type: Literal["download_failed"]`
 
                   - `url: str`
 
                     The final post-redirect URL the download was served from.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `error: Optional[str]`
 
                     The failure or cancellation detail, when known.
+
+                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
         - `is_error: Optional[bool]`
 
@@ -16674,9 +16914,13 @@ print(message_tokens_count.input_tokens)
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ServerToolUseBlockParam: …`
 
         - `id: str`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `input: Dict[str, object]`
 
@@ -16697,8 +16941,6 @@ print(message_tokens_count.input_tokens)
           - `"tool_search_tool_bm25"`
 
         - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16730,8 +16972,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_search_result"]`
 
-              - `"web_search_result"`
-
             - `url: str`
 
             - `page_age: Optional[str]`
@@ -16754,13 +16994,11 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_search_tool_result_error"]`
 
-              - `"web_search_tool_result_error"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["web_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_search_tool_result"`
+        - `type: Literal["web_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16808,15 +17046,11 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
-              - `"web_fetch_tool_result_error"`
-
           - `class WebFetchBlockParam: …`
 
             - `content: DocumentBlockParam`
 
             - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
 
             - `url: str`
 
@@ -16828,9 +17062,9 @@ print(message_tokens_count.input_tokens)
 
         - `tool_use_id: str`
 
-        - `type: Literal["web_fetch_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"web_fetch_tool_result"`
+        - `type: Literal["web_fetch_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16870,8 +17104,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_tool_result_error"]`
 
-              - `"code_execution_tool_result_error"`
-
           - `class CodeExecutionResultBlockParam: …`
 
             - `content: List[CodeExecutionOutputBlockParam]`
@@ -16880,8 +17112,6 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
-
             - `return_code: int`
 
             - `stderr: str`
@@ -16889,8 +17119,6 @@ print(message_tokens_count.input_tokens)
             - `stdout: str`
 
             - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
 
           - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -16910,13 +17138,11 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-              - `"encrypted_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"code_execution_tool_result"`
+        - `type: Literal["code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16942,8 +17168,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
-              - `"bash_code_execution_tool_result_error"`
-
           - `class BashCodeExecutionResultBlockParam: …`
 
             - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -16951,8 +17175,6 @@ print(message_tokens_count.input_tokens)
               - `file_id: str`
 
               - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
 
             - `return_code: int`
 
@@ -16962,13 +17184,11 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_result"]`
 
-              - `"bash_code_execution_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["bash_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"bash_code_execution_tool_result"`
+        - `type: Literal["bash_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -16994,8 +17214,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-              - `"text_editor_code_execution_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -17012,8 +17230,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
-              - `"text_editor_code_execution_view_result"`
-
             - `num_lines: Optional[int]`
 
             - `start_line: Optional[int]`
@@ -17026,13 +17242,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
-              - `"text_editor_code_execution_create_result"`
-
           - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
 
             - `lines: Optional[List[str]]`
 
@@ -17046,9 +17258,9 @@ print(message_tokens_count.input_tokens)
 
         - `tool_use_id: str`
 
-        - `type: Literal["text_editor_code_execution_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"text_editor_code_execution_tool_result"`
+        - `type: Literal["text_editor_code_execution_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -17072,8 +17284,6 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["tool_search_tool_result_error"]`
 
-              - `"tool_search_tool_result_error"`
-
             - `error_message: Optional[str]`
 
           - `class ToolSearchToolSearchResultBlockParam: …`
@@ -17081,6 +17291,8 @@ print(message_tokens_count.input_tokens)
             - `tool_references: List[ToolReferenceBlockParam]`
 
               - `tool_name: str`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `type: Literal["tool_reference"]`
 
@@ -17090,13 +17302,11 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-              - `"tool_search_tool_search_result"`
-
         - `tool_use_id: str`
 
-        - `type: Literal["tool_search_tool_result"]`
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `"tool_search_tool_result"`
+        - `type: Literal["tool_search_tool_result"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -17110,8 +17320,6 @@ print(message_tokens_count.input_tokens)
         - `file_id: str`
 
         - `type: Literal["container_upload"]`
-
-          - `"container_upload"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -17142,6 +17350,8 @@ print(message_tokens_count.input_tokens)
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+    maxLength: 512
 
 ### Model
 
@@ -17263,8 +17473,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["json_schema"]`
 
-      - `"json_schema"`
-
 ### Output Tokens Details
 
 - `class OutputTokensDetails: …`
@@ -17280,6 +17488,8 @@ print(message_tokens_count.input_tokens)
     generation count by a small number of tokens. Always ≤ `output_tokens`;
     `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+    default: 0, minimum: 0
+
 ### Plain Text Source
 
 - `class PlainTextSource: …`
@@ -17288,11 +17498,7 @@ print(message_tokens_count.input_tokens)
 
   - `media_type: Literal["text/plain"]`
 
-    - `"text/plain"`
-
   - `type: Literal["text"]`
-
-    - `"text"`
 
 ### Raw Content Block Delta
 
@@ -17304,7 +17510,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["text_delta"]`
 
-      - `"text_delta"`
+      default: text_delta
 
   - `class InputJSONDelta: …`
 
@@ -17312,7 +17518,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["input_json_delta"]`
 
-      - `"input_json_delta"`
+      default: input_json_delta
 
   - `class CitationsDelta: …`
 
@@ -17324,6 +17530,8 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
 
         - `end_char_index: int`
@@ -17332,15 +17540,19 @@ print(message_tokens_count.input_tokens)
 
         - `start_char_index: int`
 
+          minimum: 0
+
         - `type: Literal["char_location"]`
 
-          - `"char_location"`
+          default: char_location
 
       - `class CitationPageLocation: …`
 
         - `cited_text: str`
 
         - `document_index: int`
+
+          minimum: 0
 
         - `document_title: Optional[str]`
 
@@ -17350,9 +17562,11 @@ print(message_tokens_count.input_tokens)
 
         - `start_page_number: int`
 
+          minimum: 1
+
         - `type: Literal["page_location"]`
 
-          - `"page_location"`
+          default: page_location
 
       - `class CitationContentBlockLocation: …`
 
@@ -17363,6 +17577,8 @@ print(message_tokens_count.input_tokens)
           Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
         - `document_index: int`
+
+          minimum: 0
 
         - `document_title: Optional[str]`
 
@@ -17378,9 +17594,11 @@ print(message_tokens_count.input_tokens)
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `type: Literal["content_block_location"]`
 
-          - `"content_block_location"`
+          default: content_block_location
 
       - `class CitationsWebSearchResultLocation: …`
 
@@ -17390,9 +17608,11 @@ print(message_tokens_count.input_tokens)
 
         - `title: Optional[str]`
 
+          maxLength: 512
+
         - `type: Literal["web_search_result_location"]`
 
-          - `"web_search_result_location"`
+          default: web_search_result_location
 
         - `url: str`
 
@@ -17416,21 +17636,25 @@ print(message_tokens_count.input_tokens)
 
           Counted separately from `document_index`; server-side web search results are not included in this count.
 
+          minimum: 0
+
         - `source: str`
 
         - `start_block_index: int`
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `title: Optional[str]`
 
         - `type: Literal["search_result_location"]`
 
-          - `"search_result_location"`
+          default: search_result_location
 
     - `type: Literal["citations_delta"]`
 
-      - `"citations_delta"`
+      default: citations_delta
 
   - `class ThinkingDelta: …`
 
@@ -17440,7 +17664,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["thinking_delta"]`
 
-      - `"thinking_delta"`
+      default: thinking_delta
 
   - `class SignatureDelta: …`
 
@@ -17450,7 +17674,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["signature_delta"]`
 
-      - `"signature_delta"`
+      default: signature_delta
 
 ### Raw Content Block Delta Event
 
@@ -17464,7 +17688,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_delta"]`
 
-        - `"text_delta"`
+        default: text_delta
 
     - `class InputJSONDelta: …`
 
@@ -17472,7 +17696,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["input_json_delta"]`
 
-        - `"input_json_delta"`
+        default: input_json_delta
 
     - `class CitationsDelta: …`
 
@@ -17484,6 +17708,8 @@ print(message_tokens_count.input_tokens)
 
           - `document_index: int`
 
+            minimum: 0
+
           - `document_title: Optional[str]`
 
           - `end_char_index: int`
@@ -17492,15 +17718,19 @@ print(message_tokens_count.input_tokens)
 
           - `start_char_index: int`
 
+            minimum: 0
+
           - `type: Literal["char_location"]`
 
-            - `"char_location"`
+            default: char_location
 
         - `class CitationPageLocation: …`
 
           - `cited_text: str`
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -17510,9 +17740,11 @@ print(message_tokens_count.input_tokens)
 
           - `start_page_number: int`
 
+            minimum: 1
+
           - `type: Literal["page_location"]`
 
-            - `"page_location"`
+            default: page_location
 
         - `class CitationContentBlockLocation: …`
 
@@ -17523,6 +17755,8 @@ print(message_tokens_count.input_tokens)
             Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -17538,9 +17772,11 @@ print(message_tokens_count.input_tokens)
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `type: Literal["content_block_location"]`
 
-            - `"content_block_location"`
+            default: content_block_location
 
         - `class CitationsWebSearchResultLocation: …`
 
@@ -17550,9 +17786,11 @@ print(message_tokens_count.input_tokens)
 
           - `title: Optional[str]`
 
+            maxLength: 512
+
           - `type: Literal["web_search_result_location"]`
 
-            - `"web_search_result_location"`
+            default: web_search_result_location
 
           - `url: str`
 
@@ -17576,21 +17814,25 @@ print(message_tokens_count.input_tokens)
 
             Counted separately from `document_index`; server-side web search results are not included in this count.
 
+            minimum: 0
+
           - `source: str`
 
           - `start_block_index: int`
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `title: Optional[str]`
 
           - `type: Literal["search_result_location"]`
 
-            - `"search_result_location"`
+            default: search_result_location
 
       - `type: Literal["citations_delta"]`
 
-        - `"citations_delta"`
+        default: citations_delta
 
     - `class ThinkingDelta: …`
 
@@ -17600,7 +17842,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["thinking_delta"]`
 
-        - `"thinking_delta"`
+        default: thinking_delta
 
     - `class SignatureDelta: …`
 
@@ -17610,13 +17852,13 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["signature_delta"]`
 
-        - `"signature_delta"`
+        default: signature_delta
 
   - `index: int`
 
   - `type: Literal["content_block_delta"]`
 
-    - `"content_block_delta"`
+    default: content_block_delta
 
 ### Raw Content Block Start Event
 
@@ -17640,6 +17882,8 @@ print(message_tokens_count.input_tokens)
 
           - `document_index: int`
 
+            minimum: 0
+
           - `document_title: Optional[str]`
 
           - `end_char_index: int`
@@ -17648,15 +17892,19 @@ print(message_tokens_count.input_tokens)
 
           - `start_char_index: int`
 
+            minimum: 0
+
           - `type: Literal["char_location"]`
 
-            - `"char_location"`
+            default: char_location
 
         - `class CitationPageLocation: …`
 
           - `cited_text: str`
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -17666,9 +17914,11 @@ print(message_tokens_count.input_tokens)
 
           - `start_page_number: int`
 
+            minimum: 1
+
           - `type: Literal["page_location"]`
 
-            - `"page_location"`
+            default: page_location
 
         - `class CitationContentBlockLocation: …`
 
@@ -17679,6 +17929,8 @@ print(message_tokens_count.input_tokens)
             Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
           - `document_index: int`
+
+            minimum: 0
 
           - `document_title: Optional[str]`
 
@@ -17694,9 +17946,11 @@ print(message_tokens_count.input_tokens)
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `type: Literal["content_block_location"]`
 
-            - `"content_block_location"`
+            default: content_block_location
 
         - `class CitationsWebSearchResultLocation: …`
 
@@ -17706,9 +17960,11 @@ print(message_tokens_count.input_tokens)
 
           - `title: Optional[str]`
 
+            maxLength: 512
+
           - `type: Literal["web_search_result_location"]`
 
-            - `"web_search_result_location"`
+            default: web_search_result_location
 
           - `url: str`
 
@@ -17732,23 +17988,29 @@ print(message_tokens_count.input_tokens)
 
             Counted separately from `document_index`; server-side web search results are not included in this count.
 
+            minimum: 0
+
           - `source: str`
 
           - `start_block_index: int`
 
             0-based index of the first cited block in the source's `content` array.
 
+            minimum: 0
+
           - `title: Optional[str]`
 
           - `type: Literal["search_result_location"]`
 
-            - `"search_result_location"`
+            default: search_result_location
 
       - `text: str`
 
+        maxLength: 5000000, minLength: 0
+
       - `type: Literal["text"]`
 
-        - `"text"`
+        default: text
 
     - `class ThinkingBlock: …`
 
@@ -17766,7 +18028,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["thinking"]`
 
-        - `"thinking"`
+        default: thinking
 
     - `class RedactedThinkingBlock: …`
 
@@ -17780,15 +18042,19 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["redacted_thinking"]`
 
-        - `"redacted_thinking"`
+        default: redacted_thinking
 
     - `class ToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^[a-zA-Z0-9_-]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -17796,45 +18062,51 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["direct"]`
 
-            - `"direct"`
-
         - `class ServerToolCaller: …`
 
           Tool invocation generated by a server-side tool.
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20250825"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20250825"`
+          - `type: Literal["code_execution_20250825"]`
 
         - `class ServerToolCaller20260120: …`
 
           - `tool_id: str`
 
-          - `type: Literal["code_execution_20260120"]`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `"code_execution_20260120"`
+          - `type: Literal["code_execution_20260120"]`
 
       - `input: Dict[str, object]`
 
       - `name: str`
 
+        minLength: 1
+
       - `type: Literal["tool_use"]`
 
-        - `"tool_use"`
+        default: tool_use
 
       - `toolset_name: Optional[str]`
 
         For a toolset member tool_use, the toolset family.
 
+        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
     - `class ServerToolUseBlock: …`
 
       - `id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -17866,13 +18138,15 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["server_tool_use"]`
 
-        - `"server_tool_use"`
+        default: server_tool_use
 
     - `class WebSearchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -17904,7 +18178,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_search_tool_result_error"]`
 
-            - `"web_search_tool_result_error"`
+            default: web_search_tool_result_error
 
         - `List[WebSearchResultBlock]`
 
@@ -17916,21 +18190,25 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_search_result"]`
 
-            - `"web_search_result"`
+            default: web_search_result
 
           - `url: str`
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_search_tool_result"]`
 
-        - `"web_search_tool_result"`
+        default: web_search_tool_result
 
     - `class WebFetchToolResultBlock: …`
 
       - `caller: Caller`
 
         Tool invocation directly from the model.
+
+        default: {"type":"direct"}
 
         - `class DirectCaller: …`
 
@@ -17968,7 +18246,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_fetch_tool_result_error"]`
 
-            - `"web_fetch_tool_result_error"`
+            default: web_fetch_tool_result_error
 
         - `class WebFetchBlock: …`
 
@@ -17980,19 +18258,19 @@ print(message_tokens_count.input_tokens)
 
               - `enabled: bool`
 
+                default: false
+
             - `source: Source`
 
               - `class Base64PDFSource: …`
 
                 - `data: str`
 
+                  format: byte
+
                 - `media_type: Literal["application/pdf"]`
 
-                  - `"application/pdf"`
-
                 - `type: Literal["base64"]`
-
-                  - `"base64"`
 
               - `class PlainTextSource: …`
 
@@ -18000,11 +18278,7 @@ print(message_tokens_count.input_tokens)
 
                 - `media_type: Literal["text/plain"]`
 
-                  - `"text/plain"`
-
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
             - `title: Optional[str]`
 
@@ -18012,7 +18286,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["document"]`
 
-              - `"document"`
+              default: document
 
           - `retrieved_at: Optional[str]`
 
@@ -18020,7 +18294,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["web_fetch_result"]`
 
-            - `"web_fetch_result"`
+            default: web_fetch_result
 
           - `url: str`
 
@@ -18028,9 +18302,11 @@ print(message_tokens_count.input_tokens)
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["web_fetch_tool_result"]`
 
-        - `"web_fetch_tool_result"`
+        default: web_fetch_tool_result
 
     - `class CodeExecutionToolResultBlock: …`
 
@@ -18052,7 +18328,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_tool_result_error"]`
 
-            - `"code_execution_tool_result_error"`
+            default: code_execution_tool_result_error
 
         - `class CodeExecutionResultBlock: …`
 
@@ -18062,7 +18338,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_output"]`
 
-              - `"code_execution_output"`
+              default: code_execution_output
 
           - `return_code: int`
 
@@ -18072,7 +18348,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["code_execution_result"]`
 
-            - `"code_execution_result"`
+            default: code_execution_result
 
         - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -18084,6 +18360,8 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_output"]`
 
+              default: code_execution_output
+
           - `encrypted_stdout: str`
 
           - `return_code: int`
@@ -18092,13 +18370,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["encrypted_code_execution_result"]`
 
-            - `"encrypted_code_execution_result"`
+            default: encrypted_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["code_execution_tool_result"]`
 
-        - `"code_execution_tool_result"`
+        default: code_execution_tool_result
 
     - `class BashCodeExecutionToolResultBlock: …`
 
@@ -18120,7 +18400,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["bash_code_execution_tool_result_error"]`
 
-            - `"bash_code_execution_tool_result_error"`
+            default: bash_code_execution_tool_result_error
 
         - `class BashCodeExecutionResultBlock: …`
 
@@ -18130,7 +18410,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_output"]`
 
-              - `"bash_code_execution_output"`
+              default: bash_code_execution_output
 
           - `return_code: int`
 
@@ -18140,13 +18420,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["bash_code_execution_result"]`
 
-            - `"bash_code_execution_result"`
+            default: bash_code_execution_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["bash_code_execution_tool_result"]`
 
-        - `"bash_code_execution_tool_result"`
+        default: bash_code_execution_tool_result
 
     - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -18170,7 +18452,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-            - `"text_editor_code_execution_tool_result_error"`
+            default: text_editor_code_execution_tool_result_error
 
         - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -18192,7 +18474,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_view_result"]`
 
-            - `"text_editor_code_execution_view_result"`
+            default: text_editor_code_execution_view_result
 
         - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -18200,7 +18482,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_create_result"]`
 
-            - `"text_editor_code_execution_create_result"`
+            default: text_editor_code_execution_create_result
 
         - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -18216,13 +18498,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-            - `"text_editor_code_execution_str_replace_result"`
+            default: text_editor_code_execution_str_replace_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["text_editor_code_execution_tool_result"]`
 
-        - `"text_editor_code_execution_tool_result"`
+        default: text_editor_code_execution_tool_result
 
     - `class ToolSearchToolResultBlock: …`
 
@@ -18244,7 +18528,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["tool_search_tool_result_error"]`
 
-            - `"tool_search_tool_result_error"`
+            default: tool_search_tool_result_error
 
         - `class ToolSearchToolSearchResultBlock: …`
 
@@ -18252,19 +18536,23 @@ print(message_tokens_count.input_tokens)
 
             - `tool_name: str`
 
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `type: Literal["tool_reference"]`
 
-              - `"tool_reference"`
+              default: tool_reference
 
           - `type: Literal["tool_search_tool_search_result"]`
 
-            - `"tool_search_tool_search_result"`
+            default: tool_search_tool_search_result
 
       - `tool_use_id: str`
 
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
       - `type: Literal["tool_search_tool_result"]`
 
-        - `"tool_search_tool_result"`
+        default: tool_search_tool_result
 
     - `class ContainerUploadBlock: …`
 
@@ -18274,13 +18562,13 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["container_upload"]`
 
-        - `"container_upload"`
+        default: container_upload
 
   - `index: int`
 
   - `type: Literal["content_block_start"]`
 
-    - `"content_block_start"`
+    default: content_block_start
 
 ### Raw Content Block Stop Event
 
@@ -18290,7 +18578,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["content_block_stop"]`
 
-    - `"content_block_stop"`
+    default: content_block_stop
 
 ### Raw Message Delta Event
 
@@ -18310,6 +18598,8 @@ print(message_tokens_count.input_tokens)
 
         The time at which the container will expire.
 
+        format: date-time
+
       - `skills: Optional[List[ContainerSkill]]`
 
         Skills loaded in the container
@@ -18317,6 +18607,8 @@ print(message_tokens_count.input_tokens)
         - `skill_id: str`
 
           Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `type: Literal["anthropic", "custom"]`
 
@@ -18329,6 +18621,8 @@ print(message_tokens_count.input_tokens)
         - `version: str`
 
           The resolved version: a skill version ID for custom skills.
+
+          maxLength: 64, minLength: 1
 
     - `stop_details: Optional[RefusalStopDetails]`
 
@@ -18366,7 +18660,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["refusal"]`
 
-        - `"refusal"`
+        default: refusal
 
     - `stop_reason: Optional[StopReason]`
 
@@ -18388,7 +18682,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["message_delta"]`
 
-    - `"message_delta"`
+    default: message_delta
 
   - `usage: MessageDeltaUsage`
 
@@ -18406,13 +18700,19 @@ print(message_tokens_count.input_tokens)
 
       The cumulative number of input tokens used to create the cache entry.
 
+      minimum: 0
+
     - `cache_read_input_tokens: Optional[int]`
 
       The cumulative number of input tokens read from the cache.
 
+      minimum: 0
+
     - `input_tokens: Optional[int]`
 
       The cumulative number of input tokens which were used.
+
+      minimum: 0
 
     - `output_tokens: int`
 
@@ -18438,6 +18738,8 @@ print(message_tokens_count.input_tokens)
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+        default: 0, minimum: 0
+
     - `server_tool_use: Optional[ServerToolUsage]`
 
       The number of server tool requests.
@@ -18446,9 +18748,13 @@ print(message_tokens_count.input_tokens)
 
         The number of web fetch tool requests.
 
+        default: 0, minimum: 0
+
       - `web_search_requests: int`
 
         The number of web search tool requests.
+
+        default: 0, minimum: 0
 
 ### Raw Message Start Event
 
@@ -18474,6 +18780,8 @@ print(message_tokens_count.input_tokens)
 
         The time at which the container will expire.
 
+        format: date-time
+
       - `skills: Optional[List[ContainerSkill]]`
 
         Skills loaded in the container
@@ -18481,6 +18789,8 @@ print(message_tokens_count.input_tokens)
         - `skill_id: str`
 
           Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `type: Literal["anthropic", "custom"]`
 
@@ -18493,6 +18803,8 @@ print(message_tokens_count.input_tokens)
         - `version: str`
 
           The resolved version: a skill version ID for custom skills.
+
+          maxLength: 64, minLength: 1
 
     - `content: List[ContentBlock]`
 
@@ -18537,6 +18849,8 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
 
             - `end_char_index: int`
@@ -18545,15 +18859,19 @@ print(message_tokens_count.input_tokens)
 
             - `start_char_index: int`
 
+              minimum: 0
+
             - `type: Literal["char_location"]`
 
-              - `"char_location"`
+              default: char_location
 
           - `class CitationPageLocation: …`
 
             - `cited_text: str`
 
             - `document_index: int`
+
+              minimum: 0
 
             - `document_title: Optional[str]`
 
@@ -18563,9 +18881,11 @@ print(message_tokens_count.input_tokens)
 
             - `start_page_number: int`
 
+              minimum: 1
+
             - `type: Literal["page_location"]`
 
-              - `"page_location"`
+              default: page_location
 
           - `class CitationContentBlockLocation: …`
 
@@ -18576,6 +18896,8 @@ print(message_tokens_count.input_tokens)
               Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
             - `document_index: int`
+
+              minimum: 0
 
             - `document_title: Optional[str]`
 
@@ -18591,9 +18913,11 @@ print(message_tokens_count.input_tokens)
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `type: Literal["content_block_location"]`
 
-              - `"content_block_location"`
+              default: content_block_location
 
           - `class CitationsWebSearchResultLocation: …`
 
@@ -18603,9 +18927,11 @@ print(message_tokens_count.input_tokens)
 
             - `title: Optional[str]`
 
+              maxLength: 512
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
+              default: web_search_result_location
 
             - `url: str`
 
@@ -18629,23 +18955,29 @@ print(message_tokens_count.input_tokens)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
 
-              - `"search_result_location"`
+              default: search_result_location
 
         - `text: str`
 
+          maxLength: 5000000, minLength: 0
+
         - `type: Literal["text"]`
 
-          - `"text"`
+          default: text
 
       - `class ThinkingBlock: …`
 
@@ -18663,7 +18995,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["thinking"]`
 
-          - `"thinking"`
+          default: thinking
 
       - `class RedactedThinkingBlock: …`
 
@@ -18677,15 +19009,19 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["redacted_thinking"]`
 
-          - `"redacted_thinking"`
+          default: redacted_thinking
 
       - `class ToolUseBlock: …`
 
         - `id: str`
 
+          pattern: ^[a-zA-Z0-9_-]+$
+
         - `caller: Caller`
 
           Tool invocation directly from the model.
+
+          default: {"type":"direct"}
 
           - `class DirectCaller: …`
 
@@ -18693,45 +19029,51 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["direct"]`
 
-              - `"direct"`
-
           - `class ServerToolCaller: …`
 
             Tool invocation generated by a server-side tool.
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20250825"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20250825"`
+            - `type: Literal["code_execution_20250825"]`
 
           - `class ServerToolCaller20260120: …`
 
             - `tool_id: str`
 
-            - `type: Literal["code_execution_20260120"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_20260120"`
+            - `type: Literal["code_execution_20260120"]`
 
         - `input: Dict[str, object]`
 
         - `name: str`
 
+          minLength: 1
+
         - `type: Literal["tool_use"]`
 
-          - `"tool_use"`
+          default: tool_use
 
         - `toolset_name: Optional[str]`
 
           For a toolset member tool_use, the toolset family.
 
+          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
       - `class ServerToolUseBlock: …`
 
         - `id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `caller: Caller`
 
           Tool invocation directly from the model.
+
+          default: {"type":"direct"}
 
           - `class DirectCaller: …`
 
@@ -18763,13 +19105,15 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["server_tool_use"]`
 
-          - `"server_tool_use"`
+          default: server_tool_use
 
       - `class WebSearchToolResultBlock: …`
 
         - `caller: Caller`
 
           Tool invocation directly from the model.
+
+          default: {"type":"direct"}
 
           - `class DirectCaller: …`
 
@@ -18801,7 +19145,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_search_tool_result_error"]`
 
-              - `"web_search_tool_result_error"`
+              default: web_search_tool_result_error
 
           - `List[WebSearchResultBlock]`
 
@@ -18813,21 +19157,25 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_search_result"]`
 
-              - `"web_search_result"`
+              default: web_search_result
 
             - `url: str`
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["web_search_tool_result"]`
 
-          - `"web_search_tool_result"`
+          default: web_search_tool_result
 
       - `class WebFetchToolResultBlock: …`
 
         - `caller: Caller`
 
           Tool invocation directly from the model.
+
+          default: {"type":"direct"}
 
           - `class DirectCaller: …`
 
@@ -18865,7 +19213,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
-              - `"web_fetch_tool_result_error"`
+              default: web_fetch_tool_result_error
 
           - `class WebFetchBlock: …`
 
@@ -18877,19 +19225,19 @@ print(message_tokens_count.input_tokens)
 
                 - `enabled: bool`
 
+                  default: false
+
               - `source: Source`
 
                 - `class Base64PDFSource: …`
 
                   - `data: str`
 
+                    format: byte
+
                   - `media_type: Literal["application/pdf"]`
 
-                    - `"application/pdf"`
-
                   - `type: Literal["base64"]`
-
-                    - `"base64"`
 
                 - `class PlainTextSource: …`
 
@@ -18897,11 +19245,7 @@ print(message_tokens_count.input_tokens)
 
                   - `media_type: Literal["text/plain"]`
 
-                    - `"text/plain"`
-
                   - `type: Literal["text"]`
-
-                    - `"text"`
 
               - `title: Optional[str]`
 
@@ -18909,7 +19253,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["document"]`
 
-                - `"document"`
+                default: document
 
             - `retrieved_at: Optional[str]`
 
@@ -18917,7 +19261,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["web_fetch_result"]`
 
-              - `"web_fetch_result"`
+              default: web_fetch_result
 
             - `url: str`
 
@@ -18925,9 +19269,11 @@ print(message_tokens_count.input_tokens)
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["web_fetch_tool_result"]`
 
-          - `"web_fetch_tool_result"`
+          default: web_fetch_tool_result
 
       - `class CodeExecutionToolResultBlock: …`
 
@@ -18949,7 +19295,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_tool_result_error"]`
 
-              - `"code_execution_tool_result_error"`
+              default: code_execution_tool_result_error
 
           - `class CodeExecutionResultBlock: …`
 
@@ -18959,7 +19305,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["code_execution_output"]`
 
-                - `"code_execution_output"`
+                default: code_execution_output
 
             - `return_code: int`
 
@@ -18969,7 +19315,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["code_execution_result"]`
 
-              - `"code_execution_result"`
+              default: code_execution_result
 
           - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -18981,6 +19327,8 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["code_execution_output"]`
 
+                default: code_execution_output
+
             - `encrypted_stdout: str`
 
             - `return_code: int`
@@ -18989,13 +19337,15 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-              - `"encrypted_code_execution_result"`
+              default: encrypted_code_execution_result
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["code_execution_tool_result"]`
 
-          - `"code_execution_tool_result"`
+          default: code_execution_tool_result
 
       - `class BashCodeExecutionToolResultBlock: …`
 
@@ -19017,7 +19367,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
-              - `"bash_code_execution_tool_result_error"`
+              default: bash_code_execution_tool_result_error
 
           - `class BashCodeExecutionResultBlock: …`
 
@@ -19027,7 +19377,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["bash_code_execution_output"]`
 
-                - `"bash_code_execution_output"`
+                default: bash_code_execution_output
 
             - `return_code: int`
 
@@ -19037,13 +19387,15 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["bash_code_execution_result"]`
 
-              - `"bash_code_execution_result"`
+              default: bash_code_execution_result
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["bash_code_execution_tool_result"]`
 
-          - `"bash_code_execution_tool_result"`
+          default: bash_code_execution_tool_result
 
       - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -19067,7 +19419,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-              - `"text_editor_code_execution_tool_result_error"`
+              default: text_editor_code_execution_tool_result_error
 
           - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -19089,7 +19441,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
-              - `"text_editor_code_execution_view_result"`
+              default: text_editor_code_execution_view_result
 
           - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -19097,7 +19449,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
-              - `"text_editor_code_execution_create_result"`
+              default: text_editor_code_execution_create_result
 
           - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -19113,13 +19465,15 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-              - `"text_editor_code_execution_str_replace_result"`
+              default: text_editor_code_execution_str_replace_result
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["text_editor_code_execution_tool_result"]`
 
-          - `"text_editor_code_execution_tool_result"`
+          default: text_editor_code_execution_tool_result
 
       - `class ToolSearchToolResultBlock: …`
 
@@ -19141,7 +19495,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["tool_search_tool_result_error"]`
 
-              - `"tool_search_tool_result_error"`
+              default: tool_search_tool_result_error
 
           - `class ToolSearchToolSearchResultBlock: …`
 
@@ -19149,19 +19503,23 @@ print(message_tokens_count.input_tokens)
 
               - `tool_name: str`
 
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
               - `type: Literal["tool_reference"]`
 
-                - `"tool_reference"`
+                default: tool_reference
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-              - `"tool_search_tool_search_result"`
+              default: tool_search_tool_search_result
 
         - `tool_use_id: str`
 
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
         - `type: Literal["tool_search_tool_result"]`
 
-          - `"tool_search_tool_result"`
+          default: tool_search_tool_result
 
       - `class ContainerUploadBlock: …`
 
@@ -19171,7 +19529,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["container_upload"]`
 
-          - `"container_upload"`
+          default: container_upload
 
     - `model: Model`
 
@@ -19269,7 +19627,7 @@ print(message_tokens_count.input_tokens)
 
       This will always be `"assistant"`.
 
-      - `"assistant"`
+      default: assistant
 
     - `stop_details: Optional[RefusalStopDetails]`
 
@@ -19307,7 +19665,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["refusal"]`
 
-        - `"refusal"`
+        default: refusal
 
     - `stop_reason: Optional[StopReason]`
 
@@ -19351,7 +19709,7 @@ print(message_tokens_count.input_tokens)
 
       For Messages, this is always `"message"`.
 
-      - `"message"`
+      default: message
 
     - `usage: Usage`
 
@@ -19373,17 +19731,25 @@ print(message_tokens_count.input_tokens)
 
           The number of input tokens used to create the 1 hour cache entry.
 
+          default: 0, minimum: 0
+
         - `ephemeral_5m_input_tokens: int`
 
           The number of input tokens used to create the 5 minute cache entry.
+
+          default: 0, minimum: 0
 
       - `cache_creation_input_tokens: Optional[int]`
 
         The number of input tokens used to create the cache entry.
 
+        minimum: 0
+
       - `cache_read_input_tokens: Optional[int]`
 
         The number of input tokens read from the cache.
+
+        minimum: 0
 
       - `inference_geo: Optional[str]`
 
@@ -19393,9 +19759,13 @@ print(message_tokens_count.input_tokens)
 
         The number of input tokens which were used.
 
+        minimum: 0
+
       - `output_tokens: int`
 
         The number of output tokens which were used.
+
+        minimum: 0
 
       - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -19417,6 +19787,8 @@ print(message_tokens_count.input_tokens)
           generation count by a small number of tokens. Always ≤ `output_tokens`;
           `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+          default: 0, minimum: 0
+
       - `server_tool_use: Optional[ServerToolUsage]`
 
         The number of server tool requests.
@@ -19425,9 +19797,13 @@ print(message_tokens_count.input_tokens)
 
           The number of web fetch tool requests.
 
+          default: 0, minimum: 0
+
         - `web_search_requests: int`
 
           The number of web search tool requests.
+
+          default: 0, minimum: 0
 
       - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -19441,7 +19817,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["message_start"]`
 
-    - `"message_start"`
+    default: message_start
 
 ### Raw Message Stop Event
 
@@ -19449,7 +19825,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["message_stop"]`
 
-    - `"message_stop"`
+    default: message_stop
 
 ### Raw Message Stream Event
 
@@ -19477,6 +19853,8 @@ print(message_tokens_count.input_tokens)
 
           The time at which the container will expire.
 
+          format: date-time
+
         - `skills: Optional[List[ContainerSkill]]`
 
           Skills loaded in the container
@@ -19484,6 +19862,8 @@ print(message_tokens_count.input_tokens)
           - `skill_id: str`
 
             Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `type: Literal["anthropic", "custom"]`
 
@@ -19496,6 +19876,8 @@ print(message_tokens_count.input_tokens)
           - `version: str`
 
             The resolved version: a skill version ID for custom skills.
+
+            maxLength: 64, minLength: 1
 
       - `content: List[ContentBlock]`
 
@@ -19540,6 +19922,8 @@ print(message_tokens_count.input_tokens)
 
               - `document_index: int`
 
+                minimum: 0
+
               - `document_title: Optional[str]`
 
               - `end_char_index: int`
@@ -19548,15 +19932,19 @@ print(message_tokens_count.input_tokens)
 
               - `start_char_index: int`
 
+                minimum: 0
+
               - `type: Literal["char_location"]`
 
-                - `"char_location"`
+                default: char_location
 
             - `class CitationPageLocation: …`
 
               - `cited_text: str`
 
               - `document_index: int`
+
+                minimum: 0
 
               - `document_title: Optional[str]`
 
@@ -19566,9 +19954,11 @@ print(message_tokens_count.input_tokens)
 
               - `start_page_number: int`
 
+                minimum: 1
+
               - `type: Literal["page_location"]`
 
-                - `"page_location"`
+                default: page_location
 
             - `class CitationContentBlockLocation: …`
 
@@ -19579,6 +19969,8 @@ print(message_tokens_count.input_tokens)
                 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
               - `document_index: int`
+
+                minimum: 0
 
               - `document_title: Optional[str]`
 
@@ -19594,9 +19986,11 @@ print(message_tokens_count.input_tokens)
 
                 0-based index of the first cited block in the source's `content` array.
 
+                minimum: 0
+
               - `type: Literal["content_block_location"]`
 
-                - `"content_block_location"`
+                default: content_block_location
 
             - `class CitationsWebSearchResultLocation: …`
 
@@ -19606,9 +20000,11 @@ print(message_tokens_count.input_tokens)
 
               - `title: Optional[str]`
 
+                maxLength: 512
+
               - `type: Literal["web_search_result_location"]`
 
-                - `"web_search_result_location"`
+                default: web_search_result_location
 
               - `url: str`
 
@@ -19632,23 +20028,29 @@ print(message_tokens_count.input_tokens)
 
                 Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                minimum: 0
+
               - `source: str`
 
               - `start_block_index: int`
 
                 0-based index of the first cited block in the source's `content` array.
 
+                minimum: 0
+
               - `title: Optional[str]`
 
               - `type: Literal["search_result_location"]`
 
-                - `"search_result_location"`
+                default: search_result_location
 
           - `text: str`
 
+            maxLength: 5000000, minLength: 0
+
           - `type: Literal["text"]`
 
-            - `"text"`
+            default: text
 
         - `class ThinkingBlock: …`
 
@@ -19666,7 +20068,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["thinking"]`
 
-            - `"thinking"`
+            default: thinking
 
         - `class RedactedThinkingBlock: …`
 
@@ -19680,15 +20082,19 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["redacted_thinking"]`
 
-            - `"redacted_thinking"`
+            default: redacted_thinking
 
         - `class ToolUseBlock: …`
 
           - `id: str`
 
+            pattern: ^[a-zA-Z0-9_-]+$
+
           - `caller: Caller`
 
             Tool invocation directly from the model.
+
+            default: {"type":"direct"}
 
             - `class DirectCaller: …`
 
@@ -19696,45 +20102,51 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["direct"]`
 
-                - `"direct"`
-
             - `class ServerToolCaller: …`
 
               Tool invocation generated by a server-side tool.
 
               - `tool_id: str`
 
-              - `type: Literal["code_execution_20250825"]`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `"code_execution_20250825"`
+              - `type: Literal["code_execution_20250825"]`
 
             - `class ServerToolCaller20260120: …`
 
               - `tool_id: str`
 
-              - `type: Literal["code_execution_20260120"]`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `"code_execution_20260120"`
+              - `type: Literal["code_execution_20260120"]`
 
           - `input: Dict[str, object]`
 
           - `name: str`
 
+            minLength: 1
+
           - `type: Literal["tool_use"]`
 
-            - `"tool_use"`
+            default: tool_use
 
           - `toolset_name: Optional[str]`
 
             For a toolset member tool_use, the toolset family.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class ServerToolUseBlock: …`
 
           - `id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `caller: Caller`
 
             Tool invocation directly from the model.
+
+            default: {"type":"direct"}
 
             - `class DirectCaller: …`
 
@@ -19766,13 +20178,15 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["server_tool_use"]`
 
-            - `"server_tool_use"`
+            default: server_tool_use
 
         - `class WebSearchToolResultBlock: …`
 
           - `caller: Caller`
 
             Tool invocation directly from the model.
+
+            default: {"type":"direct"}
 
             - `class DirectCaller: …`
 
@@ -19804,7 +20218,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["web_search_tool_result_error"]`
 
-                - `"web_search_tool_result_error"`
+                default: web_search_tool_result_error
 
             - `List[WebSearchResultBlock]`
 
@@ -19816,21 +20230,25 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["web_search_result"]`
 
-                - `"web_search_result"`
+                default: web_search_result
 
               - `url: str`
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["web_search_tool_result"]`
 
-            - `"web_search_tool_result"`
+            default: web_search_tool_result
 
         - `class WebFetchToolResultBlock: …`
 
           - `caller: Caller`
 
             Tool invocation directly from the model.
+
+            default: {"type":"direct"}
 
             - `class DirectCaller: …`
 
@@ -19868,7 +20286,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["web_fetch_tool_result_error"]`
 
-                - `"web_fetch_tool_result_error"`
+                default: web_fetch_tool_result_error
 
             - `class WebFetchBlock: …`
 
@@ -19880,19 +20298,19 @@ print(message_tokens_count.input_tokens)
 
                   - `enabled: bool`
 
+                    default: false
+
                 - `source: Source`
 
                   - `class Base64PDFSource: …`
 
                     - `data: str`
 
+                      format: byte
+
                     - `media_type: Literal["application/pdf"]`
 
-                      - `"application/pdf"`
-
                     - `type: Literal["base64"]`
-
-                      - `"base64"`
 
                   - `class PlainTextSource: …`
 
@@ -19900,11 +20318,7 @@ print(message_tokens_count.input_tokens)
 
                     - `media_type: Literal["text/plain"]`
 
-                      - `"text/plain"`
-
                     - `type: Literal["text"]`
-
-                      - `"text"`
 
                 - `title: Optional[str]`
 
@@ -19912,7 +20326,7 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["document"]`
 
-                  - `"document"`
+                  default: document
 
               - `retrieved_at: Optional[str]`
 
@@ -19920,7 +20334,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["web_fetch_result"]`
 
-                - `"web_fetch_result"`
+                default: web_fetch_result
 
               - `url: str`
 
@@ -19928,9 +20342,11 @@ print(message_tokens_count.input_tokens)
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["web_fetch_tool_result"]`
 
-            - `"web_fetch_tool_result"`
+            default: web_fetch_tool_result
 
         - `class CodeExecutionToolResultBlock: …`
 
@@ -19952,7 +20368,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["code_execution_tool_result_error"]`
 
-                - `"code_execution_tool_result_error"`
+                default: code_execution_tool_result_error
 
             - `class CodeExecutionResultBlock: …`
 
@@ -19962,7 +20378,7 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["code_execution_output"]`
 
-                  - `"code_execution_output"`
+                  default: code_execution_output
 
               - `return_code: int`
 
@@ -19972,7 +20388,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["code_execution_result"]`
 
-                - `"code_execution_result"`
+                default: code_execution_result
 
             - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -19984,6 +20400,8 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["code_execution_output"]`
 
+                  default: code_execution_output
+
               - `encrypted_stdout: str`
 
               - `return_code: int`
@@ -19992,13 +20410,15 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["encrypted_code_execution_result"]`
 
-                - `"encrypted_code_execution_result"`
+                default: encrypted_code_execution_result
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["code_execution_tool_result"]`
 
-            - `"code_execution_tool_result"`
+            default: code_execution_tool_result
 
         - `class BashCodeExecutionToolResultBlock: …`
 
@@ -20020,7 +20440,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["bash_code_execution_tool_result_error"]`
 
-                - `"bash_code_execution_tool_result_error"`
+                default: bash_code_execution_tool_result_error
 
             - `class BashCodeExecutionResultBlock: …`
 
@@ -20030,7 +20450,7 @@ print(message_tokens_count.input_tokens)
 
                 - `type: Literal["bash_code_execution_output"]`
 
-                  - `"bash_code_execution_output"`
+                  default: bash_code_execution_output
 
               - `return_code: int`
 
@@ -20040,13 +20460,15 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["bash_code_execution_result"]`
 
-                - `"bash_code_execution_result"`
+                default: bash_code_execution_result
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["bash_code_execution_tool_result"]`
 
-            - `"bash_code_execution_tool_result"`
+            default: bash_code_execution_tool_result
 
         - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -20070,7 +20492,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-                - `"text_editor_code_execution_tool_result_error"`
+                default: text_editor_code_execution_tool_result_error
 
             - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -20092,7 +20514,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["text_editor_code_execution_view_result"]`
 
-                - `"text_editor_code_execution_view_result"`
+                default: text_editor_code_execution_view_result
 
             - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -20100,7 +20522,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["text_editor_code_execution_create_result"]`
 
-                - `"text_editor_code_execution_create_result"`
+                default: text_editor_code_execution_create_result
 
             - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -20116,13 +20538,15 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-                - `"text_editor_code_execution_str_replace_result"`
+                default: text_editor_code_execution_str_replace_result
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["text_editor_code_execution_tool_result"]`
 
-            - `"text_editor_code_execution_tool_result"`
+            default: text_editor_code_execution_tool_result
 
         - `class ToolSearchToolResultBlock: …`
 
@@ -20144,7 +20568,7 @@ print(message_tokens_count.input_tokens)
 
               - `type: Literal["tool_search_tool_result_error"]`
 
-                - `"tool_search_tool_result_error"`
+                default: tool_search_tool_result_error
 
             - `class ToolSearchToolSearchResultBlock: …`
 
@@ -20152,19 +20576,23 @@ print(message_tokens_count.input_tokens)
 
                 - `tool_name: str`
 
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
                 - `type: Literal["tool_reference"]`
 
-                  - `"tool_reference"`
+                  default: tool_reference
 
               - `type: Literal["tool_search_tool_search_result"]`
 
-                - `"tool_search_tool_search_result"`
+                default: tool_search_tool_search_result
 
           - `tool_use_id: str`
 
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
           - `type: Literal["tool_search_tool_result"]`
 
-            - `"tool_search_tool_result"`
+            default: tool_search_tool_result
 
         - `class ContainerUploadBlock: …`
 
@@ -20174,7 +20602,7 @@ print(message_tokens_count.input_tokens)
 
           - `type: Literal["container_upload"]`
 
-            - `"container_upload"`
+            default: container_upload
 
       - `model: Model`
 
@@ -20272,7 +20700,7 @@ print(message_tokens_count.input_tokens)
 
         This will always be `"assistant"`.
 
-        - `"assistant"`
+        default: assistant
 
       - `stop_details: Optional[RefusalStopDetails]`
 
@@ -20310,7 +20738,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["refusal"]`
 
-          - `"refusal"`
+          default: refusal
 
       - `stop_reason: Optional[StopReason]`
 
@@ -20354,7 +20782,7 @@ print(message_tokens_count.input_tokens)
 
         For Messages, this is always `"message"`.
 
-        - `"message"`
+        default: message
 
       - `usage: Usage`
 
@@ -20376,17 +20804,25 @@ print(message_tokens_count.input_tokens)
 
             The number of input tokens used to create the 1 hour cache entry.
 
+            default: 0, minimum: 0
+
           - `ephemeral_5m_input_tokens: int`
 
             The number of input tokens used to create the 5 minute cache entry.
+
+            default: 0, minimum: 0
 
         - `cache_creation_input_tokens: Optional[int]`
 
           The number of input tokens used to create the cache entry.
 
+          minimum: 0
+
         - `cache_read_input_tokens: Optional[int]`
 
           The number of input tokens read from the cache.
+
+          minimum: 0
 
         - `inference_geo: Optional[str]`
 
@@ -20396,9 +20832,13 @@ print(message_tokens_count.input_tokens)
 
           The number of input tokens which were used.
 
+          minimum: 0
+
         - `output_tokens: int`
 
           The number of output tokens which were used.
+
+          minimum: 0
 
         - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -20420,6 +20860,8 @@ print(message_tokens_count.input_tokens)
             generation count by a small number of tokens. Always ≤ `output_tokens`;
             `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+            default: 0, minimum: 0
+
         - `server_tool_use: Optional[ServerToolUsage]`
 
           The number of server tool requests.
@@ -20428,9 +20870,13 @@ print(message_tokens_count.input_tokens)
 
             The number of web fetch tool requests.
 
+            default: 0, minimum: 0
+
           - `web_search_requests: int`
 
             The number of web search tool requests.
+
+            default: 0, minimum: 0
 
         - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -20444,7 +20890,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["message_start"]`
 
-      - `"message_start"`
+      default: message_start
 
   - `class RawMessageDeltaEvent: …`
 
@@ -20464,7 +20910,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["message_delta"]`
 
-      - `"message_delta"`
+      default: message_delta
 
     - `usage: MessageDeltaUsage`
 
@@ -20482,13 +20928,19 @@ print(message_tokens_count.input_tokens)
 
         The cumulative number of input tokens used to create the cache entry.
 
+        minimum: 0
+
       - `cache_read_input_tokens: Optional[int]`
 
         The cumulative number of input tokens read from the cache.
 
+        minimum: 0
+
       - `input_tokens: Optional[int]`
 
         The cumulative number of input tokens which were used.
+
+        minimum: 0
 
       - `output_tokens: int`
 
@@ -20511,7 +20963,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["message_stop"]`
 
-      - `"message_stop"`
+      default: message_stop
 
   - `class RawContentBlockStartEvent: …`
 
@@ -20549,7 +21001,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["content_block_start"]`
 
-      - `"content_block_start"`
+      default: content_block_start
 
   - `class RawContentBlockDeltaEvent: …`
 
@@ -20561,7 +21013,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["text_delta"]`
 
-          - `"text_delta"`
+          default: text_delta
 
       - `class InputJSONDelta: …`
 
@@ -20569,7 +21021,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["input_json_delta"]`
 
-          - `"input_json_delta"`
+          default: input_json_delta
 
       - `class CitationsDelta: …`
 
@@ -20587,7 +21039,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["citations_delta"]`
 
-          - `"citations_delta"`
+          default: citations_delta
 
       - `class ThinkingDelta: …`
 
@@ -20597,7 +21049,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["thinking_delta"]`
 
-          - `"thinking_delta"`
+          default: thinking_delta
 
       - `class SignatureDelta: …`
 
@@ -20607,13 +21059,13 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["signature_delta"]`
 
-          - `"signature_delta"`
+          default: signature_delta
 
     - `index: int`
 
     - `type: Literal["content_block_delta"]`
 
-      - `"content_block_delta"`
+      default: content_block_delta
 
   - `class RawContentBlockStopEvent: …`
 
@@ -20621,7 +21073,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["content_block_stop"]`
 
-      - `"content_block_stop"`
+      default: content_block_stop
 
 ### Redacted Thinking Block
 
@@ -20637,7 +21089,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["redacted_thinking"]`
 
-    - `"redacted_thinking"`
+    default: redacted_thinking
 
 ### Redacted Thinking Block Param
 
@@ -20648,8 +21100,6 @@ print(message_tokens_count.input_tokens)
     The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
   - `type: Literal["redacted_thinking"]`
-
-    - `"redacted_thinking"`
 
 ### Refusal Stop Details
 
@@ -20689,7 +21139,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["refusal"]`
 
-    - `"refusal"`
+    default: refusal
 
 ### Search Result Block Param
 
@@ -20699,17 +21149,15 @@ print(message_tokens_count.input_tokens)
 
     - `text: str`
 
-    - `type: Literal["text"]`
+      minLength: 1
 
-      - `"text"`
+    - `type: Literal["text"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -20734,15 +21182,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_char_index: int`
 
         - `start_char_index: int`
 
-        - `type: Literal["char_location"]`
+          minimum: 0
 
-          - `"char_location"`
+        - `type: Literal["char_location"]`
 
       - `class CitationPageLocationParam: …`
 
@@ -20750,15 +21202,19 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_page_number: int`
 
         - `start_page_number: int`
 
-        - `type: Literal["page_location"]`
+          minimum: 1
 
-          - `"page_location"`
+        - `type: Literal["page_location"]`
 
       - `class CitationContentBlockLocationParam: …`
 
@@ -20770,7 +21226,11 @@ print(message_tokens_count.input_tokens)
 
         - `document_index: int`
 
+          minimum: 0
+
         - `document_title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
         - `end_block_index: int`
 
@@ -20782,9 +21242,9 @@ print(message_tokens_count.input_tokens)
 
           0-based index of the first cited block in the source's `content` array.
 
-        - `type: Literal["content_block_location"]`
+          minimum: 0
 
-          - `"content_block_location"`
+        - `type: Literal["content_block_location"]`
 
       - `class CitationWebSearchResultLocationParam: …`
 
@@ -20794,11 +21254,13 @@ print(message_tokens_count.input_tokens)
 
         - `title: Optional[str]`
 
+          maxLength: 512, minLength: 1
+
         - `type: Literal["web_search_result_location"]`
 
-          - `"web_search_result_location"`
-
         - `url: str`
+
+          minLength: 1
 
       - `class CitationSearchResultLocationParam: …`
 
@@ -20820,25 +21282,25 @@ print(message_tokens_count.input_tokens)
 
           Counted separately from `document_index`; server-side web search results are not included in this count.
 
+          minimum: 0
+
         - `source: str`
 
         - `start_block_index: int`
 
           0-based index of the first cited block in the source's `content` array.
 
+          minimum: 0
+
         - `title: Optional[str]`
 
         - `type: Literal["search_result_location"]`
-
-          - `"search_result_location"`
 
   - `source: str`
 
   - `title: str`
 
   - `type: Literal["search_result"]`
-
-    - `"search_result"`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -20856,9 +21318,9 @@ print(message_tokens_count.input_tokens)
 
   - `tool_id: str`
 
-  - `type: Literal["code_execution_20250825"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"code_execution_20250825"`
+  - `type: Literal["code_execution_20250825"]`
 
 ### Server Tool Caller 20260120
 
@@ -20866,9 +21328,9 @@ print(message_tokens_count.input_tokens)
 
   - `tool_id: str`
 
-  - `type: Literal["code_execution_20260120"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"code_execution_20260120"`
+  - `type: Literal["code_execution_20260120"]`
 
 ### Server Tool Usage
 
@@ -20878,9 +21340,13 @@ print(message_tokens_count.input_tokens)
 
     The number of web fetch tool requests.
 
+    default: 0, minimum: 0
+
   - `web_search_requests: int`
 
     The number of web search tool requests.
+
+    default: 0, minimum: 0
 
 ### Server Tool Use Block
 
@@ -20888,9 +21354,13 @@ print(message_tokens_count.input_tokens)
 
   - `id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `caller: Caller`
 
     Tool invocation directly from the model.
+
+    default: {"type":"direct"}
 
     - `class DirectCaller: …`
 
@@ -20898,25 +21368,23 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
   - `input: Dict[str, object]`
 
@@ -20938,7 +21406,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["server_tool_use"]`
 
-    - `"server_tool_use"`
+    default: server_tool_use
 
 ### Server Tool Use Block Param
 
@@ -20946,6 +21414,8 @@ print(message_tokens_count.input_tokens)
 
   - `id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `input: Dict[str, object]`
 
   - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
@@ -20966,15 +21436,11 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["server_tool_use"]`
 
-    - `"server_tool_use"`
-
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -21001,25 +21467,23 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
 ### Signature Delta
 
@@ -21031,7 +21495,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["signature_delta"]`
 
-    - `"signature_delta"`
+    default: signature_delta
 
 ### Skill Params
 
@@ -21042,6 +21506,8 @@ print(message_tokens_count.input_tokens)
   - `skill_id: str`
 
     Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `type: Literal["anthropic", "custom"]`
 
@@ -21054,6 +21520,8 @@ print(message_tokens_count.input_tokens)
   - `version: Optional[str]`
 
     Skill version or 'latest' for most recent version
+
+    maxLength: 64, minLength: 1
 
 ### Stop Reason
 
@@ -21089,6 +21557,8 @@ print(message_tokens_count.input_tokens)
 
       - `document_index: int`
 
+        minimum: 0
+
       - `document_title: Optional[str]`
 
       - `end_char_index: int`
@@ -21097,15 +21567,19 @@ print(message_tokens_count.input_tokens)
 
       - `start_char_index: int`
 
+        minimum: 0
+
       - `type: Literal["char_location"]`
 
-        - `"char_location"`
+        default: char_location
 
     - `class CitationPageLocation: …`
 
       - `cited_text: str`
 
       - `document_index: int`
+
+        minimum: 0
 
       - `document_title: Optional[str]`
 
@@ -21115,9 +21589,11 @@ print(message_tokens_count.input_tokens)
 
       - `start_page_number: int`
 
+        minimum: 1
+
       - `type: Literal["page_location"]`
 
-        - `"page_location"`
+        default: page_location
 
     - `class CitationContentBlockLocation: …`
 
@@ -21128,6 +21604,8 @@ print(message_tokens_count.input_tokens)
         Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
       - `document_index: int`
+
+        minimum: 0
 
       - `document_title: Optional[str]`
 
@@ -21143,9 +21621,11 @@ print(message_tokens_count.input_tokens)
 
         0-based index of the first cited block in the source's `content` array.
 
+        minimum: 0
+
       - `type: Literal["content_block_location"]`
 
-        - `"content_block_location"`
+        default: content_block_location
 
     - `class CitationsWebSearchResultLocation: …`
 
@@ -21155,9 +21635,11 @@ print(message_tokens_count.input_tokens)
 
       - `title: Optional[str]`
 
+        maxLength: 512
+
       - `type: Literal["web_search_result_location"]`
 
-        - `"web_search_result_location"`
+        default: web_search_result_location
 
       - `url: str`
 
@@ -21181,23 +21663,29 @@ print(message_tokens_count.input_tokens)
 
         Counted separately from `document_index`; server-side web search results are not included in this count.
 
+        minimum: 0
+
       - `source: str`
 
       - `start_block_index: int`
 
         0-based index of the first cited block in the source's `content` array.
 
+        minimum: 0
+
       - `title: Optional[str]`
 
       - `type: Literal["search_result_location"]`
 
-        - `"search_result_location"`
+        default: search_result_location
 
   - `text: str`
 
+    maxLength: 5000000, minLength: 0
+
   - `type: Literal["text"]`
 
-    - `"text"`
+    default: text
 
 ### Text Block Param
 
@@ -21205,17 +21693,15 @@ print(message_tokens_count.input_tokens)
 
   - `text: str`
 
-  - `type: Literal["text"]`
+    minLength: 1
 
-    - `"text"`
+  - `type: Literal["text"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -21240,15 +21726,19 @@ print(message_tokens_count.input_tokens)
 
       - `document_index: int`
 
+        minimum: 0
+
       - `document_title: Optional[str]`
+
+        maxLength: 500, minLength: 1
 
       - `end_char_index: int`
 
       - `start_char_index: int`
 
-      - `type: Literal["char_location"]`
+        minimum: 0
 
-        - `"char_location"`
+      - `type: Literal["char_location"]`
 
     - `class CitationPageLocationParam: …`
 
@@ -21256,15 +21746,19 @@ print(message_tokens_count.input_tokens)
 
       - `document_index: int`
 
+        minimum: 0
+
       - `document_title: Optional[str]`
+
+        maxLength: 500, minLength: 1
 
       - `end_page_number: int`
 
       - `start_page_number: int`
 
-      - `type: Literal["page_location"]`
+        minimum: 1
 
-        - `"page_location"`
+      - `type: Literal["page_location"]`
 
     - `class CitationContentBlockLocationParam: …`
 
@@ -21276,7 +21770,11 @@ print(message_tokens_count.input_tokens)
 
       - `document_index: int`
 
+        minimum: 0
+
       - `document_title: Optional[str]`
+
+        maxLength: 500, minLength: 1
 
       - `end_block_index: int`
 
@@ -21288,9 +21786,9 @@ print(message_tokens_count.input_tokens)
 
         0-based index of the first cited block in the source's `content` array.
 
-      - `type: Literal["content_block_location"]`
+        minimum: 0
 
-        - `"content_block_location"`
+      - `type: Literal["content_block_location"]`
 
     - `class CitationWebSearchResultLocationParam: …`
 
@@ -21300,11 +21798,13 @@ print(message_tokens_count.input_tokens)
 
       - `title: Optional[str]`
 
+        maxLength: 512, minLength: 1
+
       - `type: Literal["web_search_result_location"]`
 
-        - `"web_search_result_location"`
-
       - `url: str`
+
+        minLength: 1
 
     - `class CitationSearchResultLocationParam: …`
 
@@ -21326,17 +21826,19 @@ print(message_tokens_count.input_tokens)
 
         Counted separately from `document_index`; server-side web search results are not included in this count.
 
+        minimum: 0
+
       - `source: str`
 
       - `start_block_index: int`
 
         0-based index of the first cited block in the source's `content` array.
 
+        minimum: 0
+
       - `title: Optional[str]`
 
       - `type: Literal["search_result_location"]`
-
-        - `"search_result_location"`
 
 ### Text Citation
 
@@ -21348,6 +21850,8 @@ print(message_tokens_count.input_tokens)
 
     - `document_index: int`
 
+      minimum: 0
+
     - `document_title: Optional[str]`
 
     - `end_char_index: int`
@@ -21356,15 +21860,19 @@ print(message_tokens_count.input_tokens)
 
     - `start_char_index: int`
 
+      minimum: 0
+
     - `type: Literal["char_location"]`
 
-      - `"char_location"`
+      default: char_location
 
   - `class CitationPageLocation: …`
 
     - `cited_text: str`
 
     - `document_index: int`
+
+      minimum: 0
 
     - `document_title: Optional[str]`
 
@@ -21374,9 +21882,11 @@ print(message_tokens_count.input_tokens)
 
     - `start_page_number: int`
 
+      minimum: 1
+
     - `type: Literal["page_location"]`
 
-      - `"page_location"`
+      default: page_location
 
   - `class CitationContentBlockLocation: …`
 
@@ -21387,6 +21897,8 @@ print(message_tokens_count.input_tokens)
       Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
     - `document_index: int`
+
+      minimum: 0
 
     - `document_title: Optional[str]`
 
@@ -21402,9 +21914,11 @@ print(message_tokens_count.input_tokens)
 
       0-based index of the first cited block in the source's `content` array.
 
+      minimum: 0
+
     - `type: Literal["content_block_location"]`
 
-      - `"content_block_location"`
+      default: content_block_location
 
   - `class CitationsWebSearchResultLocation: …`
 
@@ -21414,9 +21928,11 @@ print(message_tokens_count.input_tokens)
 
     - `title: Optional[str]`
 
+      maxLength: 512
+
     - `type: Literal["web_search_result_location"]`
 
-      - `"web_search_result_location"`
+      default: web_search_result_location
 
     - `url: str`
 
@@ -21440,17 +21956,21 @@ print(message_tokens_count.input_tokens)
 
       Counted separately from `document_index`; server-side web search results are not included in this count.
 
+      minimum: 0
+
     - `source: str`
 
     - `start_block_index: int`
 
       0-based index of the first cited block in the source's `content` array.
 
+      minimum: 0
+
     - `title: Optional[str]`
 
     - `type: Literal["search_result_location"]`
 
-      - `"search_result_location"`
+      default: search_result_location
 
 ### Text Citation Param
 
@@ -21462,15 +21982,19 @@ print(message_tokens_count.input_tokens)
 
     - `document_index: int`
 
+      minimum: 0
+
     - `document_title: Optional[str]`
+
+      maxLength: 500, minLength: 1
 
     - `end_char_index: int`
 
     - `start_char_index: int`
 
-    - `type: Literal["char_location"]`
+      minimum: 0
 
-      - `"char_location"`
+    - `type: Literal["char_location"]`
 
   - `class CitationPageLocationParam: …`
 
@@ -21478,15 +22002,19 @@ print(message_tokens_count.input_tokens)
 
     - `document_index: int`
 
+      minimum: 0
+
     - `document_title: Optional[str]`
+
+      maxLength: 500, minLength: 1
 
     - `end_page_number: int`
 
     - `start_page_number: int`
 
-    - `type: Literal["page_location"]`
+      minimum: 1
 
-      - `"page_location"`
+    - `type: Literal["page_location"]`
 
   - `class CitationContentBlockLocationParam: …`
 
@@ -21498,7 +22026,11 @@ print(message_tokens_count.input_tokens)
 
     - `document_index: int`
 
+      minimum: 0
+
     - `document_title: Optional[str]`
+
+      maxLength: 500, minLength: 1
 
     - `end_block_index: int`
 
@@ -21510,9 +22042,9 @@ print(message_tokens_count.input_tokens)
 
       0-based index of the first cited block in the source's `content` array.
 
-    - `type: Literal["content_block_location"]`
+      minimum: 0
 
-      - `"content_block_location"`
+    - `type: Literal["content_block_location"]`
 
   - `class CitationWebSearchResultLocationParam: …`
 
@@ -21522,11 +22054,13 @@ print(message_tokens_count.input_tokens)
 
     - `title: Optional[str]`
 
+      maxLength: 512, minLength: 1
+
     - `type: Literal["web_search_result_location"]`
 
-      - `"web_search_result_location"`
-
     - `url: str`
+
+      minLength: 1
 
   - `class CitationSearchResultLocationParam: …`
 
@@ -21548,17 +22082,19 @@ print(message_tokens_count.input_tokens)
 
       Counted separately from `document_index`; server-side web search results are not included in this count.
 
+      minimum: 0
+
     - `source: str`
 
     - `start_block_index: int`
 
       0-based index of the first cited block in the source's `content` array.
 
+      minimum: 0
+
     - `title: Optional[str]`
 
     - `type: Literal["search_result_location"]`
-
-      - `"search_result_location"`
 
 ### Text Delta
 
@@ -21568,7 +22104,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_delta"]`
 
-    - `"text_delta"`
+    default: text_delta
 
 ### Text Editor Code Execution Create Result Block
 
@@ -21578,7 +22114,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_editor_code_execution_create_result"]`
 
-    - `"text_editor_code_execution_create_result"`
+    default: text_editor_code_execution_create_result
 
 ### Text Editor Code Execution Create Result Block Param
 
@@ -21587,8 +22123,6 @@ print(message_tokens_count.input_tokens)
   - `is_file_update: bool`
 
   - `type: Literal["text_editor_code_execution_create_result"]`
-
-    - `"text_editor_code_execution_create_result"`
 
 ### Text Editor Code Execution Str Replace Result Block
 
@@ -21606,15 +22140,13 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-    - `"text_editor_code_execution_str_replace_result"`
+    default: text_editor_code_execution_str_replace_result
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
 - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
   - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-    - `"text_editor_code_execution_str_replace_result"`
 
   - `lines: Optional[List[str]]`
 
@@ -21650,7 +22182,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-        - `"text_editor_code_execution_tool_result_error"`
+        default: text_editor_code_execution_tool_result_error
 
     - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -21672,7 +22204,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_view_result"]`
 
-        - `"text_editor_code_execution_view_result"`
+        default: text_editor_code_execution_view_result
 
     - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -21680,7 +22212,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_create_result"]`
 
-        - `"text_editor_code_execution_create_result"`
+        default: text_editor_code_execution_create_result
 
     - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -21696,13 +22228,15 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-        - `"text_editor_code_execution_str_replace_result"`
+        default: text_editor_code_execution_str_replace_result
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["text_editor_code_execution_tool_result"]`
 
-    - `"text_editor_code_execution_tool_result"`
+    default: text_editor_code_execution_tool_result
 
 ### Text Editor Code Execution Tool Result Block Param
 
@@ -21726,8 +22260,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-        - `"text_editor_code_execution_tool_result_error"`
-
       - `error_message: Optional[str]`
 
     - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -21744,8 +22276,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_view_result"]`
 
-        - `"text_editor_code_execution_view_result"`
-
       - `num_lines: Optional[int]`
 
       - `start_line: Optional[int]`
@@ -21758,13 +22288,9 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["text_editor_code_execution_create_result"]`
 
-        - `"text_editor_code_execution_create_result"`
-
     - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
       - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-        - `"text_editor_code_execution_str_replace_result"`
 
       - `lines: Optional[List[str]]`
 
@@ -21778,17 +22304,15 @@ print(message_tokens_count.input_tokens)
 
   - `tool_use_id: str`
 
-  - `type: Literal["text_editor_code_execution_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"text_editor_code_execution_tool_result"`
+  - `type: Literal["text_editor_code_execution_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -21825,7 +22349,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-    - `"text_editor_code_execution_tool_result_error"`
+    default: text_editor_code_execution_tool_result_error
 
 ### Text Editor Code Execution Tool Result Error Code
 
@@ -21859,8 +22383,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-    - `"text_editor_code_execution_tool_result_error"`
-
   - `error_message: Optional[str]`
 
 ### Text Editor Code Execution View Result Block
@@ -21885,7 +22407,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["text_editor_code_execution_view_result"]`
 
-    - `"text_editor_code_execution_view_result"`
+    default: text_editor_code_execution_view_result
 
 ### Text Editor Code Execution View Result Block Param
 
@@ -21902,8 +22424,6 @@ print(message_tokens_count.input_tokens)
     - `"pdf"`
 
   - `type: Literal["text_editor_code_execution_view_result"]`
-
-    - `"text_editor_code_execution_view_result"`
 
   - `num_lines: Optional[int]`
 
@@ -21929,7 +22449,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["thinking"]`
 
-    - `"thinking"`
+    default: thinking
 
 ### Thinking Block Param
 
@@ -21947,15 +22467,11 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["thinking"]`
 
-    - `"thinking"`
-
 ### Thinking Config Adaptive
 
 - `class ThinkingConfigAdaptive: …`
 
   - `type: Literal["adaptive"]`
-
-    - `"adaptive"`
 
   - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -21971,8 +22487,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["disabled"]`
 
-    - `"disabled"`
-
 ### Thinking Config Enabled
 
 - `class ThinkingConfigEnabled: …`
@@ -21985,9 +22499,9 @@ print(message_tokens_count.input_tokens)
 
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-  - `type: Literal["enabled"]`
+    minimum: 1024
 
-    - `"enabled"`
+  - `type: Literal["enabled"]`
 
   - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -22017,9 +22531,9 @@ print(message_tokens_count.input_tokens)
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-    - `type: Literal["enabled"]`
+      minimum: 1024
 
-      - `"enabled"`
+    - `type: Literal["enabled"]`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -22033,13 +22547,9 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["disabled"]`
 
-      - `"disabled"`
-
   - `class ThinkingConfigAdaptive: …`
 
     - `type: Literal["adaptive"]`
-
-      - `"adaptive"`
 
     - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -22059,7 +22569,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["thinking_delta"]`
 
-    - `"thinking_delta"`
+    default: thinking_delta
 
 ### Tool
 
@@ -22073,8 +22583,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["object"]`
 
-      - `"object"`
-
     - `properties: Optional[Dict[str, object]]`
 
     - `required: Optional[List[str]]`
@@ -22084,6 +22592,8 @@ print(message_tokens_count.input_tokens)
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
+
+    maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -22100,8 +22610,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22140,8 +22648,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Optional[Literal["custom"]]`
 
-    - `"custom"`
-
 ### Tool Bash 20250124
 
 - `class ToolBash20250124: …`
@@ -22152,11 +22658,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"bash"`
-
   - `type: Literal["bash_20250124"]`
-
-    - `"bash_20250124"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -22173,8 +22675,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22213,8 +22713,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["auto"]`
 
-      - `"auto"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -22226,8 +22724,6 @@ print(message_tokens_count.input_tokens)
     The model will use any available tools.
 
     - `type: Literal["any"]`
-
-      - `"any"`
 
     - `disable_parallel_tool_use: Optional[bool]`
 
@@ -22245,8 +22741,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["tool"]`
 
-      - `"tool"`
-
     - `disable_parallel_tool_use: Optional[bool]`
 
       Whether to disable parallel tool use.
@@ -22259,8 +22753,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["none"]`
 
-      - `"none"`
-
 ### Tool Choice Any
 
 - `class ToolChoiceAny: …`
@@ -22268,8 +22760,6 @@ print(message_tokens_count.input_tokens)
   The model will use any available tools.
 
   - `type: Literal["any"]`
-
-    - `"any"`
 
   - `disable_parallel_tool_use: Optional[bool]`
 
@@ -22285,8 +22775,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["auto"]`
 
-    - `"auto"`
-
   - `disable_parallel_tool_use: Optional[bool]`
 
     Whether to disable parallel tool use.
@@ -22301,8 +22789,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["none"]`
 
-    - `"none"`
-
 ### Tool Choice Tool
 
 - `class ToolChoiceTool: …`
@@ -22314,8 +22800,6 @@ print(message_tokens_count.input_tokens)
     The name of the tool to use.
 
   - `type: Literal["tool"]`
-
-    - `"tool"`
 
   - `disable_parallel_tool_use: Optional[bool]`
 
@@ -22329,9 +22813,11 @@ print(message_tokens_count.input_tokens)
 
   - `tool_name: str`
 
+    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
   - `type: Literal["tool_reference"]`
 
-    - `"tool_reference"`
+    default: tool_reference
 
 ### Tool Reference Block Param
 
@@ -22341,17 +22827,15 @@ print(message_tokens_count.input_tokens)
 
   - `tool_name: str`
 
-  - `type: Literal["tool_reference"]`
+    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-    - `"tool_reference"`
+  - `type: Literal["tool_reference"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22374,17 +22858,15 @@ print(message_tokens_count.input_tokens)
 
   - `tool_use_id: str`
 
-  - `type: Literal["tool_result"]`
+    pattern: ^[a-zA-Z0-9_-]+$
 
-    - `"tool_result"`
+  - `type: Literal["tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22411,9 +22893,9 @@ print(message_tokens_count.input_tokens)
 
         - `text: str`
 
-        - `type: Literal["text"]`
+          minLength: 1
 
-          - `"text"`
+        - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22427,15 +22909,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_char_index: int`
 
             - `start_char_index: int`
 
-            - `type: Literal["char_location"]`
+              minimum: 0
 
-              - `"char_location"`
+            - `type: Literal["char_location"]`
 
           - `class CitationPageLocationParam: …`
 
@@ -22443,15 +22929,19 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_page_number: int`
 
             - `start_page_number: int`
 
-            - `type: Literal["page_location"]`
+              minimum: 1
 
-              - `"page_location"`
+            - `type: Literal["page_location"]`
 
           - `class CitationContentBlockLocationParam: …`
 
@@ -22463,7 +22953,11 @@ print(message_tokens_count.input_tokens)
 
             - `document_index: int`
 
+              minimum: 0
+
             - `document_title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
             - `end_block_index: int`
 
@@ -22475,9 +22969,9 @@ print(message_tokens_count.input_tokens)
 
               0-based index of the first cited block in the source's `content` array.
 
-            - `type: Literal["content_block_location"]`
+              minimum: 0
 
-              - `"content_block_location"`
+            - `type: Literal["content_block_location"]`
 
           - `class CitationWebSearchResultLocationParam: …`
 
@@ -22487,11 +22981,13 @@ print(message_tokens_count.input_tokens)
 
             - `title: Optional[str]`
 
+              maxLength: 512, minLength: 1
+
             - `type: Literal["web_search_result_location"]`
 
-              - `"web_search_result_location"`
-
             - `url: str`
+
+              minLength: 1
 
           - `class CitationSearchResultLocationParam: …`
 
@@ -22513,17 +23009,19 @@ print(message_tokens_count.input_tokens)
 
               Counted separately from `document_index`; server-side web search results are not included in this count.
 
+              minimum: 0
+
             - `source: str`
 
             - `start_block_index: int`
 
               0-based index of the first cited block in the source's `content` array.
 
+              minimum: 0
+
             - `title: Optional[str]`
 
             - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
 
       - `class ImageBlockParam: …`
 
@@ -22532,6 +23030,8 @@ print(message_tokens_count.input_tokens)
           - `class Base64ImageSource: …`
 
             - `data: str`
+
+              format: byte
 
             - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -22545,13 +23045,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["base64"]`
 
-              - `"base64"`
-
           - `class URLImageSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -22561,11 +23057,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["image"]`
-
-          - `"image"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22589,6 +23081,8 @@ print(message_tokens_count.input_tokens)
 
           - `text: str`
 
+            minLength: 1
+
           - `type: Literal["text"]`
 
           - `cache_control: Optional[CacheControlEphemeral]`
@@ -22602,8 +23096,6 @@ print(message_tokens_count.input_tokens)
         - `title: str`
 
         - `type: Literal["search_result"]`
-
-          - `"search_result"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22621,13 +23113,11 @@ print(message_tokens_count.input_tokens)
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -22635,11 +23125,7 @@ print(message_tokens_count.input_tokens)
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class ContentBlockSource: …`
 
@@ -22655,13 +23141,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class URLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -22671,11 +23153,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22685,7 +23163,11 @@ print(message_tokens_count.input_tokens)
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
+
+          maxLength: 500, minLength: 1
 
       - `class ToolReferenceBlockParam: …`
 
@@ -22693,9 +23175,9 @@ print(message_tokens_count.input_tokens)
 
         - `tool_name: str`
 
-        - `type: Literal["tool_reference"]`
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-          - `"tool_reference"`
+        - `type: Literal["tool_reference"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22715,25 +23197,31 @@ print(message_tokens_count.input_tokens)
 
           All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+          maxItems: 100
+
           - `tab_id: str`
 
             The caller-assigned identifier for this tab, unique within the inventory.
+
+            maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `title: str`
 
             The title of the page the tab is showing. May be empty.
 
+            maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
           - `url: str`
 
             The URL of the page the tab is showing. May be empty.
+
+            maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `active: Optional[bool]`
 
             Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
         - `type: Literal["browser_state"]`
-
-          - `"browser_state"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -22742,6 +23230,8 @@ print(message_tokens_count.input_tokens)
         - `state_changes: Optional[List[BrowserStateChange]]`
 
           Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+          maxItems: 200, minItems: 1
 
           - `class BrowserStateChangeTabOpened: …`
 
@@ -22757,9 +23247,9 @@ print(message_tokens_count.input_tokens)
 
               The `tab_id` of the opened tab, present in `tabs`.
 
-            - `type: Literal["tab_opened"]`
+              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `"tab_opened"`
+            - `type: Literal["tab_opened"]`
 
           - `class BrowserStateChangeDownloadStarted: …`
 
@@ -22769,13 +23259,15 @@ print(message_tokens_count.input_tokens)
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-            - `type: Literal["download_started"]`
+              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `"download_started"`
+            - `type: Literal["download_started"]`
 
             - `url: str`
 
               The final post-redirect URL the download was served from.
+
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -22788,21 +23280,27 @@ print(message_tokens_count.input_tokens)
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-            - `type: Literal["download_completed"]`
+              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `"download_completed"`
+            - `type: Literal["download_completed"]`
 
             - `url: str`
 
               The final post-redirect URL the download was served from.
 
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
             - `path: Optional[str]`
 
               Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
             - `size_bytes: Optional[int]`
 
               The completed download's size.
+
+              minimum: 0
 
           - `class BrowserStateChangeDownloadFailed: …`
 
@@ -22812,23 +23310,29 @@ print(message_tokens_count.input_tokens)
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-            - `type: Literal["download_failed"]`
+              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `"download_failed"`
+            - `type: Literal["download_failed"]`
 
             - `url: str`
 
               The final post-redirect URL the download was served from.
 
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
             - `error: Optional[str]`
 
               The failure or cancellation detail, when known.
+
+              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
   - `is_error: Optional[bool]`
 
   - `toolset_name: Optional[str]`
 
     For a toolset member tool_result, the toolset family of the paired tool_use.
+
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Search Tool Bm25 20251119
 
@@ -22839,8 +23343,6 @@ print(message_tokens_count.input_tokens)
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"tool_search_tool_bm25"`
 
   - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -22863,8 +23365,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22899,8 +23399,6 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"tool_search_tool_regex"`
-
   - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
     - `"tool_search_tool_regex_20251119"`
@@ -22922,8 +23420,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -22970,7 +23466,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["tool_search_tool_result_error"]`
 
-        - `"tool_search_tool_result_error"`
+        default: tool_search_tool_result_error
 
     - `class ToolSearchToolSearchResultBlock: …`
 
@@ -22978,19 +23474,23 @@ print(message_tokens_count.input_tokens)
 
         - `tool_name: str`
 
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
         - `type: Literal["tool_reference"]`
 
-          - `"tool_reference"`
+          default: tool_reference
 
       - `type: Literal["tool_search_tool_search_result"]`
 
-        - `"tool_search_tool_search_result"`
+        default: tool_search_tool_search_result
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["tool_search_tool_result"]`
 
-    - `"tool_search_tool_result"`
+    default: tool_search_tool_result
 
 ### Tool Search Tool Result Block Param
 
@@ -23012,8 +23512,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["tool_search_tool_result_error"]`
 
-        - `"tool_search_tool_result_error"`
-
       - `error_message: Optional[str]`
 
     - `class ToolSearchToolSearchResultBlockParam: …`
@@ -23022,17 +23520,15 @@ print(message_tokens_count.input_tokens)
 
         - `tool_name: str`
 
-        - `type: Literal["tool_reference"]`
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-          - `"tool_reference"`
+        - `type: Literal["tool_reference"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
           - `type: Literal["ephemeral"]`
-
-            - `"ephemeral"`
 
           - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23051,13 +23547,11 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["tool_search_tool_search_result"]`
 
-        - `"tool_search_tool_search_result"`
-
   - `tool_use_id: str`
 
-  - `type: Literal["tool_search_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"tool_search_tool_result"`
+  - `type: Literal["tool_search_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -23081,7 +23575,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["tool_search_tool_result_error"]`
 
-    - `"tool_search_tool_result_error"`
+    default: tool_search_tool_result_error
 
 ### Tool Search Tool Result Error Code
 
@@ -23111,8 +23605,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["tool_search_tool_result_error"]`
 
-    - `"tool_search_tool_result_error"`
-
   - `error_message: Optional[str]`
 
 ### Tool Search Tool Search Result Block
@@ -23123,13 +23615,15 @@ print(message_tokens_count.input_tokens)
 
     - `tool_name: str`
 
+      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
     - `type: Literal["tool_reference"]`
 
-      - `"tool_reference"`
+      default: tool_reference
 
   - `type: Literal["tool_search_tool_search_result"]`
 
-    - `"tool_search_tool_search_result"`
+    default: tool_search_tool_search_result
 
 ### Tool Search Tool Search Result Block Param
 
@@ -23139,17 +23633,15 @@ print(message_tokens_count.input_tokens)
 
     - `tool_name: str`
 
-    - `type: Literal["tool_reference"]`
+      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-      - `"tool_reference"`
+    - `type: Literal["tool_reference"]`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23168,8 +23660,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["tool_search_tool_search_result"]`
 
-    - `"tool_search_tool_search_result"`
-
 ### Tool Text Editor 20250124
 
 - `class ToolTextEditor20250124: …`
@@ -23180,11 +23670,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"str_replace_editor"`
-
   - `type: Literal["text_editor_20250124"]`
-
-    - `"text_editor_20250124"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23201,8 +23687,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23239,11 +23723,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"str_replace_based_edit_tool"`
-
   - `type: Literal["text_editor_20250429"]`
-
-    - `"text_editor_20250429"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23260,8 +23740,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23298,11 +23776,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"str_replace_based_edit_tool"`
-
   - `type: Literal["text_editor_20250728"]`
-
-    - `"text_editor_20250728"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23319,8 +23793,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23347,6 +23819,8 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+    minimum: 1
+
   - `strict: Optional[bool]`
 
     When true, guarantees schema validation on tool names and inputs
@@ -23367,8 +23841,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["object"]`
 
-        - `"object"`
-
       - `properties: Optional[Dict[str, object]]`
 
       - `required: Optional[List[str]]`
@@ -23378,6 +23850,8 @@ print(message_tokens_count.input_tokens)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
+
+      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23394,8 +23868,6 @@ print(message_tokens_count.input_tokens)
       Create a cache control breakpoint at this content block.
 
       - `type: Literal["ephemeral"]`
-
-        - `"ephemeral"`
 
       - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -23434,8 +23906,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Optional[Literal["custom"]]`
 
-      - `"custom"`
-
   - `class ToolBash20250124: …`
 
     - `name: Literal["bash"]`
@@ -23444,11 +23914,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"bash"`
-
     - `type: Literal["bash_20250124"]`
-
-      - `"bash_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23482,11 +23948,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250522"]`
-
-      - `"code_execution_20250522"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23518,11 +23980,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20250825"]`
-
-      - `"code_execution_20250825"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23556,11 +24014,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260120"]`
-
-      - `"code_execution_20260120"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23594,11 +24048,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"code_execution"`
-
     - `type: Literal["code_execution_20260521"]`
-
-      - `"code_execution_20260521"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -23630,8 +24080,6 @@ print(message_tokens_count.input_tokens)
     from its schema.
 
     - `type: Literal["browser_toolset_20260801"]`
-
-      - `"browser_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24036,11 +24484,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"memory"`
-
     - `type: Literal["memory_20250818"]`
-
-      - `"memory_20250818"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24078,8 +24522,6 @@ print(message_tokens_count.input_tokens)
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-      - `"computer_toolset_20260801"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24316,11 +24758,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_editor"`
-
     - `type: Literal["text_editor_20250124"]`
-
-      - `"text_editor_20250124"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24354,11 +24792,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250429"]`
-
-      - `"text_editor_20250429"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24392,11 +24826,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"str_replace_based_edit_tool"`
-
     - `type: Literal["text_editor_20250728"]`
-
-      - `"text_editor_20250728"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24422,6 +24852,8 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+      minimum: 1
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -24434,11 +24866,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20250305"]`
-
-      - `"web_search_20250305"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24470,6 +24898,8 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of times the tool can be used in the API request.
 
+      exclusiveMinimum: 0
+
     - `strict: Optional[bool]`
 
       When true, guarantees schema validation on tool names and inputs
@@ -24480,23 +24910,29 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["approximate"]`
 
-        - `"approximate"`
-
       - `city: Optional[str]`
 
         The city of the user.
+
+        maxLength: 255, minLength: 1
 
       - `country: Optional[str]`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+        maxLength: 2, minLength: 2
+
       - `region: Optional[str]`
 
         The region of the user.
 
+        maxLength: 255, minLength: 1
+
       - `timezone: Optional[str]`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+        maxLength: 255, minLength: 1
 
   - `class WebFetchTool20250910: …`
 
@@ -24506,11 +24942,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20250910"]`
-
-      - `"web_fetch_20250910"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24548,9 +24980,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -24564,11 +25000,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260209"]`
-
-      - `"web_search_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24599,6 +25031,8 @@ print(message_tokens_count.input_tokens)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -24616,11 +25050,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260209"]`
-
-      - `"web_fetch_20260209"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24656,9 +25086,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -24674,11 +25108,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260309"]`
-
-      - `"web_fetch_20260309"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24714,9 +25144,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `strict: Optional[bool]`
 
@@ -24734,11 +25168,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_search"`
-
     - `type: Literal["web_search_20260318"]`
-
-      - `"web_search_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24769,6 +25199,8 @@ print(message_tokens_count.input_tokens)
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -24794,11 +25226,7 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"web_fetch"`
-
     - `type: Literal["web_fetch_20260318"]`
-
-      - `"web_fetch_20260318"`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -24834,9 +25262,13 @@ print(message_tokens_count.input_tokens)
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+      exclusiveMinimum: 0
+
     - `max_uses: Optional[int]`
 
       Maximum number of times the tool can be used in the API request.
+
+      exclusiveMinimum: 0
 
     - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -24861,8 +25293,6 @@ print(message_tokens_count.input_tokens)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `"tool_search_tool_bm25"`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -24900,8 +25330,6 @@ print(message_tokens_count.input_tokens)
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `"tool_search_tool_regex"`
-
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
       - `"tool_search_tool_regex_20251119"`
@@ -24936,9 +25364,13 @@ print(message_tokens_count.input_tokens)
 
   - `id: str`
 
+    pattern: ^[a-zA-Z0-9_-]+$
+
   - `caller: Caller`
 
     Tool invocation directly from the model.
+
+    default: {"type":"direct"}
 
     - `class DirectCaller: …`
 
@@ -24946,37 +25378,39 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
   - `input: Dict[str, object]`
 
   - `name: str`
 
+    minLength: 1
+
   - `type: Literal["tool_use"]`
 
-    - `"tool_use"`
+    default: tool_use
 
   - `toolset_name: Optional[str]`
 
     For a toolset member tool_use, the toolset family.
+
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Use Block Param
 
@@ -24984,21 +25418,21 @@ print(message_tokens_count.input_tokens)
 
   - `id: str`
 
+    pattern: ^[a-zA-Z0-9_-]+$
+
   - `input: Dict[str, object]`
 
   - `name: str`
 
-  - `type: Literal["tool_use"]`
+    maxLength: 200, minLength: 1
 
-    - `"tool_use"`
+  - `type: Literal["tool_use"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25025,37 +25459,35 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
   - `toolset_name: Optional[str]`
 
     For a toolset member tool_use, the toolset family this member belongs to.
+
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
 ### URL Image Source
 
 - `class URLImageSource: …`
 
   - `type: Literal["url"]`
-
-    - `"url"`
 
   - `url: str`
 
@@ -25064,8 +25496,6 @@ print(message_tokens_count.input_tokens)
 - `class URLPDFSource: …`
 
   - `type: Literal["url"]`
-
-    - `"url"`
 
   - `url: str`
 
@@ -25081,17 +25511,25 @@ print(message_tokens_count.input_tokens)
 
       The number of input tokens used to create the 1 hour cache entry.
 
+      default: 0, minimum: 0
+
     - `ephemeral_5m_input_tokens: int`
 
       The number of input tokens used to create the 5 minute cache entry.
+
+      default: 0, minimum: 0
 
   - `cache_creation_input_tokens: Optional[int]`
 
     The number of input tokens used to create the cache entry.
 
+    minimum: 0
+
   - `cache_read_input_tokens: Optional[int]`
 
     The number of input tokens read from the cache.
+
+    minimum: 0
 
   - `inference_geo: Optional[str]`
 
@@ -25101,9 +25539,13 @@ print(message_tokens_count.input_tokens)
 
     The number of input tokens which were used.
 
+    minimum: 0
+
   - `output_tokens: int`
 
     The number of output tokens which were used.
+
+    minimum: 0
 
   - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -25125,6 +25567,8 @@ print(message_tokens_count.input_tokens)
       generation count by a small number of tokens. Always ≤ `output_tokens`;
       `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+      default: 0, minimum: 0
+
   - `server_tool_use: Optional[ServerToolUsage]`
 
     The number of server tool requests.
@@ -25133,9 +25577,13 @@ print(message_tokens_count.input_tokens)
 
       The number of web fetch tool requests.
 
+      default: 0, minimum: 0
+
     - `web_search_requests: int`
 
       The number of web search tool requests.
+
+      default: 0, minimum: 0
 
   - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -25153,23 +25601,29 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["approximate"]`
 
-    - `"approximate"`
-
   - `city: Optional[str]`
 
     The city of the user.
+
+    maxLength: 255, minLength: 1
 
   - `country: Optional[str]`
 
     The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+    maxLength: 2, minLength: 2
+
   - `region: Optional[str]`
 
     The region of the user.
 
+    maxLength: 255, minLength: 1
+
   - `timezone: Optional[str]`
 
     The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+    maxLength: 255, minLength: 1
 
 ### Web Fetch Block
 
@@ -25183,19 +25637,19 @@ print(message_tokens_count.input_tokens)
 
       - `enabled: bool`
 
+        default: false
+
     - `source: Source`
 
       - `class Base64PDFSource: …`
 
         - `data: str`
 
+          format: byte
+
         - `media_type: Literal["application/pdf"]`
 
-          - `"application/pdf"`
-
         - `type: Literal["base64"]`
-
-          - `"base64"`
 
       - `class PlainTextSource: …`
 
@@ -25203,11 +25657,7 @@ print(message_tokens_count.input_tokens)
 
         - `media_type: Literal["text/plain"]`
 
-          - `"text/plain"`
-
         - `type: Literal["text"]`
-
-          - `"text"`
 
     - `title: Optional[str]`
 
@@ -25215,7 +25665,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["document"]`
 
-      - `"document"`
+      default: document
 
   - `retrieved_at: Optional[str]`
 
@@ -25223,7 +25673,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["web_fetch_result"]`
 
-    - `"web_fetch_result"`
+    default: web_fetch_result
 
   - `url: str`
 
@@ -25241,13 +25691,11 @@ print(message_tokens_count.input_tokens)
 
         - `data: str`
 
+          format: byte
+
         - `media_type: Literal["application/pdf"]`
 
-          - `"application/pdf"`
-
         - `type: Literal["base64"]`
-
-          - `"base64"`
 
       - `class PlainTextSource: …`
 
@@ -25255,11 +25703,7 @@ print(message_tokens_count.input_tokens)
 
         - `media_type: Literal["text/plain"]`
 
-          - `"text/plain"`
-
         - `type: Literal["text"]`
-
-          - `"text"`
 
       - `class ContentBlockSource: …`
 
@@ -25273,17 +25717,15 @@ print(message_tokens_count.input_tokens)
 
               - `text: str`
 
-              - `type: Literal["text"]`
+                minLength: 1
 
-                - `"text"`
+              - `type: Literal["text"]`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
 
                 - `type: Literal["ephemeral"]`
-
-                  - `"ephemeral"`
 
                 - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25308,15 +25750,19 @@ print(message_tokens_count.input_tokens)
 
                   - `document_index: int`
 
+                    minimum: 0
+
                   - `document_title: Optional[str]`
+
+                    maxLength: 500, minLength: 1
 
                   - `end_char_index: int`
 
                   - `start_char_index: int`
 
-                  - `type: Literal["char_location"]`
+                    minimum: 0
 
-                    - `"char_location"`
+                  - `type: Literal["char_location"]`
 
                 - `class CitationPageLocationParam: …`
 
@@ -25324,15 +25770,19 @@ print(message_tokens_count.input_tokens)
 
                   - `document_index: int`
 
+                    minimum: 0
+
                   - `document_title: Optional[str]`
+
+                    maxLength: 500, minLength: 1
 
                   - `end_page_number: int`
 
                   - `start_page_number: int`
 
-                  - `type: Literal["page_location"]`
+                    minimum: 1
 
-                    - `"page_location"`
+                  - `type: Literal["page_location"]`
 
                 - `class CitationContentBlockLocationParam: …`
 
@@ -25344,7 +25794,11 @@ print(message_tokens_count.input_tokens)
 
                   - `document_index: int`
 
+                    minimum: 0
+
                   - `document_title: Optional[str]`
+
+                    maxLength: 500, minLength: 1
 
                   - `end_block_index: int`
 
@@ -25356,9 +25810,9 @@ print(message_tokens_count.input_tokens)
 
                     0-based index of the first cited block in the source's `content` array.
 
-                  - `type: Literal["content_block_location"]`
+                    minimum: 0
 
-                    - `"content_block_location"`
+                  - `type: Literal["content_block_location"]`
 
                 - `class CitationWebSearchResultLocationParam: …`
 
@@ -25368,11 +25822,13 @@ print(message_tokens_count.input_tokens)
 
                   - `title: Optional[str]`
 
+                    maxLength: 512, minLength: 1
+
                   - `type: Literal["web_search_result_location"]`
 
-                    - `"web_search_result_location"`
-
                   - `url: str`
+
+                    minLength: 1
 
                 - `class CitationSearchResultLocationParam: …`
 
@@ -25394,17 +25850,19 @@ print(message_tokens_count.input_tokens)
 
                     Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                    minimum: 0
+
                   - `source: str`
 
                   - `start_block_index: int`
 
                     0-based index of the first cited block in the source's `content` array.
 
+                    minimum: 0
+
                   - `title: Optional[str]`
 
                   - `type: Literal["search_result_location"]`
-
-                    - `"search_result_location"`
 
             - `class ImageBlockParam: …`
 
@@ -25413,6 +25871,8 @@ print(message_tokens_count.input_tokens)
                 - `class Base64ImageSource: …`
 
                   - `data: str`
+
+                    format: byte
 
                   - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -25426,13 +25886,9 @@ print(message_tokens_count.input_tokens)
 
                   - `type: Literal["base64"]`
 
-                    - `"base64"`
-
                 - `class URLImageSource: …`
 
                   - `type: Literal["url"]`
-
-                    - `"url"`
 
                   - `url: str`
 
@@ -25442,11 +25898,7 @@ print(message_tokens_count.input_tokens)
 
                   - `type: Literal["file"]`
 
-                    - `"file"`
-
               - `type: Literal["image"]`
-
-                - `"image"`
 
               - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -25466,13 +25918,9 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["content"]`
 
-          - `"content"`
-
       - `class URLPDFSource: …`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -25482,11 +25930,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["file"]`
 
-          - `"file"`
-
     - `type: Literal["document"]`
-
-      - `"document"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -25498,11 +25942,13 @@ print(message_tokens_count.input_tokens)
 
     - `context: Optional[str]`
 
+      minLength: 1
+
     - `title: Optional[str]`
 
-  - `type: Literal["web_fetch_result"]`
+      maxLength: 500, minLength: 1
 
-    - `"web_fetch_result"`
+  - `type: Literal["web_fetch_result"]`
 
   - `url: str`
 
@@ -25522,11 +25968,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_fetch"`
-
   - `type: Literal["web_fetch_20250910"]`
-
-    - `"web_fetch_20250910"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -25551,8 +25993,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25583,9 +26023,13 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+    exclusiveMinimum: 0
+
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `strict: Optional[bool]`
 
@@ -25601,11 +26045,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_fetch"`
-
   - `type: Literal["web_fetch_20260209"]`
-
-    - `"web_fetch_20260209"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -25630,8 +26070,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25662,9 +26100,13 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+    exclusiveMinimum: 0
+
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `strict: Optional[bool]`
 
@@ -25682,11 +26124,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_fetch"`
-
   - `type: Literal["web_fetch_20260309"]`
-
-    - `"web_fetch_20260309"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -25711,8 +26149,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25743,9 +26179,13 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+    exclusiveMinimum: 0
+
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `strict: Optional[bool]`
 
@@ -25765,11 +26205,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_fetch"`
-
   - `type: Literal["web_fetch_20260318"]`
-
-    - `"web_fetch_20260318"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -25794,8 +26230,6 @@ print(message_tokens_count.input_tokens)
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -25826,9 +26260,13 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+    exclusiveMinimum: 0
+
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -25854,13 +26292,13 @@ print(message_tokens_count.input_tokens)
 
     Tool invocation directly from the model.
 
+    default: {"type":"direct"}
+
     - `class DirectCaller: …`
 
       Tool invocation directly from the model.
 
       - `type: Literal["direct"]`
-
-        - `"direct"`
 
     - `class ServerToolCaller: …`
 
@@ -25868,17 +26306,17 @@ print(message_tokens_count.input_tokens)
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
   - `content: Content`
 
@@ -25906,7 +26344,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_fetch_tool_result_error"]`
 
-        - `"web_fetch_tool_result_error"`
+        default: web_fetch_tool_result_error
 
     - `class WebFetchBlock: …`
 
@@ -25918,19 +26356,19 @@ print(message_tokens_count.input_tokens)
 
           - `enabled: bool`
 
+            default: false
+
         - `source: Source`
 
           - `class Base64PDFSource: …`
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -25938,11 +26376,7 @@ print(message_tokens_count.input_tokens)
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
         - `title: Optional[str]`
 
@@ -25950,7 +26384,7 @@ print(message_tokens_count.input_tokens)
 
         - `type: Literal["document"]`
 
-          - `"document"`
+          default: document
 
       - `retrieved_at: Optional[str]`
 
@@ -25958,7 +26392,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_fetch_result"]`
 
-        - `"web_fetch_result"`
+        default: web_fetch_result
 
       - `url: str`
 
@@ -25966,9 +26400,11 @@ print(message_tokens_count.input_tokens)
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["web_fetch_tool_result"]`
 
-    - `"web_fetch_tool_result"`
+    default: web_fetch_tool_result
 
 ### Web Fetch Tool Result Block Param
 
@@ -26000,8 +26436,6 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_fetch_tool_result_error"]`
 
-        - `"web_fetch_tool_result_error"`
-
     - `class WebFetchBlockParam: …`
 
       - `content: DocumentBlockParam`
@@ -26012,13 +26446,11 @@ print(message_tokens_count.input_tokens)
 
             - `data: str`
 
+              format: byte
+
             - `media_type: Literal["application/pdf"]`
 
-              - `"application/pdf"`
-
             - `type: Literal["base64"]`
-
-              - `"base64"`
 
           - `class PlainTextSource: …`
 
@@ -26026,11 +26458,7 @@ print(message_tokens_count.input_tokens)
 
             - `media_type: Literal["text/plain"]`
 
-              - `"text/plain"`
-
             - `type: Literal["text"]`
-
-              - `"text"`
 
           - `class ContentBlockSource: …`
 
@@ -26044,17 +26472,15 @@ print(message_tokens_count.input_tokens)
 
                   - `text: str`
 
-                  - `type: Literal["text"]`
+                    minLength: 1
 
-                    - `"text"`
+                  - `type: Literal["text"]`
 
                   - `cache_control: Optional[CacheControlEphemeral]`
 
                     Create a cache control breakpoint at this content block.
 
                     - `type: Literal["ephemeral"]`
-
-                      - `"ephemeral"`
 
                     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -26079,15 +26505,19 @@ print(message_tokens_count.input_tokens)
 
                       - `document_index: int`
 
+                        minimum: 0
+
                       - `document_title: Optional[str]`
+
+                        maxLength: 500, minLength: 1
 
                       - `end_char_index: int`
 
                       - `start_char_index: int`
 
-                      - `type: Literal["char_location"]`
+                        minimum: 0
 
-                        - `"char_location"`
+                      - `type: Literal["char_location"]`
 
                     - `class CitationPageLocationParam: …`
 
@@ -26095,15 +26525,19 @@ print(message_tokens_count.input_tokens)
 
                       - `document_index: int`
 
+                        minimum: 0
+
                       - `document_title: Optional[str]`
+
+                        maxLength: 500, minLength: 1
 
                       - `end_page_number: int`
 
                       - `start_page_number: int`
 
-                      - `type: Literal["page_location"]`
+                        minimum: 1
 
-                        - `"page_location"`
+                      - `type: Literal["page_location"]`
 
                     - `class CitationContentBlockLocationParam: …`
 
@@ -26115,7 +26549,11 @@ print(message_tokens_count.input_tokens)
 
                       - `document_index: int`
 
+                        minimum: 0
+
                       - `document_title: Optional[str]`
+
+                        maxLength: 500, minLength: 1
 
                       - `end_block_index: int`
 
@@ -26127,9 +26565,9 @@ print(message_tokens_count.input_tokens)
 
                         0-based index of the first cited block in the source's `content` array.
 
-                      - `type: Literal["content_block_location"]`
+                        minimum: 0
 
-                        - `"content_block_location"`
+                      - `type: Literal["content_block_location"]`
 
                     - `class CitationWebSearchResultLocationParam: …`
 
@@ -26139,11 +26577,13 @@ print(message_tokens_count.input_tokens)
 
                       - `title: Optional[str]`
 
+                        maxLength: 512, minLength: 1
+
                       - `type: Literal["web_search_result_location"]`
 
-                        - `"web_search_result_location"`
-
                       - `url: str`
+
+                        minLength: 1
 
                     - `class CitationSearchResultLocationParam: …`
 
@@ -26165,17 +26605,19 @@ print(message_tokens_count.input_tokens)
 
                         Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                        minimum: 0
+
                       - `source: str`
 
                       - `start_block_index: int`
 
                         0-based index of the first cited block in the source's `content` array.
 
+                        minimum: 0
+
                       - `title: Optional[str]`
 
                       - `type: Literal["search_result_location"]`
-
-                        - `"search_result_location"`
 
                 - `class ImageBlockParam: …`
 
@@ -26184,6 +26626,8 @@ print(message_tokens_count.input_tokens)
                     - `class Base64ImageSource: …`
 
                       - `data: str`
+
+                        format: byte
 
                       - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -26197,13 +26641,9 @@ print(message_tokens_count.input_tokens)
 
                       - `type: Literal["base64"]`
 
-                        - `"base64"`
-
                     - `class URLImageSource: …`
 
                       - `type: Literal["url"]`
-
-                        - `"url"`
 
                       - `url: str`
 
@@ -26213,11 +26653,7 @@ print(message_tokens_count.input_tokens)
 
                       - `type: Literal["file"]`
 
-                        - `"file"`
-
                   - `type: Literal["image"]`
-
-                    - `"image"`
 
                   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -26237,13 +26673,9 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["content"]`
 
-              - `"content"`
-
           - `class URLPDFSource: …`
 
             - `type: Literal["url"]`
-
-              - `"url"`
 
             - `url: str`
 
@@ -26253,11 +26685,7 @@ print(message_tokens_count.input_tokens)
 
             - `type: Literal["file"]`
 
-              - `"file"`
-
         - `type: Literal["document"]`
-
-          - `"document"`
 
         - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -26269,11 +26697,13 @@ print(message_tokens_count.input_tokens)
 
         - `context: Optional[str]`
 
+          minLength: 1
+
         - `title: Optional[str]`
 
-      - `type: Literal["web_fetch_result"]`
+          maxLength: 500, minLength: 1
 
-        - `"web_fetch_result"`
+      - `type: Literal["web_fetch_result"]`
 
       - `url: str`
 
@@ -26285,9 +26715,9 @@ print(message_tokens_count.input_tokens)
 
   - `tool_use_id: str`
 
-  - `type: Literal["web_fetch_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"web_fetch_tool_result"`
+  - `type: Literal["web_fetch_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -26303,25 +26733,23 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
 ### Web Fetch Tool Result Error Block
 
@@ -26349,7 +26777,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["web_fetch_tool_result_error"]`
 
-    - `"web_fetch_tool_result_error"`
+    default: web_fetch_tool_result_error
 
 ### Web Fetch Tool Result Error Block Param
 
@@ -26376,8 +26804,6 @@ print(message_tokens_count.input_tokens)
     - `"unavailable"`
 
   - `type: Literal["web_fetch_tool_result_error"]`
-
-    - `"web_fetch_tool_result_error"`
 
 ### Web Fetch Tool Result Error Code
 
@@ -26413,7 +26839,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["web_search_result"]`
 
-    - `"web_search_result"`
+    default: web_search_result
 
   - `url: str`
 
@@ -26426,8 +26852,6 @@ print(message_tokens_count.input_tokens)
   - `title: str`
 
   - `type: Literal["web_search_result"]`
-
-    - `"web_search_result"`
 
   - `url: str`
 
@@ -26443,11 +26867,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_search"`
-
   - `type: Literal["web_search_20250305"]`
-
-    - `"web_search_20250305"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -26473,8 +26893,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["ephemeral"]`
 
-      - `"ephemeral"`
-
     - `ttl: Optional[Literal["5m", "1h"]]`
 
       The time-to-live for the cache control breakpoint.
@@ -26498,6 +26916,8 @@ print(message_tokens_count.input_tokens)
 
     Maximum number of times the tool can be used in the API request.
 
+    exclusiveMinimum: 0
+
   - `strict: Optional[bool]`
 
     When true, guarantees schema validation on tool names and inputs
@@ -26508,23 +26928,29 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["approximate"]`
 
-      - `"approximate"`
-
     - `city: Optional[str]`
 
       The city of the user.
+
+      maxLength: 255, minLength: 1
 
     - `country: Optional[str]`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+      maxLength: 2, minLength: 2
+
     - `region: Optional[str]`
 
       The region of the user.
 
+      maxLength: 255, minLength: 1
+
     - `timezone: Optional[str]`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+      maxLength: 255, minLength: 1
 
 ### Web Search Tool 20260209
 
@@ -26536,11 +26962,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_search"`
-
   - `type: Literal["web_search_20260209"]`
-
-    - `"web_search_20260209"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -26566,8 +26988,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["ephemeral"]`
 
-      - `"ephemeral"`
-
     - `ttl: Optional[Literal["5m", "1h"]]`
 
       The time-to-live for the cache control breakpoint.
@@ -26590,6 +27010,8 @@ print(message_tokens_count.input_tokens)
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `strict: Optional[bool]`
 
@@ -26601,23 +27023,29 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["approximate"]`
 
-      - `"approximate"`
-
     - `city: Optional[str]`
 
       The city of the user.
+
+      maxLength: 255, minLength: 1
 
     - `country: Optional[str]`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+      maxLength: 2, minLength: 2
+
     - `region: Optional[str]`
 
       The region of the user.
 
+      maxLength: 255, minLength: 1
+
     - `timezone: Optional[str]`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+      maxLength: 255, minLength: 1
 
 ### Web Search Tool 20260318
 
@@ -26629,11 +27057,7 @@ print(message_tokens_count.input_tokens)
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `"web_search"`
-
   - `type: Literal["web_search_20260318"]`
-
-    - `"web_search_20260318"`
 
   - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -26659,8 +27083,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["ephemeral"]`
 
-      - `"ephemeral"`
-
     - `ttl: Optional[Literal["5m", "1h"]]`
 
       The time-to-live for the cache control breakpoint.
@@ -26683,6 +27105,8 @@ print(message_tokens_count.input_tokens)
   - `max_uses: Optional[int]`
 
     Maximum number of times the tool can be used in the API request.
+
+    exclusiveMinimum: 0
 
   - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -26702,23 +27126,29 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["approximate"]`
 
-      - `"approximate"`
-
     - `city: Optional[str]`
 
       The city of the user.
+
+      maxLength: 255, minLength: 1
 
     - `country: Optional[str]`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+      maxLength: 2, minLength: 2
+
     - `region: Optional[str]`
 
       The region of the user.
 
+      maxLength: 255, minLength: 1
+
     - `timezone: Optional[str]`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+      maxLength: 255, minLength: 1
 
 ### Web Search Tool Request Error
 
@@ -26740,8 +27170,6 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["web_search_tool_result_error"]`
 
-    - `"web_search_tool_result_error"`
-
 ### Web Search Tool Result Block
 
 - `class WebSearchToolResultBlock: …`
@@ -26750,13 +27178,13 @@ print(message_tokens_count.input_tokens)
 
     Tool invocation directly from the model.
 
+    default: {"type":"direct"}
+
     - `class DirectCaller: …`
 
       Tool invocation directly from the model.
 
       - `type: Literal["direct"]`
-
-        - `"direct"`
 
     - `class ServerToolCaller: …`
 
@@ -26764,17 +27192,17 @@ print(message_tokens_count.input_tokens)
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
   - `content: WebSearchToolResultBlockContent`
 
@@ -26796,7 +27224,7 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_search_tool_result_error"]`
 
-        - `"web_search_tool_result_error"`
+        default: web_search_tool_result_error
 
     - `List[WebSearchResultBlock]`
 
@@ -26808,15 +27236,17 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_search_result"]`
 
-        - `"web_search_result"`
+        default: web_search_result
 
       - `url: str`
 
   - `tool_use_id: str`
 
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
   - `type: Literal["web_search_tool_result"]`
 
-    - `"web_search_tool_result"`
+    default: web_search_tool_result
 
 ### Web Search Tool Result Block Content
 
@@ -26840,7 +27270,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["web_search_tool_result_error"]`
 
-      - `"web_search_tool_result_error"`
+      default: web_search_tool_result_error
 
   - `List[WebSearchResultBlock]`
 
@@ -26852,7 +27282,7 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["web_search_result"]`
 
-      - `"web_search_result"`
+      default: web_search_result
 
     - `url: str`
 
@@ -26869,8 +27299,6 @@ print(message_tokens_count.input_tokens)
       - `title: str`
 
       - `type: Literal["web_search_result"]`
-
-        - `"web_search_result"`
 
       - `url: str`
 
@@ -26894,21 +27322,17 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["web_search_tool_result_error"]`
 
-        - `"web_search_tool_result_error"`
-
   - `tool_use_id: str`
 
-  - `type: Literal["web_search_tool_result"]`
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `"web_search_tool_result"`
+  - `type: Literal["web_search_tool_result"]`
 
   - `cache_control: Optional[CacheControlEphemeral]`
 
     Create a cache control breakpoint at this content block.
 
     - `type: Literal["ephemeral"]`
-
-      - `"ephemeral"`
 
     - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -26935,25 +27359,23 @@ print(message_tokens_count.input_tokens)
 
       - `type: Literal["direct"]`
 
-        - `"direct"`
-
     - `class ServerToolCaller: …`
 
       Tool invocation generated by a server-side tool.
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20250825"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20250825"`
+      - `type: Literal["code_execution_20250825"]`
 
     - `class ServerToolCaller20260120: …`
 
       - `tool_id: str`
 
-      - `type: Literal["code_execution_20260120"]`
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `"code_execution_20260120"`
+      - `type: Literal["code_execution_20260120"]`
 
 ### Web Search Tool Result Block Param Content
 
@@ -26966,8 +27388,6 @@ print(message_tokens_count.input_tokens)
     - `title: str`
 
     - `type: Literal["web_search_result"]`
-
-      - `"web_search_result"`
 
     - `url: str`
 
@@ -26991,8 +27411,6 @@ print(message_tokens_count.input_tokens)
 
     - `type: Literal["web_search_tool_result_error"]`
 
-      - `"web_search_tool_result_error"`
-
 ### Web Search Tool Result Error
 
 - `class WebSearchToolResultError: …`
@@ -27013,7 +27431,7 @@ print(message_tokens_count.input_tokens)
 
   - `type: Literal["web_search_tool_result_error"]`
 
-    - `"web_search_tool_result_error"`
+    default: web_search_tool_result_error
 
 ### Web Search Tool Result Error Code
 
@@ -27031,13 +27449,13 @@ print(message_tokens_count.input_tokens)
 
   - `"request_too_large"`
 
-# Batches
+## Messages › Batches
 
-## Create a Message Batch
+### Create a Message Batch
 
-`messages.batches.create(BatchCreateParams**kwargs)  -> MessageBatch`
+`messages.batches.create(**kwargs)  -> MessageBatch`
 
-**post** `/v1/messages/batches`
+**POST** `/v1/messages/batches`
 
 Send a batch of Message creation requests.
 
@@ -27045,17 +27463,21 @@ The Message Batches API can be used to process multiple Messages API requests at
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `requests: Iterable[Request]`
 
   List of requests for prompt completion. Each is an individual request to create a Message.
+
+  maxItems: 100000, minItems: 1
 
   - `custom_id: str`
 
     Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
     Must be unique for each request within the Message Batch.
+
+    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
   - `params: RequestParams`
 
@@ -27072,6 +27494,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       Set to `0` to populate the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md#pre-warming-the-cache) without generating a response.
 
       Different models have different maximum values for this parameter.  See [models](../about-claude/about-claude-models-overview.md) for details.
+
+      minimum: 0
 
     - `messages: Iterable[MessageParam]`
 
@@ -27134,17 +27558,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `text: str`
 
-            - `type: Literal["text"]`
+              minLength: 1
 
-              - `"text"`
+            - `type: Literal["text"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
               Create a cache control breakpoint at this content block.
 
               - `type: Literal["ephemeral"]`
-
-                - `"ephemeral"`
 
               - `ttl: Optional[Literal["5m", "1h"]]`
 
@@ -27169,15 +27591,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_char_index: int`
 
                 - `start_char_index: int`
 
-                - `type: Literal["char_location"]`
+                  minimum: 0
 
-                  - `"char_location"`
+                - `type: Literal["char_location"]`
 
               - `class CitationPageLocationParam: …`
 
@@ -27185,15 +27611,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_page_number: int`
 
                 - `start_page_number: int`
 
-                - `type: Literal["page_location"]`
+                  minimum: 1
 
-                  - `"page_location"`
+                - `type: Literal["page_location"]`
 
               - `class CitationContentBlockLocationParam: …`
 
@@ -27205,7 +27635,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
+
+                  maxLength: 500, minLength: 1
 
                 - `end_block_index: int`
 
@@ -27217,9 +27651,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `type: Literal["content_block_location"]`
+                  minimum: 0
 
-                  - `"content_block_location"`
+                - `type: Literal["content_block_location"]`
 
               - `class CitationWebSearchResultLocationParam: …`
 
@@ -27229,11 +27663,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: Optional[str]`
 
+                  maxLength: 512, minLength: 1
+
                 - `type: Literal["web_search_result_location"]`
 
-                  - `"web_search_result_location"`
-
                 - `url: str`
+
+                  minLength: 1
 
               - `class CitationSearchResultLocationParam: …`
 
@@ -27255,17 +27691,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: str`
 
                 - `start_block_index: int`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: Optional[str]`
 
                 - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
 
           - `class ImageBlockParam: …`
 
@@ -27274,6 +27712,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `class Base64ImageSource: …`
 
                 - `data: str`
+
+                  format: byte
 
                 - `media_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]`
 
@@ -27287,13 +27727,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["base64"]`
 
-                  - `"base64"`
-
               - `class URLImageSource: …`
 
                 - `type: Literal["url"]`
-
-                  - `"url"`
 
                 - `url: str`
 
@@ -27303,11 +27739,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["file"]`
 
-                  - `"file"`
-
             - `type: Literal["image"]`
-
-              - `"image"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27333,13 +27765,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `data: str`
 
+                  format: byte
+
                 - `media_type: Literal["application/pdf"]`
 
-                  - `"application/pdf"`
-
                 - `type: Literal["base64"]`
-
-                  - `"base64"`
 
               - `class PlainTextSource: …`
 
@@ -27347,11 +27777,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `media_type: Literal["text/plain"]`
 
-                  - `"text/plain"`
-
                 - `type: Literal["text"]`
-
-                  - `"text"`
 
               - `class ContentBlockSource: …`
 
@@ -27367,13 +27793,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["content"]`
 
-                  - `"content"`
-
               - `class URLPDFSource: …`
 
                 - `type: Literal["url"]`
-
-                  - `"url"`
 
                 - `url: str`
 
@@ -27383,11 +27805,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["file"]`
 
-                  - `"file"`
-
             - `type: Literal["document"]`
-
-              - `"document"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27399,13 +27817,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `context: Optional[str]`
 
+              minLength: 1
+
             - `title: Optional[str]`
+
+              maxLength: 500, minLength: 1
 
           - `class SearchResultBlockParam: …`
 
             - `content: List[TextBlockParam]`
 
               - `text: str`
+
+                minLength: 1
 
               - `type: Literal["text"]`
 
@@ -27420,8 +27844,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `title: str`
 
             - `type: Literal["search_result"]`
-
-              - `"search_result"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27443,8 +27865,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["thinking"]`
 
-              - `"thinking"`
-
           - `class RedactedThinkingBlockParam: …`
 
             - `data: str`
@@ -27453,19 +27873,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["redacted_thinking"]`
 
-              - `"redacted_thinking"`
-
           - `class ToolUseBlockParam: …`
 
             - `id: str`
+
+              pattern: ^[a-zA-Z0-9_-]+$
 
             - `input: Dict[str, object]`
 
             - `name: str`
 
-            - `type: Literal["tool_use"]`
+              maxLength: 200, minLength: 1
 
-              - `"tool_use"`
+            - `type: Literal["tool_use"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27481,37 +27901,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["direct"]`
 
-                  - `"direct"`
-
               - `class ServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
                 - `tool_id: str`
 
-                - `type: Literal["code_execution_20250825"]`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `"code_execution_20250825"`
+                - `type: Literal["code_execution_20250825"]`
 
               - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
-                - `type: Literal["code_execution_20260120"]`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `"code_execution_20260120"`
+                - `type: Literal["code_execution_20260120"]`
 
             - `toolset_name: Optional[str]`
 
               For a toolset member tool_use, the toolset family this member belongs to.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ToolResultBlockParam: …`
 
             - `tool_use_id: str`
 
-            - `type: Literal["tool_result"]`
+              pattern: ^[a-zA-Z0-9_-]+$
 
-              - `"tool_result"`
+            - `type: Literal["tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27537,9 +27957,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `tool_name: str`
 
-                  - `type: Literal["tool_reference"]`
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `"tool_reference"`
+                  - `type: Literal["tool_reference"]`
 
                   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27559,25 +27979,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                    maxItems: 100
+
                     - `tab_id: str`
 
                       The caller-assigned identifier for this tab, unique within the inventory.
+
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `title: str`
 
                       The title of the page the tab is showing. May be empty.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `url: str`
 
                       The URL of the page the tab is showing. May be empty.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `active: Optional[bool]`
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
                   - `type: Literal["browser_state"]`
-
-                    - `"browser_state"`
 
                   - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27586,6 +28012,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `state_changes: Optional[List[BrowserStateChange]]`
 
                     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                    maxItems: 200, minItems: 1
 
                     - `class BrowserStateChangeTabOpened: …`
 
@@ -27601,9 +28029,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
-                      - `type: Literal["tab_opened"]`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `"tab_opened"`
+                      - `type: Literal["tab_opened"]`
 
                     - `class BrowserStateChangeDownloadStarted: …`
 
@@ -27613,13 +28041,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: Literal["download_started"]`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `"download_started"`
+                      - `type: Literal["download_started"]`
 
                       - `url: str`
 
                         The final post-redirect URL the download was served from.
+
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `class BrowserStateChangeDownloadCompleted: …`
 
@@ -27632,21 +28062,27 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: Literal["download_completed"]`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `"download_completed"`
+                      - `type: Literal["download_completed"]`
 
                       - `url: str`
 
                         The final post-redirect URL the download was served from.
 
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                       - `path: Optional[str]`
 
                         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
                       - `size_bytes: Optional[int]`
 
                         The completed download's size.
+
+                        minimum: 0
 
                     - `class BrowserStateChangeDownloadFailed: …`
 
@@ -27656,17 +28092,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      - `type: Literal["download_failed"]`
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `"download_failed"`
+                      - `type: Literal["download_failed"]`
 
                       - `url: str`
 
                         The final post-redirect URL the download was served from.
 
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                       - `error: Optional[str]`
 
                         The failure or cancellation detail, when known.
+
+                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
 
             - `is_error: Optional[bool]`
 
@@ -27674,9 +28114,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               For a toolset member tool_result, the toolset family of the paired tool_use.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlockParam: …`
 
             - `id: str`
+
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `input: Dict[str, object]`
 
@@ -27697,8 +28141,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"tool_search_tool_bm25"`
 
             - `type: Literal["server_tool_use"]`
-
-              - `"server_tool_use"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27730,8 +28172,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_search_result"]`
 
-                  - `"web_search_result"`
-
                 - `url: str`
 
                 - `page_age: Optional[str]`
@@ -27754,13 +28194,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_search_tool_result_error"]`
 
-                  - `"web_search_tool_result_error"`
-
             - `tool_use_id: str`
 
-            - `type: Literal["web_search_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"web_search_tool_result"`
+            - `type: Literal["web_search_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27808,15 +28246,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_fetch_tool_result_error"]`
 
-                  - `"web_fetch_tool_result_error"`
-
               - `class WebFetchBlockParam: …`
 
                 - `content: DocumentBlockParam`
 
                 - `type: Literal["web_fetch_result"]`
-
-                  - `"web_fetch_result"`
 
                 - `url: str`
 
@@ -27828,9 +28262,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: str`
 
-            - `type: Literal["web_fetch_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"web_fetch_tool_result"`
+            - `type: Literal["web_fetch_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27870,8 +28304,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["code_execution_tool_result_error"]`
 
-                  - `"code_execution_tool_result_error"`
-
               - `class CodeExecutionResultBlockParam: …`
 
                 - `content: List[CodeExecutionOutputBlockParam]`
@@ -27880,8 +28312,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["code_execution_output"]`
 
-                    - `"code_execution_output"`
-
                 - `return_code: int`
 
                 - `stderr: str`
@@ -27889,8 +28319,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `stdout: str`
 
                 - `type: Literal["code_execution_result"]`
-
-                  - `"code_execution_result"`
 
               - `class EncryptedCodeExecutionResultBlockParam: …`
 
@@ -27910,13 +28338,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["encrypted_code_execution_result"]`
 
-                  - `"encrypted_code_execution_result"`
-
             - `tool_use_id: str`
 
-            - `type: Literal["code_execution_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"code_execution_tool_result"`
+            - `type: Literal["code_execution_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27942,8 +28368,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["bash_code_execution_tool_result_error"]`
 
-                  - `"bash_code_execution_tool_result_error"`
-
               - `class BashCodeExecutionResultBlockParam: …`
 
                 - `content: List[BashCodeExecutionOutputBlockParam]`
@@ -27951,8 +28375,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `file_id: str`
 
                   - `type: Literal["bash_code_execution_output"]`
-
-                    - `"bash_code_execution_output"`
 
                 - `return_code: int`
 
@@ -27962,13 +28384,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["bash_code_execution_result"]`
 
-                  - `"bash_code_execution_result"`
-
             - `tool_use_id: str`
 
-            - `type: Literal["bash_code_execution_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"bash_code_execution_tool_result"`
+            - `type: Literal["bash_code_execution_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -27994,8 +28414,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-                  - `"text_editor_code_execution_tool_result_error"`
-
                 - `error_message: Optional[str]`
 
               - `class TextEditorCodeExecutionViewResultBlockParam: …`
@@ -28012,8 +28430,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_view_result"]`
 
-                  - `"text_editor_code_execution_view_result"`
-
                 - `num_lines: Optional[int]`
 
                 - `start_line: Optional[int]`
@@ -28026,13 +28442,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_create_result"]`
 
-                  - `"text_editor_code_execution_create_result"`
-
               - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
                 - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-                  - `"text_editor_code_execution_str_replace_result"`
 
                 - `lines: Optional[List[str]]`
 
@@ -28046,9 +28458,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: str`
 
-            - `type: Literal["text_editor_code_execution_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"text_editor_code_execution_tool_result"`
+            - `type: Literal["text_editor_code_execution_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -28072,8 +28484,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["tool_search_tool_result_error"]`
 
-                  - `"tool_search_tool_result_error"`
-
                 - `error_message: Optional[str]`
 
               - `class ToolSearchToolSearchResultBlockParam: …`
@@ -28081,6 +28491,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `tool_references: List[ToolReferenceBlockParam]`
 
                   - `tool_name: str`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                   - `type: Literal["tool_reference"]`
 
@@ -28090,13 +28502,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["tool_search_tool_search_result"]`
 
-                  - `"tool_search_tool_search_result"`
-
             - `tool_use_id: str`
 
-            - `type: Literal["tool_search_tool_result"]`
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `"tool_search_tool_result"`
+            - `type: Literal["tool_search_tool_result"]`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -28110,8 +28520,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `file_id: str`
 
             - `type: Literal["container_upload"]`
-
-              - `"container_upload"`
 
             - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -28235,9 +28643,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           List of skills to load in the container
 
+          maxItems: 20
+
           - `skill_id: str`
 
             Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `type: Literal["anthropic", "custom"]`
 
@@ -28250,6 +28662,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `version: Optional[str]`
 
             Skill version or 'latest' for most recent version
+
+            maxLength: 64, minLength: 1
 
       - `str`
 
@@ -28266,6 +28680,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         An external identifier for the user who is associated with the request.
 
         This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+        maxLength: 512
 
     - `output_config: Optional[OutputConfigParam]`
 
@@ -28294,8 +28710,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           The JSON schema of the format
 
         - `type: Literal["json_schema"]`
-
-          - `"json_schema"`
 
     - `service_tier: Optional[Literal["auto", "standard_only"]]`
 
@@ -28333,6 +28747,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `text: str`
 
+          minLength: 1
+
         - `type: Literal["text"]`
 
         - `cache_control: Optional[CacheControlEphemeral]`
@@ -28359,9 +28775,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-        - `type: Literal["enabled"]`
+          minimum: 1024
 
-          - `"enabled"`
+        - `type: Literal["enabled"]`
 
         - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -28375,13 +28791,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: Literal["disabled"]`
 
-          - `"disabled"`
-
       - `class ThinkingConfigAdaptive: …`
 
         - `type: Literal["adaptive"]`
-
-          - `"adaptive"`
 
         - `display: Optional[Literal["summarized", "omitted"]]`
 
@@ -28401,8 +28813,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: Literal["auto"]`
 
-          - `"auto"`
-
         - `disable_parallel_tool_use: Optional[bool]`
 
           Whether to disable parallel tool use.
@@ -28414,8 +28824,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         The model will use any available tools.
 
         - `type: Literal["any"]`
-
-          - `"any"`
 
         - `disable_parallel_tool_use: Optional[bool]`
 
@@ -28433,8 +28841,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: Literal["tool"]`
 
-          - `"tool"`
-
         - `disable_parallel_tool_use: Optional[bool]`
 
           Whether to disable parallel tool use.
@@ -28446,8 +28852,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         The model will not be allowed to use tools.
 
         - `type: Literal["none"]`
-
-          - `"none"`
 
     - `tools: Optional[Iterable[ToolUnionParam]]`
 
@@ -28523,8 +28927,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `type: Literal["object"]`
 
-            - `"object"`
-
           - `properties: Optional[Dict[str, object]]`
 
           - `required: Optional[List[str]]`
@@ -28534,6 +28936,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
+
+          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28571,8 +28975,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `type: Optional[Literal["custom"]]`
 
-          - `"custom"`
-
       - `class ToolBash20250124: …`
 
         - `name: Literal["bash"]`
@@ -28581,11 +28983,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"bash"`
-
         - `type: Literal["bash_20250124"]`
-
-          - `"bash_20250124"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28619,11 +29017,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"code_execution"`
-
         - `type: Literal["code_execution_20250522"]`
-
-          - `"code_execution_20250522"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28655,11 +29049,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"code_execution"`
-
         - `type: Literal["code_execution_20250825"]`
-
-          - `"code_execution_20250825"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28693,11 +29083,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"code_execution"`
-
         - `type: Literal["code_execution_20260120"]`
-
-          - `"code_execution_20260120"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28731,11 +29117,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"code_execution"`
-
         - `type: Literal["code_execution_20260521"]`
-
-          - `"code_execution_20260521"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -28767,8 +29149,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         from its schema.
 
         - `type: Literal["browser_toolset_20260801"]`
-
-          - `"browser_toolset_20260801"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29173,11 +29553,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"memory"`
-
         - `type: Literal["memory_20250818"]`
-
-          - `"memory_20250818"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29215,8 +29591,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         via `configs.zoom.enabled`.
 
         - `type: Literal["computer_toolset_20260801"]`
-
-          - `"computer_toolset_20260801"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29453,11 +29827,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"str_replace_editor"`
-
         - `type: Literal["text_editor_20250124"]`
-
-          - `"text_editor_20250124"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29491,11 +29861,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"str_replace_based_edit_tool"`
-
         - `type: Literal["text_editor_20250429"]`
-
-          - `"text_editor_20250429"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29529,11 +29895,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"str_replace_based_edit_tool"`
-
         - `type: Literal["text_editor_20250728"]`
-
-          - `"text_editor_20250728"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29559,6 +29921,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
+          minimum: 1
+
         - `strict: Optional[bool]`
 
           When true, guarantees schema validation on tool names and inputs
@@ -29571,11 +29935,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_search"`
-
         - `type: Literal["web_search_20250305"]`
-
-          - `"web_search_20250305"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29607,6 +29967,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of times the tool can be used in the API request.
 
+          exclusiveMinimum: 0
+
         - `strict: Optional[bool]`
 
           When true, guarantees schema validation on tool names and inputs
@@ -29617,23 +29979,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `type: Literal["approximate"]`
 
-            - `"approximate"`
-
           - `city: Optional[str]`
 
             The city of the user.
+
+            maxLength: 255, minLength: 1
 
           - `country: Optional[str]`
 
             The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
+            maxLength: 2, minLength: 2
+
           - `region: Optional[str]`
 
             The region of the user.
 
+            maxLength: 255, minLength: 1
+
           - `timezone: Optional[str]`
 
             The [IANA timezone](https://nodatime.org/TimeZones) of the user.
+
+            maxLength: 255, minLength: 1
 
       - `class WebFetchTool20250910: …`
 
@@ -29643,11 +30011,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_fetch"`
-
         - `type: Literal["web_fetch_20250910"]`
-
-          - `"web_fetch_20250910"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29683,9 +30047,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: Optional[bool]`
 
@@ -29699,11 +30067,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_search"`
-
         - `type: Literal["web_search_20260209"]`
-
-          - `"web_search_20260209"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29734,6 +30098,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: Optional[bool]`
 
@@ -29751,11 +30117,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_fetch"`
-
         - `type: Literal["web_fetch_20260209"]`
-
-          - `"web_fetch_20260209"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29791,9 +30153,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: Optional[bool]`
 
@@ -29809,11 +30175,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_fetch"`
-
         - `type: Literal["web_fetch_20260309"]`
-
-          - `"web_fetch_20260309"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29849,9 +30211,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `strict: Optional[bool]`
 
@@ -29869,11 +30235,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_search"`
-
         - `type: Literal["web_search_20260318"]`
-
-          - `"web_search_20260318"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29904,6 +30266,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -29929,11 +30293,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"web_fetch"`
-
         - `type: Literal["web_fetch_20260318"]`
-
-          - `"web_fetch_20260318"`
 
         - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -29969,9 +30329,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
+          exclusiveMinimum: 0
+
         - `max_uses: Optional[int]`
 
           Maximum number of times the tool can be used in the API request.
+
+          exclusiveMinimum: 0
 
         - `response_inclusion: Optional[Literal["full", "excluded"]]`
 
@@ -29996,8 +30360,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `"tool_search_tool_bm25"`
 
         - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -30035,8 +30397,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `"tool_search_tool_regex"`
-
         - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
           - `"tool_search_tool_regex_20251119"`
@@ -30069,7 +30429,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-### Returns
+#### Returns
 
 - `class MessageBatch: …`
 
@@ -30083,13 +30443,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Optional[datetime]`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Optional[datetime]`
 
@@ -30097,9 +30463,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
@@ -30123,11 +30493,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: int`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: int`
 
@@ -30135,15 +30509,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: int`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: int`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: Optional[str]`
 
@@ -30157,9 +30537,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+#### Example
 
 ```python
 import os
@@ -30190,7 +30570,7 @@ message_batch = client.messages.batches.create(
 print(message_batch.id)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -30213,23 +30593,23 @@ print(message_batch.id)
 }
 ```
 
-## Retrieve a Message Batch
+### Retrieve a Message Batch
 
-`messages.batches.retrieve(strmessage_batch_id)  -> MessageBatch`
+`messages.batches.retrieve(message_batch_id)  -> MessageBatch`
 
-**get** `/v1/messages/batches/{message_batch_id}`
+**GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `message_batch_id: str`
 
   ID of the Message Batch.
 
-### Returns
+#### Returns
 
 - `class MessageBatch: …`
 
@@ -30243,13 +30623,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Optional[datetime]`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Optional[datetime]`
 
@@ -30257,9 +30643,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
@@ -30283,11 +30673,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: int`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: int`
 
@@ -30295,15 +30689,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: int`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: int`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: Optional[str]`
 
@@ -30317,9 +30717,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+#### Example
 
 ```python
 import os
@@ -30336,7 +30736,7 @@ message_batch = client.messages.batches.retrieve(
 print(message_batch.id)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -30359,17 +30759,17 @@ print(message_batch.id)
 }
 ```
 
-## List Message Batches
+### List Message Batches
 
-`messages.batches.list(BatchListParams**kwargs)  -> SyncPage[MessageBatch]`
+`messages.batches.list(**kwargs)  -> SyncPage[MessageBatch]`
 
-**get** `/v1/messages/batches`
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `after_id: Optional[str]`
 
@@ -30385,7 +30785,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-### Returns
+  default: 20, maximum: 1000, minimum: 1
+
+#### Returns
 
 - `class MessageBatch: …`
 
@@ -30399,13 +30801,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Optional[datetime]`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Optional[datetime]`
 
@@ -30413,9 +30821,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
@@ -30439,11 +30851,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: int`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: int`
 
@@ -30451,15 +30867,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: int`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: int`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: Optional[str]`
 
@@ -30473,9 +30895,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+#### Example
 
 ```python
 import os
@@ -30491,7 +30913,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -30521,11 +30943,11 @@ print(page.id)
 }
 ```
 
-## Cancel a Message Batch
+### Cancel a Message Batch
 
-`messages.batches.cancel(strmessage_batch_id)  -> MessageBatch`
+`messages.batches.cancel(message_batch_id)  -> MessageBatch`
 
-**post** `/v1/messages/batches/{message_batch_id}/cancel`
+**POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
 
@@ -30533,13 +30955,13 @@ The number of canceled requests is specified in `request_counts`. To determine w
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `message_batch_id: str`
 
   ID of the Message Batch.
 
-### Returns
+#### Returns
 
 - `class MessageBatch: …`
 
@@ -30553,13 +30975,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: Optional[datetime]`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: Optional[datetime]`
 
@@ -30567,9 +30995,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: datetime`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: Literal["in_progress", "canceling", "ended"]`
 
@@ -30593,11 +31025,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: int`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: int`
 
@@ -30605,15 +31041,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: int`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: int`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: Optional[str]`
 
@@ -30627,9 +31069,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
-### Example
+#### Example
 
 ```python
 import os
@@ -30646,7 +31088,7 @@ message_batch = client.messages.batches.cancel(
 print(message_batch.id)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -30669,11 +31111,11 @@ print(message_batch.id)
 }
 ```
 
-## Delete a Message Batch
+### Delete a Message Batch
 
-`messages.batches.delete(strmessage_batch_id)  -> DeletedMessageBatch`
+`messages.batches.delete(message_batch_id)  -> DeletedMessageBatch`
 
-**delete** `/v1/messages/batches/{message_batch_id}`
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -30681,13 +31123,13 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `message_batch_id: str`
 
   ID of the Message Batch.
 
-### Returns
+#### Returns
 
 - `class DeletedMessageBatch: …`
 
@@ -30701,9 +31143,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-    - `"message_batch_deleted"`
+    default: message_batch_deleted
 
-### Example
+#### Example
 
 ```python
 import os
@@ -30720,7 +31162,7 @@ deleted_message_batch = client.messages.batches.delete(
 print(deleted_message_batch.id)
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -30729,11 +31171,11 @@ print(deleted_message_batch.id)
 }
 ```
 
-## Retrieve Message Batch results
+### Retrieve Message Batch results
 
-`messages.batches.results(strmessage_batch_id)  -> MessageBatchIndividualResponse`
+`messages.batches.results(message_batch_id)  -> MessageBatchIndividualResponse`
 
-**get** `/v1/messages/batches/{message_batch_id}/results`
+**GET** `/v1/messages/batches/{message_batch_id}/results`
 
 Streams the results of a Message Batch as a `.jsonl` file.
 
@@ -30741,13 +31183,13 @@ Each line in the file is a JSON object containing the result of a single request
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+#### Parameters
 
 - `message_batch_id: str`
 
   ID of the Message Batch.
 
-### Returns
+#### Returns
 
 - `class MessageBatchIndividualResponse: …`
 
@@ -30787,6 +31229,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The time at which the container will expire.
 
+            format: date-time
+
           - `skills: Optional[List[ContainerSkill]]`
 
             Skills loaded in the container
@@ -30794,6 +31238,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `skill_id: str`
 
               Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `type: Literal["anthropic", "custom"]`
 
@@ -30806,6 +31252,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `version: str`
 
               The resolved version: a skill version ID for custom skills.
+
+              maxLength: 64, minLength: 1
 
         - `content: List[ContentBlock]`
 
@@ -30850,6 +31298,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: int`
 
+                  minimum: 0
+
                 - `document_title: Optional[str]`
 
                 - `end_char_index: int`
@@ -30858,15 +31308,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `start_char_index: int`
 
+                  minimum: 0
+
                 - `type: Literal["char_location"]`
 
-                  - `"char_location"`
+                  default: char_location
 
               - `class CitationPageLocation: …`
 
                 - `cited_text: str`
 
                 - `document_index: int`
+
+                  minimum: 0
 
                 - `document_title: Optional[str]`
 
@@ -30876,9 +31330,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `start_page_number: int`
 
+                  minimum: 1
+
                 - `type: Literal["page_location"]`
 
-                  - `"page_location"`
+                  default: page_location
 
               - `class CitationContentBlockLocation: …`
 
@@ -30889,6 +31345,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
                 - `document_index: int`
+
+                  minimum: 0
 
                 - `document_title: Optional[str]`
 
@@ -30904,9 +31362,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `type: Literal["content_block_location"]`
 
-                  - `"content_block_location"`
+                  default: content_block_location
 
               - `class CitationsWebSearchResultLocation: …`
 
@@ -30916,9 +31376,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: Optional[str]`
 
+                  maxLength: 512
+
                 - `type: Literal["web_search_result_location"]`
 
-                  - `"web_search_result_location"`
+                  default: web_search_result_location
 
                 - `url: str`
 
@@ -30942,23 +31404,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                  minimum: 0
+
                 - `source: str`
 
                 - `start_block_index: int`
 
                   0-based index of the first cited block in the source's `content` array.
 
+                  minimum: 0
+
                 - `title: Optional[str]`
 
                 - `type: Literal["search_result_location"]`
 
-                  - `"search_result_location"`
+                  default: search_result_location
 
             - `text: str`
 
+              maxLength: 5000000, minLength: 0
+
             - `type: Literal["text"]`
 
-              - `"text"`
+              default: text
 
           - `class ThinkingBlock: …`
 
@@ -30976,7 +31444,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["thinking"]`
 
-              - `"thinking"`
+              default: thinking
 
           - `class RedactedThinkingBlock: …`
 
@@ -30990,15 +31458,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["redacted_thinking"]`
 
-              - `"redacted_thinking"`
+              default: redacted_thinking
 
           - `class ToolUseBlock: …`
 
             - `id: str`
 
+              pattern: ^[a-zA-Z0-9_-]+$
+
             - `caller: Caller`
 
               Tool invocation directly from the model.
+
+              default: {"type":"direct"}
 
               - `class DirectCaller: …`
 
@@ -31006,45 +31478,51 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["direct"]`
 
-                  - `"direct"`
-
               - `class ServerToolCaller: …`
 
                 Tool invocation generated by a server-side tool.
 
                 - `tool_id: str`
 
-                - `type: Literal["code_execution_20250825"]`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `"code_execution_20250825"`
+                - `type: Literal["code_execution_20250825"]`
 
               - `class ServerToolCaller20260120: …`
 
                 - `tool_id: str`
 
-                - `type: Literal["code_execution_20260120"]`
+                  pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `"code_execution_20260120"`
+                - `type: Literal["code_execution_20260120"]`
 
             - `input: Dict[str, object]`
 
             - `name: str`
 
+              minLength: 1
+
             - `type: Literal["tool_use"]`
 
-              - `"tool_use"`
+              default: tool_use
 
             - `toolset_name: Optional[str]`
 
               For a toolset member tool_use, the toolset family.
 
+              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
           - `class ServerToolUseBlock: …`
 
             - `id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `caller: Caller`
 
               Tool invocation directly from the model.
+
+              default: {"type":"direct"}
 
               - `class DirectCaller: …`
 
@@ -31076,13 +31554,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["server_tool_use"]`
 
-              - `"server_tool_use"`
+              default: server_tool_use
 
           - `class WebSearchToolResultBlock: …`
 
             - `caller: Caller`
 
               Tool invocation directly from the model.
+
+              default: {"type":"direct"}
 
               - `class DirectCaller: …`
 
@@ -31114,7 +31594,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_search_tool_result_error"]`
 
-                  - `"web_search_tool_result_error"`
+                  default: web_search_tool_result_error
 
               - `List[WebSearchResultBlock]`
 
@@ -31126,21 +31606,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_search_result"]`
 
-                  - `"web_search_result"`
+                  default: web_search_result
 
                 - `url: str`
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["web_search_tool_result"]`
 
-              - `"web_search_tool_result"`
+              default: web_search_tool_result
 
           - `class WebFetchToolResultBlock: …`
 
             - `caller: Caller`
 
               Tool invocation directly from the model.
+
+              default: {"type":"direct"}
 
               - `class DirectCaller: …`
 
@@ -31178,7 +31662,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_fetch_tool_result_error"]`
 
-                  - `"web_fetch_tool_result_error"`
+                  default: web_fetch_tool_result_error
 
               - `class WebFetchBlock: …`
 
@@ -31190,19 +31674,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `enabled: bool`
 
+                      default: false
+
                   - `source: Source`
 
                     - `class Base64PDFSource: …`
 
                       - `data: str`
 
+                        format: byte
+
                       - `media_type: Literal["application/pdf"]`
 
-                        - `"application/pdf"`
-
                       - `type: Literal["base64"]`
-
-                        - `"base64"`
 
                     - `class PlainTextSource: …`
 
@@ -31210,11 +31694,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `media_type: Literal["text/plain"]`
 
-                        - `"text/plain"`
-
                       - `type: Literal["text"]`
-
-                        - `"text"`
 
                   - `title: Optional[str]`
 
@@ -31222,7 +31702,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["document"]`
 
-                    - `"document"`
+                    default: document
 
                 - `retrieved_at: Optional[str]`
 
@@ -31230,7 +31710,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_fetch_result"]`
 
-                  - `"web_fetch_result"`
+                  default: web_fetch_result
 
                 - `url: str`
 
@@ -31238,9 +31718,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["web_fetch_tool_result"]`
 
-              - `"web_fetch_tool_result"`
+              default: web_fetch_tool_result
 
           - `class CodeExecutionToolResultBlock: …`
 
@@ -31262,7 +31744,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["code_execution_tool_result_error"]`
 
-                  - `"code_execution_tool_result_error"`
+                  default: code_execution_tool_result_error
 
               - `class CodeExecutionResultBlock: …`
 
@@ -31272,7 +31754,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["code_execution_output"]`
 
-                    - `"code_execution_output"`
+                    default: code_execution_output
 
                 - `return_code: int`
 
@@ -31282,7 +31764,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["code_execution_result"]`
 
-                  - `"code_execution_result"`
+                  default: code_execution_result
 
               - `class EncryptedCodeExecutionResultBlock: …`
 
@@ -31294,6 +31776,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["code_execution_output"]`
 
+                    default: code_execution_output
+
                 - `encrypted_stdout: str`
 
                 - `return_code: int`
@@ -31302,13 +31786,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["encrypted_code_execution_result"]`
 
-                  - `"encrypted_code_execution_result"`
+                  default: encrypted_code_execution_result
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["code_execution_tool_result"]`
 
-              - `"code_execution_tool_result"`
+              default: code_execution_tool_result
 
           - `class BashCodeExecutionToolResultBlock: …`
 
@@ -31330,7 +31816,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["bash_code_execution_tool_result_error"]`
 
-                  - `"bash_code_execution_tool_result_error"`
+                  default: bash_code_execution_tool_result_error
 
               - `class BashCodeExecutionResultBlock: …`
 
@@ -31340,7 +31826,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["bash_code_execution_output"]`
 
-                    - `"bash_code_execution_output"`
+                    default: bash_code_execution_output
 
                 - `return_code: int`
 
@@ -31350,13 +31836,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["bash_code_execution_result"]`
 
-                  - `"bash_code_execution_result"`
+                  default: bash_code_execution_result
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["bash_code_execution_tool_result"]`
 
-              - `"bash_code_execution_tool_result"`
+              default: bash_code_execution_tool_result
 
           - `class TextEditorCodeExecutionToolResultBlock: …`
 
@@ -31380,7 +31868,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
-                  - `"text_editor_code_execution_tool_result_error"`
+                  default: text_editor_code_execution_tool_result_error
 
               - `class TextEditorCodeExecutionViewResultBlock: …`
 
@@ -31402,7 +31890,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_view_result"]`
 
-                  - `"text_editor_code_execution_view_result"`
+                  default: text_editor_code_execution_view_result
 
               - `class TextEditorCodeExecutionCreateResultBlock: …`
 
@@ -31410,7 +31898,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_create_result"]`
 
-                  - `"text_editor_code_execution_create_result"`
+                  default: text_editor_code_execution_create_result
 
               - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
 
@@ -31426,13 +31914,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-                  - `"text_editor_code_execution_str_replace_result"`
+                  default: text_editor_code_execution_str_replace_result
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["text_editor_code_execution_tool_result"]`
 
-              - `"text_editor_code_execution_tool_result"`
+              default: text_editor_code_execution_tool_result
 
           - `class ToolSearchToolResultBlock: …`
 
@@ -31454,7 +31944,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["tool_search_tool_result_error"]`
 
-                  - `"tool_search_tool_result_error"`
+                  default: tool_search_tool_result_error
 
               - `class ToolSearchToolSearchResultBlock: …`
 
@@ -31462,19 +31952,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `tool_name: str`
 
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
                   - `type: Literal["tool_reference"]`
 
-                    - `"tool_reference"`
+                    default: tool_reference
 
                 - `type: Literal["tool_search_tool_search_result"]`
 
-                  - `"tool_search_tool_search_result"`
+                  default: tool_search_tool_search_result
 
             - `tool_use_id: str`
 
+              pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
             - `type: Literal["tool_search_tool_result"]`
 
-              - `"tool_search_tool_result"`
+              default: tool_search_tool_result
 
           - `class ContainerUploadBlock: …`
 
@@ -31484,7 +31978,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["container_upload"]`
 
-              - `"container_upload"`
+              default: container_upload
 
         - `model: Model`
 
@@ -31582,7 +32076,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This will always be `"assistant"`.
 
-          - `"assistant"`
+          default: assistant
 
         - `stop_details: Optional[RefusalStopDetails]`
 
@@ -31620,7 +32114,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `type: Literal["refusal"]`
 
-            - `"refusal"`
+            default: refusal
 
         - `stop_reason: Optional[StopReason]`
 
@@ -31664,7 +32158,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           For Messages, this is always `"message"`.
 
-          - `"message"`
+          default: message
 
         - `usage: Usage`
 
@@ -31686,17 +32180,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of input tokens used to create the 1 hour cache entry.
 
+              default: 0, minimum: 0
+
             - `ephemeral_5m_input_tokens: int`
 
               The number of input tokens used to create the 5 minute cache entry.
+
+              default: 0, minimum: 0
 
           - `cache_creation_input_tokens: Optional[int]`
 
             The number of input tokens used to create the cache entry.
 
+            minimum: 0
+
           - `cache_read_input_tokens: Optional[int]`
 
             The number of input tokens read from the cache.
+
+            minimum: 0
 
           - `inference_geo: Optional[str]`
 
@@ -31706,9 +32208,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The number of input tokens which were used.
 
+            minimum: 0
+
           - `output_tokens: int`
 
             The number of output tokens which were used.
+
+            minimum: 0
 
           - `output_tokens_details: Optional[OutputTokensDetails]`
 
@@ -31730,6 +32236,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
+              default: 0, minimum: 0
+
           - `server_tool_use: Optional[ServerToolUsage]`
 
             The number of server tool requests.
@@ -31738,9 +32246,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of web fetch tool requests.
 
+              default: 0, minimum: 0
+
             - `web_search_requests: int`
 
               The number of web search tool requests.
+
+              default: 0, minimum: 0
 
           - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
 
@@ -31754,7 +32266,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `type: Literal["succeeded"]`
 
-        - `"succeeded"`
+        default: succeeded
 
     - `class MessageBatchErroredResult: …`
 
@@ -31766,97 +32278,115 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `message: str`
 
+              default: Invalid request
+
             - `type: Literal["invalid_request_error"]`
 
-              - `"invalid_request_error"`
+              default: invalid_request_error
 
           - `class AuthenticationError: …`
 
             - `message: str`
 
+              default: Authentication error
+
             - `type: Literal["authentication_error"]`
 
-              - `"authentication_error"`
+              default: authentication_error
 
           - `class BillingError: …`
 
             - `message: str`
 
+              default: Billing error
+
             - `type: Literal["billing_error"]`
 
-              - `"billing_error"`
+              default: billing_error
 
           - `class PermissionError: …`
 
             - `message: str`
 
+              default: Permission denied
+
             - `type: Literal["permission_error"]`
 
-              - `"permission_error"`
+              default: permission_error
 
           - `class NotFoundError: …`
 
             - `message: str`
 
+              default: Not found
+
             - `type: Literal["not_found_error"]`
 
-              - `"not_found_error"`
+              default: not_found_error
 
           - `class RateLimitError: …`
 
             - `message: str`
 
+              default: Rate limited
+
             - `type: Literal["rate_limit_error"]`
 
-              - `"rate_limit_error"`
+              default: rate_limit_error
 
           - `class GatewayTimeoutError: …`
 
             - `message: str`
 
+              default: Request timeout
+
             - `type: Literal["timeout_error"]`
 
-              - `"timeout_error"`
+              default: timeout_error
 
           - `class APIErrorObject: …`
 
             - `message: str`
 
+              default: Internal server error
+
             - `type: Literal["api_error"]`
 
-              - `"api_error"`
+              default: api_error
 
           - `class OverloadedError: …`
 
             - `message: str`
 
+              default: Overloaded
+
             - `type: Literal["overloaded_error"]`
 
-              - `"overloaded_error"`
+              default: overloaded_error
 
         - `request_id: Optional[str]`
 
         - `type: Literal["error"]`
 
-          - `"error"`
+          default: error
 
       - `type: Literal["errored"]`
 
-        - `"errored"`
+        default: errored
 
     - `class MessageBatchCanceledResult: …`
 
       - `type: Literal["canceled"]`
 
-        - `"canceled"`
+        default: canceled
 
     - `class MessageBatchExpiredResult: …`
 
       - `type: Literal["expired"]`
 
-        - `"expired"`
+        default: expired
 
-### Example
+#### Example
 
 ```python
 import os
@@ -31872,3450 +32402,3 @@ for batch in client.messages.batches.results(
 ):
     print(batch)
 ```
-
-## Domain Types
-
-### Deleted Message Batch
-
-- `class DeletedMessageBatch: …`
-
-  - `id: str`
-
-    ID of the Message Batch.
-
-  - `type: Literal["message_batch_deleted"]`
-
-    Deleted object type.
-
-    For Message Batches, this is always `"message_batch_deleted"`.
-
-    - `"message_batch_deleted"`
-
-### Message Batch
-
-- `class MessageBatch: …`
-
-  - `id: str`
-
-    Unique object identifier.
-
-    The format and length of IDs may change over time.
-
-  - `archived_at: Optional[datetime]`
-
-    RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
-
-  - `cancel_initiated_at: Optional[datetime]`
-
-    RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
-
-  - `created_at: datetime`
-
-    RFC 3339 datetime string representing the time at which the Message Batch was created.
-
-  - `ended_at: Optional[datetime]`
-
-    RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
-
-    Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
-
-  - `expires_at: datetime`
-
-    RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
-
-  - `processing_status: Literal["in_progress", "canceling", "ended"]`
-
-    Processing status of the Message Batch.
-
-    - `"in_progress"`
-
-    - `"canceling"`
-
-    - `"ended"`
-
-  - `request_counts: MessageBatchRequestCounts`
-
-    Tallies requests within the Message Batch, categorized by their status.
-
-    Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
-
-    - `canceled: int`
-
-      Number of requests in the Message Batch that have been canceled.
-
-      This is zero until processing of the entire Message Batch has ended.
-
-    - `errored: int`
-
-      Number of requests in the Message Batch that encountered an error.
-
-      This is zero until processing of the entire Message Batch has ended.
-
-    - `expired: int`
-
-      Number of requests in the Message Batch that have expired.
-
-      This is zero until processing of the entire Message Batch has ended.
-
-    - `processing: int`
-
-      Number of requests in the Message Batch that are processing.
-
-    - `succeeded: int`
-
-      Number of requests in the Message Batch that have completed successfully.
-
-      This is zero until processing of the entire Message Batch has ended.
-
-  - `results_url: Optional[str]`
-
-    URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
-
-    Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: Literal["message_batch"]`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    - `"message_batch"`
-
-### Message Batch Canceled Result
-
-- `class MessageBatchCanceledResult: …`
-
-  - `type: Literal["canceled"]`
-
-    - `"canceled"`
-
-### Message Batch Errored Result
-
-- `class MessageBatchErroredResult: …`
-
-  - `error: ErrorResponse`
-
-    - `error: ErrorObject`
-
-      - `class InvalidRequestError: …`
-
-        - `message: str`
-
-        - `type: Literal["invalid_request_error"]`
-
-          - `"invalid_request_error"`
-
-      - `class AuthenticationError: …`
-
-        - `message: str`
-
-        - `type: Literal["authentication_error"]`
-
-          - `"authentication_error"`
-
-      - `class BillingError: …`
-
-        - `message: str`
-
-        - `type: Literal["billing_error"]`
-
-          - `"billing_error"`
-
-      - `class PermissionError: …`
-
-        - `message: str`
-
-        - `type: Literal["permission_error"]`
-
-          - `"permission_error"`
-
-      - `class NotFoundError: …`
-
-        - `message: str`
-
-        - `type: Literal["not_found_error"]`
-
-          - `"not_found_error"`
-
-      - `class RateLimitError: …`
-
-        - `message: str`
-
-        - `type: Literal["rate_limit_error"]`
-
-          - `"rate_limit_error"`
-
-      - `class GatewayTimeoutError: …`
-
-        - `message: str`
-
-        - `type: Literal["timeout_error"]`
-
-          - `"timeout_error"`
-
-      - `class APIErrorObject: …`
-
-        - `message: str`
-
-        - `type: Literal["api_error"]`
-
-          - `"api_error"`
-
-      - `class OverloadedError: …`
-
-        - `message: str`
-
-        - `type: Literal["overloaded_error"]`
-
-          - `"overloaded_error"`
-
-    - `request_id: Optional[str]`
-
-    - `type: Literal["error"]`
-
-      - `"error"`
-
-  - `type: Literal["errored"]`
-
-    - `"errored"`
-
-### Message Batch Expired Result
-
-- `class MessageBatchExpiredResult: …`
-
-  - `type: Literal["expired"]`
-
-    - `"expired"`
-
-### Message Batch Individual Response
-
-- `class MessageBatchIndividualResponse: …`
-
-  This is a single line in the response `.jsonl` file and does not represent the response as a whole.
-
-  - `custom_id: str`
-
-    Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
-
-    Must be unique for each request within the Message Batch.
-
-  - `result: MessageBatchResult`
-
-    Processing result for this request.
-
-    Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-    - `class MessageBatchSucceededResult: …`
-
-      - `message: Message`
-
-        - `id: str`
-
-          Unique object identifier.
-
-          The format and length of IDs may change over time.
-
-        - `container: Optional[Container]`
-
-          Information about the container used in the request (for the code execution tool)
-
-          - `id: str`
-
-            Identifier for the container used in this request
-
-          - `expires_at: datetime`
-
-            The time at which the container will expire.
-
-          - `skills: Optional[List[ContainerSkill]]`
-
-            Skills loaded in the container
-
-            - `skill_id: str`
-
-              Skill ID
-
-            - `type: Literal["anthropic", "custom"]`
-
-              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-              - `"anthropic"`
-
-              - `"custom"`
-
-            - `version: str`
-
-              The resolved version: a skill version ID for custom skills.
-
-        - `content: List[ContentBlock]`
-
-          Content generated by the model.
-
-          This is an array of content blocks, each of which has a `type` that determines its shape.
-
-          Example:
-
-          ```json
-          [{"type": "text", "text": "Hi, I'm Claude."}]
-          ```
-
-          If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-          For example, if the input `messages` were:
-
-          ```json
-          [
-            {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-            {"role": "assistant", "content": "The best answer is ("}
-          ]
-          ```
-
-          Then the response `content` might be:
-
-          ```json
-          [{"type": "text", "text": "B)"}]
-          ```
-
-          - `class TextBlock: …`
-
-            - `citations: Optional[List[TextCitation]]`
-
-              Citations supporting the text block.
-
-              The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-              - `class CitationCharLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_char_index: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_char_index: int`
-
-                - `type: Literal["char_location"]`
-
-                  - `"char_location"`
-
-              - `class CitationPageLocation: …`
-
-                - `cited_text: str`
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_page_number: int`
-
-                - `file_id: Optional[str]`
-
-                - `start_page_number: int`
-
-                - `type: Literal["page_location"]`
-
-                  - `"page_location"`
-
-              - `class CitationContentBlockLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `document_index: int`
-
-                - `document_title: Optional[str]`
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `file_id: Optional[str]`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `type: Literal["content_block_location"]`
-
-                  - `"content_block_location"`
-
-              - `class CitationsWebSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                - `encrypted_index: str`
-
-                - `title: Optional[str]`
-
-                - `type: Literal["web_search_result_location"]`
-
-                  - `"web_search_result_location"`
-
-                - `url: str`
-
-              - `class CitationsSearchResultLocation: …`
-
-                - `cited_text: str`
-
-                  The full text of the cited block range, concatenated.
-
-                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-                - `end_block_index: int`
-
-                  Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-                - `search_result_index: int`
-
-                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                  Counted separately from `document_index`; server-side web search results are not included in this count.
-
-                - `source: str`
-
-                - `start_block_index: int`
-
-                  0-based index of the first cited block in the source's `content` array.
-
-                - `title: Optional[str]`
-
-                - `type: Literal["search_result_location"]`
-
-                  - `"search_result_location"`
-
-            - `text: str`
-
-            - `type: Literal["text"]`
-
-              - `"text"`
-
-          - `class ThinkingBlock: …`
-
-            - `signature: str`
-
-              A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
-
-              This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
-
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-            - `thinking: str`
-
-              The text of Claude's thinking process for this block.
-
-            - `type: Literal["thinking"]`
-
-              - `"thinking"`
-
-          - `class RedactedThinkingBlock: …`
-
-            - `data: str`
-
-              The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
-
-              Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
-
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
-
-            - `type: Literal["redacted_thinking"]`
-
-              - `"redacted_thinking"`
-
-          - `class ToolUseBlock: …`
-
-            - `id: str`
-
-            - `caller: Caller`
-
-              Tool invocation directly from the model.
-
-              - `class DirectCaller: …`
-
-                Tool invocation directly from the model.
-
-                - `type: Literal["direct"]`
-
-                  - `"direct"`
-
-              - `class ServerToolCaller: …`
-
-                Tool invocation generated by a server-side tool.
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20250825"]`
-
-                  - `"code_execution_20250825"`
-
-              - `class ServerToolCaller20260120: …`
-
-                - `tool_id: str`
-
-                - `type: Literal["code_execution_20260120"]`
-
-                  - `"code_execution_20260120"`
-
-            - `input: Dict[str, object]`
-
-            - `name: str`
-
-            - `type: Literal["tool_use"]`
-
-              - `"tool_use"`
-
-            - `toolset_name: Optional[str]`
-
-              For a toolset member tool_use, the toolset family.
-
-          - `class ServerToolUseBlock: …`
-
-            - `id: str`
-
-            - `caller: Caller`
-
-              Tool invocation directly from the model.
-
-              - `class DirectCaller: …`
-
-                Tool invocation directly from the model.
-
-              - `class ServerToolCaller: …`
-
-                Tool invocation generated by a server-side tool.
-
-              - `class ServerToolCaller20260120: …`
-
-            - `input: Dict[str, object]`
-
-            - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
-
-              - `"web_search"`
-
-              - `"web_fetch"`
-
-              - `"code_execution"`
-
-              - `"bash_code_execution"`
-
-              - `"text_editor_code_execution"`
-
-              - `"tool_search_tool_regex"`
-
-              - `"tool_search_tool_bm25"`
-
-            - `type: Literal["server_tool_use"]`
-
-              - `"server_tool_use"`
-
-          - `class WebSearchToolResultBlock: …`
-
-            - `caller: Caller`
-
-              Tool invocation directly from the model.
-
-              - `class DirectCaller: …`
-
-                Tool invocation directly from the model.
-
-              - `class ServerToolCaller: …`
-
-                Tool invocation generated by a server-side tool.
-
-              - `class ServerToolCaller20260120: …`
-
-            - `content: WebSearchToolResultBlockContent`
-
-              - `class WebSearchToolResultError: …`
-
-                - `error_code: WebSearchToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"unavailable"`
-
-                  - `"max_uses_exceeded"`
-
-                  - `"too_many_requests"`
-
-                  - `"query_too_long"`
-
-                  - `"request_too_large"`
-
-                - `type: Literal["web_search_tool_result_error"]`
-
-                  - `"web_search_tool_result_error"`
-
-              - `List[WebSearchResultBlock]`
-
-                - `encrypted_content: str`
-
-                - `page_age: Optional[str]`
-
-                - `title: str`
-
-                - `type: Literal["web_search_result"]`
-
-                  - `"web_search_result"`
-
-                - `url: str`
-
-            - `tool_use_id: str`
-
-            - `type: Literal["web_search_tool_result"]`
-
-              - `"web_search_tool_result"`
-
-          - `class WebFetchToolResultBlock: …`
-
-            - `caller: Caller`
-
-              Tool invocation directly from the model.
-
-              - `class DirectCaller: …`
-
-                Tool invocation directly from the model.
-
-              - `class ServerToolCaller: …`
-
-                Tool invocation generated by a server-side tool.
-
-              - `class ServerToolCaller20260120: …`
-
-            - `content: Content`
-
-              - `class WebFetchToolResultErrorBlock: …`
-
-                - `error_code: WebFetchToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"url_too_long"`
-
-                  - `"url_not_allowed"`
-
-                  - `"url_not_in_prior_context"`
-
-                  - `"url_not_accessible"`
-
-                  - `"unsupported_content_type"`
-
-                  - `"too_many_requests"`
-
-                  - `"max_uses_exceeded"`
-
-                  - `"unavailable"`
-
-                - `type: Literal["web_fetch_tool_result_error"]`
-
-                  - `"web_fetch_tool_result_error"`
-
-              - `class WebFetchBlock: …`
-
-                - `content: DocumentBlock`
-
-                  - `citations: Optional[CitationsConfig]`
-
-                    Citation configuration for the document
-
-                    - `enabled: bool`
-
-                  - `source: Source`
-
-                    - `class Base64PDFSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["application/pdf"]`
-
-                        - `"application/pdf"`
-
-                      - `type: Literal["base64"]`
-
-                        - `"base64"`
-
-                    - `class PlainTextSource: …`
-
-                      - `data: str`
-
-                      - `media_type: Literal["text/plain"]`
-
-                        - `"text/plain"`
-
-                      - `type: Literal["text"]`
-
-                        - `"text"`
-
-                  - `title: Optional[str]`
-
-                    The title of the document
-
-                  - `type: Literal["document"]`
-
-                    - `"document"`
-
-                - `retrieved_at: Optional[str]`
-
-                  ISO 8601 timestamp when the content was retrieved
-
-                - `type: Literal["web_fetch_result"]`
-
-                  - `"web_fetch_result"`
-
-                - `url: str`
-
-                  Fetched content URL
-
-            - `tool_use_id: str`
-
-            - `type: Literal["web_fetch_tool_result"]`
-
-              - `"web_fetch_tool_result"`
-
-          - `class CodeExecutionToolResultBlock: …`
-
-            - `content: CodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
-
-              - `class CodeExecutionToolResultError: …`
-
-                - `error_code: CodeExecutionToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"unavailable"`
-
-                  - `"too_many_requests"`
-
-                  - `"execution_time_exceeded"`
-
-                - `type: Literal["code_execution_tool_result_error"]`
-
-                  - `"code_execution_tool_result_error"`
-
-              - `class CodeExecutionResultBlock: …`
-
-                - `content: List[CodeExecutionOutputBlock]`
-
-                  - `file_id: str`
-
-                  - `type: Literal["code_execution_output"]`
-
-                    - `"code_execution_output"`
-
-                - `return_code: int`
-
-                - `stderr: str`
-
-                - `stdout: str`
-
-                - `type: Literal["code_execution_result"]`
-
-                  - `"code_execution_result"`
-
-              - `class EncryptedCodeExecutionResultBlock: …`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
-
-                - `content: List[CodeExecutionOutputBlock]`
-
-                  - `file_id: str`
-
-                  - `type: Literal["code_execution_output"]`
-
-                - `encrypted_stdout: str`
-
-                - `return_code: int`
-
-                - `stderr: str`
-
-                - `type: Literal["encrypted_code_execution_result"]`
-
-                  - `"encrypted_code_execution_result"`
-
-            - `tool_use_id: str`
-
-            - `type: Literal["code_execution_tool_result"]`
-
-              - `"code_execution_tool_result"`
-
-          - `class BashCodeExecutionToolResultBlock: …`
-
-            - `content: Content`
-
-              - `class BashCodeExecutionToolResultError: …`
-
-                - `error_code: BashCodeExecutionToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"unavailable"`
-
-                  - `"too_many_requests"`
-
-                  - `"execution_time_exceeded"`
-
-                  - `"output_file_too_large"`
-
-                - `type: Literal["bash_code_execution_tool_result_error"]`
-
-                  - `"bash_code_execution_tool_result_error"`
-
-              - `class BashCodeExecutionResultBlock: …`
-
-                - `content: List[BashCodeExecutionOutputBlock]`
-
-                  - `file_id: str`
-
-                  - `type: Literal["bash_code_execution_output"]`
-
-                    - `"bash_code_execution_output"`
-
-                - `return_code: int`
-
-                - `stderr: str`
-
-                - `stdout: str`
-
-                - `type: Literal["bash_code_execution_result"]`
-
-                  - `"bash_code_execution_result"`
-
-            - `tool_use_id: str`
-
-            - `type: Literal["bash_code_execution_tool_result"]`
-
-              - `"bash_code_execution_tool_result"`
-
-          - `class TextEditorCodeExecutionToolResultBlock: …`
-
-            - `content: Content`
-
-              - `class TextEditorCodeExecutionToolResultError: …`
-
-                - `error_code: TextEditorCodeExecutionToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"unavailable"`
-
-                  - `"too_many_requests"`
-
-                  - `"execution_time_exceeded"`
-
-                  - `"file_not_found"`
-
-                - `error_message: Optional[str]`
-
-                - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
-                  - `"text_editor_code_execution_tool_result_error"`
-
-              - `class TextEditorCodeExecutionViewResultBlock: …`
-
-                - `content: str`
-
-                - `file_type: Literal["text", "image", "pdf"]`
-
-                  - `"text"`
-
-                  - `"image"`
-
-                  - `"pdf"`
-
-                - `num_lines: Optional[int]`
-
-                - `start_line: Optional[int]`
-
-                - `total_lines: Optional[int]`
-
-                - `type: Literal["text_editor_code_execution_view_result"]`
-
-                  - `"text_editor_code_execution_view_result"`
-
-              - `class TextEditorCodeExecutionCreateResultBlock: …`
-
-                - `is_file_update: bool`
-
-                - `type: Literal["text_editor_code_execution_create_result"]`
-
-                  - `"text_editor_code_execution_create_result"`
-
-              - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
-
-                - `lines: Optional[List[str]]`
-
-                - `new_lines: Optional[int]`
-
-                - `new_start: Optional[int]`
-
-                - `old_lines: Optional[int]`
-
-                - `old_start: Optional[int]`
-
-                - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-                  - `"text_editor_code_execution_str_replace_result"`
-
-            - `tool_use_id: str`
-
-            - `type: Literal["text_editor_code_execution_tool_result"]`
-
-              - `"text_editor_code_execution_tool_result"`
-
-          - `class ToolSearchToolResultBlock: …`
-
-            - `content: Content`
-
-              - `class ToolSearchToolResultError: …`
-
-                - `error_code: ToolSearchToolResultErrorCode`
-
-                  - `"invalid_tool_input"`
-
-                  - `"unavailable"`
-
-                  - `"too_many_requests"`
-
-                  - `"execution_time_exceeded"`
-
-                - `error_message: Optional[str]`
-
-                - `type: Literal["tool_search_tool_result_error"]`
-
-                  - `"tool_search_tool_result_error"`
-
-              - `class ToolSearchToolSearchResultBlock: …`
-
-                - `tool_references: List[ToolReferenceBlock]`
-
-                  - `tool_name: str`
-
-                  - `type: Literal["tool_reference"]`
-
-                    - `"tool_reference"`
-
-                - `type: Literal["tool_search_tool_search_result"]`
-
-                  - `"tool_search_tool_search_result"`
-
-            - `tool_use_id: str`
-
-            - `type: Literal["tool_search_tool_result"]`
-
-              - `"tool_search_tool_result"`
-
-          - `class ContainerUploadBlock: …`
-
-            Response model for a file uploaded to the container.
-
-            - `file_id: str`
-
-            - `type: Literal["container_upload"]`
-
-              - `"container_upload"`
-
-        - `model: Model`
-
-          The model that will complete your prompt.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `claude-sonnet-5` - High-performance model for coding and agents
-            - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-            - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-            - `claude-opus-5` - Powerful intelligence for long-running agents and coding
-            - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
-            - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
-            - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
-            - `claude-sonnet-4-6` - Best combination of speed and intelligence
-            - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-            - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-            - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
-            - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
-            - `claude-sonnet-4-5` - High-performance model for agents and coding
-            - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-
-            - `"claude-sonnet-5"`
-
-              High-performance model for coding and agents
-
-            - `"claude-fable-5"`
-
-              Next generation of intelligence for the hardest knowledge work and coding problems
-
-            - `"claude-mythos-5"`
-
-              Most capable model for cybersecurity and biology research
-
-            - `"claude-opus-5"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-opus-4-8"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-opus-4-7"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `"claude-opus-4-6"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `"claude-opus-4-5"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-opus-4-5-20251101"`
-
-              Powerful intelligence for long-running agents and coding
-
-            - `"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-          - `str`
-
-        - `role: Literal["assistant"]`
-
-          Conversational role of the generated message.
-
-          This will always be `"assistant"`.
-
-          - `"assistant"`
-
-        - `stop_details: Optional[RefusalStopDetails]`
-
-          Structured information about a refusal.
-
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
-
-            The policy category that triggered a refusal.
-
-            - `"cyber"`
-
-              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-
-            - `"bio"`
-
-              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-
-            - `"frontier_llm"`
-
-              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-
-            - `"reasoning_extraction"`
-
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-
-            - `"general_harms"`
-
-              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
-
-          - `explanation: Optional[str]`
-
-            Human-readable explanation of the refusal.
-
-            This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-          - `type: Literal["refusal"]`
-
-            - `"refusal"`
-
-        - `stop_reason: Optional[StopReason]`
-
-          The reason that we stopped.
-
-          This may be one the following values:
-
-          * `"end_turn"`: the model reached a natural stopping point
-          * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-          * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-          * `"tool_use"`: the model invoked one or more tools
-          * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-          * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-          * `"model_context_window_exceeded"`: we exceeded the model's context window
-
-          In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-          - `"end_turn"`
-
-          - `"max_tokens"`
-
-          - `"stop_sequence"`
-
-          - `"tool_use"`
-
-          - `"pause_turn"`
-
-          - `"refusal"`
-
-          - `"model_context_window_exceeded"`
-
-        - `stop_sequence: Optional[str]`
-
-          Which custom stop sequence was generated, if any.
-
-          This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: Literal["message"]`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
-
-          - `"message"`
-
-        - `usage: Usage`
-
-          Billing and rate-limit usage.
-
-          Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-          Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-          For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-          Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-          - `cache_creation: Optional[CacheCreation]`
-
-            Breakdown of cached tokens by TTL
-
-            - `ephemeral_1h_input_tokens: int`
-
-              The number of input tokens used to create the 1 hour cache entry.
-
-            - `ephemeral_5m_input_tokens: int`
-
-              The number of input tokens used to create the 5 minute cache entry.
-
-          - `cache_creation_input_tokens: Optional[int]`
-
-            The number of input tokens used to create the cache entry.
-
-          - `cache_read_input_tokens: Optional[int]`
-
-            The number of input tokens read from the cache.
-
-          - `inference_geo: Optional[str]`
-
-            The geographic region where inference was performed for this request.
-
-          - `input_tokens: int`
-
-            The number of input tokens which were used.
-
-          - `output_tokens: int`
-
-            The number of output tokens which were used.
-
-          - `output_tokens_details: Optional[OutputTokensDetails]`
-
-            Breakdown of output tokens by category.
-
-            `output_tokens` remains the inclusive, authoritative total used for billing.
-            This object provides a read-only decomposition for observability — for example,
-            how many of the billed output tokens were spent on internal reasoning that may
-            have been summarized before being returned to you.
-
-            - `thinking_tokens: int`
-
-              Number of output tokens the model generated as internal reasoning, including
-              the thinking-block delimiter tokens.
-
-              Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
-              generation count by a small number of tokens. Always ≤ `output_tokens`;
-              `output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-          - `server_tool_use: Optional[ServerToolUsage]`
-
-            The number of server tool requests.
-
-            - `web_fetch_requests: int`
-
-              The number of web fetch tool requests.
-
-            - `web_search_requests: int`
-
-              The number of web search tool requests.
-
-          - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
-
-            If the request used the priority, standard, or batch tier.
-
-            - `"standard"`
-
-            - `"priority"`
-
-            - `"batch"`
-
-      - `type: Literal["succeeded"]`
-
-        - `"succeeded"`
-
-    - `class MessageBatchErroredResult: …`
-
-      - `error: ErrorResponse`
-
-        - `error: ErrorObject`
-
-          - `class InvalidRequestError: …`
-
-            - `message: str`
-
-            - `type: Literal["invalid_request_error"]`
-
-              - `"invalid_request_error"`
-
-          - `class AuthenticationError: …`
-
-            - `message: str`
-
-            - `type: Literal["authentication_error"]`
-
-              - `"authentication_error"`
-
-          - `class BillingError: …`
-
-            - `message: str`
-
-            - `type: Literal["billing_error"]`
-
-              - `"billing_error"`
-
-          - `class PermissionError: …`
-
-            - `message: str`
-
-            - `type: Literal["permission_error"]`
-
-              - `"permission_error"`
-
-          - `class NotFoundError: …`
-
-            - `message: str`
-
-            - `type: Literal["not_found_error"]`
-
-              - `"not_found_error"`
-
-          - `class RateLimitError: …`
-
-            - `message: str`
-
-            - `type: Literal["rate_limit_error"]`
-
-              - `"rate_limit_error"`
-
-          - `class GatewayTimeoutError: …`
-
-            - `message: str`
-
-            - `type: Literal["timeout_error"]`
-
-              - `"timeout_error"`
-
-          - `class APIErrorObject: …`
-
-            - `message: str`
-
-            - `type: Literal["api_error"]`
-
-              - `"api_error"`
-
-          - `class OverloadedError: …`
-
-            - `message: str`
-
-            - `type: Literal["overloaded_error"]`
-
-              - `"overloaded_error"`
-
-        - `request_id: Optional[str]`
-
-        - `type: Literal["error"]`
-
-          - `"error"`
-
-      - `type: Literal["errored"]`
-
-        - `"errored"`
-
-    - `class MessageBatchCanceledResult: …`
-
-      - `type: Literal["canceled"]`
-
-        - `"canceled"`
-
-    - `class MessageBatchExpiredResult: …`
-
-      - `type: Literal["expired"]`
-
-        - `"expired"`
-
-### Message Batch Request Counts
-
-- `class MessageBatchRequestCounts: …`
-
-  - `canceled: int`
-
-    Number of requests in the Message Batch that have been canceled.
-
-    This is zero until processing of the entire Message Batch has ended.
-
-  - `errored: int`
-
-    Number of requests in the Message Batch that encountered an error.
-
-    This is zero until processing of the entire Message Batch has ended.
-
-  - `expired: int`
-
-    Number of requests in the Message Batch that have expired.
-
-    This is zero until processing of the entire Message Batch has ended.
-
-  - `processing: int`
-
-    Number of requests in the Message Batch that are processing.
-
-  - `succeeded: int`
-
-    Number of requests in the Message Batch that have completed successfully.
-
-    This is zero until processing of the entire Message Batch has ended.
-
-### Message Batch Result
-
-- `MessageBatchResult`
-
-  Processing result for this request.
-
-  Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
-
-  - `class MessageBatchSucceededResult: …`
-
-    - `message: Message`
-
-      - `id: str`
-
-        Unique object identifier.
-
-        The format and length of IDs may change over time.
-
-      - `container: Optional[Container]`
-
-        Information about the container used in the request (for the code execution tool)
-
-        - `id: str`
-
-          Identifier for the container used in this request
-
-        - `expires_at: datetime`
-
-          The time at which the container will expire.
-
-        - `skills: Optional[List[ContainerSkill]]`
-
-          Skills loaded in the container
-
-          - `skill_id: str`
-
-            Skill ID
-
-          - `type: Literal["anthropic", "custom"]`
-
-            Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-            - `"anthropic"`
-
-            - `"custom"`
-
-          - `version: str`
-
-            The resolved version: a skill version ID for custom skills.
-
-      - `content: List[ContentBlock]`
-
-        Content generated by the model.
-
-        This is an array of content blocks, each of which has a `type` that determines its shape.
-
-        Example:
-
-        ```json
-        [{"type": "text", "text": "Hi, I'm Claude."}]
-        ```
-
-        If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-        For example, if the input `messages` were:
-
-        ```json
-        [
-          {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-          {"role": "assistant", "content": "The best answer is ("}
-        ]
-        ```
-
-        Then the response `content` might be:
-
-        ```json
-        [{"type": "text", "text": "B)"}]
-        ```
-
-        - `class TextBlock: …`
-
-          - `citations: Optional[List[TextCitation]]`
-
-            Citations supporting the text block.
-
-            The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-            - `class CitationCharLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_char_index: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_char_index: int`
-
-              - `type: Literal["char_location"]`
-
-                - `"char_location"`
-
-            - `class CitationPageLocation: …`
-
-              - `cited_text: str`
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_page_number: int`
-
-              - `file_id: Optional[str]`
-
-              - `start_page_number: int`
-
-              - `type: Literal["page_location"]`
-
-                - `"page_location"`
-
-            - `class CitationContentBlockLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `document_index: int`
-
-              - `document_title: Optional[str]`
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `file_id: Optional[str]`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `type: Literal["content_block_location"]`
-
-                - `"content_block_location"`
-
-            - `class CitationsWebSearchResultLocation: …`
-
-              - `cited_text: str`
-
-              - `encrypted_index: str`
-
-              - `title: Optional[str]`
-
-              - `type: Literal["web_search_result_location"]`
-
-                - `"web_search_result_location"`
-
-              - `url: str`
-
-            - `class CitationsSearchResultLocation: …`
-
-              - `cited_text: str`
-
-                The full text of the cited block range, concatenated.
-
-                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-              - `end_block_index: int`
-
-                Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-              - `search_result_index: int`
-
-                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-                Counted separately from `document_index`; server-side web search results are not included in this count.
-
-              - `source: str`
-
-              - `start_block_index: int`
-
-                0-based index of the first cited block in the source's `content` array.
-
-              - `title: Optional[str]`
-
-              - `type: Literal["search_result_location"]`
-
-                - `"search_result_location"`
-
-          - `text: str`
-
-          - `type: Literal["text"]`
-
-            - `"text"`
-
-        - `class ThinkingBlock: …`
-
-          - `signature: str`
-
-            A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
-
-            This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
-
-            See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-          - `thinking: str`
-
-            The text of Claude's thinking process for this block.
-
-          - `type: Literal["thinking"]`
-
-            - `"thinking"`
-
-        - `class RedactedThinkingBlock: …`
-
-          - `data: str`
-
-            The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
-
-            Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
-
-            See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
-
-          - `type: Literal["redacted_thinking"]`
-
-            - `"redacted_thinking"`
-
-        - `class ToolUseBlock: …`
-
-          - `id: str`
-
-          - `caller: Caller`
-
-            Tool invocation directly from the model.
-
-            - `class DirectCaller: …`
-
-              Tool invocation directly from the model.
-
-              - `type: Literal["direct"]`
-
-                - `"direct"`
-
-            - `class ServerToolCaller: …`
-
-              Tool invocation generated by a server-side tool.
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20250825"]`
-
-                - `"code_execution_20250825"`
-
-            - `class ServerToolCaller20260120: …`
-
-              - `tool_id: str`
-
-              - `type: Literal["code_execution_20260120"]`
-
-                - `"code_execution_20260120"`
-
-          - `input: Dict[str, object]`
-
-          - `name: str`
-
-          - `type: Literal["tool_use"]`
-
-            - `"tool_use"`
-
-          - `toolset_name: Optional[str]`
-
-            For a toolset member tool_use, the toolset family.
-
-        - `class ServerToolUseBlock: …`
-
-          - `id: str`
-
-          - `caller: Caller`
-
-            Tool invocation directly from the model.
-
-            - `class DirectCaller: …`
-
-              Tool invocation directly from the model.
-
-            - `class ServerToolCaller: …`
-
-              Tool invocation generated by a server-side tool.
-
-            - `class ServerToolCaller20260120: …`
-
-          - `input: Dict[str, object]`
-
-          - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
-
-            - `"web_search"`
-
-            - `"web_fetch"`
-
-            - `"code_execution"`
-
-            - `"bash_code_execution"`
-
-            - `"text_editor_code_execution"`
-
-            - `"tool_search_tool_regex"`
-
-            - `"tool_search_tool_bm25"`
-
-          - `type: Literal["server_tool_use"]`
-
-            - `"server_tool_use"`
-
-        - `class WebSearchToolResultBlock: …`
-
-          - `caller: Caller`
-
-            Tool invocation directly from the model.
-
-            - `class DirectCaller: …`
-
-              Tool invocation directly from the model.
-
-            - `class ServerToolCaller: …`
-
-              Tool invocation generated by a server-side tool.
-
-            - `class ServerToolCaller20260120: …`
-
-          - `content: WebSearchToolResultBlockContent`
-
-            - `class WebSearchToolResultError: …`
-
-              - `error_code: WebSearchToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"unavailable"`
-
-                - `"max_uses_exceeded"`
-
-                - `"too_many_requests"`
-
-                - `"query_too_long"`
-
-                - `"request_too_large"`
-
-              - `type: Literal["web_search_tool_result_error"]`
-
-                - `"web_search_tool_result_error"`
-
-            - `List[WebSearchResultBlock]`
-
-              - `encrypted_content: str`
-
-              - `page_age: Optional[str]`
-
-              - `title: str`
-
-              - `type: Literal["web_search_result"]`
-
-                - `"web_search_result"`
-
-              - `url: str`
-
-          - `tool_use_id: str`
-
-          - `type: Literal["web_search_tool_result"]`
-
-            - `"web_search_tool_result"`
-
-        - `class WebFetchToolResultBlock: …`
-
-          - `caller: Caller`
-
-            Tool invocation directly from the model.
-
-            - `class DirectCaller: …`
-
-              Tool invocation directly from the model.
-
-            - `class ServerToolCaller: …`
-
-              Tool invocation generated by a server-side tool.
-
-            - `class ServerToolCaller20260120: …`
-
-          - `content: Content`
-
-            - `class WebFetchToolResultErrorBlock: …`
-
-              - `error_code: WebFetchToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"url_too_long"`
-
-                - `"url_not_allowed"`
-
-                - `"url_not_in_prior_context"`
-
-                - `"url_not_accessible"`
-
-                - `"unsupported_content_type"`
-
-                - `"too_many_requests"`
-
-                - `"max_uses_exceeded"`
-
-                - `"unavailable"`
-
-              - `type: Literal["web_fetch_tool_result_error"]`
-
-                - `"web_fetch_tool_result_error"`
-
-            - `class WebFetchBlock: …`
-
-              - `content: DocumentBlock`
-
-                - `citations: Optional[CitationsConfig]`
-
-                  Citation configuration for the document
-
-                  - `enabled: bool`
-
-                - `source: Source`
-
-                  - `class Base64PDFSource: …`
-
-                    - `data: str`
-
-                    - `media_type: Literal["application/pdf"]`
-
-                      - `"application/pdf"`
-
-                    - `type: Literal["base64"]`
-
-                      - `"base64"`
-
-                  - `class PlainTextSource: …`
-
-                    - `data: str`
-
-                    - `media_type: Literal["text/plain"]`
-
-                      - `"text/plain"`
-
-                    - `type: Literal["text"]`
-
-                      - `"text"`
-
-                - `title: Optional[str]`
-
-                  The title of the document
-
-                - `type: Literal["document"]`
-
-                  - `"document"`
-
-              - `retrieved_at: Optional[str]`
-
-                ISO 8601 timestamp when the content was retrieved
-
-              - `type: Literal["web_fetch_result"]`
-
-                - `"web_fetch_result"`
-
-              - `url: str`
-
-                Fetched content URL
-
-          - `tool_use_id: str`
-
-          - `type: Literal["web_fetch_tool_result"]`
-
-            - `"web_fetch_tool_result"`
-
-        - `class CodeExecutionToolResultBlock: …`
-
-          - `content: CodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `class CodeExecutionToolResultError: …`
-
-              - `error_code: CodeExecutionToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"unavailable"`
-
-                - `"too_many_requests"`
-
-                - `"execution_time_exceeded"`
-
-              - `type: Literal["code_execution_tool_result_error"]`
-
-                - `"code_execution_tool_result_error"`
-
-            - `class CodeExecutionResultBlock: …`
-
-              - `content: List[CodeExecutionOutputBlock]`
-
-                - `file_id: str`
-
-                - `type: Literal["code_execution_output"]`
-
-                  - `"code_execution_output"`
-
-              - `return_code: int`
-
-              - `stderr: str`
-
-              - `stdout: str`
-
-              - `type: Literal["code_execution_result"]`
-
-                - `"code_execution_result"`
-
-            - `class EncryptedCodeExecutionResultBlock: …`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
-
-              - `content: List[CodeExecutionOutputBlock]`
-
-                - `file_id: str`
-
-                - `type: Literal["code_execution_output"]`
-
-              - `encrypted_stdout: str`
-
-              - `return_code: int`
-
-              - `stderr: str`
-
-              - `type: Literal["encrypted_code_execution_result"]`
-
-                - `"encrypted_code_execution_result"`
-
-          - `tool_use_id: str`
-
-          - `type: Literal["code_execution_tool_result"]`
-
-            - `"code_execution_tool_result"`
-
-        - `class BashCodeExecutionToolResultBlock: …`
-
-          - `content: Content`
-
-            - `class BashCodeExecutionToolResultError: …`
-
-              - `error_code: BashCodeExecutionToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"unavailable"`
-
-                - `"too_many_requests"`
-
-                - `"execution_time_exceeded"`
-
-                - `"output_file_too_large"`
-
-              - `type: Literal["bash_code_execution_tool_result_error"]`
-
-                - `"bash_code_execution_tool_result_error"`
-
-            - `class BashCodeExecutionResultBlock: …`
-
-              - `content: List[BashCodeExecutionOutputBlock]`
-
-                - `file_id: str`
-
-                - `type: Literal["bash_code_execution_output"]`
-
-                  - `"bash_code_execution_output"`
-
-              - `return_code: int`
-
-              - `stderr: str`
-
-              - `stdout: str`
-
-              - `type: Literal["bash_code_execution_result"]`
-
-                - `"bash_code_execution_result"`
-
-          - `tool_use_id: str`
-
-          - `type: Literal["bash_code_execution_tool_result"]`
-
-            - `"bash_code_execution_tool_result"`
-
-        - `class TextEditorCodeExecutionToolResultBlock: …`
-
-          - `content: Content`
-
-            - `class TextEditorCodeExecutionToolResultError: …`
-
-              - `error_code: TextEditorCodeExecutionToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"unavailable"`
-
-                - `"too_many_requests"`
-
-                - `"execution_time_exceeded"`
-
-                - `"file_not_found"`
-
-              - `error_message: Optional[str]`
-
-              - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
-                - `"text_editor_code_execution_tool_result_error"`
-
-            - `class TextEditorCodeExecutionViewResultBlock: …`
-
-              - `content: str`
-
-              - `file_type: Literal["text", "image", "pdf"]`
-
-                - `"text"`
-
-                - `"image"`
-
-                - `"pdf"`
-
-              - `num_lines: Optional[int]`
-
-              - `start_line: Optional[int]`
-
-              - `total_lines: Optional[int]`
-
-              - `type: Literal["text_editor_code_execution_view_result"]`
-
-                - `"text_editor_code_execution_view_result"`
-
-            - `class TextEditorCodeExecutionCreateResultBlock: …`
-
-              - `is_file_update: bool`
-
-              - `type: Literal["text_editor_code_execution_create_result"]`
-
-                - `"text_editor_code_execution_create_result"`
-
-            - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
-
-              - `lines: Optional[List[str]]`
-
-              - `new_lines: Optional[int]`
-
-              - `new_start: Optional[int]`
-
-              - `old_lines: Optional[int]`
-
-              - `old_start: Optional[int]`
-
-              - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-                - `"text_editor_code_execution_str_replace_result"`
-
-          - `tool_use_id: str`
-
-          - `type: Literal["text_editor_code_execution_tool_result"]`
-
-            - `"text_editor_code_execution_tool_result"`
-
-        - `class ToolSearchToolResultBlock: …`
-
-          - `content: Content`
-
-            - `class ToolSearchToolResultError: …`
-
-              - `error_code: ToolSearchToolResultErrorCode`
-
-                - `"invalid_tool_input"`
-
-                - `"unavailable"`
-
-                - `"too_many_requests"`
-
-                - `"execution_time_exceeded"`
-
-              - `error_message: Optional[str]`
-
-              - `type: Literal["tool_search_tool_result_error"]`
-
-                - `"tool_search_tool_result_error"`
-
-            - `class ToolSearchToolSearchResultBlock: …`
-
-              - `tool_references: List[ToolReferenceBlock]`
-
-                - `tool_name: str`
-
-                - `type: Literal["tool_reference"]`
-
-                  - `"tool_reference"`
-
-              - `type: Literal["tool_search_tool_search_result"]`
-
-                - `"tool_search_tool_search_result"`
-
-          - `tool_use_id: str`
-
-          - `type: Literal["tool_search_tool_result"]`
-
-            - `"tool_search_tool_result"`
-
-        - `class ContainerUploadBlock: …`
-
-          Response model for a file uploaded to the container.
-
-          - `file_id: str`
-
-          - `type: Literal["container_upload"]`
-
-            - `"container_upload"`
-
-      - `model: Model`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
-
-          The model that will complete your prompt.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `claude-sonnet-5` - High-performance model for coding and agents
-          - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-          - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-          - `claude-opus-5` - Powerful intelligence for long-running agents and coding
-          - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
-          - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
-          - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-          - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
-          - `claude-sonnet-4-6` - Best combination of speed and intelligence
-          - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-          - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-          - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
-          - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
-          - `claude-sonnet-4-5` - High-performance model for agents and coding
-          - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-
-          - `"claude-sonnet-5"`
-
-            High-performance model for coding and agents
-
-          - `"claude-fable-5"`
-
-            Next generation of intelligence for the hardest knowledge work and coding problems
-
-          - `"claude-mythos-5"`
-
-            Most capable model for cybersecurity and biology research
-
-          - `"claude-opus-5"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-8"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-7"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `"claude-opus-4-6"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `"claude-haiku-4-5"`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
-
-          - `"claude-opus-4-5"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-5-20251101"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-5"`
-
-            High-performance model for agents and coding
-
-          - `"claude-sonnet-4-5-20250929"`
-
-            High-performance model for agents and coding
-
-        - `str`
-
-      - `role: Literal["assistant"]`
-
-        Conversational role of the generated message.
-
-        This will always be `"assistant"`.
-
-        - `"assistant"`
-
-      - `stop_details: Optional[RefusalStopDetails]`
-
-        Structured information about a refusal.
-
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
-
-          The policy category that triggered a refusal.
-
-          - `"cyber"`
-
-            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-
-          - `"bio"`
-
-            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-
-          - `"frontier_llm"`
-
-            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-
-          - `"reasoning_extraction"`
-
-            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-
-          - `"general_harms"`
-
-            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
-
-        - `explanation: Optional[str]`
-
-          Human-readable explanation of the refusal.
-
-          This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `type: Literal["refusal"]`
-
-          - `"refusal"`
-
-      - `stop_reason: Optional[StopReason]`
-
-        The reason that we stopped.
-
-        This may be one the following values:
-
-        * `"end_turn"`: the model reached a natural stopping point
-        * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-        * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-        * `"tool_use"`: the model invoked one or more tools
-        * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-        * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-        * `"model_context_window_exceeded"`: we exceeded the model's context window
-
-        In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-        - `"end_turn"`
-
-        - `"max_tokens"`
-
-        - `"stop_sequence"`
-
-        - `"tool_use"`
-
-        - `"pause_turn"`
-
-        - `"refusal"`
-
-        - `"model_context_window_exceeded"`
-
-      - `stop_sequence: Optional[str]`
-
-        Which custom stop sequence was generated, if any.
-
-        This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: Literal["message"]`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
-
-        - `"message"`
-
-      - `usage: Usage`
-
-        Billing and rate-limit usage.
-
-        Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-        Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-        For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-        Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-        - `cache_creation: Optional[CacheCreation]`
-
-          Breakdown of cached tokens by TTL
-
-          - `ephemeral_1h_input_tokens: int`
-
-            The number of input tokens used to create the 1 hour cache entry.
-
-          - `ephemeral_5m_input_tokens: int`
-
-            The number of input tokens used to create the 5 minute cache entry.
-
-        - `cache_creation_input_tokens: Optional[int]`
-
-          The number of input tokens used to create the cache entry.
-
-        - `cache_read_input_tokens: Optional[int]`
-
-          The number of input tokens read from the cache.
-
-        - `inference_geo: Optional[str]`
-
-          The geographic region where inference was performed for this request.
-
-        - `input_tokens: int`
-
-          The number of input tokens which were used.
-
-        - `output_tokens: int`
-
-          The number of output tokens which were used.
-
-        - `output_tokens_details: Optional[OutputTokensDetails]`
-
-          Breakdown of output tokens by category.
-
-          `output_tokens` remains the inclusive, authoritative total used for billing.
-          This object provides a read-only decomposition for observability — for example,
-          how many of the billed output tokens were spent on internal reasoning that may
-          have been summarized before being returned to you.
-
-          - `thinking_tokens: int`
-
-            Number of output tokens the model generated as internal reasoning, including
-            the thinking-block delimiter tokens.
-
-            Reflects the raw reasoning the model produced, not the (possibly shorter)
-            summarized thinking text returned in the response body. Computed by
-            re-tokenizing the raw reasoning text, so it may differ from the model's exact
-            generation count by a small number of tokens. Always ≤ `output_tokens`;
-            `output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-        - `server_tool_use: Optional[ServerToolUsage]`
-
-          The number of server tool requests.
-
-          - `web_fetch_requests: int`
-
-            The number of web fetch tool requests.
-
-          - `web_search_requests: int`
-
-            The number of web search tool requests.
-
-        - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
-
-          If the request used the priority, standard, or batch tier.
-
-          - `"standard"`
-
-          - `"priority"`
-
-          - `"batch"`
-
-    - `type: Literal["succeeded"]`
-
-      - `"succeeded"`
-
-  - `class MessageBatchErroredResult: …`
-
-    - `error: ErrorResponse`
-
-      - `error: ErrorObject`
-
-        - `class InvalidRequestError: …`
-
-          - `message: str`
-
-          - `type: Literal["invalid_request_error"]`
-
-            - `"invalid_request_error"`
-
-        - `class AuthenticationError: …`
-
-          - `message: str`
-
-          - `type: Literal["authentication_error"]`
-
-            - `"authentication_error"`
-
-        - `class BillingError: …`
-
-          - `message: str`
-
-          - `type: Literal["billing_error"]`
-
-            - `"billing_error"`
-
-        - `class PermissionError: …`
-
-          - `message: str`
-
-          - `type: Literal["permission_error"]`
-
-            - `"permission_error"`
-
-        - `class NotFoundError: …`
-
-          - `message: str`
-
-          - `type: Literal["not_found_error"]`
-
-            - `"not_found_error"`
-
-        - `class RateLimitError: …`
-
-          - `message: str`
-
-          - `type: Literal["rate_limit_error"]`
-
-            - `"rate_limit_error"`
-
-        - `class GatewayTimeoutError: …`
-
-          - `message: str`
-
-          - `type: Literal["timeout_error"]`
-
-            - `"timeout_error"`
-
-        - `class APIErrorObject: …`
-
-          - `message: str`
-
-          - `type: Literal["api_error"]`
-
-            - `"api_error"`
-
-        - `class OverloadedError: …`
-
-          - `message: str`
-
-          - `type: Literal["overloaded_error"]`
-
-            - `"overloaded_error"`
-
-      - `request_id: Optional[str]`
-
-      - `type: Literal["error"]`
-
-        - `"error"`
-
-    - `type: Literal["errored"]`
-
-      - `"errored"`
-
-  - `class MessageBatchCanceledResult: …`
-
-    - `type: Literal["canceled"]`
-
-      - `"canceled"`
-
-  - `class MessageBatchExpiredResult: …`
-
-    - `type: Literal["expired"]`
-
-      - `"expired"`
-
-### Message Batch Succeeded Result
-
-- `class MessageBatchSucceededResult: …`
-
-  - `message: Message`
-
-    - `id: str`
-
-      Unique object identifier.
-
-      The format and length of IDs may change over time.
-
-    - `container: Optional[Container]`
-
-      Information about the container used in the request (for the code execution tool)
-
-      - `id: str`
-
-        Identifier for the container used in this request
-
-      - `expires_at: datetime`
-
-        The time at which the container will expire.
-
-      - `skills: Optional[List[ContainerSkill]]`
-
-        Skills loaded in the container
-
-        - `skill_id: str`
-
-          Skill ID
-
-        - `type: Literal["anthropic", "custom"]`
-
-          Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-          - `"anthropic"`
-
-          - `"custom"`
-
-        - `version: str`
-
-          The resolved version: a skill version ID for custom skills.
-
-    - `content: List[ContentBlock]`
-
-      Content generated by the model.
-
-      This is an array of content blocks, each of which has a `type` that determines its shape.
-
-      Example:
-
-      ```json
-      [{"type": "text", "text": "Hi, I'm Claude."}]
-      ```
-
-      If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
-
-      For example, if the input `messages` were:
-
-      ```json
-      [
-        {"role": "user", "content": "What's the Greek name for Sun? (A) Sol (B) Helios (C) Sun"},
-        {"role": "assistant", "content": "The best answer is ("}
-      ]
-      ```
-
-      Then the response `content` might be:
-
-      ```json
-      [{"type": "text", "text": "B)"}]
-      ```
-
-      - `class TextBlock: …`
-
-        - `citations: Optional[List[TextCitation]]`
-
-          Citations supporting the text block.
-
-          The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
-
-          - `class CitationCharLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_char_index: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_char_index: int`
-
-            - `type: Literal["char_location"]`
-
-              - `"char_location"`
-
-          - `class CitationPageLocation: …`
-
-            - `cited_text: str`
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_page_number: int`
-
-            - `file_id: Optional[str]`
-
-            - `start_page_number: int`
-
-            - `type: Literal["page_location"]`
-
-              - `"page_location"`
-
-          - `class CitationContentBlockLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `document_index: int`
-
-            - `document_title: Optional[str]`
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `file_id: Optional[str]`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `type: Literal["content_block_location"]`
-
-              - `"content_block_location"`
-
-          - `class CitationsWebSearchResultLocation: …`
-
-            - `cited_text: str`
-
-            - `encrypted_index: str`
-
-            - `title: Optional[str]`
-
-            - `type: Literal["web_search_result_location"]`
-
-              - `"web_search_result_location"`
-
-            - `url: str`
-
-          - `class CitationsSearchResultLocation: …`
-
-            - `cited_text: str`
-
-              The full text of the cited block range, concatenated.
-
-              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-            - `end_block_index: int`
-
-              Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-            - `search_result_index: int`
-
-              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-              Counted separately from `document_index`; server-side web search results are not included in this count.
-
-            - `source: str`
-
-            - `start_block_index: int`
-
-              0-based index of the first cited block in the source's `content` array.
-
-            - `title: Optional[str]`
-
-            - `type: Literal["search_result_location"]`
-
-              - `"search_result_location"`
-
-        - `text: str`
-
-        - `type: Literal["text"]`
-
-          - `"text"`
-
-      - `class ThinkingBlock: …`
-
-        - `signature: str`
-
-          A value used to verify that this thinking block was generated by Claude when it is passed back to the API.
-
-          This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
-
-          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-        - `thinking: str`
-
-          The text of Claude's thinking process for this block.
-
-        - `type: Literal["thinking"]`
-
-          - `"thinking"`
-
-      - `class RedactedThinkingBlock: …`
-
-        - `data: str`
-
-          The contents of this redacted thinking block, returned when portions of the model's thinking were safety-redacted. This field is opaque and encrypted, with no readable content.
-
-          Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
-
-          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
-
-        - `type: Literal["redacted_thinking"]`
-
-          - `"redacted_thinking"`
-
-      - `class ToolUseBlock: …`
-
-        - `id: str`
-
-        - `caller: Caller`
-
-          Tool invocation directly from the model.
-
-          - `class DirectCaller: …`
-
-            Tool invocation directly from the model.
-
-            - `type: Literal["direct"]`
-
-              - `"direct"`
-
-          - `class ServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20250825"]`
-
-              - `"code_execution_20250825"`
-
-          - `class ServerToolCaller20260120: …`
-
-            - `tool_id: str`
-
-            - `type: Literal["code_execution_20260120"]`
-
-              - `"code_execution_20260120"`
-
-        - `input: Dict[str, object]`
-
-        - `name: str`
-
-        - `type: Literal["tool_use"]`
-
-          - `"tool_use"`
-
-        - `toolset_name: Optional[str]`
-
-          For a toolset member tool_use, the toolset family.
-
-      - `class ServerToolUseBlock: …`
-
-        - `id: str`
-
-        - `caller: Caller`
-
-          Tool invocation directly from the model.
-
-          - `class DirectCaller: …`
-
-            Tool invocation directly from the model.
-
-          - `class ServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-          - `class ServerToolCaller20260120: …`
-
-        - `input: Dict[str, object]`
-
-        - `name: Literal["web_search", "web_fetch", "code_execution", 4 more]`
-
-          - `"web_search"`
-
-          - `"web_fetch"`
-
-          - `"code_execution"`
-
-          - `"bash_code_execution"`
-
-          - `"text_editor_code_execution"`
-
-          - `"tool_search_tool_regex"`
-
-          - `"tool_search_tool_bm25"`
-
-        - `type: Literal["server_tool_use"]`
-
-          - `"server_tool_use"`
-
-      - `class WebSearchToolResultBlock: …`
-
-        - `caller: Caller`
-
-          Tool invocation directly from the model.
-
-          - `class DirectCaller: …`
-
-            Tool invocation directly from the model.
-
-          - `class ServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-          - `class ServerToolCaller20260120: …`
-
-        - `content: WebSearchToolResultBlockContent`
-
-          - `class WebSearchToolResultError: …`
-
-            - `error_code: WebSearchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"max_uses_exceeded"`
-
-              - `"too_many_requests"`
-
-              - `"query_too_long"`
-
-              - `"request_too_large"`
-
-            - `type: Literal["web_search_tool_result_error"]`
-
-              - `"web_search_tool_result_error"`
-
-          - `List[WebSearchResultBlock]`
-
-            - `encrypted_content: str`
-
-            - `page_age: Optional[str]`
-
-            - `title: str`
-
-            - `type: Literal["web_search_result"]`
-
-              - `"web_search_result"`
-
-            - `url: str`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["web_search_tool_result"]`
-
-          - `"web_search_tool_result"`
-
-      - `class WebFetchToolResultBlock: …`
-
-        - `caller: Caller`
-
-          Tool invocation directly from the model.
-
-          - `class DirectCaller: …`
-
-            Tool invocation directly from the model.
-
-          - `class ServerToolCaller: …`
-
-            Tool invocation generated by a server-side tool.
-
-          - `class ServerToolCaller20260120: …`
-
-        - `content: Content`
-
-          - `class WebFetchToolResultErrorBlock: …`
-
-            - `error_code: WebFetchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"url_too_long"`
-
-              - `"url_not_allowed"`
-
-              - `"url_not_in_prior_context"`
-
-              - `"url_not_accessible"`
-
-              - `"unsupported_content_type"`
-
-              - `"too_many_requests"`
-
-              - `"max_uses_exceeded"`
-
-              - `"unavailable"`
-
-            - `type: Literal["web_fetch_tool_result_error"]`
-
-              - `"web_fetch_tool_result_error"`
-
-          - `class WebFetchBlock: …`
-
-            - `content: DocumentBlock`
-
-              - `citations: Optional[CitationsConfig]`
-
-                Citation configuration for the document
-
-                - `enabled: bool`
-
-              - `source: Source`
-
-                - `class Base64PDFSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["application/pdf"]`
-
-                    - `"application/pdf"`
-
-                  - `type: Literal["base64"]`
-
-                    - `"base64"`
-
-                - `class PlainTextSource: …`
-
-                  - `data: str`
-
-                  - `media_type: Literal["text/plain"]`
-
-                    - `"text/plain"`
-
-                  - `type: Literal["text"]`
-
-                    - `"text"`
-
-              - `title: Optional[str]`
-
-                The title of the document
-
-              - `type: Literal["document"]`
-
-                - `"document"`
-
-            - `retrieved_at: Optional[str]`
-
-              ISO 8601 timestamp when the content was retrieved
-
-            - `type: Literal["web_fetch_result"]`
-
-              - `"web_fetch_result"`
-
-            - `url: str`
-
-              Fetched content URL
-
-        - `tool_use_id: str`
-
-        - `type: Literal["web_fetch_tool_result"]`
-
-          - `"web_fetch_tool_result"`
-
-      - `class CodeExecutionToolResultBlock: …`
-
-        - `content: CodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
-
-          - `class CodeExecutionToolResultError: …`
-
-            - `error_code: CodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `type: Literal["code_execution_tool_result_error"]`
-
-              - `"code_execution_tool_result_error"`
-
-          - `class CodeExecutionResultBlock: …`
-
-            - `content: List[CodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["code_execution_output"]`
-
-                - `"code_execution_output"`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `stdout: str`
-
-            - `type: Literal["code_execution_result"]`
-
-              - `"code_execution_result"`
-
-          - `class EncryptedCodeExecutionResultBlock: …`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
-
-            - `content: List[CodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["code_execution_output"]`
-
-            - `encrypted_stdout: str`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `type: Literal["encrypted_code_execution_result"]`
-
-              - `"encrypted_code_execution_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["code_execution_tool_result"]`
-
-          - `"code_execution_tool_result"`
-
-      - `class BashCodeExecutionToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class BashCodeExecutionToolResultError: …`
-
-            - `error_code: BashCodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"output_file_too_large"`
-
-            - `type: Literal["bash_code_execution_tool_result_error"]`
-
-              - `"bash_code_execution_tool_result_error"`
-
-          - `class BashCodeExecutionResultBlock: …`
-
-            - `content: List[BashCodeExecutionOutputBlock]`
-
-              - `file_id: str`
-
-              - `type: Literal["bash_code_execution_output"]`
-
-                - `"bash_code_execution_output"`
-
-            - `return_code: int`
-
-            - `stderr: str`
-
-            - `stdout: str`
-
-            - `type: Literal["bash_code_execution_result"]`
-
-              - `"bash_code_execution_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["bash_code_execution_tool_result"]`
-
-          - `"bash_code_execution_tool_result"`
-
-      - `class TextEditorCodeExecutionToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class TextEditorCodeExecutionToolResultError: …`
-
-            - `error_code: TextEditorCodeExecutionToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-              - `"file_not_found"`
-
-            - `error_message: Optional[str]`
-
-            - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
-              - `"text_editor_code_execution_tool_result_error"`
-
-          - `class TextEditorCodeExecutionViewResultBlock: …`
-
-            - `content: str`
-
-            - `file_type: Literal["text", "image", "pdf"]`
-
-              - `"text"`
-
-              - `"image"`
-
-              - `"pdf"`
-
-            - `num_lines: Optional[int]`
-
-            - `start_line: Optional[int]`
-
-            - `total_lines: Optional[int]`
-
-            - `type: Literal["text_editor_code_execution_view_result"]`
-
-              - `"text_editor_code_execution_view_result"`
-
-          - `class TextEditorCodeExecutionCreateResultBlock: …`
-
-            - `is_file_update: bool`
-
-            - `type: Literal["text_editor_code_execution_create_result"]`
-
-              - `"text_editor_code_execution_create_result"`
-
-          - `class TextEditorCodeExecutionStrReplaceResultBlock: …`
-
-            - `lines: Optional[List[str]]`
-
-            - `new_lines: Optional[int]`
-
-            - `new_start: Optional[int]`
-
-            - `old_lines: Optional[int]`
-
-            - `old_start: Optional[int]`
-
-            - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-              - `"text_editor_code_execution_str_replace_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["text_editor_code_execution_tool_result"]`
-
-          - `"text_editor_code_execution_tool_result"`
-
-      - `class ToolSearchToolResultBlock: …`
-
-        - `content: Content`
-
-          - `class ToolSearchToolResultError: …`
-
-            - `error_code: ToolSearchToolResultErrorCode`
-
-              - `"invalid_tool_input"`
-
-              - `"unavailable"`
-
-              - `"too_many_requests"`
-
-              - `"execution_time_exceeded"`
-
-            - `error_message: Optional[str]`
-
-            - `type: Literal["tool_search_tool_result_error"]`
-
-              - `"tool_search_tool_result_error"`
-
-          - `class ToolSearchToolSearchResultBlock: …`
-
-            - `tool_references: List[ToolReferenceBlock]`
-
-              - `tool_name: str`
-
-              - `type: Literal["tool_reference"]`
-
-                - `"tool_reference"`
-
-            - `type: Literal["tool_search_tool_search_result"]`
-
-              - `"tool_search_tool_search_result"`
-
-        - `tool_use_id: str`
-
-        - `type: Literal["tool_search_tool_result"]`
-
-          - `"tool_search_tool_result"`
-
-      - `class ContainerUploadBlock: …`
-
-        Response model for a file uploaded to the container.
-
-        - `file_id: str`
-
-        - `type: Literal["container_upload"]`
-
-          - `"container_upload"`
-
-    - `model: Model`
-
-      The model that will complete your prompt.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `claude-sonnet-5` - High-performance model for coding and agents
-        - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
-        - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-        - `claude-opus-5` - Powerful intelligence for long-running agents and coding
-        - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
-        - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
-        - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-        - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
-        - `claude-sonnet-4-6` - Best combination of speed and intelligence
-        - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
-        - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-        - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
-        - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
-        - `claude-sonnet-4-5` - High-performance model for agents and coding
-        - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-
-        - `"claude-sonnet-5"`
-
-          High-performance model for coding and agents
-
-        - `"claude-fable-5"`
-
-          Next generation of intelligence for the hardest knowledge work and coding problems
-
-        - `"claude-mythos-5"`
-
-          Most capable model for cybersecurity and biology research
-
-        - `"claude-opus-5"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-opus-4-8"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-opus-4-7"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `"claude-opus-4-6"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `"claude-opus-4-5"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-opus-4-5-20251101"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-      - `str`
-
-    - `role: Literal["assistant"]`
-
-      Conversational role of the generated message.
-
-      This will always be `"assistant"`.
-
-      - `"assistant"`
-
-    - `stop_details: Optional[RefusalStopDetails]`
-
-      Structured information about a refusal.
-
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
-
-        The policy category that triggered a refusal.
-
-        - `"cyber"`
-
-          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-
-        - `"bio"`
-
-          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-
-        - `"frontier_llm"`
-
-          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-
-        - `"reasoning_extraction"`
-
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-
-        - `"general_harms"`
-
-          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
-
-      - `explanation: Optional[str]`
-
-        Human-readable explanation of the refusal.
-
-        This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-      - `type: Literal["refusal"]`
-
-        - `"refusal"`
-
-    - `stop_reason: Optional[StopReason]`
-
-      The reason that we stopped.
-
-      This may be one the following values:
-
-      * `"end_turn"`: the model reached a natural stopping point
-      * `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-      * `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-      * `"tool_use"`: the model invoked one or more tools
-      * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
-      * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
-      * `"model_context_window_exceeded"`: we exceeded the model's context window
-
-      In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-
-      - `"end_turn"`
-
-      - `"max_tokens"`
-
-      - `"stop_sequence"`
-
-      - `"tool_use"`
-
-      - `"pause_turn"`
-
-      - `"refusal"`
-
-      - `"model_context_window_exceeded"`
-
-    - `stop_sequence: Optional[str]`
-
-      Which custom stop sequence was generated, if any.
-
-      This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: Literal["message"]`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
-
-      - `"message"`
-
-    - `usage: Usage`
-
-      Billing and rate-limit usage.
-
-      Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
-
-      Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
-
-      For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-
-      Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-
-      - `cache_creation: Optional[CacheCreation]`
-
-        Breakdown of cached tokens by TTL
-
-        - `ephemeral_1h_input_tokens: int`
-
-          The number of input tokens used to create the 1 hour cache entry.
-
-        - `ephemeral_5m_input_tokens: int`
-
-          The number of input tokens used to create the 5 minute cache entry.
-
-      - `cache_creation_input_tokens: Optional[int]`
-
-        The number of input tokens used to create the cache entry.
-
-      - `cache_read_input_tokens: Optional[int]`
-
-        The number of input tokens read from the cache.
-
-      - `inference_geo: Optional[str]`
-
-        The geographic region where inference was performed for this request.
-
-      - `input_tokens: int`
-
-        The number of input tokens which were used.
-
-      - `output_tokens: int`
-
-        The number of output tokens which were used.
-
-      - `output_tokens_details: Optional[OutputTokensDetails]`
-
-        Breakdown of output tokens by category.
-
-        `output_tokens` remains the inclusive, authoritative total used for billing.
-        This object provides a read-only decomposition for observability — for example,
-        how many of the billed output tokens were spent on internal reasoning that may
-        have been summarized before being returned to you.
-
-        - `thinking_tokens: int`
-
-          Number of output tokens the model generated as internal reasoning, including
-          the thinking-block delimiter tokens.
-
-          Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
-          generation count by a small number of tokens. Always ≤ `output_tokens`;
-          `output_tokens - thinking_tokens` approximates the non-reasoning output.
-
-      - `server_tool_use: Optional[ServerToolUsage]`
-
-        The number of server tool requests.
-
-        - `web_fetch_requests: int`
-
-          The number of web fetch tool requests.
-
-        - `web_search_requests: int`
-
-          The number of web search tool requests.
-
-      - `service_tier: Optional[Literal["standard", "priority", "batch"]]`
-
-        If the request used the priority, standard, or batch tier.
-
-        - `"standard"`
-
-        - `"priority"`
-
-        - `"batch"`
-
-  - `type: Literal["succeeded"]`
-
-    - `"succeeded"`

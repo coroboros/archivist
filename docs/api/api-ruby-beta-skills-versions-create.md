@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/creat
 category: "api"
 generated: true
 ---
----
-title: Create Skill Version
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/create
----
-
-## Create Skill Version
+# Create Skill Version
 
 `beta.skills.versions.create(skill_id, **kwargs) -> VersionCreateResponse`
 
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-### Parameters
+## Parameters
 
 - `skill_id: String`
 
@@ -107,7 +102,7 @@ Create Skill Version
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class VersionCreateResponse`
 
@@ -155,7 +150,7 @@ Create Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -167,7 +162,7 @@ version = anthropic.beta.skills.versions.create("skill_id", files: [StringIO.new
 puts(version)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

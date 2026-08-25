@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/files/download"
 category: "api"
 generated: true
 ---
----
-title: Download File
-url: https://platform.claude.com/docs/en/api/php/beta/files/download
----
-
-## Download File
+# Download File
 
 `$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download`
 
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-### Parameters
+## Parameters
 
 - `fileID: string`
 
@@ -27,11 +22,11 @@ Download File
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `mixed`
 
-### Example
+## Example
 
 ```php
 <?php

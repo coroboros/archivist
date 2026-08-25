@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/files/retrieve_metadata
 category: "api"
 generated: true
 ---
----
-title: Get File Metadata
-url: https://platform.claude.com/docs/en/api/go/beta/files/retrieve_metadata
----
-
-## Get File Metadata
+# Get File Metadata
 
 `client.Beta.Files.GetMetadata(ctx, fileID, query) (*BetaFileMetadata, error)`
 
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
-### Parameters
+## Parameters
 
 - `fileID string`
 
@@ -25,7 +20,7 @@ Get File Metadata
 
 - `query BetaFileGetMetadataParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -101,7 +96,7 @@ Get File Metadata
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaFileMetadata struct{…}`
 
@@ -115,17 +110,25 @@ Get File Metadata
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `Filename string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `MimeType string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `SizeBytes int64`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `Type File`
 
@@ -133,13 +136,13 @@ Get File Metadata
 
     For files, this is always `"file"`.
 
-    - `const FileFile File = "file"`
-
-  - `Downloadable bool`
+  - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
 
-  - `Scope BetaFileScope`
+    default: false
+
+  - `Scope BetaFileScope Optional`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -151,9 +154,7 @@ Get File Metadata
 
       The type of scope (e.g., `"session"`).
 
-      - `const SessionSession Session = "session"`
-
-### Example
+## Example
 
 ```go
 package main
@@ -182,7 +183,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

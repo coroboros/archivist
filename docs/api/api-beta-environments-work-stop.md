@@ -4,26 +4,21 @@ source: "https://platform.claude.com/docs/en/api/beta/environments/work/stop"
 category: "api"
 generated: true
 ---
----
-title: Stop Work
-url: https://platform.claude.com/docs/en/api/beta/environments/work/stop
----
+# Stop Work
 
-## Stop Work
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/stop`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
-### Path Parameters
+## Path parameters
 
 - `environment_id: string`
 
 - `work_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -101,15 +96,17 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+## Body parameters
 
 - `force: optional boolean`
 
   If true, immediately stop work without graceful shutdown
 
-### Returns
+  default: false
 
-- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 10 more }`
+## Returns
+
+- `BetaSelfHostedWork object`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -140,8 +137,6 @@ Stop a work item, initiating graceful or forced shutdown.
     - `type: "session"`
 
       Type of work data
-
-      - `"session"`
 
   - `environment_id: string`
 
@@ -189,11 +184,11 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The type of object (always 'work')
 
-    - `"work"`
+    default: work
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/stop \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -202,7 +197,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/sto
     -d '{}'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

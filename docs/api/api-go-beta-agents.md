@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/go/beta/agents"
 category: "api"
 generated: true
 ---
----
-title: Agents
-url: https://platform.claude.com/docs/en/api/go/beta/agents
----
-
 # Agents
 
 ## Create Agent
 
 `client.Beta.Agents.New(ctx, params) (*BetaManagedAgentsAgent, error)`
 
-**post** `/v1/agents`
+**POST** `/v1/agents`
 
 Create Agent
 
@@ -97,7 +92,7 @@ Create Agent
 
         - `string`
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -119,15 +114,11 @@ Create Agent
 
           - `Type BetaManagedAgentsEffortLowType`
 
-            - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
         - `type BetaManagedAgentsEffortMedium struct{…}`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
-
-            - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
         - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -135,15 +126,11 @@ Create Agent
 
           - `Type BetaManagedAgentsEffortHighType`
 
-            - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
         - `type BetaManagedAgentsEffortXhigh struct{…}`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
-
-            - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
         - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -151,13 +138,11 @@ Create Agent
 
           - `Type BetaManagedAgentsEffortMaxType`
 
-            - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-      - `InferenceGeo string`
+      - `InferenceGeo string Optional`
 
         Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-      - `Speed BetaManagedAgentsModelConfigParamsSpeed`
+      - `Speed BetaManagedAgentsModelConfigParamsSpeed Optional`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -169,11 +154,15 @@ Create Agent
 
     Body param: Human-readable name for the agent.
 
-  - `Description param.Field[string]`
+    minLength: 1, maxLength: 256
+
+  - `Description param.Field[string] Optional`
 
     Body param: Description of what the agent does.
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp]`
+    maxLength: 2048
+
+  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
 
     Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
@@ -181,23 +170,25 @@ Create Agent
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
-    - `Type BetaManagedAgentsURLMCPServerParamsType`
+      minLength: 1, maxLength: 255
 
-      - `const BetaManagedAgentsURLMCPServerParamsTypeURL BetaManagedAgentsURLMCPServerParamsType = "url"`
+    - `Type BetaManagedAgentsURLMCPServerParamsType`
 
     - `URL string`
 
       Endpoint URL for the MCP server.
 
-  - `Metadata param.Field[map[string, string]]`
+      maxLength: 2048
+
+  - `Metadata param.Field[map[string, string]] Optional`
 
     Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp]`
+  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
 
     Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp]`
+  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
 
     Body param: Skills available to the agent.
 
@@ -209,13 +200,15 @@ Create Agent
 
         Identifier of the Anthropic skill (e.g., "xlsx").
 
+        minLength: 1, maxLength: 64
+
       - `Type BetaManagedAgentsAnthropicSkillParamsType`
 
-        - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
-
-      - `Version string`
+      - `Version string Optional`
 
         Version to pin. Defaults to latest if omitted.
+
+        minLength: 1, maxLength: 64
 
     - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
 
@@ -225,19 +218,23 @@ Create Agent
 
         Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
+        minLength: 1, maxLength: 64
+
       - `Type BetaManagedAgentsCustomSkillParamsType`
 
-        - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
-
-      - `Version string`
+      - `Version string Optional`
 
         Version to pin. Defaults to latest if omitted.
 
-  - `System param.Field[string]`
+        minLength: 1, maxLength: 64
+
+  - `System param.Field[string] Optional`
 
     Body param: System prompt for the agent.
 
-  - `Tools param.Field[[]BetaAgentNewParamsToolUnion]`
+    maxLength: 100000
+
+  - `Tools param.Field[[]BetaAgentNewParamsToolUnion] Optional`
 
     Body param: Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
@@ -247,9 +244,7 @@ Create Agent
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-        - `const BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401ParamsType = "agent_toolset_20260401"`
-
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
 
         Per-tool configuration overrides.
 
@@ -261,13 +256,11 @@ Create Agent
 
             Must be "bash".
 
-            - `const BashBash Bash = "bash"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -277,19 +270,13 @@ Create Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `Type BetaManagedAgentsBashToolConfigParamsType`
-
-            - `const BetaManagedAgentsBashToolConfigParamsTypeBash BetaManagedAgentsBashToolConfigParamsType = "bash"`
+          - `Type BetaManagedAgentsBashToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
 
@@ -299,13 +286,11 @@ Create Agent
 
             Must be "edit".
 
-            - `const EditEdit Edit = "edit"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -317,9 +302,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsEditToolConfigParamsType`
-
-            - `const BetaManagedAgentsEditToolConfigParamsTypeEdit BetaManagedAgentsEditToolConfigParamsType = "edit"`
+          - `Type BetaManagedAgentsEditToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
 
@@ -329,13 +312,11 @@ Create Agent
 
             Must be "read".
 
-            - `const ReadRead Read = "read"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -347,9 +328,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsReadToolConfigParamsType`
-
-            - `const BetaManagedAgentsReadToolConfigParamsTypeRead BetaManagedAgentsReadToolConfigParamsType = "read"`
+          - `Type BetaManagedAgentsReadToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
 
@@ -359,13 +338,11 @@ Create Agent
 
             Must be "write".
 
-            - `const WriteWrite Write = "write"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -377,9 +354,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWriteToolConfigParamsType`
-
-            - `const BetaManagedAgentsWriteToolConfigParamsTypeWrite BetaManagedAgentsWriteToolConfigParamsType = "write"`
+          - `Type BetaManagedAgentsWriteToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
 
@@ -389,13 +364,11 @@ Create Agent
 
             Must be "glob".
 
-            - `const GlobGlob Glob = "glob"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -407,9 +380,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsGlobToolConfigParamsType`
-
-            - `const BetaManagedAgentsGlobToolConfigParamsTypeGlob BetaManagedAgentsGlobToolConfigParamsType = "glob"`
+          - `Type BetaManagedAgentsGlobToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
 
@@ -419,13 +390,11 @@ Create Agent
 
             Must be "grep".
 
-            - `const GrepGrep Grep = "grep"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -437,9 +406,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsGrepToolConfigParamsType`
-
-            - `const BetaManagedAgentsGrepToolConfigParamsTypeGrep BetaManagedAgentsGrepToolConfigParamsType = "grep"`
+          - `Type BetaManagedAgentsGrepToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
 
@@ -449,25 +416,25 @@ Create Agent
 
             Must be "web_fetch".
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
-          - `AllowedDomains []string`
+          - `AllowedDomains []string Optional`
 
             Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `BlockedDomains []string`
+          - `BlockedDomains []string Optional`
 
             Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `MaxContentTokens int64`
+          - `MaxContentTokens int64 Optional`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp`
+            format: int32
+
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -479,9 +446,7 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWebFetchToolConfigParamsType`
-
-            - `const BetaManagedAgentsWebFetchToolConfigParamsTypeWebFetch BetaManagedAgentsWebFetchToolConfigParamsType = "web_fetch"`
+          - `Type BetaManagedAgentsWebFetchToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
 
@@ -491,21 +456,19 @@ Create Agent
 
             Must be "web_search".
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
-
-          - `AllowedDomains []string`
+          - `AllowedDomains []string Optional`
 
             Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `BlockedDomains []string`
+          - `BlockedDomains []string Optional`
 
             Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -517,11 +480,9 @@ Create Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWebSearchToolConfigParamsType`
+          - `Type BetaManagedAgentsWebSearchToolConfigParamsType Optional`
 
-            - `const BetaManagedAgentsWebSearchToolConfigParamsTypeWebSearch BetaManagedAgentsWebSearchToolConfigParamsType = "web_search"`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -529,33 +490,37 @@ Create Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+              minLength: 1, maxLength: 255
+
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
 
         Default configuration for all tools in a toolset.
 
-        - `Enabled bool`
+        - `Enabled bool Optional`
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -575,11 +540,11 @@ Create Agent
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
+        minLength: 1, maxLength: 255
+
       - `Type BetaManagedAgentsMCPToolsetParamsType`
 
-        - `const BetaManagedAgentsMCPToolsetParamsTypeMCPToolset BetaManagedAgentsMCPToolsetParamsType = "mcp_toolset"`
-
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp`
+      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
 
         Per-tool configuration overrides.
 
@@ -587,11 +552,13 @@ Create Agent
 
           Name of the MCP tool to configure. 1-128 characters.
 
-        - `Enabled bool`
+          minLength: 1, maxLength: 128
+
+        - `Enabled bool Optional`
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -603,15 +570,15 @@ Create Agent
 
             Tool calls require user confirmation before execution.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
 
         Default configuration for all tools from an MCP server.
 
-        - `Enabled bool`
+        - `Enabled bool Optional`
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -631,27 +598,27 @@ Create Agent
 
         Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
+        minLength: 1
+
       - `InputSchema BetaManagedAgentsCustomToolInputSchema`
 
         JSON Schema for custom tool input parameters.
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsCustomToolParamsType`
 
-        - `const BetaManagedAgentsCustomToolParamsTypeCustom BetaManagedAgentsCustomToolParamsType = "custom"`
-
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -739,9 +706,13 @@ Create Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -750,8 +721,6 @@ Create Agent
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -827,7 +796,7 @@ Create Agent
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -837,15 +806,11 @@ Create Agent
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -853,15 +818,11 @@ Create Agent
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -869,13 +830,11 @@ Create Agent
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -899,9 +858,9 @@ Create Agent
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -913,11 +872,7 @@ Create Agent
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -931,8 +886,6 @@ Create Agent
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -942,8 +895,6 @@ Create Agent
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -963,8 +914,6 @@ Create Agent
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -975,19 +924,13 @@ Create Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -996,8 +939,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -1013,8 +954,6 @@ Create Agent
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -1022,8 +961,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -1039,8 +976,6 @@ Create Agent
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -1048,8 +983,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -1065,8 +998,6 @@ Create Agent
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -1074,8 +1005,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -1091,8 +1020,6 @@ Create Agent
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -1100,8 +1027,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -1117,8 +1042,6 @@ Create Agent
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -1126,8 +1049,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -1143,13 +1064,13 @@ Create Agent
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -1158,8 +1079,6 @@ Create Agent
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -1175,13 +1094,11 @@ Create Agent
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -1189,23 +1106,27 @@ Create Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -1226,8 +1147,6 @@ Create Agent
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -1271,8 +1190,6 @@ Create Agent
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -1285,29 +1202,27 @@ Create Agent
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -1339,7 +1254,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1420,7 +1335,7 @@ func main() {
 
 `client.Beta.Agents.List(ctx, params) (*PageCursor[BetaManagedAgentsAgent], error)`
 
-**get** `/v1/agents`
+**GET** `/v1/agents`
 
 List Agents
 
@@ -1428,27 +1343,33 @@ List Agents
 
 - `params BetaAgentListParams`
 
-  - `CreatedAtGte param.Field[Time]`
+  - `CreatedAtGte param.Field[Time] Optional`
 
     Query param: Return agents created at or after this time (inclusive).
 
-  - `CreatedAtLte param.Field[Time]`
+    format: date-time
+
+  - `CreatedAtLte param.Field[Time] Optional`
 
     Query param: Return agents created at or before this time (inclusive).
 
-  - `IncludeArchived param.Field[bool]`
+    format: date-time
+
+  - `IncludeArchived param.Field[bool] Optional`
 
     Query param: Include archived agents in results. Defaults to false.
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum results per page. Default 20, maximum 100.
 
-  - `Page param.Field[string]`
+    format: int32
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque pagination cursor from a previous response.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -1536,9 +1457,13 @@ List Agents
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -1547,8 +1472,6 @@ List Agents
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -1624,7 +1547,7 @@ List Agents
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -1634,15 +1557,11 @@ List Agents
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -1650,15 +1569,11 @@ List Agents
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -1666,13 +1581,11 @@ List Agents
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -1696,9 +1609,9 @@ List Agents
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -1710,11 +1623,7 @@ List Agents
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -1728,8 +1637,6 @@ List Agents
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -1739,8 +1646,6 @@ List Agents
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -1760,8 +1665,6 @@ List Agents
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -1772,19 +1675,13 @@ List Agents
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -1793,8 +1690,6 @@ List Agents
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -1810,8 +1705,6 @@ List Agents
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -1819,8 +1712,6 @@ List Agents
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -1836,8 +1727,6 @@ List Agents
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -1845,8 +1734,6 @@ List Agents
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -1862,8 +1749,6 @@ List Agents
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -1871,8 +1756,6 @@ List Agents
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -1888,8 +1771,6 @@ List Agents
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -1897,8 +1778,6 @@ List Agents
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -1914,8 +1793,6 @@ List Agents
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -1923,8 +1800,6 @@ List Agents
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -1940,13 +1815,13 @@ List Agents
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -1955,8 +1830,6 @@ List Agents
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -1972,13 +1845,11 @@ List Agents
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -1986,23 +1857,27 @@ List Agents
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -2023,8 +1898,6 @@ List Agents
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -2068,8 +1941,6 @@ List Agents
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -2082,29 +1953,27 @@ List Agents
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -2131,7 +2000,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2217,7 +2086,7 @@ func main() {
 
 `client.Beta.Agents.Get(ctx, agentID, params) (*BetaManagedAgentsAgent, error)`
 
-**get** `/v1/agents/{agent_id}`
+**GET** `/v1/agents/{agent_id}`
 
 Get Agent
 
@@ -2227,11 +2096,13 @@ Get Agent
 
 - `params BetaAgentGetParams`
 
-  - `Version param.Field[int64]`
+  - `Version param.Field[int64] Optional`
 
     Query param: Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    format: int32
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -2319,9 +2190,13 @@ Get Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -2330,8 +2205,6 @@ Get Agent
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -2407,7 +2280,7 @@ Get Agent
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -2417,15 +2290,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -2433,15 +2302,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -2449,13 +2314,11 @@ Get Agent
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2479,9 +2342,9 @@ Get Agent
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -2493,11 +2356,7 @@ Get Agent
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -2511,8 +2370,6 @@ Get Agent
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -2522,8 +2379,6 @@ Get Agent
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -2543,8 +2398,6 @@ Get Agent
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -2555,19 +2408,13 @@ Get Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -2576,8 +2423,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -2593,8 +2438,6 @@ Get Agent
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -2602,8 +2445,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -2619,8 +2460,6 @@ Get Agent
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -2628,8 +2467,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -2645,8 +2482,6 @@ Get Agent
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -2654,8 +2489,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -2671,8 +2504,6 @@ Get Agent
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -2680,8 +2511,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -2697,8 +2526,6 @@ Get Agent
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -2706,8 +2533,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -2723,13 +2548,13 @@ Get Agent
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -2738,8 +2563,6 @@ Get Agent
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -2755,13 +2578,11 @@ Get Agent
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -2769,23 +2590,27 @@ Get Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -2806,8 +2631,6 @@ Get Agent
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -2851,8 +2674,6 @@ Get Agent
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -2865,29 +2686,27 @@ Get Agent
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -2918,7 +2737,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2999,7 +2818,7 @@ func main() {
 
 `client.Beta.Agents.Update(ctx, agentID, params) (*BetaManagedAgentsAgent, error)`
 
-**post** `/v1/agents/{agent_id}`
+**POST** `/v1/agents/{agent_id}`
 
 Update Agent
 
@@ -3009,11 +2828,13 @@ Update Agent
 
 - `params BetaAgentUpdateParams`
 
-  - `Description param.Field[string]`
+  - `Description param.Field[string] Optional`
 
     Body param: Description. Omit to preserve; send empty string or null to clear.
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp]`
+    maxLength: 2048
+
+  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
 
     Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
@@ -3021,19 +2842,21 @@ Update Agent
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
-    - `Type BetaManagedAgentsURLMCPServerParamsType`
+      minLength: 1, maxLength: 255
 
-      - `const BetaManagedAgentsURLMCPServerParamsTypeURL BetaManagedAgentsURLMCPServerParamsType = "url"`
+    - `Type BetaManagedAgentsURLMCPServerParamsType`
 
     - `URL string`
 
       Endpoint URL for the MCP server.
 
-  - `Metadata param.Field[map[string, string]]`
+      maxLength: 2048
+
+  - `Metadata param.Field[map[string, string]] Optional`
 
     Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp]`
+  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp] Optional`
 
     Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
@@ -3107,7 +2930,7 @@ Update Agent
 
         - `string`
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -3129,15 +2952,11 @@ Update Agent
 
           - `Type BetaManagedAgentsEffortLowType`
 
-            - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
         - `type BetaManagedAgentsEffortMedium struct{…}`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
-
-            - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
         - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -3145,15 +2964,11 @@ Update Agent
 
           - `Type BetaManagedAgentsEffortHighType`
 
-            - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
         - `type BetaManagedAgentsEffortXhigh struct{…}`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
-
-            - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
         - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -3161,13 +2976,11 @@ Update Agent
 
           - `Type BetaManagedAgentsEffortMaxType`
 
-            - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-      - `InferenceGeo string`
+      - `InferenceGeo string Optional`
 
         Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-      - `Speed BetaManagedAgentsModelConfigParamsSpeed`
+      - `Speed BetaManagedAgentsModelConfigParamsSpeed Optional`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -3175,15 +2988,17 @@ Update Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp]`
+  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
 
     Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-  - `Name param.Field[string]`
+  - `Name param.Field[string] Optional`
 
     Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp]`
+    maxLength: 256
+
+  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
 
     Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -3195,13 +3010,15 @@ Update Agent
 
         Identifier of the Anthropic skill (e.g., "xlsx").
 
+        minLength: 1, maxLength: 64
+
       - `Type BetaManagedAgentsAnthropicSkillParamsType`
 
-        - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
-
-      - `Version string`
+      - `Version string Optional`
 
         Version to pin. Defaults to latest if omitted.
+
+        minLength: 1, maxLength: 64
 
     - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
 
@@ -3211,19 +3028,23 @@ Update Agent
 
         Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
+        minLength: 1, maxLength: 64
+
       - `Type BetaManagedAgentsCustomSkillParamsType`
 
-        - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
-
-      - `Version string`
+      - `Version string Optional`
 
         Version to pin. Defaults to latest if omitted.
 
-  - `System param.Field[string]`
+        minLength: 1, maxLength: 64
+
+  - `System param.Field[string] Optional`
 
     Body param: System prompt. Omit to preserve; send empty string or null to clear.
 
-  - `Tools param.Field[[]BetaAgentUpdateParamsToolUnion]`
+    maxLength: 100000
+
+  - `Tools param.Field[[]BetaAgentUpdateParamsToolUnion] Optional`
 
     Body param: Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
 
@@ -3233,9 +3054,7 @@ Update Agent
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-        - `const BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401ParamsType = "agent_toolset_20260401"`
-
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
 
         Per-tool configuration overrides.
 
@@ -3247,13 +3066,11 @@ Update Agent
 
             Must be "bash".
 
-            - `const BashBash Bash = "bash"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3263,19 +3080,13 @@ Update Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-          - `Type BetaManagedAgentsBashToolConfigParamsType`
-
-            - `const BetaManagedAgentsBashToolConfigParamsTypeBash BetaManagedAgentsBashToolConfigParamsType = "bash"`
+          - `Type BetaManagedAgentsBashToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
 
@@ -3285,13 +3096,11 @@ Update Agent
 
             Must be "edit".
 
-            - `const EditEdit Edit = "edit"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3303,9 +3112,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsEditToolConfigParamsType`
-
-            - `const BetaManagedAgentsEditToolConfigParamsTypeEdit BetaManagedAgentsEditToolConfigParamsType = "edit"`
+          - `Type BetaManagedAgentsEditToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
 
@@ -3315,13 +3122,11 @@ Update Agent
 
             Must be "read".
 
-            - `const ReadRead Read = "read"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3333,9 +3138,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsReadToolConfigParamsType`
-
-            - `const BetaManagedAgentsReadToolConfigParamsTypeRead BetaManagedAgentsReadToolConfigParamsType = "read"`
+          - `Type BetaManagedAgentsReadToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
 
@@ -3345,13 +3148,11 @@ Update Agent
 
             Must be "write".
 
-            - `const WriteWrite Write = "write"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3363,9 +3164,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWriteToolConfigParamsType`
-
-            - `const BetaManagedAgentsWriteToolConfigParamsTypeWrite BetaManagedAgentsWriteToolConfigParamsType = "write"`
+          - `Type BetaManagedAgentsWriteToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
 
@@ -3375,13 +3174,11 @@ Update Agent
 
             Must be "glob".
 
-            - `const GlobGlob Glob = "glob"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3393,9 +3190,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsGlobToolConfigParamsType`
-
-            - `const BetaManagedAgentsGlobToolConfigParamsTypeGlob BetaManagedAgentsGlobToolConfigParamsType = "glob"`
+          - `Type BetaManagedAgentsGlobToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
 
@@ -3405,13 +3200,11 @@ Update Agent
 
             Must be "grep".
 
-            - `const GrepGrep Grep = "grep"`
-
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3423,9 +3216,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsGrepToolConfigParamsType`
-
-            - `const BetaManagedAgentsGrepToolConfigParamsTypeGrep BetaManagedAgentsGrepToolConfigParamsType = "grep"`
+          - `Type BetaManagedAgentsGrepToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
 
@@ -3435,25 +3226,25 @@ Update Agent
 
             Must be "web_fetch".
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
-          - `AllowedDomains []string`
+          - `AllowedDomains []string Optional`
 
             Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `BlockedDomains []string`
+          - `BlockedDomains []string Optional`
 
             Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `MaxContentTokens int64`
+          - `MaxContentTokens int64 Optional`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp`
+            format: int32
+
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3465,9 +3256,7 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWebFetchToolConfigParamsType`
-
-            - `const BetaManagedAgentsWebFetchToolConfigParamsTypeWebFetch BetaManagedAgentsWebFetchToolConfigParamsType = "web_fetch"`
+          - `Type BetaManagedAgentsWebFetchToolConfigParamsType Optional`
 
         - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
 
@@ -3477,21 +3266,19 @@ Update Agent
 
             Must be "web_search".
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
-
-          - `AllowedDomains []string`
+          - `AllowedDomains []string Optional`
 
             Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `BlockedDomains []string`
+          - `BlockedDomains []string Optional`
 
             Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-          - `Enabled bool`
+          - `Enabled bool Optional`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
 
             Permission policy for tool execution.
 
@@ -3503,11 +3290,9 @@ Update Agent
 
               Tool calls require user confirmation before execution.
 
-          - `Type BetaManagedAgentsWebSearchToolConfigParamsType`
+          - `Type BetaManagedAgentsWebSearchToolConfigParamsType Optional`
 
-            - `const BetaManagedAgentsWebSearchToolConfigParamsTypeWebSearch BetaManagedAgentsWebSearchToolConfigParamsType = "web_search"`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -3515,33 +3300,37 @@ Update Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+              minLength: 1, maxLength: 255
+
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
 
         Default configuration for all tools in a toolset.
 
-        - `Enabled bool`
+        - `Enabled bool Optional`
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -3561,11 +3350,11 @@ Update Agent
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
+        minLength: 1, maxLength: 255
+
       - `Type BetaManagedAgentsMCPToolsetParamsType`
 
-        - `const BetaManagedAgentsMCPToolsetParamsTypeMCPToolset BetaManagedAgentsMCPToolsetParamsType = "mcp_toolset"`
-
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp`
+      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
 
         Per-tool configuration overrides.
 
@@ -3573,11 +3362,13 @@ Update Agent
 
           Name of the MCP tool to configure. 1-128 characters.
 
-        - `Enabled bool`
+          minLength: 1, maxLength: 128
+
+        - `Enabled bool Optional`
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -3589,15 +3380,15 @@ Update Agent
 
             Tool calls require user confirmation before execution.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
 
         Default configuration for all tools from an MCP server.
 
-        - `Enabled bool`
+        - `Enabled bool Optional`
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
           Permission policy for tool execution.
 
@@ -3617,31 +3408,33 @@ Update Agent
 
         Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
+        minLength: 1
+
       - `InputSchema BetaManagedAgentsCustomToolInputSchema`
 
         JSON Schema for custom tool input parameters.
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsCustomToolParamsType`
 
-        - `const BetaManagedAgentsCustomToolParamsTypeCustom BetaManagedAgentsCustomToolParamsType = "custom"`
-
-  - `Version param.Field[int64]`
+  - `Version param.Field[int64] Optional`
 
     Body param: The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    format: int32
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -3729,9 +3522,13 @@ Update Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -3740,8 +3537,6 @@ Update Agent
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -3817,7 +3612,7 @@ Update Agent
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -3827,15 +3622,11 @@ Update Agent
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -3843,15 +3634,11 @@ Update Agent
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -3859,13 +3646,11 @@ Update Agent
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -3889,9 +3674,9 @@ Update Agent
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -3903,11 +3688,7 @@ Update Agent
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -3921,8 +3702,6 @@ Update Agent
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -3932,8 +3711,6 @@ Update Agent
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -3953,8 +3730,6 @@ Update Agent
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -3965,19 +3740,13 @@ Update Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -3986,8 +3755,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -4003,8 +3770,6 @@ Update Agent
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -4012,8 +3777,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -4029,8 +3792,6 @@ Update Agent
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -4038,8 +3799,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -4055,8 +3814,6 @@ Update Agent
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -4064,8 +3821,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -4081,8 +3836,6 @@ Update Agent
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -4090,8 +3843,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -4107,8 +3858,6 @@ Update Agent
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -4116,8 +3865,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -4133,13 +3880,13 @@ Update Agent
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -4148,8 +3895,6 @@ Update Agent
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -4165,13 +3910,11 @@ Update Agent
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -4179,23 +3922,27 @@ Update Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -4216,8 +3963,6 @@ Update Agent
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -4261,8 +4006,6 @@ Update Agent
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -4275,29 +4018,27 @@ Update Agent
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -4330,7 +4071,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -4411,7 +4152,7 @@ func main() {
 
 `client.Beta.Agents.Archive(ctx, agentID, body) (*BetaManagedAgentsAgent, error)`
 
-**post** `/v1/agents/{agent_id}/archive`
+**POST** `/v1/agents/{agent_id}/archive`
 
 Archive Agent
 
@@ -4421,7 +4162,7 @@ Archive Agent
 
 - `body BetaAgentArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4509,9 +4250,13 @@ Archive Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -4520,8 +4265,6 @@ Archive Agent
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -4597,7 +4340,7 @@ Archive Agent
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -4607,15 +4350,11 @@ Archive Agent
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -4623,15 +4362,11 @@ Archive Agent
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -4639,13 +4374,11 @@ Archive Agent
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -4669,9 +4402,9 @@ Archive Agent
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -4683,11 +4416,7 @@ Archive Agent
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -4701,8 +4430,6 @@ Archive Agent
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -4712,8 +4439,6 @@ Archive Agent
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -4733,8 +4458,6 @@ Archive Agent
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -4745,19 +4468,13 @@ Archive Agent
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -4766,8 +4483,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -4783,8 +4498,6 @@ Archive Agent
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -4792,8 +4505,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -4809,8 +4520,6 @@ Archive Agent
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -4818,8 +4527,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -4835,8 +4542,6 @@ Archive Agent
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -4844,8 +4549,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -4861,8 +4564,6 @@ Archive Agent
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -4870,8 +4571,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -4887,8 +4586,6 @@ Archive Agent
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -4896,8 +4593,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -4913,13 +4608,13 @@ Archive Agent
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -4928,8 +4623,6 @@ Archive Agent
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -4945,13 +4638,11 @@ Archive Agent
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -4959,23 +4650,27 @@ Archive Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -4996,8 +4691,6 @@ Archive Agent
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -5041,8 +4734,6 @@ Archive Agent
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -5055,29 +4746,27 @@ Archive Agent
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Example
 
@@ -5108,7 +4797,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -5185,7 +4874,7 @@ func main() {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Advisor
 
@@ -5199,8 +4888,6 @@ func main() {
 
   - `Type BetaManagedAgentsAdvisorType`
 
-    - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
 ### Beta Managed Agents Agent
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -5213,9 +4900,13 @@ func main() {
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -5224,8 +4915,6 @@ func main() {
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -5301,7 +4990,7 @@ func main() {
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -5311,15 +5000,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -5327,15 +5012,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -5343,13 +5024,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -5373,9 +5052,9 @@ func main() {
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -5387,11 +5066,7 @@ func main() {
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -5405,8 +5080,6 @@ func main() {
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -5416,8 +5089,6 @@ func main() {
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -5437,8 +5108,6 @@ func main() {
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -5449,19 +5118,13 @@ func main() {
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -5470,8 +5133,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -5487,8 +5148,6 @@ func main() {
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -5496,8 +5155,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -5513,8 +5170,6 @@ func main() {
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -5522,8 +5177,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -5539,8 +5192,6 @@ func main() {
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -5548,8 +5199,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -5565,8 +5214,6 @@ func main() {
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -5574,8 +5221,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -5591,8 +5236,6 @@ func main() {
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -5600,8 +5243,6 @@ func main() {
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -5617,13 +5258,13 @@ func main() {
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -5632,8 +5273,6 @@ func main() {
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -5649,13 +5288,11 @@ func main() {
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -5663,23 +5300,27 @@ func main() {
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -5700,8 +5341,6 @@ func main() {
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -5745,8 +5384,6 @@ func main() {
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -5759,29 +5396,27 @@ func main() {
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+    format: int32
 
 ### Beta Managed Agents Agent Reference
 
@@ -5793,9 +5428,9 @@ func main() {
 
   - `Type BetaManagedAgentsAgentReferenceType`
 
-    - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
   - `Version int64`
+
+    format: int32
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -5811,8 +5446,6 @@ func main() {
 
     - `Name Bash`
 
-      - `const BashBash Bash = "bash"`
-
     - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
       Permission policy for tool execution.
@@ -5823,19 +5456,13 @@ func main() {
 
         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
       - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
         Tool calls require user confirmation before execution.
 
         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
     - `Type Bash`
-
-      - `const BashBash Bash = "bash"`
 
   - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -5844,8 +5471,6 @@ func main() {
     - `Enabled bool`
 
     - `Name Edit`
-
-      - `const EditEdit Edit = "edit"`
 
     - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -5861,8 +5486,6 @@ func main() {
 
     - `Type Edit`
 
-      - `const EditEdit Edit = "edit"`
-
   - `type BetaManagedAgentsReadToolConfig struct{…}`
 
     Configuration for the read tool.
@@ -5870,8 +5493,6 @@ func main() {
     - `Enabled bool`
 
     - `Name Read`
-
-      - `const ReadRead Read = "read"`
 
     - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -5887,8 +5508,6 @@ func main() {
 
     - `Type Read`
 
-      - `const ReadRead Read = "read"`
-
   - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
     Configuration for the write tool.
@@ -5896,8 +5515,6 @@ func main() {
     - `Enabled bool`
 
     - `Name Write`
-
-      - `const WriteWrite Write = "write"`
 
     - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -5913,8 +5530,6 @@ func main() {
 
     - `Type Write`
 
-      - `const WriteWrite Write = "write"`
-
   - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
     Configuration for the glob tool.
@@ -5922,8 +5537,6 @@ func main() {
     - `Enabled bool`
 
     - `Name Glob`
-
-      - `const GlobGlob Glob = "glob"`
 
     - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -5939,8 +5552,6 @@ func main() {
 
     - `Type Glob`
 
-      - `const GlobGlob Glob = "glob"`
-
   - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
     Configuration for the grep tool.
@@ -5948,8 +5559,6 @@ func main() {
     - `Enabled bool`
 
     - `Name Grep`
-
-      - `const GrepGrep Grep = "grep"`
 
     - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -5965,8 +5574,6 @@ func main() {
 
     - `Type Grep`
 
-      - `const GrepGrep Grep = "grep"`
-
   - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
     Configuration for the web_fetch tool.
@@ -5974,8 +5581,6 @@ func main() {
     - `Enabled bool`
 
     - `Name WebFetch`
-
-      - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
     - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -5991,13 +5596,13 @@ func main() {
 
     - `Type WebFetch`
 
-      - `const WebFetchWebFetch WebFetch = "web_fetch"`
+    - `AllowedDomains []string Optional`
 
-    - `AllowedDomains []string`
+    - `BlockedDomains []string Optional`
 
-    - `BlockedDomains []string`
+    - `MaxContentTokens int64 Optional`
 
-    - `MaxContentTokens int64`
+      format: int32
 
   - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -6006,8 +5611,6 @@ func main() {
     - `Enabled bool`
 
     - `Name WebSearch`
-
-      - `const WebSearchWebSearch WebSearch = "web_search"`
 
     - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -6023,13 +5626,11 @@ func main() {
 
     - `Type WebSearch`
 
-      - `const WebSearchWebSearch WebSearch = "web_search"`
+    - `AllowedDomains []string Optional`
 
-    - `AllowedDomains []string`
+    - `BlockedDomains []string Optional`
 
-    - `BlockedDomains []string`
-
-    - `UserLocation BetaManagedAgentsUserLocation`
+    - `UserLocation BetaManagedAgentsUserLocation Optional`
 
       Approximate user location for search result localization.
 
@@ -6037,23 +5638,27 @@ func main() {
 
         Location precision. Only "approximate" is supported.
 
-        - `const ApproximateApproximate Approximate = "approximate"`
-
-      - `City string`
+      - `City string Optional`
 
         City name.
 
-      - `Country string`
+        minLength: 1, maxLength: 255
+
+      - `Country string Optional`
 
         Two-letter ISO 3166-1 country code, uppercase.
 
-      - `Region string`
+      - `Region string Optional`
 
         Region or state name.
 
-      - `Timezone string`
+        minLength: 1, maxLength: 255
+
+      - `Timezone string Optional`
 
         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+        minLength: 1, maxLength: 255
 
 ### Beta Managed Agents Agent Tool Config Params
 
@@ -6069,13 +5674,11 @@ func main() {
 
       Must be "bash".
 
-      - `const BashBash Bash = "bash"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6085,19 +5688,13 @@ func main() {
 
         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
       - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
         Tool calls require user confirmation before execution.
 
         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-    - `Type BetaManagedAgentsBashToolConfigParamsType`
-
-      - `const BetaManagedAgentsBashToolConfigParamsTypeBash BetaManagedAgentsBashToolConfigParamsType = "bash"`
+    - `Type BetaManagedAgentsBashToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
 
@@ -6107,13 +5704,11 @@ func main() {
 
       Must be "edit".
 
-      - `const EditEdit Edit = "edit"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6125,9 +5720,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsEditToolConfigParamsType`
-
-      - `const BetaManagedAgentsEditToolConfigParamsTypeEdit BetaManagedAgentsEditToolConfigParamsType = "edit"`
+    - `Type BetaManagedAgentsEditToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
 
@@ -6137,13 +5730,11 @@ func main() {
 
       Must be "read".
 
-      - `const ReadRead Read = "read"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6155,9 +5746,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsReadToolConfigParamsType`
-
-      - `const BetaManagedAgentsReadToolConfigParamsTypeRead BetaManagedAgentsReadToolConfigParamsType = "read"`
+    - `Type BetaManagedAgentsReadToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
 
@@ -6167,13 +5756,11 @@ func main() {
 
       Must be "write".
 
-      - `const WriteWrite Write = "write"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6185,9 +5772,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsWriteToolConfigParamsType`
-
-      - `const BetaManagedAgentsWriteToolConfigParamsTypeWrite BetaManagedAgentsWriteToolConfigParamsType = "write"`
+    - `Type BetaManagedAgentsWriteToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
 
@@ -6197,13 +5782,11 @@ func main() {
 
       Must be "glob".
 
-      - `const GlobGlob Glob = "glob"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6215,9 +5798,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsGlobToolConfigParamsType`
-
-      - `const BetaManagedAgentsGlobToolConfigParamsTypeGlob BetaManagedAgentsGlobToolConfigParamsType = "glob"`
+    - `Type BetaManagedAgentsGlobToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
 
@@ -6227,13 +5808,11 @@ func main() {
 
       Must be "grep".
 
-      - `const GrepGrep Grep = "grep"`
-
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6245,9 +5824,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsGrepToolConfigParamsType`
-
-      - `const BetaManagedAgentsGrepToolConfigParamsTypeGrep BetaManagedAgentsGrepToolConfigParamsType = "grep"`
+    - `Type BetaManagedAgentsGrepToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
 
@@ -6257,25 +5834,25 @@ func main() {
 
       Must be "web_fetch".
 
-      - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
-    - `AllowedDomains []string`
+    - `AllowedDomains []string Optional`
 
       Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-    - `BlockedDomains []string`
+    - `BlockedDomains []string Optional`
 
       Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `MaxContentTokens int64`
+    - `MaxContentTokens int64 Optional`
 
       Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-    - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp`
+      format: int32
+
+    - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6287,9 +5864,7 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsWebFetchToolConfigParamsType`
-
-      - `const BetaManagedAgentsWebFetchToolConfigParamsTypeWebFetch BetaManagedAgentsWebFetchToolConfigParamsType = "web_fetch"`
+    - `Type BetaManagedAgentsWebFetchToolConfigParamsType Optional`
 
   - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
 
@@ -6299,21 +5874,19 @@ func main() {
 
       Must be "web_search".
 
-      - `const WebSearchWebSearch WebSearch = "web_search"`
-
-    - `AllowedDomains []string`
+    - `AllowedDomains []string Optional`
 
       Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-    - `BlockedDomains []string`
+    - `BlockedDomains []string Optional`
 
       Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -6325,11 +5898,9 @@ func main() {
 
         Tool calls require user confirmation before execution.
 
-    - `Type BetaManagedAgentsWebSearchToolConfigParamsType`
+    - `Type BetaManagedAgentsWebSearchToolConfigParamsType Optional`
 
-      - `const BetaManagedAgentsWebSearchToolConfigParamsTypeWebSearch BetaManagedAgentsWebSearchToolConfigParamsType = "web_search"`
-
-    - `UserLocation BetaManagedAgentsUserLocation`
+    - `UserLocation BetaManagedAgentsUserLocation Optional`
 
       Approximate user location for search result localization.
 
@@ -6337,23 +5908,27 @@ func main() {
 
         Location precision. Only "approximate" is supported.
 
-        - `const ApproximateApproximate Approximate = "approximate"`
-
-      - `City string`
+      - `City string Optional`
 
         City name.
 
-      - `Country string`
+        minLength: 1, maxLength: 255
+
+      - `Country string Optional`
 
         Two-letter ISO 3166-1 country code, uppercase.
 
-      - `Region string`
+      - `Region string Optional`
 
         Region or state name.
 
-      - `Timezone string`
+        minLength: 1, maxLength: 255
+
+      - `Timezone string Optional`
 
         IANA timezone identifier, e.g. "America/Los_Angeles".
+
+        minLength: 1, maxLength: 255
 
 ### Beta Managed Agents Agent Toolset Default Config
 
@@ -6373,15 +5948,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents Agent Toolset Default Config Params
 
@@ -6389,11 +5960,11 @@ func main() {
 
   Default configuration for all tools in a toolset.
 
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-  - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -6403,15 +5974,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents Agent Toolset20260401
 
@@ -6427,8 +5994,6 @@ func main() {
 
       - `Name Bash`
 
-        - `const BashBash Bash = "bash"`
-
       - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
         Permission policy for tool execution.
@@ -6439,19 +6004,13 @@ func main() {
 
           - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
         - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
           Tool calls require user confirmation before execution.
 
           - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
       - `Type Bash`
-
-        - `const BashBash Bash = "bash"`
 
     - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -6460,8 +6019,6 @@ func main() {
       - `Enabled bool`
 
       - `Name Edit`
-
-        - `const EditEdit Edit = "edit"`
 
       - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -6477,8 +6034,6 @@ func main() {
 
       - `Type Edit`
 
-        - `const EditEdit Edit = "edit"`
-
     - `type BetaManagedAgentsReadToolConfig struct{…}`
 
       Configuration for the read tool.
@@ -6486,8 +6041,6 @@ func main() {
       - `Enabled bool`
 
       - `Name Read`
-
-        - `const ReadRead Read = "read"`
 
       - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -6503,8 +6056,6 @@ func main() {
 
       - `Type Read`
 
-        - `const ReadRead Read = "read"`
-
     - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
       Configuration for the write tool.
@@ -6512,8 +6063,6 @@ func main() {
       - `Enabled bool`
 
       - `Name Write`
-
-        - `const WriteWrite Write = "write"`
 
       - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -6529,8 +6078,6 @@ func main() {
 
       - `Type Write`
 
-        - `const WriteWrite Write = "write"`
-
     - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
       Configuration for the glob tool.
@@ -6538,8 +6085,6 @@ func main() {
       - `Enabled bool`
 
       - `Name Glob`
-
-        - `const GlobGlob Glob = "glob"`
 
       - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -6555,8 +6100,6 @@ func main() {
 
       - `Type Glob`
 
-        - `const GlobGlob Glob = "glob"`
-
     - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
       Configuration for the grep tool.
@@ -6564,8 +6107,6 @@ func main() {
       - `Enabled bool`
 
       - `Name Grep`
-
-        - `const GrepGrep Grep = "grep"`
 
       - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -6581,8 +6122,6 @@ func main() {
 
       - `Type Grep`
 
-        - `const GrepGrep Grep = "grep"`
-
     - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
       Configuration for the web_fetch tool.
@@ -6590,8 +6129,6 @@ func main() {
       - `Enabled bool`
 
       - `Name WebFetch`
-
-        - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
       - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -6607,13 +6144,13 @@ func main() {
 
       - `Type WebFetch`
 
-        - `const WebFetchWebFetch WebFetch = "web_fetch"`
+      - `AllowedDomains []string Optional`
 
-      - `AllowedDomains []string`
+      - `BlockedDomains []string Optional`
 
-      - `BlockedDomains []string`
+      - `MaxContentTokens int64 Optional`
 
-      - `MaxContentTokens int64`
+        format: int32
 
     - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -6622,8 +6159,6 @@ func main() {
       - `Enabled bool`
 
       - `Name WebSearch`
-
-        - `const WebSearchWebSearch WebSearch = "web_search"`
 
       - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -6639,13 +6174,11 @@ func main() {
 
       - `Type WebSearch`
 
-        - `const WebSearchWebSearch WebSearch = "web_search"`
+      - `AllowedDomains []string Optional`
 
-      - `AllowedDomains []string`
+      - `BlockedDomains []string Optional`
 
-      - `BlockedDomains []string`
-
-      - `UserLocation BetaManagedAgentsUserLocation`
+      - `UserLocation BetaManagedAgentsUserLocation Optional`
 
         Approximate user location for search result localization.
 
@@ -6653,23 +6186,27 @@ func main() {
 
           Location precision. Only "approximate" is supported.
 
-          - `const ApproximateApproximate Approximate = "approximate"`
-
-        - `City string`
+        - `City string Optional`
 
           City name.
 
-        - `Country string`
+          minLength: 1, maxLength: 255
+
+        - `Country string Optional`
 
           Two-letter ISO 3166-1 country code, uppercase.
 
-        - `Region string`
+        - `Region string Optional`
 
           Region or state name.
 
-        - `Timezone string`
+          minLength: 1, maxLength: 255
+
+        - `Timezone string Optional`
 
           IANA timezone identifier, e.g. "America/Los_Angeles".
+
+          minLength: 1, maxLength: 255
 
   - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -6691,8 +6228,6 @@ func main() {
 
   - `Type BetaManagedAgentsAgentToolset20260401Type`
 
-    - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
-
 ### Beta Managed Agents Agent Toolset20260401 Bash Input
 
 - `type BetaManagedAgentsAgentToolset20260401BashInput struct{…}`
@@ -6702,20 +6237,22 @@ func main() {
   a normal invocation supplies `command`, while `restart=true`
   (with no `command`) reboots the runner-side bash session.
 
-  - `Command string`
+  - `Command string Optional`
 
     Shell command to execute. Omit only when `restart` is true.
 
-  - `Restart bool`
+  - `Restart bool Optional`
 
     When true, restart the persistent bash session instead of
     running a command. Subsequent calls without `restart` will
     run against the fresh session.
 
-  - `TimeoutMs int64`
+  - `TimeoutMs int64 Optional`
 
     Per-call timeout in milliseconds. Defaults to the
     runner-wide tool timeout when omitted or zero.
+
+    minimum: 0
 
 ### Beta Managed Agents Agent Toolset20260401 Edit Input
 
@@ -6737,7 +6274,7 @@ func main() {
 
     Substring to find and replace.
 
-  - `ReplaceAll bool`
+  - `ReplaceAll bool Optional`
 
     When true, replace every occurrence of `old_string`
     instead of requiring a unique match.
@@ -6755,7 +6292,7 @@ func main() {
     are only permitted when the runner is configured to allow
     them.
 
-  - `Path string`
+  - `Path string Optional`
 
     Optional directory root to search under. Defaults to the
     runner's working directory.
@@ -6771,7 +6308,7 @@ func main() {
 
     Regular expression to search for.
 
-  - `Path string`
+  - `Path string Optional`
 
     Optional directory root to search under. Defaults to the
     runner's working directory.
@@ -6784,9 +6321,7 @@ func main() {
 
   - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-    - `const BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401ParamsType = "agent_toolset_20260401"`
-
-  - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp`
+  - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
 
     Per-tool configuration overrides.
 
@@ -6798,13 +6333,11 @@ func main() {
 
         Must be "bash".
 
-        - `const BashBash Bash = "bash"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6814,19 +6347,13 @@ func main() {
 
           - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
         - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
           Tool calls require user confirmation before execution.
 
           - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-      - `Type BetaManagedAgentsBashToolConfigParamsType`
-
-        - `const BetaManagedAgentsBashToolConfigParamsTypeBash BetaManagedAgentsBashToolConfigParamsType = "bash"`
+      - `Type BetaManagedAgentsBashToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
 
@@ -6836,13 +6363,11 @@ func main() {
 
         Must be "edit".
 
-        - `const EditEdit Edit = "edit"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6854,9 +6379,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsEditToolConfigParamsType`
-
-        - `const BetaManagedAgentsEditToolConfigParamsTypeEdit BetaManagedAgentsEditToolConfigParamsType = "edit"`
+      - `Type BetaManagedAgentsEditToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
 
@@ -6866,13 +6389,11 @@ func main() {
 
         Must be "read".
 
-        - `const ReadRead Read = "read"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6884,9 +6405,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsReadToolConfigParamsType`
-
-        - `const BetaManagedAgentsReadToolConfigParamsTypeRead BetaManagedAgentsReadToolConfigParamsType = "read"`
+      - `Type BetaManagedAgentsReadToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
 
@@ -6896,13 +6415,11 @@ func main() {
 
         Must be "write".
 
-        - `const WriteWrite Write = "write"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6914,9 +6431,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsWriteToolConfigParamsType`
-
-        - `const BetaManagedAgentsWriteToolConfigParamsTypeWrite BetaManagedAgentsWriteToolConfigParamsType = "write"`
+      - `Type BetaManagedAgentsWriteToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
 
@@ -6926,13 +6441,11 @@ func main() {
 
         Must be "glob".
 
-        - `const GlobGlob Glob = "glob"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6944,9 +6457,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsGlobToolConfigParamsType`
-
-        - `const BetaManagedAgentsGlobToolConfigParamsTypeGlob BetaManagedAgentsGlobToolConfigParamsType = "glob"`
+      - `Type BetaManagedAgentsGlobToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
 
@@ -6956,13 +6467,11 @@ func main() {
 
         Must be "grep".
 
-        - `const GrepGrep Grep = "grep"`
-
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -6974,9 +6483,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsGrepToolConfigParamsType`
-
-        - `const BetaManagedAgentsGrepToolConfigParamsTypeGrep BetaManagedAgentsGrepToolConfigParamsType = "grep"`
+      - `Type BetaManagedAgentsGrepToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
 
@@ -6986,25 +6493,25 @@ func main() {
 
         Must be "web_fetch".
 
-        - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
-      - `AllowedDomains []string`
+      - `AllowedDomains []string Optional`
 
         Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-      - `BlockedDomains []string`
+      - `BlockedDomains []string Optional`
 
         Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `MaxContentTokens int64`
+      - `MaxContentTokens int64 Optional`
 
         Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-      - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp`
+        format: int32
+
+      - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -7016,9 +6523,7 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsWebFetchToolConfigParamsType`
-
-        - `const BetaManagedAgentsWebFetchToolConfigParamsTypeWebFetch BetaManagedAgentsWebFetchToolConfigParamsType = "web_fetch"`
+      - `Type BetaManagedAgentsWebFetchToolConfigParamsType Optional`
 
     - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
 
@@ -7028,21 +6533,19 @@ func main() {
 
         Must be "web_search".
 
-        - `const WebSearchWebSearch WebSearch = "web_search"`
-
-      - `AllowedDomains []string`
+      - `AllowedDomains []string Optional`
 
         Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-      - `BlockedDomains []string`
+      - `BlockedDomains []string Optional`
 
         Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-      - `Enabled bool`
+      - `Enabled bool Optional`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp`
+      - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
 
         Permission policy for tool execution.
 
@@ -7054,11 +6557,9 @@ func main() {
 
           Tool calls require user confirmation before execution.
 
-      - `Type BetaManagedAgentsWebSearchToolConfigParamsType`
+      - `Type BetaManagedAgentsWebSearchToolConfigParamsType Optional`
 
-        - `const BetaManagedAgentsWebSearchToolConfigParamsTypeWebSearch BetaManagedAgentsWebSearchToolConfigParamsType = "web_search"`
-
-      - `UserLocation BetaManagedAgentsUserLocation`
+      - `UserLocation BetaManagedAgentsUserLocation Optional`
 
         Approximate user location for search result localization.
 
@@ -7066,33 +6567,37 @@ func main() {
 
           Location precision. Only "approximate" is supported.
 
-          - `const ApproximateApproximate Approximate = "approximate"`
-
-        - `City string`
+        - `City string Optional`
 
           City name.
 
-        - `Country string`
+          minLength: 1, maxLength: 255
+
+        - `Country string Optional`
 
           Two-letter ISO 3166-1 country code, uppercase.
 
-        - `Region string`
+        - `Region string Optional`
 
           Region or state name.
 
-        - `Timezone string`
+          minLength: 1, maxLength: 255
+
+        - `Timezone string Optional`
 
           IANA timezone identifier, e.g. "America/Los_Angeles".
 
-  - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+          minLength: 1, maxLength: 255
+
+  - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
 
     Default configuration for all tools in a toolset.
 
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-    - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -7116,11 +6621,13 @@ func main() {
 
     Path of the file to read.
 
-  - `ViewRange []int64`
+  - `ViewRange []int64 Optional`
 
     Optional `[start_line, end_line]` 1-indexed inclusive
     range. When omitted the entire file is returned.
     `end_line` of 0 or negative means "to end of file".
+
+    minItems: 2, maxItems: 2
 
 ### Beta Managed Agents Agent Toolset20260401 Write Input
 
@@ -7145,8 +6652,6 @@ func main() {
 
   - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-    - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
 ### Beta Managed Agents Always Ask Policy
 
 - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
@@ -7154,8 +6659,6 @@ func main() {
   Tool calls require user confirmation before execution.
 
   - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-    - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents Anthropic Skill
 
@@ -7166,8 +6669,6 @@ func main() {
   - `SkillID string`
 
   - `Type BetaManagedAgentsAnthropicSkillType`
-
-    - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
 
   - `Version string`
 
@@ -7181,13 +6682,15 @@ func main() {
 
     Identifier of the Anthropic skill (e.g., "xlsx").
 
+    minLength: 1, maxLength: 64
+
   - `Type BetaManagedAgentsAnthropicSkillParamsType`
 
-    - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
-
-  - `Version string`
+  - `Version string Optional`
 
     Version to pin. Defaults to latest if omitted.
+
+    minLength: 1, maxLength: 64
 
 ### Beta Managed Agents Bash Tool Config
 
@@ -7199,8 +6702,6 @@ func main() {
 
   - `Name Bash`
 
-    - `const BashBash Bash = "bash"`
-
   - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -7211,19 +6712,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Bash`
-
-    - `const BashBash Bash = "bash"`
 
 ### Beta Managed Agents Bash Tool Config Params
 
@@ -7235,13 +6730,11 @@ func main() {
 
     Must be "bash".
 
-    - `const BashBash Bash = "bash"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7251,19 +6744,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsBashToolConfigParamsType`
-
-    - `const BetaManagedAgentsBashToolConfigParamsTypeBash BetaManagedAgentsBashToolConfigParamsType = "bash"`
+  - `Type BetaManagedAgentsBashToolConfigParamsType Optional`
 
 ### Beta Managed Agents Custom Skill
 
@@ -7274,8 +6761,6 @@ func main() {
   - `SkillID string`
 
   - `Type BetaManagedAgentsCustomSkillType`
-
-    - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
   - `Version string`
 
@@ -7289,13 +6774,15 @@ func main() {
 
     Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
+    minLength: 1, maxLength: 64
+
   - `Type BetaManagedAgentsCustomSkillParamsType`
 
-    - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
-
-  - `Version string`
+  - `Version string Optional`
 
     Version to pin. Defaults to latest if omitted.
+
+    minLength: 1, maxLength: 64
 
 ### Beta Managed Agents Custom Tool
 
@@ -7311,17 +6798,13 @@ func main() {
 
     - `Type Object`
 
-      - `const ObjectObject Object = "object"`
+    - `Properties map[string, any] Optional`
 
-    - `Properties map[string, any]`
-
-    - `Required []string`
+    - `Required []string Optional`
 
   - `Name string`
 
   - `Type BetaManagedAgentsCustomToolType`
-
-    - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
 
 ### Beta Managed Agents Custom Tool Input Schema
 
@@ -7331,11 +6814,9 @@ func main() {
 
   - `Type Object`
 
-    - `const ObjectObject Object = "object"`
+  - `Properties map[string, any] Optional`
 
-  - `Properties map[string, any]`
-
-  - `Required []string`
+  - `Required []string Optional`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -7347,25 +6828,25 @@ func main() {
 
     Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
+    minLength: 1
+
   - `InputSchema BetaManagedAgentsCustomToolInputSchema`
 
     JSON Schema for custom tool input parameters.
 
     - `Type Object`
 
-      - `const ObjectObject Object = "object"`
+    - `Properties map[string, any] Optional`
 
-    - `Properties map[string, any]`
-
-    - `Required []string`
+    - `Required []string Optional`
 
   - `Name string`
 
     Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-  - `Type BetaManagedAgentsCustomToolParamsType`
+    minLength: 1, maxLength: 128
 
-    - `const BetaManagedAgentsCustomToolParamsTypeCustom BetaManagedAgentsCustomToolParamsType = "custom"`
+  - `Type BetaManagedAgentsCustomToolParamsType`
 
 ### Beta Managed Agents Edit Tool Config
 
@@ -7377,8 +6858,6 @@ func main() {
 
   - `Name Edit`
 
-    - `const EditEdit Edit = "edit"`
-
   - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -7389,19 +6868,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Edit`
-
-    - `const EditEdit Edit = "edit"`
 
 ### Beta Managed Agents Edit Tool Config Params
 
@@ -7413,13 +6886,11 @@ func main() {
 
     Must be "edit".
 
-    - `const EditEdit Edit = "edit"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7429,19 +6900,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsEditToolConfigParamsType`
-
-    - `const BetaManagedAgentsEditToolConfigParamsTypeEdit BetaManagedAgentsEditToolConfigParamsType = "edit"`
+  - `Type BetaManagedAgentsEditToolConfigParamsType Optional`
 
 ### Beta Managed Agents Effort High
 
@@ -7451,8 +6916,6 @@ func main() {
 
   - `Type BetaManagedAgentsEffortHighType`
 
-    - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
 ### Beta Managed Agents Effort Low
 
 - `type BetaManagedAgentsEffortLow struct{…}`
@@ -7460,8 +6923,6 @@ func main() {
   Low effort. Favors latency over reasoning depth.
 
   - `Type BetaManagedAgentsEffortLowType`
-
-    - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
 
 ### Beta Managed Agents Effort Max
 
@@ -7471,8 +6932,6 @@ func main() {
 
   - `Type BetaManagedAgentsEffortMaxType`
 
-    - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
 ### Beta Managed Agents Effort Medium
 
 - `type BetaManagedAgentsEffortMedium struct{…}`
@@ -7481,8 +6940,6 @@ func main() {
 
   - `Type BetaManagedAgentsEffortMediumType`
 
-    - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
-
 ### Beta Managed Agents Effort Xhigh
 
 - `type BetaManagedAgentsEffortXhigh struct{…}`
@@ -7490,8 +6947,6 @@ func main() {
   Extra-high effort. Not all models accept this level.
 
   - `Type BetaManagedAgentsEffortXhighType`
-
-    - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
 ### Beta Managed Agents Glob Tool Config
 
@@ -7503,8 +6958,6 @@ func main() {
 
   - `Name Glob`
 
-    - `const GlobGlob Glob = "glob"`
-
   - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -7515,19 +6968,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Glob`
-
-    - `const GlobGlob Glob = "glob"`
 
 ### Beta Managed Agents Glob Tool Config Params
 
@@ -7539,13 +6986,11 @@ func main() {
 
     Must be "glob".
 
-    - `const GlobGlob Glob = "glob"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7555,19 +7000,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsGlobToolConfigParamsType`
-
-    - `const BetaManagedAgentsGlobToolConfigParamsTypeGlob BetaManagedAgentsGlobToolConfigParamsType = "glob"`
+  - `Type BetaManagedAgentsGlobToolConfigParamsType Optional`
 
 ### Beta Managed Agents Grep Tool Config
 
@@ -7579,8 +7018,6 @@ func main() {
 
   - `Name Grep`
 
-    - `const GrepGrep Grep = "grep"`
-
   - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -7591,19 +7028,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Grep`
-
-    - `const GrepGrep Grep = "grep"`
 
 ### Beta Managed Agents Grep Tool Config Params
 
@@ -7615,13 +7046,11 @@ func main() {
 
     Must be "grep".
 
-    - `const GrepGrep Grep = "grep"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7631,19 +7060,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsGrepToolConfigParamsType`
-
-    - `const BetaManagedAgentsGrepToolConfigParamsTypeGrep BetaManagedAgentsGrepToolConfigParamsType = "grep"`
+  - `Type BetaManagedAgentsGrepToolConfigParamsType Optional`
 
 ### Beta Managed Agents MCP Server URL Definition
 
@@ -7654,8 +7077,6 @@ func main() {
   - `Name string`
 
   - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-    - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
   - `URL string`
 
@@ -7679,15 +7100,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents MCP Tool Config Params
 
@@ -7699,11 +7116,13 @@ func main() {
 
     Name of the MCP tool to configure. 1-128 characters.
 
-  - `Enabled bool`
+    minLength: 1, maxLength: 128
+
+  - `Enabled bool Optional`
 
     Whether this tool is enabled. Overrides the `default_config` setting.
 
-  - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7713,15 +7132,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents MCP Toolset
 
@@ -7743,15 +7158,11 @@ func main() {
 
         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
       - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
         Tool calls require user confirmation before execution.
 
         - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-          - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
   - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -7775,8 +7186,6 @@ func main() {
 
   - `Type BetaManagedAgentsMCPToolsetType`
 
-    - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
 ### Beta Managed Agents MCP Toolset Default Config
 
 - `type BetaManagedAgentsMCPToolsetDefaultConfig struct{…}`
@@ -7795,15 +7204,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents MCP Toolset Default Config Params
 
@@ -7811,11 +7216,11 @@ func main() {
 
   Default configuration for all tools from an MCP server.
 
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether tools are enabled by default. Defaults to true if not specified.
 
-  - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -7825,15 +7230,11 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
-
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
 
 ### Beta Managed Agents MCP Toolset Params
 
@@ -7845,11 +7246,11 @@ func main() {
 
     Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `Type BetaManagedAgentsMCPToolsetParamsType`
 
-    - `const BetaManagedAgentsMCPToolsetParamsTypeMCPToolset BetaManagedAgentsMCPToolsetParamsType = "mcp_toolset"`
-
-  - `Configs []BetaManagedAgentsMCPToolConfigParamsResp`
+  - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
 
     Per-tool configuration overrides.
 
@@ -7857,11 +7258,13 @@ func main() {
 
       Name of the MCP tool to configure. 1-128 characters.
 
-    - `Enabled bool`
+      minLength: 1, maxLength: 128
+
+    - `Enabled bool Optional`
 
       Whether this tool is enabled. Overrides the `default_config` setting.
 
-    - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -7871,25 +7274,21 @@ func main() {
 
         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
       - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
         Tool calls require user confirmation before execution.
 
         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-          - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+  - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
 
     Default configuration for all tools from an MCP server.
 
-    - `Enabled bool`
+    - `Enabled bool Optional`
 
       Whether tools are enabled by default. Defaults to true if not specified.
 
-    - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp`
+    - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
 
       Permission policy for tool execution.
 
@@ -8041,7 +7440,7 @@ func main() {
 
     - `string`
 
-  - `Effort BetaManagedAgentsModelConfigEffortUnion`
+  - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
     How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -8051,15 +7450,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortLowType`
 
-        - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
     - `type BetaManagedAgentsEffortMedium struct{…}`
 
       Medium effort. Balances latency and reasoning depth.
 
       - `Type BetaManagedAgentsEffortMediumType`
-
-        - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
     - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -8067,15 +7462,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortHighType`
 
-        - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
     - `type BetaManagedAgentsEffortXhigh struct{…}`
 
       Extra-high effort. Not all models accept this level.
 
       - `Type BetaManagedAgentsEffortXhighType`
-
-        - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
     - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -8083,13 +7474,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortMaxType`
 
-        - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-  - `InferenceGeo string`
+  - `InferenceGeo string Optional`
 
     Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-  - `Speed BetaManagedAgentsModelConfigSpeed`
+  - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -8169,7 +7558,7 @@ func main() {
 
     - `string`
 
-  - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp`
+  - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
     How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -8191,15 +7580,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortLowType`
 
-        - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
     - `type BetaManagedAgentsEffortMedium struct{…}`
 
       Medium effort. Balances latency and reasoning depth.
 
       - `Type BetaManagedAgentsEffortMediumType`
-
-        - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
     - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -8207,15 +7592,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortHighType`
 
-        - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
     - `type BetaManagedAgentsEffortXhigh struct{…}`
 
       Extra-high effort. Not all models accept this level.
 
       - `Type BetaManagedAgentsEffortXhighType`
-
-        - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
     - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -8223,13 +7604,11 @@ func main() {
 
       - `Type BetaManagedAgentsEffortMaxType`
 
-        - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-  - `InferenceGeo string`
+  - `InferenceGeo string Optional`
 
     Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-  - `Speed BetaManagedAgentsModelConfigParamsSpeed`
+  - `Speed BetaManagedAgentsModelConfigParamsSpeed Optional`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -8255,9 +7634,9 @@ func main() {
 
       - `Type BetaManagedAgentsAgentReferenceType`
 
-        - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
       - `Version int64`
+
+        format: int32
 
     - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -8269,11 +7648,7 @@ func main() {
 
       - `Type BetaManagedAgentsAdvisorType`
 
-        - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
   - `Type BetaManagedAgentsMultiagentCoordinatorType`
-
-    - `const BetaManagedAgentsMultiagentCoordinatorTypeCoordinator BetaManagedAgentsMultiagentCoordinatorType = "coordinator"`
 
 ### Beta Managed Agents Multiagent Coordinator Params
 
@@ -8295,21 +7670,21 @@ func main() {
 
         The `agent` ID.
 
+        minLength: 1, maxLength: 128
+
       - `Type BetaManagedAgentsAgentParamsType`
 
-        - `const BetaManagedAgentsAgentParamsTypeAgent BetaManagedAgentsAgentParamsType = "agent"`
-
-      - `Version int64`
+      - `Version int64 Optional`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+        format: int32
 
     - `type BetaManagedAgentsMultiagentSelfParamsResp struct{…}`
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
       - `Type BetaManagedAgentsMultiagentSelfParamsType`
-
-        - `const BetaManagedAgentsMultiagentSelfParamsTypeSelf BetaManagedAgentsMultiagentSelfParamsType = "self"`
 
     - `type BetaManagedAgentsAdvisorParamsResp struct{…}`
 
@@ -8319,13 +7694,11 @@ func main() {
 
         A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
+        minLength: 1, maxLength: 256
+
       - `Type BetaManagedAgentsAdvisorParamsType`
 
-        - `const BetaManagedAgentsAdvisorParamsTypeAdvisor BetaManagedAgentsAdvisorParamsType = "advisor"`
-
   - `Type BetaManagedAgentsMultiagentCoordinatorParamsType`
-
-    - `const BetaManagedAgentsMultiagentCoordinatorParamsTypeCoordinator BetaManagedAgentsMultiagentCoordinatorParamsType = "coordinator"`
 
 ### Beta Managed Agents Multiagent Self Params
 
@@ -8334,8 +7707,6 @@ func main() {
   Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
   - `Type BetaManagedAgentsMultiagentSelfParamsType`
-
-    - `const BetaManagedAgentsMultiagentSelfParamsTypeSelf BetaManagedAgentsMultiagentSelfParamsType = "self"`
 
 ### Beta Managed Agents Read Tool Config
 
@@ -8347,8 +7718,6 @@ func main() {
 
   - `Name Read`
 
-    - `const ReadRead Read = "read"`
-
   - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -8359,19 +7728,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Read`
-
-    - `const ReadRead Read = "read"`
 
 ### Beta Managed Agents Read Tool Config Params
 
@@ -8383,13 +7746,11 @@ func main() {
 
     Must be "read".
 
-    - `const ReadRead Read = "read"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -8399,19 +7760,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsReadToolConfigParamsType`
-
-    - `const BetaManagedAgentsReadToolConfigParamsTypeRead BetaManagedAgentsReadToolConfigParamsType = "read"`
+  - `Type BetaManagedAgentsReadToolConfigParamsType Optional`
 
 ### Beta Managed Agents Session Thread Agent
 
@@ -8428,8 +7783,6 @@ func main() {
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -8503,7 +7856,7 @@ func main() {
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -8513,15 +7866,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -8529,15 +7878,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -8545,13 +7890,11 @@ func main() {
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -8571,8 +7914,6 @@ func main() {
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -8582,8 +7923,6 @@ func main() {
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -8603,8 +7942,6 @@ func main() {
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -8615,19 +7952,13 @@ func main() {
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -8636,8 +7967,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -8653,8 +7982,6 @@ func main() {
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -8662,8 +7989,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -8679,8 +8004,6 @@ func main() {
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -8688,8 +8011,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -8705,8 +8026,6 @@ func main() {
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -8714,8 +8033,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -8731,8 +8048,6 @@ func main() {
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -8740,8 +8055,6 @@ func main() {
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -8757,8 +8070,6 @@ func main() {
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -8766,8 +8077,6 @@ func main() {
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -8783,13 +8092,13 @@ func main() {
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -8798,8 +8107,6 @@ func main() {
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -8815,13 +8122,11 @@ func main() {
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -8829,23 +8134,27 @@ func main() {
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -8866,8 +8175,6 @@ func main() {
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -8911,8 +8218,6 @@ func main() {
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -8925,23 +8230,19 @@ func main() {
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsSessionThreadAgentType`
 
-    - `const BetaManagedAgentsSessionThreadAgentTypeAgent BetaManagedAgentsSessionThreadAgentType = "agent"`
-
   - `Version int64`
+
+    format: int32
 
 ### Beta Managed Agents Skill Params
 
@@ -8957,13 +8258,15 @@ func main() {
 
       Identifier of the Anthropic skill (e.g., "xlsx").
 
+      minLength: 1, maxLength: 64
+
     - `Type BetaManagedAgentsAnthropicSkillParamsType`
 
-      - `const BetaManagedAgentsAnthropicSkillParamsTypeAnthropic BetaManagedAgentsAnthropicSkillParamsType = "anthropic"`
-
-    - `Version string`
+    - `Version string Optional`
 
       Version to pin. Defaults to latest if omitted.
+
+      minLength: 1, maxLength: 64
 
   - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
 
@@ -8973,13 +8276,15 @@ func main() {
 
       Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
+      minLength: 1, maxLength: 64
+
     - `Type BetaManagedAgentsCustomSkillParamsType`
 
-      - `const BetaManagedAgentsCustomSkillParamsTypeCustom BetaManagedAgentsCustomSkillParamsType = "custom"`
-
-    - `Version string`
+    - `Version string Optional`
 
       Version to pin. Defaults to latest if omitted.
+
+      minLength: 1, maxLength: 64
 
 ### Beta Managed Agents URL MCP Server Params
 
@@ -8991,13 +8296,15 @@ func main() {
 
     Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
-  - `Type BetaManagedAgentsURLMCPServerParamsType`
+    minLength: 1, maxLength: 255
 
-    - `const BetaManagedAgentsURLMCPServerParamsTypeURL BetaManagedAgentsURLMCPServerParamsType = "url"`
+  - `Type BetaManagedAgentsURLMCPServerParamsType`
 
   - `URL string`
 
     Endpoint URL for the MCP server.
+
+    maxLength: 2048
 
 ### Beta Managed Agents User Location
 
@@ -9009,23 +8316,27 @@ func main() {
 
     Location precision. Only "approximate" is supported.
 
-    - `const ApproximateApproximate Approximate = "approximate"`
-
-  - `City string`
+  - `City string Optional`
 
     City name.
 
-  - `Country string`
+    minLength: 1, maxLength: 255
+
+  - `Country string Optional`
 
     Two-letter ISO 3166-1 country code, uppercase.
 
-  - `Region string`
+  - `Region string Optional`
 
     Region or state name.
 
-  - `Timezone string`
+    minLength: 1, maxLength: 255
+
+  - `Timezone string Optional`
 
     IANA timezone identifier, e.g. "America/Los_Angeles".
+
+    minLength: 1, maxLength: 255
 
 ### Beta Managed Agents Web Fetch Tool Config
 
@@ -9037,8 +8348,6 @@ func main() {
 
   - `Name WebFetch`
 
-    - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
   - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -9049,25 +8358,21 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type WebFetch`
 
-    - `const WebFetchWebFetch WebFetch = "web_fetch"`
+  - `AllowedDomains []string Optional`
 
-  - `AllowedDomains []string`
+  - `BlockedDomains []string Optional`
 
-  - `BlockedDomains []string`
+  - `MaxContentTokens int64 Optional`
 
-  - `MaxContentTokens int64`
+    format: int32
 
 ### Beta Managed Agents Web Fetch Tool Config Params
 
@@ -9079,25 +8384,25 @@ func main() {
 
     Must be "web_fetch".
 
-    - `const WebFetchWebFetch WebFetch = "web_fetch"`
-
-  - `AllowedDomains []string`
+  - `AllowedDomains []string Optional`
 
     Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-  - `BlockedDomains []string`
+  - `BlockedDomains []string Optional`
 
     Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `MaxContentTokens int64`
+  - `MaxContentTokens int64 Optional`
 
     Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
-  - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp`
+    format: int32
+
+  - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -9107,19 +8412,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
-  - `Type BetaManagedAgentsWebFetchToolConfigParamsType`
-
-    - `const BetaManagedAgentsWebFetchToolConfigParamsTypeWebFetch BetaManagedAgentsWebFetchToolConfigParamsType = "web_fetch"`
+  - `Type BetaManagedAgentsWebFetchToolConfigParamsType Optional`
 
 ### Beta Managed Agents Web Search Tool Config
 
@@ -9131,8 +8430,6 @@ func main() {
 
   - `Name WebSearch`
 
-    - `const WebSearchWebSearch WebSearch = "web_search"`
-
   - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -9143,25 +8440,19 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type WebSearch`
 
-    - `const WebSearchWebSearch WebSearch = "web_search"`
+  - `AllowedDomains []string Optional`
 
-  - `AllowedDomains []string`
+  - `BlockedDomains []string Optional`
 
-  - `BlockedDomains []string`
-
-  - `UserLocation BetaManagedAgentsUserLocation`
+  - `UserLocation BetaManagedAgentsUserLocation Optional`
 
     Approximate user location for search result localization.
 
@@ -9169,23 +8460,27 @@ func main() {
 
       Location precision. Only "approximate" is supported.
 
-      - `const ApproximateApproximate Approximate = "approximate"`
-
-    - `City string`
+    - `City string Optional`
 
       City name.
 
-    - `Country string`
+      minLength: 1, maxLength: 255
+
+    - `Country string Optional`
 
       Two-letter ISO 3166-1 country code, uppercase.
 
-    - `Region string`
+    - `Region string Optional`
 
       Region or state name.
 
-    - `Timezone string`
+      minLength: 1, maxLength: 255
+
+    - `Timezone string Optional`
 
       IANA timezone identifier, e.g. "America/Los_Angeles".
+
+      minLength: 1, maxLength: 255
 
 ### Beta Managed Agents Web Search Tool Config Params
 
@@ -9197,21 +8492,19 @@ func main() {
 
     Must be "web_search".
 
-    - `const WebSearchWebSearch WebSearch = "web_search"`
-
-  - `AllowedDomains []string`
+  - `AllowedDomains []string Optional`
 
     Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-  - `BlockedDomains []string`
+  - `BlockedDomains []string Optional`
 
     Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -9221,21 +8514,15 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
+  - `Type BetaManagedAgentsWebSearchToolConfigParamsType Optional`
 
-  - `Type BetaManagedAgentsWebSearchToolConfigParamsType`
-
-    - `const BetaManagedAgentsWebSearchToolConfigParamsTypeWebSearch BetaManagedAgentsWebSearchToolConfigParamsType = "web_search"`
-
-  - `UserLocation BetaManagedAgentsUserLocation`
+  - `UserLocation BetaManagedAgentsUserLocation Optional`
 
     Approximate user location for search result localization.
 
@@ -9243,23 +8530,27 @@ func main() {
 
       Location precision. Only "approximate" is supported.
 
-      - `const ApproximateApproximate Approximate = "approximate"`
-
-    - `City string`
+    - `City string Optional`
 
       City name.
 
-    - `Country string`
+      minLength: 1, maxLength: 255
+
+    - `Country string Optional`
 
       Two-letter ISO 3166-1 country code, uppercase.
 
-    - `Region string`
+    - `Region string Optional`
 
       Region or state name.
 
-    - `Timezone string`
+      minLength: 1, maxLength: 255
+
+    - `Timezone string Optional`
 
       IANA timezone identifier, e.g. "America/Los_Angeles".
+
+      minLength: 1, maxLength: 255
 
 ### Beta Managed Agents Write Tool Config
 
@@ -9271,8 +8562,6 @@ func main() {
 
   - `Name Write`
 
-    - `const WriteWrite Write = "write"`
-
   - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
     Permission policy for tool execution.
@@ -9283,19 +8572,13 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
   - `Type Write`
-
-    - `const WriteWrite Write = "write"`
 
 ### Beta Managed Agents Write Tool Config Params
 
@@ -9307,13 +8590,11 @@ func main() {
 
     Must be "write".
 
-    - `const WriteWrite Write = "write"`
-
-  - `Enabled bool`
+  - `Enabled bool Optional`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp`
+  - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
 
     Permission policy for tool execution.
 
@@ -9323,45 +8604,41 @@ func main() {
 
       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
     - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
       Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-        - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
+  - `Type BetaManagedAgentsWriteToolConfigParamsType Optional`
 
-  - `Type BetaManagedAgentsWriteToolConfigParamsType`
+## Agents › Versions
 
-    - `const BetaManagedAgentsWriteToolConfigParamsTypeWrite BetaManagedAgentsWriteToolConfigParamsType = "write"`
-
-# Versions
-
-## List Agent Versions
+### List Agent Versions
 
 `client.Beta.Agents.Versions.List(ctx, agentID, params) (*PageCursor[BetaManagedAgentsAgent], error)`
 
-**get** `/v1/agents/{agent_id}/versions`
+**GET** `/v1/agents/{agent_id}/versions`
 
 List Agent Versions
 
-### Parameters
+#### Parameters
 
 - `agentID string`
 
 - `params BetaAgentVersionListParams`
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum results per page. Default 20, maximum 100.
 
-  - `Page param.Field[string]`
+    format: int32
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque pagination cursor.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -9437,7 +8714,7 @@ List Agent Versions
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+#### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
 
@@ -9449,9 +8726,13 @@ List Agent Versions
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Description string`
 
@@ -9460,8 +8741,6 @@ List Agent Versions
     - `Name string`
 
     - `Type BetaManagedAgentsMCPServerURLDefinitionType`
-
-      - `const BetaManagedAgentsMCPServerURLDefinitionTypeURL BetaManagedAgentsMCPServerURLDefinitionType = "url"`
 
     - `URL string`
 
@@ -9537,7 +8816,7 @@ List Agent Versions
 
       - `string`
 
-    - `Effort BetaManagedAgentsModelConfigEffortUnion`
+    - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
@@ -9547,15 +8826,11 @@ List Agent Versions
 
         - `Type BetaManagedAgentsEffortLowType`
 
-          - `const BetaManagedAgentsEffortLowTypeLow BetaManagedAgentsEffortLowType = "low"`
-
       - `type BetaManagedAgentsEffortMedium struct{…}`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
-
-          - `const BetaManagedAgentsEffortMediumTypeMedium BetaManagedAgentsEffortMediumType = "medium"`
 
       - `type BetaManagedAgentsEffortHigh struct{…}`
 
@@ -9563,15 +8838,11 @@ List Agent Versions
 
         - `Type BetaManagedAgentsEffortHighType`
 
-          - `const BetaManagedAgentsEffortHighTypeHigh BetaManagedAgentsEffortHighType = "high"`
-
       - `type BetaManagedAgentsEffortXhigh struct{…}`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
-
-          - `const BetaManagedAgentsEffortXhighTypeXhigh BetaManagedAgentsEffortXhighType = "xhigh"`
 
       - `type BetaManagedAgentsEffortMax struct{…}`
 
@@ -9579,13 +8850,11 @@ List Agent Versions
 
         - `Type BetaManagedAgentsEffortMaxType`
 
-          - `const BetaManagedAgentsEffortMaxTypeMax BetaManagedAgentsEffortMaxType = "max"`
-
-    - `InferenceGeo string`
+    - `InferenceGeo string Optional`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-    - `Speed BetaManagedAgentsModelConfigSpeed`
+    - `Speed BetaManagedAgentsModelConfigSpeed Optional`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -9609,9 +8878,9 @@ List Agent Versions
 
         - `Type BetaManagedAgentsAgentReferenceType`
 
-          - `const BetaManagedAgentsAgentReferenceTypeAgent BetaManagedAgentsAgentReferenceType = "agent"`
-
         - `Version int64`
+
+          format: int32
 
       - `type BetaManagedAgentsAdvisor struct{…}`
 
@@ -9623,11 +8892,7 @@ List Agent Versions
 
         - `Type BetaManagedAgentsAdvisorType`
 
-          - `const BetaManagedAgentsAdvisorTypeAdvisor BetaManagedAgentsAdvisorType = "advisor"`
-
     - `Type BetaManagedAgentsMultiagentType`
-
-      - `const BetaManagedAgentsMultiagentTypeCoordinator BetaManagedAgentsMultiagentType = "coordinator"`
 
   - `Name string`
 
@@ -9641,8 +8906,6 @@ List Agent Versions
 
       - `Type BetaManagedAgentsAnthropicSkillType`
 
-        - `const BetaManagedAgentsAnthropicSkillTypeAnthropic BetaManagedAgentsAnthropicSkillType = "anthropic"`
-
       - `Version string`
 
     - `type BetaManagedAgentsCustomSkill struct{…}`
@@ -9652,8 +8915,6 @@ List Agent Versions
       - `SkillID string`
 
       - `Type BetaManagedAgentsCustomSkillType`
-
-        - `const BetaManagedAgentsCustomSkillTypeCustom BetaManagedAgentsCustomSkillType = "custom"`
 
       - `Version string`
 
@@ -9673,8 +8934,6 @@ List Agent Versions
 
           - `Name Bash`
 
-            - `const BashBash Bash = "bash"`
-
           - `PermissionPolicy BetaManagedAgentsBashToolConfigPermissionPolicyUnion`
 
             Permission policy for tool execution.
@@ -9685,19 +8944,13 @@ List Agent Versions
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow BetaManagedAgentsAlwaysAllowPolicyType = "always_allow"`
-
             - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `const BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk BetaManagedAgentsAlwaysAskPolicyType = "always_ask"`
-
           - `Type Bash`
-
-            - `const BashBash Bash = "bash"`
 
         - `type BetaManagedAgentsEditToolConfig struct{…}`
 
@@ -9706,8 +8959,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name Edit`
-
-            - `const EditEdit Edit = "edit"`
 
           - `PermissionPolicy BetaManagedAgentsEditToolConfigPermissionPolicyUnion`
 
@@ -9723,8 +8974,6 @@ List Agent Versions
 
           - `Type Edit`
 
-            - `const EditEdit Edit = "edit"`
-
         - `type BetaManagedAgentsReadToolConfig struct{…}`
 
           Configuration for the read tool.
@@ -9732,8 +8981,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name Read`
-
-            - `const ReadRead Read = "read"`
 
           - `PermissionPolicy BetaManagedAgentsReadToolConfigPermissionPolicyUnion`
 
@@ -9749,8 +8996,6 @@ List Agent Versions
 
           - `Type Read`
 
-            - `const ReadRead Read = "read"`
-
         - `type BetaManagedAgentsWriteToolConfig struct{…}`
 
           Configuration for the write tool.
@@ -9758,8 +9003,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name Write`
-
-            - `const WriteWrite Write = "write"`
 
           - `PermissionPolicy BetaManagedAgentsWriteToolConfigPermissionPolicyUnion`
 
@@ -9775,8 +9018,6 @@ List Agent Versions
 
           - `Type Write`
 
-            - `const WriteWrite Write = "write"`
-
         - `type BetaManagedAgentsGlobToolConfig struct{…}`
 
           Configuration for the glob tool.
@@ -9784,8 +9025,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name Glob`
-
-            - `const GlobGlob Glob = "glob"`
 
           - `PermissionPolicy BetaManagedAgentsGlobToolConfigPermissionPolicyUnion`
 
@@ -9801,8 +9040,6 @@ List Agent Versions
 
           - `Type Glob`
 
-            - `const GlobGlob Glob = "glob"`
-
         - `type BetaManagedAgentsGrepToolConfig struct{…}`
 
           Configuration for the grep tool.
@@ -9810,8 +9047,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name Grep`
-
-            - `const GrepGrep Grep = "grep"`
 
           - `PermissionPolicy BetaManagedAgentsGrepToolConfigPermissionPolicyUnion`
 
@@ -9827,8 +9062,6 @@ List Agent Versions
 
           - `Type Grep`
 
-            - `const GrepGrep Grep = "grep"`
-
         - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
 
           Configuration for the web_fetch tool.
@@ -9836,8 +9069,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name WebFetch`
-
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
 
           - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigPermissionPolicyUnion`
 
@@ -9853,13 +9084,13 @@ List Agent Versions
 
           - `Type WebFetch`
 
-            - `const WebFetchWebFetch WebFetch = "web_fetch"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
+          - `MaxContentTokens int64 Optional`
 
-          - `MaxContentTokens int64`
+            format: int32
 
         - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
 
@@ -9868,8 +9099,6 @@ List Agent Versions
           - `Enabled bool`
 
           - `Name WebSearch`
-
-            - `const WebSearchWebSearch WebSearch = "web_search"`
 
           - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigPermissionPolicyUnion`
 
@@ -9885,13 +9114,11 @@ List Agent Versions
 
           - `Type WebSearch`
 
-            - `const WebSearchWebSearch WebSearch = "web_search"`
+          - `AllowedDomains []string Optional`
 
-          - `AllowedDomains []string`
+          - `BlockedDomains []string Optional`
 
-          - `BlockedDomains []string`
-
-          - `UserLocation BetaManagedAgentsUserLocation`
+          - `UserLocation BetaManagedAgentsUserLocation Optional`
 
             Approximate user location for search result localization.
 
@@ -9899,23 +9126,27 @@ List Agent Versions
 
               Location precision. Only "approximate" is supported.
 
-              - `const ApproximateApproximate Approximate = "approximate"`
-
-            - `City string`
+            - `City string Optional`
 
               City name.
 
-            - `Country string`
+              minLength: 1, maxLength: 255
+
+            - `Country string Optional`
 
               Two-letter ISO 3166-1 country code, uppercase.
 
-            - `Region string`
+            - `Region string Optional`
 
               Region or state name.
 
-            - `Timezone string`
+              minLength: 1, maxLength: 255
+
+            - `Timezone string Optional`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -9936,8 +9167,6 @@ List Agent Versions
             Tool calls require user confirmation before execution.
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
-
-        - `const BetaManagedAgentsAgentToolset20260401TypeAgentToolset20260401 BetaManagedAgentsAgentToolset20260401Type = "agent_toolset_20260401"`
 
     - `type BetaManagedAgentsMCPToolset struct{…}`
 
@@ -9981,8 +9210,6 @@ List Agent Versions
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
-        - `const BetaManagedAgentsMCPToolsetTypeMCPToolset BetaManagedAgentsMCPToolsetType = "mcp_toolset"`
-
     - `type BetaManagedAgentsCustomTool struct{…}`
 
       A custom tool as returned in API responses.
@@ -9995,31 +9222,29 @@ List Agent Versions
 
         - `Type Object`
 
-          - `const ObjectObject Object = "object"`
+        - `Properties map[string, any] Optional`
 
-        - `Properties map[string, any]`
-
-        - `Required []string`
+        - `Required []string Optional`
 
       - `Name string`
 
       - `Type BetaManagedAgentsCustomToolType`
 
-        - `const BetaManagedAgentsCustomToolTypeCustom BetaManagedAgentsCustomToolType = "custom"`
-
   - `Type BetaManagedAgentsAgentType`
-
-    - `const BetaManagedAgentsAgentTypeAgent BetaManagedAgentsAgentType = "agent"`
 
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Version int64`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+#### Example
 
 ```go
 package main
@@ -10048,7 +9273,7 @@ func main() {
 }
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {

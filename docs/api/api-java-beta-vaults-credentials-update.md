@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/up
 category: "api"
 generated: true
 ---
----
-title: Update Credential
-url: https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/update
----
+# Update Credential
 
-## Update Credential
+`BetaManagedAgentsCredential beta().vaults().credentials().update(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsCredential beta().vaults().credentials().update(CredentialUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Update Credential
 
-### Parameters
+## Parameters
 
 - `CredentialUpdateParams params`
 
@@ -107,15 +102,17 @@ Update Credential
 
       - `Type type`
 
-        - `MCP_OAUTH("mcp_oauth")`
-
       - `Optional<String> accessToken`
 
         Updated OAuth access token.
 
+        minLength: 1, maxLength: 8192
+
       - `Optional<LocalDateTime> expiresAt`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Optional<BetaManagedAgentsMcpOAuthRefreshUpdateParams> refresh`
 
@@ -125,9 +122,13 @@ Update Credential
 
           Updated OAuth refresh token.
 
+          minLength: 1, maxLength: 4096
+
         - `Optional<String> scope`
 
           Updated OAuth scope for the refresh request.
+
+          maxLength: 8192
 
         - `Optional<TokenEndpointAuth> tokenEndpointAuth`
 
@@ -139,11 +140,11 @@ Update Credential
 
             - `Type type`
 
-              - `CLIENT_SECRET_BASIC("client_secret_basic")`
-
             - `Optional<String> clientSecret`
 
               Updated OAuth client secret.
+
+              minLength: 1, maxLength: 512
 
           - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam:`
 
@@ -151,11 +152,11 @@ Update Credential
 
             - `Type type`
 
-              - `CLIENT_SECRET_POST("client_secret_post")`
-
             - `Optional<String> clientSecret`
 
               Updated OAuth client secret.
+
+              minLength: 1, maxLength: 512
 
     - `class BetaManagedAgentsStaticBearerUpdateParams:`
 
@@ -163,19 +164,17 @@ Update Credential
 
       - `Type type`
 
-        - `STATIC_BEARER("static_bearer")`
-
       - `Optional<String> token`
 
         Updated static bearer token value.
+
+        minLength: 1, maxLength: 8192
 
     - `class BetaManagedAgentsEnvironmentVariableUpdateParams:`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
       - `Type type`
-
-        - `ENVIRONMENT_VARIABLE("environment_variable")`
 
       - `Optional<BetaManagedAgentsInjectionLocationUpdateParams> injectionLocation`
 
@@ -199,8 +198,6 @@ Update Credential
 
           - `Type type`
 
-            - `UNRESTRICTED("unrestricted")`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingParams:`
 
           Substitute the secret only on requests to the listed hosts.
@@ -211,21 +208,23 @@ Update Credential
 
           - `Type type`
 
-            - `LIMITED("limited")`
-
       - `Optional<String> secretValue`
 
         Updated secret value.
+
+        minLength: 1, maxLength: 4096
 
   - `Optional<String> displayName`
 
     Updated human-readable name for the credential. 1-255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `Optional<Metadata> metadata`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsCredential:`
 
@@ -238,6 +237,8 @@ Update Credential
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Auth auth`
 
@@ -253,11 +254,11 @@ Update Credential
 
       - `Type type`
 
-        - `MCP_OAUTH("mcp_oauth")`
-
       - `Optional<LocalDateTime> expiresAt`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
 
@@ -281,23 +282,17 @@ Update Credential
 
             - `Type type`
 
-              - `NONE("none")`
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type type`
 
-              - `CLIENT_SECRET_BASIC("client_secret_basic")`
-
           - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `Type type`
-
-              - `CLIENT_SECRET_POST("client_secret_post")`
 
         - `Optional<String> resource`
 
@@ -316,8 +311,6 @@ Update Credential
         URL of the MCP server this credential authenticates against.
 
       - `Type type`
-
-        - `STATIC_BEARER("static_bearer")`
 
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
@@ -345,8 +338,6 @@ Update Credential
 
           - `Type type`
 
-            - `UNRESTRICTED("unrestricted")`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingResponse:`
 
           The secret is substituted only on requests to the listed hosts.
@@ -357,19 +348,17 @@ Update Credential
 
           - `Type type`
 
-            - `LIMITED("limited")`
-
       - `String secretName`
 
         Name of the environment variable.
 
       - `Type type`
 
-        - `ENVIRONMENT_VARIABLE("environment_variable")`
-
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Metadata metadata`
 
@@ -377,11 +366,11 @@ Update Credential
 
   - `Type type`
 
-    - `VAULT_CREDENTIAL("vault_credential")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String vaultId`
 
@@ -391,7 +380,7 @@ Update Credential
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -416,7 +405,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

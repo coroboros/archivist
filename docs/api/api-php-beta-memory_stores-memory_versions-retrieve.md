@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/memory_v
 category: "api"
 generated: true
 ---
----
-title: Retrieve a memory version
-url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memory_versions/retrieve
----
-
-## Retrieve a memory version
+# Retrieve a memory version
 
 `$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
 Retrieve a memory version
 
-### Parameters
+## Parameters
 
 - `memoryStoreID: string`
 
@@ -31,7 +26,7 @@ Retrieve a memory version
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsMemoryVersion`
 
@@ -85,7 +80,7 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-### Example
+## Example
 
 ```php
 <?php
@@ -108,7 +103,7 @@ $betaManagedAgentsMemoryVersion = $client
 var_dump($betaManagedAgentsMemoryVersion);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

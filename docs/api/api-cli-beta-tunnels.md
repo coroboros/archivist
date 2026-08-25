@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/tunnels"
 category: "api"
 generated: true
 ---
----
-title: Tunnels
-url: https://platform.claude.com/docs/en/api/cli/beta/tunnels
----
-
 # Tunnels
 
 ## Create Tunnel
 
 `$ ant beta:tunnels create`
 
-**post** `/v1/tunnels`
+**POST** `/v1/tunnels`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -27,13 +22,15 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   Body param: Optional human-readable name for the tunnel (1-255 characters).
 
+  minLength: 1, maxLength: 255
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+- `beta_tunnel: object`
 
   An MCP tunnel.
 
@@ -45,9 +42,13 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -61,12 +62,12 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels create \
   --api-key my-anthropic-api-key
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -83,7 +84,7 @@ ant beta:tunnels create \
 
 `$ ant beta:tunnels retrieve`
 
-**get** `/v1/tunnels/{tunnel_id}`
+**GET** `/v1/tunnels/{tunnel_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -101,7 +102,7 @@ Fetches a tunnel by ID.
 
 ### Returns
 
-- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+- `beta_tunnel: object`
 
   An MCP tunnel.
 
@@ -113,9 +114,13 @@ Fetches a tunnel by ID.
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -129,13 +134,13 @@ Fetches a tunnel by ID.
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels retrieve \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -152,7 +157,7 @@ ant beta:tunnels retrieve \
 
 `$ ant beta:tunnels list`
 
-**get** `/v1/tunnels`
+**GET** `/v1/tunnels`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -168,6 +173,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   Query param: Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
 
+  format: int32
+
 - `--page: optional string`
 
   Query param: Opaque pagination cursor from a previous `list_tunnels` response.
@@ -178,7 +185,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 ### Returns
 
-- `BetaListTunnelsResponse: object { data, next_page }`
+- `BetaListTunnelsResponse: object`
 
   A paginated list of tunnels.
 
@@ -194,9 +201,13 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `created_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `display_name: string`
 
@@ -214,12 +225,12 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels list \
   --api-key my-anthropic-api-key
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -241,7 +252,7 @@ ant beta:tunnels list \
 
 `$ ant beta:tunnels archive`
 
-**post** `/v1/tunnels/{tunnel_id}/archive`
+**POST** `/v1/tunnels/{tunnel_id}/archive`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -259,7 +270,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 ### Returns
 
-- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+- `beta_tunnel: object`
 
   An MCP tunnel.
 
@@ -271,9 +282,13 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -287,13 +302,13 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels archive \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -310,7 +325,7 @@ ant beta:tunnels archive \
 
 `$ ant beta:tunnels reveal-token`
 
-**post** `/v1/tunnels/{tunnel_id}/reveal_token`
+**POST** `/v1/tunnels/{tunnel_id}/reveal_token`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -328,7 +343,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 ### Returns
 
-- `beta_tunnel_token: object { id, tunnel_token, type }`
+- `beta_tunnel_token: object`
 
   A tunnel's connector token.
 
@@ -344,13 +359,13 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels reveal-token \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -364,7 +379,7 @@ ant beta:tunnels reveal-token \
 
 `$ ant beta:tunnels rotate-token`
 
-**post** `/v1/tunnels/{tunnel_id}/rotate_token`
+**POST** `/v1/tunnels/{tunnel_id}/rotate_token`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -380,13 +395,15 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   Body param: Optional free-text reason for the rotation, recorded for audit.
 
+  maxLength: 1024
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
-- `beta_tunnel_token: object { id, tunnel_token, type }`
+- `beta_tunnel_token: object`
 
   A tunnel's connector token.
 
@@ -402,13 +419,13 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 ### Example
 
-```cli
+```bash
 ant beta:tunnels rotate-token \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -418,11 +435,11 @@ ant beta:tunnels rotate-token \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Tunnel
 
-- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+- `beta_tunnel: object`
 
   An MCP tunnel.
 
@@ -434,9 +451,13 @@ ant beta:tunnels rotate-token \
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -450,7 +471,7 @@ ant beta:tunnels rotate-token \
 
 ### Beta Tunnel Token
 
-- `beta_tunnel_token: object { id, tunnel_token, type }`
+- `beta_tunnel_token: object`
 
   A tunnel's connector token.
 
@@ -464,19 +485,19 @@ ant beta:tunnels rotate-token \
 
   - `type: "tunnel_token"`
 
-# Certificates
+## Tunnels › Certificates
 
-## Create Tunnel Certificate
+### Create Tunnel Certificate
 
 `$ ant beta:tunnels:certificates create`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates`
+**POST** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's server certificate against this CA when it terminates the inner TLS session. A tunnel holds at most two non-archived certificates.
 
-### Parameters
+#### Parameters
 
 - `--tunnel-id: string`
 
@@ -486,13 +507,15 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
 
+  maxLength: 8192
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
-- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+- `beta_tunnel_certificate: object`
 
   A CA certificate attached to a tunnel.
 
@@ -504,13 +527,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -522,16 +551,16 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `type: "tunnel_certificate"`
 
-### Example
+#### Example
 
-```cli
+```bash
 ant beta:tunnels:certificates create \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id \
   --ca-certificate-pem ca_certificate_pem
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -545,17 +574,17 @@ ant beta:tunnels:certificates create \
 }
 ```
 
-## Get Tunnel Certificate
+### Get Tunnel Certificate
 
 `$ ant beta:tunnels:certificates retrieve`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+**GET** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Fetches a tunnel certificate by ID.
 
-### Parameters
+#### Parameters
 
 - `--tunnel-id: string`
 
@@ -569,9 +598,9 @@ Fetches a tunnel certificate by ID.
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
-- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+- `beta_tunnel_certificate: object`
 
   A CA certificate attached to a tunnel.
 
@@ -583,13 +612,19 @@ Fetches a tunnel certificate by ID.
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -601,16 +636,16 @@ Fetches a tunnel certificate by ID.
 
   - `type: "tunnel_certificate"`
 
-### Example
+#### Example
 
-```cli
+```bash
 ant beta:tunnels:certificates retrieve \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id \
   --certificate-id certificate_id
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -624,17 +659,17 @@ ant beta:tunnels:certificates retrieve \
 }
 ```
 
-## List Tunnel Certificates
+### List Tunnel Certificates
 
 `$ ant beta:tunnels:certificates list`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates`
+**GET** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Lists the certificates registered on a tunnel. Archived certificates are excluded unless include_archived is set.
 
-### Parameters
+#### Parameters
 
 - `--tunnel-id: string`
 
@@ -648,6 +683,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   Query param: Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
+  format: int32
+
 - `--page: optional string`
 
   Query param: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
@@ -656,9 +693,9 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
-- `BetaListTunnelCertificatesResponse: object { data, next_page }`
+- `BetaListTunnelCertificatesResponse: object`
 
   The tunnel's certificates.
 
@@ -674,13 +711,19 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `created_at: string`
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `expires_at: string`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `fingerprint: string`
 
@@ -696,15 +739,15 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     Pagination cursor for the next page, or null if no more results.
 
-### Example
+#### Example
 
-```cli
+```bash
 ant beta:tunnels:certificates list \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -723,17 +766,17 @@ ant beta:tunnels:certificates list \
 }
 ```
 
-## Archive Tunnel Certificate
+### Archive Tunnel Certificate
 
 `$ ant beta:tunnels:certificates archive`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+**POST** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Archives a tunnel certificate, removing it from the set Anthropic trusts for the tunnel. The certificate record is retained. Archiving the last non-archived certificate is permitted; the tunnel rejects MCP traffic until a new certificate is added.
 
-### Parameters
+#### Parameters
 
 - `--tunnel-id: string`
 
@@ -747,9 +790,9 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
-### Returns
+#### Returns
 
-- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+- `beta_tunnel_certificate: object`
 
   A CA certificate attached to a tunnel.
 
@@ -761,13 +804,19 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -779,16 +828,16 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `type: "tunnel_certificate"`
 
-### Example
+#### Example
 
-```cli
+```bash
 ant beta:tunnels:certificates archive \
   --api-key my-anthropic-api-key \
   --tunnel-id tunnel_id \
   --certificate-id certificate_id
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -801,37 +850,3 @@ ant beta:tunnels:certificates archive \
   "type": "tunnel_certificate"
 }
 ```
-
-## Domain Types
-
-### Beta Tunnel Certificate
-
-- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
-
-  A CA certificate attached to a tunnel.
-
-  - `id: string`
-
-    Unique identifier for the certificate, prefixed with `tcrt_`.
-
-  - `archived_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `expires_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `fingerprint: string`
-
-    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
-
-  - `tunnel_id: string`
-
-    ID of the tunnel the certificate is registered against.
-
-  - `type: "tunnel_certificate"`

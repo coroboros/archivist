@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/deployments/list"
 category: "api"
 generated: true
 ---
----
-title: List Deployments
-url: https://platform.claude.com/docs/en/api/php/beta/deployments/list
----
-
-## List Deployments
+# List Deployments
 
 `$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?BetaManagedAgentsDeploymentStatus status, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsDeployment>`
 
-**get** `/v1/deployments`
+**GET** `/v1/deployments`
 
 List Deployments
 
-### Parameters
+## Parameters
 
 - `agentID?:optional string`
 
@@ -51,7 +46,7 @@ List Deployments
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsDeployment`
 
@@ -121,7 +116,7 @@ List Deployments
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -144,7 +139,7 @@ $page = $client->beta->deployments->list(
 var_dump($page);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

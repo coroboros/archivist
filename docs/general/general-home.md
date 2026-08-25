@@ -91,7 +91,7 @@ with Claude"
             Get API key
           </HomeJourneyLink>
 
-          <HomeJourneyLink icon="settings" href="../about-claude/about-claude-models-overview.md">
+          <HomeJourneyLink icon="settings" href="./general-models-overview.md">
             Choose a model
           </HomeJourneyLink>
 
@@ -247,13 +247,13 @@ with Claude"
     <HomeSectionHeader label="Models" title="The Claude model family" description="Choose the right model for your use case." />
 
     <HomeModelCards>
-      <HomeModelCard name="Fable 5" badge="Most capable" modelId="claude-fable-5" description="Highest capability for the most demanding reasoning and long-horizon agentic work." href="../about-claude/about-claude-models-overview.md" />
+      <HomeModelCard name="Fable 5" badge="Most capable" modelId="claude-fable-5" description="Highest capability for the most demanding reasoning and long-horizon agentic work." href="./general-models-fable-5-overview.md" />
 
-      <HomeModelCard name="Opus 5" badge="Advanced" modelId="claude-opus-5" description="Excellent for complex analysis, coding, and creative tasks requiring deep reasoning." href="../about-claude/about-claude-models-overview.md" />
+      <HomeModelCard name="Opus 5" badge="Advanced" modelId="claude-opus-5" description="Excellent for complex analysis, coding, and creative tasks requiring deep reasoning." href="./general-models-opus-5-overview.md" />
 
-      <HomeModelCard name="Sonnet 5" badge="Best balance" modelId="claude-sonnet-5" description="Ideal balance of intelligence and speed for most production workloads." href="../about-claude/about-claude-models-overview.md" />
+      <HomeModelCard name="Sonnet 5" badge="Best balance" modelId="claude-sonnet-5" description="Ideal balance of intelligence and speed for most production workloads." href="./general-models-sonnet-5-overview.md" />
 
-      <HomeModelCard name="Haiku 4.5" badge="Fastest" modelId="claude-haiku-4-5" description="Lightning-fast responses for high-volume, latency-sensitive applications." href="../about-claude/about-claude-models-overview.md" />
+      <HomeModelCard name="Haiku 4.5" badge="Fastest" modelId="claude-haiku-4-5" description="Lightning-fast responses for high-volume, latency-sensitive applications." href="./general-models-haiku-4-5-overview.md" />
     </HomeModelCards>
   </HomeSection>
 

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/cr
 category: "api"
 generated: true
 ---
----
-title: Create Credential
-url: https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/create
----
+# Create Credential
 
-## Create Credential
+`BetaManagedAgentsCredential beta().vaults().credentials().create(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsCredential beta().vaults().credentials().create(CredentialCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/vaults/{vault_id}/credentials`
+**POST** `/v1/vaults/{vault_id}/credentials`
 
 Create Credential
 
-### Parameters
+## Parameters
 
 - `CredentialCreateParams params`
 
@@ -107,17 +102,21 @@ Create Credential
 
         OAuth access token.
 
+        minLength: 1, maxLength: 8192
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
+        minLength: 1, maxLength: 2047
 
-        - `MCP_OAUTH("mcp_oauth")`
+      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Optional<BetaManagedAgentsMcpOAuthRefreshParams> refresh`
 
@@ -127,13 +126,19 @@ Create Credential
 
           OAuth client ID.
 
+          minLength: 1, maxLength: 1024
+
         - `String refreshToken`
 
           OAuth refresh token.
 
+          minLength: 1, maxLength: 4096
+
         - `String tokenEndpoint`
 
           Token endpoint URL used to refresh the access token.
+
+          minLength: 1, maxLength: 2047
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
@@ -145,8 +150,6 @@ Create Credential
 
             - `Type type`
 
-              - `NONE("none")`
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicParam:`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
@@ -155,9 +158,9 @@ Create Credential
 
               OAuth client secret.
 
-            - `Type type`
+              minLength: 1, maxLength: 512
 
-              - `CLIENT_SECRET_BASIC("client_secret_basic")`
+            - `Type type`
 
           - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
@@ -167,17 +170,21 @@ Create Credential
 
               OAuth client secret.
 
-            - `Type type`
+              minLength: 1, maxLength: 512
 
-              - `CLIENT_SECRET_POST("client_secret_post")`
+            - `Type type`
 
         - `Optional<String> resource`
 
           OAuth resource indicator.
 
+          minLength: 1, maxLength: 2047
+
         - `Optional<String> scope`
 
           OAuth scope for the refresh request.
+
+          minLength: 1, maxLength: 8192
 
     - `class BetaManagedAgentsStaticBearerCreateParams:`
 
@@ -187,13 +194,15 @@ Create Credential
 
         Static bearer token value.
 
+        minLength: 1, maxLength: 8192
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
+        minLength: 1, maxLength: 2047
 
-        - `STATIC_BEARER("static_bearer")`
+      - `Type type`
 
     - `class BetaManagedAgentsEnvironmentVariableCreateParams:`
 
@@ -209,8 +218,6 @@ Create Credential
 
           - `Type type`
 
-            - `UNRESTRICTED("unrestricted")`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingParams:`
 
           Substitute the secret only on requests to the listed hosts.
@@ -221,19 +228,19 @@ Create Credential
 
           - `Type type`
 
-            - `LIMITED("limited")`
-
       - `String secretName`
 
         Name of the environment variable. Immutable after create.
+
+        minLength: 1, maxLength: 255
 
       - `String secretValue`
 
         Secret value. Write-only; never returned in responses.
 
-      - `Type type`
+        minLength: 1, maxLength: 4096
 
-        - `ENVIRONMENT_VARIABLE("environment_variable")`
+      - `Type type`
 
       - `Optional<BetaManagedAgentsInjectionLocationParams> injectionLocation`
 
@@ -251,11 +258,13 @@ Create Credential
 
     Human-readable name for the credential. Up to 255 characters.
 
+    maxLength: 255
+
   - `Optional<Metadata> metadata`
 
     Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsCredential:`
 
@@ -268,6 +277,8 @@ Create Credential
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Auth auth`
 
@@ -283,11 +294,11 @@ Create Credential
 
       - `Type type`
 
-        - `MCP_OAUTH("mcp_oauth")`
-
       - `Optional<LocalDateTime> expiresAt`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
 
@@ -311,23 +322,17 @@ Create Credential
 
             - `Type type`
 
-              - `NONE("none")`
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type type`
 
-              - `CLIENT_SECRET_BASIC("client_secret_basic")`
-
           - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `Type type`
-
-              - `CLIENT_SECRET_POST("client_secret_post")`
 
         - `Optional<String> resource`
 
@@ -346,8 +351,6 @@ Create Credential
         URL of the MCP server this credential authenticates against.
 
       - `Type type`
-
-        - `STATIC_BEARER("static_bearer")`
 
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
@@ -375,8 +378,6 @@ Create Credential
 
           - `Type type`
 
-            - `UNRESTRICTED("unrestricted")`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingResponse:`
 
           The secret is substituted only on requests to the listed hosts.
@@ -387,19 +388,17 @@ Create Credential
 
           - `Type type`
 
-            - `LIMITED("limited")`
-
       - `String secretName`
 
         Name of the environment variable.
 
       - `Type type`
 
-        - `ENVIRONMENT_VARIABLE("environment_variable")`
-
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Metadata metadata`
 
@@ -407,11 +406,11 @@ Create Credential
 
   - `Type type`
 
-    - `VAULT_CREDENTIAL("vault_credential")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String vaultId`
 
@@ -421,7 +420,7 @@ Create Credential
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -451,7 +450,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

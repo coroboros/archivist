@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/files/upload"
 category: "api"
 generated: true
 ---
----
-title: Upload File
-url: https://platform.claude.com/docs/en/api/typescript/beta/files/upload
----
+# Upload File
 
-## Upload File
+`client.beta.files.upload(params, options?): BetaFileMetadata`
 
-`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): BetaFileMetadata`
-
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
-### Parameters
+## Parameters
 
 - `params: FileUploadParams`
 
   - `file: Uploadable`
 
     Body param: The file to upload
+
+    format: binary
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -101,7 +98,7 @@ Upload File
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaFileMetadata`
 
@@ -115,17 +112,25 @@ Upload File
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `filename: string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `mime_type: string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `size_bytes: number`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `type: "file"`
 
@@ -133,11 +138,11 @@ Upload File
 
     For files, this is always `"file"`.
 
-    - `"file"`
-
   - `downloadable?: boolean`
 
     Whether the file can be downloaded.
+
+    default: false
 
   - `scope?: BetaFileScope | null`
 
@@ -151,9 +156,7 @@ Upload File
 
       The type of scope (e.g., `"session"`).
 
-      - `"session"`
-
-### Example
+## Example
 
 ```typescript
 import fs from "fs";
@@ -170,7 +173,7 @@ const betaFileMetadata = await client.beta.files.upload({
 console.log(betaFileMetadata.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

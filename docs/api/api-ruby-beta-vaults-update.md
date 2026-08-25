@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/update"
 category: "api"
 generated: true
 ---
----
-title: Update Vault
-url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/update
----
-
-## Update Vault
+# Update Vault
 
 `beta.vaults.update(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
-**post** `/v1/vaults/{vault_id}`
+**POST** `/v1/vaults/{vault_id}`
 
 Update Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: String`
 
 - `display_name: String`
 
   Updated human-readable name for the vault. 1-255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `metadata: Hash[Symbol, String]`
 
@@ -105,7 +102,7 @@ Update Vault
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault`
 
@@ -119,9 +116,13 @@ Update Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: String`
 
@@ -133,13 +134,13 @@ Update Vault
 
   - `type: :vault`
 
-    - `:vault`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```ruby
 require "anthropic"
@@ -151,7 +152,7 @@ beta_managed_agents_vault = anthropic.beta.vaults.update("vlt_011CZkZDLs7fYzm1hX
 puts(beta_managed_agents_vault)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

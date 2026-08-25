@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/batches/delet
 category: "api"
 generated: true
 ---
----
-title: Delete a Message Batch
-url: https://platform.claude.com/docs/en/api/php/beta/messages/batches/delete
----
-
-## Delete a Message Batch
+# Delete a Message Batch
 
 `$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): DeletedMessageBatch`
 
-**delete** `/v1/messages/batches/{message_batch_id}`
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -21,7 +16,7 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `messageBatchID: string`
 
@@ -31,7 +26,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `DeletedMessageBatch`
 
@@ -45,7 +40,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -61,7 +56,7 @@ $betaDeletedMessageBatch = $client->beta->messages->batches->delete(
 var_dump($betaDeletedMessageBatch);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

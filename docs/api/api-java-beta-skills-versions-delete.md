@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/skills/versions/delet
 category: "api"
 generated: true
 ---
----
-title: Delete Skill Version
-url: https://platform.claude.com/docs/en/api/java/beta/skills/versions/delete
----
+# Delete Skill Version
 
-## Delete Skill Version
+`VersionDeleteResponse beta().skills().versions().delete(params, requestOptions = RequestOptions.none())`
 
-`VersionDeleteResponse beta().skills().versions().delete(VersionDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
-### Parameters
+## Parameters
 
 - `VersionDeleteParams params`
 
@@ -105,7 +100,7 @@ Delete Skill Version
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class VersionDeleteResponse:`
 
@@ -121,7 +116,7 @@ Delete Skill Version
 
     For Skill Versions, this is always `"skill_version_deleted"`.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -146,7 +141,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

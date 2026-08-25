@@ -17,7 +17,7 @@ This is the reference for prompt engineering with Claude's latest models, includ
 * **Migration considerations** last, for prompts moving from earlier generations.
 
 <Tip>
-  For an overview of model capabilities, see the [models overview](../about-claude/about-claude-models-overview.md). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](../about-claude/about-claude-models-introducing-claude-fable-5-and-claude-mythos-5.md). For details on what's new in Claude Sonnet 5, see [What's new in Claude Sonnet 5](../about-claude/about-claude-models-whats-new-sonnet-5.md). For details on what's new in Claude Opus 5, see [What's new in Claude Opus 5](../about-claude/about-claude-models-whats-new-opus-5.md). For migration guidance, see the [Migration guide](../about-claude/about-claude-models-migration-guide.md).
+  For an overview of model capabilities, see the [models overview](../general/general-models-overview.md). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](../general/general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md). For details on what's new in Claude Sonnet 5, see [What's new in Claude Sonnet 5](../general/general-models-sonnet-5-whats-new-sonnet-5.md). For details on what's new in Claude Opus 5, see [What's new in Claude Opus 5](../general/general-models-opus-5-whats-new-opus-5.md). For migration guidance, see the [Migration guide](../about-claude/about-claude-models-migration-guide.md).
 </Tip>
 
 ## Claude Fable 5

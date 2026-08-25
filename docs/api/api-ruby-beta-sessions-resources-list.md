@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/li
 category: "api"
 generated: true
 ---
----
-title: List Session Resources
-url: https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/list
----
-
-## List Session Resources
+# List Session Resources
 
 `beta.sessions.resources.list(session_id, **kwargs) -> PageCursor<BetaManagedAgentsSessionResource>`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
-### Parameters
+## Parameters
 
 - `session_id: String`
 
 - `limit: Integer`
 
   Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+
+  format: int32
 
 - `page: String`
 
@@ -105,7 +102,7 @@ List Session Resources
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
@@ -119,15 +116,17 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `mount_path: String`
 
     - `type: :github_repository`
 
-      - `:github_repository`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `url: String`
 
@@ -139,9 +138,9 @@ List Session Resources
 
           Branch name to check out.
 
-        - `type: :branch`
+          minLength: 1, maxLength: 255
 
-          - `:branch`
+        - `type: :branch`
 
       - `class BetaManagedAgentsCommitCheckout`
 
@@ -149,9 +148,9 @@ List Session Resources
 
           Full commit SHA to check out.
 
-        - `type: :commit`
+          minLength: 7, maxLength: 64
 
-          - `:commit`
+        - `type: :commit`
 
   - `class BetaManagedAgentsFileResource`
 
@@ -161,17 +160,19 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `file_id: String`
 
     - `mount_path: String`
 
     - `type: :file`
 
-      - `:file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
   - `class BetaManagedAgentsMemoryStoreResource`
 
@@ -182,8 +183,6 @@ List Session Resources
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
     - `type: :memory_store`
-
-      - `:memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -201,6 +200,8 @@ List Session Resources
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+      maxLength: 4096
+
     - `mount_path: String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -209,7 +210,7 @@ List Session Resources
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -221,7 +222,7 @@ page = anthropic.beta.sessions.resources.list("sesn_011CZkZAtmR3yMPDzynEDxu7")
 puts(page)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/admin/api_keys/list"
 category: "api"
 generated: true
 ---
----
-title: List API Keys
-url: https://platform.claude.com/docs/en/api/admin/api_keys/list
----
+# List API Keys
 
-## List API Keys
-
-**get** `/v1/organizations/api_keys`
+**GET** `/v1/organizations/api_keys`
 
 List API Keys
 
-### Query Parameters
+## Query parameters
 
 - `after_id: optional string`
 
@@ -35,6 +30,8 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  default: 20, maximum: 1000, minimum: 1
+
 - `status: optional "active" or "archived" or "expired" or "inactive"`
 
   Filter by API key status.
@@ -51,7 +48,7 @@ List API Keys
 
   Filter by Workspace ID.
 
-### Returns
+## Returns
 
 - `data: array of APIKey`
 
@@ -63,7 +60,9 @@ List API Keys
 
     RFC 3339 datetime string indicating when the API Key was created.
 
-  - `created_by: object { id, type }  or null`
+    format: date-time
+
+  - `created_by: object or null`
 
     The ID and type of the actor that created the API key, or `null` when the
     creator is not recorded (legacy, workload-identity-federated, or
@@ -81,6 +80,8 @@ List API Keys
 
     RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
+    format: date-time
+
   - `name: string`
 
     Name of the API key.
@@ -89,7 +90,7 @@ List API Keys
 
     Partially redacted hint for the API key.
 
-  - `principal: object { id, type }  or null`
+  - `principal: object or null`
 
     The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
 
@@ -123,7 +124,7 @@ List API Keys
 
     For API Keys, this is always `"api_key"`.
 
-    - `"api_key"`
+    default: api_key
 
   - `workspace_id: string or null`
 
@@ -141,15 +142,15 @@ List API Keys
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/api_keys \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

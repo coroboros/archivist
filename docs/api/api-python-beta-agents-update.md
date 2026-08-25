@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/python/beta/agents/update"
 category: "api"
 generated: true
 ---
----
-title: Update Agent
-url: https://platform.claude.com/docs/en/api/python/beta/agents/update
----
+# Update Agent
 
-## Update Agent
+`beta.agents.update(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
 
-`beta.agents.update(stragent_id, AgentUpdateParams**kwargs)  -> BetaManagedAgentsAgent`
-
-**post** `/v1/agents/{agent_id}`
+**POST** `/v1/agents/{agent_id}`
 
 Update Agent
 
-### Parameters
+## Parameters
 
 - `agent_id: str`
 
 - `description: Optional[str]`
 
   Description. Omit to preserve; send empty string or null to clear.
+
+  maxLength: 2048
 
 - `mcp_servers: Optional[Iterable[BetaManagedAgentsURLMCPServerParams]]`
 
@@ -33,13 +30,15 @@ Update Agent
 
     Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
-  - `type: Literal["url"]`
+    minLength: 1, maxLength: 255
 
-    - `"url"`
+  - `type: Literal["url"]`
 
   - `url: str`
 
     Endpoint URL for the MCP server.
+
+    maxLength: 2048
 
 - `metadata: Optional[Dict[str, Optional[str]]]`
 
@@ -181,15 +180,11 @@ Update Agent
 
         - `type: Literal["low"]`
 
-          - `"low"`
-
       - `class BetaManagedAgentsEffortMedium: …`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: Literal["medium"]`
-
-          - `"medium"`
 
       - `class BetaManagedAgentsEffortHigh: …`
 
@@ -197,23 +192,17 @@ Update Agent
 
         - `type: Literal["high"]`
 
-          - `"high"`
-
       - `class BetaManagedAgentsEffortXhigh: …`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: Literal["xhigh"]`
 
-          - `"xhigh"`
-
       - `class BetaManagedAgentsEffortMax: …`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: Literal["max"]`
-
-          - `"max"`
 
     - `inference_geo: Optional[str]`
 
@@ -245,21 +234,21 @@ Update Agent
 
         The `agent` ID.
 
-      - `type: Literal["agent"]`
+        minLength: 1, maxLength: 128
 
-        - `"agent"`
+      - `type: Literal["agent"]`
 
       - `version: Optional[int]`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+        format: int32
 
     - `class BetaManagedAgentsMultiagentSelfParams: …`
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
       - `type: Literal["self"]`
-
-        - `"self"`
 
     - `class BetaManagedAgentsAdvisorParams: …`
 
@@ -269,17 +258,17 @@ Update Agent
 
         A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
+        minLength: 1, maxLength: 256
+
       - `type: Literal["advisor"]`
 
-        - `"advisor"`
-
   - `type: Literal["coordinator"]`
-
-    - `"coordinator"`
 
 - `name: Optional[str]`
 
   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+
+  maxLength: 256
 
 - `skills: Optional[Iterable[BetaManagedAgentsSkillParams]]`
 
@@ -293,13 +282,15 @@ Update Agent
 
       Identifier of the Anthropic skill (e.g., "xlsx").
 
-    - `type: Literal["anthropic"]`
+      minLength: 1, maxLength: 64
 
-      - `"anthropic"`
+    - `type: Literal["anthropic"]`
 
     - `version: Optional[str]`
 
       Version to pin. Defaults to latest if omitted.
+
+      minLength: 1, maxLength: 64
 
   - `class BetaManagedAgentsCustomSkillParams: …`
 
@@ -309,17 +300,21 @@ Update Agent
 
       Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
-    - `type: Literal["custom"]`
+      minLength: 1, maxLength: 64
 
-      - `"custom"`
+    - `type: Literal["custom"]`
 
     - `version: Optional[str]`
 
       Version to pin. Defaults to latest if omitted.
 
+      minLength: 1, maxLength: 64
+
 - `system: Optional[str]`
 
   System prompt. Omit to preserve; send empty string or null to clear.
+
+  maxLength: 100000
 
 - `tools: Optional[Iterable[Tool]]`
 
@@ -330,8 +325,6 @@ Update Agent
     Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
     - `type: Literal["agent_toolset_20260401"]`
-
-      - `"agent_toolset_20260401"`
 
     - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
 
@@ -344,8 +337,6 @@ Update Agent
         - `name: Literal["bash"]`
 
           Must be "bash".
-
-          - `"bash"`
 
         - `enabled: Optional[bool]`
 
@@ -361,19 +352,13 @@ Update Agent
 
             - `type: Literal["always_allow"]`
 
-              - `"always_allow"`
-
           - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
             Tool calls require user confirmation before execution.
 
             - `type: Literal["always_ask"]`
 
-              - `"always_ask"`
-
         - `type: Optional[Literal["bash"]]`
-
-          - `"bash"`
 
       - `class BetaManagedAgentsEditToolConfigParams: …`
 
@@ -382,8 +367,6 @@ Update Agent
         - `name: Literal["edit"]`
 
           Must be "edit".
-
-          - `"edit"`
 
         - `enabled: Optional[bool]`
 
@@ -403,8 +386,6 @@ Update Agent
 
         - `type: Optional[Literal["edit"]]`
 
-          - `"edit"`
-
       - `class BetaManagedAgentsReadToolConfigParams: …`
 
         Configuration override for the read tool.
@@ -412,8 +393,6 @@ Update Agent
         - `name: Literal["read"]`
 
           Must be "read".
-
-          - `"read"`
 
         - `enabled: Optional[bool]`
 
@@ -433,8 +412,6 @@ Update Agent
 
         - `type: Optional[Literal["read"]]`
 
-          - `"read"`
-
       - `class BetaManagedAgentsWriteToolConfigParams: …`
 
         Configuration override for the write tool.
@@ -442,8 +419,6 @@ Update Agent
         - `name: Literal["write"]`
 
           Must be "write".
-
-          - `"write"`
 
         - `enabled: Optional[bool]`
 
@@ -463,8 +438,6 @@ Update Agent
 
         - `type: Optional[Literal["write"]]`
 
-          - `"write"`
-
       - `class BetaManagedAgentsGlobToolConfigParams: …`
 
         Configuration override for the glob tool.
@@ -472,8 +445,6 @@ Update Agent
         - `name: Literal["glob"]`
 
           Must be "glob".
-
-          - `"glob"`
 
         - `enabled: Optional[bool]`
 
@@ -493,8 +464,6 @@ Update Agent
 
         - `type: Optional[Literal["glob"]]`
 
-          - `"glob"`
-
       - `class BetaManagedAgentsGrepToolConfigParams: …`
 
         Configuration override for the grep tool.
@@ -502,8 +471,6 @@ Update Agent
         - `name: Literal["grep"]`
 
           Must be "grep".
-
-          - `"grep"`
 
         - `enabled: Optional[bool]`
 
@@ -523,8 +490,6 @@ Update Agent
 
         - `type: Optional[Literal["grep"]]`
 
-          - `"grep"`
-
       - `class BetaManagedAgentsWebFetchToolConfigParams: …`
 
         Configuration override for the web_fetch tool.
@@ -532,8 +497,6 @@ Update Agent
         - `name: Literal["web_fetch"]`
 
           Must be "web_fetch".
-
-          - `"web_fetch"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -551,6 +514,8 @@ Update Agent
 
           Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
+          format: int32
+
         - `permission_policy: Optional[PermissionPolicy]`
 
           Permission policy for tool execution.
@@ -565,8 +530,6 @@ Update Agent
 
         - `type: Optional[Literal["web_fetch"]]`
 
-          - `"web_fetch"`
-
       - `class BetaManagedAgentsWebSearchToolConfigParams: …`
 
         Configuration override for the web_search tool.
@@ -574,8 +537,6 @@ Update Agent
         - `name: Literal["web_search"]`
 
           Must be "web_search".
-
-          - `"web_search"`
 
         - `allowed_domains: Optional[List[str]]`
 
@@ -603,8 +564,6 @@ Update Agent
 
         - `type: Optional[Literal["web_search"]]`
 
-          - `"web_search"`
-
         - `user_location: Optional[BetaManagedAgentsUserLocation]`
 
           Approximate user location for search result localization.
@@ -613,11 +572,11 @@ Update Agent
 
             Location precision. Only "approximate" is supported.
 
-            - `"approximate"`
-
           - `city: Optional[str]`
 
             City name.
+
+            minLength: 1, maxLength: 255
 
           - `country: Optional[str]`
 
@@ -627,9 +586,13 @@ Update Agent
 
             Region or state name.
 
+            minLength: 1, maxLength: 255
+
           - `timezone: Optional[str]`
 
             IANA timezone identifier, e.g. "America/Los_Angeles".
+
+            minLength: 1, maxLength: 255
 
     - `default_config: Optional[BetaManagedAgentsAgentToolsetDefaultConfigParams]`
 
@@ -659,9 +622,9 @@ Update Agent
 
       Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
-    - `type: Literal["mcp_toolset"]`
+      minLength: 1, maxLength: 255
 
-      - `"mcp_toolset"`
+    - `type: Literal["mcp_toolset"]`
 
     - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
 
@@ -670,6 +633,8 @@ Update Agent
       - `name: str`
 
         Name of the MCP tool to configure. 1-128 characters.
+
+        minLength: 1, maxLength: 128
 
       - `enabled: Optional[bool]`
 
@@ -715,13 +680,13 @@ Update Agent
 
       Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
+      minLength: 1
+
     - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
       JSON Schema for custom tool input parameters.
 
       - `type: Literal["object"]`
-
-        - `"object"`
 
       - `properties: Optional[Dict[str, object]]`
 
@@ -731,13 +696,15 @@ Update Agent
 
       Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-    - `type: Literal["custom"]`
+      minLength: 1, maxLength: 128
 
-      - `"custom"`
+    - `type: Literal["custom"]`
 
 - `version: Optional[int]`
 
   The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
+  format: int32
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -815,7 +782,7 @@ Update Agent
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsAgent: …`
 
@@ -827,9 +794,13 @@ Update Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: Optional[str]`
 
@@ -838,8 +809,6 @@ Update Agent
     - `name: str`
 
     - `type: Literal["url"]`
-
-      - `"url"`
 
     - `url: str`
 
@@ -939,15 +908,11 @@ Update Agent
 
         - `type: Literal["low"]`
 
-          - `"low"`
-
       - `class BetaManagedAgentsEffortMedium: …`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: Literal["medium"]`
-
-          - `"medium"`
 
       - `class BetaManagedAgentsEffortHigh: …`
 
@@ -955,23 +920,17 @@ Update Agent
 
         - `type: Literal["high"]`
 
-          - `"high"`
-
       - `class BetaManagedAgentsEffortXhigh: …`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: Literal["xhigh"]`
 
-          - `"xhigh"`
-
       - `class BetaManagedAgentsEffortMax: …`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: Literal["max"]`
-
-          - `"max"`
 
     - `inference_geo: Optional[str]`
 
@@ -1001,9 +960,9 @@ Update Agent
 
         - `type: Literal["agent"]`
 
-          - `"agent"`
-
         - `version: int`
+
+          format: int32
 
       - `class BetaManagedAgentsAdvisor: …`
 
@@ -1015,11 +974,7 @@ Update Agent
 
         - `type: Literal["advisor"]`
 
-          - `"advisor"`
-
     - `type: Literal["coordinator"]`
-
-      - `"coordinator"`
 
   - `name: str`
 
@@ -1033,8 +988,6 @@ Update Agent
 
       - `type: Literal["anthropic"]`
 
-        - `"anthropic"`
-
       - `version: str`
 
     - `class BetaManagedAgentsCustomSkill: …`
@@ -1044,8 +997,6 @@ Update Agent
       - `skill_id: str`
 
       - `type: Literal["custom"]`
-
-        - `"custom"`
 
       - `version: str`
 
@@ -1065,8 +1016,6 @@ Update Agent
 
           - `name: Literal["bash"]`
 
-            - `"bash"`
-
           - `permission_policy: PermissionPolicy`
 
             Permission policy for tool execution.
@@ -1077,19 +1026,13 @@ Update Agent
 
               - `type: Literal["always_allow"]`
 
-                - `"always_allow"`
-
             - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
               Tool calls require user confirmation before execution.
 
               - `type: Literal["always_ask"]`
 
-                - `"always_ask"`
-
           - `type: Literal["bash"]`
-
-            - `"bash"`
 
         - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -1098,8 +1041,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["edit"]`
-
-            - `"edit"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1115,8 +1056,6 @@ Update Agent
 
           - `type: Literal["edit"]`
 
-            - `"edit"`
-
         - `class BetaManagedAgentsReadToolConfig: …`
 
           Configuration for the read tool.
@@ -1124,8 +1063,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["read"]`
-
-            - `"read"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1141,8 +1078,6 @@ Update Agent
 
           - `type: Literal["read"]`
 
-            - `"read"`
-
         - `class BetaManagedAgentsWriteToolConfig: …`
 
           Configuration for the write tool.
@@ -1150,8 +1085,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["write"]`
-
-            - `"write"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1167,8 +1100,6 @@ Update Agent
 
           - `type: Literal["write"]`
 
-            - `"write"`
-
         - `class BetaManagedAgentsGlobToolConfig: …`
 
           Configuration for the glob tool.
@@ -1176,8 +1107,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["glob"]`
-
-            - `"glob"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1193,8 +1122,6 @@ Update Agent
 
           - `type: Literal["glob"]`
 
-            - `"glob"`
-
         - `class BetaManagedAgentsGrepToolConfig: …`
 
           Configuration for the grep tool.
@@ -1202,8 +1129,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["grep"]`
-
-            - `"grep"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1219,8 +1144,6 @@ Update Agent
 
           - `type: Literal["grep"]`
 
-            - `"grep"`
-
         - `class BetaManagedAgentsWebFetchToolConfig: …`
 
           Configuration for the web_fetch tool.
@@ -1228,8 +1151,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["web_fetch"]`
-
-            - `"web_fetch"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1245,13 +1166,13 @@ Update Agent
 
           - `type: Literal["web_fetch"]`
 
-            - `"web_fetch"`
-
           - `allowed_domains: Optional[List[str]]`
 
           - `blocked_domains: Optional[List[str]]`
 
           - `max_content_tokens: Optional[int]`
+
+            format: int32
 
         - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -1260,8 +1181,6 @@ Update Agent
           - `enabled: bool`
 
           - `name: Literal["web_search"]`
-
-            - `"web_search"`
 
           - `permission_policy: PermissionPolicy`
 
@@ -1277,8 +1196,6 @@ Update Agent
 
           - `type: Literal["web_search"]`
 
-            - `"web_search"`
-
           - `allowed_domains: Optional[List[str]]`
 
           - `blocked_domains: Optional[List[str]]`
@@ -1291,11 +1208,11 @@ Update Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `"approximate"`
-
             - `city: Optional[str]`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country: Optional[str]`
 
@@ -1305,9 +1222,13 @@ Update Agent
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone: Optional[str]`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -1328,8 +1249,6 @@ Update Agent
             Tool calls require user confirmation before execution.
 
       - `type: Literal["agent_toolset_20260401"]`
-
-        - `"agent_toolset_20260401"`
 
     - `class BetaManagedAgentsMCPToolset: …`
 
@@ -1373,8 +1292,6 @@ Update Agent
 
       - `type: Literal["mcp_toolset"]`
 
-        - `"mcp_toolset"`
-
     - `class BetaManagedAgentsCustomTool: …`
 
       A custom tool as returned in API responses.
@@ -1387,8 +1304,6 @@ Update Agent
 
         - `type: Literal["object"]`
 
-          - `"object"`
-
         - `properties: Optional[Dict[str, object]]`
 
         - `required: Optional[List[str]]`
@@ -1397,21 +1312,21 @@ Update Agent
 
       - `type: Literal["custom"]`
 
-        - `"custom"`
-
   - `type: Literal["agent"]`
-
-    - `"agent"`
 
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `version: int`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+## Example
 
 ```python
 import os
@@ -1429,7 +1344,7 @@ beta_managed_agents_agent = client.beta.agents.update(
 print(beta_managed_agents_agent.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

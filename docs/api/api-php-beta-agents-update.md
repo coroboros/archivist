@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/update"
 category: "api"
 generated: true
 ---
----
-title: Update Agent
-url: https://platform.claude.com/docs/en/api/php/beta/agents/update
----
-
-## Update Agent
+# Update Agent
 
 `$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
-**post** `/v1/agents/{agent_id}`
+**POST** `/v1/agents/{agent_id}`
 
 Update Agent
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -65,7 +60,7 @@ Update Agent
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -111,7 +106,7 @@ Update Agent
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -167,7 +162,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
 var_dump($betaManagedAgentsAgent);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Environment
-url: https://platform.claude.com/docs/en/api/ruby/beta/environments/archive
----
-
-## Archive Environment
+# Archive Environment
 
 `beta.environments.archive(environment_id, **kwargs) -> BetaEnvironment`
 
-**post** `/v1/environments/{environment_id}/archive`
+**POST** `/v1/environments/{environment_id}/archive`
 
 Archive an environment by ID. Archived environments cannot be used to create new sessions.
 
-### Parameters
+## Parameters
 
 - `environment_id: String`
 
@@ -97,7 +92,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaEnvironment`
 
@@ -131,8 +126,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-            - `:unrestricted`
-
         - `class BetaLimitedNetwork`
 
           Limited network access.
@@ -152,8 +145,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
           - `type: :limited`
 
             Network policy type
-
-            - `:limited`
 
       - `packages: BetaPackages`
 
@@ -187,13 +178,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Package configuration type
 
-          - `:packages`
-
       - `type: :cloud`
 
         Environment type
-
-        - `:cloud`
 
     - `class BetaSelfHostedConfig`
 
@@ -202,8 +189,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `type: :self_hosted`
 
         Environment type
-
-        - `:self_hosted`
 
   - `created_at: String`
 
@@ -225,8 +210,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     The type of object (always 'environment')
 
-    - `:environment`
-
   - `updated_at: String`
 
     RFC 3339 timestamp when environment was last updated
@@ -239,7 +222,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `:account`
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -251,7 +234,7 @@ beta_environment = anthropic.beta.environments.archive("env_011CZkZ9X2dpNyB7HsEF
 puts(beta_environment)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

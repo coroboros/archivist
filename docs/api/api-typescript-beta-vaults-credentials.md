@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/vaults/credenti
 category: "api"
 generated: true
 ---
----
-title: Credentials
-url: https://platform.claude.com/docs/en/api/typescript/beta/vaults/credentials
----
-
 # Credentials
 
 ## Create Credential
 
-`client.beta.vaults.credentials.create(stringvaultID, CredentialCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredential`
+`client.beta.vaults.credentials.create(vaultID, params, options?): BetaManagedAgentsCredential`
 
-**post** `/v1/vaults/{vault_id}/credentials`
+**POST** `/v1/vaults/{vault_id}/credentials`
 
 Create Credential
 
@@ -37,17 +32,21 @@ Create Credential
 
         OAuth access token.
 
+        minLength: 1, maxLength: 8192
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "mcp_oauth"`
+        minLength: 1, maxLength: 2047
 
-        - `"mcp_oauth"`
+      - `type: "mcp_oauth"`
 
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshParams | null`
 
@@ -57,13 +56,19 @@ Create Credential
 
           OAuth client ID.
 
+          minLength: 1, maxLength: 1024
+
         - `refresh_token: string`
 
           OAuth refresh token.
 
+          minLength: 1, maxLength: 4096
+
         - `token_endpoint: string`
 
           Token endpoint URL used to refresh the access token.
+
+          minLength: 1, maxLength: 2047
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -75,8 +80,6 @@ Create Credential
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicParam`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
@@ -85,9 +88,9 @@ Create Credential
 
               OAuth client secret.
 
-            - `type: "client_secret_basic"`
+              minLength: 1, maxLength: 512
 
-              - `"client_secret_basic"`
+            - `type: "client_secret_basic"`
 
           - `BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -97,17 +100,21 @@ Create Credential
 
               OAuth client secret.
 
-            - `type: "client_secret_post"`
+              minLength: 1, maxLength: 512
 
-              - `"client_secret_post"`
+            - `type: "client_secret_post"`
 
         - `resource?: string | null`
 
           OAuth resource indicator.
 
+          minLength: 1, maxLength: 2047
+
         - `scope?: string | null`
 
           OAuth scope for the refresh request.
+
+          minLength: 1, maxLength: 8192
 
     - `BetaManagedAgentsStaticBearerCreateParams`
 
@@ -117,13 +124,15 @@ Create Credential
 
         Static bearer token value.
 
+        minLength: 1, maxLength: 8192
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
+        minLength: 1, maxLength: 2047
 
-        - `"static_bearer"`
+      - `type: "static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableCreateParams`
 
@@ -139,8 +148,6 @@ Create Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
@@ -151,19 +158,19 @@ Create Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable. Immutable after create.
+
+        minLength: 1, maxLength: 255
 
       - `secret_value: string`
 
         Secret value. Write-only; never returned in responses.
 
-      - `type: "environment_variable"`
+        minLength: 1, maxLength: 4096
 
-        - `"environment_variable"`
+      - `type: "environment_variable"`
 
       - `injection_location?: BetaManagedAgentsInjectionLocationParams`
 
@@ -180,6 +187,8 @@ Create Credential
   - `display_name?: string | null`
 
     Body param: Human-readable name for the credential. Up to 255 characters.
+
+    maxLength: 255
 
   - `metadata?: Record<string, string>`
 
@@ -275,6 +284,8 @@ Create Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -289,11 +300,11 @@ Create Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -317,23 +328,17 @@ Create Credential
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -352,8 +357,6 @@ Create Credential
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -381,8 +384,6 @@ Create Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -393,19 +394,17 @@ Create Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -413,11 +412,11 @@ Create Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -450,7 +449,7 @@ const betaManagedAgentsCredential = await client.beta.vaults.credentials.create(
 console.log(betaManagedAgentsCredential.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -473,9 +472,9 @@ console.log(betaManagedAgentsCredential.id);
 
 ## List Credentials
 
-`client.beta.vaults.credentials.list(stringvaultID, CredentialListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsCredential>`
+`client.beta.vaults.credentials.list(vaultID, params?, options?): PageCursor<BetaManagedAgentsCredential>`
 
-**get** `/v1/vaults/{vault_id}/credentials`
+**GET** `/v1/vaults/{vault_id}/credentials`
 
 List Credentials
 
@@ -492,6 +491,8 @@ List Credentials
   - `limit?: number`
 
     Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+
+    format: int32
 
   - `page?: string`
 
@@ -587,6 +588,8 @@ List Credentials
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -601,11 +604,11 @@ List Credentials
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -629,23 +632,17 @@ List Credentials
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -664,8 +661,6 @@ List Credentials
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -693,8 +688,6 @@ List Credentials
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -705,19 +698,17 @@ List Credentials
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -725,11 +716,11 @@ List Credentials
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -756,7 +747,7 @@ for await (const betaManagedAgentsCredential of client.beta.vaults.credentials.l
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -784,9 +775,9 @@ for await (const betaManagedAgentsCredential of client.beta.vaults.credentials.l
 
 ## Get Credential
 
-`client.beta.vaults.credentials.retrieve(stringcredentialID, CredentialRetrieveParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredential`
+`client.beta.vaults.credentials.retrieve(credentialID, params, options?): BetaManagedAgentsCredential`
 
-**get** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Get Credential
 
@@ -890,6 +881,8 @@ Get Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -904,11 +897,11 @@ Get Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -932,23 +925,17 @@ Get Credential
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -967,8 +954,6 @@ Get Credential
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -996,8 +981,6 @@ Get Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -1008,19 +991,17 @@ Get Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -1028,11 +1009,11 @@ Get Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1059,7 +1040,7 @@ const betaManagedAgentsCredential = await client.beta.vaults.credentials.retriev
 console.log(betaManagedAgentsCredential.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1082,9 +1063,9 @@ console.log(betaManagedAgentsCredential.id);
 
 ## Update Credential
 
-`client.beta.vaults.credentials.update(stringcredentialID, CredentialUpdateParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredential`
+`client.beta.vaults.credentials.update(credentialID, params, options?): BetaManagedAgentsCredential`
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Update Credential
 
@@ -1108,15 +1089,17 @@ Update Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `access_token?: string | null`
 
         Updated OAuth access token.
 
+        minLength: 1, maxLength: 8192
+
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshUpdateParams | null`
 
@@ -1126,9 +1109,13 @@ Update Credential
 
           Updated OAuth refresh token.
 
+          minLength: 1, maxLength: 4096
+
         - `scope?: string | null`
 
           Updated OAuth scope for the refresh request.
+
+          maxLength: 8192
 
         - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -1140,11 +1127,11 @@ Update Credential
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
             - `client_secret?: string | null`
 
               Updated OAuth client secret.
+
+              minLength: 1, maxLength: 512
 
           - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -1152,11 +1139,11 @@ Update Credential
 
             - `type: "client_secret_post"`
 
-              - `"client_secret_post"`
-
             - `client_secret?: string | null`
 
               Updated OAuth client secret.
+
+              minLength: 1, maxLength: 512
 
     - `BetaManagedAgentsStaticBearerUpdateParams`
 
@@ -1164,19 +1151,17 @@ Update Credential
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
       - `token?: string | null`
 
         Updated static bearer token value.
+
+        minLength: 1, maxLength: 8192
 
     - `BetaManagedAgentsEnvironmentVariableUpdateParams`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
       - `type: "environment_variable"`
-
-        - `"environment_variable"`
 
       - `injection_location?: BetaManagedAgentsInjectionLocationUpdateParams`
 
@@ -1200,8 +1185,6 @@ Update Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
@@ -1212,15 +1195,17 @@ Update Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_value?: string | null`
 
         Updated secret value.
 
+        minLength: 1, maxLength: 4096
+
   - `display_name?: string | null`
 
     Body param: Updated human-readable name for the credential. 1-255 characters.
+
+    minLength: 1, maxLength: 255
 
   - `metadata?: Record<string, string | null> | null`
 
@@ -1316,6 +1301,8 @@ Update Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -1330,11 +1317,11 @@ Update Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -1358,23 +1345,17 @@ Update Credential
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -1393,8 +1374,6 @@ Update Credential
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -1422,8 +1401,6 @@ Update Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -1434,19 +1411,17 @@ Update Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -1454,11 +1429,11 @@ Update Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1485,7 +1460,7 @@ const betaManagedAgentsCredential = await client.beta.vaults.credentials.update(
 console.log(betaManagedAgentsCredential.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1508,9 +1483,9 @@ console.log(betaManagedAgentsCredential.id);
 
 ## Delete Credential
 
-`client.beta.vaults.credentials.delete(stringcredentialID, CredentialDeleteParamsparams, RequestOptionsoptions?): BetaManagedAgentsDeletedCredential`
+`client.beta.vaults.credentials.delete(credentialID, params, options?): BetaManagedAgentsDeletedCredential`
 
-**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Delete Credential
 
@@ -1612,8 +1587,6 @@ Delete Credential
 
   - `type: "vault_credential_deleted"`
 
-    - `"vault_credential_deleted"`
-
 ### Example
 
 ```typescript
@@ -1631,7 +1604,7 @@ const betaManagedAgentsDeletedCredential = await client.beta.vaults.credentials.
 console.log(betaManagedAgentsDeletedCredential.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1642,9 +1615,9 @@ console.log(betaManagedAgentsDeletedCredential.id);
 
 ## Archive Credential
 
-`client.beta.vaults.credentials.archive(stringcredentialID, CredentialArchiveParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredential`
+`client.beta.vaults.credentials.archive(credentialID, params, options?): BetaManagedAgentsCredential`
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
 Archive Credential
 
@@ -1748,6 +1721,8 @@ Archive Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -1762,11 +1737,11 @@ Archive Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -1790,23 +1765,17 @@ Archive Credential
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -1825,8 +1794,6 @@ Archive Credential
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -1854,8 +1821,6 @@ Archive Credential
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -1866,19 +1831,17 @@ Archive Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -1886,11 +1849,11 @@ Archive Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1917,7 +1880,7 @@ const betaManagedAgentsCredential = await client.beta.vaults.credentials.archive
 console.log(betaManagedAgentsCredential.id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1940,9 +1903,9 @@ console.log(betaManagedAgentsCredential.id);
 
 ## Validate Credential
 
-`client.beta.vaults.credentials.mcpOAuthValidate(stringcredentialID, CredentialMCPOAuthValidateParamsparams, RequestOptionsoptions?): BetaManagedAgentsCredentialValidation`
+`client.beta.vaults.credentials.mcpOAuthValidate(credentialID, params, options?): BetaManagedAgentsCredentialValidation`
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
@@ -2070,6 +2033,8 @@ Validate Credential
 
         HTTP status code.
 
+        format: int32
+
     - `method: string`
 
       The MCP method that failed (for example `initialize` or `tools/list`).
@@ -2106,11 +2071,11 @@ Validate Credential
 
   - `type: "vault_credential_validation"`
 
-    - `"vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2133,7 +2098,7 @@ const betaManagedAgentsCredentialValidation =
 console.log(betaManagedAgentsCredentialValidation.credential_id);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2164,7 +2129,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Credential
 
@@ -2180,6 +2145,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
@@ -2194,11 +2161,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at?: string | null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -2222,23 +2189,17 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
             - `type: "none"`
 
-              - `"none"`
-
           - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
           - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource?: string | null`
 
@@ -2257,8 +2218,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
         URL of the MCP server this credential authenticates against.
 
       - `type: "static_bearer"`
-
-        - `"static_bearer"`
 
     - `BetaManagedAgentsEnvironmentVariableAuthResponse`
 
@@ -2286,8 +2245,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
         - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
@@ -2298,19 +2255,17 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Record<string, string>`
 
@@ -2318,11 +2273,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2344,8 +2299,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     - `type: "unrestricted"`
 
-      - `"unrestricted"`
-
   - `BetaManagedAgentsLimitedCredentialNetworkingParams`
 
     Substitute the secret only on requests to the listed hosts.
@@ -2355,8 +2308,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
       Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
     - `type: "limited"`
-
-      - `"limited"`
 
 ### Beta Managed Agents Credential Validation
 
@@ -2396,6 +2347,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         HTTP status code.
 
+        format: int32
+
     - `method: string`
 
       The MCP method that failed (for example `initialize` or `tools/list`).
@@ -2432,11 +2385,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "vault_credential_validation"`
 
-    - `"vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2466,8 +2419,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "vault_credential_deleted"`
 
-    - `"vault_credential_deleted"`
-
 ### Beta Managed Agents Environment Variable Auth Response
 
 - `BetaManagedAgentsEnvironmentVariableAuthResponse`
@@ -2496,8 +2447,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
     - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
       The secret is substituted only on requests to the listed hosts.
@@ -2508,15 +2457,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_name: string`
 
     Name of the environment variable.
 
   - `type: "environment_variable"`
-
-    - `"environment_variable"`
 
 ### Beta Managed Agents Environment Variable Create Params
 
@@ -2534,8 +2479,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
     - `BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
@@ -2546,19 +2489,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_name: string`
 
     Name of the environment variable. Immutable after create.
+
+    minLength: 1, maxLength: 255
 
   - `secret_value: string`
 
     Secret value. Write-only; never returned in responses.
 
-  - `type: "environment_variable"`
+    minLength: 1, maxLength: 4096
 
-    - `"environment_variable"`
+  - `type: "environment_variable"`
 
   - `injection_location?: BetaManagedAgentsInjectionLocationParams`
 
@@ -2579,8 +2522,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
   Parameters for updating an environment variable credential. `secret_name` is immutable.
 
   - `type: "environment_variable"`
-
-    - `"environment_variable"`
 
   - `injection_location?: BetaManagedAgentsInjectionLocationUpdateParams`
 
@@ -2604,8 +2545,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
     - `BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
@@ -2616,11 +2555,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_value?: string | null`
 
     Updated secret value.
+
+    minLength: 1, maxLength: 4096
 
 ### Beta Managed Agents Injection Location Params
 
@@ -2676,8 +2615,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "limited"`
 
-    - `"limited"`
-
 ### Beta Managed Agents Limited Credential Networking Response
 
 - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
@@ -2689,8 +2626,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
     Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
   - `type: "limited"`
-
-    - `"limited"`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -2704,11 +2639,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "mcp_oauth"`
 
-    - `"mcp_oauth"`
-
   - `expires_at?: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh?: BetaManagedAgentsMCPOAuthRefreshResponse | null`
 
@@ -2732,23 +2667,17 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         - `type: "none"`
 
-          - `"none"`
-
       - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
         - `type: "client_secret_basic"`
 
-          - `"client_secret_basic"`
-
       - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
         Token endpoint uses POST body authentication with client credentials.
 
         - `type: "client_secret_post"`
-
-          - `"client_secret_post"`
 
     - `resource?: string | null`
 
@@ -2768,17 +2697,21 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     OAuth access token.
 
+    minLength: 1, maxLength: 8192
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
 
-  - `type: "mcp_oauth"`
+    minLength: 1, maxLength: 2047
 
-    - `"mcp_oauth"`
+  - `type: "mcp_oauth"`
 
   - `expires_at?: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh?: BetaManagedAgentsMCPOAuthRefreshParams | null`
 
@@ -2788,13 +2721,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       OAuth client ID.
 
+      minLength: 1, maxLength: 1024
+
     - `refresh_token: string`
 
       OAuth refresh token.
 
+      minLength: 1, maxLength: 4096
+
     - `token_endpoint: string`
 
       Token endpoint URL used to refresh the access token.
+
+      minLength: 1, maxLength: 2047
 
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -2806,8 +2745,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         - `type: "none"`
 
-          - `"none"`
-
       - `BetaManagedAgentsTokenEndpointAuthBasicParam`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
@@ -2816,9 +2753,9 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           OAuth client secret.
 
-        - `type: "client_secret_basic"`
+          minLength: 1, maxLength: 512
 
-          - `"client_secret_basic"`
+        - `type: "client_secret_basic"`
 
       - `BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -2828,17 +2765,21 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           OAuth client secret.
 
-        - `type: "client_secret_post"`
+          minLength: 1, maxLength: 512
 
-          - `"client_secret_post"`
+        - `type: "client_secret_post"`
 
     - `resource?: string | null`
 
       OAuth resource indicator.
 
+      minLength: 1, maxLength: 2047
+
     - `scope?: string | null`
 
       OAuth scope for the refresh request.
+
+      minLength: 1, maxLength: 8192
 
 ### Beta Managed Agents MCP OAuth Refresh Params
 
@@ -2850,13 +2791,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     OAuth client ID.
 
+    minLength: 1, maxLength: 1024
+
   - `refresh_token: string`
 
     OAuth refresh token.
 
+    minLength: 1, maxLength: 4096
+
   - `token_endpoint: string`
 
     Token endpoint URL used to refresh the access token.
+
+    minLength: 1, maxLength: 2047
 
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -2868,8 +2815,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "none"`
 
-        - `"none"`
-
     - `BetaManagedAgentsTokenEndpointAuthBasicParam`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
@@ -2878,9 +2823,9 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         OAuth client secret.
 
-      - `type: "client_secret_basic"`
+        minLength: 1, maxLength: 512
 
-        - `"client_secret_basic"`
+      - `type: "client_secret_basic"`
 
     - `BetaManagedAgentsTokenEndpointAuthPostParam`
 
@@ -2890,17 +2835,21 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         OAuth client secret.
 
-      - `type: "client_secret_post"`
+        minLength: 1, maxLength: 512
 
-        - `"client_secret_post"`
+      - `type: "client_secret_post"`
 
   - `resource?: string | null`
 
     OAuth resource indicator.
 
+    minLength: 1, maxLength: 2047
+
   - `scope?: string | null`
 
     OAuth scope for the refresh request.
+
+    minLength: 1, maxLength: 8192
 
 ### Beta Managed Agents MCP OAuth Refresh Response
 
@@ -2926,23 +2875,17 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "none"`
 
-        - `"none"`
-
     - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
       - `type: "client_secret_basic"`
 
-        - `"client_secret_basic"`
-
     - `BetaManagedAgentsTokenEndpointAuthPostResponse`
 
       Token endpoint uses POST body authentication with client credentials.
 
       - `type: "client_secret_post"`
-
-        - `"client_secret_post"`
 
   - `resource?: string | null`
 
@@ -2962,9 +2905,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Updated OAuth refresh token.
 
+    minLength: 1, maxLength: 4096
+
   - `scope?: string | null`
 
     Updated OAuth scope for the refresh request.
+
+    maxLength: 8192
 
   - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -2976,11 +2923,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "client_secret_basic"`
 
-        - `"client_secret_basic"`
-
       - `client_secret?: string | null`
 
         Updated OAuth client secret.
+
+        minLength: 1, maxLength: 512
 
     - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -2988,11 +2935,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       - `type: "client_secret_post"`
 
-        - `"client_secret_post"`
-
       - `client_secret?: string | null`
 
         Updated OAuth client secret.
+
+        minLength: 1, maxLength: 512
 
 ### Beta Managed Agents MCP OAuth Update Params
 
@@ -3002,15 +2949,17 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "mcp_oauth"`
 
-    - `"mcp_oauth"`
-
   - `access_token?: string | null`
 
     Updated OAuth access token.
 
+    minLength: 1, maxLength: 8192
+
   - `expires_at?: string | null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh?: BetaManagedAgentsMCPOAuthRefreshUpdateParams | null`
 
@@ -3020,9 +2969,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       Updated OAuth refresh token.
 
+      minLength: 1, maxLength: 4096
+
     - `scope?: string | null`
 
       Updated OAuth scope for the refresh request.
+
+      maxLength: 8192
 
     - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -3034,11 +2987,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         - `type: "client_secret_basic"`
 
-          - `"client_secret_basic"`
-
         - `client_secret?: string | null`
 
           Updated OAuth client secret.
+
+          minLength: 1, maxLength: 512
 
       - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
@@ -3046,11 +2999,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         - `type: "client_secret_post"`
 
-          - `"client_secret_post"`
-
         - `client_secret?: string | null`
 
           Updated OAuth client secret.
+
+          minLength: 1, maxLength: 512
 
 ### Beta Managed Agents MCP Probe
 
@@ -3078,6 +3031,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       HTTP status code.
 
+      format: int32
+
   - `method: string`
 
     The MCP method that failed (for example `initialize` or `tools/list`).
@@ -3103,6 +3058,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
   - `status_code: number`
 
     HTTP status code.
+
+    format: int32
 
 ### Beta Managed Agents Refresh Object
 
@@ -3130,6 +3087,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       HTTP status code.
 
+      format: int32
+
   - `status: "succeeded" | "failed" | "connect_error" | "no_refresh_token"`
 
     Outcome of a refresh-token exchange attempted during credential validation.
@@ -3154,8 +3113,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "static_bearer"`
 
-    - `"static_bearer"`
-
 ### Beta Managed Agents Static Bearer Create Params
 
 - `BetaManagedAgentsStaticBearerCreateParams`
@@ -3166,13 +3123,15 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Static bearer token value.
 
+    minLength: 1, maxLength: 8192
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
 
-  - `type: "static_bearer"`
+    minLength: 1, maxLength: 2047
 
-    - `"static_bearer"`
+  - `type: "static_bearer"`
 
 ### Beta Managed Agents Static Bearer Update Params
 
@@ -3182,11 +3141,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "static_bearer"`
 
-    - `"static_bearer"`
-
   - `token?: string | null`
 
     Updated static bearer token value.
+
+    minLength: 1, maxLength: 8192
 
 ### Beta Managed Agents Token Endpoint Auth Basic Param
 
@@ -3198,9 +3157,9 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     OAuth client secret.
 
-  - `type: "client_secret_basic"`
+    minLength: 1, maxLength: 512
 
-    - `"client_secret_basic"`
+  - `type: "client_secret_basic"`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
@@ -3210,8 +3169,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "client_secret_basic"`
 
-    - `"client_secret_basic"`
-
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
 - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
@@ -3220,11 +3177,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "client_secret_basic"`
 
-    - `"client_secret_basic"`
-
   - `client_secret?: string | null`
 
     Updated OAuth client secret.
+
+    minLength: 1, maxLength: 512
 
 ### Beta Managed Agents Token Endpoint Auth None Param
 
@@ -3234,8 +3191,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "none"`
 
-    - `"none"`
-
 ### Beta Managed Agents Token Endpoint Auth None Response
 
 - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
@@ -3243,8 +3198,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
   Token endpoint requires no client authentication.
 
   - `type: "none"`
-
-    - `"none"`
 
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
@@ -3256,9 +3209,9 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     OAuth client secret.
 
-  - `type: "client_secret_post"`
+    minLength: 1, maxLength: 512
 
-    - `"client_secret_post"`
+  - `type: "client_secret_post"`
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 
@@ -3268,8 +3221,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "client_secret_post"`
 
-    - `"client_secret_post"`
-
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
 - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
@@ -3278,11 +3229,11 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "client_secret_post"`
 
-    - `"client_secret_post"`
-
   - `client_secret?: string | null`
 
     Updated OAuth client secret.
+
+    minLength: 1, maxLength: 512
 
 ### Beta Managed Agents Unrestricted Credential Networking Params
 
@@ -3292,8 +3243,6 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `type: "unrestricted"`
 
-    - `"unrestricted"`
-
 ### Beta Managed Agents Unrestricted Credential Networking Response
 
 - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
@@ -3301,5 +3250,3 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
   The secret is substituted on any host the session's Environment network policy permits egress to.
 
   - `type: "unrestricted"`
-
-    - `"unrestricted"`

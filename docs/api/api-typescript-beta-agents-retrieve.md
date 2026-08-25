@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/agents/retrieve
 category: "api"
 generated: true
 ---
----
-title: Get Agent
-url: https://platform.claude.com/docs/en/api/typescript/beta/agents/retrieve
----
+# Get Agent
 
-## Get Agent
+`client.beta.agents.retrieve(agentID, params?, options?): BetaManagedAgentsAgent`
 
-`client.beta.agents.retrieve(stringagentID, AgentRetrieveParamsparams?, RequestOptionsoptions?): BetaManagedAgentsAgent`
-
-**get** `/v1/agents/{agent_id}`
+**GET** `/v1/agents/{agent_id}`
 
 Get Agent
 
-### Parameters
+## Parameters
 
 - `agentID: string`
 
@@ -26,6 +21,8 @@ Get Agent
   - `version?: number`
 
     Query param: Agent version. Omit for the most recent version. Must be at least 1 if specified.
+
+    format: int32
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -103,7 +100,7 @@ Get Agent
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsAgent`
 
@@ -115,9 +112,13 @@ Get Agent
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string | null`
 
@@ -126,8 +127,6 @@ Get Agent
     - `name: string`
 
     - `type: "url"`
-
-      - `"url"`
 
     - `url: string`
 
@@ -209,15 +208,11 @@ Get Agent
 
         - `type: "low"`
 
-          - `"low"`
-
       - `BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `type: "medium"`
-
-          - `"medium"`
 
       - `BetaManagedAgentsEffortHigh`
 
@@ -225,23 +220,17 @@ Get Agent
 
         - `type: "high"`
 
-          - `"high"`
-
       - `BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `type: "xhigh"`
 
-          - `"xhigh"`
-
       - `BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
         - `type: "max"`
-
-          - `"max"`
 
     - `inference_geo?: string`
 
@@ -271,9 +260,9 @@ Get Agent
 
         - `type: "agent"`
 
-          - `"agent"`
-
         - `version: number`
+
+          format: int32
 
       - `BetaManagedAgentsAdvisor`
 
@@ -285,11 +274,7 @@ Get Agent
 
         - `type: "advisor"`
 
-          - `"advisor"`
-
     - `type: "coordinator"`
-
-      - `"coordinator"`
 
   - `name: string`
 
@@ -303,8 +288,6 @@ Get Agent
 
       - `type: "anthropic"`
 
-        - `"anthropic"`
-
       - `version: string`
 
     - `BetaManagedAgentsCustomSkill`
@@ -314,8 +297,6 @@ Get Agent
       - `skill_id: string`
 
       - `type: "custom"`
-
-        - `"custom"`
 
       - `version: string`
 
@@ -335,8 +316,6 @@ Get Agent
 
           - `name: "bash"`
 
-            - `"bash"`
-
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
             Permission policy for tool execution.
@@ -347,19 +326,13 @@ Get Agent
 
               - `type: "always_allow"`
 
-                - `"always_allow"`
-
             - `BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `type: "always_ask"`
 
-                - `"always_ask"`
-
           - `type: "bash"`
-
-            - `"bash"`
 
         - `BetaManagedAgentsEditToolConfig`
 
@@ -368,8 +341,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "edit"`
-
-            - `"edit"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -385,8 +356,6 @@ Get Agent
 
           - `type: "edit"`
 
-            - `"edit"`
-
         - `BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
@@ -394,8 +363,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "read"`
-
-            - `"read"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -411,8 +378,6 @@ Get Agent
 
           - `type: "read"`
 
-            - `"read"`
-
         - `BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
@@ -420,8 +385,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "write"`
-
-            - `"write"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -437,8 +400,6 @@ Get Agent
 
           - `type: "write"`
 
-            - `"write"`
-
         - `BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
@@ -446,8 +407,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "glob"`
-
-            - `"glob"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -463,8 +422,6 @@ Get Agent
 
           - `type: "glob"`
 
-            - `"glob"`
-
         - `BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
@@ -472,8 +429,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "grep"`
-
-            - `"grep"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -489,8 +444,6 @@ Get Agent
 
           - `type: "grep"`
 
-            - `"grep"`
-
         - `BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
@@ -498,8 +451,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "web_fetch"`
-
-            - `"web_fetch"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -515,13 +466,13 @@ Get Agent
 
           - `type: "web_fetch"`
 
-            - `"web_fetch"`
-
           - `allowed_domains?: Array<string>`
 
           - `blocked_domains?: Array<string>`
 
           - `max_content_tokens?: number | null`
+
+            format: int32
 
         - `BetaManagedAgentsWebSearchToolConfig`
 
@@ -530,8 +481,6 @@ Get Agent
           - `enabled: boolean`
 
           - `name: "web_search"`
-
-            - `"web_search"`
 
           - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
 
@@ -547,8 +496,6 @@ Get Agent
 
           - `type: "web_search"`
 
-            - `"web_search"`
-
           - `allowed_domains?: Array<string>`
 
           - `blocked_domains?: Array<string>`
@@ -561,11 +508,11 @@ Get Agent
 
               Location precision. Only "approximate" is supported.
 
-              - `"approximate"`
-
             - `city?: string | null`
 
               City name.
+
+              minLength: 1, maxLength: 255
 
             - `country?: string | null`
 
@@ -575,9 +522,13 @@ Get Agent
 
               Region or state name.
 
+              minLength: 1, maxLength: 255
+
             - `timezone?: string | null`
 
               IANA timezone identifier, e.g. "America/Los_Angeles".
+
+              minLength: 1, maxLength: 255
 
       - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -598,8 +549,6 @@ Get Agent
             Tool calls require user confirmation before execution.
 
       - `type: "agent_toolset_20260401"`
-
-        - `"agent_toolset_20260401"`
 
     - `BetaManagedAgentsMCPToolset`
 
@@ -643,8 +592,6 @@ Get Agent
 
       - `type: "mcp_toolset"`
 
-        - `"mcp_toolset"`
-
     - `BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
@@ -657,8 +604,6 @@ Get Agent
 
         - `type: "object"`
 
-          - `"object"`
-
         - `properties?: Record<string, unknown> | null`
 
         - `required?: Array<string> | null`
@@ -667,21 +612,21 @@ Get Agent
 
       - `type: "custom"`
 
-        - `"custom"`
-
   - `type: "agent"`
-
-    - `"agent"`
 
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `version: number`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-### Example
+    format: int32
+
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -697,7 +642,7 @@ const betaManagedAgentsAgent = await client.beta.agents.retrieve(
 console.log(betaManagedAgentsAgent.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

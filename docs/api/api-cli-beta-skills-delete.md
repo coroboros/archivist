@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete Skill
-url: https://platform.claude.com/docs/en/api/cli/beta/skills/delete
----
-
-## Delete Skill
+# Delete Skill
 
 `$ ant beta:skills delete`
 
-**delete** `/v1/skills/{skill_id}`
+**DELETE** `/v1/skills/{skill_id}`
 
 Delete Skill
 
-### Parameters
+## Parameters
 
 - `--skill-id: string`
 
@@ -29,9 +24,9 @@ Delete Skill
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
-- `BetaSkillDeleteResponse: object { id, type }`
+- `BetaSkillDeleteResponse: object`
 
   - `id: string`
 
@@ -45,15 +40,15 @@ Delete Skill
 
     For Skills, this is always `"skill_deleted"`.
 
-### Example
+## Example
 
-```cli
+```bash
 ant beta:skills delete \
   --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

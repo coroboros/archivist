@@ -269,7 +269,7 @@ Prompt caching introduces a new pricing structure. The following table shows the
 
 ## Supported models
 
-Prompt caching (both automatic and explicit) is supported on all [active Claude models](../about-claude/about-claude-models-overview.md).
+Prompt caching (both automatic and explicit) is supported on all [active Claude models](../general/general-models-overview.md).
 
 ***
 
@@ -3246,7 +3246,7 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
   </Accordion>
 
   <Accordion title="Is prompt caching available for all models?">
-    Prompt caching is supported on all [active Claude models](../about-claude/about-claude-models-overview.md).
+    Prompt caching is supported on all [active Claude models](../general/general-models-overview.md).
   </Accordion>
 
   <Accordion title="How does prompt caching work with thinking?">

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files"
 category: "api"
 generated: true
 ---
----
-title: Files
-url: https://platform.claude.com/docs/en/api/java/beta/files
----
-
 # Files
 
 ## Upload File
 
-`BetaFileMetadata beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaFileMetadata beta().files().upload(params, requestOptions = RequestOptions.none())`
 
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
@@ -99,6 +94,8 @@ Upload File
 
     The file to upload
 
+    format: binary
+
 ### Returns
 
 - `class BetaFileMetadata:`
@@ -113,25 +110,31 @@ Upload File
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -145,11 +148,9 @@ Upload File
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
-
-      - `SESSION("session")`
 
 ### Example
 
@@ -176,7 +177,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -196,9 +197,9 @@ public final class Main {
 
 ## List Files
 
-`FileListPage beta().files().list(FileListParamsparams = FileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`FileListPage beta().files().list(params = FileListParams.none(), requestOptions = RequestOptions.none())`
 
-**get** `/v1/files`
+**GET** `/v1/files`
 
 List Files
 
@@ -219,6 +220,8 @@ List Files
     Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
+
+    maximum: 1000, minimum: 1
 
   - `Optional<String> scopeId`
 
@@ -310,25 +313,31 @@ List Files
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -342,11 +351,9 @@ List Files
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
-
-      - `SESSION("session")`
 
 ### Example
 
@@ -369,7 +376,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -396,9 +403,9 @@ public final class Main {
 
 ## Download File
 
-`HttpResponse beta().files().download(FileDownloadParamsparams = FileDownloadParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`HttpResponse beta().files().download(params = FileDownloadParams.none(), requestOptions = RequestOptions.none())`
 
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
@@ -505,9 +512,9 @@ public final class Main {
 
 ## Get File Metadata
 
-`BetaFileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaFileMetadata beta().files().retrieveMetadata(params = FileRetrieveMetadataParams.none(), requestOptions = RequestOptions.none())`
 
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
@@ -605,25 +612,31 @@ Get File Metadata
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -637,11 +650,9 @@ Get File Metadata
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
-
-      - `SESSION("session")`
 
 ### Example
 
@@ -664,7 +675,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -684,9 +695,9 @@ public final class Main {
 
 ## Delete File
 
-`BetaDeletedFile beta().files().delete(FileDeleteParamsparams = FileDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaDeletedFile beta().files().delete(params = FileDeleteParams.none(), requestOptions = RequestOptions.none())`
 
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
@@ -784,8 +795,6 @@ Delete File
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `FILE_DELETED("file_deleted")`
-
 ### Example
 
 ```java
@@ -807,7 +816,7 @@ public final class Main {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -816,7 +825,7 @@ public final class Main {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Deleted File
 
@@ -832,8 +841,6 @@ public final class Main {
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `FILE_DELETED("file_deleted")`
-
 ### Beta File Metadata
 
 - `class BetaFileMetadata:`
@@ -848,25 +855,31 @@ public final class Main {
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `String filename`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `String mimeType`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `long sizeBytes`
 
     Size of the file in bytes.
 
-  - `JsonValue; type "file"constant`
+    minimum: 0
+
+  - `JsonValue type constant`
 
     Object type.
 
     For files, this is always `"file"`.
-
-    - `FILE("file")`
 
   - `Optional<Boolean> downloadable`
 
@@ -880,11 +893,9 @@ public final class Main {
 
       The ID of the scoping resource (e.g., the session ID).
 
-    - `JsonValue; type "session"constant`
+    - `JsonValue type constant`
 
       The type of scope (e.g., `"session"`).
-
-      - `SESSION("session")`
 
 ### Beta File Scope
 
@@ -894,8 +905,6 @@ public final class Main {
 
     The ID of the scoping resource (e.g., the session ID).
 
-  - `JsonValue; type "session"constant`
+  - `JsonValue type constant`
 
     The type of scope (e.g., `"session"`).
-
-    - `SESSION("session")`

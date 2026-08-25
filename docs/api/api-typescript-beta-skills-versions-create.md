@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions
 category: "api"
 generated: true
 ---
----
-title: Create Skill Version
-url: https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/create
----
+# Create Skill Version
 
-## Create Skill Version
+`client.beta.skills.versions.create(skillID, params, options?): VersionCreateResponse`
 
-`client.beta.skills.versions.create(stringskillID, VersionCreateParamsparams, RequestOptionsoptions?): VersionCreateResponse`
-
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-### Parameters
+## Parameters
 
 - `skillID: string`
 
@@ -109,7 +104,7 @@ Create Skill Version
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `VersionCreateResponse`
 
@@ -151,13 +146,15 @@ Create Skill Version
 
     For Skill Versions, this is always `"skill_version"`.
 
+    default: skill_version
+
   - `version: string`
 
     Version identifier for the skill.
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -173,7 +170,7 @@ const version = await client.beta.skills.versions.create("skill_id", {
 console.log(version.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

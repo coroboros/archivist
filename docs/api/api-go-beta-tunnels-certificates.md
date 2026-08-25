@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/go/beta/tunnels/certificates"
 category: "api"
 generated: true
 ---
----
-title: Certificates
-url: https://platform.claude.com/docs/en/api/go/beta/tunnels/certificates
----
-
 # Certificates
 
 ## Create Tunnel Certificate
 
 `client.Beta.Tunnels.Certificates.New(ctx, tunnelID, params) (*BetaTunnelCertificate, error)`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates`
+**POST** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -31,7 +26,9 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    maxLength: 8192
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -121,13 +118,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Fingerprint string`
 
@@ -138,8 +141,6 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     ID of the tunnel the certificate is registered against.
 
   - `Type TunnelCertificate`
-
-    - `const TunnelCertificateTunnelCertificate TunnelCertificate = "tunnel_certificate"`
 
 ### Example
 
@@ -172,7 +173,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -190,7 +191,7 @@ func main() {
 
 `client.Beta.Tunnels.Certificates.Get(ctx, certificateID, params) (*BetaTunnelCertificate, error)`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+**GET** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -206,7 +207,7 @@ Fetches a tunnel certificate by ID.
 
     Path param: Path parameter tunnel_id
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -296,13 +297,19 @@ Fetches a tunnel certificate by ID.
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Fingerprint string`
 
@@ -313,8 +320,6 @@ Fetches a tunnel certificate by ID.
     ID of the tunnel the certificate is registered against.
 
   - `Type TunnelCertificate`
-
-    - `const TunnelCertificateTunnelCertificate TunnelCertificate = "tunnel_certificate"`
 
 ### Example
 
@@ -347,7 +352,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -365,7 +370,7 @@ func main() {
 
 `client.Beta.Tunnels.Certificates.List(ctx, tunnelID, params) (*PageCursor[BetaTunnelCertificate], error)`
 
-**get** `/v1/tunnels/{tunnel_id}/certificates`
+**GET** `/v1/tunnels/{tunnel_id}/certificates`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -377,19 +382,21 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 - `params BetaTunnelCertificateListParams`
 
-  - `IncludeArchived param.Field[bool]`
+  - `IncludeArchived param.Field[bool] Optional`
 
     Query param: Whether to include archived certificates in the results. Defaults to false.
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
-  - `Page param.Field[string]`
+    format: int32
+
+  - `Page param.Field[string] Optional`
 
     Query param: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -479,13 +486,19 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Fingerprint string`
 
@@ -496,8 +509,6 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     ID of the tunnel the certificate is registered against.
 
   - `Type TunnelCertificate`
-
-    - `const TunnelCertificateTunnelCertificate TunnelCertificate = "tunnel_certificate"`
 
 ### Example
 
@@ -528,7 +539,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -551,7 +562,7 @@ func main() {
 
 `client.Beta.Tunnels.Certificates.Archive(ctx, certificateID, params) (*BetaTunnelCertificate, error)`
 
-**post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+**POST** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
@@ -567,7 +578,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     Path param: Path parameter tunnel_id
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -657,13 +668,19 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Fingerprint string`
 
@@ -674,8 +691,6 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     ID of the tunnel the certificate is registered against.
 
   - `Type TunnelCertificate`
-
-    - `const TunnelCertificateTunnelCertificate TunnelCertificate = "tunnel_certificate"`
 
 ### Example
 
@@ -708,7 +723,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -722,7 +737,7 @@ func main() {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Tunnel Certificate
 
@@ -738,13 +753,19 @@ func main() {
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `CreatedAt Time`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Fingerprint string`
 
@@ -755,5 +776,3 @@ func main() {
     ID of the tunnel the certificate is registered against.
 
   - `Type TunnelCertificate`
-
-    - `const TunnelCertificateTunnelCertificate TunnelCertificate = "tunnel_certificate"`

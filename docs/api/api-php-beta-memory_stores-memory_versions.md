@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/memory_v
 category: "api"
 generated: true
 ---
----
-title: Memory Versions
-url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memory_versions
----
-
 # Memory Versions
 
 ## List memory versions
 
 `$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryVersion>`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
 List memory versions
 
@@ -148,7 +143,7 @@ $page = $client->beta->memoryStores->memoryVersions->list(
 var_dump($page);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -183,7 +178,7 @@ var_dump($page);
 
 `$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
 
-**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
 Retrieve a memory version
 
@@ -278,7 +273,7 @@ $betaManagedAgentsMemoryVersion = $client
 var_dump($betaManagedAgentsMemoryVersion);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -308,7 +303,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 `$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
 
-**post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+**POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
 Redact a memory version
 
@@ -398,7 +393,7 @@ $betaManagedAgentsMemoryVersion = $client
 var_dump($betaManagedAgentsMemoryVersion);
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -424,7 +419,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Actor
 

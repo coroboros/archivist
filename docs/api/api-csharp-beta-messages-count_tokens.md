@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/messages/count_toke
 category: "api"
 generated: true
 ---
----
-title: Count tokens in a Message
-url: https://platform.claude.com/docs/en/api/csharp/beta/messages/count_tokens
----
+# Count tokens in a Message
 
-## Count tokens in a Message
+`BetaMessageTokensCount Beta.Messages.CountTokens(parameters, cancellationToken = default)`
 
-`BetaMessageTokensCount Beta.Messages.CountTokens(MessageCountTokensParamsparameters, CancellationTokencancellationToken = default)`
-
-**post** `/v1/messages/count_tokens`
+**POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
 
@@ -21,7 +16,7 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 
 Learn more about token counting in our [user guide](../build-with-claude/build-with-claude-token-counting.md)
 
-### Parameters
+## Parameters
 
 - `MessageCountTokensParams parameters`
 
@@ -86,13 +81,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string Text`
 
-          - `JsonElement Type "text"constant`
+            minLength: 1
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type "ephemeral"constant`
+            - `JsonElement Type constant`
 
             - `Ttl Ttl`
 
@@ -105,9 +102,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
-              - `"5m"Ttl5m`
+              - `Ttl5m`
 
-              - `"1h"Ttl1h`
+              - `Ttl1h`
 
           - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
@@ -115,29 +112,41 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string CitedText`
 
-              - `required Long DocumentIndex`
+              - `required long DocumentIndex`
+
+                minimum: 0
 
               - `required string? DocumentTitle`
 
-              - `required Long EndCharIndex`
+                maxLength: 500, minLength: 1
 
-              - `required Long StartCharIndex`
+              - `required long EndCharIndex`
 
-              - `JsonElement Type "char_location"constant`
+              - `required long StartCharIndex`
+
+                minimum: 0
+
+              - `JsonElement Type constant`
 
             - `class BetaCitationPageLocationParam:`
 
               - `required string CitedText`
 
-              - `required Long DocumentIndex`
+              - `required long DocumentIndex`
+
+                minimum: 0
 
               - `required string? DocumentTitle`
 
-              - `required Long EndPageNumber`
+                maxLength: 500, minLength: 1
 
-              - `required Long StartPageNumber`
+              - `required long EndPageNumber`
 
-              - `JsonElement Type "page_location"constant`
+              - `required long StartPageNumber`
+
+                minimum: 1
+
+              - `JsonElement Type constant`
 
             - `class BetaCitationContentBlockLocationParam:`
 
@@ -147,21 +156,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-              - `required Long DocumentIndex`
+              - `required long DocumentIndex`
+
+                minimum: 0
 
               - `required string? DocumentTitle`
 
-              - `required Long EndBlockIndex`
+                maxLength: 500, minLength: 1
+
+              - `required long EndBlockIndex`
 
                 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
                 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-              - `required Long StartBlockIndex`
+              - `required long StartBlockIndex`
 
                 0-based index of the first cited block in the source's `content` array.
 
-              - `JsonElement Type "content_block_location"constant`
+                minimum: 0
+
+              - `JsonElement Type constant`
 
             - `class BetaCitationWebSearchResultLocationParam:`
 
@@ -171,9 +186,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string? Title`
 
-              - `JsonElement Type "web_search_result_location"constant`
+                maxLength: 512, minLength: 1
+
+              - `JsonElement Type constant`
 
               - `required string Url`
+
+                minLength: 1
 
             - `class BetaCitationSearchResultLocationParam:`
 
@@ -183,27 +202,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-              - `required Long EndBlockIndex`
+              - `required long EndBlockIndex`
 
                 Exclusive 0-based end index of the cited block range in the source's `content` array.
 
                 Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-              - `required Long SearchResultIndex`
+              - `required long SearchResultIndex`
 
                 0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
                 Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                minimum: 0
+
               - `required string Source`
 
-              - `required Long StartBlockIndex`
+              - `required long StartBlockIndex`
 
                 0-based index of the first cited block in the source's `content` array.
 
+                minimum: 0
+
               - `required string? Title`
 
-              - `JsonElement Type "search_result_location"constant`
+              - `JsonElement Type constant`
 
         - `class BetaImageBlockParam:`
 
@@ -213,21 +236,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Data`
 
+                format: byte
+
               - `required MediaType MediaType`
 
-                - `"image/jpeg"ImageJpeg`
+                - `ImageJpeg`
 
-                - `"image/png"ImagePng`
+                - `ImagePng`
 
-                - `"image/gif"ImageGif`
+                - `ImageGif`
 
-                - `"image/webp"ImageWebP`
+                - `ImageWebP`
 
-              - `JsonElement Type "base64"constant`
+              - `JsonElement Type constant`
 
             - `class BetaUrlImageSource:`
 
-              - `JsonElement Type "url"constant`
+              - `JsonElement Type constant`
 
               - `required string Url`
 
@@ -235,9 +260,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string FileID`
 
-              - `JsonElement Type "file"constant`
+              - `JsonElement Type constant`
 
-          - `JsonElement Type "image"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -251,9 +276,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-              - `"downsize"Downsize`
+              - `Downsize`
 
-              - `"error"Error`
+              - `Error`
 
         - `class BetaRequestDocumentBlock:`
 
@@ -263,17 +288,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Data`
 
-              - `JsonElement MediaType "application/pdf"constant`
+                format: byte
 
-              - `JsonElement Type "base64"constant`
+              - `JsonElement MediaType constant`
+
+              - `JsonElement Type constant`
 
             - `class BetaPlainTextSource:`
 
               - `required string Data`
 
-              - `JsonElement MediaType "text/plain"constant`
+              - `JsonElement MediaType constant`
 
-              - `JsonElement Type "text"constant`
+              - `JsonElement Type constant`
 
             - `class BetaContentBlockSource:`
 
@@ -287,11 +314,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   - `class BetaImageBlockParam:`
 
-              - `JsonElement Type "content"constant`
+              - `JsonElement Type constant`
 
             - `class BetaUrlPdfSource:`
 
-              - `JsonElement Type "url"constant`
+              - `JsonElement Type constant`
 
               - `required string Url`
 
@@ -299,9 +326,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string FileID`
 
-              - `JsonElement Type "file"constant`
+              - `JsonElement Type constant`
 
-          - `JsonElement Type "document"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -309,11 +336,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `BetaCitationsConfigParam? Citations`
 
-            - `Boolean Enabled`
+            - `bool Enabled`
 
           - `string? Context`
 
+            minLength: 1
+
           - `string? Title`
+
+            maxLength: 500, minLength: 1
 
         - `class BetaSearchResultBlockParam:`
 
@@ -321,7 +352,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `required string Text`
 
-            - `JsonElement Type "text"constant`
+              minLength: 1
+
+            - `JsonElement Type constant`
 
             - `BetaCacheControlEphemeral? CacheControl`
 
@@ -333,7 +366,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string Title`
 
-          - `JsonElement Type "search_result"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -353,7 +386,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `thinking` text of this block as returned by the API.
 
-          - `JsonElement Type "thinking"constant`
+          - `JsonElement Type constant`
 
         - `class BetaRedactedThinkingBlockParam:`
 
@@ -361,17 +394,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `JsonElement Type "redacted_thinking"constant`
+          - `JsonElement Type constant`
 
         - `class BetaToolUseBlockParam:`
 
           - `required string ID`
 
+            pattern: ^[a-zA-Z0-9_-]+$
+
           - `required IReadOnlyDictionary<string, JsonElement> Input`
 
           - `required string Name`
 
-          - `JsonElement Type "tool_use"constant`
+            maxLength: 200, minLength: 1
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -385,7 +422,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type "direct"constant`
+              - `JsonElement Type constant`
 
             - `class BetaServerToolCaller:`
 
@@ -393,23 +430,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string ToolID`
 
-              - `JsonElement Type "code_execution_20250825"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
             - `class BetaServerToolCaller20260120:`
 
               - `required string ToolID`
 
-              - `JsonElement Type "code_execution_20260120"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
           - `string? ToolsetName`
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class BetaToolResultBlockParam:`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "tool_result"constant`
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -435,7 +480,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string ToolName`
 
-                - `JsonElement Type "tool_reference"constant`
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                - `JsonElement Type constant`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
@@ -455,23 +502,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                  maxItems: 100
+
                   - `required string TabID`
 
                     The caller-assigned identifier for this tab, unique within the inventory.
+
+                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Title`
 
                     The title of the page the tab is showing. May be empty.
 
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                   - `required string Url`
 
                     The URL of the page the tab is showing. May be empty.
 
-                  - `Boolean Active`
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                  - `bool Active`
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `JsonElement Type "browser_state"constant`
+                - `JsonElement Type constant`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
@@ -480,6 +535,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                 - `IReadOnlyList<BetaBrowserStateChange>? StateChanges`
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  maxItems: 200, minItems: 1
 
                   - `class BetaBrowserStateChangeTabOpened:`
 
@@ -495,7 +552,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                    - `JsonElement Type "tab_opened"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `JsonElement Type constant`
 
                   - `class BetaBrowserStateChangeDownloadStarted:`
 
@@ -505,11 +564,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonElement Type "download_started"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `JsonElement Type constant`
 
                     - `required string Url`
 
                       The final post-redirect URL the download was served from.
+
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `class BetaBrowserStateChangeDownloadCompleted:`
 
@@ -522,19 +585,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonElement Type "download_completed"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `JsonElement Type constant`
 
                     - `required string Url`
 
                       The final post-redirect URL the download was served from.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `string? Path`
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                    - `Long? SizeBytes`
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+                    - `long? SizeBytes`
 
                       The completed download's size.
+
+                      minimum: 0
 
                   - `class BetaBrowserStateChangeDownloadFailed:`
 
@@ -544,47 +615,57 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    - `JsonElement Type "download_failed"constant`
+                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                    - `JsonElement Type constant`
 
                     - `required string Url`
 
                       The final post-redirect URL the download was served from.
 
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                     - `string? Error`
 
                       The failure or cancellation detail, when known.
 
-          - `Boolean IsError`
+                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+          - `bool IsError`
 
           - `string? ToolsetName`
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
+            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
         - `class BetaServerToolUseBlockParam:`
 
           - `required string ID`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `required IReadOnlyDictionary<string, JsonElement> Input`
 
           - `required Name Name`
 
-            - `"advisor"Advisor`
+            - `Advisor`
 
-            - `"web_search"WebSearch`
+            - `WebSearch`
 
-            - `"web_fetch"WebFetch`
+            - `WebFetch`
 
-            - `"code_execution"CodeExecution`
+            - `CodeExecution`
 
-            - `"bash_code_execution"BashCodeExecution`
+            - `BashCodeExecution`
 
-            - `"text_editor_code_execution"TextEditorCodeExecution`
+            - `TextEditorCodeExecution`
 
-            - `"tool_search_tool_regex"ToolSearchToolRegex`
+            - `ToolSearchToolRegex`
 
-            - `"tool_search_tool_bm25"ToolSearchToolBm25`
+            - `ToolSearchToolBm25`
 
-          - `JsonElement Type "server_tool_use"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -614,7 +695,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Title`
 
-              - `JsonElement Type "web_search_result"constant`
+              - `JsonElement Type constant`
 
               - `required string Url`
 
@@ -624,23 +705,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaWebSearchToolResultErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"max_uses_exceeded"MaxUsesExceeded`
+                - `MaxUsesExceeded`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"query_too_long"QueryTooLong`
+                - `QueryTooLong`
 
-                - `"request_too_large"RequestTooLarge`
+                - `RequestTooLarge`
 
-              - `JsonElement Type "web_search_tool_result_error"constant`
+              - `JsonElement Type constant`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "web_search_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -668,31 +751,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaWebFetchToolResultErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"url_too_long"UrlTooLong`
+                - `UrlTooLong`
 
-                - `"url_not_allowed"UrlNotAllowed`
+                - `UrlNotAllowed`
 
-                - `"url_not_in_prior_context"UrlNotInPriorContext`
+                - `UrlNotInPriorContext`
 
-                - `"url_not_accessible"UrlNotAccessible`
+                - `UrlNotAccessible`
 
-                - `"unsupported_content_type"UnsupportedContentType`
+                - `UnsupportedContentType`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"max_uses_exceeded"MaxUsesExceeded`
+                - `MaxUsesExceeded`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-              - `JsonElement Type "web_fetch_tool_result_error"constant`
+              - `JsonElement Type constant`
 
             - `class BetaWebFetchBlockParam:`
 
               - `required BetaRequestDocumentBlock Content`
 
-              - `JsonElement Type "web_fetch_result"constant`
+              - `JsonElement Type constant`
 
               - `required string Url`
 
@@ -704,7 +787,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "web_fetch_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -732,27 +817,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `"max_uses_exceeded"MaxUsesExceeded`
+                - `MaxUsesExceeded`
 
-                - `"prompt_too_long"PromptTooLong`
+                - `PromptTooLong`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"overloaded"Overloaded`
+                - `Overloaded`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"execution_time_exceeded"ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded`
 
-                - `"model_not_found"ModelNotFound`
+                - `ModelNotFound`
 
-              - `JsonElement Type "advisor_tool_result_error"constant`
+              - `JsonElement Type constant`
 
             - `class BetaAdvisorResultBlockParam:`
 
               - `required string Text`
 
-              - `JsonElement Type "advisor_result"constant`
+              - `JsonElement Type constant`
 
               - `string? StopReason`
 
@@ -762,13 +847,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-              - `JsonElement Type "advisor_redacted_result"constant`
+              - `JsonElement Type constant`
 
               - `string? StopReason`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "advisor_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -784,15 +871,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaCodeExecutionToolResultErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"execution_time_exceeded"ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded`
 
-              - `JsonElement Type "code_execution_tool_result_error"constant`
+              - `JsonElement Type constant`
 
             - `class BetaCodeExecutionResultBlockParam:`
 
@@ -800,15 +887,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type "code_execution_output"constant`
+                - `JsonElement Type constant`
 
-              - `required Long ReturnCode`
+              - `required long ReturnCode`
 
               - `required string Stderr`
 
               - `required string Stdout`
 
-              - `JsonElement Type "code_execution_result"constant`
+              - `JsonElement Type constant`
 
             - `class BetaEncryptedCodeExecutionResultBlockParam:`
 
@@ -818,19 +905,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type "code_execution_output"constant`
+                - `JsonElement Type constant`
 
               - `required string EncryptedStdout`
 
-              - `required Long ReturnCode`
+              - `required long ReturnCode`
 
               - `required string Stderr`
 
-              - `JsonElement Type "encrypted_code_execution_result"constant`
+              - `JsonElement Type constant`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -844,17 +933,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"execution_time_exceeded"ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded`
 
-                - `"output_file_too_large"OutputFileTooLarge`
+                - `OutputFileTooLarge`
 
-              - `JsonElement Type "bash_code_execution_tool_result_error"constant`
+              - `JsonElement Type constant`
 
             - `class BetaBashCodeExecutionResultBlockParam:`
 
@@ -862,19 +951,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type "bash_code_execution_output"constant`
+                - `JsonElement Type constant`
 
-              - `required Long ReturnCode`
+              - `required long ReturnCode`
 
               - `required string Stderr`
 
               - `required string Stdout`
 
-              - `JsonElement Type "bash_code_execution_result"constant`
+              - `JsonElement Type constant`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "bash_code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -888,17 +979,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"execution_time_exceeded"ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded`
 
-                - `"file_not_found"FileNotFound`
+                - `FileNotFound`
 
-              - `JsonElement Type "text_editor_code_execution_tool_result_error"constant`
+              - `JsonElement Type constant`
 
               - `string? ErrorMessage`
 
@@ -908,43 +999,45 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required FileType FileType`
 
-                - `"text"Text`
+                - `Text`
 
-                - `"image"Image`
+                - `Image`
 
-                - `"pdf"Pdf`
+                - `Pdf`
 
-              - `JsonElement Type "text_editor_code_execution_view_result"constant`
+              - `JsonElement Type constant`
 
-              - `Long? NumLines`
+              - `long? NumLines`
 
-              - `Long? StartLine`
+              - `long? StartLine`
 
-              - `Long? TotalLines`
+              - `long? TotalLines`
 
             - `class BetaTextEditorCodeExecutionCreateResultBlockParam:`
 
-              - `required Boolean IsFileUpdate`
+              - `required bool IsFileUpdate`
 
-              - `JsonElement Type "text_editor_code_execution_create_result"constant`
+              - `JsonElement Type constant`
 
             - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-              - `JsonElement Type "text_editor_code_execution_str_replace_result"constant`
+              - `JsonElement Type constant`
 
               - `IReadOnlyList<string>? Lines`
 
-              - `Long? NewLines`
+              - `long? NewLines`
 
-              - `Long? NewStart`
+              - `long? NewStart`
 
-              - `Long? OldLines`
+              - `long? OldLines`
 
-              - `Long? OldStart`
+              - `long? OldStart`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "text_editor_code_execution_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -958,15 +1051,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `"invalid_tool_input"InvalidToolInput`
+                - `InvalidToolInput`
 
-                - `"unavailable"Unavailable`
+                - `Unavailable`
 
-                - `"too_many_requests"TooManyRequests`
+                - `TooManyRequests`
 
-                - `"execution_time_exceeded"ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded`
 
-              - `JsonElement Type "tool_search_tool_result_error"constant`
+              - `JsonElement Type constant`
 
               - `string? ErrorMessage`
 
@@ -976,17 +1069,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string ToolName`
 
-                - `JsonElement Type "tool_reference"constant`
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                - `JsonElement Type constant`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
                   Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type "tool_search_tool_search_result"constant`
+              - `JsonElement Type constant`
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "tool_search_tool_result"constant`
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -996,6 +1093,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string ID`
 
+            pattern: ^[a-zA-Z0-9_-]+$
+
           - `required IReadOnlyDictionary<string, JsonElement> Input`
 
           - `required string Name`
@@ -1004,7 +1103,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The name of the MCP server
 
-          - `JsonElement Type "mcp_tool_use"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1014,7 +1113,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string ToolUseID`
 
-          - `JsonElement Type "mcp_tool_result"constant`
+            pattern: ^[a-zA-Z0-9_-]+$
+
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1028,7 +1129,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Text`
 
-              - `JsonElement Type "text"constant`
+                minLength: 1
+
+              - `JsonElement Type constant`
 
               - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1036,7 +1139,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
-          - `Boolean IsError`
+          - `bool IsError`
 
         - `class BetaContainerUploadBlockParam:`
 
@@ -1045,7 +1148,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string FileID`
 
-          - `JsonElement Type "container_upload"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1061,7 +1164,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `JsonElement Type "compaction"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1099,7 +1202,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Name`
 
-              - `JsonElement Type "tool_reference"constant`
+                pattern: ^[a-zA-Z0-9_-]{1,128}$
+
+              - `JsonElement Type constant`
 
             - `class BetaToolChangeMcpToolReference:`
 
@@ -1110,7 +1215,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string ServerName`
 
-              - `JsonElement Type "mcp_tool_reference"constant`
+              - `JsonElement Type constant`
 
             - `class BetaToolChangeMcpToolsetReference:`
 
@@ -1118,9 +1223,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string ServerName`
 
-              - `JsonElement Type "mcp_toolset_reference"constant`
+              - `JsonElement Type constant`
 
-          - `JsonElement Type "tool_addition"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1157,7 +1262,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Reference to every tool in the named MCP server's toolset.
 
-          - `JsonElement Type "tool_removal"constant`
+          - `JsonElement Type constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1189,63 +1294,63 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-              - `"claude-sonnet-5"ClaudeSonnet5`
+              - `ClaudeSonnet5`
 
                 High-performance model for coding and agents
 
-              - `"claude-fable-5"ClaudeFable5`
+              - `ClaudeFable5`
 
                 Next generation of intelligence for the hardest knowledge work and coding problems
 
-              - `"claude-mythos-5"ClaudeMythos5`
+              - `ClaudeMythos5`
 
                 Most capable model for cybersecurity and biology research
 
-              - `"claude-opus-5"ClaudeOpus5`
+              - `ClaudeOpus5`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-opus-4-8"ClaudeOpus4_8`
+              - `ClaudeOpus4_8`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-opus-4-7"ClaudeOpus4_7`
+              - `ClaudeOpus4_7`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-mythos-preview"ClaudeMythosPreview`
+              - `ClaudeMythosPreview`
 
                 New class of intelligence, strongest in coding and cybersecurity
 
-              - `"claude-opus-4-6"ClaudeOpus4_6`
+              - `ClaudeOpus4_6`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+              - `ClaudeSonnet4_6`
 
                 Best combination of speed and intelligence
 
-              - `"claude-haiku-4-5"ClaudeHaiku4_5`
+              - `ClaudeHaiku4_5`
 
                 Fastest model with near-frontier intelligence
 
-              - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+              - `ClaudeHaiku4_5_20251001`
 
                 Fastest model with near-frontier intelligence
 
-              - `"claude-opus-4-5"ClaudeOpus4_5`
+              - `ClaudeOpus4_5`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+              - `ClaudeOpus4_5_20251101`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+              - `ClaudeSonnet4_5`
 
                 High-performance model for agents and coding
 
-              - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+              - `ClaudeSonnet4_5_20250929`
 
                 High-performance model for agents and coding
 
@@ -1253,7 +1358,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Identifies one hop of a fallback transition.
 
-          - `JsonElement Type "fallback"constant`
+          - `JsonElement Type constant`
 
           - `JsonElement Trigger`
 
@@ -1261,11 +1366,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `required Role Role`
 
-      - `"user"User`
+      - `User`
 
-      - `"assistant"Assistant`
+      - `Assistant`
 
-      - `"system"System`
+      - `System`
 
   - `required Model model`
 
@@ -1287,9 +1392,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     Body param: MCP servers to be utilized in this request
 
+    maxItems: 20
+
     - `required string Name`
 
-    - `JsonElement Type "url"constant`
+    - `JsonElement Type constant`
 
     - `required string Url`
 
@@ -1299,25 +1406,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `IReadOnlyList<string>? AllowedTools`
 
-      - `Boolean? Enabled`
+      - `bool? Enabled`
 
   - `BetaOutputConfig outputConfig`
 
     Body param: Configuration options for the model's output, such as the output format.
 
-  - `BetaJsonOutputFormat? outputFormat`
-
-    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-    A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
-
   - `Speed? speed`
 
     Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-    - `"standard"Standard`
+    - `Standard`
 
-    - `"fast"Fast`
+    - `Fast`
 
   - `System system`
 
@@ -1331,7 +1432,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `required string Text`
 
-      - `JsonElement Type "text"constant`
+        minLength: 1
+
+      - `JsonElement Type constant`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1423,7 +1526,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-        - `JsonElement Type "object"constant`
+        - `JsonElement Type constant`
 
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
@@ -1435,21 +1538,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
+        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
@@ -1459,149 +1564,147 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-      - `Boolean? EagerInputStreaming`
+      - `bool? EagerInputStreaming`
 
         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
       - `Type? Type`
 
-        - `"custom"Custom`
-
     - `class BetaToolBash20241022:`
 
-      - `JsonElement Name "bash"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "bash_20241022"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolBash20250124:`
 
-      - `JsonElement Name "bash"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "bash_20250124"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaCodeExecutionTool20250522:`
 
-      - `JsonElement Name "code_execution"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "code_execution_20250522"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaCodeExecutionTool20250825:`
 
-      - `JsonElement Name "code_execution"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "code_execution_20250825"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -1609,33 +1712,33 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-      - `JsonElement Name "code_execution"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "code_execution_20260120"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -1643,33 +1746,33 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence.
 
-      - `JsonElement Name "code_execution"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "code_execution_20260521"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -1680,17 +1783,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       the family's tool with any members disabled via `configs` removed
       from its schema.
 
-      - `JsonElement Type "browser_toolset_20260801"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<BetaBrowserToolset20260801AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1709,11 +1812,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `close_tab`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1721,11 +1824,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `double_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1733,11 +1836,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `file_upload`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1745,11 +1848,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `find`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1757,11 +1860,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `form_input`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1769,11 +1872,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `get_page_text`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1781,11 +1884,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `hold_key`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1793,11 +1896,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `hover`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1805,11 +1908,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `javascript_exec`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1817,11 +1920,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `key`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1829,11 +1932,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1841,11 +1944,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_click_drag`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1853,11 +1956,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_mouse_down`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1865,11 +1968,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_mouse_up`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1877,11 +1980,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `list_tabs`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1889,11 +1992,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `middle_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1901,11 +2004,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `mouse_move`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1913,11 +2016,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `navigate`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1925,11 +2028,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `new_tab`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1937,11 +2040,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `read_console`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1949,11 +2052,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `read_network`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1961,11 +2064,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `read_page`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1973,11 +2076,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `right_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1985,11 +2088,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `screenshot`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1997,11 +2100,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `scroll`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2009,11 +2112,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `scroll_to`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2021,11 +2124,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `switch_tab`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2033,11 +2136,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `triple_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2045,11 +2148,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `type`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2057,11 +2160,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `wait`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2069,221 +2172,239 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `zoom`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `class BetaToolComputerUse20241022:`
 
-      - `required Long DisplayHeightPx`
+      - `required long DisplayHeightPx`
 
         The height of the display in pixels.
 
-      - `required Long DisplayWidthPx`
+        minimum: 1
+
+      - `required long DisplayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonElement Name "computer"constant`
+        minimum: 1
+
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "computer_20241022"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? DisplayNumber`
+      - `long? DisplayNumber`
 
         The X11 display number (e.g. 0, 1) for the display.
 
+        minimum: 0
+
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaMemoryTool20250818:`
 
-      - `JsonElement Name "memory"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "memory_20250818"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolComputerUse20250124:`
 
-      - `required Long DisplayHeightPx`
+      - `required long DisplayHeightPx`
 
         The height of the display in pixels.
 
-      - `required Long DisplayWidthPx`
+        minimum: 1
+
+      - `required long DisplayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonElement Name "computer"constant`
+        minimum: 1
+
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "computer_20250124"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? DisplayNumber`
+      - `long? DisplayNumber`
 
         The X11 display number (e.g. 0, 1) for the display.
 
+        minimum: 0
+
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolTextEditor20241022:`
 
-      - `JsonElement Name "str_replace_editor"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "text_editor_20241022"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolComputerUse20251124:`
 
-      - `required Long DisplayHeightPx`
+      - `required long DisplayHeightPx`
 
         The height of the display in pixels.
 
-      - `required Long DisplayWidthPx`
+        minimum: 1
+
+      - `required long DisplayWidthPx`
 
         The width of the display in pixels.
 
-      - `JsonElement Name "computer"constant`
+        minimum: 1
+
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "computer_20251124"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? DisplayNumber`
+      - `long? DisplayNumber`
 
         The X11 display number (e.g. 0, 1) for the display.
 
-      - `Boolean EnableZoom`
+        minimum: 0
+
+      - `bool EnableZoom`
 
         Whether to enable an action to take a zoomed-in screenshot of the screen.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -2298,17 +2419,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       `type`, `configs`, and `cache_control`; zoom is controlled
       via `configs.zoom.enabled`.
 
-      - `JsonElement Type "computer_toolset_20260801"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<BetaComputerToolset20260801AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2327,11 +2448,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `cursor_position`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2339,11 +2460,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `double_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2351,11 +2472,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `hold_key`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2363,11 +2484,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `key`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2375,11 +2496,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2387,11 +2508,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_click_drag`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2399,11 +2520,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_mouse_down`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2411,11 +2532,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `left_mouse_up`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2423,11 +2544,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `middle_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2435,11 +2556,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `mouse_move`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2447,11 +2568,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `right_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2459,11 +2580,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `screenshot`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2471,11 +2592,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `scroll`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2483,11 +2604,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `triple_click`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2495,11 +2616,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `type`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2507,11 +2628,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `wait`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2519,139 +2640,141 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           `zoom`'s config overrides.
 
-          - `Boolean? DeferLoading`
+          - `bool? DeferLoading`
 
             Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-          - `Boolean? Enabled`
+          - `bool? Enabled`
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `class BetaToolTextEditor20250124:`
 
-      - `JsonElement Name "str_replace_editor"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "text_editor_20250124"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolTextEditor20250429:`
 
-      - `JsonElement Name "str_replace_based_edit_tool"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "text_editor_20250429"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolTextEditor20250728:`
 
-      - `JsonElement Name "str_replace_based_edit_tool"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "text_editor_20250728"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
       - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-      - `Long? MaxCharacters`
+      - `long? MaxCharacters`
 
         Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-      - `Boolean Strict`
+        minimum: 1
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaWebSearchTool20250305:`
 
-      - `JsonElement Name "web_search"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_search_20250305"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2665,15 +2788,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxUses`
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -2681,43 +2806,51 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-        - `JsonElement Type "approximate"constant`
+        - `JsonElement Type constant`
 
         - `string? City`
 
           The city of the user.
 
+          maxLength: 255, minLength: 1
+
         - `string? Country`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+          maxLength: 2, minLength: 2
 
         - `string? Region`
 
           The region of the user.
 
+          maxLength: 255, minLength: 1
+
         - `string? Timezone`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+          maxLength: 255, minLength: 1
+
     - `class BetaWebFetchTool20250910:`
 
-      - `JsonElement Name "web_fetch"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_fetch_20250910"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2735,41 +2868,45 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Citations configuration for fetched documents. Citations are disabled by default.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxContentTokens`
+      - `long? MaxContentTokens`
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      - `Long? MaxUses`
+        exclusiveMinimum: 0
+
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaWebSearchTool20260209:`
 
-      - `JsonElement Name "web_search"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_search_20260209"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2783,15 +2920,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxUses`
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -2801,23 +2940,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebFetchTool20260209:`
 
-      - `JsonElement Name "web_fetch"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_fetch_20260209"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2835,19 +2974,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Citations configuration for fetched documents. Citations are disabled by default.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxContentTokens`
+      - `long? MaxContentTokens`
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      - `Long? MaxUses`
+        exclusiveMinimum: 0
+
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -2855,23 +2998,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
-      - `JsonElement Name "web_fetch"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_fetch_20260309"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2889,45 +3032,49 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Citations configuration for fetched documents. Citations are disabled by default.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxContentTokens`
+      - `long? MaxContentTokens`
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      - `Long? MaxUses`
+        exclusiveMinimum: 0
+
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `Boolean UseCache`
+      - `bool UseCache`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
     - `class BetaWebSearchTool20260318:`
 
-      - `JsonElement Name "web_search"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_search_20260318"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2941,23 +3088,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxUses`
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `ResponseInclusion ResponseInclusion`
 
         How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-        - `"full"Full`
+        - `Full`
 
-        - `"excluded"Excluded`
+        - `Excluded`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -2967,23 +3116,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebFetchTool20260318:`
 
-      - `JsonElement Name "web_fetch"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "web_fetch_20260318"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3001,31 +3150,35 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Citations configuration for fetched documents. Citations are disabled by default.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxContentTokens`
+      - `long? MaxContentTokens`
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      - `Long? MaxUses`
+        exclusiveMinimum: 0
+
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
+
+        exclusiveMinimum: 0
 
       - `ResponseInclusion ResponseInclusion`
 
         How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-        - `"full"Full`
+        - `Full`
 
-        - `"excluded"Excluded`
+        - `Excluded`
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `Boolean UseCache`
+      - `bool UseCache`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
@@ -3037,23 +3190,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `JsonElement Name "advisor"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type "advisor_20260301"constant`
+      - `JsonElement Type constant`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3063,25 +3216,29 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Long? MaxTokens`
+      - `long? MaxTokens`
 
         Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
-      - `Long? MaxUses`
+        minimum: 1024
+
+      - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-      - `Boolean Strict`
+        exclusiveMinimum: 0
+
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolSearchToolBm25_20251119:`
 
-      - `JsonElement Name "tool_search_tool_bm25"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
@@ -3089,35 +3246,35 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `required Type Type`
 
-        - `"tool_search_tool_bm25_20251119"ToolSearchToolBm25_20251119`
+        - `ToolSearchToolBm25_20251119`
 
-        - `"tool_search_tool_bm25"ToolSearchToolBm25`
+        - `ToolSearchToolBm25`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
     - `class BetaToolSearchToolRegex20251119:`
 
-      - `JsonElement Name "tool_search_tool_regex"constant`
+      - `JsonElement Name constant`
 
         Name of the tool.
 
@@ -3125,29 +3282,29 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `required Type Type`
 
-        - `"tool_search_tool_regex_20251119"ToolSearchToolRegex20251119`
+        - `ToolSearchToolRegex20251119`
 
-        - `"tool_search_tool_regex"ToolSearchToolRegex`
+        - `ToolSearchToolRegex`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `"direct"Direct`
+        - `Direct`
 
-        - `"code_execution_20250825"CodeExecution20250825`
+        - `CodeExecution20250825`
 
-        - `"code_execution_20260120"CodeExecution20260120`
+        - `CodeExecution20260120`
 
-        - `"code_execution_20260521"CodeExecution20260521`
+        - `CodeExecution20260521`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
         Create a cache control breakpoint at this content block.
 
-      - `Boolean DeferLoading`
+      - `bool DeferLoading`
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `Boolean Strict`
+      - `bool Strict`
 
         When true, guarantees schema validation on tool names and inputs
 
@@ -3162,7 +3319,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Name of the MCP server to configure tools for
 
-      - `JsonElement Type "mcp_toolset"constant`
+        maxLength: 255, minLength: 1
+
+      - `JsonElement Type constant`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3172,95 +3331,103 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Configuration overrides for specific tools, keyed by tool name
 
-        - `Boolean DeferLoading`
+        - `bool DeferLoading`
 
-        - `Boolean Enabled`
+        - `bool Enabled`
 
       - `BetaMcpToolDefaultConfig DefaultConfig`
 
         Default configuration applied to all tools from this server
 
-        - `Boolean DeferLoading`
+        - `bool DeferLoading`
 
-        - `Boolean Enabled`
+        - `bool Enabled`
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+    - `MessageBatches2024_09_24`
 
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+    - `PromptCaching2024_07_31`
 
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+    - `ComputerUse2024_10_22`
 
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+    - `ComputerUse2025_01_24`
 
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+    - `Pdfs2024_09_25`
 
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+    - `TokenCounting2024_11_01`
 
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+    - `TokenEfficientTools2025_02_19`
 
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
+    - `Output128k2025_02_19`
 
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
+    - `FilesApi2025_04_14`
 
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+    - `McpClient2025_04_04`
 
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+    - `McpClient2025_11_20`
 
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+    - `DevFullThinking2025_05_14`
 
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+    - `InterleavedThinking2025_05_14`
 
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+    - `CodeExecution2025_05_22`
 
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+    - `ExtendedCacheTtl2025_04_11`
 
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
+    - `Context1m2025_08_07`
 
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+    - `ContextManagement2025_06_27`
 
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+    - `ModelContextWindowExceeded2025_08_26`
 
-    - `"skills-2025-10-02"Skills2025_10_02`
+    - `Skills2025_10_02`
 
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+    - `FastMode2026_02_01`
 
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
+    - `Output300k2026_03_24`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+    - `UserProfiles2026_03_24`
 
-    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+    - `UserProfiles2026_08_18`
 
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+    - `AdvisorTool2026_03_01`
 
-    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+    - `ManagedAgents2026_04_01`
 
-    - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+    - `CacheDiagnosis2026_04_07`
 
-    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+    - `Dreaming2026_04_21`
 
-    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+    - `ThinkingTokenCount2026_05_13`
 
-    - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
+    - `ServerSideFallback2026_06_01`
 
-    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+    - `ServerSideFallback2026_07_01`
 
-    - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+    - `FallbackCredit2026_06_01`
 
-    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
+    - `FallbackCredit2026_07_01`
 
-    - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+    - `AgentMemory2026_07_22`
 
-    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+    - `MidConversationToolChanges2026_07_01`
 
   - `string userProfileID`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-### Returns
+  - `BetaJsonOutputFormat? outputFormat`
+
+    **Deprecated**
+
+    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+    A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
+
+## Returns
 
 - `class BetaMessageTokensCount:`
 
@@ -3268,15 +3435,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     Information about context management applied to the message.
 
-    - `required Long OriginalInputTokens`
+    - `required long OriginalInputTokens`
 
       The original token count before context management was applied
 
-  - `required Long InputTokens`
+  - `required long InputTokens`
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
-### Example
+## Example
 
 ```csharp
 MessageCountTokensParams parameters = new()
@@ -3297,7 +3464,7 @@ var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);
 Console.WriteLine(betaMessageTokensCount);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

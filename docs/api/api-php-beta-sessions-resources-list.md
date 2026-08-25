@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/resources/lis
 category: "api"
 generated: true
 ---
----
-title: List Session Resources
-url: https://platform.claude.com/docs/en/api/php/beta/sessions/resources/list
----
-
-## List Session Resources
+# List Session Resources
 
 `$client->beta->sessions->resources->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionResource>`
 
-**get** `/v1/sessions/{session_id}/resources`
+**GET** `/v1/sessions/{session_id}/resources`
 
 List Session Resources
 
-### Parameters
+## Parameters
 
 - `sessionID: string`
 
@@ -33,7 +28,7 @@ List Session Resources
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ManagedAgentsSessionResource`
 
@@ -103,7 +98,7 @@ List Session Resources
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -122,7 +117,7 @@ $page = $client->beta->sessions->resources->list(
 var_dump($page);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,16 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/messages/batches/create"
 category: "api"
 generated: true
 ---
----
-title: Create a Message Batch
-url: https://platform.claude.com/docs/en/api/csharp/messages/batches/create
----
+# Create a Message Batch
 
-## Create a Message Batch
+`MessageBatch Messages.Batches.Create(parameters, cancellationToken = default)`
 
-`MessageBatch Messages.Batches.Create(BatchCreateParamsparameters, CancellationTokencancellationToken = default)`
-
-**post** `/v1/messages/batches`
+**POST** `/v1/messages/batches`
 
 Send a batch of Message creation requests.
 
@@ -21,7 +16,7 @@ The Message Batches API can be used to process multiple Messages API requests at
 
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
-### Parameters
+## Parameters
 
 - `BatchCreateParams parameters`
 
@@ -29,11 +24,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
+    maxItems: 100000, minItems: 1
+
     - `required string CustomID`
 
       Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
 
       Must be unique for each request within the Message Batch.
+
+      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
     - `required Params Params`
 
@@ -41,7 +40,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       See the [Messages API reference](./api-messages.md) for full documentation on available parameters.
 
-      - `required Long MaxTokens`
+      - `required long MaxTokens`
 
         The maximum number of tokens to generate before stopping.
 
@@ -50,6 +49,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         Set to `0` to populate the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md#pre-warming-the-cache) without generating a response.
 
         Different models have different maximum values for this parameter.  See [models](../about-claude/about-claude-models-overview.md) for details.
+
+        minimum: 0
 
       - `required IReadOnlyList<MessageParam> Messages`
 
@@ -112,13 +113,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required string Text`
 
-              - `JsonElement Type "text"constant`
+                minLength: 1
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonElement Type "ephemeral"constant`
+                - `JsonElement Type constant`
 
                 - `Ttl Ttl`
 
@@ -131,9 +134,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
-                  - `"5m"Ttl5m`
+                  - `Ttl5m`
 
-                  - `"1h"Ttl1h`
+                  - `Ttl1h`
 
               - `IReadOnlyList<TextCitationParam>? Citations`
 
@@ -141,29 +144,41 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string CitedText`
 
-                  - `required Long DocumentIndex`
+                  - `required long DocumentIndex`
+
+                    minimum: 0
 
                   - `required string? DocumentTitle`
 
-                  - `required Long EndCharIndex`
+                    maxLength: 500, minLength: 1
 
-                  - `required Long StartCharIndex`
+                  - `required long EndCharIndex`
 
-                  - `JsonElement Type "char_location"constant`
+                  - `required long StartCharIndex`
+
+                    minimum: 0
+
+                  - `JsonElement Type constant`
 
                 - `class CitationPageLocationParam:`
 
                   - `required string CitedText`
 
-                  - `required Long DocumentIndex`
+                  - `required long DocumentIndex`
+
+                    minimum: 0
 
                   - `required string? DocumentTitle`
 
-                  - `required Long EndPageNumber`
+                    maxLength: 500, minLength: 1
 
-                  - `required Long StartPageNumber`
+                  - `required long EndPageNumber`
 
-                  - `JsonElement Type "page_location"constant`
+                  - `required long StartPageNumber`
+
+                    minimum: 1
+
+                  - `JsonElement Type constant`
 
                 - `class CitationContentBlockLocationParam:`
 
@@ -173,21 +188,27 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-                  - `required Long DocumentIndex`
+                  - `required long DocumentIndex`
+
+                    minimum: 0
 
                   - `required string? DocumentTitle`
 
-                  - `required Long EndBlockIndex`
+                    maxLength: 500, minLength: 1
+
+                  - `required long EndBlockIndex`
 
                     Exclusive 0-based end index of the cited block range in the source's `content` array.
 
                     Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-                  - `required Long StartBlockIndex`
+                  - `required long StartBlockIndex`
 
                     0-based index of the first cited block in the source's `content` array.
 
-                  - `JsonElement Type "content_block_location"constant`
+                    minimum: 0
+
+                  - `JsonElement Type constant`
 
                 - `class CitationWebSearchResultLocationParam:`
 
@@ -197,9 +218,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string? Title`
 
-                  - `JsonElement Type "web_search_result_location"constant`
+                    maxLength: 512, minLength: 1
+
+                  - `JsonElement Type constant`
 
                   - `required string Url`
+
+                    minLength: 1
 
                 - `class CitationSearchResultLocationParam:`
 
@@ -209,27 +234,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-                  - `required Long EndBlockIndex`
+                  - `required long EndBlockIndex`
 
                     Exclusive 0-based end index of the cited block range in the source's `content` array.
 
                     Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-                  - `required Long SearchResultIndex`
+                  - `required long SearchResultIndex`
 
                     0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
                     Counted separately from `document_index`; server-side web search results are not included in this count.
 
+                    minimum: 0
+
                   - `required string Source`
 
-                  - `required Long StartBlockIndex`
+                  - `required long StartBlockIndex`
 
                     0-based index of the first cited block in the source's `content` array.
 
+                    minimum: 0
+
                   - `required string? Title`
 
-                  - `JsonElement Type "search_result_location"constant`
+                  - `JsonElement Type constant`
 
             - `class ImageBlockParam:`
 
@@ -239,21 +268,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string Data`
 
+                    format: byte
+
                   - `required MediaType MediaType`
 
-                    - `"image/jpeg"ImageJpeg`
+                    - `ImageJpeg`
 
-                    - `"image/png"ImagePng`
+                    - `ImagePng`
 
-                    - `"image/gif"ImageGif`
+                    - `ImageGif`
 
-                    - `"image/webp"ImageWebP`
+                    - `ImageWebP`
 
-                  - `JsonElement Type "base64"constant`
+                  - `JsonElement Type constant`
 
                 - `class UrlImageSource:`
 
-                  - `JsonElement Type "url"constant`
+                  - `JsonElement Type constant`
 
                   - `required string Url`
 
@@ -261,9 +292,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string FileID`
 
-                  - `JsonElement Type "file"constant`
+                  - `JsonElement Type constant`
 
-              - `JsonElement Type "image"constant`
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -277,9 +308,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-                  - `"downsize"Downsize`
+                  - `Downsize`
 
-                  - `"error"Error`
+                  - `Error`
 
             - `class DocumentBlockParam:`
 
@@ -289,17 +320,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string Data`
 
-                  - `JsonElement MediaType "application/pdf"constant`
+                    format: byte
 
-                  - `JsonElement Type "base64"constant`
+                  - `JsonElement MediaType constant`
+
+                  - `JsonElement Type constant`
 
                 - `class PlainTextSource:`
 
                   - `required string Data`
 
-                  - `JsonElement MediaType "text/plain"constant`
+                  - `JsonElement MediaType constant`
 
-                  - `JsonElement Type "text"constant`
+                  - `JsonElement Type constant`
 
                 - `class ContentBlockSource:`
 
@@ -313,11 +346,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `class ImageBlockParam:`
 
-                  - `JsonElement Type "content"constant`
+                  - `JsonElement Type constant`
 
                 - `class UrlPdfSource:`
 
-                  - `JsonElement Type "url"constant`
+                  - `JsonElement Type constant`
 
                   - `required string Url`
 
@@ -325,9 +358,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string FileID`
 
-                  - `JsonElement Type "file"constant`
+                  - `JsonElement Type constant`
 
-              - `JsonElement Type "document"constant`
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -335,11 +368,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `CitationsConfigParam? Citations`
 
-                - `Boolean Enabled`
+                - `bool Enabled`
 
               - `string? Context`
 
+                minLength: 1
+
               - `string? Title`
+
+                maxLength: 500, minLength: 1
 
             - `class SearchResultBlockParam:`
 
@@ -347,7 +384,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Text`
 
-                - `JsonElement Type "text"constant`
+                  minLength: 1
+
+                - `JsonElement Type constant`
 
                 - `CacheControlEphemeral? CacheControl`
 
@@ -359,7 +398,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required string Title`
 
-              - `JsonElement Type "search_result"constant`
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -379,7 +418,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `thinking` text of this block as returned by the API.
 
-              - `JsonElement Type "thinking"constant`
+              - `JsonElement Type constant`
 
             - `class RedactedThinkingBlockParam:`
 
@@ -387,17 +426,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `JsonElement Type "redacted_thinking"constant`
+              - `JsonElement Type constant`
 
             - `class ToolUseBlockParam:`
 
               - `required string ID`
 
+                pattern: ^[a-zA-Z0-9_-]+$
+
               - `required IReadOnlyDictionary<string, JsonElement> Input`
 
               - `required string Name`
 
-              - `JsonElement Type "tool_use"constant`
+                maxLength: 200, minLength: 1
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -411,7 +454,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Tool invocation directly from the model.
 
-                  - `JsonElement Type "direct"constant`
+                  - `JsonElement Type constant`
 
                 - `class ServerToolCaller:`
 
@@ -419,23 +462,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string ToolID`
 
-                  - `JsonElement Type "code_execution_20250825"constant`
+                    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                  - `JsonElement Type constant`
 
                 - `class ServerToolCaller20260120:`
 
                   - `required string ToolID`
 
-                  - `JsonElement Type "code_execution_20260120"constant`
+                    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+                  - `JsonElement Type constant`
 
               - `string? ToolsetName`
 
                 For a toolset member tool_use, the toolset family this member belongs to.
 
+                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
             - `class ToolResultBlockParam:`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "tool_result"constant`
+                pattern: ^[a-zA-Z0-9_-]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -461,7 +512,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `required string ToolName`
 
-                    - `JsonElement Type "tool_reference"constant`
+                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                    - `JsonElement Type constant`
 
                     - `CacheControlEphemeral? CacheControl`
 
@@ -481,23 +534,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
+                      maxItems: 100
+
                       - `required string TabID`
 
                         The caller-assigned identifier for this tab, unique within the inventory.
+
+                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `required string Title`
 
                         The title of the page the tab is showing. May be empty.
 
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                       - `required string Url`
 
                         The URL of the page the tab is showing. May be empty.
 
-                      - `Boolean Active`
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                      - `bool Active`
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `JsonElement Type "browser_state"constant`
+                    - `JsonElement Type constant`
 
                     - `CacheControlEphemeral? CacheControl`
 
@@ -506,6 +567,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                     - `IReadOnlyList<BrowserStateChange>? StateChanges`
 
                       Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                      maxItems: 200, minItems: 1
 
                       - `class BrowserStateChangeTabOpened:`
 
@@ -521,7 +584,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
-                        - `JsonElement Type "tab_opened"constant`
+                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                        - `JsonElement Type constant`
 
                       - `class BrowserStateChangeDownloadStarted:`
 
@@ -531,11 +596,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        - `JsonElement Type "download_started"constant`
+                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                        - `JsonElement Type constant`
 
                         - `required string Url`
 
                           The final post-redirect URL the download was served from.
+
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `class BrowserStateChangeDownloadCompleted:`
 
@@ -548,19 +617,27 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        - `JsonElement Type "download_completed"constant`
+                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                        - `JsonElement Type constant`
 
                         - `required string Url`
 
                           The final post-redirect URL the download was served from.
 
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                         - `string? Path`
 
                           Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                        - `Long? SizeBytes`
+                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+                        - `long? SizeBytes`
 
                           The completed download's size.
+
+                          minimum: 0
 
                       - `class BrowserStateChangeDownloadFailed:`
 
@@ -570,45 +647,55 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        - `JsonElement Type "download_failed"constant`
+                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
+                        - `JsonElement Type constant`
 
                         - `required string Url`
 
                           The final post-redirect URL the download was served from.
 
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+
                         - `string? Error`
 
                           The failure or cancellation detail, when known.
 
-              - `Boolean IsError`
+                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+
+              - `bool IsError`
 
               - `string? ToolsetName`
 
                 For a toolset member tool_result, the toolset family of the paired tool_use.
 
+                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+
             - `class ServerToolUseBlockParam:`
 
               - `required string ID`
+
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
               - `required IReadOnlyDictionary<string, JsonElement> Input`
 
               - `required Name Name`
 
-                - `"web_search"WebSearch`
+                - `WebSearch`
 
-                - `"web_fetch"WebFetch`
+                - `WebFetch`
 
-                - `"code_execution"CodeExecution`
+                - `CodeExecution`
 
-                - `"bash_code_execution"BashCodeExecution`
+                - `BashCodeExecution`
 
-                - `"text_editor_code_execution"TextEditorCodeExecution`
+                - `TextEditorCodeExecution`
 
-                - `"tool_search_tool_regex"ToolSearchToolRegex`
+                - `ToolSearchToolRegex`
 
-                - `"tool_search_tool_bm25"ToolSearchToolBm25`
+                - `ToolSearchToolBm25`
 
-              - `JsonElement Type "server_tool_use"constant`
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -638,7 +725,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string Title`
 
-                  - `JsonElement Type "web_search_result"constant`
+                  - `JsonElement Type constant`
 
                   - `required string Url`
 
@@ -648,23 +735,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required WebSearchToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                    - `"max_uses_exceeded"MaxUsesExceeded`
+                    - `MaxUsesExceeded`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"query_too_long"QueryTooLong`
+                    - `QueryTooLong`
 
-                    - `"request_too_large"RequestTooLarge`
+                    - `RequestTooLarge`
 
-                  - `JsonElement Type "web_search_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "web_search_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -692,31 +781,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required WebFetchToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"url_too_long"UrlTooLong`
+                    - `UrlTooLong`
 
-                    - `"url_not_allowed"UrlNotAllowed`
+                    - `UrlNotAllowed`
 
-                    - `"url_not_in_prior_context"UrlNotInPriorContext`
+                    - `UrlNotInPriorContext`
 
-                    - `"url_not_accessible"UrlNotAccessible`
+                    - `UrlNotAccessible`
 
-                    - `"unsupported_content_type"UnsupportedContentType`
+                    - `UnsupportedContentType`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"max_uses_exceeded"MaxUsesExceeded`
+                    - `MaxUsesExceeded`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                  - `JsonElement Type "web_fetch_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
                 - `class WebFetchBlockParam:`
 
                   - `required DocumentBlockParam Content`
 
-                  - `JsonElement Type "web_fetch_result"constant`
+                  - `JsonElement Type constant`
 
                   - `required string Url`
 
@@ -728,7 +817,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "web_fetch_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -758,15 +849,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required CodeExecutionToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"execution_time_exceeded"ExecutionTimeExceeded`
+                    - `ExecutionTimeExceeded`
 
-                  - `JsonElement Type "code_execution_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
                 - `class CodeExecutionResultBlockParam:`
 
@@ -774,15 +865,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `required string FileID`
 
-                    - `JsonElement Type "code_execution_output"constant`
+                    - `JsonElement Type constant`
 
-                  - `required Long ReturnCode`
+                  - `required long ReturnCode`
 
                   - `required string Stderr`
 
                   - `required string Stdout`
 
-                  - `JsonElement Type "code_execution_result"constant`
+                  - `JsonElement Type constant`
 
                 - `class EncryptedCodeExecutionResultBlockParam:`
 
@@ -792,19 +883,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `required string FileID`
 
-                    - `JsonElement Type "code_execution_output"constant`
+                    - `JsonElement Type constant`
 
                   - `required string EncryptedStdout`
 
-                  - `required Long ReturnCode`
+                  - `required long ReturnCode`
 
                   - `required string Stderr`
 
-                  - `JsonElement Type "encrypted_code_execution_result"constant`
+                  - `JsonElement Type constant`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "code_execution_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -818,17 +911,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required BashCodeExecutionToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"execution_time_exceeded"ExecutionTimeExceeded`
+                    - `ExecutionTimeExceeded`
 
-                    - `"output_file_too_large"OutputFileTooLarge`
+                    - `OutputFileTooLarge`
 
-                  - `JsonElement Type "bash_code_execution_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
                 - `class BashCodeExecutionResultBlockParam:`
 
@@ -836,19 +929,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `required string FileID`
 
-                    - `JsonElement Type "bash_code_execution_output"constant`
+                    - `JsonElement Type constant`
 
-                  - `required Long ReturnCode`
+                  - `required long ReturnCode`
 
                   - `required string Stderr`
 
                   - `required string Stdout`
 
-                  - `JsonElement Type "bash_code_execution_result"constant`
+                  - `JsonElement Type constant`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "bash_code_execution_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -862,17 +957,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required TextEditorCodeExecutionToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"execution_time_exceeded"ExecutionTimeExceeded`
+                    - `ExecutionTimeExceeded`
 
-                    - `"file_not_found"FileNotFound`
+                    - `FileNotFound`
 
-                  - `JsonElement Type "text_editor_code_execution_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
                   - `string? ErrorMessage`
 
@@ -882,43 +977,45 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required FileType FileType`
 
-                    - `"text"Text`
+                    - `Text`
 
-                    - `"image"Image`
+                    - `Image`
 
-                    - `"pdf"Pdf`
+                    - `Pdf`
 
-                  - `JsonElement Type "text_editor_code_execution_view_result"constant`
+                  - `JsonElement Type constant`
 
-                  - `Long? NumLines`
+                  - `long? NumLines`
 
-                  - `Long? StartLine`
+                  - `long? StartLine`
 
-                  - `Long? TotalLines`
+                  - `long? TotalLines`
 
                 - `class TextEditorCodeExecutionCreateResultBlockParam:`
 
-                  - `required Boolean IsFileUpdate`
+                  - `required bool IsFileUpdate`
 
-                  - `JsonElement Type "text_editor_code_execution_create_result"constant`
+                  - `JsonElement Type constant`
 
                 - `class TextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-                  - `JsonElement Type "text_editor_code_execution_str_replace_result"constant`
+                  - `JsonElement Type constant`
 
                   - `IReadOnlyList<string>? Lines`
 
-                  - `Long? NewLines`
+                  - `long? NewLines`
 
-                  - `Long? NewStart`
+                  - `long? NewStart`
 
-                  - `Long? OldLines`
+                  - `long? OldLines`
 
-                  - `Long? OldStart`
+                  - `long? OldStart`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "text_editor_code_execution_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -932,15 +1029,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required ToolSearchToolResultErrorCode ErrorCode`
 
-                    - `"invalid_tool_input"InvalidToolInput`
+                    - `InvalidToolInput`
 
-                    - `"unavailable"Unavailable`
+                    - `Unavailable`
 
-                    - `"too_many_requests"TooManyRequests`
+                    - `TooManyRequests`
 
-                    - `"execution_time_exceeded"ExecutionTimeExceeded`
+                    - `ExecutionTimeExceeded`
 
-                  - `JsonElement Type "tool_search_tool_result_error"constant`
+                  - `JsonElement Type constant`
 
                   - `string? ErrorMessage`
 
@@ -950,17 +1047,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `required string ToolName`
 
-                    - `JsonElement Type "tool_reference"constant`
+                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
+                    - `JsonElement Type constant`
 
                     - `CacheControlEphemeral? CacheControl`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `JsonElement Type "tool_search_tool_search_result"constant`
+                  - `JsonElement Type constant`
 
               - `required string ToolUseID`
 
-              - `JsonElement Type "tool_search_tool_result"constant`
+                pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -973,7 +1074,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required string FileID`
 
-              - `JsonElement Type "container_upload"constant`
+              - `JsonElement Type constant`
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -981,11 +1082,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required Role Role`
 
-          - `"user"User`
+          - `User`
 
-          - `"assistant"Assistant`
+          - `Assistant`
 
-          - `"system"System`
+          - `System`
 
       - `required Model Model`
 
@@ -993,63 +1094,63 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-sonnet-5"ClaudeSonnet5`
+        - `ClaudeSonnet5`
 
           High-performance model for coding and agents
 
-        - `"claude-fable-5"ClaudeFable5`
+        - `ClaudeFable5`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
-        - `"claude-mythos-5"ClaudeMythos5`
+        - `ClaudeMythos5`
 
           Most capable model for cybersecurity and biology research
 
-        - `"claude-opus-5"ClaudeOpus5`
+        - `ClaudeOpus5`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-opus-4-8"ClaudeOpus4_8`
+        - `ClaudeOpus4_8`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-opus-4-7"ClaudeOpus4_7`
+        - `ClaudeOpus4_7`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-mythos-preview"ClaudeMythosPreview`
+        - `ClaudeMythosPreview`
 
           New class of intelligence, strongest in coding and cybersecurity
 
-        - `"claude-opus-4-6"ClaudeOpus4_6`
+        - `ClaudeOpus4_6`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+        - `ClaudeSonnet4_6`
 
           Best combination of speed and intelligence
 
-        - `"claude-haiku-4-5"ClaudeHaiku4_5`
+        - `ClaudeHaiku4_5`
 
           Fastest model with near-frontier intelligence
 
-        - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+        - `ClaudeHaiku4_5_20251001`
 
           Fastest model with near-frontier intelligence
 
-        - `"claude-opus-4-5"ClaudeOpus4_5`
+        - `ClaudeOpus4_5`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+        - `ClaudeOpus4_5_20251101`
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+        - `ClaudeSonnet4_5`
 
           High-performance model for agents and coding
 
-        - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+        - `ClaudeSonnet4_5_20250929`
 
           High-performance model for agents and coding
 
@@ -1073,21 +1174,27 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             List of skills to load in the container
 
+            maxItems: 20
+
             - `required string SkillID`
 
               Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `required SkillParamsType Type`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-              - `"anthropic"Anthropic`
+              - `Anthropic`
 
-              - `"custom"Custom`
+              - `Custom`
 
             - `string Version`
 
               Skill version or 'latest' for most recent version
+
+              maxLength: 64, minLength: 1
 
         - `string`
 
@@ -1105,6 +1212,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+          maxLength: 512
+
       - `OutputConfig OutputConfig`
 
         Configuration options for the model's output, such as the output format.
@@ -1113,15 +1222,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           All possible effort levels.
 
-          - `"low"Low`
+          - `Low`
 
-          - `"medium"Medium`
+          - `Medium`
 
-          - `"high"High`
+          - `High`
 
-          - `"xhigh"Xhigh`
+          - `Xhigh`
 
-          - `"max"Max`
+          - `Max`
 
         - `JsonOutputFormat? Format`
 
@@ -1131,7 +1240,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The JSON schema of the format
 
-          - `JsonElement Type "json_schema"constant`
+          - `JsonElement Type constant`
 
       - `ServiceTier ServiceTier`
 
@@ -1139,9 +1248,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Anthropic offers different levels of service for your API requests. See [service-tiers](./api-service-tiers.md) for details.
 
-        - `"auto"Auto`
+        - `Auto`
 
-        - `"standard_only"StandardOnly`
+        - `StandardOnly`
 
       - `IReadOnlyList<string> StopSequences`
 
@@ -1151,7 +1260,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-      - `Boolean Stream`
+      - `bool Stream`
 
         Whether to incrementally stream the response using server-sent events.
 
@@ -1169,21 +1278,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `required string Text`
 
-          - `JsonElement Type "text"constant`
+            minLength: 1
+
+          - `JsonElement Type constant`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
           - `IReadOnlyList<TextCitationParam>? Citations`
-
-      - `Double Temperature`
-
-        Amount of randomness injected into the response.
-
-        Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-        Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
       - `ThinkingConfigParam Thinking`
 
@@ -1195,7 +1298,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ThinkingConfigEnabled:`
 
-          - `required Long BudgetTokens`
+          - `required long BudgetTokens`
 
             Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
@@ -1203,31 +1306,33 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-          - `JsonElement Type "enabled"constant`
+            minimum: 1024
+
+          - `JsonElement Type constant`
 
           - `Display? Display`
 
             Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-            - `"summarized"Summarized`
+            - `Summarized`
 
-            - `"omitted"Omitted`
+            - `Omitted`
 
         - `class ThinkingConfigDisabled:`
 
-          - `JsonElement Type "disabled"constant`
+          - `JsonElement Type constant`
 
         - `class ThinkingConfigAdaptive:`
 
-          - `JsonElement Type "adaptive"constant`
+          - `JsonElement Type constant`
 
           - `Display? Display`
 
             Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-            - `"summarized"Summarized`
+            - `Summarized`
 
-            - `"omitted"Omitted`
+            - `Omitted`
 
       - `ToolChoice ToolChoice`
 
@@ -1237,9 +1342,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will automatically decide whether to use tools.
 
-          - `JsonElement Type "auto"constant`
+          - `JsonElement Type constant`
 
-          - `Boolean DisableParallelToolUse`
+          - `bool DisableParallelToolUse`
 
             Whether to disable parallel tool use.
 
@@ -1249,9 +1354,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will use any available tools.
 
-          - `JsonElement Type "any"constant`
+          - `JsonElement Type constant`
 
-          - `Boolean DisableParallelToolUse`
+          - `bool DisableParallelToolUse`
 
             Whether to disable parallel tool use.
 
@@ -1265,9 +1370,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The name of the tool to use.
 
-          - `JsonElement Type "tool"constant`
+          - `JsonElement Type constant`
 
-          - `Boolean DisableParallelToolUse`
+          - `bool DisableParallelToolUse`
 
             Whether to disable parallel tool use.
 
@@ -1277,7 +1382,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will not be allowed to use tools.
 
-          - `JsonElement Type "none"constant`
+          - `JsonElement Type constant`
 
       - `IReadOnlyList<ToolUnion> Tools`
 
@@ -1351,7 +1456,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-            - `JsonElement Type "object"constant`
+            - `JsonElement Type constant`
 
             - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
@@ -1363,21 +1468,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
+            maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
@@ -1387,115 +1494,113 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-          - `Boolean? EagerInputStreaming`
+          - `bool? EagerInputStreaming`
 
             Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
           - `Type? Type`
 
-            - `"custom"Custom`
-
         - `class ToolBash20250124:`
 
-          - `JsonElement Name "bash"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "bash_20250124"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class CodeExecutionTool20250522:`
 
-          - `JsonElement Name "code_execution"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "code_execution_20250522"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class CodeExecutionTool20250825:`
 
-          - `JsonElement Name "code_execution"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "code_execution_20250825"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -1503,33 +1608,33 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-          - `JsonElement Name "code_execution"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "code_execution_20260120"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -1537,33 +1642,33 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence.
 
-          - `JsonElement Name "code_execution"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "code_execution_20260521"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -1574,17 +1679,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           the family's tool with any members disabled via `configs` removed
           from its schema.
 
-          - `JsonElement Type "browser_toolset_20260801"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<BrowserToolset20260801AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -1603,11 +1708,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `close_tab`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1615,11 +1720,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `double_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1627,11 +1732,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `file_upload`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1639,11 +1744,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `find`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1651,11 +1756,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `form_input`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1663,11 +1768,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `get_page_text`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1675,11 +1780,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `hold_key`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1687,11 +1792,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `hover`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1699,11 +1804,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `javascript_exec`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1711,11 +1816,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `key`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1723,11 +1828,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1735,11 +1840,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_click_drag`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1747,11 +1852,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_mouse_down`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1759,11 +1864,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_mouse_up`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1771,11 +1876,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `list_tabs`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1783,11 +1888,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `middle_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1795,11 +1900,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `mouse_move`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1807,11 +1912,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `navigate`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1819,11 +1924,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `new_tab`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1831,11 +1936,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `read_console`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1843,11 +1948,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `read_network`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1855,11 +1960,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `read_page`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1867,11 +1972,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `right_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1879,11 +1984,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `screenshot`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1891,11 +1996,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `scroll`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1903,11 +2008,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `scroll_to`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1915,11 +2020,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `switch_tab`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1927,11 +2032,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `triple_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1939,11 +2044,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `type`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1951,11 +2056,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `wait`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -1963,45 +2068,45 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `zoom`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `class MemoryTool20250818:`
 
-          - `JsonElement Name "memory"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "memory_20250818"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -2016,17 +2121,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           `type`, `configs`, and `cache_control`; zoom is controlled
           via `configs.zoom.enabled`.
 
-          - `JsonElement Type "computer_toolset_20260801"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<ComputerToolset20260801AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -2045,11 +2150,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `cursor_position`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2057,11 +2162,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `double_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2069,11 +2174,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `hold_key`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2081,11 +2186,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `key`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2093,11 +2198,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2105,11 +2210,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_click_drag`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2117,11 +2222,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_mouse_down`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2129,11 +2234,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `left_mouse_up`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2141,11 +2246,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `middle_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2153,11 +2258,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `mouse_move`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2165,11 +2270,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `right_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2177,11 +2282,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `screenshot`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2189,11 +2294,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `scroll`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2201,11 +2306,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `triple_click`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2213,11 +2318,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `type`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2225,11 +2330,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `wait`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
@@ -2237,139 +2342,141 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               `zoom`'s config overrides.
 
-              - `Boolean? DeferLoading`
+              - `bool? DeferLoading`
 
                 Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
 
-              - `Boolean? Enabled`
+              - `bool? Enabled`
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `class ToolTextEditor20250124:`
 
-          - `JsonElement Name "str_replace_editor"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "text_editor_20250124"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class ToolTextEditor20250429:`
 
-          - `JsonElement Name "str_replace_based_edit_tool"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "text_editor_20250429"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class ToolTextEditor20250728:`
 
-          - `JsonElement Name "str_replace_based_edit_tool"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "text_editor_20250728"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
           - `IReadOnlyList<IReadOnlyDictionary<string, JsonElement>> InputExamples`
 
-          - `Long? MaxCharacters`
+          - `long? MaxCharacters`
 
             Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-          - `Boolean Strict`
+            minimum: 1
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class WebSearchTool20250305:`
 
-          - `JsonElement Name "web_search"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_search_20250305"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2383,15 +2490,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxUses`
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-          - `Boolean Strict`
+            exclusiveMinimum: 0
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -2399,43 +2508,51 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-            - `JsonElement Type "approximate"constant`
+            - `JsonElement Type constant`
 
             - `string? City`
 
               The city of the user.
 
+              maxLength: 255, minLength: 1
+
             - `string? Country`
 
               The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
+
+              maxLength: 2, minLength: 2
 
             - `string? Region`
 
               The region of the user.
 
+              maxLength: 255, minLength: 1
+
             - `string? Timezone`
 
               The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
+              maxLength: 255, minLength: 1
+
         - `class WebFetchTool20250910:`
 
-          - `JsonElement Name "web_fetch"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_fetch_20250910"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2453,41 +2570,45 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Citations configuration for fetched documents. Citations are disabled by default.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxContentTokens`
+          - `long? MaxContentTokens`
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          - `Long? MaxUses`
+            exclusiveMinimum: 0
+
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-          - `Boolean Strict`
+            exclusiveMinimum: 0
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class WebSearchTool20260209:`
 
-          - `JsonElement Name "web_search"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_search_20260209"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2501,15 +2622,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxUses`
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-          - `Boolean Strict`
+            exclusiveMinimum: 0
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -2519,23 +2642,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebFetchTool20260209:`
 
-          - `JsonElement Name "web_fetch"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_fetch_20260209"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2553,19 +2676,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Citations configuration for fetched documents. Citations are disabled by default.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxContentTokens`
+          - `long? MaxContentTokens`
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          - `Long? MaxUses`
+            exclusiveMinimum: 0
+
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-          - `Boolean Strict`
+            exclusiveMinimum: 0
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -2573,23 +2700,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
-          - `JsonElement Name "web_fetch"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_fetch_20260309"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2607,45 +2734,49 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Citations configuration for fetched documents. Citations are disabled by default.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxContentTokens`
+          - `long? MaxContentTokens`
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          - `Long? MaxUses`
+            exclusiveMinimum: 0
+
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-          - `Boolean Strict`
+            exclusiveMinimum: 0
+
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `Boolean UseCache`
+          - `bool UseCache`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
         - `class WebSearchTool20260318:`
 
-          - `JsonElement Name "web_search"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_search_20260318"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2659,23 +2790,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxUses`
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
+
+            exclusiveMinimum: 0
 
           - `ResponseInclusion ResponseInclusion`
 
             How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-            - `"full"Full`
+            - `Full`
 
-            - `"excluded"Excluded`
+            - `Excluded`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
@@ -2685,23 +2818,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebFetchTool20260318:`
 
-          - `JsonElement Name "web_fetch"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonElement Type "web_fetch_20260318"constant`
+          - `JsonElement Type constant`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2719,37 +2852,41 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Citations configuration for fetched documents. Citations are disabled by default.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Long? MaxContentTokens`
+          - `long? MaxContentTokens`
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          - `Long? MaxUses`
+            exclusiveMinimum: 0
+
+          - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
+
+            exclusiveMinimum: 0
 
           - `ResponseInclusion ResponseInclusion`
 
             How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-            - `"full"Full`
+            - `Full`
 
-            - `"excluded"Excluded`
+            - `Excluded`
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `Boolean UseCache`
+          - `bool UseCache`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
         - `class ToolSearchToolBm25_20251119:`
 
-          - `JsonElement Name "tool_search_tool_bm25"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
@@ -2757,35 +2894,35 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `required Type Type`
 
-            - `"tool_search_tool_bm25_20251119"ToolSearchToolBm25_20251119`
+            - `ToolSearchToolBm25_20251119`
 
-            - `"tool_search_tool_bm25"ToolSearchToolBm25`
+            - `ToolSearchToolBm25`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
         - `class ToolSearchToolRegex20251119:`
 
-          - `JsonElement Name "tool_search_tool_regex"constant`
+          - `JsonElement Name constant`
 
             Name of the tool.
 
@@ -2793,33 +2930,47 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `required Type Type`
 
-            - `"tool_search_tool_regex_20251119"ToolSearchToolRegex20251119`
+            - `ToolSearchToolRegex20251119`
 
-            - `"tool_search_tool_regex"ToolSearchToolRegex`
+            - `ToolSearchToolRegex`
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-            - `"direct"Direct`
+            - `Direct`
 
-            - `"code_execution_20250825"CodeExecution20250825`
+            - `CodeExecution20250825`
 
-            - `"code_execution_20260120"CodeExecution20260120`
+            - `CodeExecution20260120`
 
-            - `"code_execution_20260521"CodeExecution20260521`
+            - `CodeExecution20260521`
 
           - `CacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-          - `Boolean DeferLoading`
+          - `bool DeferLoading`
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `Boolean Strict`
+          - `bool Strict`
 
             When true, guarantees schema validation on tool names and inputs
 
-      - `Long TopK`
+      - `double Temperature`
+
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+        Amount of randomness injected into the response.
+
+        Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+        Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+        maximum: 1, minimum: 0
+
+      - `long TopK`
+
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
         Only sample from the top K options for each subsequent token.
 
@@ -2827,7 +2978,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Recommended for advanced use cases only.
 
-      - `Double TopP`
+        minimum: 0
+
+      - `double TopP`
+
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
         Use nucleus sampling.
 
@@ -2835,11 +2990,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Recommended for advanced use cases only.
 
+        maximum: 1, minimum: 0
+
   - `string userProfileID`
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-### Returns
+## Returns
 
 - `class MessageBatch:`
 
@@ -2853,13 +3010,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `required DateTimeOffset? CancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `required DateTimeOffset CreatedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `required DateTimeOffset? EndedAt`
 
@@ -2867,19 +3030,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `required DateTimeOffset ExpiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `required ProcessingStatus ProcessingStatus`
 
     Processing status of the Message Batch.
 
-    - `"in_progress"InProgress`
+    - `InProgress`
 
-    - `"canceling"Canceling`
+    - `Canceling`
 
-    - `"ended"Ended`
+    - `Ended`
 
   - `required MessageBatchRequestCounts RequestCounts`
 
@@ -2887,29 +3054,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
 
-    - `required Long Canceled`
+    - `required long Canceled`
 
       Number of requests in the Message Batch that have been canceled.
 
       This is zero until processing of the entire Message Batch has ended.
 
-    - `required Long Errored`
+    - `required long Errored`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
 
-    - `required Long Expired`
+    - `required long Expired`
 
       Number of requests in the Message Batch that have expired.
 
       This is zero until processing of the entire Message Batch has ended.
 
-    - `required Long Processing`
+    - `required long Processing`
 
       Number of requests in the Message Batch that are processing.
 
-    - `required Long Succeeded`
+    - `required long Succeeded`
 
       Number of requests in the Message Batch that have completed successfully.
 
@@ -2921,13 +3088,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `JsonElement Type "message_batch"constant`
+  - `JsonElement Type constant`
 
     Object type.
 
     For Message Batches, this is always `"message_batch"`.
 
-### Example
+## Example
 
 ```csharp
 BatchCreateParams parameters = new()
@@ -3063,7 +3230,7 @@ var messageBatch = await client.Messages.Batches.Create(parameters);
 Console.WriteLine(messageBatch);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

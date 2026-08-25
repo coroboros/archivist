@@ -4,14 +4,9 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/webhooks"
 category: "api"
 generated: true
 ---
----
-title: Webhooks
-url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
----
-
 # Webhooks
 
-## Domain Types
+## Domain types
 
 ### Beta Webhook Agent Archived Event Data
 
@@ -23,7 +18,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "agent.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -37,7 +32,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "agent.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -51,7 +46,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "agent.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -65,7 +60,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "agent.updated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -79,7 +74,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -93,7 +88,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -107,7 +102,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -121,7 +116,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.paused"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -135,7 +130,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment_run.failed"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -149,7 +144,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment_run.started"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -163,7 +158,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment_run.succeeded"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -177,7 +172,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.unpaused"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -191,7 +186,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "deployment.updated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -205,7 +200,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "environment.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -219,7 +214,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "environment.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -233,7 +228,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "environment.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -247,7 +242,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "environment.updated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -263,6 +258,8 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     RFC 3339 timestamp when the event occurred.
 
+    format: date-time
+
   - `required BetaWebhookEventData Data`
 
     - `class BetaWebhookSessionCreatedEventData:`
@@ -273,7 +270,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -285,7 +282,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.pending"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -297,7 +294,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.running"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -309,7 +306,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -321,7 +318,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.requires_action"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -333,7 +330,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -345,7 +342,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -357,7 +354,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_rescheduled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -369,7 +366,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_run_started"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -381,7 +378,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -393,7 +390,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_terminated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -409,7 +406,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -425,7 +422,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -441,7 +438,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_terminated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -453,7 +450,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.outcome_evaluation_ended"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -465,7 +462,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -477,7 +474,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -489,7 +486,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -501,7 +498,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.created"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -517,7 +514,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -533,7 +530,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -549,7 +546,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.refresh_failed"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -565,7 +562,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -577,7 +574,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -589,7 +586,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -601,7 +598,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -613,7 +610,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.paused"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -625,7 +622,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.failed"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -637,7 +634,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -649,7 +646,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -661,7 +658,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.unpaused"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -673,7 +670,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -685,7 +682,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -697,7 +694,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.started"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -709,7 +706,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -721,7 +718,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.succeeded"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -733,7 +730,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -745,7 +742,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -757,7 +754,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -769,7 +766,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -781,7 +778,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -793,7 +790,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -805,7 +802,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -817,17 +814,17 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.budget_reached"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
-  - `JsonElement Type "event"constant`
+  - `JsonElement Type constant`
 
     Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
-- `class BetaWebhookEventData: A class that can be one of several variants.union`
+- `class BetaWebhookEventData: union`
 
   - `class BetaWebhookSessionCreatedEventData:`
 
@@ -837,7 +834,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -849,7 +846,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.pending"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -861,7 +858,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.running"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -873,7 +870,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.idled"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -885,7 +882,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.requires_action"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -897,7 +894,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -909,7 +906,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -921,7 +918,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.status_rescheduled"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -933,7 +930,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.status_run_started"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -945,7 +942,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.status_idled"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -957,7 +954,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.status_terminated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -973,7 +970,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       ID of the session thread this event refers to.
 
-    - `JsonElement Type "session.thread_created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -989,7 +986,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       ID of the session thread this event refers to.
 
-    - `JsonElement Type "session.thread_idled"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1005,7 +1002,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       ID of the session thread this event refers to.
 
-    - `JsonElement Type "session.thread_terminated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1017,7 +1014,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.outcome_evaluation_ended"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1029,7 +1026,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1041,7 +1038,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1053,7 +1050,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1065,7 +1062,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault_credential.created"constant`
+    - `JsonElement Type constant`
 
     - `required string VaultID`
 
@@ -1081,7 +1078,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault_credential.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string VaultID`
 
@@ -1097,7 +1094,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault_credential.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string VaultID`
 
@@ -1113,7 +1110,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "vault_credential.refresh_failed"constant`
+    - `JsonElement Type constant`
 
     - `required string VaultID`
 
@@ -1129,7 +1126,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.updated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1141,7 +1138,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "agent.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1153,7 +1150,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "agent.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1165,7 +1162,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "agent.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1177,7 +1174,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.paused"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1189,7 +1186,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment_run.failed"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1201,7 +1198,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1213,7 +1210,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.updated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1225,7 +1222,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.unpaused"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1237,7 +1234,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "agent.updated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1249,7 +1246,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1261,7 +1258,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment_run.started"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1273,7 +1270,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1285,7 +1282,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "deployment_run.succeeded"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1297,7 +1294,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "environment.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1309,7 +1306,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "environment.updated"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1321,7 +1318,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "environment.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1333,7 +1330,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "environment.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1345,7 +1342,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "memory_store.created"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1357,7 +1354,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "memory_store.archived"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1369,7 +1366,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "memory_store.deleted"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1381,7 +1378,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
-    - `JsonElement Type "session.budget_reached"constant`
+    - `JsonElement Type constant`
 
     - `required string WorkspaceID`
 
@@ -1395,7 +1392,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "memory_store.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1409,7 +1406,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "memory_store.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1423,7 +1420,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "memory_store.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1437,7 +1434,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1451,7 +1448,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.budget_reached"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1465,7 +1462,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1479,7 +1476,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1493,7 +1490,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.idled"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1507,7 +1504,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.outcome_evaluation_ended"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1521,7 +1518,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.pending"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1535,7 +1532,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.requires_action"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1549,7 +1546,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.running"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1563,7 +1560,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.status_idled"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1577,7 +1574,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.status_rescheduled"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1591,7 +1588,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.status_run_started"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1605,7 +1602,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.status_terminated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1623,7 +1620,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     ID of the session thread this event refers to.
 
-  - `JsonElement Type "session.thread_created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1641,7 +1638,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     ID of the session thread this event refers to.
 
-  - `JsonElement Type "session.thread_idled"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1659,7 +1656,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     ID of the session thread this event refers to.
 
-  - `JsonElement Type "session.thread_terminated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1673,7 +1670,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "session.updated"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1687,7 +1684,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1701,7 +1698,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault.created"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1715,7 +1712,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault_credential.archived"constant`
+  - `JsonElement Type constant`
 
   - `required string VaultID`
 
@@ -1733,7 +1730,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault_credential.created"constant`
+  - `JsonElement Type constant`
 
   - `required string VaultID`
 
@@ -1751,7 +1748,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault_credential.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string VaultID`
 
@@ -1769,7 +1766,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault_credential.refresh_failed"constant`
+  - `JsonElement Type constant`
 
   - `required string VaultID`
 
@@ -1787,7 +1784,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required string OrganizationID`
 
-  - `JsonElement Type "vault.deleted"constant`
+  - `JsonElement Type constant`
 
   - `required string WorkspaceID`
 
@@ -1803,6 +1800,8 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     RFC 3339 timestamp when the event occurred.
 
+    format: date-time
+
   - `required BetaWebhookEventData Data`
 
     - `class BetaWebhookSessionCreatedEventData:`
@@ -1813,7 +1812,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1825,7 +1824,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.pending"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1837,7 +1836,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.running"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1849,7 +1848,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1861,7 +1860,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.requires_action"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1873,7 +1872,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1885,7 +1884,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1897,7 +1896,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_rescheduled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1909,7 +1908,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_run_started"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1921,7 +1920,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1933,7 +1932,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.status_terminated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1949,7 +1948,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1965,7 +1964,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_idled"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1981,7 +1980,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
         ID of the session thread this event refers to.
 
-      - `JsonElement Type "session.thread_terminated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -1993,7 +1992,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.outcome_evaluation_ended"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2005,7 +2004,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2017,7 +2016,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2029,7 +2028,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2041,7 +2040,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.created"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -2057,7 +2056,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -2073,7 +2072,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -2089,7 +2088,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "vault_credential.refresh_failed"constant`
+      - `JsonElement Type constant`
 
       - `required string VaultID`
 
@@ -2105,7 +2104,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2117,7 +2116,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2129,7 +2128,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2141,7 +2140,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2153,7 +2152,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.paused"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2165,7 +2164,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.failed"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2177,7 +2176,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2189,7 +2188,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2201,7 +2200,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.unpaused"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2213,7 +2212,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "agent.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2225,7 +2224,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2237,7 +2236,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.started"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2249,7 +2248,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2261,7 +2260,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "deployment_run.succeeded"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2273,7 +2272,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2285,7 +2284,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.updated"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2297,7 +2296,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2309,7 +2308,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "environment.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2321,7 +2320,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.created"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2333,7 +2332,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.archived"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2345,7 +2344,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "memory_store.deleted"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
@@ -2357,10 +2356,10 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
-      - `JsonElement Type "session.budget_reached"constant`
+      - `JsonElement Type constant`
 
       - `required string WorkspaceID`
 
-  - `JsonElement Type "event"constant`
+  - `JsonElement Type constant`
 
     Object type. Always `event` for webhook payloads.

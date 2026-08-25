@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/go/beta/vaults/credentials/mcp_
 category: "api"
 generated: true
 ---
----
-title: Validate Credential
-url: https://platform.claude.com/docs/en/api/go/beta/vaults/credentials/mcp_oauth_validate
----
-
-## Validate Credential
+# Validate Credential
 
 `client.Beta.Vaults.Credentials.MCPOAuthValidate(ctx, credentialID, params) (*BetaManagedAgentsCredentialValidation, error)`
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
-### Parameters
+## Parameters
 
 - `credentialID string`
 
@@ -27,7 +22,7 @@ Validate Credential
 
     Path param: Path parameter vault_id
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -103,7 +98,7 @@ Validate Credential
 
       - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `type BetaManagedAgentsCredentialValidation struct{…}`
 
@@ -141,6 +136,8 @@ Validate Credential
 
         HTTP status code.
 
+        format: int32
+
     - `Method string`
 
       The MCP method that failed (for example `initialize` or `tools/list`).
@@ -177,17 +174,17 @@ Validate Credential
 
   - `Type BetaManagedAgentsCredentialValidationType`
 
-    - `const BetaManagedAgentsCredentialValidationTypeVaultCredentialValidation BetaManagedAgentsCredentialValidationType = "vault_credential_validation"`
-
   - `ValidatedAt Time`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `VaultID string`
 
     Identifier of the vault containing the credential.
 
-### Example
+## Example
 
 ```go
 package main
@@ -218,7 +215,7 @@ func main() {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

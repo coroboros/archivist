@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memorie
 category: "api"
 generated: true
 ---
----
-title: Delete a memory
-url: https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memories/delete
----
-
-## Delete a memory
+# Delete a memory
 
 `beta.memory_stores.memories.delete(memory_id, **kwargs) -> BetaManagedAgentsDeletedMemory`
 
-**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Delete a memory
 
-### Parameters
+## Parameters
 
 - `memory_store_id: String`
 
@@ -103,7 +98,7 @@ Delete a memory
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedMemory`
 
@@ -115,9 +110,7 @@ Delete a memory
 
   - `type: :memory_deleted`
 
-    - `:memory_deleted`
-
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -129,7 +122,7 @@ beta_managed_agents_deleted_memory = anthropic.beta.memory_stores.memories.delet
 puts(beta_managed_agents_deleted_memory)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

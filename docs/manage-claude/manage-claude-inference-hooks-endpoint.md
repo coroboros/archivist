@@ -695,6 +695,8 @@ Timeouts, non-200 statuses (redirects included), unparseable or oversized respon
 
 Sustained webhook failures attributable to your AI security server trip a circuit breaker that stops enforcement: Anthropic stops contacting your server, and failure handling applies to every request. Recovery happens on the admin side: fix the server, then have your administrator turn **Enforce verdicts** back on. See [Circuit breaker](./manage-claude-inference-hooks-configuration.md#circuit-breaker).
 
+Each trip is recorded as an `inference_hooks_circuit_breaker_tripped` activity in the [Activity Feed](./manage-claude-compliance-activity-feed.md), one activity per trip. While the breaker is tripped, no per-request Inference hooks activities are recorded, so the trip activity is the feed's only record of the tripped window.
+
 ### Latency
 
 Enforcement adds your AI security server's round trip to the latency of every governed request in your organization. Keep the verdict fast, and load-test your server before rolling it out to a large organization.

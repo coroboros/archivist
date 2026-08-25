@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/files/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete File
-url: https://platform.claude.com/docs/en/api/typescript/beta/files/delete
----
+# Delete File
 
-## Delete File
+`client.beta.files.delete(fileID, params?, options?): BetaDeletedFile`
 
-`client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): BetaDeletedFile`
-
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-### Parameters
+## Parameters
 
 - `fileID: string`
 
@@ -101,7 +96,7 @@ Delete File
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaDeletedFile`
 
@@ -115,9 +110,9 @@ Delete File
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `"file_deleted"`
+    default: file_deleted
 
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -131,7 +126,7 @@ const betaDeletedFile = await client.beta.files.delete("file_id");
 console.log(betaDeletedFile.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

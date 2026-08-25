@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/list"
 category: "api"
 generated: true
 ---
----
-title: List Sessions
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/list
----
+# List Sessions
 
-## List Sessions
+`beta.sessions.list(**kwargs)  -> SyncBidirectionalPageCursor[BetaManagedAgentsSession]`
 
-`beta.sessions.list(SessionListParams**kwargs)  -> SyncBidirectionalPageCursor[BetaManagedAgentsSession]`
-
-**get** `/v1/sessions`
+**GET** `/v1/sessions`
 
 List Sessions
 
-### Parameters
+## Parameters
 
 - `agent_id: Optional[str]`
 
@@ -27,21 +22,31 @@ List Sessions
 
   Filter by agent version. Only applies when agent_id is also set.
 
+  format: int32
+
 - `created_at_gt: Optional[Union[str, datetime]]`
 
   Return sessions created after this time (exclusive).
+
+  format: date-time
 
 - `created_at_gte: Optional[Union[str, datetime]]`
 
   Return sessions created at or after this time (inclusive).
 
+  format: date-time
+
 - `created_at_lt: Optional[Union[str, datetime]]`
 
   Return sessions created before this time (exclusive).
 
+  format: date-time
+
 - `created_at_lte: Optional[Union[str, datetime]]`
 
   Return sessions created at or before this time (inclusive).
+
+  format: date-time
 
 - `deployment_id: Optional[str]`
 
@@ -54,6 +59,8 @@ List Sessions
 - `limit: Optional[int]`
 
   Maximum number of results to return.
+
+  format: int32
 
 - `memory_store_id: Optional[str]`
 
@@ -159,7 +166,7 @@ List Sessions
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsSession: …`
 
@@ -180,8 +187,6 @@ List Sessions
       - `name: str`
 
       - `type: Literal["url"]`
-
-        - `"url"`
 
       - `url: str`
 
@@ -279,15 +284,11 @@ List Sessions
 
           - `type: Literal["low"]`
 
-            - `"low"`
-
         - `class BetaManagedAgentsEffortMedium: …`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `type: Literal["medium"]`
-
-            - `"medium"`
 
         - `class BetaManagedAgentsEffortHigh: …`
 
@@ -295,23 +296,17 @@ List Sessions
 
           - `type: Literal["high"]`
 
-            - `"high"`
-
         - `class BetaManagedAgentsEffortXhigh: …`
 
           Extra-high effort. Not all models accept this level.
 
           - `type: Literal["xhigh"]`
 
-            - `"xhigh"`
-
         - `class BetaManagedAgentsEffortMax: …`
 
           Maximum effort. Favors reasoning depth over latency.
 
           - `type: Literal["max"]`
-
-            - `"max"`
 
       - `inference_geo: Optional[str]`
 
@@ -365,8 +360,6 @@ List Sessions
 
               - `type: Literal["anthropic"]`
 
-                - `"anthropic"`
-
               - `version: str`
 
             - `class BetaManagedAgentsCustomSkill: …`
@@ -376,8 +369,6 @@ List Sessions
               - `skill_id: str`
 
               - `type: Literal["custom"]`
-
-                - `"custom"`
 
               - `version: str`
 
@@ -397,8 +388,6 @@ List Sessions
 
                   - `name: Literal["bash"]`
 
-                    - `"bash"`
-
                   - `permission_policy: PermissionPolicy`
 
                     Permission policy for tool execution.
@@ -409,19 +398,13 @@ List Sessions
 
                       - `type: Literal["always_allow"]`
 
-                        - `"always_allow"`
-
                     - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                       Tool calls require user confirmation before execution.
 
                       - `type: Literal["always_ask"]`
 
-                        - `"always_ask"`
-
                   - `type: Literal["bash"]`
-
-                    - `"bash"`
 
                 - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -430,8 +413,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["edit"]`
-
-                    - `"edit"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -447,8 +428,6 @@ List Sessions
 
                   - `type: Literal["edit"]`
 
-                    - `"edit"`
-
                 - `class BetaManagedAgentsReadToolConfig: …`
 
                   Configuration for the read tool.
@@ -456,8 +435,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["read"]`
-
-                    - `"read"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -473,8 +450,6 @@ List Sessions
 
                   - `type: Literal["read"]`
 
-                    - `"read"`
-
                 - `class BetaManagedAgentsWriteToolConfig: …`
 
                   Configuration for the write tool.
@@ -482,8 +457,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["write"]`
-
-                    - `"write"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -499,8 +472,6 @@ List Sessions
 
                   - `type: Literal["write"]`
 
-                    - `"write"`
-
                 - `class BetaManagedAgentsGlobToolConfig: …`
 
                   Configuration for the glob tool.
@@ -508,8 +479,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["glob"]`
-
-                    - `"glob"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -525,8 +494,6 @@ List Sessions
 
                   - `type: Literal["glob"]`
 
-                    - `"glob"`
-
                 - `class BetaManagedAgentsGrepToolConfig: …`
 
                   Configuration for the grep tool.
@@ -534,8 +501,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["grep"]`
-
-                    - `"grep"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -551,8 +516,6 @@ List Sessions
 
                   - `type: Literal["grep"]`
 
-                    - `"grep"`
-
                 - `class BetaManagedAgentsWebFetchToolConfig: …`
 
                   Configuration for the web_fetch tool.
@@ -560,8 +523,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["web_fetch"]`
-
-                    - `"web_fetch"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -577,13 +538,13 @@ List Sessions
 
                   - `type: Literal["web_fetch"]`
 
-                    - `"web_fetch"`
-
                   - `allowed_domains: Optional[List[str]]`
 
                   - `blocked_domains: Optional[List[str]]`
 
                   - `max_content_tokens: Optional[int]`
+
+                    format: int32
 
                 - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -592,8 +553,6 @@ List Sessions
                   - `enabled: bool`
 
                   - `name: Literal["web_search"]`
-
-                    - `"web_search"`
 
                   - `permission_policy: PermissionPolicy`
 
@@ -609,8 +568,6 @@ List Sessions
 
                   - `type: Literal["web_search"]`
 
-                    - `"web_search"`
-
                   - `allowed_domains: Optional[List[str]]`
 
                   - `blocked_domains: Optional[List[str]]`
@@ -623,11 +580,11 @@ List Sessions
 
                       Location precision. Only "approximate" is supported.
 
-                      - `"approximate"`
-
                     - `city: Optional[str]`
 
                       City name.
+
+                      minLength: 1, maxLength: 255
 
                     - `country: Optional[str]`
 
@@ -637,9 +594,13 @@ List Sessions
 
                       Region or state name.
 
+                      minLength: 1, maxLength: 255
+
                     - `timezone: Optional[str]`
 
                       IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                      minLength: 1, maxLength: 255
 
               - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -660,8 +621,6 @@ List Sessions
                     Tool calls require user confirmation before execution.
 
               - `type: Literal["agent_toolset_20260401"]`
-
-                - `"agent_toolset_20260401"`
 
             - `class BetaManagedAgentsMCPToolset: …`
 
@@ -705,8 +664,6 @@ List Sessions
 
               - `type: Literal["mcp_toolset"]`
 
-                - `"mcp_toolset"`
-
             - `class BetaManagedAgentsCustomTool: …`
 
               A custom tool as returned in API responses.
@@ -719,8 +676,6 @@ List Sessions
 
                 - `type: Literal["object"]`
 
-                  - `"object"`
-
                 - `properties: Optional[Dict[str, object]]`
 
                 - `required: Optional[List[str]]`
@@ -729,13 +684,11 @@ List Sessions
 
               - `type: Literal["custom"]`
 
-                - `"custom"`
-
           - `type: Literal["agent"]`
 
-            - `"agent"`
-
           - `version: int`
+
+            format: int32
 
         - `class BetaManagedAgentsAdvisor: …`
 
@@ -747,11 +700,7 @@ List Sessions
 
           - `type: Literal["advisor"]`
 
-            - `"advisor"`
-
       - `type: Literal["coordinator"]`
-
-        - `"coordinator"`
 
     - `name: str`
 
@@ -779,13 +728,15 @@ List Sessions
 
     - `type: Literal["agent"]`
 
-      - `"agent"`
-
     - `version: int`
+
+      format: int32
 
   - `archived_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `budget: Optional[BetaManagedAgentsBudgetLimit]`
 
@@ -803,15 +754,13 @@ List Sessions
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: Literal["limit"]`
-
-      - `"limit"`
 
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `environment_id: str`
 
@@ -825,6 +774,8 @@ List Sessions
 
       A timestamp in RFC 3339 format
 
+      format: date-time
+
     - `description: str`
 
       What the agent should produce.
@@ -837,6 +788,8 @@ List Sessions
 
       0-indexed revision cycle the outcome is currently on.
 
+      format: int32
+
     - `outcome_id: str`
 
       Server-generated outc_ ID for this outcome.
@@ -846,8 +799,6 @@ List Sessions
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
     - `type: Literal["outcome_evaluation"]`
-
-      - `"outcome_evaluation"`
 
   - `resources: List[BetaManagedAgentsSessionResource]`
 
@@ -859,15 +810,17 @@ List Sessions
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `mount_path: str`
 
       - `type: Literal["github_repository"]`
 
-        - `"github_repository"`
-
       - `updated_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `url: str`
 
@@ -879,9 +832,9 @@ List Sessions
 
             Branch name to check out.
 
-          - `type: Literal["branch"]`
+            minLength: 1, maxLength: 255
 
-            - `"branch"`
+          - `type: Literal["branch"]`
 
         - `class BetaManagedAgentsCommitCheckout: …`
 
@@ -889,9 +842,9 @@ List Sessions
 
             Full commit SHA to check out.
 
-          - `type: Literal["commit"]`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: Literal["commit"]`
 
     - `class BetaManagedAgentsFileResource: …`
 
@@ -901,17 +854,19 @@ List Sessions
 
         A timestamp in RFC 3339 format
 
+        format: date-time
+
       - `file_id: str`
 
       - `mount_path: str`
 
       - `type: Literal["file"]`
 
-        - `"file"`
-
       - `updated_at: datetime`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
     - `class BetaManagedAgentsMemoryStoreResource: …`
 
@@ -922,8 +877,6 @@ List Sessions
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: Literal["memory_store"]`
-
-        - `"memory_store"`
 
       - `access: Optional[Literal["read_write", "read_only"]]`
 
@@ -941,6 +894,8 @@ List Sessions
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+        maxLength: 4096
+
       - `mount_path: Optional[str]`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
@@ -957,9 +912,13 @@ List Sessions
 
       Cumulative time in seconds the session spent in running status. Excludes idle time.
 
+      format: double
+
     - `duration_seconds: Optional[float]`
 
       Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+      format: double
 
   - `status: Literal["rescheduling", "running", "idle", "terminated"]`
 
@@ -977,11 +936,11 @@ List Sessions
 
   - `type: Literal["session"]`
 
-    - `"session"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `usage: BetaManagedAgentsSessionUsage`
 
@@ -991,6 +950,8 @@ List Sessions
 
       Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once, unlike `stats.active_seconds`, which sums each thread's own active time. This is the duration the session's runtime cost is priced on.
 
+      format: double
+
     - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -999,17 +960,25 @@ List Sessions
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `ephemeral_5m_input_tokens: Optional[int]`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `cache_read_input_tokens: Optional[int]`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `input_tokens: Optional[int]`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -1019,6 +988,8 @@ List Sessions
 
       Total output tokens generated across all turns.
 
+      format: int32
+
     - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
@@ -1027,9 +998,13 @@ List Sessions
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `web_search_requests: Optional[int]`
 
         Number of server-executed web search requests.
+
+        format: int32
 
   - `vault_ids: List[str]`
 
@@ -1039,7 +1014,7 @@ List Sessions
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-### Example
+## Example
 
 ```python
 import os
@@ -1055,7 +1030,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

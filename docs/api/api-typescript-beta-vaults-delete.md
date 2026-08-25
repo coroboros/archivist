@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/vaults/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete Vault
-url: https://platform.claude.com/docs/en/api/typescript/beta/vaults/delete
----
+# Delete Vault
 
-## Delete Vault
+`client.beta.vaults.delete(vaultID, params?, options?): BetaManagedAgentsDeletedVault`
 
-`client.beta.vaults.delete(stringvaultID, VaultDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedVault`
-
-**delete** `/v1/vaults/{vault_id}`
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-### Parameters
+## Parameters
 
 - `vaultID: string`
 
@@ -99,7 +94,7 @@ Delete Vault
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsDeletedVault`
 
@@ -111,9 +106,7 @@ Delete Vault
 
   - `type: "vault_deleted"`
 
-    - `"vault_deleted"`
-
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -129,7 +122,7 @@ const betaManagedAgentsDeletedVault = await client.beta.vaults.delete(
 console.log(betaManagedAgentsDeletedVault.id);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

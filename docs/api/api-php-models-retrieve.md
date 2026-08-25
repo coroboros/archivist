@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/php/models/retrieve"
 category: "api"
 generated: true
 ---
----
-title: Get a Model
-url: https://platform.claude.com/docs/en/api/php/models/retrieve
----
-
-## Get a Model
+# Get a Model
 
 `$client->models->retrieve(string modelID, ?list<AnthropicBeta> betas): ModelInfo`
 
-**get** `/v1/models/{model_id}`
+**GET** `/v1/models/{model_id}`
 
 Get a specific model.
 
 The Models API response can be used to determine information about a specific model or resolve a model alias to a model ID.
 
-### Parameters
+## Parameters
 
 - `modelID: string`
 
@@ -29,7 +24,7 @@ The Models API response can be used to determine information about a specific mo
 
   Optional header to specify the beta version(s) you want to use.
 
-### Returns
+## Returns
 
 - `ModelInfo`
 
@@ -63,7 +58,7 @@ The Models API response can be used to determine information about a specific mo
 
     For Models, this is always `"model"`.
 
-### Example
+## Example
 
 ```php
 <?php
@@ -79,7 +74,7 @@ $modelInfo = $client->models->retrieve(
 var_dump($modelInfo);
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

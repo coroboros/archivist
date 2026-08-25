@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/vaults/delete"
 category: "api"
 generated: true
 ---
----
-title: Delete Vault
-url: https://platform.claude.com/docs/en/api/python/beta/vaults/delete
----
+# Delete Vault
 
-## Delete Vault
+`beta.vaults.delete(vault_id, **kwargs)  -> BetaManagedAgentsDeletedVault`
 
-`beta.vaults.delete(strvault_id, VaultDeleteParams**kwargs)  -> BetaManagedAgentsDeletedVault`
-
-**delete** `/v1/vaults/{vault_id}`
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-### Parameters
+## Parameters
 
 - `vault_id: str`
 
@@ -97,7 +92,7 @@ Delete Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsDeletedVault: …`
 
@@ -109,9 +104,7 @@ Delete Vault
 
   - `type: Literal["vault_deleted"]`
 
-    - `"vault_deleted"`
-
-### Example
+## Example
 
 ```python
 import os
@@ -128,7 +121,7 @@ beta_managed_agents_deleted_vault = client.beta.vaults.delete(
 print(beta_managed_agents_deleted_vault.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

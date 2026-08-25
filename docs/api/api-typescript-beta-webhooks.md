@@ -4,14 +4,25 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/webhooks"
 category: "api"
 generated: true
 ---
----
-title: Webhooks
-url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
----
-
 # Webhooks
 
-## Domain Types
+## Unwrap
+
+`client.beta.webhooks.unwrap(options?): void`
+
+### Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
+});
+
+await client.beta.webhooks.unwrap();
+```
+
+## Domain types
 
 ### Beta Webhook Agent Archived Event Data
 
@@ -24,8 +35,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "agent.archived"`
-
-    - `"agent.archived"`
 
   - `workspace_id: string`
 
@@ -41,8 +50,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "agent.created"`
 
-    - `"agent.created"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Agent Deleted Event Data
@@ -56,8 +63,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "agent.deleted"`
-
-    - `"agent.deleted"`
 
   - `workspace_id: string`
 
@@ -73,8 +78,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "agent.updated"`
 
-    - `"agent.updated"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Deployment Archived Event Data
@@ -88,8 +91,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "deployment.archived"`
-
-    - `"deployment.archived"`
 
   - `workspace_id: string`
 
@@ -105,8 +106,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "deployment.created"`
 
-    - `"deployment.created"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Deployment Deleted Event Data
@@ -120,8 +119,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "deployment.deleted"`
-
-    - `"deployment.deleted"`
 
   - `workspace_id: string`
 
@@ -137,8 +134,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "deployment.paused"`
 
-    - `"deployment.paused"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Deployment Run Failed Event Data
@@ -152,8 +147,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "deployment_run.failed"`
-
-    - `"deployment_run.failed"`
 
   - `workspace_id: string`
 
@@ -169,8 +162,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "deployment_run.started"`
 
-    - `"deployment_run.started"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Deployment Run Succeeded Event Data
@@ -184,8 +175,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "deployment_run.succeeded"`
-
-    - `"deployment_run.succeeded"`
 
   - `workspace_id: string`
 
@@ -201,8 +190,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "deployment.unpaused"`
 
-    - `"deployment.unpaused"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Deployment Updated Event Data
@@ -216,8 +203,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "deployment.updated"`
-
-    - `"deployment.updated"`
 
   - `workspace_id: string`
 
@@ -233,8 +218,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "environment.archived"`
 
-    - `"environment.archived"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Environment Created Event Data
@@ -248,8 +231,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "environment.created"`
-
-    - `"environment.created"`
 
   - `workspace_id: string`
 
@@ -265,8 +246,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "environment.deleted"`
 
-    - `"environment.deleted"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Environment Updated Event Data
@@ -280,8 +259,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "environment.updated"`
-
-    - `"environment.updated"`
 
   - `workspace_id: string`
 
@@ -297,6 +274,8 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     RFC 3339 timestamp when the event occurred.
 
+    format: date-time
+
   - `data: BetaWebhookEventData`
 
     - `BetaWebhookSessionCreatedEventData`
@@ -308,8 +287,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.created"`
-
-        - `"session.created"`
 
       - `workspace_id: string`
 
@@ -323,8 +300,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.pending"`
 
-        - `"session.pending"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionRunningEventData`
@@ -336,8 +311,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.running"`
-
-        - `"session.running"`
 
       - `workspace_id: string`
 
@@ -351,8 +324,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.idled"`
 
-        - `"session.idled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionRequiresActionEventData`
@@ -364,8 +335,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.requires_action"`
-
-        - `"session.requires_action"`
 
       - `workspace_id: string`
 
@@ -379,8 +348,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.archived"`
 
-        - `"session.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionDeletedEventData`
@@ -392,8 +359,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.deleted"`
-
-        - `"session.deleted"`
 
       - `workspace_id: string`
 
@@ -407,8 +372,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.status_rescheduled"`
 
-        - `"session.status_rescheduled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusRunStartedEventData`
@@ -420,8 +383,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.status_run_started"`
-
-        - `"session.status_run_started"`
 
       - `workspace_id: string`
 
@@ -435,8 +396,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.status_idled"`
 
-        - `"session.status_idled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusTerminatedEventData`
@@ -448,8 +407,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.status_terminated"`
-
-        - `"session.status_terminated"`
 
       - `workspace_id: string`
 
@@ -467,8 +424,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.thread_created"`
 
-        - `"session.thread_created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionThreadIdledEventData`
@@ -484,8 +439,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
         ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
-
-        - `"session.thread_idled"`
 
       - `workspace_id: string`
 
@@ -503,8 +456,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.thread_terminated"`
 
-        - `"session.thread_terminated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
@@ -516,8 +467,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.outcome_evaluation_ended"`
-
-        - `"session.outcome_evaluation_ended"`
 
       - `workspace_id: string`
 
@@ -531,8 +480,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault.created"`
 
-        - `"vault.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultArchivedEventData`
@@ -544,8 +491,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault.archived"`
-
-        - `"vault.archived"`
 
       - `workspace_id: string`
 
@@ -559,8 +504,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault.deleted"`
 
-        - `"vault.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultCredentialCreatedEventData`
@@ -572,8 +515,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault_credential.created"`
-
-        - `"vault_credential.created"`
 
       - `vault_id: string`
 
@@ -591,8 +532,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault_credential.archived"`
 
-        - `"vault_credential.archived"`
-
       - `vault_id: string`
 
         ID of the vault that owns this credential.
@@ -608,8 +547,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault_credential.deleted"`
-
-        - `"vault_credential.deleted"`
 
       - `vault_id: string`
 
@@ -627,8 +564,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault_credential.refresh_failed"`
 
-        - `"vault_credential.refresh_failed"`
-
       - `vault_id: string`
 
         ID of the vault that owns this credential.
@@ -645,8 +580,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.updated"`
 
-        - `"session.updated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentCreatedEventData`
@@ -658,8 +591,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.created"`
-
-        - `"agent.created"`
 
       - `workspace_id: string`
 
@@ -673,8 +604,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "agent.archived"`
 
-        - `"agent.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentDeletedEventData`
@@ -686,8 +615,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.deleted"`
-
-        - `"agent.deleted"`
 
       - `workspace_id: string`
 
@@ -701,8 +628,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.paused"`
 
-        - `"deployment.paused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunFailedEventData`
@@ -714,8 +639,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.failed"`
-
-        - `"deployment_run.failed"`
 
       - `workspace_id: string`
 
@@ -729,8 +652,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.created"`
 
-        - `"deployment.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentUpdatedEventData`
@@ -742,8 +663,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment.updated"`
-
-        - `"deployment.updated"`
 
       - `workspace_id: string`
 
@@ -757,8 +676,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.unpaused"`
 
-        - `"deployment.unpaused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentUpdatedEventData`
@@ -770,8 +687,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.updated"`
-
-        - `"agent.updated"`
 
       - `workspace_id: string`
 
@@ -785,8 +700,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.archived"`
 
-        - `"deployment.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunStartedEventData`
@@ -798,8 +711,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.started"`
-
-        - `"deployment_run.started"`
 
       - `workspace_id: string`
 
@@ -813,8 +724,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.deleted"`
 
-        - `"deployment.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunSucceededEventData`
@@ -826,8 +735,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.succeeded"`
-
-        - `"deployment_run.succeeded"`
 
       - `workspace_id: string`
 
@@ -841,8 +748,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "environment.created"`
 
-        - `"environment.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentUpdatedEventData`
@@ -854,8 +759,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "environment.updated"`
-
-        - `"environment.updated"`
 
       - `workspace_id: string`
 
@@ -869,8 +772,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "environment.archived"`
 
-        - `"environment.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentDeletedEventData`
@@ -882,8 +783,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "environment.deleted"`
-
-        - `"environment.deleted"`
 
       - `workspace_id: string`
 
@@ -897,8 +796,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "memory_store.created"`
 
-        - `"memory_store.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookMemoryStoreArchivedEventData`
@@ -910,8 +807,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "memory_store.archived"`
-
-        - `"memory_store.archived"`
 
       - `workspace_id: string`
 
@@ -925,8 +820,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "memory_store.deleted"`
 
-        - `"memory_store.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionBudgetReachedEventData`
@@ -939,15 +832,11 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.budget_reached"`
 
-        - `"session.budget_reached"`
-
       - `workspace_id: string`
 
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
-
-    - `"event"`
 
 ### Beta Webhook Event Data
 
@@ -963,8 +852,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.created"`
 
-      - `"session.created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionPendingEventData`
@@ -976,8 +863,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.pending"`
-
-      - `"session.pending"`
 
     - `workspace_id: string`
 
@@ -991,8 +876,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.running"`
 
-      - `"session.running"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionIdledEventData`
@@ -1004,8 +887,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.idled"`
-
-      - `"session.idled"`
 
     - `workspace_id: string`
 
@@ -1019,8 +900,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.requires_action"`
 
-      - `"session.requires_action"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionArchivedEventData`
@@ -1032,8 +911,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.archived"`
-
-      - `"session.archived"`
 
     - `workspace_id: string`
 
@@ -1047,8 +924,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.deleted"`
 
-      - `"session.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusRescheduledEventData`
@@ -1060,8 +935,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.status_rescheduled"`
-
-      - `"session.status_rescheduled"`
 
     - `workspace_id: string`
 
@@ -1075,8 +948,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.status_run_started"`
 
-      - `"session.status_run_started"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusIdledEventData`
@@ -1089,8 +960,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.status_idled"`
 
-      - `"session.status_idled"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusTerminatedEventData`
@@ -1102,8 +971,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.status_terminated"`
-
-      - `"session.status_terminated"`
 
     - `workspace_id: string`
 
@@ -1121,8 +988,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.thread_created"`
 
-      - `"session.thread_created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionThreadIdledEventData`
@@ -1138,8 +1003,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       ID of the session thread this event refers to.
 
     - `type: "session.thread_idled"`
-
-      - `"session.thread_idled"`
 
     - `workspace_id: string`
 
@@ -1157,8 +1020,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.thread_terminated"`
 
-      - `"session.thread_terminated"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
@@ -1170,8 +1031,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.outcome_evaluation_ended"`
-
-      - `"session.outcome_evaluation_ended"`
 
     - `workspace_id: string`
 
@@ -1185,8 +1044,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "vault.created"`
 
-      - `"vault.created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookVaultArchivedEventData`
@@ -1198,8 +1055,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "vault.archived"`
-
-      - `"vault.archived"`
 
     - `workspace_id: string`
 
@@ -1213,8 +1068,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "vault.deleted"`
 
-      - `"vault.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookVaultCredentialCreatedEventData`
@@ -1226,8 +1079,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "vault_credential.created"`
-
-      - `"vault_credential.created"`
 
     - `vault_id: string`
 
@@ -1245,8 +1096,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "vault_credential.archived"`
 
-      - `"vault_credential.archived"`
-
     - `vault_id: string`
 
       ID of the vault that owns this credential.
@@ -1262,8 +1111,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "vault_credential.deleted"`
-
-      - `"vault_credential.deleted"`
 
     - `vault_id: string`
 
@@ -1281,8 +1128,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "vault_credential.refresh_failed"`
 
-      - `"vault_credential.refresh_failed"`
-
     - `vault_id: string`
 
       ID of the vault that owns this credential.
@@ -1299,8 +1144,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "session.updated"`
 
-      - `"session.updated"`
-
     - `workspace_id: string`
 
   - `BetaWebhookAgentCreatedEventData`
@@ -1312,8 +1155,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "agent.created"`
-
-      - `"agent.created"`
 
     - `workspace_id: string`
 
@@ -1327,8 +1168,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "agent.archived"`
 
-      - `"agent.archived"`
-
     - `workspace_id: string`
 
   - `BetaWebhookAgentDeletedEventData`
@@ -1340,8 +1179,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "agent.deleted"`
-
-      - `"agent.deleted"`
 
     - `workspace_id: string`
 
@@ -1355,8 +1192,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "deployment.paused"`
 
-      - `"deployment.paused"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunFailedEventData`
@@ -1368,8 +1203,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "deployment_run.failed"`
-
-      - `"deployment_run.failed"`
 
     - `workspace_id: string`
 
@@ -1383,8 +1216,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "deployment.created"`
 
-      - `"deployment.created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentUpdatedEventData`
@@ -1396,8 +1227,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "deployment.updated"`
-
-      - `"deployment.updated"`
 
     - `workspace_id: string`
 
@@ -1411,8 +1240,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "deployment.unpaused"`
 
-      - `"deployment.unpaused"`
-
     - `workspace_id: string`
 
   - `BetaWebhookAgentUpdatedEventData`
@@ -1424,8 +1251,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "agent.updated"`
-
-      - `"agent.updated"`
 
     - `workspace_id: string`
 
@@ -1439,8 +1264,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "deployment.archived"`
 
-      - `"deployment.archived"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunStartedEventData`
@@ -1452,8 +1275,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "deployment_run.started"`
-
-      - `"deployment_run.started"`
 
     - `workspace_id: string`
 
@@ -1467,8 +1288,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "deployment.deleted"`
 
-      - `"deployment.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunSucceededEventData`
@@ -1480,8 +1299,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "deployment_run.succeeded"`
-
-      - `"deployment_run.succeeded"`
 
     - `workspace_id: string`
 
@@ -1495,8 +1312,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "environment.created"`
 
-      - `"environment.created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentUpdatedEventData`
@@ -1508,8 +1323,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "environment.updated"`
-
-      - `"environment.updated"`
 
     - `workspace_id: string`
 
@@ -1523,8 +1336,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "environment.archived"`
 
-      - `"environment.archived"`
-
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentDeletedEventData`
@@ -1536,8 +1347,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "environment.deleted"`
-
-      - `"environment.deleted"`
 
     - `workspace_id: string`
 
@@ -1551,8 +1360,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "memory_store.created"`
 
-      - `"memory_store.created"`
-
     - `workspace_id: string`
 
   - `BetaWebhookMemoryStoreArchivedEventData`
@@ -1564,8 +1371,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "memory_store.archived"`
-
-      - `"memory_store.archived"`
 
     - `workspace_id: string`
 
@@ -1579,8 +1384,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     - `type: "memory_store.deleted"`
 
-      - `"memory_store.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionBudgetReachedEventData`
@@ -1592,8 +1395,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     - `organization_id: string`
 
     - `type: "session.budget_reached"`
-
-      - `"session.budget_reached"`
 
     - `workspace_id: string`
 
@@ -1609,8 +1410,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "memory_store.archived"`
 
-    - `"memory_store.archived"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Memory Store Created Event Data
@@ -1624,8 +1423,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "memory_store.created"`
-
-    - `"memory_store.created"`
 
   - `workspace_id: string`
 
@@ -1641,8 +1438,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "memory_store.deleted"`
 
-    - `"memory_store.deleted"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Archived Event Data
@@ -1656,8 +1451,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.archived"`
-
-    - `"session.archived"`
 
   - `workspace_id: string`
 
@@ -1673,8 +1466,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.budget_reached"`
 
-    - `"session.budget_reached"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Created Event Data
@@ -1688,8 +1479,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.created"`
-
-    - `"session.created"`
 
   - `workspace_id: string`
 
@@ -1705,8 +1494,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.deleted"`
 
-    - `"session.deleted"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Idled Event Data
@@ -1720,8 +1507,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.idled"`
-
-    - `"session.idled"`
 
   - `workspace_id: string`
 
@@ -1737,8 +1522,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.outcome_evaluation_ended"`
 
-    - `"session.outcome_evaluation_ended"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Pending Event Data
@@ -1752,8 +1535,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.pending"`
-
-    - `"session.pending"`
 
   - `workspace_id: string`
 
@@ -1769,8 +1550,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.requires_action"`
 
-    - `"session.requires_action"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Running Event Data
@@ -1784,8 +1563,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.running"`
-
-    - `"session.running"`
 
   - `workspace_id: string`
 
@@ -1801,8 +1578,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.status_idled"`
 
-    - `"session.status_idled"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Status Rescheduled Event Data
@@ -1816,8 +1591,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.status_rescheduled"`
-
-    - `"session.status_rescheduled"`
 
   - `workspace_id: string`
 
@@ -1833,8 +1606,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.status_run_started"`
 
-    - `"session.status_run_started"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Status Terminated Event Data
@@ -1848,8 +1619,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.status_terminated"`
-
-    - `"session.status_terminated"`
 
   - `workspace_id: string`
 
@@ -1869,8 +1638,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.thread_created"`
 
-    - `"session.thread_created"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Thread Idled Event Data
@@ -1888,8 +1655,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
     ID of the session thread this event refers to.
 
   - `type: "session.thread_idled"`
-
-    - `"session.thread_idled"`
 
   - `workspace_id: string`
 
@@ -1909,8 +1674,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "session.thread_terminated"`
 
-    - `"session.thread_terminated"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Updated Event Data
@@ -1924,8 +1687,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "session.updated"`
-
-    - `"session.updated"`
 
   - `workspace_id: string`
 
@@ -1941,8 +1702,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "vault.archived"`
 
-    - `"vault.archived"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Vault Created Event Data
@@ -1957,8 +1716,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "vault.created"`
 
-    - `"vault.created"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Vault Credential Archived Event Data
@@ -1972,8 +1729,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "vault_credential.archived"`
-
-    - `"vault_credential.archived"`
 
   - `vault_id: string`
 
@@ -1993,8 +1748,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "vault_credential.created"`
 
-    - `"vault_credential.created"`
-
   - `vault_id: string`
 
     ID of the vault that owns this credential.
@@ -2012,8 +1765,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
   - `organization_id: string`
 
   - `type: "vault_credential.deleted"`
-
-    - `"vault_credential.deleted"`
 
   - `vault_id: string`
 
@@ -2033,8 +1784,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "vault_credential.refresh_failed"`
 
-    - `"vault_credential.refresh_failed"`
-
   - `vault_id: string`
 
     ID of the vault that owns this credential.
@@ -2053,8 +1802,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
   - `type: "vault.deleted"`
 
-    - `"vault.deleted"`
-
   - `workspace_id: string`
 
 ### Unwrap Webhook Event
@@ -2069,6 +1816,8 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
     RFC 3339 timestamp when the event occurred.
 
+    format: date-time
+
   - `data: BetaWebhookEventData`
 
     - `BetaWebhookSessionCreatedEventData`
@@ -2080,8 +1829,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.created"`
-
-        - `"session.created"`
 
       - `workspace_id: string`
 
@@ -2095,8 +1842,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.pending"`
 
-        - `"session.pending"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionRunningEventData`
@@ -2108,8 +1853,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.running"`
-
-        - `"session.running"`
 
       - `workspace_id: string`
 
@@ -2123,8 +1866,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.idled"`
 
-        - `"session.idled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionRequiresActionEventData`
@@ -2136,8 +1877,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.requires_action"`
-
-        - `"session.requires_action"`
 
       - `workspace_id: string`
 
@@ -2151,8 +1890,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.archived"`
 
-        - `"session.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionDeletedEventData`
@@ -2164,8 +1901,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.deleted"`
-
-        - `"session.deleted"`
 
       - `workspace_id: string`
 
@@ -2179,8 +1914,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.status_rescheduled"`
 
-        - `"session.status_rescheduled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusRunStartedEventData`
@@ -2192,8 +1925,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.status_run_started"`
-
-        - `"session.status_run_started"`
 
       - `workspace_id: string`
 
@@ -2207,8 +1938,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.status_idled"`
 
-        - `"session.status_idled"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusTerminatedEventData`
@@ -2220,8 +1949,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.status_terminated"`
-
-        - `"session.status_terminated"`
 
       - `workspace_id: string`
 
@@ -2239,8 +1966,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.thread_created"`
 
-        - `"session.thread_created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionThreadIdledEventData`
@@ -2256,8 +1981,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
         ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
-
-        - `"session.thread_idled"`
 
       - `workspace_id: string`
 
@@ -2275,8 +1998,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.thread_terminated"`
 
-        - `"session.thread_terminated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
@@ -2288,8 +2009,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "session.outcome_evaluation_ended"`
-
-        - `"session.outcome_evaluation_ended"`
 
       - `workspace_id: string`
 
@@ -2303,8 +2022,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault.created"`
 
-        - `"vault.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultArchivedEventData`
@@ -2316,8 +2033,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault.archived"`
-
-        - `"vault.archived"`
 
       - `workspace_id: string`
 
@@ -2331,8 +2046,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault.deleted"`
 
-        - `"vault.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultCredentialCreatedEventData`
@@ -2344,8 +2057,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault_credential.created"`
-
-        - `"vault_credential.created"`
 
       - `vault_id: string`
 
@@ -2363,8 +2074,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault_credential.archived"`
 
-        - `"vault_credential.archived"`
-
       - `vault_id: string`
 
         ID of the vault that owns this credential.
@@ -2380,8 +2089,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "vault_credential.deleted"`
-
-        - `"vault_credential.deleted"`
 
       - `vault_id: string`
 
@@ -2399,8 +2106,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "vault_credential.refresh_failed"`
 
-        - `"vault_credential.refresh_failed"`
-
       - `vault_id: string`
 
         ID of the vault that owns this credential.
@@ -2417,8 +2122,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.updated"`
 
-        - `"session.updated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentCreatedEventData`
@@ -2430,8 +2133,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.created"`
-
-        - `"agent.created"`
 
       - `workspace_id: string`
 
@@ -2445,8 +2146,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "agent.archived"`
 
-        - `"agent.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentDeletedEventData`
@@ -2458,8 +2157,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.deleted"`
-
-        - `"agent.deleted"`
 
       - `workspace_id: string`
 
@@ -2473,8 +2170,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.paused"`
 
-        - `"deployment.paused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunFailedEventData`
@@ -2486,8 +2181,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.failed"`
-
-        - `"deployment_run.failed"`
 
       - `workspace_id: string`
 
@@ -2501,8 +2194,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.created"`
 
-        - `"deployment.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentUpdatedEventData`
@@ -2514,8 +2205,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment.updated"`
-
-        - `"deployment.updated"`
 
       - `workspace_id: string`
 
@@ -2529,8 +2218,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.unpaused"`
 
-        - `"deployment.unpaused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentUpdatedEventData`
@@ -2542,8 +2229,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "agent.updated"`
-
-        - `"agent.updated"`
 
       - `workspace_id: string`
 
@@ -2557,8 +2242,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.archived"`
 
-        - `"deployment.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunStartedEventData`
@@ -2570,8 +2253,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.started"`
-
-        - `"deployment_run.started"`
 
       - `workspace_id: string`
 
@@ -2585,8 +2266,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "deployment.deleted"`
 
-        - `"deployment.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunSucceededEventData`
@@ -2598,8 +2277,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "deployment_run.succeeded"`
-
-        - `"deployment_run.succeeded"`
 
       - `workspace_id: string`
 
@@ -2613,8 +2290,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "environment.created"`
 
-        - `"environment.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentUpdatedEventData`
@@ -2626,8 +2301,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "environment.updated"`
-
-        - `"environment.updated"`
 
       - `workspace_id: string`
 
@@ -2641,8 +2314,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "environment.archived"`
 
-        - `"environment.archived"`
-
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentDeletedEventData`
@@ -2654,8 +2325,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "environment.deleted"`
-
-        - `"environment.deleted"`
 
       - `workspace_id: string`
 
@@ -2669,8 +2338,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "memory_store.created"`
 
-        - `"memory_store.created"`
-
       - `workspace_id: string`
 
     - `BetaWebhookMemoryStoreArchivedEventData`
@@ -2682,8 +2349,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
       - `organization_id: string`
 
       - `type: "memory_store.archived"`
-
-        - `"memory_store.archived"`
 
       - `workspace_id: string`
 
@@ -2697,8 +2362,6 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "memory_store.deleted"`
 
-        - `"memory_store.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionBudgetReachedEventData`
@@ -2711,12 +2374,8 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
 
       - `type: "session.budget_reached"`
 
-        - `"session.budget_reached"`
-
       - `workspace_id: string`
 
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
-
-    - `"event"`

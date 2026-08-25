@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/deployments/lis
 category: "api"
 generated: true
 ---
----
-title: List Deployments
-url: https://platform.claude.com/docs/en/api/typescript/beta/deployments/list
----
+# List Deployments
 
-## List Deployments
+`client.beta.deployments.list(params?, options?): PageCursor<BetaManagedAgentsDeployment>`
 
-`client.beta.deployments.list(DeploymentListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsDeployment>`
-
-**get** `/v1/deployments`
+**GET** `/v1/deployments`
 
 List Deployments
 
-### Parameters
+## Parameters
 
 - `params: DeploymentListParams`
 
@@ -29,9 +24,13 @@ List Deployments
 
     Query param: Return deployments created at or after this time (inclusive).
 
+    format: date-time
+
   - `"created_at[lte]"?: string`
 
     Query param: Return deployments created at or before this time (inclusive).
+
+    format: date-time
 
   - `include_archived?: boolean`
 
@@ -40,6 +39,8 @@ List Deployments
   - `limit?: number`
 
     Query param: Maximum results per page. Default 20, maximum 100.
+
+    format: int32
 
   - `page?: string`
 
@@ -129,7 +130,7 @@ List Deployments
 
       - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `BetaManagedAgentsDeployment`
 
@@ -147,17 +148,21 @@ List Deployments
 
     - `type: "agent"`
 
-      - `"agent"`
-
     - `version: number`
+
+      format: int32
 
   - `archived_at: string | null`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `description: string | null`
 
@@ -187,9 +192,9 @@ List Deployments
 
             The text content.
 
-          - `type: "text"`
+            minLength: 1
 
-            - `"text"`
+          - `type: "text"`
 
         - `BetaManagedAgentsImageBlock`
 
@@ -207,13 +212,15 @@ List Deployments
 
                 Base64-encoded image data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
-              - `type: "base64"`
+                minLength: 1
 
-                - `"base64"`
+              - `type: "base64"`
 
             - `BetaManagedAgentsURLImageSource`
 
@@ -221,11 +228,11 @@ List Deployments
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the image to fetch.
+
+                minLength: 1
 
             - `BetaManagedAgentsFileImageSource`
 
@@ -235,13 +242,11 @@ List Deployments
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "image"`
-
-            - `"image"`
 
         - `BetaManagedAgentsDocumentBlock`
 
@@ -259,13 +264,15 @@ List Deployments
 
                 Base64-encoded document data.
 
+                minLength: 1
+
               - `media_type: string`
 
                 MIME type of the document (e.g., "application/pdf").
 
-              - `type: "base64"`
+                minLength: 1
 
-                - `"base64"`
+              - `type: "base64"`
 
             - `BetaManagedAgentsPlainTextDocumentSource`
 
@@ -275,15 +282,13 @@ List Deployments
 
                 The plain text content.
 
+                minLength: 1
+
               - `media_type: "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
-                - `"text/plain"`
-
               - `type: "text"`
-
-                - `"text"`
 
             - `BetaManagedAgentsURLDocumentSource`
 
@@ -291,11 +296,11 @@ List Deployments
 
               - `type: "url"`
 
-                - `"url"`
-
               - `url: string`
 
                 URL of the document to fetch.
+
+                minLength: 1
 
             - `BetaManagedAgentsFileDocumentSource`
 
@@ -305,13 +310,11 @@ List Deployments
 
                 ID of a previously uploaded file.
 
+                minLength: 1
+
               - `type: "file"`
 
-                - `"file"`
-
           - `type: "document"`
-
-            - `"document"`
 
           - `context?: string | null`
 
@@ -327,11 +330,7 @@ List Deployments
 
           - `type: "redacted"`
 
-            - `"redacted"`
-
       - `type: "user.message"`
-
-        - `"user.message"`
 
     - `BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
@@ -355,8 +354,6 @@ List Deployments
 
           - `type: "file"`
 
-            - `"file"`
-
         - `BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
@@ -367,15 +364,13 @@ List Deployments
 
           - `type: "text"`
 
-            - `"text"`
-
       - `type: "user.define_outcome"`
-
-        - `"user.define_outcome"`
 
       - `max_iterations?: number | null`
 
         Eval→revision cycles before giving up. Default 3, max 20.
+
+        format: int32
 
     - `BetaManagedAgentsDeploymentSystemMessageEvent`
 
@@ -389,13 +384,11 @@ List Deployments
 
           The text content.
 
+          minLength: 1
+
         - `type: "text"`
 
-          - `"text"`
-
       - `type: "system.message"`
-
-        - `"system.message"`
 
   - `metadata: Record<string, string>`
 
@@ -415,8 +408,6 @@ List Deployments
 
       - `type: "manual"`
 
-        - `"manual"`
-
     - `BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
@@ -431,15 +422,11 @@ List Deployments
 
           - `type: "environment_archived_error"`
 
-            - `"environment_archived_error"`
-
         - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
-
-            - `"agent_archived_error"`
 
         - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
@@ -447,15 +434,11 @@ List Deployments
 
           - `type: "environment_not_found_error"`
 
-            - `"environment_not_found_error"`
-
         - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
-
-            - `"vault_not_found_error"`
 
         - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
@@ -463,15 +446,11 @@ List Deployments
 
           - `type: "file_not_found_error"`
 
-            - `"file_not_found_error"`
-
         - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
-
-            - `"session_resource_not_found_error"`
 
         - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
@@ -479,15 +458,11 @@ List Deployments
 
           - `type: "workspace_archived_error"`
 
-            - `"workspace_archived_error"`
-
         - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
-
-            - `"organization_disabled_error"`
 
         - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
@@ -495,15 +470,11 @@ List Deployments
 
           - `type: "memory_store_archived_error"`
 
-            - `"memory_store_archived_error"`
-
         - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
-
-            - `"skill_not_found_error"`
 
         - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
@@ -511,15 +482,11 @@ List Deployments
 
           - `type: "vault_archived_error"`
 
-            - `"vault_archived_error"`
-
         - `BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
-
-            - `"unknown_error"`
 
         - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
@@ -527,19 +494,13 @@ List Deployments
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-            - `"self_hosted_resources_unsupported_error"`
-
         - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
           - `type: "mcp_egress_blocked_error"`
 
-            - `"mcp_egress_blocked_error"`
-
       - `type: "error"`
-
-        - `"error"`
 
   - `resources: Array<BetaManagedAgentsSessionResourceConfig>`
 
@@ -550,8 +511,6 @@ List Deployments
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
       - `type: "github_repository"`
-
-        - `"github_repository"`
 
       - `url: string`
 
@@ -567,9 +526,9 @@ List Deployments
 
             Branch name to check out.
 
-          - `type: "branch"`
+            minLength: 1, maxLength: 255
 
-            - `"branch"`
+          - `type: "branch"`
 
         - `BetaManagedAgentsCommitCheckout`
 
@@ -577,9 +536,9 @@ List Deployments
 
             Full commit SHA to check out.
 
-          - `type: "commit"`
+            minLength: 7, maxLength: 64
 
-            - `"commit"`
+          - `type: "commit"`
 
       - `mount_path?: string | null`
 
@@ -595,8 +554,6 @@ List Deployments
 
       - `type: "file"`
 
-        - `"file"`
-
       - `mount_path?: string | null`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
@@ -610,8 +567,6 @@ List Deployments
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
       - `type: "memory_store"`
-
-        - `"memory_store"`
 
       - `access?: "read_write" | "read_only" | null`
 
@@ -633,17 +588,21 @@ List Deployments
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
 
+      minLength: 1, maxLength: 256
+
     - `timezone: string`
 
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
-    - `type: "cron"`
+      minLength: 1
 
-      - `"cron"`
+    - `type: "cron"`
 
     - `last_run_at?: string | null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `upcoming_runs_at?: Array<string>`
 
@@ -659,11 +618,11 @@ List Deployments
 
   - `type: "deployment"`
 
-    - `"deployment"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_ids: Array<string>`
 
@@ -685,13 +644,9 @@ List Deployments
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `type: "limit"`
 
-      - `"limit"`
-
-### Example
+## Example
 
 ```typescript
 import Anthropic from "@anthropic-ai/sdk";
@@ -706,7 +661,7 @@ for await (const betaManagedAgentsDeployment of client.beta.deployments.list()) 
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

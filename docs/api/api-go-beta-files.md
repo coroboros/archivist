@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/go/beta/files"
 category: "api"
 generated: true
 ---
----
-title: Files
-url: https://platform.claude.com/docs/en/api/go/beta/files
----
-
 # Files
 
 ## Upload File
 
 `client.Beta.Files.Upload(ctx, params) (*BetaFileMetadata, error)`
 
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
@@ -27,7 +22,9 @@ Upload File
 
     Body param: The file to upload
 
-  - `Betas param.Field[[]AnthropicBeta]`
+    format: binary
+
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -117,17 +114,25 @@ Upload File
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `Filename string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `MimeType string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `SizeBytes int64`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `Type File`
 
@@ -135,13 +140,13 @@ Upload File
 
     For files, this is always `"file"`.
 
-    - `const FileFile File = "file"`
-
-  - `Downloadable bool`
+  - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
 
-  - `Scope BetaFileScope`
+    default: false
+
+  - `Scope BetaFileScope Optional`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -152,8 +157,6 @@ Upload File
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
-
-      - `const SessionSession Session = "session"`
 
 ### Example
 
@@ -184,7 +187,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -206,7 +209,7 @@ func main() {
 
 `client.Beta.Files.List(ctx, params) (*Page[BetaFileMetadata], error)`
 
-**get** `/v1/files`
+**GET** `/v1/files`
 
 List Files
 
@@ -214,25 +217,27 @@ List Files
 
 - `params BetaFileListParams`
 
-  - `AfterID param.Field[string]`
+  - `AfterID param.Field[string] Optional`
 
     Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string]`
+  - `BeforeID param.Field[string] Optional`
 
     Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Limit param.Field[int64]`
+  - `Limit param.Field[int64] Optional`
 
     Query param: Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
-  - `ScopeID param.Field[string]`
+    maximum: 1000, minimum: 1
+
+  - `ScopeID param.Field[string] Optional`
 
     Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -322,17 +327,25 @@ List Files
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `Filename string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `MimeType string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `SizeBytes int64`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `Type File`
 
@@ -340,13 +353,13 @@ List Files
 
     For files, this is always `"file"`.
 
-    - `const FileFile File = "file"`
-
-  - `Downloadable bool`
+  - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
 
-  - `Scope BetaFileScope`
+    default: false
+
+  - `Scope BetaFileScope Optional`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -357,8 +370,6 @@ List Files
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
-
-      - `const SessionSession Session = "session"`
 
 ### Example
 
@@ -385,7 +396,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -414,7 +425,7 @@ func main() {
 
 `client.Beta.Files.Download(ctx, fileID, query) (*Response, error)`
 
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
@@ -426,7 +437,7 @@ Download File
 
 - `query BetaFileDownloadParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -539,7 +550,7 @@ func main() {
 
 `client.Beta.Files.GetMetadata(ctx, fileID, query) (*BetaFileMetadata, error)`
 
-**get** `/v1/files/{file_id}`
+**GET** `/v1/files/{file_id}`
 
 Get File Metadata
 
@@ -551,7 +562,7 @@ Get File Metadata
 
 - `query BetaFileGetMetadataParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -641,17 +652,25 @@ Get File Metadata
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `Filename string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `MimeType string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `SizeBytes int64`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `Type File`
 
@@ -659,13 +678,13 @@ Get File Metadata
 
     For files, this is always `"file"`.
 
-    - `const FileFile File = "file"`
-
-  - `Downloadable bool`
+  - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
 
-  - `Scope BetaFileScope`
+    default: false
+
+  - `Scope BetaFileScope Optional`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -676,8 +695,6 @@ Get File Metadata
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
-
-      - `const SessionSession Session = "session"`
 
 ### Example
 
@@ -708,7 +725,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -730,7 +747,7 @@ func main() {
 
 `client.Beta.Files.Delete(ctx, fileID, body) (*BetaDeletedFile, error)`
 
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
@@ -742,7 +759,7 @@ Delete File
 
 - `body BetaFileDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta]`
+  - `Betas param.Field[[]AnthropicBeta] Optional`
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -826,13 +843,13 @@ Delete File
 
     ID of the deleted file.
 
-  - `Type BetaDeletedFileType`
+  - `Type BetaDeletedFileType Optional`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `const BetaDeletedFileTypeFileDeleted BetaDeletedFileType = "file_deleted"`
+    default: file_deleted
 
 ### Example
 
@@ -863,7 +880,7 @@ func main() {
 }
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -872,7 +889,7 @@ func main() {
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Deleted File
 
@@ -882,13 +899,13 @@ func main() {
 
     ID of the deleted file.
 
-  - `Type BetaDeletedFileType`
+  - `Type BetaDeletedFileType Optional`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `const BetaDeletedFileTypeFileDeleted BetaDeletedFileType = "file_deleted"`
+    default: file_deleted
 
 ### Beta File Metadata
 
@@ -904,17 +921,25 @@ func main() {
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `Filename string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `MimeType string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `SizeBytes int64`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `Type File`
 
@@ -922,13 +947,13 @@ func main() {
 
     For files, this is always `"file"`.
 
-    - `const FileFile File = "file"`
-
-  - `Downloadable bool`
+  - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
 
-  - `Scope BetaFileScope`
+    default: false
+
+  - `Scope BetaFileScope Optional`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -939,8 +964,6 @@ func main() {
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
-
-      - `const SessionSession Session = "session"`
 
 ### Beta File Scope
 
@@ -953,5 +976,3 @@ func main() {
   - `Type Session`
 
     The type of scope (e.g., `"session"`).
-
-    - `const SessionSession Session = "session"`

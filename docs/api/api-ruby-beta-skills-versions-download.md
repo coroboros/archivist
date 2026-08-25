@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/downl
 category: "api"
 generated: true
 ---
----
-title: Download Skill Version Content
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/download
----
-
-## Download Skill Version Content
+# Download Skill Version Content
 
 `beta.skills.versions.download(version, **kwargs) -> StringIO`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-### Parameters
+## Parameters
 
 - `skill_id: String`
 
@@ -107,11 +102,11 @@ Download a skill version's content as a zip archive.
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `StringIO`
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"

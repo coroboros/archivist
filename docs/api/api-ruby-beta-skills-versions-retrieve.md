@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/retri
 category: "api"
 generated: true
 ---
----
-title: Get Skill Version
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills/versions/retrieve
----
-
-## Get Skill Version
+# Get Skill Version
 
 `beta.skills.versions.retrieve(version, **kwargs) -> VersionRetrieveResponse`
 
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-### Parameters
+## Parameters
 
 - `skill_id: String`
 
@@ -107,7 +102,7 @@ Get Skill Version
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class VersionRetrieveResponse`
 
@@ -155,7 +150,7 @@ Get Skill Version
 
     Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-### Example
+## Example
 
 ```ruby
 require "anthropic"
@@ -167,7 +162,7 @@ version = anthropic.beta.skills.versions.retrieve("version", skill_id: "skill_id
 puts(version)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

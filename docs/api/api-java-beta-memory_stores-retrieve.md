@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/retriev
 category: "api"
 generated: true
 ---
----
-title: Retrieve a memory store
-url: https://platform.claude.com/docs/en/api/java/beta/memory_stores/retrieve
----
+# Retrieve a memory store
 
-## Retrieve a memory store
+`BetaManagedAgentsMemoryStore beta().memoryStores().retrieve(params = MemoryStoreRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsMemoryStore beta().memoryStores().retrieve(MemoryStoreRetrieveParamsparams = MemoryStoreRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/memory_stores/{memory_store_id}`
+**GET** `/v1/memory_stores/{memory_store_id}`
 
 Retrieve a memory store
 
-### Parameters
+## Parameters
 
 - `MemoryStoreRetrieveParams params`
 
@@ -95,7 +90,7 @@ Retrieve a memory store
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsMemoryStore:`
 
@@ -109,21 +104,25 @@ Retrieve a memory store
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `String name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
   - `Type type`
 
-    - `MEMORY_STORE("memory_store")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Optional<String> description`
 
@@ -133,7 +132,7 @@ Retrieve a memory store
 
     Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -154,7 +153,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

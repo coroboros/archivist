@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/create"
 category: "api"
 generated: true
 ---
----
-title: Create Vault
-url: https://platform.claude.com/docs/en/api/java/beta/vaults/create
----
+# Create Vault
 
-## Create Vault
+`BetaManagedAgentsVault beta().vaults().create(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsVault beta().vaults().create(VaultCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/vaults`
+**POST** `/v1/vaults`
 
 Create Vault
 
-### Parameters
+## Parameters
 
 - `VaultCreateParams params`
 
@@ -97,11 +92,13 @@ Create Vault
 
     Human-readable name for the vault. 1-255 characters.
 
+    minLength: 1, maxLength: 255
+
   - `Optional<Metadata> metadata`
 
     Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsVault:`
 
@@ -115,9 +112,13 @@ Create Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String displayName`
 
@@ -129,13 +130,13 @@ Create Vault
 
   - `Type type`
 
-    - `VAULT("vault")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
+
+## Example
 
 ```java
 package com.anthropic.example;
@@ -159,7 +160,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

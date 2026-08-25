@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments/update
 category: "api"
 generated: true
 ---
----
-title: Update Environment
-url: https://platform.claude.com/docs/en/api/python/beta/environments/update
----
+# Update Environment
 
-## Update Environment
+`beta.environments.update(environment_id, **kwargs)  -> BetaEnvironment`
 
-`beta.environments.update(strenvironment_id, EnvironmentUpdateParams**kwargs)  -> BetaEnvironment`
-
-**post** `/v1/environments/{environment_id}`
+**POST** `/v1/environments/{environment_id}`
 
 Update an existing environment's configuration.
 
-### Parameters
+## Parameters
 
 - `environment_id: str`
 
@@ -36,8 +31,6 @@ Update an existing environment's configuration.
 
       Environment type
 
-      - `"cloud"`
-
     - `networking: Optional[Networking]`
 
       Network configuration policy. Omit on update to preserve the existing value.
@@ -50,8 +43,6 @@ Update an existing environment's configuration.
 
           Network policy type
 
-          - `"unrestricted"`
-
       - `class BetaLimitedNetworkParams: …`
 
         Limited network request params.
@@ -62,8 +53,6 @@ Update an existing environment's configuration.
         - `type: Literal["limited"]`
 
           Network policy type
-
-          - `"limited"`
 
         - `allow_mcp_servers: Optional[bool]`
 
@@ -111,7 +100,7 @@ Update an existing environment's configuration.
 
         Package configuration type
 
-        - `"packages"`
+        default: packages
 
   - `class BetaSelfHostedConfigParams: …`
 
@@ -121,11 +110,11 @@ Update an existing environment's configuration.
 
       Environment type
 
-      - `"self_hosted"`
-
 - `description: Optional[str]`
 
   Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
+
+  maxLength: 1024
 
 - `metadata: Optional[Dict[str, Optional[str]]]`
 
@@ -134,6 +123,8 @@ Update an existing environment's configuration.
 - `name: Optional[str]`
 
   Updated name for the environment
+
+  maxLength: 256, minLength: 1
 
 - `scope: Optional[Literal["organization", "account"]]`
 
@@ -219,7 +210,7 @@ Update an existing environment's configuration.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaEnvironment: …`
 
@@ -253,8 +244,6 @@ Update an existing environment's configuration.
 
             Network policy type
 
-            - `"unrestricted"`
-
         - `class BetaLimitedNetwork: …`
 
           Limited network access.
@@ -274,8 +263,6 @@ Update an existing environment's configuration.
           - `type: Literal["limited"]`
 
             Network policy type
-
-            - `"limited"`
 
       - `packages: BetaPackages`
 
@@ -309,13 +296,11 @@ Update an existing environment's configuration.
 
           Package configuration type
 
-          - `"packages"`
+          default: packages
 
       - `type: Literal["cloud"]`
 
         Environment type
-
-        - `"cloud"`
 
     - `class BetaSelfHostedConfig: …`
 
@@ -324,8 +309,6 @@ Update an existing environment's configuration.
       - `type: Literal["self_hosted"]`
 
         Environment type
-
-        - `"self_hosted"`
 
   - `created_at: str`
 
@@ -347,7 +330,7 @@ Update an existing environment's configuration.
 
     The type of object (always 'environment')
 
-    - `"environment"`
+    default: environment
 
   - `updated_at: str`
 
@@ -361,7 +344,7 @@ Update an existing environment's configuration.
 
     - `"account"`
 
-### Example
+## Example
 
 ```python
 import os
@@ -378,7 +361,7 @@ beta_environment = client.beta.environments.update(
 print(beta_environment.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/archive"
 category: "api"
 generated: true
 ---
----
-title: Archive Environment
-url: https://platform.claude.com/docs/en/api/java/beta/environments/archive
----
+# Archive Environment
 
-## Archive Environment
+`BetaEnvironment beta().environments().archive(params = EnvironmentArchiveParams.none(), requestOptions = RequestOptions.none())`
 
-`BetaEnvironment beta().environments().archive(EnvironmentArchiveParamsparams = EnvironmentArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/environments/{environment_id}/archive`
+**POST** `/v1/environments/{environment_id}/archive`
 
 Archive an environment by ID. Archived environments cannot be used to create new sessions.
 
-### Parameters
+## Parameters
 
 - `EnvironmentArchiveParams params`
 
@@ -95,7 +90,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaEnvironment:`
 
@@ -125,11 +120,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Unrestricted network access.
 
-          - `JsonValue; type "unrestricted"constant`
+          - `JsonValue type constant`
 
             Network policy type
-
-            - `UNRESTRICTED("unrestricted")`
 
         - `class BetaLimitedNetwork:`
 
@@ -147,11 +140,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Specifies domains the container can reach.
 
-          - `JsonValue; type "limited"constant`
+          - `JsonValue type constant`
 
             Network policy type
-
-            - `LIMITED("limited")`
 
       - `BetaPackages packages`
 
@@ -185,23 +176,17 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Package configuration type
 
-          - `PACKAGES("packages")`
-
-      - `JsonValue; type "cloud"constant`
+      - `JsonValue type constant`
 
         Environment type
-
-        - `CLOUD("cloud")`
 
     - `class BetaSelfHostedConfig:`
 
       Configuration for self-hosted environments.
 
-      - `JsonValue; type "self_hosted"constant`
+      - `JsonValue type constant`
 
         Environment type
-
-        - `SELF_HOSTED("self_hosted")`
 
   - `String createdAt`
 
@@ -219,11 +204,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     Human-readable name for the environment
 
-  - `JsonValue; type "environment"constant`
+  - `JsonValue type constant`
 
     The type of object (always 'environment')
-
-    - `ENVIRONMENT("environment")`
 
   - `String updatedAt`
 
@@ -237,7 +220,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `ACCOUNT("account")`
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -258,7 +241,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

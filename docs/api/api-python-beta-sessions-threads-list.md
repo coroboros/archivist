@@ -4,26 +4,23 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/threads/li
 category: "api"
 generated: true
 ---
----
-title: List Session Threads
-url: https://platform.claude.com/docs/en/api/python/beta/sessions/threads/list
----
+# List Session Threads
 
-## List Session Threads
+`beta.sessions.threads.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionThread]`
 
-`beta.sessions.threads.list(strsession_id, ThreadListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionThread]`
-
-**get** `/v1/sessions/{session_id}/threads`
+**GET** `/v1/sessions/{session_id}/threads`
 
 List Session Threads
 
-### Parameters
+## Parameters
 
 - `session_id: str`
 
 - `limit: Optional[int]`
 
   Maximum results per page. Defaults to 1000.
+
+  format: int32
 
 - `page: Optional[str]`
 
@@ -105,7 +102,7 @@ List Session Threads
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsSessionThread: …`
 
@@ -132,8 +129,6 @@ List Session Threads
         - `name: str`
 
         - `type: Literal["url"]`
-
-          - `"url"`
 
         - `url: str`
 
@@ -231,15 +226,11 @@ List Session Threads
 
             - `type: Literal["low"]`
 
-              - `"low"`
-
           - `class BetaManagedAgentsEffortMedium: …`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
-
-              - `"medium"`
 
           - `class BetaManagedAgentsEffortHigh: …`
 
@@ -247,23 +238,17 @@ List Session Threads
 
             - `type: Literal["high"]`
 
-              - `"high"`
-
           - `class BetaManagedAgentsEffortXhigh: …`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-              - `"xhigh"`
-
           - `class BetaManagedAgentsEffortMax: …`
 
             Maximum effort. Favors reasoning depth over latency.
 
             - `type: Literal["max"]`
-
-              - `"max"`
 
         - `inference_geo: Optional[str]`
 
@@ -289,8 +274,6 @@ List Session Threads
 
           - `type: Literal["anthropic"]`
 
-            - `"anthropic"`
-
           - `version: str`
 
         - `class BetaManagedAgentsCustomSkill: …`
@@ -300,8 +283,6 @@ List Session Threads
           - `skill_id: str`
 
           - `type: Literal["custom"]`
-
-            - `"custom"`
 
           - `version: str`
 
@@ -321,8 +302,6 @@ List Session Threads
 
               - `name: Literal["bash"]`
 
-                - `"bash"`
-
               - `permission_policy: PermissionPolicy`
 
                 Permission policy for tool execution.
@@ -333,19 +312,13 @@ List Session Threads
 
                   - `type: Literal["always_allow"]`
 
-                    - `"always_allow"`
-
                 - `class BetaManagedAgentsAlwaysAskPolicy: …`
 
                   Tool calls require user confirmation before execution.
 
                   - `type: Literal["always_ask"]`
 
-                    - `"always_ask"`
-
               - `type: Literal["bash"]`
-
-                - `"bash"`
 
             - `class BetaManagedAgentsEditToolConfig: …`
 
@@ -354,8 +327,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["edit"]`
-
-                - `"edit"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -371,8 +342,6 @@ List Session Threads
 
               - `type: Literal["edit"]`
 
-                - `"edit"`
-
             - `class BetaManagedAgentsReadToolConfig: …`
 
               Configuration for the read tool.
@@ -380,8 +349,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["read"]`
-
-                - `"read"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -397,8 +364,6 @@ List Session Threads
 
               - `type: Literal["read"]`
 
-                - `"read"`
-
             - `class BetaManagedAgentsWriteToolConfig: …`
 
               Configuration for the write tool.
@@ -406,8 +371,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["write"]`
-
-                - `"write"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -423,8 +386,6 @@ List Session Threads
 
               - `type: Literal["write"]`
 
-                - `"write"`
-
             - `class BetaManagedAgentsGlobToolConfig: …`
 
               Configuration for the glob tool.
@@ -432,8 +393,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["glob"]`
-
-                - `"glob"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -449,8 +408,6 @@ List Session Threads
 
               - `type: Literal["glob"]`
 
-                - `"glob"`
-
             - `class BetaManagedAgentsGrepToolConfig: …`
 
               Configuration for the grep tool.
@@ -458,8 +415,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["grep"]`
-
-                - `"grep"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -475,8 +430,6 @@ List Session Threads
 
               - `type: Literal["grep"]`
 
-                - `"grep"`
-
             - `class BetaManagedAgentsWebFetchToolConfig: …`
 
               Configuration for the web_fetch tool.
@@ -484,8 +437,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["web_fetch"]`
-
-                - `"web_fetch"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -501,13 +452,13 @@ List Session Threads
 
               - `type: Literal["web_fetch"]`
 
-                - `"web_fetch"`
-
               - `allowed_domains: Optional[List[str]]`
 
               - `blocked_domains: Optional[List[str]]`
 
               - `max_content_tokens: Optional[int]`
+
+                format: int32
 
             - `class BetaManagedAgentsWebSearchToolConfig: …`
 
@@ -516,8 +467,6 @@ List Session Threads
               - `enabled: bool`
 
               - `name: Literal["web_search"]`
-
-                - `"web_search"`
 
               - `permission_policy: PermissionPolicy`
 
@@ -533,8 +482,6 @@ List Session Threads
 
               - `type: Literal["web_search"]`
 
-                - `"web_search"`
-
               - `allowed_domains: Optional[List[str]]`
 
               - `blocked_domains: Optional[List[str]]`
@@ -547,11 +494,11 @@ List Session Threads
 
                   Location precision. Only "approximate" is supported.
 
-                  - `"approximate"`
-
                 - `city: Optional[str]`
 
                   City name.
+
+                  minLength: 1, maxLength: 255
 
                 - `country: Optional[str]`
 
@@ -561,9 +508,13 @@ List Session Threads
 
                   Region or state name.
 
+                  minLength: 1, maxLength: 255
+
                 - `timezone: Optional[str]`
 
                   IANA timezone identifier, e.g. "America/Los_Angeles".
+
+                  minLength: 1, maxLength: 255
 
           - `default_config: BetaManagedAgentsAgentToolsetDefaultConfig`
 
@@ -584,8 +535,6 @@ List Session Threads
                 Tool calls require user confirmation before execution.
 
           - `type: Literal["agent_toolset_20260401"]`
-
-            - `"agent_toolset_20260401"`
 
         - `class BetaManagedAgentsMCPToolset: …`
 
@@ -629,8 +578,6 @@ List Session Threads
 
           - `type: Literal["mcp_toolset"]`
 
-            - `"mcp_toolset"`
-
         - `class BetaManagedAgentsCustomTool: …`
 
           A custom tool as returned in API responses.
@@ -643,8 +590,6 @@ List Session Threads
 
             - `type: Literal["object"]`
 
-              - `"object"`
-
             - `properties: Optional[Dict[str, object]]`
 
             - `required: Optional[List[str]]`
@@ -653,13 +598,11 @@ List Session Threads
 
           - `type: Literal["custom"]`
 
-            - `"custom"`
-
       - `type: Literal["agent"]`
 
-        - `"agent"`
-
       - `version: int`
+
+        format: int32
 
     - `class BetaManagedAgentsAdvisor: …`
 
@@ -671,15 +614,17 @@ List Session Threads
 
       - `type: Literal["advisor"]`
 
-        - `"advisor"`
-
   - `archived_at: Optional[datetime]`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `parent_thread_id: Optional[str]`
 
@@ -697,13 +642,19 @@ List Session Threads
 
       Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
+      format: double
+
     - `duration_seconds: Optional[float]`
 
       Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
+      format: double
+
     - `startup_seconds: Optional[float]`
 
       Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+      format: double
 
   - `status: BetaManagedAgentsSessionThreadStatus`
 
@@ -719,11 +670,11 @@ List Session Threads
 
   - `type: Literal["session_thread"]`
 
-    - `"session_thread"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `usage: Optional[BetaManagedAgentsSessionThreadUsage]`
 
@@ -733,6 +684,8 @@ List Session Threads
 
       Cumulative time in seconds this thread spent in running status. Equal to `stats.active_seconds`; surfaced here so a thread's usage carries every quantity its cost is priced on.
 
+      format: double
+
     - `cache_creation: Optional[BetaManagedAgentsCacheCreationUsage]`
 
       Prompt-cache creation token usage broken down by cache lifetime.
@@ -741,17 +694,25 @@ List Session Threads
 
         Tokens used to create 1-hour ephemeral cache entries.
 
+        format: int32
+
       - `ephemeral_5m_input_tokens: Optional[int]`
 
         Tokens used to create 5-minute ephemeral cache entries.
+
+        format: int32
 
     - `cache_read_input_tokens: Optional[int]`
 
       Total tokens read from prompt cache.
 
+      format: int32
+
     - `input_tokens: Optional[int]`
 
       Total input tokens consumed across all turns.
+
+      format: int32
 
     - `list_cost: Optional[BetaMonetaryAmount]`
 
@@ -765,11 +726,11 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-        - `"USD"`
-
     - `output_tokens: Optional[int]`
 
       Total output tokens generated across all turns.
+
+      format: int32
 
     - `server_tool_use: Optional[BetaManagedAgentsServerToolUsage]`
 
@@ -779,11 +740,15 @@ List Session Threads
 
         Number of server-executed web fetch requests.
 
+        format: int32
+
       - `web_search_requests: Optional[int]`
 
         Number of server-executed web search requests.
 
-### Example
+        format: int32
+
+## Example
 
 ```python
 import os
@@ -801,7 +766,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/python/beta/user_profiles"
 category: "api"
 generated: true
 ---
----
-title: User Profiles
-url: https://platform.claude.com/docs/en/api/python/beta/user_profiles
----
-
 # User Profiles
 
 ## Create User Profile
 
-`beta.user_profiles.create(UserProfileCreateParams**kwargs)  -> BetaUserProfile`
+`beta.user_profiles.create(**kwargs)  -> BetaUserProfile`
 
-**post** `/v1/user_profiles`
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
@@ -33,6 +28,8 @@ Create User Profile
 
   Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: Optional[Dict[str, str]]`
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -40,6 +37,8 @@ Create User Profile
 - `name: Optional[str]`
 
   Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: Optional[Literal["external", "resold", "internal"]]`
 
@@ -139,6 +138,8 @@ Create User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -161,11 +162,11 @@ Create User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: Optional[Literal["application", "passthrough"]]`
 
@@ -208,7 +209,7 @@ beta_user_profile = client.beta.user_profiles.create()
 print(beta_user_profile.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -231,9 +232,9 @@ print(beta_user_profile.id)
 
 ## List User Profiles
 
-`beta.user_profiles.list(UserProfileListParams**kwargs)  -> SyncPageCursor[BetaUserProfile]`
+`beta.user_profiles.list(**kwargs)  -> SyncPageCursor[BetaUserProfile]`
 
-**get** `/v1/user_profiles`
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
@@ -242,6 +243,8 @@ List User Profiles
 - `limit: Optional[int]`
 
   Query parameter for limit
+
+  format: int32
 
 - `order: Optional[Literal["asc", "desc"]]`
 
@@ -343,6 +346,8 @@ List User Profiles
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -365,11 +370,11 @@ List User Profiles
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: Optional[Literal["application", "passthrough"]]`
 
@@ -413,7 +418,7 @@ page = page.data[0]
 print(page.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -441,9 +446,9 @@ print(page.id)
 
 ## Get User Profile
 
-`beta.user_profiles.retrieve(struser_profile_id, UserProfileRetrieveParams**kwargs)  -> BetaUserProfile`
+`beta.user_profiles.retrieve(user_profile_id, **kwargs)  -> BetaUserProfile`
 
-**get** `/v1/user_profiles/{user_profile_id}`
+**GET** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
@@ -539,6 +544,8 @@ Get User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -561,11 +568,11 @@ Get User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: Optional[Literal["application", "passthrough"]]`
 
@@ -610,7 +617,7 @@ beta_user_profile = client.beta.user_profiles.retrieve(
 print(beta_user_profile.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -633,9 +640,9 @@ print(beta_user_profile.id)
 
 ## Update User Profile
 
-`beta.user_profiles.update(struser_profile_id, UserProfileUpdateParams**kwargs)  -> BetaUserProfile`
+`beta.user_profiles.update(user_profile_id, **kwargs)  -> BetaUserProfile`
 
-**post** `/v1/user_profiles/{user_profile_id}`
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
@@ -655,6 +662,8 @@ Update User Profile
 
   If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: Optional[Dict[str, str]]`
 
   Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
@@ -662,6 +671,8 @@ Update User Profile
 - `name: Optional[str]`
 
   If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: Optional[Literal["external", "resold", "internal"]]`
 
@@ -761,6 +772,8 @@ Update User Profile
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -783,11 +796,11 @@ Update User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: Optional[Literal["application", "passthrough"]]`
 
@@ -832,7 +845,7 @@ beta_user_profile = client.beta.user_profiles.update(
 print(beta_user_profile.id)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -855,9 +868,9 @@ print(beta_user_profile.id)
 
 ## Create Enrollment URL
 
-`beta.user_profiles.create_enrollment_url(struser_profile_id, UserProfileCreateEnrollmentURLParams**kwargs)  -> BetaUserProfileEnrollmentURL`
+`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs)  -> BetaUserProfileEnrollmentURL`
 
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
@@ -949,11 +962,11 @@ Create Enrollment URL
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: Literal["enrollment_url"]`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: str`
 
@@ -976,7 +989,7 @@ beta_user_profile_enrollment_url = client.beta.user_profiles.create_enrollment_u
 print(beta_user_profile_enrollment_url.expires_at)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -986,7 +999,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta User Profile
 
@@ -999,6 +1012,8 @@ print(beta_user_profile_enrollment_url.expires_at)
   - `created_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: Dict[str, str]`
 
@@ -1022,11 +1037,11 @@ print(beta_user_profile_enrollment_url.expires_at)
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: datetime`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: Optional[Literal["application", "passthrough"]]`
 
@@ -1062,11 +1077,11 @@ print(beta_user_profile_enrollment_url.expires_at)
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: Literal["enrollment_url"]`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: str`
 

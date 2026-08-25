@@ -4,20 +4,15 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/ar
 category: "api"
 generated: true
 ---
----
-title: Archive Credential
-url: https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/archive
----
+# Archive Credential
 
-## Archive Credential
+`BetaManagedAgentsCredential beta().vaults().credentials().archive(params, requestOptions = RequestOptions.none())`
 
-`BetaManagedAgentsCredential beta().vaults().credentials().archive(CredentialArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
 Archive Credential
 
-### Parameters
+## Parameters
 
 - `CredentialArchiveParams params`
 
@@ -97,7 +92,7 @@ Archive Credential
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaManagedAgentsCredential:`
 
@@ -110,6 +105,8 @@ Archive Credential
   - `Optional<LocalDateTime> archivedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Auth auth`
 
@@ -125,11 +122,11 @@ Archive Credential
 
       - `Type type`
 
-        - `MCP_OAUTH("mcp_oauth")`
-
       - `Optional<LocalDateTime> expiresAt`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `Optional<BetaManagedAgentsMcpOAuthRefreshResponse> refresh`
 
@@ -153,23 +150,17 @@ Archive Credential
 
             - `Type type`
 
-              - `NONE("none")`
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type type`
 
-              - `CLIENT_SECRET_BASIC("client_secret_basic")`
-
           - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `Type type`
-
-              - `CLIENT_SECRET_POST("client_secret_post")`
 
         - `Optional<String> resource`
 
@@ -188,8 +179,6 @@ Archive Credential
         URL of the MCP server this credential authenticates against.
 
       - `Type type`
-
-        - `STATIC_BEARER("static_bearer")`
 
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
@@ -217,8 +206,6 @@ Archive Credential
 
           - `Type type`
 
-            - `UNRESTRICTED("unrestricted")`
-
         - `class BetaManagedAgentsLimitedCredentialNetworkingResponse:`
 
           The secret is substituted only on requests to the listed hosts.
@@ -229,19 +216,17 @@ Archive Credential
 
           - `Type type`
 
-            - `LIMITED("limited")`
-
       - `String secretName`
 
         Name of the environment variable.
 
       - `Type type`
 
-        - `ENVIRONMENT_VARIABLE("environment_variable")`
-
   - `LocalDateTime createdAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `Metadata metadata`
 
@@ -249,11 +234,11 @@ Archive Credential
 
   - `Type type`
 
-    - `VAULT_CREDENTIAL("vault_credential")`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `String vaultId`
 
@@ -263,7 +248,7 @@ Archive Credential
 
     Human-readable name for the credential.
 
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -288,7 +273,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

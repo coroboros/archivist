@@ -4,22 +4,17 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/work/hea
 category: "api"
 generated: true
 ---
----
-title: Record Heartbeat
-url: https://platform.claude.com/docs/en/api/java/beta/environments/work/heartbeat
----
+# Record Heartbeat
 
-## Record Heartbeat
+`BetaSelfHostedWorkHeartbeatResponse beta().environments().work().heartbeat(params, requestOptions = RequestOptions.none())`
 
-`BetaSelfHostedWorkHeartbeatResponse beta().environments().work().heartbeat(WorkHeartbeatParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Record a heartbeat for a work item to maintain the lease.
 
-### Parameters
+## Parameters
 
 - `WorkHeartbeatParams params`
 
@@ -107,7 +102,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-### Returns
+## Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse:`
 
@@ -139,13 +134,11 @@ Record a heartbeat for a work item to maintain the lease.
 
     Effective TTL applied to the lease
 
-  - `JsonValue; type "work_heartbeat"constant`
+  - `JsonValue type constant`
 
     The type of response
 
-    - `WORK_HEARTBEAT("work_heartbeat")`
-
-### Example
+## Example
 
 ```java
 package com.anthropic.example;
@@ -170,7 +163,7 @@ public final class Main {
 }
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

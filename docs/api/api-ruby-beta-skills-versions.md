@@ -4,18 +4,13 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/versions"
 category: "api"
 generated: true
 ---
----
-title: Versions
-url: https://platform.claude.com/docs/en/api/ruby/beta/skills/versions
----
-
 # Versions
 
 ## Create Skill Version
 
 `beta.skills.versions.create(skill_id, **kwargs) -> VersionCreateResponse`
 
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
@@ -169,7 +164,7 @@ version = anthropic.beta.skills.versions.create("skill_id", files: [StringIO.new
 puts(version)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -188,7 +183,7 @@ puts(version)
 
 `beta.skills.versions.list(skill_id, **kwargs) -> PageCursor<VersionListResponse>`
 
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
@@ -346,7 +341,7 @@ page = anthropic.beta.skills.versions.list("skill_id")
 puts(page)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -371,7 +366,7 @@ puts(page)
 
 `beta.skills.versions.download(version, **kwargs) -> StringIO`
 
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
@@ -485,7 +480,7 @@ puts(response)
 
 `beta.skills.versions.retrieve(version, **kwargs) -> VersionRetrieveResponse`
 
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
@@ -639,7 +634,7 @@ version = anthropic.beta.skills.versions.retrieve("version", skill_id: "skill_id
 puts(version)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -658,7 +653,7 @@ puts(version)
 
 `beta.skills.versions.delete(version, **kwargs) -> VersionDeleteResponse`
 
-**delete** `/v1/skills/{skill_id}/versions/{version}`
+**DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
 Delete Skill Version
 
@@ -780,7 +775,7 @@ version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 puts(version)
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -789,7 +784,7 @@ puts(version)
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Version Create Response
 
