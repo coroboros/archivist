@@ -1,5 +1,24 @@
 # Changelog
 
+## 🤖 v1.5.129 - 25/08/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-claude-platform-on-aws-iam-actions.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+
+
 ## 🤖 v1.5.128 - 25/08/2026
 
 File Changes:
