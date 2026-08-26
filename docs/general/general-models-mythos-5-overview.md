@@ -18,7 +18,7 @@ Model ID: `claude-mythos-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTok · Output pricing: $50 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [What’s new](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md) · [Migration guide](../about-claude/about-claude-models-migration-guide.md#migrating-to-claude-mythos-5-and-claude-fable-5)
+[Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [What’s new](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md) · [Migration guide](./general-models-fable-5-migration-guide.md)
 
 Claude Mythos 5 is offered separately, by invitation only, for defensive cybersecurity workflows as part of Project Glasswing. It shares Claude Fable 5’s specifications and pricing. Claude Fable 5 includes safety classifiers that can decline requests; Claude Mythos 5 does not include these classifiers. For access, contact your Anthropic, AWS, or Google Cloud account team. [See Claude Fable 5](./general-models-fable-5-overview.md) · [Project Glasswing](https://anthropic.com/glasswing)
 

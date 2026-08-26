@@ -1,5 +1,72 @@
 # Changelog
 
+## 🤖 v1.5.130 - 26/08/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-4-8.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-sonnet-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/build-with-claude/build-with-claude-refusals-and-fallback.md`
+- Modified: `docs/build-with-claude/build-with-claude-working-with-messages.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md`
+- Modified: `docs/general/general-models-fable-5-overview.md`
+- Modified: `docs/general/general-models-haiku-4-5-overview.md`
+- Modified: `docs/general/general-models-mythos-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-6-overview.md`
+- Modified: `docs/general/general-models-opus-4-7-overview.md`
+- Modified: `docs/general/general-models-opus-4-8-overview.md`
+- Modified: `docs/general/general-models-opus-5-overview.md`
+- Modified: `docs/general/general-models-opus-5-whats-new-opus-5.md`
+- Modified: `docs/general/general-models-overview.md`
+- Modified: `docs/general/general-models-sonnet-4-5-overview.md`
+- Modified: `docs/general/general-models-sonnet-4-6-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-whats-new-sonnet-5.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/general/general-models-fable-5-migration-guide.md`
+- Added: `docs/general/general-models-haiku-4-5-migration-guide.md`
+- Added: `docs/general/general-models-opus-5-migration-guide.md`
+- Added: `docs/general/general-models-sonnet-5-migration-guide.md`
+
+
 ## 🤖 v1.5.129 - 25/08/2026
 
 File Changes:

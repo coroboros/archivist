@@ -18,7 +18,7 @@ Model ID: `claude-sonnet-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok · Output pricing: $10 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-sonnet-5) · [What’s new](./general-models-sonnet-5-whats-new-sonnet-5.md) · [Migration guide](../about-claude/about-claude-models-migration-guide.md#migrating-to-claude-sonnet-5)
+[Announcement](https://www.anthropic.com/news/claude-sonnet-5) · [What’s new](./general-models-sonnet-5-whats-new-sonnet-5.md) · [Migration guide](./general-models-sonnet-5-migration-guide.md)
 
 ## Overview
 

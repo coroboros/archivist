@@ -18,7 +18,7 @@ Model ID: `claude-haiku-4-5-20251001`
 
 Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTok · Output pricing: $5 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-haiku-4-5) · [Migration guide](../about-claude/about-claude-models-migration-guide.md#migrating-to-claude-haiku-4-5)
+[Announcement](https://www.anthropic.com/news/claude-haiku-4-5) · [Migration guide](./general-models-haiku-4-5-migration-guide.md)
 
 ## How it compares
 

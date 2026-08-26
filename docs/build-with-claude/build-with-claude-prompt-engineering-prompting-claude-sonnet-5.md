@@ -15,7 +15,7 @@ This guide covers the prompting patterns specific to Claude Sonnet 5. For the mo
 Claude Sonnet 5 has particular strengths in coding and agentic tasks. It performs well out of the box on existing Claude Sonnet 4.6 prompts. The patterns in this guide cover the behaviors that most often require tuning.
 
 <Note>
-  For API parameter changes when migrating from Claude Sonnet 4.6 (adaptive thinking on by default, sampling parameters not accepted, manual extended thinking removed, and the new tokenizer), see the [migration guide](../about-claude/about-claude-models-migration-guide.md#migrating-from-claude-sonnet-4-6-to-claude-sonnet-5).
+  For API parameter changes when migrating from Claude Sonnet 4.6 (adaptive thinking on by default, sampling parameters not accepted, manual extended thinking removed, and the new tokenizer), see the [migration guide](../general/general-models-sonnet-5-migration-guide.md#migrating-from-claude-sonnet-4-6-to-claude-sonnet-5).
 </Note>
 
 ## Response length and verbosity

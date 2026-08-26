@@ -12,7 +12,7 @@ description: "Claude Sonnet 4.5 reference: lifecycle status, model IDs on every 
 
 **Legacy.** Released September 29, 2025.
 
-Although Claude Sonnet 4.5 is still available, you should consider migrating to Claude Sonnet 5 for improved performance. [See Claude Sonnet 5](./general-models-sonnet-5-overview.md) · [Migrate to Claude Sonnet 5](../about-claude/about-claude-models-migration-guide.md#migrating-from-sonnet-45)
+Although Claude Sonnet 4.5 is still available, you should consider migrating to Claude Sonnet 5 for improved performance. [See Claude Sonnet 5](./general-models-sonnet-5-overview.md) · [Migrate to Claude Sonnet 5](./general-models-sonnet-5-migration-guide.md#migrating-from-sonnet-45)
 
 Model ID: `claude-sonnet-4-5-20250929`
 
@@ -86,7 +86,7 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $3 / MTo
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Sonnet 5" icon="arrows-left-right" href="../about-claude/about-claude-models-migration-guide.md">
+  <Card title="Migrate to Claude Sonnet 5" icon="arrows-left-right" href="./general-models-sonnet-5-migration-guide.md">
     What changes when moving from Claude Sonnet 4.5 and earlier Sonnet models to Claude Sonnet 5.
   </Card>
 

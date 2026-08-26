@@ -18,7 +18,7 @@ Model ID: `claude-opus-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok · Output pricing: $25 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-opus-5) · [What’s new](./general-models-opus-5-whats-new-opus-5.md) · [Migration guide](../about-claude/about-claude-models-migration-guide.md#migrating-to-claude-opus-5)
+[Announcement](https://www.anthropic.com/news/claude-opus-5) · [What’s new](./general-models-opus-5-whats-new-opus-5.md) · [Migration guide](./general-models-opus-5-migration-guide.md)
 
 ## Overview
 

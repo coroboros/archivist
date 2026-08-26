@@ -12,7 +12,7 @@ description: "Claude Opus 4.7 reference: lifecycle status, model IDs on every pl
 
 **Legacy.** Released April 16, 2026.
 
-Although Claude Opus 4.7 is still available, you should consider migrating to Claude Opus 5 for improved performance. [See Claude Opus 5](./general-models-opus-5-overview.md) · [Migrate to Claude Opus 5](../about-claude/about-claude-models-migration-guide.md#migrating-from-claude-opus-47)
+Although Claude Opus 4.7 is still available, you should consider migrating to Claude Opus 5 for improved performance. [See Claude Opus 5](./general-models-opus-5-overview.md) · [Migrate to Claude Opus 5](./general-models-opus-5-migration-guide.md#migrating-from-claude-opus-47)
 
 Model ID: `claude-opus-4-7`
 
@@ -86,7 +86,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Opus 5" icon="arrows-left-right" href="../about-claude/about-claude-models-migration-guide.md">
+  <Card title="Migrate to Claude Opus 5" icon="arrows-left-right" href="./general-models-opus-5-migration-guide.md">
     What changes when moving from Claude Opus 4.7 to Claude Opus 5.
   </Card>
 

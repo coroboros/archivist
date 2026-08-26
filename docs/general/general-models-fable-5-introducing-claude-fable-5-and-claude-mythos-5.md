@@ -99,13 +99,13 @@ At launch, Claude Fable 5 and Claude Mythos 5 support:
 
 Step-by-step instructions live in the migration guide:
 
-* From Claude Mythos Preview: see [Migrating from Claude Mythos Preview to Claude Mythos 5](../about-claude/about-claude-models-migration-guide.md#migrating-from-claude-mythos-preview).
-* From Claude Opus 4.8: see [Migrating from Claude Opus 4.8 to Claude Fable 5](../about-claude/about-claude-models-migration-guide.md#migrating-from-claude-opus-48).
+* From Claude Mythos Preview: see [Migrating from Claude Mythos Preview to Claude Mythos 5](./general-models-fable-5-migration-guide.md#migrating-from-claude-mythos-preview).
+* From Claude Opus 4.8: see [Migrating from Claude Opus 4.8 to Claude Fable 5](./general-models-fable-5-migration-guide.md#migrating-from-claude-opus-48).
 
 ## Next steps
 
 <CardGroup>
-  <Card title="Migration guide" icon="arrow-right" href="../about-claude/about-claude-models-migration-guide.md">
+  <Card title="Migration guide" icon="arrow-right" href="./general-models-fable-5-migration-guide.md">
     Step-by-step upgrade instructions from Claude Opus 4.8 and Claude Mythos Preview.
   </Card>
 
