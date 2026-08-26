@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.131 - 26/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.130 - 26/08/2026
 
 File Changes:

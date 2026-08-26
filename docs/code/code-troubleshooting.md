@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting"
-source: "https://code.claude.com/docs/en/agent-sdk/troubleshooting"
+source: "https://code.claude.com/docs/en/troubleshooting"
 category: "code"
 generated: true
 ---
@@ -10,61 +10,155 @@ generated: true
 
 # Troubleshooting
 
-> Fix Agent SDK errors by the exact message you see, with the cause and fix for each error in the TypeScript and Python SDKs.
+> Fix high CPU or memory usage, hangs, auto-compact thrashing, and search problems in Claude Code, and find the right page for other issues.
 
-Entries on this page are keyed to the error you see. Each names the cause and what to do.
+This page covers performance, stability, and search problems once Claude Code is running. For other issues, start with the page that matches where you're stuck:
 
-## CLI startup
+| Symptom                                                                                                                                              | Go to                                                                                    |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
+| `command not found`, install fails, PATH issues, `EACCES`, TLS errors                                                                                | [Troubleshoot installation and login](/docs/en/troubleshoot-install)                          |
+| Update or install download fails with `The connection dropped while downloading the update` or `aborted`                                             | [Error reference](/docs/en/errors#the-connection-dropped-while-downloading-the-update)        |
+| Login loops, OAuth errors, `403 Forbidden`, "organization disabled", Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry credentials | [Troubleshoot installation and login](/docs/en/troubleshoot-install#login-and-authentication) |
+| Settings not applying, hooks not firing, MCP servers not loading                                                                                     | [Debug your configuration](/docs/en/debug-your-config)                                        |
+| Session started in auto mode, or Claude edits files and runs commands without asking                                                                 | [Which mode a session starts in](/docs/en/permission-modes#which-mode-a-session-starts-in)    |
+| `API Error: 5xx`, `529 Overloaded`, `429`, request validation errors                                                                                 | [Error reference](/docs/en/errors)                                                            |
+| `model not found` or `you may not have access to it`                                                                                                 | [Error reference](/docs/en/errors#theres-an-issue-with-the-selected-model)                    |
+| VS Code extension not connecting or detecting Claude                                                                                                 | [VS Code integration](/docs/en/vs-code#fix-common-issues)                                     |
+| `Claude Code process exited with code 1` in VS Code or an SDK app                                                                                    | [Error reference](/docs/en/errors#claude-code-process-exited-with-code-n)                     |
+| JetBrains plugin or IDE not detected                                                                                                                 | [JetBrains integration](/docs/en/jetbrains#troubleshooting)                                   |
+| High CPU or memory, slow responses, hangs, search not finding files                                                                                  | [Performance and stability](#performance-and-stability) below                            |
 
-### CLINotFoundError: Claude Code not found
+If you're not sure which applies, run `/doctor` inside Claude Code for an automated check of your installation, settings, extensions, and context usage; it proposes fixes it can apply after you confirm. If `claude` won't start at all, run `claude doctor` from your shell instead. Run `/mcp` to check MCP server status.
 
-The Python SDK launches the Claude Code CLI as a subprocess. When it can't find a `claude` executable, connecting fails with a `CLINotFoundError`:
+## Performance and stability
 
+These sections cover issues related to resource usage, responsiveness, and search behavior.
+
+### High CPU or memory usage
+
+Claude Code is designed to work with most development environments, but may consume significant resources when processing large codebases. If you're experiencing performance issues:
+
+1. Use `/compact` regularly to reduce context size. If it returns `Not enough messages to compact.`, the conversation has too few turns to summarize; that can happen even with a full context when a single large paste filled it
+2. Close and restart Claude Code between major tasks
+3. Consider adding large build directories to your `.gitignore` file
+4. Restart with [`claude --safe-mode`](/docs/en/cli-reference#cli-flags) to check whether a plugin, MCP server, or hook is the source. It disables all customizations for the session; if usage drops, see [Debug your configuration](/docs/en/debug-your-config#test-against-a-clean-configuration) to find which one
+
+If memory usage stays high after these steps, run `/heapdump` to write two files to `~/Desktop`: a JavaScript heap snapshot named `<session-id>.heapsnapshot` and a memory breakdown named `<session-id>-diagnostics.json`. Claude Code [hides the command from the command menu](/docs/en/commands#how-the-command-menu-matches-what-you-type); type it in full. On Linux without a Desktop folder, the files are written to your home directory.
+
+<Warning>
+  The `.heapsnapshot` file contains every string in the process, including your full conversation and credentials. Don't attach it to a public issue or share it.
+</Warning>
+
+The command also prints a summary in the conversation, showing resident set size, JS heap, array buffers, and unaccounted native memory, plus any leak indicators it detected, such as a high memory growth rate or an unusually high number of open handles. The summary says whether most memory is in the JS heap, which the snapshot captures, or in native memory, which it doesn't.
+
+Do one of two things with the output:
+
+* **Report it**: open a [GitHub issue](https://github.com/anthropics/claude-code/issues) and attach only the `-diagnostics.json` file, which carries the statistics behind the printed summary and no conversation content or credentials
+* **Investigate it yourself**: if the summary says most memory is JS heap, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load and sort by retained size to see what's holding the memory
+
+If the summary says most memory is native, the snapshot can't show it; include the summary's leak indicators in your report instead.
+
+### Large tables are cut off in the terminal
+
+A Markdown table with more than 200 rows renders its first 200 rows followed by a `… N more rows not shown` line. Only the display is capped: the full table stays in the conversation, and [`/copy`](/docs/en/commands) copies every row. For a table too large to read in the terminal, ask Claude to write it to a file instead. Before v2.1.208, Claude Code rendered every row, so resuming a session that contained a very large table could stall while it re-rendered.
+
+### Auto-compaction stops with a thrashing error
+
+If you see `Autocompact is thrashing: the context refilled to the limit...`, automatic compaction succeeded but a file or tool output immediately refilled the context window several times in a row. Claude Code stops retrying to avoid wasting API calls on a loop that isn't making progress.
+
+To recover:
+
+1. Ask Claude to read the oversized file in smaller chunks, such as a specific line range or function, instead of the whole file
+2. Run `/compact` with a focus that drops the large output, for example `/compact keep only the plan and the diff`
+3. Move the large-file work to a [subagent](/docs/en/sub-agents) so it runs in a separate context window
+4. Run `/clear` if the earlier conversation is no longer needed
+
+### Command hangs or freezes
+
+If Claude Code seems unresponsive:
+
+1. Press Ctrl+C to attempt to cancel the current operation
+2. If unresponsive, you may need to close the terminal and restart
+
+Restarting doesn't lose your conversation. Run `claude --resume` in the same directory to pick the session back up.
+
+### Garbled or corrupted text in an editor's integrated terminal
+
+If characters render as boxes, smears, or the wrong glyphs when running Claude Code in the VS Code, Cursor, or Devin Desktop integrated terminal, the terminal's GPU renderer is likely the cause. Run `/terminal-setup` inside Claude Code to set `terminal.integrated.gpuAcceleration` to `"off"`, or set it manually in your editor settings and reload the window. See [Terminal configuration](/docs/en/terminal-config) for the other settings `/terminal-setup` writes.
+
+### Search and discovery issues
+
+If the Search tool, `@file` mentions, custom agents, or custom skills aren't finding files, the bundled `ripgrep` binary may not run on your system. Install your platform's `ripgrep` package and tell Claude Code to use it instead:
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash theme={null}
+    brew install ripgrep
+    ```
+  </Tab>
+
+  <Tab title="Ubuntu/Debian">
+    ```bash theme={null}
+    sudo apt install ripgrep
+    ```
+  </Tab>
+
+  <Tab title="Alpine">
+    ```bash theme={null}
+    apk add ripgrep
+    ```
+
+    `ripgrep` is in Alpine's community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](/docs/en/setup#alpine-linux-and-musl-based-distributions).
+  </Tab>
+
+  <Tab title="Arch">
+    ```bash theme={null}
+    pacman -S ripgrep
+    ```
+  </Tab>
+
+  <Tab title="Windows">
+    ```powershell theme={null}
+    winget install BurntSushi.ripgrep.MSVC
+    ```
+  </Tab>
+</Tabs>
+
+Then set `USE_BUILTIN_RIPGREP` to `0`, either in your shell [environment](/docs/en/env-vars) or in the `env` block of your [`settings.json`](/docs/en/settings-reference#all-settings):
+
+```json theme={null}
+{
+  "env": {
+    "USE_BUILTIN_RIPGREP": "0"
+  }
+}
 ```
-Claude Code not found at: /your/configured/path
-```
 
-The message includes the configured path when you set `ClaudeAgentOptions(cli_path=...)` and it points at a missing file. Without `cli_path`, the SDK searches your `PATH` and common install locations, and the message includes install instructions for your platform.
+To confirm the switch took effect, run `claude doctor` in your terminal and check that the Search line shows the path of your system ripgrep instead of `OK (bundled)`.
 
-To fix it:
+### Slow or incomplete search results on WSL
 
-* Install Claude Code if it isn't installed. See [Install Claude Code](/docs/en/setup#install-claude-code) for the command on your platform.
-* If you set `cli_path`, confirm the file exists and is the `claude` executable.
-* If you rely on `PATH` resolution, confirm `claude --version` works in the same environment your application runs in. Processes you launch outside your shell, such as from an IDE or a service manager, often run with a different `PATH`.
+Disk read performance penalties when [working across file systems on WSL](https://learn.microsoft.com/en-us/windows/wsl/filesystems) may result in fewer-than-expected matches when using Claude Code on WSL. Search still functions, but returns fewer results than on a native filesystem.
 
-### CLIConnectionError: Refusing to execute batch script
+<Note>
+  `claude doctor` shows Search as OK in this case.
+</Note>
 
-On Windows, connecting fails with a `CLIConnectionError` when the CLI path the Python SDK uses is a `.bat` or `.cmd` batch script, including the `claude.cmd` shim that an npm install creates:
+**Solutions:**
 
-```
-Refusing to execute batch script 'C:\\Users\\you\\AppData\\Roaming\\npm\\claude.cmd': Windows runs .bat/.cmd files via cmd.exe, which can execute commands injected through CLI arguments, and no reliable escaping for cmd.exe exists. Use a native claude executable instead: install Claude Code natively (irm https://claude.ai/install.ps1 | iex), point ClaudeAgentOptions(cli_path=...) at a claude.exe, or install the claude-agent-sdk wheel for a platform that bundles claude.exe (e.g. Windows x64).
-```
+1. **Submit more specific searches**: reduce the number of files searched by specifying directories or file types: "Search for JWT validation logic in the auth-service package" or "Find use of md5 hash in JS files".
 
-The refusal is deliberate security hardening, not a broken install. Windows runs batch scripts by rewriting the spawn into a `cmd.exe /c` invocation, and `cmd.exe` re-parses the whole command line at execution time, so an argument value can execute injected commands.
+2. **Move project to Linux filesystem**: if possible, ensure your project is located on the Linux filesystem (`/home/`) rather than the Windows filesystem (`/mnt/c/`).
 
-Most Windows installs never reach this error. The Windows x64 wheel of `claude-agent-sdk` bundles a `claude.exe`, and the SDK prefers the bundled CLI, then any native `claude.exe` it can discover, before falling back to a batch shim. You see the refusal in two cases:
+3. **Use native Windows instead**: consider running Claude Code natively on Windows instead of through WSL, for better file system performance.
 
-* You set `ClaudeAgentOptions(cli_path=...)` to a `.bat` or `.cmd` file, such as npm's `claude.cmd` shim.
-* Your install has no bundled or native `claude.exe`, for example a source install on ARM64 Windows where the only `claude` on your `PATH` is the npm shim.
+## Get more help
 
-To fix it, give the SDK a native executable instead of a batch script:
+If you're experiencing issues not covered here:
 
-* If you set `ClaudeAgentOptions(cli_path=...)`, point it at a `claude.exe` or remove the option. The SDK skips discovery while `cli_path` is set, so a native install alone can't take effect.
-* Install Claude Code natively in PowerShell: `irm https://claude.ai/install.ps1 | iex`
-* On x64 Windows, install the `claude-agent-sdk` wheel, which bundles `claude.exe`.
+1. Run `/doctor` for a setup checkup and `/mcp` to check MCP server status
+2. Use the `/feedback` command within Claude Code to report problems directly to Anthropic
+3. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
+4. Ask Claude directly about its capabilities and features. Claude has built-in access to its documentation.
 
-Before `claude-agent-sdk` 0.2.124, the Python SDK spawned batch scripts through `cmd.exe` without this check.
-
-## Structured outputs
-
-### structured\_output is None but the result says success
-
-A result message can end with `subtype: "success"` while `structured_output` is `None` in Python or `undefined` in TypeScript. The run completes, but no validated output exists. One way to hit this is a schema no output can satisfy, for example conflicting length constraints. The run ends without a validation error, and the only signal is the missing `structured_output`.
-
-Treat this result as a failure in application code. Check both that `subtype` is `success` and that `structured_output` is present before using it. The [Error handling](/docs/en/agent-sdk/structured-outputs#error-handling) section shows this pattern for both SDKs.
-
-If it happens repeatedly with a schema you believe is correct, verify the schema is satisfiable, then simplify it until outputs validate, and reintroduce constraints one at a time.
-
-## Report a new issue
-
-If your error isn't covered here, check the open issues or file a new one in the SDK repositories: [claude-agent-sdk-typescript](https://github.com/anthropics/claude-agent-sdk-typescript/issues) or [claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python/issues). Include the full error text and your SDK version.
+For account, billing, or subscription problems, contact Anthropic support instead: sign in at [claude.ai](https://claude.ai) (Console users: [platform.claude.com](https://platform.claude.com)), click your initials in the lower left, and select **Get help**. See [How to get support](https://support.claude.com/en/articles/9015913-how-to-get-support) for the full flow, including who can reach a human agent on each plan.
