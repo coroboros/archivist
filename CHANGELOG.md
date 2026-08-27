@@ -1,5 +1,45 @@
 # Changelog
 
+## 🤖 v1.5.133 - 27/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-mcp-quickstart.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugin-relevance.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-home.md`
+
+
 ## 🤖 v1.5.132 - 27/08/2026
 
 File Changes:
