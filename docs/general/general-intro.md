@@ -81,7 +81,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="https://platform.claude.com/">
-    Explore and understand the API in your browser with Playground.
+    Explore and understand the API in your browser with playground.
   </Card>
 
   <Card title="API Reference" icon="code" href="../api/api-overview.md">

@@ -1654,11 +1654,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Per-iteration token usage breakdown.
 
-      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
       - Determine which iterations exceeded long context thresholds (>=200k tokens)
-      - Calculate the true context window size from the last iteration
+      - Calculate the context window size from the last `message` entry
       - Understand token accumulation across server-side tool use loops
+
+      A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
       - `beta_message_iteration_usage: object`
 
@@ -2395,11 +2397,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Per-iteration token usage breakdown.
 
-        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
         - Determine which iterations exceeded long context thresholds (>=200k tokens)
-        - Calculate the true context window size from the last iteration
+        - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
+
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
         - `beta_message_iteration_usage: object`
 
@@ -11839,13 +11843,15 @@ ant beta:messages count-tokens \
 
       - `type: "enabled"`
 
-      - `display: optional "summarized" or "omitted"`
+      - `display: optional "summarized" or "omitted" or "updates"`
 
         Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
         - `"summarized"`
 
         - `"omitted"`
+
+        - `"updates"`
 
     - `beta_thinking_config_disabled: object`
 
@@ -11855,13 +11861,15 @@ ant beta:messages count-tokens \
 
       - `type: "adaptive"`
 
-      - `display: optional "summarized" or "omitted"`
+      - `display: optional "summarized" or "omitted" or "updates"`
 
         Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
         - `"summarized"`
 
         - `"omitted"`
+
+        - `"updates"`
 
 ### Beta Fallback Refusal Trigger
 
@@ -12041,13 +12049,15 @@ ant beta:messages count-tokens \
 
         - `type: "enabled"`
 
-        - `display: optional "summarized" or "omitted"`
+        - `display: optional "summarized" or "omitted" or "updates"`
 
           Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
           - `"summarized"`
 
           - `"omitted"`
+
+          - `"updates"`
 
       - `beta_thinking_config_disabled: object`
 
@@ -12057,13 +12067,15 @@ ant beta:messages count-tokens \
 
         - `type: "adaptive"`
 
-        - `display: optional "summarized" or "omitted"`
+        - `display: optional "summarized" or "omitted" or "updates"`
 
           Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
           - `"summarized"`
 
           - `"omitted"`
+
+          - `"updates"`
 
   - `Default: "default"`
 
@@ -12202,11 +12214,13 @@ ant beta:messages count-tokens \
 
   Per-iteration token usage breakdown.
 
-  Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+  Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
   - Determine which iterations exceeded long context thresholds (>=200k tokens)
-  - Calculate the true context window size from the last iteration
+  - Calculate the context window size from the last `message` entry
   - Understand token accumulation across server-side tool use loops
+
+  A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
   - `beta_message_iteration_usage: object`
 
@@ -14498,11 +14512,13 @@ ant beta:messages count-tokens \
 
       Per-iteration token usage breakdown.
 
-      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
       - Determine which iterations exceeded long context thresholds (>=200k tokens)
-      - Calculate the true context window size from the last iteration
+      - Calculate the context window size from the last `message` entry
       - Understand token accumulation across server-side tool use loops
+
+      A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
       - `beta_message_iteration_usage: object`
 
@@ -15055,11 +15071,13 @@ ant beta:messages count-tokens \
 
     Per-iteration token usage breakdown.
 
-    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
     - Determine which iterations exceeded long context thresholds (>=200k tokens)
-    - Calculate the true context window size from the last iteration
+    - Calculate the context window size from the last `message` entry
     - Understand token accumulation across server-side tool use loops
+
+    A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
     - `beta_message_iteration_usage: object`
 
@@ -18912,11 +18930,13 @@ ant beta:messages count-tokens \
 
       Per-iteration token usage breakdown.
 
-      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+      Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
       - Determine which iterations exceeded long context thresholds (>=200k tokens)
-      - Calculate the true context window size from the last iteration
+      - Calculate the context window size from the last `message` entry
       - Understand token accumulation across server-side tool use loops
+
+      A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
       - `beta_message_iteration_usage: object`
 
@@ -20708,11 +20728,13 @@ ant beta:messages count-tokens \
 
         Per-iteration token usage breakdown.
 
-        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
         - Determine which iterations exceeded long context thresholds (>=200k tokens)
-        - Calculate the true context window size from the last iteration
+        - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
+
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
         - `beta_message_iteration_usage: object`
 
@@ -22534,11 +22556,13 @@ ant beta:messages count-tokens \
 
           Per-iteration token usage breakdown.
 
-          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
           - Determine which iterations exceeded long context thresholds (>=200k tokens)
-          - Calculate the true context window size from the last iteration
+          - Calculate the context window size from the last `message` entry
           - Understand token accumulation across server-side tool use loops
+
+          A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
           - `beta_message_iteration_usage: object`
 
@@ -23163,11 +23187,13 @@ ant beta:messages count-tokens \
 
         Per-iteration token usage breakdown.
 
-        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
         - Determine which iterations exceeded long context thresholds (>=200k tokens)
-        - Calculate the true context window size from the last iteration
+        - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
+
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
         - `beta_message_iteration_usage: object`
 
@@ -25743,13 +25769,15 @@ ant beta:messages count-tokens \
 
   - `type: "adaptive"`
 
-  - `display: optional "summarized" or "omitted"`
+  - `display: optional "summarized" or "omitted" or "updates"`
 
     Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
     - `"summarized"`
 
     - `"omitted"`
+
+    - `"updates"`
 
 ### Beta Thinking Config Disabled
 
@@ -25773,13 +25801,15 @@ ant beta:messages count-tokens \
 
   - `type: "enabled"`
 
-  - `display: optional "summarized" or "omitted"`
+  - `display: optional "summarized" or "omitted" or "updates"`
 
     Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
     - `"summarized"`
 
     - `"omitted"`
+
+    - `"updates"`
 
 ### Beta Thinking Config Param
 
@@ -25805,13 +25835,15 @@ ant beta:messages count-tokens \
 
     - `type: "enabled"`
 
-    - `display: optional "summarized" or "omitted"`
+    - `display: optional "summarized" or "omitted" or "updates"`
 
       Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
       - `"summarized"`
 
       - `"omitted"`
+
+      - `"updates"`
 
   - `beta_thinking_config_disabled: object`
 
@@ -25821,13 +25853,15 @@ ant beta:messages count-tokens \
 
     - `type: "adaptive"`
 
-    - `display: optional "summarized" or "omitted"`
+    - `display: optional "summarized" or "omitted" or "updates"`
 
       Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
       - `"summarized"`
 
       - `"omitted"`
+
+      - `"updates"`
 
 ### Beta Thinking Delta
 
@@ -30178,11 +30212,13 @@ ant beta:messages count-tokens \
 
     Per-iteration token usage breakdown.
 
-    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+    Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
     - Determine which iterations exceeded long context thresholds (>=200k tokens)
-    - Calculate the true context window size from the last iteration
+    - Calculate the context window size from the last `message` entry
     - Understand token accumulation across server-side tool use loops
+
+    A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
     - `beta_message_iteration_usage: object`
 
@@ -34608,11 +34644,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Per-iteration token usage breakdown.
 
-            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
             - Determine which iterations exceeded long context thresholds (>=200k tokens)
-            - Calculate the true context window size from the last iteration
+            - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
+
+            A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
             - `beta_message_iteration_usage: object`
 

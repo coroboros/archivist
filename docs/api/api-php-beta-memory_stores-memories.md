@@ -60,7 +60,7 @@ Create a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -177,7 +177,7 @@ List memories
 
     - `string memoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
     - `string path`
 
@@ -293,7 +293,7 @@ Retrieve a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -405,7 +405,7 @@ Update a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -658,7 +658,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -702,7 +702,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
     - `string memoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
     - `string path`
 

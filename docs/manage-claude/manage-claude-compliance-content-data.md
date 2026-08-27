@@ -20,7 +20,7 @@ description: Access chat content, file attachments, and projects for claude.ai o
   **Prerequisite:** None for listing chats organization-wide. To filter the chat list to specific users, you need user IDs from [List organization users](./manage-claude-compliance-org-data.md#list-organization-users). The other endpoints on this page take resource IDs directly.
 </Check>
 
-The endpoints on this page expose Claude Enterprise chat content, file uploads, projects, and project attachments to compliance reviewers. They support eDiscovery (electronic discovery) exports, data loss prevention (DLP) enforcement, and account-deletion responses. Chat, file, and project content is retained for as long as your organization's retention policy allows. Chats that a user has soft-deleted in claude.ai remain visible through the Compliance API with `deleted_at` populated; chats that have been hard-deleted (through the Compliance API itself, or after the organization's retention window expires) are not retrievable.
+The endpoints on this page expose Claude Enterprise chat content, file uploads, projects, and project attachments to compliance reviewers. They support eDiscovery (electronic discovery) exports, data loss prevention (DLP) enforcement, and account-deletion responses. Chat, file, and project content is retained for as long as your organization's retention policy allows. When a user deletes a chat in claude.ai, its message content, attached files, tool-generated files, and artifacts are deleted with it. The Compliance API still lists the chat, with `deleted_at` populated and an empty `name`, and returns its messages without their content. Chats that have been hard-deleted (through the Compliance API itself, or after the organization's retention window expires) are not retrievable.
 
 Both scopes are granted only on Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai; see [Set up the Compliance API](./manage-claude-compliance-api-access.md) to provision one. The `read:compliance_user_data` scope covers retrieval; `delete:compliance_user_data` is required only for the delete endpoints. The chat, file, project, and attachment endpoints are not available to Admin API keys (`sk-ant-admin01-...`); calls authenticated with an Admin API key return [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden).
 
@@ -30,7 +30,7 @@ Endpoints on this page paginate two ways; see [Paginate results](./manage-claude
 
 Use [List chats](../api/api-compliance-apps-chats-list.md) to page through chat metadata, then [Get chat messages](../api/api-compliance-apps-chats-messages-list.md) to fetch the full message content of one chat.
 
-The chat list endpoint defaults to organization-wide scope: leave off `user_ids[]` to include every chat under your parent organization. Add `order_by=updated_at` to sort by last update time. This combination is the recommended way to export chats and keep an export current, because one paginated loop picks up both new and modified chats for every user without enumerating users first. The following request lists chats updated since a given date.
+The chat list endpoint defaults to organization-wide scope: leave off `user_ids[]` to include every chat under your parent organization. Add `order_by=updated_at` to sort by last update time. This combination is the recommended way to export chats and keep an export current, because one paginated loop picks up new chats, modified chats, and chats deleted in claude.ai for every user without enumerating users first. The following request lists chats updated since a given date.
 
 ```bash cURL
 curl --fail-with-body -sS -G \
@@ -68,7 +68,7 @@ curl --fail-with-body -sS -G \
 
 Results sort ascending by the `order_by` field, oldest first, with ties broken by `id`. Pagination uses the standard `first_id`/`last_id`/`has_more` cursor fields described in [Paginate results](./manage-claude-compliance-activity-feed.md#paginate-results). To walk forward toward newer chats, pass the response's `last_id` back as `after_id` on the next request.
 
-That forward walk is also how you keep an export current across runs: persist the final page's `last_id` and resume from it as `after_id` on the next run. Because the list is ordered by `updated_at`, a chat that changes after your saved cursor reappears ahead of it, so each incremental run returns both brand-new chats and older chats that have since been modified. Process results idempotently, keyed by chat `id`, to handle those reappearances.
+That forward walk is also how you keep an export current across runs: persist the final page's `last_id` and resume from it as `after_id` on the next run. Because the list is ordered by `updated_at`, a chat that changes after your saved cursor reappears ahead of it, so each incremental run returns both brand-new chats and older chats that have since been modified or deleted in claude.ai. Process results idempotently, keyed by chat `id`, to handle those reappearances. A chat that comes back with `deleted_at` populated has no content left to fetch, so treat it as deleted rather than updated.
 
 A few constraints apply to these organization-wide queries. Cursors are opaque and bound to the sort key, so an `after_id` issued under one `order_by` value is rejected with a 400 error under the other. Time-filter bounds must match the sort key too: pair `updated_at.*` bounds with `order_by=updated_at`, and `created_at.*` bounds with the default `order_by=created_at`. Backward pagination with `before_id` is not supported, and the `project_ids[]` filter is not available. See [List chats](../api/api-compliance-apps-chats-list.md) for the full filter reference.
 
@@ -125,7 +125,10 @@ The messages endpoint returns the chat's metadata plus a `chat_messages` array s
         {
           "id": "claude_file_01UaT9wBcDfGhJkLmNpQrSv7",
           "filename": "dashboard_mockup_v1.pdf",
-          "mime_type": "application/pdf"
+          "mime_type": "application/pdf",
+          "size_bytes": 482133,
+          "md5": "56367e4d2705cc9c025ad07424e944f0",
+          "created_at": "2026-04-10T08:09:10Z"
         }
       ]
     },
@@ -143,7 +146,9 @@ The messages endpoint returns the chat's metadata plus a `chat_messages` array s
         {
           "id": "claude_gen_file_01TbR8wAcCeFhJkLnPqStUvX",
           "filename": "requirements_summary.csv",
-          "mime_type": "text/csv"
+          "mime_type": "text/csv",
+          "size_bytes": 2048,
+          "md5": "89968669461d95416549937168269d6b"
         }
       ],
       "artifacts": [
@@ -162,7 +167,7 @@ The messages endpoint returns the chat's metadata plus a `chat_messages` array s
 }
 ```
 
-`files`, `generated_files`, and `artifacts` can each be `null` on a given message. `files` are binary uploads (PDFs, images, spreadsheets) the user attached to the message. `generated_files` are binary files the assistant created during the conversation through tool use (for example, PDFs, spreadsheets, or slide decks). `artifacts` are versioned documents (for example, code or markdown) the assistant generated or updated in its response; an artifact can be revised across multiple assistant turns in the same chat, and each revision appears as a new `version_id` under the same artifact `id`. Pass each entry's `id` (or `version_id` for artifacts) to the matching content endpoint in [Retrieve files and artifacts](./manage-claude-compliance-content-data.md#retrieve-files-and-artifacts) to download it.
+`files`, `generated_files`, and `artifacts` can each be `null` on a given message. `files` are the files and text attachments (for example, PDFs, images, spreadsheets, documents, and pasted text) the user attached to the message, as claude.ai stored them. `generated_files` are binary files the assistant created during the conversation through tool use (for example, PDFs, spreadsheets, or slide decks). `artifacts` are versioned documents (for example, code or markdown) the assistant generated or updated in its response; an artifact can be revised across multiple assistant turns in the same chat, and each revision appears as a new `version_id` under the same artifact `id`. Pass each entry's `id` (or `version_id` for artifacts) to the matching content endpoint in [Retrieve files and artifacts](./manage-claude-compliance-content-data.md#retrieve-files-and-artifacts) to download it.
 
 ## Retrieve files and artifacts
 
@@ -172,7 +177,7 @@ Pick the endpoint that matches your ID type and the data you need. The same file
 
 | You have                       | You want                                | Use this endpoint                                                                                                          |
 | ------------------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `claude_file_*` ID             | The file's binary content               | [Download file content](../api/api-compliance-apps-chats-files-download.md)                      |
+| `claude_file_*` ID             | The file's content                      | [Download file content](../api/api-compliance-apps-chats-files-download.md)                      |
 | `claude_file_*` ID             | The file's metadata only                | [Get file metadata](../api/api-compliance-apps-chats-files-retrieve.md)                          |
 | `claude_gen_file_*` ID         | A tool-generated file's binary content  | [Download a Claude-generated file](../api/api-compliance-apps-chats-generated_files-download.md) |
 | `claude_gen_file_*` ID         | A tool-generated file's metadata only   | [Get generated-file metadata](../api/api-compliance-apps-chats-generated_files-retrieve.md)      |
@@ -181,11 +186,13 @@ Pick the endpoint that matches your ID type and the data you need. The same file
 | `claude_proj_doc_*` ID         | A project document's plain-text content | [Get project document content](../api/api-compliance-apps-projects-documents-retrieve.md)        |
 | `claude_proj_doc_*` ID         | A project document's metadata only      | [Get project document metadata](../api/api-compliance-apps-projects-documents-metadata.md)       |
 
-The file content endpoint streams the original upload as a chunked binary response with these headers:
+The file content endpoint streams the content that claude.ai stored for the file as a chunked binary response. That content is not always identical to the file the user uploaded. Images can be served as a processed copy rather than the uploaded bytes. Some documents attached to chats (for example, Word files, PowerPoint files, and some PDFs) are stored as the text claude.ai extracted from them. For these documents, the endpoint returns the extracted text under the original file name, and the original document is not available through the Compliance API. The `size_bytes` and `md5` fields describe the stored content rather than the uploaded file. The file name and `mime_type` can still name the uploaded document's format. Identify a file's format from the returned bytes, not from its name or declared type.
+
+The response carries these headers:
 
 * `Content-Disposition: attachment; filename*=utf-8''<percent-encoded filename>` carries the original upload file name in RFC 5987 extended form. The extended form is used for every file name, not only non-ASCII ones.
-* `Content-Type` carries the upload's MIME type.
-* `Content-MD5` carries the file's MD5 digest, base64-encoded as specified in RFC 1864.
+* `Content-Type` carries the MIME type recorded for the stored content, which for a document stored as extracted text can still name the original document format.
+* `Content-MD5` carries the MD5 digest of the served bytes, base64-encoded as specified in RFC 1864.
 * `Transfer-Encoding: chunked` is always set.
 
 ```bash cURL
@@ -215,7 +222,7 @@ Project results are sorted by creation date ascending. Attachment results are so
 
 A project attachment is one of two distinct shapes, identified by the `type` discriminator on each entry:
 
-Entries with `type` of `project_file` are binary uploads (PDFs, images, spreadsheets) whose IDs start with `claude_file_`; download them with [Download file content](../api/api-compliance-apps-chats-files-download.md). Entries with `type` of `project_doc` are plain-text documents (always `text/plain`) whose IDs start with `claude_proj_doc_`; fetch them with [Get project document content](../api/api-compliance-apps-projects-documents-retrieve.md).
+Entries with `type` of `project_file` are file uploads (PDFs, images, spreadsheets) whose IDs start with `claude_file_`; download them with [Download file content](../api/api-compliance-apps-chats-files-download.md). Entries with `type` of `project_doc` are plain-text documents (always `text/plain`) whose IDs start with `claude_proj_doc_`, including documents such as Word files that claude.ai converts to text when they are added to a project; fetch them with [Get project document content](../api/api-compliance-apps-projects-documents-retrieve.md).
 
 A consumer that walks the attachment list must branch on `type` and call the matching content endpoint for each entry. The following request lists one page of attachments; paginate by passing `next_page` back as the `page` parameter until `has_more` is `false`.
 
@@ -235,6 +242,8 @@ curl --fail-with-body -sS -G \
       "created_at": "2026-04-10T08:09:10Z",
       "filename": "dashboard_mockup_v1.pdf",
       "mime_type": "application/pdf",
+      "size_bytes": 482133,
+      "md5": "56367e4d2705cc9c025ad07424e944f0",
       "type": "project_file"
     },
     {
@@ -256,7 +265,7 @@ curl --fail-with-body -sS -G \
   Every successful delete is permanent and immediate. There is no recovery window.
 </Warning>
 
-The Compliance API exposes hard-delete endpoints for chats, files, project documents, and entire projects. A hard-deleted chat cannot be restored, and it stops appearing in list responses afterward (whereas a chat soft-deleted from claude.ai still appears with `deleted_at` populated).
+The Compliance API exposes hard-delete endpoints for chats, files, project documents, and entire projects. A hard-deleted chat cannot be restored, and it stops appearing in list responses afterward.
 
 * [Delete chat](../api/api-compliance-apps-chats-delete.md): also removes the chat's messages and any files attached to those messages.
 * [Delete file](../api/api-compliance-apps-chats-files-delete.md): handles both chat files and project files.

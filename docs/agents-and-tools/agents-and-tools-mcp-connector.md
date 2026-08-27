@@ -14,8 +14,7 @@ description: Connect to remote MCP servers directly from the Messages API withou
 - Status: Beta
 - [Beta header](../api/api-beta-headers.md): `mcp-client-2025-11-20`
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): not eligible
-- Platforms: Claude API (beta), Claude Platform on AWS (beta), Microsoft Foundry (beta) [1]; not available on Amazon Bedrock, Google Cloud
-1. On [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), the MCP connector requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
+- Platforms: Claude API (beta), Claude Platform on AWS (beta), Microsoft Foundry (beta); not available on Amazon Bedrock, Google Cloud
 
 Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.
 

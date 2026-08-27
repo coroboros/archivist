@@ -631,7 +631,7 @@ Create a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -748,7 +748,7 @@ List memories
 
     - `string memoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
     - `string path`
 
@@ -864,7 +864,7 @@ Retrieve a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -976,7 +976,7 @@ Update a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `string path`
 
@@ -1165,7 +1165,7 @@ List memory versions
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `string memoryStoreID`
 
@@ -1299,7 +1299,7 @@ Retrieve a memory version
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `string memoryStoreID`
 
@@ -1420,7 +1420,7 @@ Redact a memory version
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `string memoryStoreID`
 

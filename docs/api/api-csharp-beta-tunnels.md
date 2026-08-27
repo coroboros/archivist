@@ -98,6 +98,20 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaTunnel:`
@@ -242,6 +256,20 @@ Fetches a tunnel by ID.
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 
@@ -397,6 +425,20 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 
@@ -558,6 +600,20 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaTunnel:`
@@ -703,6 +759,20 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaTunnelToken:`
@@ -834,6 +904,20 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 
@@ -1019,6 +1103,20 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 #### Returns
 
 - `class BetaTunnelCertificate:`
@@ -1063,7 +1161,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 CertificateCreateParams parameters = new()
 {
     TunnelID = "tunnel_id",
-    CaCertificatePem = "ca_certificate_pem",
+    CACertificatePem = "ca_certificate_pem",
 };
 
 var betaTunnelCertificate = await client.Beta.Tunnels.Certificates.Create(parameters);
@@ -1178,6 +1276,20 @@ Fetches a tunnel certificate by ID.
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 #### Returns
 
@@ -1349,6 +1461,20 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 #### Returns
 
 - `class CertificateListPageResponse:`
@@ -1519,6 +1645,20 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 #### Returns
 

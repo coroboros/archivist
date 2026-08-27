@@ -268,6 +268,20 @@ Create Credential
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -566,6 +580,20 @@ List Credentials
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class CredentialListPageResponse:`
@@ -862,6 +890,20 @@ Get Credential
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 
@@ -1278,6 +1320,20 @@ Update Credential
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -1561,6 +1617,20 @@ Delete Credential
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -1687,6 +1757,20 @@ Archive Credential
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 
@@ -1970,6 +2054,20 @@ Validate Credential
     - `AgentMemory2026_07_22`
 
     - `MidConversationToolChanges2026_07_01`
+
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
 
 ### Returns
 

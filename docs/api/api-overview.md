@@ -61,7 +61,7 @@ When accessing Claude through a [cloud platform](./api-overview.md#claude-api-vs
 
 ### Getting API keys
 
-The API is made available through the web [Console](https://platform.claude.com/). You can use [Playground](https://platform.claude.com/playground) to try out the API in the browser and then generate API keys in [Account Settings](https://platform.claude.com/settings/keys). You choose each key's [expiration](../manage-claude/manage-claude-authentication.md#key-expiration) when you create it. Use [workspaces](https://platform.claude.com/settings/workspaces) to segment your API keys and [control spend](./api-rate-limits.md) by use case.
+The API is made available through the web [Console](https://platform.claude.com/). You can use [playground](https://platform.claude.com/playground) to try out the API in the browser and then generate API keys in [Account Settings](https://platform.claude.com/settings/keys). You choose each key's [expiration](../manage-claude/manage-claude-authentication.md#key-expiration) when you create it. Use [workspaces](https://platform.claude.com/settings/workspaces) to segment your API keys and [control spend](./api-rate-limits.md) by use case.
 
 ## Client SDKs
 

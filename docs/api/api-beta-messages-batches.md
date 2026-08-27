@@ -24,7 +24,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -93,6 +93,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -1794,13 +1808,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: "enabled"`
 
-            - `display: optional "summarized" or "omitted" or null`
+            - `display: optional "summarized" or "omitted" or "updates" or null`
 
               Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
               - `"summarized"`
 
               - `"omitted"`
+
+              - `"updates"`
 
           - `BetaThinkingConfigDisabled object`
 
@@ -1810,13 +1826,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: "adaptive"`
 
-            - `display: optional "summarized" or "omitted" or null`
+            - `display: optional "summarized" or "omitted" or "updates" or null`
 
               Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
               - `"summarized"`
 
               - `"omitted"`
+
+              - `"updates"`
 
       - `Default = "default"`
 
@@ -4093,7 +4111,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4162,6 +4180,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -4339,7 +4371,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4408,6 +4440,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -4594,7 +4640,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4663,6 +4709,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -4831,7 +4891,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4900,6 +4960,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -4960,7 +5034,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -5029,6 +5103,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"agent-memory-2026-07-22"`
 
     - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -6465,11 +6553,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Per-iteration token usage breakdown.
 
-            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
             - Determine which iterations exceeded long context thresholds (>=200k tokens)
-            - Calculate the true context window size from the last iteration
+            - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
+
+            A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
             - `BetaMessageIterationUsage object`
 
@@ -8526,11 +8616,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             Per-iteration token usage breakdown.
 
-            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+            Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
             - Determine which iterations exceeded long context thresholds (>=200k tokens)
-            - Calculate the true context window size from the last iteration
+            - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
+
+            A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
             - `BetaMessageIterationUsage object`
 
@@ -10358,11 +10450,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           Per-iteration token usage breakdown.
 
-          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+          Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
           - Determine which iterations exceeded long context thresholds (>=200k tokens)
-          - Calculate the true context window size from the last iteration
+          - Calculate the context window size from the last `message` entry
           - Understand token accumulation across server-side tool use loops
+
+          A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
           - `BetaMessageIterationUsage object`
 
@@ -12142,11 +12236,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         Per-iteration token usage breakdown.
 
-        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics. This allows you to:
+        Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
         - Determine which iterations exceeded long context thresholds (>=200k tokens)
-        - Calculate the true context window size from the last iteration
+        - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
+
+        A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
         - `BetaMessageIterationUsage object`
 

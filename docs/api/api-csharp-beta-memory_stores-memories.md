@@ -108,6 +108,20 @@ Create a memory
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -140,7 +154,7 @@ Create a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `required string Path`
 
@@ -302,6 +316,20 @@ List memories
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class MemoryListPageResponse:`
@@ -342,7 +370,7 @@ List memories
 
       - `required string MemoryVersionID`
 
-        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
       - `required string Path`
 
@@ -504,6 +532,20 @@ Retrieve a memory
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -536,7 +578,7 @@ Retrieve a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `required string Path`
 
@@ -695,6 +737,20 @@ Update a memory
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -727,7 +783,7 @@ Update a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `required string Path`
 
@@ -872,11 +928,25 @@ Delete a memory
 
     - `MidConversationToolChanges2026_07_01`
 
+    - `Compact2026_01_12`
+
+    - `ComputerUse2025_11_24`
+
+    - `McpTunnels2026_06_22`
+
+    - `StructuredOutputs2025_11_13`
+
+    - `TaskBudgets2026_03_13`
+
+    - `ThinkingDisplayUpdates2026_08_18`
+
+    - `CEUserManagement2026_07_13`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemory:`
 
-  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `required string ID`
 
@@ -933,7 +1003,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
 - `class BetaManagedAgentsDeletedMemory:`
 
-  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `required string ID`
 
@@ -1053,7 +1123,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `required string Path`
 
@@ -1107,7 +1177,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     - `required string MemoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
     - `required string Path`
 

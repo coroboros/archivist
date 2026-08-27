@@ -70,7 +70,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `path: string`
 
@@ -197,7 +197,7 @@ List memories
 
       - `memory_version_id: string`
 
-        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
       - `path: string`
 
@@ -317,7 +317,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `path: string`
 
@@ -433,7 +433,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `path: string`
 
@@ -507,7 +507,7 @@ Delete a memory
 
 - `beta_managed_agents_deleted_memory: object`
 
-  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `id: string`
 
@@ -559,7 +559,7 @@ ant beta:memory-stores:memories delete \
 
 - `beta_managed_agents_deleted_memory: object`
 
-  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
+  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `id: string`
 
@@ -679,7 +679,7 @@ ant beta:memory-stores:memories delete \
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `path: string`
 
@@ -733,7 +733,7 @@ ant beta:memory-stores:memories delete \
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
     - `path: string`
 

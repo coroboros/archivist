@@ -66,7 +66,7 @@ Create a new environment with the specified configuration.
 
         - `allow_package_managers: bool`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
         - `allowed_hosts: Array[String]`
 
@@ -77,6 +77,8 @@ Create a new environment with the specified configuration.
       Specify packages (and optionally their versions) available in this environment.
 
       When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+      Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
       - `apt: Array[String]`
 
@@ -138,7 +140,7 @@ Create a new environment with the specified configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -207,6 +209,20 @@ Create a new environment with the specified configuration.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -429,7 +445,7 @@ List environments with pagination support.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -498,6 +514,20 @@ List environments with pagination support.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -713,7 +743,7 @@ Retrieve a specific environment by ID.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -782,6 +812,20 @@ Retrieve a specific environment by ID.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -1030,7 +1074,7 @@ Update an existing environment's configuration.
 
         - `allow_package_managers: bool`
 
-          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+          Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
         - `allowed_hosts: Array[String]`
 
@@ -1041,6 +1085,8 @@ Update an existing environment's configuration.
       Specify packages (and optionally their versions) available in this environment.
 
       When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+      Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
       - `apt: Array[String]`
 
@@ -1108,7 +1154,7 @@ Update an existing environment's configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1177,6 +1223,20 @@ Update an existing environment's configuration.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -1387,7 +1447,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1456,6 +1516,20 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -1510,7 +1584,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1579,6 +1653,20 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 ### Returns
 
@@ -1889,7 +1977,7 @@ puts(beta_environment)
 
       - `allow_package_managers: bool`
 
-        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+        Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
       - `allowed_hosts: Array[String]`
 
@@ -1900,6 +1988,8 @@ puts(beta_environment)
     Specify packages (and optionally their versions) available in this environment.
 
     When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+    Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
     - `apt: Array[String]`
 
@@ -2114,7 +2204,7 @@ puts(beta_environment)
 
   - `allow_package_managers: bool`
 
-    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+    Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
   - `allowed_hosts: Array[String]`
 
@@ -2161,6 +2251,8 @@ puts(beta_environment)
   Specify packages (and optionally their versions) available in this environment.
 
   When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
+
+  Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
   - `apt: Array[String]`
 
@@ -2244,7 +2336,7 @@ Retrieve detailed information about a specific work item.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2313,6 +2405,20 @@ Retrieve detailed information about a specific work item.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -2463,7 +2569,7 @@ Long poll for work items in the queue.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2532,6 +2638,20 @@ Long poll for work items in the queue.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 - `anthropic_worker_id: String`
 
@@ -2676,7 +2796,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2745,6 +2865,20 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -2893,7 +3027,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2962,6 +3096,20 @@ Record a heartbeat for a work item to maintain the lease.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -3049,7 +3197,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3118,6 +3266,20 @@ Stop a work item, initiating graceful or forced shutdown.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -3266,7 +3428,7 @@ List work items in an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3335,6 +3497,20 @@ List work items in an environment.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -3484,7 +3660,7 @@ Update work item metadata with merge semantics.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3553,6 +3729,20 @@ Update work item metadata with merge semantics.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 
@@ -3693,7 +3883,7 @@ Get statistics about the work queue for an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 38 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3762,6 +3952,20 @@ Get statistics about the work queue for an environment.
     - `:"agent-memory-2026-07-22"`
 
     - `:"mid-conversation-tool-changes-2026-07-01"`
+
+    - `:"compact-2026-01-12"`
+
+    - `:"computer-use-2025-11-24"`
+
+    - `:"mcp-tunnels-2026-06-22"`
+
+    - `:"structured-outputs-2025-11-13"`
+
+    - `:"task-budgets-2026-03-13"`
+
+    - `:"thinking-display-updates-2026-08-18"`
+
+    - `:"ce-user-management-2026-07-13"`
 
 #### Returns
 

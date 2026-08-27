@@ -655,12 +655,11 @@ Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6
 
 The following features are available for deployments hosted on Anthropic but are not supported for deployments hosted on Azure:
 
-* Structured outputs
-* Server-side tools (web search, web fetch, code execution, and tool search)
-* MCP connector
-* Agent Skills
-* Programmatic tool calling
-* Files API
+* [Code execution](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md)
+* [Web search](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md) and [web fetch](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md) tool versions later than `web_search_20250305` and `web_fetch_20250910`. Deployments hosted on Azure support only these basic versions, so dynamic filtering, response inclusion, and cache bypass are not available.
+* [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md)
+* [Programmatic tool calling](../agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md)
+* [Files API](./build-with-claude-files.md)
 
 Requests that use these features against a deployment hosted on Azure return a `400 Bad Request` error by design. Claude Code detects deployments hosted on Azure and automatically adapts its feature set.
 

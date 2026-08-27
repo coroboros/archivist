@@ -69,7 +69,7 @@ Dynamic filtering runs web search from inside [code execution](./agents-and-tool
 To call web search directly, without dynamic filtering, set `allowed_callers: ["direct"]`. Models that don't support programmatic tool calling require this setting. Without it, the API returns a 400 error that tells you to set it.
 
 <Note>
-  The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). On Microsoft Foundry, web search requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
+  The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). On Microsoft Foundry, deployments [hosted on Azure](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure) support only the basic web search tool (`web_search_20250305`, without dynamic filtering). Deployments hosted on Anthropic support all versions. On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 </Note>
 
 The following examples use `web_search_20260318`:
