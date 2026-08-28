@@ -8,7 +8,7 @@ generated: true
 
 **GET** `/v1/organizations/invites/{invite_id}`
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Retrieve an invite by ID.
 
 ## Path parameters
 
@@ -48,7 +48,7 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
   - `rbac_group_ids: array of string`
 
-    RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+    RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
   - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 

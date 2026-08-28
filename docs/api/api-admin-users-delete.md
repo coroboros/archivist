@@ -8,7 +8,7 @@ generated: true
 
 **DELETE** `/v1/organizations/users/{user_id}`
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Remove a member from the organization.
 
 ## Path parameters
 

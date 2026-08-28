@@ -70,7 +70,7 @@ foreach (var block in message.Content)
 }
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md).
+For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md). If your API key is a [personal or service account key](../manage-claude/manage-claude-authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../manage-claude/manage-claude-authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ## Client configuration
 

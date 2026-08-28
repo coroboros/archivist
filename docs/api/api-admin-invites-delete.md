@@ -8,7 +8,7 @@ generated: true
 
 **DELETE** `/v1/organizations/invites/{invite_id}`
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
+Delete a pending invite.
 
 ## Path parameters
 

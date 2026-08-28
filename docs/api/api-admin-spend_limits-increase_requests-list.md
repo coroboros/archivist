@@ -51,17 +51,27 @@ Requests whose requester is no longer a member are excluded.
 
     - `deleted: boolean`
 
+      True only when the underlying account has been deleted.
+
       default: false
 
     - `email_address: string or null`
 
+      The user's email address. Null when the account is unavailable or has been deleted.
+
     - `name: string or null`
 
+      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
     - `type: "user_actor"`
+
+      Actor type. Always `user_actor`.
 
       default: user_actor
 
     - `user_id: string`
+
+      Tagged ID of the user.
 
   - `created_at: string`
 
@@ -93,17 +103,27 @@ Requests whose requester is no longer a member are excluded.
 
       - `deleted: boolean`
 
+        True only when the underlying account has been deleted.
+
         default: false
 
       - `email_address: string or null`
 
+        The user's email address. Null when the account is unavailable or has been deleted.
+
       - `name: string or null`
 
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
       - `type: "user_actor"`
+
+        Actor type. Always `user_actor`.
 
         default: user_actor
 
       - `user_id: string`
+
+        Tagged ID of the user.
 
     - `ScopedAPIKeyActor object`
 
@@ -117,7 +137,7 @@ Requests whose requester is no longer a member are excluded.
 
   - `spend_summary: SpendSummary or null`
 
-    Per-member effective-limit report row (GET /spend_limits/effective).
+    Per-member effective-limit report row (`GET /spend_limits/effective`).
 
     - `actor: object`
 
@@ -127,17 +147,27 @@ Requests whose requester is no longer a member are excluded.
 
       - `deleted: boolean`
 
+        True only when the underlying account has been deleted.
+
         default: false
 
       - `email_address: string or null`
 
+        The user's email address. Null when the account is unavailable or has been deleted.
+
       - `name: string or null`
 
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
       - `type: "user_actor"`
+
+        Actor type. Always `user_actor`.
 
         default: user_actor
 
       - `user_id: string`
+
+        Tagged ID of the user.
 
     - `amount: string or null`
 
@@ -148,6 +178,8 @@ Requests whose requester is no longer a member are excluded.
       ISO 4217 code of the organization's billing currency; the unit for `amount` and `period_to_date_spend`.
 
     - `period: "daily" or "monthly" or "weekly"`
+
+      Period this row's effective limit and spend are reported for.
 
       - `"daily"`
 
@@ -161,21 +193,35 @@ Requests whose requester is no longer a member are excluded.
 
     - `scope: object`
 
+      Scope selecting a single member of the organization.
+
       - `type: "user"`
+
+        Scope type. Always `user` for this scope.
 
         default: user
 
       - `user_id: string`
 
+        Tagged ID of the member the spend limit applies to.
+
     - `source: object or object or object or 2 more`
+
+      Scope selecting a single member of the organization.
 
       - `User object`
 
+        Scope selecting a single member of the organization.
+
         - `type: "user"`
+
+          Scope type. Always `user` for this scope.
 
           default: user
 
         - `user_id: string`
+
+          Tagged ID of the member the spend limit applies to.
 
       - `SeatTier object`
 
@@ -243,7 +289,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "created_at": "2019-12-27T18:11:19.117Z",
       "period": "monthly",
@@ -253,7 +299,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_id"
+        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
       },
       "spend_summary": {
         "actor": {
@@ -261,7 +307,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
           "email_address": "email_address",
           "name": "name",
           "type": "user_actor",
-          "user_id": "user_id"
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
         },
         "amount": "50000",
         "currency": "USD",
@@ -269,11 +315,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
         "period_to_date_spend": "12050.5",
         "scope": {
           "type": "user",
-          "user_id": "user_id"
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
         },
         "source": {
           "type": "user",
-          "user_id": "user_id"
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
         },
         "spend_limit_id": "spend_limit_id"
       },

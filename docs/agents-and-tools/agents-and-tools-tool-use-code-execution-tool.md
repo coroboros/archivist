@@ -1119,7 +1119,7 @@ The code execution tool runs in a secure, containerized environment designed spe
 * **External connections:** No outbound network requests permitted
 * **Sandbox isolation:** Full isolation from host system and other containers
 * **File access:** Limited to workspace directory only
-* **Workspace scoping:** Like the [Files API](../build-with-claude/build-with-claude-files.md), containers are scoped to the workspace of the API key
+* **Workspace scoping:** Like the [Files API](../build-with-claude/build-with-claude-files.md), containers are scoped to the request's workspace
 * **Expiration:** Containers expire 30 days after creation
 
 ### Pre-installed libraries
