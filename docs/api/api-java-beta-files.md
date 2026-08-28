@@ -110,6 +110,12 @@ Upload File
 
     format: binary
 
+  - `Optional<Long> expiresInSeconds`
+
+    Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+
+    minimum: 3600, maximum: 7776000
+
 ### Returns
 
 - `class BetaFileMetadata:`
@@ -153,6 +159,12 @@ Upload File
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
 
   - `Optional<BetaFileScope> scope`
 
@@ -202,6 +214,7 @@ public final class Main {
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -221,13 +234,9 @@ List Files
 
 - `FileListParams params`
 
-  - `Optional<String> afterId`
+  - `Optional<List<String>> ids`
 
-    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
-
-  - `Optional<String> beforeId`
-
-    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
   - `Optional<Long> limit`
 
@@ -236,6 +245,10 @@ List Files
     Defaults to `20`. Ranges from `1` to `1000`.
 
     maximum: 1000, minimum: 1
+
+  - `Optional<String> page`
+
+    Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
   - `Optional<String> scopeId`
 
@@ -371,6 +384,12 @@ List Files
 
     Whether the file can be downloaded.
 
+  - `Optional<LocalDateTime> expiresAt`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
   - `Optional<BetaFileScope> scope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
@@ -417,15 +436,14 @@ public final class Main {
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 
@@ -698,6 +716,12 @@ Get File Metadata
 
     Whether the file can be downloaded.
 
+  - `Optional<LocalDateTime> expiresAt`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
   - `Optional<BetaFileScope> scope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
@@ -742,6 +766,7 @@ public final class Main {
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -954,6 +979,12 @@ public final class Main {
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
+
+  - `Optional<LocalDateTime> expiresAt`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
 
   - `Optional<BetaFileScope> scope`
 

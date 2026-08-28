@@ -1412,7 +1412,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 4096,
           "messages": [
             {
@@ -1746,7 +1746,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -2033,7 +2033,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -2385,7 +2385,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {

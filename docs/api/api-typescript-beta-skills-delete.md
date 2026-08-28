@@ -6,7 +6,7 @@ generated: true
 ---
 # Delete Skill
 
-`client.beta.skills.delete(skillID, params?, options?): SkillDeleteResponse`
+`client.beta.skills.delete(skillID, params?, options?): BetaDeletedSkill`
 
 **DELETE** `/v1/skills/{skill_id}`
 
@@ -114,7 +114,7 @@ Delete Skill
 
 ## Returns
 
-- `SkillDeleteResponse`
+- `BetaDeletedSkill`
 
   - `id: string`
 
@@ -122,7 +122,7 @@ Delete Skill
 
     The format and length of IDs may change over time.
 
-  - `type: string`
+  - `type: "skill_deleted"`
 
     Deleted object type.
 
@@ -139,9 +139,9 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const skill = await client.beta.skills.delete("skill_id");
+const betaDeletedSkill = await client.beta.skills.delete("skill_id");
 
-console.log(skill.id);
+console.log(betaDeletedSkill.id);
 ```
 
 ### Response (200)
@@ -149,6 +149,6 @@ console.log(skill.id);
 ```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```

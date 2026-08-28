@@ -156,7 +156,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             format: date-time
 
-          - `Skills []BetaSkill`
+          - `Skills []BetaContainerSkill`
 
             Skills loaded in the container
 
@@ -166,13 +166,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               maxLength: 64, minLength: 1
 
-            - `Type BetaSkillType`
+            - `Type BetaContainerSkillType`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-              - `const BetaSkillTypeAnthropic BetaSkillType = "anthropic"`
+              - `const BetaContainerSkillTypeAnthropic BetaContainerSkillType = "anthropic"`
 
-              - `const BetaSkillTypeCustom BetaSkillType = "custom"`
+              - `const BetaContainerSkillTypeCustom BetaContainerSkillType = "custom"`
 
             - `Version string`
 

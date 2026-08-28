@@ -3953,7 +3953,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       format: date-time
 
-    - `skills: Array<BetaSkill> | null`
+    - `skills: Array<BetaContainerSkill> | null`
 
       Skills loaded in the container
 
@@ -4930,6 +4930,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The policy category that triggered a refusal.
 
+          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
           - `"cyber"`
 
             The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -5090,6 +5096,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
+
+      - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+      - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+      - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+      - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+      - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `"cyber"`
 
@@ -14197,7 +14209,7 @@ console.log(betaMessageTokensCount.context_management);
 
     format: date-time
 
-  - `skills: Array<BetaSkill> | null`
+  - `skills: Array<BetaContainerSkill> | null`
 
     Skills loaded in the container
 
@@ -14256,6 +14268,32 @@ console.log(betaMessageTokensCount.context_management);
       Skill version or 'latest' for most recent version
 
       maxLength: 64, minLength: 1
+
+### Beta Container Skill
+
+- `BetaContainerSkill`
+
+  A skill that was loaded in a container (response model).
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
+
+  - `type: "anthropic" | "custom"`
+
+    Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+    - `"anthropic"`
+
+    - `"custom"`
+
+  - `version: string`
+
+    The resolved version: a skill version ID for custom skills.
+
+    maxLength: 64, minLength: 1
 
 ### Beta Container Upload Block
 
@@ -15230,6 +15268,12 @@ console.log(betaMessageTokensCount.context_management);
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
         The policy category that triggered a refusal.
+
+        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `"cyber"`
 
@@ -17412,6 +17456,12 @@ console.log(betaMessageTokensCount.context_management);
 
       The policy category that triggered a refusal.
 
+      - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+      - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+      - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+      - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+      - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
       - `"cyber"`
 
         The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -18174,6 +18224,12 @@ console.log(betaMessageTokensCount.context_management);
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
     The policy category that triggered a refusal.
+
+    - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+    - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+    - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+    - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+    - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `"cyber"`
 
@@ -19387,7 +19443,7 @@ console.log(betaMessageTokensCount.context_management);
 
       format: date-time
 
-    - `skills: Array<BetaSkill> | null`
+    - `skills: Array<BetaContainerSkill> | null`
 
       Skills loaded in the container
 
@@ -20364,6 +20420,12 @@ console.log(betaMessageTokensCount.context_management);
 
           The policy category that triggered a refusal.
 
+          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
           - `"cyber"`
 
             The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -20524,6 +20586,12 @@ console.log(betaMessageTokensCount.context_management);
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
+
+      - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+      - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+      - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+      - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+      - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `"cyber"`
 
@@ -24278,6 +24346,12 @@ console.log(betaMessageTokensCount.context_management);
 
           The policy category that triggered a refusal.
 
+          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
           - `"cyber"`
 
             The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -24390,7 +24464,7 @@ console.log(betaMessageTokensCount.context_management);
 
         format: date-time
 
-      - `skills: Array<BetaSkill> | null`
+      - `skills: Array<BetaContainerSkill> | null`
 
         Skills loaded in the container
 
@@ -24421,6 +24495,12 @@ console.log(betaMessageTokensCount.context_management);
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
         The policy category that triggered a refusal.
+
+        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `"cyber"`
 
@@ -24958,7 +25038,7 @@ console.log(betaMessageTokensCount.context_management);
 
         format: date-time
 
-      - `skills: Array<BetaSkill> | null`
+      - `skills: Array<BetaContainerSkill> | null`
 
         Skills loaded in the container
 
@@ -25935,6 +26015,12 @@ console.log(betaMessageTokensCount.context_management);
 
             The policy category that triggered a refusal.
 
+            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
             - `"cyber"`
 
               The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -26095,6 +26181,12 @@ console.log(betaMessageTokensCount.context_management);
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
         The policy category that triggered a refusal.
+
+        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `"cyber"`
 
@@ -26632,7 +26724,7 @@ console.log(betaMessageTokensCount.context_management);
 
           format: date-time
 
-        - `skills: Array<BetaSkill> | null`
+        - `skills: Array<BetaContainerSkill> | null`
 
           Skills loaded in the container
 
@@ -27609,6 +27701,12 @@ console.log(betaMessageTokensCount.context_management);
 
               The policy category that triggered a refusal.
 
+              - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+              - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+              - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+              - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+              - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
               - `"cyber"`
 
                 The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -27769,6 +27867,12 @@ console.log(betaMessageTokensCount.context_management);
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
+
+          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `"cyber"`
 
@@ -28552,6 +28656,12 @@ console.log(betaMessageTokensCount.context_management);
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
     The policy category that triggered a refusal.
+
+    - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+    - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+    - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+    - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+    - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `"cyber"`
 
@@ -29597,32 +29707,6 @@ console.log(betaMessageTokensCount.context_management);
   - `type: "signature_delta"`
 
     default: signature_delta
-
-### Beta Skill
-
-- `BetaSkill`
-
-  A skill that was loaded in a container (response model).
-
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
-
-  - `type: "anthropic" | "custom"`
-
-    Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-
-    - `"anthropic"`
-
-    - `"custom"`
-
-  - `version: string`
-
-    The resolved version: a skill version ID for custom skills.
-
-    maxLength: 64, minLength: 1
 
 ### Beta Skill Params
 
@@ -41856,7 +41940,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             format: date-time
 
-          - `skills: Array<BetaSkill> | null`
+          - `skills: Array<BetaContainerSkill> | null`
 
             Skills loaded in the container
 
@@ -42833,6 +42917,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The policy category that triggered a refusal.
 
+                - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+                - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+                - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+                - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+                - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+
                 - `"cyber"`
 
                   The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
@@ -42993,6 +43083,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
             The policy category that triggered a refusal.
+
+            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
+            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
+            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `"cyber"`
 

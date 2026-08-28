@@ -5160,7 +5160,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             format: date-time
 
-          - `skills: array of BetaSkill or null`
+          - `skills: array of BetaContainerSkill or null`
 
             Skills loaded in the container
 
@@ -7223,7 +7223,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             format: date-time
 
-          - `skills: array of BetaSkill or null`
+          - `skills: array of BetaContainerSkill or null`
 
             Skills loaded in the container
 
@@ -9057,7 +9057,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           format: date-time
 
-        - `skills: array of BetaSkill or null`
+        - `skills: array of BetaContainerSkill or null`
 
           Skills loaded in the container
 
@@ -10843,7 +10843,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         format: date-time
 
-      - `skills: array of BetaSkill or null`
+      - `skills: array of BetaContainerSkill or null`
 
         Skills loaded in the container
 

@@ -208,6 +208,7 @@ Match the message you see to a section below.
 | `Claude Code exited after an unrecoverable interface error (...)`                                                                                                                             | [Configuration warnings](#exited-after-an-unrecoverable-interface-error)                                                      |
 | `Agent descriptions are over the 15.0k-token limit`                                                                                                                                           | [Configuration warnings](#agent-descriptions-are-over-the-15000-token-limit)                                                  |
 | `Ignoring N permissions.allow entries from ... this workspace has not been trusted`                                                                                                           | [Configuration warnings](#workspace-has-not-been-trusted)                                                                     |
+| `Remote managed settings failed to load (<cause>)`                                                                                                                                            | [Configuration warnings](#remote-managed-settings-failed-to-load)                                                             |
 | `"crossSessionInbound" must be one of "accept", "hold", "refuse"`                                                                                                                             | [Configuration warnings](#crosssessioninbound-must-be-one-of-accept-hold-refuse)                                              |
 | `headersHelper not run — this workspace has no persisted trust`                                                                                                                               | [Configuration warnings](#headershelper-not-run)                                                                              |
 | `... is not matched by file permission checks`                                                                                                                                                | [Configuration warnings](#is-not-matched-by-file-permission-checks)                                                           |
@@ -2772,6 +2773,7 @@ Error: Claude Code process exited with code 1
 **What to do:**
 
 * In VS Code, follow the **View output logs** link shown with the error to see the underlying failure
+* In an Agent SDK application, catch the error around your message loop. The entries under [CLI process exit](/docs/en/agent-sdk/troubleshooting#cli-process-exit) cover what your code receives in each SDK language.
 * Run `claude` in a terminal in the same project. The failure usually reproduces there with its real error message, which you can then look up on this page.
 * Run `claude doctor` in a terminal to check the installation and configuration
 
@@ -2947,6 +2949,22 @@ Ignoring 2 permissions.allow entries from .claude/settings.local.json: this work
 * Run `claude` in the directory and accept the trust dialog. [Project allow rules and workspace trust](/docs/en/permissions#project-allow-rules-and-workspace-trust) says which folder that acceptance covers.
 * In [non-interactive mode](/docs/en/headless) with `-p` no dialog is shown. Set the `hasTrustDialogAccepted` entry in `~/.claude.json` using the exact `projects` key the message prints.
 * If the message names `.claude/settings.local.json` and you started Claude Code outside a git repository or in your home directory, update to v2.1.200 or later. Versions 2.1.196 through 2.1.199 treated your own `.claude/settings.local.json` as repository-supplied in those workspaces. On v2.1.207 and later, updating isn't enough outside a git repository if you haven't trusted the folder: determining that a folder isn't inside a repository runs git, and Claude Code runs that check only after you accept the trust dialog, so use the first step. Your home directory and any other [configuration home](/docs/en/permissions#project-allow-rules-and-workspace-trust) are exempt and don't wait for the dialog. See [Project allow rules and workspace trust](/docs/en/permissions#project-allow-rules-and-workspace-trust).
+
+<h3 id="remote-managed-settings-failed-to-load">
+  Remote managed settings failed to load
+</h3>
+
+Your session is eligible for [server-managed settings](/docs/en/server-managed-settings), but Claude Code couldn't fetch them, so it shows this warning in interactive sessions. The parenthesized cause names what failed, such as `network error`, `request timed out`, or `authentication rejected (401)`, and the rest of the line says which policy the session runs on:
+
+* **Settings cached from an earlier successful fetch**: Claude Code runs the session on that cached policy, except the [withheld environment variables](/docs/en/server-managed-settings#fetch-and-caching-behavior), and the line reads `using cached policy`.
+* **No cache**: Claude Code runs the session without server-managed settings, and the line reads `no remote policy applied`.
+
+**What to do:**
+
+* Act on the cause the message names: for a network cause, check that this machine can reach `api.anthropic.com`; for an authentication cause, check your sign-in with `/status`
+* Run `/status` or `claude doctor` for the full diagnostic
+
+Before v2.1.248, Claude Code reported a failed settings fetch only in the debug log.
 
 ### headersHelper not run
 

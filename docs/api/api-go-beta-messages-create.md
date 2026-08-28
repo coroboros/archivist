@@ -3643,7 +3643,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       format: date-time
 
-    - `Skills []BetaSkill`
+    - `Skills []BetaContainerSkill`
 
       Skills loaded in the container
 
@@ -3653,13 +3653,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         maxLength: 64, minLength: 1
 
-      - `Type BetaSkillType`
+      - `Type BetaContainerSkillType`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-        - `const BetaSkillTypeAnthropic BetaSkillType = "anthropic"`
+        - `const BetaContainerSkillTypeAnthropic BetaContainerSkillType = "anthropic"`
 
-        - `const BetaSkillTypeCustom BetaSkillType = "custom"`
+        - `const BetaContainerSkillTypeCustom BetaContainerSkillType = "custom"`
 
       - `Version string`
 

@@ -22,6 +22,12 @@ Upload File
 
   format: binary
 
+- `expires_in_seconds: Integer`
+
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+
+  minimum: 3600, maximum: 7776000
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
@@ -156,6 +162,12 @@ Upload File
 
     Whether the file can be downloaded.
 
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
   - `scope: BetaFileScope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
@@ -191,6 +203,7 @@ puts(beta_file_metadata)
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -200,7 +213,7 @@ puts(beta_file_metadata)
 
 ## List Files
 
-`beta.files.list(**kwargs) -> Page<BetaFileMetadata>`
+`beta.files.list(**kwargs) -> PageCursor<BetaFileMetadata>`
 
 **GET** `/v1/files`
 
@@ -208,13 +221,9 @@ List Files
 
 ### Parameters
 
-- `after_id: String`
+- `ids: Array[String]`
 
-  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
-
-- `before_id: String`
-
-  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
 - `limit: Integer`
 
@@ -223,6 +232,10 @@ List Files
   Defaults to `20`. Ranges from `1` to `1000`.
 
   maximum: 1000, minimum: 1
+
+- `page: String`
+
+  Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
 - `scope_id: String`
 
@@ -362,6 +375,12 @@ List Files
 
     Whether the file can be downloaded.
 
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
   - `scope: BetaFileScope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
@@ -399,15 +418,14 @@ puts(page)
       "size_bytes": 102400,
       "type": "file",
       "downloadable": false,
+      "expires_at": "2025-05-15T18:37:24.100435Z",
       "scope": {
         "id": "id",
         "type": "session"
       }
     }
   ],
-  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-  "has_more": true,
-  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+  "next_page": "next_page"
 }
 ```
 
@@ -679,6 +697,12 @@ Get File Metadata
 
     Whether the file can be downloaded.
 
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
+
   - `scope: BetaFileScope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
@@ -714,6 +738,7 @@ puts(beta_file_metadata)
   "size_bytes": 102400,
   "type": "file",
   "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z",
   "scope": {
     "id": "id",
     "type": "session"
@@ -919,6 +944,12 @@ puts(beta_deleted_file)
   - `downloadable: bool`
 
     Whether the file can be downloaded.
+
+  - `expires_at: Time`
+
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
+
+    format: date-time
 
   - `scope: BetaFileScope`
 

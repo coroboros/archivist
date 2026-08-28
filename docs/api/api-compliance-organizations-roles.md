@@ -156,9 +156,9 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 
 ## Domain types
 
-### Role List Response
+### Role Retrieve Response
 
-- `RoleListResponse object`
+- `RoleRetrieveResponse object`
 
   Role information for compliance responses.
 
@@ -182,9 +182,9 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 
     Role last-updated timestamp (ISO 8601)
 
-### Role Retrieve Response
+### Role List Response
 
-- `RoleRetrieveResponse object`
+- `RoleListResponse object`
 
   Role information for compliance responses.
 

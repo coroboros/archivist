@@ -154,7 +154,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             format: date-time
 
-          - `skills: Array[BetaSkill]`
+          - `skills: Array[BetaContainerSkill]`
 
             Skills loaded in the container
 

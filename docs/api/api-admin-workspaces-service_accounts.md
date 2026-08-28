@@ -560,9 +560,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
     - `"workspace_user"`
 
-### Service Account List Response
+### Service Account Update Response
 
-- `ServiceAccountListResponse object`
+- `ServiceAccountUpdateResponse object`
 
   - `created_by_actor_id: string or null`
 
@@ -598,9 +598,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
     - `"workspace_user"`
 
-### Service Account Update Response
+### Service Account List Response
 
-- `ServiceAccountUpdateResponse object`
+- `ServiceAccountListResponse object`
 
   - `created_by_actor_id: string or null`
 

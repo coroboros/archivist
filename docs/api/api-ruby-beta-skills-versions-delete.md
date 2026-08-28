@@ -6,7 +6,7 @@ generated: true
 ---
 # Delete Skill Version
 
-`beta.skills.versions.delete(version, **kwargs) -> VersionDeleteResponse`
+`beta.skills.versions.delete(version, **kwargs) -> BetaDeletedSkillVersion`
 
 **DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -22,9 +22,9 @@ Delete Skill Version
 
 - `version: String`
 
-  Version identifier for the skill.
+  Identifies the skill version by its version ID.
 
-  Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
 - `betas: Array[AnthropicBeta]`
 
@@ -118,15 +118,14 @@ Delete Skill Version
 
 ## Returns
 
-- `class VersionDeleteResponse`
+- `class BetaDeletedSkillVersion`
 
   - `id: String`
 
-    Version identifier for the skill.
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-    Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
-
-  - `type: String`
+  - `type: :skill_version_deleted`
 
     Deleted object type.
 
@@ -139,16 +138,16 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
+beta_deleted_skill_version = anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 
-puts(version)
+puts(beta_deleted_skill_version)
 ```
 
 ### Response (200)
 
 ```json
 {
-  "id": "1759178010641129",
-  "type": "type"
+  "id": "id",
+  "type": "skill_version_deleted"
 }
 ```

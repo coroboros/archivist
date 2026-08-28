@@ -6,7 +6,7 @@ generated: true
 ---
 # Delete Skill
 
-`client.Beta.Skills.Delete(ctx, skillID, body) (*BetaSkillDeleteResponse, error)`
+`client.Beta.Skills.Delete(ctx, skillID, body) (*BetaDeletedSkill, error)`
 
 **DELETE** `/v1/skills/{skill_id}`
 
@@ -114,7 +114,7 @@ Delete Skill
 
 ## Returns
 
-- `type BetaSkillDeleteResponse struct{…}`
+- `type BetaDeletedSkill struct{…}`
 
   - `ID string`
 
@@ -122,7 +122,7 @@ Delete Skill
 
     The format and length of IDs may change over time.
 
-  - `Type string`
+  - `Type SkillDeleted`
 
     Deleted object type.
 
@@ -147,7 +147,7 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	skill, err := client.Beta.Skills.Delete(
+	betaDeletedSkill, err := client.Beta.Skills.Delete(
 		context.TODO(),
 		"skill_id",
 		anthropic.BetaSkillDeleteParams{},
@@ -155,7 +155,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", skill.ID)
+	fmt.Printf("%+v\n", betaDeletedSkill.ID)
 }
 ```
 
@@ -164,6 +164,6 @@ func main() {
 ```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type"
+  "type": "skill_deleted"
 }
 ```
