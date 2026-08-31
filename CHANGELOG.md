@@ -1,5 +1,56 @@
 # Changelog
 
+## 🤖 v1.5.141 - 31/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-2026-w34.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-gateways.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-self-hosted-environments-testing.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-example.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-workflows.md`
+
+
 ## 🤖 v1.5.140 - 31/08/2026
 
 File Changes:
