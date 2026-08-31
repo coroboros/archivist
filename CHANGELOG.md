@@ -1,5 +1,34 @@
 # Changelog
 
+## 🤖 v1.5.140 - 31/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.139 - 30/08/2026
 
 File Changes:
