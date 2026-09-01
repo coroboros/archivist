@@ -19,7 +19,7 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 ## File type support
 
-Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](./build-with-claude-vision.md) are supported on all current Claude models. For [PDFs](./build-with-claude-pdf-support.md) and [other file types with the code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#model-compatibility), see the linked pages for model support.
+Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](./build-with-claude-vision.md) are supported on all current Claude models. For [PDFs](./build-with-claude-pdf-support.md) and [other file types with the code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#compatibility), see the linked pages for model support.
 
 ## How the Files API works
 

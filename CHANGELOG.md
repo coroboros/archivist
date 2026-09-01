@@ -1,5 +1,109 @@
 # Changelog
 
+## 🤖 v1.5.142 - 01/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-enterprise.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-bash-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-memory-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-reference.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-claude-code-routines-fire.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-effort.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/build-with-claude/build-with-claude-search-results.md`
+- Modified: `docs/build-with-claude/build-with-claude-skills-guide.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-steering-and-cost.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-tool-workflows.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-troubleshooting.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/build-with-claude/build-with-claude-working-with-messages.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-using.md`
+- Modified: `docs/general/general-models-fable-5-migration-guide.md`
+- Modified: `docs/general/general-models-haiku-4-5-migration-guide.md`
+- Modified: `docs/general/general-models-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-migration-guide.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api-keys.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-cmek-aws-kms.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api-access.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-integration-patterns.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-sessions.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-configuration.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-endpoint.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-budgets.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.141 - 31/08/2026
 
 File Changes:

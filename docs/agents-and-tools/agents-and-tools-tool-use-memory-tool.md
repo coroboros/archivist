@@ -21,7 +21,7 @@ The memory tool operates client-side: Claude requests file operations, and your 
 </Note>
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Use cases

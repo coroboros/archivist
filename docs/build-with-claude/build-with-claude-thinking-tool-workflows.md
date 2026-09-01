@@ -11,7 +11,7 @@ description: Walk through a complete two-turn tool-use round trip that preserves
 ---
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 This page walks through a complete two-turn tool-use round trip with thinking enabled: Claude thinks, requests a tool call, receives the result, and finishes its answer, with the thinking blocks handled correctly at every step. The full rules live on the [Thinking](./build-with-claude-thinking.md) page, in [Thinking with tool use](./build-with-claude-thinking.md#thinking-with-tool-use) and [Preserving thinking blocks](./build-with-claude-thinking.md#preserving-thinking-blocks); this page shows those rules applied in runnable code.

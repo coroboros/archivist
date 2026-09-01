@@ -369,7 +369,7 @@ Each tool (whether configured in `default_config` or in `configs`) supports the 
 | `enabled`       | boolean | `true`  | Whether this tool is enabled.                                                                                                                                               |
 | `defer_loading` | boolean | `false` | If true, tool description is not sent to the model initially. Used with [Tool search tool](./agents-and-tools-tool-use-tool-search-tool.md). |
 
-For the full directory of Anthropic-provided tools and optional properties such as `defer_loading`, see the [Tool reference](./agents-and-tools-tool-use-tool-reference.md). For searching across large tool sets, see [Tool search tool](./agents-and-tools-tool-use-tool-search-tool.md).
+For the full directory of Anthropic-provided tools and optional properties such as `defer_loading`, see the [Tool reference](./agents-and-tools-tool-use-tool-reference.md). To search across large tool sets, see [Tool search tool](./agents-and-tools-tool-use-tool-search-tool.md).
 
 ### Configuration merging
 

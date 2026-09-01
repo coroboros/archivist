@@ -11,14 +11,14 @@ description: Steer how often and how deeply Claude thinks with effort levels, sy
 ---
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 Claude's thinking is adaptive: the model evaluates each request and decides for itself whether to think and how much. You set an intent, optionally specify the effort, and the model allocates reasoning where it judges reasoning will help.
 
 This makes thinking a strong fit for workloads that mix trivial and complex requests, and for long-horizon agentic workflows where the right amount of reasoning varies from step to step.
 
-For how to turn thinking on, how to read thinking output, and [thinking output on Claude Fable 5 and Claude Mythos 5](./build-with-claude-thinking.md#thinking-output-on-claude-fable-5-and-claude-mythos-5), see the [Thinking](./build-with-claude-thinking.md) overview. This page covers how Claude decides when to think, how to steer that decision, and the caching, cost, and pricing mechanics that follow from it.
+To learn how to turn thinking on, how to read thinking output, and about [thinking output on Claude Fable 5 and Claude Mythos 5](./build-with-claude-thinking.md#thinking-output-on-claude-fable-5-and-claude-mythos-5), see the [Thinking](./build-with-claude-thinking.md) overview. This page covers how Claude decides when to think, how to steer that decision, and the caching, cost, and pricing mechanics that follow from it.
 
 ## How Claude decides when to think
 

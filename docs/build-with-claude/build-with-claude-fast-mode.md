@@ -17,7 +17,7 @@ Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5
 </Note>
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Supported models

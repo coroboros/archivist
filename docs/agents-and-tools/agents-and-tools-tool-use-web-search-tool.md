@@ -11,7 +11,7 @@ description: Give Claude access to current web content with cited sources, optio
 ---
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
@@ -619,7 +619,7 @@ For the server-side loop and `pause_turn` handling, see [The server-side loop an
 
 ## Prompt caching
 
-For caching tool definitions across turns, see [Tool use with prompt caching](./agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
+To cache tool definitions across turns, see [Tool use with prompt caching](./agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
 
 ## Streaming
 

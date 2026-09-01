@@ -20,7 +20,7 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 </Note>
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Quick links
@@ -66,7 +66,7 @@ To use Skills, you need:
 1. **Claude API key** from the [Claude Console](https://platform.claude.com/settings/keys)
 2. **[Code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md)** enabled in your requests
 
-Skills require the code execution tool, so use a model from its [model compatibility list](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#model-compatibility).
+Skills require the code execution tool, so use a model from its [model compatibility list](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#compatibility).
 
 ***
 

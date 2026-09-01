@@ -2367,7 +2367,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 ## Strict tool use
 
-For enforcing JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md).
+To enforce JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md).
 
 ## Using both features together
 

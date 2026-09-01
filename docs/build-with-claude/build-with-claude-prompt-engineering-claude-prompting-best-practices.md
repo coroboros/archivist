@@ -447,7 +447,7 @@ Here are common prefill scenarios and how to migrate away from them:
 
 ### Tool usage
 
-Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended. For how to define tools and troubleshoot tool triggering, see [Tool use with Claude](../agents-and-tools/agents-and-tools-tool-use-overview.md).
+Claude's latest models are trained for precise instruction following and benefit from explicit direction to use specific tools. If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than implementing them, even if making changes might be what you intended. To learn how to define tools and troubleshoot tool triggering, see [Tool use with Claude](../agents-and-tools/agents-and-tools-tool-use-overview.md).
 
 For Claude to take action, be more explicit:
 
