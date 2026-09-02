@@ -457,7 +457,7 @@ If the most recent assistant message contains `thinking` or `redacted_thinking` 
 `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified. These blocks must remain as they were in the original response.
 ```
 
-With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Troubleshooting thinking](../build-with-claude/build-with-claude-thinking-troubleshooting.md#error-thinking-blocks-modified), [Preserving thinking blocks](../build-with-claude/build-with-claude-thinking.md#preserving-thinking-blocks), and [Thinking output on Claude Fable 5 and Claude Mythos 5](../build-with-claude/build-with-claude-thinking.md#thinking-output-on-claude-fable-5-and-claude-mythos-5).
+With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Troubleshooting thinking](../build-with-claude/build-with-claude-thinking-troubleshooting.md#error-thinking-blocks-modified), [Preserving thinking blocks](../build-with-claude/build-with-claude-thinking.md#preserving-thinking-blocks), and [Preserved thinking](../build-with-claude/build-with-claude-thinking.md#preserved-thinking).
 
 ### Extended thinking not supported
 
@@ -481,13 +481,41 @@ Use `thinking: {"type": "enabled", "budget_tokens": N}` on these models; see [Ex
 
 ### Thinking cannot be disabled
 
-On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and [Claude Mythos Preview](https://anthropic.com/glasswing), thinking is always on. Sending `thinking: {"type": "disabled"}` to any of these models returns a 400 `invalid_request_error`:
+On Claude Fable 5.1, [Claude Mythos 5.1](https://anthropic.com/glasswing), Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and [Claude Mythos Preview](https://anthropic.com/glasswing), thinking is always on. Sending `thinking: {"type": "disabled"}` to any of these models returns a 400 `invalid_request_error`:
 
 ```text wrap
 "thinking.type.disabled" is not supported for this model. Thinking defaults to adaptive mode when not specified; use "thinking.type.enabled" with "budget_tokens" for extended thinking.
 ```
 
-On Claude Fable 5 and Claude Mythos 5, the error message's own suggestion of `"thinking.type.enabled"` is also rejected. Omit the `thinking` parameter and the request runs with adaptive thinking. To keep thinking content out of responses without turning thinking off, set `display: "omitted"` on the thinking configuration. See [Troubleshooting thinking](../build-with-claude/build-with-claude-thinking-troubleshooting.md#error-thinking-type-disabled).
+On Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5, the error message's own suggestion of `"thinking.type.enabled"` is also rejected. Omit the `thinking` parameter and the request runs with adaptive thinking. To keep thinking content out of responses without turning thinking off, set `display: "omitted"` on the thinking configuration. See [Troubleshooting thinking](../build-with-claude/build-with-claude-thinking-troubleshooting.md#error-thinking-type-disabled).
+
+### Forced tool use not supported
+
+Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing) don't support forced tool use. Sending `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` to either model, including on the [token counting endpoint](../build-with-claude/build-with-claude-token-counting.md), returns a 400 `invalid_request_error`:
+
+```text wrap
+tool_choice: type "tool" and "any" are not supported for this model.
+```
+
+`tool_choice: {"type": "auto"}` (the default) and `{"type": "none"}` are accepted. Use `auto` with [strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md) to keep tool inputs schema-valid, or [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) when you need the response itself in a fixed JSON shape. See [Forcing tool use](../agents-and-tools/agents-and-tools-tool-use-define-tools.md#forcing-tool-use).
+
+### Thinking block no longer matches the conversation
+
+On Claude Fable 5.1, the API accepts a replayed thinking block only while the `system` prompt, `tools`, and messages that preceded it are unchanged. For new accounts created on or after August 31, 2026, and for any request that sets `thinking.block_binding.prefix_mismatch_behavior` to `"error"`, a replayed block whose earlier history changed is rejected with a 400 `invalid_request_error` (with `"drop_block"`, the API drops the block and the request succeeds). The message starts with the position of the first failing block:
+
+```text wrap
+messages.{i}.content.{j}: Invalid `signature` in `thinking` block. The block is bound to a different conversation. Remove the block, or set `thinking.block_binding.prefix_mismatch_behavior` to "drop_block".
+```
+
+Without the `thinking-binding-controls-2026-08-01` beta header the message also names that header. Keep the conversation history append-only, or send the beta header with `prefix_mismatch_behavior: "drop_block"` to drop the block and continue. A block from a model the target model can't read is dropped rather than rejected. See [Preserved thinking](../build-with-claude/build-with-claude-thinking.md#preserved-in-conversation) and [Troubleshooting thinking](../build-with-claude/build-with-claude-thinking-troubleshooting.md#error-thinking-block-signature).
+
+Sending `thinking.block_binding` without the `thinking-binding-controls-2026-08-01` [beta header](./api-beta-headers.md) returns a 400 `invalid_request_error` whose message ends in:
+
+```text wrap
+block_binding: Extra inputs are not permitted
+```
+
+Add the header, or remove the field.
 
 ### Outbound web identity federation disabled (Claude Platform on AWS)
 
@@ -496,8 +524,8 @@ If every request to [Claude Platform on AWS](../build-with-claude/build-with-cla
 ## Next steps
 
 <CardGroup cols={3}>
-  <Card title="Trigger a routine through the API" icon="play" href="./api-claude-code-routines-fire.md">
-    Start a Claude Code routine session on demand by sending an authenticated POST request.
+  <Card title="Troubleshooting thinking" icon="wrench" href="../build-with-claude/build-with-claude-thinking-troubleshooting.md">
+    Symptom-first fixes for thinking configuration 400 errors, empty thinking blocks, and `max_tokens` stops.
   </Card>
 
   <Card title="Rate limits" icon="gauge" href="./api-rate-limits.md">

@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "Fable vs. Mythos"
 source: "https://platform.claude.com/docs/en/models/fable-5/overview"
 category: "general"
 generated: true
@@ -7,44 +7,36 @@ generated: true
 ---
 title: Claude Fable 5
 url: https://platform.claude.com/docs/en/models/fable-5/overview
-description: "Claude Fable 5 at a glance: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and the guides and resources for building with it."
+description: "Claude Fable 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Fable 5 is a legacy model, and Claude Fable 5.1 is the current Fable model."
 ---
 
-**Latest.** Released June 9, 2026.
+**Legacy.** Released June 9, 2026.
 
-Next-generation intelligence for long-running agents
+Although Claude Fable 5 is still available, you should consider migrating to Claude Fable 5.1 for improved performance. [See Claude Fable 5.1](./general-models-fable-5-1-overview.md) · [Migrate to Claude Fable 5.1](./general-models-fable-5-1-migration-guide.md#migrating-from-claude-fable-5-to-claude-fable-5-1)
 
 Model ID: `claude-fable-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTok · Output pricing: $50 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [What’s new](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md) · [Migration guide](./general-models-fable-5-migration-guide.md)
-
-## Overview
-
-Claude Fable 5 is Anthropic's most capable widely released model, built for the most demanding reasoning and long-horizon agentic work. Claude Mythos 5 shares the same capabilities and is available only in limited release through [Project Glasswing](https://anthropic.com/glasswing).
-
-The headline change for integrations: Claude Fable 5 includes safety classifiers that can decline requests. Claude Mythos 5 does not include these classifiers. If your integration calls Claude Fable 5, plan for three changes: new response handling for refusals, fallback options for retrying on another Claude model, and new billing rules. [Refusals, fallback, and billing on Claude Fable 5](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md#refusals-fallback-and-billing-on-claude-fable-5) summarizes all three.
-
-[Introducing Claude Fable 5 and Claude Mythos 5](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md)
+[Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [What’s new](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md)
 
 ## Fable vs. Mythos
 
 [Claude Mythos 5](./general-models-mythos-5-overview.md) is offered separately, by invitation only, for defensive cybersecurity workflows as part of [Project Glasswing](https://anthropic.com/glasswing). It shares Claude Fable 5's specifications and pricing; Claude Fable 5 includes safety classifiers that can decline requests, and Claude Mythos 5 does not. For access, contact your Anthropic, AWS, or Google Cloud account team.
 
-## How it compares
+## How it compares to the current lineup
 
-| Model                                                                             | Context | Max output | Price / MTok | Latency  | Thinking             | Default effort | Knowledge cutoff |
-| :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------- | :------------------- | :------------- | :--------------- |
-| **Claude Fable 5** (this model)                                                   | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jan 2026         |
-| [Claude Opus 5](./general-models-opus-5-overview.md)       | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
-| [Claude Sonnet 5](./general-models-sonnet-5-overview.md)   | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
-| [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
+| Model                                                                             | Context | Max output | Price / MTok | Thinking             | Default effort | Knowledge cutoff |
+| :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------------------- | :------------- | :--------------- |
+| [Claude Fable 5.1](./general-models-fable-5-1-overview.md) | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jun 2026         |
+| **Claude Fable 5** (this model)                                                   | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jan 2026         |
+| [Claude Opus 5](./general-models-opus-5-overview.md)       | 1M      | 128K       | $5 / $25     | Adaptive             | `high`         | May 2026         |
+| [Claude Sonnet 5](./general-models-sonnet-5-overview.md)   | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jan 2026         |
+| [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) | 200K    | 64K        | $1 / $5      | Extended             | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
 * **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price. See Pricing for the full list.
-* **Latency:** Comparative latency, relative to the current lineup, as published in the models overview. Actual latency depends on prompt length, output length, and thinking effort.
 * **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
 * **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
 * **Knowledge cutoff:** Reliable knowledge cutoff: the date through which the model’s knowledge is most extensive and reliable.
@@ -81,7 +73,6 @@ The headline change for integrations: Claude Fable 5 includes safety classifiers
 | Max output                                                                              | 128K tokens            |
 | [Thinking](../build-with-claude/build-with-claude-thinking.md)              | Adaptive (always on)   |
 | [Default effort](../build-with-claude/build-with-claude-effort.md)          | `high`                 |
-| Comparative latency                                                                     | Slower                 |
 | Input → output                                                                          | Text and images → text |
 | Reliable knowledge cutoff                                                               | Jan 2026               |
 | Training data cutoff                                                                    | Jan 2026               |
@@ -90,7 +81,7 @@ The headline change for integrations: Claude Fable 5 includes safety classifiers
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../about-claude/about-claude-model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [Status](../about-claude/about-claude-model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Released                                                                      | June 9, 2026                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Retirement                                                                    | Not sooner than June 9, 2027                                                                                                                                                                                                                                                                                                                                                                                            |
 | Platforms                                                                     | Claude API, [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) |
@@ -98,16 +89,24 @@ The headline change for integrations: Claude Fable 5 includes safety classifiers
 ## Resources
 
 <CardGroup cols={3}>
+  <Card title="Migrate to Claude Fable 5.1" icon="arrows-left-right" href="./general-models-fable-5-1-migration-guide.md">
+    What changes when moving from Claude Fable 5 to Claude Fable 5.1.
+  </Card>
+
+  <Card title="Claude Fable 5.1" icon="arrow-right" href="./general-models-fable-5-1-overview.md">
+    The current Fable model: overview, specs, and resources.
+  </Card>
+
+  <Card title="Introducing Claude Fable 5 and Claude Mythos 5" icon="star" href="./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md">
+    Capabilities, API changes, and availability for Claude Fable 5.
+  </Card>
+
   <Card title="Prompting Claude Fable 5" icon="lightbulb" href="../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md">
     Model-specific prompting guidance for long-horizon and agentic work.
   </Card>
 
   <Card title="Refusals and fallback" icon="shield" href="../build-with-claude/build-with-claude-refusals-and-fallback.md">
     Handle classifier refusals and retry on another Claude model with the `fallbacks` parameter.
-  </Card>
-
-  <Card title="Adaptive thinking" icon="brain" href="../build-with-claude/build-with-claude-thinking.md">
-    The only thinking mode on Claude Fable 5. Steer depth with `effort`.
   </Card>
 </CardGroup>
 

@@ -1397,16 +1397,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `Type BrowserToolset20260801`
 
-      - `AllowedCallers []string Optional`
-
-        - `const BrowserToolset20260801AllowedCallerDirect BrowserToolset20260801AllowedCaller = "direct"`
-
-        - `const BrowserToolset20260801AllowedCallerCodeExecution20250825 BrowserToolset20260801AllowedCaller = "code_execution_20250825"`
-
-        - `const BrowserToolset20260801AllowedCallerCodeExecution20260120 BrowserToolset20260801AllowedCaller = "code_execution_20260120"`
-
-        - `const BrowserToolset20260801AllowedCallerCodeExecution20260521 BrowserToolset20260801AllowedCaller = "code_execution_20260521"`
-
       - `CacheControl CacheControlEphemeral Optional`
 
         Create a cache control breakpoint at this content block.
@@ -1838,16 +1828,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       via `configs.zoom.enabled`.
 
       - `Type ComputerToolset20260801`
-
-      - `AllowedCallers []string Optional`
-
-        - `const ComputerToolset20260801AllowedCallerDirect ComputerToolset20260801AllowedCaller = "direct"`
-
-        - `const ComputerToolset20260801AllowedCallerCodeExecution20250825 ComputerToolset20260801AllowedCaller = "code_execution_20250825"`
-
-        - `const ComputerToolset20260801AllowedCallerCodeExecution20260120 ComputerToolset20260801AllowedCaller = "code_execution_20260120"`
-
-        - `const ComputerToolset20260801AllowedCallerCodeExecution20260521 ComputerToolset20260801AllowedCaller = "code_execution_20260521"`
 
       - `CacheControl CacheControlEphemeral Optional`
 

@@ -246,8 +246,8 @@ with Claude"
   <HomeSection>
     <HomeSectionHeader label="Models" title="The Claude model family" description="Choose the right model for your use case." />
 
-    * [Claude Fable 5](./general-models-fable-5-overview.md) (`claude-fable-5`) — *Next-generation intelligence for long-running agents* — Most capable · Research · Multi-day tasks
-    * [Claude Opus 5](./general-models-opus-5-overview.md) (`claude-opus-5`) — New — *For complex agentic coding and enterprise work* — Complex projects · Agents · Coding
+    * [Claude Fable 5.1](./general-models-fable-5-1-overview.md) (`claude-fable-5-1`) — New — *For demanding reasoning and long-horizon agentic work* — Most capable · Research · Multi-day tasks
+    * [Claude Opus 5](./general-models-opus-5-overview.md) (`claude-opus-5`) — *For complex agentic coding and enterprise work* — Complex projects · Agents · Coding
     * [Claude Sonnet 5](./general-models-sonnet-5-overview.md) (`claude-sonnet-5`) — *The best combination of speed and intelligence* — Everyday tasks · Writing · Cost-efficient
     * [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) (`claude-haiku-4-5`) — *The fastest model with near-frontier intelligence* — Fastest · Lowest cost · High volume
   </HomeSection>
@@ -256,7 +256,7 @@ with Claude"
     <HomeSectionHeader label="Resources" title="Keep learning" />
 
     <CardGroup cols={3}>
-      <Card icon="graduation-cap" title="Courses" href="https://anthropic.skilljar.com/">
+      <Card icon="graduation-cap" title="Courses" href="https://academy.claude.com/courses">
         Interactive courses to master Claude.
       </Card>
 

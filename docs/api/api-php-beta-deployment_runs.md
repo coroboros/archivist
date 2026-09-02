@@ -34,11 +34,11 @@ List Deployment Runs
 
 - `deploymentID?:optional string`
 
-  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment_id returns 200 with empty data.
+  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
 - `hasError?:optional bool`
 
-  Filter: true for runs with non-null error, false for runs with non-null session_id. Omit for all.
+  Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
 - `limit?:optional int`
 
@@ -46,7 +46,7 @@ List Deployment Runs
 
 - `page?:optional string`
 
-  Opaque pagination cursor. Pass next_page from the previous response. Invalid or expired cursors return 400.
+  Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
 - `triggerType?:optional BetaManagedAgentsTriggerType`
 
@@ -82,7 +82,7 @@ List Deployment Runs
 
   - `?string sessionID`
 
-    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
   - `BetaManagedAgentsTriggerContext triggerContext`
 
@@ -187,7 +187,7 @@ Get Deployment Run
 
   - `?string sessionID`
 
-    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
   - `BetaManagedAgentsTriggerContext triggerContext`
 
@@ -274,7 +274,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
   - `?string sessionID`
 
-    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+    Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
   - `BetaManagedAgentsTriggerContext triggerContext`
 

@@ -28,7 +28,7 @@ List Session Resources
 
   - `string page`
 
-    Query param: Opaque cursor from a previous response's next_page field.
+    Query param: Opaque cursor from a previous response's `next_page` field.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -115,6 +115,12 @@ List Session Resources
     - `ThinkingDisplayUpdates2026_08_18`
 
     - `CEUserManagement2026_07_13`
+
+    - `MidConversationOutputConfig2026_07_01`
+
+    - `ThinkingBindingControls2026_08_01`
+
+    - `MidConversationSystemClearAt2026_08_21`
 
 ## Returns
 

@@ -1072,12 +1072,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
+  - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+    - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
     - `claude-sonnet-5` - High-performance model for coding and agents
     - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
     - `claude-mythos-5` - Most capable model for cybersecurity and biology research
@@ -1093,6 +1095,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
     - `claude-sonnet-4-5` - High-performance model for agents and coding
     - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+    - `"claude-fable-5-1"`
+
+      Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+    - `"claude-mythos-5-1"`
+
+      Our most capable model for cybersecurity and biology research, available through trusted access programs
 
     - `"claude-sonnet-5"`
 
@@ -1683,16 +1693,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `type: Literal["browser_toolset_20260801"]`
 
-    - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
-
-      - `"direct"`
-
-      - `"code_execution_20250825"`
-
-      - `"code_execution_20260120"`
-
-      - `"code_execution_20260521"`
-
     - `cache_control: Optional[CacheControlEphemeral]`
 
       Create a cache control breakpoint at this content block.
@@ -2124,16 +2124,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     via `configs.zoom.enabled`.
 
     - `type: Literal["computer_toolset_20260801"]`
-
-    - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
-
-      - `"direct"`
-
-      - `"code_execution_20250825"`
-
-      - `"code_execution_20260120"`
-
-      - `"code_execution_20260521"`
 
     - `cache_control: Optional[CacheControlEphemeral]`
 
@@ -3741,12 +3731,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
+    - `Literal["claude-fable-5-1", "claude-mythos-5-1", "claude-sonnet-5", 14 more]`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+      - `claude-mythos-5-1` - Our most capable model for cybersecurity and biology research, available through trusted access programs
       - `claude-sonnet-5` - High-performance model for coding and agents
       - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
       - `claude-mythos-5` - Most capable model for cybersecurity and biology research
@@ -3762,6 +3754,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
       - `claude-sonnet-4-5` - High-performance model for agents and coding
       - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+      - `"claude-fable-5-1"`
+
+        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+      - `"claude-mythos-5-1"`
+
+        Our most capable model for cybersecurity and biology research, available through trusted access programs
 
       - `"claude-sonnet-5"`
 
