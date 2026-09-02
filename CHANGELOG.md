@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.5.145 - 02/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-desktop-ios-simulator.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.144 - 02/09/2026
 
 File Changes:
