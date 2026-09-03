@@ -119,13 +119,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minLength: 1
 
-              - `JsonValue type constant`
+              - `JsonValue type = "text"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
                 Create a cache control breakpoint at this content block.
 
-                - `JsonValue type constant`
+                - `JsonValue type = "ephemeral"`
 
                 - `Optional<Ttl> ttl`
 
@@ -162,7 +162,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "char_location"`
 
                 - `class CitationPageLocationParam:`
 
@@ -182,7 +182,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 1
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "page_location"`
 
                 - `class CitationContentBlockLocationParam:`
 
@@ -212,7 +212,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "content_block_location"`
 
                 - `class CitationWebSearchResultLocationParam:`
 
@@ -224,7 +224,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     maxLength: 512, minLength: 1
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_search_result_location"`
 
                   - `String url`
 
@@ -262,7 +262,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> title`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "search_result_location"`
 
             - `class ImageBlockParam:`
 
@@ -284,11 +284,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `IMAGE_WEBP("image/webp")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "base64"`
 
                 - `class UrlImageSource:`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "url"`
 
                   - `String url`
 
@@ -296,9 +296,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String fileId`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "file"`
 
-              - `JsonValue type constant`
+              - `JsonValue type = "image"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -326,17 +326,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     format: byte
 
-                  - `JsonValue mediaType constant`
+                  - `JsonValue mediaType = "application/pdf"`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "base64"`
 
                 - `class PlainTextSource:`
 
                   - `String data`
 
-                  - `JsonValue mediaType constant`
+                  - `JsonValue mediaType = "text/plain"`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "text"`
 
                 - `class ContentBlockSource:`
 
@@ -350,11 +350,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `class ImageBlockParam:`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "content"`
 
                 - `class UrlPdfSource:`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "url"`
 
                   - `String url`
 
@@ -362,9 +362,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String fileId`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "file"`
 
-              - `JsonValue type constant`
+              - `JsonValue type = "document"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -390,7 +390,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minLength: 1
 
-                - `JsonValue type constant`
+                - `JsonValue type = "text"`
 
                 - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -402,7 +402,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `String title`
 
-              - `JsonValue type constant`
+              - `JsonValue type = "search_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -422,7 +422,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `thinking` text of this block as returned by the API.
 
-              - `JsonValue type constant`
+              - `JsonValue type = "thinking"`
 
             - `class RedactedThinkingBlockParam:`
 
@@ -430,7 +430,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `JsonValue type constant`
+              - `JsonValue type = "redacted_thinking"`
 
             - `class ToolUseBlockParam:`
 
@@ -444,7 +444,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 200, minLength: 1
 
-              - `JsonValue type constant`
+              - `JsonValue type = "tool_use"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -458,7 +458,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Tool invocation directly from the model.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "direct"`
 
                 - `class ServerToolCaller:`
 
@@ -468,7 +468,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "code_execution_20250825"`
 
                 - `class ServerToolCaller20260120:`
 
@@ -476,7 +476,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "code_execution_20260120"`
 
               - `Optional<String> toolsetName`
 
@@ -490,7 +490,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 pattern: ^[a-zA-Z0-9_-]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -518,7 +518,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "tool_reference"`
 
                     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -562,7 +562,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "browser_state"`
 
                     - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -590,7 +590,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `JsonValue type constant`
+                        - `JsonValue type = "tab_opened"`
 
                       - `class BrowserStateChangeDownloadStarted:`
 
@@ -602,7 +602,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `JsonValue type constant`
+                        - `JsonValue type = "download_started"`
 
                         - `String url`
 
@@ -623,7 +623,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `JsonValue type constant`
+                        - `JsonValue type = "download_completed"`
 
                         - `String url`
 
@@ -653,7 +653,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `JsonValue type constant`
+                        - `JsonValue type = "download_failed"`
 
                         - `String url`
 
@@ -699,7 +699,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-              - `JsonValue type constant`
+              - `JsonValue type = "server_tool_use"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -729,7 +729,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String title`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_search_result"`
 
                   - `String url`
 
@@ -751,13 +751,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `REQUEST_TOO_LARGE("request_too_large")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_search_tool_result_error"`
 
               - `String toolUseId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "web_search_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -803,13 +803,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `UNAVAILABLE("unavailable")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_fetch_tool_result_error"`
 
                 - `class WebFetchBlockParam:`
 
                   - `DocumentBlockParam content`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_fetch_result"`
 
                   - `String url`
 
@@ -823,7 +823,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "web_fetch_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -861,7 +861,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "code_execution_tool_result_error"`
 
                 - `class CodeExecutionResultBlockParam:`
 
@@ -869,7 +869,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `String fileId`
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "code_execution_output"`
 
                   - `long returnCode`
 
@@ -877,7 +877,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String stdout`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "code_execution_result"`
 
                 - `class EncryptedCodeExecutionResultBlockParam:`
 
@@ -887,7 +887,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `String fileId`
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "code_execution_output"`
 
                   - `String encryptedStdout`
 
@@ -895,13 +895,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String stderr`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "encrypted_code_execution_result"`
 
               - `String toolUseId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "code_execution_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -925,7 +925,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "bash_code_execution_tool_result_error"`
 
                 - `class BashCodeExecutionResultBlockParam:`
 
@@ -933,7 +933,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `String fileId`
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "bash_code_execution_output"`
 
                   - `long returnCode`
 
@@ -941,13 +941,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String stdout`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "bash_code_execution_result"`
 
               - `String toolUseId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "bash_code_execution_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -971,7 +971,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `FILE_NOT_FOUND("file_not_found")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
                   - `Optional<String> errorMessage`
 
@@ -987,7 +987,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `PDF("pdf")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "text_editor_code_execution_view_result"`
 
                   - `Optional<Long> numLines`
 
@@ -999,11 +999,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `boolean isFileUpdate`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "text_editor_code_execution_create_result"`
 
                 - `class TextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
                   - `Optional<List<String>> lines`
 
@@ -1019,7 +1019,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "text_editor_code_execution_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1041,7 +1041,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "tool_search_tool_result_error"`
 
                   - `Optional<String> errorMessage`
 
@@ -1053,19 +1053,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "tool_reference"`
 
                     - `Optional<CacheControlEphemeral> cacheControl`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "tool_search_tool_search_result"`
 
               - `String toolUseId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonValue type constant`
+              - `JsonValue type = "tool_search_tool_result"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1078,7 +1078,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `String fileId`
 
-              - `JsonValue type constant`
+              - `JsonValue type = "container_upload"`
 
               - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1252,7 +1252,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The JSON schema of the format
 
-          - `JsonValue type constant`
+          - `JsonValue type = "json_schema"`
 
       - `Optional<ServiceTier> serviceTier`
 
@@ -1292,7 +1292,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             minLength: 1
 
-          - `JsonValue type constant`
+          - `JsonValue type = "text"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1320,7 +1320,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             minimum: 1024
 
-          - `JsonValue type constant`
+          - `JsonValue type = "enabled"`
 
           - `Optional<Display> display`
 
@@ -1332,11 +1332,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ThinkingConfigDisabled:`
 
-          - `JsonValue type constant`
+          - `JsonValue type = "disabled"`
 
         - `class ThinkingConfigAdaptive:`
 
-          - `JsonValue type constant`
+          - `JsonValue type = "adaptive"`
 
           - `Optional<Display> display`
 
@@ -1354,7 +1354,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will automatically decide whether to use tools.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "auto"`
 
           - `Optional<Boolean> disableParallelToolUse`
 
@@ -1366,7 +1366,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will use any available tools.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "any"`
 
           - `Optional<Boolean> disableParallelToolUse`
 
@@ -1382,7 +1382,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The name of the tool to use.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "tool"`
 
           - `Optional<Boolean> disableParallelToolUse`
 
@@ -1394,7 +1394,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will not be allowed to use tools.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "none"`
 
       - `Optional<List<ToolUnion>> tools`
 
@@ -1468,7 +1468,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-            - `JsonValue type constant`
+            - `JsonValue type = "object"`
 
             - `Optional<Properties> properties`
 
@@ -1520,13 +1520,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolBash20250124:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "bash"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "bash_20250124"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1554,13 +1554,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class CodeExecutionTool20250522:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "code_execution_20250522"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1586,13 +1586,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class CodeExecutionTool20250825:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "code_execution_20250825"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1620,13 +1620,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-          - `JsonValue name constant`
+          - `JsonValue name = "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "code_execution_20260120"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1654,13 +1654,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence.
 
-          - `JsonValue name constant`
+          - `JsonValue name = "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "code_execution_20260521"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1691,7 +1691,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           the family's tool with any members disabled via `configs` removed
           from its schema.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "browser_toolset_20260801"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -2080,13 +2080,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class MemoryTool20250818:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "memory"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "memory_20250818"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2123,7 +2123,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           `type`, `configs`, and `cache_control`; zoom is controlled
           via `configs.zoom.enabled`.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "computer_toolset_20260801"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -2344,13 +2344,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolTextEditor20250124:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "str_replace_editor"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "text_editor_20250124"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2378,13 +2378,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolTextEditor20250429:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "text_editor_20250429"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2412,13 +2412,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolTextEditor20250728:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "text_editor_20250728"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2452,13 +2452,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebSearchTool20250305:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_search_20250305"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2500,7 +2500,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-            - `JsonValue type constant`
+            - `JsonValue type = "approximate"`
 
             - `Optional<String> city`
 
@@ -2528,13 +2528,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebFetchTool20250910:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_fetch_20250910"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2584,13 +2584,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebSearchTool20260209:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_search_20260209"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2634,13 +2634,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebFetchTool20260209:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_fetch_20260209"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2692,13 +2692,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_fetch_20260309"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2752,13 +2752,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebSearchTool20260318:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_search_20260318"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2810,13 +2810,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class WebFetchTool20260318:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `JsonValue type constant`
+          - `JsonValue type = "web_fetch_20260318"`
 
           - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2878,7 +2878,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolSearchToolBm25_20251119:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "tool_search_tool_bm25"`
 
             Name of the tool.
 
@@ -2914,7 +2914,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `class ToolSearchToolRegex20251119:`
 
-          - `JsonValue name constant`
+          - `JsonValue name = "tool_search_tool_regex"`
 
             Name of the tool.
 
@@ -3076,7 +3076,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "message_batch"`
 
     Object type.
 

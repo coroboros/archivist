@@ -386,7 +386,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "bash"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -404,7 +404,7 @@ List Sessions
 
                       - `Type type`
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "bash"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
@@ -412,7 +412,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "edit"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -426,7 +426,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "edit"`
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
@@ -434,7 +434,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "read"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -448,7 +448,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "read"`
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
@@ -456,7 +456,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "write"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -470,7 +470,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "write"`
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
@@ -478,7 +478,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "glob"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -492,7 +492,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "glob"`
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
@@ -500,7 +500,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "grep"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -514,7 +514,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "grep"`
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
@@ -522,7 +522,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "web_fetch"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -536,7 +536,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_fetch"`
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -552,7 +552,7 @@ List Sessions
 
                   - `boolean enabled`
 
-                  - `JsonValue name constant`
+                  - `JsonValue name = "web_search"`
 
                   - `PermissionPolicy permissionPolicy`
 
@@ -566,7 +566,7 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type constant`
+                  - `JsonValue type = "web_search"`
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -576,7 +576,7 @@ List Sessions
 
                     Approximate user location for search result localization.
 
-                    - `JsonValue type constant`
+                    - `JsonValue type = "approximate"`
 
                       Location precision. Only "approximate" is supported.
 
@@ -674,7 +674,7 @@ List Sessions
 
                 JSON Schema for custom tool input parameters.
 
-                - `JsonValue type constant`
+                - `JsonValue type = "object"`
 
                 - `Optional<Properties> properties`
 

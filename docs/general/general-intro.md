@@ -1,5 +1,5 @@
 ---
-title: "Recommended path for new developers"
+title: "Explore the latest generation of Claude models"
 source: "https://platform.claude.com/docs/en/intro"
 category: "general"
 generated: true
@@ -9,20 +9,6 @@ title: Intro to Claude
 url: https://platform.claude.com/docs/en/intro
 description: Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.
 ---
-
-<Tip>
-  The latest generation of Claude models:
-
-  **Claude Fable 5.1** - For demanding reasoning and long-horizon agentic work. Read the [Claude Fable 5.1 announcement](https://www.anthropic.com/claude-fable-and-mythos-5-1).
-
-  **Claude Mythos 5.1** - Offers Claude Fable 5.1's capabilities by invitation through [Project Glasswing](https://anthropic.com/glasswing).
-
-  **Claude Opus 5** - For complex agentic coding and enterprise work. Read the [Claude Opus 5 announcement](https://www.anthropic.com/news/claude-opus-5).
-
-  **Claude Sonnet 5** - Frontier intelligence at scale, built for coding, agents, and enterprise workflows. Read the [Claude Sonnet 5 announcement](https://www.anthropic.com/news/claude-sonnet-5).
-
-  **Claude Haiku 4.5** - Fastest model with near-frontier intelligence. Read the [Claude Haiku 4.5 announcement](https://www.anthropic.com/news/claude-haiku-4-5).
-</Tip>
 
 <Note>
   Looking to chat with Claude? Visit [claude.ai](https://claude.ai).
@@ -36,6 +22,19 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **Best for**   | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work                                  |
 
 To learn more about each, see [Using the Messages API](../build-with-claude/build-with-claude-working-with-messages.md) and the [Claude Managed Agents overview](../managed-agents/managed-agents-overview.md).
+
+## Explore the latest generation of Claude models
+
+If you're unsure which model to use, start with [Claude Opus 5](./general-models-opus-5-overview.md) for most workloads. Use [Claude Fable 5.1](./general-models-fable-5-1-overview.md) for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5 at higher effort still fall short. All current models support text and image input, text output, multilingual capabilities, vision, and tool use. Each model's page lists the platforms it's available on.
+
+* [Claude Fable 5.1](./general-models-fable-5-1-overview.md) (`claude-fable-5-1`) — New — *For demanding reasoning and long-horizon agentic work* — Most capable · Research · Multi-day tasks
+* [Claude Opus 5](./general-models-opus-5-overview.md) (`claude-opus-5`) — *For complex agentic coding and enterprise work* — Complex projects · Agents · Coding
+* [Claude Sonnet 5](./general-models-sonnet-5-overview.md) (`claude-sonnet-5`) — *The best combination of speed and intelligence* — Everyday tasks · Writing · Cost-efficient
+* [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) (`claude-haiku-4-5`) — *The fastest model with near-frontier intelligence* — Fastest · Lowest cost · High volume
+
+[Compare models](./general-models-overview.md)
+
+***
 
 ## Recommended path for new developers
 

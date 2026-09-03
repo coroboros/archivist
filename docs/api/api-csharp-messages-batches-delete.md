@@ -32,7 +32,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     ID of the Message Batch.
 
-  - `JsonElement Type constant`
+  - `JsonElement Type = "message_batch_deleted"`
 
     Deleted object type.
 

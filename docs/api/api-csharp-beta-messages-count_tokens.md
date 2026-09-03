@@ -83,13 +83,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             minLength: 1
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "text"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
 
-            - `JsonElement Type constant`
+            - `JsonElement Type = "ephemeral"`
 
             - `Ttl Ttl`
 
@@ -102,9 +102,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
-              - `Ttl5m`
+              - `Ttl5m("5m")`
 
-              - `Ttl1h`
+              - `Ttl1h("1h")`
 
           - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
@@ -126,7 +126,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "char_location"`
 
             - `class BetaCitationPageLocationParam:`
 
@@ -146,7 +146,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 1
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "page_location"`
 
             - `class BetaCitationContentBlockLocationParam:`
 
@@ -176,7 +176,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "content_block_location"`
 
             - `class BetaCitationWebSearchResultLocationParam:`
 
@@ -188,7 +188,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 maxLength: 512, minLength: 1
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "web_search_result_location"`
 
               - `required string Url`
 
@@ -226,7 +226,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string? Title`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "search_result_location"`
 
         - `class BetaImageBlockParam:`
 
@@ -240,19 +240,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required MediaType MediaType`
 
-                - `ImageJpeg`
+                - `ImageJpeg("image/jpeg")`
 
-                - `ImagePng`
+                - `ImagePng("image/png")`
 
-                - `ImageGif`
+                - `ImageGif("image/gif")`
 
-                - `ImageWebP`
+                - `ImageWebP("image/webp")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "base64"`
 
             - `class BetaUrlImageSource:`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -260,9 +260,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string FileID`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "file"`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "image"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -276,9 +276,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
-              - `Downsize`
+              - `Downsize("downsize")`
 
-              - `Error`
+              - `Error("error")`
 
         - `class BetaRequestDocumentBlock:`
 
@@ -290,17 +290,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 format: byte
 
-              - `JsonElement MediaType constant`
+              - `JsonElement MediaType = "application/pdf"`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "base64"`
 
             - `class BetaPlainTextSource:`
 
               - `required string Data`
 
-              - `JsonElement MediaType constant`
+              - `JsonElement MediaType = "text/plain"`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text"`
 
             - `class BetaContentBlockSource:`
 
@@ -314,11 +314,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   - `class BetaImageBlockParam:`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "content"`
 
             - `class BetaUrlPdfSource:`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -326,9 +326,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string FileID`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "file"`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "document"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -354,7 +354,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               minLength: 1
 
-            - `JsonElement Type constant`
+            - `JsonElement Type = "text"`
 
             - `BetaCacheControlEphemeral? CacheControl`
 
@@ -366,7 +366,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string Title`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "search_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -386,7 +386,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `thinking` text of this block as returned by the API.
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "thinking"`
 
         - `class BetaRedactedThinkingBlockParam:`
 
@@ -394,7 +394,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "redacted_thinking"`
 
         - `class BetaToolUseBlockParam:`
 
@@ -408,7 +408,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             maxLength: 200, minLength: 1
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "tool_use"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -422,7 +422,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Tool invocation directly from the model.
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "direct"`
 
             - `class BetaServerToolCaller:`
 
@@ -432,7 +432,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "code_execution_20250825"`
 
             - `class BetaServerToolCaller20260120:`
 
@@ -440,7 +440,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "code_execution_20260120"`
 
           - `string? ToolsetName`
 
@@ -454,7 +454,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -482,7 +482,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "tool_reference"`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
@@ -526,7 +526,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "browser_state"`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
@@ -554,7 +554,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `JsonElement Type constant`
+                    - `JsonElement Type = "tab_opened"`
 
                   - `class BetaBrowserStateChangeDownloadStarted:`
 
@@ -566,7 +566,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `JsonElement Type constant`
+                    - `JsonElement Type = "download_started"`
 
                     - `required string Url`
 
@@ -587,7 +587,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `JsonElement Type constant`
+                    - `JsonElement Type = "download_completed"`
 
                     - `required string Url`
 
@@ -617,7 +617,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `JsonElement Type constant`
+                    - `JsonElement Type = "download_failed"`
 
                     - `required string Url`
 
@@ -649,23 +649,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required Name Name`
 
-            - `Advisor`
+            - `Advisor("advisor")`
 
-            - `WebSearch`
+            - `WebSearch("web_search")`
 
-            - `WebFetch`
+            - `WebFetch("web_fetch")`
 
-            - `CodeExecution`
+            - `CodeExecution("code_execution")`
 
-            - `BashCodeExecution`
+            - `BashCodeExecution("bash_code_execution")`
 
-            - `TextEditorCodeExecution`
+            - `TextEditorCodeExecution("text_editor_code_execution")`
 
-            - `ToolSearchToolRegex`
+            - `ToolSearchToolRegex("tool_search_tool_regex")`
 
-            - `ToolSearchToolBm25`
+            - `ToolSearchToolBm25("tool_search_tool_bm25")`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "server_tool_use"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -695,7 +695,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Title`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "web_search_result"`
 
               - `required string Url`
 
@@ -705,25 +705,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaWebSearchToolResultErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `MaxUsesExceeded`
+                - `MaxUsesExceeded("max_uses_exceeded")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `QueryTooLong`
+                - `QueryTooLong("query_too_long")`
 
-                - `RequestTooLarge`
+                - `RequestTooLarge("request_too_large")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "web_search_tool_result_error"`
 
           - `required string ToolUseID`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "web_search_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -751,31 +751,31 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaWebFetchToolResultErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `UrlTooLong`
+                - `UrlTooLong("url_too_long")`
 
-                - `UrlNotAllowed`
+                - `UrlNotAllowed("url_not_allowed")`
 
-                - `UrlNotInPriorContext`
+                - `UrlNotInPriorContext("url_not_in_prior_context")`
 
-                - `UrlNotAccessible`
+                - `UrlNotAccessible("url_not_accessible")`
 
-                - `UnsupportedContentType`
+                - `UnsupportedContentType("unsupported_content_type")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `MaxUsesExceeded`
+                - `MaxUsesExceeded("max_uses_exceeded")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "web_fetch_tool_result_error"`
 
             - `class BetaWebFetchBlockParam:`
 
               - `required BetaRequestDocumentBlock Content`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "web_fetch_result"`
 
               - `required string Url`
 
@@ -789,7 +789,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "web_fetch_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -817,27 +817,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `MaxUsesExceeded`
+                - `MaxUsesExceeded("max_uses_exceeded")`
 
-                - `PromptTooLong`
+                - `PromptTooLong("prompt_too_long")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `Overloaded`
+                - `Overloaded("overloaded")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-                - `ModelNotFound`
+                - `ModelNotFound("model_not_found")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "advisor_tool_result_error"`
 
             - `class BetaAdvisorResultBlockParam:`
 
               - `required string Text`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "advisor_result"`
 
               - `string? StopReason`
 
@@ -847,7 +847,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "advisor_redacted_result"`
 
               - `string? StopReason`
 
@@ -855,7 +855,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "advisor_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -871,15 +871,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required BetaCodeExecutionToolResultErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "code_execution_tool_result_error"`
 
             - `class BetaCodeExecutionResultBlockParam:`
 
@@ -887,7 +887,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "code_execution_output"`
 
               - `required long ReturnCode`
 
@@ -895,7 +895,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Stdout`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "code_execution_result"`
 
             - `class BetaEncryptedCodeExecutionResultBlockParam:`
 
@@ -905,7 +905,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "code_execution_output"`
 
               - `required string EncryptedStdout`
 
@@ -913,13 +913,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Stderr`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "encrypted_code_execution_result"`
 
           - `required string ToolUseID`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "code_execution_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -933,17 +933,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-                - `OutputFileTooLarge`
+                - `OutputFileTooLarge("output_file_too_large")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
             - `class BetaBashCodeExecutionResultBlockParam:`
 
@@ -951,7 +951,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `required string FileID`
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "bash_code_execution_output"`
 
               - `required long ReturnCode`
 
@@ -959,13 +959,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string Stdout`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "bash_code_execution_result"`
 
           - `required string ToolUseID`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "bash_code_execution_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -979,17 +979,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-                - `FileNotFound`
+                - `FileNotFound("file_not_found")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
               - `string? ErrorMessage`
 
@@ -999,13 +999,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required FileType FileType`
 
-                - `Text`
+                - `Text("text")`
 
-                - `Image`
+                - `Image("image")`
 
-                - `Pdf`
+                - `Pdf("pdf")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text_editor_code_execution_view_result"`
 
               - `long? NumLines`
 
@@ -1017,11 +1017,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required bool IsFileUpdate`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text_editor_code_execution_create_result"`
 
             - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text_editor_code_execution_str_replace_result"`
 
               - `IReadOnlyList<string>? Lines`
 
@@ -1037,7 +1037,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1051,15 +1051,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required ErrorCode ErrorCode`
 
-                - `InvalidToolInput`
+                - `InvalidToolInput("invalid_tool_input")`
 
-                - `Unavailable`
+                - `Unavailable("unavailable")`
 
-                - `TooManyRequests`
+                - `TooManyRequests("too_many_requests")`
 
-                - `ExecutionTimeExceeded`
+                - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "tool_search_tool_result_error"`
 
               - `string? ErrorMessage`
 
@@ -1071,19 +1071,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `JsonElement Type constant`
+                - `JsonElement Type = "tool_reference"`
 
                 - `BetaCacheControlEphemeral? CacheControl`
 
                   Create a cache control breakpoint at this content block.
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "tool_search_tool_search_result"`
 
           - `required string ToolUseID`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "tool_search_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1103,7 +1103,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The name of the MCP server
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "mcp_tool_use"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1115,7 +1115,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "mcp_tool_result"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1131,7 +1131,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minLength: 1
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "text"`
 
               - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1148,7 +1148,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `required string FileID`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "container_upload"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1164,7 +1164,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "compaction"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1204,7 +1204,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "tool_reference"`
 
             - `class BetaToolChangeMcpToolReference:`
 
@@ -1215,7 +1215,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string ServerName`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "mcp_tool_reference"`
 
             - `class BetaToolChangeMcpToolsetReference:`
 
@@ -1223,9 +1223,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `required string ServerName`
 
-              - `JsonElement Type constant`
+              - `JsonElement Type = "mcp_toolset_reference"`
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "tool_addition"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1262,7 +1262,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Reference to every tool in the named MCP server's toolset.
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "tool_removal"`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1294,71 +1294,71 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-              - `ClaudeFable5_1`
+              - `ClaudeFable5_1("claude-fable-5-1")`
 
                 Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
-              - `ClaudeMythos5_1`
+              - `ClaudeMythos5_1("claude-mythos-5-1")`
 
                 Our most capable model for cybersecurity and biology research, available through trusted access programs
 
-              - `ClaudeSonnet5`
+              - `ClaudeSonnet5("claude-sonnet-5")`
 
                 High-performance model for coding and agents
 
-              - `ClaudeFable5`
+              - `ClaudeFable5("claude-fable-5")`
 
                 Next generation of intelligence for the hardest knowledge work and coding problems
 
-              - `ClaudeMythos5`
+              - `ClaudeMythos5("claude-mythos-5")`
 
                 Most capable model for cybersecurity and biology research
 
-              - `ClaudeOpus5`
+              - `ClaudeOpus5("claude-opus-5")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeOpus4_8`
+              - `ClaudeOpus4_8("claude-opus-4-8")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeOpus4_7`
+              - `ClaudeOpus4_7("claude-opus-4-7")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeMythosPreview`
+              - `ClaudeMythosPreview("claude-mythos-preview")`
 
                 New class of intelligence, strongest in coding and cybersecurity
 
-              - `ClaudeOpus4_6`
+              - `ClaudeOpus4_6("claude-opus-4-6")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeSonnet4_6`
+              - `ClaudeSonnet4_6("claude-sonnet-4-6")`
 
                 Best combination of speed and intelligence
 
-              - `ClaudeHaiku4_5`
+              - `ClaudeHaiku4_5("claude-haiku-4-5")`
 
                 Fastest model with near-frontier intelligence
 
-              - `ClaudeHaiku4_5_20251001`
+              - `ClaudeHaiku4_5_20251001("claude-haiku-4-5-20251001")`
 
                 Fastest model with near-frontier intelligence
 
-              - `ClaudeOpus4_5`
+              - `ClaudeOpus4_5("claude-opus-4-5")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeOpus4_5_20251101`
+              - `ClaudeOpus4_5_20251101("claude-opus-4-5-20251101")`
 
                 Powerful intelligence for long-running agents and coding
 
-              - `ClaudeSonnet4_5`
+              - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
                 High-performance model for agents and coding
 
-              - `ClaudeSonnet4_5_20250929`
+              - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
 
                 High-performance model for agents and coding
 
@@ -1366,7 +1366,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Identifies one hop of a fallback transition.
 
-          - `JsonElement Type constant`
+          - `JsonElement Type = "fallback"`
 
           - `JsonElement Trigger`
 
@@ -1374,19 +1374,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `required Role Role`
 
-      - `User`
+      - `User("user")`
 
-      - `Assistant`
+      - `Assistant("assistant")`
 
-      - `System`
+      - `System("system")`
 
     - `ClearAt? ClearAt`
 
       How long this system message's text stays in front of the model. `"never"` (the default) renders it on every request that includes it. `"next_user_message"` renders it only for the user turn it follows: once a later `role: "user"` message exists in `messages` the message stays in the array (send it unchanged) but is no longer shown to the model. Only permitted on `role: "system"` messages.
 
-      - `NextUserMessage`
+      - `NextUserMessage("next_user_message")`
 
-      - `Never`
+      - `Never("never")`
 
     - `BetaSystemMessageOutputConfig? OutputConfig`
 
@@ -1400,15 +1400,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         All possible effort levels.
 
-        - `Low`
+        - `Low("low")`
 
-        - `Medium`
+        - `Medium("medium")`
 
-        - `High`
+        - `High("high")`
 
-        - `Xhigh`
+        - `Xhigh("xhigh")`
 
-        - `Max`
+        - `Max("max")`
 
   - `required Model model`
 
@@ -1434,7 +1434,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `required string Name`
 
-    - `JsonElement Type constant`
+    - `JsonElement Type = "url"`
 
     - `required string Url`
 
@@ -1454,9 +1454,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-    - `Standard`
+    - `Standard("standard")`
 
-    - `Fast`
+    - `Fast("fast")`
 
   - `System system`
 
@@ -1472,7 +1472,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         minLength: 1
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "text"`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1564,7 +1564,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         This defines the shape of the `input` that your tool accepts and that the model will produce.
 
-        - `JsonElement Type constant`
+        - `JsonElement Type = "object"`
 
         - `IReadOnlyDictionary<string, JsonElement>? Properties`
 
@@ -1580,13 +1580,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1616,23 +1616,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolBash20241022:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "bash_20241022"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1650,23 +1650,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolBash20250124:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "bash_20250124"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1684,23 +1684,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaCodeExecutionTool20250522:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "code_execution_20250522"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1716,23 +1716,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaCodeExecutionTool20250825:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "code_execution_20250825"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1750,23 +1750,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "code_execution_20260120"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1784,23 +1784,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence.
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "code_execution_20260521"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1821,7 +1821,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       the family's tool with any members disabled via `configs` removed
       from its schema.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "browser_toolset_20260801"`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2222,23 +2222,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         minimum: 1
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "computer"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "computer_20241022"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2262,23 +2262,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaMemoryTool20250818:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "memory"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "memory_20250818"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2308,23 +2308,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         minimum: 1
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "computer"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "computer_20250124"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2348,23 +2348,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolTextEditor20241022:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "text_editor_20241022"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2394,23 +2394,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         minimum: 1
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "computer"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "computer_20251124"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2447,7 +2447,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       `type`, `configs`, and `cache_control`; zoom is controlled
       via `configs.zoom.enabled`.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "computer_toolset_20260801"`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2668,23 +2668,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolTextEditor20250124:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "text_editor_20250124"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2702,23 +2702,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolTextEditor20250429:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "text_editor_20250429"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2736,23 +2736,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolTextEditor20250728:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "text_editor_20250728"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2776,23 +2776,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebSearchTool20250305:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_search_20250305"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2824,7 +2824,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-        - `JsonElement Type constant`
+        - `JsonElement Type = "approximate"`
 
         - `string? City`
 
@@ -2852,23 +2852,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebFetchTool20250910:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_fetch_20250910"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2908,23 +2908,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebSearchTool20260209:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_search_20260209"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2958,23 +2958,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebFetchTool20260209:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_fetch_20260209"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3016,23 +3016,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_fetch_20260309"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3076,23 +3076,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebSearchTool20260318:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_search_20260318"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3120,9 +3120,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-        - `Full`
+        - `Full("full")`
 
-        - `Excluded`
+        - `Excluded("excluded")`
 
       - `bool Strict`
 
@@ -3134,23 +3134,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaWebFetchTool20260318:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "web_fetch_20260318"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `IReadOnlyList<string>? AllowedDomains`
 
@@ -3188,9 +3188,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
-        - `Full`
+        - `Full("full")`
 
-        - `Excluded`
+        - `Excluded("excluded")`
 
       - `bool Strict`
 
@@ -3208,23 +3208,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "advisor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "advisor_20260301"`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3256,7 +3256,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolSearchToolBm25_20251119:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "tool_search_tool_bm25"`
 
         Name of the tool.
 
@@ -3264,19 +3264,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `required Type Type`
 
-        - `ToolSearchToolBm25_20251119`
+        - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
-        - `ToolSearchToolBm25`
+        - `ToolSearchToolBm25("tool_search_tool_bm25")`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3292,7 +3292,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `class BetaToolSearchToolRegex20251119:`
 
-      - `JsonElement Name constant`
+      - `JsonElement Name = "tool_search_tool_regex"`
 
         Name of the tool.
 
@@ -3300,19 +3300,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `required Type Type`
 
-        - `ToolSearchToolRegex20251119`
+        - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
-        - `ToolSearchToolRegex`
+        - `ToolSearchToolRegex("tool_search_tool_regex")`
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
-        - `Direct`
+        - `Direct("direct")`
 
-        - `CodeExecution20250825`
+        - `CodeExecution20250825("code_execution_20250825")`
 
-        - `CodeExecution20260120`
+        - `CodeExecution20260120("code_execution_20260120")`
 
-        - `CodeExecution20260521`
+        - `CodeExecution20260521("code_execution_20260521")`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3339,7 +3339,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         maxLength: 255, minLength: 1
 
-      - `JsonElement Type constant`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3365,93 +3365,93 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
-    - `MessageBatches2024_09_24`
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
-    - `PromptCaching2024_07_31`
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
 
-    - `ComputerUse2024_10_22`
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
 
-    - `ComputerUse2025_01_24`
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
 
-    - `Pdfs2024_09_25`
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
 
-    - `TokenCounting2024_11_01`
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
 
-    - `TokenEfficientTools2025_02_19`
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
 
-    - `Output128k2025_02_19`
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
 
-    - `FilesApi2025_04_14`
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
 
-    - `McpClient2025_04_04`
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
 
-    - `McpClient2025_11_20`
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
 
-    - `DevFullThinking2025_05_14`
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
 
-    - `InterleavedThinking2025_05_14`
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
 
-    - `CodeExecution2025_05_22`
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
 
-    - `ExtendedCacheTtl2025_04_11`
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
 
-    - `Context1m2025_08_07`
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
 
-    - `ContextManagement2025_06_27`
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
 
-    - `ModelContextWindowExceeded2025_08_26`
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
 
-    - `Skills2025_10_02`
+    - `Skills2025_10_02("skills-2025-10-02")`
 
-    - `FastMode2026_02_01`
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
 
-    - `Output300k2026_03_24`
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
 
-    - `UserProfiles2026_03_24`
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
 
-    - `UserProfiles2026_08_18`
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
-    - `AdvisorTool2026_03_01`
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
-    - `ManagedAgents2026_04_01`
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
 
-    - `CacheDiagnosis2026_04_07`
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
 
-    - `Dreaming2026_04_21`
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
 
-    - `ThinkingTokenCount2026_05_13`
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
 
-    - `ServerSideFallback2026_06_01`
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
 
-    - `ServerSideFallback2026_07_01`
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
 
-    - `FallbackCredit2026_06_01`
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
 
-    - `FallbackCredit2026_07_01`
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
 
-    - `AgentMemory2026_07_22`
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
 
-    - `MidConversationToolChanges2026_07_01`
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
-    - `Compact2026_01_12`
+    - `Compact2026_01_12("compact-2026-01-12")`
 
-    - `ComputerUse2025_11_24`
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
 
-    - `McpTunnels2026_06_22`
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
 
-    - `StructuredOutputs2025_11_13`
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
 
-    - `TaskBudgets2026_03_13`
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
 
-    - `ThinkingDisplayUpdates2026_08_18`
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CEUserManagement2026_07_13`
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
 
-    - `MidConversationOutputConfig2026_07_01`
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
 
-    - `ThinkingBindingControls2026_08_01`
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
-    - `MidConversationSystemClearAt2026_08_21`
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
   - `string userProfileID`
 

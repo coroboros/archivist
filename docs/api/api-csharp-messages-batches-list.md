@@ -80,11 +80,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Processing status of the Message Batch.
 
-    - `InProgress`
+    - `InProgress("in_progress")`
 
-    - `Canceling`
+    - `Canceling("canceling")`
 
-    - `Ended`
+    - `Ended("ended")`
 
   - `required MessageBatchRequestCounts RequestCounts`
 
@@ -126,7 +126,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `JsonElement Type constant`
+  - `JsonElement Type = "message_batch"`
 
     Object type.
 

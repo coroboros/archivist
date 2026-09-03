@@ -160,7 +160,7 @@ List Skill Versions
 
     The format and length of IDs may change over time.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "skill_version"`
 
     Object type.
 

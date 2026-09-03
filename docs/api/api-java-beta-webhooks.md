@@ -18,7 +18,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "agent.archived"`
 
   - `String workspaceId`
 
@@ -32,7 +32,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "agent.created"`
 
   - `String workspaceId`
 
@@ -46,7 +46,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "agent.deleted"`
 
   - `String workspaceId`
 
@@ -60,7 +60,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "agent.updated"`
 
   - `String workspaceId`
 
@@ -74,7 +74,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.archived"`
 
   - `String workspaceId`
 
@@ -88,7 +88,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.created"`
 
   - `String workspaceId`
 
@@ -102,7 +102,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.deleted"`
 
   - `String workspaceId`
 
@@ -116,7 +116,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.paused"`
 
   - `String workspaceId`
 
@@ -130,7 +130,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment_run.failed"`
 
   - `String workspaceId`
 
@@ -144,7 +144,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment_run.started"`
 
   - `String workspaceId`
 
@@ -158,7 +158,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment_run.succeeded"`
 
   - `String workspaceId`
 
@@ -172,7 +172,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.unpaused"`
 
   - `String workspaceId`
 
@@ -186,7 +186,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "deployment.updated"`
 
   - `String workspaceId`
 
@@ -200,7 +200,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "environment.archived"`
 
   - `String workspaceId`
 
@@ -214,7 +214,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "environment.created"`
 
   - `String workspaceId`
 
@@ -228,7 +228,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "environment.deleted"`
 
   - `String workspaceId`
 
@@ -242,7 +242,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "environment.updated"`
 
   - `String workspaceId`
 
@@ -270,7 +270,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.created"`
 
       - `String workspaceId`
 
@@ -282,7 +282,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.pending"`
 
       - `String workspaceId`
 
@@ -294,7 +294,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.running"`
 
       - `String workspaceId`
 
@@ -306,7 +306,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.idled"`
 
       - `String workspaceId`
 
@@ -318,7 +318,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.requires_action"`
 
       - `String workspaceId`
 
@@ -330,7 +330,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.archived"`
 
       - `String workspaceId`
 
@@ -342,7 +342,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.deleted"`
 
       - `String workspaceId`
 
@@ -354,7 +354,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.status_rescheduled"`
 
       - `String workspaceId`
 
@@ -366,7 +366,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.status_run_started"`
 
       - `String workspaceId`
 
@@ -378,7 +378,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.status_idled"`
 
       - `String workspaceId`
 
@@ -390,7 +390,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.status_terminated"`
 
       - `String workspaceId`
 
@@ -406,7 +406,7 @@ generated: true
 
         ID of the session thread this event refers to.
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.thread_created"`
 
       - `String workspaceId`
 
@@ -422,7 +422,7 @@ generated: true
 
         ID of the session thread this event refers to.
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.thread_idled"`
 
       - `String workspaceId`
 
@@ -438,7 +438,7 @@ generated: true
 
         ID of the session thread this event refers to.
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.thread_terminated"`
 
       - `String workspaceId`
 
@@ -450,7 +450,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.outcome_evaluation_ended"`
 
       - `String workspaceId`
 
@@ -462,7 +462,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault.created"`
 
       - `String workspaceId`
 
@@ -474,7 +474,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault.archived"`
 
       - `String workspaceId`
 
@@ -486,7 +486,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault.deleted"`
 
       - `String workspaceId`
 
@@ -498,7 +498,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault_credential.created"`
 
       - `String vaultId`
 
@@ -514,7 +514,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault_credential.archived"`
 
       - `String vaultId`
 
@@ -530,7 +530,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault_credential.deleted"`
 
       - `String vaultId`
 
@@ -546,7 +546,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "vault_credential.refresh_failed"`
 
       - `String vaultId`
 
@@ -562,7 +562,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.updated"`
 
       - `String workspaceId`
 
@@ -574,7 +574,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "agent.created"`
 
       - `String workspaceId`
 
@@ -586,7 +586,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "agent.archived"`
 
       - `String workspaceId`
 
@@ -598,7 +598,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "agent.deleted"`
 
       - `String workspaceId`
 
@@ -610,7 +610,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.paused"`
 
       - `String workspaceId`
 
@@ -622,7 +622,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment_run.failed"`
 
       - `String workspaceId`
 
@@ -634,7 +634,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.created"`
 
       - `String workspaceId`
 
@@ -646,7 +646,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.updated"`
 
       - `String workspaceId`
 
@@ -658,7 +658,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.unpaused"`
 
       - `String workspaceId`
 
@@ -670,7 +670,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "agent.updated"`
 
       - `String workspaceId`
 
@@ -682,7 +682,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.archived"`
 
       - `String workspaceId`
 
@@ -694,7 +694,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment_run.started"`
 
       - `String workspaceId`
 
@@ -706,7 +706,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment.deleted"`
 
       - `String workspaceId`
 
@@ -718,7 +718,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "deployment_run.succeeded"`
 
       - `String workspaceId`
 
@@ -730,7 +730,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "environment.created"`
 
       - `String workspaceId`
 
@@ -742,7 +742,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "environment.updated"`
 
       - `String workspaceId`
 
@@ -754,7 +754,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "environment.archived"`
 
       - `String workspaceId`
 
@@ -766,7 +766,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "environment.deleted"`
 
       - `String workspaceId`
 
@@ -778,7 +778,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "memory_store.created"`
 
       - `String workspaceId`
 
@@ -790,7 +790,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "memory_store.archived"`
 
       - `String workspaceId`
 
@@ -802,7 +802,7 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "memory_store.deleted"`
 
       - `String workspaceId`
 
@@ -814,11 +814,11 @@ generated: true
 
       - `String organizationId`
 
-      - `JsonValue type constant`
+      - `JsonValue type = "session.budget_reached"`
 
       - `String workspaceId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "event"`
 
     Object type. Always `event` for webhook payloads.
 
@@ -834,7 +834,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.created"`
 
     - `String workspaceId`
 
@@ -846,7 +846,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.pending"`
 
     - `String workspaceId`
 
@@ -858,7 +858,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.running"`
 
     - `String workspaceId`
 
@@ -870,7 +870,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.idled"`
 
     - `String workspaceId`
 
@@ -882,7 +882,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.requires_action"`
 
     - `String workspaceId`
 
@@ -894,7 +894,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.archived"`
 
     - `String workspaceId`
 
@@ -906,7 +906,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.deleted"`
 
     - `String workspaceId`
 
@@ -918,7 +918,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.status_rescheduled"`
 
     - `String workspaceId`
 
@@ -930,7 +930,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.status_run_started"`
 
     - `String workspaceId`
 
@@ -942,7 +942,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.status_idled"`
 
     - `String workspaceId`
 
@@ -954,7 +954,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.status_terminated"`
 
     - `String workspaceId`
 
@@ -970,7 +970,7 @@ generated: true
 
       ID of the session thread this event refers to.
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.thread_created"`
 
     - `String workspaceId`
 
@@ -986,7 +986,7 @@ generated: true
 
       ID of the session thread this event refers to.
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.thread_idled"`
 
     - `String workspaceId`
 
@@ -1002,7 +1002,7 @@ generated: true
 
       ID of the session thread this event refers to.
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.thread_terminated"`
 
     - `String workspaceId`
 
@@ -1014,7 +1014,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.outcome_evaluation_ended"`
 
     - `String workspaceId`
 
@@ -1026,7 +1026,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault.created"`
 
     - `String workspaceId`
 
@@ -1038,7 +1038,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault.archived"`
 
     - `String workspaceId`
 
@@ -1050,7 +1050,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault.deleted"`
 
     - `String workspaceId`
 
@@ -1062,7 +1062,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault_credential.created"`
 
     - `String vaultId`
 
@@ -1078,7 +1078,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault_credential.archived"`
 
     - `String vaultId`
 
@@ -1094,7 +1094,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault_credential.deleted"`
 
     - `String vaultId`
 
@@ -1110,7 +1110,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "vault_credential.refresh_failed"`
 
     - `String vaultId`
 
@@ -1126,7 +1126,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.updated"`
 
     - `String workspaceId`
 
@@ -1138,7 +1138,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "agent.created"`
 
     - `String workspaceId`
 
@@ -1150,7 +1150,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "agent.archived"`
 
     - `String workspaceId`
 
@@ -1162,7 +1162,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "agent.deleted"`
 
     - `String workspaceId`
 
@@ -1174,7 +1174,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.paused"`
 
     - `String workspaceId`
 
@@ -1186,7 +1186,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment_run.failed"`
 
     - `String workspaceId`
 
@@ -1198,7 +1198,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.created"`
 
     - `String workspaceId`
 
@@ -1210,7 +1210,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.updated"`
 
     - `String workspaceId`
 
@@ -1222,7 +1222,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.unpaused"`
 
     - `String workspaceId`
 
@@ -1234,7 +1234,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "agent.updated"`
 
     - `String workspaceId`
 
@@ -1246,7 +1246,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.archived"`
 
     - `String workspaceId`
 
@@ -1258,7 +1258,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment_run.started"`
 
     - `String workspaceId`
 
@@ -1270,7 +1270,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment.deleted"`
 
     - `String workspaceId`
 
@@ -1282,7 +1282,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "deployment_run.succeeded"`
 
     - `String workspaceId`
 
@@ -1294,7 +1294,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "environment.created"`
 
     - `String workspaceId`
 
@@ -1306,7 +1306,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "environment.updated"`
 
     - `String workspaceId`
 
@@ -1318,7 +1318,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "environment.archived"`
 
     - `String workspaceId`
 
@@ -1330,7 +1330,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "environment.deleted"`
 
     - `String workspaceId`
 
@@ -1342,7 +1342,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "memory_store.created"`
 
     - `String workspaceId`
 
@@ -1354,7 +1354,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "memory_store.archived"`
 
     - `String workspaceId`
 
@@ -1366,7 +1366,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "memory_store.deleted"`
 
     - `String workspaceId`
 
@@ -1378,7 +1378,7 @@ generated: true
 
     - `String organizationId`
 
-    - `JsonValue type constant`
+    - `JsonValue type = "session.budget_reached"`
 
     - `String workspaceId`
 
@@ -1392,7 +1392,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "memory_store.archived"`
 
   - `String workspaceId`
 
@@ -1406,7 +1406,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "memory_store.created"`
 
   - `String workspaceId`
 
@@ -1420,7 +1420,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "memory_store.deleted"`
 
   - `String workspaceId`
 
@@ -1434,7 +1434,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.archived"`
 
   - `String workspaceId`
 
@@ -1448,7 +1448,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.budget_reached"`
 
   - `String workspaceId`
 
@@ -1462,7 +1462,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.created"`
 
   - `String workspaceId`
 
@@ -1476,7 +1476,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.deleted"`
 
   - `String workspaceId`
 
@@ -1490,7 +1490,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.idled"`
 
   - `String workspaceId`
 
@@ -1504,7 +1504,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.outcome_evaluation_ended"`
 
   - `String workspaceId`
 
@@ -1518,7 +1518,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.pending"`
 
   - `String workspaceId`
 
@@ -1532,7 +1532,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.requires_action"`
 
   - `String workspaceId`
 
@@ -1546,7 +1546,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.running"`
 
   - `String workspaceId`
 
@@ -1560,7 +1560,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.status_idled"`
 
   - `String workspaceId`
 
@@ -1574,7 +1574,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.status_rescheduled"`
 
   - `String workspaceId`
 
@@ -1588,7 +1588,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.status_run_started"`
 
   - `String workspaceId`
 
@@ -1602,7 +1602,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.status_terminated"`
 
   - `String workspaceId`
 
@@ -1620,7 +1620,7 @@ generated: true
 
     ID of the session thread this event refers to.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.thread_created"`
 
   - `String workspaceId`
 
@@ -1638,7 +1638,7 @@ generated: true
 
     ID of the session thread this event refers to.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.thread_idled"`
 
   - `String workspaceId`
 
@@ -1656,7 +1656,7 @@ generated: true
 
     ID of the session thread this event refers to.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.thread_terminated"`
 
   - `String workspaceId`
 
@@ -1670,7 +1670,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "session.updated"`
 
   - `String workspaceId`
 
@@ -1684,7 +1684,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault.archived"`
 
   - `String workspaceId`
 
@@ -1698,7 +1698,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault.created"`
 
   - `String workspaceId`
 
@@ -1712,7 +1712,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault_credential.archived"`
 
   - `String vaultId`
 
@@ -1730,7 +1730,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault_credential.created"`
 
   - `String vaultId`
 
@@ -1748,7 +1748,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault_credential.deleted"`
 
   - `String vaultId`
 
@@ -1766,7 +1766,7 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault_credential.refresh_failed"`
 
   - `String vaultId`
 
@@ -1784,6 +1784,6 @@ generated: true
 
   - `String organizationId`
 
-  - `JsonValue type constant`
+  - `JsonValue type = "vault.deleted"`
 
   - `String workspaceId`

@@ -216,7 +216,7 @@ Retrieve a memory version
 
         minLength: 1
 
-      - `JsonValue type constant`
+      - `JsonValue type = "service_account_actor"`
 
   - `Optional<String> path`
 

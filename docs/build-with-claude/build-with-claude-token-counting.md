@@ -785,7 +785,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 <Note>
   See [Thinking and the context window](./build-with-claude-thinking.md#thinking-and-the-context-window) for more details.
 
-  * Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
+  * Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](./build-with-claude-thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count
   * **Current** assistant turn thinking **does** count toward your input tokens
 </Note>
 

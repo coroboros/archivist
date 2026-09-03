@@ -129,7 +129,7 @@ Delete Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `JsonValue type constant`
+  - `JsonValue type = "skill_version_deleted"`
 
     Deleted object type.
 
