@@ -1,5 +1,35 @@
 # Changelog
 
+## 🤖 v1.5.147 - 03/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-preserved-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-self-hosted-environments-reference.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-models-fable-5-1-whats-new-fable-5-1.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.146 - 03/09/2026
 
 File Changes:

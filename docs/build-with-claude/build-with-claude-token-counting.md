@@ -796,10 +796,9 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
     -H "content-type: application/json" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-sonnet-4-6",
+      "model": "claude-opus-5",
       "thinking": {
-        "type": "enabled",
-        "budget_tokens": 16000
+        "type": "adaptive"
       },
       "messages": [
         {
@@ -830,10 +829,9 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 
   ```bash CLI
   ant messages count-tokens <<'YAML'
-  model: claude-sonnet-4-6
+  model: claude-opus-5
   thinking:
-    type: enabled
-    budget_tokens: 16000
+    type: adaptive
   messages:
     - role: user
       content: Are there an infinite number of prime numbers such that n mod 4 == 3?
@@ -855,8 +853,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   client = anthropic.Anthropic()
 
   response = client.messages.count_tokens(
-      model="claude-sonnet-4-6",
-      thinking={"type": "enabled", "budget_tokens": 16000},
+      model="claude-opus-5",
+      thinking={"type": "adaptive"},
       messages=[
           {
               "role": "user",
@@ -887,11 +885,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   const client = new Anthropic();
 
   const response = await client.messages.countTokens({
-    model: "claude-sonnet-4-6",
-    thinking: {
-      type: "enabled",
-      budget_tokens: 16000
-    },
+    model: "claude-opus-5",
+    thinking: { type: "adaptive" },
     messages: [
       {
         role: "user",
@@ -934,8 +929,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 
   var parameters = new MessageCountTokensParams
   {
-      Model = Model.ClaudeSonnet4_6,
-      Thinking = new ThinkingConfigEnabled(budgetTokens: 16000),
+      Model = Model.ClaudeOpus5,
+      Thinking = new ThinkingConfigAdaptive(),
       Messages =
       [
           new()
@@ -981,8 +976,10 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   )
 
   response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-  	Model:    anthropic.ModelClaudeSonnet4_6,
-  	Thinking: anthropic.ThinkingConfigParamOfEnabled(16000),
+  	Model: anthropic.ModelClaudeOpus5,
+  	Thinking: anthropic.ThinkingConfigParamUnion{
+  		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+  	},
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Are there an infinite number of prime numbers such that n mod 4 == 3?")),
   		anthropic.NewAssistantMessage(thinkingBlock, textBlock),
@@ -1001,6 +998,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   import com.anthropic.models.messages.MessageTokensCount;
   // ...
   import com.anthropic.models.messages.ThinkingBlockParam;
+  import com.anthropic.models.messages.ThinkingConfigAdaptive;
   // ...
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
@@ -1023,8 +1021,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
       );
 
       MessageCountTokensParams params = MessageCountTokensParams.builder()
-        .model(Model.CLAUDE_SONNET_4_6)
-        .enabledThinking(16000)
+        .model(Model.CLAUDE_OPUS_5)
+        .thinking(ThinkingConfigAdaptive.builder().build())
         .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
         .addAssistantMessageOfBlockParams(assistantBlocks)
         .addUserMessage("Can you write a formal proof?")
@@ -1062,11 +1060,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
               'content' => 'Can you write a formal proof?'
           ]
       ],
-      model: 'claude-sonnet-4-6',
-      thinking: [
-          'type' => 'enabled',
-          'budget_tokens' => 16000
-      ],
+      model: 'claude-opus-5',
+      thinking: ['type' => 'adaptive'],
   );
 
   echo json_encode($response);
@@ -1076,10 +1071,9 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   client = Anthropic::Client.new
 
   response = client.messages.count_tokens(
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-5",
     thinking: {
-      type: "enabled",
-      budget_tokens: 16000
+      type: "adaptive"
     },
     messages: [
       {

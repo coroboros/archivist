@@ -946,7 +946,7 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
   A file is downloadable only when its metadata shows `"downloadable": true`, which is the case for files created by skills or the code execution tool. Downloading a file you uploaded returns a 400 error.
 </Note>
 
-On the Claude API, supported image and video files that Claude produces with the code execution tool, including files created by skills, carry signed C2PA Content Credentials when you download them. See [Content Credentials on generated files](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#content-credentials-on-generated-files) for what the credential contains and how to verify it.
+On the Claude API, supported image, video, and audio files that Claude produces with the code execution tool, including files created by skills, carry signed C2PA Content Credentials when you download them. See [Content Credentials on generated files](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#content-credentials-on-generated-files) for what the credential contains and how to verify it.
 
 ## File storage and limits
 
