@@ -1,5 +1,84 @@
 # Changelog
 
+## 🤖 v1.5.148 - 04/09/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/code/code-2026-w13.md`
+- Modified: `docs/code/code-2026-w14.md`
+- Modified: `docs/code/code-2026-w15.md`
+- Modified: `docs/code/code-2026-w16.md`
+- Modified: `docs/code/code-2026-w17.md`
+- Modified: `docs/code/code-2026-w18.md`
+- Modified: `docs/code/code-2026-w19.md`
+- Modified: `docs/code/code-2026-w20.md`
+- Modified: `docs/code/code-2026-w21.md`
+- Modified: `docs/code/code-2026-w22.md`
+- Modified: `docs/code/code-2026-w23.md`
+- Modified: `docs/code/code-2026-w24.md`
+- Modified: `docs/code/code-2026-w25.md`
+- Modified: `docs/code/code-2026-w26.md`
+- Modified: `docs/code/code-2026-w27.md`
+- Modified: `docs/code/code-2026-w28.md`
+- Modified: `docs/code/code-2026-w29.md`
+- Modified: `docs/code/code-2026-w30.md`
+- Modified: `docs/code/code-2026-w32.md`
+- Modified: `docs/code/code-2026-w33.md`
+- Modified: `docs/code/code-2026-w34.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-gateways.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-llm-gateway-rollout.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-scripting.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-analytics-api.md`
+- Modified: `docs/manage-claude/manage-claude-authentication.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-multiagent-orchestration.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+
+
 ## 🤖 v1.5.147 - 03/09/2026
 
 File Changes:
