@@ -1,6 +1,6 @@
 ---
 name: ask-archivist
-description: Consult a local mirror of Anthropic's official docs for authoritative answers about Claude Code (CLI flags, non-interactive mode, hooks, MCP, subagents, slash commands, skills, plugins, CLAUDE.md, sandboxing, worktrees, checkpointing, statusline, settings.json, agent teams), the Claude Agent SDK (agents, tools, state, streaming, managed agents), and the Claude API (messages, tool use, prompt caching, files, batch, citations, extended thinking, vision, pricing, rate limits, endpoints). Use whenever the user asks how anything in Claude's ecosystem works or behaves — features, flags, parameters, limits, configuration — including casual phrasing, French, typos, and questions that don't explicitly say "check docs". Also triggers on "does X support Y / can I do Z / what's the diff between A and B / how do I configure …" and on complaints about Claude Code behavior the user wants to change. Deterministic Grep + full-file Read over the local mirror — never training data. Cites paths and source URLs.
+description: Look up Claude Code, Claude Agent SDK, and Claude API documentation in the local Archivist mirror. Use for questions about their features, configuration, commands, or APIs.
 argument-hint: "[--section <api|code|agents-and-tools|build-with-claude|manage-claude|managed-agents|test-and-evaluate|release-notes|general|insights>] [--tag <tag>] <question>"
 allowed-tools: Bash Grep Read Glob
 metadata:

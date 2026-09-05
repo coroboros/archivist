@@ -1,5 +1,11 @@
 # Changelog
 
+## 🧑‍💻 v1.5.152 - 05/09/2026
+
+### Documentation
+
+- Centralized project guidance in `AGENTS.md` and shared rules, reduced repeated context, and preserved conditional changelog loading; narrowed the `ask-archivist` discovery description
+
 ## 🤖 v1.5.151 - 05/09/2026
 
 File Changes:
