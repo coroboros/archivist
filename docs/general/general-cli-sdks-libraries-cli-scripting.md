@@ -7,14 +7,14 @@ generated: true
 ---
 title: CLI scripting and automation
 url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting
-description: Version-control API resources as YAML, chain ant CLI commands in scripts, operate on resources from Claude Code, and authenticate curl calls with CLI credentials.
+description: Version-control API resources as files with ant apply, chain ant CLI commands in scripts, operate on resources from Claude Code, and authenticate curl calls with CLI credentials.
 ---
 
 This page covers task-oriented workflows built on the `ant` CLI. For the underlying flags and output options, see [Using the CLI](./general-cli-sdks-libraries-cli-using.md).
 
 ## Version-controlling API resources
 
-To keep agents, environments, and other Claude Managed Agents resources as files in your repository, see [Manage resources as code with ant apply](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply.md).
+To keep agents, environments, and other Claude Managed Agents resources as files in your repository, see [Manage resources as code with ant apply](./general-cli-sdks-libraries-cli-apply.md).
 
 ### Run the applied agent from the shell
 
@@ -22,7 +22,7 @@ Once an agent and environment exist, you can drive a session from the shell:
 
 <Steps>
   <Step title="Start a session">
-    Pass the agent and environment IDs to the session create command. After `ant apply`, read them from `claude-lock.json`: each entry under `resources` has an `id`, and for the project in [Manage resources as code with ant apply](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply.md) the entries are `./agents/summarizer.md` and `./environments/cloud.yaml`.
+    Pass the agent and environment IDs to the session create command. After `ant apply`, read them from `claude-lock.json`: each entry under `resources` has an `id`, and for the project in [Manage resources as code with ant apply](./general-cli-sdks-libraries-cli-apply.md) the entries are `./agents/summarizer.md` and `./environments/cloud.yaml`.
 
     ```bash
     ant beta:sessions create \

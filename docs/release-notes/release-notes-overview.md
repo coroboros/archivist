@@ -17,6 +17,10 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### September 3, 2026
+
+* Version 1.30.0 of the `ant` CLI adds `ant apply`, which creates and updates agents, environments, skills, memory stores, and deployments from files in your repository. Describe each resource in a file, run `ant apply`, and approve the plan it prints. Commit the `claude-lock.json` lockfile it writes so that later runs, on your machine or in CI, update the same resources instead of creating new ones. See [Manage resources as code with ant apply](../general/general-cli-sdks-libraries-cli-apply.md).
+
 ### September 1, 2026
 
 * We've launched **Claude Fable 5.1** (`claude-fable-5-1`), the successor to Claude Fable 5 for long-running agentic coding, knowledge work, and research, alongside **Claude Mythos 5.1** (`claude-mythos-5-1`) for Project Glasswing participants. Both models support a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default, 128k max output tokens, and always-on [adaptive thinking](../build-with-claude/build-with-claude-thinking.md), at $10 / $50 USD per MTok, the same as Claude Fable 5, with cache reads cut to $0.25 per MTok. Claude Fable 5.1 is available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). See [What's new in Claude Fable 5.1](../general/general-models-fable-5-1-whats-new-fable-5-1.md) for capabilities, API changes, and migration guidance.
