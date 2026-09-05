@@ -4,7 +4,7 @@
 
 ### Documentation
 
-- Centralized project instructions in `AGENTS.md` with a shared rule index and a Claude import; narrowed the `ask-archivist` discovery description
+- Centralized project guidance in `AGENTS.md` and shared rules, reduced repeated context, and preserved conditional changelog loading; narrowed the `ask-archivist` discovery description
 
 ## 🤖 v1.5.151 - 05/09/2026
 

@@ -1,23 +1,10 @@
-# Documentation Authoring
+# Documentation authoring
 
 Rules for authoring and maintaining content under `docs/`.
 
-## Auto-generated sections — do not edit
+## Generated sections
 
-The following folders are overwritten by the update script (`pnpm update`) and must never be edited by hand:
-
-- `docs/about-claude/`
-- `docs/agents-and-tools/`
-- `docs/api/`
-- `docs/build-with-claude/`
-- `docs/manage-claude/`
-- `docs/managed-agents/`
-- `docs/release-notes/`
-- `docs/test-and-evaluate/`
-- `docs/general/` (fallback bucket for orphan top-level pages)
-- `docs/code/`
-
-Platform folders mirror the upstream sitemap top-level sections 1:1 (config: `DOCS` in `scripts/update-platform-docs.js`). Each folder has a `{section}-README.md` index that is regenerated on every update run. Manual edits are lost on the next CI fetch (every 12h).
+`pnpm update` overwrites platform documentation selected by `DOCS` in `scripts/update-platform-docs.js`, including the `docs/general/` fallback, and Claude Code documentation in `docs/code/`. Their section indexes are generated too. Change the fetcher or upstream source, never these files by hand; the next scheduled fetch would erase manual edits.
 
 ## Insights (`docs/insights/`)
 
@@ -26,10 +13,10 @@ Manually curated articles from Anthropic team members and official resources. Co
 ### Filename
 
 - Lowercase kebab-case with hyphens — never underscores, spaces, or camelCase
-- Start with a topical prefix matching an existing group: `claude-code-…`, `claude-project-…`, `skills-…`. Introduce a new prefix only when a new category is unavoidable
+- Use an existing topical prefix such as `claude-code-…`, `claude-project-…`, or `skills-…`; add one only for a distinct category
 - Be descriptive and self-explanatory — filenames act as implicit metadata for Claude's retrieval
 - Include year/version only when meaningful (e.g. `opus-4-7`)
-- Avoid: `doc1.md`, `final.md`, `latest.md`, or any non-ASCII characters
+- Avoid generic or temporary names such as `doc1.md`, `final.md`, and `latest.md`, and non-ASCII characters
 
 ### Frontmatter
 
