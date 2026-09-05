@@ -1,5 +1,45 @@
 # Changelog
 
+## 🤖 v1.5.151 - 05/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-settings-example.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-worktrees.md`
+
+
 ## 🤖 v1.5.150 - 05/09/2026
 
 File Changes:
