@@ -1,5 +1,11 @@
 # Changelog
 
+## 🧑‍💻 v1.5.152 - 05/09/2026
+
+### Documentation
+
+- Centralized project instructions in `AGENTS.md` with a shared rule index and a Claude import
+
 ## 🤖 v1.5.151 - 05/09/2026
 
 File Changes:

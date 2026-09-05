@@ -21,7 +21,7 @@ Platform folders mirror the upstream sitemap top-level sections 1:1 (config: `DO
 
 ## Insights (`docs/insights/`)
 
-Manually curated articles from Anthropic team members and official resources. Conventions are derived from [claude-project-knowledge-bases-best-practices.md](../docs/insights/claude-project-knowledge-bases-best-practices.md).
+Manually curated articles from Anthropic team members and official resources. Conventions are derived from [claude-project-knowledge-bases-best-practices.md](../../docs/insights/claude-project-knowledge-bases-best-practices.md).
 
 ### Filename
 
