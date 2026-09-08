@@ -1,5 +1,28 @@
 # Changelog
 
+## 🤖 v1.5.158 - 08/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugin-relevance.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-voice-dictation.md`
+
+
 ## 🤖 v1.5.157 - 08/09/2026
 
 File Changes:
