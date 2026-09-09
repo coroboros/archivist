@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.160 - 09/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.159 - 09/09/2026
 
 File Changes:
