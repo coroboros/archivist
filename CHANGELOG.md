@@ -1,5 +1,37 @@
 # Changelog
 
+## 🤖 v1.5.159 - 09/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-github-actions-cloud-providers.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-workflows.md`
+
+
 ## 🤖 v1.5.158 - 08/09/2026
 
 File Changes:
