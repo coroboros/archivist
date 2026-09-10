@@ -10213,10 +10213,6 @@ Stream Session Thread Events
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-- `BetaManagedAgentsStreamSessionThreadEvents`
-
-  Server-sent event in a single thread's stream.
-
 #### Example
 
 ```python

@@ -26,6 +26,8 @@ Token counting lets you determine the number of tokens in a message before you s
 
 The [token counting](https://platform.claude.com/docs/en/api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/agents-and-tools-tool-use-overview.md), [images](./build-with-claude-vision.md), and [PDFs](./build-with-claude-pdf-support.md). The response contains the total number of input tokens.
 
+This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts: [server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md)), the [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md), and `image` or `document` blocks with a `url` or `file` source. Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
+
 <Note>
   The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
@@ -190,7 +192,7 @@ All [active models](../general/general-models-overview.md) support token countin
 ### Count tokens in messages with tools
 
 <Note>
-  [Server tool](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) token counts only apply to the first sampling call.
+  Token counting supports client tools and the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md). Requests that include other [server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) return an error. For the advisor tool, the count covers the executor's first sampling call only.
 </Note>
 
 <CodeGroup>
@@ -1112,7 +1114,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 ### Count tokens in messages with PDFs
 
 <Note>
-  Token counting supports PDFs with the same [PDF support limitations](./build-with-claude-pdf-support.md#pdf-support-limitations) as the Messages API.
+  Token counting supports base64-encoded PDFs with the same [PDF requirements](./build-with-claude-pdf-support.md#check-pdf-requirements) as the Messages API. This endpoint doesn't support `url` or `file` document sources.
 </Note>
 
 <CodeGroup>

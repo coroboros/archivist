@@ -264,7 +264,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
 * `{"type": "self"}` allows the coordinator to spawn copies of itself. If the session was created with [agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session), those overrides also apply to these copies; roster entries referenced by ID are unaffected.
 * `{"type": "advisor", "model": "<model id>"}` gives the session's primary thread an advisor it can consult mid-turn. At most one advisor entry per roster. See [Give the session an advisor](./managed-agents-multiagent-orchestration.md#give-the-session-an-advisor).
 
-In an [`ant apply`](../general/general-cli-sdks-libraries-cli-scripting.md#version-controlling-api-resources) agent file (the CLI tab), a roster entry can also be the path to another agent's file, such as `./reviewer.md`. Apply creates that agent first and replaces the path with a pinned `{"type": "agent", "id": ..., "version": ...}` reference.
+In an [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) agent file (the CLI tab), a roster entry can also be the path to another agent's file, such as `./reviewer.md`. Apply creates that agent first and replaces the path with a pinned `{"type": "agent", "id": ..., "version": ...}` reference.
 
 The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](./managed-agents-agent-setup.md#update-an-agent) so its roster references that version.
 
@@ -827,7 +827,8 @@ A [session budget](./managed-agents-budgets.md) is a single shared cap across al
 
       ```typescript TypeScript
       for await (const thread of client.beta.sessions.threads.list(session.id)) {
-        console.log(`[${thread.agent.name}] ${thread.status}`);
+        const name = thread.agent.type === "agent" ? thread.agent.name : "advisor";
+        console.log(`[${name}] ${thread.status}`);
       }
       ```
 

@@ -71,7 +71,7 @@ To keep thinking valid across a long session, treat the conversation as append-o
 
 ### Change effort mid-conversation (beta)
 
-On Claude Fable 5.1 you can change the [effort](../build-with-claude/build-with-claude-effort.md) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5 support it on the Claude API.
+On Claude Fable 5.1 you can change the [effort](../build-with-claude/build-with-claude-effort.md) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5 support it on the Claude API and Google Cloud.
 
 <CodeGroup>
   ```bash cURL
@@ -483,7 +483,7 @@ Then review these items:
 2. Pass thinking blocks back unchanged and keep the history append-only. If your code builds the `messages` array itself, run the [history-editing check](./general-models-fable-5-1-migration-guide.md#fable-5-1-preserved-thinking): move per-turn reminders you currently inject and delete to [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta), move `system` and `tools` changes to mid-conversation system messages, trim context server-side or strip thinking blocks from turns you carry across a client-side summary, then pick a production [`prefix_mismatch_behavior`](../build-with-claude/build-with-claude-thinking.md#preserved-thinking-controls) and monitor `input_transformations`.
 3. Re-tune effort from the default (`high`), and consider [changing it mid-conversation](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) instead of holding one level for the whole session.
 4. In agent loops, watch for one tool call per turn where Claude Fable 5 batched several, and add the per-turn note from [Prompting Claude Fable 5.1](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md).
-5. Re-run your evals. Refusal handling, fallback, fallback credit, and token counts carry over unchanged. Cache reads cost less (see [Pricing](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing)), and default behavior differs in the ways listed under [Changed from Claude Fable 5](./general-models-fable-5-1-whats-new-fable-5-1.md#changed-from-claude-fable-5).
+5. Re-run your evals. Refusal handling, fallback, fallback credit, and the tokenizer carry over unchanged. Cache reads cost less (see [Pricing](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing)), and default behavior differs in the ways listed under [Changed from Claude Fable 5](./general-models-fable-5-1-whats-new-fable-5-1.md#changed-from-claude-fable-5).
 
 See the [migration guide](./general-models-fable-5-1-migration-guide.md) for step-by-step instructions, including from Claude Opus 5 and earlier models.
 

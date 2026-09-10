@@ -15,9 +15,11 @@ description: Let Claude navigate, read, and interact with webpages in your own b
 - Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-opus-4-8`
 - Platforms: Claude API, Google Cloud; not available on Claude Platform on AWS, Amazon Bedrock, Microsoft Foundry
 
-The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. It works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through pixels (screenshots and viewport coordinates), whereas the [computer use tool](./agents-and-tools-tool-use-computer-use-tool.md) works with a whole desktop through screenshots and coordinates alone. It's an Anthropic-defined [client toolset](./agents-and-tools-tool-use-tool-reference.md#client-toolsets): one `browser_toolset_20260801` entry in your `tools` array gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more (`javascript_exec`, `file_upload`, `read_console`, and `read_network`) when you [enable them](./agents-and-tools-tool-use-browser-use-tool.md#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. It isn't currently available in [Claude Managed Agents](../managed-agents/managed-agents-tools.md). This page says "your application" for the agent loop that calls the Messages API and "your executor" for the part of it that drives the browser and produces tool results.
+The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 
-Choose browser use over computer use when the task stays inside webpages: Claude can read a page's structure, act on an element by reference in addition to by coordinate, set form values directly, and work across tabs, and you don't need to run a desktop. If Claude only needs to read pages you can point it to, or to find sources on the web, the [web fetch tool](./agents-and-tools-tool-use-web-fetch-tool.md) and [web search tool](./agents-and-tools-tool-use-web-search-tool.md) are lighter still, because they're [server tools](./agents-and-tools-tool-use-server-tools.md) that the API runs for you with no browser to operate. Choose browser use instead when pages build their content with JavaScript or the task means acting on the page rather than only reading it.
+The tool is an Anthropic-defined [client toolset](./agents-and-tools-tool-use-tool-reference.md#client-toolsets): one `browser_toolset_20260801` entry in `tools` gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more when you [enable them](./agents-and-tools-tool-use-browser-use-tool.md#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. The tool isn't currently available in [Claude Managed Agents](../managed-agents/managed-agents-tools.md).
+
+Choose browser use when the task stays inside webpages and means acting on them, or when pages build their content with JavaScript. When a task needs a whole desktop, use the [computer use tool](./agents-and-tools-tool-use-computer-use-tool.md), which works through screenshots and coordinates alone. For reading pages you can point Claude to, or finding sources on the web, the [web fetch tool](./agents-and-tools-tool-use-web-fetch-tool.md) and [web search tool](./agents-and-tools-tool-use-web-search-tool.md) are lighter. They're [server tools](./agents-and-tools-tool-use-server-tools.md) that the API runs for you, with no browser to operate.
 
 With browser use, Claude reads and acts on live webpages, so everything a page supplies is untrusted input and the actions Claude takes can have real effects. See [Security considerations](./agents-and-tools-tool-use-browser-use-tool.md#security-considerations) before you deploy.
 
@@ -226,7 +228,7 @@ Claude's first response ends with `stop_reason: "tool_use"` and carries one or m
 }
 ```
 
-Your executor runs `navigate`, then `read_page`, and your application returns one `tool_result` per block in its next request, echoing `toolset_name` on each. The `navigate` result reports the tab it loaded in a `browser_state` block; the `read_page` result is text in which every element carries a reference:
+Your executor (the part of your application that drives the browser and produces tool results) runs `navigate`, then `read_page`. Your application returns one `tool_result` per block in its next request, echoing `toolset_name` on each. The `navigate` result reports the tab it loaded in a `browser_state` block; the `read_page` result is text in which every element carries a reference:
 
 ```json
 {
@@ -270,7 +272,7 @@ Claude now holds references it can act on, so its next turn can click `ref_2` to
 
 ## How browser use works
 
-Browser use runs as an agent loop: Claude returns member tool calls, your executor runs them against the browser, and you return the results until Claude answers in text.
+Browser use runs as an agent loop in your application: Claude returns member tool calls, your executor runs them against the browser, and you return the results until Claude answers in text.
 
 <Steps>
   <Step title="Provide Claude with the browser use tool and a user prompt" icon="tool">

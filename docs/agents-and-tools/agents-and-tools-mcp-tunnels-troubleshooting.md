@@ -11,7 +11,7 @@ description: Diagnose connectivity, TLS, IP validation, and OAuth routing issues
 ---
 
 <Note>
-  MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+  MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 </Note>
 
 A request through the tunnel can fail at one of three layers; diagnose them in order: the outbound connection to the [tunnel edge](./agents-and-tools-mcp-tunnels-concepts.md#components), the [inner TLS](./agents-and-tools-mcp-tunnels-concepts.md#components) from Anthropic to your [proxy](./agents-and-tools-mcp-tunnels-concepts.md#components), then routing and IP validation toward the [upstream MCP server](./agents-and-tools-mcp-tunnels-concepts.md#components).
