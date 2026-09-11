@@ -1,5 +1,66 @@
 # Changelog
 
+## 🤖 v1.5.164 - 11/09/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-webhooks.md`
+- Modified: `docs/api/api-beta.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-go-beta-webhooks.md`
+- Modified: `docs/api/api-go-beta.md`
+- Modified: `docs/api/api-php-beta-webhooks.md`
+- Modified: `docs/api/api-php-beta.md`
+- Modified: `docs/api/api-python-beta-webhooks.md`
+- Modified: `docs/api/api-python-beta.md`
+- Modified: `docs/api/api-ruby-beta-webhooks.md`
+- Modified: `docs/api/api-ruby-beta.md`
+- Modified: `docs/api/api-typescript-beta-webhooks.md`
+- Modified: `docs/api/api-typescript-beta.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-apply.md`
+- Modified: `docs/general/general-models-fable-5-1-migration-guide.md`
+- Modified: `docs/general/general-models-fable-5-1-whats-new-fable-5-1.md`
+- Modified: `docs/general/general-models-fable-5-migration-guide.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks.md`
+
+
 ## 🤖 v1.5.163 - 11/09/2026
 
 File Changes:
