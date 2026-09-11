@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_cla
 category: "api"
 generated: true
 ---
+---
+title: Get Claude Code Usage Report
+url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_claude_code
+---
+
 # Get Claude Code Usage Report
 
 **GET** `/v1/organizations/usage_report/claude_code`
@@ -31,7 +36,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ## Returns
 
-- `ClaudeCodeUsageReport object`
+- `BetaClaudeCodeUsageReport object`
 
   - `data: array of object`
 
@@ -43,23 +48,23 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       - `UserActor object`
 
-        - `email_address: string`
-
-          Email address of the user who performed Claude Code actions.
-
         - `type: "user_actor"`
 
           Actor type. Always `"user_actor"` for a user.
 
+        - `email_address: string`
+
+          Email address of the user who performed Claude Code actions.
+
       - `APIActor object`
-
-        - `api_key_name: string`
-
-          Name of the API key used to perform Claude Code actions.
 
         - `type: "api_actor"`
 
           Actor type. Always `"api_actor"` for an API key.
+
+        - `api_key_name: string`
+
+          Name of the API key used to perform Claude Code actions.
 
     - `core_metrics: object`
 
@@ -190,7 +195,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 ```bash
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

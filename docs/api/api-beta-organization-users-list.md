@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/users/list"
 category: "api"
 generated: true
 ---
+---
+title: List Users
+url: https://platform.claude.com/docs/en/api/beta/organization/users/list
+---
+
 # List Users
 
 **GET** `/v1/organizations/users`
@@ -44,6 +49,14 @@ List the organization's members.
 
 - `data: array of BetaOrganizationUser`
 
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
   - `id: string`
 
     ID of the User.
@@ -83,14 +96,6 @@ List the organization's members.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 - `first_id: string or null`
 

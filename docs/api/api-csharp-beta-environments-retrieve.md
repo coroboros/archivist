@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/retrie
 category: "api"
 generated: true
 ---
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/retrieve
+---
+
 # Get Environment
 
 `BetaEnvironment Beta.Environments.Retrieve(parameters, cancellationToken = default)`
@@ -68,6 +73,8 @@ Retrieve a specific environment by ID.
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -110,11 +117,21 @@ Retrieve a specific environment by ID.
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `class BetaEnvironment:`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
 
   - `required string ID`
 
@@ -132,6 +149,10 @@ Retrieve a specific environment by ID.
 
       `cloud` environment configuration.
 
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
       - `required Networking Networking`
 
         Network configuration policy.
@@ -148,6 +169,10 @@ Retrieve a specific environment by ID.
 
           Limited network access.
 
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
           - `required bool AllowMcpServers`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -160,13 +185,13 @@ Retrieve a specific environment by ID.
 
             Specifies domains the container can reach.
 
-          - `JsonElement Type = "limited"`
-
-            Network policy type
-
       - `required BetaPackages Packages`
 
         Package manager configuration.
+
+        - `Type Type`
+
+          Package configuration type
 
         - `required IReadOnlyList<string> Apt`
 
@@ -192,14 +217,6 @@ Retrieve a specific environment by ID.
 
           Python packages to install
 
-        - `Type Type`
-
-          Package configuration type
-
-      - `JsonElement Type = "cloud"`
-
-        Environment type
-
     - `class BetaSelfHostedConfig:`
 
       Configuration for self-hosted environments.
@@ -223,10 +240,6 @@ Retrieve a specific environment by ID.
   - `required string Name`
 
     Human-readable name for the environment
-
-  - `JsonElement Type = "environment"`
-
-    The type of object (always 'environment')
 
   - `required string UpdatedAt`
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: List Skills
+url: https://platform.claude.com/docs/en/api/cli/beta/skills/list
+---
+
 # List Skills
 
 `$ ant beta:skills list`
@@ -41,6 +46,12 @@ List Skills
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `BetaListSkillsResponse: object`
@@ -48,6 +59,12 @@ List Skills
   - `data: array of BetaSkill`
 
     List of skills.
+
+    - `type: "skill"`
+
+      Object type.
+
+      For Skills, this is always `"skill"`.
 
     - `id: string`
 
@@ -100,12 +117,6 @@ List Skills
         - `"anthropic_example"`
 
         - `"plugin"`
-
-    - `type: "skill"`
-
-      Object type.
-
-      For Skills, this is always `"skill"`.
 
     - `updated_at: string`
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks
+---
+
 # Webhooks
 
 ## Unwrap
@@ -51,13 +56,13 @@ puts(result)
 
 - `class BetaWebhookAgentArchivedEventData`
 
+  - `type: :"agent.archived"`
+
   - `id: String`
 
     ID of the agent that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"agent.archived"`
 
   - `workspace_id: String`
 
@@ -65,13 +70,13 @@ puts(result)
 
 - `class BetaWebhookAgentCreatedEventData`
 
+  - `type: :"agent.created"`
+
   - `id: String`
 
     ID of the agent that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"agent.created"`
 
   - `workspace_id: String`
 
@@ -79,13 +84,13 @@ puts(result)
 
 - `class BetaWebhookAgentDeletedEventData`
 
+  - `type: :"agent.deleted"`
+
   - `id: String`
 
     ID of the agent that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"agent.deleted"`
 
   - `workspace_id: String`
 
@@ -93,13 +98,13 @@ puts(result)
 
 - `class BetaWebhookAgentUpdatedEventData`
 
+  - `type: :"agent.updated"`
+
   - `id: String`
 
     ID of the agent that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"agent.updated"`
 
   - `workspace_id: String`
 
@@ -107,13 +112,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentArchivedEventData`
 
+  - `type: :"deployment.archived"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.archived"`
 
   - `workspace_id: String`
 
@@ -121,13 +126,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentCreatedEventData`
 
+  - `type: :"deployment.created"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.created"`
 
   - `workspace_id: String`
 
@@ -135,13 +140,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentDeletedEventData`
 
+  - `type: :"deployment.deleted"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.deleted"`
 
   - `workspace_id: String`
 
@@ -149,13 +154,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentPausedEventData`
 
+  - `type: :"deployment.paused"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.paused"`
 
   - `workspace_id: String`
 
@@ -163,13 +168,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentRunFailedEventData`
 
+  - `type: :"deployment_run.failed"`
+
   - `id: String`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment_run.failed"`
 
   - `workspace_id: String`
 
@@ -177,13 +182,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentRunStartedEventData`
 
+  - `type: :"deployment_run.started"`
+
   - `id: String`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment_run.started"`
 
   - `workspace_id: String`
 
@@ -191,13 +196,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentRunSucceededEventData`
 
+  - `type: :"deployment_run.succeeded"`
+
   - `id: String`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment_run.succeeded"`
 
   - `workspace_id: String`
 
@@ -205,13 +210,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentUnpausedEventData`
 
+  - `type: :"deployment.unpaused"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.unpaused"`
 
   - `workspace_id: String`
 
@@ -219,13 +224,13 @@ puts(result)
 
 - `class BetaWebhookDeploymentUpdatedEventData`
 
+  - `type: :"deployment.updated"`
+
   - `id: String`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"deployment.updated"`
 
   - `workspace_id: String`
 
@@ -233,13 +238,13 @@ puts(result)
 
 - `class BetaWebhookEnvironmentArchivedEventData`
 
+  - `type: :"environment.archived"`
+
   - `id: String`
 
     ID of the environment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"environment.archived"`
 
   - `workspace_id: String`
 
@@ -247,13 +252,13 @@ puts(result)
 
 - `class BetaWebhookEnvironmentCreatedEventData`
 
+  - `type: :"environment.created"`
+
   - `id: String`
 
     ID of the environment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"environment.created"`
 
   - `workspace_id: String`
 
@@ -261,13 +266,13 @@ puts(result)
 
 - `class BetaWebhookEnvironmentDeletedEventData`
 
+  - `type: :"environment.deleted"`
+
   - `id: String`
 
     ID of the environment that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"environment.deleted"`
 
   - `workspace_id: String`
 
@@ -275,19 +280,23 @@ puts(result)
 
 - `class BetaWebhookEnvironmentUpdatedEventData`
 
+  - `type: :"environment.updated"`
+
   - `id: String`
 
     ID of the environment that triggered the event.
 
   - `organization_id: String`
 
-  - `type: :"environment.updated"`
-
   - `workspace_id: String`
 
 ### Beta Webhook Event
 
 - `class BetaWebhookEvent`
+
+  - `type: :event`
+
+    Object type. Always `event` for webhook payloads.
 
   - `id: String`
 
@@ -303,138 +312,140 @@ puts(result)
 
     - `class BetaWebhookSessionCreatedEventData`
 
+      - `type: :"session.created"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionPendingEventData`
 
+      - `type: :"session.pending"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.pending"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionRunningEventData`
 
+      - `type: :"session.running"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.running"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionIdledEventData`
 
+      - `type: :"session.idled"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.idled"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionRequiresActionEventData`
 
+      - `type: :"session.requires_action"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.requires_action"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionArchivedEventData`
 
+      - `type: :"session.archived"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionDeletedEventData`
 
+      - `type: :"session.deleted"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.deleted"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionStatusRescheduledEventData`
 
+      - `type: :"session.status_rescheduled"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.status_rescheduled"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionStatusRunStartedEventData`
 
+      - `type: :"session.status_run_started"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.status_run_started"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionStatusIdledEventData`
 
+      - `type: :"session.status_idled"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.status_idled"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionStatusTerminatedEventData`
 
+      - `type: :"session.status_terminated"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.status_terminated"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionThreadCreatedEventData`
 
+      - `type: :"session.thread_created"`
+
       - `id: String`
 
         ID of the session that triggered the event.
@@ -444,13 +455,13 @@ puts(result)
       - `session_thread_id: String`
 
         ID of the session thread this event refers to.
-
-      - `type: :"session.thread_created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionThreadIdledEventData`
 
+      - `type: :"session.thread_idled"`
+
       - `id: String`
 
         ID of the session that triggered the event.
@@ -460,13 +471,13 @@ puts(result)
       - `session_thread_id: String`
 
         ID of the session thread this event refers to.
-
-      - `type: :"session.thread_idled"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookSessionThreadTerminatedEventData`
 
+      - `type: :"session.thread_terminated"`
+
       - `id: String`
 
         ID of the session that triggered the event.
@@ -477,11 +488,11 @@ puts(result)
 
         ID of the session thread this event refers to.
 
-      - `type: :"session.thread_terminated"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+      - `type: :"session.outcome_evaluation_ended"`
 
       - `id: String`
 
@@ -489,55 +500,53 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"session.outcome_evaluation_ended"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookVaultCreatedEventData`
+
+      - `type: :"vault.created"`
 
       - `id: String`
 
         ID of the vault that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookVaultArchivedEventData`
 
+      - `type: :"vault.archived"`
+
       - `id: String`
 
         ID of the vault that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookVaultDeletedEventData`
 
+      - `type: :"vault.deleted"`
+
       - `id: String`
 
         ID of the vault that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"vault.deleted"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookVaultCredentialCreatedEventData`
+
+      - `type: :"vault_credential.created"`
 
       - `id: String`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault_credential.created"`
 
       - `vault_id: String`
 
@@ -547,13 +556,13 @@ puts(result)
 
     - `class BetaWebhookVaultCredentialArchivedEventData`
 
+      - `type: :"vault_credential.archived"`
+
       - `id: String`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault_credential.archived"`
 
       - `vault_id: String`
 
@@ -563,13 +572,13 @@ puts(result)
 
     - `class BetaWebhookVaultCredentialDeletedEventData`
 
+      - `type: :"vault_credential.deleted"`
+
       - `id: String`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault_credential.deleted"`
 
       - `vault_id: String`
 
@@ -579,13 +588,13 @@ puts(result)
 
     - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
+      - `type: :"vault_credential.refresh_failed"`
+
       - `id: String`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"vault_credential.refresh_failed"`
 
       - `vault_id: String`
 
@@ -595,65 +604,67 @@ puts(result)
 
     - `class BetaWebhookSessionUpdatedEventData`
 
+      - `type: :"session.updated"`
+
       - `id: String`
 
         ID of the session that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"session.updated"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookAgentCreatedEventData`
 
+      - `type: :"agent.created"`
+
       - `id: String`
 
         ID of the agent that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"agent.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookAgentArchivedEventData`
 
+      - `type: :"agent.archived"`
+
       - `id: String`
 
         ID of the agent that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"agent.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookAgentDeletedEventData`
 
+      - `type: :"agent.deleted"`
+
       - `id: String`
 
         ID of the agent that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"agent.deleted"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentPausedEventData`
 
+      - `type: :"deployment.paused"`
+
       - `id: String`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"deployment.paused"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentRunFailedEventData`
+
+      - `type: :"deployment_run.failed"`
 
       - `id: String`
 
@@ -661,47 +672,47 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"deployment_run.failed"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentCreatedEventData`
+
+      - `type: :"deployment.created"`
 
       - `id: String`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"deployment.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentUpdatedEventData`
 
+      - `type: :"deployment.updated"`
+
       - `id: String`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"deployment.updated"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentUnpausedEventData`
 
+      - `type: :"deployment.unpaused"`
+
       - `id: String`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"deployment.unpaused"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookAgentUpdatedEventData`
+
+      - `type: :"agent.updated"`
 
       - `id: String`
 
@@ -709,35 +720,35 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"agent.updated"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentArchivedEventData`
+
+      - `type: :"deployment.archived"`
 
       - `id: String`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"deployment.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentRunStartedEventData`
 
+      - `type: :"deployment_run.started"`
+
       - `id: String`
 
         ID of the deployment run that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"deployment_run.started"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentDeletedEventData`
+
+      - `type: :"deployment.deleted"`
 
       - `id: String`
 
@@ -745,11 +756,11 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"deployment.deleted"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookDeploymentRunSucceededEventData`
+
+      - `type: :"deployment_run.succeeded"`
 
       - `id: String`
 
@@ -757,95 +768,95 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"deployment_run.succeeded"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookEnvironmentCreatedEventData`
+
+      - `type: :"environment.created"`
 
       - `id: String`
 
         ID of the environment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"environment.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookEnvironmentUpdatedEventData`
 
+      - `type: :"environment.updated"`
+
       - `id: String`
 
         ID of the environment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"environment.updated"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookEnvironmentArchivedEventData`
 
+      - `type: :"environment.archived"`
+
       - `id: String`
 
         ID of the environment that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"environment.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookEnvironmentDeletedEventData`
 
+      - `type: :"environment.deleted"`
+
       - `id: String`
 
         ID of the environment that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"environment.deleted"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookMemoryStoreCreatedEventData`
+
+      - `type: :"memory_store.created"`
 
       - `id: String`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"memory_store.created"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookMemoryStoreArchivedEventData`
 
+      - `type: :"memory_store.archived"`
+
       - `id: String`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: String`
-
-      - `type: :"memory_store.archived"`
 
       - `workspace_id: String`
 
     - `class BetaWebhookMemoryStoreDeletedEventData`
 
+      - `type: :"memory_store.deleted"`
+
       - `id: String`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: String`
 
-      - `type: :"memory_store.deleted"`
-
       - `workspace_id: String`
 
     - `class BetaWebhookSessionBudgetReachedEventData`
+
+      - `type: :"session.budget_reached"`
 
       - `id: String`
 
@@ -853,13 +864,7 @@ puts(result)
 
       - `organization_id: String`
 
-      - `type: :"session.budget_reached"`
-
       - `workspace_id: String`
-
-  - `type: :event`
-
-    Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
@@ -867,138 +872,140 @@ puts(result)
 
   - `class BetaWebhookSessionCreatedEventData`
 
+    - `type: :"session.created"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionPendingEventData`
 
+    - `type: :"session.pending"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.pending"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionRunningEventData`
 
+    - `type: :"session.running"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.running"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionIdledEventData`
 
+    - `type: :"session.idled"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.idled"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionRequiresActionEventData`
 
+    - `type: :"session.requires_action"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.requires_action"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionArchivedEventData`
 
+    - `type: :"session.archived"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionDeletedEventData`
 
+    - `type: :"session.deleted"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.deleted"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionStatusRescheduledEventData`
 
+    - `type: :"session.status_rescheduled"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.status_rescheduled"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionStatusRunStartedEventData`
 
+    - `type: :"session.status_run_started"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.status_run_started"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionStatusIdledEventData`
 
+    - `type: :"session.status_idled"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.status_idled"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionStatusTerminatedEventData`
 
+    - `type: :"session.status_terminated"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.status_terminated"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionThreadCreatedEventData`
 
+    - `type: :"session.thread_created"`
+
     - `id: String`
 
       ID of the session that triggered the event.
@@ -1008,13 +1015,13 @@ puts(result)
     - `session_thread_id: String`
 
       ID of the session thread this event refers to.
-
-    - `type: :"session.thread_created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionThreadIdledEventData`
 
+    - `type: :"session.thread_idled"`
+
     - `id: String`
 
       ID of the session that triggered the event.
@@ -1024,13 +1031,13 @@ puts(result)
     - `session_thread_id: String`
 
       ID of the session thread this event refers to.
-
-    - `type: :"session.thread_idled"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookSessionThreadTerminatedEventData`
 
+    - `type: :"session.thread_terminated"`
+
     - `id: String`
 
       ID of the session that triggered the event.
@@ -1041,11 +1048,11 @@ puts(result)
 
       ID of the session thread this event refers to.
 
-    - `type: :"session.thread_terminated"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+    - `type: :"session.outcome_evaluation_ended"`
 
     - `id: String`
 
@@ -1053,55 +1060,53 @@ puts(result)
 
     - `organization_id: String`
 
-    - `type: :"session.outcome_evaluation_ended"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookVaultCreatedEventData`
+
+    - `type: :"vault.created"`
 
     - `id: String`
 
       ID of the vault that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookVaultArchivedEventData`
 
+    - `type: :"vault.archived"`
+
     - `id: String`
 
       ID of the vault that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookVaultDeletedEventData`
 
+    - `type: :"vault.deleted"`
+
     - `id: String`
 
       ID of the vault that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"vault.deleted"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookVaultCredentialCreatedEventData`
+
+    - `type: :"vault_credential.created"`
 
     - `id: String`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault_credential.created"`
 
     - `vault_id: String`
 
@@ -1111,13 +1116,13 @@ puts(result)
 
   - `class BetaWebhookVaultCredentialArchivedEventData`
 
+    - `type: :"vault_credential.archived"`
+
     - `id: String`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault_credential.archived"`
 
     - `vault_id: String`
 
@@ -1127,13 +1132,13 @@ puts(result)
 
   - `class BetaWebhookVaultCredentialDeletedEventData`
 
+    - `type: :"vault_credential.deleted"`
+
     - `id: String`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault_credential.deleted"`
 
     - `vault_id: String`
 
@@ -1143,13 +1148,13 @@ puts(result)
 
   - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
+    - `type: :"vault_credential.refresh_failed"`
+
     - `id: String`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"vault_credential.refresh_failed"`
 
     - `vault_id: String`
 
@@ -1159,65 +1164,67 @@ puts(result)
 
   - `class BetaWebhookSessionUpdatedEventData`
 
+    - `type: :"session.updated"`
+
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.updated"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookAgentCreatedEventData`
 
+    - `type: :"agent.created"`
+
     - `id: String`
 
       ID of the agent that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"agent.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookAgentArchivedEventData`
 
+    - `type: :"agent.archived"`
+
     - `id: String`
 
       ID of the agent that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"agent.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookAgentDeletedEventData`
 
+    - `type: :"agent.deleted"`
+
     - `id: String`
 
       ID of the agent that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"agent.deleted"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentPausedEventData`
 
+    - `type: :"deployment.paused"`
+
     - `id: String`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"deployment.paused"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentRunFailedEventData`
+
+    - `type: :"deployment_run.failed"`
 
     - `id: String`
 
@@ -1225,47 +1232,47 @@ puts(result)
 
     - `organization_id: String`
 
-    - `type: :"deployment_run.failed"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentCreatedEventData`
+
+    - `type: :"deployment.created"`
 
     - `id: String`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"deployment.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentUpdatedEventData`
 
+    - `type: :"deployment.updated"`
+
     - `id: String`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"deployment.updated"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentUnpausedEventData`
 
+    - `type: :"deployment.unpaused"`
+
     - `id: String`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"deployment.unpaused"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookAgentUpdatedEventData`
+
+    - `type: :"agent.updated"`
 
     - `id: String`
 
@@ -1273,35 +1280,35 @@ puts(result)
 
     - `organization_id: String`
 
-    - `type: :"agent.updated"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentArchivedEventData`
+
+    - `type: :"deployment.archived"`
 
     - `id: String`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"deployment.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentRunStartedEventData`
 
+    - `type: :"deployment_run.started"`
+
     - `id: String`
 
       ID of the deployment run that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"deployment_run.started"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentDeletedEventData`
+
+    - `type: :"deployment.deleted"`
 
     - `id: String`
 
@@ -1309,11 +1316,11 @@ puts(result)
 
     - `organization_id: String`
 
-    - `type: :"deployment.deleted"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookDeploymentRunSucceededEventData`
+
+    - `type: :"deployment_run.succeeded"`
 
     - `id: String`
 
@@ -1321,103 +1328,101 @@ puts(result)
 
     - `organization_id: String`
 
-    - `type: :"deployment_run.succeeded"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookEnvironmentCreatedEventData`
+
+    - `type: :"environment.created"`
 
     - `id: String`
 
       ID of the environment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"environment.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookEnvironmentUpdatedEventData`
 
+    - `type: :"environment.updated"`
+
     - `id: String`
 
       ID of the environment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"environment.updated"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookEnvironmentArchivedEventData`
 
+    - `type: :"environment.archived"`
+
     - `id: String`
 
       ID of the environment that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"environment.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookEnvironmentDeletedEventData`
 
+    - `type: :"environment.deleted"`
+
     - `id: String`
 
       ID of the environment that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"environment.deleted"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookMemoryStoreCreatedEventData`
+
+    - `type: :"memory_store.created"`
 
     - `id: String`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"memory_store.created"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookMemoryStoreArchivedEventData`
 
+    - `type: :"memory_store.archived"`
+
     - `id: String`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"memory_store.archived"`
 
     - `workspace_id: String`
 
   - `class BetaWebhookMemoryStoreDeletedEventData`
 
+    - `type: :"memory_store.deleted"`
+
     - `id: String`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: String`
 
-    - `type: :"memory_store.deleted"`
-
     - `workspace_id: String`
 
   - `class BetaWebhookSessionBudgetReachedEventData`
+
+    - `type: :"session.budget_reached"`
 
     - `id: String`
 
       ID of the session that triggered the event.
 
     - `organization_id: String`
-
-    - `type: :"session.budget_reached"`
 
     - `workspace_id: String`
 
@@ -1425,13 +1430,13 @@ puts(result)
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
 
+  - `type: :"memory_store.archived"`
+
   - `id: String`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"memory_store.archived"`
 
   - `workspace_id: String`
 
@@ -1439,13 +1444,13 @@ puts(result)
 
 - `class BetaWebhookMemoryStoreCreatedEventData`
 
+  - `type: :"memory_store.created"`
+
   - `id: String`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"memory_store.created"`
 
   - `workspace_id: String`
 
@@ -1453,13 +1458,13 @@ puts(result)
 
 - `class BetaWebhookMemoryStoreDeletedEventData`
 
+  - `type: :"memory_store.deleted"`
+
   - `id: String`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"memory_store.deleted"`
 
   - `workspace_id: String`
 
@@ -1467,13 +1472,13 @@ puts(result)
 
 - `class BetaWebhookSessionArchivedEventData`
 
+  - `type: :"session.archived"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.archived"`
 
   - `workspace_id: String`
 
@@ -1481,13 +1486,13 @@ puts(result)
 
 - `class BetaWebhookSessionBudgetReachedEventData`
 
+  - `type: :"session.budget_reached"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.budget_reached"`
 
   - `workspace_id: String`
 
@@ -1495,13 +1500,13 @@ puts(result)
 
 - `class BetaWebhookSessionCreatedEventData`
 
+  - `type: :"session.created"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.created"`
 
   - `workspace_id: String`
 
@@ -1509,13 +1514,13 @@ puts(result)
 
 - `class BetaWebhookSessionDeletedEventData`
 
+  - `type: :"session.deleted"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.deleted"`
 
   - `workspace_id: String`
 
@@ -1523,13 +1528,13 @@ puts(result)
 
 - `class BetaWebhookSessionIdledEventData`
 
+  - `type: :"session.idled"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.idled"`
 
   - `workspace_id: String`
 
@@ -1537,13 +1542,13 @@ puts(result)
 
 - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
+  - `type: :"session.outcome_evaluation_ended"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.outcome_evaluation_ended"`
 
   - `workspace_id: String`
 
@@ -1551,13 +1556,13 @@ puts(result)
 
 - `class BetaWebhookSessionPendingEventData`
 
+  - `type: :"session.pending"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.pending"`
 
   - `workspace_id: String`
 
@@ -1565,13 +1570,13 @@ puts(result)
 
 - `class BetaWebhookSessionRequiresActionEventData`
 
+  - `type: :"session.requires_action"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.requires_action"`
 
   - `workspace_id: String`
 
@@ -1579,13 +1584,13 @@ puts(result)
 
 - `class BetaWebhookSessionRunningEventData`
 
+  - `type: :"session.running"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.running"`
 
   - `workspace_id: String`
 
@@ -1593,13 +1598,13 @@ puts(result)
 
 - `class BetaWebhookSessionStatusIdledEventData`
 
+  - `type: :"session.status_idled"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.status_idled"`
 
   - `workspace_id: String`
 
@@ -1607,13 +1612,13 @@ puts(result)
 
 - `class BetaWebhookSessionStatusRescheduledEventData`
 
+  - `type: :"session.status_rescheduled"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.status_rescheduled"`
 
   - `workspace_id: String`
 
@@ -1621,13 +1626,13 @@ puts(result)
 
 - `class BetaWebhookSessionStatusRunStartedEventData`
 
+  - `type: :"session.status_run_started"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.status_run_started"`
 
   - `workspace_id: String`
 
@@ -1635,13 +1640,13 @@ puts(result)
 
 - `class BetaWebhookSessionStatusTerminatedEventData`
 
+  - `type: :"session.status_terminated"`
+
   - `id: String`
 
     ID of the session that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"session.status_terminated"`
 
   - `workspace_id: String`
 
@@ -1649,6 +1654,8 @@ puts(result)
 
 - `class BetaWebhookSessionThreadCreatedEventData`
 
+  - `type: :"session.thread_created"`
+
   - `id: String`
 
     ID of the session that triggered the event.
@@ -1658,8 +1665,6 @@ puts(result)
   - `session_thread_id: String`
 
     ID of the session thread this event refers to.
-
-  - `type: :"session.thread_created"`
 
   - `workspace_id: String`
 
@@ -1667,6 +1672,8 @@ puts(result)
 
 - `class BetaWebhookSessionThreadIdledEventData`
 
+  - `type: :"session.thread_idled"`
+
   - `id: String`
 
     ID of the session that triggered the event.
@@ -1676,8 +1683,6 @@ puts(result)
   - `session_thread_id: String`
 
     ID of the session thread this event refers to.
-
-  - `type: :"session.thread_idled"`
 
   - `workspace_id: String`
 
@@ -1685,6 +1690,8 @@ puts(result)
 
 - `class BetaWebhookSessionThreadTerminatedEventData`
 
+  - `type: :"session.thread_terminated"`
+
   - `id: String`
 
     ID of the session that triggered the event.
@@ -1695,13 +1702,13 @@ puts(result)
 
     ID of the session thread this event refers to.
 
-  - `type: :"session.thread_terminated"`
-
   - `workspace_id: String`
 
 ### Beta Webhook Session Updated Event Data
 
 - `class BetaWebhookSessionUpdatedEventData`
+
+  - `type: :"session.updated"`
 
   - `id: String`
 
@@ -1709,21 +1716,19 @@ puts(result)
 
   - `organization_id: String`
 
-  - `type: :"session.updated"`
-
   - `workspace_id: String`
 
 ### Beta Webhook Vault Archived Event Data
 
 - `class BetaWebhookVaultArchivedEventData`
 
+  - `type: :"vault.archived"`
+
   - `id: String`
 
     ID of the vault that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault.archived"`
 
   - `workspace_id: String`
 
@@ -1731,13 +1736,13 @@ puts(result)
 
 - `class BetaWebhookVaultCreatedEventData`
 
+  - `type: :"vault.created"`
+
   - `id: String`
 
     ID of the vault that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault.created"`
 
   - `workspace_id: String`
 
@@ -1745,13 +1750,13 @@ puts(result)
 
 - `class BetaWebhookVaultCredentialArchivedEventData`
 
+  - `type: :"vault_credential.archived"`
+
   - `id: String`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault_credential.archived"`
 
   - `vault_id: String`
 
@@ -1763,13 +1768,13 @@ puts(result)
 
 - `class BetaWebhookVaultCredentialCreatedEventData`
 
+  - `type: :"vault_credential.created"`
+
   - `id: String`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault_credential.created"`
 
   - `vault_id: String`
 
@@ -1781,13 +1786,13 @@ puts(result)
 
 - `class BetaWebhookVaultCredentialDeletedEventData`
 
+  - `type: :"vault_credential.deleted"`
+
   - `id: String`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault_credential.deleted"`
 
   - `vault_id: String`
 
@@ -1799,13 +1804,13 @@ puts(result)
 
 - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
+  - `type: :"vault_credential.refresh_failed"`
+
   - `id: String`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault_credential.refresh_failed"`
 
   - `vault_id: String`
 
@@ -1817,12 +1822,12 @@ puts(result)
 
 - `class BetaWebhookVaultDeletedEventData`
 
+  - `type: :"vault.deleted"`
+
   - `id: String`
 
     ID of the vault that triggered the event.
 
   - `organization_id: String`
-
-  - `type: :"vault.deleted"`
 
   - `workspace_id: String`

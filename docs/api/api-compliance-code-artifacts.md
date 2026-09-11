@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/code/artifacts"
 category: "api"
 generated: true
 ---
+---
+title: Artifacts
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts
+---
+
 # Artifacts
 
 ## List Code Artifacts
@@ -74,6 +79,12 @@ returned.
   maxItems: 200
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -226,6 +237,12 @@ only for identity-stored content; validate against it when present.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Example
@@ -256,19 +273,25 @@ Artifact.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
-
-- `id: string`
-
-  The ID of the Artifact that was deleted
 
 - `type: "code_artifact_deleted"`
 
   Constant string confirming deletion
 
   default: code_artifact_deleted
+
+- `id: string`
+
+  The ID of the Artifact that was deleted
 
 ### Example
 
@@ -370,12 +393,12 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
 
   Response for deleting a Code Artifact.
 
-  - `id: string`
-
-    The ID of the Artifact that was deleted
-
   - `type: "code_artifact_deleted"`
 
     Constant string confirming deletion
 
     default: code_artifact_deleted
+
+  - `id: string`
+
+    The ID of the Artifact that was deleted

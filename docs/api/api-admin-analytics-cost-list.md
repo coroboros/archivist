@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/cost/list"
 category: "api"
 generated: true
 ---
+---
+title: Get Cost Over Time
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost/list
+---
+
 # Get Cost Over Time
 
 **GET** `/v1/organizations/analytics/cost_report`
@@ -179,7 +184,7 @@ Requires an API key with the `read:analytics` scope.
 
 ## Returns
 
-- `CostBucket object`
+- `BetaCostBucket object`
 
   - `data: array of object`
 
@@ -324,7 +329,7 @@ Requires an API key with the `read:analytics` scope.
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

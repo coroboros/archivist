@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/list_effecti
 category: "api"
 generated: true
 ---
+---
+title: List Effective Spend Limits
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/list_effective
+---
+
 # List Effective Spend Limits
 
 **GET** `/v1/organizations/spend_limits/effective`
@@ -46,13 +51,19 @@ Paginates by member, so a member's periods never split across pages.
 
 ## Returns
 
-- `data: array of SpendSummary`
+- `data: array of BetaSpendSummary`
 
   - `actor: object`
 
     A user within the organization. `name` and `email_address` are
     null when the underlying account is unavailable or has been deleted;
     `deleted` is true only for deleted accounts.
+
+    - `type: "user_actor"`
+
+      Actor type. Always `user_actor`.
+
+      default: user_actor
 
     - `deleted: boolean`
 
@@ -67,12 +78,6 @@ Paginates by member, so a member's periods never split across pages.
     - `name: string or null`
 
       The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
-
-    - `type: "user_actor"`
-
-      Actor type. Always `user_actor`.
-
-      default: user_actor
 
     - `user_id: string`
 
@@ -134,27 +139,27 @@ Paginates by member, so a member's periods never split across pages.
 
     - `SeatTier object`
 
-      - `seat_tier: string`
-
       - `type: "seat_tier"`
 
         default: seat_tier
 
-    - `RbacGroup object`
+      - `seat_tier: string`
 
-      - `rbac_group_id: string`
+    - `RBACGroup object`
 
       - `type: "rbac_group"`
 
         default: rbac_group
 
-    - `OrganizationService object`
+      - `rbac_group_id: string`
 
-      - `service: string`
+    - `OrganizationService object`
 
       - `type: "organization_service"`
 
         default: organization_service
+
+      - `service: string`
 
     - `Organization object`
 
@@ -171,7 +176,7 @@ Paginates by member, so a member's periods never split across pages.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work/ack"
 category: "api"
 generated: true
 ---
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/php/beta/environments/work/ack
+---
+
 # Acknowledge Work
 
 `$client->beta->environments->work->ack(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
@@ -27,6 +32,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 ## Returns
 
 - `SelfHostedWork`
+
+  - `"work" type`
+
+    The type of object (always 'work')
 
   - `string id`
 
@@ -75,10 +84,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `?string stoppedAt`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `"work" type`
-
-    The type of object (always 'work')
 
 ## Example
 

@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/list"
 category: "api"
 generated: true
 ---
+---
+title: List memory stores
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/list
+---
+
 # List memory stores
 
-`$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsMemoryStore>`
+`$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsMemoryStore>`
 
 **GET** `/v1/memory_stores`
 
@@ -38,9 +43,13 @@ List memory stores
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -53,8 +62,6 @@ List memory stores
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -88,6 +95,7 @@ $page = $client->beta->memoryStores->list(
   limit: 0,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);

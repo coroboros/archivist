@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/versions"
 category: "api"
 generated: true
 ---
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/php/beta/agents/versions
+---
+
 # Versions
 
 ## List Agent Versions
 
-`$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
+`$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsAgent>`
 
 **GET** `/v1/agents/{agent_id}/versions`
 
@@ -30,9 +35,13 @@ List Agent Versions
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -66,8 +75,6 @@ List Agent Versions
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -90,6 +97,7 @@ $page = $client->beta->agents->versions->list(
   limit: 0,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);

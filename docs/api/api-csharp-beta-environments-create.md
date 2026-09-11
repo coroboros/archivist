@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/create
 category: "api"
 generated: true
 ---
+---
+title: Create Environment
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/create
+---
+
 # Create Environment
 
 `BetaEnvironment Beta.Environments.Create(parameters, cancellationToken = default)`
@@ -80,6 +85,10 @@ Create a new environment with the specified configuration.
 
         Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+        - `Type Type`
+
+          Package configuration type
+
         - `IReadOnlyList<string>? Apt`
 
           Ubuntu/Debian packages to install
@@ -104,10 +113,6 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `Type Type`
-
-          Package configuration type
-
     - `class BetaSelfHostedConfigParams:`
 
       Request params for `self_hosted` environment configuration.
@@ -128,7 +133,7 @@ Create a new environment with the specified configuration.
 
   - `Scope? scope`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
     - `Organization("organization")`
 
@@ -184,6 +189,8 @@ Create a new environment with the specified configuration.
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -226,11 +233,21 @@ Create a new environment with the specified configuration.
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `class BetaEnvironment:`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `JsonElement Type = "environment"`
+
+    The type of object (always 'environment')
 
   - `required string ID`
 
@@ -248,6 +265,10 @@ Create a new environment with the specified configuration.
 
       `cloud` environment configuration.
 
+      - `JsonElement Type = "cloud"`
+
+        Environment type
+
       - `required Networking Networking`
 
         Network configuration policy.
@@ -264,6 +285,10 @@ Create a new environment with the specified configuration.
 
           Limited network access.
 
+          - `JsonElement Type = "limited"`
+
+            Network policy type
+
           - `required bool AllowMcpServers`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -276,13 +301,13 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-          - `JsonElement Type = "limited"`
-
-            Network policy type
-
       - `required BetaPackages Packages`
 
         Package manager configuration.
+
+        - `Type Type`
+
+          Package configuration type
 
         - `required IReadOnlyList<string> Apt`
 
@@ -308,14 +333,6 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `Type Type`
-
-          Package configuration type
-
-      - `JsonElement Type = "cloud"`
-
-        Environment type
-
     - `class BetaSelfHostedConfig:`
 
       Configuration for self-hosted environments.
@@ -339,10 +356,6 @@ Create a new environment with the specified configuration.
   - `required string Name`
 
     Human-readable name for the environment
-
-  - `JsonElement Type = "environment"`
-
-    The type of object (always 'environment')
 
   - `required string UpdatedAt`
 

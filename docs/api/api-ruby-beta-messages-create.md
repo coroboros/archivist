@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/ruby/beta/messages/create
+---
+
 # Create a Message
 
 `beta.messages.create(**kwargs) -> BetaMessage`
@@ -89,11 +94,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaTextBlockParam`
 
+        - `type: :text`
+
         - `text: String`
 
           minLength: 1
-
-        - `type: :text`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -120,6 +125,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaCitationCharLocationParam`
 
+            - `type: :char_location`
+
             - `cited_text: String`
 
             - `document_index: Integer`
@@ -136,9 +143,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: :char_location`
-
           - `class BetaCitationPageLocationParam`
+
+            - `type: :page_location`
 
             - `cited_text: String`
 
@@ -156,9 +163,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 1
 
-            - `type: :page_location`
-
           - `class BetaCitationContentBlockLocationParam`
+
+            - `type: :content_block_location`
 
             - `cited_text: String`
 
@@ -186,9 +193,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: :content_block_location`
-
           - `class BetaCitationWebSearchResultLocationParam`
+
+            - `type: :web_search_result_location`
 
             - `cited_text: String`
 
@@ -198,13 +205,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 512, minLength: 1
 
-            - `type: :web_search_result_location`
-
             - `url: String`
 
               minLength: 1
 
           - `class BetaCitationSearchResultLocationParam`
+
+            - `type: :search_result_location`
 
             - `cited_text: String`
 
@@ -236,13 +243,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `title: String`
 
-            - `type: :search_result_location`
-
       - `class BetaImageBlockParam`
+
+        - `type: :image`
 
         - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
           - `class BetaBase64ImageSource`
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -258,8 +267,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:"image/webp"`
 
-            - `type: :base64`
-
           - `class BetaURLImageSource`
 
             - `type: :url`
@@ -268,11 +275,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaFileImageSource`
 
-            - `file_id: String`
-
             - `type: :file`
 
-        - `type: :image`
+            - `file_id: String`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -292,9 +297,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaRequestDocumentBlock`
 
+        - `type: :document`
+
         - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
           - `class BetaBase64PDFSource`
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -302,17 +311,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `media_type: :"application/pdf"`
 
-            - `type: :base64`
-
           - `class BetaPlainTextSource`
+
+            - `type: :text`
 
             - `data: String`
 
             - `media_type: :"text/plain"`
 
-            - `type: :text`
-
           - `class BetaContentBlockSource`
+
+            - `type: :content`
 
             - `content: String | Array[BetaContentBlockSourceContent]`
 
@@ -324,8 +333,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `class BetaImageBlockParam`
 
-            - `type: :content`
-
           - `class BetaURLPDFSource`
 
             - `type: :url`
@@ -334,11 +341,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaFileDocumentSource`
 
-            - `file_id: String`
-
             - `type: :file`
 
-        - `type: :document`
+            - `file_id: String`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -358,13 +363,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaSearchResultBlockParam`
 
+        - `type: :search_result`
+
         - `content: Array[BetaTextBlockParam]`
+
+          - `type: :text`
 
           - `text: String`
 
             minLength: 1
-
-          - `type: :text`
 
           - `cache_control: BetaCacheControlEphemeral`
 
@@ -376,8 +383,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `title: String`
 
-        - `type: :search_result`
-
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
@@ -385,6 +390,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `citations: BetaCitationsConfigParam`
 
       - `class BetaThinkingBlockParam`
+
+        - `type: :thinking`
 
         - `signature: String`
 
@@ -396,17 +403,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: :thinking`
-
       - `class BetaRedactedThinkingBlockParam`
+
+        - `type: :redacted_thinking`
 
         - `data: String`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: :redacted_thinking`
-
       - `class BetaToolUseBlockParam`
+
+        - `type: :tool_use`
 
         - `id: String`
 
@@ -417,8 +424,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `name: String`
 
           maxLength: 200, minLength: 1
-
-        - `type: :tool_use`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -438,19 +443,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Tool invocation generated by a server-side tool.
 
+            - `type: :code_execution_20250825`
+
             - `tool_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: :code_execution_20250825`
 
           - `class BetaServerToolCaller20260120`
 
+            - `type: :code_execution_20260120`
+
             - `tool_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: :code_execution_20260120`
 
         - `toolset_name: String`
 
@@ -460,11 +465,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaToolResultBlockParam`
 
+        - `type: :tool_result`
+
         - `tool_use_id: String`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: :tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -488,11 +493,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: :tool_reference`
+
               - `tool_name: String`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: :tool_reference`
 
               - `cache_control: BetaCacheControlEphemeral`
 
@@ -507,6 +512,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: :browser_state`
 
               - `tabs: Array[BetaBrowserStateTabEntry]`
 
@@ -536,8 +543,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: :browser_state`
-
               - `cache_control: BetaCacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
@@ -558,25 +563,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: :tab_opened`
+
                   - `tab_id: String`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: :tab_opened`
-
                 - `class BetaBrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
+
+                  - `type: :download_started`
 
                   - `download_id: String`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: :download_started`
 
                   - `url: String`
 
@@ -591,13 +596,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: :download_completed`
+
                   - `download_id: String`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: :download_completed`
 
                   - `url: String`
 
@@ -621,13 +626,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: :download_failed`
+
                   - `download_id: String`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: :download_failed`
 
                   - `url: String`
 
@@ -650,6 +655,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class BetaServerToolUseBlockParam`
+
+        - `type: :server_tool_use`
 
         - `id: String`
 
@@ -675,8 +682,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `:tool_search_tool_bm25`
 
-        - `type: :server_tool_use`
-
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
@@ -697,21 +702,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaWebSearchToolResultBlockParam`
 
+        - `type: :web_search_tool_result`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `ResultBlock = Array[BetaWebSearchResultBlockParam]`
 
+            - `type: :web_search_result`
+
             - `encrypted_content: String`
 
             - `title: String`
-
-            - `type: :web_search_result`
 
             - `url: String`
 
             - `page_age: String`
 
           - `class BetaWebSearchToolRequestError`
+
+            - `type: :web_search_tool_result_error`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -727,13 +736,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:request_too_large`
 
-            - `type: :web_search_tool_result_error`
-
         - `tool_use_id: String`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: :web_search_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -755,9 +760,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaWebFetchToolResultBlockParam`
 
+        - `type: :web_fetch_tool_result`
+
         - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
           - `class BetaWebFetchToolResultErrorBlockParam`
+
+            - `type: :web_fetch_tool_result_error`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -779,13 +788,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:unavailable`
 
-            - `type: :web_fetch_tool_result_error`
+              - `:content_too_large`
 
           - `class BetaWebFetchBlockParam`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: :web_fetch_result`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: String`
 
@@ -798,8 +807,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `tool_use_id: String`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: :web_fetch_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -821,9 +828,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaAdvisorToolResultBlockParam`
 
+        - `type: :advisor_tool_result`
+
         - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
           - `class BetaAdvisorToolResultErrorParam`
+
+            - `type: :advisor_tool_result_error`
 
             - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
@@ -841,23 +852,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:model_not_found`
 
-            - `type: :advisor_tool_result_error`
-
           - `class BetaAdvisorResultBlockParam`
 
-            - `text: String`
-
             - `type: :advisor_result`
+
+            - `text: String`
 
             - `stop_reason: String`
 
           - `class BetaAdvisorRedactedResultBlockParam`
 
+            - `type: :advisor_redacted_result`
+
             - `encrypted_content: String`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: :advisor_redacted_result`
 
             - `stop_reason: String`
 
@@ -865,19 +874,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: :advisor_tool_result`
-
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaCodeExecutionToolResultBlockParam`
 
+        - `type: :code_execution_tool_result`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultErrorParam`
+
+            - `type: :code_execution_tool_result_error`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -889,15 +900,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:execution_time_exceeded`
 
-            - `type: :code_execution_tool_result_error`
-
           - `class BetaCodeExecutionResultBlockParam`
+
+            - `type: :code_execution_result`
 
             - `content: Array[BetaCodeExecutionOutputBlockParam]`
 
-              - `file_id: String`
-
               - `type: :code_execution_output`
+
+              - `file_id: String`
 
             - `return_code: Integer`
 
@@ -905,17 +916,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stdout: String`
 
-            - `type: :code_execution_result`
-
           - `class BetaEncryptedCodeExecutionResultBlockParam`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: :encrypted_code_execution_result`
+
             - `content: Array[BetaCodeExecutionOutputBlockParam]`
 
-              - `file_id: String`
-
               - `type: :code_execution_output`
+
+              - `file_id: String`
 
             - `encrypted_stdout: String`
 
@@ -923,13 +934,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stderr: String`
 
-            - `type: :encrypted_code_execution_result`
-
         - `tool_use_id: String`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: :code_execution_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -937,9 +944,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaBashCodeExecutionToolResultBlockParam`
 
+        - `type: :bash_code_execution_tool_result`
+
         - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
           - `class BetaBashCodeExecutionToolResultErrorParam`
+
+            - `type: :bash_code_execution_tool_result_error`
 
             - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -953,15 +964,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:output_file_too_large`
 
-            - `type: :bash_code_execution_tool_result_error`
-
           - `class BetaBashCodeExecutionResultBlockParam`
+
+            - `type: :bash_code_execution_result`
 
             - `content: Array[BetaBashCodeExecutionOutputBlockParam]`
 
-              - `file_id: String`
-
               - `type: :bash_code_execution_output`
+
+              - `file_id: String`
 
             - `return_code: Integer`
 
@@ -969,13 +980,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stdout: String`
 
-            - `type: :bash_code_execution_result`
-
         - `tool_use_id: String`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: :bash_code_execution_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -983,9 +990,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam`
 
+        - `type: :text_editor_code_execution_tool_result`
+
         - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `class BetaTextEditorCodeExecutionToolResultErrorParam`
+
+            - `type: :text_editor_code_execution_tool_result_error`
 
             - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -999,11 +1010,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:file_not_found`
 
-            - `type: :text_editor_code_execution_tool_result_error`
-
             - `error_message: String`
 
           - `class BetaTextEditorCodeExecutionViewResultBlockParam`
+
+            - `type: :text_editor_code_execution_view_result`
 
             - `content: String`
 
@@ -1015,8 +1026,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:pdf`
 
-            - `type: :text_editor_code_execution_view_result`
-
             - `num_lines: Integer`
 
             - `start_line: Integer`
@@ -1025,9 +1034,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-            - `is_file_update: bool`
-
             - `type: :text_editor_code_execution_create_result`
+
+            - `is_file_update: bool`
 
           - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -1047,17 +1056,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: :text_editor_code_execution_tool_result`
-
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaToolSearchToolResultBlockParam`
 
+        - `type: :tool_search_tool_result`
+
         - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
           - `class BetaToolSearchToolResultErrorParam`
+
+            - `type: :tool_search_tool_result_error`
 
             - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
@@ -1069,37 +1080,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `:execution_time_exceeded`
 
-            - `type: :tool_search_tool_result_error`
-
             - `error_message: String`
 
           - `class BetaToolSearchToolSearchResultBlockParam`
 
+            - `type: :tool_search_tool_search_result`
+
             - `tool_references: Array[BetaToolReferenceBlockParam]`
+
+              - `type: :tool_reference`
 
               - `tool_name: String`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: :tool_reference`
-
               - `cache_control: BetaCacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: :tool_search_tool_search_result`
-
         - `tool_use_id: String`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: :tool_search_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaMCPToolUseBlockParam`
+
+        - `type: :mcp_tool_use`
 
         - `id: String`
 
@@ -1113,19 +1122,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The name of the MCP server
 
-        - `type: :mcp_tool_use`
-
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaRequestMCPToolResultBlockParam`
 
+        - `type: :mcp_tool_result`
+
         - `tool_use_id: String`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: :mcp_tool_result`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -1137,11 +1144,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaMCPToolResultBlockParamContent = Array[BetaTextBlockParam]`
 
+            - `type: :text`
+
             - `text: String`
 
               minLength: 1
-
-            - `type: :text`
 
             - `cache_control: BetaCacheControlEphemeral`
 
@@ -1156,9 +1163,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: String`
-
         - `type: :container_upload`
+
+        - `file_id: String`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -1196,6 +1203,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `type: :tool_addition`
+
         - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
           Reference to a single tool the caller declared directly in
@@ -1210,32 +1219,30 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: :tool_reference`
+
             - `name: String`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: :tool_reference`
 
           - `class BetaToolChangeMCPToolReference`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: :mcp_tool_reference`
+
             - `name: String`
 
             - `server_name: String`
-
-            - `type: :mcp_tool_reference`
 
           - `class BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: String`
-
             - `type: :mcp_toolset_reference`
 
-        - `type: :tool_addition`
+            - `server_name: String`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -1249,6 +1256,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
+        - `type: :tool_removal`
+
         - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
           Reference to a single tool the caller declared directly in
@@ -1271,8 +1280,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `class BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: :tool_removal`
 
         - `cache_control: BetaCacheControlEphemeral`
 
@@ -1293,6 +1300,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: :fallback`
 
         - `from: BetaFallbackInfoParam`
 
@@ -1384,8 +1393,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Identifies one hop of a fallback transition.
 
-        - `type: :fallback`
-
         - `trigger: untyped`
 
           The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1456,12 +1463,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       maxItems: 20
 
-      - `skill_id: String`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: :anthropic | :custom`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1469,6 +1470,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `:anthropic`
 
         - `:custom`
+
+      - `skill_id: String`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: String`
 
@@ -1680,25 +1687,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+        - `type: :json_schema`
+
         - `schema: Hash[Symbol, untyped]`
 
           The JSON schema of the format
 
-        - `type: :json_schema`
-
       - `task_budget: BetaTokenTaskBudget`
 
         User-configurable total token budget across contexts.
+
+        - `type: :tokens`
+
+          The budget type. Currently only 'tokens' is supported.
 
         - `total: Integer`
 
           Total token budget across all contexts in the session.
 
           minimum: 1024
-
-        - `type: :tokens`
-
-          The budget type. Currently only 'tokens' is supported.
 
         - `remaining: Integer`
 
@@ -1718,6 +1725,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaThinkingConfigEnabled`
 
+        - `type: :enabled`
+
         - `budget_tokens: Integer`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1727,8 +1736,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
           minimum: 1024
-
-        - `type: :enabled`
 
         - `block_binding: BetaThinkingBlockBinding`
 
@@ -1794,9 +1801,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   maxItems: 20
 
-  - `name: String`
-
   - `type: :url`
+
+  - `name: String`
 
   - `url: String`
 
@@ -1866,11 +1873,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `UnionMember1 = Array[BetaTextBlockParam]`
 
+    - `type: :text`
+
     - `text: String`
 
       minLength: 1
-
-    - `type: :text`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -1924,11 +1931,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: :tool`
+
     - `name: String`
 
       The name of the tool to use.
-
-    - `type: :tool`
 
     - `disable_parallel_tool_use: bool`
 
@@ -2008,6 +2015,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaTool`
 
+    - `type: :custom`
+
     - `input_schema: InputSchema`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -2062,17 +2071,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: :custom`
-
   - `class BetaToolBash20241022`
+
+    - `type: :bash_20241022`
 
     - `name: :bash`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :bash_20241022`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2100,13 +2107,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolBash20250124`
 
+    - `type: :bash_20250124`
+
     - `name: :bash`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :bash_20250124`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2134,13 +2141,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaCodeExecutionTool20250522`
 
+    - `type: :code_execution_20250522`
+
     - `name: :code_execution`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :code_execution_20250522`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2166,13 +2173,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaCodeExecutionTool20250825`
 
+    - `type: :code_execution_20250825`
+
     - `name: :code_execution`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :code_execution_20250825`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2200,13 +2207,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: :code_execution_20260120`
+
     - `name: :code_execution`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :code_execution_20260120`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2234,13 +2241,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Code execution tool with REPL state persistence.
 
+    - `type: :code_execution_20260521`
+
     - `name: :code_execution`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :code_execution_20260521`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2285,6 +2292,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: BetaBrowserTypeConfig`
+
+        `type`'s config overrides.
+
+        - `defer_loading: bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: BetaBrowserCloseTabConfig`
 
@@ -2622,18 +2641,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: BetaBrowserTypeConfig`
-
-        `type`'s config overrides.
-
-        - `defer_loading: bool`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: bool`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: BetaBrowserWaitConfig`
 
         `wait`'s config overrides.
@@ -2660,6 +2667,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20241022`
 
+    - `type: :computer_20241022`
+
     - `display_height_px: Integer`
 
       The height of the display in pixels.
@@ -2677,8 +2686,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :computer_20241022`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2712,13 +2719,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaMemoryTool20250818`
 
+    - `type: :memory_20250818`
+
     - `name: :memory`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :memory_20250818`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2746,6 +2753,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20250124`
 
+    - `type: :computer_20250124`
+
     - `display_height_px: Integer`
 
       The height of the display in pixels.
@@ -2763,8 +2772,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :computer_20250124`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2798,13 +2805,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20241022`
 
+    - `type: :text_editor_20241022`
+
     - `name: :str_replace_editor`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :text_editor_20241022`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2832,6 +2839,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20251124`
 
+    - `type: :computer_20251124`
+
     - `display_height_px: Integer`
 
       The height of the display in pixels.
@@ -2849,8 +2858,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :computer_20251124`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -2911,6 +2918,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: BetaComputerTypeConfig`
+
+        `type`'s config overrides.
+
+        - `defer_loading: bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: BetaComputerCursorPositionConfig`
 
@@ -3080,18 +3099,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: BetaComputerTypeConfig`
-
-        `type`'s config overrides.
-
-        - `defer_loading: bool`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: bool`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: BetaComputerWaitConfig`
 
         `wait`'s config overrides.
@@ -3118,13 +3125,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250124`
 
+    - `type: :text_editor_20250124`
+
     - `name: :str_replace_editor`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :text_editor_20250124`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3152,13 +3159,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250429`
 
+    - `type: :text_editor_20250429`
+
     - `name: :str_replace_based_edit_tool`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :text_editor_20250429`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3186,13 +3193,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250728`
 
+    - `type: :text_editor_20250728`
+
     - `name: :str_replace_based_edit_tool`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :text_editor_20250728`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3226,13 +3233,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20250305`
 
+    - `type: :web_search_20250305`
+
     - `name: :web_search`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_search_20250305`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3302,13 +3309,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20250910`
 
+    - `type: :web_fetch_20250910`
+
     - `name: :web_fetch`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_fetch_20250910`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3358,13 +3365,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20260209`
 
+    - `type: :web_search_20260209`
+
     - `name: :web_search`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_search_20260209`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3408,13 +3415,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20260209`
 
+    - `type: :web_fetch_20260209`
+
     - `name: :web_fetch`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_fetch_20260209`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3466,13 +3473,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: :web_fetch_20260309`
+
     - `name: :web_fetch`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_fetch_20260309`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3526,13 +3533,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20260318`
 
+    - `type: :web_search_20260318`
+
     - `name: :web_search`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_search_20260318`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3584,13 +3591,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20260318`
 
+    - `type: :web_fetch_20260318`
+
     - `name: :web_fetch`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :web_fetch_20260318`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3652,6 +3659,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaAdvisorTool20260301`
 
+    - `type: :advisor_20260301`
+
     - `model: Model`
 
       The model that will complete your prompt.
@@ -3663,8 +3672,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: :advisor_20260301`
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3706,17 +3713,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolSearchToolBm25_20251119`
 
-    - `name: :tool_search_tool_bm25`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: :tool_search_tool_bm25_20251119 | :tool_search_tool_bm25`
 
       - `:tool_search_tool_bm25_20251119`
 
       - `:tool_search_tool_bm25`
+
+    - `name: :tool_search_tool_bm25`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3742,17 +3749,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolSearchToolRegex20251119`
 
-    - `name: :tool_search_tool_regex`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: :tool_search_tool_regex_20251119 | :tool_search_tool_regex`
 
       - `:tool_search_tool_regex_20251119`
 
       - `:tool_search_tool_regex`
+
+    - `name: :tool_search_tool_regex`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -3783,13 +3790,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: :mcp_toolset`
+
     - `mcp_server_name: String`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: :mcp_toolset`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -3817,7 +3824,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3865,6 +3872,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -3910,6 +3919,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 - `user_profile_id: String`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+- `workspace_id: String`
 
 - `output_format: BetaJSONOutputFormat`
 
@@ -3959,6 +3970,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `class BetaMessage`
 
+  - `type: :message`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
   - `id: String`
 
     Unique object identifier.
@@ -3983,12 +4000,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Skills loaded in the container
 
-      - `skill_id: String`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: :anthropic | :custom`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -3996,6 +4007,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `:anthropic`
 
         - `:custom`
+
+      - `skill_id: String`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: String`
 
@@ -4034,6 +4051,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaTextBlock`
 
+      - `type: :text`
+
       - `citations: Array[BetaTextCitation]`
 
         Citations supporting the text block.
@@ -4041,6 +4060,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `class BetaCitationCharLocation`
+
+          - `type: :char_location`
 
           - `cited_text: String`
 
@@ -4058,9 +4079,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: :char_location`
-
         - `class BetaCitationPageLocation`
+
+          - `type: :page_location`
 
           - `cited_text: String`
 
@@ -4078,9 +4099,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-          - `type: :page_location`
-
         - `class BetaCitationContentBlockLocation`
+
+          - `type: :content_block_location`
 
           - `cited_text: String`
 
@@ -4108,9 +4129,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: :content_block_location`
-
         - `class BetaCitationsWebSearchResultLocation`
+
+          - `type: :web_search_result_location`
 
           - `cited_text: String`
 
@@ -4120,11 +4141,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 512
 
-          - `type: :web_search_result_location`
-
           - `url: String`
 
         - `class BetaCitationSearchResultLocation`
+
+          - `type: :search_result_location`
 
           - `cited_text: String`
 
@@ -4156,15 +4177,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: String`
 
-          - `type: :search_result_location`
-
       - `text: String`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: :text`
+        minLength: 0
 
     - `class BetaThinkingBlock`
+
+      - `type: :thinking`
 
       - `signature: String`
 
@@ -4178,9 +4197,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `type: :thinking`
-
     - `class BetaRedactedThinkingBlock`
+
+      - `type: :redacted_thinking`
 
       - `data: String`
 
@@ -4190,9 +4209,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: :redacted_thinking`
-
     - `class BetaToolUseBlock`
+
+      - `type: :tool_use`
 
       - `id: String`
 
@@ -4203,8 +4222,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `name: String`
 
         minLength: 1
-
-      - `type: :tool_use`
 
       - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4220,19 +4237,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `type: :code_execution_20250825`
+
           - `tool_id: String`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: :code_execution_20250825`
 
         - `class BetaServerToolCaller20260120`
 
+          - `type: :code_execution_20260120`
+
           - `tool_id: String`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: :code_execution_20260120`
 
       - `toolset_name: String`
 
@@ -4241,6 +4258,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class BetaServerToolUseBlock`
+
+      - `type: :server_tool_use`
 
       - `id: String`
 
@@ -4266,8 +4285,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `:tool_search_tool_bm25`
 
-      - `type: :server_tool_use`
-
       - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
         Tool invocation directly from the model.
@@ -4284,9 +4301,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebSearchToolResultBlock`
 
+      - `type: :web_search_tool_result`
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `class BetaWebSearchToolResultError`
+
+          - `type: :web_search_tool_result_error`
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -4302,9 +4323,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `:request_too_large`
 
-          - `type: :web_search_tool_result_error`
-
         - `UnionMember1 = Array[BetaWebSearchResultBlock]`
+
+          - `type: :web_search_result`
 
           - `encrypted_content: String`
 
@@ -4312,15 +4333,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: String`
 
-          - `type: :web_search_result`
-
           - `url: String`
 
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: :web_search_tool_result`
 
       - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4338,9 +4355,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebFetchToolResultBlock`
 
+      - `type: :web_fetch_tool_result`
+
       - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
         - `class BetaWebFetchToolResultErrorBlock`
+
+          - `type: :web_fetch_tool_result_error`
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -4362,11 +4383,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `:unavailable`
 
-          - `type: :web_fetch_tool_result_error`
+            - `:content_too_large`
 
         - `class BetaWebFetchBlock`
 
+          - `type: :web_fetch_result`
+
           - `content: BetaDocumentBlock`
+
+            - `type: :document`
 
             - `citations: BetaCitationConfig`
 
@@ -4378,33 +4403,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `class BetaBase64PDFSource`
 
+                - `type: :base64`
+
                 - `data: String`
 
                   format: byte
 
                 - `media_type: :"application/pdf"`
 
-                - `type: :base64`
-
               - `class BetaPlainTextSource`
+
+                - `type: :text`
 
                 - `data: String`
 
                 - `media_type: :"text/plain"`
 
-                - `type: :text`
-
             - `title: String`
 
               The title of the document
 
-            - `type: :document`
-
           - `retrieved_at: String`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: :web_fetch_result`
 
           - `url: String`
 
@@ -4413,8 +4434,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: :web_fetch_tool_result`
 
       - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4432,9 +4451,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaAdvisorToolResultBlock`
 
+      - `type: :advisor_tool_result`
+
       - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
         - `class BetaAdvisorToolResultError`
+
+          - `type: :advisor_tool_result_error`
 
           - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
@@ -4452,9 +4475,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `:model_not_found`
 
-          - `type: :advisor_tool_result_error`
-
         - `class BetaAdvisorResultBlock`
+
+          - `type: :advisor_result`
 
           - `stop_reason: String`
 
@@ -4462,9 +4485,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: String`
 
-          - `type: :advisor_result`
-
         - `class BetaAdvisorRedactedResultBlock`
+
+          - `type: :advisor_redacted_result`
 
           - `encrypted_content: String`
 
@@ -4474,21 +4497,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: :advisor_redacted_result`
-
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: :advisor_tool_result`
-
     - `class BetaCodeExecutionToolResultBlock`
+
+      - `type: :code_execution_tool_result`
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class BetaCodeExecutionToolResultError`
+
+          - `type: :code_execution_tool_result_error`
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -4500,15 +4523,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `:execution_time_exceeded`
 
-          - `type: :code_execution_tool_result_error`
-
         - `class BetaCodeExecutionResultBlock`
+
+          - `type: :code_execution_result`
 
           - `content: Array[BetaCodeExecutionOutputBlock]`
 
-            - `file_id: String`
-
             - `type: :code_execution_output`
+
+            - `file_id: String`
 
           - `return_code: Integer`
 
@@ -4516,17 +4539,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: String`
 
-          - `type: :code_execution_result`
-
         - `class BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
+          - `type: :encrypted_code_execution_result`
+
           - `content: Array[BetaCodeExecutionOutputBlock]`
 
-            - `file_id: String`
-
             - `type: :code_execution_output`
+
+            - `file_id: String`
 
           - `encrypted_stdout: String`
 
@@ -4534,19 +4557,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stderr: String`
 
-          - `type: :encrypted_code_execution_result`
-
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: :code_execution_tool_result`
-
     - `class BetaBashCodeExecutionToolResultBlock`
+
+      - `type: :bash_code_execution_tool_result`
 
       - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
         - `class BetaBashCodeExecutionToolResultError`
+
+          - `type: :bash_code_execution_tool_result_error`
 
           - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -4560,15 +4583,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `:output_file_too_large`
 
-          - `type: :bash_code_execution_tool_result_error`
-
         - `class BetaBashCodeExecutionResultBlock`
+
+          - `type: :bash_code_execution_result`
 
           - `content: Array[BetaBashCodeExecutionOutputBlock]`
 
-            - `file_id: String`
-
             - `type: :bash_code_execution_output`
+
+            - `file_id: String`
 
           - `return_code: Integer`
 
@@ -4576,19 +4599,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: String`
 
-          - `type: :bash_code_execution_result`
-
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: :bash_code_execution_tool_result`
-
     - `class BetaTextEditorCodeExecutionToolResultBlock`
+
+      - `type: :text_editor_code_execution_tool_result`
 
       - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `class BetaTextEditorCodeExecutionToolResultError`
+
+          - `type: :text_editor_code_execution_tool_result_error`
 
           - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -4604,9 +4627,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: String`
 
-          - `type: :text_editor_code_execution_tool_result_error`
-
         - `class BetaTextEditorCodeExecutionViewResultBlock`
+
+          - `type: :text_editor_code_execution_view_result`
 
           - `content: String`
 
@@ -4624,15 +4647,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `total_lines: Integer`
 
-          - `type: :text_editor_code_execution_view_result`
-
         - `class BetaTextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: bool`
 
           - `type: :text_editor_code_execution_create_result`
 
+          - `is_file_update: bool`
+
         - `class BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: :text_editor_code_execution_str_replace_result`
 
           - `lines: Array[String]`
 
@@ -4644,19 +4667,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `old_start: Integer`
 
-          - `type: :text_editor_code_execution_str_replace_result`
-
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: :text_editor_code_execution_tool_result`
-
     - `class BetaToolSearchToolResultBlock`
+
+      - `type: :tool_search_tool_result`
 
       - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
         - `class BetaToolSearchToolResultError`
+
+          - `type: :tool_search_tool_result_error`
 
           - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
@@ -4670,27 +4693,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: String`
 
-          - `type: :tool_search_tool_result_error`
-
         - `class BetaToolSearchToolSearchResultBlock`
 
+          - `type: :tool_search_tool_search_result`
+
           - `tool_references: Array[BetaToolReferenceBlock]`
+
+            - `type: :tool_reference`
 
             - `tool_name: String`
 
               maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-            - `type: :tool_reference`
-
-          - `type: :tool_search_tool_search_result`
-
       - `tool_use_id: String`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: :tool_search_tool_result`
-
     - `class BetaMCPToolUseBlock`
+
+      - `type: :mcp_tool_use`
 
       - `id: String`
 
@@ -4706,15 +4727,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The name of the MCP server
 
-      - `type: :mcp_tool_use`
-
     - `class BetaMCPToolResultBlock`
+
+      - `type: :mcp_tool_result`
 
       - `content: String | Array[BetaTextBlock]`
 
         - `String = String`
 
         - `BetaMCPToolResultBlockContent = Array[BetaTextBlock]`
+
+          - `type: :text`
 
           - `citations: Array[BetaTextCitation]`
 
@@ -4724,9 +4747,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: String`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: :text`
+            minLength: 0
 
       - `is_error: bool`
 
@@ -4734,15 +4755,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: :mcp_tool_result`
-
     - `class BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: String`
-
       - `type: :container_upload`
+
+      - `file_id: String`
 
     - `class BetaCompactionBlock`
 
@@ -4752,6 +4771,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: :compaction`
+
       - `content: String`
 
         Summary of compacted content, or null if compaction failed
@@ -4759,8 +4780,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `encrypted_content: String`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: :compaction`
 
     - `class BetaFallbackBlock`
 
@@ -4775,6 +4794,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: :fallback`
 
       - `from: BetaFallbackInfo`
 
@@ -4870,6 +4891,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: :refusal`
+
         - `category: :cyber | :bio | :frontier_llm | 2 more`
 
           The policy category that triggered a refusal.
@@ -4894,10 +4917,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: :refusal`
-
-      - `type: :fallback`
-
   - `context_management: BetaContextManagementResponse`
 
     Context management response.
@@ -4909,6 +4928,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       List of context management edits that were applied.
 
       - `class BetaClearToolUses20250919EditResponse`
+
+        - `type: :clear_tool_uses_20250919`
+
+          The type of context management edit applied.
 
         - `cleared_input_tokens: Integer`
 
@@ -4922,11 +4945,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: :clear_tool_uses_20250919`
+      - `class BetaClearThinking20251015EditResponse`
+
+        - `type: :clear_thinking_20251015`
 
           The type of context management edit applied.
-
-      - `class BetaClearThinking20251015EditResponse`
 
         - `cleared_input_tokens: Integer`
 
@@ -4940,10 +4963,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: :clear_thinking_20251015`
-
-          The type of context management edit applied.
-
   - `diagnostics: BetaDiagnostics`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -4955,35 +4974,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaCacheMissModelChanged`
 
+        - `type: :model_changed`
+
         - `cache_missed_input_tokens: Integer`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-        - `type: :model_changed`
 
       - `class BetaCacheMissSystemChanged`
 
+        - `type: :system_changed`
+
         - `cache_missed_input_tokens: Integer`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-        - `type: :system_changed`
 
       - `class BetaCacheMissToolsChanged`
 
+        - `type: :tools_changed`
+
         - `cache_missed_input_tokens: Integer`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-        - `type: :tools_changed`
 
       - `class BetaCacheMissMessagesChanged`
 
+        - `type: :messages_changed`
+
         - `cache_missed_input_tokens: Integer`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-        - `type: :messages_changed`
 
       - `class BetaCacheMissPreviousMessageNotFound`
 
@@ -5008,6 +5027,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `stop_details: BetaRefusalStopDetails`
 
     Structured information about a refusal.
+
+    - `type: :refusal`
 
     - `category: :cyber | :bio | :frontier_llm | 2 more`
 
@@ -5088,8 +5109,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: :refusal`
-
   - `stop_reason: BetaStopReason`
 
     The reason that we stopped.
@@ -5127,12 +5146,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: :message`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
 
   - `usage: BetaUsage`
 
@@ -5198,6 +5211,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           No reprice was applied; `reason` says why.
 
+          - `type: :not_applied`
+
           - `reason: :body_mismatch | :continuation_excluded | :continuation_only | 9 more`
 
             Why the reprice was not applied.
@@ -5228,8 +5243,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `:wrong_platform`
 
             - `:wrong_workspace`
-
-          - `type: :not_applied`
 
           - `remove_to_redeem: Array[String]`
 
@@ -5268,6 +5281,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Token usage for a sampling iteration.
 
+        - `type: :message`
+
+          Usage for a sampling iteration
+
         - `cache_creation: BetaCacheCreation`
 
           Breakdown of cached tokens by TTL
@@ -5301,15 +5318,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: :message`
-
-          Usage for a sampling iteration
 
       - `class BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
 
+        - `type: :compaction`
+
+          Usage for a compaction iteration
+
         - `cache_creation: BetaCacheCreation`
 
           Breakdown of cached tokens by TTL
@@ -5338,13 +5355,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: :compaction`
-
-          Usage for a compaction iteration
-
       - `class BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: :advisor_message`
+
+          Usage for an advisor sub-inference iteration
 
         - `cache_creation: BetaCacheCreation`
 
@@ -5379,10 +5396,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: :advisor_message`
-
-          Usage for an advisor sub-inference iteration
 
       - `class BetaFallbackMessageIterationUsage`
 
@@ -5393,6 +5406,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: :fallback_message`
+
+          Usage for the fallback-model attempt that served the response
+
         - `cache_creation: BetaCacheCreation`
 
           Breakdown of cached tokens by TTL
@@ -5426,10 +5443,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: :fallback_message`
-
-          Usage for the fallback-model attempt that served the response
 
     - `output_tokens: Integer`
 
@@ -5511,6 +5524,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: :thinking_dropped`
+
+      Always `thinking_dropped` for this entry type.
+
     - `path: String`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5541,19 +5558,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `:end_user_binding_mismatch`
 
-    - `type: :thinking_dropped`
-
-      Always `thinking_dropped` for this entry type.
-
 - `BetaRawMessageStreamEvent = BetaRawMessageStartEvent | BetaRawMessageDeltaEvent | BetaRawMessageStopEvent | 3 more`
 
   - `class BetaRawMessageStartEvent`
 
-    - `message: BetaMessage`
-
     - `type: :message_start`
 
+    - `message: BetaMessage`
+
   - `class BetaRawMessageDeltaEvent`
+
+    - `type: :message_delta`
 
     - `context_management: BetaContextManagementResponse`
 
@@ -5572,8 +5587,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `stop_reason: BetaStopReason`
 
       - `stop_sequence: String`
-
-    - `type: :message_delta`
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -5656,6 +5669,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: :thinking_dropped`
+
+        Always `thinking_dropped` for this entry type.
+
       - `path: String`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5678,15 +5695,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: :thinking_dropped`
-
-        Always `thinking_dropped` for this entry type.
-
   - `class BetaRawMessageStopEvent`
 
     - `type: :message_stop`
 
   - `class BetaRawContentBlockStartEvent`
+
+    - `type: :content_block_start`
 
     - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
@@ -5748,25 +5763,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `index: Integer`
 
-    - `type: :content_block_start`
-
   - `class BetaRawContentBlockDeltaEvent`
+
+    - `type: :content_block_delta`
 
     - `delta: BetaRawContentBlockDelta`
 
       - `class BetaTextDelta`
 
-        - `text: String`
-
         - `type: :text_delta`
+
+        - `text: String`
 
       - `class BetaInputJSONDelta`
 
-        - `partial_json: String`
-
         - `type: :input_json_delta`
 
+        - `partial_json: String`
+
       - `class BetaCitationsDelta`
+
+        - `type: :citations_delta`
 
         - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
@@ -5780,9 +5797,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaCitationSearchResultLocation`
 
-        - `type: :citations_delta`
-
       - `class BetaThinkingDelta`
+
+        - `type: :thinking_delta`
 
         - `estimated_tokens: Integer`
 
@@ -5792,17 +5809,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: :thinking_delta`
-
       - `class BetaSignatureDelta`
+
+        - `type: :signature_delta`
 
         - `signature: String`
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-        - `type: :signature_delta`
-
       - `class BetaCompactionContentBlockDelta`
+
+        - `type: :compaction_delta`
 
         - `content: String`
 
@@ -5810,17 +5827,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: :compaction_delta`
-
     - `index: Integer`
-
-    - `type: :content_block_delta`
 
   - `class BetaRawContentBlockStopEvent`
 
-    - `index: Integer`
-
     - `type: :content_block_stop`
+
+    - `index: Integer`
 
 ## Example
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/cr
 category: "api"
 generated: true
 ---
+---
+title: Create Environment
+url: https://platform.claude.com/docs/en/api/typescript/beta/environments/create
+---
+
 # Create Environment
 
 `client.beta.environments.create(params, options?): BetaEnvironment`
@@ -80,6 +85,12 @@ Create a new environment with the specified configuration.
 
         Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+        - `type?: "packages"`
+
+          Package configuration type
+
+          default: packages
+
         - `apt?: Array<string> | null`
 
           Ubuntu/Debian packages to install
@@ -104,12 +115,6 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `type?: "packages"`
-
-          Package configuration type
-
-          default: packages
-
     - `BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
@@ -130,7 +135,7 @@ Create a new environment with the specified configuration.
 
   - `scope?: "organization" | "account" | null`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
     - `"organization"`
 
@@ -142,7 +147,7 @@ Create a new environment with the specified configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -190,6 +195,8 @@ Create a new environment with the specified configuration.
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -232,11 +239,23 @@ Create a new environment with the specified configuration.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: "environment"`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: string`
 
@@ -254,6 +273,10 @@ Create a new environment with the specified configuration.
 
       `cloud` environment configuration.
 
+      - `type: "cloud"`
+
+        Environment type
+
       - `networking: BetaUnrestrictedNetwork | BetaLimitedNetwork`
 
         Network configuration policy.
@@ -270,6 +293,10 @@ Create a new environment with the specified configuration.
 
           Limited network access.
 
+          - `type: "limited"`
+
+            Network policy type
+
           - `allow_mcp_servers: boolean`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -282,13 +309,15 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-          - `type: "limited"`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type?: "packages"`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: Array<string>`
 
@@ -314,16 +343,6 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `type?: "packages"`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: "cloud"`
-
-        Environment type
-
     - `BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
@@ -347,12 +366,6 @@ Create a new environment with the specified configuration.
   - `name: string`
 
     Human-readable name for the environment
-
-  - `type: "environment"`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: string`
 

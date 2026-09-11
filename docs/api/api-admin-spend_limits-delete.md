@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Spend Limit
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/delete
+---
+
 # Delete Spend Limit
 
 **DELETE** `/v1/organizations/spend_limits/{spend_limit_id}`
@@ -22,11 +27,11 @@ this endpoint.
 
 ## Returns
 
-- `id: string`
-
 - `type: "spend_limit_deleted"`
 
   default: spend_limit_deleted
+
+- `id: string`
 
 ## Example
 
@@ -34,7 +39,7 @@ this endpoint.
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

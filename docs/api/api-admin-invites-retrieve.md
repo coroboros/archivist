@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/invites/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Invite
+url: https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve
+---
+
 # Get Invite
 
 **GET** `/v1/organizations/invites/{invite_id}`
@@ -18,7 +23,15 @@ Retrieve an invite by ID.
 
 ## Returns
 
-- `Invite object`
+- `BetaOrganizationInvite object`
+
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
 
   - `id: string`
 
@@ -50,7 +63,7 @@ Retrieve an invite by ID.
 
     RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
+  - `role: BetaOrganizationRole`
 
     Organization role of the User.
 
@@ -84,20 +97,12 @@ Retrieve an invite by ID.
 
     - `"pending"`
 
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
-
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -112,7 +117,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
   "rbac_group_ids": [
     "string"
   ],
-  "role": "user",
+  "role": "admin",
   "status": "pending",
   "type": "invite"
 }

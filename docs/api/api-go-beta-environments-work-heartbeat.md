@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/heart
 category: "api"
 generated: true
 ---
+---
+title: Record Heartbeat
+url: https://platform.claude.com/docs/en/api/go/beta/environments/work/heartbeat
+---
+
 # Record Heartbeat
 
 `client.Beta.Environments.Work.Heartbeat(ctx, workID, params) (*BetaSelfHostedWorkHeartbeatResponse, error)`
@@ -86,6 +91,8 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -134,6 +141,12 @@ Record a heartbeat for a work item to maintain the lease.
 
   Response after recording a heartbeat for a work item.
 
+  - `Type WorkHeartbeat`
+
+    The type of response
+
+    default: work_heartbeat
+
   - `LastHeartbeat string`
 
     RFC 3339 timestamp of the actual heartbeat from DB
@@ -159,12 +172,6 @@ Record a heartbeat for a work item to maintain the lease.
   - `TTLSeconds int64`
 
     Effective TTL applied to the lease
-
-  - `Type WorkHeartbeat`
-
-    The type of response
-
-    default: work_heartbeat
 
 ## Example
 

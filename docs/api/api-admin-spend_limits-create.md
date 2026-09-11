@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/create"
 category: "api"
 generated: true
 ---
+---
+title: Set Spend Limit
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/create
+---
+
 # Set Spend Limit
 
 **POST** `/v1/organizations/spend_limits`
@@ -44,9 +49,15 @@ group, and organization-level defaults are configured in claude.ai.
 
 ## Returns
 
-- `SpendLimit object`
+- `BetaSpendLimit object`
 
   A configured spend limit: a cap on metered spend for one scope and period.
+
+  - `type: "spend_limit"`
+
+    Object type. Always `spend_limit`.
+
+    default: spend_limit
 
   - `id: string`
 
@@ -96,39 +107,33 @@ group, and organization-level defaults are configured in claude.ai.
 
     - `SeatTier object`
 
-      - `seat_tier: string`
-
       - `type: "seat_tier"`
 
         default: seat_tier
 
-    - `RbacGroup object`
+      - `seat_tier: string`
 
-      - `rbac_group_id: string`
+    - `RBACGroup object`
 
       - `type: "rbac_group"`
 
         default: rbac_group
 
-    - `OrganizationService object`
+      - `rbac_group_id: string`
 
-      - `service: string`
+    - `OrganizationService object`
 
       - `type: "organization_service"`
 
         default: organization_service
+
+      - `service: string`
 
     - `Organization object`
 
       - `type: "organization"`
 
         default: organization
-
-  - `type: "spend_limit"`
-
-    Object type. Always `spend_limit`.
-
-    default: spend_limit
 
   - `updated_at: string`
 
@@ -142,7 +147,7 @@ group, and organization-level defaults are configured in claude.ai.
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "amount": "50000",
           "scope": {

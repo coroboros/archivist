@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/completions"
 category: "api"
 generated: true
 ---
+---
+title: Completions
+url: https://platform.claude.com/docs/en/api/go/completions
+---
+
 # Completions
 
 ## Create a Text Completion
@@ -124,6 +129,8 @@ Future models and features will not be compatible with Text Completions. See our
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -166,6 +173,12 @@ Future models and features will not be compatible with Text Completions. See our
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
   - `Temperature param.Field[float64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
@@ -205,6 +218,14 @@ Future models and features will not be compatible with Text Completions. See our
 ### Returns
 
 - `type Completion struct{…}`
+
+  - `Type Completion`
+
+    Object type.
+
+    For Text Completions, this is always `"completion"`.
+
+    default: completion
 
   - `ID string`
 
@@ -306,14 +327,6 @@ Future models and features will not be compatible with Text Completions. See our
 
     * `"stop_sequence"`: we reached a stop sequence — either provided by you via the `stop_sequences` parameter, or a stop sequence built into the model
     * `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
-
-  - `Type Completion`
-
-    Object type.
-
-    For Text Completions, this is always `"completion"`.
-
-    default: completion
 
 ### Example
 
@@ -362,6 +375,14 @@ func main() {
 
 - `type Completion struct{…}`
 
+  - `Type Completion`
+
+    Object type.
+
+    For Text Completions, this is always `"completion"`.
+
+    default: completion
+
   - `ID string`
 
     Unique object identifier.
@@ -462,11 +483,3 @@ func main() {
 
     * `"stop_sequence"`: we reached a stop sequence — either provided by you via the `stop_sequences` parameter, or a stop sequence built into the model
     * `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
-
-  - `Type Completion`
-
-    Object type.
-
-    For Text Completions, this is always `"completion"`.
-
-    default: completion

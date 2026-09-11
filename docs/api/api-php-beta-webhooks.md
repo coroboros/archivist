@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/php/beta/webhooks
+---
+
 # Webhooks
 
 ## Unwrap
@@ -55,13 +60,13 @@ var_dump($result);
 
 - `BetaWebhookAgentArchivedEventData`
 
+  - `"agent.archived" type`
+
   - `string id`
 
     ID of the agent that triggered the event.
 
   - `string organizationID`
-
-  - `"agent.archived" type`
 
   - `string workspaceID`
 
@@ -69,13 +74,13 @@ var_dump($result);
 
 - `BetaWebhookAgentCreatedEventData`
 
+  - `"agent.created" type`
+
   - `string id`
 
     ID of the agent that triggered the event.
 
   - `string organizationID`
-
-  - `"agent.created" type`
 
   - `string workspaceID`
 
@@ -83,13 +88,13 @@ var_dump($result);
 
 - `BetaWebhookAgentDeletedEventData`
 
+  - `"agent.deleted" type`
+
   - `string id`
 
     ID of the agent that triggered the event.
 
   - `string organizationID`
-
-  - `"agent.deleted" type`
 
   - `string workspaceID`
 
@@ -97,13 +102,13 @@ var_dump($result);
 
 - `BetaWebhookAgentUpdatedEventData`
 
+  - `"agent.updated" type`
+
   - `string id`
 
     ID of the agent that triggered the event.
 
   - `string organizationID`
-
-  - `"agent.updated" type`
 
   - `string workspaceID`
 
@@ -111,13 +116,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentArchivedEventData`
 
+  - `"deployment.archived" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.archived" type`
 
   - `string workspaceID`
 
@@ -125,13 +130,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentCreatedEventData`
 
+  - `"deployment.created" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.created" type`
 
   - `string workspaceID`
 
@@ -139,13 +144,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentDeletedEventData`
 
+  - `"deployment.deleted" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.deleted" type`
 
   - `string workspaceID`
 
@@ -153,13 +158,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentPausedEventData`
 
+  - `"deployment.paused" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.paused" type`
 
   - `string workspaceID`
 
@@ -167,13 +172,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentRunFailedEventData`
 
+  - `"deployment_run.failed" type`
+
   - `string id`
 
     ID of the deployment run that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment_run.failed" type`
 
   - `string workspaceID`
 
@@ -181,13 +186,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentRunStartedEventData`
 
+  - `"deployment_run.started" type`
+
   - `string id`
 
     ID of the deployment run that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment_run.started" type`
 
   - `string workspaceID`
 
@@ -195,13 +200,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentRunSucceededEventData`
 
+  - `"deployment_run.succeeded" type`
+
   - `string id`
 
     ID of the deployment run that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment_run.succeeded" type`
 
   - `string workspaceID`
 
@@ -209,13 +214,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentUnpausedEventData`
 
+  - `"deployment.unpaused" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.unpaused" type`
 
   - `string workspaceID`
 
@@ -223,13 +228,13 @@ var_dump($result);
 
 - `BetaWebhookDeploymentUpdatedEventData`
 
+  - `"deployment.updated" type`
+
   - `string id`
 
     ID of the deployment that triggered the event.
 
   - `string organizationID`
-
-  - `"deployment.updated" type`
 
   - `string workspaceID`
 
@@ -237,13 +242,13 @@ var_dump($result);
 
 - `BetaWebhookEnvironmentArchivedEventData`
 
+  - `"environment.archived" type`
+
   - `string id`
 
     ID of the environment that triggered the event.
 
   - `string organizationID`
-
-  - `"environment.archived" type`
 
   - `string workspaceID`
 
@@ -251,13 +256,13 @@ var_dump($result);
 
 - `BetaWebhookEnvironmentCreatedEventData`
 
+  - `"environment.created" type`
+
   - `string id`
 
     ID of the environment that triggered the event.
 
   - `string organizationID`
-
-  - `"environment.created" type`
 
   - `string workspaceID`
 
@@ -265,13 +270,13 @@ var_dump($result);
 
 - `BetaWebhookEnvironmentDeletedEventData`
 
+  - `"environment.deleted" type`
+
   - `string id`
 
     ID of the environment that triggered the event.
 
   - `string organizationID`
-
-  - `"environment.deleted" type`
 
   - `string workspaceID`
 
@@ -279,19 +284,23 @@ var_dump($result);
 
 - `BetaWebhookEnvironmentUpdatedEventData`
 
+  - `"environment.updated" type`
+
   - `string id`
 
     ID of the environment that triggered the event.
 
   - `string organizationID`
 
-  - `"environment.updated" type`
-
   - `string workspaceID`
 
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
+
+  - `"event" type`
+
+    Object type. Always `event` for webhook payloads.
 
   - `string id`
 
@@ -303,148 +312,146 @@ var_dump($result);
 
   - `BetaWebhookEventData data`
 
-  - `"event" type`
-
-    Object type. Always `event` for webhook payloads.
-
 ### Beta Webhook Event Data
 
 - `BetaWebhookEventData`
 
   - `BetaWebhookSessionCreatedEventData`
 
+    - `"session.created" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionPendingEventData`
 
+    - `"session.pending" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.pending" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionRunningEventData`
 
+    - `"session.running" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.running" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionIdledEventData`
 
+    - `"session.idled" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.idled" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionRequiresActionEventData`
 
+    - `"session.requires_action" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.requires_action" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionArchivedEventData`
 
+    - `"session.archived" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionDeletedEventData`
 
+    - `"session.deleted" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.deleted" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionStatusRescheduledEventData`
 
+    - `"session.status_rescheduled" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.status_rescheduled" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionStatusRunStartedEventData`
 
+    - `"session.status_run_started" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.status_run_started" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionStatusIdledEventData`
 
+    - `"session.status_idled" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.status_idled" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionStatusTerminatedEventData`
 
+    - `"session.status_terminated" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.status_terminated" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionThreadCreatedEventData`
 
+    - `"session.thread_created" type`
+
     - `string id`
 
       ID of the session that triggered the event.
@@ -454,13 +461,13 @@ var_dump($result);
     - `string sessionThreadID`
 
       ID of the session thread this event refers to.
-
-    - `"session.thread_created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionThreadIdledEventData`
 
+    - `"session.thread_idled" type`
+
     - `string id`
 
       ID of the session that triggered the event.
@@ -470,13 +477,13 @@ var_dump($result);
     - `string sessionThreadID`
 
       ID of the session thread this event refers to.
-
-    - `"session.thread_idled" type`
 
     - `string workspaceID`
 
   - `BetaWebhookSessionThreadTerminatedEventData`
 
+    - `"session.thread_terminated" type`
+
     - `string id`
 
       ID of the session that triggered the event.
@@ -487,11 +494,11 @@ var_dump($result);
 
       ID of the session thread this event refers to.
 
-    - `"session.thread_terminated" type`
-
     - `string workspaceID`
 
   - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+    - `"session.outcome_evaluation_ended" type`
 
     - `string id`
 
@@ -499,55 +506,53 @@ var_dump($result);
 
     - `string organizationID`
 
-    - `"session.outcome_evaluation_ended" type`
-
     - `string workspaceID`
 
   - `BetaWebhookVaultCreatedEventData`
+
+    - `"vault.created" type`
 
     - `string id`
 
       ID of the vault that triggered the event.
 
     - `string organizationID`
-
-    - `"vault.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookVaultArchivedEventData`
 
+    - `"vault.archived" type`
+
     - `string id`
 
       ID of the vault that triggered the event.
 
     - `string organizationID`
-
-    - `"vault.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookVaultDeletedEventData`
 
+    - `"vault.deleted" type`
+
     - `string id`
 
       ID of the vault that triggered the event.
 
     - `string organizationID`
 
-    - `"vault.deleted" type`
-
     - `string workspaceID`
 
   - `BetaWebhookVaultCredentialCreatedEventData`
+
+    - `"vault_credential.created" type`
 
     - `string id`
 
       ID of the vault credential that triggered the event.
 
     - `string organizationID`
-
-    - `"vault_credential.created" type`
 
     - `string vaultID`
 
@@ -557,13 +562,13 @@ var_dump($result);
 
   - `BetaWebhookVaultCredentialArchivedEventData`
 
+    - `"vault_credential.archived" type`
+
     - `string id`
 
       ID of the vault credential that triggered the event.
 
     - `string organizationID`
-
-    - `"vault_credential.archived" type`
 
     - `string vaultID`
 
@@ -573,13 +578,13 @@ var_dump($result);
 
   - `BetaWebhookVaultCredentialDeletedEventData`
 
+    - `"vault_credential.deleted" type`
+
     - `string id`
 
       ID of the vault credential that triggered the event.
 
     - `string organizationID`
-
-    - `"vault_credential.deleted" type`
 
     - `string vaultID`
 
@@ -589,13 +594,13 @@ var_dump($result);
 
   - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
+    - `"vault_credential.refresh_failed" type`
+
     - `string id`
 
       ID of the vault credential that triggered the event.
 
     - `string organizationID`
-
-    - `"vault_credential.refresh_failed" type`
 
     - `string vaultID`
 
@@ -605,65 +610,67 @@ var_dump($result);
 
   - `BetaWebhookSessionUpdatedEventData`
 
+    - `"session.updated" type`
+
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.updated" type`
 
     - `string workspaceID`
 
   - `BetaWebhookAgentCreatedEventData`
 
+    - `"agent.created" type`
+
     - `string id`
 
       ID of the agent that triggered the event.
 
     - `string organizationID`
-
-    - `"agent.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookAgentArchivedEventData`
 
+    - `"agent.archived" type`
+
     - `string id`
 
       ID of the agent that triggered the event.
 
     - `string organizationID`
-
-    - `"agent.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookAgentDeletedEventData`
 
+    - `"agent.deleted" type`
+
     - `string id`
 
       ID of the agent that triggered the event.
 
     - `string organizationID`
-
-    - `"agent.deleted" type`
 
     - `string workspaceID`
 
   - `BetaWebhookDeploymentPausedEventData`
 
+    - `"deployment.paused" type`
+
     - `string id`
 
       ID of the deployment that triggered the event.
 
     - `string organizationID`
 
-    - `"deployment.paused" type`
-
     - `string workspaceID`
 
   - `BetaWebhookDeploymentRunFailedEventData`
+
+    - `"deployment_run.failed" type`
 
     - `string id`
 
@@ -671,47 +678,47 @@ var_dump($result);
 
     - `string organizationID`
 
-    - `"deployment_run.failed" type`
-
     - `string workspaceID`
 
   - `BetaWebhookDeploymentCreatedEventData`
+
+    - `"deployment.created" type`
 
     - `string id`
 
       ID of the deployment that triggered the event.
 
     - `string organizationID`
-
-    - `"deployment.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookDeploymentUpdatedEventData`
 
+    - `"deployment.updated" type`
+
     - `string id`
 
       ID of the deployment that triggered the event.
 
     - `string organizationID`
-
-    - `"deployment.updated" type`
 
     - `string workspaceID`
 
   - `BetaWebhookDeploymentUnpausedEventData`
 
+    - `"deployment.unpaused" type`
+
     - `string id`
 
       ID of the deployment that triggered the event.
 
     - `string organizationID`
 
-    - `"deployment.unpaused" type`
-
     - `string workspaceID`
 
   - `BetaWebhookAgentUpdatedEventData`
+
+    - `"agent.updated" type`
 
     - `string id`
 
@@ -719,35 +726,35 @@ var_dump($result);
 
     - `string organizationID`
 
-    - `"agent.updated" type`
-
     - `string workspaceID`
 
   - `BetaWebhookDeploymentArchivedEventData`
+
+    - `"deployment.archived" type`
 
     - `string id`
 
       ID of the deployment that triggered the event.
 
     - `string organizationID`
-
-    - `"deployment.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookDeploymentRunStartedEventData`
 
+    - `"deployment_run.started" type`
+
     - `string id`
 
       ID of the deployment run that triggered the event.
 
     - `string organizationID`
 
-    - `"deployment_run.started" type`
-
     - `string workspaceID`
 
   - `BetaWebhookDeploymentDeletedEventData`
+
+    - `"deployment.deleted" type`
 
     - `string id`
 
@@ -755,11 +762,11 @@ var_dump($result);
 
     - `string organizationID`
 
-    - `"deployment.deleted" type`
-
     - `string workspaceID`
 
   - `BetaWebhookDeploymentRunSucceededEventData`
+
+    - `"deployment_run.succeeded" type`
 
     - `string id`
 
@@ -767,103 +774,101 @@ var_dump($result);
 
     - `string organizationID`
 
-    - `"deployment_run.succeeded" type`
-
     - `string workspaceID`
 
   - `BetaWebhookEnvironmentCreatedEventData`
+
+    - `"environment.created" type`
 
     - `string id`
 
       ID of the environment that triggered the event.
 
     - `string organizationID`
-
-    - `"environment.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookEnvironmentUpdatedEventData`
 
+    - `"environment.updated" type`
+
     - `string id`
 
       ID of the environment that triggered the event.
 
     - `string organizationID`
-
-    - `"environment.updated" type`
 
     - `string workspaceID`
 
   - `BetaWebhookEnvironmentArchivedEventData`
 
+    - `"environment.archived" type`
+
     - `string id`
 
       ID of the environment that triggered the event.
 
     - `string organizationID`
-
-    - `"environment.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookEnvironmentDeletedEventData`
 
+    - `"environment.deleted" type`
+
     - `string id`
 
       ID of the environment that triggered the event.
 
     - `string organizationID`
 
-    - `"environment.deleted" type`
-
     - `string workspaceID`
 
   - `BetaWebhookMemoryStoreCreatedEventData`
+
+    - `"memory_store.created" type`
 
     - `string id`
 
       ID of the memory store that triggered the event.
 
     - `string organizationID`
-
-    - `"memory_store.created" type`
 
     - `string workspaceID`
 
   - `BetaWebhookMemoryStoreArchivedEventData`
 
+    - `"memory_store.archived" type`
+
     - `string id`
 
       ID of the memory store that triggered the event.
 
     - `string organizationID`
-
-    - `"memory_store.archived" type`
 
     - `string workspaceID`
 
   - `BetaWebhookMemoryStoreDeletedEventData`
 
+    - `"memory_store.deleted" type`
+
     - `string id`
 
       ID of the memory store that triggered the event.
 
     - `string organizationID`
 
-    - `"memory_store.deleted" type`
-
     - `string workspaceID`
 
   - `BetaWebhookSessionBudgetReachedEventData`
+
+    - `"session.budget_reached" type`
 
     - `string id`
 
       ID of the session that triggered the event.
 
     - `string organizationID`
-
-    - `"session.budget_reached" type`
 
     - `string workspaceID`
 
@@ -871,13 +876,13 @@ var_dump($result);
 
 - `BetaWebhookMemoryStoreArchivedEventData`
 
+  - `"memory_store.archived" type`
+
   - `string id`
 
     ID of the memory store that triggered the event.
 
   - `string organizationID`
-
-  - `"memory_store.archived" type`
 
   - `string workspaceID`
 
@@ -885,13 +890,13 @@ var_dump($result);
 
 - `BetaWebhookMemoryStoreCreatedEventData`
 
+  - `"memory_store.created" type`
+
   - `string id`
 
     ID of the memory store that triggered the event.
 
   - `string organizationID`
-
-  - `"memory_store.created" type`
 
   - `string workspaceID`
 
@@ -899,13 +904,13 @@ var_dump($result);
 
 - `BetaWebhookMemoryStoreDeletedEventData`
 
+  - `"memory_store.deleted" type`
+
   - `string id`
 
     ID of the memory store that triggered the event.
 
   - `string organizationID`
-
-  - `"memory_store.deleted" type`
 
   - `string workspaceID`
 
@@ -913,13 +918,13 @@ var_dump($result);
 
 - `BetaWebhookSessionArchivedEventData`
 
+  - `"session.archived" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.archived" type`
 
   - `string workspaceID`
 
@@ -927,13 +932,13 @@ var_dump($result);
 
 - `BetaWebhookSessionBudgetReachedEventData`
 
+  - `"session.budget_reached" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.budget_reached" type`
 
   - `string workspaceID`
 
@@ -941,13 +946,13 @@ var_dump($result);
 
 - `BetaWebhookSessionCreatedEventData`
 
+  - `"session.created" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.created" type`
 
   - `string workspaceID`
 
@@ -955,13 +960,13 @@ var_dump($result);
 
 - `BetaWebhookSessionDeletedEventData`
 
+  - `"session.deleted" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.deleted" type`
 
   - `string workspaceID`
 
@@ -969,13 +974,13 @@ var_dump($result);
 
 - `BetaWebhookSessionIdledEventData`
 
+  - `"session.idled" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.idled" type`
 
   - `string workspaceID`
 
@@ -983,13 +988,13 @@ var_dump($result);
 
 - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
+  - `"session.outcome_evaluation_ended" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.outcome_evaluation_ended" type`
 
   - `string workspaceID`
 
@@ -997,13 +1002,13 @@ var_dump($result);
 
 - `BetaWebhookSessionPendingEventData`
 
+  - `"session.pending" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.pending" type`
 
   - `string workspaceID`
 
@@ -1011,13 +1016,13 @@ var_dump($result);
 
 - `BetaWebhookSessionRequiresActionEventData`
 
+  - `"session.requires_action" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.requires_action" type`
 
   - `string workspaceID`
 
@@ -1025,13 +1030,13 @@ var_dump($result);
 
 - `BetaWebhookSessionRunningEventData`
 
+  - `"session.running" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.running" type`
 
   - `string workspaceID`
 
@@ -1039,13 +1044,13 @@ var_dump($result);
 
 - `BetaWebhookSessionStatusIdledEventData`
 
+  - `"session.status_idled" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.status_idled" type`
 
   - `string workspaceID`
 
@@ -1053,13 +1058,13 @@ var_dump($result);
 
 - `BetaWebhookSessionStatusRescheduledEventData`
 
+  - `"session.status_rescheduled" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.status_rescheduled" type`
 
   - `string workspaceID`
 
@@ -1067,13 +1072,13 @@ var_dump($result);
 
 - `BetaWebhookSessionStatusRunStartedEventData`
 
+  - `"session.status_run_started" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.status_run_started" type`
 
   - `string workspaceID`
 
@@ -1081,13 +1086,13 @@ var_dump($result);
 
 - `BetaWebhookSessionStatusTerminatedEventData`
 
+  - `"session.status_terminated" type`
+
   - `string id`
 
     ID of the session that triggered the event.
 
   - `string organizationID`
-
-  - `"session.status_terminated" type`
 
   - `string workspaceID`
 
@@ -1095,6 +1100,8 @@ var_dump($result);
 
 - `BetaWebhookSessionThreadCreatedEventData`
 
+  - `"session.thread_created" type`
+
   - `string id`
 
     ID of the session that triggered the event.
@@ -1104,8 +1111,6 @@ var_dump($result);
   - `string sessionThreadID`
 
     ID of the session thread this event refers to.
-
-  - `"session.thread_created" type`
 
   - `string workspaceID`
 
@@ -1113,6 +1118,8 @@ var_dump($result);
 
 - `BetaWebhookSessionThreadIdledEventData`
 
+  - `"session.thread_idled" type`
+
   - `string id`
 
     ID of the session that triggered the event.
@@ -1122,8 +1129,6 @@ var_dump($result);
   - `string sessionThreadID`
 
     ID of the session thread this event refers to.
-
-  - `"session.thread_idled" type`
 
   - `string workspaceID`
 
@@ -1131,6 +1136,8 @@ var_dump($result);
 
 - `BetaWebhookSessionThreadTerminatedEventData`
 
+  - `"session.thread_terminated" type`
+
   - `string id`
 
     ID of the session that triggered the event.
@@ -1141,13 +1148,13 @@ var_dump($result);
 
     ID of the session thread this event refers to.
 
-  - `"session.thread_terminated" type`
-
   - `string workspaceID`
 
 ### Beta Webhook Session Updated Event Data
 
 - `BetaWebhookSessionUpdatedEventData`
+
+  - `"session.updated" type`
 
   - `string id`
 
@@ -1155,21 +1162,19 @@ var_dump($result);
 
   - `string organizationID`
 
-  - `"session.updated" type`
-
   - `string workspaceID`
 
 ### Beta Webhook Vault Archived Event Data
 
 - `BetaWebhookVaultArchivedEventData`
 
+  - `"vault.archived" type`
+
   - `string id`
 
     ID of the vault that triggered the event.
 
   - `string organizationID`
-
-  - `"vault.archived" type`
 
   - `string workspaceID`
 
@@ -1177,13 +1182,13 @@ var_dump($result);
 
 - `BetaWebhookVaultCreatedEventData`
 
+  - `"vault.created" type`
+
   - `string id`
 
     ID of the vault that triggered the event.
 
   - `string organizationID`
-
-  - `"vault.created" type`
 
   - `string workspaceID`
 
@@ -1191,13 +1196,13 @@ var_dump($result);
 
 - `BetaWebhookVaultCredentialArchivedEventData`
 
+  - `"vault_credential.archived" type`
+
   - `string id`
 
     ID of the vault credential that triggered the event.
 
   - `string organizationID`
-
-  - `"vault_credential.archived" type`
 
   - `string vaultID`
 
@@ -1209,13 +1214,13 @@ var_dump($result);
 
 - `BetaWebhookVaultCredentialCreatedEventData`
 
+  - `"vault_credential.created" type`
+
   - `string id`
 
     ID of the vault credential that triggered the event.
 
   - `string organizationID`
-
-  - `"vault_credential.created" type`
 
   - `string vaultID`
 
@@ -1227,13 +1232,13 @@ var_dump($result);
 
 - `BetaWebhookVaultCredentialDeletedEventData`
 
+  - `"vault_credential.deleted" type`
+
   - `string id`
 
     ID of the vault credential that triggered the event.
 
   - `string organizationID`
-
-  - `"vault_credential.deleted" type`
 
   - `string vaultID`
 
@@ -1245,13 +1250,13 @@ var_dump($result);
 
 - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
+  - `"vault_credential.refresh_failed" type`
+
   - `string id`
 
     ID of the vault credential that triggered the event.
 
   - `string organizationID`
-
-  - `"vault_credential.refresh_failed" type`
 
   - `string vaultID`
 
@@ -1263,12 +1268,12 @@ var_dump($result);
 
 - `BetaWebhookVaultDeletedEventData`
 
+  - `"vault.deleted" type`
+
   - `string id`
 
     ID of the vault that triggered the event.
 
   - `string organizationID`
-
-  - `"vault.deleted" type`
 
   - `string workspaceID`

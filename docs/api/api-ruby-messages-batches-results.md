@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/results"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/ruby/messages/batches/results
+---
+
 # Retrieve Message Batch results
 
-`messages.batches.results(message_batch_id) -> MessageBatchIndividualResponse`
+`messages.batches.results(message_batch_id, **kwargs) -> MessageBatchIndividualResponse`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -21,6 +26,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 - `message_batch_id: String`
 
   ID of the Message Batch.
+
+- `workspace_id: String`
 
 ## Returns
 
@@ -42,7 +49,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `class MessageBatchSucceededResult`
 
+      - `type: :succeeded`
+
       - `message: Message`
+
+        - `type: :message`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: String`
 
@@ -68,12 +83,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: String`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: :anthropic | :custom`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -81,6 +90,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `:anthropic`
 
               - `:custom`
+
+            - `skill_id: String`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: String`
 
@@ -119,6 +134,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class TextBlock`
 
+            - `type: :text`
+
             - `citations: Array[TextCitation]`
 
               Citations supporting the text block.
@@ -126,6 +143,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `class CitationCharLocation`
+
+                - `type: :char_location`
 
                 - `cited_text: String`
 
@@ -143,9 +162,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: :char_location`
-
               - `class CitationPageLocation`
+
+                - `type: :page_location`
 
                 - `cited_text: String`
 
@@ -163,9 +182,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: :page_location`
-
               - `class CitationContentBlockLocation`
+
+                - `type: :content_block_location`
 
                 - `cited_text: String`
 
@@ -193,9 +212,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: :content_block_location`
-
               - `class CitationsWebSearchResultLocation`
+
+                - `type: :web_search_result_location`
 
                 - `cited_text: String`
 
@@ -205,11 +224,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: :web_search_result_location`
-
                 - `url: String`
 
               - `class CitationsSearchResultLocation`
+
+                - `type: :search_result_location`
 
                 - `cited_text: String`
 
@@ -241,15 +260,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
-                - `type: :search_result_location`
-
             - `text: String`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: :text`
+              minLength: 0
 
           - `class ThinkingBlock`
+
+            - `type: :thinking`
 
             - `signature: String`
 
@@ -263,9 +280,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: :thinking`
-
           - `class RedactedThinkingBlock`
+
+            - `type: :redacted_thinking`
 
             - `data: String`
 
@@ -275,9 +292,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: :redacted_thinking`
-
           - `class ToolUseBlock`
+
+            - `type: :tool_use`
 
             - `id: String`
 
@@ -297,27 +314,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: :code_execution_20250825`
+
                 - `tool_id: String`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: :code_execution_20250825`
 
               - `class ServerToolCaller20260120`
 
+                - `type: :code_execution_20260120`
+
                 - `tool_id: String`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: :code_execution_20260120`
 
             - `input: Hash[Symbol, untyped]`
 
             - `name: String`
 
               minLength: 1
-
-            - `type: :tool_use`
 
             - `toolset_name: String`
 
@@ -326,6 +341,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
+
+            - `type: :server_tool_use`
 
             - `id: String`
 
@@ -363,9 +380,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `:tool_search_tool_bm25`
 
-            - `type: :server_tool_use`
-
           - `class WebSearchToolResultBlock`
+
+            - `type: :web_search_tool_result`
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -385,6 +402,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `class WebSearchToolResultError`
 
+                - `type: :web_search_tool_result_error`
+
                 - `error_code: WebSearchToolResultErrorCode`
 
                   - `:invalid_tool_input`
@@ -399,9 +418,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:request_too_large`
 
-                - `type: :web_search_tool_result_error`
-
               - `UnionMember1 = Array[WebSearchResultBlock]`
+
+                - `type: :web_search_result`
 
                 - `encrypted_content: String`
 
@@ -409,17 +428,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
-                - `type: :web_search_result`
-
                 - `url: String`
 
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :web_search_tool_result`
-
           - `class WebFetchToolResultBlock`
+
+            - `type: :web_fetch_tool_result`
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -438,6 +455,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
               - `class WebFetchToolResultErrorBlock`
+
+                - `type: :web_fetch_tool_result_error`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -459,11 +478,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:unavailable`
 
-                - `type: :web_fetch_tool_result_error`
+                  - `:content_too_large`
 
               - `class WebFetchBlock`
 
+                - `type: :web_fetch_result`
+
                 - `content: DocumentBlock`
+
+                  - `type: :document`
 
                   - `citations: CitationsConfig`
 
@@ -475,33 +498,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `class Base64PDFSource`
 
+                      - `type: :base64`
+
                       - `data: String`
 
                         format: byte
 
                       - `media_type: :"application/pdf"`
 
-                      - `type: :base64`
-
                     - `class PlainTextSource`
+
+                      - `type: :text`
 
                       - `data: String`
 
                       - `media_type: :"text/plain"`
 
-                      - `type: :text`
-
                   - `title: String`
 
                     The title of the document
 
-                  - `type: :document`
-
                 - `retrieved_at: String`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: :web_fetch_result`
 
                 - `url: String`
 
@@ -511,15 +530,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :web_fetch_tool_result`
-
           - `class CodeExecutionToolResultBlock`
+
+            - `type: :code_execution_tool_result`
 
             - `content: CodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class CodeExecutionToolResultError`
+
+                - `type: :code_execution_tool_result_error`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -531,15 +552,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:execution_time_exceeded`
 
-                - `type: :code_execution_tool_result_error`
-
               - `class CodeExecutionResultBlock`
+
+                - `type: :code_execution_result`
 
                 - `content: Array[CodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :code_execution_output`
+
+                  - `file_id: String`
 
                 - `return_code: Integer`
 
@@ -547,17 +568,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: String`
 
-                - `type: :code_execution_result`
-
               - `class EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: :encrypted_code_execution_result`
+
                 - `content: Array[CodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :code_execution_output`
+
+                  - `file_id: String`
 
                 - `encrypted_stdout: String`
 
@@ -565,19 +586,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: String`
 
-                - `type: :encrypted_code_execution_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :code_execution_tool_result`
-
           - `class BashCodeExecutionToolResultBlock`
+
+            - `type: :bash_code_execution_tool_result`
 
             - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
               - `class BashCodeExecutionToolResultError`
+
+                - `type: :bash_code_execution_tool_result_error`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -591,15 +612,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:output_file_too_large`
 
-                - `type: :bash_code_execution_tool_result_error`
-
               - `class BashCodeExecutionResultBlock`
+
+                - `type: :bash_code_execution_result`
 
                 - `content: Array[BashCodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :bash_code_execution_output`
+
+                  - `file_id: String`
 
                 - `return_code: Integer`
 
@@ -607,19 +628,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: String`
 
-                - `type: :bash_code_execution_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :bash_code_execution_tool_result`
-
           - `class TextEditorCodeExecutionToolResultBlock`
+
+            - `type: :text_editor_code_execution_tool_result`
 
             - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `class TextEditorCodeExecutionToolResultError`
+
+                - `type: :text_editor_code_execution_tool_result_error`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -635,9 +656,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: String`
 
-                - `type: :text_editor_code_execution_tool_result_error`
-
               - `class TextEditorCodeExecutionViewResultBlock`
+
+                - `type: :text_editor_code_execution_view_result`
 
                 - `content: String`
 
@@ -655,15 +676,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: Integer`
 
-                - `type: :text_editor_code_execution_view_result`
-
               - `class TextEditorCodeExecutionCreateResultBlock`
-
-                - `is_file_update: bool`
 
                 - `type: :text_editor_code_execution_create_result`
 
+                - `is_file_update: bool`
+
               - `class TextEditorCodeExecutionStrReplaceResultBlock`
+
+                - `type: :text_editor_code_execution_str_replace_result`
 
                 - `lines: Array[String]`
 
@@ -675,19 +696,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: Integer`
 
-                - `type: :text_editor_code_execution_str_replace_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :text_editor_code_execution_tool_result`
-
           - `class ToolSearchToolResultBlock`
+
+            - `type: :tool_search_tool_result`
 
             - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
               - `class ToolSearchToolResultError`
+
+                - `type: :tool_search_tool_result_error`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -701,33 +722,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: String`
 
-                - `type: :tool_search_tool_result_error`
-
               - `class ToolSearchToolSearchResultBlock`
 
+                - `type: :tool_search_tool_search_result`
+
                 - `tool_references: Array[ToolReferenceBlock]`
+
+                  - `type: :tool_reference`
 
                   - `tool_name: String`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: :tool_reference`
-
-                - `type: :tool_search_tool_search_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: :tool_search_tool_result`
 
           - `class ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: String`
-
             - `type: :container_upload`
+
+            - `file_id: String`
 
         - `model: Model`
 
@@ -821,6 +838,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
+          - `type: :refusal`
+
           - `category: :cyber | :bio | :frontier_llm | 2 more`
 
             The policy category that triggered a refusal.
@@ -850,8 +869,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-          - `type: :refusal`
 
         - `stop_reason: StopReason`
 
@@ -888,12 +905,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: :message`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: Usage`
 
@@ -999,73 +1010,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `:batch`
 
-      - `type: :succeeded`
-
     - `class MessageBatchErroredResult`
 
+      - `type: :errored`
+
       - `error: ErrorResponse`
+
+        - `type: :error`
 
         - `error: ErrorObject`
 
           - `class InvalidRequestError`
 
-            - `message: String`
-
             - `type: :invalid_request_error`
+
+            - `message: String`
 
           - `class AuthenticationError`
 
-            - `message: String`
-
             - `type: :authentication_error`
+
+            - `message: String`
 
           - `class BillingError`
 
-            - `message: String`
-
             - `type: :billing_error`
+
+            - `message: String`
 
           - `class PermissionError`
 
-            - `message: String`
-
             - `type: :permission_error`
+
+            - `message: String`
 
           - `class NotFoundError`
 
-            - `message: String`
-
             - `type: :not_found_error`
+
+            - `message: String`
 
           - `class RateLimitError`
 
-            - `message: String`
-
             - `type: :rate_limit_error`
+
+            - `message: String`
 
           - `class GatewayTimeoutError`
 
-            - `message: String`
-
             - `type: :timeout_error`
+
+            - `message: String`
 
           - `class APIErrorObject`
 
-            - `message: String`
-
             - `type: :api_error`
+
+            - `message: String`
 
           - `class OverloadedError`
 
-            - `message: String`
-
             - `type: :overloaded_error`
 
+            - `message: String`
+
         - `request_id: String`
-
-        - `type: :error`
-
-      - `type: :errored`
 
     - `class MessageBatchCanceledResult`
 

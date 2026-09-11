@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/files/upload"
 category: "api"
 generated: true
 ---
+---
+title: Upload File
+url: https://platform.claude.com/docs/en/api/php/beta/files/upload
+---
+
 # Upload File
 
-`$client->beta->files->upload(string file, ?int expiresInSeconds, ?list<AnthropicBeta> betas): BetaFileMetadata`
+`$client->beta->files->upload(string file, ?int expiresInSeconds, ?list<AnthropicBeta> betas, ?string workspaceID): BetaFileMetadata`
 
 **POST** `/v1/files`
 
@@ -16,7 +21,7 @@ Upload File
 
 - `file: string`
 
-  The file to upload
+  The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
 - `expiresInSeconds?:optional int`
 
@@ -26,9 +31,17 @@ Upload File
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaFileMetadata`
+
+  - `"file" type`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `string id`
 
@@ -51,12 +64,6 @@ Upload File
   - `int sizeBytes`
 
     Size of the file in bytes.
-
-  - `"file" type`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `?bool downloadable`
 
@@ -83,6 +90,7 @@ $betaFileMetadata = $client->beta->files->upload(
   file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   expiresInSeconds: 3600,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaFileMetadata);

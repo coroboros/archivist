@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/external_keys/validate"
 category: "api"
 generated: true
 ---
+---
+title: Validate External Key
+url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/validate
+---
+
 # Validate External Key
 
 **POST** `/v1/organizations/external_keys/{external_key_id}/validate`
@@ -25,6 +30,10 @@ message if it failed or timed out.
 
 ## Returns
 
+- `type: "external_key_validation"`
+
+  default: external_key_validation
+
 - `error: string or null`
 
   Error message when status is `failure`. Null otherwise.
@@ -37,25 +46,21 @@ message if it failed or timed out.
 
   - `"success"`
 
-- `type: "external_key_validation"`
-
-  default: external_key_validation
-
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
 
 ```json
 {
-  "error": null,
-  "status": "success",
+  "error": "error",
+  "status": "failure",
   "type": "external_key_validation"
 }
 ```

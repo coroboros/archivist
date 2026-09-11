@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments"
 category: "api"
 generated: true
 ---
+---
+title: Environments
+url: https://platform.claude.com/docs/en/api/python/beta/environments
+---
+
 # Environments
 
 ## Create Environment
@@ -80,6 +85,12 @@ Create a new environment with the specified configuration.
 
       Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+      - `type: Optional[Literal["packages"]]`
+
+        Package configuration type
+
+        default: packages
+
       - `apt: Optional[List[str]]`
 
         Ubuntu/Debian packages to install
@@ -104,12 +115,6 @@ Create a new environment with the specified configuration.
 
         Python packages to install
 
-      - `type: Optional[Literal["packages"]]`
-
-        Package configuration type
-
-        default: packages
-
   - `class BetaSelfHostedConfigParams: …`
 
     Request params for `self_hosted` environment configuration.
@@ -130,7 +135,7 @@ Create a new environment with the specified configuration.
 
 - `scope: Optional[Literal["organization", "account"]]`
 
-  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
   - `"organization"`
 
@@ -142,7 +147,7 @@ Create a new environment with the specified configuration.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -190,6 +195,8 @@ Create a new environment with the specified configuration.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -232,11 +239,19 @@ Create a new environment with the specified configuration.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -254,6 +269,10 @@ Create a new environment with the specified configuration.
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -270,6 +289,10 @@ Create a new environment with the specified configuration.
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -282,13 +305,15 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -314,16 +339,6 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -347,12 +362,6 @@ Create a new environment with the specified configuration.
   - `name: str`
 
     Human-readable name for the environment
-
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: str`
 
@@ -464,7 +473,7 @@ List environments with pagination support.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -512,6 +521,8 @@ List environments with pagination support.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -554,11 +565,19 @@ List environments with pagination support.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -576,6 +595,10 @@ List environments with pagination support.
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -592,6 +615,10 @@ List environments with pagination support.
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -604,13 +631,15 @@ List environments with pagination support.
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -636,16 +665,6 @@ List environments with pagination support.
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -669,12 +688,6 @@ List environments with pagination support.
   - `name: str`
 
     Human-readable name for the environment
-
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: str`
 
@@ -776,7 +789,7 @@ Retrieve a specific environment by ID.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -824,6 +837,8 @@ Retrieve a specific environment by ID.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -866,11 +881,19 @@ Retrieve a specific environment by ID.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -888,6 +911,10 @@ Retrieve a specific environment by ID.
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -904,6 +931,10 @@ Retrieve a specific environment by ID.
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -916,13 +947,15 @@ Retrieve a specific environment by ID.
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -948,16 +981,6 @@ Retrieve a specific environment by ID.
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -981,12 +1004,6 @@ Retrieve a specific environment by ID.
   - `name: str`
 
     Human-readable name for the environment
-
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: str`
 
@@ -1136,6 +1153,12 @@ Update an existing environment's configuration.
 
       Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+      - `type: Optional[Literal["packages"]]`
+
+        Package configuration type
+
+        default: packages
+
       - `apt: Optional[List[str]]`
 
         Ubuntu/Debian packages to install
@@ -1159,12 +1182,6 @@ Update an existing environment's configuration.
       - `pip: Optional[List[str]]`
 
         Python packages to install
-
-      - `type: Optional[Literal["packages"]]`
-
-        Package configuration type
-
-        default: packages
 
   - `class BetaSelfHostedConfigParams: …`
 
@@ -1204,7 +1221,7 @@ Update an existing environment's configuration.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1252,6 +1269,8 @@ Update an existing environment's configuration.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1294,11 +1313,19 @@ Update an existing environment's configuration.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -1316,6 +1343,10 @@ Update an existing environment's configuration.
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -1332,6 +1363,10 @@ Update an existing environment's configuration.
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -1344,13 +1379,15 @@ Update an existing environment's configuration.
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -1376,16 +1413,6 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -1409,12 +1436,6 @@ Update an existing environment's configuration.
   - `name: str`
 
     Human-readable name for the environment
-
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: str`
 
@@ -1512,7 +1533,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1560,6 +1581,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1602,21 +1625,23 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse: …`
 
   Response after deleting an environment.
 
-  - `id: str`
-
-    Environment identifier
-
   - `type: Literal["environment_deleted"]`
 
     The type of response
 
     default: environment_deleted
+
+  - `id: str`
+
+    Environment identifier
 
 ### Example
 
@@ -1662,7 +1687,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1710,6 +1735,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1752,11 +1779,19 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -1774,6 +1809,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -1790,6 +1829,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -1802,13 +1845,15 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -1834,16 +1879,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -1867,12 +1902,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `name: str`
 
     Human-readable name for the environment
-
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
 
   - `updated_at: str`
 
@@ -1960,6 +1989,10 @@ print(beta_environment.id)
 
   `cloud` environment configuration.
 
+  - `type: Literal["cloud"]`
+
+    Environment type
+
   - `networking: Networking`
 
     Network configuration policy.
@@ -1976,6 +2009,10 @@ print(beta_environment.id)
 
       Limited network access.
 
+      - `type: Literal["limited"]`
+
+        Network policy type
+
       - `allow_mcp_servers: bool`
 
         Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -1988,13 +2025,15 @@ print(beta_environment.id)
 
         Specifies domains the container can reach.
 
-      - `type: Literal["limited"]`
-
-        Network policy type
-
   - `packages: BetaPackages`
 
     Package manager configuration.
+
+    - `type: Optional[Literal["packages"]]`
+
+      Package configuration type
+
+      default: packages
 
     - `apt: List[str]`
 
@@ -2019,16 +2058,6 @@ print(beta_environment.id)
     - `pip: List[str]`
 
       Python packages to install
-
-    - `type: Optional[Literal["packages"]]`
-
-      Package configuration type
-
-      default: packages
-
-  - `type: Literal["cloud"]`
-
-    Environment type
 
 ### Beta Cloud Config Params
 
@@ -2086,6 +2115,12 @@ print(beta_environment.id)
 
     Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+    - `type: Optional[Literal["packages"]]`
+
+      Package configuration type
+
+      default: packages
+
     - `apt: Optional[List[str]]`
 
       Ubuntu/Debian packages to install
@@ -2110,17 +2145,17 @@ print(beta_environment.id)
 
       Python packages to install
 
-    - `type: Optional[Literal["packages"]]`
-
-      Package configuration type
-
-      default: packages
-
 ### Beta Environment
 
 - `class BetaEnvironment: …`
 
   Unified Environment resource for both cloud and self-hosted environments.
+
+  - `type: Literal["environment"]`
+
+    The type of object (always 'environment')
+
+    default: environment
 
   - `id: str`
 
@@ -2138,6 +2173,10 @@ print(beta_environment.id)
 
       `cloud` environment configuration.
 
+      - `type: Literal["cloud"]`
+
+        Environment type
+
       - `networking: Networking`
 
         Network configuration policy.
@@ -2154,6 +2193,10 @@ print(beta_environment.id)
 
           Limited network access.
 
+          - `type: Literal["limited"]`
+
+            Network policy type
+
           - `allow_mcp_servers: bool`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -2166,13 +2209,15 @@ print(beta_environment.id)
 
             Specifies domains the container can reach.
 
-          - `type: Literal["limited"]`
-
-            Network policy type
-
       - `packages: BetaPackages`
 
         Package manager configuration.
+
+        - `type: Optional[Literal["packages"]]`
+
+          Package configuration type
+
+          default: packages
 
         - `apt: List[str]`
 
@@ -2198,16 +2243,6 @@ print(beta_environment.id)
 
           Python packages to install
 
-        - `type: Optional[Literal["packages"]]`
-
-          Package configuration type
-
-          default: packages
-
-      - `type: Literal["cloud"]`
-
-        Environment type
-
     - `class BetaSelfHostedConfig: …`
 
       Configuration for self-hosted environments.
@@ -2232,12 +2267,6 @@ print(beta_environment.id)
 
     Human-readable name for the environment
 
-  - `type: Literal["environment"]`
-
-    The type of object (always 'environment')
-
-    default: environment
-
   - `updated_at: str`
 
     RFC 3339 timestamp when environment was last updated
@@ -2256,21 +2285,25 @@ print(beta_environment.id)
 
   Response after deleting an environment.
 
-  - `id: str`
-
-    Environment identifier
-
   - `type: Literal["environment_deleted"]`
 
     The type of response
 
     default: environment_deleted
 
+  - `id: str`
+
+    Environment identifier
+
 ### Beta Limited Network
 
 - `class BetaLimitedNetwork: …`
 
   Limited network access.
+
+  - `type: Literal["limited"]`
+
+    Network policy type
 
   - `allow_mcp_servers: bool`
 
@@ -2283,10 +2316,6 @@ print(beta_environment.id)
   - `allowed_hosts: List[str]`
 
     Specifies domains the container can reach.
-
-  - `type: Literal["limited"]`
-
-    Network policy type
 
 ### Beta Limited Network Params
 
@@ -2319,6 +2348,12 @@ print(beta_environment.id)
 
   Packages (and their versions) available in this environment.
 
+  - `type: Optional[Literal["packages"]]`
+
+    Package configuration type
+
+    default: packages
+
   - `apt: List[str]`
 
     Ubuntu/Debian packages to install
@@ -2343,12 +2378,6 @@ print(beta_environment.id)
 
     Python packages to install
 
-  - `type: Optional[Literal["packages"]]`
-
-    Package configuration type
-
-    default: packages
-
 ### Beta Packages Params
 
 - `class BetaPackagesParams: …`
@@ -2358,6 +2387,12 @@ print(beta_environment.id)
   When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
   Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
+
+  - `type: Optional[Literal["packages"]]`
+
+    Package configuration type
+
+    default: packages
 
   - `apt: Optional[List[str]]`
 
@@ -2382,12 +2417,6 @@ print(beta_environment.id)
   - `pip: Optional[List[str]]`
 
     Python packages to install
-
-  - `type: Optional[Literal["packages"]]`
-
-    Package configuration type
-
-    default: packages
 
 ### Beta Self Hosted Config
 
@@ -2443,7 +2472,7 @@ Retrieve detailed information about a specific work item.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2491,6 +2520,8 @@ Retrieve detailed information about a specific work item.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -2533,6 +2564,8 @@ Retrieve detailed information about a specific work item.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 #### Returns
 
 - `class BetaSelfHostedWork: …`
@@ -2542,6 +2575,12 @@ Retrieve detailed information about a specific work item.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
 
   - `id: str`
 
@@ -2559,13 +2598,13 @@ Retrieve detailed information about a specific work item.
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -2608,12 +2647,6 @@ Retrieve detailed information about a specific work item.
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -2690,7 +2723,7 @@ Long poll for work items in the queue.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2737,6 +2770,8 @@ Long poll for work items in the queue.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2794,6 +2829,12 @@ Long poll for work items in the queue.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: str`
 
     Work identifier (e.g., 'work_...')
@@ -2810,13 +2851,13 @@ Long poll for work items in the queue.
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -2859,12 +2900,6 @@ Long poll for work items in the queue.
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -2930,7 +2965,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2977,6 +3012,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -3030,6 +3067,12 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: str`
 
     Work identifier (e.g., 'work_...')
@@ -3046,13 +3089,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -3095,12 +3138,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -3175,7 +3212,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3222,6 +3259,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -3271,6 +3310,12 @@ Record a heartbeat for a work item to maintain the lease.
 
   Response after recording a heartbeat for a work item.
 
+  - `type: Literal["work_heartbeat"]`
+
+    The type of response
+
+    default: work_heartbeat
+
   - `last_heartbeat: str`
 
     RFC 3339 timestamp of the actual heartbeat from DB
@@ -3296,12 +3341,6 @@ Record a heartbeat for a work item to maintain the lease.
   - `ttl_seconds: int`
 
     Effective TTL applied to the lease
-
-  - `type: Literal["work_heartbeat"]`
-
-    The type of response
-
-    default: work_heartbeat
 
 #### Example
 
@@ -3361,7 +3400,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3409,6 +3448,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -3451,6 +3492,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 #### Returns
 
 - `class BetaSelfHostedWork: …`
@@ -3460,6 +3503,12 @@ Stop a work item, initiating graceful or forced shutdown.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
 
   - `id: str`
 
@@ -3477,13 +3526,13 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -3526,12 +3575,6 @@ Stop a work item, initiating graceful or forced shutdown.
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -3606,7 +3649,7 @@ List work items in an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3653,6 +3696,8 @@ List work items in an environment.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -3706,6 +3751,12 @@ List work items in an environment.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: str`
 
     Work identifier (e.g., 'work_...')
@@ -3722,13 +3773,13 @@ List work items in an environment.
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -3771,12 +3822,6 @@ List work items in an environment.
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -3852,7 +3897,7 @@ Update work item metadata with merge semantics.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3900,6 +3945,8 @@ Update work item metadata with merge semantics.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -3942,6 +3989,8 @@ Update work item metadata with merge semantics.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 #### Returns
 
 - `class BetaSelfHostedWork: …`
@@ -3951,6 +4000,12 @@ Update work item metadata with merge semantics.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `type: Literal["work"]`
+
+    The type of object (always 'work')
+
+    default: work
 
   - `id: str`
 
@@ -3968,13 +4023,13 @@ Update work item metadata with merge semantics.
 
     The actual work to be performed
 
-    - `id: str`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: Literal["session"]`
 
       Type of work data
+
+    - `id: str`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: str`
 
@@ -4017,12 +4072,6 @@ Update work item metadata with merge semantics.
   - `stopped_at: Optional[str]`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: Literal["work"]`
-
-    The type of object (always 'work')
-
-    default: work
 
 #### Example
 
@@ -4086,7 +4135,7 @@ Get statistics about the work queue for an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4134,6 +4183,8 @@ Get statistics about the work queue for an environment.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -4176,6 +4227,8 @@ Get statistics about the work queue for an environment.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 #### Returns
 
 - `class BetaSelfHostedWorkQueueStats: …`
@@ -4183,6 +4236,12 @@ Get statistics about the work queue for an environment.
   Statistics about the work queue for an environment.
 
   Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `type: Literal["work_queue_stats"]`
+
+    The type of object
+
+    default: work_queue_stats
 
   - `depth: int`
 
@@ -4197,12 +4256,6 @@ Get statistics about the work queue for an environment.
     Number of work items being processed (polled but not acknowledged)
 
     default: 0
-
-  - `type: Literal["work_queue_stats"]`
-
-    The type of object
-
-    default: work_queue_stats
 
   - `workers_polling: Optional[int]`
 

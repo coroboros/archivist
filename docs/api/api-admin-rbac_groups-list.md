@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/list"
 category: "api"
 generated: true
 ---
+---
+title: List RBAC Groups
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/list
+---
+
 # List RBAC Groups
 
 **GET** `/v1/organizations/rbac_groups`
@@ -28,7 +33,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `data: array of RbacGroup`
+- `data: array of BetaRBACGroup`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -56,14 +69,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
@@ -83,7 +88,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

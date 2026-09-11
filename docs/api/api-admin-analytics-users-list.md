@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/users/list"
 category: "api"
 generated: true
 ---
+---
+title: List User Activity
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/users/list
+---
+
 # List User Activity
 
 **GET** `/v1/organizations/analytics/users`
@@ -72,7 +77,7 @@ the `read:analytics` scope.
 
 ## Returns
 
-- `UserActivity object`
+- `BetaUserActivity object`
 
   Response for GET /v1/organizations/analytics/users.
 
@@ -170,7 +175,7 @@ the `read:analytics` scope.
 
         Per-tool accepted/rejected counts for Claude Code file modification tools.
 
-        - `edit_tool: ToolActionCounts`
+        - `edit_tool: BetaToolActionCounts`
 
           Accepted/rejected counts for a single Claude Code tool type.
 
@@ -182,15 +187,15 @@ the `read:analytics` scope.
 
             Number of tool proposals rejected
 
-        - `multi_edit_tool: ToolActionCounts`
+        - `multi_edit_tool: BetaToolActionCounts`
 
           Accepted/rejected counts for a single Claude Code tool type.
 
-        - `notebook_edit_tool: ToolActionCounts`
+        - `notebook_edit_tool: BetaToolActionCounts`
 
           Accepted/rejected counts for a single Claude Code tool type.
 
-        - `write_tool: ToolActionCounts`
+        - `write_tool: BetaToolActionCounts`
 
           Accepted/rejected counts for a single Claude Code tool type.
 
@@ -290,7 +295,7 @@ the `read:analytics` scope.
 
       Office Agent activity metrics for a single user on a given day, broken out by Office product.
 
-      - `excel: OfficeProductMetrics`
+      - `excel: BetaOfficeProductMetrics`
 
         Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -318,15 +323,15 @@ the `read:analytics` scope.
 
           Number of skill invocations
 
-      - `outlook: OfficeProductMetrics`
+      - `outlook: BetaOfficeProductMetrics`
 
         Office Agent activity metrics for a single user on a given day within one Office product.
 
-      - `powerpoint: OfficeProductMetrics`
+      - `powerpoint: BetaOfficeProductMetrics`
 
         Office Agent activity metrics for a single user on a given day within one Office product.
 
-      - `word: OfficeProductMetrics`
+      - `word: BetaOfficeProductMetrics`
 
         Office Agent activity metrics for a single user on a given day within one Office product.
 
@@ -376,9 +381,15 @@ the `read:analytics` scope.
 
       Resolved RBAC group display name, alongside `rbac_group_id` when name resolution is available. Null if the group has been deleted or its name could not be resolved; `rbac_group_id` remains the stable key.
 
-    - `user: optional AnalyticsUser or null`
+    - `user: optional BetaAnalyticsUser or null`
 
       A user in the organization, identified by tagged id and email address.
+
+      - `type: "user"`
+
+        Object type. Always `user`.
+
+        default: user
 
       - `id: string`
 
@@ -387,12 +398,6 @@ the `read:analytics` scope.
       - `email_address: string`
 
         Email address of the user
-
-      - `type: "user"`
-
-        Object type. Always `user`.
-
-        default: user
 
   - `next_page: string or null`
 
@@ -403,7 +408,7 @@ the `read:analytics` scope.
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/users \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/organizations/me"
 category: "api"
 generated: true
 ---
+---
+title: Get Current Organization
+url: https://platform.claude.com/docs/en/api/beta/organization/retrieve
+---
+
 # Get Current Organization
 
 **GET** `/v1/organizations/me`
@@ -12,7 +17,15 @@ Retrieve information about the organization associated with the authenticated AP
 
 ## Returns
 
-- `Organization object`
+- `BetaOrganization object`
+
+  - `type: "organization"`
+
+    Object type.
+
+    For Organizations, this is always `"organization"`.
+
+    default: organization
 
   - `id: string`
 
@@ -24,20 +37,12 @@ Retrieve information about the organization associated with the authenticated AP
 
     Name of the Organization.
 
-  - `type: "organization"`
-
-    Object type.
-
-    For Organizations, this is always `"organization"`.
-
-    default: organization
-
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/me \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

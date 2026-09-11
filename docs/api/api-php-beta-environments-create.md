@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Environment
+url: https://platform.claude.com/docs/en/api/php/beta/environments/create
+---
+
 # Create Environment
 
-`$client->beta->environments->create(string name, ?Config config, ?string description, ?array<string,string> metadata, ?Scope scope, ?list<AnthropicBeta> betas): BetaEnvironment`
+`$client->beta->environments->create(string name, ?Config config, ?string description, ?array<string,string> metadata, ?Scope scope, ?list<AnthropicBeta> betas, ?string workspaceID): BetaEnvironment`
 
 **POST** `/v1/environments`
 
@@ -32,15 +37,21 @@ Create a new environment with the specified configuration.
 
 - `scope?:optional Scope`
 
-  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
+  The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaEnvironment`
+
+  - `"environment" type`
+
+    The type of object (always 'environment')
 
   - `string id`
 
@@ -69,10 +80,6 @@ Create a new environment with the specified configuration.
   - `string name`
 
     Human-readable name for the environment
-
-  - `"environment" type`
-
-    The type of object (always 'environment')
 
   - `string updatedAt`
 
@@ -115,6 +122,7 @@ $betaEnvironment = $client->beta->environments->create(
   metadata: ['foo' => 'string'],
   scope: 'organization',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaEnvironment);

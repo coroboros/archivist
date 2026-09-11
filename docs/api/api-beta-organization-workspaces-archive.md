@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/workspaces/ar
 category: "api"
 generated: true
 ---
+---
+title: Archive Workspace
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/archive
+---
+
 # Archive Workspace
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/archive`
@@ -17,6 +22,14 @@ Archive Workspace
 ## Returns
 
 - `BetaWorkspace object`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -93,14 +106,6 @@ Archive Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ## Example
 

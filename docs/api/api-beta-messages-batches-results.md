@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/messages/batches/results"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/beta/messages/batches/results
+---
+
 # Retrieve Message Batch results
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
@@ -28,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -118,6 +125,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaMessageBatchIndividualResponse object`
@@ -138,7 +147,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `BetaMessageBatchSucceededResult object`
 
+      - `type: "succeeded"`
+
+        default: succeeded
+
       - `message: BetaMessage`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+          default: message
 
         - `id: string`
 
@@ -164,12 +185,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -177,6 +192,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -215,6 +236,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaTextBlock object`
 
+            - `type: "text"`
+
+              default: text
+
             - `citations: array of BetaTextCitation or null`
 
               Citations supporting the text block.
@@ -222,6 +247,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `BetaCitationCharLocation object`
+
+                - `type: "char_location"`
+
+                  default: char_location
 
                 - `cited_text: string`
 
@@ -239,11 +268,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "char_location"`
-
-                  default: char_location
-
               - `BetaCitationPageLocation object`
+
+                - `type: "page_location"`
+
+                  default: page_location
 
                 - `cited_text: string`
 
@@ -261,11 +290,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: "page_location"`
-
-                  default: page_location
-
               - `BetaCitationContentBlockLocation object`
+
+                - `type: "content_block_location"`
+
+                  default: content_block_location
 
                 - `cited_text: string`
 
@@ -293,11 +322,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
-                  default: content_block_location
-
               - `BetaCitationsWebSearchResultLocation object`
+
+                - `type: "web_search_result_location"`
+
+                  default: web_search_result_location
 
                 - `cited_text: string`
 
@@ -307,13 +336,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
-                  default: web_search_result_location
-
                 - `url: string`
 
               - `BetaCitationSearchResultLocation object`
+
+                - `type: "search_result_location"`
+
+                  default: search_result_location
 
                 - `cited_text: string`
 
@@ -345,19 +374,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string or null`
 
-                - `type: "search_result_location"`
-
-                  default: search_result_location
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
           - `BetaThinkingBlock object`
+
+            - `type: "thinking"`
+
+              default: thinking
 
             - `signature: string`
 
@@ -371,11 +396,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
-              default: thinking
-
           - `BetaRedactedThinkingBlock object`
+
+            - `type: "redacted_thinking"`
+
+              default: redacted_thinking
 
             - `data: string`
 
@@ -385,11 +410,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
-              default: redacted_thinking
-
           - `BetaToolUseBlock object`
+
+            - `type: "tool_use"`
+
+              default: tool_use
 
             - `id: string`
 
@@ -400,10 +425,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
-
-              default: tool_use
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -419,19 +440,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `BetaServerToolCaller20260120 object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name: optional string or null`
 
@@ -440,6 +461,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `BetaServerToolUseBlock object`
+
+            - `type: "server_tool_use"`
+
+              default: server_tool_use
 
             - `id: string`
 
@@ -465,10 +490,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
-              default: server_tool_use
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
               Tool invocation directly from the model.
@@ -485,9 +506,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaWebSearchToolResultBlock object`
 
+            - `type: "web_search_tool_result"`
+
+              default: web_search_tool_result
+
             - `content: BetaWebSearchToolResultBlockContent`
 
               - `BetaWebSearchToolResultError object`
+
+                - `type: "web_search_tool_result_error"`
+
+                  default: web_search_tool_result_error
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -503,11 +532,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
-                  default: web_search_tool_result_error
-
               - `array of BetaWebSearchResultBlock`
+
+                - `type: "web_search_result"`
+
+                  default: web_search_result
 
                 - `encrypted_content: string`
 
@@ -515,19 +544,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
-                  default: web_search_result
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
-
-              default: web_search_tool_result
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -545,9 +566,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaWebFetchToolResultBlock object`
 
+            - `type: "web_fetch_tool_result"`
+
+              default: web_fetch_tool_result
+
             - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
               - `BetaWebFetchToolResultErrorBlock object`
+
+                - `type: "web_fetch_tool_result_error"`
+
+                  default: web_fetch_tool_result_error
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -569,13 +598,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
-
-                  default: web_fetch_tool_result_error
+                  - `"content_too_large"`
 
               - `BetaWebFetchBlock object`
 
+                - `type: "web_fetch_result"`
+
+                  default: web_fetch_result
+
                 - `content: BetaDocumentBlock`
+
+                  - `type: "document"`
+
+                    default: document
 
                   - `citations: BetaCitationConfig or null`
 
@@ -589,37 +624,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `BetaBase64PDFSource object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `BetaPlainTextSource object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string or null`
 
                     The title of the document
 
-                  - `type: "document"`
-
-                    default: document
-
                 - `retrieved_at: string or null`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
-
-                  default: web_fetch_result
 
                 - `url: string`
 
@@ -628,10 +655,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
-
-              default: web_fetch_tool_result
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -649,9 +672,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaAdvisorToolResultBlock object`
 
+            - `type: "advisor_tool_result"`
+
+              default: advisor_tool_result
+
             - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
               - `BetaAdvisorToolResultError object`
+
+                - `type: "advisor_tool_result_error"`
+
+                  default: advisor_tool_result_error
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -669,11 +700,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
-                  default: advisor_tool_result_error
-
               - `BetaAdvisorResultBlock object`
+
+                - `type: "advisor_result"`
+
+                  default: advisor_result
 
                 - `stop_reason: string or null`
 
@@ -681,11 +712,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                - `type: "advisor_result"`
-
-                  default: advisor_result
-
               - `BetaAdvisorRedactedResultBlock object`
+
+                - `type: "advisor_redacted_result"`
+
+                  default: advisor_redacted_result
 
                 - `encrypted_content: string`
 
@@ -695,25 +726,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: "advisor_redacted_result"`
-
-                  default: advisor_redacted_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
-              default: advisor_tool_result
-
           - `BetaCodeExecutionToolResultBlock object`
+
+            - `type: "code_execution_tool_result"`
+
+              default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError object`
+
+                - `type: "code_execution_tool_result_error"`
+
+                  default: code_execution_tool_result_error
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -725,19 +756,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
-                  default: code_execution_tool_result_error
-
               - `BetaCodeExecutionResultBlock object`
 
-                - `content: array of BetaCodeExecutionOutputBlock`
+                - `type: "code_execution_result"`
 
-                  - `file_id: string`
+                  default: code_execution_result
+
+                - `content: array of BetaCodeExecutionOutputBlock`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -745,21 +776,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
-                  default: code_execution_result
-
               - `BetaEncryptedCodeExecutionResultBlock object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
-                - `content: array of BetaCodeExecutionOutputBlock`
+                - `type: "encrypted_code_execution_result"`
 
-                  - `file_id: string`
+                  default: encrypted_code_execution_result
+
+                - `content: array of BetaCodeExecutionOutputBlock`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -767,23 +798,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
-                  default: encrypted_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
-              default: code_execution_tool_result
-
           - `BetaBashCodeExecutionToolResultBlock object`
+
+            - `type: "bash_code_execution_tool_result"`
+
+              default: bash_code_execution_tool_result
 
             - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
               - `BetaBashCodeExecutionToolResultError object`
+
+                - `type: "bash_code_execution_tool_result_error"`
+
+                  default: bash_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -797,19 +828,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
-                  default: bash_code_execution_tool_result_error
-
               - `BetaBashCodeExecutionResultBlock object`
 
-                - `content: array of BetaBashCodeExecutionOutputBlock`
+                - `type: "bash_code_execution_result"`
 
-                  - `file_id: string`
+                  default: bash_code_execution_result
+
+                - `content: array of BetaBashCodeExecutionOutputBlock`
 
                   - `type: "bash_code_execution_output"`
 
                     default: bash_code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -817,23 +848,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
-                  default: bash_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
-              default: bash_code_execution_tool_result
-
           - `BetaTextEditorCodeExecutionToolResultBlock object`
+
+            - `type: "text_editor_code_execution_tool_result"`
+
+              default: text_editor_code_execution_tool_result
 
             - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `BetaTextEditorCodeExecutionToolResultError object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
+
+                  default: text_editor_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -849,11 +880,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string or null`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
-                  default: text_editor_code_execution_tool_result_error
-
               - `BetaTextEditorCodeExecutionViewResultBlock object`
+
+                - `type: "text_editor_code_execution_view_result"`
+
+                  default: text_editor_code_execution_view_result
 
                 - `content: string`
 
@@ -871,19 +902,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: number or null`
 
-                - `type: "text_editor_code_execution_view_result"`
-
-                  default: text_editor_code_execution_view_result
-
               - `BetaTextEditorCodeExecutionCreateResultBlock object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
                   default: text_editor_code_execution_create_result
 
+                - `is_file_update: boolean`
+
               - `BetaTextEditorCodeExecutionStrReplaceResultBlock object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
+
+                  default: text_editor_code_execution_str_replace_result
 
                 - `lines: array of string or null`
 
@@ -895,23 +926,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: number or null`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
-                  default: text_editor_code_execution_str_replace_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
-              default: text_editor_code_execution_tool_result
-
           - `BetaToolSearchToolResultBlock object`
+
+            - `type: "tool_search_tool_result"`
+
+              default: tool_search_tool_result
 
             - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
               - `BetaToolSearchToolResultError object`
+
+                - `type: "tool_search_tool_result_error"`
+
+                  default: tool_search_tool_result_error
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -925,35 +956,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string or null`
 
-                - `type: "tool_search_tool_result_error"`
-
-                  default: tool_search_tool_result_error
-
               - `BetaToolSearchToolSearchResultBlock object`
-
-                - `tool_references: array of BetaToolReferenceBlock`
-
-                  - `tool_name: string`
-
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
-
-                    default: tool_reference
 
                 - `type: "tool_search_tool_search_result"`
 
                   default: tool_search_tool_search_result
 
+                - `tool_references: array of BetaToolReferenceBlock`
+
+                  - `type: "tool_reference"`
+
+                    default: tool_reference
+
+                  - `tool_name: string`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "tool_search_tool_result"`
-
-              default: tool_search_tool_result
-
           - `BetaMCPToolUseBlock object`
+
+            - `type: "mcp_tool_use"`
+
+              default: mcp_tool_use
 
             - `id: string`
 
@@ -969,17 +996,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
-              default: mcp_tool_use
-
           - `BetaMCPToolResultBlock object`
+
+            - `type: "mcp_tool_result"`
+
+              default: mcp_tool_result
 
             - `content: string or array of BetaTextBlock`
 
               - `string`
 
               - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
+
+                - `type: "text"`
+
+                  default: text
 
                 - `citations: array of BetaTextCitation or null`
 
@@ -989,11 +1020,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: "text"`
-
-                  default: text
+                  minLength: 0
 
             - `is_error: boolean`
 
@@ -1003,19 +1030,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: "mcp_tool_result"`
-
-              default: mcp_tool_result
-
           - `BetaContainerUploadBlock object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
 
               default: container_upload
+
+            - `file_id: string`
 
           - `BetaCompactionBlock object`
 
@@ -1025,6 +1048,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: "compaction"`
+
+              default: compaction
+
             - `content: string or null`
 
               Summary of compacted content, or null if compaction failed
@@ -1032,10 +1059,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `encrypted_content: string or null`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: "compaction"`
-
-              default: compaction
 
           - `BetaFallbackBlock object`
 
@@ -1050,6 +1073,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: "fallback"`
+
+              default: fallback
 
             - `from: BetaFallbackInfo`
 
@@ -1145,6 +1172,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: "refusal"`
+
+                default: refusal
+
               - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
                 The policy category that triggered a refusal.
@@ -1169,14 +1200,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: "refusal"`
-
-                default: refusal
-
-            - `type: "fallback"`
-
-              default: fallback
-
         - `context_management: BetaContextManagementResponse or null`
 
           Context management response.
@@ -1188,6 +1211,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             List of context management edits that were applied.
 
             - `BetaClearToolUses20250919EditResponse object`
+
+              - `type: "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
+
+                default: clear_tool_uses_20250919
 
               - `cleared_input_tokens: number`
 
@@ -1201,13 +1230,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_tool_uses_20250919"`
+            - `BetaClearThinking20251015EditResponse object`
+
+              - `type: "clear_thinking_20251015"`
 
                 The type of context management edit applied.
 
-                default: clear_tool_uses_20250919
-
-            - `BetaClearThinking20251015EditResponse object`
+                default: clear_thinking_20251015
 
               - `cleared_input_tokens: number`
 
@@ -1221,12 +1250,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
-                default: clear_thinking_20251015
-
         - `diagnostics: BetaDiagnostics or null`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -1238,43 +1261,43 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaCacheMissModelChanged object`
 
-              - `cache_missed_input_tokens: number`
-
-                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
               - `type: "model_changed"`
 
                 default: model_changed
 
-            - `BetaCacheMissSystemChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissSystemChanged object`
 
               - `type: "system_changed"`
 
                 default: system_changed
 
-            - `BetaCacheMissToolsChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissToolsChanged object`
 
               - `type: "tools_changed"`
 
                 default: tools_changed
 
-            - `BetaCacheMissMessagesChanged object`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+            - `BetaCacheMissMessagesChanged object`
+
               - `type: "messages_changed"`
 
                 default: messages_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `BetaCacheMissPreviousMessageNotFound object`
 
@@ -1305,6 +1328,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `stop_details: BetaRefusalStopDetails or null`
 
           Structured information about a refusal.
+
+          - `type: "refusal"`
+
+            default: refusal
 
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
@@ -1385,10 +1412,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: "refusal"`
-
-            default: refusal
-
         - `stop_reason: BetaStopReason or null`
 
           The reason that we stopped.
@@ -1426,14 +1449,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
-
-          default: message
 
         - `usage: BetaUsage`
 
@@ -1501,6 +1516,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 No reprice was applied; `reason` says why.
 
+                - `type: "not_applied"`
+
+                  default: not_applied
+
                 - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                   Why the reprice was not applied.
@@ -1531,10 +1550,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `"wrong_platform"`
 
                   - `"wrong_workspace"`
-
-                - `type: "not_applied"`
-
-                  default: not_applied
 
                 - `remove_to_redeem: optional array of string or null`
 
@@ -1573,6 +1588,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
+                default: message
+
               - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
@@ -1607,43 +1628,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "message"`
-
-                Usage for a sampling iteration
-
-                default: message
-
             - `BetaCompactionIterationUsage object`
 
               Token usage for a compaction iteration.
-
-              - `cache_creation: BetaCacheCreation or null`
-
-                Breakdown of cached tokens by TTL
-
-              - `cache_creation_input_tokens: number`
-
-                The number of input tokens used to create the cache entry.
-
-                default: 0, minimum: 0
-
-              - `cache_read_input_tokens: number`
-
-                The number of input tokens read from the cache.
-
-                default: 0, minimum: 0
-
-              - `input_tokens: number`
-
-                The number of input tokens which were used.
-
-                minimum: 0
-
-              - `output_tokens: number`
-
-                The number of output tokens which were used.
-
-                minimum: 0
 
               - `type: "compaction"`
 
@@ -1651,9 +1638,43 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 default: compaction
 
+              - `cache_creation: BetaCacheCreation or null`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
             - `BetaAdvisorMessageIterationUsage object`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
+
+                default: advisor_message
 
               - `cache_creation: BetaCacheCreation or null`
 
@@ -1688,12 +1709,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
-
-                default: advisor_message
 
             - `BetaFallbackMessageIterationUsage object`
 
@@ -1704,6 +1719,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
+                default: fallback_message
+
               - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
@@ -1737,12 +1758,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
-
-                default: fallback_message
 
           - `output_tokens: number`
 
@@ -1824,6 +1839,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
+            default: thinking_dropped
+
           - `path: string`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -1854,121 +1875,111 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"end_user_binding_mismatch"`
 
-          - `type: "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-            default: thinking_dropped
-
-      - `type: "succeeded"`
-
-        default: succeeded
-
     - `BetaMessageBatchErroredResult object`
 
+      - `type: "errored"`
+
+        default: errored
+
       - `error: BetaErrorResponse`
-
-        - `error: BetaError`
-
-          - `BetaInvalidRequestError object`
-
-            - `message: string`
-
-              default: Invalid request
-
-            - `type: "invalid_request_error"`
-
-              default: invalid_request_error
-
-          - `BetaAuthenticationError object`
-
-            - `message: string`
-
-              default: Authentication error
-
-            - `type: "authentication_error"`
-
-              default: authentication_error
-
-          - `BetaBillingError object`
-
-            - `message: string`
-
-              default: Billing error
-
-            - `type: "billing_error"`
-
-              default: billing_error
-
-          - `BetaPermissionError object`
-
-            - `message: string`
-
-              default: Permission denied
-
-            - `type: "permission_error"`
-
-              default: permission_error
-
-          - `BetaNotFoundError object`
-
-            - `message: string`
-
-              default: Not found
-
-            - `type: "not_found_error"`
-
-              default: not_found_error
-
-          - `BetaRateLimitError object`
-
-            - `message: string`
-
-              default: Rate limited
-
-            - `type: "rate_limit_error"`
-
-              default: rate_limit_error
-
-          - `BetaGatewayTimeoutError object`
-
-            - `message: string`
-
-              default: Request timeout
-
-            - `type: "timeout_error"`
-
-              default: timeout_error
-
-          - `BetaAPIError object`
-
-            - `message: string`
-
-              default: Internal server error
-
-            - `type: "api_error"`
-
-              default: api_error
-
-          - `BetaOverloadedError object`
-
-            - `message: string`
-
-              default: Overloaded
-
-            - `type: "overloaded_error"`
-
-              default: overloaded_error
-
-        - `request_id: string or null`
 
         - `type: "error"`
 
           default: error
 
-      - `type: "errored"`
+        - `error: BetaError`
 
-        default: errored
+          - `BetaInvalidRequestError object`
+
+            - `type: "invalid_request_error"`
+
+              default: invalid_request_error
+
+            - `message: string`
+
+              default: Invalid request
+
+          - `BetaAuthenticationError object`
+
+            - `type: "authentication_error"`
+
+              default: authentication_error
+
+            - `message: string`
+
+              default: Authentication error
+
+          - `BetaBillingError object`
+
+            - `type: "billing_error"`
+
+              default: billing_error
+
+            - `message: string`
+
+              default: Billing error
+
+          - `BetaPermissionError object`
+
+            - `type: "permission_error"`
+
+              default: permission_error
+
+            - `message: string`
+
+              default: Permission denied
+
+          - `BetaNotFoundError object`
+
+            - `type: "not_found_error"`
+
+              default: not_found_error
+
+            - `message: string`
+
+              default: Not found
+
+          - `BetaRateLimitError object`
+
+            - `type: "rate_limit_error"`
+
+              default: rate_limit_error
+
+            - `message: string`
+
+              default: Rate limited
+
+          - `BetaGatewayTimeoutError object`
+
+            - `type: "timeout_error"`
+
+              default: timeout_error
+
+            - `message: string`
+
+              default: Request timeout
+
+          - `BetaAPIError object`
+
+            - `type: "api_error"`
+
+              default: api_error
+
+            - `message: string`
+
+              default: Internal server error
+
+          - `BetaOverloadedError object`
+
+            - `type: "overloaded_error"`
+
+              default: overloaded_error
+
+            - `message: string`
+
+              default: Overloaded
+
+        - `request_id: string or null`
 
     - `BetaMessageBatchCanceledResult object`
 

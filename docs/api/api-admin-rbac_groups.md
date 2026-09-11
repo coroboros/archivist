@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups"
 category: "api"
 generated: true
 ---
+---
+title: RBAC Groups
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups
+---
+
 # RBAC Groups
 
 ## List RBAC Groups
@@ -30,7 +35,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `data: array of RbacGroup`
+- `data: array of BetaRBACGroup`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -58,14 +71,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
@@ -85,7 +90,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -126,7 +132,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroup object`
+- `BetaRBACGroup object`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -154,14 +168,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
@@ -173,7 +179,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -210,7 +217,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroup object`
+- `BetaRBACGroup object`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -238,14 +253,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
@@ -258,7 +265,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "name": "Engineering"
         }'
@@ -304,7 +312,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroup object`
+- `BetaRBACGroup object`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -332,14 +348,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
@@ -352,7 +360,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "name": "Engineering"
         }'
@@ -390,11 +399,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroupDeleted object`
-
-  - `id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupDeleted object`
 
   - `type: "rbac_group_deleted"`
 
@@ -404,13 +409,18 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     default: rbac_group_deleted
 
+  - `id: string`
+
+    ID of the RBAC Group.
+
 ### Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -424,9 +434,17 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
 ## Domain types
 
-### Rbac Group
+### Beta RBAC Group
 
-- `RbacGroup object`
+- `BetaRBACGroup object`
+
+  - `type: "rbac_group"`
+
+    Object type.
+
+    For RBAC Groups, this is always `"rbac_group"`.
+
+    default: rbac_group
 
   - `id: string`
 
@@ -454,27 +472,15 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
     - `"scim"`
 
-  - `type: "rbac_group"`
-
-    Object type.
-
-    For RBAC Groups, this is always `"rbac_group"`.
-
-    default: rbac_group
-
   - `updated_at: string`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
 
-### Rbac Group Deleted
+### Beta RBAC Group Deleted
 
-- `RbacGroupDeleted object`
-
-  - `id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupDeleted object`
 
   - `type: "rbac_group_deleted"`
 
@@ -483,6 +489,10 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     For RBAC Groups, this is always `"rbac_group_deleted"`.
 
     default: rbac_group_deleted
+
+  - `id: string`
+
+    ID of the RBAC Group.
 
 ## RBAC Groups › Members
 
@@ -516,7 +526,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Returns
 
-- `data: array of RbacGroupMember`
+- `data: array of BetaRBACGroupMember`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -531,14 +549,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `group_id: string`
 
     ID of the RBAC Group.
-
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
 
   - `user_id: string`
 
@@ -557,7 +567,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -600,7 +611,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Returns
 
-- `RbacGroupMember object`
+- `BetaRBACGroupMember object`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -616,14 +635,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
-
   - `user_id: string`
 
     ID of the User.
@@ -634,7 +645,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
         }'
@@ -672,17 +684,17 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Returns
 
-- `RbacGroupMemberDeleted object`
-
-  - `group_id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupMemberDeleted object`
 
   - `type: "rbac_group_member_deleted"`
 
     Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
     default: rbac_group_member_deleted
+
+  - `group_id: string`
+
+    ID of the RBAC Group.
 
   - `user_id: string`
 
@@ -694,7 +706,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)

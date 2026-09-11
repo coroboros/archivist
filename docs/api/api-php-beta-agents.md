@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents"
 category: "api"
 generated: true
 ---
+---
+title: Agents
+url: https://platform.claude.com/docs/en/api/php/beta/agents
+---
+
 # Agents
 
 ## Create Agent
 
-`$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **POST** `/v1/agents`
 
@@ -56,9 +61,13 @@ Create Agent
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -91,8 +100,6 @@ Create Agent
   - `?string system`
 
   - `list<Tool> tools`
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -146,6 +153,7 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
     ],
   ],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -230,7 +238,7 @@ var_dump($betaManagedAgentsAgent);
 
 ## List Agents
 
-`$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
+`$client->beta->agents->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsAgent>`
 
 **GET** `/v1/agents`
 
@@ -262,9 +270,13 @@ List Agents
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -298,8 +310,6 @@ List Agents
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -324,6 +334,7 @@ $page = $client->beta->agents->list(
   limit: 0,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -413,7 +424,7 @@ var_dump($page);
 
 ## Get Agent
 
-`$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **GET** `/v1/agents/{agent_id}`
 
@@ -431,9 +442,13 @@ Get Agent
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -467,8 +482,6 @@ Get Agent
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -490,6 +503,7 @@ $betaManagedAgentsAgent = $client->beta->agents->retrieve(
   'agent_011CZkYpogX7uDKUyvBTophP',
   version: 0,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -574,7 +588,7 @@ var_dump($betaManagedAgentsAgent);
 
 ## Update Agent
 
-`$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}`
 
@@ -628,9 +642,13 @@ Update Agent
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -663,8 +681,6 @@ Update Agent
   - `?string system`
 
   - `list<Tool> tools`
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -725,6 +741,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
   ],
   version: 1,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -809,7 +826,7 @@ var_dump($betaManagedAgentsAgent);
 
 ## Archive Agent
 
-`$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}/archive`
 
@@ -823,9 +840,13 @@ Archive Agent
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -859,8 +880,6 @@ Archive Agent
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -881,6 +900,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaManagedAgentsAgent = $client->beta->agents->archive(
   'agent_011CZkYpogX7uDKUyvBTophP',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -969,15 +989,17 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsAdvisor`
 
+  - `Type type`
+
   - `string model`
 
     The advisor model id.
 
-  - `Type type`
-
 ### Beta Managed Agents Agent
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -1011,8 +1033,6 @@ var_dump($betaManagedAgentsAgent);
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -1025,9 +1045,9 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsAgentReference`
 
-  - `string id`
-
   - `Type type`
+
+  - `string id`
 
   - `int version`
 
@@ -1037,6 +1057,8 @@ var_dump($betaManagedAgentsAgent);
 
   - `BetaManagedAgentsBashToolConfig`
 
+    - `"bash" type`
+
     - `bool enabled`
 
     - `"bash" name`
@@ -1045,9 +1067,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"bash" type`
-
   - `BetaManagedAgentsEditToolConfig`
+
+    - `"edit" type`
 
     - `bool enabled`
 
@@ -1057,9 +1079,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"edit" type`
-
   - `BetaManagedAgentsReadToolConfig`
+
+    - `"read" type`
 
     - `bool enabled`
 
@@ -1069,9 +1091,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"read" type`
-
   - `BetaManagedAgentsWriteToolConfig`
+
+    - `"write" type`
 
     - `bool enabled`
 
@@ -1081,9 +1103,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"write" type`
-
   - `BetaManagedAgentsGlobToolConfig`
+
+    - `"glob" type`
 
     - `bool enabled`
 
@@ -1093,9 +1115,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"glob" type`
-
   - `BetaManagedAgentsGrepToolConfig`
+
+    - `"grep" type`
 
     - `bool enabled`
 
@@ -1105,9 +1127,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"grep" type`
-
   - `BetaManagedAgentsWebFetchToolConfig`
+
+    - `"web_fetch" type`
 
     - `bool enabled`
 
@@ -1117,8 +1139,6 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `"web_fetch" type`
-
     - `?list<string> allowedDomains`
 
     - `?list<string> blockedDomains`
@@ -1127,6 +1147,8 @@ var_dump($betaManagedAgentsAgent);
 
   - `BetaManagedAgentsWebSearchToolConfig`
 
+    - `"web_search" type`
+
     - `bool enabled`
 
     - `"web_search" name`
@@ -1134,8 +1156,6 @@ var_dump($betaManagedAgentsAgent);
     - `PermissionPolicy permissionPolicy`
 
       Permission policy for tool execution.
-
-    - `"web_search" type`
 
     - `?list<string> allowedDomains`
 
@@ -1151,6 +1171,8 @@ var_dump($betaManagedAgentsAgent);
 
   - `BetaManagedAgentsBashToolConfigParams`
 
+    - `?Type type`
+
     - `"bash" name`
 
       Must be "bash".
@@ -1163,9 +1185,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsEditToolConfigParams`
+
+    - `?Type type`
 
     - `"edit" name`
 
@@ -1179,9 +1201,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsReadToolConfigParams`
+
+    - `?Type type`
 
     - `"read" name`
 
@@ -1195,9 +1217,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsWriteToolConfigParams`
+
+    - `?Type type`
 
     - `"write" name`
 
@@ -1211,9 +1233,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsGlobToolConfigParams`
+
+    - `?Type type`
 
     - `"glob" name`
 
@@ -1227,9 +1249,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsGrepToolConfigParams`
+
+    - `?Type type`
 
     - `"grep" name`
 
@@ -1243,9 +1265,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsWebFetchToolConfigParams`
+
+    - `?Type type`
 
     - `"web_fetch" name`
 
@@ -1271,9 +1293,9 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-    - `?Type type`
-
   - `BetaManagedAgentsWebSearchToolConfigParams`
+
+    - `?Type type`
 
     - `"web_search" name`
 
@@ -1294,8 +1316,6 @@ var_dump($betaManagedAgentsAgent);
     - `?PermissionPolicy permissionPolicy`
 
       Permission policy for tool execution.
-
-    - `?Type type`
 
     - `?BetaManagedAgentsUserLocation userLocation`
 
@@ -1327,13 +1347,13 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsAgentToolset20260401`
 
+  - `Type type`
+
   - `list<BetaManagedAgentsAgentToolConfig> configs`
 
   - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
 
     Resolved default configuration for agent tools.
-
-  - `Type type`
 
 ### Beta Managed Agents Agent Toolset20260401 Bash Input
 
@@ -1459,9 +1479,9 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsAnthropicSkill`
 
-  - `string skillID`
-
   - `Type type`
+
+  - `string skillID`
 
   - `string version`
 
@@ -1469,19 +1489,27 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsAnthropicSkillParams`
 
+  - `Type type`
+
   - `string skillID`
 
     Identifier of the Anthropic skill (e.g., "xlsx").
-
-  - `Type type`
 
   - `?string version`
 
     Version to pin. Defaults to latest if omitted.
 
+### Beta Managed Agents Auto Policy
+
+- `BetaManagedAgentsAutoPolicy`
+
+  - `"auto" type`
+
 ### Beta Managed Agents Bash Tool Config
 
 - `BetaManagedAgentsBashToolConfig`
+
+  - `"bash" type`
 
   - `bool enabled`
 
@@ -1491,11 +1519,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"bash" type`
-
 ### Beta Managed Agents Bash Tool Config Params
 
 - `BetaManagedAgentsBashToolConfigParams`
+
+  - `?Type type`
 
   - `"bash" name`
 
@@ -1509,15 +1537,13 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ### Beta Managed Agents Custom Skill
 
 - `BetaManagedAgentsCustomSkill`
 
-  - `string skillID`
-
   - `Type type`
+
+  - `string skillID`
 
   - `string version`
 
@@ -1525,11 +1551,11 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsCustomSkillParams`
 
+  - `Type type`
+
   - `string skillID`
 
     Tagged ID of the custom skill (e.g., "skill_01XJ5...").
-
-  - `Type type`
 
   - `?string version`
 
@@ -1539,6 +1565,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsCustomTool`
 
+  - `Type type`
+
   - `string description`
 
   - `BetaManagedAgentsCustomToolInputSchema inputSchema`
@@ -1546,8 +1574,6 @@ var_dump($betaManagedAgentsAgent);
     JSON Schema for custom tool input parameters.
 
   - `string name`
-
-  - `Type type`
 
 ### Beta Managed Agents Custom Tool Input Schema
 
@@ -1563,6 +1589,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsCustomToolParams`
 
+  - `Type type`
+
   - `string description`
 
     Description of what the tool does, shown to the agent to help it decide when to use the tool.
@@ -1575,11 +1603,11 @@ var_dump($betaManagedAgentsAgent);
 
     Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-  - `Type type`
-
 ### Beta Managed Agents Edit Tool Config
 
 - `BetaManagedAgentsEditToolConfig`
+
+  - `"edit" type`
 
   - `bool enabled`
 
@@ -1589,11 +1617,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"edit" type`
-
 ### Beta Managed Agents Edit Tool Config Params
 
 - `BetaManagedAgentsEditToolConfigParams`
+
+  - `?Type type`
 
   - `"edit" name`
 
@@ -1606,8 +1634,6 @@ var_dump($betaManagedAgentsAgent);
   - `?PermissionPolicy permissionPolicy`
 
     Permission policy for tool execution.
-
-  - `?Type type`
 
 ### Beta Managed Agents Effort High
 
@@ -1643,6 +1669,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsGlobToolConfig`
 
+  - `"glob" type`
+
   - `bool enabled`
 
   - `"glob" name`
@@ -1651,11 +1679,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"glob" type`
-
 ### Beta Managed Agents Glob Tool Config Params
 
 - `BetaManagedAgentsGlobToolConfigParams`
+
+  - `?Type type`
 
   - `"glob" name`
 
@@ -1669,11 +1697,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ### Beta Managed Agents Grep Tool Config
 
 - `BetaManagedAgentsGrepToolConfig`
+
+  - `"grep" type`
 
   - `bool enabled`
 
@@ -1683,11 +1711,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"grep" type`
-
 ### Beta Managed Agents Grep Tool Config Params
 
 - `BetaManagedAgentsGrepToolConfigParams`
+
+  - `?Type type`
 
   - `"grep" name`
 
@@ -1701,15 +1729,13 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ### Beta Managed Agents MCP Server URL Definition
 
 - `BetaManagedAgentsMCPServerURLDefinition`
 
-  - `string name`
-
   - `Type type`
+
+  - `string name`
 
   - `string url`
 
@@ -1745,6 +1771,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsMCPToolset`
 
+  - `Type type`
+
   - `list<BetaManagedAgentsMCPToolConfig> configs`
 
   - `BetaManagedAgentsMCPToolsetDefaultConfig defaultConfig`
@@ -1752,8 +1780,6 @@ var_dump($betaManagedAgentsAgent);
     Resolved default configuration for all tools from an MCP server.
 
   - `string mcpServerName`
-
-  - `Type type`
 
 ### Beta Managed Agents MCP Toolset Default Config
 
@@ -1781,11 +1807,11 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsMCPToolsetParams`
 
+  - `Type type`
+
   - `string mcpServerName`
 
     Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
-
-  - `Type type`
 
   - `?list<BetaManagedAgentsMCPToolConfigParams> configs`
 
@@ -1903,21 +1929,21 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsMultiagentCoordinator`
 
+  - `Type type`
+
   - `list<Agent> agents`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
-
-  - `Type type`
 
 ### Beta Managed Agents Multiagent Coordinator Params
 
 - `BetaManagedAgentsMultiagentCoordinatorParams`
 
+  - `Type type`
+
   - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
-
-  - `Type type`
 
 ### Beta Managed Agents Multiagent Self Params
 
@@ -1929,6 +1955,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsReadToolConfig`
 
+  - `"read" type`
+
   - `bool enabled`
 
   - `"read" name`
@@ -1937,11 +1965,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"read" type`
-
 ### Beta Managed Agents Read Tool Config Params
 
 - `BetaManagedAgentsReadToolConfigParams`
+
+  - `?Type type`
 
   - `"read" name`
 
@@ -1955,11 +1983,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ### Beta Managed Agents Session Thread Agent
 
 - `BetaManagedAgentsSessionThreadAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -1979,8 +2007,6 @@ var_dump($betaManagedAgentsAgent);
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `int version`
 
 ### Beta Managed Agents Skill Params
@@ -1989,11 +2015,11 @@ var_dump($betaManagedAgentsAgent);
 
   - `BetaManagedAgentsAnthropicSkillParams`
 
+    - `Type type`
+
     - `string skillID`
 
       Identifier of the Anthropic skill (e.g., "xlsx").
-
-    - `Type type`
 
     - `?string version`
 
@@ -2001,11 +2027,11 @@ var_dump($betaManagedAgentsAgent);
 
   - `BetaManagedAgentsCustomSkillParams`
 
+    - `Type type`
+
     - `string skillID`
 
       Tagged ID of the custom skill (e.g., "skill_01XJ5...").
-
-    - `Type type`
 
     - `?string version`
 
@@ -2015,11 +2041,11 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsURLMCPServerParams`
 
+  - `Type type`
+
   - `string name`
 
     Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
-
-  - `Type type`
 
   - `string url`
 
@@ -2053,6 +2079,8 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsWebFetchToolConfig`
 
+  - `"web_fetch" type`
+
   - `bool enabled`
 
   - `"web_fetch" name`
@@ -2060,8 +2088,6 @@ var_dump($betaManagedAgentsAgent);
   - `PermissionPolicy permissionPolicy`
 
     Permission policy for tool execution.
-
-  - `"web_fetch" type`
 
   - `?list<string> allowedDomains`
 
@@ -2072,6 +2098,8 @@ var_dump($betaManagedAgentsAgent);
 ### Beta Managed Agents Web Fetch Tool Config Params
 
 - `BetaManagedAgentsWebFetchToolConfigParams`
+
+  - `?Type type`
 
   - `"web_fetch" name`
 
@@ -2097,11 +2125,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ### Beta Managed Agents Web Search Tool Config
 
 - `BetaManagedAgentsWebSearchToolConfig`
+
+  - `"web_search" type`
 
   - `bool enabled`
 
@@ -2110,8 +2138,6 @@ var_dump($betaManagedAgentsAgent);
   - `PermissionPolicy permissionPolicy`
 
     Permission policy for tool execution.
-
-  - `"web_search" type`
 
   - `?list<string> allowedDomains`
 
@@ -2124,6 +2150,8 @@ var_dump($betaManagedAgentsAgent);
 ### Beta Managed Agents Web Search Tool Config Params
 
 - `BetaManagedAgentsWebSearchToolConfigParams`
+
+  - `?Type type`
 
   - `"web_search" name`
 
@@ -2145,8 +2173,6 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
   - `?BetaManagedAgentsUserLocation userLocation`
 
     Approximate user location for search result localization.
@@ -2154,6 +2180,8 @@ var_dump($betaManagedAgentsAgent);
 ### Beta Managed Agents Write Tool Config
 
 - `BetaManagedAgentsWriteToolConfig`
+
+  - `"write" type`
 
   - `bool enabled`
 
@@ -2163,11 +2191,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `"write" type`
-
 ### Beta Managed Agents Write Tool Config Params
 
 - `BetaManagedAgentsWriteToolConfigParams`
+
+  - `?Type type`
 
   - `"write" name`
 
@@ -2181,13 +2209,11 @@ var_dump($betaManagedAgentsAgent);
 
     Permission policy for tool execution.
 
-  - `?Type type`
-
 ## Agents › Versions
 
 ### List Agent Versions
 
-`$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsAgent>`
+`$client->beta->agents->versions->list(string agentID, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsAgent>`
 
 **GET** `/v1/agents/{agent_id}/versions`
 
@@ -2209,9 +2235,13 @@ List Agent Versions
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -2245,8 +2275,6 @@ List Agent Versions
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -2269,6 +2297,7 @@ $page = $client->beta->agents->versions->list(
   limit: 0,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);

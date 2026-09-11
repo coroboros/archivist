@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/dele
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/delete
+---
+
 # Delete a Message Batch
 
 `beta.messages.batches.delete(message_batch_id, **kwargs) -> BetaDeletedMessageBatch`
@@ -28,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -118,19 +125,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class BetaDeletedMessageBatch`
-
-  - `id: String`
-
-    ID of the Message Batch.
 
   - `type: :message_batch_deleted`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
+
+  - `id: String`
+
+    ID of the Message Batch.
 
 ## Example
 

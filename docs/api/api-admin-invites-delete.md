@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/invites/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Invite
+url: https://platform.claude.com/docs/en/api/beta/organization/invites/delete
+---
+
 # Delete Invite
 
 **DELETE** `/v1/organizations/invites/{invite_id}`
@@ -18,10 +23,6 @@ Delete a pending invite.
 
 ## Returns
 
-- `id: string`
-
-  ID of the Invite.
-
 - `type: "invite_deleted"`
 
   Deleted object type.
@@ -30,13 +31,17 @@ Delete a pending invite.
 
   default: invite_deleted
 
+- `id: string`
+
+  ID of the Invite.
+
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

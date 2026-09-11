@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/deployments/list"
 category: "api"
 generated: true
 ---
+---
+title: List Deployments
+url: https://platform.claude.com/docs/en/api/php/beta/deployments/list
+---
+
 # List Deployments
 
-`$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?BetaManagedAgentsDeploymentStatus status, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsDeployment>`
+`$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?BetaManagedAgentsDeploymentStatus status, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsDeployment>`
 
 **GET** `/v1/deployments`
 
@@ -46,9 +51,13 @@ List Deployments
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaManagedAgentsDeployment`
+
+  - `Type type`
 
   - `string id`
 
@@ -102,8 +111,6 @@ List Deployments
 
     Lifecycle status of a deployment.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -134,6 +141,7 @@ $page = $client->beta->deployments->list(
   page: 'page',
   status: BetaManagedAgentsDeploymentStatus::ACTIVE,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);

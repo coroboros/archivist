@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/connectors/list
 category: "api"
 generated: true
 ---
+---
+title: Get Connector Usage
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/connectors/list
+---
+
 # Get Connector Usage
 
 **GET** `/v1/organizations/analytics/connectors`
@@ -81,7 +86,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 ## Returns
 
-- `ConnectorUsage object`
+- `BetaConnectorUsage object`
 
   Response for GET /v1/organizations/analytics/connectors.
 
@@ -123,7 +128,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       Office Agent activity metrics for a single connector on a given day, broken out by Office product.
 
-      - `excel: ConnectorOfficeProductMetrics`
+      - `excel: BetaConnectorOfficeProductMetrics`
 
         Office Agent activity metrics for a single connector on a given day within one Office product.
 
@@ -131,15 +136,15 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
           Number of distinct Office Agent sessions in which the connector was used. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
-      - `outlook: ConnectorOfficeProductMetrics`
+      - `outlook: BetaConnectorOfficeProductMetrics`
 
         Office Agent activity metrics for a single connector on a given day within one Office product.
 
-      - `powerpoint: ConnectorOfficeProductMetrics`
+      - `powerpoint: BetaConnectorOfficeProductMetrics`
 
         Office Agent activity metrics for a single connector on a given day within one Office product.
 
-      - `word: ConnectorOfficeProductMetrics`
+      - `word: BetaConnectorOfficeProductMetrics`
 
         Office Agent activity metrics for a single connector on a given day within one Office product.
 
@@ -192,7 +197,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/connectors \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

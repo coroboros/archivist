@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials"
 category: "api"
 generated: true
 ---
+---
+title: Credentials
+url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials
+---
+
 # Credentials
 
 ## Create Credential
@@ -30,6 +35,8 @@ Create Credential
 
       Parameters for creating an MCP OAuth credential.
 
+      - `required Type Type`
+
       - `required string AccessToken`
 
         OAuth access token.
@@ -41,8 +48,6 @@ Create Credential
         URL of the MCP server this credential authenticates against.
 
         minLength: 1, maxLength: 2047
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -64,7 +69,7 @@ Create Credential
 
           OAuth refresh token.
 
-          minLength: 1, maxLength: 4096
+          minLength: 1, maxLength: 8192
 
         - `required string TokenEndpoint`
 
@@ -86,25 +91,25 @@ Create Credential
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
+            - `required Type Type`
+
             - `required string ClientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `required Type Type`
 
           - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
             Token endpoint uses POST body authentication with client credentials.
 
+            - `required Type Type`
+
             - `required string ClientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `required Type Type`
 
         - `string? Resource`
 
@@ -122,6 +127,8 @@ Create Credential
 
       Parameters for creating a static bearer token credential.
 
+      - `required Type Type`
+
       - `required string Token`
 
         Static bearer token value.
@@ -134,11 +141,11 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableCreateParams:`
 
       Parameters for creating an environment variable credential.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsCredentialNetworkingParams Networking`
 
@@ -154,11 +161,11 @@ Create Credential
 
           Substitute the secret only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-          - `required Type Type`
 
       - `required string SecretName`
 
@@ -171,8 +178,6 @@ Create Credential
         Secret value. Write-only; never returned in responses.
 
         minLength: 1, maxLength: 4096
-
-      - `required Type Type`
 
       - `BetaManagedAgentsInjectionLocationParams InjectionLocation`
 
@@ -246,6 +251,8 @@ Create Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -288,11 +295,19 @@ Create Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -312,11 +327,11 @@ Create Credential
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -370,15 +385,17 @@ Create Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -406,17 +423,15 @@ Create Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -427,8 +442,6 @@ Create Credential
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -564,6 +577,8 @@ List Credentials
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -606,11 +621,19 @@ List Credentials
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -630,11 +653,11 @@ List Credentials
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -688,15 +711,17 @@ List Credentials
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -724,17 +749,15 @@ List Credentials
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -745,8 +768,6 @@ List Credentials
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -873,6 +894,8 @@ Get Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -915,11 +938,19 @@ Get Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -939,11 +970,11 @@ Get Credential
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -997,15 +1028,17 @@ Get Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -1033,17 +1066,15 @@ Get Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -1054,8 +1085,6 @@ Get Credential
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -1156,7 +1185,7 @@ Update Credential
 
           Updated OAuth refresh token.
 
-          minLength: 1, maxLength: 4096
+          minLength: 1, maxLength: 8192
 
         - `string? Scope`
 
@@ -1236,11 +1265,11 @@ Update Credential
 
           Substitute the secret only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-          - `required Type Type`
 
       - `string? SecretValue`
 
@@ -1308,6 +1337,8 @@ Update Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1350,11 +1381,19 @@ Update Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -1374,11 +1413,11 @@ Update Credential
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -1432,15 +1471,17 @@ Update Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -1468,17 +1509,15 @@ Update Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -1489,8 +1528,6 @@ Update Credential
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -1611,6 +1648,8 @@ Delete Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1653,17 +1692,23 @@ Delete Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
 
   Confirmation of a deleted credential.
 
+  - `required Type Type`
+
   - `required string ID`
 
     Unique identifier of the deleted credential.
-
-  - `required Type Type`
 
 ### Example
 
@@ -1758,6 +1803,8 @@ Archive Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1800,11 +1847,19 @@ Archive Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -1824,11 +1879,11 @@ Archive Credential
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -1882,15 +1937,17 @@ Archive Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -1918,17 +1975,15 @@ Archive Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -1939,8 +1994,6 @@ Archive Credential
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -2061,6 +2114,8 @@ Validate Credential
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -2103,11 +2158,19 @@ Validate Credential
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsCredentialValidation:`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `required Type Type`
 
   - `required string CredentialID`
 
@@ -2176,8 +2239,6 @@ Validate Credential
     - `Invalid("invalid")`
 
     - `Unknown("unknown")`
-
-  - `required Type Type`
 
   - `required DateTimeOffset ValidatedAt`
 
@@ -2242,6 +2303,8 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `required Type Type`
+
   - `required string ID`
 
     Unique identifier for the credential.
@@ -2260,11 +2323,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       OAuth credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `required Type Type`
 
       - `DateTimeOffset? ExpiresAt`
 
@@ -2318,15 +2381,17 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       Static bearer token credential details for an MCP server.
 
+      - `required Type Type`
+
       - `required string McpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `required Type Type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `required Type Type`
 
       - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -2354,17 +2419,15 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `required Type Type`
+
           - `required IReadOnlyList<string> AllowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `required Type Type`
-
       - `required string SecretName`
 
         Name of the environment variable.
-
-      - `required Type Type`
 
   - `required DateTimeOffset CreatedAt`
 
@@ -2375,8 +2438,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -2408,17 +2469,19 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     Substitute the secret only on requests to the listed hosts.
 
+    - `required Type Type`
+
     - `required IReadOnlyList<string> AllowedHosts`
 
       Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-    - `required Type Type`
 
 ### Beta Managed Agents Credential Validation
 
 - `class BetaManagedAgentsCredentialValidation:`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `required Type Type`
 
   - `required string CredentialID`
 
@@ -2488,8 +2551,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     - `Unknown("unknown")`
 
-  - `required Type Type`
-
   - `required DateTimeOffset ValidatedAt`
 
     A timestamp in RFC 3339 format
@@ -2518,17 +2579,19 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Confirmation of a deleted credential.
 
+  - `required Type Type`
+
   - `required string ID`
 
     Unique identifier of the deleted credential.
-
-  - `required Type Type`
 
 ### Beta Managed Agents Environment Variable Auth Response
 
 - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
   Environment variable credential details. The secret value is never returned.
+
+  - `required Type Type`
 
   - `required BetaManagedAgentsInjectionLocationResponse InjectionLocation`
 
@@ -2556,23 +2619,23 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       The secret is substituted only on requests to the listed hosts.
 
+      - `required Type Type`
+
       - `required IReadOnlyList<string> AllowedHosts`
 
         Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-      - `required Type Type`
-
   - `required string SecretName`
 
     Name of the environment variable.
-
-  - `required Type Type`
 
 ### Beta Managed Agents Environment Variable Create Params
 
 - `class BetaManagedAgentsEnvironmentVariableCreateParams:`
 
   Parameters for creating an environment variable credential.
+
+  - `required Type Type`
 
   - `required BetaManagedAgentsCredentialNetworkingParams Networking`
 
@@ -2588,11 +2651,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `required Type Type`
+
       - `required IReadOnlyList<string> AllowedHosts`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `required Type Type`
 
   - `required string SecretName`
 
@@ -2605,8 +2668,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
     Secret value. Write-only; never returned in responses.
 
     minLength: 1, maxLength: 4096
-
-  - `required Type Type`
 
   - `BetaManagedAgentsInjectionLocationParams InjectionLocation`
 
@@ -2654,11 +2715,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `required Type Type`
+
       - `required IReadOnlyList<string> AllowedHosts`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `required Type Type`
 
   - `string? SecretValue`
 
@@ -2714,11 +2775,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Substitute the secret only on requests to the listed hosts.
 
+  - `required Type Type`
+
   - `required IReadOnlyList<string> AllowedHosts`
 
     Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-  - `required Type Type`
 
 ### Beta Managed Agents Limited Credential Networking Response
 
@@ -2726,11 +2787,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   The secret is substituted only on requests to the listed hosts.
 
+  - `required Type Type`
+
   - `required IReadOnlyList<string> AllowedHosts`
 
     Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
-
-  - `required Type Type`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -2738,11 +2799,11 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   OAuth credential details for an MCP server.
 
+  - `required Type Type`
+
   - `required string McpServerUrl`
 
     URL of the MCP server this credential authenticates against.
-
-  - `required Type Type`
 
   - `DateTimeOffset? ExpiresAt`
 
@@ -2798,6 +2859,8 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Parameters for creating an MCP OAuth credential.
 
+  - `required Type Type`
+
   - `required string AccessToken`
 
     OAuth access token.
@@ -2809,8 +2872,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `required Type Type`
 
   - `DateTimeOffset? ExpiresAt`
 
@@ -2832,7 +2893,7 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `required string TokenEndpoint`
 
@@ -2854,25 +2915,25 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
+        - `required Type Type`
+
         - `required string ClientSecret`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `required Type Type`
 
       - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
         Token endpoint uses POST body authentication with client credentials.
 
+        - `required Type Type`
+
         - `required string ClientSecret`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `required Type Type`
 
     - `string? Resource`
 
@@ -2902,7 +2963,7 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `required string TokenEndpoint`
 
@@ -2924,25 +2985,25 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
+      - `required Type Type`
+
       - `required string ClientSecret`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `required Type Type`
 
     - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
       Token endpoint uses POST body authentication with client credentials.
 
+      - `required Type Type`
+
       - `required string ClientSecret`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `required Type Type`
 
   - `string? Resource`
 
@@ -3010,7 +3071,7 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     Updated OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `string? Scope`
 
@@ -3074,7 +3135,7 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
       Updated OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `string? Scope`
 
@@ -3212,17 +3273,19 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Static bearer token credential details for an MCP server.
 
+  - `required Type Type`
+
   - `required string McpServerUrl`
 
     URL of the MCP server this credential authenticates against.
-
-  - `required Type Type`
 
 ### Beta Managed Agents Static Bearer Create Params
 
 - `class BetaManagedAgentsStaticBearerCreateParams:`
 
   Parameters for creating a static bearer token credential.
+
+  - `required Type Type`
 
   - `required string Token`
 
@@ -3235,8 +3298,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `required Type Type`
 
 ### Beta Managed Agents Static Bearer Update Params
 
@@ -3258,13 +3319,13 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
+  - `required Type Type`
+
   - `required string ClientSecret`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `required Type Type`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
@@ -3310,13 +3371,13 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   Token endpoint uses POST body authentication with client credentials.
 
+  - `required Type Type`
+
   - `required string ClientSecret`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `required Type Type`
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/go/beta/webhooks
+---
+
 # Webhooks
 
 ## Unwrap
@@ -73,13 +78,13 @@ func main() {
 
 - `type BetaWebhookAgentArchivedEventData struct{…}`
 
+  - `Type AgentArchived`
+
   - `ID string`
 
     ID of the agent that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type AgentArchived`
 
   - `WorkspaceID string`
 
@@ -87,13 +92,13 @@ func main() {
 
 - `type BetaWebhookAgentCreatedEventData struct{…}`
 
+  - `Type AgentCreated`
+
   - `ID string`
 
     ID of the agent that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type AgentCreated`
 
   - `WorkspaceID string`
 
@@ -101,13 +106,13 @@ func main() {
 
 - `type BetaWebhookAgentDeletedEventData struct{…}`
 
+  - `Type AgentDeleted`
+
   - `ID string`
 
     ID of the agent that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type AgentDeleted`
 
   - `WorkspaceID string`
 
@@ -115,13 +120,13 @@ func main() {
 
 - `type BetaWebhookAgentUpdatedEventData struct{…}`
 
+  - `Type AgentUpdated`
+
   - `ID string`
 
     ID of the agent that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type AgentUpdated`
 
   - `WorkspaceID string`
 
@@ -129,13 +134,13 @@ func main() {
 
 - `type BetaWebhookDeploymentArchivedEventData struct{…}`
 
+  - `Type DeploymentArchived`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentArchived`
 
   - `WorkspaceID string`
 
@@ -143,13 +148,13 @@ func main() {
 
 - `type BetaWebhookDeploymentCreatedEventData struct{…}`
 
+  - `Type DeploymentCreated`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentCreated`
 
   - `WorkspaceID string`
 
@@ -157,13 +162,13 @@ func main() {
 
 - `type BetaWebhookDeploymentDeletedEventData struct{…}`
 
+  - `Type DeploymentDeleted`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentDeleted`
 
   - `WorkspaceID string`
 
@@ -171,13 +176,13 @@ func main() {
 
 - `type BetaWebhookDeploymentPausedEventData struct{…}`
 
+  - `Type DeploymentPaused`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentPaused`
 
   - `WorkspaceID string`
 
@@ -185,13 +190,13 @@ func main() {
 
 - `type BetaWebhookDeploymentRunFailedEventData struct{…}`
 
+  - `Type DeploymentRunFailed`
+
   - `ID string`
 
     ID of the deployment run that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentRunFailed`
 
   - `WorkspaceID string`
 
@@ -199,13 +204,13 @@ func main() {
 
 - `type BetaWebhookDeploymentRunStartedEventData struct{…}`
 
+  - `Type DeploymentRunStarted`
+
   - `ID string`
 
     ID of the deployment run that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentRunStarted`
 
   - `WorkspaceID string`
 
@@ -213,13 +218,13 @@ func main() {
 
 - `type BetaWebhookDeploymentRunSucceededEventData struct{…}`
 
+  - `Type DeploymentRunSucceeded`
+
   - `ID string`
 
     ID of the deployment run that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentRunSucceeded`
 
   - `WorkspaceID string`
 
@@ -227,13 +232,13 @@ func main() {
 
 - `type BetaWebhookDeploymentUnpausedEventData struct{…}`
 
+  - `Type DeploymentUnpaused`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentUnpaused`
 
   - `WorkspaceID string`
 
@@ -241,13 +246,13 @@ func main() {
 
 - `type BetaWebhookDeploymentUpdatedEventData struct{…}`
 
+  - `Type DeploymentUpdated`
+
   - `ID string`
 
     ID of the deployment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type DeploymentUpdated`
 
   - `WorkspaceID string`
 
@@ -255,13 +260,13 @@ func main() {
 
 - `type BetaWebhookEnvironmentArchivedEventData struct{…}`
 
+  - `Type EnvironmentArchived`
+
   - `ID string`
 
     ID of the environment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type EnvironmentArchived`
 
   - `WorkspaceID string`
 
@@ -269,13 +274,13 @@ func main() {
 
 - `type BetaWebhookEnvironmentCreatedEventData struct{…}`
 
+  - `Type EnvironmentCreated`
+
   - `ID string`
 
     ID of the environment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type EnvironmentCreated`
 
   - `WorkspaceID string`
 
@@ -283,13 +288,13 @@ func main() {
 
 - `type BetaWebhookEnvironmentDeletedEventData struct{…}`
 
+  - `Type EnvironmentDeleted`
+
   - `ID string`
 
     ID of the environment that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type EnvironmentDeleted`
 
   - `WorkspaceID string`
 
@@ -297,19 +302,23 @@ func main() {
 
 - `type BetaWebhookEnvironmentUpdatedEventData struct{…}`
 
+  - `Type EnvironmentUpdated`
+
   - `ID string`
 
     ID of the environment that triggered the event.
 
   - `OrganizationID string`
 
-  - `Type EnvironmentUpdated`
-
   - `WorkspaceID string`
 
 ### Beta Webhook Event
 
 - `type UnwrapWebhookEvent struct{…}`
+
+  - `Type Event`
+
+    Object type. Always `event` for webhook payloads.
 
   - `ID string`
 
@@ -325,138 +334,140 @@ func main() {
 
     - `type BetaWebhookSessionCreatedEventData struct{…}`
 
+      - `Type SessionCreated`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionPendingEventData struct{…}`
 
+      - `Type SessionPending`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionPending`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionRunningEventData struct{…}`
 
+      - `Type SessionRunning`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionRunning`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionIdledEventData struct{…}`
 
+      - `Type SessionIdled`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionIdled`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionRequiresActionEventData struct{…}`
 
+      - `Type SessionRequiresAction`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionRequiresAction`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionArchivedEventData struct{…}`
 
+      - `Type SessionArchived`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionDeletedEventData struct{…}`
 
+      - `Type SessionDeleted`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionDeleted`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionStatusRescheduledEventData struct{…}`
 
+      - `Type SessionStatusRescheduled`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionStatusRescheduled`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionStatusRunStartedEventData struct{…}`
 
+      - `Type SessionStatusRunStarted`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionStatusRunStarted`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionStatusIdledEventData struct{…}`
 
+      - `Type SessionStatusIdled`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionStatusIdled`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionStatusTerminatedEventData struct{…}`
 
+      - `Type SessionStatusTerminated`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionStatusTerminated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionThreadCreatedEventData struct{…}`
 
+      - `Type SessionThreadCreated`
+
       - `ID string`
 
         ID of the session that triggered the event.
@@ -466,13 +477,13 @@ func main() {
       - `SessionThreadID string`
 
         ID of the session thread this event refers to.
-
-      - `Type SessionThreadCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionThreadIdledEventData struct{…}`
 
+      - `Type SessionThreadIdled`
+
       - `ID string`
 
         ID of the session that triggered the event.
@@ -482,13 +493,13 @@ func main() {
       - `SessionThreadID string`
 
         ID of the session thread this event refers to.
-
-      - `Type SessionThreadIdled`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionThreadTerminatedEventData struct{…}`
 
+      - `Type SessionThreadTerminated`
+
       - `ID string`
 
         ID of the session that triggered the event.
@@ -499,11 +510,11 @@ func main() {
 
         ID of the session thread this event refers to.
 
-      - `Type SessionThreadTerminated`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}`
+
+      - `Type SessionOutcomeEvaluationEnded`
 
       - `ID string`
 
@@ -511,55 +522,53 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type SessionOutcomeEvaluationEnded`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookVaultCreatedEventData struct{…}`
+
+      - `Type VaultCreated`
 
       - `ID string`
 
         ID of the vault that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookVaultArchivedEventData struct{…}`
 
+      - `Type VaultArchived`
+
       - `ID string`
 
         ID of the vault that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookVaultDeletedEventData struct{…}`
 
+      - `Type VaultDeleted`
+
       - `ID string`
 
         ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type VaultDeleted`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookVaultCredentialCreatedEventData struct{…}`
+
+      - `Type VaultCredentialCreated`
 
       - `ID string`
 
         ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultCredentialCreated`
 
       - `VaultID string`
 
@@ -569,13 +578,13 @@ func main() {
 
     - `type BetaWebhookVaultCredentialArchivedEventData struct{…}`
 
+      - `Type VaultCredentialArchived`
+
       - `ID string`
 
         ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultCredentialArchived`
 
       - `VaultID string`
 
@@ -585,13 +594,13 @@ func main() {
 
     - `type BetaWebhookVaultCredentialDeletedEventData struct{…}`
 
+      - `Type VaultCredentialDeleted`
+
       - `ID string`
 
         ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultCredentialDeleted`
 
       - `VaultID string`
 
@@ -601,13 +610,13 @@ func main() {
 
     - `type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}`
 
+      - `Type VaultCredentialRefreshFailed`
+
       - `ID string`
 
         ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type VaultCredentialRefreshFailed`
 
       - `VaultID string`
 
@@ -617,65 +626,67 @@ func main() {
 
     - `type BetaWebhookSessionUpdatedEventData struct{…}`
 
+      - `Type SessionUpdated`
+
       - `ID string`
 
         ID of the session that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type SessionUpdated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookAgentCreatedEventData struct{…}`
 
+      - `Type AgentCreated`
+
       - `ID string`
 
         ID of the agent that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type AgentCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookAgentArchivedEventData struct{…}`
 
+      - `Type AgentArchived`
+
       - `ID string`
 
         ID of the agent that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type AgentArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookAgentDeletedEventData struct{…}`
 
+      - `Type AgentDeleted`
+
       - `ID string`
 
         ID of the agent that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type AgentDeleted`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentPausedEventData struct{…}`
 
+      - `Type DeploymentPaused`
+
       - `ID string`
 
         ID of the deployment that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type DeploymentPaused`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentRunFailedEventData struct{…}`
+
+      - `Type DeploymentRunFailed`
 
       - `ID string`
 
@@ -683,47 +694,47 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type DeploymentRunFailed`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentCreatedEventData struct{…}`
+
+      - `Type DeploymentCreated`
 
       - `ID string`
 
         ID of the deployment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type DeploymentCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentUpdatedEventData struct{…}`
 
+      - `Type DeploymentUpdated`
+
       - `ID string`
 
         ID of the deployment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type DeploymentUpdated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentUnpausedEventData struct{…}`
 
+      - `Type DeploymentUnpaused`
+
       - `ID string`
 
         ID of the deployment that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type DeploymentUnpaused`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookAgentUpdatedEventData struct{…}`
+
+      - `Type AgentUpdated`
 
       - `ID string`
 
@@ -731,35 +742,35 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type AgentUpdated`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentArchivedEventData struct{…}`
+
+      - `Type DeploymentArchived`
 
       - `ID string`
 
         ID of the deployment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type DeploymentArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentRunStartedEventData struct{…}`
 
+      - `Type DeploymentRunStarted`
+
       - `ID string`
 
         ID of the deployment run that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type DeploymentRunStarted`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentDeletedEventData struct{…}`
+
+      - `Type DeploymentDeleted`
 
       - `ID string`
 
@@ -767,11 +778,11 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type DeploymentDeleted`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookDeploymentRunSucceededEventData struct{…}`
+
+      - `Type DeploymentRunSucceeded`
 
       - `ID string`
 
@@ -779,95 +790,95 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type DeploymentRunSucceeded`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookEnvironmentCreatedEventData struct{…}`
+
+      - `Type EnvironmentCreated`
 
       - `ID string`
 
         ID of the environment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type EnvironmentCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookEnvironmentUpdatedEventData struct{…}`
 
+      - `Type EnvironmentUpdated`
+
       - `ID string`
 
         ID of the environment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type EnvironmentUpdated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookEnvironmentArchivedEventData struct{…}`
 
+      - `Type EnvironmentArchived`
+
       - `ID string`
 
         ID of the environment that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type EnvironmentArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookEnvironmentDeletedEventData struct{…}`
 
+      - `Type EnvironmentDeleted`
+
       - `ID string`
 
         ID of the environment that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type EnvironmentDeleted`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookMemoryStoreCreatedEventData struct{…}`
+
+      - `Type MemoryStoreCreated`
 
       - `ID string`
 
         ID of the memory store that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type MemoryStoreCreated`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookMemoryStoreArchivedEventData struct{…}`
 
+      - `Type MemoryStoreArchived`
+
       - `ID string`
 
         ID of the memory store that triggered the event.
 
       - `OrganizationID string`
-
-      - `Type MemoryStoreArchived`
 
       - `WorkspaceID string`
 
     - `type BetaWebhookMemoryStoreDeletedEventData struct{…}`
 
+      - `Type MemoryStoreDeleted`
+
       - `ID string`
 
         ID of the memory store that triggered the event.
 
       - `OrganizationID string`
 
-      - `Type MemoryStoreDeleted`
-
       - `WorkspaceID string`
 
     - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+      - `Type SessionBudgetReached`
 
       - `ID string`
 
@@ -875,13 +886,7 @@ func main() {
 
       - `OrganizationID string`
 
-      - `Type SessionBudgetReached`
-
       - `WorkspaceID string`
-
-  - `Type Event`
-
-    Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
@@ -889,138 +894,140 @@ func main() {
 
   - `type BetaWebhookSessionCreatedEventData struct{…}`
 
+    - `Type SessionCreated`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionPendingEventData struct{…}`
 
+    - `Type SessionPending`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionPending`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionRunningEventData struct{…}`
 
+    - `Type SessionRunning`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionRunning`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionIdledEventData struct{…}`
 
+    - `Type SessionIdled`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionIdled`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionRequiresActionEventData struct{…}`
 
+    - `Type SessionRequiresAction`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionRequiresAction`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionArchivedEventData struct{…}`
 
+    - `Type SessionArchived`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionDeletedEventData struct{…}`
 
+    - `Type SessionDeleted`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionDeleted`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionStatusRescheduledEventData struct{…}`
 
+    - `Type SessionStatusRescheduled`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionStatusRescheduled`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionStatusRunStartedEventData struct{…}`
 
+    - `Type SessionStatusRunStarted`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionStatusRunStarted`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionStatusIdledEventData struct{…}`
 
+    - `Type SessionStatusIdled`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionStatusIdled`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionStatusTerminatedEventData struct{…}`
 
+    - `Type SessionStatusTerminated`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionStatusTerminated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionThreadCreatedEventData struct{…}`
 
+    - `Type SessionThreadCreated`
+
     - `ID string`
 
       ID of the session that triggered the event.
@@ -1030,13 +1037,13 @@ func main() {
     - `SessionThreadID string`
 
       ID of the session thread this event refers to.
-
-    - `Type SessionThreadCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionThreadIdledEventData struct{…}`
 
+    - `Type SessionThreadIdled`
+
     - `ID string`
 
       ID of the session that triggered the event.
@@ -1046,13 +1053,13 @@ func main() {
     - `SessionThreadID string`
 
       ID of the session thread this event refers to.
-
-    - `Type SessionThreadIdled`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionThreadTerminatedEventData struct{…}`
 
+    - `Type SessionThreadTerminated`
+
     - `ID string`
 
       ID of the session that triggered the event.
@@ -1063,11 +1070,11 @@ func main() {
 
       ID of the session thread this event refers to.
 
-    - `Type SessionThreadTerminated`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}`
+
+    - `Type SessionOutcomeEvaluationEnded`
 
     - `ID string`
 
@@ -1075,55 +1082,53 @@ func main() {
 
     - `OrganizationID string`
 
-    - `Type SessionOutcomeEvaluationEnded`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookVaultCreatedEventData struct{…}`
+
+    - `Type VaultCreated`
 
     - `ID string`
 
       ID of the vault that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookVaultArchivedEventData struct{…}`
 
+    - `Type VaultArchived`
+
     - `ID string`
 
       ID of the vault that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookVaultDeletedEventData struct{…}`
 
+    - `Type VaultDeleted`
+
     - `ID string`
 
       ID of the vault that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type VaultDeleted`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookVaultCredentialCreatedEventData struct{…}`
+
+    - `Type VaultCredentialCreated`
 
     - `ID string`
 
       ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultCredentialCreated`
 
     - `VaultID string`
 
@@ -1133,13 +1138,13 @@ func main() {
 
   - `type BetaWebhookVaultCredentialArchivedEventData struct{…}`
 
+    - `Type VaultCredentialArchived`
+
     - `ID string`
 
       ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultCredentialArchived`
 
     - `VaultID string`
 
@@ -1149,13 +1154,13 @@ func main() {
 
   - `type BetaWebhookVaultCredentialDeletedEventData struct{…}`
 
+    - `Type VaultCredentialDeleted`
+
     - `ID string`
 
       ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultCredentialDeleted`
 
     - `VaultID string`
 
@@ -1165,13 +1170,13 @@ func main() {
 
   - `type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}`
 
+    - `Type VaultCredentialRefreshFailed`
+
     - `ID string`
 
       ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type VaultCredentialRefreshFailed`
 
     - `VaultID string`
 
@@ -1181,65 +1186,67 @@ func main() {
 
   - `type BetaWebhookSessionUpdatedEventData struct{…}`
 
+    - `Type SessionUpdated`
+
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionUpdated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookAgentCreatedEventData struct{…}`
 
+    - `Type AgentCreated`
+
     - `ID string`
 
       ID of the agent that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type AgentCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookAgentArchivedEventData struct{…}`
 
+    - `Type AgentArchived`
+
     - `ID string`
 
       ID of the agent that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type AgentArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookAgentDeletedEventData struct{…}`
 
+    - `Type AgentDeleted`
+
     - `ID string`
 
       ID of the agent that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type AgentDeleted`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentPausedEventData struct{…}`
 
+    - `Type DeploymentPaused`
+
     - `ID string`
 
       ID of the deployment that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type DeploymentPaused`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentRunFailedEventData struct{…}`
+
+    - `Type DeploymentRunFailed`
 
     - `ID string`
 
@@ -1247,47 +1254,47 @@ func main() {
 
     - `OrganizationID string`
 
-    - `Type DeploymentRunFailed`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentCreatedEventData struct{…}`
+
+    - `Type DeploymentCreated`
 
     - `ID string`
 
       ID of the deployment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type DeploymentCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentUpdatedEventData struct{…}`
 
+    - `Type DeploymentUpdated`
+
     - `ID string`
 
       ID of the deployment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type DeploymentUpdated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentUnpausedEventData struct{…}`
 
+    - `Type DeploymentUnpaused`
+
     - `ID string`
 
       ID of the deployment that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type DeploymentUnpaused`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookAgentUpdatedEventData struct{…}`
+
+    - `Type AgentUpdated`
 
     - `ID string`
 
@@ -1295,35 +1302,35 @@ func main() {
 
     - `OrganizationID string`
 
-    - `Type AgentUpdated`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentArchivedEventData struct{…}`
+
+    - `Type DeploymentArchived`
 
     - `ID string`
 
       ID of the deployment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type DeploymentArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentRunStartedEventData struct{…}`
 
+    - `Type DeploymentRunStarted`
+
     - `ID string`
 
       ID of the deployment run that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type DeploymentRunStarted`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentDeletedEventData struct{…}`
+
+    - `Type DeploymentDeleted`
 
     - `ID string`
 
@@ -1331,11 +1338,11 @@ func main() {
 
     - `OrganizationID string`
 
-    - `Type DeploymentDeleted`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookDeploymentRunSucceededEventData struct{…}`
+
+    - `Type DeploymentRunSucceeded`
 
     - `ID string`
 
@@ -1343,103 +1350,101 @@ func main() {
 
     - `OrganizationID string`
 
-    - `Type DeploymentRunSucceeded`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookEnvironmentCreatedEventData struct{…}`
+
+    - `Type EnvironmentCreated`
 
     - `ID string`
 
       ID of the environment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type EnvironmentCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookEnvironmentUpdatedEventData struct{…}`
 
+    - `Type EnvironmentUpdated`
+
     - `ID string`
 
       ID of the environment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type EnvironmentUpdated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookEnvironmentArchivedEventData struct{…}`
 
+    - `Type EnvironmentArchived`
+
     - `ID string`
 
       ID of the environment that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type EnvironmentArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookEnvironmentDeletedEventData struct{…}`
 
+    - `Type EnvironmentDeleted`
+
     - `ID string`
 
       ID of the environment that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type EnvironmentDeleted`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookMemoryStoreCreatedEventData struct{…}`
+
+    - `Type MemoryStoreCreated`
 
     - `ID string`
 
       ID of the memory store that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type MemoryStoreCreated`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookMemoryStoreArchivedEventData struct{…}`
 
+    - `Type MemoryStoreArchived`
+
     - `ID string`
 
       ID of the memory store that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type MemoryStoreArchived`
 
     - `WorkspaceID string`
 
   - `type BetaWebhookMemoryStoreDeletedEventData struct{…}`
 
+    - `Type MemoryStoreDeleted`
+
     - `ID string`
 
       ID of the memory store that triggered the event.
 
     - `OrganizationID string`
 
-    - `Type MemoryStoreDeleted`
-
     - `WorkspaceID string`
 
   - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+    - `Type SessionBudgetReached`
 
     - `ID string`
 
       ID of the session that triggered the event.
 
     - `OrganizationID string`
-
-    - `Type SessionBudgetReached`
 
     - `WorkspaceID string`
 
@@ -1447,13 +1452,13 @@ func main() {
 
 - `type BetaWebhookMemoryStoreArchivedEventData struct{…}`
 
+  - `Type MemoryStoreArchived`
+
   - `ID string`
 
     ID of the memory store that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type MemoryStoreArchived`
 
   - `WorkspaceID string`
 
@@ -1461,13 +1466,13 @@ func main() {
 
 - `type BetaWebhookMemoryStoreCreatedEventData struct{…}`
 
+  - `Type MemoryStoreCreated`
+
   - `ID string`
 
     ID of the memory store that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type MemoryStoreCreated`
 
   - `WorkspaceID string`
 
@@ -1475,13 +1480,13 @@ func main() {
 
 - `type BetaWebhookMemoryStoreDeletedEventData struct{…}`
 
+  - `Type MemoryStoreDeleted`
+
   - `ID string`
 
     ID of the memory store that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type MemoryStoreDeleted`
 
   - `WorkspaceID string`
 
@@ -1489,13 +1494,13 @@ func main() {
 
 - `type BetaWebhookSessionArchivedEventData struct{…}`
 
+  - `Type SessionArchived`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionArchived`
 
   - `WorkspaceID string`
 
@@ -1503,13 +1508,13 @@ func main() {
 
 - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
 
+  - `Type SessionBudgetReached`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionBudgetReached`
 
   - `WorkspaceID string`
 
@@ -1517,13 +1522,13 @@ func main() {
 
 - `type BetaWebhookSessionCreatedEventData struct{…}`
 
+  - `Type SessionCreated`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionCreated`
 
   - `WorkspaceID string`
 
@@ -1531,13 +1536,13 @@ func main() {
 
 - `type BetaWebhookSessionDeletedEventData struct{…}`
 
+  - `Type SessionDeleted`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionDeleted`
 
   - `WorkspaceID string`
 
@@ -1545,13 +1550,13 @@ func main() {
 
 - `type BetaWebhookSessionIdledEventData struct{…}`
 
+  - `Type SessionIdled`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionIdled`
 
   - `WorkspaceID string`
 
@@ -1559,13 +1564,13 @@ func main() {
 
 - `type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}`
 
+  - `Type SessionOutcomeEvaluationEnded`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionOutcomeEvaluationEnded`
 
   - `WorkspaceID string`
 
@@ -1573,13 +1578,13 @@ func main() {
 
 - `type BetaWebhookSessionPendingEventData struct{…}`
 
+  - `Type SessionPending`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionPending`
 
   - `WorkspaceID string`
 
@@ -1587,13 +1592,13 @@ func main() {
 
 - `type BetaWebhookSessionRequiresActionEventData struct{…}`
 
+  - `Type SessionRequiresAction`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionRequiresAction`
 
   - `WorkspaceID string`
 
@@ -1601,13 +1606,13 @@ func main() {
 
 - `type BetaWebhookSessionRunningEventData struct{…}`
 
+  - `Type SessionRunning`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionRunning`
 
   - `WorkspaceID string`
 
@@ -1615,13 +1620,13 @@ func main() {
 
 - `type BetaWebhookSessionStatusIdledEventData struct{…}`
 
+  - `Type SessionStatusIdled`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionStatusIdled`
 
   - `WorkspaceID string`
 
@@ -1629,13 +1634,13 @@ func main() {
 
 - `type BetaWebhookSessionStatusRescheduledEventData struct{…}`
 
+  - `Type SessionStatusRescheduled`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionStatusRescheduled`
 
   - `WorkspaceID string`
 
@@ -1643,13 +1648,13 @@ func main() {
 
 - `type BetaWebhookSessionStatusRunStartedEventData struct{…}`
 
+  - `Type SessionStatusRunStarted`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionStatusRunStarted`
 
   - `WorkspaceID string`
 
@@ -1657,13 +1662,13 @@ func main() {
 
 - `type BetaWebhookSessionStatusTerminatedEventData struct{…}`
 
+  - `Type SessionStatusTerminated`
+
   - `ID string`
 
     ID of the session that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type SessionStatusTerminated`
 
   - `WorkspaceID string`
 
@@ -1671,6 +1676,8 @@ func main() {
 
 - `type BetaWebhookSessionThreadCreatedEventData struct{…}`
 
+  - `Type SessionThreadCreated`
+
   - `ID string`
 
     ID of the session that triggered the event.
@@ -1680,8 +1687,6 @@ func main() {
   - `SessionThreadID string`
 
     ID of the session thread this event refers to.
-
-  - `Type SessionThreadCreated`
 
   - `WorkspaceID string`
 
@@ -1689,6 +1694,8 @@ func main() {
 
 - `type BetaWebhookSessionThreadIdledEventData struct{…}`
 
+  - `Type SessionThreadIdled`
+
   - `ID string`
 
     ID of the session that triggered the event.
@@ -1698,8 +1705,6 @@ func main() {
   - `SessionThreadID string`
 
     ID of the session thread this event refers to.
-
-  - `Type SessionThreadIdled`
 
   - `WorkspaceID string`
 
@@ -1707,6 +1712,8 @@ func main() {
 
 - `type BetaWebhookSessionThreadTerminatedEventData struct{…}`
 
+  - `Type SessionThreadTerminated`
+
   - `ID string`
 
     ID of the session that triggered the event.
@@ -1717,13 +1724,13 @@ func main() {
 
     ID of the session thread this event refers to.
 
-  - `Type SessionThreadTerminated`
-
   - `WorkspaceID string`
 
 ### Beta Webhook Session Updated Event Data
 
 - `type BetaWebhookSessionUpdatedEventData struct{…}`
+
+  - `Type SessionUpdated`
 
   - `ID string`
 
@@ -1731,21 +1738,19 @@ func main() {
 
   - `OrganizationID string`
 
-  - `Type SessionUpdated`
-
   - `WorkspaceID string`
 
 ### Beta Webhook Vault Archived Event Data
 
 - `type BetaWebhookVaultArchivedEventData struct{…}`
 
+  - `Type VaultArchived`
+
   - `ID string`
 
     ID of the vault that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultArchived`
 
   - `WorkspaceID string`
 
@@ -1753,13 +1758,13 @@ func main() {
 
 - `type BetaWebhookVaultCreatedEventData struct{…}`
 
+  - `Type VaultCreated`
+
   - `ID string`
 
     ID of the vault that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultCreated`
 
   - `WorkspaceID string`
 
@@ -1767,13 +1772,13 @@ func main() {
 
 - `type BetaWebhookVaultCredentialArchivedEventData struct{…}`
 
+  - `Type VaultCredentialArchived`
+
   - `ID string`
 
     ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultCredentialArchived`
 
   - `VaultID string`
 
@@ -1785,13 +1790,13 @@ func main() {
 
 - `type BetaWebhookVaultCredentialCreatedEventData struct{…}`
 
+  - `Type VaultCredentialCreated`
+
   - `ID string`
 
     ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultCredentialCreated`
 
   - `VaultID string`
 
@@ -1803,13 +1808,13 @@ func main() {
 
 - `type BetaWebhookVaultCredentialDeletedEventData struct{…}`
 
+  - `Type VaultCredentialDeleted`
+
   - `ID string`
 
     ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultCredentialDeleted`
 
   - `VaultID string`
 
@@ -1821,13 +1826,13 @@ func main() {
 
 - `type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}`
 
+  - `Type VaultCredentialRefreshFailed`
+
   - `ID string`
 
     ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultCredentialRefreshFailed`
 
   - `VaultID string`
 
@@ -1839,12 +1844,12 @@ func main() {
 
 - `type BetaWebhookVaultDeletedEventData struct{…}`
 
+  - `Type VaultDeleted`
+
   - `ID string`
 
     ID of the vault that triggered the event.
 
   - `OrganizationID string`
-
-  - `Type VaultDeleted`
 
   - `WorkspaceID string`

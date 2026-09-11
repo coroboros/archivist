@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/create
 category: "api"
 generated: true
 ---
+---
+title: Create Workspace Member
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/add
+---
+
 # Create Workspace Member
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/members`
@@ -22,7 +27,7 @@ Create Workspace Member
 
   ID of the User.
 
-- `workspace_role: "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
+- `workspace_role: BetaNoBillingWorkspaceRole`
 
   Role of the new Workspace Member. Cannot be `workspace_billing`.
 
@@ -36,7 +41,7 @@ Create Workspace Member
 
 ## Returns
 
-- `WorkspaceMember object`
+- `BetaWorkspaceMember object`
 
   - `type: "workspace_member"`
 
@@ -54,7 +59,7 @@ Create Workspace Member
 
     ID of the Workspace.
 
-  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+  - `workspace_role: BetaWorkspaceRole`
 
     Role of the Workspace Member.
 
@@ -74,7 +79,7 @@ Create Workspace Member
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
           "workspace_role": "workspace_admin"
@@ -88,6 +93,6 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
   "type": "workspace_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
+  "workspace_role": "workspace_admin"
 }
 ```

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/cr
 category: "api"
 generated: true
 ---
+---
+title: Create Credential
+url: https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/create
+---
+
 # Create Credential
 
 `BetaManagedAgentsCredential beta().vaults().credentials().create(params, requestOptions = RequestOptions.none())`
@@ -68,6 +73,8 @@ Create Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -110,6 +117,8 @@ Create Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Auth auth`
 
     Authentication details for creating a credential.
@@ -117,6 +126,8 @@ Create Credential
     - `class BetaManagedAgentsMcpOAuthCreateParams:`
 
       Parameters for creating an MCP OAuth credential.
+
+      - `Type type`
 
       - `String accessToken`
 
@@ -129,8 +140,6 @@ Create Credential
         URL of the MCP server this credential authenticates against.
 
         minLength: 1, maxLength: 2047
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -152,7 +161,7 @@ Create Credential
 
           OAuth refresh token.
 
-          minLength: 1, maxLength: 4096
+          minLength: 1, maxLength: 8192
 
         - `String tokenEndpoint`
 
@@ -174,25 +183,25 @@ Create Credential
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
+            - `Type type`
+
             - `String clientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `Type type`
 
           - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
             Token endpoint uses POST body authentication with client credentials.
 
+            - `Type type`
+
             - `String clientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `Type type`
 
         - `Optional<String> resource`
 
@@ -210,6 +219,8 @@ Create Credential
 
       Parameters for creating a static bearer token credential.
 
+      - `Type type`
+
       - `String token`
 
         Static bearer token value.
@@ -222,11 +233,11 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableCreateParams:`
 
       Parameters for creating an environment variable credential.
+
+      - `Type type`
 
       - `BetaManagedAgentsCredentialNetworkingParams networking`
 
@@ -242,11 +253,11 @@ Create Credential
 
           Substitute the secret only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-          - `Type type`
 
       - `String secretName`
 
@@ -259,8 +270,6 @@ Create Credential
         Secret value. Write-only; never returned in responses.
 
         minLength: 1, maxLength: 4096
-
-      - `Type type`
 
       - `Optional<BetaManagedAgentsInjectionLocationParams> injectionLocation`
 
@@ -290,6 +299,8 @@ Create Credential
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for the credential.
@@ -308,11 +319,11 @@ Create Credential
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -366,15 +377,17 @@ Create Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -402,17 +415,15 @@ Create Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -423,8 +434,6 @@ Create Credential
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 

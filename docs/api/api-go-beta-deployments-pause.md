@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/deployments/pause"
 category: "api"
 generated: true
 ---
+---
+title: Pause Deployment
+url: https://platform.claude.com/docs/en/api/go/beta/deployments/pause
+---
+
 # Pause Deployment
 
 `client.Beta.Deployments.Pause(ctx, deploymentID, body) (*BetaManagedAgentsDeployment, error)`
@@ -72,6 +77,8 @@ Pause Deployment
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -114,11 +121,19 @@ Pause Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `type BetaManagedAgentsDeployment struct{…}`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type BetaManagedAgentsDeploymentType`
 
   - `ID string`
 
@@ -128,9 +143,9 @@ Pause Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `ID string`
-
     - `Type BetaManagedAgentsAgentReferenceType`
+
+    - `ID string`
 
     - `Version int64`
 
@@ -164,6 +179,8 @@ Pause Deployment
 
       A user message sent to the session.
 
+      - `Type BetaManagedAgentsDeploymentUserMessageEventType`
+
       - `Content []BetaManagedAgentsDeploymentUserMessageEventContentUnion`
 
         Array of content blocks for the user message.
@@ -172,17 +189,19 @@ Pause Deployment
 
           Regular text content.
 
+          - `Type BetaManagedAgentsTextBlockType`
+
           - `Text string`
 
             The text content.
 
             minLength: 1
 
-          - `Type BetaManagedAgentsTextBlockType`
-
         - `type BetaManagedAgentsImageBlock struct{…}`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type BetaManagedAgentsImageBlockType`
 
           - `Source BetaManagedAgentsImageBlockSourceUnion`
 
@@ -191,6 +210,8 @@ Pause Deployment
             - `type BetaManagedAgentsBase64ImageSource struct{…}`
 
               Base64-encoded image data.
+
+              - `Type BetaManagedAgentsBase64ImageSourceType`
 
               - `Data string`
 
@@ -203,8 +224,6 @@ Pause Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type BetaManagedAgentsBase64ImageSourceType`
 
             - `type BetaManagedAgentsURLImageSource struct{…}`
 
@@ -222,19 +241,19 @@ Pause Deployment
 
               Image referenced by file ID.
 
+              - `Type BetaManagedAgentsFileImageSourceType`
+
               - `FileID string`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type BetaManagedAgentsFileImageSourceType`
-
-          - `Type BetaManagedAgentsImageBlockType`
-
         - `type BetaManagedAgentsDocumentBlock struct{…}`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type BetaManagedAgentsDocumentBlockType`
 
           - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
@@ -243,6 +262,8 @@ Pause Deployment
             - `type BetaManagedAgentsBase64DocumentSource struct{…}`
 
               Base64-encoded document data.
+
+              - `Type BetaManagedAgentsBase64DocumentSourceType`
 
               - `Data string`
 
@@ -256,11 +277,11 @@ Pause Deployment
 
                 minLength: 1
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
-
             - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
 
               Plain text document content.
+
+              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
               - `Data string`
 
@@ -271,8 +292,6 @@ Pause Deployment
               - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
 
             - `type BetaManagedAgentsURLDocumentSource struct{…}`
 
@@ -290,15 +309,13 @@ Pause Deployment
 
               Document referenced by file ID.
 
+              - `Type BetaManagedAgentsFileDocumentSourceType`
+
               - `FileID string`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type BetaManagedAgentsFileDocumentSourceType`
-
-          - `Type BetaManagedAgentsDocumentBlockType`
 
           - `Context string Optional`
 
@@ -314,11 +331,11 @@ Pause Deployment
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-      - `Type BetaManagedAgentsDeploymentUserMessageEventType`
-
     - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type BetaManagedAgentsDeploymentUserDefineOutcomeEventType`
 
       - `Description string`
 
@@ -332,23 +349,21 @@ Pause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type BetaManagedAgentsFileRubricType`
+
           - `FileID string`
 
             ID of the rubric file.
-
-          - `Type BetaManagedAgentsFileRubricType`
 
         - `type BetaManagedAgentsTextRubric struct{…}`
 
           Rubric content provided inline as text.
 
+          - `Type BetaManagedAgentsTextRubricType`
+
           - `Content string`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type BetaManagedAgentsTextRubricType`
-
-      - `Type BetaManagedAgentsDeploymentUserDefineOutcomeEventType`
 
       - `MaxIterations int64 Optional`
 
@@ -360,19 +375,19 @@ Pause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type BetaManagedAgentsDeploymentSystemMessageEventType`
+
       - `Content []BetaManagedAgentsSystemContentBlock`
 
         System content blocks to append. Text-only.
+
+        - `Type BetaManagedAgentsSystemContentBlockType`
 
         - `Text string`
 
           The text content.
 
           minLength: 1
-
-        - `Type BetaManagedAgentsSystemContentBlockType`
-
-      - `Type BetaManagedAgentsDeploymentSystemMessageEventType`
 
   - `Metadata map[string, string]`
 
@@ -395,6 +410,8 @@ Pause Deployment
     - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type BetaManagedAgentsErrorDeploymentPausedReasonType`
 
       - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
 
@@ -484,8 +501,6 @@ Pause Deployment
 
           - `Type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorType`
 
-      - `Type BetaManagedAgentsErrorDeploymentPausedReasonType`
-
   - `Resources []BetaManagedAgentsSessionResourceConfigUnion`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -506,23 +521,23 @@ Pause Deployment
 
         - `type BetaManagedAgentsBranchCheckout struct{…}`
 
+          - `Type BetaManagedAgentsBranchCheckoutType`
+
           - `Name string`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type BetaManagedAgentsBranchCheckoutType`
-
         - `type BetaManagedAgentsCommitCheckout struct{…}`
+
+          - `Type BetaManagedAgentsCommitCheckoutType`
 
           - `Sha string`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type BetaManagedAgentsCommitCheckoutType`
 
       - `MountPath string Optional`
 
@@ -532,11 +547,11 @@ Pause Deployment
 
       A file mounted into each session's container.
 
+      - `Type BetaManagedAgentsFileResourceConfigType`
+
       - `FileID string`
 
         ID of a previously uploaded file.
-
-      - `Type BetaManagedAgentsFileResourceConfigType`
 
       - `MountPath string Optional`
 
@@ -546,11 +561,11 @@ Pause Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type BetaManagedAgentsMemoryStoreResourceConfigType`
+
       - `MemoryStoreID string`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type BetaManagedAgentsMemoryStoreResourceConfigType`
 
       - `Access BetaManagedAgentsMemoryStoreResourceConfigAccess Optional`
 
@@ -568,6 +583,8 @@ Pause Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type BetaManagedAgentsScheduleType`
+
     - `Expression string`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -579,8 +596,6 @@ Pause Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type BetaManagedAgentsScheduleType`
 
     - `LastRunAt Time Optional`
 
@@ -600,8 +615,6 @@ Pause Deployment
 
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
 
-  - `Type BetaManagedAgentsDeploymentType`
-
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
@@ -616,6 +629,8 @@ Pause Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type BetaManagedAgentsBudgetLimitType`
+
     - `MaxListCost BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -627,8 +642,6 @@ Pause Deployment
       - `Currency BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type BetaManagedAgentsBudgetLimitType`
 
 ## Example
 

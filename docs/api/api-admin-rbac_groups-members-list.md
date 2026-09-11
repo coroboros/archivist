@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list"
 category: "api"
 generated: true
 ---
+---
+title: List RBAC Group Members
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/members/list
+---
+
 # List RBAC Group Members
 
 **GET** `/v1/organizations/rbac_groups/{group_id}/members`
@@ -34,7 +39,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `data: array of RbacGroupMember`
+- `data: array of BetaRBACGroupMember`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -49,14 +62,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `group_id: string`
 
     ID of the RBAC Group.
-
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
 
   - `user_id: string`
 
@@ -75,7 +80,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/models"
 category: "api"
 generated: true
 ---
+---
+title: Models
+url: https://platform.claude.com/docs/en/api/php/beta/models
+---
+
 # Models
 
 ## List Models
 
-`$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<BetaModelInfo>`
+`$client->beta->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas, ?string workspaceID): Page<BetaModelInfo>`
 
 **GET** `/v1/models`
 
@@ -38,9 +43,17 @@ The Models API response can be used to determine which models are available for 
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaModelInfo`
+
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
 
   - `string id`
 
@@ -70,12 +83,6 @@ The Models API response can be used to determine which models are available for 
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `"model" type`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
 ### Example
 
 ```php
@@ -90,6 +97,7 @@ $page = $client->beta->models->list(
   beforeID: 'before_id',
   limit: 1,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -181,7 +189,7 @@ var_dump($page);
 
 ## Get a Model
 
-`$client->beta->models->retrieve(string modelID, ?list<AnthropicBeta> betas): BetaModelInfo`
+`$client->beta->models->retrieve(string modelID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaModelInfo`
 
 **GET** `/v1/models/{model_id}`
 
@@ -199,9 +207,17 @@ The Models API response can be used to determine information about a specific mo
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaModelInfo`
+
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
 
   - `string id`
 
@@ -231,12 +247,6 @@ The Models API response can be used to determine information about a specific mo
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `"model" type`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
 ### Example
 
 ```php
@@ -247,7 +257,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaModelInfo = $client->beta->models->retrieve(
-  'model_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'model_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaModelInfo);
@@ -432,6 +444,12 @@ var_dump($betaModelInfo);
 
 - `BetaModelInfo`
 
+  - `"model" type`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
   - `string id`
 
     Unique model identifier.
@@ -459,12 +477,6 @@ var_dump($betaModelInfo);
   - `?int maxTokens`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `"model" type`
-
-    Object type.
-
-    For Models, this is always `"model"`.
 
 ### Beta Thinking Capability
 

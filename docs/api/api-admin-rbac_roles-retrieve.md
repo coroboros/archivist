@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get RBAC Role
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_roles/retrieve
+---
+
 # Get RBAC Role
 
 **GET** `/v1/organizations/rbac_roles/{role_id}`
@@ -20,7 +25,15 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `RbacRole object`
+- `BetaRBACRole object`
+
+  - `type: "rbac_role"`
+
+    Object type.
+
+    For RBAC Roles, this is always `"rbac_role"`.
+
+    default: rbac_role
 
   - `id: string`
 
@@ -36,14 +49,6 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Role.
 
-  - `type: "rbac_role"`
-
-    Object type.
-
-    For RBAC Roles, this is always `"rbac_role"`.
-
-    default: rbac_role
-
   - `updated_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
@@ -55,7 +60,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

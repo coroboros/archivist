@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/resources/
 category: "api"
 generated: true
 ---
+---
+title: Delete Session Resource
+url: https://platform.claude.com/docs/en/api/python/beta/sessions/resources/delete
+---
+
 # Delete Session Resource
 
 `beta.sessions.resources.delete(resource_id, **kwargs)  -> BetaManagedAgentsDeleteSessionResource`
@@ -24,7 +29,7 @@ Delete Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Delete Session Resource
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,15 +121,17 @@ Delete Session Resource
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ## Returns
 
 - `class BetaManagedAgentsDeleteSessionResource: …`
 
   Confirmation of resource deletion.
 
-  - `id: str`
-
   - `type: Literal["session_resource_deleted"]`
+
+  - `id: str`
 
 ## Example
 

@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/results"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/php/messages/batches/results
+---
+
 # Retrieve Message Batch results
 
-`$client->messages->batches->results(string messageBatchID): MessageBatchIndividualResponse`
+`$client->messages->batches->results(string messageBatchID, ?string workspaceID): MessageBatchIndividualResponse`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -21,6 +26,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 - `messageBatchID: string`
 
   ID of the Message Batch.
+
+- `workspaceID?:optional string`
 
 ## Returns
 
@@ -48,7 +55,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $messageBatchIndividualResponse = $client->messages->batches->resultsStream(
-  'message_batch_id'
+  'message_batch_id', workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy'
 );
 
 var_dump($messageBatchIndividualResponse);

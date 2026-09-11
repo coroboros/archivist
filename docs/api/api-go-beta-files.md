@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/files"
 category: "api"
 generated: true
 ---
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/go/beta/files
+---
+
 # Files
 
 ## Upload File
@@ -20,7 +25,7 @@ Upload File
 
   - `File param.Field[Reader]`
 
-    Body param: The file to upload
+    Body param: The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
     format: binary
 
@@ -84,6 +89,8 @@ Upload File
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -126,9 +133,21 @@ Upload File
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaFileMetadata struct{…}`
+
+  - `Type File`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `ID string`
 
@@ -160,12 +179,6 @@ Upload File
 
     minimum: 0
 
-  - `Type File`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
@@ -182,13 +195,13 @@ Upload File
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `ID string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -324,6 +337,8 @@ List Files
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -366,9 +381,21 @@ List Files
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaFileMetadata struct{…}`
+
+  - `Type File`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `ID string`
 
@@ -400,12 +427,6 @@ List Files
 
     minimum: 0
 
-  - `Type File`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
@@ -422,13 +443,13 @@ List Files
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `ID string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -549,6 +570,8 @@ Download File
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -590,6 +613,12 @@ Download File
       - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -694,6 +723,8 @@ Get File Metadata
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -736,9 +767,21 @@ Get File Metadata
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaFileMetadata struct{…}`
+
+  - `Type File`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `ID string`
 
@@ -770,12 +813,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `Type File`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
@@ -792,13 +829,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `ID string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -918,6 +955,8 @@ Delete File
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -960,13 +999,15 @@ Delete File
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaDeletedFile struct{…}`
-
-  - `ID string`
-
-    ID of the deleted file.
 
   - `Type BetaDeletedFileType Optional`
 
@@ -975,6 +1016,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `ID string`
+
+    ID of the deleted file.
 
 ### Example
 
@@ -1020,10 +1065,6 @@ func main() {
 
 - `type BetaDeletedFile struct{…}`
 
-  - `ID string`
-
-    ID of the deleted file.
-
   - `Type BetaDeletedFileType Optional`
 
     Deleted object type.
@@ -1032,9 +1073,19 @@ func main() {
 
     default: file_deleted
 
+  - `ID string`
+
+    ID of the deleted file.
+
 ### Beta File Metadata
 
 - `type BetaFileMetadata struct{…}`
+
+  - `Type File`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `ID string`
 
@@ -1066,12 +1117,6 @@ func main() {
 
     minimum: 0
 
-  - `Type File`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Downloadable bool Optional`
 
     Whether the file can be downloaded.
@@ -1088,22 +1133,22 @@ func main() {
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `ID string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `Type Session`
 
       The type of scope (e.g., `"session"`).
+
+    - `ID string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Beta File Scope
 
 - `type BetaFileScope struct{…}`
 
-  - `ID string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
   - `Type Session`
 
     The type of scope (e.g., `"session"`).
+
+  - `ID string`
+
+    The ID of the scoping resource (e.g., the session ID).

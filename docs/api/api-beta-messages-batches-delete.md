@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/messages/batches/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/beta/messages/batches/delete
+---
+
 # Delete a Message Batch
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
@@ -28,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -118,13 +125,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaDeletedMessageBatch object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -133,6 +138,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ## Example
 

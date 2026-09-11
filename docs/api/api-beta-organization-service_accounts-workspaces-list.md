@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/service_accou
 category: "api"
 generated: true
 ---
+---
+title: List Workspaces For Service Account
+url: https://platform.claude.com/docs/en/api/beta/organization/service_accounts/workspaces/list
+---
+
 # List Workspaces For Service Account
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
@@ -52,7 +57,7 @@ page to recover.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -100,6 +105,8 @@ page to recover.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -146,6 +153,10 @@ page to recover.
 
 - `data: array of BetaServiceAccountWorkspaceMember`
 
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
   - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
@@ -157,10 +168,6 @@ page to recover.
   - `service_account_id: string`
 
     Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    default: service_account_workspace_member
 
   - `workspace_id: string`
 

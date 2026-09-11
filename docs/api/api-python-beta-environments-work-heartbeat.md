@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments/work/h
 category: "api"
 generated: true
 ---
+---
+title: Record Heartbeat
+url: https://platform.claude.com/docs/en/api/python/beta/environments/work/heartbeat
+---
+
 # Record Heartbeat
 
 `beta.environments.work.heartbeat(work_id, **kwargs)  -> BetaSelfHostedWorkHeartbeatResponse`
@@ -34,7 +39,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -81,6 +86,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -130,6 +137,12 @@ Record a heartbeat for a work item to maintain the lease.
 
   Response after recording a heartbeat for a work item.
 
+  - `type: Literal["work_heartbeat"]`
+
+    The type of response
+
+    default: work_heartbeat
+
   - `last_heartbeat: str`
 
     RFC 3339 timestamp of the actual heartbeat from DB
@@ -155,12 +168,6 @@ Record a heartbeat for a work item to maintain the lease.
   - `ttl_seconds: int`
 
     Effective TTL applied to the lease
-
-  - `type: Literal["work_heartbeat"]`
-
-    The type of response
-
-    default: work_heartbeat
 
 ## Example
 

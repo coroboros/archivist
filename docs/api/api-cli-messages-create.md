@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/cli/messages/create
+---
+
 # Create a Message
 
 `$ ant messages create`
@@ -207,6 +212,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 - `--temperature: optional number`
 
   **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
@@ -247,6 +258,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `message: object`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
   - `id: string`
 
     Unique object identifier.
@@ -271,12 +288,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" or "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -284,6 +295,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -322,6 +339,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `text_block: object`
 
+      - `type: "text"`
+
       - `citations: array of TextCitation`
 
         Citations supporting the text block.
@@ -329,6 +348,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `citation_char_location: object`
+
+          - `type: "char_location"`
 
           - `cited_text: string`
 
@@ -346,9 +367,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: "char_location"`
-
         - `citation_page_location: object`
+
+          - `type: "page_location"`
 
           - `cited_text: string`
 
@@ -366,9 +387,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-          - `type: "page_location"`
-
         - `citation_content_block_location: object`
+
+          - `type: "content_block_location"`
 
           - `cited_text: string`
 
@@ -396,9 +417,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
         - `citations_web_search_result_location: object`
+
+          - `type: "web_search_result_location"`
 
           - `cited_text: string`
 
@@ -408,11 +429,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
           - `url: string`
 
         - `citations_search_result_location: object`
+
+          - `type: "search_result_location"`
 
           - `cited_text: string`
 
@@ -444,15 +465,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: string`
 
-          - `type: "search_result_location"`
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
+        minLength: 0
 
     - `thinking_block: object`
+
+      - `type: "thinking"`
 
       - `signature: string`
 
@@ -466,9 +485,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
     - `redacted_thinking_block: object`
+
+      - `type: "redacted_thinking"`
 
       - `data: string`
 
@@ -478,9 +497,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
     - `tool_use_block: object`
+
+      - `type: "tool_use"`
 
       - `id: string`
 
@@ -500,27 +519,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `server_tool_caller_20260120: object`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `input: map[unknown]`
 
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
 
       - `toolset_name: optional string`
 
@@ -529,6 +546,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `server_tool_use_block: object`
+
+      - `type: "server_tool_use"`
 
       - `id: string`
 
@@ -566,9 +585,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
     - `web_search_tool_result_block: object`
+
+      - `type: "web_search_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -588,6 +607,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `web_search_tool_result_error: object`
 
+          - `type: "web_search_tool_result_error"`
+
           - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
             - `"invalid_tool_input"`
@@ -602,9 +623,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
         - `union_member_1: array of WebSearchResultBlock`
+
+          - `type: "web_search_result"`
 
           - `encrypted_content: string`
 
@@ -612,17 +633,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
     - `web_fetch_tool_result_block: object`
+
+      - `type: "web_fetch_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -642,7 +661,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `web_fetch_tool_result_error_block: object`
 
-          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+          - `type: "web_fetch_tool_result_error"`
+
+          - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
             - `"invalid_tool_input"`
 
@@ -662,11 +683,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
+            - `"content_too_large"`
 
         - `web_fetch_block: object`
 
+          - `type: "web_fetch_result"`
+
           - `content: object`
+
+            - `type: "document"`
 
             - `citations: object`
 
@@ -678,33 +703,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `base64_pdf_source: object`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `plain_text_source: object`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string`
 
               The title of the document
 
-            - `type: "document"`
-
           - `retrieved_at: string`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
 
           - `url: string`
 
@@ -714,15 +735,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
     - `code_execution_tool_result_block: object`
+
+      - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error: object`
+
+          - `type: "code_execution_tool_result_error"`
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -734,15 +757,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
         - `code_execution_result_block: object`
+
+          - `type: "code_execution_result"`
 
           - `content: array of CodeExecutionOutputBlock`
 
-            - `file_id: string`
-
             - `type: "code_execution_output"`
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -750,17 +773,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
         - `encrypted_code_execution_result_block: object`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
+          - `type: "encrypted_code_execution_result"`
+
           - `content: array of CodeExecutionOutputBlock`
 
-            - `file_id: string`
-
             - `type: "code_execution_output"`
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -768,19 +791,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
     - `bash_code_execution_tool_result_block: object`
+
+      - `type: "bash_code_execution_tool_result"`
 
       - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
         - `bash_code_execution_tool_result_error: object`
+
+          - `type: "bash_code_execution_tool_result_error"`
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -794,15 +817,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
         - `bash_code_execution_result_block: object`
+
+          - `type: "bash_code_execution_result"`
 
           - `content: array of BashCodeExecutionOutputBlock`
 
-            - `file_id: string`
-
             - `type: "bash_code_execution_output"`
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -810,19 +833,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
     - `text_editor_code_execution_tool_result_block: object`
+
+      - `type: "text_editor_code_execution_tool_result"`
 
       - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `text_editor_code_execution_tool_result_error: object`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -838,9 +861,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
         - `text_editor_code_execution_view_result_block: object`
+
+          - `type: "text_editor_code_execution_view_result"`
 
           - `content: string`
 
@@ -858,15 +881,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `total_lines: number`
 
-          - `type: "text_editor_code_execution_view_result"`
-
         - `text_editor_code_execution_create_result_block: object`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
+          - `is_file_update: boolean`
+
         - `text_editor_code_execution_str_replace_result_block: object`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
 
           - `lines: array of string`
 
@@ -878,19 +901,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `old_start: number`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
     - `tool_search_tool_result_block: object`
+
+      - `type: "tool_search_tool_result"`
 
       - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
         - `tool_search_tool_result_error: object`
+
+          - `type: "tool_search_tool_result_error"`
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -904,33 +927,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string`
 
-          - `type: "tool_search_tool_result_error"`
-
         - `tool_search_tool_search_result_block: object`
 
+          - `type: "tool_search_tool_search_result"`
+
           - `tool_references: array of ToolReferenceBlock`
+
+            - `type: "tool_reference"`
 
             - `tool_name: string`
 
               maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-            - `type: "tool_reference"`
-
-          - `type: "tool_search_tool_search_result"`
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "tool_search_tool_result"`
 
     - `container_upload_block: object`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
+
+      - `file_id: string`
 
   - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
@@ -1016,6 +1035,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Structured information about a refusal.
 
+    - `type: "refusal"`
+
     - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
       The policy category that triggered a refusal.
@@ -1045,8 +1066,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-    - `type: "refusal"`
 
   - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -1083,12 +1102,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
 
   - `usage: object`
 
@@ -1198,7 +1211,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `raw_message_start_event: object`
 
+    - `type: "message_start"`
+
     - `message: object`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
 
       - `id: string`
 
@@ -1277,12 +1298,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         This value will be a non-null string if one of your custom stop sequences was generated.
 
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
-
       - `usage: object`
 
         Billing and rate-limit usage.
@@ -1295,9 +1310,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-    - `type: "message_start"`
-
   - `raw_message_delta_event: object`
+
+    - `type: "message_delta"`
 
     - `delta: object`
 
@@ -1323,6 +1338,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Structured information about a refusal.
 
+        - `type: "refusal"`
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
@@ -1332,8 +1349,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `type: "refusal"`
 
       - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -1352,8 +1367,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"model_context_window_exceeded"`
 
       - `stop_sequence: string`
-
-    - `type: "message_delta"`
 
     - `usage: object`
 
@@ -1433,11 +1446,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `raw_content_block_start_event: object`
 
+    - `type: "content_block_start"`
+
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
       Response model for a file uploaded to the container.
 
       - `text_block: object`
+
+        - `type: "text"`
 
         - `citations: array of TextCitation`
 
@@ -1447,11 +1464,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
+          minLength: 0
 
       - `thinking_block: object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -1465,9 +1482,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
       - `redacted_thinking_block: object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
@@ -1477,9 +1494,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
       - `tool_use_block: object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -1495,8 +1512,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minLength: 1
 
-        - `type: "tool_use"`
-
         - `toolset_name: optional string`
 
           For a toolset member tool_use, the toolset family.
@@ -1504,6 +1519,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `server_tool_use_block: object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -1517,9 +1534,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
 
-        - `type: "server_tool_use"`
-
       - `web_search_tool_result_block: object`
+
+        - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -1531,9 +1548,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_search_tool_result"`
-
       - `web_fetch_tool_result_block: object`
+
+        - `type: "web_fetch_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -1545,9 +1562,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
       - `code_execution_tool_result_block: object`
+
+        - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
@@ -1557,9 +1574,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
       - `bash_code_execution_tool_result_block: object`
+
+        - `type: "bash_code_execution_tool_result"`
 
         - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
@@ -1567,9 +1584,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
       - `text_editor_code_execution_tool_result_block: object`
+
+        - `type: "text_editor_code_execution_tool_result"`
 
         - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
@@ -1577,9 +1594,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
       - `tool_search_tool_result_block: object`
+
+        - `type: "tool_search_tool_result"`
 
         - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
@@ -1587,41 +1604,43 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "tool_search_tool_result"`
-
       - `container_upload_block: object`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
   - `raw_content_block_delta_event: object`
+
+    - `type: "content_block_delta"`
 
     - `delta: TextDelta or InputJSONDelta or CitationsDelta or 2 more`
 
       - `text_delta: object`
 
-        - `text: string`
-
         - `type: "text_delta"`
+
+        - `text: string`
 
       - `input_json_delta: object`
 
-        - `partial_json: string`
-
         - `type: "input_json_delta"`
 
+        - `partial_json: string`
+
       - `citations_delta: object`
+
+        - `type: "citations_delta"`
 
         - `citation: CitationCharLocation or CitationPageLocation or CitationContentBlockLocation or 2 more`
 
           - `citation_char_location: object`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -1639,9 +1658,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `citation_page_location: object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -1659,9 +1678,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `citation_content_block_location: object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -1689,9 +1708,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `citations_web_search_result_location: object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -1701,11 +1720,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
           - `citations_search_result_location: object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -1737,35 +1756,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `title: string`
 
-            - `type: "search_result_location"`
-
-        - `type: "citations_delta"`
-
       - `thinking_delta: object`
+
+        - `type: "thinking_delta"`
 
         - `thinking: string`
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: "thinking_delta"`
-
       - `signature_delta: object`
+
+        - `type: "signature_delta"`
 
         - `signature: string`
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-        - `type: "signature_delta"`
-
     - `index: number`
-
-    - `type: "content_block_delta"`
 
   - `raw_content_block_stop_event: object`
 
-    - `index: number`
-
     - `type: "content_block_stop"`
+
+    - `index: number`
 
 ## Example
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/sessions/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Session
+url: https://platform.claude.com/docs/en/api/python/beta/sessions/delete
+---
+
 # Delete Session
 
 `beta.sessions.delete(session_id, **kwargs)  -> BetaManagedAgentsDeletedSession`
@@ -22,7 +27,7 @@ Delete Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -70,6 +75,8 @@ Delete Session
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -112,15 +119,17 @@ Delete Session
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ## Returns
 
 - `class BetaManagedAgentsDeletedSession: …`
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `id: str`
-
   - `type: Literal["session_deleted"]`
+
+  - `id: str`
 
 ## Example
 

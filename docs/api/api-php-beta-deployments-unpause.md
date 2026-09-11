@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/deployments/unpause"
 category: "api"
 generated: true
 ---
+---
+title: Unpause Deployment
+url: https://platform.claude.com/docs/en/api/php/beta/deployments/unpause
+---
+
 # Unpause Deployment
 
-`$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeployment`
+`$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/unpause`
 
@@ -20,9 +25,13 @@ Unpause Deployment
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaManagedAgentsDeployment`
+
+  - `Type type`
 
   - `string id`
 
@@ -76,8 +85,6 @@ Unpause Deployment
 
     Lifecycle status of a deployment.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -102,6 +109,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaManagedAgentsDeployment = $client->beta->deployments->unpause(
   'depl_011CZkZcDH3vPqd7xnEfwTai',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsDeployment);

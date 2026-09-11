@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete chat
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/delete
+---
+
 # Delete chat
 
 **DELETE** `/v1/compliance/apps/chats/{claude_chat_id}`
@@ -19,19 +24,25 @@ files. This is a destructive operation that cannot be undone.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ## Returns
-
-- `id: string`
-
-  The ID of the Claude chat that was deleted
 
 - `type: optional "claude_chat_deleted"`
 
   Constant string confirming deletion
 
   default: claude_chat_deleted
+
+- `id: string`
+
+  The ID of the Claude chat that was deleted
 
 ## Example
 

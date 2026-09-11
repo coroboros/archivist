@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/messages"
 category: "api"
 generated: true
 ---
+---
+title: Messages
+url: https://platform.claude.com/docs/en/api/typescript/beta/messages
+---
+
 # Messages
 
 ## Create a Message
@@ -95,11 +100,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaTextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -126,6 +131,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `BetaCitationCharLocationParam`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -142,9 +149,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `BetaCitationPageLocationParam`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -162,9 +169,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `BetaCitationContentBlockLocationParam`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -192,9 +199,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `BetaCitationWebSearchResultLocationParam`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -204,13 +211,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `BetaCitationSearchResultLocationParam`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -242,13 +249,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
           - `BetaImageBlockParam`
+
+            - `type: "image"`
 
             - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
               - `BetaBase64ImageSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -264,8 +273,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `BetaURLImageSource`
 
                 - `type: "url"`
@@ -274,11 +281,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `BetaFileImageSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -298,9 +303,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaRequestDocumentBlock`
 
+            - `type: "document"`
+
             - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
               - `BetaBase64PDFSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -308,17 +317,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
               - `BetaContentBlockSource`
+
+                - `type: "content"`
 
                 - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -330,8 +339,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     - `BetaImageBlockParam`
 
-                - `type: "content"`
-
               - `BetaURLPDFSource`
 
                 - `type: "url"`
@@ -340,11 +347,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `BetaFileDocumentSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "document"`
+                - `file_id: string`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -364,13 +369,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaSearchResultBlockParam`
 
+            - `type: "search_result"`
+
             - `content: Array<BetaTextBlockParam>`
+
+              - `type: "text"`
 
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -382,8 +389,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `title: string`
 
-            - `type: "search_result"`
-
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
@@ -391,6 +396,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `citations?: BetaCitationsConfigParam`
 
           - `BetaThinkingBlockParam`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -402,17 +409,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               The `thinking` text of this block as returned by the API.
 
-            - `type: "thinking"`
-
           - `BetaRedactedThinkingBlockParam`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
               The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type: "redacted_thinking"`
-
           - `BetaToolUseBlockParam`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -423,8 +430,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `name: string`
 
               maxLength: 200, minLength: 1
-
-            - `type: "tool_use"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -444,19 +449,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `BetaServerToolCaller20260120`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name?: string | null`
 
@@ -466,11 +471,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaToolResultBlockParam`
 
+            - `type: "tool_result"`
+
             - `tool_use_id: string`
 
               pattern: ^[a-zA-Z0-9_-]+$
-
-            - `type: "tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -494,11 +499,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Tool reference block that can be included in tool_result content.
 
+                  - `type: "tool_reference"`
+
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
 
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -513,6 +518,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                   At most one per `tool_result`, only on a non-error result answering a
                   browser toolset member `tool_use`. The server renders the
                   model-visible text from it; the model never sees the raw fields.
+
+                  - `type: "browser_state"`
 
                   - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -542,8 +549,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                  - `type: "browser_state"`
-
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
                     Create a cache control breakpoint at this content block.
@@ -564,25 +569,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                       during a failed call gets no deferred `tab_opened`; it simply appears
                       in the next result's `tabs` inventory.
 
+                      - `type: "tab_opened"`
+
                       - `tab_id: string`
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type: "tab_opened"`
-
                     - `BetaBrowserStateChangeDownloadStarted`
 
                       A file download that started during this call.
+
+                      - `type: "download_started"`
 
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_started"`
 
                       - `url: string`
 
@@ -597,13 +602,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                       `download_started`, when the download finished during the call that
                       started it (at most one state change per `download_id` per result).
 
+                      - `type: "download_completed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_completed"`
 
                       - `url: string`
 
@@ -627,13 +632,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       A file download that failed — or was cancelled — during this call.
 
+                      - `type: "download_failed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_failed"`
 
                       - `url: string`
 
@@ -656,6 +661,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `BetaServerToolUseBlockParam`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -681,8 +688,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
@@ -703,21 +708,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaWebSearchToolResultBlockParam`
 
+            - `type: "web_search_tool_result"`
+
             - `content: BetaWebSearchToolResultBlockParamContent`
 
               - `Array<BetaWebSearchResultBlockParam>`
 
+                - `type: "web_search_result"`
+
                 - `encrypted_content: string`
 
                 - `title: string`
-
-                - `type: "web_search_result"`
 
                 - `url: string`
 
                 - `page_age?: string | null`
 
               - `BetaWebSearchToolRequestError`
+
+                - `type: "web_search_tool_result_error"`
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -733,13 +742,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -761,9 +766,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaWebFetchToolResultBlockParam`
 
+            - `type: "web_fetch_tool_result"`
+
             - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
               - `BetaWebFetchToolResultErrorBlockParam`
+
+                - `type: "web_fetch_tool_result_error"`
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -785,13 +794,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `BetaWebFetchBlockParam`
 
-                - `content: BetaRequestDocumentBlock`
-
                 - `type: "web_fetch_result"`
+
+                - `content: BetaRequestDocumentBlock`
 
                 - `url: string`
 
@@ -804,8 +813,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -827,9 +834,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaAdvisorToolResultBlockParam`
 
+            - `type: "advisor_tool_result"`
+
             - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
               - `BetaAdvisorToolResultErrorParam`
+
+                - `type: "advisor_tool_result_error"`
 
                 - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -847,23 +858,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
               - `BetaAdvisorResultBlockParam`
 
-                - `text: string`
-
                 - `type: "advisor_result"`
+
+                - `text: string`
 
                 - `stop_reason?: string | null`
 
               - `BetaAdvisorRedactedResultBlockParam`
 
+                - `type: "advisor_redacted_result"`
+
                 - `encrypted_content: string`
 
                   Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-                - `type: "advisor_redacted_result"`
 
                 - `stop_reason?: string | null`
 
@@ -871,19 +880,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaCodeExecutionToolResultBlockParam`
 
+            - `type: "code_execution_tool_result"`
+
             - `content: BetaCodeExecutionToolResultBlockParamContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultErrorParam`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -895,15 +906,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `BetaCodeExecutionResultBlockParam`
+
+                - `type: "code_execution_result"`
 
                 - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -911,17 +922,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `BetaEncryptedCodeExecutionResultBlockParam`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -929,13 +940,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -943,9 +950,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaBashCodeExecutionToolResultBlockParam`
 
+            - `type: "bash_code_execution_tool_result"`
+
             - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
               - `BetaBashCodeExecutionToolResultErrorParam`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -959,15 +970,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `BetaBashCodeExecutionResultBlockParam`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -975,13 +986,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "bash_code_execution_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -989,9 +996,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+            - `type: "text_editor_code_execution_tool_result"`
+
             - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -1005,11 +1016,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"file_not_found"`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
                 - `error_message?: string | null`
 
               - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -1021,8 +1032,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"pdf"`
 
-                - `type: "text_editor_code_execution_view_result"`
-
                 - `num_lines?: number | null`
 
                 - `start_line?: number | null`
@@ -1031,9 +1040,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-                - `is_file_update: boolean`
-
                 - `type: "text_editor_code_execution_create_result"`
+
+                - `is_file_update: boolean`
 
               - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -1053,17 +1062,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaToolSearchToolResultBlockParam`
 
+            - `type: "tool_search_tool_result"`
+
             - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
               - `BetaToolSearchToolResultErrorParam`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -1075,37 +1086,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"execution_time_exceeded"`
 
-                - `type: "tool_search_tool_result_error"`
-
                 - `error_message?: string | null`
 
               - `BetaToolSearchToolSearchResultBlockParam`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
                     Create a cache control breakpoint at this content block.
 
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaMCPToolUseBlockParam`
+
+            - `type: "mcp_tool_use"`
 
             - `id: string`
 
@@ -1119,19 +1128,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
 
           - `BetaRequestMCPToolResultBlockParam`
 
+            - `type: "mcp_tool_result"`
+
             - `tool_use_id: string`
 
               pattern: ^[a-zA-Z0-9_-]+$
-
-            - `type: "mcp_tool_result"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1143,11 +1150,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Array<BetaTextBlockParam>`
 
+                - `type: "text"`
+
                 - `text: string`
 
                   minLength: 1
-
-                - `type: "text"`
 
                 - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1162,9 +1169,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             A content block that represents a file to be uploaded to the container
             Files uploaded via this block will be available in the container's input directory.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1202,6 +1209,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             `tools`; it is offered to the model from this point in the
             conversation onward.
 
+            - `type: "tool_addition"`
+
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
               Reference to a single tool the caller declared directly in
@@ -1216,32 +1225,30 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                 server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                 `mcp_toolset_reference` for those.
 
+                - `type: "tool_reference"`
+
                 - `name: string`
 
                   pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-                - `type: "tool_reference"`
 
               - `BetaToolChangeMCPToolReference`
 
                 Reference to a single MCP tool by its server and remote name — the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
+                - `type: "mcp_tool_reference"`
+
                 - `name: string`
 
                 - `server_name: string`
-
-                - `type: "mcp_tool_reference"`
 
               - `BetaToolChangeMCPToolsetReference`
 
                 Reference to every tool in the named MCP server's toolset.
 
-                - `server_name: string`
-
                 - `type: "mcp_toolset_reference"`
 
-            - `type: "tool_addition"`
+                - `server_name: string`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1255,6 +1262,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             `tools`; it is no longer offered to the model from this point in the
             conversation onward.
 
+            - `type: "tool_removal"`
+
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
               Reference to a single tool the caller declared directly in
@@ -1277,8 +1286,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               - `BetaToolChangeMCPToolsetReference`
 
                 Reference to every tool in the named MCP server's toolset.
-
-            - `type: "tool_removal"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1299,6 +1306,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             request is rejected), and moving it into the middle of a single run is
             likewise rejected; between non-thinking blocks the block's placement has
             no validation effect.
+
+            - `type: "fallback"`
 
             - `from: BetaFallbackInfoParam`
 
@@ -1386,8 +1395,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Identifies one hop of a fallback transition.
 
-            - `type: "fallback"`
-
             - `trigger?: unknown`
 
               The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1458,12 +1465,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           maxItems: 20
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" | "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1471,6 +1472,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version?: string`
 
@@ -1684,25 +1691,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+            - `type: "json_schema"`
+
             - `schema: Record<string, unknown>`
 
               The JSON schema of the format
 
-            - `type: "json_schema"`
-
           - `task_budget?: BetaTokenTaskBudget | null`
 
             User-configurable total token budget across contexts.
+
+            - `type: "tokens"`
+
+              The budget type. Currently only 'tokens' is supported.
 
             - `total: number`
 
               Total token budget across all contexts in the session.
 
               minimum: 1024
-
-            - `type: "tokens"`
-
-              The budget type. Currently only 'tokens' is supported.
 
             - `remaining?: number | null`
 
@@ -1722,6 +1729,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaThinkingConfigEnabled`
 
+            - `type: "enabled"`
+
             - `budget_tokens: number`
 
               Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1731,8 +1740,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
               minimum: 1024
-
-            - `type: "enabled"`
 
             - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -1800,9 +1807,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       maxItems: 20
 
-      - `name: string`
-
       - `type: "url"`
+
+      - `name: string`
 
       - `url: string`
 
@@ -1872,11 +1879,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Array<BetaTextBlockParam>`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -1930,11 +1937,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The model will use the specified tool with `tool_choice.name`.
 
+        - `type: "tool"`
+
         - `name: string`
 
           The name of the tool to use.
-
-        - `type: "tool"`
 
         - `disable_parallel_tool_use?: boolean`
 
@@ -2014,6 +2021,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaTool`
 
+        - `type?: "custom" | null`
+
         - `input_schema: InputSchema`
 
           [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -2068,17 +2077,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `type?: "custom" | null`
-
       - `BetaToolBash20241022`
+
+        - `type: "bash_20241022"`
 
         - `name: "bash"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "bash_20241022"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2106,13 +2113,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolBash20250124`
 
+        - `type: "bash_20250124"`
+
         - `name: "bash"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "bash_20250124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2140,13 +2147,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaCodeExecutionTool20250522`
 
+        - `type: "code_execution_20250522"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250522"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2172,13 +2179,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaCodeExecutionTool20250825`
 
+        - `type: "code_execution_20250825"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250825"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2206,13 +2213,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+        - `type: "code_execution_20260120"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260120"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2240,13 +2247,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Code execution tool with REPL state persistence.
 
+        - `type: "code_execution_20260521"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260521"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2291,6 +2298,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type?: BetaBrowserTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -2628,18 +2647,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type?: BetaBrowserTypeConfig | null`
-
-            `type`'s config overrides.
-
-            - `defer_loading?: boolean | null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled?: boolean | null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait?: BetaBrowserWaitConfig | null`
 
             `wait`'s config overrides.
@@ -2666,6 +2673,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolComputerUse20241022`
 
+        - `type: "computer_20241022"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -2683,8 +2692,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20241022"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2718,13 +2725,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaMemoryTool20250818`
 
+        - `type: "memory_20250818"`
+
         - `name: "memory"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "memory_20250818"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2752,6 +2759,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolComputerUse20250124`
 
+        - `type: "computer_20250124"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -2769,8 +2778,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20250124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2804,13 +2811,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolTextEditor20241022`
 
+        - `type: "text_editor_20241022"`
+
         - `name: "str_replace_editor"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20241022"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2838,6 +2845,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolComputerUse20251124`
 
+        - `type: "computer_20251124"`
+
         - `display_height_px: number`
 
           The height of the display in pixels.
@@ -2855,8 +2864,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "computer_20251124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2917,6 +2924,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type?: BetaComputerTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
@@ -3086,18 +3105,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type?: BetaComputerTypeConfig | null`
-
-            `type`'s config overrides.
-
-            - `defer_loading?: boolean | null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled?: boolean | null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait?: BetaComputerWaitConfig | null`
 
             `wait`'s config overrides.
@@ -3124,13 +3131,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolTextEditor20250124`
 
+        - `type: "text_editor_20250124"`
+
         - `name: "str_replace_editor"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3158,13 +3165,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolTextEditor20250429`
 
+        - `type: "text_editor_20250429"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250429"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3192,13 +3199,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolTextEditor20250728`
 
+        - `type: "text_editor_20250728"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250728"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3232,13 +3239,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebSearchTool20250305`
 
+        - `type: "web_search_20250305"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20250305"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3308,13 +3315,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebFetchTool20250910`
 
+        - `type: "web_fetch_20250910"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20250910"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3364,13 +3371,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebSearchTool20260209`
 
+        - `type: "web_search_20260209"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260209"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3414,13 +3421,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebFetchTool20260209`
 
+        - `type: "web_fetch_20260209"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260209"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3472,13 +3479,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Web fetch tool with use_cache parameter for bypassing cached content.
 
+        - `type: "web_fetch_20260309"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260309"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3532,13 +3539,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebSearchTool20260318`
 
+        - `type: "web_search_20260318"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260318"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3590,13 +3597,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaWebFetchTool20260318`
 
+        - `type: "web_fetch_20260318"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260318"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3658,6 +3665,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaAdvisorTool20260301`
 
+        - `type: "advisor_20260301"`
+
         - `model: Model`
 
           The model that will complete your prompt.
@@ -3669,8 +3678,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "advisor_20260301"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3712,17 +3719,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolSearchToolBm25_20251119`
 
-        - `name: "tool_search_tool_bm25"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
           - `"tool_search_tool_bm25_20251119"`
 
           - `"tool_search_tool_bm25"`
+
+        - `name: "tool_search_tool_bm25"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3748,17 +3755,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaToolSearchToolRegex20251119`
 
-        - `name: "tool_search_tool_regex"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
           - `"tool_search_tool_regex_20251119"`
 
           - `"tool_search_tool_regex"`
+
+        - `name: "tool_search_tool_regex"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -3789,13 +3796,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         Allows configuring enabled status and defer_loading for all tools
         from an MCP server, with optional per-tool overrides.
 
+        - `type: "mcp_toolset"`
+
         - `mcp_server_name: string`
 
           Name of the MCP server to configure tools for
 
           maxLength: 255, minLength: 1
-
-        - `type: "mcp_toolset"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -3823,7 +3830,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -3871,6 +3878,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"user-profiles-2026-08-18"`
 
+        - `"user-profiles-2026-09-04"`
+
         - `"advisor-tool-2026-03-01"`
 
         - `"managed-agents-2026-04-01"`
@@ -3916,6 +3925,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `user_profile_id?: string`
 
       Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+    - `workspace_id?: string`
+
+      Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+      Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
     - `output_format?: BetaJSONOutputFormat | null`
 
@@ -3981,6 +3996,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `BetaMessage`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -4005,12 +4028,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" | "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -4018,6 +4035,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -4056,6 +4079,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `BetaTextBlock`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: Array<BetaTextCitation> | null`
 
         Citations supporting the text block.
@@ -4063,6 +4090,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -4080,11 +4111,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -4102,11 +4133,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -4134,11 +4165,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -4148,13 +4179,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -4186,19 +4217,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -4212,11 +4239,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -4226,11 +4253,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -4241,10 +4268,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4260,19 +4283,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name?: string | null`
 
@@ -4281,6 +4304,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -4306,10 +4333,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
         Tool invocation directly from the model.
@@ -4326,9 +4349,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `BetaWebSearchToolResultBlock`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -4344,11 +4375,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<BetaWebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -4356,19 +4387,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4386,9 +4409,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `BetaWebFetchToolResultBlock`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -4410,13 +4441,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig | null`
 
@@ -4430,37 +4467,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `BetaBase64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -4469,10 +4498,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -4490,9 +4515,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `BetaAdvisorToolResultBlock`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -4510,11 +4543,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string | null`
 
@@ -4522,11 +4555,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -4536,25 +4569,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `BetaCodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -4566,19 +4599,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock`
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -4586,21 +4619,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -4608,23 +4641,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -4638,19 +4671,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock`
 
-          - `content: Array<BetaBashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -4658,23 +4691,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -4690,11 +4723,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -4712,19 +4745,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -4736,23 +4769,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -4766,35 +4799,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<BetaToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<BetaToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -4810,17 +4839,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string | Array<BetaTextBlock>`
 
         - `string`
 
         - `Array<BetaTextBlock>`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: Array<BetaTextCitation> | null`
 
@@ -4830,11 +4863,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -4844,19 +4873,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock`
 
@@ -4866,6 +4891,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
@@ -4873,10 +4902,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `encrypted_content: string | null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock`
 
@@ -4891,6 +4916,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -4982,6 +5011,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
@@ -5012,14 +5045,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `context_management: BetaContextManagementResponse | null`
 
     Context management response.
@@ -5031,6 +5056,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -5044,13 +5075,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -5064,12 +5095,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
-
   - `diagnostics: BetaDiagnostics | null`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -5081,43 +5106,43 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `BetaCacheMissModelChanged`
 
-        - `cache_missed_input_tokens: number`
-
-          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
         - `type: "model_changed"`
 
           default: model_changed
 
-      - `BetaCacheMissSystemChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissSystemChanged`
 
         - `type: "system_changed"`
 
           default: system_changed
 
-      - `BetaCacheMissToolsChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissToolsChanged`
 
         - `type: "tools_changed"`
 
           default: tools_changed
 
-      - `BetaCacheMissMessagesChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+      - `BetaCacheMissMessagesChanged`
+
         - `type: "messages_changed"`
 
           default: messages_changed
+
+        - `cache_missed_input_tokens: number`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `BetaCacheMissPreviousMessageNotFound`
 
@@ -5148,6 +5173,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `stop_details: BetaRefusalStopDetails | null`
 
     Structured information about a refusal.
+
+    - `type: "refusal"`
+
+      default: refusal
 
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -5234,10 +5263,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: BetaStopReason | null`
 
     The reason that we stopped.
@@ -5275,14 +5300,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: BetaUsage`
 
@@ -5350,6 +5367,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
             Why the reprice was not applied.
@@ -5380,10 +5401,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem?: Array<string> | null`
 
@@ -5422,6 +5439,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Token usage for a sampling iteration.
 
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
+
         - `cache_creation: BetaCacheCreation | null`
 
           Breakdown of cached tokens by TTL
@@ -5456,43 +5479,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
-
-        - `cache_creation: BetaCacheCreation | null`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: number`
-
-          The number of input tokens used to create the cache entry.
-
-          default: 0, minimum: 0
-
-        - `cache_read_input_tokens: number`
-
-          The number of input tokens read from the cache.
-
-          default: 0, minimum: 0
-
-        - `input_tokens: number`
-
-          The number of input tokens which were used.
-
-          minimum: 0
-
-        - `output_tokens: number`
-
-          The number of output tokens which were used.
-
-          minimum: 0
 
         - `type: "compaction"`
 
@@ -5500,9 +5489,43 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           default: compaction
 
+        - `cache_creation: BetaCacheCreation | null`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+          default: 0, minimum: 0
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+          default: 0, minimum: 0
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
       - `BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation | null`
 
@@ -5537,12 +5560,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage`
 
@@ -5553,6 +5570,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation | null`
 
           Breakdown of cached tokens by TTL
@@ -5586,12 +5609,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -5673,6 +5690,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5703,23 +5726,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `"end_user_binding_mismatch"`
 
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
-
 - `BetaRawMessageStreamEvent = BetaRawMessageStartEvent | BetaRawMessageDeltaEvent | BetaRawMessageStopEvent | 3 more`
 
   - `BetaRawMessageStartEvent`
-
-    - `message: BetaMessage`
 
     - `type: "message_start"`
 
       default: message_start
 
+    - `message: BetaMessage`
+
   - `BetaRawMessageDeltaEvent`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `context_management: BetaContextManagementResponse | null`
 
@@ -5738,10 +5759,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `stop_reason: BetaStopReason | null`
 
       - `stop_sequence: string | null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -5824,6 +5841,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5846,12 +5869,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
   - `BetaRawMessageStopEvent`
 
     - `type: "message_stop"`
@@ -5859,6 +5876,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       default: message_stop
 
   - `BetaRawContentBlockStartEvent`
+
+    - `type: "content_block_start"`
+
+      default: content_block_start
 
     - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
@@ -5920,31 +5941,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `BetaRawContentBlockDeltaEvent`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: BetaRawContentBlockDelta`
 
       - `BetaTextDelta`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `BetaInputJSONDelta`
+        - `text: string`
 
-        - `partial_json: string`
+      - `BetaInputJSONDelta`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `BetaCitationsDelta`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
@@ -5958,11 +5983,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `BetaCitationSearchResultLocation`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `BetaThinkingDelta`
+
+        - `type: "thinking_delta"`
+
+          default: thinking_delta
 
         - `estimated_tokens: number | null`
 
@@ -5972,21 +5997,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: "thinking_delta"`
-
-          default: thinking_delta
-
       - `BetaSignatureDelta`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
       - `BetaCompactionContentBlockDelta`
+
+        - `type: "compaction_delta"`
+
+          default: compaction_delta
 
         - `content: string | null`
 
@@ -5994,23 +6019,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: "compaction_delta"`
-
-          default: compaction_delta
-
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `BetaRawContentBlockStopEvent`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
+
+    - `index: number`
 
 ### Example
 
@@ -6215,11 +6232,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaTextBlockParam`
 
+          - `type: "text"`
+
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6246,6 +6263,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `BetaCitationCharLocationParam`
 
+              - `type: "char_location"`
+
               - `cited_text: string`
 
               - `document_index: number`
@@ -6262,9 +6281,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `type: "char_location"`
-
             - `BetaCitationPageLocationParam`
+
+              - `type: "page_location"`
 
               - `cited_text: string`
 
@@ -6282,9 +6301,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 1
 
-              - `type: "page_location"`
-
             - `BetaCitationContentBlockLocationParam`
+
+              - `type: "content_block_location"`
 
               - `cited_text: string`
 
@@ -6312,9 +6331,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
             - `BetaCitationWebSearchResultLocationParam`
+
+              - `type: "web_search_result_location"`
 
               - `cited_text: string`
 
@@ -6324,13 +6343,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 maxLength: 512, minLength: 1
 
-              - `type: "web_search_result_location"`
-
               - `url: string`
 
                 minLength: 1
 
             - `BetaCitationSearchResultLocationParam`
+
+              - `type: "search_result_location"`
 
               - `cited_text: string`
 
@@ -6362,13 +6381,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `title: string | null`
 
-              - `type: "search_result_location"`
-
         - `BetaImageBlockParam`
+
+          - `type: "image"`
 
           - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
             - `BetaBase64ImageSource`
+
+              - `type: "base64"`
 
               - `data: string`
 
@@ -6384,8 +6405,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"image/webp"`
 
-              - `type: "base64"`
-
             - `BetaURLImageSource`
 
               - `type: "url"`
@@ -6394,11 +6413,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `BetaFileImageSource`
 
-              - `file_id: string`
-
               - `type: "file"`
 
-          - `type: "image"`
+              - `file_id: string`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6418,9 +6435,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaRequestDocumentBlock`
 
+          - `type: "document"`
+
           - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
             - `BetaBase64PDFSource`
+
+              - `type: "base64"`
 
               - `data: string`
 
@@ -6428,17 +6449,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `media_type: "application/pdf"`
 
-              - `type: "base64"`
-
             - `BetaPlainTextSource`
+
+              - `type: "text"`
 
               - `data: string`
 
               - `media_type: "text/plain"`
 
-              - `type: "text"`
-
             - `BetaContentBlockSource`
+
+              - `type: "content"`
 
               - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -6450,8 +6471,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   - `BetaImageBlockParam`
 
-              - `type: "content"`
-
             - `BetaURLPDFSource`
 
               - `type: "url"`
@@ -6460,11 +6479,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `BetaFileDocumentSource`
 
-              - `file_id: string`
-
               - `type: "file"`
 
-          - `type: "document"`
+              - `file_id: string`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6484,13 +6501,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaSearchResultBlockParam`
 
+          - `type: "search_result"`
+
           - `content: Array<BetaTextBlockParam>`
+
+            - `type: "text"`
 
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6502,8 +6521,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `title: string`
 
-          - `type: "search_result"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -6511,6 +6528,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `citations?: BetaCitationsConfigParam`
 
         - `BetaThinkingBlockParam`
+
+          - `type: "thinking"`
 
           - `signature: string`
 
@@ -6522,17 +6541,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `thinking` text of this block as returned by the API.
 
-          - `type: "thinking"`
-
         - `BetaRedactedThinkingBlockParam`
+
+          - `type: "redacted_thinking"`
 
           - `data: string`
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `type: "redacted_thinking"`
-
         - `BetaToolUseBlockParam`
+
+          - `type: "tool_use"`
 
           - `id: string`
 
@@ -6543,8 +6562,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `name: string`
 
             maxLength: 200, minLength: 1
-
-          - `type: "tool_use"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6564,19 +6581,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `BetaServerToolCaller20260120`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `toolset_name?: string | null`
 
@@ -6586,11 +6603,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaToolResultBlockParam`
 
+          - `type: "tool_result"`
+
           - `tool_use_id: string`
 
             pattern: ^[a-zA-Z0-9_-]+$
-
-          - `type: "tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6614,11 +6631,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Tool reference block that can be included in tool_result content.
 
+                - `type: "tool_reference"`
+
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `type: "tool_reference"`
 
                 - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6633,6 +6650,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                 At most one per `tool_result`, only on a non-error result answering a
                 browser toolset member `tool_use`. The server renders the
                 model-visible text from it; the model never sees the raw fields.
+
+                - `type: "browser_state"`
 
                 - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -6662,8 +6681,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `type: "browser_state"`
-
                 - `cache_control?: BetaCacheControlEphemeral | null`
 
                   Create a cache control breakpoint at this content block.
@@ -6684,25 +6701,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                     during a failed call gets no deferred `tab_opened`; it simply appears
                     in the next result's `tabs` inventory.
 
+                    - `type: "tab_opened"`
+
                     - `tab_id: string`
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `type: "tab_opened"`
-
                   - `BetaBrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
+
+                    - `type: "download_started"`
 
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_started"`
 
                     - `url: string`
 
@@ -6717,13 +6734,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                     `download_started`, when the download finished during the call that
                     started it (at most one state change per `download_id` per result).
 
+                    - `type: "download_completed"`
+
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_completed"`
 
                     - `url: string`
 
@@ -6747,13 +6764,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     A file download that failed — or was cancelled — during this call.
 
+                    - `type: "download_failed"`
+
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_failed"`
 
                     - `url: string`
 
@@ -6776,6 +6793,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `BetaServerToolUseBlockParam`
+
+          - `type: "server_tool_use"`
 
           - `id: string`
 
@@ -6801,8 +6820,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -6823,21 +6840,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaWebSearchToolResultBlockParam`
 
+          - `type: "web_search_tool_result"`
+
           - `content: BetaWebSearchToolResultBlockParamContent`
 
             - `Array<BetaWebSearchResultBlockParam>`
 
+              - `type: "web_search_result"`
+
               - `encrypted_content: string`
 
               - `title: string`
-
-              - `type: "web_search_result"`
 
               - `url: string`
 
               - `page_age?: string | null`
 
             - `BetaWebSearchToolRequestError`
+
+              - `type: "web_search_tool_result_error"`
 
               - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -6853,13 +6874,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_search_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6881,9 +6898,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaWebFetchToolResultBlockParam`
 
+          - `type: "web_fetch_tool_result"`
+
           - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
             - `BetaWebFetchToolResultErrorBlockParam`
+
+              - `type: "web_fetch_tool_result_error"`
 
               - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -6905,13 +6926,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
+                - `"content_too_large"`
 
             - `BetaWebFetchBlockParam`
 
-              - `content: BetaRequestDocumentBlock`
-
               - `type: "web_fetch_result"`
+
+              - `content: BetaRequestDocumentBlock`
 
               - `url: string`
 
@@ -6924,8 +6945,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_fetch_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -6947,9 +6966,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaAdvisorToolResultBlockParam`
 
+          - `type: "advisor_tool_result"`
+
           - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
             - `BetaAdvisorToolResultErrorParam`
+
+              - `type: "advisor_tool_result_error"`
 
               - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -6967,23 +6990,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"model_not_found"`
 
-              - `type: "advisor_tool_result_error"`
-
             - `BetaAdvisorResultBlockParam`
 
-              - `text: string`
-
               - `type: "advisor_result"`
+
+              - `text: string`
 
               - `stop_reason?: string | null`
 
             - `BetaAdvisorRedactedResultBlockParam`
 
+              - `type: "advisor_redacted_result"`
+
               - `encrypted_content: string`
 
                 Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-              - `type: "advisor_redacted_result"`
 
               - `stop_reason?: string | null`
 
@@ -6991,19 +7012,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "advisor_tool_result"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
         - `BetaCodeExecutionToolResultBlockParam`
 
+          - `type: "code_execution_tool_result"`
+
           - `content: BetaCodeExecutionToolResultBlockParamContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `BetaCodeExecutionToolResultErrorParam`
+
+              - `type: "code_execution_tool_result_error"`
 
               - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -7015,15 +7038,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
             - `BetaCodeExecutionResultBlockParam`
+
+              - `type: "code_execution_result"`
 
               - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -7031,17 +7054,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
             - `BetaEncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `type: "encrypted_code_execution_result"`
+
               - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -7049,13 +7072,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7063,9 +7082,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaBashCodeExecutionToolResultBlockParam`
 
+          - `type: "bash_code_execution_tool_result"`
+
           - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
             - `BetaBashCodeExecutionToolResultErrorParam`
+
+              - `type: "bash_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -7079,15 +7102,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
             - `BetaBashCodeExecutionResultBlockParam`
+
+              - `type: "bash_code_execution_result"`
 
               - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "bash_code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -7095,13 +7118,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "bash_code_execution_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7109,9 +7128,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+          - `type: "text_editor_code_execution_tool_result"`
+
           - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
             - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -7125,11 +7148,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"file_not_found"`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
               - `error_message?: string | null`
 
             - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+              - `type: "text_editor_code_execution_view_result"`
 
               - `content: string`
 
@@ -7141,8 +7164,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"pdf"`
 
-              - `type: "text_editor_code_execution_view_result"`
-
               - `num_lines?: number | null`
 
               - `start_line?: number | null`
@@ -7151,9 +7172,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-              - `is_file_update: boolean`
-
               - `type: "text_editor_code_execution_create_result"`
+
+              - `is_file_update: boolean`
 
             - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -7173,17 +7194,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
         - `BetaToolSearchToolResultBlockParam`
 
+          - `type: "tool_search_tool_result"`
+
           - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
             - `BetaToolSearchToolResultErrorParam`
+
+              - `type: "tool_search_tool_result_error"`
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -7195,37 +7218,35 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"execution_time_exceeded"`
 
-              - `type: "tool_search_tool_result_error"`
-
               - `error_message?: string | null`
 
             - `BetaToolSearchToolSearchResultBlockParam`
 
+              - `type: "tool_search_tool_search_result"`
+
               - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+                - `type: "tool_reference"`
 
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `type: "tool_reference"`
-
                 - `cache_control?: BetaCacheControlEphemeral | null`
 
                   Create a cache control breakpoint at this content block.
 
-              - `type: "tool_search_tool_search_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "tool_search_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
         - `BetaMCPToolUseBlockParam`
+
+          - `type: "mcp_tool_use"`
 
           - `id: string`
 
@@ -7239,19 +7260,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The name of the MCP server
 
-          - `type: "mcp_tool_use"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
         - `BetaRequestMCPToolResultBlockParam`
 
+          - `type: "mcp_tool_result"`
+
           - `tool_use_id: string`
 
             pattern: ^[a-zA-Z0-9_-]+$
-
-          - `type: "mcp_tool_result"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7263,11 +7282,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `Array<BetaTextBlockParam>`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7282,9 +7301,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
+
+          - `file_id: string`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7322,6 +7341,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `type: "tool_addition"`
+
           - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
             Reference to a single tool the caller declared directly in
@@ -7336,32 +7357,30 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               server assigns to MCP-resolved tools — use `mcp_tool_reference` or
               `mcp_toolset_reference` for those.
 
+              - `type: "tool_reference"`
+
               - `name: string`
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-              - `type: "tool_reference"`
 
             - `BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
+              - `type: "mcp_tool_reference"`
+
               - `name: string`
 
               - `server_name: string`
-
-              - `type: "mcp_tool_reference"`
 
             - `BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
-              - `server_name: string`
-
               - `type: "mcp_toolset_reference"`
 
-          - `type: "tool_addition"`
+              - `server_name: string`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7375,6 +7394,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
 
+          - `type: "tool_removal"`
+
           - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
             Reference to a single tool the caller declared directly in
@@ -7397,8 +7418,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             - `BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
-
-          - `type: "tool_removal"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7419,6 +7438,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           request is rejected), and moving it into the middle of a single run is
           likewise rejected; between non-thinking blocks the block's placement has
           no validation effect.
+
+          - `type: "fallback"`
 
           - `from: BetaFallbackInfoParam`
 
@@ -7505,8 +7526,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `to: BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
-
-          - `type: "fallback"`
 
           - `trigger?: unknown`
 
@@ -7676,9 +7695,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     maxItems: 20
 
-    - `name: string`
-
     - `type: "url"`
+
+    - `name: string`
 
     - `url: string`
 
@@ -7712,25 +7731,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+      - `type: "json_schema"`
+
       - `schema: Record<string, unknown>`
 
         The JSON schema of the format
 
-      - `type: "json_schema"`
-
     - `task_budget?: BetaTokenTaskBudget | null`
 
       User-configurable total token budget across contexts.
+
+      - `type: "tokens"`
+
+        The budget type. Currently only 'tokens' is supported.
 
       - `total: number`
 
         Total token budget across all contexts in the session.
 
         minimum: 1024
-
-      - `type: "tokens"`
-
-        The budget type. Currently only 'tokens' is supported.
 
       - `remaining?: number | null`
 
@@ -7756,11 +7775,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `Array<BetaTextBlockParam>`
 
+      - `type: "text"`
+
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -7778,6 +7797,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaThinkingConfigEnabled`
 
+      - `type: "enabled"`
+
       - `budget_tokens: number`
 
         Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -7787,8 +7808,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
         minimum: 1024
-
-      - `type: "enabled"`
 
       - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -7874,11 +7893,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The model will use the specified tool with `tool_choice.name`.
 
+      - `type: "tool"`
+
       - `name: string`
 
         The name of the tool to use.
-
-      - `type: "tool"`
 
       - `disable_parallel_tool_use?: boolean`
 
@@ -7958,6 +7977,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaTool`
 
+      - `type?: "custom" | null`
+
       - `input_schema: InputSchema`
 
         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -8012,17 +8033,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `type?: "custom" | null`
-
     - `BetaToolBash20241022`
+
+      - `type: "bash_20241022"`
 
       - `name: "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "bash_20241022"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8050,13 +8069,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolBash20250124`
 
+      - `type: "bash_20250124"`
+
       - `name: "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "bash_20250124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8084,13 +8103,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaCodeExecutionTool20250522`
 
+      - `type: "code_execution_20250522"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20250522"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8116,13 +8135,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaCodeExecutionTool20250825`
 
+      - `type: "code_execution_20250825"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20250825"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8150,13 +8169,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+      - `type: "code_execution_20260120"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20260120"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8184,13 +8203,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence.
 
+      - `type: "code_execution_20260521"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20260521"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8235,6 +8254,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `type?: BetaBrowserTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -8572,18 +8603,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type?: BetaBrowserTypeConfig | null`
-
-          `type`'s config overrides.
-
-          - `defer_loading?: boolean | null`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `enabled?: boolean | null`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `wait?: BetaBrowserWaitConfig | null`
 
           `wait`'s config overrides.
@@ -8610,6 +8629,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolComputerUse20241022`
 
+      - `type: "computer_20241022"`
+
       - `display_height_px: number`
 
         The height of the display in pixels.
@@ -8627,8 +8648,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "computer_20241022"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8662,13 +8681,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaMemoryTool20250818`
 
+      - `type: "memory_20250818"`
+
       - `name: "memory"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "memory_20250818"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8696,6 +8715,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolComputerUse20250124`
 
+      - `type: "computer_20250124"`
+
       - `display_height_px: number`
 
         The height of the display in pixels.
@@ -8713,8 +8734,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "computer_20250124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8748,13 +8767,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolTextEditor20241022`
 
+      - `type: "text_editor_20241022"`
+
       - `name: "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20241022"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8782,6 +8801,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolComputerUse20251124`
 
+      - `type: "computer_20251124"`
+
       - `display_height_px: number`
 
         The height of the display in pixels.
@@ -8799,8 +8820,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "computer_20251124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -8861,6 +8880,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `type?: BetaComputerTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
@@ -9030,18 +9061,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type?: BetaComputerTypeConfig | null`
-
-          `type`'s config overrides.
-
-          - `defer_loading?: boolean | null`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `enabled?: boolean | null`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `wait?: BetaComputerWaitConfig | null`
 
           `wait`'s config overrides.
@@ -9068,13 +9087,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolTextEditor20250124`
 
+      - `type: "text_editor_20250124"`
+
       - `name: "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9102,13 +9121,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolTextEditor20250429`
 
+      - `type: "text_editor_20250429"`
+
       - `name: "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250429"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9136,13 +9155,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolTextEditor20250728`
 
+      - `type: "text_editor_20250728"`
+
       - `name: "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250728"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9176,13 +9195,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebSearchTool20250305`
 
+      - `type: "web_search_20250305"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20250305"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9252,13 +9271,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebFetchTool20250910`
 
+      - `type: "web_fetch_20250910"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20250910"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9308,13 +9327,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebSearchTool20260209`
 
+      - `type: "web_search_20260209"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20260209"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9358,13 +9377,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebFetchTool20260209`
 
+      - `type: "web_fetch_20260209"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260209"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9416,13 +9435,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
+      - `type: "web_fetch_20260309"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260309"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9476,13 +9495,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebSearchTool20260318`
 
+      - `type: "web_search_20260318"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20260318"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9534,13 +9553,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaWebFetchTool20260318`
 
+      - `type: "web_fetch_20260318"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260318"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9602,6 +9621,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaAdvisorTool20260301`
 
+      - `type: "advisor_20260301"`
+
       - `model: Model`
 
         The model that will complete your prompt.
@@ -9613,8 +9634,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "advisor_20260301"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9656,17 +9675,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolSearchToolBm25_20251119`
 
-      - `name: "tool_search_tool_bm25"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
         - `"tool_search_tool_bm25_20251119"`
 
         - `"tool_search_tool_bm25"`
+
+      - `name: "tool_search_tool_bm25"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9692,17 +9711,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `BetaToolSearchToolRegex20251119`
 
-      - `name: "tool_search_tool_regex"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
         - `"tool_search_tool_regex_20251119"`
 
         - `"tool_search_tool_regex"`
+
+      - `name: "tool_search_tool_regex"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9733,13 +9752,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
+      - `type: "mcp_toolset"`
+
       - `mcp_server_name: string`
 
         Name of the MCP server to configure tools for
 
         maxLength: 255, minLength: 1
-
-      - `type: "mcp_toolset"`
 
       - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -9767,7 +9786,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -9815,6 +9834,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -9860,6 +9881,12 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
   - `user_profile_id?: string`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `output_format?: BetaJSONOutputFormat | null`
 
@@ -9920,6 +9947,12 @@ console.log(betaMessageTokensCount.context_management);
 - `BetaAdvisorMessageIterationUsage`
 
   Token usage for an advisor sub-inference iteration.
+
+  - `type: "advisor_message"`
+
+    Usage for an advisor sub-inference iteration
+
+    default: advisor_message
 
   - `cache_creation: BetaCacheCreation | null`
 
@@ -10039,15 +10072,13 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "advisor_message"`
-
-    Usage for an advisor sub-inference iteration
-
-    default: advisor_message
-
 ### Beta Advisor Redacted Result Block
 
 - `BetaAdvisorRedactedResultBlock`
+
+  - `type: "advisor_redacted_result"`
+
+    default: advisor_redacted_result
 
   - `encrypted_content: string`
 
@@ -10057,19 +10088,15 @@ console.log(betaMessageTokensCount.context_management);
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-  - `type: "advisor_redacted_result"`
-
-    default: advisor_redacted_result
-
 ### Beta Advisor Redacted Result Block Param
 
 - `BetaAdvisorRedactedResultBlockParam`
 
+  - `type: "advisor_redacted_result"`
+
   - `encrypted_content: string`
 
     Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-  - `type: "advisor_redacted_result"`
 
   - `stop_reason?: string | null`
 
@@ -10077,29 +10104,31 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaAdvisorResultBlock`
 
+  - `type: "advisor_result"`
+
+    default: advisor_result
+
   - `stop_reason: string | null`
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `text: string`
 
-  - `type: "advisor_result"`
-
-    default: advisor_result
-
 ### Beta Advisor Result Block Param
 
 - `BetaAdvisorResultBlockParam`
 
-  - `text: string`
-
   - `type: "advisor_result"`
+
+  - `text: string`
 
   - `stop_reason?: string | null`
 
 ### Beta Advisor Tool 20260301
 
 - `BetaAdvisorTool20260301`
+
+  - `type: "advisor_20260301"`
 
   - `model: Model`
 
@@ -10185,8 +10214,6 @@ console.log(betaMessageTokensCount.context_management);
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-  - `type: "advisor_20260301"`
-
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
     - `"direct"`
@@ -10246,9 +10273,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaAdvisorToolResultBlock`
 
+  - `type: "advisor_tool_result"`
+
+    default: advisor_tool_result
+
   - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
     - `BetaAdvisorToolResultError`
+
+      - `type: "advisor_tool_result_error"`
+
+        default: advisor_tool_result_error
 
       - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -10266,11 +10301,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"model_not_found"`
 
-      - `type: "advisor_tool_result_error"`
-
-        default: advisor_tool_result_error
-
     - `BetaAdvisorResultBlock`
+
+      - `type: "advisor_result"`
+
+        default: advisor_result
 
       - `stop_reason: string | null`
 
@@ -10278,11 +10313,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `text: string`
 
-      - `type: "advisor_result"`
-
-        default: advisor_result
-
     - `BetaAdvisorRedactedResultBlock`
+
+      - `type: "advisor_redacted_result"`
+
+        default: advisor_redacted_result
 
       - `encrypted_content: string`
 
@@ -10292,25 +10327,21 @@ console.log(betaMessageTokensCount.context_management);
 
         The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-      - `type: "advisor_redacted_result"`
-
-        default: advisor_redacted_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "advisor_tool_result"`
-
-    default: advisor_tool_result
 
 ### Beta Advisor Tool Result Block Param
 
 - `BetaAdvisorToolResultBlockParam`
 
+  - `type: "advisor_tool_result"`
+
   - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
     - `BetaAdvisorToolResultErrorParam`
+
+      - `type: "advisor_tool_result_error"`
 
       - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -10328,31 +10359,27 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"model_not_found"`
 
-      - `type: "advisor_tool_result_error"`
-
     - `BetaAdvisorResultBlockParam`
 
-      - `text: string`
-
       - `type: "advisor_result"`
+
+      - `text: string`
 
       - `stop_reason?: string | null`
 
     - `BetaAdvisorRedactedResultBlockParam`
 
+      - `type: "advisor_redacted_result"`
+
       - `encrypted_content: string`
 
         Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-      - `type: "advisor_redacted_result"`
 
       - `stop_reason?: string | null`
 
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "advisor_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -10379,6 +10406,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaAdvisorToolResultError`
 
+  - `type: "advisor_tool_result_error"`
+
+    default: advisor_tool_result_error
+
   - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
     - `"max_uses_exceeded"`
@@ -10394,15 +10425,13 @@ console.log(betaMessageTokensCount.context_management);
     - `"execution_time_exceeded"`
 
     - `"model_not_found"`
-
-  - `type: "advisor_tool_result_error"`
-
-    default: advisor_tool_result_error
 
 ### Beta Advisor Tool Result Error Param
 
 - `BetaAdvisorToolResultErrorParam`
 
+  - `type: "advisor_tool_result_error"`
+
   - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
     - `"max_uses_exceeded"`
@@ -10418,8 +10447,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"execution_time_exceeded"`
 
     - `"model_not_found"`
-
-  - `type: "advisor_tool_result_error"`
 
 ### Beta All Thinking Turns
 
@@ -10430,6 +10457,8 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Base64 Image Source
 
 - `BetaBase64ImageSource`
+
+  - `type: "base64"`
 
   - `data: string`
 
@@ -10445,11 +10474,11 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"image/webp"`
 
-  - `type: "base64"`
-
 ### Beta Base64 PDF Source
 
 - `BetaBase64PDFSource`
+
+  - `type: "base64"`
 
   - `data: string`
 
@@ -10457,57 +10486,57 @@ console.log(betaMessageTokensCount.context_management);
 
   - `media_type: "application/pdf"`
 
-  - `type: "base64"`
-
 ### Beta Bash Code Execution Output Block
 
 - `BetaBashCodeExecutionOutputBlock`
-
-  - `file_id: string`
 
   - `type: "bash_code_execution_output"`
 
     default: bash_code_execution_output
 
+  - `file_id: string`
+
 ### Beta Bash Code Execution Output Block Param
 
 - `BetaBashCodeExecutionOutputBlockParam`
 
-  - `file_id: string`
-
   - `type: "bash_code_execution_output"`
+
+  - `file_id: string`
 
 ### Beta Bash Code Execution Result Block
 
 - `BetaBashCodeExecutionResultBlock`
 
-  - `content: Array<BetaBashCodeExecutionOutputBlock>`
+  - `type: "bash_code_execution_result"`
 
-    - `file_id: string`
+    default: bash_code_execution_result
+
+  - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
     - `type: "bash_code_execution_output"`
 
       default: bash_code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "bash_code_execution_result"`
-
-    default: bash_code_execution_result
 
 ### Beta Bash Code Execution Result Block Param
 
 - `BetaBashCodeExecutionResultBlockParam`
 
+  - `type: "bash_code_execution_result"`
+
   - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "bash_code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -10515,67 +10544,21 @@ console.log(betaMessageTokensCount.context_management);
 
   - `stdout: string`
 
-  - `type: "bash_code_execution_result"`
-
 ### Beta Bash Code Execution Tool Result Block
 
 - `BetaBashCodeExecutionToolResultBlock`
-
-  - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
-
-    - `BetaBashCodeExecutionToolResultError`
-
-      - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
-
-        - `"invalid_tool_input"`
-
-        - `"unavailable"`
-
-        - `"too_many_requests"`
-
-        - `"execution_time_exceeded"`
-
-        - `"output_file_too_large"`
-
-      - `type: "bash_code_execution_tool_result_error"`
-
-        default: bash_code_execution_tool_result_error
-
-    - `BetaBashCodeExecutionResultBlock`
-
-      - `content: Array<BetaBashCodeExecutionOutputBlock>`
-
-        - `file_id: string`
-
-        - `type: "bash_code_execution_output"`
-
-          default: bash_code_execution_output
-
-      - `return_code: number`
-
-      - `stderr: string`
-
-      - `stdout: string`
-
-      - `type: "bash_code_execution_result"`
-
-        default: bash_code_execution_result
-
-  - `tool_use_id: string`
-
-    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `type: "bash_code_execution_tool_result"`
 
     default: bash_code_execution_tool_result
 
-### Beta Bash Code Execution Tool Result Block Param
+  - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
-- `BetaBashCodeExecutionToolResultBlockParam`
+    - `BetaBashCodeExecutionToolResultError`
 
-  - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
+      - `type: "bash_code_execution_tool_result_error"`
 
-    - `BetaBashCodeExecutionToolResultErrorParam`
+        default: bash_code_execution_tool_result_error
 
       - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -10589,15 +10572,19 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"output_file_too_large"`
 
-      - `type: "bash_code_execution_tool_result_error"`
+    - `BetaBashCodeExecutionResultBlock`
 
-    - `BetaBashCodeExecutionResultBlockParam`
+      - `type: "bash_code_execution_result"`
 
-      - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
+        default: bash_code_execution_result
 
-        - `file_id: string`
+      - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
         - `type: "bash_code_execution_output"`
+
+          default: bash_code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -10605,13 +10592,53 @@ console.log(betaMessageTokensCount.context_management);
 
       - `stdout: string`
 
-      - `type: "bash_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
+### Beta Bash Code Execution Tool Result Block Param
+
+- `BetaBashCodeExecutionToolResultBlockParam`
+
   - `type: "bash_code_execution_tool_result"`
+
+  - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
+
+    - `BetaBashCodeExecutionToolResultErrorParam`
+
+      - `type: "bash_code_execution_tool_result_error"`
+
+      - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
+
+        - `"invalid_tool_input"`
+
+        - `"unavailable"`
+
+        - `"too_many_requests"`
+
+        - `"execution_time_exceeded"`
+
+        - `"output_file_too_large"`
+
+    - `BetaBashCodeExecutionResultBlockParam`
+
+      - `type: "bash_code_execution_result"`
+
+      - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
+
+        - `type: "bash_code_execution_output"`
+
+        - `file_id: string`
+
+      - `return_code: number`
+
+      - `stderr: string`
+
+      - `stdout: string`
+
+  - `tool_use_id: string`
+
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -10638,6 +10665,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaBashCodeExecutionToolResultError`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
+    default: bash_code_execution_tool_result_error
+
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
     - `"invalid_tool_input"`
@@ -10649,15 +10680,13 @@ console.log(betaMessageTokensCount.context_management);
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
-
-    default: bash_code_execution_tool_result_error
 
 ### Beta Bash Code Execution Tool Result Error Param
 
 - `BetaBashCodeExecutionToolResultErrorParam`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
     - `"invalid_tool_input"`
@@ -10669,8 +10698,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
 
 ### Beta Browser Close Tab Config
 
@@ -11048,6 +11075,8 @@ console.log(betaMessageTokensCount.context_management);
   browser toolset member `tool_use`. The server renders the
   model-visible text from it; the model never sees the raw fields.
 
+  - `type: "browser_state"`
+
   - `tabs: Array<BetaBrowserStateTabEntry>`
 
     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
@@ -11075,8 +11104,6 @@ console.log(betaMessageTokensCount.context_management);
     - `active?: boolean`
 
       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
-
-  - `type: "browser_state"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -11115,25 +11142,25 @@ console.log(betaMessageTokensCount.context_management);
       during a failed call gets no deferred `tab_opened`; it simply appears
       in the next result's `tabs` inventory.
 
+      - `type: "tab_opened"`
+
       - `tab_id: string`
 
         The `tab_id` of the opened tab, present in `tabs`.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `type: "tab_opened"`
-
     - `BetaBrowserStateChangeDownloadStarted`
 
       A file download that started during this call.
+
+      - `type: "download_started"`
 
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_started"`
 
       - `url: string`
 
@@ -11148,13 +11175,13 @@ console.log(betaMessageTokensCount.context_management);
       `download_started`, when the download finished during the call that
       started it (at most one state change per `download_id` per result).
 
+      - `type: "download_completed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_completed"`
 
       - `url: string`
 
@@ -11178,13 +11205,13 @@ console.log(betaMessageTokensCount.context_management);
 
       A file download that failed — or was cancelled — during this call.
 
+      - `type: "download_failed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_failed"`
 
       - `url: string`
 
@@ -11220,25 +11247,25 @@ console.log(betaMessageTokensCount.context_management);
     during a failed call gets no deferred `tab_opened`; it simply appears
     in the next result's `tabs` inventory.
 
+    - `type: "tab_opened"`
+
     - `tab_id: string`
 
       The `tab_id` of the opened tab, present in `tabs`.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type: "tab_opened"`
-
   - `BetaBrowserStateChangeDownloadStarted`
 
     A file download that started during this call.
+
+    - `type: "download_started"`
 
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_started"`
 
     - `url: string`
 
@@ -11253,13 +11280,13 @@ console.log(betaMessageTokensCount.context_management);
     `download_started`, when the download finished during the call that
     started it (at most one state change per `download_id` per result).
 
+    - `type: "download_completed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_completed"`
 
     - `url: string`
 
@@ -11283,13 +11310,13 @@ console.log(betaMessageTokensCount.context_management);
 
     A file download that failed — or was cancelled — during this call.
 
+    - `type: "download_failed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_failed"`
 
     - `url: string`
 
@@ -11312,13 +11339,13 @@ console.log(betaMessageTokensCount.context_management);
   `download_started`, when the download finished during the call that
   started it (at most one state change per `download_id` per result).
 
+  - `type: "download_completed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_completed"`
 
   - `url: string`
 
@@ -11344,13 +11371,13 @@ console.log(betaMessageTokensCount.context_management);
 
   A file download that failed — or was cancelled — during this call.
 
+  - `type: "download_failed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_failed"`
 
   - `url: string`
 
@@ -11370,13 +11397,13 @@ console.log(betaMessageTokensCount.context_management);
 
   A file download that started during this call.
 
+  - `type: "download_started"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_started"`
 
   - `url: string`
 
@@ -11396,13 +11423,13 @@ console.log(betaMessageTokensCount.context_management);
   during a failed call gets no deferred `tab_opened`; it simply appears
   in the next result's `tabs` inventory.
 
+  - `type: "tab_opened"`
+
   - `tab_id: string`
 
     The `tab_id` of the opened tab, present in `tabs`.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "tab_opened"`
 
 ### Beta Browser State Tab Entry
 
@@ -11493,6 +11520,18 @@ console.log(betaMessageTokensCount.context_management);
     accepted key, and a member's defaults apply wherever its key is
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
+
+    - `type?: BetaBrowserTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -11830,18 +11869,6 @@ console.log(betaMessageTokensCount.context_management);
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type?: BetaBrowserTypeConfig | null`
-
-      `type`'s config overrides.
-
-      - `defer_loading?: boolean | null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled?: boolean | null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait?: BetaBrowserWaitConfig | null`
 
       `wait`'s config overrides.
@@ -11876,6 +11903,18 @@ console.log(betaMessageTokensCount.context_management);
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type?: BetaBrowserTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -12213,18 +12252,6 @@ console.log(betaMessageTokensCount.context_management);
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type?: BetaBrowserTypeConfig | null`
-
-    `type`'s config overrides.
-
-    - `defer_loading?: boolean | null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled?: boolean | null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait?: BetaBrowserWaitConfig | null`
 
     `wait`'s config overrides.
@@ -12346,25 +12373,25 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCacheMissMessagesChanged`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "messages_changed"`
 
     default: messages_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Model Changed
 
 - `BetaCacheMissModelChanged`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "model_changed"`
 
     default: model_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Previous Message Not Found
 
@@ -12378,25 +12405,25 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCacheMissSystemChanged`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "system_changed"`
 
     default: system_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Tools Changed
 
 - `BetaCacheMissToolsChanged`
 
-  - `cache_missed_input_tokens: number`
-
-    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
   - `type: "tools_changed"`
 
     default: tools_changed
+
+  - `cache_missed_input_tokens: number`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
 ### Beta Cache Miss Unavailable
 
@@ -12410,6 +12437,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCitationCharLocation`
 
+  - `type: "char_location"`
+
+    default: char_location
+
   - `cited_text: string`
 
   - `document_index: number`
@@ -12426,13 +12457,11 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "char_location"`
-
-    default: char_location
-
 ### Beta Citation Char Location Param
 
 - `BetaCitationCharLocationParam`
+
+  - `type: "char_location"`
 
   - `cited_text: string`
 
@@ -12449,8 +12478,6 @@ console.log(betaMessageTokensCount.context_management);
   - `start_char_index: number`
 
     minimum: 0
-
-  - `type: "char_location"`
 
 ### Beta Citation Config
 
@@ -12464,6 +12491,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCitationContentBlockLocation`
 
+  - `type: "content_block_location"`
+
+    default: content_block_location
+
   - `cited_text: string`
 
     The full text of the cited block range, concatenated.
@@ -12489,15 +12520,13 @@ console.log(betaMessageTokensCount.context_management);
     0-based index of the first cited block in the source's `content` array.
 
     minimum: 0
-
-  - `type: "content_block_location"`
-
-    default: content_block_location
 
 ### Beta Citation Content Block Location Param
 
 - `BetaCitationContentBlockLocationParam`
 
+  - `type: "content_block_location"`
+
   - `cited_text: string`
 
     The full text of the cited block range, concatenated.
@@ -12524,11 +12553,13 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "content_block_location"`
-
 ### Beta Citation Page Location
 
 - `BetaCitationPageLocation`
+
+  - `type: "page_location"`
+
+    default: page_location
 
   - `cited_text: string`
 
@@ -12546,13 +12577,11 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 1
 
-  - `type: "page_location"`
-
-    default: page_location
-
 ### Beta Citation Page Location Param
 
 - `BetaCitationPageLocationParam`
+
+  - `type: "page_location"`
 
   - `cited_text: string`
 
@@ -12570,49 +12599,49 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 1
 
-  - `type: "page_location"`
-
 ### Beta Citation Search Result Location
 
 - `BetaCitationSearchResultLocation`
-
-  - `cited_text: string`
-
-    The full text of the cited block range, concatenated.
-
-    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-  - `end_block_index: number`
-
-    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-  - `search_result_index: number`
-
-    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-    Counted separately from `document_index`; server-side web search results are not included in this count.
-
-    minimum: 0
-
-  - `source: string`
-
-  - `start_block_index: number`
-
-    0-based index of the first cited block in the source's `content` array.
-
-    minimum: 0
-
-  - `title: string | null`
 
   - `type: "search_result_location"`
 
     default: search_result_location
 
+  - `cited_text: string`
+
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+  - `end_block_index: number`
+
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+  - `search_result_index: number`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
+
+    minimum: 0
+
+  - `source: string`
+
+  - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
+
+    minimum: 0
+
+  - `title: string | null`
+
 ### Beta Citation Search Result Location Param
 
 - `BetaCitationSearchResultLocationParam`
+
+  - `type: "search_result_location"`
 
   - `cited_text: string`
 
@@ -12644,11 +12673,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `title: string | null`
 
-  - `type: "search_result_location"`
-
 ### Beta Citation Web Search Result Location Param
 
 - `BetaCitationWebSearchResultLocationParam`
+
+  - `type: "web_search_result_location"`
 
   - `cited_text: string`
 
@@ -12657,8 +12686,6 @@ console.log(betaMessageTokensCount.context_management);
   - `title: string | null`
 
     maxLength: 512, minLength: 1
-
-  - `type: "web_search_result_location"`
 
   - `url: string`
 
@@ -12674,9 +12701,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCitationsDelta`
 
+  - `type: "citations_delta"`
+
+    default: citations_delta
+
   - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
     - `BetaCitationCharLocation`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -12694,11 +12729,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `BetaCitationPageLocation`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -12716,11 +12751,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `BetaCitationContentBlockLocation`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -12748,11 +12783,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `BetaCitationsWebSearchResultLocation`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -12762,13 +12797,13 @@ console.log(betaMessageTokensCount.context_management);
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `BetaCitationSearchResultLocation`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -12800,17 +12835,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
-  - `type: "citations_delta"`
-
-    default: citations_delta
-
 ### Beta Citations Web Search Result Location
 
 - `BetaCitationsWebSearchResultLocation`
+
+  - `type: "web_search_result_location"`
+
+    default: web_search_result_location
 
   - `cited_text: string`
 
@@ -12819,10 +12850,6 @@ console.log(betaMessageTokensCount.context_management);
   - `title: string | null`
 
     maxLength: 512
-
-  - `type: "web_search_result_location"`
-
-    default: web_search_result_location
 
   - `url: string`
 
@@ -12856,6 +12883,12 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaClearThinking20251015EditResponse`
 
+  - `type: "clear_thinking_20251015"`
+
+    The type of context management edit applied.
+
+    default: clear_thinking_20251015
+
   - `cleared_input_tokens: number`
 
     Number of input tokens cleared by this edit.
@@ -12867,12 +12900,6 @@ console.log(betaMessageTokensCount.context_management);
     Number of thinking turns that were cleared.
 
     minimum: 0
-
-  - `type: "clear_thinking_20251015"`
-
-    The type of context management edit applied.
-
-    default: clear_thinking_20251015
 
 ### Beta Clear Tool Uses 20250919 Edit
 
@@ -12936,6 +12963,12 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaClearToolUses20250919EditResponse`
 
+  - `type: "clear_tool_uses_20250919"`
+
+    The type of context management edit applied.
+
+    default: clear_tool_uses_20250919
+
   - `cleared_input_tokens: number`
 
     Number of input tokens cleared by this edit.
@@ -12948,61 +12981,57 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "clear_tool_uses_20250919"`
-
-    The type of context management edit applied.
-
-    default: clear_tool_uses_20250919
-
 ### Beta Code Execution Output Block
 
 - `BetaCodeExecutionOutputBlock`
-
-  - `file_id: string`
 
   - `type: "code_execution_output"`
 
     default: code_execution_output
 
+  - `file_id: string`
+
 ### Beta Code Execution Output Block Param
 
 - `BetaCodeExecutionOutputBlockParam`
 
-  - `file_id: string`
-
   - `type: "code_execution_output"`
+
+  - `file_id: string`
 
 ### Beta Code Execution Result Block
 
 - `BetaCodeExecutionResultBlock`
 
-  - `content: Array<BetaCodeExecutionOutputBlock>`
+  - `type: "code_execution_result"`
 
-    - `file_id: string`
+    default: code_execution_result
+
+  - `content: Array<BetaCodeExecutionOutputBlock>`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "code_execution_result"`
-
-    default: code_execution_result
 
 ### Beta Code Execution Result Block Param
 
 - `BetaCodeExecutionResultBlockParam`
 
+  - `type: "code_execution_result"`
+
   - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -13010,19 +13039,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `stdout: string`
 
-  - `type: "code_execution_result"`
-
 ### Beta Code Execution Tool 20250522
 
 - `BetaCodeExecutionTool20250522`
+
+  - `type: "code_execution_20250522"`
 
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250522"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -13067,13 +13094,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCodeExecutionTool20250825`
 
+  - `type: "code_execution_20250825"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250825"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -13120,13 +13147,13 @@ console.log(betaMessageTokensCount.context_management);
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+  - `type: "code_execution_20260120"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260120"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -13173,13 +13200,13 @@ console.log(betaMessageTokensCount.context_management);
 
   Code execution tool with REPL state persistence.
 
+  - `type: "code_execution_20260521"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260521"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -13224,11 +13251,19 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCodeExecutionToolResultBlock`
 
+  - `type: "code_execution_tool_result"`
+
+    default: code_execution_tool_result
+
   - `content: BetaCodeExecutionToolResultBlockContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
     - `BetaCodeExecutionToolResultError`
+
+      - `type: "code_execution_tool_result_error"`
+
+        default: code_execution_tool_result_error
 
       - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13240,19 +13275,19 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
-        default: code_execution_tool_result_error
-
     - `BetaCodeExecutionResultBlock`
 
-      - `content: Array<BetaCodeExecutionOutputBlock>`
+      - `type: "code_execution_result"`
 
-        - `file_id: string`
+        default: code_execution_result
+
+      - `content: Array<BetaCodeExecutionOutputBlock>`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -13260,21 +13295,21 @@ console.log(betaMessageTokensCount.context_management);
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
-        default: code_execution_result
-
     - `BetaEncryptedCodeExecutionResultBlock`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
-      - `content: Array<BetaCodeExecutionOutputBlock>`
+      - `type: "encrypted_code_execution_result"`
 
-        - `file_id: string`
+        default: encrypted_code_execution_result
+
+      - `content: Array<BetaCodeExecutionOutputBlock>`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -13282,17 +13317,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
-        default: encrypted_code_execution_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
-
-    default: code_execution_tool_result
 
 ### Beta Code Execution Tool Result Block Content
 
@@ -13301,6 +13328,10 @@ console.log(betaMessageTokensCount.context_management);
   Code execution result with encrypted stdout for PFC + web_search results.
 
   - `BetaCodeExecutionToolResultError`
+
+    - `type: "code_execution_tool_result_error"`
+
+      default: code_execution_tool_result_error
 
     - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13312,19 +13343,19 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
-      default: code_execution_tool_result_error
-
   - `BetaCodeExecutionResultBlock`
 
-    - `content: Array<BetaCodeExecutionOutputBlock>`
+    - `type: "code_execution_result"`
 
-      - `file_id: string`
+      default: code_execution_result
+
+    - `content: Array<BetaCodeExecutionOutputBlock>`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -13332,21 +13363,21 @@ console.log(betaMessageTokensCount.context_management);
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
-      default: code_execution_result
-
   - `BetaEncryptedCodeExecutionResultBlock`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
-    - `content: Array<BetaCodeExecutionOutputBlock>`
+    - `type: "encrypted_code_execution_result"`
 
-      - `file_id: string`
+      default: encrypted_code_execution_result
+
+    - `content: Array<BetaCodeExecutionOutputBlock>`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -13354,19 +13385,19 @@ console.log(betaMessageTokensCount.context_management);
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
-      default: encrypted_code_execution_result
-
 ### Beta Code Execution Tool Result Block Param
 
 - `BetaCodeExecutionToolResultBlockParam`
+
+  - `type: "code_execution_tool_result"`
 
   - `content: BetaCodeExecutionToolResultBlockParamContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
     - `BetaCodeExecutionToolResultErrorParam`
+
+      - `type: "code_execution_tool_result_error"`
 
       - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13378,15 +13409,15 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
     - `BetaCodeExecutionResultBlockParam`
+
+      - `type: "code_execution_result"`
 
       - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -13394,17 +13425,17 @@ console.log(betaMessageTokensCount.context_management);
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
     - `BetaEncryptedCodeExecutionResultBlockParam`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
+      - `type: "encrypted_code_execution_result"`
+
       - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -13412,13 +13443,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -13449,6 +13476,8 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaCodeExecutionToolResultErrorParam`
 
+    - `type: "code_execution_tool_result_error"`
+
     - `error_code: BetaCodeExecutionToolResultErrorCode`
 
       - `"invalid_tool_input"`
@@ -13459,15 +13488,15 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
   - `BetaCodeExecutionResultBlockParam`
+
+    - `type: "code_execution_result"`
 
     - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -13475,17 +13504,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
   - `BetaEncryptedCodeExecutionResultBlockParam`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
+    - `type: "encrypted_code_execution_result"`
+
     - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -13493,11 +13522,13 @@ console.log(betaMessageTokensCount.context_management);
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
 ### Beta Code Execution Tool Result Error
 
 - `BetaCodeExecutionToolResultError`
+
+  - `type: "code_execution_tool_result_error"`
+
+    default: code_execution_tool_result_error
 
   - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -13508,10 +13539,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
-
-    default: code_execution_tool_result_error
 
 ### Beta Code Execution Tool Result Error Code
 
@@ -13529,6 +13556,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCodeExecutionToolResultErrorParam`
 
+  - `type: "code_execution_tool_result_error"`
+
   - `error_code: BetaCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -13538,8 +13567,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
 
 ### Beta Compact 20260112 Edit
 
@@ -13577,6 +13604,10 @@ console.log(betaMessageTokensCount.context_management);
   summary (e.g., malformed output from the model). Clients may round-trip
   compaction blocks with null content; the server treats them as no-ops.
 
+  - `type: "compaction"`
+
+    default: compaction
+
   - `content: string | null`
 
     Summary of compacted content, or null if compaction failed
@@ -13584,10 +13615,6 @@ console.log(betaMessageTokensCount.context_management);
   - `encrypted_content: string | null`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
-
-  - `type: "compaction"`
-
-    default: compaction
 
 ### Beta Compaction Block Param
 
@@ -13636,21 +13663,27 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaCompactionContentBlockDelta`
 
+  - `type: "compaction_delta"`
+
+    default: compaction_delta
+
   - `content: string | null`
 
   - `encrypted_content: string | null`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `type: "compaction_delta"`
-
-    default: compaction_delta
-
 ### Beta Compaction Iteration Usage
 
 - `BetaCompactionIterationUsage`
 
   Token usage for a compaction iteration.
+
+  - `type: "compaction"`
+
+    Usage for a compaction iteration
+
+    default: compaction
 
   - `cache_creation: BetaCacheCreation | null`
 
@@ -13691,12 +13724,6 @@ console.log(betaMessageTokensCount.context_management);
     The number of output tokens which were used.
 
     minimum: 0
-
-  - `type: "compaction"`
-
-    Usage for a compaction iteration
-
-    default: compaction
 
 ### Beta Computer Cursor Position Config
 
@@ -13925,6 +13952,18 @@ console.log(betaMessageTokensCount.context_management);
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
 
+    - `type?: BetaComputerTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
       `cursor_position`'s config overrides.
@@ -14093,18 +14132,6 @@ console.log(betaMessageTokensCount.context_management);
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type?: BetaComputerTypeConfig | null`
-
-      `type`'s config overrides.
-
-      - `defer_loading?: boolean | null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled?: boolean | null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait?: BetaComputerWaitConfig | null`
 
       `wait`'s config overrides.
@@ -14139,6 +14166,18 @@ console.log(betaMessageTokensCount.context_management);
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type?: BetaComputerTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
@@ -14308,18 +14347,6 @@ console.log(betaMessageTokensCount.context_management);
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type?: BetaComputerTypeConfig | null`
-
-    `type`'s config overrides.
-
-    - `defer_loading?: boolean | null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled?: boolean | null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait?: BetaComputerWaitConfig | null`
 
     `wait`'s config overrides.
@@ -14420,12 +14447,6 @@ console.log(betaMessageTokensCount.context_management);
 
     Skills loaded in the container
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" | "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14433,6 +14454,12 @@ console.log(betaMessageTokensCount.context_management);
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version: string`
 
@@ -14456,12 +14483,6 @@ console.log(betaMessageTokensCount.context_management);
 
     maxItems: 20
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" | "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14469,6 +14490,12 @@ console.log(betaMessageTokensCount.context_management);
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version?: string`
 
@@ -14482,12 +14509,6 @@ console.log(betaMessageTokensCount.context_management);
 
   A skill that was loaded in a container (response model).
 
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
-
   - `type: "anthropic" | "custom"`
 
     Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -14495,6 +14516,12 @@ console.log(betaMessageTokensCount.context_management);
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version: string`
 
@@ -14508,11 +14535,11 @@ console.log(betaMessageTokensCount.context_management);
 
   Response model for a file uploaded to the container.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
 
     default: container_upload
+
+  - `file_id: string`
 
 ### Beta Container Upload Block Param
 
@@ -14521,9 +14548,9 @@ console.log(betaMessageTokensCount.context_management);
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
+
+  - `file_id: string`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -14554,6 +14581,10 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaTextBlock`
 
+    - `type: "text"`
+
+      default: text
+
     - `citations: Array<BetaTextCitation> | null`
 
       Citations supporting the text block.
@@ -14561,6 +14592,10 @@ console.log(betaMessageTokensCount.context_management);
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
       - `BetaCitationCharLocation`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -14578,11 +14613,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `BetaCitationPageLocation`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -14600,11 +14635,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `BetaCitationContentBlockLocation`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -14632,11 +14667,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `BetaCitationsWebSearchResultLocation`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -14646,13 +14681,13 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `BetaCitationSearchResultLocation`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -14684,19 +14719,15 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
     - `text: string`
 
-      maxLength: 5000000, minLength: 0
-
-    - `type: "text"`
-
-      default: text
+      minLength: 0
 
   - `BetaThinkingBlock`
+
+    - `type: "thinking"`
+
+      default: thinking
 
     - `signature: string`
 
@@ -14710,11 +14741,11 @@ console.log(betaMessageTokensCount.context_management);
 
       The text of Claude's thinking process for this block.
 
-    - `type: "thinking"`
-
-      default: thinking
-
   - `BetaRedactedThinkingBlock`
+
+    - `type: "redacted_thinking"`
+
+      default: redacted_thinking
 
     - `data: string`
 
@@ -14724,11 +14755,11 @@ console.log(betaMessageTokensCount.context_management);
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type: "redacted_thinking"`
-
-      default: redacted_thinking
-
   - `BetaToolUseBlock`
+
+    - `type: "tool_use"`
+
+      default: tool_use
 
     - `id: string`
 
@@ -14739,10 +14770,6 @@ console.log(betaMessageTokensCount.context_management);
     - `name: string`
 
       minLength: 1
-
-    - `type: "tool_use"`
-
-      default: tool_use
 
     - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -14758,19 +14785,19 @@ console.log(betaMessageTokensCount.context_management);
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `BetaServerToolCaller20260120`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `toolset_name?: string | null`
 
@@ -14779,6 +14806,10 @@ console.log(betaMessageTokensCount.context_management);
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
   - `BetaServerToolUseBlock`
+
+    - `type: "server_tool_use"`
+
+      default: server_tool_use
 
     - `id: string`
 
@@ -14804,10 +14835,6 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
-      default: server_tool_use
-
     - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
       Tool invocation directly from the model.
@@ -14824,9 +14851,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebSearchToolResultBlock`
 
+    - `type: "web_search_tool_result"`
+
+      default: web_search_tool_result
+
     - `content: BetaWebSearchToolResultBlockContent`
 
       - `BetaWebSearchToolResultError`
+
+        - `type: "web_search_tool_result_error"`
+
+          default: web_search_tool_result_error
 
         - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -14842,11 +14877,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
-          default: web_search_tool_result_error
-
       - `Array<BetaWebSearchResultBlock>`
+
+        - `type: "web_search_result"`
+
+          default: web_search_result
 
         - `encrypted_content: string`
 
@@ -14854,19 +14889,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string`
 
-        - `type: "web_search_result"`
-
-          default: web_search_result
-
         - `url: string`
 
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_search_tool_result"`
-
-      default: web_search_tool_result
 
     - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -14884,9 +14911,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebFetchToolResultBlock`
 
+    - `type: "web_fetch_tool_result"`
+
+      default: web_fetch_tool_result
+
     - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
       - `BetaWebFetchToolResultErrorBlock`
+
+        - `type: "web_fetch_tool_result_error"`
+
+          default: web_fetch_tool_result_error
 
         - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -14908,13 +14943,19 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
-
-          default: web_fetch_tool_result_error
+          - `"content_too_large"`
 
       - `BetaWebFetchBlock`
 
+        - `type: "web_fetch_result"`
+
+          default: web_fetch_result
+
         - `content: BetaDocumentBlock`
+
+          - `type: "document"`
+
+            default: document
 
           - `citations: BetaCitationConfig | null`
 
@@ -14928,37 +14969,29 @@ console.log(betaMessageTokensCount.context_management);
 
             - `BetaBase64PDFSource`
 
+              - `type: "base64"`
+
               - `data: string`
 
                 format: byte
 
               - `media_type: "application/pdf"`
 
-              - `type: "base64"`
-
             - `BetaPlainTextSource`
+
+              - `type: "text"`
 
               - `data: string`
 
               - `media_type: "text/plain"`
 
-              - `type: "text"`
-
           - `title: string | null`
 
             The title of the document
 
-          - `type: "document"`
-
-            default: document
-
         - `retrieved_at: string | null`
 
           ISO 8601 timestamp when the content was retrieved
-
-        - `type: "web_fetch_result"`
-
-          default: web_fetch_result
 
         - `url: string`
 
@@ -14967,10 +15000,6 @@ console.log(betaMessageTokensCount.context_management);
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_fetch_tool_result"`
-
-      default: web_fetch_tool_result
 
     - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -14988,9 +15017,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaAdvisorToolResultBlock`
 
+    - `type: "advisor_tool_result"`
+
+      default: advisor_tool_result
+
     - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
       - `BetaAdvisorToolResultError`
+
+        - `type: "advisor_tool_result_error"`
+
+          default: advisor_tool_result_error
 
         - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -15008,11 +15045,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"model_not_found"`
 
-        - `type: "advisor_tool_result_error"`
-
-          default: advisor_tool_result_error
-
       - `BetaAdvisorResultBlock`
+
+        - `type: "advisor_result"`
+
+          default: advisor_result
 
         - `stop_reason: string | null`
 
@@ -15020,11 +15057,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `text: string`
 
-        - `type: "advisor_result"`
-
-          default: advisor_result
-
       - `BetaAdvisorRedactedResultBlock`
+
+        - `type: "advisor_redacted_result"`
+
+          default: advisor_redacted_result
 
         - `encrypted_content: string`
 
@@ -15034,25 +15071,25 @@ console.log(betaMessageTokensCount.context_management);
 
           The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-        - `type: "advisor_redacted_result"`
-
-          default: advisor_redacted_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "advisor_tool_result"`
-
-      default: advisor_tool_result
-
   - `BetaCodeExecutionToolResultBlock`
+
+    - `type: "code_execution_tool_result"`
+
+      default: code_execution_tool_result
 
     - `content: BetaCodeExecutionToolResultBlockContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
       - `BetaCodeExecutionToolResultError`
+
+        - `type: "code_execution_tool_result_error"`
+
+          default: code_execution_tool_result_error
 
         - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -15064,19 +15101,19 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
-          default: code_execution_tool_result_error
-
       - `BetaCodeExecutionResultBlock`
 
-        - `content: Array<BetaCodeExecutionOutputBlock>`
+        - `type: "code_execution_result"`
 
-          - `file_id: string`
+          default: code_execution_result
+
+        - `content: Array<BetaCodeExecutionOutputBlock>`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -15084,21 +15121,21 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
-          default: code_execution_result
-
       - `BetaEncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `content: Array<BetaCodeExecutionOutputBlock>`
+        - `type: "encrypted_code_execution_result"`
 
-          - `file_id: string`
+          default: encrypted_code_execution_result
+
+        - `content: Array<BetaCodeExecutionOutputBlock>`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -15106,23 +15143,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
-          default: encrypted_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "code_execution_tool_result"`
-
-      default: code_execution_tool_result
-
   - `BetaBashCodeExecutionToolResultBlock`
+
+    - `type: "bash_code_execution_tool_result"`
+
+      default: bash_code_execution_tool_result
 
     - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
       - `BetaBashCodeExecutionToolResultError`
+
+        - `type: "bash_code_execution_tool_result_error"`
+
+          default: bash_code_execution_tool_result_error
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -15136,19 +15173,19 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
-          default: bash_code_execution_tool_result_error
-
       - `BetaBashCodeExecutionResultBlock`
 
-        - `content: Array<BetaBashCodeExecutionOutputBlock>`
+        - `type: "bash_code_execution_result"`
 
-          - `file_id: string`
+          default: bash_code_execution_result
+
+        - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
           - `type: "bash_code_execution_output"`
 
             default: bash_code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -15156,23 +15193,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
-          default: bash_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "bash_code_execution_tool_result"`
-
-      default: bash_code_execution_tool_result
-
   - `BetaTextEditorCodeExecutionToolResultBlock`
+
+    - `type: "text_editor_code_execution_tool_result"`
+
+      default: text_editor_code_execution_tool_result
 
     - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
       - `BetaTextEditorCodeExecutionToolResultError`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
+
+          default: text_editor_code_execution_tool_result_error
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -15188,11 +15225,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `error_message: string | null`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
-          default: text_editor_code_execution_tool_result_error
-
       - `BetaTextEditorCodeExecutionViewResultBlock`
+
+        - `type: "text_editor_code_execution_view_result"`
+
+          default: text_editor_code_execution_view_result
 
         - `content: string`
 
@@ -15210,19 +15247,19 @@ console.log(betaMessageTokensCount.context_management);
 
         - `total_lines: number | null`
 
-        - `type: "text_editor_code_execution_view_result"`
-
-          default: text_editor_code_execution_view_result
-
       - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-        - `is_file_update: boolean`
 
         - `type: "text_editor_code_execution_create_result"`
 
           default: text_editor_code_execution_create_result
 
+        - `is_file_update: boolean`
+
       - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+        - `type: "text_editor_code_execution_str_replace_result"`
+
+          default: text_editor_code_execution_str_replace_result
 
         - `lines: Array<string> | null`
 
@@ -15234,23 +15271,23 @@ console.log(betaMessageTokensCount.context_management);
 
         - `old_start: number | null`
 
-        - `type: "text_editor_code_execution_str_replace_result"`
-
-          default: text_editor_code_execution_str_replace_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
-      default: text_editor_code_execution_tool_result
-
   - `BetaToolSearchToolResultBlock`
+
+    - `type: "tool_search_tool_result"`
+
+      default: tool_search_tool_result
 
     - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
       - `BetaToolSearchToolResultError`
+
+        - `type: "tool_search_tool_result_error"`
+
+          default: tool_search_tool_result_error
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -15264,35 +15301,31 @@ console.log(betaMessageTokensCount.context_management);
 
         - `error_message: string | null`
 
-        - `type: "tool_search_tool_result_error"`
-
-          default: tool_search_tool_result_error
-
       - `BetaToolSearchToolSearchResultBlock`
-
-        - `tool_references: Array<BetaToolReferenceBlock>`
-
-          - `tool_name: string`
-
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
-
-            default: tool_reference
 
         - `type: "tool_search_tool_search_result"`
 
           default: tool_search_tool_search_result
 
+        - `tool_references: Array<BetaToolReferenceBlock>`
+
+          - `type: "tool_reference"`
+
+            default: tool_reference
+
+          - `tool_name: string`
+
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "tool_search_tool_result"`
-
-      default: tool_search_tool_result
-
   - `BetaMCPToolUseBlock`
+
+    - `type: "mcp_tool_use"`
+
+      default: mcp_tool_use
 
     - `id: string`
 
@@ -15308,17 +15341,21 @@ console.log(betaMessageTokensCount.context_management);
 
       The name of the MCP server
 
-    - `type: "mcp_tool_use"`
-
-      default: mcp_tool_use
-
   - `BetaMCPToolResultBlock`
+
+    - `type: "mcp_tool_result"`
+
+      default: mcp_tool_result
 
     - `content: string | Array<BetaTextBlock>`
 
       - `string`
 
       - `Array<BetaTextBlock>`
+
+        - `type: "text"`
+
+          default: text
 
         - `citations: Array<BetaTextCitation> | null`
 
@@ -15328,11 +15365,7 @@ console.log(betaMessageTokensCount.context_management);
 
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
-
-          default: text
+          minLength: 0
 
     - `is_error: boolean`
 
@@ -15342,19 +15375,15 @@ console.log(betaMessageTokensCount.context_management);
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type: "mcp_tool_result"`
-
-      default: mcp_tool_result
-
   - `BetaContainerUploadBlock`
 
     Response model for a file uploaded to the container.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
 
       default: container_upload
+
+    - `file_id: string`
 
   - `BetaCompactionBlock`
 
@@ -15364,6 +15393,10 @@ console.log(betaMessageTokensCount.context_management);
     summary (e.g., malformed output from the model). Clients may round-trip
     compaction blocks with null content; the server treats them as no-ops.
 
+    - `type: "compaction"`
+
+      default: compaction
+
     - `content: string | null`
 
       Summary of compacted content, or null if compaction failed
@@ -15371,10 +15404,6 @@ console.log(betaMessageTokensCount.context_management);
     - `encrypted_content: string | null`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
-
-    - `type: "compaction"`
-
-      default: compaction
 
   - `BetaFallbackBlock`
 
@@ -15389,6 +15418,10 @@ console.log(betaMessageTokensCount.context_management);
     The block is treated like a server-tool content block for streaming: it
     arrives via the standard `content_block_start` / `content_block_stop`
     pair and carries no deltas.
+
+    - `type: "fallback"`
+
+      default: fallback
 
     - `from: BetaFallbackInfo`
 
@@ -15480,6 +15513,10 @@ console.log(betaMessageTokensCount.context_management);
 
       What caused the `from` model to hand over at this hop.
 
+      - `type: "refusal"`
+
+        default: refusal
+
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
         The policy category that triggered a refusal.
@@ -15510,14 +15547,6 @@ console.log(betaMessageTokensCount.context_management);
 
           The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-      - `type: "refusal"`
-
-        default: refusal
-
-    - `type: "fallback"`
-
-      default: fallback
-
 ### Beta Content Block Param
 
 - `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 20 more`
@@ -15526,11 +15555,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaTextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15557,6 +15586,8 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaCitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -15573,9 +15604,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -15593,9 +15624,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -15623,9 +15654,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -15635,13 +15666,13 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -15673,13 +15704,15 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `BetaImageBlockParam`
+
+    - `type: "image"`
 
     - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
       - `BetaBase64ImageSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -15695,8 +15728,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `BetaURLImageSource`
 
         - `type: "url"`
@@ -15705,11 +15736,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaFileImageSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15729,9 +15758,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaRequestDocumentBlock`
 
+    - `type: "document"`
+
     - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
       - `BetaBase64PDFSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -15739,17 +15772,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `BetaContentBlockSource`
+
+        - `type: "content"`
 
         - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -15761,8 +15794,6 @@ console.log(betaMessageTokensCount.context_management);
 
             - `BetaImageBlockParam`
 
-        - `type: "content"`
-
       - `BetaURLPDFSource`
 
         - `type: "url"`
@@ -15771,11 +15802,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaFileDocumentSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15795,13 +15824,15 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaSearchResultBlockParam`
 
+    - `type: "search_result"`
+
     - `content: Array<BetaTextBlockParam>`
+
+      - `type: "text"`
 
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15813,8 +15844,6 @@ console.log(betaMessageTokensCount.context_management);
 
     - `title: string`
 
-    - `type: "search_result"`
-
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
@@ -15822,6 +15851,8 @@ console.log(betaMessageTokensCount.context_management);
     - `citations?: BetaCitationsConfigParam`
 
   - `BetaThinkingBlockParam`
+
+    - `type: "thinking"`
 
     - `signature: string`
 
@@ -15833,17 +15864,17 @@ console.log(betaMessageTokensCount.context_management);
 
       The `thinking` text of this block as returned by the API.
 
-    - `type: "thinking"`
-
   - `BetaRedactedThinkingBlockParam`
+
+    - `type: "redacted_thinking"`
 
     - `data: string`
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-    - `type: "redacted_thinking"`
-
   - `BetaToolUseBlockParam`
+
+    - `type: "tool_use"`
 
     - `id: string`
 
@@ -15854,8 +15885,6 @@ console.log(betaMessageTokensCount.context_management);
     - `name: string`
 
       maxLength: 200, minLength: 1
-
-    - `type: "tool_use"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15875,19 +15904,19 @@ console.log(betaMessageTokensCount.context_management);
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `BetaServerToolCaller20260120`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `toolset_name?: string | null`
 
@@ -15897,11 +15926,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolResultBlockParam`
 
+    - `type: "tool_result"`
+
     - `tool_use_id: string`
 
       pattern: ^[a-zA-Z0-9_-]+$
-
-    - `type: "tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15925,11 +15954,11 @@ console.log(betaMessageTokensCount.context_management);
 
           Tool reference block that can be included in tool_result content.
 
+          - `type: "tool_reference"`
+
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -15944,6 +15973,8 @@ console.log(betaMessageTokensCount.context_management);
           At most one per `tool_result`, only on a non-error result answering a
           browser toolset member `tool_use`. The server renders the
           model-visible text from it; the model never sees the raw fields.
+
+          - `type: "browser_state"`
 
           - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -15973,8 +16004,6 @@ console.log(betaMessageTokensCount.context_management);
 
               Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-          - `type: "browser_state"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -15995,25 +16024,25 @@ console.log(betaMessageTokensCount.context_management);
               during a failed call gets no deferred `tab_opened`; it simply appears
               in the next result's `tabs` inventory.
 
+              - `type: "tab_opened"`
+
               - `tab_id: string`
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `type: "tab_opened"`
-
             - `BetaBrowserStateChangeDownloadStarted`
 
               A file download that started during this call.
+
+              - `type: "download_started"`
 
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_started"`
 
               - `url: string`
 
@@ -16028,13 +16057,13 @@ console.log(betaMessageTokensCount.context_management);
               `download_started`, when the download finished during the call that
               started it (at most one state change per `download_id` per result).
 
+              - `type: "download_completed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_completed"`
 
               - `url: string`
 
@@ -16058,13 +16087,13 @@ console.log(betaMessageTokensCount.context_management);
 
               A file download that failed — or was cancelled — during this call.
 
+              - `type: "download_failed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_failed"`
 
               - `url: string`
 
@@ -16087,6 +16116,8 @@ console.log(betaMessageTokensCount.context_management);
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
   - `BetaServerToolUseBlockParam`
+
+    - `type: "server_tool_use"`
 
     - `id: string`
 
@@ -16112,8 +16143,6 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
@@ -16134,21 +16163,25 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebSearchToolResultBlockParam`
 
+    - `type: "web_search_tool_result"`
+
     - `content: BetaWebSearchToolResultBlockParamContent`
 
       - `Array<BetaWebSearchResultBlockParam>`
 
+        - `type: "web_search_result"`
+
         - `encrypted_content: string`
 
         - `title: string`
-
-        - `type: "web_search_result"`
 
         - `url: string`
 
         - `page_age?: string | null`
 
       - `BetaWebSearchToolRequestError`
+
+        - `type: "web_search_tool_result_error"`
 
         - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -16164,13 +16197,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_search_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16192,9 +16221,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebFetchToolResultBlockParam`
 
+    - `type: "web_fetch_tool_result"`
+
     - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
       - `BetaWebFetchToolResultErrorBlockParam`
+
+        - `type: "web_fetch_tool_result_error"`
 
         - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -16216,13 +16249,13 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
+          - `"content_too_large"`
 
       - `BetaWebFetchBlockParam`
 
-        - `content: BetaRequestDocumentBlock`
-
         - `type: "web_fetch_result"`
+
+        - `content: BetaRequestDocumentBlock`
 
         - `url: string`
 
@@ -16235,8 +16268,6 @@ console.log(betaMessageTokensCount.context_management);
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_fetch_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16258,9 +16289,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaAdvisorToolResultBlockParam`
 
+    - `type: "advisor_tool_result"`
+
     - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
       - `BetaAdvisorToolResultErrorParam`
+
+        - `type: "advisor_tool_result_error"`
 
         - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -16278,23 +16313,21 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"model_not_found"`
 
-        - `type: "advisor_tool_result_error"`
-
       - `BetaAdvisorResultBlockParam`
 
-        - `text: string`
-
         - `type: "advisor_result"`
+
+        - `text: string`
 
         - `stop_reason?: string | null`
 
       - `BetaAdvisorRedactedResultBlockParam`
 
+        - `type: "advisor_redacted_result"`
+
         - `encrypted_content: string`
 
           Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-        - `type: "advisor_redacted_result"`
 
         - `stop_reason?: string | null`
 
@@ -16302,19 +16335,21 @@ console.log(betaMessageTokensCount.context_management);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "advisor_tool_result"`
-
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaCodeExecutionToolResultBlockParam`
 
+    - `type: "code_execution_tool_result"`
+
     - `content: BetaCodeExecutionToolResultBlockParamContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
       - `BetaCodeExecutionToolResultErrorParam`
+
+        - `type: "code_execution_tool_result_error"`
 
         - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -16326,15 +16361,15 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
       - `BetaCodeExecutionResultBlockParam`
+
+        - `type: "code_execution_result"`
 
         - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -16342,17 +16377,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
       - `BetaEncryptedCodeExecutionResultBlockParam`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
+        - `type: "encrypted_code_execution_result"`
+
         - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -16360,13 +16395,9 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "code_execution_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16374,9 +16405,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaBashCodeExecutionToolResultBlockParam`
 
+    - `type: "bash_code_execution_tool_result"`
+
     - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
       - `BetaBashCodeExecutionToolResultErrorParam`
+
+        - `type: "bash_code_execution_tool_result_error"`
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -16390,15 +16425,15 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
       - `BetaBashCodeExecutionResultBlockParam`
+
+        - `type: "bash_code_execution_result"`
 
         - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "bash_code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -16406,13 +16441,9 @@ console.log(betaMessageTokensCount.context_management);
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "bash_code_execution_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16420,9 +16451,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+    - `type: "text_editor_code_execution_tool_result"`
+
     - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
       - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -16436,11 +16471,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"file_not_found"`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
         - `error_message?: string | null`
 
       - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+        - `type: "text_editor_code_execution_view_result"`
 
         - `content: string`
 
@@ -16452,8 +16487,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"pdf"`
 
-        - `type: "text_editor_code_execution_view_result"`
-
         - `num_lines?: number | null`
 
         - `start_line?: number | null`
@@ -16462,9 +16495,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-        - `is_file_update: boolean`
-
         - `type: "text_editor_code_execution_create_result"`
+
+        - `is_file_update: boolean`
 
       - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -16484,17 +16517,19 @@ console.log(betaMessageTokensCount.context_management);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaToolSearchToolResultBlockParam`
 
+    - `type: "tool_search_tool_result"`
+
     - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
       - `BetaToolSearchToolResultErrorParam`
+
+        - `type: "tool_search_tool_result_error"`
 
         - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -16506,37 +16541,35 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"execution_time_exceeded"`
 
-        - `type: "tool_search_tool_result_error"`
-
         - `error_message?: string | null`
 
       - `BetaToolSearchToolSearchResultBlockParam`
 
+        - `type: "tool_search_tool_search_result"`
+
         - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+          - `type: "tool_reference"`
 
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-          - `type: "tool_reference"`
-
           - `cache_control?: BetaCacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
-        - `type: "tool_search_tool_search_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "tool_search_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaMCPToolUseBlockParam`
+
+    - `type: "mcp_tool_use"`
 
     - `id: string`
 
@@ -16550,19 +16583,17 @@ console.log(betaMessageTokensCount.context_management);
 
       The name of the MCP server
 
-    - `type: "mcp_tool_use"`
-
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaRequestMCPToolResultBlockParam`
 
+    - `type: "mcp_tool_result"`
+
     - `tool_use_id: string`
 
       pattern: ^[a-zA-Z0-9_-]+$
-
-    - `type: "mcp_tool_result"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16574,11 +16605,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `Array<BetaTextBlockParam>`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16593,9 +16624,9 @@ console.log(betaMessageTokensCount.context_management);
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
+
+    - `file_id: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16633,6 +16664,8 @@ console.log(betaMessageTokensCount.context_management);
     `tools`; it is offered to the model from this point in the
     conversation onward.
 
+    - `type: "tool_addition"`
+
     - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
       Reference to a single tool the caller declared directly in
@@ -16647,32 +16680,30 @@ console.log(betaMessageTokensCount.context_management);
         server assigns to MCP-resolved tools — use `mcp_tool_reference` or
         `mcp_toolset_reference` for those.
 
+        - `type: "tool_reference"`
+
         - `name: string`
 
           pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-        - `type: "tool_reference"`
 
       - `BetaToolChangeMCPToolReference`
 
         Reference to a single MCP tool by its server and remote name — the
         same `server_name`/`name` pair `mcp_tool_use` carries.
 
+        - `type: "mcp_tool_reference"`
+
         - `name: string`
 
         - `server_name: string`
-
-        - `type: "mcp_tool_reference"`
 
       - `BetaToolChangeMCPToolsetReference`
 
         Reference to every tool in the named MCP server's toolset.
 
-        - `server_name: string`
-
         - `type: "mcp_toolset_reference"`
 
-    - `type: "tool_addition"`
+        - `server_name: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16686,6 +16717,8 @@ console.log(betaMessageTokensCount.context_management);
     `tools`; it is no longer offered to the model from this point in the
     conversation onward.
 
+    - `type: "tool_removal"`
+
     - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
       Reference to a single tool the caller declared directly in
@@ -16708,8 +16741,6 @@ console.log(betaMessageTokensCount.context_management);
       - `BetaToolChangeMCPToolsetReference`
 
         Reference to every tool in the named MCP server's toolset.
-
-    - `type: "tool_removal"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16730,6 +16761,8 @@ console.log(betaMessageTokensCount.context_management);
     request is rejected), and moving it into the middle of a single run is
     likewise rejected; between non-thinking blocks the block's placement has
     no validation effect.
+
+    - `type: "fallback"`
 
     - `from: BetaFallbackInfoParam`
 
@@ -16817,8 +16850,6 @@ console.log(betaMessageTokensCount.context_management);
 
       Identifies one hop of a fallback transition.
 
-    - `type: "fallback"`
-
     - `trigger?: unknown`
 
       The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -16826,6 +16857,8 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Content Block Source
 
 - `BetaContentBlockSource`
+
+  - `type: "content"`
 
   - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -16835,11 +16868,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -16866,6 +16899,8 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaCitationCharLocationParam`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -16882,9 +16917,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -16902,9 +16937,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -16932,9 +16967,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -16944,13 +16979,13 @@ console.log(betaMessageTokensCount.context_management);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -16982,13 +17017,15 @@ console.log(betaMessageTokensCount.context_management);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
           - `BetaBase64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -17004,8 +17041,6 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource`
 
             - `type: "url"`
@@ -17014,11 +17049,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -17036,19 +17069,17 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"error"`
 
-  - `type: "content"`
-
 ### Beta Content Block Source Content
 
 - `BetaContentBlockSourceContent = BetaTextBlockParam | BetaImageBlockParam`
 
   - `BetaTextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -17075,6 +17106,8 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaCitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -17091,9 +17124,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -17111,9 +17144,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -17141,9 +17174,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -17153,13 +17186,13 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -17191,13 +17224,15 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `BetaImageBlockParam`
+
+    - `type: "image"`
 
     - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
       - `BetaBase64ImageSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -17213,8 +17248,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `BetaURLImageSource`
 
         - `type: "url"`
@@ -17223,11 +17256,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaFileImageSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -17363,6 +17394,12 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaClearToolUses20250919EditResponse`
 
+      - `type: "clear_tool_uses_20250919"`
+
+        The type of context management edit applied.
+
+        default: clear_tool_uses_20250919
+
       - `cleared_input_tokens: number`
 
         Number of input tokens cleared by this edit.
@@ -17375,13 +17412,13 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "clear_tool_uses_20250919"`
+    - `BetaClearThinking20251015EditResponse`
+
+      - `type: "clear_thinking_20251015"`
 
         The type of context management edit applied.
 
-        default: clear_tool_uses_20250919
-
-    - `BetaClearThinking20251015EditResponse`
+        default: clear_thinking_20251015
 
       - `cleared_input_tokens: number`
 
@@ -17394,12 +17431,6 @@ console.log(betaMessageTokensCount.context_management);
         Number of thinking turns that were cleared.
 
         minimum: 0
-
-      - `type: "clear_thinking_20251015"`
-
-        The type of context management edit applied.
-
-        default: clear_thinking_20251015
 
 ### Beta Count Tokens Context Management Response
 
@@ -17422,43 +17453,43 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaCacheMissModelChanged`
 
-      - `cache_missed_input_tokens: number`
-
-        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
       - `type: "model_changed"`
 
         default: model_changed
 
-    - `BetaCacheMissSystemChanged`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `BetaCacheMissSystemChanged`
 
       - `type: "system_changed"`
 
         default: system_changed
 
-    - `BetaCacheMissToolsChanged`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `BetaCacheMissToolsChanged`
 
       - `type: "tools_changed"`
 
         default: tools_changed
 
-    - `BetaCacheMissMessagesChanged`
-
       - `cache_missed_input_tokens: number`
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+    - `BetaCacheMissMessagesChanged`
+
       - `type: "messages_changed"`
 
         default: messages_changed
+
+      - `cache_missed_input_tokens: number`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
     - `BetaCacheMissPreviousMessageNotFound`
 
@@ -17497,6 +17528,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaDocumentBlock`
 
+  - `type: "document"`
+
+    default: document
+
   - `citations: BetaCitationConfig | null`
 
     Citation configuration for the document
@@ -17509,29 +17544,25 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaBase64PDFSource`
 
+      - `type: "base64"`
+
       - `data: string`
 
         format: byte
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `BetaPlainTextSource`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
 
-      - `type: "text"`
-
   - `title: string | null`
 
     The title of the document
-
-  - `type: "document"`
-
-    default: document
 
 ### Beta Encrypted Code Execution Result Block
 
@@ -17539,23 +17570,23 @@ console.log(betaMessageTokensCount.context_management);
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
-  - `content: Array<BetaCodeExecutionOutputBlock>`
+  - `type: "encrypted_code_execution_result"`
 
-    - `file_id: string`
+    default: encrypted_code_execution_result
+
+  - `content: Array<BetaCodeExecutionOutputBlock>`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
   - `return_code: number`
 
   - `stderr: string`
-
-  - `type: "encrypted_code_execution_result"`
-
-    default: encrypted_code_execution_result
 
 ### Beta Encrypted Code Execution Result Block Param
 
@@ -17563,19 +17594,19 @@ console.log(betaMessageTokensCount.context_management);
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
+  - `type: "encrypted_code_execution_result"`
+
   - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
   - `return_code: number`
 
   - `stderr: string`
-
-  - `type: "encrypted_code_execution_result"`
 
 ### Beta Fallback Block
 
@@ -17592,6 +17623,10 @@ console.log(betaMessageTokensCount.context_management);
   The block is treated like a server-tool content block for streaming: it
   arrives via the standard `content_block_start` / `content_block_stop`
   pair and carries no deltas.
+
+  - `type: "fallback"`
+
+    default: fallback
 
   - `from: BetaFallbackInfo`
 
@@ -17683,6 +17718,10 @@ console.log(betaMessageTokensCount.context_management);
 
     What caused the `from` model to hand over at this hop.
 
+    - `type: "refusal"`
+
+      default: refusal
+
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
@@ -17713,14 +17752,6 @@ console.log(betaMessageTokensCount.context_management);
 
         The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-    - `type: "refusal"`
-
-      default: refusal
-
-  - `type: "fallback"`
-
-    default: fallback
-
 ### Beta Fallback Block Param
 
 - `BetaFallbackBlockParam`
@@ -17738,6 +17769,8 @@ console.log(betaMessageTokensCount.context_management);
   request is rejected), and moving it into the middle of a single run is
   likewise rejected; between non-thinking blocks the block's placement has
   no validation effect.
+
+  - `type: "fallback"`
 
   - `from: BetaFallbackInfoParam`
 
@@ -17825,8 +17858,6 @@ console.log(betaMessageTokensCount.context_management);
 
     Identifies one hop of a fallback transition.
 
-  - `type: "fallback"`
-
   - `trigger?: unknown`
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -17836,6 +17867,10 @@ console.log(betaMessageTokensCount.context_management);
 - `BetaFallbackCreditNotApplied`
 
   No reprice was applied; `reason` says why.
+
+  - `type: "not_applied"`
+
+    default: not_applied
 
   - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
@@ -17867,10 +17902,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"wrong_platform"`
 
     - `"wrong_workspace"`
-
-  - `type: "not_applied"`
-
-    default: not_applied
 
   - `remove_to_redeem?: Array<string> | null`
 
@@ -17948,6 +17979,10 @@ console.log(betaMessageTokensCount.context_management);
 
       No reprice was applied; `reason` says why.
 
+      - `type: "not_applied"`
+
+        default: not_applied
+
       - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
         Why the reprice was not applied.
@@ -17978,10 +18013,6 @@ console.log(betaMessageTokensCount.context_management);
         - `"wrong_platform"`
 
         - `"wrong_workspace"`
-
-      - `type: "not_applied"`
-
-        default: not_applied
 
       - `remove_to_redeem?: Array<string> | null`
 
@@ -18173,6 +18204,12 @@ console.log(betaMessageTokensCount.context_management);
   a fallback model served the response is signalled by the presence of this
   entry in `usage.iterations`.
 
+  - `type: "fallback_message"`
+
+    Usage for the fallback-model attempt that served the response
+
+    default: fallback_message
+
   - `cache_creation: BetaCacheCreation | null`
 
     Breakdown of cached tokens by TTL
@@ -18291,12 +18328,6 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "fallback_message"`
-
-    Usage for the fallback-model attempt that served the response
-
-    default: fallback_message
-
 ### Beta Fallback Param
 
 - `BetaFallbackParam`
@@ -18408,25 +18439,25 @@ console.log(betaMessageTokensCount.context_management);
 
       A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+      - `type: "json_schema"`
+
       - `schema: Record<string, unknown>`
 
         The JSON schema of the format
 
-      - `type: "json_schema"`
-
     - `task_budget?: BetaTokenTaskBudget | null`
 
       User-configurable total token budget across contexts.
+
+      - `type: "tokens"`
+
+        The budget type. Currently only 'tokens' is supported.
 
       - `total: number`
 
         Total token budget across all contexts in the session.
 
         minimum: 1024
-
-      - `type: "tokens"`
-
-        The budget type. Currently only 'tokens' is supported.
 
       - `remaining?: number | null`
 
@@ -18446,6 +18477,8 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaThinkingConfigEnabled`
 
+      - `type: "enabled"`
+
       - `budget_tokens: number`
 
         Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -18455,8 +18488,6 @@ console.log(betaMessageTokensCount.context_management);
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
         minimum: 1024
-
-      - `type: "enabled"`
 
       - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -18516,6 +18547,10 @@ console.log(betaMessageTokensCount.context_management);
 
   The `from` model declined for policy reasons.
 
+  - `type: "refusal"`
+
+    default: refusal
+
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
     The policy category that triggered a refusal.
@@ -18545,10 +18580,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"general_harms"`
 
       The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
-
-  - `type: "refusal"`
-
-    default: refusal
 
 ### Beta Fallbacks Param
 
@@ -18658,25 +18689,25 @@ console.log(betaMessageTokensCount.context_management);
 
         A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+        - `type: "json_schema"`
+
         - `schema: Record<string, unknown>`
 
           The JSON schema of the format
 
-        - `type: "json_schema"`
-
       - `task_budget?: BetaTokenTaskBudget | null`
 
         User-configurable total token budget across contexts.
+
+        - `type: "tokens"`
+
+          The budget type. Currently only 'tokens' is supported.
 
         - `total: number`
 
           Total token budget across all contexts in the session.
 
           minimum: 1024
-
-        - `type: "tokens"`
-
-          The budget type. Currently only 'tokens' is supported.
 
         - `remaining?: number | null`
 
@@ -18696,6 +18727,8 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaThinkingConfigEnabled`
 
+        - `type: "enabled"`
+
         - `budget_tokens: number`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -18705,8 +18738,6 @@ console.log(betaMessageTokensCount.context_management);
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
           minimum: 1024
-
-        - `type: "enabled"`
 
         - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -18768,25 +18799,29 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaFileDocumentSource`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### Beta File Image Source
 
 - `BetaFileImageSource`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### Beta Image Block Param
 
 - `BetaImageBlockParam`
 
+  - `type: "image"`
+
   - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
     - `BetaBase64ImageSource`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -18802,8 +18837,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"image/webp"`
 
-      - `type: "base64"`
-
     - `BetaURLImageSource`
 
       - `type: "url"`
@@ -18812,11 +18845,9 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaFileImageSource`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "image"`
+      - `file_id: string`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -18869,11 +18900,11 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaInputJSONDelta`
 
-  - `partial_json: string`
-
   - `type: "input_json_delta"`
 
     default: input_json_delta
+
+  - `partial_json: string`
 
 ### Beta Input Tokens Clear At Least
 
@@ -18912,6 +18943,12 @@ console.log(betaMessageTokensCount.context_management);
   - `BetaMessageIterationUsage`
 
     Token usage for a sampling iteration.
+
+    - `type: "message"`
+
+      Usage for a sampling iteration
+
+      default: message
 
     - `cache_creation: BetaCacheCreation | null`
 
@@ -19031,15 +19068,15 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "message"`
-
-      Usage for a sampling iteration
-
-      default: message
-
   - `BetaCompactionIterationUsage`
 
     Token usage for a compaction iteration.
+
+    - `type: "compaction"`
+
+      Usage for a compaction iteration
+
+      default: compaction
 
     - `cache_creation: BetaCacheCreation | null`
 
@@ -19069,15 +19106,15 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "compaction"`
-
-      Usage for a compaction iteration
-
-      default: compaction
-
   - `BetaAdvisorMessageIterationUsage`
 
     Token usage for an advisor sub-inference iteration.
+
+    - `type: "advisor_message"`
+
+      Usage for an advisor sub-inference iteration
+
+      default: advisor_message
 
     - `cache_creation: BetaCacheCreation | null`
 
@@ -19112,12 +19149,6 @@ console.log(betaMessageTokensCount.context_management);
       The number of output tokens which were used.
 
       minimum: 0
-
-    - `type: "advisor_message"`
-
-      Usage for an advisor sub-inference iteration
-
-      default: advisor_message
 
   - `BetaFallbackMessageIterationUsage`
 
@@ -19128,6 +19159,12 @@ console.log(betaMessageTokensCount.context_management);
     a fallback model served the response is signalled by the presence of this
     entry in `usage.iterations`.
 
+    - `type: "fallback_message"`
+
+      Usage for the fallback-model attempt that served the response
+
+      default: fallback_message
+
     - `cache_creation: BetaCacheCreation | null`
 
       Breakdown of cached tokens by TTL
@@ -19162,21 +19199,15 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "fallback_message"`
-
-      Usage for the fallback-model attempt that served the response
-
-      default: fallback_message
-
 ### Beta JSON Output Format
 
 - `BetaJSONOutputFormat`
 
+  - `type: "json_schema"`
+
   - `schema: Record<string, unknown>`
 
     The JSON schema of the format
-
-  - `type: "json_schema"`
 
 ### Beta MCP Tool Config
 
@@ -19202,11 +19233,19 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaMCPToolResultBlock`
 
+  - `type: "mcp_tool_result"`
+
+    default: mcp_tool_result
+
   - `content: string | Array<BetaTextBlock>`
 
     - `string`
 
     - `Array<BetaTextBlock>`
+
+      - `type: "text"`
+
+        default: text
 
       - `citations: Array<BetaTextCitation> | null`
 
@@ -19215,6 +19254,10 @@ console.log(betaMessageTokensCount.context_management);
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -19232,11 +19275,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -19254,11 +19297,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -19286,11 +19329,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -19300,13 +19343,13 @@ console.log(betaMessageTokensCount.context_management);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -19338,17 +19381,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
   - `is_error: boolean`
 
@@ -19358,13 +19393,13 @@ console.log(betaMessageTokensCount.context_management);
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type: "mcp_tool_result"`
-
-    default: mcp_tool_result
-
 ### Beta MCP Tool Use Block
 
 - `BetaMCPToolUseBlock`
+
+  - `type: "mcp_tool_use"`
+
+    default: mcp_tool_use
 
   - `id: string`
 
@@ -19380,13 +19415,11 @@ console.log(betaMessageTokensCount.context_management);
 
     The name of the MCP server
 
-  - `type: "mcp_tool_use"`
-
-    default: mcp_tool_use
-
 ### Beta MCP Tool Use Block Param
 
 - `BetaMCPToolUseBlockParam`
+
+  - `type: "mcp_tool_use"`
 
   - `id: string`
 
@@ -19399,8 +19432,6 @@ console.log(betaMessageTokensCount.context_management);
   - `server_name: string`
 
     The name of the MCP server
-
-  - `type: "mcp_tool_use"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -19432,13 +19463,13 @@ console.log(betaMessageTokensCount.context_management);
   Allows configuring enabled status and defer_loading for all tools
   from an MCP server, with optional per-tool overrides.
 
+  - `type: "mcp_toolset"`
+
   - `mcp_server_name: string`
 
     Name of the MCP server to configure tools for
 
     maxLength: 255, minLength: 1
-
-  - `type: "mcp_toolset"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -19481,13 +19512,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaMemoryTool20250818`
 
+  - `type: "memory_20250818"`
+
   - `name: "memory"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "memory_20250818"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -19758,6 +19789,14 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaMessage`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -19782,12 +19821,6 @@ console.log(betaMessageTokensCount.context_management);
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" | "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -19795,6 +19828,12 @@ console.log(betaMessageTokensCount.context_management);
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -19833,6 +19872,10 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaTextBlock`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: Array<BetaTextCitation> | null`
 
         Citations supporting the text block.
@@ -19840,6 +19883,10 @@ console.log(betaMessageTokensCount.context_management);
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -19857,11 +19904,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -19879,11 +19926,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -19911,11 +19958,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -19925,13 +19972,13 @@ console.log(betaMessageTokensCount.context_management);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -19963,19 +20010,15 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -19989,11 +20032,11 @@ console.log(betaMessageTokensCount.context_management);
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -20003,11 +20046,11 @@ console.log(betaMessageTokensCount.context_management);
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -20018,10 +20061,6 @@ console.log(betaMessageTokensCount.context_management);
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -20037,19 +20076,19 @@ console.log(betaMessageTokensCount.context_management);
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name?: string | null`
 
@@ -20058,6 +20097,10 @@ console.log(betaMessageTokensCount.context_management);
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -20083,10 +20126,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
         Tool invocation directly from the model.
@@ -20103,9 +20142,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaWebSearchToolResultBlock`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -20121,11 +20168,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<BetaWebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -20133,19 +20180,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -20163,9 +20202,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaWebFetchToolResultBlock`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -20187,13 +20234,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig | null`
 
@@ -20207,37 +20260,29 @@ console.log(betaMessageTokensCount.context_management);
 
               - `BetaBase64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -20246,10 +20291,6 @@ console.log(betaMessageTokensCount.context_management);
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -20267,9 +20308,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaAdvisorToolResultBlock`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -20287,11 +20336,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string | null`
 
@@ -20299,11 +20348,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -20313,25 +20362,25 @@ console.log(betaMessageTokensCount.context_management);
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `BetaCodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -20343,19 +20392,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock`
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -20363,21 +20412,21 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -20385,23 +20434,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -20415,19 +20464,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock`
 
-          - `content: Array<BetaBashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -20435,23 +20484,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -20467,11 +20516,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -20489,19 +20538,19 @@ console.log(betaMessageTokensCount.context_management);
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -20513,23 +20562,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -20543,35 +20592,31 @@ console.log(betaMessageTokensCount.context_management);
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<BetaToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<BetaToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -20587,17 +20632,21 @@ console.log(betaMessageTokensCount.context_management);
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string | Array<BetaTextBlock>`
 
         - `string`
 
         - `Array<BetaTextBlock>`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: Array<BetaTextCitation> | null`
 
@@ -20607,11 +20656,7 @@ console.log(betaMessageTokensCount.context_management);
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -20621,19 +20666,15 @@ console.log(betaMessageTokensCount.context_management);
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock`
 
@@ -20643,6 +20684,10 @@ console.log(betaMessageTokensCount.context_management);
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
@@ -20650,10 +20695,6 @@ console.log(betaMessageTokensCount.context_management);
       - `encrypted_content: string | null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock`
 
@@ -20668,6 +20709,10 @@ console.log(betaMessageTokensCount.context_management);
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -20759,6 +20804,10 @@ console.log(betaMessageTokensCount.context_management);
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
@@ -20789,14 +20838,6 @@ console.log(betaMessageTokensCount.context_management);
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `context_management: BetaContextManagementResponse | null`
 
     Context management response.
@@ -20808,6 +20849,12 @@ console.log(betaMessageTokensCount.context_management);
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -20821,13 +20868,13 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -20841,12 +20888,6 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
-
   - `diagnostics: BetaDiagnostics | null`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -20858,43 +20899,43 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaCacheMissModelChanged`
 
-        - `cache_missed_input_tokens: number`
-
-          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
         - `type: "model_changed"`
 
           default: model_changed
 
-      - `BetaCacheMissSystemChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissSystemChanged`
 
         - `type: "system_changed"`
 
           default: system_changed
 
-      - `BetaCacheMissToolsChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `BetaCacheMissToolsChanged`
 
         - `type: "tools_changed"`
 
           default: tools_changed
 
-      - `BetaCacheMissMessagesChanged`
-
         - `cache_missed_input_tokens: number`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+      - `BetaCacheMissMessagesChanged`
+
         - `type: "messages_changed"`
 
           default: messages_changed
+
+        - `cache_missed_input_tokens: number`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `BetaCacheMissPreviousMessageNotFound`
 
@@ -20925,6 +20966,10 @@ console.log(betaMessageTokensCount.context_management);
   - `stop_details: BetaRefusalStopDetails | null`
 
     Structured information about a refusal.
+
+    - `type: "refusal"`
+
+      default: refusal
 
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -21011,10 +21056,6 @@ console.log(betaMessageTokensCount.context_management);
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: BetaStopReason | null`
 
     The reason that we stopped.
@@ -21052,14 +21093,6 @@ console.log(betaMessageTokensCount.context_management);
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: BetaUsage`
 
@@ -21127,6 +21160,10 @@ console.log(betaMessageTokensCount.context_management);
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
             Why the reprice was not applied.
@@ -21157,10 +21194,6 @@ console.log(betaMessageTokensCount.context_management);
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem?: Array<string> | null`
 
@@ -21199,6 +21232,12 @@ console.log(betaMessageTokensCount.context_management);
 
         Token usage for a sampling iteration.
 
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
+
         - `cache_creation: BetaCacheCreation | null`
 
           Breakdown of cached tokens by TTL
@@ -21233,43 +21272,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
-
-        - `cache_creation: BetaCacheCreation | null`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: number`
-
-          The number of input tokens used to create the cache entry.
-
-          default: 0, minimum: 0
-
-        - `cache_read_input_tokens: number`
-
-          The number of input tokens read from the cache.
-
-          default: 0, minimum: 0
-
-        - `input_tokens: number`
-
-          The number of input tokens which were used.
-
-          minimum: 0
-
-        - `output_tokens: number`
-
-          The number of output tokens which were used.
-
-          minimum: 0
 
         - `type: "compaction"`
 
@@ -21277,9 +21282,43 @@ console.log(betaMessageTokensCount.context_management);
 
           default: compaction
 
+        - `cache_creation: BetaCacheCreation | null`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+          default: 0, minimum: 0
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+          default: 0, minimum: 0
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
       - `BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation | null`
 
@@ -21314,12 +21353,6 @@ console.log(betaMessageTokensCount.context_management);
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage`
 
@@ -21330,6 +21363,12 @@ console.log(betaMessageTokensCount.context_management);
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation | null`
 
           Breakdown of cached tokens by TTL
@@ -21363,12 +21402,6 @@ console.log(betaMessageTokensCount.context_management);
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -21450,6 +21483,12 @@ console.log(betaMessageTokensCount.context_management);
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -21479,12 +21518,6 @@ console.log(betaMessageTokensCount.context_management);
       - `"organization_binding_mismatch"`
 
       - `"end_user_binding_mismatch"`
-
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
 
 ### Beta Message Delta Usage
 
@@ -21528,6 +21561,10 @@ console.log(betaMessageTokensCount.context_management);
 
         No reprice was applied; `reason` says why.
 
+        - `type: "not_applied"`
+
+          default: not_applied
+
         - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
           Why the reprice was not applied.
@@ -21558,10 +21595,6 @@ console.log(betaMessageTokensCount.context_management);
           - `"wrong_platform"`
 
           - `"wrong_workspace"`
-
-        - `type: "not_applied"`
-
-          default: not_applied
 
         - `remove_to_redeem?: Array<string> | null`
 
@@ -21595,6 +21628,12 @@ console.log(betaMessageTokensCount.context_management);
     - `BetaMessageIterationUsage`
 
       Token usage for a sampling iteration.
+
+      - `type: "message"`
+
+        Usage for a sampling iteration
+
+        default: message
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -21714,15 +21753,15 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "message"`
-
-        Usage for a sampling iteration
-
-        default: message
-
     - `BetaCompactionIterationUsage`
 
       Token usage for a compaction iteration.
+
+      - `type: "compaction"`
+
+        Usage for a compaction iteration
+
+        default: compaction
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -21752,15 +21791,15 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "compaction"`
-
-        Usage for a compaction iteration
-
-        default: compaction
-
     - `BetaAdvisorMessageIterationUsage`
 
       Token usage for an advisor sub-inference iteration.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        default: advisor_message
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -21795,12 +21834,6 @@ console.log(betaMessageTokensCount.context_management);
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "advisor_message"`
-
-        Usage for an advisor sub-inference iteration
-
-        default: advisor_message
 
     - `BetaFallbackMessageIterationUsage`
 
@@ -21811,6 +21844,12 @@ console.log(betaMessageTokensCount.context_management);
       a fallback model served the response is signalled by the presence of this
       entry in `usage.iterations`.
 
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
+
+        default: fallback_message
+
       - `cache_creation: BetaCacheCreation | null`
 
         Breakdown of cached tokens by TTL
@@ -21844,12 +21883,6 @@ console.log(betaMessageTokensCount.context_management);
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "fallback_message"`
-
-        Usage for the fallback-model attempt that served the response
-
-        default: fallback_message
 
   - `output_tokens: number`
 
@@ -21898,6 +21931,12 @@ console.log(betaMessageTokensCount.context_management);
 - `BetaMessageIterationUsage`
 
   Token usage for a sampling iteration.
+
+  - `type: "message"`
+
+    Usage for a sampling iteration
+
+    default: message
 
   - `cache_creation: BetaCacheCreation | null`
 
@@ -22017,12 +22056,6 @@ console.log(betaMessageTokensCount.context_management);
 
     minimum: 0
 
-  - `type: "message"`
-
-    Usage for a sampling iteration
-
-    default: message
-
 ### Beta Message Param
 
 - `BetaMessageParam`
@@ -22035,11 +22068,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22066,6 +22099,8 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaCitationCharLocationParam`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -22082,9 +22117,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -22102,9 +22137,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -22132,9 +22167,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -22144,13 +22179,13 @@ console.log(betaMessageTokensCount.context_management);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -22182,13 +22217,15 @@ console.log(betaMessageTokensCount.context_management);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
           - `BetaBase64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -22204,8 +22241,6 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource`
 
             - `type: "url"`
@@ -22214,11 +22249,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22238,9 +22271,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaRequestDocumentBlock`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
           - `BetaBase64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -22248,17 +22285,17 @@ console.log(betaMessageTokensCount.context_management);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -22270,8 +22307,6 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaImageBlockParam`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource`
 
             - `type: "url"`
@@ -22280,11 +22315,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22304,13 +22337,15 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaSearchResultBlockParam`
 
+        - `type: "search_result"`
+
         - `content: Array<BetaTextBlockParam>`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22322,8 +22357,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -22331,6 +22364,8 @@ console.log(betaMessageTokensCount.context_management);
         - `citations?: BetaCitationsConfigParam`
 
       - `BetaThinkingBlockParam`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -22342,17 +22377,17 @@ console.log(betaMessageTokensCount.context_management);
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `BetaRedactedThinkingBlockParam`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `BetaToolUseBlockParam`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -22363,8 +22398,6 @@ console.log(betaMessageTokensCount.context_management);
         - `name: string`
 
           maxLength: 200, minLength: 1
-
-        - `type: "tool_use"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22384,19 +22417,19 @@ console.log(betaMessageTokensCount.context_management);
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name?: string | null`
 
@@ -22406,11 +22439,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaToolResultBlockParam`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22434,11 +22467,11 @@ console.log(betaMessageTokensCount.context_management);
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22453,6 +22486,8 @@ console.log(betaMessageTokensCount.context_management);
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -22482,8 +22517,6 @@ console.log(betaMessageTokensCount.context_management);
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -22504,25 +22537,25 @@ console.log(betaMessageTokensCount.context_management);
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BetaBrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -22537,13 +22570,13 @@ console.log(betaMessageTokensCount.context_management);
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -22567,13 +22600,13 @@ console.log(betaMessageTokensCount.context_management);
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -22596,6 +22629,8 @@ console.log(betaMessageTokensCount.context_management);
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlockParam`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -22621,8 +22656,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -22643,21 +22676,25 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaWebSearchToolResultBlockParam`
 
+        - `type: "web_search_tool_result"`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `Array<BetaWebSearchResultBlockParam>`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age?: string | null`
 
           - `BetaWebSearchToolRequestError`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -22673,13 +22710,9 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22701,9 +22734,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaWebFetchToolResultBlockParam`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
           - `BetaWebFetchToolResultErrorBlockParam`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -22725,13 +22762,13 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `BetaWebFetchBlockParam`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: "web_fetch_result"`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: string`
 
@@ -22744,8 +22781,6 @@ console.log(betaMessageTokensCount.context_management);
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_fetch_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22767,9 +22802,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaAdvisorToolResultBlockParam`
 
+        - `type: "advisor_tool_result"`
+
         - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
           - `BetaAdvisorToolResultErrorParam`
+
+            - `type: "advisor_tool_result_error"`
 
             - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -22787,23 +22826,21 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
           - `BetaAdvisorResultBlockParam`
 
-            - `text: string`
-
             - `type: "advisor_result"`
+
+            - `text: string`
 
             - `stop_reason?: string | null`
 
           - `BetaAdvisorRedactedResultBlockParam`
 
+            - `type: "advisor_redacted_result"`
+
             - `encrypted_content: string`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: "advisor_redacted_result"`
 
             - `stop_reason?: string | null`
 
@@ -22811,19 +22848,21 @@ console.log(betaMessageTokensCount.context_management);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaCodeExecutionToolResultBlockParam`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `BetaCodeExecutionToolResultErrorParam`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -22835,15 +22874,15 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `BetaCodeExecutionResultBlockParam`
+
+            - `type: "code_execution_result"`
 
             - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -22851,17 +22890,17 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `BetaEncryptedCodeExecutionResultBlockParam`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -22869,13 +22908,9 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22883,9 +22918,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaBashCodeExecutionToolResultBlockParam`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
           - `BetaBashCodeExecutionToolResultErrorParam`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -22899,15 +22938,15 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BetaBashCodeExecutionResultBlockParam`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -22915,13 +22954,9 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -22929,9 +22964,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -22945,11 +22984,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message?: string | null`
 
           - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -22961,8 +23000,6 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines?: number | null`
 
             - `start_line?: number | null`
@@ -22971,9 +23008,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -22993,17 +23030,19 @@ console.log(betaMessageTokensCount.context_management);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaToolSearchToolResultBlockParam`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
           - `BetaToolSearchToolResultErrorParam`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -23015,37 +23054,35 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message?: string | null`
 
           - `BetaToolSearchToolSearchResultBlockParam`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaMCPToolUseBlockParam`
+
+        - `type: "mcp_tool_use"`
 
         - `id: string`
 
@@ -23059,19 +23096,17 @@ console.log(betaMessageTokensCount.context_management);
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
 
       - `BetaRequestMCPToolResultBlockParam`
 
+        - `type: "mcp_tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "mcp_tool_result"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -23083,11 +23118,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `Array<BetaTextBlockParam>`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -23102,9 +23137,9 @@ console.log(betaMessageTokensCount.context_management);
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -23142,6 +23177,8 @@ console.log(betaMessageTokensCount.context_management);
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `type: "tool_addition"`
+
         - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
           Reference to a single tool the caller declared directly in
@@ -23156,32 +23193,30 @@ console.log(betaMessageTokensCount.context_management);
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: "tool_reference"`
+
             - `name: string`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: "tool_reference"`
 
           - `BetaToolChangeMCPToolReference`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: "mcp_tool_reference"`
+
             - `name: string`
 
             - `server_name: string`
-
-            - `type: "mcp_tool_reference"`
 
           - `BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: string`
-
             - `type: "mcp_toolset_reference"`
 
-        - `type: "tool_addition"`
+            - `server_name: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -23195,6 +23230,8 @@ console.log(betaMessageTokensCount.context_management);
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
+        - `type: "tool_removal"`
+
         - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
           Reference to a single tool the caller declared directly in
@@ -23217,8 +23254,6 @@ console.log(betaMessageTokensCount.context_management);
           - `BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: "tool_removal"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -23239,6 +23274,8 @@ console.log(betaMessageTokensCount.context_management);
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: "fallback"`
 
         - `from: BetaFallbackInfoParam`
 
@@ -23325,8 +23362,6 @@ console.log(betaMessageTokensCount.context_management);
         - `to: BetaFallbackInfoParam`
 
           Identifies one hop of a fallback transition.
-
-        - `type: "fallback"`
 
         - `trigger?: unknown`
 
@@ -23420,25 +23455,25 @@ console.log(betaMessageTokensCount.context_management);
 
     A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+    - `type: "json_schema"`
+
     - `schema: Record<string, unknown>`
 
       The JSON schema of the format
 
-    - `type: "json_schema"`
-
   - `task_budget?: BetaTokenTaskBudget | null`
 
     User-configurable total token budget across contexts.
+
+    - `type: "tokens"`
+
+      The budget type. Currently only 'tokens' is supported.
 
     - `total: number`
 
       Total token budget across all contexts in the session.
 
       minimum: 1024
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
 
     - `remaining?: number | null`
 
@@ -23467,11 +23502,11 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaPlainTextSource`
 
+  - `type: "text"`
+
   - `data: string`
 
   - `media_type: "text/plain"`
-
-  - `type: "text"`
 
 ### Beta Raw Content Block Delta
 
@@ -23479,25 +23514,33 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaTextDelta`
 
-    - `text: string`
-
     - `type: "text_delta"`
 
       default: text_delta
 
-  - `BetaInputJSONDelta`
+    - `text: string`
 
-    - `partial_json: string`
+  - `BetaInputJSONDelta`
 
     - `type: "input_json_delta"`
 
       default: input_json_delta
 
+    - `partial_json: string`
+
   - `BetaCitationsDelta`
+
+    - `type: "citations_delta"`
+
+      default: citations_delta
 
     - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
       - `BetaCitationCharLocation`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -23515,11 +23558,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `BetaCitationPageLocation`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -23537,11 +23580,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `BetaCitationContentBlockLocation`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -23569,11 +23612,11 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `BetaCitationsWebSearchResultLocation`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -23583,13 +23626,13 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `BetaCitationSearchResultLocation`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -23621,15 +23664,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
-    - `type: "citations_delta"`
-
-      default: citations_delta
-
   - `BetaThinkingDelta`
+
+    - `type: "thinking_delta"`
+
+      default: thinking_delta
 
     - `estimated_tokens: number | null`
 
@@ -23639,21 +23678,21 @@ console.log(betaMessageTokensCount.context_management);
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `type: "thinking_delta"`
-
-      default: thinking_delta
-
   - `BetaSignatureDelta`
-
-    - `signature: string`
-
-      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
     - `type: "signature_delta"`
 
       default: signature_delta
 
+    - `signature: string`
+
+      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
   - `BetaCompactionContentBlockDelta`
+
+    - `type: "compaction_delta"`
+
+      default: compaction_delta
 
     - `content: string | null`
 
@@ -23661,37 +23700,45 @@ console.log(betaMessageTokensCount.context_management);
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type: "compaction_delta"`
-
-      default: compaction_delta
-
 ### Beta Raw Content Block Delta Event
 
 - `BetaRawContentBlockDeltaEvent`
+
+  - `type: "content_block_delta"`
+
+    default: content_block_delta
 
   - `delta: BetaRawContentBlockDelta`
 
     - `BetaTextDelta`
 
-      - `text: string`
-
       - `type: "text_delta"`
 
         default: text_delta
 
-    - `BetaInputJSONDelta`
+      - `text: string`
 
-      - `partial_json: string`
+    - `BetaInputJSONDelta`
 
       - `type: "input_json_delta"`
 
         default: input_json_delta
 
+      - `partial_json: string`
+
     - `BetaCitationsDelta`
+
+      - `type: "citations_delta"`
+
+        default: citations_delta
 
       - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
         - `BetaCitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -23709,11 +23756,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -23731,11 +23778,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -23763,11 +23810,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -23777,13 +23824,13 @@ console.log(betaMessageTokensCount.context_management);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -23815,15 +23862,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
-      - `type: "citations_delta"`
-
-        default: citations_delta
-
     - `BetaThinkingDelta`
+
+      - `type: "thinking_delta"`
+
+        default: thinking_delta
 
       - `estimated_tokens: number | null`
 
@@ -23833,21 +23876,21 @@ console.log(betaMessageTokensCount.context_management);
 
         The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type: "thinking_delta"`
-
-        default: thinking_delta
-
     - `BetaSignatureDelta`
-
-      - `signature: string`
-
-        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
       - `type: "signature_delta"`
 
         default: signature_delta
 
+      - `signature: string`
+
+        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
     - `BetaCompactionContentBlockDelta`
+
+      - `type: "compaction_delta"`
+
+        default: compaction_delta
 
       - `content: string | null`
 
@@ -23855,25 +23898,25 @@ console.log(betaMessageTokensCount.context_management);
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type: "compaction_delta"`
-
-        default: compaction_delta
-
   - `index: number`
-
-  - `type: "content_block_delta"`
-
-    default: content_block_delta
 
 ### Beta Raw Content Block Start Event
 
 - `BetaRawContentBlockStartEvent`
+
+  - `type: "content_block_start"`
+
+    default: content_block_start
 
   - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
     Response model for a file uploaded to the container.
 
     - `BetaTextBlock`
+
+      - `type: "text"`
+
+        default: text
 
       - `citations: Array<BetaTextCitation> | null`
 
@@ -23882,6 +23925,10 @@ console.log(betaMessageTokensCount.context_management);
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `BetaCitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -23899,11 +23946,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `BetaCitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -23921,11 +23968,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `BetaCitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -23953,11 +24000,11 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `BetaCitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -23967,13 +24014,13 @@ console.log(betaMessageTokensCount.context_management);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `BetaCitationSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -24005,19 +24052,15 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `BetaThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -24031,11 +24074,11 @@ console.log(betaMessageTokensCount.context_management);
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `BetaRedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -24045,11 +24088,11 @@ console.log(betaMessageTokensCount.context_management);
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `BetaToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -24060,10 +24103,6 @@ console.log(betaMessageTokensCount.context_management);
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -24079,19 +24118,19 @@ console.log(betaMessageTokensCount.context_management);
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `BetaServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `toolset_name?: string | null`
 
@@ -24100,6 +24139,10 @@ console.log(betaMessageTokensCount.context_management);
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `BetaServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -24125,10 +24168,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
         Tool invocation directly from the model.
@@ -24145,9 +24184,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaWebSearchToolResultBlock`
 
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `BetaWebSearchToolResultError`
+
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -24163,11 +24210,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<BetaWebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -24175,19 +24222,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -24205,9 +24244,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaWebFetchToolResultBlock`
 
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
+
       - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
         - `BetaWebFetchToolResultErrorBlock`
+
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -24229,13 +24276,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `BetaWebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: BetaCitationConfig | null`
 
@@ -24249,37 +24302,29 @@ console.log(betaMessageTokensCount.context_management);
 
               - `BetaBase64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `BetaPlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -24288,10 +24333,6 @@ console.log(betaMessageTokensCount.context_management);
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -24309,9 +24350,17 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaAdvisorToolResultBlock`
 
+      - `type: "advisor_tool_result"`
+
+        default: advisor_tool_result
+
       - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
         - `BetaAdvisorToolResultError`
+
+          - `type: "advisor_tool_result_error"`
+
+            default: advisor_tool_result_error
 
           - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -24329,11 +24378,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"model_not_found"`
 
-          - `type: "advisor_tool_result_error"`
-
-            default: advisor_tool_result_error
-
         - `BetaAdvisorResultBlock`
+
+          - `type: "advisor_result"`
+
+            default: advisor_result
 
           - `stop_reason: string | null`
 
@@ -24341,11 +24390,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `text: string`
 
-          - `type: "advisor_result"`
-
-            default: advisor_result
-
         - `BetaAdvisorRedactedResultBlock`
+
+          - `type: "advisor_redacted_result"`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: string`
 
@@ -24355,25 +24404,25 @@ console.log(betaMessageTokensCount.context_management);
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: "advisor_redacted_result"`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "advisor_tool_result"`
-
-        default: advisor_tool_result
-
     - `BetaCodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `BetaCodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -24385,19 +24434,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `BetaCodeExecutionResultBlock`
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -24405,21 +24454,21 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<BetaCodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<BetaCodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -24427,23 +24476,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BetaBashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
         - `BetaBashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -24457,19 +24506,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BetaBashCodeExecutionResultBlock`
 
-          - `content: Array<BetaBashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -24477,23 +24526,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `BetaTextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `BetaTextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -24509,11 +24558,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `BetaTextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -24531,19 +24580,19 @@ console.log(betaMessageTokensCount.context_management);
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -24555,23 +24604,23 @@ console.log(betaMessageTokensCount.context_management);
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `BetaToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
         - `BetaToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -24585,35 +24634,31 @@ console.log(betaMessageTokensCount.context_management);
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `BetaToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<BetaToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<BetaToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
-
     - `BetaMCPToolUseBlock`
+
+      - `type: "mcp_tool_use"`
+
+        default: mcp_tool_use
 
       - `id: string`
 
@@ -24629,17 +24674,21 @@ console.log(betaMessageTokensCount.context_management);
 
         The name of the MCP server
 
-      - `type: "mcp_tool_use"`
-
-        default: mcp_tool_use
-
     - `BetaMCPToolResultBlock`
+
+      - `type: "mcp_tool_result"`
+
+        default: mcp_tool_result
 
       - `content: string | Array<BetaTextBlock>`
 
         - `string`
 
         - `Array<BetaTextBlock>`
+
+          - `type: "text"`
+
+            default: text
 
           - `citations: Array<BetaTextCitation> | null`
 
@@ -24649,11 +24698,7 @@ console.log(betaMessageTokensCount.context_management);
 
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
       - `is_error: boolean`
 
@@ -24663,19 +24708,15 @@ console.log(betaMessageTokensCount.context_management);
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: "mcp_tool_result"`
-
-        default: mcp_tool_result
-
     - `BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
     - `BetaCompactionBlock`
 
@@ -24685,6 +24726,10 @@ console.log(betaMessageTokensCount.context_management);
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: "compaction"`
+
+        default: compaction
+
       - `content: string | null`
 
         Summary of compacted content, or null if compaction failed
@@ -24692,10 +24737,6 @@ console.log(betaMessageTokensCount.context_management);
       - `encrypted_content: string | null`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: "compaction"`
-
-        default: compaction
 
     - `BetaFallbackBlock`
 
@@ -24710,6 +24751,10 @@ console.log(betaMessageTokensCount.context_management);
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: "fallback"`
+
+        default: fallback
 
       - `from: BetaFallbackInfo`
 
@@ -24801,6 +24846,10 @@ console.log(betaMessageTokensCount.context_management);
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
@@ -24831,33 +24880,25 @@ console.log(betaMessageTokensCount.context_management);
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
-      - `type: "fallback"`
-
-        default: fallback
-
   - `index: number`
-
-  - `type: "content_block_start"`
-
-    default: content_block_start
 
 ### Beta Raw Content Block Stop Event
 
 - `BetaRawContentBlockStopEvent`
 
-  - `index: number`
-
   - `type: "content_block_stop"`
 
     default: content_block_stop
 
+  - `index: number`
+
 ### Beta Raw Message Delta Event
 
 - `BetaRawMessageDeltaEvent`
+
+  - `type: "message_delta"`
+
+    default: message_delta
 
   - `context_management: BetaContextManagementResponse | null`
 
@@ -24868,6 +24909,12 @@ console.log(betaMessageTokensCount.context_management);
       List of context management edits that were applied.
 
       - `BetaClearToolUses20250919EditResponse`
+
+        - `type: "clear_tool_uses_20250919"`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: number`
 
@@ -24881,13 +24928,13 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "clear_tool_uses_20250919"`
+      - `BetaClearThinking20251015EditResponse`
+
+        - `type: "clear_thinking_20251015"`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `BetaClearThinking20251015EditResponse`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: number`
 
@@ -24900,12 +24947,6 @@ console.log(betaMessageTokensCount.context_management);
           Number of thinking turns that were cleared.
 
           minimum: 0
-
-        - `type: "clear_thinking_20251015"`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
 
   - `delta: Delta`
 
@@ -24927,12 +24968,6 @@ console.log(betaMessageTokensCount.context_management);
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" | "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -24940,6 +24975,12 @@ console.log(betaMessageTokensCount.context_management);
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -24950,6 +24991,10 @@ console.log(betaMessageTokensCount.context_management);
     - `stop_details: BetaRefusalStopDetails | null`
 
       Structured information about a refusal.
+
+      - `type: "refusal"`
+
+        default: refusal
 
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -25036,10 +25081,6 @@ console.log(betaMessageTokensCount.context_management);
 
         The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: BetaStopReason | null`
 
       - `"end_turn"`
@@ -25059,10 +25100,6 @@ console.log(betaMessageTokensCount.context_management);
       - `"model_context_window_exceeded"`
 
     - `stop_sequence: string | null`
-
-  - `type: "message_delta"`
-
-    default: message_delta
 
   - `usage: BetaMessageDeltaUsage`
 
@@ -25114,6 +25151,10 @@ console.log(betaMessageTokensCount.context_management);
 
           No reprice was applied; `reason` says why.
 
+          - `type: "not_applied"`
+
+            default: not_applied
+
           - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
             Why the reprice was not applied.
@@ -25144,10 +25185,6 @@ console.log(betaMessageTokensCount.context_management);
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: "not_applied"`
-
-            default: not_applied
 
           - `remove_to_redeem?: Array<string> | null`
 
@@ -25181,6 +25218,12 @@ console.log(betaMessageTokensCount.context_management);
       - `BetaMessageIterationUsage`
 
         Token usage for a sampling iteration.
+
+        - `type: "message"`
+
+          Usage for a sampling iteration
+
+          default: message
 
         - `cache_creation: BetaCacheCreation | null`
 
@@ -25300,15 +25343,15 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "message"`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
+
+        - `type: "compaction"`
+
+          Usage for a compaction iteration
+
+          default: compaction
 
         - `cache_creation: BetaCacheCreation | null`
 
@@ -25338,15 +25381,15 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "compaction"`
-
-          Usage for a compaction iteration
-
-          default: compaction
-
       - `BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: "advisor_message"`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: BetaCacheCreation | null`
 
@@ -25381,12 +25424,6 @@ console.log(betaMessageTokensCount.context_management);
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "advisor_message"`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `BetaFallbackMessageIterationUsage`
 
@@ -25397,6 +25434,12 @@ console.log(betaMessageTokensCount.context_management);
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: BetaCacheCreation | null`
 
           Breakdown of cached tokens by TTL
@@ -25430,12 +25473,6 @@ console.log(betaMessageTokensCount.context_management);
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: "fallback_message"`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: number`
 
@@ -25497,6 +25534,12 @@ console.log(betaMessageTokensCount.context_management);
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: "thinking_dropped"`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: string`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -25527,17 +25570,23 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"end_user_binding_mismatch"`
 
-    - `type: "thinking_dropped"`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
-
 ### Beta Raw Message Start Event
 
 - `BetaRawMessageStartEvent`
 
+  - `type: "message_start"`
+
+    default: message_start
+
   - `message: BetaMessage`
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
+
+      default: message
 
     - `id: string`
 
@@ -25563,12 +25612,6 @@ console.log(betaMessageTokensCount.context_management);
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" | "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -25576,6 +25619,12 @@ console.log(betaMessageTokensCount.context_management);
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -25614,6 +25663,10 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextBlock`
 
+        - `type: "text"`
+
+          default: text
+
         - `citations: Array<BetaTextCitation> | null`
 
           Citations supporting the text block.
@@ -25621,6 +25674,10 @@ console.log(betaMessageTokensCount.context_management);
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `BetaCitationCharLocation`
+
+            - `type: "char_location"`
+
+              default: char_location
 
             - `cited_text: string`
 
@@ -25638,11 +25695,11 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "char_location"`
-
-              default: char_location
-
           - `BetaCitationPageLocation`
+
+            - `type: "page_location"`
+
+              default: page_location
 
             - `cited_text: string`
 
@@ -25660,11 +25717,11 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 1
 
-            - `type: "page_location"`
-
-              default: page_location
-
           - `BetaCitationContentBlockLocation`
+
+            - `type: "content_block_location"`
+
+              default: content_block_location
 
             - `cited_text: string`
 
@@ -25692,11 +25749,11 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
-              default: content_block_location
-
           - `BetaCitationsWebSearchResultLocation`
+
+            - `type: "web_search_result_location"`
+
+              default: web_search_result_location
 
             - `cited_text: string`
 
@@ -25706,13 +25763,13 @@ console.log(betaMessageTokensCount.context_management);
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
-              default: web_search_result_location
-
             - `url: string`
 
           - `BetaCitationSearchResultLocation`
+
+            - `type: "search_result_location"`
+
+              default: search_result_location
 
             - `cited_text: string`
 
@@ -25744,19 +25801,15 @@ console.log(betaMessageTokensCount.context_management);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
-              default: search_result_location
-
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
-
-          default: text
+          minLength: 0
 
       - `BetaThinkingBlock`
+
+        - `type: "thinking"`
+
+          default: thinking
 
         - `signature: string`
 
@@ -25770,11 +25823,11 @@ console.log(betaMessageTokensCount.context_management);
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
-          default: thinking
-
       - `BetaRedactedThinkingBlock`
+
+        - `type: "redacted_thinking"`
+
+          default: redacted_thinking
 
         - `data: string`
 
@@ -25784,11 +25837,11 @@ console.log(betaMessageTokensCount.context_management);
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
-          default: redacted_thinking
-
       - `BetaToolUseBlock`
+
+        - `type: "tool_use"`
+
+          default: tool_use
 
         - `id: string`
 
@@ -25799,10 +25852,6 @@ console.log(betaMessageTokensCount.context_management);
         - `name: string`
 
           minLength: 1
-
-        - `type: "tool_use"`
-
-          default: tool_use
 
         - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -25818,19 +25867,19 @@ console.log(betaMessageTokensCount.context_management);
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `BetaServerToolCaller20260120`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name?: string | null`
 
@@ -25839,6 +25888,10 @@ console.log(betaMessageTokensCount.context_management);
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `BetaServerToolUseBlock`
+
+        - `type: "server_tool_use"`
+
+          default: server_tool_use
 
         - `id: string`
 
@@ -25864,10 +25917,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
-          default: server_tool_use
-
         - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
           Tool invocation directly from the model.
@@ -25884,9 +25933,17 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaWebSearchToolResultBlock`
 
+        - `type: "web_search_tool_result"`
+
+          default: web_search_tool_result
+
         - `content: BetaWebSearchToolResultBlockContent`
 
           - `BetaWebSearchToolResultError`
+
+            - `type: "web_search_tool_result_error"`
+
+              default: web_search_tool_result_error
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -25902,11 +25959,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
-              default: web_search_tool_result_error
-
           - `Array<BetaWebSearchResultBlock>`
+
+            - `type: "web_search_result"`
+
+              default: web_search_result
 
             - `encrypted_content: string`
 
@@ -25914,19 +25971,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `title: string`
 
-            - `type: "web_search_result"`
-
-              default: web_search_result
-
             - `url: string`
 
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
-
-          default: web_search_tool_result
 
         - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -25944,9 +25993,17 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaWebFetchToolResultBlock`
 
+        - `type: "web_fetch_tool_result"`
+
+          default: web_fetch_tool_result
+
         - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
           - `BetaWebFetchToolResultErrorBlock`
+
+            - `type: "web_fetch_tool_result_error"`
+
+              default: web_fetch_tool_result_error
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -25968,13 +26025,19 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
-
-              default: web_fetch_tool_result_error
+              - `"content_too_large"`
 
           - `BetaWebFetchBlock`
 
+            - `type: "web_fetch_result"`
+
+              default: web_fetch_result
+
             - `content: BetaDocumentBlock`
+
+              - `type: "document"`
+
+                default: document
 
               - `citations: BetaCitationConfig | null`
 
@@ -25988,37 +26051,29 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaBase64PDFSource`
 
+                  - `type: "base64"`
+
                   - `data: string`
 
                     format: byte
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `BetaPlainTextSource`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
               - `title: string | null`
 
                 The title of the document
 
-              - `type: "document"`
-
-                default: document
-
             - `retrieved_at: string | null`
 
               ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
-
-              default: web_fetch_result
 
             - `url: string`
 
@@ -26027,10 +26082,6 @@ console.log(betaMessageTokensCount.context_management);
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_fetch_tool_result"`
-
-          default: web_fetch_tool_result
 
         - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -26048,9 +26099,17 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaAdvisorToolResultBlock`
 
+        - `type: "advisor_tool_result"`
+
+          default: advisor_tool_result
+
         - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
           - `BetaAdvisorToolResultError`
+
+            - `type: "advisor_tool_result_error"`
+
+              default: advisor_tool_result_error
 
             - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -26068,11 +26127,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
-              default: advisor_tool_result_error
-
           - `BetaAdvisorResultBlock`
+
+            - `type: "advisor_result"`
+
+              default: advisor_result
 
             - `stop_reason: string | null`
 
@@ -26080,11 +26139,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `text: string`
 
-            - `type: "advisor_result"`
-
-              default: advisor_result
-
           - `BetaAdvisorRedactedResultBlock`
+
+            - `type: "advisor_redacted_result"`
+
+              default: advisor_redacted_result
 
             - `encrypted_content: string`
 
@@ -26094,25 +26153,25 @@ console.log(betaMessageTokensCount.context_management);
 
               The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-            - `type: "advisor_redacted_result"`
-
-              default: advisor_redacted_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
-          default: advisor_tool_result
-
       - `BetaCodeExecutionToolResultBlock`
+
+        - `type: "code_execution_tool_result"`
+
+          default: code_execution_tool_result
 
         - `content: BetaCodeExecutionToolResultBlockContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `BetaCodeExecutionToolResultError`
+
+            - `type: "code_execution_tool_result_error"`
+
+              default: code_execution_tool_result_error
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -26124,19 +26183,19 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
-              default: code_execution_tool_result_error
-
           - `BetaCodeExecutionResultBlock`
 
-            - `content: Array<BetaCodeExecutionOutputBlock>`
+            - `type: "code_execution_result"`
 
-              - `file_id: string`
+              default: code_execution_result
+
+            - `content: Array<BetaCodeExecutionOutputBlock>`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -26144,21 +26203,21 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
-              default: code_execution_result
-
           - `BetaEncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
-            - `content: Array<BetaCodeExecutionOutputBlock>`
+            - `type: "encrypted_code_execution_result"`
 
-              - `file_id: string`
+              default: encrypted_code_execution_result
+
+            - `content: Array<BetaCodeExecutionOutputBlock>`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -26166,23 +26225,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
-              default: encrypted_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
-          default: code_execution_tool_result
-
       - `BetaBashCodeExecutionToolResultBlock`
+
+        - `type: "bash_code_execution_tool_result"`
+
+          default: bash_code_execution_tool_result
 
         - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
           - `BetaBashCodeExecutionToolResultError`
+
+            - `type: "bash_code_execution_tool_result_error"`
+
+              default: bash_code_execution_tool_result_error
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -26196,19 +26255,19 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
-              default: bash_code_execution_tool_result_error
-
           - `BetaBashCodeExecutionResultBlock`
 
-            - `content: Array<BetaBashCodeExecutionOutputBlock>`
+            - `type: "bash_code_execution_result"`
 
-              - `file_id: string`
+              default: bash_code_execution_result
+
+            - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
               - `type: "bash_code_execution_output"`
 
                 default: bash_code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -26216,23 +26275,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
-              default: bash_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
-          default: bash_code_execution_tool_result
-
       - `BetaTextEditorCodeExecutionToolResultBlock`
+
+        - `type: "text_editor_code_execution_tool_result"`
+
+          default: text_editor_code_execution_tool_result
 
         - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `BetaTextEditorCodeExecutionToolResultError`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
+
+              default: text_editor_code_execution_tool_result_error
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -26248,11 +26307,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `error_message: string | null`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
-              default: text_editor_code_execution_tool_result_error
-
           - `BetaTextEditorCodeExecutionViewResultBlock`
+
+            - `type: "text_editor_code_execution_view_result"`
+
+              default: text_editor_code_execution_view_result
 
             - `content: string`
 
@@ -26270,19 +26329,19 @@ console.log(betaMessageTokensCount.context_management);
 
             - `total_lines: number | null`
 
-            - `type: "text_editor_code_execution_view_result"`
-
-              default: text_editor_code_execution_view_result
-
           - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-            - `is_file_update: boolean`
 
             - `type: "text_editor_code_execution_create_result"`
 
               default: text_editor_code_execution_create_result
 
+            - `is_file_update: boolean`
+
           - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
+
+              default: text_editor_code_execution_str_replace_result
 
             - `lines: Array<string> | null`
 
@@ -26294,23 +26353,23 @@ console.log(betaMessageTokensCount.context_management);
 
             - `old_start: number | null`
 
-            - `type: "text_editor_code_execution_str_replace_result"`
-
-              default: text_editor_code_execution_str_replace_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
-          default: text_editor_code_execution_tool_result
-
       - `BetaToolSearchToolResultBlock`
+
+        - `type: "tool_search_tool_result"`
+
+          default: tool_search_tool_result
 
         - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
           - `BetaToolSearchToolResultError`
+
+            - `type: "tool_search_tool_result_error"`
+
+              default: tool_search_tool_result_error
 
             - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -26324,35 +26383,31 @@ console.log(betaMessageTokensCount.context_management);
 
             - `error_message: string | null`
 
-            - `type: "tool_search_tool_result_error"`
-
-              default: tool_search_tool_result_error
-
           - `BetaToolSearchToolSearchResultBlock`
-
-            - `tool_references: Array<BetaToolReferenceBlock>`
-
-              - `tool_name: string`
-
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
-
-                default: tool_reference
 
             - `type: "tool_search_tool_search_result"`
 
               default: tool_search_tool_search_result
 
+            - `tool_references: Array<BetaToolReferenceBlock>`
+
+              - `type: "tool_reference"`
+
+                default: tool_reference
+
+              - `tool_name: string`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "tool_search_tool_result"`
-
-          default: tool_search_tool_result
-
       - `BetaMCPToolUseBlock`
+
+        - `type: "mcp_tool_use"`
+
+          default: mcp_tool_use
 
         - `id: string`
 
@@ -26368,17 +26423,21 @@ console.log(betaMessageTokensCount.context_management);
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
-          default: mcp_tool_use
-
       - `BetaMCPToolResultBlock`
+
+        - `type: "mcp_tool_result"`
+
+          default: mcp_tool_result
 
         - `content: string | Array<BetaTextBlock>`
 
           - `string`
 
           - `Array<BetaTextBlock>`
+
+            - `type: "text"`
+
+              default: text
 
             - `citations: Array<BetaTextCitation> | null`
 
@@ -26388,11 +26447,7 @@ console.log(betaMessageTokensCount.context_management);
 
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
         - `is_error: boolean`
 
@@ -26402,19 +26457,15 @@ console.log(betaMessageTokensCount.context_management);
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type: "mcp_tool_result"`
-
-          default: mcp_tool_result
-
       - `BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
 
           default: container_upload
+
+        - `file_id: string`
 
       - `BetaCompactionBlock`
 
@@ -26424,6 +26475,10 @@ console.log(betaMessageTokensCount.context_management);
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
+        - `type: "compaction"`
+
+          default: compaction
+
         - `content: string | null`
 
           Summary of compacted content, or null if compaction failed
@@ -26431,10 +26486,6 @@ console.log(betaMessageTokensCount.context_management);
         - `encrypted_content: string | null`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
-
-        - `type: "compaction"`
-
-          default: compaction
 
       - `BetaFallbackBlock`
 
@@ -26449,6 +26500,10 @@ console.log(betaMessageTokensCount.context_management);
         The block is treated like a server-tool content block for streaming: it
         arrives via the standard `content_block_start` / `content_block_stop`
         pair and carries no deltas.
+
+        - `type: "fallback"`
+
+          default: fallback
 
         - `from: BetaFallbackInfo`
 
@@ -26540,6 +26595,10 @@ console.log(betaMessageTokensCount.context_management);
 
           What caused the `from` model to hand over at this hop.
 
+          - `type: "refusal"`
+
+            default: refusal
+
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
             The policy category that triggered a refusal.
@@ -26570,14 +26629,6 @@ console.log(betaMessageTokensCount.context_management);
 
               The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-          - `type: "refusal"`
-
-            default: refusal
-
-        - `type: "fallback"`
-
-          default: fallback
-
     - `context_management: BetaContextManagementResponse | null`
 
       Context management response.
@@ -26589,6 +26640,12 @@ console.log(betaMessageTokensCount.context_management);
         List of context management edits that were applied.
 
         - `BetaClearToolUses20250919EditResponse`
+
+          - `type: "clear_tool_uses_20250919"`
+
+            The type of context management edit applied.
+
+            default: clear_tool_uses_20250919
 
           - `cleared_input_tokens: number`
 
@@ -26602,13 +26659,13 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "clear_tool_uses_20250919"`
+        - `BetaClearThinking20251015EditResponse`
+
+          - `type: "clear_thinking_20251015"`
 
             The type of context management edit applied.
 
-            default: clear_tool_uses_20250919
-
-        - `BetaClearThinking20251015EditResponse`
+            default: clear_thinking_20251015
 
           - `cleared_input_tokens: number`
 
@@ -26622,12 +26679,6 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "clear_thinking_20251015"`
-
-            The type of context management edit applied.
-
-            default: clear_thinking_20251015
-
     - `diagnostics: BetaDiagnostics | null`
 
       Response envelope for request-level diagnostics. Present (possibly
@@ -26639,43 +26690,43 @@ console.log(betaMessageTokensCount.context_management);
 
         - `BetaCacheMissModelChanged`
 
-          - `cache_missed_input_tokens: number`
-
-            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
           - `type: "model_changed"`
 
             default: model_changed
 
-        - `BetaCacheMissSystemChanged`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `BetaCacheMissSystemChanged`
 
           - `type: "system_changed"`
 
             default: system_changed
 
-        - `BetaCacheMissToolsChanged`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `BetaCacheMissToolsChanged`
 
           - `type: "tools_changed"`
 
             default: tools_changed
 
-        - `BetaCacheMissMessagesChanged`
-
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+        - `BetaCacheMissMessagesChanged`
+
           - `type: "messages_changed"`
 
             default: messages_changed
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `BetaCacheMissPreviousMessageNotFound`
 
@@ -26706,6 +26757,10 @@ console.log(betaMessageTokensCount.context_management);
     - `stop_details: BetaRefusalStopDetails | null`
 
       Structured information about a refusal.
+
+      - `type: "refusal"`
+
+        default: refusal
 
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -26792,10 +26847,6 @@ console.log(betaMessageTokensCount.context_management);
 
         The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: BetaStopReason | null`
 
       The reason that we stopped.
@@ -26833,14 +26884,6 @@ console.log(betaMessageTokensCount.context_management);
       Which custom stop sequence was generated, if any.
 
       This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: "message"`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
-
-      default: message
 
     - `usage: BetaUsage`
 
@@ -26908,6 +26951,10 @@ console.log(betaMessageTokensCount.context_management);
 
             No reprice was applied; `reason` says why.
 
+            - `type: "not_applied"`
+
+              default: not_applied
+
             - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
               Why the reprice was not applied.
@@ -26938,10 +26985,6 @@ console.log(betaMessageTokensCount.context_management);
               - `"wrong_platform"`
 
               - `"wrong_workspace"`
-
-            - `type: "not_applied"`
-
-              default: not_applied
 
             - `remove_to_redeem?: Array<string> | null`
 
@@ -26980,6 +27023,12 @@ console.log(betaMessageTokensCount.context_management);
 
           Token usage for a sampling iteration.
 
+          - `type: "message"`
+
+            Usage for a sampling iteration
+
+            default: message
+
           - `cache_creation: BetaCacheCreation | null`
 
             Breakdown of cached tokens by TTL
@@ -27014,43 +27063,9 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "message"`
-
-            Usage for a sampling iteration
-
-            default: message
-
         - `BetaCompactionIterationUsage`
 
           Token usage for a compaction iteration.
-
-          - `cache_creation: BetaCacheCreation | null`
-
-            Breakdown of cached tokens by TTL
-
-          - `cache_creation_input_tokens: number`
-
-            The number of input tokens used to create the cache entry.
-
-            default: 0, minimum: 0
-
-          - `cache_read_input_tokens: number`
-
-            The number of input tokens read from the cache.
-
-            default: 0, minimum: 0
-
-          - `input_tokens: number`
-
-            The number of input tokens which were used.
-
-            minimum: 0
-
-          - `output_tokens: number`
-
-            The number of output tokens which were used.
-
-            minimum: 0
 
           - `type: "compaction"`
 
@@ -27058,9 +27073,43 @@ console.log(betaMessageTokensCount.context_management);
 
             default: compaction
 
+          - `cache_creation: BetaCacheCreation | null`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+            default: 0, minimum: 0
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+            default: 0, minimum: 0
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+            minimum: 0
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+            minimum: 0
+
         - `BetaAdvisorMessageIterationUsage`
 
           Token usage for an advisor sub-inference iteration.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
+
+            default: advisor_message
 
           - `cache_creation: BetaCacheCreation | null`
 
@@ -27095,12 +27144,6 @@ console.log(betaMessageTokensCount.context_management);
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "advisor_message"`
-
-            Usage for an advisor sub-inference iteration
-
-            default: advisor_message
 
         - `BetaFallbackMessageIterationUsage`
 
@@ -27111,6 +27154,12 @@ console.log(betaMessageTokensCount.context_management);
           a fallback model served the response is signalled by the presence of this
           entry in `usage.iterations`.
 
+          - `type: "fallback_message"`
+
+            Usage for the fallback-model attempt that served the response
+
+            default: fallback_message
+
           - `cache_creation: BetaCacheCreation | null`
 
             Breakdown of cached tokens by TTL
@@ -27144,12 +27193,6 @@ console.log(betaMessageTokensCount.context_management);
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "fallback_message"`
-
-            Usage for the fallback-model attempt that served the response
-
-            default: fallback_message
 
       - `output_tokens: number`
 
@@ -27231,6 +27274,12 @@ console.log(betaMessageTokensCount.context_management);
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -27261,16 +27310,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"end_user_binding_mismatch"`
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
-  - `type: "message_start"`
-
-    default: message_start
-
 ### Beta Raw Message Stop Event
 
 - `BetaRawMessageStopEvent`
@@ -27285,7 +27324,19 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaRawMessageStartEvent`
 
+    - `type: "message_start"`
+
+      default: message_start
+
     - `message: BetaMessage`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
+
+        default: message
 
       - `id: string`
 
@@ -27311,12 +27362,6 @@ console.log(betaMessageTokensCount.context_management);
 
           Skills loaded in the container
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" | "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -27324,6 +27369,12 @@ console.log(betaMessageTokensCount.context_management);
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: string`
 
@@ -27362,6 +27413,10 @@ console.log(betaMessageTokensCount.context_management);
 
         - `BetaTextBlock`
 
+          - `type: "text"`
+
+            default: text
+
           - `citations: Array<BetaTextCitation> | null`
 
             Citations supporting the text block.
@@ -27369,6 +27424,10 @@ console.log(betaMessageTokensCount.context_management);
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
             - `BetaCitationCharLocation`
+
+              - `type: "char_location"`
+
+                default: char_location
 
               - `cited_text: string`
 
@@ -27386,11 +27445,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 minimum: 0
 
-              - `type: "char_location"`
-
-                default: char_location
-
             - `BetaCitationPageLocation`
+
+              - `type: "page_location"`
+
+                default: page_location
 
               - `cited_text: string`
 
@@ -27408,11 +27467,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 minimum: 1
 
-              - `type: "page_location"`
-
-                default: page_location
-
             - `BetaCitationContentBlockLocation`
+
+              - `type: "content_block_location"`
+
+                default: content_block_location
 
               - `cited_text: string`
 
@@ -27440,11 +27499,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
-                default: content_block_location
-
             - `BetaCitationsWebSearchResultLocation`
+
+              - `type: "web_search_result_location"`
+
+                default: web_search_result_location
 
               - `cited_text: string`
 
@@ -27454,13 +27513,13 @@ console.log(betaMessageTokensCount.context_management);
 
                 maxLength: 512
 
-              - `type: "web_search_result_location"`
-
-                default: web_search_result_location
-
               - `url: string`
 
             - `BetaCitationSearchResultLocation`
+
+              - `type: "search_result_location"`
+
+                default: search_result_location
 
               - `cited_text: string`
 
@@ -27492,19 +27551,15 @@ console.log(betaMessageTokensCount.context_management);
 
               - `title: string | null`
 
-              - `type: "search_result_location"`
-
-                default: search_result_location
-
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
         - `BetaThinkingBlock`
+
+          - `type: "thinking"`
+
+            default: thinking
 
           - `signature: string`
 
@@ -27518,11 +27573,11 @@ console.log(betaMessageTokensCount.context_management);
 
             The text of Claude's thinking process for this block.
 
-          - `type: "thinking"`
-
-            default: thinking
-
         - `BetaRedactedThinkingBlock`
+
+          - `type: "redacted_thinking"`
+
+            default: redacted_thinking
 
           - `data: string`
 
@@ -27532,11 +27587,11 @@ console.log(betaMessageTokensCount.context_management);
 
             See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type: "redacted_thinking"`
-
-            default: redacted_thinking
-
         - `BetaToolUseBlock`
+
+          - `type: "tool_use"`
+
+            default: tool_use
 
           - `id: string`
 
@@ -27547,10 +27602,6 @@ console.log(betaMessageTokensCount.context_management);
           - `name: string`
 
             minLength: 1
-
-          - `type: "tool_use"`
-
-            default: tool_use
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -27566,19 +27617,19 @@ console.log(betaMessageTokensCount.context_management);
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `BetaServerToolCaller20260120`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `toolset_name?: string | null`
 
@@ -27587,6 +27638,10 @@ console.log(betaMessageTokensCount.context_management);
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `BetaServerToolUseBlock`
+
+          - `type: "server_tool_use"`
+
+            default: server_tool_use
 
           - `id: string`
 
@@ -27612,10 +27667,6 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
-            default: server_tool_use
-
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
             Tool invocation directly from the model.
@@ -27632,9 +27683,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `BetaWebSearchToolResultBlock`
 
+          - `type: "web_search_tool_result"`
+
+            default: web_search_tool_result
+
           - `content: BetaWebSearchToolResultBlockContent`
 
             - `BetaWebSearchToolResultError`
+
+              - `type: "web_search_tool_result_error"`
+
+                default: web_search_tool_result_error
 
               - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -27650,11 +27709,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
-                default: web_search_tool_result_error
-
             - `Array<BetaWebSearchResultBlock>`
+
+              - `type: "web_search_result"`
+
+                default: web_search_result
 
               - `encrypted_content: string`
 
@@ -27662,19 +27721,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `title: string`
 
-              - `type: "web_search_result"`
-
-                default: web_search_result
-
               - `url: string`
 
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_search_tool_result"`
-
-            default: web_search_tool_result
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -27692,9 +27743,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `BetaWebFetchToolResultBlock`
 
+          - `type: "web_fetch_tool_result"`
+
+            default: web_fetch_tool_result
+
           - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
             - `BetaWebFetchToolResultErrorBlock`
+
+              - `type: "web_fetch_tool_result_error"`
+
+                default: web_fetch_tool_result_error
 
               - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -27716,13 +27775,19 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
-
-                default: web_fetch_tool_result_error
+                - `"content_too_large"`
 
             - `BetaWebFetchBlock`
 
+              - `type: "web_fetch_result"`
+
+                default: web_fetch_result
+
               - `content: BetaDocumentBlock`
+
+                - `type: "document"`
+
+                  default: document
 
                 - `citations: BetaCitationConfig | null`
 
@@ -27736,37 +27801,29 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `BetaBase64PDFSource`
 
+                    - `type: "base64"`
+
                     - `data: string`
 
                       format: byte
 
                     - `media_type: "application/pdf"`
 
-                    - `type: "base64"`
-
                   - `BetaPlainTextSource`
+
+                    - `type: "text"`
 
                     - `data: string`
 
                     - `media_type: "text/plain"`
 
-                    - `type: "text"`
-
                 - `title: string | null`
 
                   The title of the document
 
-                - `type: "document"`
-
-                  default: document
-
               - `retrieved_at: string | null`
 
                 ISO 8601 timestamp when the content was retrieved
-
-              - `type: "web_fetch_result"`
-
-                default: web_fetch_result
 
               - `url: string`
 
@@ -27775,10 +27832,6 @@ console.log(betaMessageTokensCount.context_management);
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_fetch_tool_result"`
-
-            default: web_fetch_tool_result
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -27796,9 +27849,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `BetaAdvisorToolResultBlock`
 
+          - `type: "advisor_tool_result"`
+
+            default: advisor_tool_result
+
           - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
             - `BetaAdvisorToolResultError`
+
+              - `type: "advisor_tool_result_error"`
+
+                default: advisor_tool_result_error
 
               - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -27816,11 +27877,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"model_not_found"`
 
-              - `type: "advisor_tool_result_error"`
-
-                default: advisor_tool_result_error
-
             - `BetaAdvisorResultBlock`
+
+              - `type: "advisor_result"`
+
+                default: advisor_result
 
               - `stop_reason: string | null`
 
@@ -27828,11 +27889,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `text: string`
 
-              - `type: "advisor_result"`
-
-                default: advisor_result
-
             - `BetaAdvisorRedactedResultBlock`
+
+              - `type: "advisor_redacted_result"`
+
+                default: advisor_redacted_result
 
               - `encrypted_content: string`
 
@@ -27842,25 +27903,25 @@ console.log(betaMessageTokensCount.context_management);
 
                 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-              - `type: "advisor_redacted_result"`
-
-                default: advisor_redacted_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "advisor_tool_result"`
-
-            default: advisor_tool_result
-
         - `BetaCodeExecutionToolResultBlock`
+
+          - `type: "code_execution_tool_result"`
+
+            default: code_execution_tool_result
 
           - `content: BetaCodeExecutionToolResultBlockContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `BetaCodeExecutionToolResultError`
+
+              - `type: "code_execution_tool_result_error"`
+
+                default: code_execution_tool_result_error
 
               - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -27872,19 +27933,19 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
-                default: code_execution_tool_result_error
-
             - `BetaCodeExecutionResultBlock`
 
-              - `content: Array<BetaCodeExecutionOutputBlock>`
+              - `type: "code_execution_result"`
 
-                - `file_id: string`
+                default: code_execution_result
+
+              - `content: Array<BetaCodeExecutionOutputBlock>`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -27892,21 +27953,21 @@ console.log(betaMessageTokensCount.context_management);
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
-                default: code_execution_result
-
             - `BetaEncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `content: Array<BetaCodeExecutionOutputBlock>`
+              - `type: "encrypted_code_execution_result"`
 
-                - `file_id: string`
+                default: encrypted_code_execution_result
+
+              - `content: Array<BetaCodeExecutionOutputBlock>`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -27914,23 +27975,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
-                default: encrypted_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "code_execution_tool_result"`
-
-            default: code_execution_tool_result
-
         - `BetaBashCodeExecutionToolResultBlock`
+
+          - `type: "bash_code_execution_tool_result"`
+
+            default: bash_code_execution_tool_result
 
           - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
             - `BetaBashCodeExecutionToolResultError`
+
+              - `type: "bash_code_execution_tool_result_error"`
+
+                default: bash_code_execution_tool_result_error
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -27944,19 +28005,19 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
-                default: bash_code_execution_tool_result_error
-
             - `BetaBashCodeExecutionResultBlock`
 
-              - `content: Array<BetaBashCodeExecutionOutputBlock>`
+              - `type: "bash_code_execution_result"`
 
-                - `file_id: string`
+                default: bash_code_execution_result
+
+              - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
                 - `type: "bash_code_execution_output"`
 
                   default: bash_code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -27964,23 +28025,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
-                default: bash_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "bash_code_execution_tool_result"`
-
-            default: bash_code_execution_tool_result
-
         - `BetaTextEditorCodeExecutionToolResultBlock`
+
+          - `type: "text_editor_code_execution_tool_result"`
+
+            default: text_editor_code_execution_tool_result
 
           - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
             - `BetaTextEditorCodeExecutionToolResultError`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
+
+                default: text_editor_code_execution_tool_result_error
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -27996,11 +28057,11 @@ console.log(betaMessageTokensCount.context_management);
 
               - `error_message: string | null`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
-                default: text_editor_code_execution_tool_result_error
-
             - `BetaTextEditorCodeExecutionViewResultBlock`
+
+              - `type: "text_editor_code_execution_view_result"`
+
+                default: text_editor_code_execution_view_result
 
               - `content: string`
 
@@ -28018,19 +28079,19 @@ console.log(betaMessageTokensCount.context_management);
 
               - `total_lines: number | null`
 
-              - `type: "text_editor_code_execution_view_result"`
-
-                default: text_editor_code_execution_view_result
-
             - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-              - `is_file_update: boolean`
 
               - `type: "text_editor_code_execution_create_result"`
 
                 default: text_editor_code_execution_create_result
 
+              - `is_file_update: boolean`
+
             - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
+
+                default: text_editor_code_execution_str_replace_result
 
               - `lines: Array<string> | null`
 
@@ -28042,23 +28103,23 @@ console.log(betaMessageTokensCount.context_management);
 
               - `old_start: number | null`
 
-              - `type: "text_editor_code_execution_str_replace_result"`
-
-                default: text_editor_code_execution_str_replace_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
-            default: text_editor_code_execution_tool_result
-
         - `BetaToolSearchToolResultBlock`
+
+          - `type: "tool_search_tool_result"`
+
+            default: tool_search_tool_result
 
           - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
             - `BetaToolSearchToolResultError`
+
+              - `type: "tool_search_tool_result_error"`
+
+                default: tool_search_tool_result_error
 
               - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -28072,35 +28133,31 @@ console.log(betaMessageTokensCount.context_management);
 
               - `error_message: string | null`
 
-              - `type: "tool_search_tool_result_error"`
-
-                default: tool_search_tool_result_error
-
             - `BetaToolSearchToolSearchResultBlock`
-
-              - `tool_references: Array<BetaToolReferenceBlock>`
-
-                - `tool_name: string`
-
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `type: "tool_reference"`
-
-                  default: tool_reference
 
               - `type: "tool_search_tool_search_result"`
 
                 default: tool_search_tool_search_result
 
+              - `tool_references: Array<BetaToolReferenceBlock>`
+
+                - `type: "tool_reference"`
+
+                  default: tool_reference
+
+                - `tool_name: string`
+
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "tool_search_tool_result"`
-
-            default: tool_search_tool_result
-
         - `BetaMCPToolUseBlock`
+
+          - `type: "mcp_tool_use"`
+
+            default: mcp_tool_use
 
           - `id: string`
 
@@ -28116,17 +28173,21 @@ console.log(betaMessageTokensCount.context_management);
 
             The name of the MCP server
 
-          - `type: "mcp_tool_use"`
-
-            default: mcp_tool_use
-
         - `BetaMCPToolResultBlock`
+
+          - `type: "mcp_tool_result"`
+
+            default: mcp_tool_result
 
           - `content: string | Array<BetaTextBlock>`
 
             - `string`
 
             - `Array<BetaTextBlock>`
+
+              - `type: "text"`
+
+                default: text
 
               - `citations: Array<BetaTextCitation> | null`
 
@@ -28136,11 +28197,7 @@ console.log(betaMessageTokensCount.context_management);
 
               - `text: string`
 
-                maxLength: 5000000, minLength: 0
-
-              - `type: "text"`
-
-                default: text
+                minLength: 0
 
           - `is_error: boolean`
 
@@ -28150,19 +28207,15 @@ console.log(betaMessageTokensCount.context_management);
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type: "mcp_tool_result"`
-
-            default: mcp_tool_result
-
         - `BetaContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
 
             default: container_upload
+
+          - `file_id: string`
 
         - `BetaCompactionBlock`
 
@@ -28172,6 +28225,10 @@ console.log(betaMessageTokensCount.context_management);
           summary (e.g., malformed output from the model). Clients may round-trip
           compaction blocks with null content; the server treats them as no-ops.
 
+          - `type: "compaction"`
+
+            default: compaction
+
           - `content: string | null`
 
             Summary of compacted content, or null if compaction failed
@@ -28179,10 +28236,6 @@ console.log(betaMessageTokensCount.context_management);
           - `encrypted_content: string | null`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
-
-          - `type: "compaction"`
-
-            default: compaction
 
         - `BetaFallbackBlock`
 
@@ -28197,6 +28250,10 @@ console.log(betaMessageTokensCount.context_management);
           The block is treated like a server-tool content block for streaming: it
           arrives via the standard `content_block_start` / `content_block_stop`
           pair and carries no deltas.
+
+          - `type: "fallback"`
+
+            default: fallback
 
           - `from: BetaFallbackInfo`
 
@@ -28288,6 +28345,10 @@ console.log(betaMessageTokensCount.context_management);
 
             What caused the `from` model to hand over at this hop.
 
+            - `type: "refusal"`
+
+              default: refusal
+
             - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
               The policy category that triggered a refusal.
@@ -28318,14 +28379,6 @@ console.log(betaMessageTokensCount.context_management);
 
                 The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-            - `type: "refusal"`
-
-              default: refusal
-
-          - `type: "fallback"`
-
-            default: fallback
-
       - `context_management: BetaContextManagementResponse | null`
 
         Context management response.
@@ -28337,6 +28390,12 @@ console.log(betaMessageTokensCount.context_management);
           List of context management edits that were applied.
 
           - `BetaClearToolUses20250919EditResponse`
+
+            - `type: "clear_tool_uses_20250919"`
+
+              The type of context management edit applied.
+
+              default: clear_tool_uses_20250919
 
             - `cleared_input_tokens: number`
 
@@ -28350,13 +28409,13 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "clear_tool_uses_20250919"`
+          - `BetaClearThinking20251015EditResponse`
+
+            - `type: "clear_thinking_20251015"`
 
               The type of context management edit applied.
 
-              default: clear_tool_uses_20250919
-
-          - `BetaClearThinking20251015EditResponse`
+              default: clear_thinking_20251015
 
             - `cleared_input_tokens: number`
 
@@ -28370,12 +28429,6 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "clear_thinking_20251015"`
-
-              The type of context management edit applied.
-
-              default: clear_thinking_20251015
-
       - `diagnostics: BetaDiagnostics | null`
 
         Response envelope for request-level diagnostics. Present (possibly
@@ -28387,43 +28440,43 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaCacheMissModelChanged`
 
-            - `cache_missed_input_tokens: number`
-
-              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
             - `type: "model_changed"`
 
               default: model_changed
 
-          - `BetaCacheMissSystemChanged`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `BetaCacheMissSystemChanged`
 
             - `type: "system_changed"`
 
               default: system_changed
 
-          - `BetaCacheMissToolsChanged`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `BetaCacheMissToolsChanged`
 
             - `type: "tools_changed"`
 
               default: tools_changed
 
-          - `BetaCacheMissMessagesChanged`
-
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+          - `BetaCacheMissMessagesChanged`
+
             - `type: "messages_changed"`
 
               default: messages_changed
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `BetaCacheMissPreviousMessageNotFound`
 
@@ -28454,6 +28507,10 @@ console.log(betaMessageTokensCount.context_management);
       - `stop_details: BetaRefusalStopDetails | null`
 
         Structured information about a refusal.
+
+        - `type: "refusal"`
+
+          default: refusal
 
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -28540,10 +28597,6 @@ console.log(betaMessageTokensCount.context_management);
 
           The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-        - `type: "refusal"`
-
-          default: refusal
-
       - `stop_reason: BetaStopReason | null`
 
         The reason that we stopped.
@@ -28581,14 +28634,6 @@ console.log(betaMessageTokensCount.context_management);
         Which custom stop sequence was generated, if any.
 
         This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
-
-        default: message
 
       - `usage: BetaUsage`
 
@@ -28656,6 +28701,10 @@ console.log(betaMessageTokensCount.context_management);
 
               No reprice was applied; `reason` says why.
 
+              - `type: "not_applied"`
+
+                default: not_applied
+
               - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
                 Why the reprice was not applied.
@@ -28686,10 +28735,6 @@ console.log(betaMessageTokensCount.context_management);
                 - `"wrong_platform"`
 
                 - `"wrong_workspace"`
-
-              - `type: "not_applied"`
-
-                default: not_applied
 
               - `remove_to_redeem?: Array<string> | null`
 
@@ -28728,6 +28773,12 @@ console.log(betaMessageTokensCount.context_management);
 
             Token usage for a sampling iteration.
 
+            - `type: "message"`
+
+              Usage for a sampling iteration
+
+              default: message
+
             - `cache_creation: BetaCacheCreation | null`
 
               Breakdown of cached tokens by TTL
@@ -28762,43 +28813,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "message"`
-
-              Usage for a sampling iteration
-
-              default: message
-
           - `BetaCompactionIterationUsage`
 
             Token usage for a compaction iteration.
-
-            - `cache_creation: BetaCacheCreation | null`
-
-              Breakdown of cached tokens by TTL
-
-            - `cache_creation_input_tokens: number`
-
-              The number of input tokens used to create the cache entry.
-
-              default: 0, minimum: 0
-
-            - `cache_read_input_tokens: number`
-
-              The number of input tokens read from the cache.
-
-              default: 0, minimum: 0
-
-            - `input_tokens: number`
-
-              The number of input tokens which were used.
-
-              minimum: 0
-
-            - `output_tokens: number`
-
-              The number of output tokens which were used.
-
-              minimum: 0
 
             - `type: "compaction"`
 
@@ -28806,9 +28823,43 @@ console.log(betaMessageTokensCount.context_management);
 
               default: compaction
 
+            - `cache_creation: BetaCacheCreation | null`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+              default: 0, minimum: 0
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+              default: 0, minimum: 0
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+              minimum: 0
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+              minimum: 0
+
           - `BetaAdvisorMessageIterationUsage`
 
             Token usage for an advisor sub-inference iteration.
+
+            - `type: "advisor_message"`
+
+              Usage for an advisor sub-inference iteration
+
+              default: advisor_message
 
             - `cache_creation: BetaCacheCreation | null`
 
@@ -28843,12 +28894,6 @@ console.log(betaMessageTokensCount.context_management);
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "advisor_message"`
-
-              Usage for an advisor sub-inference iteration
-
-              default: advisor_message
 
           - `BetaFallbackMessageIterationUsage`
 
@@ -28859,6 +28904,12 @@ console.log(betaMessageTokensCount.context_management);
             a fallback model served the response is signalled by the presence of this
             entry in `usage.iterations`.
 
+            - `type: "fallback_message"`
+
+              Usage for the fallback-model attempt that served the response
+
+              default: fallback_message
+
             - `cache_creation: BetaCacheCreation | null`
 
               Breakdown of cached tokens by TTL
@@ -28892,12 +28943,6 @@ console.log(betaMessageTokensCount.context_management);
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "fallback_message"`
-
-              Usage for the fallback-model attempt that served the response
-
-              default: fallback_message
 
         - `output_tokens: number`
 
@@ -28979,6 +29024,12 @@ console.log(betaMessageTokensCount.context_management);
         fallback happened mid-stream, in which case it holds the serving model's
         entries and replaces the one in `message_start`.
 
+        - `type: "thinking_dropped"`
+
+          Always `thinking_dropped` for this entry type.
+
+          default: thinking_dropped
+
         - `path: string`
 
           Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -29009,17 +29060,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"end_user_binding_mismatch"`
 
-        - `type: "thinking_dropped"`
-
-          Always `thinking_dropped` for this entry type.
-
-          default: thinking_dropped
-
-    - `type: "message_start"`
-
-      default: message_start
-
   - `BetaRawMessageDeltaEvent`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `context_management: BetaContextManagementResponse | null`
 
@@ -29038,10 +29083,6 @@ console.log(betaMessageTokensCount.context_management);
       - `stop_reason: BetaStopReason | null`
 
       - `stop_sequence: string | null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -29124,6 +29165,12 @@ console.log(betaMessageTokensCount.context_management);
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -29146,12 +29193,6 @@ console.log(betaMessageTokensCount.context_management);
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
   - `BetaRawMessageStopEvent`
 
     - `type: "message_stop"`
@@ -29159,6 +29200,10 @@ console.log(betaMessageTokensCount.context_management);
       default: message_stop
 
   - `BetaRawContentBlockStartEvent`
+
+    - `type: "content_block_start"`
+
+      default: content_block_start
 
     - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
@@ -29220,31 +29265,35 @@ console.log(betaMessageTokensCount.context_management);
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `BetaRawContentBlockDeltaEvent`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: BetaRawContentBlockDelta`
 
       - `BetaTextDelta`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `BetaInputJSONDelta`
+        - `text: string`
 
-        - `partial_json: string`
+      - `BetaInputJSONDelta`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `BetaCitationsDelta`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
@@ -29258,11 +29307,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaCitationSearchResultLocation`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `BetaThinkingDelta`
+
+        - `type: "thinking_delta"`
+
+          default: thinking_delta
 
         - `estimated_tokens: number | null`
 
@@ -29272,21 +29321,21 @@ console.log(betaMessageTokensCount.context_management);
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: "thinking_delta"`
-
-          default: thinking_delta
-
       - `BetaSignatureDelta`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
       - `BetaCompactionContentBlockDelta`
+
+        - `type: "compaction_delta"`
+
+          default: compaction_delta
 
         - `content: string | null`
 
@@ -29294,27 +29343,23 @@ console.log(betaMessageTokensCount.context_management);
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: "compaction_delta"`
-
-          default: compaction_delta
-
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `BetaRawContentBlockStopEvent`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
 
+    - `index: number`
+
 ### Beta Redacted Thinking Block
 
 - `BetaRedactedThinkingBlock`
+
+  - `type: "redacted_thinking"`
+
+    default: redacted_thinking
 
   - `data: string`
 
@@ -29324,25 +29369,25 @@ console.log(betaMessageTokensCount.context_management);
 
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `type: "redacted_thinking"`
-
-    default: redacted_thinking
-
 ### Beta Redacted Thinking Block Param
 
 - `BetaRedactedThinkingBlockParam`
 
+  - `type: "redacted_thinking"`
+
   - `data: string`
 
     The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
-
-  - `type: "redacted_thinking"`
 
 ### Beta Refusal Stop Details
 
 - `BetaRefusalStopDetails`
 
   Structured information about a refusal.
+
+  - `type: "refusal"`
+
+    default: refusal
 
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -29429,17 +29474,17 @@ console.log(betaMessageTokensCount.context_management);
 
     The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-  - `type: "refusal"`
-
-    default: refusal
-
 ### Beta Request Document Block
 
 - `BetaRequestDocumentBlock`
 
+  - `type: "document"`
+
   - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
     - `BetaBase64PDFSource`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -29447,17 +29492,17 @@ console.log(betaMessageTokensCount.context_management);
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `BetaPlainTextSource`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
 
-      - `type: "text"`
-
     - `BetaContentBlockSource`
+
+      - `type: "content"`
 
       - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -29467,11 +29512,11 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaTextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29498,6 +29543,8 @@ console.log(betaMessageTokensCount.context_management);
 
               - `BetaCitationCharLocationParam`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -29514,9 +29561,9 @@ console.log(betaMessageTokensCount.context_management);
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `BetaCitationPageLocationParam`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -29534,9 +29581,9 @@ console.log(betaMessageTokensCount.context_management);
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `BetaCitationContentBlockLocationParam`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -29564,9 +29611,9 @@ console.log(betaMessageTokensCount.context_management);
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `BetaCitationWebSearchResultLocationParam`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -29576,13 +29623,13 @@ console.log(betaMessageTokensCount.context_management);
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `BetaCitationSearchResultLocationParam`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -29614,13 +29661,15 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
           - `BetaImageBlockParam`
+
+            - `type: "image"`
 
             - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
               - `BetaBase64ImageSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -29636,8 +29685,6 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `BetaURLImageSource`
 
                 - `type: "url"`
@@ -29646,11 +29693,9 @@ console.log(betaMessageTokensCount.context_management);
 
               - `BetaFileImageSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29668,8 +29713,6 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `"error"`
 
-      - `type: "content"`
-
     - `BetaURLPDFSource`
 
       - `type: "url"`
@@ -29678,11 +29721,9 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaFileDocumentSource`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "document"`
+      - `file_id: string`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29712,9 +29753,9 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaRequestMCPServerURLDefinition`
 
-  - `name: string`
-
   - `type: "url"`
+
+  - `name: string`
 
   - `url: string`
 
@@ -29730,11 +29771,11 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaRequestMCPToolResultBlockParam`
 
+  - `type: "mcp_tool_result"`
+
   - `tool_use_id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
-
-  - `type: "mcp_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29763,11 +29804,11 @@ console.log(betaMessageTokensCount.context_management);
 
     - `Array<BetaTextBlockParam>`
 
+      - `type: "text"`
+
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29776,6 +29817,8 @@ console.log(betaMessageTokensCount.context_management);
       - `citations?: Array<BetaTextCitationParam> | null`
 
         - `BetaCitationCharLocationParam`
+
+          - `type: "char_location"`
 
           - `cited_text: string`
 
@@ -29793,9 +29836,9 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "char_location"`
-
         - `BetaCitationPageLocationParam`
+
+          - `type: "page_location"`
 
           - `cited_text: string`
 
@@ -29813,9 +29856,9 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 1
 
-          - `type: "page_location"`
-
         - `BetaCitationContentBlockLocationParam`
+
+          - `type: "content_block_location"`
 
           - `cited_text: string`
 
@@ -29843,9 +29886,9 @@ console.log(betaMessageTokensCount.context_management);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
         - `BetaCitationWebSearchResultLocationParam`
+
+          - `type: "web_search_result_location"`
 
           - `cited_text: string`
 
@@ -29855,13 +29898,13 @@ console.log(betaMessageTokensCount.context_management);
 
             maxLength: 512, minLength: 1
 
-          - `type: "web_search_result_location"`
-
           - `url: string`
 
             minLength: 1
 
         - `BetaCitationSearchResultLocationParam`
+
+          - `type: "search_result_location"`
 
           - `cited_text: string`
 
@@ -29893,8 +29936,6 @@ console.log(betaMessageTokensCount.context_management);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
   - `is_error?: boolean`
 
 ### Beta Request Tool Addition Block
@@ -29906,6 +29947,8 @@ console.log(betaMessageTokensCount.context_management);
   `tool` references a tool (or MCP toolset) by name from the request's
   `tools`; it is offered to the model from this point in the
   conversation onward.
+
+  - `type: "tool_addition"`
 
   - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
@@ -29921,32 +29964,30 @@ console.log(betaMessageTokensCount.context_management);
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
 
+      - `type: "tool_reference"`
+
       - `name: string`
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-      - `type: "tool_reference"`
 
     - `BetaToolChangeMCPToolReference`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
+      - `type: "mcp_tool_reference"`
+
       - `name: string`
 
       - `server_name: string`
-
-      - `type: "mcp_tool_reference"`
 
     - `BetaToolChangeMCPToolsetReference`
 
       Reference to every tool in the named MCP server's toolset.
 
-      - `server_name: string`
-
       - `type: "mcp_toolset_reference"`
 
-  - `type: "tool_addition"`
+      - `server_name: string`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -29979,6 +30020,8 @@ console.log(betaMessageTokensCount.context_management);
   `tools`; it is no longer offered to the model from this point in the
   conversation onward.
 
+  - `type: "tool_removal"`
+
   - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
     Reference to a single tool the caller declared directly in
@@ -29993,32 +30036,30 @@ console.log(betaMessageTokensCount.context_management);
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
 
+      - `type: "tool_reference"`
+
       - `name: string`
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-      - `type: "tool_reference"`
 
     - `BetaToolChangeMCPToolReference`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
+      - `type: "mcp_tool_reference"`
+
       - `name: string`
 
       - `server_name: string`
-
-      - `type: "mcp_tool_reference"`
 
     - `BetaToolChangeMCPToolsetReference`
 
       Reference to every tool in the named MCP server's toolset.
 
-      - `server_name: string`
-
       - `type: "mcp_toolset_reference"`
 
-  - `type: "tool_removal"`
+      - `server_name: string`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -30045,13 +30086,15 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaSearchResultBlockParam`
 
+  - `type: "search_result"`
+
   - `content: Array<BetaTextBlockParam>`
+
+    - `type: "text"`
 
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -30078,6 +30121,8 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaCitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -30094,9 +30139,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `BetaCitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -30114,9 +30159,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `BetaCitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -30144,9 +30189,9 @@ console.log(betaMessageTokensCount.context_management);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `BetaCitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -30156,13 +30201,13 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `BetaCitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -30194,13 +30239,9 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `source: string`
 
   - `title: string`
-
-  - `type: "search_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -30216,21 +30257,21 @@ console.log(betaMessageTokensCount.context_management);
 
   Tool invocation generated by a server-side tool.
 
+  - `type: "code_execution_20250825"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20250825"`
 
 ### Beta Server Tool Caller 20260120
 
 - `BetaServerToolCaller20260120`
 
+  - `type: "code_execution_20260120"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20260120"`
 
 ### Beta Server Tool Usage
 
@@ -30252,6 +30293,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaServerToolUseBlock`
 
+  - `type: "server_tool_use"`
+
+    default: server_tool_use
+
   - `id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -30275,10 +30320,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"tool_search_tool_regex"`
 
     - `"tool_search_tool_bm25"`
-
-  - `type: "server_tool_use"`
-
-    default: server_tool_use
 
   - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -30294,23 +30335,25 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Server Tool Use Block Param
 
 - `BetaServerToolUseBlockParam`
+
+  - `type: "server_tool_use"`
 
   - `id: string`
 
@@ -30335,8 +30378,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"tool_search_tool_regex"`
 
     - `"tool_search_tool_bm25"`
-
-  - `type: "server_tool_use"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -30373,43 +30414,37 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Signature Delta
 
 - `BetaSignatureDelta`
 
-  - `signature: string`
-
-    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
-
   - `type: "signature_delta"`
 
     default: signature_delta
+
+  - `signature: string`
+
+    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
 ### Beta Skill Params
 
 - `BetaSkillParams`
 
   Specification for a skill to be loaded in a container (request model).
-
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
 
   - `type: "anthropic" | "custom"`
 
@@ -30418,6 +30453,12 @@ console.log(betaMessageTokensCount.context_management);
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version?: string`
 
@@ -30473,6 +30514,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaTextBlock`
 
+  - `type: "text"`
+
+    default: text
+
   - `citations: Array<BetaTextCitation> | null`
 
     Citations supporting the text block.
@@ -30480,6 +30525,10 @@ console.log(betaMessageTokensCount.context_management);
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
     - `BetaCitationCharLocation`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -30497,11 +30546,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `BetaCitationPageLocation`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -30519,11 +30568,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `BetaCitationContentBlockLocation`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -30551,11 +30600,11 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `BetaCitationsWebSearchResultLocation`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -30565,13 +30614,13 @@ console.log(betaMessageTokensCount.context_management);
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `BetaCitationSearchResultLocation`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -30603,27 +30652,19 @@ console.log(betaMessageTokensCount.context_management);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
   - `text: string`
 
-    maxLength: 5000000, minLength: 0
-
-  - `type: "text"`
-
-    default: text
+    minLength: 0
 
 ### Beta Text Block Param
 
 - `BetaTextBlockParam`
 
+  - `type: "text"`
+
   - `text: string`
 
     minLength: 1
-
-  - `type: "text"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -30650,6 +30691,8 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaCitationCharLocationParam`
 
+      - `type: "char_location"`
+
       - `cited_text: string`
 
       - `document_index: number`
@@ -30666,9 +30709,9 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "char_location"`
-
     - `BetaCitationPageLocationParam`
+
+      - `type: "page_location"`
 
       - `cited_text: string`
 
@@ -30686,9 +30729,9 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 1
 
-      - `type: "page_location"`
-
     - `BetaCitationContentBlockLocationParam`
+
+      - `type: "content_block_location"`
 
       - `cited_text: string`
 
@@ -30716,9 +30759,9 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
     - `BetaCitationWebSearchResultLocationParam`
+
+      - `type: "web_search_result_location"`
 
       - `cited_text: string`
 
@@ -30728,13 +30771,13 @@ console.log(betaMessageTokensCount.context_management);
 
         maxLength: 512, minLength: 1
 
-      - `type: "web_search_result_location"`
-
       - `url: string`
 
         minLength: 1
 
     - `BetaCitationSearchResultLocationParam`
+
+      - `type: "search_result_location"`
 
       - `cited_text: string`
 
@@ -30766,13 +30809,15 @@ console.log(betaMessageTokensCount.context_management);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
 ### Beta Text Citation
 
 - `BetaTextCitation = BetaCitationCharLocation | BetaCitationPageLocation | BetaCitationContentBlockLocation | 2 more`
 
   - `BetaCitationCharLocation`
+
+    - `type: "char_location"`
+
+      default: char_location
 
     - `cited_text: string`
 
@@ -30790,11 +30835,11 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "char_location"`
-
-      default: char_location
-
   - `BetaCitationPageLocation`
+
+    - `type: "page_location"`
+
+      default: page_location
 
     - `cited_text: string`
 
@@ -30812,11 +30857,11 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 1
 
-    - `type: "page_location"`
-
-      default: page_location
-
   - `BetaCitationContentBlockLocation`
+
+    - `type: "content_block_location"`
+
+      default: content_block_location
 
     - `cited_text: string`
 
@@ -30844,11 +30889,11 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
-      default: content_block_location
-
   - `BetaCitationsWebSearchResultLocation`
+
+    - `type: "web_search_result_location"`
+
+      default: web_search_result_location
 
     - `cited_text: string`
 
@@ -30858,13 +30903,13 @@ console.log(betaMessageTokensCount.context_management);
 
       maxLength: 512
 
-    - `type: "web_search_result_location"`
-
-      default: web_search_result_location
-
     - `url: string`
 
   - `BetaCitationSearchResultLocation`
+
+    - `type: "search_result_location"`
+
+      default: search_result_location
 
     - `cited_text: string`
 
@@ -30896,15 +30941,13 @@ console.log(betaMessageTokensCount.context_management);
 
     - `title: string | null`
 
-    - `type: "search_result_location"`
-
-      default: search_result_location
-
 ### Beta Text Citation Param
 
 - `BetaTextCitationParam = BetaCitationCharLocationParam | BetaCitationPageLocationParam | BetaCitationContentBlockLocationParam | 2 more`
 
   - `BetaCitationCharLocationParam`
+
+    - `type: "char_location"`
 
     - `cited_text: string`
 
@@ -30922,9 +30965,9 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "char_location"`
-
   - `BetaCitationPageLocationParam`
+
+    - `type: "page_location"`
 
     - `cited_text: string`
 
@@ -30942,9 +30985,9 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 1
 
-    - `type: "page_location"`
-
   - `BetaCitationContentBlockLocationParam`
+
+    - `type: "content_block_location"`
 
     - `cited_text: string`
 
@@ -30972,9 +31015,9 @@ console.log(betaMessageTokensCount.context_management);
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
   - `BetaCitationWebSearchResultLocationParam`
+
+    - `type: "web_search_result_location"`
 
     - `cited_text: string`
 
@@ -30984,13 +31027,13 @@ console.log(betaMessageTokensCount.context_management);
 
       maxLength: 512, minLength: 1
 
-    - `type: "web_search_result_location"`
-
     - `url: string`
 
       minLength: 1
 
   - `BetaCitationSearchResultLocationParam`
+
+    - `type: "search_result_location"`
 
     - `cited_text: string`
 
@@ -31022,39 +31065,41 @@ console.log(betaMessageTokensCount.context_management);
 
     - `title: string | null`
 
-    - `type: "search_result_location"`
-
 ### Beta Text Delta
 
 - `BetaTextDelta`
-
-  - `text: string`
 
   - `type: "text_delta"`
 
     default: text_delta
 
+  - `text: string`
+
 ### Beta Text Editor Code Execution Create Result Block
 
 - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-  - `is_file_update: boolean`
 
   - `type: "text_editor_code_execution_create_result"`
 
     default: text_editor_code_execution_create_result
 
+  - `is_file_update: boolean`
+
 ### Beta Text Editor Code Execution Create Result Block Param
 
 - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-  - `is_file_update: boolean`
-
   - `type: "text_editor_code_execution_create_result"`
+
+  - `is_file_update: boolean`
 
 ### Beta Text Editor Code Execution Str Replace Result Block
 
 - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+  - `type: "text_editor_code_execution_str_replace_result"`
+
+    default: text_editor_code_execution_str_replace_result
 
   - `lines: Array<string> | null`
 
@@ -31065,10 +31110,6 @@ console.log(betaMessageTokensCount.context_management);
   - `old_lines: number | null`
 
   - `old_start: number | null`
-
-  - `type: "text_editor_code_execution_str_replace_result"`
-
-    default: text_editor_code_execution_str_replace_result
 
 ### Beta Text Editor Code Execution Str Replace Result Block Param
 
@@ -31090,9 +31131,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaTextEditorCodeExecutionToolResultBlock`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
+    default: text_editor_code_execution_tool_result
+
   - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
     - `BetaTextEditorCodeExecutionToolResultError`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
+
+        default: text_editor_code_execution_tool_result_error
 
       - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -31108,11 +31157,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `error_message: string | null`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
-        default: text_editor_code_execution_tool_result_error
-
     - `BetaTextEditorCodeExecutionViewResultBlock`
+
+      - `type: "text_editor_code_execution_view_result"`
+
+        default: text_editor_code_execution_view_result
 
       - `content: string`
 
@@ -31130,19 +31179,19 @@ console.log(betaMessageTokensCount.context_management);
 
       - `total_lines: number | null`
 
-      - `type: "text_editor_code_execution_view_result"`
-
-        default: text_editor_code_execution_view_result
-
     - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-      - `is_file_update: boolean`
 
       - `type: "text_editor_code_execution_create_result"`
 
         default: text_editor_code_execution_create_result
 
+      - `is_file_update: boolean`
+
     - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+      - `type: "text_editor_code_execution_str_replace_result"`
+
+        default: text_editor_code_execution_str_replace_result
 
       - `lines: Array<string> | null`
 
@@ -31154,25 +31203,21 @@ console.log(betaMessageTokensCount.context_management);
 
       - `old_start: number | null`
 
-      - `type: "text_editor_code_execution_str_replace_result"`
-
-        default: text_editor_code_execution_str_replace_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
-
-    default: text_editor_code_execution_tool_result
 
 ### Beta Text Editor Code Execution Tool Result Block Param
 
 - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
   - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
     - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
 
       - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -31186,11 +31231,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"file_not_found"`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
       - `error_message?: string | null`
 
     - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+      - `type: "text_editor_code_execution_view_result"`
 
       - `content: string`
 
@@ -31202,8 +31247,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"pdf"`
 
-      - `type: "text_editor_code_execution_view_result"`
-
       - `num_lines?: number | null`
 
       - `start_line?: number | null`
@@ -31212,9 +31255,9 @@ console.log(betaMessageTokensCount.context_management);
 
     - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-      - `is_file_update: boolean`
-
       - `type: "text_editor_code_execution_create_result"`
+
+      - `is_file_update: boolean`
 
     - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -31233,8 +31276,6 @@ console.log(betaMessageTokensCount.context_management);
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -31261,6 +31302,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaTextEditorCodeExecutionToolResultError`
 
+  - `type: "text_editor_code_execution_tool_result_error"`
+
+    default: text_editor_code_execution_tool_result_error
+
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
     - `"invalid_tool_input"`
@@ -31275,13 +31320,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `error_message: string | null`
 
-  - `type: "text_editor_code_execution_tool_result_error"`
-
-    default: text_editor_code_execution_tool_result_error
-
 ### Beta Text Editor Code Execution Tool Result Error Param
 
 - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+  - `type: "text_editor_code_execution_tool_result_error"`
 
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -31295,13 +31338,15 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"file_not_found"`
 
-  - `type: "text_editor_code_execution_tool_result_error"`
-
   - `error_message?: string | null`
 
 ### Beta Text Editor Code Execution View Result Block
 
 - `BetaTextEditorCodeExecutionViewResultBlock`
+
+  - `type: "text_editor_code_execution_view_result"`
+
+    default: text_editor_code_execution_view_result
 
   - `content: string`
 
@@ -31319,13 +31364,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `total_lines: number | null`
 
-  - `type: "text_editor_code_execution_view_result"`
-
-    default: text_editor_code_execution_view_result
-
 ### Beta Text Editor Code Execution View Result Block Param
 
 - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+  - `type: "text_editor_code_execution_view_result"`
 
   - `content: string`
 
@@ -31337,8 +31380,6 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"pdf"`
 
-  - `type: "text_editor_code_execution_view_result"`
-
   - `num_lines?: number | null`
 
   - `start_line?: number | null`
@@ -31348,6 +31389,10 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Thinking Block
 
 - `BetaThinkingBlock`
+
+  - `type: "thinking"`
+
+    default: thinking
 
   - `signature: string`
 
@@ -31360,10 +31405,6 @@ console.log(betaMessageTokensCount.context_management);
   - `thinking: string`
 
     The text of Claude's thinking process for this block.
-
-  - `type: "thinking"`
-
-    default: thinking
 
 ### Beta Thinking Block Binding
 
@@ -31389,6 +31430,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaThinkingBlockParam`
 
+  - `type: "thinking"`
+
   - `signature: string`
 
     The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
@@ -31398,8 +31441,6 @@ console.log(betaMessageTokensCount.context_management);
   - `thinking: string`
 
     The `thinking` text of this block as returned by the API.
-
-  - `type: "thinking"`
 
 ### Beta Thinking Config Adaptive
 
@@ -31445,6 +31486,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaThinkingConfigEnabled`
 
+  - `type: "enabled"`
+
   - `budget_tokens: number`
 
     Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -31454,8 +31497,6 @@ console.log(betaMessageTokensCount.context_management);
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
     minimum: 1024
-
-  - `type: "enabled"`
 
   - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -31497,6 +31538,8 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaThinkingConfigEnabled`
 
+    - `type: "enabled"`
+
     - `budget_tokens: number`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -31506,8 +31549,6 @@ console.log(betaMessageTokensCount.context_management);
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
       minimum: 1024
-
-    - `type: "enabled"`
 
     - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -31565,6 +31606,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaThinkingDelta`
 
+  - `type: "thinking_delta"`
+
+    default: thinking_delta
+
   - `estimated_tokens: number | null`
 
     Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
@@ -31573,13 +31618,15 @@ console.log(betaMessageTokensCount.context_management);
 
     The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `type: "thinking_delta"`
-
-    default: thinking_delta
-
 ### Beta Thinking Dropped Input Transformation
 
 - `BetaThinkingDroppedInputTransformation`
+
+  - `type: "thinking_dropped"`
+
+    Always `thinking_dropped` for this entry type.
+
+    default: thinking_dropped
 
   - `path: string`
 
@@ -31611,12 +31658,6 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"end_user_binding_mismatch"`
 
-  - `type: "thinking_dropped"`
-
-    Always `thinking_dropped` for this entry type.
-
-    default: thinking_dropped
-
 ### Beta Thinking Prefix Mismatch Behavior
 
 - `BetaThinkingPrefixMismatchBehavior = "error" | "drop_block"`
@@ -31647,15 +31688,15 @@ console.log(betaMessageTokensCount.context_management);
 
   User-configurable total token budget across contexts.
 
+  - `type: "tokens"`
+
+    The budget type. Currently only 'tokens' is supported.
+
   - `total: number`
 
     Total token budget across all contexts in the session.
 
     minimum: 1024
-
-  - `type: "tokens"`
-
-    The budget type. Currently only 'tokens' is supported.
 
   - `remaining?: number | null`
 
@@ -31666,6 +31707,8 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Tool
 
 - `BetaTool`
+
+  - `type?: "custom" | null`
 
   - `input_schema: InputSchema`
 
@@ -31738,19 +31781,17 @@ console.log(betaMessageTokensCount.context_management);
 
     When true, guarantees schema validation on tool names and inputs
 
-  - `type?: "custom" | null`
-
 ### Beta Tool Bash 20241022
 
 - `BetaToolBash20241022`
+
+  - `type: "bash_20241022"`
 
   - `name: "bash"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "bash_20241022"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -31797,13 +31838,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolBash20250124`
 
+  - `type: "bash_20250124"`
+
   - `name: "bash"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "bash_20250124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -31853,11 +31894,11 @@ console.log(betaMessageTokensCount.context_management);
   Reference to a single MCP tool by its server and remote name — the
   same `server_name`/`name` pair `mcp_tool_use` carries.
 
+  - `type: "mcp_tool_reference"`
+
   - `name: string`
 
   - `server_name: string`
-
-  - `type: "mcp_tool_reference"`
 
 ### Beta Tool Change MCP Toolset Reference
 
@@ -31865,9 +31906,9 @@ console.log(betaMessageTokensCount.context_management);
 
   Reference to every tool in the named MCP server's toolset.
 
-  - `server_name: string`
-
   - `type: "mcp_toolset_reference"`
+
+  - `server_name: string`
 
 ### Beta Tool Change Tool Reference
 
@@ -31878,11 +31919,11 @@ console.log(betaMessageTokensCount.context_management);
   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
   `mcp_toolset_reference` for those.
 
+  - `type: "tool_reference"`
+
   - `name: string`
 
     pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-  - `type: "tool_reference"`
 
 ### Beta Tool Choice
 
@@ -31918,11 +31959,11 @@ console.log(betaMessageTokensCount.context_management);
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use?: boolean`
 
@@ -31978,11 +32019,11 @@ console.log(betaMessageTokensCount.context_management);
 
   The model will use the specified tool with `tool_choice.name`.
 
+  - `type: "tool"`
+
   - `name: string`
 
     The name of the tool to use.
-
-  - `type: "tool"`
 
   - `disable_parallel_tool_use?: boolean`
 
@@ -31993,6 +32034,8 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Tool Computer Use 20241022
 
 - `BetaToolComputerUse20241022`
+
+  - `type: "computer_20241022"`
 
   - `display_height_px: number`
 
@@ -32011,8 +32054,6 @@ console.log(betaMessageTokensCount.context_management);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20241022"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -32065,6 +32106,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolComputerUse20250124`
 
+  - `type: "computer_20250124"`
+
   - `display_height_px: number`
 
     The height of the display in pixels.
@@ -32082,8 +32125,6 @@ console.log(betaMessageTokensCount.context_management);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20250124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -32136,6 +32177,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolComputerUse20251124`
 
+  - `type: "computer_20251124"`
+
   - `display_height_px: number`
 
     The height of the display in pixels.
@@ -32153,8 +32196,6 @@ console.log(betaMessageTokensCount.context_management);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "computer_20251124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -32211,13 +32252,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolReferenceBlock`
 
-  - `tool_name: string`
-
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
   - `type: "tool_reference"`
 
     default: tool_reference
+
+  - `tool_name: string`
+
+    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Beta Tool Reference Block Param
 
@@ -32225,11 +32266,11 @@ console.log(betaMessageTokensCount.context_management);
 
   Tool reference block that can be included in tool_result content.
 
+  - `type: "tool_reference"`
+
   - `tool_name: string`
 
     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-  - `type: "tool_reference"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32256,11 +32297,11 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolResultBlockParam`
 
+  - `type: "tool_result"`
+
   - `tool_use_id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
-
-  - `type: "tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32291,11 +32332,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaTextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32304,6 +32345,8 @@ console.log(betaMessageTokensCount.context_management);
         - `citations?: Array<BetaTextCitationParam> | null`
 
           - `BetaCitationCharLocationParam`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -32321,9 +32364,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `BetaCitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -32341,9 +32384,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `BetaCitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -32371,9 +32414,9 @@ console.log(betaMessageTokensCount.context_management);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `BetaCitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -32383,13 +32426,13 @@ console.log(betaMessageTokensCount.context_management);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `BetaCitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -32421,13 +32464,15 @@ console.log(betaMessageTokensCount.context_management);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `BetaImageBlockParam`
+
+        - `type: "image"`
 
         - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
           - `BetaBase64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -32443,8 +32488,6 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `BetaURLImageSource`
 
             - `type: "url"`
@@ -32453,11 +32496,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32477,13 +32518,15 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaSearchResultBlockParam`
 
+        - `type: "search_result"`
+
         - `content: Array<BetaTextBlockParam>`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32495,8 +32538,6 @@ console.log(betaMessageTokensCount.context_management);
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -32507,9 +32548,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaRequestDocumentBlock`
 
+        - `type: "document"`
+
         - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
           - `BetaBase64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -32517,17 +32562,17 @@ console.log(betaMessageTokensCount.context_management);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -32539,8 +32584,6 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaImageBlockParam`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource`
 
             - `type: "url"`
@@ -32549,11 +32592,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32573,11 +32614,11 @@ console.log(betaMessageTokensCount.context_management);
 
         Tool reference block that can be included in tool_result content.
 
+        - `type: "tool_reference"`
+
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32592,6 +32633,8 @@ console.log(betaMessageTokensCount.context_management);
         At most one per `tool_result`, only on a non-error result answering a
         browser toolset member `tool_use`. The server renders the
         model-visible text from it; the model never sees the raw fields.
+
+        - `type: "browser_state"`
 
         - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -32621,8 +32664,6 @@ console.log(betaMessageTokensCount.context_management);
 
             Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-        - `type: "browser_state"`
-
         - `cache_control?: BetaCacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -32643,25 +32684,25 @@ console.log(betaMessageTokensCount.context_management);
             during a failed call gets no deferred `tab_opened`; it simply appears
             in the next result's `tabs` inventory.
 
+            - `type: "tab_opened"`
+
             - `tab_id: string`
 
               The `tab_id` of the opened tab, present in `tabs`.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type: "tab_opened"`
-
           - `BetaBrowserStateChangeDownloadStarted`
 
             A file download that started during this call.
+
+            - `type: "download_started"`
 
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_started"`
 
             - `url: string`
 
@@ -32676,13 +32717,13 @@ console.log(betaMessageTokensCount.context_management);
             `download_started`, when the download finished during the call that
             started it (at most one state change per `download_id` per result).
 
+            - `type: "download_completed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_completed"`
 
             - `url: string`
 
@@ -32706,13 +32747,13 @@ console.log(betaMessageTokensCount.context_management);
 
             A file download that failed — or was cancelled — during this call.
 
+            - `type: "download_failed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_failed"`
 
             - `url: string`
 
@@ -32738,17 +32779,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolSearchToolBm25_20251119`
 
-  - `name: "tool_search_tool_bm25"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
     - `"tool_search_tool_bm25_20251119"`
 
     - `"tool_search_tool_bm25"`
+
+  - `name: "tool_search_tool_bm25"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -32793,17 +32834,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolSearchToolRegex20251119`
 
-  - `name: "tool_search_tool_regex"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
     - `"tool_search_tool_regex_20251119"`
 
     - `"tool_search_tool_regex"`
+
+  - `name: "tool_search_tool_regex"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -32848,9 +32889,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolSearchToolResultBlock`
 
+  - `type: "tool_search_tool_result"`
+
+    default: tool_search_tool_result
+
   - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
     - `BetaToolSearchToolResultError`
+
+      - `type: "tool_search_tool_result_error"`
+
+        default: tool_search_tool_result_error
 
       - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -32864,41 +32913,37 @@ console.log(betaMessageTokensCount.context_management);
 
       - `error_message: string | null`
 
-      - `type: "tool_search_tool_result_error"`
-
-        default: tool_search_tool_result_error
-
     - `BetaToolSearchToolSearchResultBlock`
-
-      - `tool_references: Array<BetaToolReferenceBlock>`
-
-        - `tool_name: string`
-
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
-
-          default: tool_reference
 
       - `type: "tool_search_tool_search_result"`
 
         default: tool_search_tool_search_result
 
+      - `tool_references: Array<BetaToolReferenceBlock>`
+
+        - `type: "tool_reference"`
+
+          default: tool_reference
+
+        - `tool_name: string`
+
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
-
-    default: tool_search_tool_result
 
 ### Beta Tool Search Tool Result Block Param
 
 - `BetaToolSearchToolResultBlockParam`
 
+  - `type: "tool_search_tool_result"`
+
   - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
     - `BetaToolSearchToolResultErrorParam`
+
+      - `type: "tool_search_tool_result_error"`
 
       - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -32910,19 +32955,19 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"execution_time_exceeded"`
 
-      - `type: "tool_search_tool_result_error"`
-
       - `error_message?: string | null`
 
     - `BetaToolSearchToolSearchResultBlockParam`
 
+      - `type: "tool_search_tool_search_result"`
+
       - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+        - `type: "tool_reference"`
 
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32945,13 +32990,9 @@ console.log(betaMessageTokensCount.context_management);
 
             - `"1h"`
 
-      - `type: "tool_search_tool_search_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -32960,6 +33001,10 @@ console.log(betaMessageTokensCount.context_management);
 ### Beta Tool Search Tool Result Error
 
 - `BetaToolSearchToolResultError`
+
+  - `type: "tool_search_tool_result_error"`
+
+    default: tool_search_tool_result_error
 
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -32973,13 +33018,11 @@ console.log(betaMessageTokensCount.context_management);
 
   - `error_message: string | null`
 
-  - `type: "tool_search_tool_result_error"`
-
-    default: tool_search_tool_result_error
-
 ### Beta Tool Search Tool Result Error Param
 
 - `BetaToolSearchToolResultErrorParam`
+
+  - `type: "tool_search_tool_result_error"`
 
   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -32991,39 +33034,39 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"execution_time_exceeded"`
 
-  - `type: "tool_search_tool_result_error"`
-
   - `error_message?: string | null`
 
 ### Beta Tool Search Tool Search Result Block
 
 - `BetaToolSearchToolSearchResultBlock`
 
+  - `type: "tool_search_tool_search_result"`
+
+    default: tool_search_tool_search_result
+
   - `tool_references: Array<BetaToolReferenceBlock>`
-
-    - `tool_name: string`
-
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `type: "tool_reference"`
 
       default: tool_reference
 
-  - `type: "tool_search_tool_search_result"`
+    - `tool_name: string`
 
-    default: tool_search_tool_search_result
+      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Beta Tool Search Tool Search Result Block Param
 
 - `BetaToolSearchToolSearchResultBlockParam`
 
+  - `type: "tool_search_tool_search_result"`
+
   - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+    - `type: "tool_reference"`
 
     - `tool_name: string`
 
       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-    - `type: "tool_reference"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -33046,19 +33089,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"1h"`
 
-  - `type: "tool_search_tool_search_result"`
-
 ### Beta Tool Text Editor 20241022
 
 - `BetaToolTextEditor20241022`
+
+  - `type: "text_editor_20241022"`
 
   - `name: "str_replace_editor"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20241022"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33105,13 +33146,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolTextEditor20250124`
 
+  - `type: "text_editor_20250124"`
+
   - `name: "str_replace_editor"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33158,13 +33199,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolTextEditor20250429`
 
+  - `type: "text_editor_20250429"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250429"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33211,13 +33252,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolTextEditor20250728`
 
+  - `type: "text_editor_20250728"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250728"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33273,6 +33314,8 @@ console.log(betaMessageTokensCount.context_management);
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `BetaTool`
+
+    - `type?: "custom" | null`
 
     - `input_schema: InputSchema`
 
@@ -33345,17 +33388,15 @@ console.log(betaMessageTokensCount.context_management);
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type?: "custom" | null`
-
   - `BetaToolBash20241022`
+
+    - `type: "bash_20241022"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20241022"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33383,13 +33424,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolBash20250124`
 
+    - `type: "bash_20250124"`
+
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33417,13 +33458,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaCodeExecutionTool20250522`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33449,13 +33490,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaCodeExecutionTool20250825`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33483,13 +33524,13 @@ console.log(betaMessageTokensCount.context_management);
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33517,13 +33558,13 @@ console.log(betaMessageTokensCount.context_management);
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33568,6 +33609,18 @@ console.log(betaMessageTokensCount.context_management);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: BetaBrowserTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -33905,18 +33958,6 @@ console.log(betaMessageTokensCount.context_management);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: BetaBrowserTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: BetaBrowserWaitConfig | null`
 
         `wait`'s config overrides.
@@ -33943,6 +33984,8 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolComputerUse20241022`
 
+    - `type: "computer_20241022"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -33960,8 +34003,6 @@ console.log(betaMessageTokensCount.context_management);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20241022"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -33995,13 +34036,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaMemoryTool20250818`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34029,6 +34070,8 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolComputerUse20250124`
 
+    - `type: "computer_20250124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -34046,8 +34089,6 @@ console.log(betaMessageTokensCount.context_management);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34081,13 +34122,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolTextEditor20241022`
 
+    - `type: "text_editor_20241022"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20241022"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34115,6 +34156,8 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolComputerUse20251124`
 
+    - `type: "computer_20251124"`
+
     - `display_height_px: number`
 
       The height of the display in pixels.
@@ -34132,8 +34175,6 @@ console.log(betaMessageTokensCount.context_management);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "computer_20251124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34194,6 +34235,18 @@ console.log(betaMessageTokensCount.context_management);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: BetaComputerTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
@@ -34363,18 +34416,6 @@ console.log(betaMessageTokensCount.context_management);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: BetaComputerTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: BetaComputerWaitConfig | null`
 
         `wait`'s config overrides.
@@ -34401,13 +34442,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolTextEditor20250124`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34435,13 +34476,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolTextEditor20250429`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34469,13 +34510,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolTextEditor20250728`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34509,13 +34550,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebSearchTool20250305`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34585,13 +34626,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebFetchTool20250910`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34643,13 +34684,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebSearchTool20260209`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34693,13 +34734,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebFetchTool20260209`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34751,13 +34792,13 @@ console.log(betaMessageTokensCount.context_management);
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34811,13 +34852,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebSearchTool20260318`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34869,13 +34910,13 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaWebFetchTool20260318`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -34936,6 +34977,8 @@ console.log(betaMessageTokensCount.context_management);
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
   - `BetaAdvisorTool20260301`
+
+    - `type: "advisor_20260301"`
 
     - `model: Model`
 
@@ -35021,8 +35064,6 @@ console.log(betaMessageTokensCount.context_management);
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-    - `type: "advisor_20260301"`
-
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
       - `"direct"`
@@ -35063,17 +35104,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolSearchToolBm25_20251119`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -35099,17 +35140,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `BetaToolSearchToolRegex20251119`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -35140,13 +35181,13 @@ console.log(betaMessageTokensCount.context_management);
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: "mcp_toolset"`
+
     - `mcp_server_name: string`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: "mcp_toolset"`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -35172,6 +35213,10 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolUseBlock`
 
+  - `type: "tool_use"`
+
+    default: tool_use
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -35181,10 +35226,6 @@ console.log(betaMessageTokensCount.context_management);
   - `name: string`
 
     minLength: 1
-
-  - `type: "tool_use"`
-
-    default: tool_use
 
   - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -35200,19 +35241,19 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `toolset_name?: string | null`
 
@@ -35224,6 +35265,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaToolUseBlockParam`
 
+  - `type: "tool_use"`
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -35233,8 +35276,6 @@ console.log(betaMessageTokensCount.context_management);
   - `name: string`
 
     maxLength: 200, minLength: 1
-
-  - `type: "tool_use"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -35271,19 +35312,19 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `toolset_name?: string | null`
 
@@ -35385,6 +35426,10 @@ console.log(betaMessageTokensCount.context_management);
 
         No reprice was applied; `reason` says why.
 
+        - `type: "not_applied"`
+
+          default: not_applied
+
         - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
           Why the reprice was not applied.
@@ -35415,10 +35460,6 @@ console.log(betaMessageTokensCount.context_management);
           - `"wrong_platform"`
 
           - `"wrong_workspace"`
-
-        - `type: "not_applied"`
-
-          default: not_applied
 
         - `remove_to_redeem?: Array<string> | null`
 
@@ -35456,6 +35497,12 @@ console.log(betaMessageTokensCount.context_management);
     - `BetaMessageIterationUsage`
 
       Token usage for a sampling iteration.
+
+      - `type: "message"`
+
+        Usage for a sampling iteration
+
+        default: message
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -35563,15 +35610,15 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "message"`
-
-        Usage for a sampling iteration
-
-        default: message
-
     - `BetaCompactionIterationUsage`
 
       Token usage for a compaction iteration.
+
+      - `type: "compaction"`
+
+        Usage for a compaction iteration
+
+        default: compaction
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -35601,15 +35648,15 @@ console.log(betaMessageTokensCount.context_management);
 
         minimum: 0
 
-      - `type: "compaction"`
-
-        Usage for a compaction iteration
-
-        default: compaction
-
     - `BetaAdvisorMessageIterationUsage`
 
       Token usage for an advisor sub-inference iteration.
+
+      - `type: "advisor_message"`
+
+        Usage for an advisor sub-inference iteration
+
+        default: advisor_message
 
       - `cache_creation: BetaCacheCreation | null`
 
@@ -35644,12 +35691,6 @@ console.log(betaMessageTokensCount.context_management);
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "advisor_message"`
-
-        Usage for an advisor sub-inference iteration
-
-        default: advisor_message
 
     - `BetaFallbackMessageIterationUsage`
 
@@ -35660,6 +35701,12 @@ console.log(betaMessageTokensCount.context_management);
       a fallback model served the response is signalled by the presence of this
       entry in `usage.iterations`.
 
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
+
+        default: fallback_message
+
       - `cache_creation: BetaCacheCreation | null`
 
         Breakdown of cached tokens by TTL
@@ -35693,12 +35740,6 @@ console.log(betaMessageTokensCount.context_management);
         The number of output tokens which were used.
 
         minimum: 0
-
-      - `type: "fallback_message"`
-
-        Usage for the fallback-model attempt that served the response
-
-        default: fallback_message
 
   - `output_tokens: number`
 
@@ -35796,7 +35837,15 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchBlock`
 
+  - `type: "web_fetch_result"`
+
+    default: web_fetch_result
+
   - `content: BetaDocumentBlock`
+
+    - `type: "document"`
+
+      default: document
 
     - `citations: BetaCitationConfig | null`
 
@@ -35810,37 +35859,29 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaBase64PDFSource`
 
+        - `type: "base64"`
+
         - `data: string`
 
           format: byte
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
     - `title: string | null`
 
       The title of the document
 
-    - `type: "document"`
-
-      default: document
-
   - `retrieved_at: string | null`
 
     ISO 8601 timestamp when the content was retrieved
-
-  - `type: "web_fetch_result"`
-
-    default: web_fetch_result
 
   - `url: string`
 
@@ -35850,11 +35891,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchBlockParam`
 
+  - `type: "web_fetch_result"`
+
   - `content: BetaRequestDocumentBlock`
+
+    - `type: "document"`
 
     - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
       - `BetaBase64PDFSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -35862,17 +35909,17 @@ console.log(betaMessageTokensCount.context_management);
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `BetaPlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `BetaContentBlockSource`
+
+        - `type: "content"`
 
         - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -35882,11 +35929,11 @@ console.log(betaMessageTokensCount.context_management);
 
             - `BetaTextBlockParam`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -35913,6 +35960,8 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaCitationCharLocationParam`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -35929,9 +35978,9 @@ console.log(betaMessageTokensCount.context_management);
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `BetaCitationPageLocationParam`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -35949,9 +35998,9 @@ console.log(betaMessageTokensCount.context_management);
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `BetaCitationContentBlockLocationParam`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -35979,9 +36028,9 @@ console.log(betaMessageTokensCount.context_management);
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `BetaCitationWebSearchResultLocationParam`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -35991,13 +36040,13 @@ console.log(betaMessageTokensCount.context_management);
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `BetaCitationSearchResultLocationParam`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -36029,13 +36078,15 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `title: string | null`
 
-                  - `type: "search_result_location"`
-
             - `BetaImageBlockParam`
+
+              - `type: "image"`
 
               - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
                 - `BetaBase64ImageSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -36051,8 +36102,6 @@ console.log(betaMessageTokensCount.context_management);
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `BetaURLImageSource`
 
                   - `type: "url"`
@@ -36061,11 +36110,9 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaFileImageSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36083,8 +36130,6 @@ console.log(betaMessageTokensCount.context_management);
 
                   - `"error"`
 
-        - `type: "content"`
-
       - `BetaURLPDFSource`
 
         - `type: "url"`
@@ -36093,11 +36138,9 @@ console.log(betaMessageTokensCount.context_management);
 
       - `BetaFileDocumentSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36115,8 +36158,6 @@ console.log(betaMessageTokensCount.context_management);
 
       maxLength: 500, minLength: 1
 
-  - `type: "web_fetch_result"`
-
   - `url: string`
 
     Fetched content URL
@@ -36129,13 +36170,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchTool20250910`
 
+  - `type: "web_fetch_20250910"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20250910"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -36206,13 +36247,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchTool20260209`
 
+  - `type: "web_fetch_20260209"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260209"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -36285,13 +36326,13 @@ console.log(betaMessageTokensCount.context_management);
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
+  - `type: "web_fetch_20260309"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260309"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -36366,13 +36407,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchTool20260318`
 
+  - `type: "web_fetch_20260318"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260318"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -36455,9 +36496,17 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebFetchToolResultBlock`
 
+  - `type: "web_fetch_tool_result"`
+
+    default: web_fetch_tool_result
+
   - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
     - `BetaWebFetchToolResultErrorBlock`
+
+      - `type: "web_fetch_tool_result_error"`
+
+        default: web_fetch_tool_result_error
 
       - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -36479,13 +36528,19 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
-
-        default: web_fetch_tool_result_error
+        - `"content_too_large"`
 
     - `BetaWebFetchBlock`
 
+      - `type: "web_fetch_result"`
+
+        default: web_fetch_result
+
       - `content: BetaDocumentBlock`
+
+        - `type: "document"`
+
+          default: document
 
         - `citations: BetaCitationConfig | null`
 
@@ -36499,37 +36554,29 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaBase64PDFSource`
 
+            - `type: "base64"`
+
             - `data: string`
 
               format: byte
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
         - `title: string | null`
 
           The title of the document
 
-        - `type: "document"`
-
-          default: document
-
       - `retrieved_at: string | null`
 
         ISO 8601 timestamp when the content was retrieved
-
-      - `type: "web_fetch_result"`
-
-        default: web_fetch_result
 
       - `url: string`
 
@@ -36538,10 +36585,6 @@ console.log(betaMessageTokensCount.context_management);
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_fetch_tool_result"`
-
-    default: web_fetch_tool_result
 
   - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -36557,27 +36600,31 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Fetch Tool Result Block Param
 
 - `BetaWebFetchToolResultBlockParam`
 
+  - `type: "web_fetch_tool_result"`
+
   - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
     - `BetaWebFetchToolResultErrorBlockParam`
+
+      - `type: "web_fetch_tool_result_error"`
 
       - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -36599,15 +36646,21 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
+        - `"content_too_large"`
 
     - `BetaWebFetchBlockParam`
 
+      - `type: "web_fetch_result"`
+
       - `content: BetaRequestDocumentBlock`
+
+        - `type: "document"`
 
         - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
           - `BetaBase64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -36615,17 +36668,17 @@ console.log(betaMessageTokensCount.context_management);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `BetaPlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `BetaContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -36635,11 +36688,11 @@ console.log(betaMessageTokensCount.context_management);
 
                 - `BetaTextBlockParam`
 
+                  - `type: "text"`
+
                   - `text: string`
 
                     minLength: 1
-
-                  - `type: "text"`
 
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36666,6 +36719,8 @@ console.log(betaMessageTokensCount.context_management);
 
                     - `BetaCitationCharLocationParam`
 
+                      - `type: "char_location"`
+
                       - `cited_text: string`
 
                       - `document_index: number`
@@ -36682,9 +36737,9 @@ console.log(betaMessageTokensCount.context_management);
 
                         minimum: 0
 
-                      - `type: "char_location"`
-
                     - `BetaCitationPageLocationParam`
+
+                      - `type: "page_location"`
 
                       - `cited_text: string`
 
@@ -36702,9 +36757,9 @@ console.log(betaMessageTokensCount.context_management);
 
                         minimum: 1
 
-                      - `type: "page_location"`
-
                     - `BetaCitationContentBlockLocationParam`
+
+                      - `type: "content_block_location"`
 
                       - `cited_text: string`
 
@@ -36732,9 +36787,9 @@ console.log(betaMessageTokensCount.context_management);
 
                         minimum: 0
 
-                      - `type: "content_block_location"`
-
                     - `BetaCitationWebSearchResultLocationParam`
+
+                      - `type: "web_search_result_location"`
 
                       - `cited_text: string`
 
@@ -36744,13 +36799,13 @@ console.log(betaMessageTokensCount.context_management);
 
                         maxLength: 512, minLength: 1
 
-                      - `type: "web_search_result_location"`
-
                       - `url: string`
 
                         minLength: 1
 
                     - `BetaCitationSearchResultLocationParam`
+
+                      - `type: "search_result_location"`
 
                       - `cited_text: string`
 
@@ -36782,13 +36837,15 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `title: string | null`
 
-                      - `type: "search_result_location"`
-
                 - `BetaImageBlockParam`
+
+                  - `type: "image"`
 
                   - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
                     - `BetaBase64ImageSource`
+
+                      - `type: "base64"`
 
                       - `data: string`
 
@@ -36804,8 +36861,6 @@ console.log(betaMessageTokensCount.context_management);
 
                         - `"image/webp"`
 
-                      - `type: "base64"`
-
                     - `BetaURLImageSource`
 
                       - `type: "url"`
@@ -36814,11 +36869,9 @@ console.log(betaMessageTokensCount.context_management);
 
                     - `BetaFileImageSource`
 
-                      - `file_id: string`
-
                       - `type: "file"`
 
-                  - `type: "image"`
+                      - `file_id: string`
 
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36836,8 +36889,6 @@ console.log(betaMessageTokensCount.context_management);
 
                       - `"error"`
 
-            - `type: "content"`
-
           - `BetaURLPDFSource`
 
             - `type: "url"`
@@ -36846,11 +36897,9 @@ console.log(betaMessageTokensCount.context_management);
 
           - `BetaFileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36868,8 +36917,6 @@ console.log(betaMessageTokensCount.context_management);
 
           maxLength: 500, minLength: 1
 
-      - `type: "web_fetch_result"`
-
       - `url: string`
 
         Fetched content URL
@@ -36881,8 +36928,6 @@ console.log(betaMessageTokensCount.context_management);
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_fetch_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -36902,24 +36947,28 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Fetch Tool Result Error Block
 
 - `BetaWebFetchToolResultErrorBlock`
 
+  - `type: "web_fetch_tool_result_error"`
+
+    default: web_fetch_tool_result_error
+
   - `error_code: BetaWebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -36940,14 +36989,14 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
-
-    default: web_fetch_tool_result_error
+    - `"content_too_large"`
 
 ### Beta Web Fetch Tool Result Error Block Param
 
 - `BetaWebFetchToolResultErrorBlockParam`
 
+  - `type: "web_fetch_tool_result_error"`
+
   - `error_code: BetaWebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -36968,11 +37017,11 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
+    - `"content_too_large"`
 
 ### Beta Web Fetch Tool Result Error Code
 
-- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 6 more`
+- `BetaWebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 7 more`
 
   - `"invalid_tool_input"`
 
@@ -36992,9 +37041,15 @@ console.log(betaMessageTokensCount.context_management);
 
   - `"unavailable"`
 
+  - `"content_too_large"`
+
 ### Beta Web Search Result Block
 
 - `BetaWebSearchResultBlock`
+
+  - `type: "web_search_result"`
+
+    default: web_search_result
 
   - `encrypted_content: string`
 
@@ -37002,21 +37057,17 @@ console.log(betaMessageTokensCount.context_management);
 
   - `title: string`
 
-  - `type: "web_search_result"`
-
-    default: web_search_result
-
   - `url: string`
 
 ### Beta Web Search Result Block Param
 
 - `BetaWebSearchResultBlockParam`
 
+  - `type: "web_search_result"`
+
   - `encrypted_content: string`
 
   - `title: string`
-
-  - `type: "web_search_result"`
 
   - `url: string`
 
@@ -37026,13 +37077,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebSearchTool20250305`
 
+  - `type: "web_search_20250305"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20250305"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -37121,13 +37172,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebSearchTool20260209`
 
+  - `type: "web_search_20260209"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260209"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -37216,13 +37267,13 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebSearchTool20260318`
 
+  - `type: "web_search_20260318"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260318"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -37319,6 +37370,8 @@ console.log(betaMessageTokensCount.context_management);
 
 - `BetaWebSearchToolRequestError`
 
+  - `type: "web_search_tool_result_error"`
+
   - `error_code: BetaWebSearchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -37333,15 +37386,21 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"request_too_large"`
 
-  - `type: "web_search_tool_result_error"`
-
 ### Beta Web Search Tool Result Block
 
 - `BetaWebSearchToolResultBlock`
 
+  - `type: "web_search_tool_result"`
+
+    default: web_search_tool_result
+
   - `content: BetaWebSearchToolResultBlockContent`
 
     - `BetaWebSearchToolResultError`
+
+      - `type: "web_search_tool_result_error"`
+
+        default: web_search_tool_result_error
 
       - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37357,11 +37416,11 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
-        default: web_search_tool_result_error
-
     - `Array<BetaWebSearchResultBlock>`
+
+      - `type: "web_search_result"`
+
+        default: web_search_result
 
       - `encrypted_content: string`
 
@@ -37369,19 +37428,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `title: string`
 
-      - `type: "web_search_result"`
-
-        default: web_search_result
-
       - `url: string`
 
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_search_tool_result"`
-
-    default: web_search_tool_result
 
   - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -37397,25 +37448,29 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Search Tool Result Block Content
 
 - `BetaWebSearchToolResultBlockContent = BetaWebSearchToolResultError | Array<BetaWebSearchResultBlock>`
 
   - `BetaWebSearchToolResultError`
+
+    - `type: "web_search_tool_result_error"`
+
+      default: web_search_tool_result_error
 
     - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37431,11 +37486,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
-      default: web_search_tool_result_error
-
   - `Array<BetaWebSearchResultBlock>`
+
+    - `type: "web_search_result"`
+
+      default: web_search_result
 
     - `encrypted_content: string`
 
@@ -37443,31 +37498,31 @@ console.log(betaMessageTokensCount.context_management);
 
     - `title: string`
 
-    - `type: "web_search_result"`
-
-      default: web_search_result
-
     - `url: string`
 
 ### Beta Web Search Tool Result Block Param
 
 - `BetaWebSearchToolResultBlockParam`
 
+  - `type: "web_search_tool_result"`
+
   - `content: BetaWebSearchToolResultBlockParamContent`
 
     - `Array<BetaWebSearchResultBlockParam>`
 
+      - `type: "web_search_result"`
+
       - `encrypted_content: string`
 
       - `title: string`
-
-      - `type: "web_search_result"`
 
       - `url: string`
 
       - `page_age?: string | null`
 
     - `BetaWebSearchToolRequestError`
+
+      - `type: "web_search_tool_result_error"`
 
       - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37483,13 +37538,9 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_search_tool_result"`
 
   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -37526,19 +37577,19 @@ console.log(betaMessageTokensCount.context_management);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `BetaServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Beta Web Search Tool Result Block Param Content
 
@@ -37546,17 +37597,19 @@ console.log(betaMessageTokensCount.context_management);
 
   - `Array<BetaWebSearchResultBlockParam>`
 
+    - `type: "web_search_result"`
+
     - `encrypted_content: string`
 
     - `title: string`
-
-    - `type: "web_search_result"`
 
     - `url: string`
 
     - `page_age?: string | null`
 
   - `BetaWebSearchToolRequestError`
+
+    - `type: "web_search_tool_result_error"`
 
     - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37572,11 +37625,13 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
 ### Beta Web Search Tool Result Error
 
 - `BetaWebSearchToolResultError`
+
+  - `type: "web_search_tool_result_error"`
+
+    default: web_search_tool_result_error
 
   - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -37591,10 +37646,6 @@ console.log(betaMessageTokensCount.context_management);
     - `"query_too_long"`
 
     - `"request_too_large"`
-
-  - `type: "web_search_tool_result_error"`
-
-    default: web_search_tool_result_error
 
 ### Beta Web Search Tool Result Error Code
 
@@ -37721,11 +37772,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaTextBlockParam`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -37752,6 +37803,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `BetaCitationCharLocationParam`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -37768,9 +37821,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `BetaCitationPageLocationParam`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -37788,9 +37841,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `BetaCitationContentBlockLocationParam`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -37818,9 +37871,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `BetaCitationWebSearchResultLocationParam`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -37830,13 +37883,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `BetaCitationSearchResultLocationParam`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -37868,13 +37921,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `title: string | null`
 
-                  - `type: "search_result_location"`
-
             - `BetaImageBlockParam`
+
+              - `type: "image"`
 
               - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
                 - `BetaBase64ImageSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -37890,8 +37945,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `BetaURLImageSource`
 
                   - `type: "url"`
@@ -37900,11 +37953,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `BetaFileImageSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -37924,9 +37975,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaRequestDocumentBlock`
 
+              - `type: "document"`
+
               - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
                 - `BetaBase64PDFSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -37934,17 +37989,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `BetaPlainTextSource`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
                 - `BetaContentBlockSource`
+
+                  - `type: "content"`
 
                   - `content: string | Array<BetaContentBlockSourceContent>`
 
@@ -37956,8 +38011,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `BetaImageBlockParam`
 
-                  - `type: "content"`
-
                 - `BetaURLPDFSource`
 
                   - `type: "url"`
@@ -37966,11 +38019,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `BetaFileDocumentSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "document"`
+                  - `file_id: string`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -37990,13 +38041,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaSearchResultBlockParam`
 
+              - `type: "search_result"`
+
               - `content: Array<BetaTextBlockParam>`
+
+                - `type: "text"`
 
                 - `text: string`
 
                   minLength: 1
-
-                - `type: "text"`
 
                 - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38008,8 +38061,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `title: string`
 
-              - `type: "search_result"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -38017,6 +38068,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `citations?: BetaCitationsConfigParam`
 
             - `BetaThinkingBlockParam`
+
+              - `type: "thinking"`
 
               - `signature: string`
 
@@ -38028,17 +38081,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `thinking` text of this block as returned by the API.
 
-              - `type: "thinking"`
-
             - `BetaRedactedThinkingBlockParam`
+
+              - `type: "redacted_thinking"`
 
               - `data: string`
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `type: "redacted_thinking"`
-
             - `BetaToolUseBlockParam`
+
+              - `type: "tool_use"`
 
               - `id: string`
 
@@ -38049,8 +38102,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `name: string`
 
                 maxLength: 200, minLength: 1
-
-              - `type: "tool_use"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38070,19 +38121,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Tool invocation generated by a server-side tool.
 
+                  - `type: "code_execution_20250825"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20250825"`
 
                 - `BetaServerToolCaller20260120`
 
+                  - `type: "code_execution_20260120"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20260120"`
 
               - `toolset_name?: string | null`
 
@@ -38092,11 +38143,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaToolResultBlockParam`
 
+              - `type: "tool_result"`
+
               - `tool_use_id: string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `type: "tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38120,11 +38171,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Tool reference block that can be included in tool_result content.
 
+                    - `type: "tool_reference"`
+
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                    - `type: "tool_reference"`
 
                     - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38139,6 +38190,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                     At most one per `tool_result`, only on a non-error result answering a
                     browser toolset member `tool_use`. The server renders the
                     model-visible text from it; the model never sees the raw fields.
+
+                    - `type: "browser_state"`
 
                     - `tabs: Array<BetaBrowserStateTabEntry>`
 
@@ -38168,8 +38221,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `type: "browser_state"`
-
                     - `cache_control?: BetaCacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
@@ -38190,25 +38241,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                         during a failed call gets no deferred `tab_opened`; it simply appears
                         in the next result's `tabs` inventory.
 
+                        - `type: "tab_opened"`
+
                         - `tab_id: string`
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `type: "tab_opened"`
-
                       - `BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
+
+                        - `type: "download_started"`
 
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_started"`
 
                         - `url: string`
 
@@ -38223,13 +38274,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                         `download_started`, when the download finished during the call that
                         started it (at most one state change per `download_id` per result).
 
+                        - `type: "download_completed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_completed"`
 
                         - `url: string`
 
@@ -38253,13 +38304,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         A file download that failed — or was cancelled — during this call.
 
+                        - `type: "download_failed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_failed"`
 
                         - `url: string`
 
@@ -38282,6 +38333,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
             - `BetaServerToolUseBlockParam`
+
+              - `type: "server_tool_use"`
 
               - `id: string`
 
@@ -38307,8 +38360,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"tool_search_tool_bm25"`
 
-              - `type: "server_tool_use"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -38329,21 +38380,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaWebSearchToolResultBlockParam`
 
+              - `type: "web_search_tool_result"`
+
               - `content: BetaWebSearchToolResultBlockParamContent`
 
                 - `Array<BetaWebSearchResultBlockParam>`
 
+                  - `type: "web_search_result"`
+
                   - `encrypted_content: string`
 
                   - `title: string`
-
-                  - `type: "web_search_result"`
 
                   - `url: string`
 
                   - `page_age?: string | null`
 
                 - `BetaWebSearchToolRequestError`
+
+                  - `type: "web_search_tool_result_error"`
 
                   - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -38359,13 +38414,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"request_too_large"`
 
-                  - `type: "web_search_tool_result_error"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_search_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38387,9 +38438,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaWebFetchToolResultBlockParam`
 
+              - `type: "web_fetch_tool_result"`
+
               - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
                 - `BetaWebFetchToolResultErrorBlockParam`
+
+                  - `type: "web_fetch_tool_result_error"`
 
                   - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -38411,13 +38466,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"unavailable"`
 
-                  - `type: "web_fetch_tool_result_error"`
+                    - `"content_too_large"`
 
                 - `BetaWebFetchBlockParam`
 
-                  - `content: BetaRequestDocumentBlock`
-
                   - `type: "web_fetch_result"`
+
+                  - `content: BetaRequestDocumentBlock`
 
                   - `url: string`
 
@@ -38430,8 +38485,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_fetch_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38453,9 +38506,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaAdvisorToolResultBlockParam`
 
+              - `type: "advisor_tool_result"`
+
               - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
                 - `BetaAdvisorToolResultErrorParam`
+
+                  - `type: "advisor_tool_result_error"`
 
                   - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -38473,23 +38530,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"model_not_found"`
 
-                  - `type: "advisor_tool_result_error"`
-
                 - `BetaAdvisorResultBlockParam`
 
-                  - `text: string`
-
                   - `type: "advisor_result"`
+
+                  - `text: string`
 
                   - `stop_reason?: string | null`
 
                 - `BetaAdvisorRedactedResultBlockParam`
 
+                  - `type: "advisor_redacted_result"`
+
                   - `encrypted_content: string`
 
                     Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-                  - `type: "advisor_redacted_result"`
 
                   - `stop_reason?: string | null`
 
@@ -38497,19 +38552,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type: "advisor_tool_result"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `BetaCodeExecutionToolResultBlockParam`
 
+              - `type: "code_execution_tool_result"`
+
               - `content: BetaCodeExecutionToolResultBlockParamContent`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `BetaCodeExecutionToolResultErrorParam`
+
+                  - `type: "code_execution_tool_result_error"`
 
                   - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -38521,15 +38578,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "code_execution_tool_result_error"`
-
                 - `BetaCodeExecutionResultBlockParam`
+
+                  - `type: "code_execution_result"`
 
                   - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -38537,17 +38594,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `stdout: string`
 
-                  - `type: "code_execution_result"`
-
                 - `BetaEncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
+                  - `type: "encrypted_code_execution_result"`
+
                   - `content: Array<BetaCodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `encrypted_stdout: string`
 
@@ -38555,13 +38612,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `stderr: string`
 
-                  - `type: "encrypted_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38569,9 +38622,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaBashCodeExecutionToolResultBlockParam`
 
+              - `type: "bash_code_execution_tool_result"`
+
               - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
                 - `BetaBashCodeExecutionToolResultErrorParam`
+
+                  - `type: "bash_code_execution_tool_result_error"`
 
                   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -38585,15 +38642,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"output_file_too_large"`
 
-                  - `type: "bash_code_execution_tool_result_error"`
-
                 - `BetaBashCodeExecutionResultBlockParam`
+
+                  - `type: "bash_code_execution_result"`
 
                   - `content: Array<BetaBashCodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "bash_code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -38601,13 +38658,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `stdout: string`
 
-                  - `type: "bash_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "bash_code_execution_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38615,9 +38668,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+              - `type: "text_editor_code_execution_tool_result"`
+
               - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
                 - `BetaTextEditorCodeExecutionToolResultErrorParam`
+
+                  - `type: "text_editor_code_execution_tool_result_error"`
 
                   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -38631,11 +38688,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"file_not_found"`
 
-                  - `type: "text_editor_code_execution_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `BetaTextEditorCodeExecutionViewResultBlockParam`
+
+                  - `type: "text_editor_code_execution_view_result"`
 
                   - `content: string`
 
@@ -38647,8 +38704,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"pdf"`
 
-                  - `type: "text_editor_code_execution_view_result"`
-
                   - `num_lines?: number | null`
 
                   - `start_line?: number | null`
@@ -38657,9 +38712,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-                  - `is_file_update: boolean`
-
                   - `type: "text_editor_code_execution_create_result"`
+
+                  - `is_file_update: boolean`
 
                 - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -38679,17 +38734,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type: "text_editor_code_execution_tool_result"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `BetaToolSearchToolResultBlockParam`
 
+              - `type: "tool_search_tool_result"`
+
               - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
                 - `BetaToolSearchToolResultErrorParam`
+
+                  - `type: "tool_search_tool_result_error"`
 
                   - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -38701,37 +38758,35 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "tool_search_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `BetaToolSearchToolSearchResultBlockParam`
 
+                  - `type: "tool_search_tool_search_result"`
+
                   - `tool_references: Array<BetaToolReferenceBlockParam>`
+
+                    - `type: "tool_reference"`
 
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `type: "tool_reference"`
-
                     - `cache_control?: BetaCacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type: "tool_search_tool_search_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "tool_search_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `BetaMCPToolUseBlockParam`
+
+              - `type: "mcp_tool_use"`
 
               - `id: string`
 
@@ -38745,19 +38800,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The name of the MCP server
 
-              - `type: "mcp_tool_use"`
-
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `BetaRequestMCPToolResultBlockParam`
 
+              - `type: "mcp_tool_result"`
+
               - `tool_use_id: string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `type: "mcp_tool_result"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38769,11 +38822,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Array<BetaTextBlockParam>`
 
+                  - `type: "text"`
+
                   - `text: string`
 
                     minLength: 1
-
-                  - `type: "text"`
 
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38788,9 +38841,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
 
-              - `file_id: string`
-
               - `type: "container_upload"`
+
+              - `file_id: string`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38828,6 +38881,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tools`; it is offered to the model from this point in the
               conversation onward.
 
+              - `type: "tool_addition"`
+
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
                 Reference to a single tool the caller declared directly in
@@ -38842,32 +38897,30 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
+                  - `type: "tool_reference"`
+
                   - `name: string`
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-                  - `type: "tool_reference"`
 
                 - `BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
+                  - `type: "mcp_tool_reference"`
+
                   - `name: string`
 
                   - `server_name: string`
-
-                  - `type: "mcp_tool_reference"`
 
                 - `BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
-                  - `server_name: string`
-
                   - `type: "mcp_toolset_reference"`
 
-              - `type: "tool_addition"`
+                  - `server_name: string`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38881,6 +38934,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tools`; it is no longer offered to the model from this point in the
               conversation onward.
 
+              - `type: "tool_removal"`
+
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
                 Reference to a single tool the caller declared directly in
@@ -38903,8 +38958,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
-
-              - `type: "tool_removal"`
 
               - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -38925,6 +38978,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               request is rejected), and moving it into the middle of a single run is
               likewise rejected; between non-thinking blocks the block's placement has
               no validation effect.
+
+              - `type: "fallback"`
 
               - `from: BetaFallbackInfoParam`
 
@@ -39012,8 +39067,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Identifies one hop of a fallback transition.
 
-              - `type: "fallback"`
-
               - `trigger?: unknown`
 
                 The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -39084,12 +39137,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             maxItems: 20
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" | "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -39097,6 +39144,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version?: string`
 
@@ -39310,25 +39363,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+              - `type: "json_schema"`
+
               - `schema: Record<string, unknown>`
 
                 The JSON schema of the format
 
-              - `type: "json_schema"`
-
             - `task_budget?: BetaTokenTaskBudget | null`
 
               User-configurable total token budget across contexts.
+
+              - `type: "tokens"`
+
+                The budget type. Currently only 'tokens' is supported.
 
               - `total: number`
 
                 Total token budget across all contexts in the session.
 
                 minimum: 1024
-
-              - `type: "tokens"`
-
-                The budget type. Currently only 'tokens' is supported.
 
               - `remaining?: number | null`
 
@@ -39348,6 +39401,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaThinkingConfigEnabled`
 
+              - `type: "enabled"`
+
               - `budget_tokens: number`
 
                 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -39357,8 +39412,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
                 minimum: 1024
-
-              - `type: "enabled"`
 
               - `block_binding?: BetaThinkingBlockBinding | null`
 
@@ -39426,9 +39479,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         maxItems: 20
 
-        - `name: string`
-
         - `type: "url"`
+
+        - `name: string`
 
         - `url: string`
 
@@ -39498,11 +39551,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `Array<BetaTextBlockParam>`
 
+          - `type: "text"`
+
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -39556,11 +39609,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The model will use the specified tool with `tool_choice.name`.
 
+          - `type: "tool"`
+
           - `name: string`
 
             The name of the tool to use.
-
-          - `type: "tool"`
 
           - `disable_parallel_tool_use?: boolean`
 
@@ -39640,6 +39693,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaTool`
 
+          - `type?: "custom" | null`
+
           - `input_schema: InputSchema`
 
             [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -39694,17 +39749,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `type?: "custom" | null`
-
         - `BetaToolBash20241022`
+
+          - `type: "bash_20241022"`
 
           - `name: "bash"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "bash_20241022"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39732,13 +39785,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolBash20250124`
 
+          - `type: "bash_20250124"`
+
           - `name: "bash"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "bash_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39766,13 +39819,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaCodeExecutionTool20250522`
 
+          - `type: "code_execution_20250522"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250522"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39798,13 +39851,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaCodeExecutionTool20250825`
 
+          - `type: "code_execution_20250825"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250825"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39832,13 +39885,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+          - `type: "code_execution_20260120"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260120"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39866,13 +39919,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Code execution tool with REPL state persistence.
 
+          - `type: "code_execution_20260521"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260521"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -39917,6 +39970,18 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: BetaBrowserTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `close_tab?: BetaBrowserCloseTabConfig | null`
 
@@ -40254,18 +40319,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: BetaBrowserTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: BetaBrowserWaitConfig | null`
 
               `wait`'s config overrides.
@@ -40292,6 +40345,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolComputerUse20241022`
 
+          - `type: "computer_20241022"`
+
           - `display_height_px: number`
 
             The height of the display in pixels.
@@ -40309,8 +40364,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "computer_20241022"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40344,13 +40397,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaMemoryTool20250818`
 
+          - `type: "memory_20250818"`
+
           - `name: "memory"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "memory_20250818"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40378,6 +40431,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolComputerUse20250124`
 
+          - `type: "computer_20250124"`
+
           - `display_height_px: number`
 
             The height of the display in pixels.
@@ -40395,8 +40450,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "computer_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40430,13 +40483,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolTextEditor20241022`
 
+          - `type: "text_editor_20241022"`
+
           - `name: "str_replace_editor"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20241022"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40464,6 +40517,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolComputerUse20251124`
 
+          - `type: "computer_20251124"`
+
           - `display_height_px: number`
 
             The height of the display in pixels.
@@ -40481,8 +40536,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "computer_20251124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40543,6 +40596,18 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: BetaComputerTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `cursor_position?: BetaComputerCursorPositionConfig | null`
 
@@ -40712,18 +40777,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: BetaComputerTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: BetaComputerWaitConfig | null`
 
               `wait`'s config overrides.
@@ -40750,13 +40803,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolTextEditor20250124`
 
+          - `type: "text_editor_20250124"`
+
           - `name: "str_replace_editor"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40784,13 +40837,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolTextEditor20250429`
 
+          - `type: "text_editor_20250429"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250429"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40818,13 +40871,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolTextEditor20250728`
 
+          - `type: "text_editor_20250728"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250728"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40858,13 +40911,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebSearchTool20250305`
 
+          - `type: "web_search_20250305"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20250305"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40934,13 +40987,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebFetchTool20250910`
 
+          - `type: "web_fetch_20250910"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20250910"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -40990,13 +41043,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebSearchTool20260209`
 
+          - `type: "web_search_20260209"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41040,13 +41093,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebFetchTool20260209`
 
+          - `type: "web_fetch_20260209"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41098,13 +41151,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
+          - `type: "web_fetch_20260309"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260309"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41158,13 +41211,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebSearchTool20260318`
 
+          - `type: "web_search_20260318"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41216,13 +41269,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaWebFetchTool20260318`
 
+          - `type: "web_fetch_20260318"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41284,6 +41337,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaAdvisorTool20260301`
 
+          - `type: "advisor_20260301"`
+
           - `model: Model`
 
             The model that will complete your prompt.
@@ -41295,8 +41350,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "advisor_20260301"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41338,17 +41391,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolSearchToolBm25_20251119`
 
-          - `name: "tool_search_tool_bm25"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
             - `"tool_search_tool_bm25_20251119"`
 
             - `"tool_search_tool_bm25"`
+
+          - `name: "tool_search_tool_bm25"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41374,17 +41427,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `BetaToolSearchToolRegex20251119`
 
-          - `name: "tool_search_tool_regex"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
             - `"tool_search_tool_regex_20251119"`
 
             - `"tool_search_tool_regex"`
+
+          - `name: "tool_search_tool_regex"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -41415,13 +41468,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Allows configuring enabled status and defer_loading for all tools
           from an MCP server, with optional per-tool overrides.
 
+          - `type: "mcp_toolset"`
+
           - `mcp_server_name: string`
 
             Name of the MCP server to configure tools for
 
             maxLength: 255, minLength: 1
-
-          - `type: "mcp_toolset"`
 
           - `cache_control?: BetaCacheControlEphemeral | null`
 
@@ -41493,7 +41546,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41541,6 +41594,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -41587,9 +41642,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaMessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -41688,14 +41757,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -41769,7 +41830,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -41817,6 +41878,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -41859,9 +41922,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaMessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -41960,14 +42037,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -42042,7 +42111,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42090,6 +42159,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -42132,9 +42203,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaMessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -42233,14 +42318,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -42313,7 +42390,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42361,6 +42438,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -42403,9 +42482,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaMessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -42505,14 +42598,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
-
 #### Example
 
 ```typescript
@@ -42576,7 +42661,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42624,6 +42709,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -42666,13 +42753,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaDeletedMessageBatch`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -42681,6 +42770,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 #### Example
 
@@ -42731,7 +42824,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 41 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -42779,6 +42872,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"user-profiles-2026-08-18"`
 
+      - `"user-profiles-2026-09-04"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -42821,6 +42916,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `BetaMessageBatchIndividualResponse`
@@ -42841,7 +42942,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `BetaMessageBatchSucceededResult`
 
+      - `type: "succeeded"`
+
+        default: succeeded
+
       - `message: BetaMessage`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+          default: message
 
         - `id: string`
 
@@ -42867,12 +42980,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" | "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -42880,6 +42987,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -42918,6 +43031,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaTextBlock`
 
+            - `type: "text"`
+
+              default: text
+
             - `citations: Array<BetaTextCitation> | null`
 
               Citations supporting the text block.
@@ -42925,6 +43042,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `BetaCitationCharLocation`
+
+                - `type: "char_location"`
+
+                  default: char_location
 
                 - `cited_text: string`
 
@@ -42942,11 +43063,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "char_location"`
-
-                  default: char_location
-
               - `BetaCitationPageLocation`
+
+                - `type: "page_location"`
+
+                  default: page_location
 
                 - `cited_text: string`
 
@@ -42964,11 +43085,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: "page_location"`
-
-                  default: page_location
-
               - `BetaCitationContentBlockLocation`
+
+                - `type: "content_block_location"`
+
+                  default: content_block_location
 
                 - `cited_text: string`
 
@@ -42996,11 +43117,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
-                  default: content_block_location
-
               - `BetaCitationsWebSearchResultLocation`
+
+                - `type: "web_search_result_location"`
+
+                  default: web_search_result_location
 
                 - `cited_text: string`
 
@@ -43010,13 +43131,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
-                  default: web_search_result_location
-
                 - `url: string`
 
               - `BetaCitationSearchResultLocation`
+
+                - `type: "search_result_location"`
+
+                  default: search_result_location
 
                 - `cited_text: string`
 
@@ -43048,19 +43169,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
-                  default: search_result_location
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
           - `BetaThinkingBlock`
+
+            - `type: "thinking"`
+
+              default: thinking
 
             - `signature: string`
 
@@ -43074,11 +43191,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
-              default: thinking
-
           - `BetaRedactedThinkingBlock`
+
+            - `type: "redacted_thinking"`
+
+              default: redacted_thinking
 
             - `data: string`
 
@@ -43088,11 +43205,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
-              default: redacted_thinking
-
           - `BetaToolUseBlock`
+
+            - `type: "tool_use"`
+
+              default: tool_use
 
             - `id: string`
 
@@ -43103,10 +43220,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
-
-              default: tool_use
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -43122,19 +43235,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `BetaServerToolCaller20260120`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name?: string | null`
 
@@ -43143,6 +43256,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `BetaServerToolUseBlock`
+
+            - `type: "server_tool_use"`
+
+              default: server_tool_use
 
             - `id: string`
 
@@ -43168,10 +43285,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
-              default: server_tool_use
-
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
               Tool invocation directly from the model.
@@ -43188,9 +43301,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaWebSearchToolResultBlock`
 
+            - `type: "web_search_tool_result"`
+
+              default: web_search_tool_result
+
             - `content: BetaWebSearchToolResultBlockContent`
 
               - `BetaWebSearchToolResultError`
+
+                - `type: "web_search_tool_result_error"`
+
+                  default: web_search_tool_result_error
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -43206,11 +43327,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
-                  default: web_search_tool_result_error
-
               - `Array<BetaWebSearchResultBlock>`
+
+                - `type: "web_search_result"`
+
+                  default: web_search_result
 
                 - `encrypted_content: string`
 
@@ -43218,19 +43339,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
-                  default: web_search_result
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
-
-              default: web_search_tool_result
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -43248,9 +43361,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaWebFetchToolResultBlock`
 
+            - `type: "web_fetch_tool_result"`
+
+              default: web_fetch_tool_result
+
             - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
               - `BetaWebFetchToolResultErrorBlock`
+
+                - `type: "web_fetch_tool_result_error"`
+
+                  default: web_fetch_tool_result_error
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -43272,13 +43393,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
-
-                  default: web_fetch_tool_result_error
+                  - `"content_too_large"`
 
               - `BetaWebFetchBlock`
 
+                - `type: "web_fetch_result"`
+
+                  default: web_fetch_result
+
                 - `content: BetaDocumentBlock`
+
+                  - `type: "document"`
+
+                    default: document
 
                   - `citations: BetaCitationConfig | null`
 
@@ -43292,37 +43419,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `BetaBase64PDFSource`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `BetaPlainTextSource`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string | null`
 
                     The title of the document
 
-                  - `type: "document"`
-
-                    default: document
-
                 - `retrieved_at: string | null`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
-
-                  default: web_fetch_result
 
                 - `url: string`
 
@@ -43331,10 +43450,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
-
-              default: web_fetch_tool_result
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -43352,9 +43467,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaAdvisorToolResultBlock`
 
+            - `type: "advisor_tool_result"`
+
+              default: advisor_tool_result
+
             - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
               - `BetaAdvisorToolResultError`
+
+                - `type: "advisor_tool_result_error"`
+
+                  default: advisor_tool_result_error
 
                 - `error_code: "max_uses_exceeded" | "prompt_too_long" | "too_many_requests" | 4 more`
 
@@ -43372,11 +43495,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
-                  default: advisor_tool_result_error
-
               - `BetaAdvisorResultBlock`
+
+                - `type: "advisor_result"`
+
+                  default: advisor_result
 
                 - `stop_reason: string | null`
 
@@ -43384,11 +43507,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                - `type: "advisor_result"`
-
-                  default: advisor_result
-
               - `BetaAdvisorRedactedResultBlock`
+
+                - `type: "advisor_redacted_result"`
+
+                  default: advisor_redacted_result
 
                 - `encrypted_content: string`
 
@@ -43398,25 +43521,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: "advisor_redacted_result"`
-
-                  default: advisor_redacted_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
-              default: advisor_tool_result
-
           - `BetaCodeExecutionToolResultBlock`
+
+            - `type: "code_execution_tool_result"`
+
+              default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError`
+
+                - `type: "code_execution_tool_result_error"`
+
+                  default: code_execution_tool_result_error
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -43428,19 +43551,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
-                  default: code_execution_tool_result_error
-
               - `BetaCodeExecutionResultBlock`
 
-                - `content: Array<BetaCodeExecutionOutputBlock>`
+                - `type: "code_execution_result"`
 
-                  - `file_id: string`
+                  default: code_execution_result
+
+                - `content: Array<BetaCodeExecutionOutputBlock>`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -43448,21 +43571,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
-                  default: code_execution_result
-
               - `BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
-                - `content: Array<BetaCodeExecutionOutputBlock>`
+                - `type: "encrypted_code_execution_result"`
 
-                  - `file_id: string`
+                  default: encrypted_code_execution_result
+
+                - `content: Array<BetaCodeExecutionOutputBlock>`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -43470,23 +43593,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
-                  default: encrypted_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
-              default: code_execution_tool_result
-
           - `BetaBashCodeExecutionToolResultBlock`
+
+            - `type: "bash_code_execution_tool_result"`
+
+              default: bash_code_execution_tool_result
 
             - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
               - `BetaBashCodeExecutionToolResultError`
+
+                - `type: "bash_code_execution_tool_result_error"`
+
+                  default: bash_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -43500,19 +43623,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
-                  default: bash_code_execution_tool_result_error
-
               - `BetaBashCodeExecutionResultBlock`
 
-                - `content: Array<BetaBashCodeExecutionOutputBlock>`
+                - `type: "bash_code_execution_result"`
 
-                  - `file_id: string`
+                  default: bash_code_execution_result
+
+                - `content: Array<BetaBashCodeExecutionOutputBlock>`
 
                   - `type: "bash_code_execution_output"`
 
                     default: bash_code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -43520,23 +43643,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
-                  default: bash_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
-              default: bash_code_execution_tool_result
-
           - `BetaTextEditorCodeExecutionToolResultBlock`
+
+            - `type: "text_editor_code_execution_tool_result"`
+
+              default: text_editor_code_execution_tool_result
 
             - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `BetaTextEditorCodeExecutionToolResultError`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
+
+                  default: text_editor_code_execution_tool_result_error
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
@@ -43552,11 +43675,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string | null`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
-                  default: text_editor_code_execution_tool_result_error
-
               - `BetaTextEditorCodeExecutionViewResultBlock`
+
+                - `type: "text_editor_code_execution_view_result"`
+
+                  default: text_editor_code_execution_view_result
 
                 - `content: string`
 
@@ -43574,19 +43697,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: number | null`
 
-                - `type: "text_editor_code_execution_view_result"`
-
-                  default: text_editor_code_execution_view_result
-
               - `BetaTextEditorCodeExecutionCreateResultBlock`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
                   default: text_editor_code_execution_create_result
 
+                - `is_file_update: boolean`
+
               - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
+
+                  default: text_editor_code_execution_str_replace_result
 
                 - `lines: Array<string> | null`
 
@@ -43598,23 +43721,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: number | null`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
-                  default: text_editor_code_execution_str_replace_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
-              default: text_editor_code_execution_tool_result
-
           - `BetaToolSearchToolResultBlock`
+
+            - `type: "tool_search_tool_result"`
+
+              default: tool_search_tool_result
 
             - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
               - `BetaToolSearchToolResultError`
+
+                - `type: "tool_search_tool_result_error"`
+
+                  default: tool_search_tool_result_error
 
                 - `error_code: "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
@@ -43628,35 +43751,31 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string | null`
 
-                - `type: "tool_search_tool_result_error"`
-
-                  default: tool_search_tool_result_error
-
               - `BetaToolSearchToolSearchResultBlock`
-
-                - `tool_references: Array<BetaToolReferenceBlock>`
-
-                  - `tool_name: string`
-
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
-
-                    default: tool_reference
 
                 - `type: "tool_search_tool_search_result"`
 
                   default: tool_search_tool_search_result
 
+                - `tool_references: Array<BetaToolReferenceBlock>`
+
+                  - `type: "tool_reference"`
+
+                    default: tool_reference
+
+                  - `tool_name: string`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "tool_search_tool_result"`
-
-              default: tool_search_tool_result
-
           - `BetaMCPToolUseBlock`
+
+            - `type: "mcp_tool_use"`
+
+              default: mcp_tool_use
 
             - `id: string`
 
@@ -43672,17 +43791,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
-              default: mcp_tool_use
-
           - `BetaMCPToolResultBlock`
+
+            - `type: "mcp_tool_result"`
+
+              default: mcp_tool_result
 
             - `content: string | Array<BetaTextBlock>`
 
               - `string`
 
               - `Array<BetaTextBlock>`
+
+                - `type: "text"`
+
+                  default: text
 
                 - `citations: Array<BetaTextCitation> | null`
 
@@ -43692,11 +43815,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: "text"`
-
-                  default: text
+                  minLength: 0
 
             - `is_error: boolean`
 
@@ -43706,19 +43825,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: "mcp_tool_result"`
-
-              default: mcp_tool_result
-
           - `BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
 
               default: container_upload
+
+            - `file_id: string`
 
           - `BetaCompactionBlock`
 
@@ -43728,6 +43843,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: "compaction"`
+
+              default: compaction
+
             - `content: string | null`
 
               Summary of compacted content, or null if compaction failed
@@ -43735,10 +43854,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `encrypted_content: string | null`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: "compaction"`
-
-              default: compaction
 
           - `BetaFallbackBlock`
 
@@ -43753,6 +43868,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: "fallback"`
+
+              default: fallback
 
             - `from: BetaFallbackInfo`
 
@@ -43844,6 +43963,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: "refusal"`
+
+                default: refusal
+
               - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
                 The policy category that triggered a refusal.
@@ -43874,14 +43997,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: "refusal"`
-
-                default: refusal
-
-            - `type: "fallback"`
-
-              default: fallback
-
         - `context_management: BetaContextManagementResponse | null`
 
           Context management response.
@@ -43893,6 +44008,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             List of context management edits that were applied.
 
             - `BetaClearToolUses20250919EditResponse`
+
+              - `type: "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
+
+                default: clear_tool_uses_20250919
 
               - `cleared_input_tokens: number`
 
@@ -43906,13 +44027,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_tool_uses_20250919"`
+            - `BetaClearThinking20251015EditResponse`
+
+              - `type: "clear_thinking_20251015"`
 
                 The type of context management edit applied.
 
-                default: clear_tool_uses_20250919
-
-            - `BetaClearThinking20251015EditResponse`
+                default: clear_thinking_20251015
 
               - `cleared_input_tokens: number`
 
@@ -43926,12 +44047,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
-                default: clear_thinking_20251015
-
         - `diagnostics: BetaDiagnostics | null`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -43943,43 +44058,43 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `BetaCacheMissModelChanged`
 
-              - `cache_missed_input_tokens: number`
-
-                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
               - `type: "model_changed"`
 
                 default: model_changed
 
-            - `BetaCacheMissSystemChanged`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissSystemChanged`
 
               - `type: "system_changed"`
 
                 default: system_changed
 
-            - `BetaCacheMissToolsChanged`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `BetaCacheMissToolsChanged`
 
               - `type: "tools_changed"`
 
                 default: tools_changed
 
-            - `BetaCacheMissMessagesChanged`
-
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+            - `BetaCacheMissMessagesChanged`
+
               - `type: "messages_changed"`
 
                 default: messages_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `BetaCacheMissPreviousMessageNotFound`
 
@@ -44010,6 +44125,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `stop_details: BetaRefusalStopDetails | null`
 
           Structured information about a refusal.
+
+          - `type: "refusal"`
+
+            default: refusal
 
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -44096,10 +44215,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: "refusal"`
-
-            default: refusal
-
         - `stop_reason: BetaStopReason | null`
 
           The reason that we stopped.
@@ -44137,14 +44252,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
-
-          default: message
 
         - `usage: BetaUsage`
 
@@ -44212,6 +44319,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 No reprice was applied; `reason` says why.
 
+                - `type: "not_applied"`
+
+                  default: not_applied
+
                 - `reason: "body_mismatch" | "continuation_excluded" | "continuation_only" | 9 more`
 
                   Why the reprice was not applied.
@@ -44242,10 +44353,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `"wrong_platform"`
 
                   - `"wrong_workspace"`
-
-                - `type: "not_applied"`
-
-                  default: not_applied
 
                 - `remove_to_redeem?: Array<string> | null`
 
@@ -44284,6 +44391,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
+                default: message
+
               - `cache_creation: BetaCacheCreation | null`
 
                 Breakdown of cached tokens by TTL
@@ -44318,43 +44431,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "message"`
-
-                Usage for a sampling iteration
-
-                default: message
-
             - `BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
-
-              - `cache_creation: BetaCacheCreation | null`
-
-                Breakdown of cached tokens by TTL
-
-              - `cache_creation_input_tokens: number`
-
-                The number of input tokens used to create the cache entry.
-
-                default: 0, minimum: 0
-
-              - `cache_read_input_tokens: number`
-
-                The number of input tokens read from the cache.
-
-                default: 0, minimum: 0
-
-              - `input_tokens: number`
-
-                The number of input tokens which were used.
-
-                minimum: 0
-
-              - `output_tokens: number`
-
-                The number of output tokens which were used.
-
-                minimum: 0
 
               - `type: "compaction"`
 
@@ -44362,9 +44441,43 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 default: compaction
 
+              - `cache_creation: BetaCacheCreation | null`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+                default: 0, minimum: 0
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+                default: 0, minimum: 0
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+                minimum: 0
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+                minimum: 0
+
             - `BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
+
+                default: advisor_message
 
               - `cache_creation: BetaCacheCreation | null`
 
@@ -44399,12 +44512,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
-
-                default: advisor_message
 
             - `BetaFallbackMessageIterationUsage`
 
@@ -44415,6 +44522,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
+                default: fallback_message
+
               - `cache_creation: BetaCacheCreation | null`
 
                 Breakdown of cached tokens by TTL
@@ -44448,12 +44561,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
-
-                default: fallback_message
 
           - `output_tokens: number`
 
@@ -44535,6 +44642,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
+            default: thinking_dropped
+
           - `path: string`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -44565,121 +44678,111 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"end_user_binding_mismatch"`
 
-          - `type: "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-            default: thinking_dropped
-
-      - `type: "succeeded"`
-
-        default: succeeded
-
     - `BetaMessageBatchErroredResult`
 
+      - `type: "errored"`
+
+        default: errored
+
       - `error: BetaErrorResponse`
-
-        - `error: BetaError`
-
-          - `BetaInvalidRequestError`
-
-            - `message: string`
-
-              default: Invalid request
-
-            - `type: "invalid_request_error"`
-
-              default: invalid_request_error
-
-          - `BetaAuthenticationError`
-
-            - `message: string`
-
-              default: Authentication error
-
-            - `type: "authentication_error"`
-
-              default: authentication_error
-
-          - `BetaBillingError`
-
-            - `message: string`
-
-              default: Billing error
-
-            - `type: "billing_error"`
-
-              default: billing_error
-
-          - `BetaPermissionError`
-
-            - `message: string`
-
-              default: Permission denied
-
-            - `type: "permission_error"`
-
-              default: permission_error
-
-          - `BetaNotFoundError`
-
-            - `message: string`
-
-              default: Not found
-
-            - `type: "not_found_error"`
-
-              default: not_found_error
-
-          - `BetaRateLimitError`
-
-            - `message: string`
-
-              default: Rate limited
-
-            - `type: "rate_limit_error"`
-
-              default: rate_limit_error
-
-          - `BetaGatewayTimeoutError`
-
-            - `message: string`
-
-              default: Request timeout
-
-            - `type: "timeout_error"`
-
-              default: timeout_error
-
-          - `BetaAPIError`
-
-            - `message: string`
-
-              default: Internal server error
-
-            - `type: "api_error"`
-
-              default: api_error
-
-          - `BetaOverloadedError`
-
-            - `message: string`
-
-              default: Overloaded
-
-            - `type: "overloaded_error"`
-
-              default: overloaded_error
-
-        - `request_id: string | null`
 
         - `type: "error"`
 
           default: error
 
-      - `type: "errored"`
+        - `error: BetaError`
 
-        default: errored
+          - `BetaInvalidRequestError`
+
+            - `type: "invalid_request_error"`
+
+              default: invalid_request_error
+
+            - `message: string`
+
+              default: Invalid request
+
+          - `BetaAuthenticationError`
+
+            - `type: "authentication_error"`
+
+              default: authentication_error
+
+            - `message: string`
+
+              default: Authentication error
+
+          - `BetaBillingError`
+
+            - `type: "billing_error"`
+
+              default: billing_error
+
+            - `message: string`
+
+              default: Billing error
+
+          - `BetaPermissionError`
+
+            - `type: "permission_error"`
+
+              default: permission_error
+
+            - `message: string`
+
+              default: Permission denied
+
+          - `BetaNotFoundError`
+
+            - `type: "not_found_error"`
+
+              default: not_found_error
+
+            - `message: string`
+
+              default: Not found
+
+          - `BetaRateLimitError`
+
+            - `type: "rate_limit_error"`
+
+              default: rate_limit_error
+
+            - `message: string`
+
+              default: Rate limited
+
+          - `BetaGatewayTimeoutError`
+
+            - `type: "timeout_error"`
+
+              default: timeout_error
+
+            - `message: string`
+
+              default: Request timeout
+
+          - `BetaAPIError`
+
+            - `type: "api_error"`
+
+              default: api_error
+
+            - `message: string`
+
+              default: Internal server error
+
+          - `BetaOverloadedError`
+
+            - `type: "overloaded_error"`
+
+              default: overloaded_error
+
+            - `message: string`
+
+              default: Overloaded
+
+        - `request_id: string | null`
 
     - `BetaMessageBatchCanceledResult`
 

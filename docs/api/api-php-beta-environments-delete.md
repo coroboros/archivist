@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Environment
+url: https://platform.claude.com/docs/en/api/php/beta/environments/delete
+---
+
 # Delete Environment
 
-`$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironmentDeleteResponse`
+`$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaEnvironmentDeleteResponse`
 
 **DELETE** `/v1/environments/{environment_id}`
 
@@ -20,17 +25,19 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaEnvironmentDeleteResponse`
 
-  - `string id`
-
-    Environment identifier
-
   - `Type type`
 
     The type of response
+
+  - `string id`
+
+    Environment identifier
 
 ## Example
 
@@ -44,6 +51,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaEnvironmentDeleteResponse = $client->beta->environments->delete(
   'env_011CZkZ9X2dpNyB7HsEFoRfW',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaEnvironmentDeleteResponse);

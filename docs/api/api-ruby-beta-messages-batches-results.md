@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/resu
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/results
+---
+
 # Retrieve Message Batch results
 
 `beta.messages.batches.results(message_batch_id, **kwargs) -> BetaMessageBatchIndividualResponse`
@@ -28,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -118,6 +125,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class BetaMessageBatchIndividualResponse`
@@ -138,7 +147,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `class BetaMessageBatchSucceededResult`
 
+      - `type: :succeeded`
+
       - `message: BetaMessage`
+
+        - `type: :message`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: String`
 
@@ -164,12 +181,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: String`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: :anthropic | :custom`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -177,6 +188,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `:anthropic`
 
               - `:custom`
+
+            - `skill_id: String`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: String`
 
@@ -215,6 +232,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaTextBlock`
 
+            - `type: :text`
+
             - `citations: Array[BetaTextCitation]`
 
               Citations supporting the text block.
@@ -222,6 +241,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `class BetaCitationCharLocation`
+
+                - `type: :char_location`
 
                 - `cited_text: String`
 
@@ -239,9 +260,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: :char_location`
-
               - `class BetaCitationPageLocation`
+
+                - `type: :page_location`
 
                 - `cited_text: String`
 
@@ -259,9 +280,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: :page_location`
-
               - `class BetaCitationContentBlockLocation`
+
+                - `type: :content_block_location`
 
                 - `cited_text: String`
 
@@ -289,9 +310,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: :content_block_location`
-
               - `class BetaCitationsWebSearchResultLocation`
+
+                - `type: :web_search_result_location`
 
                 - `cited_text: String`
 
@@ -301,11 +322,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: :web_search_result_location`
-
                 - `url: String`
 
               - `class BetaCitationSearchResultLocation`
+
+                - `type: :search_result_location`
 
                 - `cited_text: String`
 
@@ -337,15 +358,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
-                - `type: :search_result_location`
-
             - `text: String`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: :text`
+              minLength: 0
 
           - `class BetaThinkingBlock`
+
+            - `type: :thinking`
 
             - `signature: String`
 
@@ -359,9 +378,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: :thinking`
-
           - `class BetaRedactedThinkingBlock`
+
+            - `type: :redacted_thinking`
 
             - `data: String`
 
@@ -371,9 +390,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: :redacted_thinking`
-
           - `class BetaToolUseBlock`
+
+            - `type: :tool_use`
 
             - `id: String`
 
@@ -384,8 +403,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `name: String`
 
               minLength: 1
-
-            - `type: :tool_use`
 
             - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -401,19 +418,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: :code_execution_20250825`
+
                 - `tool_id: String`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: :code_execution_20250825`
 
               - `class BetaServerToolCaller20260120`
 
+                - `type: :code_execution_20260120`
+
                 - `tool_id: String`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: :code_execution_20260120`
 
             - `toolset_name: String`
 
@@ -422,6 +439,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class BetaServerToolUseBlock`
+
+            - `type: :server_tool_use`
 
             - `id: String`
 
@@ -447,8 +466,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `:tool_search_tool_bm25`
 
-            - `type: :server_tool_use`
-
             - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
               Tool invocation directly from the model.
@@ -465,9 +482,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaWebSearchToolResultBlock`
 
+            - `type: :web_search_tool_result`
+
             - `content: BetaWebSearchToolResultBlockContent`
 
               - `class BetaWebSearchToolResultError`
+
+                - `type: :web_search_tool_result_error`
 
                 - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -483,9 +504,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:request_too_large`
 
-                - `type: :web_search_tool_result_error`
-
               - `UnionMember1 = Array[BetaWebSearchResultBlock]`
+
+                - `type: :web_search_result`
 
                 - `encrypted_content: String`
 
@@ -493,15 +514,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: String`
 
-                - `type: :web_search_result`
-
                 - `url: String`
 
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: :web_search_tool_result`
 
             - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -519,9 +536,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaWebFetchToolResultBlock`
 
+            - `type: :web_fetch_tool_result`
+
             - `content: BetaWebFetchToolResultErrorBlock | BetaWebFetchBlock`
 
               - `class BetaWebFetchToolResultErrorBlock`
+
+                - `type: :web_fetch_tool_result_error`
 
                 - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -543,11 +564,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:unavailable`
 
-                - `type: :web_fetch_tool_result_error`
+                  - `:content_too_large`
 
               - `class BetaWebFetchBlock`
 
+                - `type: :web_fetch_result`
+
                 - `content: BetaDocumentBlock`
+
+                  - `type: :document`
 
                   - `citations: BetaCitationConfig`
 
@@ -559,33 +584,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `class BetaBase64PDFSource`
 
+                      - `type: :base64`
+
                       - `data: String`
 
                         format: byte
 
                       - `media_type: :"application/pdf"`
 
-                      - `type: :base64`
-
                     - `class BetaPlainTextSource`
+
+                      - `type: :text`
 
                       - `data: String`
 
                       - `media_type: :"text/plain"`
 
-                      - `type: :text`
-
                   - `title: String`
 
                     The title of the document
 
-                  - `type: :document`
-
                 - `retrieved_at: String`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: :web_fetch_result`
 
                 - `url: String`
 
@@ -594,8 +615,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: :web_fetch_tool_result`
 
             - `caller_: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
@@ -613,9 +632,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaAdvisorToolResultBlock`
 
+            - `type: :advisor_tool_result`
+
             - `content: BetaAdvisorToolResultError | BetaAdvisorResultBlock | BetaAdvisorRedactedResultBlock`
 
               - `class BetaAdvisorToolResultError`
+
+                - `type: :advisor_tool_result_error`
 
                 - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
@@ -633,9 +656,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:model_not_found`
 
-                - `type: :advisor_tool_result_error`
-
               - `class BetaAdvisorResultBlock`
+
+                - `type: :advisor_result`
 
                 - `stop_reason: String`
 
@@ -643,9 +666,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: String`
 
-                - `type: :advisor_result`
-
               - `class BetaAdvisorRedactedResultBlock`
+
+                - `type: :advisor_redacted_result`
 
                 - `encrypted_content: String`
 
@@ -655,21 +678,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: :advisor_redacted_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :advisor_tool_result`
-
           - `class BetaCodeExecutionToolResultBlock`
+
+            - `type: :code_execution_tool_result`
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultError`
+
+                - `type: :code_execution_tool_result_error`
 
                 - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -681,15 +704,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:execution_time_exceeded`
 
-                - `type: :code_execution_tool_result_error`
-
               - `class BetaCodeExecutionResultBlock`
+
+                - `type: :code_execution_result`
 
                 - `content: Array[BetaCodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :code_execution_output`
+
+                  - `file_id: String`
 
                 - `return_code: Integer`
 
@@ -697,17 +720,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: String`
 
-                - `type: :code_execution_result`
-
               - `class BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: :encrypted_code_execution_result`
+
                 - `content: Array[BetaCodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :code_execution_output`
+
+                  - `file_id: String`
 
                 - `encrypted_stdout: String`
 
@@ -715,19 +738,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: String`
 
-                - `type: :encrypted_code_execution_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :code_execution_tool_result`
-
           - `class BetaBashCodeExecutionToolResultBlock`
+
+            - `type: :bash_code_execution_tool_result`
 
             - `content: BetaBashCodeExecutionToolResultError | BetaBashCodeExecutionResultBlock`
 
               - `class BetaBashCodeExecutionToolResultError`
+
+                - `type: :bash_code_execution_tool_result_error`
 
                 - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -741,15 +764,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `:output_file_too_large`
 
-                - `type: :bash_code_execution_tool_result_error`
-
               - `class BetaBashCodeExecutionResultBlock`
+
+                - `type: :bash_code_execution_result`
 
                 - `content: Array[BetaBashCodeExecutionOutputBlock]`
 
-                  - `file_id: String`
-
                   - `type: :bash_code_execution_output`
+
+                  - `file_id: String`
 
                 - `return_code: Integer`
 
@@ -757,19 +780,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: String`
 
-                - `type: :bash_code_execution_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :bash_code_execution_tool_result`
-
           - `class BetaTextEditorCodeExecutionToolResultBlock`
+
+            - `type: :text_editor_code_execution_tool_result`
 
             - `content: BetaTextEditorCodeExecutionToolResultError | BetaTextEditorCodeExecutionViewResultBlock | BetaTextEditorCodeExecutionCreateResultBlock | BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `class BetaTextEditorCodeExecutionToolResultError`
+
+                - `type: :text_editor_code_execution_tool_result_error`
 
                 - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
@@ -785,9 +808,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: String`
 
-                - `type: :text_editor_code_execution_tool_result_error`
-
               - `class BetaTextEditorCodeExecutionViewResultBlock`
+
+                - `type: :text_editor_code_execution_view_result`
 
                 - `content: String`
 
@@ -805,15 +828,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: Integer`
 
-                - `type: :text_editor_code_execution_view_result`
-
               - `class BetaTextEditorCodeExecutionCreateResultBlock`
-
-                - `is_file_update: bool`
 
                 - `type: :text_editor_code_execution_create_result`
 
+                - `is_file_update: bool`
+
               - `class BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+                - `type: :text_editor_code_execution_str_replace_result`
 
                 - `lines: Array[String]`
 
@@ -825,19 +848,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: Integer`
 
-                - `type: :text_editor_code_execution_str_replace_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :text_editor_code_execution_tool_result`
-
           - `class BetaToolSearchToolResultBlock`
+
+            - `type: :tool_search_tool_result`
 
             - `content: BetaToolSearchToolResultError | BetaToolSearchToolSearchResultBlock`
 
               - `class BetaToolSearchToolResultError`
+
+                - `type: :tool_search_tool_result_error`
 
                 - `error_code: :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
@@ -851,27 +874,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: String`
 
-                - `type: :tool_search_tool_result_error`
-
               - `class BetaToolSearchToolSearchResultBlock`
 
+                - `type: :tool_search_tool_search_result`
+
                 - `tool_references: Array[BetaToolReferenceBlock]`
+
+                  - `type: :tool_reference`
 
                   - `tool_name: String`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: :tool_reference`
-
-                - `type: :tool_search_tool_search_result`
-
             - `tool_use_id: String`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: :tool_search_tool_result`
-
           - `class BetaMCPToolUseBlock`
+
+            - `type: :mcp_tool_use`
 
             - `id: String`
 
@@ -887,15 +908,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `type: :mcp_tool_use`
-
           - `class BetaMCPToolResultBlock`
+
+            - `type: :mcp_tool_result`
 
             - `content: String | Array[BetaTextBlock]`
 
               - `String = String`
 
               - `BetaMCPToolResultBlockContent = Array[BetaTextBlock]`
+
+                - `type: :text`
 
                 - `citations: Array[BetaTextCitation]`
 
@@ -905,9 +928,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: String`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: :text`
+                  minLength: 0
 
             - `is_error: bool`
 
@@ -915,15 +936,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: :mcp_tool_result`
-
           - `class BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: String`
-
             - `type: :container_upload`
+
+            - `file_id: String`
 
           - `class BetaCompactionBlock`
 
@@ -933,6 +952,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: :compaction`
+
             - `content: String`
 
               Summary of compacted content, or null if compaction failed
@@ -940,8 +961,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `encrypted_content: String`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: :compaction`
 
           - `class BetaFallbackBlock`
 
@@ -956,6 +975,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: :fallback`
 
             - `from: BetaFallbackInfo`
 
@@ -1051,6 +1072,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: :refusal`
+
               - `category: :cyber | :bio | :frontier_llm | 2 more`
 
                 The policy category that triggered a refusal.
@@ -1075,10 +1098,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: :refusal`
-
-            - `type: :fallback`
-
         - `context_management: BetaContextManagementResponse`
 
           Context management response.
@@ -1090,6 +1109,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             List of context management edits that were applied.
 
             - `class BetaClearToolUses20250919EditResponse`
+
+              - `type: :clear_tool_uses_20250919`
+
+                The type of context management edit applied.
 
               - `cleared_input_tokens: Integer`
 
@@ -1103,11 +1126,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: :clear_tool_uses_20250919`
+            - `class BetaClearThinking20251015EditResponse`
+
+              - `type: :clear_thinking_20251015`
 
                 The type of context management edit applied.
-
-            - `class BetaClearThinking20251015EditResponse`
 
               - `cleared_input_tokens: Integer`
 
@@ -1121,10 +1144,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: :clear_thinking_20251015`
-
-                The type of context management edit applied.
-
         - `diagnostics: BetaDiagnostics`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -1136,35 +1155,35 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class BetaCacheMissModelChanged`
 
+              - `type: :model_changed`
+
               - `cache_missed_input_tokens: Integer`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: :model_changed`
 
             - `class BetaCacheMissSystemChanged`
 
+              - `type: :system_changed`
+
               - `cache_missed_input_tokens: Integer`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: :system_changed`
 
             - `class BetaCacheMissToolsChanged`
 
+              - `type: :tools_changed`
+
               - `cache_missed_input_tokens: Integer`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: :tools_changed`
 
             - `class BetaCacheMissMessagesChanged`
 
+              - `type: :messages_changed`
+
               - `cache_missed_input_tokens: Integer`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: :messages_changed`
 
             - `class BetaCacheMissPreviousMessageNotFound`
 
@@ -1189,6 +1208,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `stop_details: BetaRefusalStopDetails`
 
           Structured information about a refusal.
+
+          - `type: :refusal`
 
           - `category: :cyber | :bio | :frontier_llm | 2 more`
 
@@ -1269,8 +1290,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: :refusal`
-
         - `stop_reason: BetaStopReason`
 
           The reason that we stopped.
@@ -1308,12 +1327,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: :message`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: BetaUsage`
 
@@ -1379,6 +1392,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 No reprice was applied; `reason` says why.
 
+                - `type: :not_applied`
+
                 - `reason: :body_mismatch | :continuation_excluded | :continuation_only | 9 more`
 
                   Why the reprice was not applied.
@@ -1409,8 +1424,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `:wrong_platform`
 
                   - `:wrong_workspace`
-
-                - `type: :not_applied`
 
                 - `remove_to_redeem: Array[String]`
 
@@ -1449,6 +1462,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
+              - `type: :message`
+
+                Usage for a sampling iteration
+
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1482,15 +1499,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: :message`
-
-                Usage for a sampling iteration
 
             - `class BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
 
+              - `type: :compaction`
+
+                Usage for a compaction iteration
+
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1519,13 +1536,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: :compaction`
-
-                Usage for a compaction iteration
-
             - `class BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: :advisor_message`
+
+                Usage for an advisor sub-inference iteration
 
               - `cache_creation: BetaCacheCreation`
 
@@ -1560,10 +1577,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: :advisor_message`
-
-                Usage for an advisor sub-inference iteration
 
             - `class BetaFallbackMessageIterationUsage`
 
@@ -1574,6 +1587,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: :fallback_message`
+
+                Usage for the fallback-model attempt that served the response
+
               - `cache_creation: BetaCacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1607,10 +1624,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: :fallback_message`
-
-                Usage for the fallback-model attempt that served the response
 
           - `output_tokens: Integer`
 
@@ -1692,6 +1705,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: :thinking_dropped`
+
+            Always `thinking_dropped` for this entry type.
+
           - `path: String`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -1722,77 +1739,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `:end_user_binding_mismatch`
 
-          - `type: :thinking_dropped`
-
-            Always `thinking_dropped` for this entry type.
-
-      - `type: :succeeded`
-
     - `class BetaMessageBatchErroredResult`
 
+      - `type: :errored`
+
       - `error: BetaErrorResponse`
+
+        - `type: :error`
 
         - `error: BetaError`
 
           - `class BetaInvalidRequestError`
 
-            - `message: String`
-
             - `type: :invalid_request_error`
+
+            - `message: String`
 
           - `class BetaAuthenticationError`
 
-            - `message: String`
-
             - `type: :authentication_error`
+
+            - `message: String`
 
           - `class BetaBillingError`
 
-            - `message: String`
-
             - `type: :billing_error`
+
+            - `message: String`
 
           - `class BetaPermissionError`
 
-            - `message: String`
-
             - `type: :permission_error`
+
+            - `message: String`
 
           - `class BetaNotFoundError`
 
-            - `message: String`
-
             - `type: :not_found_error`
+
+            - `message: String`
 
           - `class BetaRateLimitError`
 
-            - `message: String`
-
             - `type: :rate_limit_error`
+
+            - `message: String`
 
           - `class BetaGatewayTimeoutError`
 
-            - `message: String`
-
             - `type: :timeout_error`
+
+            - `message: String`
 
           - `class BetaAPIError`
 
-            - `message: String`
-
             - `type: :api_error`
+
+            - `message: String`
 
           - `class BetaOverloadedError`
 
-            - `message: String`
-
             - `type: :overloaded_error`
 
+            - `message: String`
+
         - `request_id: String`
-
-        - `type: :error`
-
-      - `type: :errored`
 
     - `class BetaMessageBatchCanceledResult`
 

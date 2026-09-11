@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/go/messages/batches/cancel"
 category: "api"
 generated: true
 ---
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/go/messages/batches/cancel
+---
+
 # Cancel a Message Batch
 
-`client.Messages.Batches.Cancel(ctx, messageBatchID) (*MessageBatch, error)`
+`client.Messages.Batches.Cancel(ctx, messageBatchID, body) (*MessageBatch, error)`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -22,9 +27,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+- `body MessageBatchCancelParams`
+
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `type MessageBatch struct{…}`
+
+  - `Type MessageBatch`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `ID string`
 
@@ -124,14 +145,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `Type MessageBatch`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
-
 ## Example
 
 ```go
@@ -149,7 +162,11 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	messageBatch, err := client.Messages.Batches.Cancel(context.TODO(), "message_batch_id")
+	messageBatch, err := client.Messages.Batches.Cancel(
+		context.TODO(),
+		"message_batch_id",
+		anthropic.MessageBatchCancelParams{},
+	)
 	if err != nil {
 		panic(err.Error())
 	}

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/python/beta/messages/create
+---
+
 # Create a Message
 
 `beta.messages.create(**kwargs)  -> BetaMessage`
@@ -89,11 +94,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaTextBlockParam: …`
 
+        - `type: Literal["text"]`
+
         - `text: str`
 
           minLength: 1
-
-        - `type: Literal["text"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -120,6 +125,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaCitationCharLocationParam: …`
 
+            - `type: Literal["char_location"]`
+
             - `cited_text: str`
 
             - `document_index: int`
@@ -136,9 +143,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: Literal["char_location"]`
-
           - `class BetaCitationPageLocationParam: …`
+
+            - `type: Literal["page_location"]`
 
             - `cited_text: str`
 
@@ -156,9 +163,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 1
 
-            - `type: Literal["page_location"]`
-
           - `class BetaCitationContentBlockLocationParam: …`
+
+            - `type: Literal["content_block_location"]`
 
             - `cited_text: str`
 
@@ -186,9 +193,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minimum: 0
 
-            - `type: Literal["content_block_location"]`
-
           - `class BetaCitationWebSearchResultLocationParam: …`
+
+            - `type: Literal["web_search_result_location"]`
 
             - `cited_text: str`
 
@@ -198,13 +205,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 512, minLength: 1
 
-            - `type: Literal["web_search_result_location"]`
-
             - `url: str`
 
               minLength: 1
 
           - `class BetaCitationSearchResultLocationParam: …`
+
+            - `type: Literal["search_result_location"]`
 
             - `cited_text: str`
 
@@ -236,13 +243,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `title: Optional[str]`
 
-            - `type: Literal["search_result_location"]`
-
       - `class BetaImageBlockParam: …`
+
+        - `type: Literal["image"]`
 
         - `source: Source`
 
           - `class BetaBase64ImageSource: …`
+
+            - `type: Literal["base64"]`
 
             - `data: str`
 
@@ -258,8 +267,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"image/webp"`
 
-            - `type: Literal["base64"]`
-
           - `class BetaURLImageSource: …`
 
             - `type: Literal["url"]`
@@ -268,11 +275,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaFileImageSource: …`
 
-            - `file_id: str`
-
             - `type: Literal["file"]`
 
-        - `type: Literal["image"]`
+            - `file_id: str`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -292,9 +297,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaRequestDocumentBlock: …`
 
+        - `type: Literal["document"]`
+
         - `source: Source`
 
           - `class BetaBase64PDFSource: …`
+
+            - `type: Literal["base64"]`
 
             - `data: str`
 
@@ -302,17 +311,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `media_type: Literal["application/pdf"]`
 
-            - `type: Literal["base64"]`
-
           - `class BetaPlainTextSource: …`
+
+            - `type: Literal["text"]`
 
             - `data: str`
 
             - `media_type: Literal["text/plain"]`
 
-            - `type: Literal["text"]`
-
           - `class BetaContentBlockSource: …`
+
+            - `type: Literal["content"]`
 
             - `content: Union[str, List[BetaContentBlockSourceContent]]`
 
@@ -324,8 +333,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `class BetaImageBlockParam: …`
 
-            - `type: Literal["content"]`
-
           - `class BetaURLPDFSource: …`
 
             - `type: Literal["url"]`
@@ -334,11 +341,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaFileDocumentSource: …`
 
-            - `file_id: str`
-
             - `type: Literal["file"]`
 
-        - `type: Literal["document"]`
+            - `file_id: str`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -358,13 +363,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaSearchResultBlockParam: …`
 
+        - `type: Literal["search_result"]`
+
         - `content: List[BetaTextBlockParam]`
+
+          - `type: Literal["text"]`
 
           - `text: str`
 
             minLength: 1
-
-          - `type: Literal["text"]`
 
           - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -376,8 +383,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `title: str`
 
-        - `type: Literal["search_result"]`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
@@ -385,6 +390,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `citations: Optional[BetaCitationsConfigParam]`
 
       - `class BetaThinkingBlockParam: …`
+
+        - `type: Literal["thinking"]`
 
         - `signature: str`
 
@@ -396,17 +403,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: Literal["thinking"]`
-
       - `class BetaRedactedThinkingBlockParam: …`
+
+        - `type: Literal["redacted_thinking"]`
 
         - `data: str`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: Literal["redacted_thinking"]`
-
       - `class BetaToolUseBlockParam: …`
+
+        - `type: Literal["tool_use"]`
 
         - `id: str`
 
@@ -417,8 +424,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `name: str`
 
           maxLength: 200, minLength: 1
-
-        - `type: Literal["tool_use"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -438,19 +443,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Tool invocation generated by a server-side tool.
 
+            - `type: Literal["code_execution_20250825"]`
+
             - `tool_id: str`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: Literal["code_execution_20250825"]`
 
           - `class BetaServerToolCaller20260120: …`
 
+            - `type: Literal["code_execution_20260120"]`
+
             - `tool_id: str`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: Literal["code_execution_20260120"]`
 
         - `toolset_name: Optional[str]`
 
@@ -460,11 +465,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaToolResultBlockParam: …`
 
+        - `type: Literal["tool_result"]`
+
         - `tool_use_id: str`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: Literal["tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -488,11 +493,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: Literal["tool_reference"]`
+
               - `tool_name: str`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: Literal["tool_reference"]`
 
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -507,6 +512,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: Literal["browser_state"]`
 
               - `tabs: List[BetaBrowserStateTabEntry]`
 
@@ -536,8 +543,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: Literal["browser_state"]`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
@@ -558,25 +563,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: Literal["tab_opened"]`
+
                   - `tab_id: str`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: Literal["tab_opened"]`
-
                 - `class BetaBrowserStateChangeDownloadStarted: …`
 
                   A file download that started during this call.
+
+                  - `type: Literal["download_started"]`
 
                   - `download_id: str`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: Literal["download_started"]`
 
                   - `url: str`
 
@@ -591,13 +596,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: Literal["download_completed"]`
+
                   - `download_id: str`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: Literal["download_completed"]`
 
                   - `url: str`
 
@@ -621,13 +626,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: Literal["download_failed"]`
+
                   - `download_id: str`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: Literal["download_failed"]`
 
                   - `url: str`
 
@@ -650,6 +655,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class BetaServerToolUseBlockParam: …`
+
+        - `type: Literal["server_tool_use"]`
 
         - `id: str`
 
@@ -675,8 +682,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"tool_search_tool_bm25"`
 
-        - `type: Literal["server_tool_use"]`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
@@ -697,21 +702,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaWebSearchToolResultBlockParam: …`
 
+        - `type: Literal["web_search_tool_result"]`
+
         - `content: BetaWebSearchToolResultBlockParamContent`
 
           - `List[BetaWebSearchResultBlockParam]`
 
+            - `type: Literal["web_search_result"]`
+
             - `encrypted_content: str`
 
             - `title: str`
-
-            - `type: Literal["web_search_result"]`
 
             - `url: str`
 
             - `page_age: Optional[str]`
 
           - `class BetaWebSearchToolRequestError: …`
+
+            - `type: Literal["web_search_tool_result_error"]`
 
             - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -727,13 +736,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"request_too_large"`
 
-            - `type: Literal["web_search_tool_result_error"]`
-
         - `tool_use_id: str`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: Literal["web_search_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -755,9 +760,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaWebFetchToolResultBlockParam: …`
 
+        - `type: Literal["web_fetch_tool_result"]`
+
         - `content: Content`
 
           - `class BetaWebFetchToolResultErrorBlockParam: …`
+
+            - `type: Literal["web_fetch_tool_result_error"]`
 
             - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -779,13 +788,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"unavailable"`
 
-            - `type: Literal["web_fetch_tool_result_error"]`
+              - `"content_too_large"`
 
           - `class BetaWebFetchBlockParam: …`
 
-            - `content: BetaRequestDocumentBlock`
-
             - `type: Literal["web_fetch_result"]`
+
+            - `content: BetaRequestDocumentBlock`
 
             - `url: str`
 
@@ -798,8 +807,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `tool_use_id: str`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: Literal["web_fetch_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -821,9 +828,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaAdvisorToolResultBlockParam: …`
 
+        - `type: Literal["advisor_tool_result"]`
+
         - `content: Content`
 
           - `class BetaAdvisorToolResultErrorParam: …`
+
+            - `type: Literal["advisor_tool_result_error"]`
 
             - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
 
@@ -841,23 +852,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"model_not_found"`
 
-            - `type: Literal["advisor_tool_result_error"]`
-
           - `class BetaAdvisorResultBlockParam: …`
 
-            - `text: str`
-
             - `type: Literal["advisor_result"]`
+
+            - `text: str`
 
             - `stop_reason: Optional[str]`
 
           - `class BetaAdvisorRedactedResultBlockParam: …`
 
+            - `type: Literal["advisor_redacted_result"]`
+
             - `encrypted_content: str`
 
               Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-            - `type: Literal["advisor_redacted_result"]`
 
             - `stop_reason: Optional[str]`
 
@@ -865,19 +874,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: Literal["advisor_tool_result"]`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaCodeExecutionToolResultBlockParam: …`
 
+        - `type: Literal["code_execution_tool_result"]`
+
         - `content: BetaCodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultErrorParam: …`
+
+            - `type: Literal["code_execution_tool_result_error"]`
 
             - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -889,15 +900,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"execution_time_exceeded"`
 
-            - `type: Literal["code_execution_tool_result_error"]`
-
           - `class BetaCodeExecutionResultBlockParam: …`
+
+            - `type: Literal["code_execution_result"]`
 
             - `content: List[BetaCodeExecutionOutputBlockParam]`
 
-              - `file_id: str`
-
               - `type: Literal["code_execution_output"]`
+
+              - `file_id: str`
 
             - `return_code: int`
 
@@ -905,17 +916,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stdout: str`
 
-            - `type: Literal["code_execution_result"]`
-
           - `class BetaEncryptedCodeExecutionResultBlockParam: …`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: Literal["encrypted_code_execution_result"]`
+
             - `content: List[BetaCodeExecutionOutputBlockParam]`
 
-              - `file_id: str`
-
               - `type: Literal["code_execution_output"]`
+
+              - `file_id: str`
 
             - `encrypted_stdout: str`
 
@@ -923,13 +934,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stderr: str`
 
-            - `type: Literal["encrypted_code_execution_result"]`
-
         - `tool_use_id: str`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: Literal["code_execution_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -937,9 +944,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaBashCodeExecutionToolResultBlockParam: …`
 
+        - `type: Literal["bash_code_execution_tool_result"]`
+
         - `content: Content`
 
           - `class BetaBashCodeExecutionToolResultErrorParam: …`
+
+            - `type: Literal["bash_code_execution_tool_result_error"]`
 
             - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
@@ -953,15 +964,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"output_file_too_large"`
 
-            - `type: Literal["bash_code_execution_tool_result_error"]`
-
           - `class BetaBashCodeExecutionResultBlockParam: …`
+
+            - `type: Literal["bash_code_execution_result"]`
 
             - `content: List[BetaBashCodeExecutionOutputBlockParam]`
 
-              - `file_id: str`
-
               - `type: Literal["bash_code_execution_output"]`
+
+              - `file_id: str`
 
             - `return_code: int`
 
@@ -969,13 +980,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `stdout: str`
 
-            - `type: Literal["bash_code_execution_result"]`
-
         - `tool_use_id: str`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: Literal["bash_code_execution_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -983,9 +990,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaTextEditorCodeExecutionToolResultBlockParam: …`
 
+        - `type: Literal["text_editor_code_execution_tool_result"]`
+
         - `content: Content`
 
           - `class BetaTextEditorCodeExecutionToolResultErrorParam: …`
+
+            - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
             - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
@@ -999,11 +1010,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"file_not_found"`
 
-            - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
             - `error_message: Optional[str]`
 
           - `class BetaTextEditorCodeExecutionViewResultBlockParam: …`
+
+            - `type: Literal["text_editor_code_execution_view_result"]`
 
             - `content: str`
 
@@ -1015,8 +1026,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"pdf"`
 
-            - `type: Literal["text_editor_code_execution_view_result"]`
-
             - `num_lines: Optional[int]`
 
             - `start_line: Optional[int]`
@@ -1025,9 +1034,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaTextEditorCodeExecutionCreateResultBlockParam: …`
 
-            - `is_file_update: bool`
-
             - `type: Literal["text_editor_code_execution_create_result"]`
+
+            - `is_file_update: bool`
 
           - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam: …`
 
@@ -1047,17 +1056,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: Literal["text_editor_code_execution_tool_result"]`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaToolSearchToolResultBlockParam: …`
 
+        - `type: Literal["tool_search_tool_result"]`
+
         - `content: Content`
 
           - `class BetaToolSearchToolResultErrorParam: …`
+
+            - `type: Literal["tool_search_tool_result_error"]`
 
             - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
 
@@ -1069,37 +1080,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"execution_time_exceeded"`
 
-            - `type: Literal["tool_search_tool_result_error"]`
-
             - `error_message: Optional[str]`
 
           - `class BetaToolSearchToolSearchResultBlockParam: …`
 
+            - `type: Literal["tool_search_tool_search_result"]`
+
             - `tool_references: List[BetaToolReferenceBlockParam]`
+
+              - `type: Literal["tool_reference"]`
 
               - `tool_name: str`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: Literal["tool_reference"]`
-
               - `cache_control: Optional[BetaCacheControlEphemeral]`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: Literal["tool_search_tool_search_result"]`
-
         - `tool_use_id: str`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: Literal["tool_search_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaMCPToolUseBlockParam: …`
+
+        - `type: Literal["mcp_tool_use"]`
 
         - `id: str`
 
@@ -1113,19 +1122,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The name of the MCP server
 
-        - `type: Literal["mcp_tool_use"]`
-
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
 
       - `class BetaRequestMCPToolResultBlockParam: …`
 
+        - `type: Literal["mcp_tool_result"]`
+
         - `tool_use_id: str`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: Literal["mcp_tool_result"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1137,11 +1144,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `List[BetaTextBlockParam]`
 
+            - `type: Literal["text"]`
+
             - `text: str`
 
               minLength: 1
-
-            - `type: Literal["text"]`
 
             - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1156,9 +1163,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: str`
-
         - `type: Literal["container_upload"]`
+
+        - `file_id: str`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1196,6 +1203,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `type: Literal["tool_addition"]`
+
         - `tool: Tool`
 
           Reference to a single tool the caller declared directly in
@@ -1210,32 +1219,30 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
+            - `type: Literal["tool_reference"]`
+
             - `name: str`
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-            - `type: Literal["tool_reference"]`
 
           - `class BetaToolChangeMCPToolReference: …`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
+            - `type: Literal["mcp_tool_reference"]`
+
             - `name: str`
 
             - `server_name: str`
-
-            - `type: Literal["mcp_tool_reference"]`
 
           - `class BetaToolChangeMCPToolsetReference: …`
 
             Reference to every tool in the named MCP server's toolset.
 
-            - `server_name: str`
-
             - `type: Literal["mcp_toolset_reference"]`
 
-        - `type: Literal["tool_addition"]`
+            - `server_name: str`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1249,6 +1256,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
 
+        - `type: Literal["tool_removal"]`
+
         - `tool: Tool`
 
           Reference to a single tool the caller declared directly in
@@ -1271,8 +1280,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `class BetaToolChangeMCPToolsetReference: …`
 
             Reference to every tool in the named MCP server's toolset.
-
-        - `type: Literal["tool_removal"]`
 
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1293,6 +1300,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
         no validation effect.
+
+        - `type: Literal["fallback"]`
 
         - `from_: BetaFallbackInfoParam`
 
@@ -1402,8 +1411,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Identifies one hop of a fallback transition.
 
-        - `type: Literal["fallback"]`
-
         - `trigger: Optional[object]`
 
           The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1474,12 +1481,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       maxItems: 20
 
-      - `skill_id: str`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: Literal["anthropic", "custom"]`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1487,6 +1488,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: str`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: Optional[str]`
 
@@ -1698,25 +1705,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
+        - `type: Literal["json_schema"]`
+
         - `schema: Dict[str, object]`
 
           The JSON schema of the format
 
-        - `type: Literal["json_schema"]`
-
       - `task_budget: Optional[BetaTokenTaskBudget]`
 
         User-configurable total token budget across contexts.
+
+        - `type: Literal["tokens"]`
+
+          The budget type. Currently only 'tokens' is supported.
 
         - `total: int`
 
           Total token budget across all contexts in the session.
 
           minimum: 1024
-
-        - `type: Literal["tokens"]`
-
-          The budget type. Currently only 'tokens' is supported.
 
         - `remaining: Optional[int]`
 
@@ -1736,6 +1743,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaThinkingConfigEnabled: …`
 
+        - `type: Literal["enabled"]`
+
         - `budget_tokens: int`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1745,8 +1754,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
           minimum: 1024
-
-        - `type: Literal["enabled"]`
 
         - `block_binding: Optional[BetaThinkingBlockBinding]`
 
@@ -1812,9 +1819,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   maxItems: 20
 
-  - `name: str`
-
   - `type: Literal["url"]`
+
+  - `name: str`
 
   - `url: str`
 
@@ -1884,11 +1891,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Iterable[BetaTextBlockParam]`
 
+    - `type: Literal["text"]`
+
     - `text: str`
 
       minLength: 1
-
-    - `type: Literal["text"]`
 
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -1942,11 +1949,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: Literal["tool"]`
+
     - `name: str`
 
       The name of the tool to use.
-
-    - `type: Literal["tool"]`
 
     - `disable_parallel_tool_use: Optional[bool]`
 
@@ -2026,6 +2033,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaTool: …`
 
+    - `type: Optional[Literal["custom"]]`
+
     - `input_schema: InputSchema`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -2080,17 +2089,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: Optional[Literal["custom"]]`
-
   - `class BetaToolBash20241022: …`
+
+    - `type: Literal["bash_20241022"]`
 
     - `name: Literal["bash"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["bash_20241022"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2118,13 +2125,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolBash20250124: …`
 
+    - `type: Literal["bash_20250124"]`
+
     - `name: Literal["bash"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["bash_20250124"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2152,13 +2159,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaCodeExecutionTool20250522: …`
 
+    - `type: Literal["code_execution_20250522"]`
+
     - `name: Literal["code_execution"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["code_execution_20250522"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2184,13 +2191,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaCodeExecutionTool20250825: …`
 
+    - `type: Literal["code_execution_20250825"]`
+
     - `name: Literal["code_execution"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["code_execution_20250825"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2218,13 +2225,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: Literal["code_execution_20260120"]`
+
     - `name: Literal["code_execution"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["code_execution_20260120"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2252,13 +2259,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Code execution tool with REPL state persistence.
 
+    - `type: Literal["code_execution_20260521"]`
+
     - `name: Literal["code_execution"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["code_execution_20260521"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2303,6 +2310,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: Optional[BetaBrowserTypeConfig]`
+
+        `type`'s config overrides.
+
+        - `defer_loading: Optional[bool]`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: Optional[bool]`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: Optional[BetaBrowserCloseTabConfig]`
 
@@ -2640,18 +2659,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: Optional[BetaBrowserTypeConfig]`
-
-        `type`'s config overrides.
-
-        - `defer_loading: Optional[bool]`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: Optional[bool]`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: Optional[BetaBrowserWaitConfig]`
 
         `wait`'s config overrides.
@@ -2678,6 +2685,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20241022: …`
 
+    - `type: Literal["computer_20241022"]`
+
     - `display_height_px: int`
 
       The height of the display in pixels.
@@ -2695,8 +2704,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["computer_20241022"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2730,13 +2737,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaMemoryTool20250818: …`
 
+    - `type: Literal["memory_20250818"]`
+
     - `name: Literal["memory"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["memory_20250818"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2764,6 +2771,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20250124: …`
 
+    - `type: Literal["computer_20250124"]`
+
     - `display_height_px: int`
 
       The height of the display in pixels.
@@ -2781,8 +2790,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["computer_20250124"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2816,13 +2823,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20241022: …`
 
+    - `type: Literal["text_editor_20241022"]`
+
     - `name: Literal["str_replace_editor"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["text_editor_20241022"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2850,6 +2857,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolComputerUse20251124: …`
 
+    - `type: Literal["computer_20251124"]`
+
     - `display_height_px: int`
 
       The height of the display in pixels.
@@ -2867,8 +2876,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["computer_20251124"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -2929,6 +2936,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: Optional[BetaComputerTypeConfig]`
+
+        `type`'s config overrides.
+
+        - `defer_loading: Optional[bool]`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: Optional[bool]`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: Optional[BetaComputerCursorPositionConfig]`
 
@@ -3098,18 +3117,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: Optional[BetaComputerTypeConfig]`
-
-        `type`'s config overrides.
-
-        - `defer_loading: Optional[bool]`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: Optional[bool]`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: Optional[BetaComputerWaitConfig]`
 
         `wait`'s config overrides.
@@ -3136,13 +3143,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250124: …`
 
+    - `type: Literal["text_editor_20250124"]`
+
     - `name: Literal["str_replace_editor"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["text_editor_20250124"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3170,13 +3177,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250429: …`
 
+    - `type: Literal["text_editor_20250429"]`
+
     - `name: Literal["str_replace_based_edit_tool"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["text_editor_20250429"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3204,13 +3211,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolTextEditor20250728: …`
 
+    - `type: Literal["text_editor_20250728"]`
+
     - `name: Literal["str_replace_based_edit_tool"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["text_editor_20250728"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3244,13 +3251,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20250305: …`
 
+    - `type: Literal["web_search_20250305"]`
+
     - `name: Literal["web_search"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_search_20250305"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3320,13 +3327,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20250910: …`
 
+    - `type: Literal["web_fetch_20250910"]`
+
     - `name: Literal["web_fetch"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_fetch_20250910"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3376,13 +3383,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20260209: …`
 
+    - `type: Literal["web_search_20260209"]`
+
     - `name: Literal["web_search"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_search_20260209"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3426,13 +3433,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20260209: …`
 
+    - `type: Literal["web_fetch_20260209"]`
+
     - `name: Literal["web_fetch"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_fetch_20260209"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3484,13 +3491,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: Literal["web_fetch_20260309"]`
+
     - `name: Literal["web_fetch"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_fetch_20260309"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3544,13 +3551,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebSearchTool20260318: …`
 
+    - `type: Literal["web_search_20260318"]`
+
     - `name: Literal["web_search"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_search_20260318"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3602,13 +3609,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaWebFetchTool20260318: …`
 
+    - `type: Literal["web_fetch_20260318"]`
+
     - `name: Literal["web_fetch"]`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["web_fetch_20260318"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3670,6 +3677,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaAdvisorTool20260301: …`
 
+    - `type: Literal["advisor_20260301"]`
+
     - `model: Model`
 
       The model that will complete your prompt.
@@ -3681,8 +3690,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: Literal["advisor_20260301"]`
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3724,17 +3731,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolSearchToolBm25_20251119: …`
 
-    - `name: Literal["tool_search_tool_bm25"]`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: Literal["tool_search_tool_bm25"]`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3760,17 +3767,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class BetaToolSearchToolRegex20251119: …`
 
-    - `name: Literal["tool_search_tool_regex"]`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: Literal["tool_search_tool_regex"]`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: Optional[List[Literal["direct", "code_execution_20250825", "code_execution_20260120", "code_execution_20260521"]]]`
 
@@ -3801,13 +3808,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Allows configuring enabled status and defer_loading for all tools
     from an MCP server, with optional per-tool overrides.
 
+    - `type: Literal["mcp_toolset"]`
+
     - `mcp_server_name: str`
 
       Name of the MCP server to configure tools for
 
       maxLength: 255, minLength: 1
-
-    - `type: Literal["mcp_toolset"]`
 
     - `cache_control: Optional[BetaCacheControlEphemeral]`
 
@@ -3835,7 +3842,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3883,6 +3890,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -3929,9 +3938,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
+- `workspace_id: Optional[str]`
+
 ## Returns
 
 - `class BetaMessage: …`
+
+  - `type: Literal["message"]`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
 
   - `id: str`
 
@@ -3957,12 +3976,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Skills loaded in the container
 
-      - `skill_id: str`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: Literal["anthropic", "custom"]`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -3970,6 +3983,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: str`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: str`
 
@@ -4008,6 +4027,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaTextBlock: …`
 
+      - `type: Literal["text"]`
+
+        default: text
+
       - `citations: Optional[List[BetaTextCitation]]`
 
         Citations supporting the text block.
@@ -4015,6 +4038,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `class BetaCitationCharLocation: …`
+
+          - `type: Literal["char_location"]`
+
+            default: char_location
 
           - `cited_text: str`
 
@@ -4032,11 +4059,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: Literal["char_location"]`
-
-            default: char_location
-
         - `class BetaCitationPageLocation: …`
+
+          - `type: Literal["page_location"]`
+
+            default: page_location
 
           - `cited_text: str`
 
@@ -4054,11 +4081,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-          - `type: Literal["page_location"]`
-
-            default: page_location
-
         - `class BetaCitationContentBlockLocation: …`
+
+          - `type: Literal["content_block_location"]`
+
+            default: content_block_location
 
           - `cited_text: str`
 
@@ -4086,11 +4113,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `type: Literal["content_block_location"]`
-
-            default: content_block_location
-
         - `class BetaCitationsWebSearchResultLocation: …`
+
+          - `type: Literal["web_search_result_location"]`
+
+            default: web_search_result_location
 
           - `cited_text: str`
 
@@ -4100,13 +4127,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 512
 
-          - `type: Literal["web_search_result_location"]`
-
-            default: web_search_result_location
-
           - `url: str`
 
         - `class BetaCitationSearchResultLocation: …`
+
+          - `type: Literal["search_result_location"]`
+
+            default: search_result_location
 
           - `cited_text: str`
 
@@ -4138,19 +4165,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: Optional[str]`
 
-          - `type: Literal["search_result_location"]`
-
-            default: search_result_location
-
       - `text: str`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: Literal["text"]`
-
-        default: text
+        minLength: 0
 
     - `class BetaThinkingBlock: …`
+
+      - `type: Literal["thinking"]`
+
+        default: thinking
 
       - `signature: str`
 
@@ -4164,11 +4187,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `type: Literal["thinking"]`
-
-        default: thinking
-
     - `class BetaRedactedThinkingBlock: …`
+
+      - `type: Literal["redacted_thinking"]`
+
+        default: redacted_thinking
 
       - `data: str`
 
@@ -4178,11 +4201,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: Literal["redacted_thinking"]`
-
-        default: redacted_thinking
-
     - `class BetaToolUseBlock: …`
+
+      - `type: Literal["tool_use"]`
+
+        default: tool_use
 
       - `id: str`
 
@@ -4193,10 +4216,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `name: str`
 
         minLength: 1
-
-      - `type: Literal["tool_use"]`
-
-        default: tool_use
 
       - `caller: Optional[Caller]`
 
@@ -4212,19 +4231,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `type: Literal["code_execution_20250825"]`
+
           - `tool_id: str`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: Literal["code_execution_20250825"]`
 
         - `class BetaServerToolCaller20260120: …`
 
+          - `type: Literal["code_execution_20260120"]`
+
           - `tool_id: str`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: Literal["code_execution_20260120"]`
 
       - `toolset_name: Optional[str]`
 
@@ -4233,6 +4252,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class BetaServerToolUseBlock: …`
+
+      - `type: Literal["server_tool_use"]`
+
+        default: server_tool_use
 
       - `id: str`
 
@@ -4258,10 +4281,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"tool_search_tool_bm25"`
 
-      - `type: Literal["server_tool_use"]`
-
-        default: server_tool_use
-
       - `caller: Optional[Caller]`
 
         Tool invocation directly from the model.
@@ -4278,9 +4297,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebSearchToolResultBlock: …`
 
+      - `type: Literal["web_search_tool_result"]`
+
+        default: web_search_tool_result
+
       - `content: BetaWebSearchToolResultBlockContent`
 
         - `class BetaWebSearchToolResultError: …`
+
+          - `type: Literal["web_search_tool_result_error"]`
+
+            default: web_search_tool_result_error
 
           - `error_code: BetaWebSearchToolResultErrorCode`
 
@@ -4296,11 +4323,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"request_too_large"`
 
-          - `type: Literal["web_search_tool_result_error"]`
-
-            default: web_search_tool_result_error
-
         - `List[BetaWebSearchResultBlock]`
+
+          - `type: Literal["web_search_result"]`
+
+            default: web_search_result
 
           - `encrypted_content: str`
 
@@ -4308,19 +4335,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title: str`
 
-          - `type: Literal["web_search_result"]`
-
-            default: web_search_result
-
           - `url: str`
 
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: Literal["web_search_tool_result"]`
-
-        default: web_search_tool_result
 
       - `caller: Optional[Caller]`
 
@@ -4338,9 +4357,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaWebFetchToolResultBlock: …`
 
+      - `type: Literal["web_fetch_tool_result"]`
+
+        default: web_fetch_tool_result
+
       - `content: Content`
 
         - `class BetaWebFetchToolResultErrorBlock: …`
+
+          - `type: Literal["web_fetch_tool_result_error"]`
+
+            default: web_fetch_tool_result_error
 
           - `error_code: BetaWebFetchToolResultErrorCode`
 
@@ -4362,13 +4389,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"unavailable"`
 
-          - `type: Literal["web_fetch_tool_result_error"]`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `class BetaWebFetchBlock: …`
 
+          - `type: Literal["web_fetch_result"]`
+
+            default: web_fetch_result
+
           - `content: BetaDocumentBlock`
+
+            - `type: Literal["document"]`
+
+              default: document
 
             - `citations: Optional[BetaCitationConfig]`
 
@@ -4382,37 +4415,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `class BetaBase64PDFSource: …`
 
+                - `type: Literal["base64"]`
+
                 - `data: str`
 
                   format: byte
 
                 - `media_type: Literal["application/pdf"]`
 
-                - `type: Literal["base64"]`
-
               - `class BetaPlainTextSource: …`
+
+                - `type: Literal["text"]`
 
                 - `data: str`
 
                 - `media_type: Literal["text/plain"]`
 
-                - `type: Literal["text"]`
-
             - `title: Optional[str]`
 
               The title of the document
 
-            - `type: Literal["document"]`
-
-              default: document
-
           - `retrieved_at: Optional[str]`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: Literal["web_fetch_result"]`
-
-            default: web_fetch_result
 
           - `url: str`
 
@@ -4421,10 +4446,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: Literal["web_fetch_tool_result"]`
-
-        default: web_fetch_tool_result
 
       - `caller: Optional[Caller]`
 
@@ -4442,9 +4463,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class BetaAdvisorToolResultBlock: …`
 
+      - `type: Literal["advisor_tool_result"]`
+
+        default: advisor_tool_result
+
       - `content: Content`
 
         - `class BetaAdvisorToolResultError: …`
+
+          - `type: Literal["advisor_tool_result_error"]`
+
+            default: advisor_tool_result_error
 
           - `error_code: Literal["max_uses_exceeded", "prompt_too_long", "too_many_requests", 4 more]`
 
@@ -4462,11 +4491,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"model_not_found"`
 
-          - `type: Literal["advisor_tool_result_error"]`
-
-            default: advisor_tool_result_error
-
         - `class BetaAdvisorResultBlock: …`
+
+          - `type: Literal["advisor_result"]`
+
+            default: advisor_result
 
           - `stop_reason: Optional[str]`
 
@@ -4474,11 +4503,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: str`
 
-          - `type: Literal["advisor_result"]`
-
-            default: advisor_result
-
         - `class BetaAdvisorRedactedResultBlock: …`
+
+          - `type: Literal["advisor_redacted_result"]`
+
+            default: advisor_redacted_result
 
           - `encrypted_content: str`
 
@@ -4488,25 +4517,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-          - `type: Literal["advisor_redacted_result"]`
-
-            default: advisor_redacted_result
-
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: Literal["advisor_tool_result"]`
-
-        default: advisor_tool_result
-
     - `class BetaCodeExecutionToolResultBlock: …`
+
+      - `type: Literal["code_execution_tool_result"]`
+
+        default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class BetaCodeExecutionToolResultError: …`
+
+          - `type: Literal["code_execution_tool_result_error"]`
+
+            default: code_execution_tool_result_error
 
           - `error_code: BetaCodeExecutionToolResultErrorCode`
 
@@ -4518,19 +4547,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"execution_time_exceeded"`
 
-          - `type: Literal["code_execution_tool_result_error"]`
-
-            default: code_execution_tool_result_error
-
         - `class BetaCodeExecutionResultBlock: …`
 
-          - `content: List[BetaCodeExecutionOutputBlock]`
+          - `type: Literal["code_execution_result"]`
 
-            - `file_id: str`
+            default: code_execution_result
+
+          - `content: List[BetaCodeExecutionOutputBlock]`
 
             - `type: Literal["code_execution_output"]`
 
               default: code_execution_output
+
+            - `file_id: str`
 
           - `return_code: int`
 
@@ -4538,21 +4567,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: str`
 
-          - `type: Literal["code_execution_result"]`
-
-            default: code_execution_result
-
         - `class BetaEncryptedCodeExecutionResultBlock: …`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: List[BetaCodeExecutionOutputBlock]`
+          - `type: Literal["encrypted_code_execution_result"]`
 
-            - `file_id: str`
+            default: encrypted_code_execution_result
+
+          - `content: List[BetaCodeExecutionOutputBlock]`
 
             - `type: Literal["code_execution_output"]`
 
               default: code_execution_output
+
+            - `file_id: str`
 
           - `encrypted_stdout: str`
 
@@ -4560,23 +4589,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stderr: str`
 
-          - `type: Literal["encrypted_code_execution_result"]`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: Literal["code_execution_tool_result"]`
-
-        default: code_execution_tool_result
-
     - `class BetaBashCodeExecutionToolResultBlock: …`
+
+      - `type: Literal["bash_code_execution_tool_result"]`
+
+        default: bash_code_execution_tool_result
 
       - `content: Content`
 
         - `class BetaBashCodeExecutionToolResultError: …`
+
+          - `type: Literal["bash_code_execution_tool_result_error"]`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
@@ -4590,19 +4619,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"output_file_too_large"`
 
-          - `type: Literal["bash_code_execution_tool_result_error"]`
-
-            default: bash_code_execution_tool_result_error
-
         - `class BetaBashCodeExecutionResultBlock: …`
 
-          - `content: List[BetaBashCodeExecutionOutputBlock]`
+          - `type: Literal["bash_code_execution_result"]`
 
-            - `file_id: str`
+            default: bash_code_execution_result
+
+          - `content: List[BetaBashCodeExecutionOutputBlock]`
 
             - `type: Literal["bash_code_execution_output"]`
 
               default: bash_code_execution_output
+
+            - `file_id: str`
 
           - `return_code: int`
 
@@ -4610,23 +4639,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: str`
 
-          - `type: Literal["bash_code_execution_result"]`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: Literal["bash_code_execution_tool_result"]`
-
-        default: bash_code_execution_tool_result
-
     - `class BetaTextEditorCodeExecutionToolResultBlock: …`
+
+      - `type: Literal["text_editor_code_execution_tool_result"]`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: Content`
 
         - `class BetaTextEditorCodeExecutionToolResultError: …`
+
+          - `type: Literal["text_editor_code_execution_tool_result_error"]`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", 2 more]`
 
@@ -4642,11 +4671,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: Optional[str]`
 
-          - `type: Literal["text_editor_code_execution_tool_result_error"]`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `class BetaTextEditorCodeExecutionViewResultBlock: …`
+
+          - `type: Literal["text_editor_code_execution_view_result"]`
+
+            default: text_editor_code_execution_view_result
 
           - `content: str`
 
@@ -4664,19 +4693,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `total_lines: Optional[int]`
 
-          - `type: Literal["text_editor_code_execution_view_result"]`
-
-            default: text_editor_code_execution_view_result
-
         - `class BetaTextEditorCodeExecutionCreateResultBlock: …`
-
-          - `is_file_update: bool`
 
           - `type: Literal["text_editor_code_execution_create_result"]`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: bool`
+
         - `class BetaTextEditorCodeExecutionStrReplaceResultBlock: …`
+
+          - `type: Literal["text_editor_code_execution_str_replace_result"]`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Optional[List[str]]`
 
@@ -4688,23 +4717,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `old_start: Optional[int]`
 
-          - `type: Literal["text_editor_code_execution_str_replace_result"]`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: Literal["text_editor_code_execution_tool_result"]`
-
-        default: text_editor_code_execution_tool_result
-
     - `class BetaToolSearchToolResultBlock: …`
+
+      - `type: Literal["tool_search_tool_result"]`
+
+        default: tool_search_tool_result
 
       - `content: Content`
 
         - `class BetaToolSearchToolResultError: …`
+
+          - `type: Literal["tool_search_tool_result_error"]`
+
+            default: tool_search_tool_result_error
 
           - `error_code: Literal["invalid_tool_input", "unavailable", "too_many_requests", "execution_time_exceeded"]`
 
@@ -4718,35 +4747,31 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: Optional[str]`
 
-          - `type: Literal["tool_search_tool_result_error"]`
-
-            default: tool_search_tool_result_error
-
         - `class BetaToolSearchToolSearchResultBlock: …`
-
-          - `tool_references: List[BetaToolReferenceBlock]`
-
-            - `tool_name: str`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: Literal["tool_reference"]`
-
-              default: tool_reference
 
           - `type: Literal["tool_search_tool_search_result"]`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: List[BetaToolReferenceBlock]`
+
+            - `type: Literal["tool_reference"]`
+
+              default: tool_reference
+
+            - `tool_name: str`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: str`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: Literal["tool_search_tool_result"]`
-
-        default: tool_search_tool_result
-
     - `class BetaMCPToolUseBlock: …`
+
+      - `type: Literal["mcp_tool_use"]`
+
+        default: mcp_tool_use
 
       - `id: str`
 
@@ -4762,17 +4787,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The name of the MCP server
 
-      - `type: Literal["mcp_tool_use"]`
-
-        default: mcp_tool_use
-
     - `class BetaMCPToolResultBlock: …`
+
+      - `type: Literal["mcp_tool_result"]`
+
+        default: mcp_tool_result
 
       - `content: Union[str, List[BetaTextBlock]]`
 
         - `str`
 
         - `List[BetaTextBlock]`
+
+          - `type: Literal["text"]`
+
+            default: text
 
           - `citations: Optional[List[BetaTextCitation]]`
 
@@ -4782,11 +4811,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `text: str`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: Literal["text"]`
-
-            default: text
+            minLength: 0
 
       - `is_error: bool`
 
@@ -4796,19 +4821,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type: Literal["mcp_tool_result"]`
-
-        default: mcp_tool_result
-
     - `class BetaContainerUploadBlock: …`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: str`
-
       - `type: Literal["container_upload"]`
 
         default: container_upload
+
+      - `file_id: str`
 
     - `class BetaCompactionBlock: …`
 
@@ -4818,6 +4839,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       summary (e.g., malformed output from the model). Clients may round-trip
       compaction blocks with null content; the server treats them as no-ops.
 
+      - `type: Literal["compaction"]`
+
+        default: compaction
+
       - `content: Optional[str]`
 
         Summary of compacted content, or null if compaction failed
@@ -4825,10 +4850,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `encrypted_content: Optional[str]`
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
-
-      - `type: Literal["compaction"]`
-
-        default: compaction
 
     - `class BetaFallbackBlock: …`
 
@@ -4843,6 +4864,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       The block is treated like a server-tool content block for streaming: it
       arrives via the standard `content_block_start` / `content_block_stop`
       pair and carries no deltas.
+
+      - `type: Literal["fallback"]`
+
+        default: fallback
 
       - `from_: BetaFallbackInfo`
 
@@ -4956,6 +4981,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
+        - `type: Literal["refusal"]`
+
+          default: refusal
+
         - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
@@ -4986,14 +5015,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-        - `type: Literal["refusal"]`
-
-          default: refusal
-
-      - `type: Literal["fallback"]`
-
-        default: fallback
-
   - `context_management: Optional[BetaContextManagementResponse]`
 
     Context management response.
@@ -5005,6 +5026,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       List of context management edits that were applied.
 
       - `class BetaClearToolUses20250919EditResponse: …`
+
+        - `type: Literal["clear_tool_uses_20250919"]`
+
+          The type of context management edit applied.
+
+          default: clear_tool_uses_20250919
 
         - `cleared_input_tokens: int`
 
@@ -5018,13 +5045,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: Literal["clear_tool_uses_20250919"]`
+      - `class BetaClearThinking20251015EditResponse: …`
+
+        - `type: Literal["clear_thinking_20251015"]`
 
           The type of context management edit applied.
 
-          default: clear_tool_uses_20250919
-
-      - `class BetaClearThinking20251015EditResponse: …`
+          default: clear_thinking_20251015
 
         - `cleared_input_tokens: int`
 
@@ -5038,12 +5065,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: Literal["clear_thinking_20251015"]`
-
-          The type of context management edit applied.
-
-          default: clear_thinking_20251015
-
   - `diagnostics: Optional[BetaDiagnostics]`
 
     Response envelope for request-level diagnostics. Present (possibly
@@ -5055,43 +5076,43 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class BetaCacheMissModelChanged: …`
 
-        - `cache_missed_input_tokens: int`
-
-          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
         - `type: Literal["model_changed"]`
 
           default: model_changed
 
-      - `class BetaCacheMissSystemChanged: …`
-
         - `cache_missed_input_tokens: int`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class BetaCacheMissSystemChanged: …`
 
         - `type: Literal["system_changed"]`
 
           default: system_changed
 
-      - `class BetaCacheMissToolsChanged: …`
-
         - `cache_missed_input_tokens: int`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class BetaCacheMissToolsChanged: …`
 
         - `type: Literal["tools_changed"]`
 
           default: tools_changed
 
-      - `class BetaCacheMissMessagesChanged: …`
-
         - `cache_missed_input_tokens: int`
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
+      - `class BetaCacheMissMessagesChanged: …`
+
         - `type: Literal["messages_changed"]`
 
           default: messages_changed
+
+        - `cache_missed_input_tokens: int`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class BetaCacheMissPreviousMessageNotFound: …`
 
@@ -5122,6 +5143,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `stop_details: Optional[BetaRefusalStopDetails]`
 
     Structured information about a refusal.
+
+    - `type: Literal["refusal"]`
+
+      default: refusal
 
     - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
@@ -5208,10 +5233,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-    - `type: Literal["refusal"]`
-
-      default: refusal
-
   - `stop_reason: Optional[BetaStopReason]`
 
     The reason that we stopped.
@@ -5249,14 +5270,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: Literal["message"]`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: BetaUsage`
 
@@ -5324,6 +5337,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           No reprice was applied; `reason` says why.
 
+          - `type: Literal["not_applied"]`
+
+            default: not_applied
+
           - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
 
             Why the reprice was not applied.
@@ -5354,10 +5371,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `"wrong_platform"`
 
             - `"wrong_workspace"`
-
-          - `type: Literal["not_applied"]`
-
-            default: not_applied
 
           - `remove_to_redeem: Optional[List[str]]`
 
@@ -5396,6 +5409,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Token usage for a sampling iteration.
 
+        - `type: Literal["message"]`
+
+          Usage for a sampling iteration
+
+          default: message
+
         - `cache_creation: Optional[BetaCacheCreation]`
 
           Breakdown of cached tokens by TTL
@@ -5430,43 +5449,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `type: Literal["message"]`
-
-          Usage for a sampling iteration
-
-          default: message
-
       - `class BetaCompactionIterationUsage: …`
 
         Token usage for a compaction iteration.
-
-        - `cache_creation: Optional[BetaCacheCreation]`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: int`
-
-          The number of input tokens used to create the cache entry.
-
-          default: 0, minimum: 0
-
-        - `cache_read_input_tokens: int`
-
-          The number of input tokens read from the cache.
-
-          default: 0, minimum: 0
-
-        - `input_tokens: int`
-
-          The number of input tokens which were used.
-
-          minimum: 0
-
-        - `output_tokens: int`
-
-          The number of output tokens which were used.
-
-          minimum: 0
 
         - `type: Literal["compaction"]`
 
@@ -5474,9 +5459,43 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           default: compaction
 
+        - `cache_creation: Optional[BetaCacheCreation]`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: int`
+
+          The number of input tokens used to create the cache entry.
+
+          default: 0, minimum: 0
+
+        - `cache_read_input_tokens: int`
+
+          The number of input tokens read from the cache.
+
+          default: 0, minimum: 0
+
+        - `input_tokens: int`
+
+          The number of input tokens which were used.
+
+          minimum: 0
+
+        - `output_tokens: int`
+
+          The number of output tokens which were used.
+
+          minimum: 0
+
       - `class BetaAdvisorMessageIterationUsage: …`
 
         Token usage for an advisor sub-inference iteration.
+
+        - `type: Literal["advisor_message"]`
+
+          Usage for an advisor sub-inference iteration
+
+          default: advisor_message
 
         - `cache_creation: Optional[BetaCacheCreation]`
 
@@ -5511,12 +5530,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: Literal["advisor_message"]`
-
-          Usage for an advisor sub-inference iteration
-
-          default: advisor_message
 
       - `class BetaFallbackMessageIterationUsage: …`
 
@@ -5527,6 +5540,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         a fallback model served the response is signalled by the presence of this
         entry in `usage.iterations`.
 
+        - `type: Literal["fallback_message"]`
+
+          Usage for the fallback-model attempt that served the response
+
+          default: fallback_message
+
         - `cache_creation: Optional[BetaCacheCreation]`
 
           Breakdown of cached tokens by TTL
@@ -5560,12 +5579,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           The number of output tokens which were used.
 
           minimum: 0
-
-        - `type: Literal["fallback_message"]`
-
-          Usage for the fallback-model attempt that served the response
-
-          default: fallback_message
 
     - `output_tokens: int`
 
@@ -5647,6 +5660,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     fallback happened mid-stream, in which case it holds the serving model's
     entries and replaces the one in `message_start`.
 
+    - `type: Literal["thinking_dropped"]`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
     - `path: str`
 
       Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5677,23 +5696,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `"end_user_binding_mismatch"`
 
-    - `type: Literal["thinking_dropped"]`
-
-      Always `thinking_dropped` for this entry type.
-
-      default: thinking_dropped
-
 - `BetaRawMessageStreamEvent`
 
   - `class BetaRawMessageStartEvent: …`
-
-    - `message: BetaMessage`
 
     - `type: Literal["message_start"]`
 
       default: message_start
 
+    - `message: BetaMessage`
+
   - `class BetaRawMessageDeltaEvent: …`
+
+    - `type: Literal["message_delta"]`
+
+      default: message_delta
 
     - `context_management: Optional[BetaContextManagementResponse]`
 
@@ -5712,10 +5729,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `stop_reason: Optional[BetaStopReason]`
 
       - `stop_sequence: Optional[str]`
-
-    - `type: Literal["message_delta"]`
-
-      default: message_delta
 
     - `usage: BetaMessageDeltaUsage`
 
@@ -5798,6 +5811,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: Literal["thinking_dropped"]`
+
+        Always `thinking_dropped` for this entry type.
+
+        default: thinking_dropped
+
       - `path: str`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -5820,12 +5839,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         `organization_binding_mismatch`, `end_user_binding_mismatch`,
         `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `type: Literal["thinking_dropped"]`
-
-        Always `thinking_dropped` for this entry type.
-
-        default: thinking_dropped
-
   - `class BetaRawMessageStopEvent: …`
 
     - `type: Literal["message_stop"]`
@@ -5833,6 +5846,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       default: message_stop
 
   - `class BetaRawContentBlockStartEvent: …`
+
+    - `type: Literal["content_block_start"]`
+
+      default: content_block_start
 
     - `content_block: ContentBlock`
 
@@ -5894,31 +5911,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `index: int`
 
-    - `type: Literal["content_block_start"]`
-
-      default: content_block_start
-
   - `class BetaRawContentBlockDeltaEvent: …`
+
+    - `type: Literal["content_block_delta"]`
+
+      default: content_block_delta
 
     - `delta: BetaRawContentBlockDelta`
 
       - `class BetaTextDelta: …`
 
-        - `text: str`
-
         - `type: Literal["text_delta"]`
 
           default: text_delta
 
-      - `class BetaInputJSONDelta: …`
+        - `text: str`
 
-        - `partial_json: str`
+      - `class BetaInputJSONDelta: …`
 
         - `type: Literal["input_json_delta"]`
 
           default: input_json_delta
 
+        - `partial_json: str`
+
       - `class BetaCitationsDelta: …`
+
+        - `type: Literal["citations_delta"]`
+
+          default: citations_delta
 
         - `citation: Citation`
 
@@ -5932,11 +5953,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class BetaCitationSearchResultLocation: …`
 
-        - `type: Literal["citations_delta"]`
-
-          default: citations_delta
-
       - `class BetaThinkingDelta: …`
+
+        - `type: Literal["thinking_delta"]`
+
+          default: thinking_delta
 
         - `estimated_tokens: Optional[int]`
 
@@ -5946,21 +5967,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `type: Literal["thinking_delta"]`
-
-          default: thinking_delta
-
       - `class BetaSignatureDelta: …`
-
-        - `signature: str`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: Literal["signature_delta"]`
 
           default: signature_delta
 
+        - `signature: str`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
       - `class BetaCompactionContentBlockDelta: …`
+
+        - `type: Literal["compaction_delta"]`
+
+          default: compaction_delta
 
         - `content: Optional[str]`
 
@@ -5968,23 +5989,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type: Literal["compaction_delta"]`
-
-          default: compaction_delta
-
     - `index: int`
-
-    - `type: Literal["content_block_delta"]`
-
-      default: content_block_delta
 
   - `class BetaRawContentBlockStopEvent: …`
-
-    - `index: int`
 
     - `type: Literal["content_block_stop"]`
 
       default: content_block_stop
+
+    - `index: int`
 
 ## Example
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/skills/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/ruby/beta/skills/create
+---
+
 # Create Skill
 
 `beta.skills.create(**kwargs) -> BetaSkill`
@@ -32,7 +37,7 @@ Create Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80,6 +85,8 @@ Create Skill
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -122,9 +129,17 @@ Create Skill
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class BetaSkill`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: String`
 
@@ -177,12 +192,6 @@ Create Skill
       - `:anthropic_example`
 
       - `:plugin`
-
-  - `type: :skill`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: Time`
 

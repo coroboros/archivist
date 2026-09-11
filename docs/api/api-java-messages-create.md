@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/java/messages/create
+---
+
 # Create a Message
 
 `Message messages().create(params, requestOptions = RequestOptions.none())`
@@ -23,6 +28,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `Optional<String> userProfileId`
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+  - `Optional<String> workspaceId`
 
   - `long maxTokens`
 
@@ -95,11 +102,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class TextBlockParam:`
 
+          - `JsonValue type = "text"`
+
           - `String text`
 
             minLength: 1
-
-          - `JsonValue type = "text"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -126,6 +133,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `class CitationCharLocationParam:`
 
+              - `JsonValue type = "char_location"`
+
               - `String citedText`
 
               - `long documentIndex`
@@ -142,9 +151,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 minimum: 0
 
-              - `JsonValue type = "char_location"`
-
             - `class CitationPageLocationParam:`
+
+              - `JsonValue type = "page_location"`
 
               - `String citedText`
 
@@ -162,9 +171,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 minimum: 1
 
-              - `JsonValue type = "page_location"`
-
             - `class CitationContentBlockLocationParam:`
+
+              - `JsonValue type = "content_block_location"`
 
               - `String citedText`
 
@@ -192,9 +201,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 minimum: 0
 
-              - `JsonValue type = "content_block_location"`
-
             - `class CitationWebSearchResultLocationParam:`
+
+              - `JsonValue type = "web_search_result_location"`
 
               - `String citedText`
 
@@ -204,13 +213,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 maxLength: 512, minLength: 1
 
-              - `JsonValue type = "web_search_result_location"`
-
               - `String url`
 
                 minLength: 1
 
             - `class CitationSearchResultLocationParam:`
+
+              - `JsonValue type = "search_result_location"`
 
               - `String citedText`
 
@@ -242,13 +251,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> title`
 
-              - `JsonValue type = "search_result_location"`
-
         - `class ImageBlockParam:`
+
+          - `JsonValue type = "image"`
 
           - `Source source`
 
             - `class Base64ImageSource:`
+
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -264,8 +275,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `IMAGE_WEBP("image/webp")`
 
-              - `JsonValue type = "base64"`
-
             - `class UrlImageSource:`
 
               - `JsonValue type = "url"`
@@ -274,11 +283,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `class FileImageSource:`
 
-              - `String fileId`
-
               - `JsonValue type = "file"`
 
-          - `JsonValue type = "image"`
+              - `String fileId`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -298,9 +305,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class DocumentBlockParam:`
 
+          - `JsonValue type = "document"`
+
           - `Source source`
 
             - `class Base64PdfSource:`
+
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -308,17 +319,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `JsonValue mediaType = "application/pdf"`
 
-              - `JsonValue type = "base64"`
-
             - `class PlainTextSource:`
+
+              - `JsonValue type = "text"`
 
               - `String data`
 
               - `JsonValue mediaType = "text/plain"`
 
-              - `JsonValue type = "text"`
-
             - `class ContentBlockSource:`
+
+              - `JsonValue type = "content"`
 
               - `Content content`
 
@@ -330,8 +341,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `class ImageBlockParam:`
 
-              - `JsonValue type = "content"`
-
             - `class UrlPdfSource:`
 
               - `JsonValue type = "url"`
@@ -340,11 +349,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `class FileDocumentSource:`
 
-              - `String fileId`
-
               - `JsonValue type = "file"`
 
-          - `JsonValue type = "document"`
+              - `String fileId`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -364,13 +371,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class SearchResultBlockParam:`
 
+          - `JsonValue type = "search_result"`
+
           - `List<TextBlockParam> content`
+
+            - `JsonValue type = "text"`
 
             - `String text`
 
               minLength: 1
-
-            - `JsonValue type = "text"`
 
             - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -382,8 +391,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String title`
 
-          - `JsonValue type = "search_result"`
-
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -391,6 +398,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `Optional<CitationsConfigParam> citations`
 
         - `class ThinkingBlockParam:`
+
+          - `JsonValue type = "thinking"`
 
           - `String signature`
 
@@ -402,17 +411,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-          - `JsonValue type = "thinking"`
-
         - `class RedactedThinkingBlockParam:`
+
+          - `JsonValue type = "redacted_thinking"`
 
           - `String data`
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `JsonValue type = "redacted_thinking"`
-
         - `class ToolUseBlockParam:`
+
+          - `JsonValue type = "tool_use"`
 
           - `String id`
 
@@ -423,8 +432,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `String name`
 
             maxLength: 200, minLength: 1
-
-          - `JsonValue type = "tool_use"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -444,19 +451,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Tool invocation generated by a server-side tool.
 
+              - `JsonValue type = "code_execution_20250825"`
+
               - `String toolId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `JsonValue type = "code_execution_20250825"`
 
             - `class ServerToolCaller20260120:`
 
+              - `JsonValue type = "code_execution_20260120"`
+
               - `String toolId`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `JsonValue type = "code_execution_20260120"`
 
           - `Optional<String> toolsetName`
 
@@ -466,11 +473,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class ToolResultBlockParam:`
 
+          - `JsonValue type = "tool_result"`
+
           - `String toolUseId`
 
             pattern: ^[a-zA-Z0-9_-]+$
-
-          - `JsonValue type = "tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -494,11 +501,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Tool reference block that can be included in tool_result content.
 
+                - `JsonValue type = "tool_reference"`
+
                 - `String toolName`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `JsonValue type = "tool_reference"`
 
                 - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -513,6 +520,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                 At most one per `tool_result`, only on a non-error result answering a
                 browser toolset member `tool_use`. The server renders the
                 model-visible text from it; the model never sees the raw fields.
+
+                - `JsonValue type = "browser_state"`
 
                 - `List<BrowserStateTabEntry> tabs`
 
@@ -542,8 +551,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `JsonValue type = "browser_state"`
-
                 - `Optional<CacheControlEphemeral> cacheControl`
 
                   Create a cache control breakpoint at this content block.
@@ -564,25 +571,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                     during a failed call gets no deferred `tab_opened`; it simply appears
                     in the next result's `tabs` inventory.
 
+                    - `JsonValue type = "tab_opened"`
+
                     - `String tabId`
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `JsonValue type = "tab_opened"`
-
                   - `class BrowserStateChangeDownloadStarted:`
 
                     A file download that started during this call.
+
+                    - `JsonValue type = "download_started"`
 
                     - `String downloadId`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `JsonValue type = "download_started"`
 
                     - `String url`
 
@@ -597,13 +604,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                     `download_started`, when the download finished during the call that
                     started it (at most one state change per `download_id` per result).
 
+                    - `JsonValue type = "download_completed"`
+
                     - `String downloadId`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `JsonValue type = "download_completed"`
 
                     - `String url`
 
@@ -627,13 +634,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     A file download that failed — or was cancelled — during this call.
 
+                    - `JsonValue type = "download_failed"`
+
                     - `String downloadId`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `JsonValue type = "download_failed"`
 
                     - `String url`
 
@@ -657,6 +664,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class ServerToolUseBlockParam:`
 
+          - `JsonValue type = "server_tool_use"`
+
           - `String id`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -679,8 +688,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-          - `JsonValue type = "server_tool_use"`
-
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -701,21 +708,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class WebSearchToolResultBlockParam:`
 
+          - `JsonValue type = "web_search_tool_result"`
+
           - `WebSearchToolResultBlockParamContent content`
 
             - `List<WebSearchResultBlockParam>`
 
+              - `JsonValue type = "web_search_result"`
+
               - `String encryptedContent`
 
               - `String title`
-
-              - `JsonValue type = "web_search_result"`
 
               - `String url`
 
               - `Optional<String> pageAge`
 
             - `class WebSearchToolRequestError:`
+
+              - `JsonValue type = "web_search_tool_result_error"`
 
               - `WebSearchToolResultErrorCode errorCode`
 
@@ -731,13 +742,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `REQUEST_TOO_LARGE("request_too_large")`
 
-              - `JsonValue type = "web_search_tool_result_error"`
-
           - `String toolUseId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "web_search_tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -759,9 +766,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class WebFetchToolResultBlockParam:`
 
+          - `JsonValue type = "web_fetch_tool_result"`
+
           - `Content content`
 
             - `class WebFetchToolResultErrorBlockParam:`
+
+              - `JsonValue type = "web_fetch_tool_result_error"`
 
               - `WebFetchToolResultErrorCode errorCode`
 
@@ -783,13 +794,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `UNAVAILABLE("unavailable")`
 
-              - `JsonValue type = "web_fetch_tool_result_error"`
+                - `CONTENT_TOO_LARGE("content_too_large")`
 
             - `class WebFetchBlockParam:`
 
-              - `DocumentBlockParam content`
-
               - `JsonValue type = "web_fetch_result"`
+
+              - `DocumentBlockParam content`
 
               - `String url`
 
@@ -802,8 +813,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `String toolUseId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "web_fetch_tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -825,11 +834,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class CodeExecutionToolResultBlockParam:`
 
+          - `JsonValue type = "code_execution_tool_result"`
+
           - `CodeExecutionToolResultBlockParamContent content`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultErrorParam:`
+
+              - `JsonValue type = "code_execution_tool_result_error"`
 
               - `CodeExecutionToolResultErrorCode errorCode`
 
@@ -841,15 +854,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-              - `JsonValue type = "code_execution_tool_result_error"`
-
             - `class CodeExecutionResultBlockParam:`
+
+              - `JsonValue type = "code_execution_result"`
 
               - `List<CodeExecutionOutputBlockParam> content`
 
-                - `String fileId`
-
                 - `JsonValue type = "code_execution_output"`
+
+                - `String fileId`
 
               - `long returnCode`
 
@@ -857,17 +870,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stdout`
 
-              - `JsonValue type = "code_execution_result"`
-
             - `class EncryptedCodeExecutionResultBlockParam:`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `JsonValue type = "encrypted_code_execution_result"`
+
               - `List<CodeExecutionOutputBlockParam> content`
 
-                - `String fileId`
-
                 - `JsonValue type = "code_execution_output"`
+
+                - `String fileId`
 
               - `String encryptedStdout`
 
@@ -875,13 +888,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stderr`
 
-              - `JsonValue type = "encrypted_code_execution_result"`
-
           - `String toolUseId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "code_execution_tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -889,9 +898,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class BashCodeExecutionToolResultBlockParam:`
 
+          - `JsonValue type = "bash_code_execution_tool_result"`
+
           - `Content content`
 
             - `class BashCodeExecutionToolResultErrorParam:`
+
+              - `JsonValue type = "bash_code_execution_tool_result_error"`
 
               - `BashCodeExecutionToolResultErrorCode errorCode`
 
@@ -905,15 +918,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-              - `JsonValue type = "bash_code_execution_tool_result_error"`
-
             - `class BashCodeExecutionResultBlockParam:`
+
+              - `JsonValue type = "bash_code_execution_result"`
 
               - `List<BashCodeExecutionOutputBlockParam> content`
 
-                - `String fileId`
-
                 - `JsonValue type = "bash_code_execution_output"`
+
+                - `String fileId`
 
               - `long returnCode`
 
@@ -921,13 +934,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `String stdout`
 
-              - `JsonValue type = "bash_code_execution_result"`
-
           - `String toolUseId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "bash_code_execution_tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -935,9 +944,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class TextEditorCodeExecutionToolResultBlockParam:`
 
+          - `JsonValue type = "text_editor_code_execution_tool_result"`
+
           - `Content content`
 
             - `class TextEditorCodeExecutionToolResultErrorParam:`
+
+              - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
               - `TextEditorCodeExecutionToolResultErrorCode errorCode`
 
@@ -951,11 +964,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `FILE_NOT_FOUND("file_not_found")`
 
-              - `JsonValue type = "text_editor_code_execution_tool_result_error"`
-
               - `Optional<String> errorMessage`
 
             - `class TextEditorCodeExecutionViewResultBlockParam:`
+
+              - `JsonValue type = "text_editor_code_execution_view_result"`
 
               - `String content`
 
@@ -967,8 +980,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `PDF("pdf")`
 
-              - `JsonValue type = "text_editor_code_execution_view_result"`
-
               - `Optional<Long> numLines`
 
               - `Optional<Long> startLine`
@@ -977,9 +988,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `class TextEditorCodeExecutionCreateResultBlockParam:`
 
-              - `boolean isFileUpdate`
-
               - `JsonValue type = "text_editor_code_execution_create_result"`
+
+              - `boolean isFileUpdate`
 
             - `class TextEditorCodeExecutionStrReplaceResultBlockParam:`
 
@@ -999,17 +1010,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `JsonValue type = "text_editor_code_execution_tool_result"`
-
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
 
         - `class ToolSearchToolResultBlockParam:`
 
+          - `JsonValue type = "tool_search_tool_result"`
+
           - `Content content`
 
             - `class ToolSearchToolResultErrorParam:`
+
+              - `JsonValue type = "tool_search_tool_result_error"`
 
               - `ToolSearchToolResultErrorCode errorCode`
 
@@ -1021,31 +1034,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-              - `JsonValue type = "tool_search_tool_result_error"`
-
               - `Optional<String> errorMessage`
 
             - `class ToolSearchToolSearchResultBlockParam:`
 
+              - `JsonValue type = "tool_search_tool_search_result"`
+
               - `List<ToolReferenceBlockParam> toolReferences`
+
+                - `JsonValue type = "tool_reference"`
 
                 - `String toolName`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `JsonValue type = "tool_reference"`
-
                 - `Optional<CacheControlEphemeral> cacheControl`
 
                   Create a cache control breakpoint at this content block.
 
-              - `JsonValue type = "tool_search_tool_search_result"`
-
           - `String toolUseId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "tool_search_tool_result"`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1056,9 +1065,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
 
-          - `String fileId`
-
           - `JsonValue type = "container_upload"`
+
+          - `String fileId`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1126,11 +1135,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `List<TextBlockParam>`
 
+      - `JsonValue type = "text"`
+
       - `String text`
 
         minLength: 1
-
-      - `JsonValue type = "text"`
 
       - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1216,6 +1225,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class Tool:`
 
+      - `Optional<Type> type`
+
       - `InputSchema inputSchema`
 
         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -1270,17 +1281,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `Optional<Type> type`
-
     - `class ToolBash20250124:`
+
+      - `JsonValue type = "bash_20250124"`
 
       - `JsonValue name = "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "bash_20250124"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1308,13 +1317,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class CodeExecutionTool20250522:`
 
+      - `JsonValue type = "code_execution_20250522"`
+
       - `JsonValue name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "code_execution_20250522"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1340,13 +1349,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class CodeExecutionTool20250825:`
 
+      - `JsonValue type = "code_execution_20250825"`
+
       - `JsonValue name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "code_execution_20250825"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1374,13 +1383,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+      - `JsonValue type = "code_execution_20260120"`
+
       - `JsonValue name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "code_execution_20260120"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1408,13 +1417,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Code execution tool with REPL state persistence.
 
+      - `JsonValue type = "code_execution_20260521"`
+
       - `JsonValue name = "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "code_execution_20260521"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1459,6 +1468,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `Optional<BrowserTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `Optional<BrowserCloseTabConfig> closeTab`
 
@@ -1796,18 +1817,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `Optional<BrowserTypeConfig> type`
-
-          `type`'s config overrides.
-
-          - `Optional<Boolean> deferLoading`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `Optional<Boolean> enabled`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `Optional<BrowserWaitConfig> wait`
 
           `wait`'s config overrides.
@@ -1834,13 +1843,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class MemoryTool20250818:`
 
+      - `JsonValue type = "memory_20250818"`
+
       - `JsonValue name = "memory"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "memory_20250818"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1891,6 +1900,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `Optional<ComputerTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `Optional<ComputerCursorPositionConfig> cursorPosition`
 
@@ -2060,18 +2081,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `Optional<ComputerTypeConfig> type`
-
-          `type`'s config overrides.
-
-          - `Optional<Boolean> deferLoading`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `Optional<Boolean> enabled`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `Optional<ComputerWaitConfig> wait`
 
           `wait`'s config overrides.
@@ -2098,13 +2107,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class ToolTextEditor20250124:`
 
+      - `JsonValue type = "text_editor_20250124"`
+
       - `JsonValue name = "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "text_editor_20250124"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2132,13 +2141,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class ToolTextEditor20250429:`
 
+      - `JsonValue type = "text_editor_20250429"`
+
       - `JsonValue name = "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "text_editor_20250429"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2166,13 +2175,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class ToolTextEditor20250728:`
 
+      - `JsonValue type = "text_editor_20250728"`
+
       - `JsonValue name = "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "text_editor_20250728"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2206,13 +2215,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebSearchTool20250305:`
 
+      - `JsonValue type = "web_search_20250305"`
+
       - `JsonValue name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_search_20250305"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2282,13 +2291,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebFetchTool20250910:`
 
+      - `JsonValue type = "web_fetch_20250910"`
+
       - `JsonValue name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_fetch_20250910"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2338,13 +2347,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebSearchTool20260209:`
 
+      - `JsonValue type = "web_search_20260209"`
+
       - `JsonValue name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_search_20260209"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2388,13 +2397,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebFetchTool20260209:`
 
+      - `JsonValue type = "web_fetch_20260209"`
+
       - `JsonValue name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_fetch_20260209"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2446,13 +2455,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
+      - `JsonValue type = "web_fetch_20260309"`
+
       - `JsonValue name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_fetch_20260309"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2506,13 +2515,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebSearchTool20260318:`
 
+      - `JsonValue type = "web_search_20260318"`
+
       - `JsonValue name = "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_search_20260318"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2564,13 +2573,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class WebFetchTool20260318:`
 
+      - `JsonValue type = "web_fetch_20260318"`
+
       - `JsonValue name = "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `JsonValue type = "web_fetch_20260318"`
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2632,17 +2641,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class ToolSearchToolBm25_20251119:`
 
-      - `JsonValue name = "tool_search_tool_bm25"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `Type type`
 
         - `TOOL_SEARCH_TOOL_BM25_20251119("tool_search_tool_bm25_20251119")`
 
         - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
+
+      - `JsonValue name = "tool_search_tool_bm25"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2668,17 +2677,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class ToolSearchToolRegex20251119:`
 
-      - `JsonValue name = "tool_search_tool_regex"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `Type type`
 
         - `TOOL_SEARCH_TOOL_REGEX_20251119("tool_search_tool_regex_20251119")`
 
         - `TOOL_SEARCH_TOOL_REGEX("tool_search_tool_regex")`
+
+      - `JsonValue name = "tool_search_tool_regex"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -2742,6 +2751,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `class Message:`
 
+  - `JsonValue type = "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
   - `String id`
 
     Unique object identifier.
@@ -2766,12 +2781,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Skills loaded in the container
 
-      - `String skillId`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `Type type`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -2779,6 +2788,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `ANTHROPIC("anthropic")`
 
         - `CUSTOM("custom")`
+
+      - `String skillId`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `String version`
 
@@ -2817,6 +2832,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `class TextBlock:`
 
+      - `JsonValue type = "text"`
+
       - `Optional<List<TextCitation>> citations`
 
         Citations supporting the text block.
@@ -2824,6 +2841,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `class CitationCharLocation:`
+
+          - `JsonValue type = "char_location"`
 
           - `String citedText`
 
@@ -2841,9 +2860,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `JsonValue type = "char_location"`
-
         - `class CitationPageLocation:`
+
+          - `JsonValue type = "page_location"`
 
           - `String citedText`
 
@@ -2861,9 +2880,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-          - `JsonValue type = "page_location"`
-
         - `class CitationContentBlockLocation:`
+
+          - `JsonValue type = "content_block_location"`
 
           - `String citedText`
 
@@ -2891,9 +2910,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-          - `JsonValue type = "content_block_location"`
-
         - `class CitationsWebSearchResultLocation:`
+
+          - `JsonValue type = "web_search_result_location"`
 
           - `String citedText`
 
@@ -2903,11 +2922,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 512
 
-          - `JsonValue type = "web_search_result_location"`
-
           - `String url`
 
         - `class CitationsSearchResultLocation:`
+
+          - `JsonValue type = "search_result_location"`
 
           - `String citedText`
 
@@ -2939,15 +2958,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> title`
 
-          - `JsonValue type = "search_result_location"`
-
       - `String text`
 
-        maxLength: 5000000, minLength: 0
-
-      - `JsonValue type = "text"`
+        minLength: 0
 
     - `class ThinkingBlock:`
+
+      - `JsonValue type = "thinking"`
 
       - `String signature`
 
@@ -2961,9 +2978,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `JsonValue type = "thinking"`
-
     - `class RedactedThinkingBlock:`
+
+      - `JsonValue type = "redacted_thinking"`
 
       - `String data`
 
@@ -2973,9 +2990,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `JsonValue type = "redacted_thinking"`
-
     - `class ToolUseBlock:`
+
+      - `JsonValue type = "tool_use"`
 
       - `String id`
 
@@ -2995,27 +3012,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `JsonValue type = "code_execution_20250825"`
+
           - `String toolId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "code_execution_20250825"`
 
         - `class ServerToolCaller20260120:`
 
+          - `JsonValue type = "code_execution_20260120"`
+
           - `String toolId`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `JsonValue type = "code_execution_20260120"`
 
       - `Input input`
 
       - `String name`
 
         minLength: 1
-
-      - `JsonValue type = "tool_use"`
 
       - `Optional<String> toolsetName`
 
@@ -3024,6 +3039,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class ServerToolUseBlock:`
+
+      - `JsonValue type = "server_tool_use"`
 
       - `String id`
 
@@ -3061,9 +3078,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `TOOL_SEARCH_TOOL_BM25("tool_search_tool_bm25")`
 
-      - `JsonValue type = "server_tool_use"`
-
     - `class WebSearchToolResultBlock:`
+
+      - `JsonValue type = "web_search_tool_result"`
 
       - `Caller caller`
 
@@ -3083,6 +3100,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `class WebSearchToolResultError:`
 
+          - `JsonValue type = "web_search_tool_result_error"`
+
           - `WebSearchToolResultErrorCode errorCode`
 
             - `INVALID_TOOL_INPUT("invalid_tool_input")`
@@ -3097,9 +3116,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `REQUEST_TOO_LARGE("request_too_large")`
 
-          - `JsonValue type = "web_search_tool_result_error"`
-
         - `List<WebSearchResultBlock>`
+
+          - `JsonValue type = "web_search_result"`
 
           - `String encryptedContent`
 
@@ -3107,17 +3126,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String title`
 
-          - `JsonValue type = "web_search_result"`
-
           - `String url`
 
       - `String toolUseId`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `JsonValue type = "web_search_tool_result"`
-
     - `class WebFetchToolResultBlock:`
+
+      - `JsonValue type = "web_fetch_tool_result"`
 
       - `Caller caller`
 
@@ -3136,6 +3153,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Content content`
 
         - `class WebFetchToolResultErrorBlock:`
+
+          - `JsonValue type = "web_fetch_tool_result_error"`
 
           - `WebFetchToolResultErrorCode errorCode`
 
@@ -3157,11 +3176,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `UNAVAILABLE("unavailable")`
 
-          - `JsonValue type = "web_fetch_tool_result_error"`
+            - `CONTENT_TOO_LARGE("content_too_large")`
 
         - `class WebFetchBlock:`
 
+          - `JsonValue type = "web_fetch_result"`
+
           - `DocumentBlock content`
+
+            - `JsonValue type = "document"`
 
             - `Optional<CitationsConfig> citations`
 
@@ -3173,33 +3196,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `class Base64PdfSource:`
 
+                - `JsonValue type = "base64"`
+
                 - `String data`
 
                   format: byte
 
                 - `JsonValue mediaType = "application/pdf"`
 
-                - `JsonValue type = "base64"`
-
               - `class PlainTextSource:`
+
+                - `JsonValue type = "text"`
 
                 - `String data`
 
                 - `JsonValue mediaType = "text/plain"`
 
-                - `JsonValue type = "text"`
-
             - `Optional<String> title`
 
               The title of the document
 
-            - `JsonValue type = "document"`
-
           - `Optional<String> retrievedAt`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `JsonValue type = "web_fetch_result"`
 
           - `String url`
 
@@ -3209,15 +3228,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `JsonValue type = "web_fetch_tool_result"`
-
     - `class CodeExecutionToolResultBlock:`
+
+      - `JsonValue type = "code_execution_tool_result"`
 
       - `CodeExecutionToolResultBlockContent content`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
+
+          - `JsonValue type = "code_execution_tool_result_error"`
 
           - `CodeExecutionToolResultErrorCode errorCode`
 
@@ -3229,15 +3250,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-          - `JsonValue type = "code_execution_tool_result_error"`
-
         - `class CodeExecutionResultBlock:`
+
+          - `JsonValue type = "code_execution_result"`
 
           - `List<CodeExecutionOutputBlock> content`
 
-            - `String fileId`
-
             - `JsonValue type = "code_execution_output"`
+
+            - `String fileId`
 
           - `long returnCode`
 
@@ -3245,17 +3266,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stdout`
 
-          - `JsonValue type = "code_execution_result"`
-
         - `class EncryptedCodeExecutionResultBlock:`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
+          - `JsonValue type = "encrypted_code_execution_result"`
+
           - `List<CodeExecutionOutputBlock> content`
 
-            - `String fileId`
-
             - `JsonValue type = "code_execution_output"`
+
+            - `String fileId`
 
           - `String encryptedStdout`
 
@@ -3263,19 +3284,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stderr`
 
-          - `JsonValue type = "encrypted_code_execution_result"`
-
       - `String toolUseId`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `JsonValue type = "code_execution_tool_result"`
-
     - `class BashCodeExecutionToolResultBlock:`
+
+      - `JsonValue type = "bash_code_execution_tool_result"`
 
       - `Content content`
 
         - `class BashCodeExecutionToolResultError:`
+
+          - `JsonValue type = "bash_code_execution_tool_result_error"`
 
           - `BashCodeExecutionToolResultErrorCode errorCode`
 
@@ -3289,15 +3310,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-          - `JsonValue type = "bash_code_execution_tool_result_error"`
-
         - `class BashCodeExecutionResultBlock:`
+
+          - `JsonValue type = "bash_code_execution_result"`
 
           - `List<BashCodeExecutionOutputBlock> content`
 
-            - `String fileId`
-
             - `JsonValue type = "bash_code_execution_output"`
+
+            - `String fileId`
 
           - `long returnCode`
 
@@ -3305,19 +3326,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String stdout`
 
-          - `JsonValue type = "bash_code_execution_result"`
-
       - `String toolUseId`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `JsonValue type = "bash_code_execution_tool_result"`
-
     - `class TextEditorCodeExecutionToolResultBlock:`
+
+      - `JsonValue type = "text_editor_code_execution_tool_result"`
 
       - `Content content`
 
         - `class TextEditorCodeExecutionToolResultError:`
+
+          - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
           - `TextEditorCodeExecutionToolResultErrorCode errorCode`
 
@@ -3333,9 +3354,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> errorMessage`
 
-          - `JsonValue type = "text_editor_code_execution_tool_result_error"`
-
         - `class TextEditorCodeExecutionViewResultBlock:`
+
+          - `JsonValue type = "text_editor_code_execution_view_result"`
 
           - `String content`
 
@@ -3353,15 +3374,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Long> totalLines`
 
-          - `JsonValue type = "text_editor_code_execution_view_result"`
-
         - `class TextEditorCodeExecutionCreateResultBlock:`
-
-          - `boolean isFileUpdate`
 
           - `JsonValue type = "text_editor_code_execution_create_result"`
 
+          - `boolean isFileUpdate`
+
         - `class TextEditorCodeExecutionStrReplaceResultBlock:`
+
+          - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
           - `Optional<List<String>> lines`
 
@@ -3373,19 +3394,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Long> oldStart`
 
-          - `JsonValue type = "text_editor_code_execution_str_replace_result"`
-
       - `String toolUseId`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `JsonValue type = "text_editor_code_execution_tool_result"`
-
     - `class ToolSearchToolResultBlock:`
+
+      - `JsonValue type = "tool_search_tool_result"`
 
       - `Content content`
 
         - `class ToolSearchToolResultError:`
+
+          - `JsonValue type = "tool_search_tool_result_error"`
 
           - `ToolSearchToolResultErrorCode errorCode`
 
@@ -3399,33 +3420,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> errorMessage`
 
-          - `JsonValue type = "tool_search_tool_result_error"`
-
         - `class ToolSearchToolSearchResultBlock:`
 
+          - `JsonValue type = "tool_search_tool_search_result"`
+
           - `List<ToolReferenceBlock> toolReferences`
+
+            - `JsonValue type = "tool_reference"`
 
             - `String toolName`
 
               maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-            - `JsonValue type = "tool_reference"`
-
-          - `JsonValue type = "tool_search_tool_search_result"`
-
       - `String toolUseId`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `JsonValue type = "tool_search_tool_result"`
 
     - `class ContainerUploadBlock:`
 
       Response model for a file uploaded to the container.
 
-      - `String fileId`
-
       - `JsonValue type = "container_upload"`
+
+      - `String fileId`
 
   - `Model model`
 
@@ -3511,6 +3528,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Structured information about a refusal.
 
+    - `JsonValue type = "refusal"`
+
     - `Optional<Category> category`
 
       The policy category that triggered a refusal.
@@ -3540,8 +3559,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-    - `JsonValue type = "refusal"`
 
   - `Optional<StopReason> stopReason`
 
@@ -3578,12 +3595,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `JsonValue type = "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
 
   - `Usage usage`
 
@@ -3693,11 +3704,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class RawMessageStartEvent:`
 
-    - `Message message`
-
     - `JsonValue type = "message_start"`
 
+    - `Message message`
+
   - `class RawMessageDeltaEvent:`
+
+    - `JsonValue type = "message_delta"`
 
     - `Delta delta`
 
@@ -3712,8 +3725,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Optional<StopReason> stopReason`
 
       - `Optional<String> stopSequence`
-
-    - `JsonValue type = "message_delta"`
 
     - `MessageDeltaUsage usage`
 
@@ -3768,6 +3779,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `class RawContentBlockStartEvent:`
 
+    - `JsonValue type = "content_block_start"`
+
     - `ContentBlock contentBlock`
 
       Response model for a file uploaded to the container.
@@ -3800,25 +3813,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `long index`
 
-    - `JsonValue type = "content_block_start"`
-
   - `class RawContentBlockDeltaEvent:`
+
+    - `JsonValue type = "content_block_delta"`
 
     - `RawContentBlockDelta delta`
 
       - `class TextDelta:`
 
-        - `String text`
-
         - `JsonValue type = "text_delta"`
+
+        - `String text`
 
       - `class InputJsonDelta:`
 
-        - `String partialJson`
-
         - `JsonValue type = "input_json_delta"`
 
+        - `String partialJson`
+
       - `class CitationsDelta:`
+
+        - `JsonValue type = "citations_delta"`
 
         - `Citation citation`
 
@@ -3832,33 +3847,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `class CitationsSearchResultLocation:`
 
-        - `JsonValue type = "citations_delta"`
-
       - `class ThinkingDelta:`
+
+        - `JsonValue type = "thinking_delta"`
 
         - `String thinking`
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-        - `JsonValue type = "thinking_delta"`
-
       - `class SignatureDelta:`
+
+        - `JsonValue type = "signature_delta"`
 
         - `String signature`
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-        - `JsonValue type = "signature_delta"`
-
     - `long index`
-
-    - `JsonValue type = "content_block_delta"`
 
   - `class RawContentBlockStopEvent:`
 
-    - `long index`
-
     - `JsonValue type = "content_block_stop"`
+
+    - `long index`
 
 ## Example
 

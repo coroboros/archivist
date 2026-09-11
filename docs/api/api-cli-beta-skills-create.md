@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/cli/beta/skills/create
+---
+
 # Create Skill
 
 `$ ant beta:skills create`
@@ -30,9 +35,21 @@ Create Skill
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `beta_skill: object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: string`
 
@@ -85,12 +102,6 @@ Create Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: string`
 

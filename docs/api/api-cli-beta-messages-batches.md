@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/messages/batches"
 category: "api"
 generated: true
 ---
+---
+title: Batches
+url: https://platform.claude.com/docs/en/api/cli/beta/messages/batches
+---
+
 # Batches
 
 ## Create a Message Batch
@@ -34,9 +39,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -125,12 +142,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ### Example
 
@@ -183,9 +194,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -274,12 +297,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ### Example
 
@@ -344,11 +361,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `BetaListResponse_MessageBatch_: object`
 
   - `data: array of BetaMessageBatch`
+
+    - `type: "message_batch"`
+
+      Object type.
+
+      For Message Batches, this is always `"message_batch"`.
 
     - `id: string`
 
@@ -438,12 +467,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-    - `type: "message_batch"`
-
-      Object type.
-
-      For Message Batches, this is always `"message_batch"`.
-
   - `first_id: string`
 
     First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -515,9 +538,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -606,12 +641,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ### Example
 
@@ -666,19 +695,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_deleted_message_batch: object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ### Example
 
@@ -719,6 +754,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_message_batch_individual_response: object`
@@ -739,7 +780,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `beta_message_batch_succeeded_result: object`
 
+      - `type: "succeeded"`
+
       - `message: object`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: string`
 
@@ -765,12 +814,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -778,6 +821,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -816,6 +865,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `beta_text_block: object`
 
+            - `type: "text"`
+
             - `citations: array of BetaTextCitation`
 
               Citations supporting the text block.
@@ -823,6 +874,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `beta_citation_char_location: object`
+
+                - `type: "char_location"`
 
                 - `cited_text: string`
 
@@ -840,9 +893,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `beta_citation_page_location: object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -860,9 +913,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `beta_citation_content_block_location: object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -890,9 +943,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `beta_citations_web_search_result_location: object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -902,11 +955,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
               - `beta_citation_search_result_location: object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -938,15 +991,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "search_result_location"`
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
+              minLength: 0
 
           - `beta_thinking_block: object`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -960,9 +1011,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
           - `beta_redacted_thinking_block: object`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
@@ -972,9 +1023,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
           - `beta_tool_use_block: object`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -985,8 +1036,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -1002,19 +1051,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `beta_server_tool_caller_20260120: object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name: optional string`
 
@@ -1023,6 +1072,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `beta_server_tool_use_block: object`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -1048,8 +1099,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
               Tool invocation directly from the model.
@@ -1066,9 +1115,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `beta_web_search_tool_result_block: object`
 
+            - `type: "web_search_tool_result"`
+
             - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
               - `beta_web_search_tool_result_error: object`
+
+                - `type: "web_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
@@ -1084,9 +1137,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
               - `union_member_1: array of BetaWebSearchResultBlock`
+
+                - `type: "web_search_result"`
 
                 - `encrypted_content: string`
 
@@ -1094,15 +1147,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -1120,11 +1169,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `beta_web_fetch_tool_result_block: object`
 
+            - `type: "web_fetch_tool_result"`
+
             - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
               - `beta_web_fetch_tool_result_error_block: object`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+                - `type: "web_fetch_tool_result_error"`
+
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                   - `"invalid_tool_input"`
 
@@ -1144,11 +1197,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `beta_web_fetch_block: object`
 
+                - `type: "web_fetch_result"`
+
                 - `content: object`
+
+                  - `type: "document"`
 
                   - `citations: object`
 
@@ -1160,33 +1217,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `beta_base64_pdf_source: object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `beta_plain_text_source: object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string`
 
                     The title of the document
 
-                  - `type: "document"`
-
                 - `retrieved_at: string`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
 
                 - `url: string`
 
@@ -1195,8 +1248,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -1214,9 +1265,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `beta_advisor_tool_result_block: object`
 
+            - `type: "advisor_tool_result"`
+
             - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
               - `beta_advisor_tool_result_error: object`
+
+                - `type: "advisor_tool_result_error"`
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -1234,9 +1289,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
               - `beta_advisor_result_block: object`
+
+                - `type: "advisor_result"`
 
                 - `stop_reason: string`
 
@@ -1244,9 +1299,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                - `type: "advisor_result"`
-
               - `beta_advisor_redacted_result_block: object`
+
+                - `type: "advisor_redacted_result"`
 
                 - `encrypted_content: string`
 
@@ -1256,21 +1311,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: "advisor_redacted_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
           - `beta_code_execution_tool_result_block: object`
+
+            - `type: "code_execution_tool_result"`
 
             - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `beta_code_execution_tool_result_error: object`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -1282,15 +1337,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `beta_code_execution_result_block: object`
+
+                - `type: "code_execution_result"`
 
                 - `content: array of BetaCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -1298,17 +1353,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `beta_encrypted_code_execution_result_block: object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: array of BetaCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -1316,19 +1371,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
           - `beta_bash_code_execution_tool_result_block: object`
+
+            - `type: "bash_code_execution_tool_result"`
 
             - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
               - `beta_bash_code_execution_tool_result_error: object`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1342,15 +1397,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `beta_bash_code_execution_result_block: object`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: array of BetaBashCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -1358,19 +1413,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
           - `beta_text_editor_code_execution_tool_result_block: object`
+
+            - `type: "text_editor_code_execution_tool_result"`
 
             - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `beta_text_editor_code_execution_tool_result_error: object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1386,9 +1441,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
               - `beta_text_editor_code_execution_view_result_block: object`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -1406,15 +1461,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: number`
 
-                - `type: "text_editor_code_execution_view_result"`
-
               - `beta_text_editor_code_execution_create_result_block: object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
+                - `is_file_update: boolean`
+
               - `beta_text_editor_code_execution_str_replace_result_block: object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
 
                 - `lines: array of string`
 
@@ -1426,19 +1481,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: number`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
           - `beta_tool_search_tool_result_block: object`
+
+            - `type: "tool_search_tool_result"`
 
             - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
               - `beta_tool_search_tool_result_error: object`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -1452,27 +1507,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string`
 
-                - `type: "tool_search_tool_result_error"`
-
               - `beta_tool_search_tool_search_result_block: object`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: array of BetaToolReferenceBlock`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "tool_search_tool_result"`
-
           - `beta_mcp_tool_use_block: object`
+
+            - `type: "mcp_tool_use"`
 
             - `id: string`
 
@@ -1488,15 +1541,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
           - `beta_mcp_tool_result_block: object`
+
+            - `type: "mcp_tool_result"`
 
             - `content: string or array of BetaTextBlock`
 
               - `union_member_0: string`
 
               - `beta_mcp_tool_result_block_content: array of BetaTextBlock`
+
+                - `type: "text"`
 
                 - `citations: array of BetaTextCitation`
 
@@ -1506,9 +1561,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `text: string`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: "text"`
+                  minLength: 0
 
             - `is_error: boolean`
 
@@ -1516,15 +1569,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: "mcp_tool_result"`
-
           - `beta_container_upload_block: object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
           - `beta_compaction_block: object`
 
@@ -1534,6 +1585,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: "compaction"`
+
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
@@ -1541,8 +1594,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `encrypted_content: string`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: "compaction"`
 
           - `beta_fallback_block: object`
 
@@ -1557,6 +1608,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: "fallback"`
 
             - `from: object`
 
@@ -1650,6 +1703,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: "refusal"`
+
               - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
                 The policy category that triggered a refusal.
@@ -1674,10 +1729,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: "refusal"`
-
-            - `type: "fallback"`
-
         - `context_management: object`
 
           Context management response.
@@ -1689,6 +1740,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             List of context management edits that were applied.
 
             - `beta_clear_tool_uses_20250919_edit_response: object`
+
+              - `type: "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
 
               - `cleared_input_tokens: number`
 
@@ -1702,11 +1757,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_tool_uses_20250919"`
+            - `beta_clear_thinking_20251015_edit_response: object`
+
+              - `type: "clear_thinking_20251015"`
 
                 The type of context management edit applied.
-
-            - `beta_clear_thinking_20251015_edit_response: object`
 
               - `cleared_input_tokens: number`
 
@@ -1720,10 +1775,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
         - `diagnostics: object`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -1735,35 +1786,35 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `beta_cache_miss_model_changed: object`
 
+              - `type: "model_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "model_changed"`
 
             - `beta_cache_miss_system_changed: object`
 
+              - `type: "system_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "system_changed"`
 
             - `beta_cache_miss_tools_changed: object`
 
+              - `type: "tools_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "tools_changed"`
 
             - `beta_cache_miss_messages_changed: object`
 
+              - `type: "messages_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "messages_changed"`
 
             - `beta_cache_miss_previous_message_not_found: object`
 
@@ -1857,6 +1908,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
+          - `type: "refusal"`
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
@@ -1936,8 +1989,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: "refusal"`
-
         - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
           The reason that we stopped.
@@ -1975,12 +2026,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: object`
 
@@ -2046,6 +2091,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 No reprice was applied; `reason` says why.
 
+                - `type: "not_applied"`
+
                 - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                   Why the reprice was not applied.
@@ -2076,8 +2123,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `"wrong_platform"`
 
                   - `"wrong_workspace"`
-
-                - `type: "not_applied"`
 
                 - `remove_to_redeem: optional array of string`
 
@@ -2116,6 +2161,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -2229,15 +2278,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "message"`
-
-                Usage for a sampling iteration
 
             - `beta_compaction_iteration_usage: object`
 
               Token usage for a compaction iteration.
 
+              - `type: "compaction"`
+
+                Usage for a compaction iteration
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -2278,13 +2327,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `type: "compaction"`
-
-                Usage for a compaction iteration
-
             - `beta_advisor_message_iteration_usage: object`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
 
               - `cache_creation: object`
 
@@ -2399,10 +2448,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
 
             - `beta_fallback_message_iteration_usage: object`
 
@@ -2413,6 +2458,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -2526,10 +2575,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
 
           - `output_tokens: number`
 
@@ -2611,6 +2656,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
           - `path: string`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -2641,77 +2690,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"end_user_binding_mismatch"`
 
-          - `type: "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-      - `type: "succeeded"`
-
     - `beta_message_batch_errored_result: object`
 
+      - `type: "errored"`
+
       - `error: object`
+
+        - `type: "error"`
 
         - `error: BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 6 more`
 
           - `beta_invalid_request_error: object`
 
-            - `message: string`
-
             - `type: "invalid_request_error"`
+
+            - `message: string`
 
           - `beta_authentication_error: object`
 
-            - `message: string`
-
             - `type: "authentication_error"`
+
+            - `message: string`
 
           - `beta_billing_error: object`
 
-            - `message: string`
-
             - `type: "billing_error"`
+
+            - `message: string`
 
           - `beta_permission_error: object`
 
-            - `message: string`
-
             - `type: "permission_error"`
+
+            - `message: string`
 
           - `beta_not_found_error: object`
 
-            - `message: string`
-
             - `type: "not_found_error"`
+
+            - `message: string`
 
           - `beta_rate_limit_error: object`
 
-            - `message: string`
-
             - `type: "rate_limit_error"`
+
+            - `message: string`
 
           - `beta_gateway_timeout_error: object`
 
-            - `message: string`
-
             - `type: "timeout_error"`
+
+            - `message: string`
 
           - `beta_api_error: object`
 
-            - `message: string`
-
             - `type: "api_error"`
+
+            - `message: string`
 
           - `beta_overloaded_error: object`
 
-            - `message: string`
-
             - `type: "overloaded_error"`
 
+            - `message: string`
+
         - `request_id: string`
-
-        - `type: "error"`
-
-      - `type: "errored"`
 
     - `beta_message_batch_canceled_result: object`
 
@@ -2735,19 +2778,25 @@ ant beta:messages:batches results \
 
 - `beta_deleted_message_batch: object`
 
-  - `id: string`
-
-    ID of the Message Batch.
-
   - `type: "message_batch_deleted"`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
+  - `id: string`
+
+    ID of the Message Batch.
+
 ### Beta Message Batch
 
 - `beta_message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -2837,12 +2886,6 @@ ant beta:messages:batches results \
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 ### Beta Message Batch Canceled Result
 
 - `beta_message_batch_canceled_result: object`
@@ -2853,69 +2896,69 @@ ant beta:messages:batches results \
 
 - `beta_message_batch_errored_result: object`
 
+  - `type: "errored"`
+
   - `error: object`
+
+    - `type: "error"`
 
     - `error: BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 6 more`
 
       - `beta_invalid_request_error: object`
 
-        - `message: string`
-
         - `type: "invalid_request_error"`
+
+        - `message: string`
 
       - `beta_authentication_error: object`
 
-        - `message: string`
-
         - `type: "authentication_error"`
+
+        - `message: string`
 
       - `beta_billing_error: object`
 
-        - `message: string`
-
         - `type: "billing_error"`
+
+        - `message: string`
 
       - `beta_permission_error: object`
 
-        - `message: string`
-
         - `type: "permission_error"`
+
+        - `message: string`
 
       - `beta_not_found_error: object`
 
-        - `message: string`
-
         - `type: "not_found_error"`
+
+        - `message: string`
 
       - `beta_rate_limit_error: object`
 
-        - `message: string`
-
         - `type: "rate_limit_error"`
+
+        - `message: string`
 
       - `beta_gateway_timeout_error: object`
 
-        - `message: string`
-
         - `type: "timeout_error"`
+
+        - `message: string`
 
       - `beta_api_error: object`
 
-        - `message: string`
-
         - `type: "api_error"`
+
+        - `message: string`
 
       - `beta_overloaded_error: object`
 
-        - `message: string`
-
         - `type: "overloaded_error"`
 
+        - `message: string`
+
     - `request_id: string`
-
-    - `type: "error"`
-
-  - `type: "errored"`
 
 ### Beta Message Batch Expired Result
 
@@ -2943,7 +2986,15 @@ ant beta:messages:batches results \
 
     - `beta_message_batch_succeeded_result: object`
 
+      - `type: "succeeded"`
+
       - `message: object`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: string`
 
@@ -2969,12 +3020,6 @@ ant beta:messages:batches results \
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -2982,6 +3027,12 @@ ant beta:messages:batches results \
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -3020,6 +3071,8 @@ ant beta:messages:batches results \
 
           - `beta_text_block: object`
 
+            - `type: "text"`
+
             - `citations: array of BetaTextCitation`
 
               Citations supporting the text block.
@@ -3027,6 +3080,8 @@ ant beta:messages:batches results \
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `beta_citation_char_location: object`
+
+                - `type: "char_location"`
 
                 - `cited_text: string`
 
@@ -3044,9 +3099,9 @@ ant beta:messages:batches results \
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `beta_citation_page_location: object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -3064,9 +3119,9 @@ ant beta:messages:batches results \
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `beta_citation_content_block_location: object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -3094,9 +3149,9 @@ ant beta:messages:batches results \
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `beta_citations_web_search_result_location: object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -3106,11 +3161,11 @@ ant beta:messages:batches results \
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
               - `beta_citation_search_result_location: object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -3142,15 +3197,13 @@ ant beta:messages:batches results \
 
                 - `title: string`
 
-                - `type: "search_result_location"`
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
+              minLength: 0
 
           - `beta_thinking_block: object`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -3164,9 +3217,9 @@ ant beta:messages:batches results \
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
           - `beta_redacted_thinking_block: object`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
@@ -3176,9 +3229,9 @@ ant beta:messages:batches results \
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
           - `beta_tool_use_block: object`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -3189,8 +3242,6 @@ ant beta:messages:batches results \
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -3206,19 +3257,19 @@ ant beta:messages:batches results \
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `beta_server_tool_caller_20260120: object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name: optional string`
 
@@ -3227,6 +3278,8 @@ ant beta:messages:batches results \
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `beta_server_tool_use_block: object`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -3252,8 +3305,6 @@ ant beta:messages:batches results \
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
               Tool invocation directly from the model.
@@ -3270,9 +3321,13 @@ ant beta:messages:batches results \
 
           - `beta_web_search_tool_result_block: object`
 
+            - `type: "web_search_tool_result"`
+
             - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
               - `beta_web_search_tool_result_error: object`
+
+                - `type: "web_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
@@ -3288,9 +3343,9 @@ ant beta:messages:batches results \
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
               - `union_member_1: array of BetaWebSearchResultBlock`
+
+                - `type: "web_search_result"`
 
                 - `encrypted_content: string`
 
@@ -3298,15 +3353,11 @@ ant beta:messages:batches results \
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -3324,11 +3375,15 @@ ant beta:messages:batches results \
 
           - `beta_web_fetch_tool_result_block: object`
 
+            - `type: "web_fetch_tool_result"`
+
             - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
               - `beta_web_fetch_tool_result_error_block: object`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+                - `type: "web_fetch_tool_result_error"`
+
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                   - `"invalid_tool_input"`
 
@@ -3348,11 +3403,15 @@ ant beta:messages:batches results \
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `beta_web_fetch_block: object`
 
+                - `type: "web_fetch_result"`
+
                 - `content: object`
+
+                  - `type: "document"`
 
                   - `citations: object`
 
@@ -3364,33 +3423,29 @@ ant beta:messages:batches results \
 
                     - `beta_base64_pdf_source: object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `beta_plain_text_source: object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string`
 
                     The title of the document
 
-                  - `type: "document"`
-
                 - `retrieved_at: string`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
 
                 - `url: string`
 
@@ -3399,8 +3454,6 @@ ant beta:messages:batches results \
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -3418,9 +3471,13 @@ ant beta:messages:batches results \
 
           - `beta_advisor_tool_result_block: object`
 
+            - `type: "advisor_tool_result"`
+
             - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
               - `beta_advisor_tool_result_error: object`
+
+                - `type: "advisor_tool_result_error"`
 
                 - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -3438,9 +3495,9 @@ ant beta:messages:batches results \
 
                   - `"model_not_found"`
 
-                - `type: "advisor_tool_result_error"`
-
               - `beta_advisor_result_block: object`
+
+                - `type: "advisor_result"`
 
                 - `stop_reason: string`
 
@@ -3448,9 +3505,9 @@ ant beta:messages:batches results \
 
                 - `text: string`
 
-                - `type: "advisor_result"`
-
               - `beta_advisor_redacted_result_block: object`
+
+                - `type: "advisor_redacted_result"`
 
                 - `encrypted_content: string`
 
@@ -3460,21 +3517,21 @@ ant beta:messages:batches results \
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `type: "advisor_redacted_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "advisor_tool_result"`
-
           - `beta_code_execution_tool_result_block: object`
+
+            - `type: "code_execution_tool_result"`
 
             - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `beta_code_execution_tool_result_error: object`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -3486,15 +3543,15 @@ ant beta:messages:batches results \
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `beta_code_execution_result_block: object`
+
+                - `type: "code_execution_result"`
 
                 - `content: array of BetaCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -3502,17 +3559,17 @@ ant beta:messages:batches results \
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `beta_encrypted_code_execution_result_block: object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: array of BetaCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -3520,19 +3577,19 @@ ant beta:messages:batches results \
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
           - `beta_bash_code_execution_tool_result_block: object`
+
+            - `type: "bash_code_execution_tool_result"`
 
             - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
               - `beta_bash_code_execution_tool_result_error: object`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -3546,15 +3603,15 @@ ant beta:messages:batches results \
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `beta_bash_code_execution_result_block: object`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: array of BetaBashCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -3562,19 +3619,19 @@ ant beta:messages:batches results \
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
           - `beta_text_editor_code_execution_tool_result_block: object`
+
+            - `type: "text_editor_code_execution_tool_result"`
 
             - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `beta_text_editor_code_execution_tool_result_error: object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -3590,9 +3647,9 @@ ant beta:messages:batches results \
 
                 - `error_message: string`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
               - `beta_text_editor_code_execution_view_result_block: object`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -3610,15 +3667,15 @@ ant beta:messages:batches results \
 
                 - `total_lines: number`
 
-                - `type: "text_editor_code_execution_view_result"`
-
               - `beta_text_editor_code_execution_create_result_block: object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
+                - `is_file_update: boolean`
+
               - `beta_text_editor_code_execution_str_replace_result_block: object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
 
                 - `lines: array of string`
 
@@ -3630,19 +3687,19 @@ ant beta:messages:batches results \
 
                 - `old_start: number`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
           - `beta_tool_search_tool_result_block: object`
+
+            - `type: "tool_search_tool_result"`
 
             - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
               - `beta_tool_search_tool_result_error: object`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -3656,27 +3713,25 @@ ant beta:messages:batches results \
 
                 - `error_message: string`
 
-                - `type: "tool_search_tool_result_error"`
-
               - `beta_tool_search_tool_search_result_block: object`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: array of BetaToolReferenceBlock`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "tool_search_tool_result"`
-
           - `beta_mcp_tool_use_block: object`
+
+            - `type: "mcp_tool_use"`
 
             - `id: string`
 
@@ -3692,15 +3747,17 @@ ant beta:messages:batches results \
 
               The name of the MCP server
 
-            - `type: "mcp_tool_use"`
-
           - `beta_mcp_tool_result_block: object`
+
+            - `type: "mcp_tool_result"`
 
             - `content: string or array of BetaTextBlock`
 
               - `union_member_0: string`
 
               - `beta_mcp_tool_result_block_content: array of BetaTextBlock`
+
+                - `type: "text"`
 
                 - `citations: array of BetaTextCitation`
 
@@ -3710,9 +3767,7 @@ ant beta:messages:batches results \
 
                 - `text: string`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `type: "text"`
+                  minLength: 0
 
             - `is_error: boolean`
 
@@ -3720,15 +3775,13 @@ ant beta:messages:batches results \
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type: "mcp_tool_result"`
-
           - `beta_container_upload_block: object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
           - `beta_compaction_block: object`
 
@@ -3738,6 +3791,8 @@ ant beta:messages:batches results \
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `type: "compaction"`
+
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
@@ -3745,8 +3800,6 @@ ant beta:messages:batches results \
             - `encrypted_content: string`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `type: "compaction"`
 
           - `beta_fallback_block: object`
 
@@ -3761,6 +3814,8 @@ ant beta:messages:batches results \
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `type: "fallback"`
 
             - `from: object`
 
@@ -3854,6 +3909,8 @@ ant beta:messages:batches results \
 
               What caused the `from` model to hand over at this hop.
 
+              - `type: "refusal"`
+
               - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
                 The policy category that triggered a refusal.
@@ -3878,10 +3935,6 @@ ant beta:messages:batches results \
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `type: "refusal"`
-
-            - `type: "fallback"`
-
         - `context_management: object`
 
           Context management response.
@@ -3893,6 +3946,10 @@ ant beta:messages:batches results \
             List of context management edits that were applied.
 
             - `beta_clear_tool_uses_20250919_edit_response: object`
+
+              - `type: "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
 
               - `cleared_input_tokens: number`
 
@@ -3906,11 +3963,11 @@ ant beta:messages:batches results \
 
                 minimum: 0
 
-              - `type: "clear_tool_uses_20250919"`
+            - `beta_clear_thinking_20251015_edit_response: object`
+
+              - `type: "clear_thinking_20251015"`
 
                 The type of context management edit applied.
-
-            - `beta_clear_thinking_20251015_edit_response: object`
 
               - `cleared_input_tokens: number`
 
@@ -3924,10 +3981,6 @@ ant beta:messages:batches results \
 
                 minimum: 0
 
-              - `type: "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
         - `diagnostics: object`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -3939,35 +3992,35 @@ ant beta:messages:batches results \
 
             - `beta_cache_miss_model_changed: object`
 
+              - `type: "model_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "model_changed"`
 
             - `beta_cache_miss_system_changed: object`
 
+              - `type: "system_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "system_changed"`
 
             - `beta_cache_miss_tools_changed: object`
 
+              - `type: "tools_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "tools_changed"`
 
             - `beta_cache_miss_messages_changed: object`
 
+              - `type: "messages_changed"`
+
               - `cache_missed_input_tokens: number`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `type: "messages_changed"`
 
             - `beta_cache_miss_previous_message_not_found: object`
 
@@ -4061,6 +4114,8 @@ ant beta:messages:batches results \
 
           Structured information about a refusal.
 
+          - `type: "refusal"`
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
@@ -4140,8 +4195,6 @@ ant beta:messages:batches results \
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `type: "refusal"`
-
         - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
           The reason that we stopped.
@@ -4179,12 +4232,6 @@ ant beta:messages:batches results \
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: object`
 
@@ -4250,6 +4297,8 @@ ant beta:messages:batches results \
 
                 No reprice was applied; `reason` says why.
 
+                - `type: "not_applied"`
+
                 - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                   Why the reprice was not applied.
@@ -4280,8 +4329,6 @@ ant beta:messages:batches results \
                   - `"wrong_platform"`
 
                   - `"wrong_workspace"`
-
-                - `type: "not_applied"`
 
                 - `remove_to_redeem: optional array of string`
 
@@ -4320,6 +4367,10 @@ ant beta:messages:batches results \
 
               Token usage for a sampling iteration.
 
+              - `type: "message"`
+
+                Usage for a sampling iteration
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -4433,15 +4484,15 @@ ant beta:messages:batches results \
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "message"`
-
-                Usage for a sampling iteration
 
             - `beta_compaction_iteration_usage: object`
 
               Token usage for a compaction iteration.
 
+              - `type: "compaction"`
+
+                Usage for a compaction iteration
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -4482,13 +4533,13 @@ ant beta:messages:batches results \
 
                 minimum: 0
 
-              - `type: "compaction"`
-
-                Usage for a compaction iteration
-
             - `beta_advisor_message_iteration_usage: object`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `type: "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
 
               - `cache_creation: object`
 
@@ -4603,10 +4654,6 @@ ant beta:messages:batches results \
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
 
             - `beta_fallback_message_iteration_usage: object`
 
@@ -4617,6 +4664,10 @@ ant beta:messages:batches results \
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
               - `cache_creation: object`
 
                 Breakdown of cached tokens by TTL
@@ -4730,10 +4781,6 @@ ant beta:messages:batches results \
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `type: "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
 
           - `output_tokens: number`
 
@@ -4815,6 +4862,10 @@ ant beta:messages:batches results \
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `type: "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
           - `path: string`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -4845,77 +4896,71 @@ ant beta:messages:batches results \
 
             - `"end_user_binding_mismatch"`
 
-          - `type: "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-      - `type: "succeeded"`
-
     - `beta_message_batch_errored_result: object`
 
+      - `type: "errored"`
+
       - `error: object`
+
+        - `type: "error"`
 
         - `error: BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 6 more`
 
           - `beta_invalid_request_error: object`
 
-            - `message: string`
-
             - `type: "invalid_request_error"`
+
+            - `message: string`
 
           - `beta_authentication_error: object`
 
-            - `message: string`
-
             - `type: "authentication_error"`
+
+            - `message: string`
 
           - `beta_billing_error: object`
 
-            - `message: string`
-
             - `type: "billing_error"`
+
+            - `message: string`
 
           - `beta_permission_error: object`
 
-            - `message: string`
-
             - `type: "permission_error"`
+
+            - `message: string`
 
           - `beta_not_found_error: object`
 
-            - `message: string`
-
             - `type: "not_found_error"`
+
+            - `message: string`
 
           - `beta_rate_limit_error: object`
 
-            - `message: string`
-
             - `type: "rate_limit_error"`
+
+            - `message: string`
 
           - `beta_gateway_timeout_error: object`
 
-            - `message: string`
-
             - `type: "timeout_error"`
+
+            - `message: string`
 
           - `beta_api_error: object`
 
-            - `message: string`
-
             - `type: "api_error"`
+
+            - `message: string`
 
           - `beta_overloaded_error: object`
 
-            - `message: string`
-
             - `type: "overloaded_error"`
 
+            - `message: string`
+
         - `request_id: string`
-
-        - `type: "error"`
-
-      - `type: "errored"`
 
     - `beta_message_batch_canceled_result: object`
 
@@ -4967,7 +5012,15 @@ ant beta:messages:batches results \
 
   - `beta_message_batch_succeeded_result: object`
 
+    - `type: "succeeded"`
+
     - `message: object`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
 
       - `id: string`
 
@@ -4993,12 +5046,6 @@ ant beta:messages:batches results \
 
           Skills loaded in the container
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" or "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -5006,6 +5053,12 @@ ant beta:messages:batches results \
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: string`
 
@@ -5044,6 +5097,8 @@ ant beta:messages:batches results \
 
         - `beta_text_block: object`
 
+          - `type: "text"`
+
           - `citations: array of BetaTextCitation`
 
             Citations supporting the text block.
@@ -5051,6 +5106,8 @@ ant beta:messages:batches results \
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
             - `beta_citation_char_location: object`
+
+              - `type: "char_location"`
 
               - `cited_text: string`
 
@@ -5068,9 +5125,9 @@ ant beta:messages:batches results \
 
                 minimum: 0
 
-              - `type: "char_location"`
-
             - `beta_citation_page_location: object`
+
+              - `type: "page_location"`
 
               - `cited_text: string`
 
@@ -5088,9 +5145,9 @@ ant beta:messages:batches results \
 
                 minimum: 1
 
-              - `type: "page_location"`
-
             - `beta_citation_content_block_location: object`
+
+              - `type: "content_block_location"`
 
               - `cited_text: string`
 
@@ -5118,9 +5175,9 @@ ant beta:messages:batches results \
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
             - `beta_citations_web_search_result_location: object`
+
+              - `type: "web_search_result_location"`
 
               - `cited_text: string`
 
@@ -5130,11 +5187,11 @@ ant beta:messages:batches results \
 
                 maxLength: 512
 
-              - `type: "web_search_result_location"`
-
               - `url: string`
 
             - `beta_citation_search_result_location: object`
+
+              - `type: "search_result_location"`
 
               - `cited_text: string`
 
@@ -5166,15 +5223,13 @@ ant beta:messages:batches results \
 
               - `title: string`
 
-              - `type: "search_result_location"`
-
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
+            minLength: 0
 
         - `beta_thinking_block: object`
+
+          - `type: "thinking"`
 
           - `signature: string`
 
@@ -5188,9 +5243,9 @@ ant beta:messages:batches results \
 
             The text of Claude's thinking process for this block.
 
-          - `type: "thinking"`
-
         - `beta_redacted_thinking_block: object`
+
+          - `type: "redacted_thinking"`
 
           - `data: string`
 
@@ -5200,9 +5255,9 @@ ant beta:messages:batches results \
 
             See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type: "redacted_thinking"`
-
         - `beta_tool_use_block: object`
+
+          - `type: "tool_use"`
 
           - `id: string`
 
@@ -5213,8 +5268,6 @@ ant beta:messages:batches results \
           - `name: string`
 
             minLength: 1
-
-          - `type: "tool_use"`
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -5230,19 +5283,19 @@ ant beta:messages:batches results \
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `beta_server_tool_caller_20260120: object`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `toolset_name: optional string`
 
@@ -5251,6 +5304,8 @@ ant beta:messages:batches results \
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `beta_server_tool_use_block: object`
+
+          - `type: "server_tool_use"`
 
           - `id: string`
 
@@ -5276,8 +5331,6 @@ ant beta:messages:batches results \
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
             Tool invocation directly from the model.
@@ -5294,9 +5347,13 @@ ant beta:messages:batches results \
 
         - `beta_web_search_tool_result_block: object`
 
+          - `type: "web_search_tool_result"`
+
           - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
             - `beta_web_search_tool_result_error: object`
+
+              - `type: "web_search_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
@@ -5312,9 +5369,9 @@ ant beta:messages:batches results \
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
             - `union_member_1: array of BetaWebSearchResultBlock`
+
+              - `type: "web_search_result"`
 
               - `encrypted_content: string`
 
@@ -5322,15 +5379,11 @@ ant beta:messages:batches results \
 
               - `title: string`
 
-              - `type: "web_search_result"`
-
               - `url: string`
 
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_search_tool_result"`
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -5348,11 +5401,15 @@ ant beta:messages:batches results \
 
         - `beta_web_fetch_tool_result_block: object`
 
+          - `type: "web_fetch_tool_result"`
+
           - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
             - `beta_web_fetch_tool_result_error_block: object`
 
-              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+              - `type: "web_fetch_tool_result_error"`
+
+              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                 - `"invalid_tool_input"`
 
@@ -5372,11 +5429,15 @@ ant beta:messages:batches results \
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
+                - `"content_too_large"`
 
             - `beta_web_fetch_block: object`
 
+              - `type: "web_fetch_result"`
+
               - `content: object`
+
+                - `type: "document"`
 
                 - `citations: object`
 
@@ -5388,33 +5449,29 @@ ant beta:messages:batches results \
 
                   - `beta_base64_pdf_source: object`
 
+                    - `type: "base64"`
+
                     - `data: string`
 
                       format: byte
 
                     - `media_type: "application/pdf"`
 
-                    - `type: "base64"`
-
                   - `beta_plain_text_source: object`
+
+                    - `type: "text"`
 
                     - `data: string`
 
                     - `media_type: "text/plain"`
 
-                    - `type: "text"`
-
                 - `title: string`
 
                   The title of the document
 
-                - `type: "document"`
-
               - `retrieved_at: string`
 
                 ISO 8601 timestamp when the content was retrieved
-
-              - `type: "web_fetch_result"`
 
               - `url: string`
 
@@ -5423,8 +5480,6 @@ ant beta:messages:batches results \
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_fetch_tool_result"`
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -5442,9 +5497,13 @@ ant beta:messages:batches results \
 
         - `beta_advisor_tool_result_block: object`
 
+          - `type: "advisor_tool_result"`
+
           - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
             - `beta_advisor_tool_result_error: object`
+
+              - `type: "advisor_tool_result_error"`
 
               - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -5462,9 +5521,9 @@ ant beta:messages:batches results \
 
                 - `"model_not_found"`
 
-              - `type: "advisor_tool_result_error"`
-
             - `beta_advisor_result_block: object`
+
+              - `type: "advisor_result"`
 
               - `stop_reason: string`
 
@@ -5472,9 +5531,9 @@ ant beta:messages:batches results \
 
               - `text: string`
 
-              - `type: "advisor_result"`
-
             - `beta_advisor_redacted_result_block: object`
+
+              - `type: "advisor_redacted_result"`
 
               - `encrypted_content: string`
 
@@ -5484,21 +5543,21 @@ ant beta:messages:batches results \
 
                 The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-              - `type: "advisor_redacted_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "advisor_tool_result"`
-
         - `beta_code_execution_tool_result_block: object`
+
+          - `type: "code_execution_tool_result"`
 
           - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `beta_code_execution_tool_result_error: object`
+
+              - `type: "code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -5510,15 +5569,15 @@ ant beta:messages:batches results \
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
             - `beta_code_execution_result_block: object`
+
+              - `type: "code_execution_result"`
 
               - `content: array of BetaCodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -5526,17 +5585,17 @@ ant beta:messages:batches results \
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
             - `beta_encrypted_code_execution_result_block: object`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `type: "encrypted_code_execution_result"`
+
               - `content: array of BetaCodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -5544,19 +5603,19 @@ ant beta:messages:batches results \
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "code_execution_tool_result"`
-
         - `beta_bash_code_execution_tool_result_block: object`
+
+          - `type: "bash_code_execution_tool_result"`
 
           - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
             - `beta_bash_code_execution_tool_result_error: object`
+
+              - `type: "bash_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -5570,15 +5629,15 @@ ant beta:messages:batches results \
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
             - `beta_bash_code_execution_result_block: object`
+
+              - `type: "bash_code_execution_result"`
 
               - `content: array of BetaBashCodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "bash_code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -5586,19 +5645,19 @@ ant beta:messages:batches results \
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "bash_code_execution_tool_result"`
-
         - `beta_text_editor_code_execution_tool_result_block: object`
+
+          - `type: "text_editor_code_execution_tool_result"`
 
           - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
             - `beta_text_editor_code_execution_tool_result_error: object`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -5614,9 +5673,9 @@ ant beta:messages:batches results \
 
               - `error_message: string`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
             - `beta_text_editor_code_execution_view_result_block: object`
+
+              - `type: "text_editor_code_execution_view_result"`
 
               - `content: string`
 
@@ -5634,15 +5693,15 @@ ant beta:messages:batches results \
 
               - `total_lines: number`
 
-              - `type: "text_editor_code_execution_view_result"`
-
             - `beta_text_editor_code_execution_create_result_block: object`
-
-              - `is_file_update: boolean`
 
               - `type: "text_editor_code_execution_create_result"`
 
+              - `is_file_update: boolean`
+
             - `beta_text_editor_code_execution_str_replace_result_block: object`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
 
               - `lines: array of string`
 
@@ -5654,19 +5713,19 @@ ant beta:messages:batches results \
 
               - `old_start: number`
 
-              - `type: "text_editor_code_execution_str_replace_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
         - `beta_tool_search_tool_result_block: object`
+
+          - `type: "tool_search_tool_result"`
 
           - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
             - `beta_tool_search_tool_result_error: object`
+
+              - `type: "tool_search_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -5680,27 +5739,25 @@ ant beta:messages:batches results \
 
               - `error_message: string`
 
-              - `type: "tool_search_tool_result_error"`
-
             - `beta_tool_search_tool_search_result_block: object`
 
+              - `type: "tool_search_tool_search_result"`
+
               - `tool_references: array of BetaToolReferenceBlock`
+
+                - `type: "tool_reference"`
 
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `type: "tool_reference"`
-
-              - `type: "tool_search_tool_search_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "tool_search_tool_result"`
-
         - `beta_mcp_tool_use_block: object`
+
+          - `type: "mcp_tool_use"`
 
           - `id: string`
 
@@ -5716,15 +5773,17 @@ ant beta:messages:batches results \
 
             The name of the MCP server
 
-          - `type: "mcp_tool_use"`
-
         - `beta_mcp_tool_result_block: object`
+
+          - `type: "mcp_tool_result"`
 
           - `content: string or array of BetaTextBlock`
 
             - `union_member_0: string`
 
             - `beta_mcp_tool_result_block_content: array of BetaTextBlock`
+
+              - `type: "text"`
 
               - `citations: array of BetaTextCitation`
 
@@ -5734,9 +5793,7 @@ ant beta:messages:batches results \
 
               - `text: string`
 
-                maxLength: 5000000, minLength: 0
-
-              - `type: "text"`
+                minLength: 0
 
           - `is_error: boolean`
 
@@ -5744,15 +5801,13 @@ ant beta:messages:batches results \
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type: "mcp_tool_result"`
-
         - `beta_container_upload_block: object`
 
           Response model for a file uploaded to the container.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
+
+          - `file_id: string`
 
         - `beta_compaction_block: object`
 
@@ -5762,6 +5817,8 @@ ant beta:messages:batches results \
           summary (e.g., malformed output from the model). Clients may round-trip
           compaction blocks with null content; the server treats them as no-ops.
 
+          - `type: "compaction"`
+
           - `content: string`
 
             Summary of compacted content, or null if compaction failed
@@ -5769,8 +5826,6 @@ ant beta:messages:batches results \
           - `encrypted_content: string`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
-
-          - `type: "compaction"`
 
         - `beta_fallback_block: object`
 
@@ -5785,6 +5840,8 @@ ant beta:messages:batches results \
           The block is treated like a server-tool content block for streaming: it
           arrives via the standard `content_block_start` / `content_block_stop`
           pair and carries no deltas.
+
+          - `type: "fallback"`
 
           - `from: object`
 
@@ -5878,6 +5935,8 @@ ant beta:messages:batches results \
 
             What caused the `from` model to hand over at this hop.
 
+            - `type: "refusal"`
+
             - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
               The policy category that triggered a refusal.
@@ -5902,10 +5961,6 @@ ant beta:messages:batches results \
 
                 The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-            - `type: "refusal"`
-
-          - `type: "fallback"`
-
       - `context_management: object`
 
         Context management response.
@@ -5917,6 +5972,10 @@ ant beta:messages:batches results \
           List of context management edits that were applied.
 
           - `beta_clear_tool_uses_20250919_edit_response: object`
+
+            - `type: "clear_tool_uses_20250919"`
+
+              The type of context management edit applied.
 
             - `cleared_input_tokens: number`
 
@@ -5930,11 +5989,11 @@ ant beta:messages:batches results \
 
               minimum: 0
 
-            - `type: "clear_tool_uses_20250919"`
+          - `beta_clear_thinking_20251015_edit_response: object`
+
+            - `type: "clear_thinking_20251015"`
 
               The type of context management edit applied.
-
-          - `beta_clear_thinking_20251015_edit_response: object`
 
             - `cleared_input_tokens: number`
 
@@ -5948,10 +6007,6 @@ ant beta:messages:batches results \
 
               minimum: 0
 
-            - `type: "clear_thinking_20251015"`
-
-              The type of context management edit applied.
-
       - `diagnostics: object`
 
         Response envelope for request-level diagnostics. Present (possibly
@@ -5963,35 +6018,35 @@ ant beta:messages:batches results \
 
           - `beta_cache_miss_model_changed: object`
 
+            - `type: "model_changed"`
+
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-            - `type: "model_changed"`
 
           - `beta_cache_miss_system_changed: object`
 
+            - `type: "system_changed"`
+
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-            - `type: "system_changed"`
 
           - `beta_cache_miss_tools_changed: object`
 
+            - `type: "tools_changed"`
+
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-            - `type: "tools_changed"`
 
           - `beta_cache_miss_messages_changed: object`
 
+            - `type: "messages_changed"`
+
             - `cache_missed_input_tokens: number`
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-            - `type: "messages_changed"`
 
           - `beta_cache_miss_previous_message_not_found: object`
 
@@ -6085,6 +6140,8 @@ ant beta:messages:batches results \
 
         Structured information about a refusal.
 
+        - `type: "refusal"`
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
@@ -6164,8 +6221,6 @@ ant beta:messages:batches results \
 
           The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-        - `type: "refusal"`
-
       - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
         The reason that we stopped.
@@ -6203,12 +6258,6 @@ ant beta:messages:batches results \
         Which custom stop sequence was generated, if any.
 
         This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
 
       - `usage: object`
 
@@ -6274,6 +6323,8 @@ ant beta:messages:batches results \
 
               No reprice was applied; `reason` says why.
 
+              - `type: "not_applied"`
+
               - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
                 Why the reprice was not applied.
@@ -6304,8 +6355,6 @@ ant beta:messages:batches results \
                 - `"wrong_platform"`
 
                 - `"wrong_workspace"`
-
-              - `type: "not_applied"`
 
               - `remove_to_redeem: optional array of string`
 
@@ -6344,6 +6393,10 @@ ant beta:messages:batches results \
 
             Token usage for a sampling iteration.
 
+            - `type: "message"`
+
+              Usage for a sampling iteration
+
             - `cache_creation: object`
 
               Breakdown of cached tokens by TTL
@@ -6457,15 +6510,15 @@ ant beta:messages:batches results \
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "message"`
-
-              Usage for a sampling iteration
 
           - `beta_compaction_iteration_usage: object`
 
             Token usage for a compaction iteration.
 
+            - `type: "compaction"`
+
+              Usage for a compaction iteration
+
             - `cache_creation: object`
 
               Breakdown of cached tokens by TTL
@@ -6506,13 +6559,13 @@ ant beta:messages:batches results \
 
               minimum: 0
 
-            - `type: "compaction"`
-
-              Usage for a compaction iteration
-
           - `beta_advisor_message_iteration_usage: object`
 
             Token usage for an advisor sub-inference iteration.
+
+            - `type: "advisor_message"`
+
+              Usage for an advisor sub-inference iteration
 
             - `cache_creation: object`
 
@@ -6627,10 +6680,6 @@ ant beta:messages:batches results \
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "advisor_message"`
-
-              Usage for an advisor sub-inference iteration
 
           - `beta_fallback_message_iteration_usage: object`
 
@@ -6641,6 +6690,10 @@ ant beta:messages:batches results \
             a fallback model served the response is signalled by the presence of this
             entry in `usage.iterations`.
 
+            - `type: "fallback_message"`
+
+              Usage for the fallback-model attempt that served the response
+
             - `cache_creation: object`
 
               Breakdown of cached tokens by TTL
@@ -6754,10 +6807,6 @@ ant beta:messages:batches results \
               The number of output tokens which were used.
 
               minimum: 0
-
-            - `type: "fallback_message"`
-
-              Usage for the fallback-model attempt that served the response
 
         - `output_tokens: number`
 
@@ -6839,6 +6888,10 @@ ant beta:messages:batches results \
         fallback happened mid-stream, in which case it holds the serving model's
         entries and replaces the one in `message_start`.
 
+        - `type: "thinking_dropped"`
+
+          Always `thinking_dropped` for this entry type.
+
         - `path: string`
 
           Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -6869,77 +6922,71 @@ ant beta:messages:batches results \
 
           - `"end_user_binding_mismatch"`
 
-        - `type: "thinking_dropped"`
-
-          Always `thinking_dropped` for this entry type.
-
-    - `type: "succeeded"`
-
   - `beta_message_batch_errored_result: object`
 
+    - `type: "errored"`
+
     - `error: object`
+
+      - `type: "error"`
 
       - `error: BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 6 more`
 
         - `beta_invalid_request_error: object`
 
-          - `message: string`
-
           - `type: "invalid_request_error"`
+
+          - `message: string`
 
         - `beta_authentication_error: object`
 
-          - `message: string`
-
           - `type: "authentication_error"`
+
+          - `message: string`
 
         - `beta_billing_error: object`
 
-          - `message: string`
-
           - `type: "billing_error"`
+
+          - `message: string`
 
         - `beta_permission_error: object`
 
-          - `message: string`
-
           - `type: "permission_error"`
+
+          - `message: string`
 
         - `beta_not_found_error: object`
 
-          - `message: string`
-
           - `type: "not_found_error"`
+
+          - `message: string`
 
         - `beta_rate_limit_error: object`
 
-          - `message: string`
-
           - `type: "rate_limit_error"`
+
+          - `message: string`
 
         - `beta_gateway_timeout_error: object`
 
-          - `message: string`
-
           - `type: "timeout_error"`
+
+          - `message: string`
 
         - `beta_api_error: object`
 
-          - `message: string`
-
           - `type: "api_error"`
+
+          - `message: string`
 
         - `beta_overloaded_error: object`
 
-          - `message: string`
-
           - `type: "overloaded_error"`
 
+          - `message: string`
+
       - `request_id: string`
-
-      - `type: "error"`
-
-    - `type: "errored"`
 
   - `beta_message_batch_canceled_result: object`
 
@@ -6953,7 +7000,15 @@ ant beta:messages:batches results \
 
 - `beta_message_batch_succeeded_result: object`
 
+  - `type: "succeeded"`
+
   - `message: object`
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
 
     - `id: string`
 
@@ -6979,12 +7034,6 @@ ant beta:messages:batches results \
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" or "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -6992,6 +7041,12 @@ ant beta:messages:batches results \
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -7030,6 +7085,8 @@ ant beta:messages:batches results \
 
       - `beta_text_block: object`
 
+        - `type: "text"`
+
         - `citations: array of BetaTextCitation`
 
           Citations supporting the text block.
@@ -7037,6 +7094,8 @@ ant beta:messages:batches results \
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `beta_citation_char_location: object`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -7054,9 +7113,9 @@ ant beta:messages:batches results \
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `beta_citation_page_location: object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -7074,9 +7133,9 @@ ant beta:messages:batches results \
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `beta_citation_content_block_location: object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -7104,9 +7163,9 @@ ant beta:messages:batches results \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `beta_citations_web_search_result_location: object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -7116,11 +7175,11 @@ ant beta:messages:batches results \
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
           - `beta_citation_search_result_location: object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -7152,15 +7211,13 @@ ant beta:messages:batches results \
 
             - `title: string`
 
-            - `type: "search_result_location"`
-
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
+          minLength: 0
 
       - `beta_thinking_block: object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -7174,9 +7231,9 @@ ant beta:messages:batches results \
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
       - `beta_redacted_thinking_block: object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
@@ -7186,9 +7243,9 @@ ant beta:messages:batches results \
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
       - `beta_tool_use_block: object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -7199,8 +7256,6 @@ ant beta:messages:batches results \
         - `name: string`
 
           minLength: 1
-
-        - `type: "tool_use"`
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -7216,19 +7271,19 @@ ant beta:messages:batches results \
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `beta_server_tool_caller_20260120: object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string`
 
@@ -7237,6 +7292,8 @@ ant beta:messages:batches results \
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `beta_server_tool_use_block: object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -7262,8 +7319,6 @@ ant beta:messages:batches results \
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
           Tool invocation directly from the model.
@@ -7280,9 +7335,13 @@ ant beta:messages:batches results \
 
       - `beta_web_search_tool_result_block: object`
 
+        - `type: "web_search_tool_result"`
+
         - `content: BetaWebSearchToolResultError or array of BetaWebSearchResultBlock`
 
           - `beta_web_search_tool_result_error: object`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
@@ -7298,9 +7357,9 @@ ant beta:messages:batches results \
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
           - `union_member_1: array of BetaWebSearchResultBlock`
+
+            - `type: "web_search_result"`
 
             - `encrypted_content: string`
 
@@ -7308,15 +7367,11 @@ ant beta:messages:batches results \
 
             - `title: string`
 
-            - `type: "web_search_result"`
-
             - `url: string`
 
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -7334,11 +7389,15 @@ ant beta:messages:batches results \
 
       - `beta_web_fetch_tool_result_block: object`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: BetaWebFetchToolResultErrorBlock or BetaWebFetchBlock`
 
           - `beta_web_fetch_tool_result_error_block: object`
 
-            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+            - `type: "web_fetch_tool_result_error"`
+
+            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
               - `"invalid_tool_input"`
 
@@ -7358,11 +7417,15 @@ ant beta:messages:batches results \
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `beta_web_fetch_block: object`
 
+            - `type: "web_fetch_result"`
+
             - `content: object`
+
+              - `type: "document"`
 
               - `citations: object`
 
@@ -7374,33 +7437,29 @@ ant beta:messages:batches results \
 
                 - `beta_base64_pdf_source: object`
 
+                  - `type: "base64"`
+
                   - `data: string`
 
                     format: byte
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `beta_plain_text_source: object`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
               - `title: string`
 
                 The title of the document
 
-              - `type: "document"`
-
             - `retrieved_at: string`
 
               ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
 
             - `url: string`
 
@@ -7409,8 +7468,6 @@ ant beta:messages:batches results \
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_fetch_tool_result"`
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
@@ -7428,9 +7485,13 @@ ant beta:messages:batches results \
 
       - `beta_advisor_tool_result_block: object`
 
+        - `type: "advisor_tool_result"`
+
         - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
           - `beta_advisor_tool_result_error: object`
+
+            - `type: "advisor_tool_result_error"`
 
             - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
@@ -7448,9 +7509,9 @@ ant beta:messages:batches results \
 
               - `"model_not_found"`
 
-            - `type: "advisor_tool_result_error"`
-
           - `beta_advisor_result_block: object`
+
+            - `type: "advisor_result"`
 
             - `stop_reason: string`
 
@@ -7458,9 +7519,9 @@ ant beta:messages:batches results \
 
             - `text: string`
 
-            - `type: "advisor_result"`
-
           - `beta_advisor_redacted_result_block: object`
+
+            - `type: "advisor_redacted_result"`
 
             - `encrypted_content: string`
 
@@ -7470,21 +7531,21 @@ ant beta:messages:batches results \
 
               The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-            - `type: "advisor_redacted_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "advisor_tool_result"`
-
       - `beta_code_execution_tool_result_block: object`
+
+        - `type: "code_execution_tool_result"`
 
         - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `beta_code_execution_tool_result_error: object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -7496,15 +7557,15 @@ ant beta:messages:batches results \
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `beta_code_execution_result_block: object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of BetaCodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -7512,17 +7573,17 @@ ant beta:messages:batches results \
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `beta_encrypted_code_execution_result_block: object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of BetaCodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -7530,19 +7591,19 @@ ant beta:messages:batches results \
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
       - `beta_bash_code_execution_tool_result_block: object`
+
+        - `type: "bash_code_execution_tool_result"`
 
         - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
 
           - `beta_bash_code_execution_tool_result_error: object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -7556,15 +7617,15 @@ ant beta:messages:batches results \
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `beta_bash_code_execution_result_block: object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BetaBashCodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -7572,19 +7633,19 @@ ant beta:messages:batches results \
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
       - `beta_text_editor_code_execution_tool_result_block: object`
+
+        - `type: "text_editor_code_execution_tool_result"`
 
         - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `beta_text_editor_code_execution_tool_result_error: object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -7600,9 +7661,9 @@ ant beta:messages:batches results \
 
             - `error_message: string`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
           - `beta_text_editor_code_execution_view_result_block: object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -7620,15 +7681,15 @@ ant beta:messages:batches results \
 
             - `total_lines: number`
 
-            - `type: "text_editor_code_execution_view_result"`
-
           - `beta_text_editor_code_execution_create_result_block: object`
-
-            - `is_file_update: boolean`
 
             - `type: "text_editor_code_execution_create_result"`
 
+            - `is_file_update: boolean`
+
           - `beta_text_editor_code_execution_str_replace_result_block: object`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
 
             - `lines: array of string`
 
@@ -7640,19 +7701,19 @@ ant beta:messages:batches results \
 
             - `old_start: number`
 
-            - `type: "text_editor_code_execution_str_replace_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
       - `beta_tool_search_tool_result_block: object`
+
+        - `type: "tool_search_tool_result"`
 
         - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
 
           - `beta_tool_search_tool_result_error: object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -7666,27 +7727,25 @@ ant beta:messages:batches results \
 
             - `error_message: string`
 
-            - `type: "tool_search_tool_result_error"`
-
           - `beta_tool_search_tool_search_result_block: object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of BetaToolReferenceBlock`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "tool_search_tool_result"`
-
       - `beta_mcp_tool_use_block: object`
+
+        - `type: "mcp_tool_use"`
 
         - `id: string`
 
@@ -7702,15 +7761,17 @@ ant beta:messages:batches results \
 
           The name of the MCP server
 
-        - `type: "mcp_tool_use"`
-
       - `beta_mcp_tool_result_block: object`
+
+        - `type: "mcp_tool_result"`
 
         - `content: string or array of BetaTextBlock`
 
           - `union_member_0: string`
 
           - `beta_mcp_tool_result_block_content: array of BetaTextBlock`
+
+            - `type: "text"`
 
             - `citations: array of BetaTextCitation`
 
@@ -7720,9 +7781,7 @@ ant beta:messages:batches results \
 
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
+              minLength: 0
 
         - `is_error: boolean`
 
@@ -7730,15 +7789,13 @@ ant beta:messages:batches results \
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type: "mcp_tool_result"`
-
       - `beta_container_upload_block: object`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
       - `beta_compaction_block: object`
 
@@ -7748,6 +7805,8 @@ ant beta:messages:batches results \
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
+        - `type: "compaction"`
+
         - `content: string`
 
           Summary of compacted content, or null if compaction failed
@@ -7755,8 +7814,6 @@ ant beta:messages:batches results \
         - `encrypted_content: string`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
-
-        - `type: "compaction"`
 
       - `beta_fallback_block: object`
 
@@ -7771,6 +7828,8 @@ ant beta:messages:batches results \
         The block is treated like a server-tool content block for streaming: it
         arrives via the standard `content_block_start` / `content_block_stop`
         pair and carries no deltas.
+
+        - `type: "fallback"`
 
         - `from: object`
 
@@ -7864,6 +7923,8 @@ ant beta:messages:batches results \
 
           What caused the `from` model to hand over at this hop.
 
+          - `type: "refusal"`
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
@@ -7888,10 +7949,6 @@ ant beta:messages:batches results \
 
               The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-          - `type: "refusal"`
-
-        - `type: "fallback"`
-
     - `context_management: object`
 
       Context management response.
@@ -7903,6 +7960,10 @@ ant beta:messages:batches results \
         List of context management edits that were applied.
 
         - `beta_clear_tool_uses_20250919_edit_response: object`
+
+          - `type: "clear_tool_uses_20250919"`
+
+            The type of context management edit applied.
 
           - `cleared_input_tokens: number`
 
@@ -7916,11 +7977,11 @@ ant beta:messages:batches results \
 
             minimum: 0
 
-          - `type: "clear_tool_uses_20250919"`
+        - `beta_clear_thinking_20251015_edit_response: object`
+
+          - `type: "clear_thinking_20251015"`
 
             The type of context management edit applied.
-
-        - `beta_clear_thinking_20251015_edit_response: object`
 
           - `cleared_input_tokens: number`
 
@@ -7934,10 +7995,6 @@ ant beta:messages:batches results \
 
             minimum: 0
 
-          - `type: "clear_thinking_20251015"`
-
-            The type of context management edit applied.
-
     - `diagnostics: object`
 
       Response envelope for request-level diagnostics. Present (possibly
@@ -7949,35 +8006,35 @@ ant beta:messages:batches results \
 
         - `beta_cache_miss_model_changed: object`
 
+          - `type: "model_changed"`
+
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-          - `type: "model_changed"`
 
         - `beta_cache_miss_system_changed: object`
 
+          - `type: "system_changed"`
+
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-          - `type: "system_changed"`
 
         - `beta_cache_miss_tools_changed: object`
 
+          - `type: "tools_changed"`
+
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-          - `type: "tools_changed"`
 
         - `beta_cache_miss_messages_changed: object`
 
+          - `type: "messages_changed"`
+
           - `cache_missed_input_tokens: number`
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-          - `type: "messages_changed"`
 
         - `beta_cache_miss_previous_message_not_found: object`
 
@@ -8071,6 +8128,8 @@ ant beta:messages:batches results \
 
       Structured information about a refusal.
 
+      - `type: "refusal"`
+
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
@@ -8150,8 +8209,6 @@ ant beta:messages:batches results \
 
         The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-      - `type: "refusal"`
-
     - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 5 more`
 
       The reason that we stopped.
@@ -8189,12 +8246,6 @@ ant beta:messages:batches results \
       Which custom stop sequence was generated, if any.
 
       This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: "message"`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
 
     - `usage: object`
 
@@ -8260,6 +8311,8 @@ ant beta:messages:batches results \
 
             No reprice was applied; `reason` says why.
 
+            - `type: "not_applied"`
+
             - `reason: "body_mismatch" or "continuation_excluded" or "continuation_only" or 9 more`
 
               Why the reprice was not applied.
@@ -8290,8 +8343,6 @@ ant beta:messages:batches results \
               - `"wrong_platform"`
 
               - `"wrong_workspace"`
-
-            - `type: "not_applied"`
 
             - `remove_to_redeem: optional array of string`
 
@@ -8330,6 +8381,10 @@ ant beta:messages:batches results \
 
           Token usage for a sampling iteration.
 
+          - `type: "message"`
+
+            Usage for a sampling iteration
+
           - `cache_creation: object`
 
             Breakdown of cached tokens by TTL
@@ -8443,15 +8498,15 @@ ant beta:messages:batches results \
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "message"`
-
-            Usage for a sampling iteration
 
         - `beta_compaction_iteration_usage: object`
 
           Token usage for a compaction iteration.
 
+          - `type: "compaction"`
+
+            Usage for a compaction iteration
+
           - `cache_creation: object`
 
             Breakdown of cached tokens by TTL
@@ -8492,13 +8547,13 @@ ant beta:messages:batches results \
 
             minimum: 0
 
-          - `type: "compaction"`
-
-            Usage for a compaction iteration
-
         - `beta_advisor_message_iteration_usage: object`
 
           Token usage for an advisor sub-inference iteration.
+
+          - `type: "advisor_message"`
+
+            Usage for an advisor sub-inference iteration
 
           - `cache_creation: object`
 
@@ -8613,10 +8668,6 @@ ant beta:messages:batches results \
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "advisor_message"`
-
-            Usage for an advisor sub-inference iteration
 
         - `beta_fallback_message_iteration_usage: object`
 
@@ -8627,6 +8678,10 @@ ant beta:messages:batches results \
           a fallback model served the response is signalled by the presence of this
           entry in `usage.iterations`.
 
+          - `type: "fallback_message"`
+
+            Usage for the fallback-model attempt that served the response
+
           - `cache_creation: object`
 
             Breakdown of cached tokens by TTL
@@ -8740,10 +8795,6 @@ ant beta:messages:batches results \
             The number of output tokens which were used.
 
             minimum: 0
-
-          - `type: "fallback_message"`
-
-            Usage for the fallback-model attempt that served the response
 
       - `output_tokens: number`
 
@@ -8825,6 +8876,10 @@ ant beta:messages:batches results \
       fallback happened mid-stream, in which case it holds the serving model's
       entries and replaces the one in `message_start`.
 
+      - `type: "thinking_dropped"`
+
+        Always `thinking_dropped` for this entry type.
+
       - `path: string`
 
         Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -8854,9 +8909,3 @@ ant beta:messages:batches results \
         - `"organization_binding_mismatch"`
 
         - `"end_user_binding_mismatch"`
-
-      - `type: "thinking_dropped"`
-
-        Always `thinking_dropped` for this entry type.
-
-  - `type: "succeeded"`

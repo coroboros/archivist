@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks
+---
+
 # Webhooks
 
 ## Unwrap
@@ -51,13 +56,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookAgentArchivedEventData`
 
+  - `type: "agent.archived"`
+
   - `id: string`
 
     ID of the agent that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "agent.archived"`
 
   - `workspace_id: string`
 
@@ -65,13 +70,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookAgentCreatedEventData`
 
+  - `type: "agent.created"`
+
   - `id: string`
 
     ID of the agent that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "agent.created"`
 
   - `workspace_id: string`
 
@@ -79,13 +84,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookAgentDeletedEventData`
 
+  - `type: "agent.deleted"`
+
   - `id: string`
 
     ID of the agent that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "agent.deleted"`
 
   - `workspace_id: string`
 
@@ -93,13 +98,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookAgentUpdatedEventData`
 
+  - `type: "agent.updated"`
+
   - `id: string`
 
     ID of the agent that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "agent.updated"`
 
   - `workspace_id: string`
 
@@ -107,13 +112,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentArchivedEventData`
 
+  - `type: "deployment.archived"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.archived"`
 
   - `workspace_id: string`
 
@@ -121,13 +126,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentCreatedEventData`
 
+  - `type: "deployment.created"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.created"`
 
   - `workspace_id: string`
 
@@ -135,13 +140,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentDeletedEventData`
 
+  - `type: "deployment.deleted"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.deleted"`
 
   - `workspace_id: string`
 
@@ -149,13 +154,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentPausedEventData`
 
+  - `type: "deployment.paused"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.paused"`
 
   - `workspace_id: string`
 
@@ -163,13 +168,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentRunFailedEventData`
 
+  - `type: "deployment_run.failed"`
+
   - `id: string`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment_run.failed"`
 
   - `workspace_id: string`
 
@@ -177,13 +182,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentRunStartedEventData`
 
+  - `type: "deployment_run.started"`
+
   - `id: string`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment_run.started"`
 
   - `workspace_id: string`
 
@@ -191,13 +196,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentRunSucceededEventData`
 
+  - `type: "deployment_run.succeeded"`
+
   - `id: string`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment_run.succeeded"`
 
   - `workspace_id: string`
 
@@ -205,13 +210,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentUnpausedEventData`
 
+  - `type: "deployment.unpaused"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.unpaused"`
 
   - `workspace_id: string`
 
@@ -219,13 +224,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookDeploymentUpdatedEventData`
 
+  - `type: "deployment.updated"`
+
   - `id: string`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "deployment.updated"`
 
   - `workspace_id: string`
 
@@ -233,13 +238,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookEnvironmentArchivedEventData`
 
+  - `type: "environment.archived"`
+
   - `id: string`
 
     ID of the environment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "environment.archived"`
 
   - `workspace_id: string`
 
@@ -247,13 +252,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookEnvironmentCreatedEventData`
 
+  - `type: "environment.created"`
+
   - `id: string`
 
     ID of the environment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "environment.created"`
 
   - `workspace_id: string`
 
@@ -261,13 +266,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookEnvironmentDeletedEventData`
 
+  - `type: "environment.deleted"`
+
   - `id: string`
 
     ID of the environment that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "environment.deleted"`
 
   - `workspace_id: string`
 
@@ -275,19 +280,23 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookEnvironmentUpdatedEventData`
 
+  - `type: "environment.updated"`
+
   - `id: string`
 
     ID of the environment that triggered the event.
 
   - `organization_id: string`
 
-  - `type: "environment.updated"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
+
+  - `type: "event"`
+
+    Object type. Always `event` for webhook payloads.
 
   - `id: string`
 
@@ -303,138 +312,140 @@ await client.beta.webhooks.parseUnverified();
 
     - `BetaWebhookSessionCreatedEventData`
 
+      - `type: "session.created"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionPendingEventData`
 
+      - `type: "session.pending"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.pending"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionRunningEventData`
 
+      - `type: "session.running"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.running"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionIdledEventData`
 
+      - `type: "session.idled"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.idled"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionRequiresActionEventData`
 
+      - `type: "session.requires_action"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.requires_action"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionArchivedEventData`
 
+      - `type: "session.archived"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionDeletedEventData`
 
+      - `type: "session.deleted"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.deleted"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusRescheduledEventData`
 
+      - `type: "session.status_rescheduled"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.status_rescheduled"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusRunStartedEventData`
 
+      - `type: "session.status_run_started"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.status_run_started"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusIdledEventData`
 
+      - `type: "session.status_idled"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.status_idled"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionStatusTerminatedEventData`
 
+      - `type: "session.status_terminated"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.status_terminated"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionThreadCreatedEventData`
 
+      - `type: "session.thread_created"`
+
       - `id: string`
 
         ID of the session that triggered the event.
@@ -444,13 +455,13 @@ await client.beta.webhooks.parseUnverified();
       - `session_thread_id: string`
 
         ID of the session thread this event refers to.
-
-      - `type: "session.thread_created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionThreadIdledEventData`
 
+      - `type: "session.thread_idled"`
+
       - `id: string`
 
         ID of the session that triggered the event.
@@ -460,13 +471,13 @@ await client.beta.webhooks.parseUnverified();
       - `session_thread_id: string`
 
         ID of the session thread this event refers to.
-
-      - `type: "session.thread_idled"`
 
       - `workspace_id: string`
 
     - `BetaWebhookSessionThreadTerminatedEventData`
 
+      - `type: "session.thread_terminated"`
+
       - `id: string`
 
         ID of the session that triggered the event.
@@ -477,11 +488,11 @@ await client.beta.webhooks.parseUnverified();
 
         ID of the session thread this event refers to.
 
-      - `type: "session.thread_terminated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+      - `type: "session.outcome_evaluation_ended"`
 
       - `id: string`
 
@@ -489,55 +500,53 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "session.outcome_evaluation_ended"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultCreatedEventData`
+
+      - `type: "vault.created"`
 
       - `id: string`
 
         ID of the vault that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookVaultArchivedEventData`
 
+      - `type: "vault.archived"`
+
       - `id: string`
 
         ID of the vault that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookVaultDeletedEventData`
 
+      - `type: "vault.deleted"`
+
       - `id: string`
 
         ID of the vault that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "vault.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookVaultCredentialCreatedEventData`
+
+      - `type: "vault_credential.created"`
 
       - `id: string`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault_credential.created"`
 
       - `vault_id: string`
 
@@ -547,13 +556,13 @@ await client.beta.webhooks.parseUnverified();
 
     - `BetaWebhookVaultCredentialArchivedEventData`
 
+      - `type: "vault_credential.archived"`
+
       - `id: string`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault_credential.archived"`
 
       - `vault_id: string`
 
@@ -563,13 +572,13 @@ await client.beta.webhooks.parseUnverified();
 
     - `BetaWebhookVaultCredentialDeletedEventData`
 
+      - `type: "vault_credential.deleted"`
+
       - `id: string`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault_credential.deleted"`
 
       - `vault_id: string`
 
@@ -579,13 +588,13 @@ await client.beta.webhooks.parseUnverified();
 
     - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
+      - `type: "vault_credential.refresh_failed"`
+
       - `id: string`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "vault_credential.refresh_failed"`
 
       - `vault_id: string`
 
@@ -595,65 +604,67 @@ await client.beta.webhooks.parseUnverified();
 
     - `BetaWebhookSessionUpdatedEventData`
 
+      - `type: "session.updated"`
+
       - `id: string`
 
         ID of the session that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "session.updated"`
 
       - `workspace_id: string`
 
     - `BetaWebhookAgentCreatedEventData`
 
+      - `type: "agent.created"`
+
       - `id: string`
 
         ID of the agent that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "agent.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookAgentArchivedEventData`
 
+      - `type: "agent.archived"`
+
       - `id: string`
 
         ID of the agent that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "agent.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookAgentDeletedEventData`
 
+      - `type: "agent.deleted"`
+
       - `id: string`
 
         ID of the agent that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "agent.deleted"`
 
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentPausedEventData`
 
+      - `type: "deployment.paused"`
+
       - `id: string`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "deployment.paused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunFailedEventData`
+
+      - `type: "deployment_run.failed"`
 
       - `id: string`
 
@@ -661,47 +672,47 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "deployment_run.failed"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentCreatedEventData`
+
+      - `type: "deployment.created"`
 
       - `id: string`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "deployment.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentUpdatedEventData`
 
+      - `type: "deployment.updated"`
+
       - `id: string`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "deployment.updated"`
 
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentUnpausedEventData`
 
+      - `type: "deployment.unpaused"`
+
       - `id: string`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "deployment.unpaused"`
-
       - `workspace_id: string`
 
     - `BetaWebhookAgentUpdatedEventData`
+
+      - `type: "agent.updated"`
 
       - `id: string`
 
@@ -709,35 +720,35 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "agent.updated"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentArchivedEventData`
+
+      - `type: "deployment.archived"`
 
       - `id: string`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "deployment.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunStartedEventData`
 
+      - `type: "deployment_run.started"`
+
       - `id: string`
 
         ID of the deployment run that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "deployment_run.started"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentDeletedEventData`
+
+      - `type: "deployment.deleted"`
 
       - `id: string`
 
@@ -745,11 +756,11 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "deployment.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookDeploymentRunSucceededEventData`
+
+      - `type: "deployment_run.succeeded"`
 
       - `id: string`
 
@@ -757,95 +768,95 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "deployment_run.succeeded"`
-
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentCreatedEventData`
+
+      - `type: "environment.created"`
 
       - `id: string`
 
         ID of the environment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "environment.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentUpdatedEventData`
 
+      - `type: "environment.updated"`
+
       - `id: string`
 
         ID of the environment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "environment.updated"`
 
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentArchivedEventData`
 
+      - `type: "environment.archived"`
+
       - `id: string`
 
         ID of the environment that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "environment.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookEnvironmentDeletedEventData`
 
+      - `type: "environment.deleted"`
+
       - `id: string`
 
         ID of the environment that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "environment.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookMemoryStoreCreatedEventData`
+
+      - `type: "memory_store.created"`
 
       - `id: string`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "memory_store.created"`
 
       - `workspace_id: string`
 
     - `BetaWebhookMemoryStoreArchivedEventData`
 
+      - `type: "memory_store.archived"`
+
       - `id: string`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: string`
-
-      - `type: "memory_store.archived"`
 
       - `workspace_id: string`
 
     - `BetaWebhookMemoryStoreDeletedEventData`
 
+      - `type: "memory_store.deleted"`
+
       - `id: string`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: string`
 
-      - `type: "memory_store.deleted"`
-
       - `workspace_id: string`
 
     - `BetaWebhookSessionBudgetReachedEventData`
+
+      - `type: "session.budget_reached"`
 
       - `id: string`
 
@@ -853,13 +864,7 @@ await client.beta.webhooks.parseUnverified();
 
       - `organization_id: string`
 
-      - `type: "session.budget_reached"`
-
       - `workspace_id: string`
-
-  - `type: "event"`
-
-    Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
@@ -867,138 +872,140 @@ await client.beta.webhooks.parseUnverified();
 
   - `BetaWebhookSessionCreatedEventData`
 
+    - `type: "session.created"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionPendingEventData`
 
+    - `type: "session.pending"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.pending"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionRunningEventData`
 
+    - `type: "session.running"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.running"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionIdledEventData`
 
+    - `type: "session.idled"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.idled"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionRequiresActionEventData`
 
+    - `type: "session.requires_action"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.requires_action"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionArchivedEventData`
 
+    - `type: "session.archived"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionDeletedEventData`
 
+    - `type: "session.deleted"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.deleted"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusRescheduledEventData`
 
+    - `type: "session.status_rescheduled"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.status_rescheduled"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusRunStartedEventData`
 
+    - `type: "session.status_run_started"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.status_run_started"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusIdledEventData`
 
+    - `type: "session.status_idled"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.status_idled"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionStatusTerminatedEventData`
 
+    - `type: "session.status_terminated"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.status_terminated"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionThreadCreatedEventData`
 
+    - `type: "session.thread_created"`
+
     - `id: string`
 
       ID of the session that triggered the event.
@@ -1008,13 +1015,13 @@ await client.beta.webhooks.parseUnverified();
     - `session_thread_id: string`
 
       ID of the session thread this event refers to.
-
-    - `type: "session.thread_created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionThreadIdledEventData`
 
+    - `type: "session.thread_idled"`
+
     - `id: string`
 
       ID of the session that triggered the event.
@@ -1024,13 +1031,13 @@ await client.beta.webhooks.parseUnverified();
     - `session_thread_id: string`
 
       ID of the session thread this event refers to.
-
-    - `type: "session.thread_idled"`
 
     - `workspace_id: string`
 
   - `BetaWebhookSessionThreadTerminatedEventData`
 
+    - `type: "session.thread_terminated"`
+
     - `id: string`
 
       ID of the session that triggered the event.
@@ -1041,11 +1048,11 @@ await client.beta.webhooks.parseUnverified();
 
       ID of the session thread this event refers to.
 
-    - `type: "session.thread_terminated"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+
+    - `type: "session.outcome_evaluation_ended"`
 
     - `id: string`
 
@@ -1053,55 +1060,53 @@ await client.beta.webhooks.parseUnverified();
 
     - `organization_id: string`
 
-    - `type: "session.outcome_evaluation_ended"`
-
     - `workspace_id: string`
 
   - `BetaWebhookVaultCreatedEventData`
+
+    - `type: "vault.created"`
 
     - `id: string`
 
       ID of the vault that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookVaultArchivedEventData`
 
+    - `type: "vault.archived"`
+
     - `id: string`
 
       ID of the vault that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookVaultDeletedEventData`
 
+    - `type: "vault.deleted"`
+
     - `id: string`
 
       ID of the vault that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "vault.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookVaultCredentialCreatedEventData`
+
+    - `type: "vault_credential.created"`
 
     - `id: string`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault_credential.created"`
 
     - `vault_id: string`
 
@@ -1111,13 +1116,13 @@ await client.beta.webhooks.parseUnverified();
 
   - `BetaWebhookVaultCredentialArchivedEventData`
 
+    - `type: "vault_credential.archived"`
+
     - `id: string`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault_credential.archived"`
 
     - `vault_id: string`
 
@@ -1127,13 +1132,13 @@ await client.beta.webhooks.parseUnverified();
 
   - `BetaWebhookVaultCredentialDeletedEventData`
 
+    - `type: "vault_credential.deleted"`
+
     - `id: string`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault_credential.deleted"`
 
     - `vault_id: string`
 
@@ -1143,13 +1148,13 @@ await client.beta.webhooks.parseUnverified();
 
   - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
+    - `type: "vault_credential.refresh_failed"`
+
     - `id: string`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "vault_credential.refresh_failed"`
 
     - `vault_id: string`
 
@@ -1159,65 +1164,67 @@ await client.beta.webhooks.parseUnverified();
 
   - `BetaWebhookSessionUpdatedEventData`
 
+    - `type: "session.updated"`
+
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.updated"`
 
     - `workspace_id: string`
 
   - `BetaWebhookAgentCreatedEventData`
 
+    - `type: "agent.created"`
+
     - `id: string`
 
       ID of the agent that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "agent.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookAgentArchivedEventData`
 
+    - `type: "agent.archived"`
+
     - `id: string`
 
       ID of the agent that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "agent.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookAgentDeletedEventData`
 
+    - `type: "agent.deleted"`
+
     - `id: string`
 
       ID of the agent that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "agent.deleted"`
 
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentPausedEventData`
 
+    - `type: "deployment.paused"`
+
     - `id: string`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "deployment.paused"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunFailedEventData`
+
+    - `type: "deployment_run.failed"`
 
     - `id: string`
 
@@ -1225,47 +1232,47 @@ await client.beta.webhooks.parseUnverified();
 
     - `organization_id: string`
 
-    - `type: "deployment_run.failed"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentCreatedEventData`
+
+    - `type: "deployment.created"`
 
     - `id: string`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "deployment.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentUpdatedEventData`
 
+    - `type: "deployment.updated"`
+
     - `id: string`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "deployment.updated"`
 
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentUnpausedEventData`
 
+    - `type: "deployment.unpaused"`
+
     - `id: string`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "deployment.unpaused"`
-
     - `workspace_id: string`
 
   - `BetaWebhookAgentUpdatedEventData`
+
+    - `type: "agent.updated"`
 
     - `id: string`
 
@@ -1273,35 +1280,35 @@ await client.beta.webhooks.parseUnverified();
 
     - `organization_id: string`
 
-    - `type: "agent.updated"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentArchivedEventData`
+
+    - `type: "deployment.archived"`
 
     - `id: string`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "deployment.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunStartedEventData`
 
+    - `type: "deployment_run.started"`
+
     - `id: string`
 
       ID of the deployment run that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "deployment_run.started"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentDeletedEventData`
+
+    - `type: "deployment.deleted"`
 
     - `id: string`
 
@@ -1309,11 +1316,11 @@ await client.beta.webhooks.parseUnverified();
 
     - `organization_id: string`
 
-    - `type: "deployment.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookDeploymentRunSucceededEventData`
+
+    - `type: "deployment_run.succeeded"`
 
     - `id: string`
 
@@ -1321,103 +1328,101 @@ await client.beta.webhooks.parseUnverified();
 
     - `organization_id: string`
 
-    - `type: "deployment_run.succeeded"`
-
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentCreatedEventData`
+
+    - `type: "environment.created"`
 
     - `id: string`
 
       ID of the environment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "environment.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentUpdatedEventData`
 
+    - `type: "environment.updated"`
+
     - `id: string`
 
       ID of the environment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "environment.updated"`
 
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentArchivedEventData`
 
+    - `type: "environment.archived"`
+
     - `id: string`
 
       ID of the environment that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "environment.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookEnvironmentDeletedEventData`
 
+    - `type: "environment.deleted"`
+
     - `id: string`
 
       ID of the environment that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "environment.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookMemoryStoreCreatedEventData`
+
+    - `type: "memory_store.created"`
 
     - `id: string`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "memory_store.created"`
 
     - `workspace_id: string`
 
   - `BetaWebhookMemoryStoreArchivedEventData`
 
+    - `type: "memory_store.archived"`
+
     - `id: string`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "memory_store.archived"`
 
     - `workspace_id: string`
 
   - `BetaWebhookMemoryStoreDeletedEventData`
 
+    - `type: "memory_store.deleted"`
+
     - `id: string`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: string`
 
-    - `type: "memory_store.deleted"`
-
     - `workspace_id: string`
 
   - `BetaWebhookSessionBudgetReachedEventData`
+
+    - `type: "session.budget_reached"`
 
     - `id: string`
 
       ID of the session that triggered the event.
 
     - `organization_id: string`
-
-    - `type: "session.budget_reached"`
 
     - `workspace_id: string`
 
@@ -1425,13 +1430,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookMemoryStoreArchivedEventData`
 
+  - `type: "memory_store.archived"`
+
   - `id: string`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "memory_store.archived"`
 
   - `workspace_id: string`
 
@@ -1439,13 +1444,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookMemoryStoreCreatedEventData`
 
+  - `type: "memory_store.created"`
+
   - `id: string`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "memory_store.created"`
 
   - `workspace_id: string`
 
@@ -1453,13 +1458,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookMemoryStoreDeletedEventData`
 
+  - `type: "memory_store.deleted"`
+
   - `id: string`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "memory_store.deleted"`
 
   - `workspace_id: string`
 
@@ -1467,13 +1472,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionArchivedEventData`
 
+  - `type: "session.archived"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.archived"`
 
   - `workspace_id: string`
 
@@ -1481,13 +1486,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionBudgetReachedEventData`
 
+  - `type: "session.budget_reached"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.budget_reached"`
 
   - `workspace_id: string`
 
@@ -1495,13 +1500,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionCreatedEventData`
 
+  - `type: "session.created"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.created"`
 
   - `workspace_id: string`
 
@@ -1509,13 +1514,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionDeletedEventData`
 
+  - `type: "session.deleted"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.deleted"`
 
   - `workspace_id: string`
 
@@ -1523,13 +1528,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionIdledEventData`
 
+  - `type: "session.idled"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.idled"`
 
   - `workspace_id: string`
 
@@ -1537,13 +1542,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
+  - `type: "session.outcome_evaluation_ended"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.outcome_evaluation_ended"`
 
   - `workspace_id: string`
 
@@ -1551,13 +1556,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionPendingEventData`
 
+  - `type: "session.pending"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.pending"`
 
   - `workspace_id: string`
 
@@ -1565,13 +1570,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionRequiresActionEventData`
 
+  - `type: "session.requires_action"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.requires_action"`
 
   - `workspace_id: string`
 
@@ -1579,13 +1584,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionRunningEventData`
 
+  - `type: "session.running"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.running"`
 
   - `workspace_id: string`
 
@@ -1593,13 +1598,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionStatusIdledEventData`
 
+  - `type: "session.status_idled"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.status_idled"`
 
   - `workspace_id: string`
 
@@ -1607,13 +1612,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionStatusRescheduledEventData`
 
+  - `type: "session.status_rescheduled"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.status_rescheduled"`
 
   - `workspace_id: string`
 
@@ -1621,13 +1626,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionStatusRunStartedEventData`
 
+  - `type: "session.status_run_started"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.status_run_started"`
 
   - `workspace_id: string`
 
@@ -1635,13 +1640,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionStatusTerminatedEventData`
 
+  - `type: "session.status_terminated"`
+
   - `id: string`
 
     ID of the session that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "session.status_terminated"`
 
   - `workspace_id: string`
 
@@ -1649,6 +1654,8 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionThreadCreatedEventData`
 
+  - `type: "session.thread_created"`
+
   - `id: string`
 
     ID of the session that triggered the event.
@@ -1658,8 +1665,6 @@ await client.beta.webhooks.parseUnverified();
   - `session_thread_id: string`
 
     ID of the session thread this event refers to.
-
-  - `type: "session.thread_created"`
 
   - `workspace_id: string`
 
@@ -1667,6 +1672,8 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionThreadIdledEventData`
 
+  - `type: "session.thread_idled"`
+
   - `id: string`
 
     ID of the session that triggered the event.
@@ -1676,8 +1683,6 @@ await client.beta.webhooks.parseUnverified();
   - `session_thread_id: string`
 
     ID of the session thread this event refers to.
-
-  - `type: "session.thread_idled"`
 
   - `workspace_id: string`
 
@@ -1685,6 +1690,8 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookSessionThreadTerminatedEventData`
 
+  - `type: "session.thread_terminated"`
+
   - `id: string`
 
     ID of the session that triggered the event.
@@ -1695,13 +1702,13 @@ await client.beta.webhooks.parseUnverified();
 
     ID of the session thread this event refers to.
 
-  - `type: "session.thread_terminated"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Session Updated Event Data
 
 - `BetaWebhookSessionUpdatedEventData`
+
+  - `type: "session.updated"`
 
   - `id: string`
 
@@ -1709,21 +1716,19 @@ await client.beta.webhooks.parseUnverified();
 
   - `organization_id: string`
 
-  - `type: "session.updated"`
-
   - `workspace_id: string`
 
 ### Beta Webhook Vault Archived Event Data
 
 - `BetaWebhookVaultArchivedEventData`
 
+  - `type: "vault.archived"`
+
   - `id: string`
 
     ID of the vault that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault.archived"`
 
   - `workspace_id: string`
 
@@ -1731,13 +1736,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultCreatedEventData`
 
+  - `type: "vault.created"`
+
   - `id: string`
 
     ID of the vault that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault.created"`
 
   - `workspace_id: string`
 
@@ -1745,13 +1750,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultCredentialArchivedEventData`
 
+  - `type: "vault_credential.archived"`
+
   - `id: string`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault_credential.archived"`
 
   - `vault_id: string`
 
@@ -1763,13 +1768,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultCredentialCreatedEventData`
 
+  - `type: "vault_credential.created"`
+
   - `id: string`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault_credential.created"`
 
   - `vault_id: string`
 
@@ -1781,13 +1786,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultCredentialDeletedEventData`
 
+  - `type: "vault_credential.deleted"`
+
   - `id: string`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault_credential.deleted"`
 
   - `vault_id: string`
 
@@ -1799,13 +1804,13 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultCredentialRefreshFailedEventData`
 
+  - `type: "vault_credential.refresh_failed"`
+
   - `id: string`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault_credential.refresh_failed"`
 
   - `vault_id: string`
 
@@ -1817,12 +1822,12 @@ await client.beta.webhooks.parseUnverified();
 
 - `BetaWebhookVaultDeletedEventData`
 
+  - `type: "vault.deleted"`
+
   - `id: string`
 
     ID of the vault that triggered the event.
 
   - `organization_id: string`
-
-  - `type: "vault.deleted"`
 
   - `workspace_id: string`

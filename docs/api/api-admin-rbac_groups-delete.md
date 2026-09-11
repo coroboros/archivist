@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete RBAC Group
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/delete
+---
+
 # Delete RBAC Group
 
 **DELETE** `/v1/organizations/rbac_groups/{group_id}`
@@ -20,11 +25,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `RbacGroupDeleted object`
-
-  - `id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupDeleted object`
 
   - `type: "rbac_group_deleted"`
 
@@ -34,13 +35,18 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     default: rbac_group_deleted
 
+  - `id: string`
+
+    ID of the RBAC Group.
+
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

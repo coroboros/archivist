@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories"
 category: "api"
 generated: true
 ---
+---
+title: Memories
+url: https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories
+---
+
 # Memories
 
 ## Create a memory
@@ -88,6 +93,8 @@ Create a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -130,11 +137,19 @@ Create a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -167,8 +182,6 @@ Create a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -321,6 +334,8 @@ List memories
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -363,6 +378,12 @@ List memories
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryListItemUnion interface{…}`
@@ -372,6 +393,8 @@ List memories
   - `type BetaManagedAgentsMemory struct{…}`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `Type BetaManagedAgentsMemoryType`
 
     - `ID string`
 
@@ -405,8 +428,6 @@ List memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `Type BetaManagedAgentsMemoryType`
-
     - `UpdatedAt Time`
 
       A timestamp in RFC 3339 format
@@ -421,11 +442,11 @@ List memories
 
     A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+    - `Type BetaManagedAgentsMemoryPrefixType`
+
     - `Path string`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `Type BetaManagedAgentsMemoryPrefixType`
 
 ### Example
 
@@ -554,6 +575,8 @@ Retrieve a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -596,11 +619,19 @@ Retrieve a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -633,8 +664,6 @@ Retrieve a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -784,6 +813,8 @@ Update a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -826,11 +857,19 @@ Update a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -863,8 +902,6 @@ Update a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -1000,6 +1037,8 @@ Delete a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -1042,17 +1081,23 @@ Delete a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedMemory struct{…}`
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
+  - `Type BetaManagedAgentsDeletedMemoryType`
+
   - `ID string`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `Type BetaManagedAgentsDeletedMemoryType`
 
 ### Example
 
@@ -1122,11 +1167,11 @@ func main() {
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
+  - `Type BetaManagedAgentsDeletedMemoryType`
+
   - `ID string`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `Type BetaManagedAgentsDeletedMemoryType`
 
 ### Beta Managed Agents Error
 
@@ -1134,93 +1179,93 @@ func main() {
 
   - `type BetaInvalidRequestError struct{…}`
 
-    - `Message string`
-
-      default: Invalid request
-
     - `Type InvalidRequestError`
 
       default: invalid_request_error
 
-  - `type BetaAuthenticationError struct{…}`
-
     - `Message string`
 
-      default: Authentication error
+      default: Invalid request
+
+  - `type BetaAuthenticationError struct{…}`
 
     - `Type AuthenticationError`
 
       default: authentication_error
 
-  - `type BetaBillingError struct{…}`
-
     - `Message string`
 
-      default: Billing error
+      default: Authentication error
+
+  - `type BetaBillingError struct{…}`
 
     - `Type BillingError`
 
       default: billing_error
 
-  - `type BetaPermissionError struct{…}`
-
     - `Message string`
 
-      default: Permission denied
+      default: Billing error
+
+  - `type BetaPermissionError struct{…}`
 
     - `Type PermissionError`
 
       default: permission_error
 
-  - `type BetaNotFoundError struct{…}`
-
     - `Message string`
 
-      default: Not found
+      default: Permission denied
+
+  - `type BetaNotFoundError struct{…}`
 
     - `Type NotFoundError`
 
       default: not_found_error
 
-  - `type BetaRateLimitError struct{…}`
-
     - `Message string`
 
-      default: Rate limited
+      default: Not found
+
+  - `type BetaRateLimitError struct{…}`
 
     - `Type RateLimitError`
 
       default: rate_limit_error
 
-  - `type BetaGatewayTimeoutError struct{…}`
-
     - `Message string`
 
-      default: Request timeout
+      default: Rate limited
+
+  - `type BetaGatewayTimeoutError struct{…}`
 
     - `Type TimeoutError`
 
       default: timeout_error
 
-  - `type BetaAPIError struct{…}`
-
     - `Message string`
 
-      default: Internal server error
+      default: Request timeout
+
+  - `type BetaAPIError struct{…}`
 
     - `Type APIError`
 
       default: api_error
 
-  - `type BetaOverloadedError struct{…}`
-
     - `Message string`
 
-      default: Overloaded
+      default: Internal server error
+
+  - `type BetaOverloadedError struct{…}`
 
     - `Type OverloadedError`
 
       default: overloaded_error
+
+    - `Message string`
+
+      default: Overloaded
 
   - `type BetaManagedAgentsMemoryPreconditionFailedError struct{…}`
 
@@ -1249,6 +1294,8 @@ func main() {
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -1282,8 +1329,6 @@ func main() {
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `Type BetaManagedAgentsMemoryType`
-
   - `UpdatedAt Time`
 
     A timestamp in RFC 3339 format
@@ -1303,6 +1348,8 @@ func main() {
   - `type BetaManagedAgentsMemory struct{…}`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `Type BetaManagedAgentsMemoryType`
 
     - `ID string`
 
@@ -1336,8 +1383,6 @@ func main() {
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `Type BetaManagedAgentsMemoryType`
-
     - `UpdatedAt Time`
 
       A timestamp in RFC 3339 format
@@ -1352,11 +1397,11 @@ func main() {
 
     A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+    - `Type BetaManagedAgentsMemoryPrefixType`
+
     - `Path string`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `Type BetaManagedAgentsMemoryPrefixType`
 
 ### Beta Managed Agents Memory Path Conflict Error
 
@@ -1384,11 +1429,11 @@ func main() {
 
   A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+  - `Type BetaManagedAgentsMemoryPrefixType`
+
   - `Path string`
 
     The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-  - `Type BetaManagedAgentsMemoryPrefixType`
 
 ### Beta Managed Agents Memory View
 

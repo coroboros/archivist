@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/workspaces/li
 category: "api"
 generated: true
 ---
+---
+title: List Workspaces
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/list
+---
+
 # List Workspaces
 
 **GET** `/v1/organizations/workspaces`
@@ -37,6 +42,14 @@ List Workspaces
 ## Returns
 
 - `data: array of BetaWorkspace`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -113,14 +126,6 @@ List Workspaces
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 - `first_id: string or null`
 

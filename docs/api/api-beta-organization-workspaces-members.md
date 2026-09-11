@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/workspaces/me
 category: "api"
 generated: true
 ---
+---
+title: Members
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members
+---
+
 # Members
 
 ## List Workspace Members

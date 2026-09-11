@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/models"
 category: "api"
 generated: true
 ---
+---
+title: Models
+url: https://platform.claude.com/docs/en/api/cli/models
+---
+
 # Models
 
 ## List Models
@@ -38,11 +43,23 @@ The Models API response can be used to determine which models are available for 
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `ListResponse_ModelInfo_: object`
 
   - `data: array of ModelInfo`
+
+    - `type: "model"`
+
+      Object type.
+
+      For Models, this is always `"model"`.
 
     - `id: string`
 
@@ -226,12 +243,6 @@ The Models API response can be used to determine which models are available for 
 
       Maximum value for the `max_tokens` parameter when using this model.
 
-    - `type: "model"`
-
-      Object type.
-
-      For Models, this is always `"model"`.
-
   - `first_id: string`
 
     First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -352,9 +363,21 @@ The Models API response can be used to determine information about a specific mo
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `model_info: object`
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
 
   - `id: string`
 
@@ -537,12 +560,6 @@ The Models API response can be used to determine information about a specific mo
   - `max_tokens: number`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: "model"`
-
-    Object type.
-
-    For Models, this is always `"model"`.
 
 ### Example
 
@@ -888,6 +905,12 @@ ant models retrieve \
 
 - `model_info: object`
 
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
   - `id: string`
 
     Unique model identifier.
@@ -1069,12 +1092,6 @@ ant models retrieve \
   - `max_tokens: number`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: "model"`
-
-    Object type.
-
-    For Models, this is always `"model"`.
 
 ### Thinking Capability
 

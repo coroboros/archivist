@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/list"
 category: "api"
 generated: true
 ---
+---
+title: List projects
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/list
+---
+
 # List projects
 
 **GET** `/v1/compliance/apps/projects`
@@ -84,6 +89,12 @@ are sorted chronologically (time ascending) by created_at.
   Filter by user IDs. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 

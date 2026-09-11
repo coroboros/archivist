@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/deployment_runs/retrie
 category: "api"
 generated: true
 ---
+---
+title: Get Deployment Run
+url: https://platform.claude.com/docs/en/api/php/beta/deployment_runs/retrieve
+---
+
 # Get Deployment Run
 
-`$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeploymentRun`
+`$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeploymentRun`
 
 **GET** `/v1/deployment_runs/{deployment_run_id}`
 
@@ -20,9 +25,13 @@ Get Deployment Run
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaManagedAgentsDeploymentRun`
+
+  - `Type type`
 
   - `string id`
 
@@ -52,8 +61,6 @@ Get Deployment Run
 
     Describes what triggered a deployment run, with trigger-specific metadata.
 
-  - `Type type`
-
 ## Example
 
 ```php
@@ -64,7 +71,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeploymentRun = $client->beta->deploymentRuns->retrieve(
-  'deployment_run_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'deployment_run_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsDeploymentRun);

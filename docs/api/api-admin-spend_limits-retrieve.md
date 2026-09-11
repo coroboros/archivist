@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Spend Limit
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/retrieve
+---
+
 # Get Spend Limit
 
 **GET** `/v1/organizations/spend_limits/{spend_limit_id}`
@@ -18,9 +23,15 @@ Retrieve a spend limit by ID.
 
 ## Returns
 
-- `SpendLimit object`
+- `BetaSpendLimit object`
 
   A configured spend limit: a cap on metered spend for one scope and period.
+
+  - `type: "spend_limit"`
+
+    Object type. Always `spend_limit`.
+
+    default: spend_limit
 
   - `id: string`
 
@@ -70,39 +81,33 @@ Retrieve a spend limit by ID.
 
     - `SeatTier object`
 
-      - `seat_tier: string`
-
       - `type: "seat_tier"`
 
         default: seat_tier
 
-    - `RbacGroup object`
+      - `seat_tier: string`
 
-      - `rbac_group_id: string`
+    - `RBACGroup object`
 
       - `type: "rbac_group"`
 
         default: rbac_group
 
-    - `OrganizationService object`
+      - `rbac_group_id: string`
 
-      - `service: string`
+    - `OrganizationService object`
 
       - `type: "organization_service"`
 
         default: organization_service
+
+      - `service: string`
 
     - `Organization object`
 
       - `type: "organization"`
 
         default: organization
-
-  - `type: "spend_limit"`
-
-    Object type. Always `spend_limit`.
-
-    default: spend_limit
 
   - `updated_at: string`
 
@@ -115,7 +120,7 @@ Retrieve a spend limit by ID.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

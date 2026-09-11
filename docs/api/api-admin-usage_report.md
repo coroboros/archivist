@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/usage_report"
 category: "api"
 generated: true
 ---
+---
+title: Usage Report
+url: https://platform.claude.com/docs/en/api/beta/organization/usage_report
+---
+
 # Usage Report
 
 ## Get Messages Usage Report
@@ -124,14 +129,14 @@ Get Messages Usage Report
 
   - `"standard"`
 
-- `speeds: optional array of "fast" or "standard"`
+- `speeds: optional array of "standard" or "fast"`
 
   Restrict usage returned to the specified speed(s) (Claude Code research preview).
   Requires the `fast-mode-2026-02-01` beta header.
 
-  - `"fast"`
-
   - `"standard"`
+
+  - `"fast"`
 
 - `workspace_ids: optional array of string`
 
@@ -139,15 +144,107 @@ Get Messages Usage Report
 
 ### Headers
 
-- `"anthropic-beta": optional array of string`
+- `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
 
-  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
+  - `string`
+
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Returns
 
-- `MessagesUsageReport object`
+- `BetaMessagesUsageReport object`
 
   - `data: array of object`
 
@@ -171,7 +268,7 @@ Get Messages Usage Report
 
         ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
-      - `cache_creation: object`
+      - `cache_creation: BetaCacheCreation`
 
         The number of input tokens for cache creation.
 
@@ -179,9 +276,13 @@ Get Messages Usage Report
 
           The number of input tokens used to create the 1 hour cache entry.
 
+          default: 0, minimum: 0
+
         - `ephemeral_5m_input_tokens: number`
 
           The number of input tokens used to create the 5 minute cache entry.
+
+          default: 0, minimum: 0
 
       - `cache_read_input_tokens: number`
 
@@ -269,7 +370,7 @@ Get Messages Usage Report
 ```bash
 curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -284,8 +385,8 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
           "account_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
           "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
           "cache_creation": {
-            "ephemeral_1h_input_tokens": 1000,
-            "ephemeral_5m_input_tokens": 500
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
           },
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
@@ -336,7 +437,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ### Returns
 
-- `ClaudeCodeUsageReport object`
+- `BetaClaudeCodeUsageReport object`
 
   - `data: array of object`
 
@@ -348,23 +449,23 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       - `UserActor object`
 
-        - `email_address: string`
-
-          Email address of the user who performed Claude Code actions.
-
         - `type: "user_actor"`
 
           Actor type. Always `"user_actor"` for a user.
 
+        - `email_address: string`
+
+          Email address of the user who performed Claude Code actions.
+
       - `APIActor object`
-
-        - `api_key_name: string`
-
-          Name of the API key used to perform Claude Code actions.
 
         - `type: "api_actor"`
 
           Actor type. Always `"api_actor"` for an API key.
+
+        - `api_key_name: string`
+
+          Name of the API key used to perform Claude Code actions.
 
     - `core_metrics: object`
 
@@ -495,7 +596,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 ```bash
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -578,9 +679,9 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
 ## Domain types
 
-### Claude Code Usage Report
+### Beta Claude Code Usage Report
 
-- `ClaudeCodeUsageReport object`
+- `BetaClaudeCodeUsageReport object`
 
   - `data: array of object`
 
@@ -592,23 +693,23 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
       - `UserActor object`
 
-        - `email_address: string`
-
-          Email address of the user who performed Claude Code actions.
-
         - `type: "user_actor"`
 
           Actor type. Always `"user_actor"` for a user.
 
+        - `email_address: string`
+
+          Email address of the user who performed Claude Code actions.
+
       - `APIActor object`
-
-        - `api_key_name: string`
-
-          Name of the API key used to perform Claude Code actions.
 
         - `type: "api_actor"`
 
           Actor type. Always `"api_actor"` for an API key.
+
+        - `api_key_name: string`
+
+          Name of the API key used to perform Claude Code actions.
 
     - `core_metrics: object`
 
@@ -734,9 +835,9 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
     Opaque cursor token for fetching the next page of results, or null if no more pages are available.
 
-### Messages Usage Report
+### Beta Messages Usage Report
 
-- `MessagesUsageReport object`
+- `BetaMessagesUsageReport object`
 
   - `data: array of object`
 
@@ -760,7 +861,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
         ID of the API key used. `null` if not grouping by API key or for usage in the Anthropic Console.
 
-      - `cache_creation: object`
+      - `cache_creation: BetaCacheCreation`
 
         The number of input tokens for cache creation.
 
@@ -768,9 +869,13 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
           The number of input tokens used to create the 1 hour cache entry.
 
+          default: 0, minimum: 0
+
         - `ephemeral_5m_input_tokens: number`
 
           The number of input tokens used to create the 5 minute cache entry.
+
+          default: 0, minimum: 0
 
       - `cache_read_input_tokens: number`
 

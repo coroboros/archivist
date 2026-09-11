@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: Get Skill Usage
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/skills/list
+---
+
 # Get Skill Usage
 
 **GET** `/v1/organizations/analytics/skills`
@@ -79,7 +84,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
 ## Returns
 
-- `SkillUsage object`
+- `BetaSkillUsage object`
 
   Response for GET /v1/organizations/analytics/skills.
 
@@ -117,7 +122,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
       Office Agent activity metrics for a single skill on a given day, broken out by Office product.
 
-      - `excel: SkillOfficeProductMetrics`
+      - `excel: BetaSkillOfficeProductMetrics`
 
         Office Agent activity metrics for a single skill on a given day within one Office product.
 
@@ -125,15 +130,15 @@ on a Claude Enterprise plan. Requires an API key with the
 
           Number of distinct Office Agent sessions in which the skill was used. A skill counts as used only when it is explicitly activated — the model (or the user, via the skill's slash command) invokes it, reading its instructions into context as part of that activation. Skills that are merely installed or listed as available, or whose content reaches the context without an activation (preloaded, hook-injected, or read as a plain file), are not counted. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
 
-      - `outlook: SkillOfficeProductMetrics`
+      - `outlook: BetaSkillOfficeProductMetrics`
 
         Office Agent activity metrics for a single skill on a given day within one Office product.
 
-      - `powerpoint: SkillOfficeProductMetrics`
+      - `powerpoint: BetaSkillOfficeProductMetrics`
 
         Office Agent activity metrics for a single skill on a given day within one Office product.
 
-      - `word: SkillOfficeProductMetrics`
+      - `word: BetaSkillOfficeProductMetrics`
 
         Office Agent activity metrics for a single skill on a given day within one Office product.
 
@@ -200,7 +205,7 @@ on a Claude Enterprise plan. Requires an API key with the
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/skills \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

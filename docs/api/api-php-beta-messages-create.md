@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/php/beta/messages/create
+---
+
 # Create a Message
 
-`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): BetaMessage`
 
 **POST** `/v1/messages`
 
@@ -261,6 +266,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
+- `workspaceID?:optional string`
+
 - `outputFormat?:optional BetaJSONOutputFormat`
 
   **Deprecated**
@@ -302,6 +309,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 ## Returns
 
 - `BetaMessage`
+
+  - `"message" type`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
 
   - `string id`
 
@@ -391,12 +404,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     This value will be a non-null string if one of your custom stop sequences was generated.
 
-  - `"message" type`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
   - `BetaUsage usage`
 
     Billing and rate-limit usage.
@@ -431,19 +438,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `BetaRawMessageStartEvent`
 
-    - `BetaMessage message`
-
     - `"message_start" type`
 
+    - `BetaMessage message`
+
   - `BetaRawMessageDeltaEvent`
+
+    - `"message_delta" type`
 
     - `?BetaContextManagementResponse contextManagement`
 
       Information about context management strategies applied during the request
 
     - `Delta delta`
-
-    - `"message_delta" type`
 
     - `BetaMessageDeltaUsage usage`
 
@@ -481,27 +488,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `BetaRawContentBlockStartEvent`
 
+    - `"content_block_start" type`
+
     - `ContentBlock contentBlock`
 
       Response model for a file uploaded to the container.
 
     - `int index`
 
-    - `"content_block_start" type`
-
   - `BetaRawContentBlockDeltaEvent`
+
+    - `"content_block_delta" type`
 
     - `BetaRawContentBlockDelta delta`
 
     - `int index`
 
-    - `"content_block_delta" type`
-
   - `BetaRawContentBlockStopEvent`
 
-    - `int index`
-
     - `"content_block_stop" type`
+
+    - `int index`
 
 ## Example
 
@@ -613,6 +620,7 @@ $betaMessage = $client->beta->messages->create(
   topP: 0.7,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessage);

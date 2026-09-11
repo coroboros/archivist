@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/cost"
 category: "api"
 generated: true
 ---
+---
+title: Cost
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost
+---
+
 # Cost
 
 ## Get Cost Over Time
@@ -181,7 +186,7 @@ Requires an API key with the `read:analytics` scope.
 
 ### Returns
 
-- `CostBucket object`
+- `BetaCostBucket object`
 
   - `data: array of object`
 
@@ -326,7 +331,7 @@ Requires an API key with the `read:analytics` scope.
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -567,15 +572,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 ### Returns
 
-- `UserCost object`
+- `BetaUserCost object`
 
   - `data: array of object`
 
     Rows for this page, ranked by `order_by` in the `order` direction. One row per user, or several per user when `group_by[]` or `bucket_width` breaks that user's usage or cost out across rows. Rows split out by `cost_type` or `token_type` (cost endpoint only) stay adjacent and are ranked as one unit.
 
-    - `actor: AnalyticsUserActor`
+    - `actor: BetaAnalyticsUserActor`
 
       The user this row's usage or cost is attributed to. Always a `user_actor`.
+
+      - `type: "user_actor"`
+
+        Actor type. Always `"user_actor"`.
 
       - `deleted: boolean`
 
@@ -588,10 +597,6 @@ organizations on a Claude Enterprise plan. Requires an API key with the
       - `name: string or null`
 
         The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
-
-      - `type: "user_actor"`
-
-        Actor type. Always `"user_actor"`.
 
       - `user_id: string`
 
@@ -732,7 +737,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -776,9 +781,9 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
 ## Domain types
 
-### Cost Bucket
+### Beta Cost Bucket
 
-- `CostBucket object`
+- `BetaCostBucket object`
 
   - `data: array of object`
 
@@ -918,17 +923,21 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
     ID of the Organization.
 
-### User Cost
+### Beta User Cost
 
-- `UserCost object`
+- `BetaUserCost object`
 
   - `data: array of object`
 
     Rows for this page, ranked by `order_by` in the `order` direction. One row per user, or several per user when `group_by[]` or `bucket_width` breaks that user's usage or cost out across rows. Rows split out by `cost_type` or `token_type` (cost endpoint only) stay adjacent and are ranked as one unit.
 
-    - `actor: AnalyticsUserActor`
+    - `actor: BetaAnalyticsUserActor`
 
       The user this row's usage or cost is attributed to. Always a `user_actor`.
+
+      - `type: "user_actor"`
+
+        Actor type. Always `"user_actor"`.
 
       - `deleted: boolean`
 
@@ -941,10 +950,6 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
       - `name: string or null`
 
         The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
-
-      - `type: "user_actor"`
-
-        Actor type. Always `"user_actor"`.
 
       - `user_id: string`
 

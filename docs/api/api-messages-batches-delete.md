@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/messages/batches/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/delete
+---
+
 # Delete a Message Batch
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
@@ -20,13 +25,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `DeletedMessageBatch object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -35,6 +40,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ## Example
 

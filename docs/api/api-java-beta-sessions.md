@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions"
 category: "api"
 generated: true
 ---
+---
+title: Sessions
+url: https://platform.claude.com/docs/en/api/java/beta/sessions
+---
+
 # Sessions
 
 ## Create Session
@@ -68,6 +73,8 @@ Create Session
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -110,6 +117,8 @@ Create Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Agent agent`
 
     Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
@@ -120,13 +129,13 @@ Create Session
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+      - `Type type`
+
       - `String id`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<Long> version`
 
@@ -138,25 +147,25 @@ Create Session
 
       Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
+      - `Type type`
+
       - `String id`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
 
-      - `Type type`
-
       - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
         Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+        - `Type type`
 
         - `String name`
 
           Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
           minLength: 1, maxLength: 255
-
-        - `Type type`
 
         - `String url`
 
@@ -308,13 +317,13 @@ Create Session
 
           An Anthropic-managed skill.
 
+          - `Type type`
+
           - `String skillId`
 
             Identifier of the Anthropic skill (e.g., "xlsx").
 
             minLength: 1, maxLength: 64
-
-          - `Type type`
 
           - `Optional<String> version`
 
@@ -326,13 +335,13 @@ Create Session
 
           A user-created custom skill.
 
+          - `Type type`
+
           - `String skillId`
 
             Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
             minLength: 1, maxLength: 64
-
-          - `Type type`
 
           - `Optional<String> version`
 
@@ -364,6 +373,8 @@ Create Session
 
               Configuration override for the bash tool.
 
+              - `Optional<Type> type`
+
               - `JsonValue name = "bash"`
 
                 Must be "bash".
@@ -388,11 +399,17 @@ Create Session
 
                   - `Type type`
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `JsonValue type = "auto"`
 
             - `class BetaManagedAgentsEditToolConfigParams:`
 
               Configuration override for the edit tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "edit"`
 
@@ -414,11 +431,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfigParams:`
 
               Configuration override for the read tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "read"`
 
@@ -440,11 +461,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfigParams:`
 
               Configuration override for the write tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "write"`
 
@@ -466,11 +491,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfigParams:`
 
               Configuration override for the glob tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "glob"`
 
@@ -492,11 +521,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfigParams:`
 
               Configuration override for the grep tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "grep"`
 
@@ -518,11 +551,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfigParams:`
 
               Configuration override for the web_fetch tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "web_fetch"`
 
@@ -558,11 +595,15 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebSearchToolConfigParams:`
 
               Configuration override for the web_search tool.
+
+              - `Optional<Type> type`
 
               - `JsonValue name = "web_search"`
 
@@ -592,7 +633,9 @@ Create Session
 
                   Tool calls require user confirmation before execution.
 
-              - `Optional<Type> type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<BetaManagedAgentsUserLocation> userLocation`
 
@@ -644,17 +687,21 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
         - `class BetaManagedAgentsMcpToolsetParams:`
 
           Configuration for tools from an MCP server defined in `mcp_servers`.
+
+          - `Type type`
 
           - `String mcpServerName`
 
             Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
             minLength: 1, maxLength: 255
-
-          - `Type type`
 
           - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
 
@@ -682,6 +729,10 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
           - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
 
             Default configuration for all tools from an MCP server.
@@ -702,9 +753,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
         - `class BetaManagedAgentsCustomToolParams:`
 
           A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+          - `Type type`
 
           - `String description`
 
@@ -727,8 +784,6 @@ Create Session
             Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
             minLength: 1, maxLength: 128
-
-          - `Type type`
 
       - `Optional<Long> version`
 
@@ -754,6 +809,8 @@ Create Session
 
       Parameters for sending a user message to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -762,17 +819,19 @@ Create Session
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -781,6 +840,8 @@ Create Session
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -793,8 +854,6 @@ Create Session
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -812,19 +871,19 @@ Create Session
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -833,6 +892,8 @@ Create Session
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -846,11 +907,11 @@ Create Session
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -861,8 +922,6 @@ Create Session
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -880,15 +939,13 @@ Create Session
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -904,11 +961,11 @@ Create Session
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -922,25 +979,23 @@ Create Session
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
 
-          - `Type type`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
+
+          - `Type type`
 
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
             maxLength: 262144
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -960,12 +1015,6 @@ Create Session
 
       Mount a GitHub repository into the session's container.
 
-      - `String authorizationToken`
-
-        GitHub authorization token used to clone the repository.
-
-        minLength: 1, maxLength: 4096
-
       - `Type type`
 
       - `String url`
@@ -974,11 +1023,19 @@ Create Session
 
         minLength: 1, maxLength: 2048
 
+      - `Optional<String> authorizationToken`
+
+        GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+        minLength: 1, maxLength: 4096
+
       - `Optional<Checkout> checkout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
         - `class BetaManagedAgentsBranchCheckout:`
+
+          - `Type type`
 
           - `String name`
 
@@ -986,17 +1043,15 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -1008,13 +1063,13 @@ Create Session
 
       Mount a file uploaded via the Files API into the session.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -1026,11 +1081,11 @@ Create Session
 
       Parameters for attaching a memory store to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -1062,11 +1117,15 @@ Create Session
 
   A Managed Agents `session`.
 
+  - `Type type`
+
   - `String id`
 
   - `BetaManagedAgentsSessionAgent agent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `Type type`
 
     - `String id`
 
@@ -1074,9 +1133,9 @@ Create Session
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -1196,6 +1255,8 @@ Create Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -1204,15 +1265,17 @@ Create Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -1228,9 +1291,9 @@ Create Session
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -1238,9 +1301,9 @@ Create Session
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -1250,11 +1313,15 @@ Create Session
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -1276,11 +1343,17 @@ Create Session
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -1298,11 +1371,15 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -1320,11 +1397,15 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -1342,11 +1423,15 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -1364,11 +1449,15 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -1386,11 +1475,15 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -1408,7 +1501,9 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -1421,6 +1516,8 @@ Create Session
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -1438,7 +1535,9 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -1492,9 +1591,13 @@ Create Session
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -1514,6 +1617,10 @@ Create Session
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -1532,13 +1639,17 @@ Create Session
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -1554,10 +1665,6 @@ Create Session
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -1566,13 +1673,11 @@ Create Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -1598,8 +1703,6 @@ Create Session
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -1614,6 +1717,8 @@ Create Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -1625,8 +1730,6 @@ Create Session
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -1641,6 +1744,8 @@ Create Session
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -1670,11 +1775,11 @@ Create Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -1685,8 +1790,6 @@ Create Session
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -1700,15 +1803,17 @@ Create Session
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -1716,9 +1821,9 @@ Create Session
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -1732,8 +1837,6 @@ Create Session
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -1744,11 +1847,11 @@ Create Session
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -1805,8 +1908,6 @@ Create Session
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -2243,6 +2344,8 @@ List Sessions
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2285,11 +2388,15 @@ List Sessions
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
 
   A Managed Agents `session`.
+
+  - `Type type`
 
   - `String id`
 
@@ -2297,15 +2404,17 @@ List Sessions
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `Type type`
+
     - `String id`
 
     - `Optional<String> description`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -2425,6 +2534,8 @@ List Sessions
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -2433,15 +2544,17 @@ List Sessions
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -2457,9 +2570,9 @@ List Sessions
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -2467,9 +2580,9 @@ List Sessions
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -2479,11 +2592,15 @@ List Sessions
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -2505,11 +2622,17 @@ List Sessions
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -2527,11 +2650,15 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -2549,11 +2676,15 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -2571,11 +2702,15 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -2593,11 +2728,15 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -2615,11 +2754,15 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -2637,7 +2780,9 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -2650,6 +2795,8 @@ List Sessions
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -2667,7 +2814,9 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -2721,9 +2870,13 @@ List Sessions
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -2743,6 +2896,10 @@ List Sessions
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -2761,13 +2918,17 @@ List Sessions
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -2783,10 +2944,6 @@ List Sessions
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -2795,13 +2952,11 @@ List Sessions
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -2827,8 +2982,6 @@ List Sessions
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -2843,6 +2996,8 @@ List Sessions
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -2854,8 +3009,6 @@ List Sessions
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -2870,6 +3023,8 @@ List Sessions
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -2899,11 +3054,11 @@ List Sessions
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -2914,8 +3069,6 @@ List Sessions
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -2929,15 +3082,17 @@ List Sessions
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -2945,9 +3100,9 @@ List Sessions
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -2961,8 +3116,6 @@ List Sessions
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -2973,11 +3126,11 @@ List Sessions
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -3034,8 +3187,6 @@ List Sessions
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -3400,6 +3551,8 @@ Get Session
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3442,11 +3595,15 @@ Get Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
 
   A Managed Agents `session`.
+
+  - `Type type`
 
   - `String id`
 
@@ -3454,15 +3611,17 @@ Get Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `Type type`
+
     - `String id`
 
     - `Optional<String> description`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -3582,6 +3741,8 @@ Get Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -3590,15 +3751,17 @@ Get Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -3614,9 +3777,9 @@ Get Session
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -3624,9 +3787,9 @@ Get Session
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -3636,11 +3799,15 @@ Get Session
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -3662,11 +3829,17 @@ Get Session
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -3684,11 +3857,15 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -3706,11 +3883,15 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -3728,11 +3909,15 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -3750,11 +3935,15 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -3772,11 +3961,15 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -3794,7 +3987,9 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -3807,6 +4002,8 @@ Get Session
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -3824,7 +4021,9 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -3878,9 +4077,13 @@ Get Session
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -3900,6 +4103,10 @@ Get Session
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -3918,13 +4125,17 @@ Get Session
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -3940,10 +4151,6 @@ Get Session
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -3952,13 +4159,11 @@ Get Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -3984,8 +4189,6 @@ Get Session
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -4000,6 +4203,8 @@ Get Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -4011,8 +4216,6 @@ Get Session
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -4027,6 +4230,8 @@ Get Session
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -4056,11 +4261,11 @@ Get Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -4071,8 +4276,6 @@ Get Session
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -4086,15 +4289,17 @@ Get Session
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -4102,9 +4307,9 @@ Get Session
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -4118,8 +4323,6 @@ Get Session
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -4130,11 +4333,11 @@ Get Session
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -4191,8 +4394,6 @@ Get Session
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -4551,6 +4752,8 @@ Update Session
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -4593,6 +4796,8 @@ Update Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Optional<BetaManagedAgentsSessionAgentUpdate> agent`
 
     Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
@@ -4621,11 +4826,15 @@ Update Session
 
   A Managed Agents `session`.
 
+  - `Type type`
+
   - `String id`
 
   - `BetaManagedAgentsSessionAgent agent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `Type type`
 
     - `String id`
 
@@ -4633,9 +4842,9 @@ Update Session
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -4755,6 +4964,8 @@ Update Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -4763,15 +4974,17 @@ Update Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -4787,9 +5000,9 @@ Update Session
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -4797,9 +5010,9 @@ Update Session
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -4809,11 +5022,15 @@ Update Session
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -4835,11 +5052,17 @@ Update Session
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -4857,11 +5080,15 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -4879,11 +5106,15 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -4901,11 +5132,15 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -4923,11 +5158,15 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -4945,11 +5184,15 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -4967,7 +5210,9 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -4980,6 +5225,8 @@ Update Session
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -4997,7 +5244,9 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -5051,9 +5300,13 @@ Update Session
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -5073,6 +5326,10 @@ Update Session
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -5091,13 +5348,17 @@ Update Session
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -5113,10 +5374,6 @@ Update Session
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -5125,13 +5382,11 @@ Update Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -5157,8 +5412,6 @@ Update Session
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -5173,6 +5426,8 @@ Update Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -5184,8 +5439,6 @@ Update Session
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -5200,6 +5453,8 @@ Update Session
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -5229,11 +5484,11 @@ Update Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -5244,8 +5499,6 @@ Update Session
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -5259,15 +5512,17 @@ Update Session
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -5275,9 +5530,9 @@ Update Session
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -5291,8 +5546,6 @@ Update Session
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -5303,11 +5556,11 @@ Update Session
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -5364,8 +5617,6 @@ Update Session
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -5724,6 +5975,8 @@ Delete Session
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -5766,15 +6019,17 @@ Delete Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `String id`
-
   - `Type type`
+
+  - `String id`
 
 ### Example
 
@@ -5870,6 +6125,8 @@ Archive Session
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -5912,11 +6169,15 @@ Archive Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
 
   A Managed Agents `session`.
+
+  - `Type type`
 
   - `String id`
 
@@ -5924,15 +6185,17 @@ Archive Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `Type type`
+
     - `String id`
 
     - `Optional<String> description`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -6052,6 +6315,8 @@ Archive Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -6060,15 +6325,17 @@ Archive Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -6084,9 +6351,9 @@ Archive Session
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -6094,9 +6361,9 @@ Archive Session
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -6106,11 +6373,15 @@ Archive Session
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -6132,11 +6403,17 @@ Archive Session
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -6154,11 +6431,15 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -6176,11 +6457,15 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -6198,11 +6483,15 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -6220,11 +6509,15 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -6242,11 +6535,15 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -6264,7 +6561,9 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -6277,6 +6576,8 @@ Archive Session
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -6294,7 +6595,9 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -6348,9 +6651,13 @@ Archive Session
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -6370,6 +6677,10 @@ Archive Session
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -6388,13 +6699,17 @@ Archive Session
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -6410,10 +6725,6 @@ Archive Session
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -6422,13 +6733,11 @@ Archive Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -6454,8 +6763,6 @@ Archive Session
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -6470,6 +6777,8 @@ Archive Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -6481,8 +6790,6 @@ Archive Session
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -6497,6 +6804,8 @@ Archive Session
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -6526,11 +6835,11 @@ Archive Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -6541,8 +6850,6 @@ Archive Session
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -6556,15 +6863,17 @@ Archive Session
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -6572,9 +6881,9 @@ Archive Session
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -6588,8 +6897,6 @@ Archive Session
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -6600,11 +6907,11 @@ Archive Session
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -6661,8 +6968,6 @@ Archive Session
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -6965,23 +7270,23 @@ public final class Main {
 
   Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+  - `Type type`
+
   - `String model`
 
     A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
     minLength: 1, maxLength: 256
 
-  - `Type type`
-
 ### Beta Managed Agents Agent Message Preview
 
 - `class BetaManagedAgentsAgentMessagePreview:`
 
+  - `Type type`
+
   - `String id`
 
     The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
-
-  - `Type type`
 
 ### Beta Managed Agents Agent Params
 
@@ -6989,13 +7294,13 @@ public final class Main {
 
   Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+  - `Type type`
+
   - `String id`
 
     The `agent` ID.
 
     minLength: 1, maxLength: 128
-
-  - `Type type`
 
   - `Optional<Long> version`
 
@@ -7007,11 +7312,11 @@ public final class Main {
 
 - `class BetaManagedAgentsAgentThinkingPreview:`
 
+  - `Type type`
+
   - `String id`
 
     The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-  - `Type type`
 
 ### Beta Managed Agents Agent With Overrides Params
 
@@ -7019,25 +7324,25 @@ public final class Main {
 
   Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
+  - `Type type`
+
   - `String id`
 
     The `agent` ID.
 
     minLength: 1, maxLength: 128
 
-  - `Type type`
-
   - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
     Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+    - `Type type`
 
     - `String name`
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
       minLength: 1, maxLength: 255
-
-    - `Type type`
 
     - `String url`
 
@@ -7189,13 +7494,13 @@ public final class Main {
 
       An Anthropic-managed skill.
 
+      - `Type type`
+
       - `String skillId`
 
         Identifier of the Anthropic skill (e.g., "xlsx").
 
         minLength: 1, maxLength: 64
-
-      - `Type type`
 
       - `Optional<String> version`
 
@@ -7207,13 +7512,13 @@ public final class Main {
 
       A user-created custom skill.
 
+      - `Type type`
+
       - `String skillId`
 
         Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
         minLength: 1, maxLength: 64
-
-      - `Type type`
 
       - `Optional<String> version`
 
@@ -7245,6 +7550,8 @@ public final class Main {
 
           Configuration override for the bash tool.
 
+          - `Optional<Type> type`
+
           - `JsonValue name = "bash"`
 
             Must be "bash".
@@ -7269,11 +7576,17 @@ public final class Main {
 
               - `Type type`
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `JsonValue type = "auto"`
 
         - `class BetaManagedAgentsEditToolConfigParams:`
 
           Configuration override for the edit tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "edit"`
 
@@ -7295,11 +7608,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfigParams:`
 
           Configuration override for the read tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "read"`
 
@@ -7321,11 +7638,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfigParams:`
 
           Configuration override for the write tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "write"`
 
@@ -7347,11 +7668,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfigParams:`
 
           Configuration override for the glob tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "glob"`
 
@@ -7373,11 +7698,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfigParams:`
 
           Configuration override for the grep tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "grep"`
 
@@ -7399,11 +7728,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfigParams:`
 
           Configuration override for the web_fetch tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "web_fetch"`
 
@@ -7439,11 +7772,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebSearchToolConfigParams:`
 
           Configuration override for the web_search tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "web_search"`
 
@@ -7473,7 +7810,9 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `Optional<BetaManagedAgentsUserLocation> userLocation`
 
@@ -7525,17 +7864,21 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsMcpToolsetParams:`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `Type type`
 
       - `String mcpServerName`
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `Type type`
 
       - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
 
@@ -7563,6 +7906,10 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
       - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
 
         Default configuration for all tools from an MCP server.
@@ -7583,9 +7930,15 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsCustomToolParams:`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `Type type`
 
       - `String description`
 
@@ -7609,8 +7962,6 @@ public final class Main {
 
         minLength: 1, maxLength: 128
 
-      - `Type type`
-
   - `Optional<Long> version`
 
     The specific `agent` version to use. Omit to use the latest version.
@@ -7621,19 +7972,21 @@ public final class Main {
 
 - `class BetaManagedAgentsBranchCheckout:`
 
+  - `Type type`
+
   - `String name`
 
     Branch name to check out.
 
     minLength: 1, maxLength: 255
 
-  - `Type type`
-
 ### Beta Managed Agents Budget Limit
 
 - `class BetaManagedAgentsBudgetLimit:`
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `Type type`
 
   - `BetaMonetaryAmount maxListCost`
 
@@ -7646,8 +7999,6 @@ public final class Main {
     - `BetaCurrency currency`
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-  - `Type type`
 
 ### Beta Managed Agents Cache Creation Usage
 
@@ -7671,13 +8022,13 @@ public final class Main {
 
 - `class BetaManagedAgentsCommitCheckout:`
 
+  - `Type type`
+
   - `String sha`
 
     Full commit SHA to check out.
 
     minLength: 7, maxLength: 64
-
-  - `Type type`
 
 ### Beta Managed Agents Deleted Session
 
@@ -7685,27 +8036,27 @@ public final class Main {
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `String id`
-
   - `Type type`
+
+  - `String id`
 
 ### Beta Managed Agents Delta Content
 
 - `class BetaManagedAgentsDeltaContent:`
 
+  - `Type type`
+
   - `BetaManagedAgentsTextBlock content`
 
     Regular text content.
+
+    - `Type type`
 
     - `String text`
 
       The text content.
 
       minLength: 1
-
-    - `Type type`
-
-  - `Type type`
 
   - `Optional<Long> index`
 
@@ -7719,23 +8070,25 @@ public final class Main {
 
   An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+  - `Type type`
+
   - `BetaManagedAgentsDeltaContent delta`
 
     One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+    - `Type type`
+
     - `BetaManagedAgentsTextBlock content`
 
       Regular text content.
+
+      - `Type type`
 
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<Long> index`
 
@@ -7746,8 +8099,6 @@ public final class Main {
   - `String eventId`
 
     The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
-
-  - `Type type`
 
 ### Beta Managed Agents Delta Type
 
@@ -7765,13 +8116,13 @@ public final class Main {
 
   Mount a file uploaded via the Files API into the session.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of a previously uploaded file.
 
     minLength: 1, maxLength: 128
-
-  - `Type type`
 
   - `Optional<String> mountPath`
 
@@ -7785,12 +8136,6 @@ public final class Main {
 
   Mount a GitHub repository into the session's container.
 
-  - `String authorizationToken`
-
-    GitHub authorization token used to clone the repository.
-
-    minLength: 1, maxLength: 4096
-
   - `Type type`
 
   - `String url`
@@ -7799,11 +8144,19 @@ public final class Main {
 
     minLength: 1, maxLength: 2048
 
+  - `Optional<String> authorizationToken`
+
+    GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+    minLength: 1, maxLength: 4096
+
   - `Optional<Checkout> checkout`
 
     Branch or commit to check out. Defaults to the repository's default branch.
 
     - `class BetaManagedAgentsBranchCheckout:`
+
+      - `Type type`
 
       - `String name`
 
@@ -7811,17 +8164,15 @@ public final class Main {
 
         minLength: 1, maxLength: 255
 
-      - `Type type`
-
     - `class BetaManagedAgentsCommitCheckout:`
+
+      - `Type type`
 
       - `String sha`
 
         Full commit SHA to check out.
 
         minLength: 7, maxLength: 64
-
-      - `Type type`
 
   - `Optional<String> mountPath`
 
@@ -7835,11 +8186,11 @@ public final class Main {
 
   Parameters for attaching a memory store to an agent session.
 
+  - `Type type`
+
   - `String memoryStoreId`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-  - `Type type`
 
   - `Optional<Access> access`
 
@@ -7861,6 +8212,8 @@ public final class Main {
 
   Resolved coordinator topology with a concrete agent roster.
 
+  - `Type type`
+
   - `List<Agent> agents`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
@@ -7869,9 +8222,9 @@ public final class Main {
 
       A resolved agent reference with a concrete version.
 
-      - `String id`
-
       - `Type type`
+
+      - `String id`
 
       - `long version`
 
@@ -7881,19 +8234,19 @@ public final class Main {
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `Type type`
+
       - `String model`
 
         The advisor model id.
-
-      - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Multiagent Params
 
 - `class BetaManagedAgentsMultiagentParams:`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `Type type`
 
   - `List<BetaManagedAgentsMultiagentRosterEntryParams> agents`
 
@@ -7905,13 +8258,13 @@ public final class Main {
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+      - `Type type`
+
       - `String id`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<Long> version`
 
@@ -7929,15 +8282,13 @@ public final class Main {
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+      - `Type type`
+
       - `String model`
 
         A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
         minLength: 1, maxLength: 256
-
-      - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Multiagent Roster Entry Params
 
@@ -7951,13 +8302,13 @@ public final class Main {
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+    - `Type type`
+
     - `String id`
 
       The `agent` ID.
 
       minLength: 1, maxLength: 128
-
-    - `Type type`
 
     - `Optional<Long> version`
 
@@ -7975,19 +8326,21 @@ public final class Main {
 
     Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+    - `Type type`
+
     - `String model`
 
       A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
       minLength: 1, maxLength: 256
 
-    - `Type type`
-
 ### Beta Managed Agents Outcome Evaluation Resource
 
 - `class BetaManagedAgentsOutcomeEvaluationResource:`
 
   Evaluation state for a single outcome defined via a `define_outcome` event.
+
+  - `Type type`
 
   - `Optional<LocalDateTime> completedAt`
 
@@ -8017,8 +8370,6 @@ public final class Main {
 
     Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-  - `Type type`
-
 ### Beta Managed Agents Server Tool Usage
 
 - `class BetaManagedAgentsServerToolUsage:`
@@ -8043,11 +8394,15 @@ public final class Main {
 
   A Managed Agents `session`.
 
+  - `Type type`
+
   - `String id`
 
   - `BetaManagedAgentsSessionAgent agent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `Type type`
 
     - `String id`
 
@@ -8055,9 +8410,9 @@ public final class Main {
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -8177,6 +8532,8 @@ public final class Main {
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -8185,15 +8542,17 @@ public final class Main {
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -8209,9 +8568,9 @@ public final class Main {
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -8219,9 +8578,9 @@ public final class Main {
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -8231,11 +8590,15 @@ public final class Main {
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -8257,11 +8620,17 @@ public final class Main {
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -8279,11 +8648,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -8301,11 +8674,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -8323,11 +8700,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -8345,11 +8726,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -8367,11 +8752,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -8389,7 +8778,9 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -8402,6 +8793,8 @@ public final class Main {
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -8419,7 +8812,9 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -8473,9 +8868,13 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -8495,6 +8894,10 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -8513,13 +8916,17 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -8535,10 +8942,6 @@ public final class Main {
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -8547,13 +8950,11 @@ public final class Main {
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -8579,8 +8980,6 @@ public final class Main {
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -8595,6 +8994,8 @@ public final class Main {
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -8606,8 +9007,6 @@ public final class Main {
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -8622,6 +9021,8 @@ public final class Main {
   - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `Type type`
 
     - `Optional<LocalDateTime> completedAt`
 
@@ -8651,11 +9052,11 @@ public final class Main {
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `Type type`
-
   - `List<BetaManagedAgentsSessionResource> resources`
 
     - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -8666,8 +9067,6 @@ public final class Main {
         format: date-time
 
       - `String mountPath`
-
-      - `Type type`
 
       - `LocalDateTime updatedAt`
 
@@ -8681,15 +9080,17 @@ public final class Main {
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
@@ -8697,9 +9098,9 @@ public final class Main {
 
             minLength: 7, maxLength: 64
 
-          - `Type type`
-
     - `class BetaManagedAgentsFileResource:`
+
+      - `Type type`
 
       - `String id`
 
@@ -8713,8 +9114,6 @@ public final class Main {
 
       - `String mountPath`
 
-      - `Type type`
-
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
@@ -8725,11 +9124,11 @@ public final class Main {
 
       A memory store attached to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -8786,8 +9185,6 @@ public final class Main {
     - `TERMINATED("terminated")`
 
   - `Optional<String> title`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -8873,15 +9270,17 @@ public final class Main {
 
   Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+  - `Type type`
+
   - `String id`
 
   - `Optional<String> description`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-    - `String name`
-
     - `Type type`
+
+    - `String name`
 
     - `String url`
 
@@ -9001,6 +9400,8 @@ public final class Main {
 
     Resolved coordinator topology with full agent definitions for each roster member.
 
+    - `Type type`
+
     - `List<Agent> agents`
 
       Full `agent` definitions the coordinator may spawn as session threads.
@@ -9009,15 +9410,17 @@ public final class Main {
 
         Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+        - `Type type`
+
         - `String id`
 
         - `Optional<String> description`
 
         - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-          - `String name`
-
           - `Type type`
+
+          - `String name`
 
           - `String url`
 
@@ -9033,9 +9436,9 @@ public final class Main {
 
             A resolved Anthropic-managed skill.
 
-            - `String skillId`
-
             - `Type type`
+
+            - `String skillId`
 
             - `String version`
 
@@ -9043,9 +9446,9 @@ public final class Main {
 
             A resolved user-created custom skill.
 
-            - `String skillId`
-
             - `Type type`
+
+            - `String skillId`
 
             - `String version`
 
@@ -9055,11 +9458,15 @@ public final class Main {
 
           - `class BetaManagedAgentsAgentToolset20260401:`
 
+            - `Type type`
+
             - `List<BetaManagedAgentsAgentToolConfig> configs`
 
               - `class BetaManagedAgentsBashToolConfig:`
 
                 Configuration for the bash tool.
+
+                - `JsonValue type = "bash"`
 
                 - `boolean enabled`
 
@@ -9081,11 +9488,17 @@ public final class Main {
 
                     - `Type type`
 
-                - `JsonValue type = "bash"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                    - `JsonValue type = "auto"`
 
               - `class BetaManagedAgentsEditToolConfig:`
 
                 Configuration for the edit tool.
+
+                - `JsonValue type = "edit"`
 
                 - `boolean enabled`
 
@@ -9103,11 +9516,15 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "edit"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsReadToolConfig:`
 
                 Configuration for the read tool.
+
+                - `JsonValue type = "read"`
 
                 - `boolean enabled`
 
@@ -9125,11 +9542,15 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "read"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsWriteToolConfig:`
 
                 Configuration for the write tool.
+
+                - `JsonValue type = "write"`
 
                 - `boolean enabled`
 
@@ -9147,11 +9568,15 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "write"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsGlobToolConfig:`
 
                 Configuration for the glob tool.
+
+                - `JsonValue type = "glob"`
 
                 - `boolean enabled`
 
@@ -9169,11 +9594,15 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "glob"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsGrepToolConfig:`
 
                 Configuration for the grep tool.
+
+                - `JsonValue type = "grep"`
 
                 - `boolean enabled`
 
@@ -9191,11 +9620,15 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "grep"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsWebFetchToolConfig:`
 
                 Configuration for the web_fetch tool.
+
+                - `JsonValue type = "web_fetch"`
 
                 - `boolean enabled`
 
@@ -9213,7 +9646,9 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "web_fetch"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `Optional<List<String>> allowedDomains`
 
@@ -9226,6 +9661,8 @@ public final class Main {
               - `class BetaManagedAgentsWebSearchToolConfig:`
 
                 Configuration for the web_search tool.
+
+                - `JsonValue type = "web_search"`
 
                 - `boolean enabled`
 
@@ -9243,7 +9680,9 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-                - `JsonValue type = "web_search"`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `Optional<List<String>> allowedDomains`
 
@@ -9297,9 +9736,13 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-            - `Type type`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsMcpToolset:`
+
+            - `Type type`
 
             - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -9319,6 +9762,10 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
             - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
               Resolved default configuration for all tools from an MCP server.
@@ -9337,13 +9784,17 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-            - `String mcpServerName`
+                - `class BetaManagedAgentsAutoPolicy:`
 
-            - `Type type`
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+            - `String mcpServerName`
 
           - `class BetaManagedAgentsCustomTool:`
 
             A custom tool as returned in API responses.
+
+            - `Type type`
 
             - `String description`
 
@@ -9359,10 +9810,6 @@ public final class Main {
 
             - `String name`
 
-            - `Type type`
-
-        - `Type type`
-
         - `long version`
 
           format: int32
@@ -9371,13 +9818,11 @@ public final class Main {
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+        - `Type type`
+
         - `String model`
 
           The advisor model id.
-
-        - `Type type`
-
-    - `Type type`
 
   - `String name`
 
@@ -9403,8 +9848,6 @@ public final class Main {
 
       A custom tool as returned in API responses.
 
-  - `Type type`
-
   - `long version`
 
     format: int32
@@ -9419,13 +9862,13 @@ public final class Main {
 
     Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
+    - `Type type`
+
     - `String name`
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
       minLength: 1, maxLength: 255
-
-    - `Type type`
 
     - `String url`
 
@@ -9451,6 +9894,8 @@ public final class Main {
 
           Configuration override for the bash tool.
 
+          - `Optional<Type> type`
+
           - `JsonValue name = "bash"`
 
             Must be "bash".
@@ -9475,11 +9920,17 @@ public final class Main {
 
               - `Type type`
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `JsonValue type = "auto"`
 
         - `class BetaManagedAgentsEditToolConfigParams:`
 
           Configuration override for the edit tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "edit"`
 
@@ -9501,11 +9952,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfigParams:`
 
           Configuration override for the read tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "read"`
 
@@ -9527,11 +9982,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfigParams:`
 
           Configuration override for the write tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "write"`
 
@@ -9553,11 +10012,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfigParams:`
 
           Configuration override for the glob tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "glob"`
 
@@ -9579,11 +10042,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfigParams:`
 
           Configuration override for the grep tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "grep"`
 
@@ -9605,11 +10072,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfigParams:`
 
           Configuration override for the web_fetch tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "web_fetch"`
 
@@ -9645,11 +10116,15 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebSearchToolConfigParams:`
 
           Configuration override for the web_search tool.
+
+          - `Optional<Type> type`
 
           - `JsonValue name = "web_search"`
 
@@ -9679,7 +10154,9 @@ public final class Main {
 
               Tool calls require user confirmation before execution.
 
-          - `Optional<Type> type`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `Optional<BetaManagedAgentsUserLocation> userLocation`
 
@@ -9731,17 +10208,21 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsMcpToolsetParams:`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `Type type`
 
       - `String mcpServerName`
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `Type type`
 
       - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
 
@@ -9769,6 +10250,10 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
       - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
 
         Default configuration for all tools from an MCP server.
@@ -9789,9 +10274,15 @@ public final class Main {
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsCustomToolParams:`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `Type type`
 
       - `String description`
 
@@ -9815,13 +10306,13 @@ public final class Main {
 
         minLength: 1, maxLength: 128
 
-      - `Type type`
-
 ### Beta Managed Agents Session Multiagent Coordinator
 
 - `class BetaManagedAgentsSessionMultiagentCoordinator:`
 
   Resolved coordinator topology with full agent definitions for each roster member.
+
+  - `Type type`
 
   - `List<Agent> agents`
 
@@ -9831,15 +10322,17 @@ public final class Main {
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `Type type`
+
       - `String id`
 
       - `Optional<String> description`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -9963,9 +10456,9 @@ public final class Main {
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -9973,9 +10466,9 @@ public final class Main {
 
           A resolved user-created custom skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -9985,11 +10478,15 @@ public final class Main {
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
+          - `Type type`
+
           - `List<BetaManagedAgentsAgentToolConfig> configs`
 
             - `class BetaManagedAgentsBashToolConfig:`
 
               Configuration for the bash tool.
+
+              - `JsonValue type = "bash"`
 
               - `boolean enabled`
 
@@ -10011,11 +10508,17 @@ public final class Main {
 
                   - `Type type`
 
-              - `JsonValue type = "bash"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `JsonValue type = "auto"`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
               Configuration for the edit tool.
+
+              - `JsonValue type = "edit"`
 
               - `boolean enabled`
 
@@ -10033,11 +10536,15 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "edit"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig:`
 
               Configuration for the read tool.
+
+              - `JsonValue type = "read"`
 
               - `boolean enabled`
 
@@ -10055,11 +10562,15 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "read"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
               Configuration for the write tool.
+
+              - `JsonValue type = "write"`
 
               - `boolean enabled`
 
@@ -10077,11 +10588,15 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "write"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
               Configuration for the glob tool.
+
+              - `JsonValue type = "glob"`
 
               - `boolean enabled`
 
@@ -10099,11 +10614,15 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "glob"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
               Configuration for the grep tool.
+
+              - `JsonValue type = "grep"`
 
               - `boolean enabled`
 
@@ -10121,11 +10640,15 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "grep"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
               Configuration for the web_fetch tool.
+
+              - `JsonValue type = "web_fetch"`
 
               - `boolean enabled`
 
@@ -10143,7 +10666,9 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_fetch"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -10156,6 +10681,8 @@ public final class Main {
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
+
+              - `JsonValue type = "web_search"`
 
               - `boolean enabled`
 
@@ -10173,7 +10700,9 @@ public final class Main {
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_search"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -10227,9 +10756,13 @@ public final class Main {
 
                 Tool calls require user confirmation before execution.
 
-          - `Type type`
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMcpToolset:`
+
+          - `Type type`
 
           - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -10249,6 +10782,10 @@ public final class Main {
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
           - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
             Resolved default configuration for all tools from an MCP server.
@@ -10267,13 +10804,17 @@ public final class Main {
 
                 Tool calls require user confirmation before execution.
 
-          - `String mcpServerName`
+              - `class BetaManagedAgentsAutoPolicy:`
 
-          - `Type type`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `String mcpServerName`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
+
+          - `Type type`
 
           - `String description`
 
@@ -10289,10 +10830,6 @@ public final class Main {
 
           - `String name`
 
-          - `Type type`
-
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -10301,13 +10838,11 @@ public final class Main {
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `Type type`
+
       - `String model`
 
         The advisor model id.
-
-      - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Session Stats
 
@@ -10333,6 +10868,8 @@ public final class Main {
 
   Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10343,11 +10880,11 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<BetaManagedAgentsSessionAgent> agent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `Type type`
 
     - `String id`
 
@@ -10355,9 +10892,9 @@ public final class Main {
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-      - `String name`
-
       - `Type type`
+
+      - `String name`
 
       - `String url`
 
@@ -10477,6 +11014,8 @@ public final class Main {
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `Type type`
+
       - `List<Agent> agents`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -10485,15 +11024,17 @@ public final class Main {
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `Type type`
+
           - `String id`
 
           - `Optional<String> description`
 
           - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-            - `String name`
-
             - `Type type`
+
+            - `String name`
 
             - `String url`
 
@@ -10509,9 +11050,9 @@ public final class Main {
 
               A resolved Anthropic-managed skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -10519,9 +11060,9 @@ public final class Main {
 
               A resolved user-created custom skill.
 
-              - `String skillId`
-
               - `Type type`
+
+              - `String skillId`
 
               - `String version`
 
@@ -10531,11 +11072,15 @@ public final class Main {
 
             - `class BetaManagedAgentsAgentToolset20260401:`
 
+              - `Type type`
+
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                 - `class BetaManagedAgentsBashToolConfig:`
 
                   Configuration for the bash tool.
+
+                  - `JsonValue type = "bash"`
 
                   - `boolean enabled`
 
@@ -10557,11 +11102,17 @@ public final class Main {
 
                       - `Type type`
 
-                  - `JsonValue type = "bash"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `JsonValue type = "auto"`
 
                 - `class BetaManagedAgentsEditToolConfig:`
 
                   Configuration for the edit tool.
+
+                  - `JsonValue type = "edit"`
 
                   - `boolean enabled`
 
@@ -10579,11 +11130,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "edit"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig:`
 
                   Configuration for the read tool.
+
+                  - `JsonValue type = "read"`
 
                   - `boolean enabled`
 
@@ -10601,11 +11156,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "read"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig:`
 
                   Configuration for the write tool.
+
+                  - `JsonValue type = "write"`
 
                   - `boolean enabled`
 
@@ -10623,11 +11182,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "write"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig:`
 
                   Configuration for the glob tool.
+
+                  - `JsonValue type = "glob"`
 
                   - `boolean enabled`
 
@@ -10645,11 +11208,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "glob"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig:`
 
                   Configuration for the grep tool.
+
+                  - `JsonValue type = "grep"`
 
                   - `boolean enabled`
 
@@ -10667,11 +11234,15 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "grep"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig:`
 
                   Configuration for the web_fetch tool.
+
+                  - `JsonValue type = "web_fetch"`
 
                   - `boolean enabled`
 
@@ -10689,7 +11260,9 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_fetch"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -10702,6 +11275,8 @@ public final class Main {
                 - `class BetaManagedAgentsWebSearchToolConfig:`
 
                   Configuration for the web_search tool.
+
+                  - `JsonValue type = "web_search"`
 
                   - `boolean enabled`
 
@@ -10719,7 +11294,9 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                  - `JsonValue type = "web_search"`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Optional<List<String>> allowedDomains`
 
@@ -10773,9 +11350,13 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-              - `Type type`
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMcpToolset:`
+
+              - `Type type`
 
               - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -10795,6 +11376,10 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
+                  - `class BetaManagedAgentsAutoPolicy:`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
               - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                 Resolved default configuration for all tools from an MCP server.
@@ -10813,13 +11398,17 @@ public final class Main {
 
                     Tool calls require user confirmation before execution.
 
-              - `String mcpServerName`
+                  - `class BetaManagedAgentsAutoPolicy:`
 
-              - `Type type`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `String mcpServerName`
 
             - `class BetaManagedAgentsCustomTool:`
 
               A custom tool as returned in API responses.
+
+              - `Type type`
 
               - `String description`
 
@@ -10835,10 +11424,6 @@ public final class Main {
 
               - `String name`
 
-              - `Type type`
-
-          - `Type type`
-
           - `long version`
 
             format: int32
@@ -10847,13 +11432,11 @@ public final class Main {
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `Type type`
+
           - `String model`
 
             The advisor model id.
-
-          - `Type type`
-
-      - `Type type`
 
     - `String name`
 
@@ -10879,8 +11462,6 @@ public final class Main {
 
         A custom tool as returned in API responses.
 
-    - `Type type`
-
     - `long version`
 
       format: int32
@@ -10888,6 +11469,8 @@ public final class Main {
   - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `Type type`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -10900,8 +11483,6 @@ public final class Main {
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
   - `Optional<Metadata> metadata`
 
@@ -10991,6 +11572,8 @@ public final class Main {
 
   Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -11000,8 +11583,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
   - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -11079,11 +11660,11 @@ public final class Main {
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
-
-    - `Type type`
 
 ### Beta Managed Agents Start Event
 
@@ -11091,27 +11672,27 @@ public final class Main {
 
   Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+  - `Type type`
+
   - `BetaManagedAgentsStartEventPreview event`
 
     The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
     - `class BetaManagedAgentsAgentMessagePreview:`
 
+      - `Type type`
+
       - `String id`
 
         The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `Type type`
-
     - `class BetaManagedAgentsAgentThinkingPreview:`
+
+      - `Type type`
 
       - `String id`
 
         The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-      - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Start Event Preview
 
@@ -11119,19 +11700,19 @@ public final class Main {
 
   - `class BetaManagedAgentsAgentMessagePreview:`
 
+    - `Type type`
+
     - `String id`
 
       The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingPreview:`
+
+    - `Type type`
 
     - `String id`
 
       The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-    - `Type type`
 
 ### Beta Managed Agents System Content Block
 
@@ -11139,19 +11720,21 @@ public final class Main {
 
   Regular text content.
 
+  - `Type type`
+
   - `String text`
 
     The text content.
 
     minLength: 1
 
-  - `Type type`
-
 ### Beta Managed Agents System Message Event
 
 - `class BetaManagedAgentsSystemMessageEvent:`
 
   A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `Type type`
 
   - `String id`
 
@@ -11161,15 +11744,13 @@ public final class Main {
 
     System content blocks. Text-only.
 
+    - `Type type`
+
     - `String text`
 
       The text content.
 
       minLength: 1
-
-    - `Type type`
-
-  - `Type type`
 
   - `Optional<LocalDateTime> processedAt`
 
@@ -11183,6 +11764,8 @@ public final class Main {
 
   Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -11190,8 +11773,6 @@ public final class Main {
   - `String toolUseId`
 
     The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-  - `Type type`
 
   - `Optional<List<Content>> content`
 
@@ -11201,17 +11782,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -11220,6 +11803,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -11232,8 +11817,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -11251,19 +11834,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -11272,6 +11855,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -11285,11 +11870,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -11300,8 +11885,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -11319,15 +11902,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -11341,6 +11922,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -11353,13 +11936,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -11372,8 +11955,6 @@ public final class Main {
         The title of the search result.
 
         minLength: 1
-
-      - `Type type`
 
   - `Optional<Boolean> isError`
 
@@ -11501,6 +12082,8 @@ List Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -11543,6 +12126,8 @@ List Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionEvent: union`
@@ -11552,6 +12137,8 @@ List Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -11565,17 +12152,19 @@ List Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -11584,6 +12173,8 @@ List Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -11596,8 +12187,6 @@ List Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -11615,19 +12204,19 @@ List Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -11636,6 +12225,8 @@ List Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -11649,11 +12240,11 @@ List Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -11664,8 +12255,6 @@ List Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -11683,15 +12272,13 @@ List Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -11707,8 +12294,6 @@ List Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -11719,11 +12304,11 @@ List Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -11738,6 +12323,8 @@ List Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11754,8 +12341,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -11777,6 +12362,8 @@ List Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11784,8 +12371,6 @@ List Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -11807,6 +12392,8 @@ List Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -11819,13 +12406,13 @@ List Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -11838,8 +12425,6 @@ List Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -11859,6 +12444,8 @@ List Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11877,8 +12464,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -11886,6 +12471,8 @@ List Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -11909,11 +12496,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -11925,11 +12512,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -11953,8 +12540,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -11965,6 +12550,62 @@ List Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -11972,6 +12613,8 @@ List Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11986,8 +12629,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -12017,6 +12658,8 @@ List Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12035,8 +12678,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -12047,6 +12688,10 @@ List Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -12054,6 +12699,8 @@ List Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -12068,8 +12715,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -12098,6 +12743,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -12133,8 +12780,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -12142,6 +12787,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -12177,8 +12824,6 @@ List Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -12186,6 +12831,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -12197,11 +12844,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -12215,6 +12862,8 @@ List Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -12240,13 +12889,13 @@ List Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -12266,13 +12915,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -12292,13 +12941,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -12319,11 +12968,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -12349,11 +12998,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -12379,11 +13028,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -12405,11 +13054,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -12435,8 +13084,6 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -12447,11 +13094,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -12462,13 +13109,13 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12479,11 +13126,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -12509,11 +13156,11 @@ List Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -12527,11 +13174,11 @@ List Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -12543,11 +13190,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -12567,11 +13214,11 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -12593,11 +13240,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -12630,8 +13277,6 @@ List Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -12673,6 +13318,8 @@ List Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12683,11 +13330,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -12711,11 +13358,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -12737,11 +13384,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -12775,27 +13422,27 @@ List Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -12807,11 +13454,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12831,11 +13478,11 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12875,11 +13522,11 @@ List Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12899,11 +13546,11 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -12912,8 +13559,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -12953,6 +13598,8 @@ List Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12971,11 +13618,11 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -12987,11 +13634,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -12999,9 +13646,9 @@ List Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -13121,6 +13768,8 @@ List Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -13129,15 +13778,17 @@ List Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -13153,9 +13804,9 @@ List Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -13163,9 +13814,9 @@ List Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -13175,11 +13826,15 @@ List Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -13201,11 +13856,17 @@ List Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -13223,11 +13884,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -13245,11 +13910,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -13267,11 +13936,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -13289,11 +13962,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -13311,11 +13988,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -13333,7 +14014,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -13346,6 +14029,8 @@ List Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -13363,7 +14048,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -13417,9 +14104,13 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -13439,6 +14130,10 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -13457,13 +14152,17 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -13479,10 +14178,6 @@ List Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -13491,13 +14186,11 @@ List Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -13523,8 +14216,6 @@ List Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -13532,6 +14223,8 @@ List Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -13545,8 +14238,6 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -13559,6 +14250,8 @@ List Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -13567,15 +14260,13 @@ List Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -13587,6 +14278,8 @@ List Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -13596,8 +14289,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -13784,6 +14475,8 @@ Send Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -13826,6 +14519,8 @@ Send Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.
@@ -13833,6 +14528,8 @@ Send Events
     - `class BetaManagedAgentsUserMessageEventParams:`
 
       Parameters for sending a user message to the session.
+
+      - `Type type`
 
       - `List<Content> content`
 
@@ -13842,17 +14539,19 @@ Send Events
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -13861,6 +14560,8 @@ Send Events
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -13873,8 +14574,6 @@ Send Events
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -13892,19 +14591,19 @@ Send Events
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -13913,6 +14612,8 @@ Send Events
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -13926,11 +14627,11 @@ Send Events
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -13941,8 +14642,6 @@ Send Events
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -13960,15 +14659,13 @@ Send Events
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -13984,8 +14681,6 @@ Send Events
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsUserInterruptEventParams:`
 
       Parameters for sending an interrupt to pause the agent.
@@ -13999,6 +14694,8 @@ Send Events
     - `class BetaManagedAgentsUserToolConfirmationEventParams:`
 
       Parameters for confirming or denying a tool execution request.
+
+      - `Type type`
 
       - `Result result`
 
@@ -14014,8 +14711,6 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Type type`
-
       - `Optional<String> denyMessage`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
@@ -14026,13 +14721,13 @@ Send Events
 
       Parameters for providing the result of a custom tool execution.
 
+      - `Type type`
+
       - `String customToolUseId`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -14054,6 +14749,8 @@ Send Events
 
           A block containing a web search result.
 
+          - `Type type`
+
           - `BetaManagedAgentsSearchResultCitations citations`
 
             Citation settings for a search result.
@@ -14066,13 +14763,13 @@ Send Events
 
             Array of text content blocks from the search result.
 
+            - `Type type`
+
             - `String text`
 
               The text content.
 
               minLength: 1
-
-            - `Type type`
 
           - `String source`
 
@@ -14086,8 +14783,6 @@ Send Events
 
             minLength: 1
 
-          - `Type type`
-
       - `Optional<Boolean> isError`
 
         Whether the tool execution resulted in an error.
@@ -14095,6 +14790,8 @@ Send Events
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -14108,25 +14805,23 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
 
-          - `Type type`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
+
+          - `Type type`
 
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
             maxLength: 262144
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -14138,13 +14833,13 @@ Send Events
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+      - `Type type`
+
       - `String toolUseId`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -14174,19 +14869,19 @@ Send Events
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
 #### Returns
 
@@ -14202,6 +14897,8 @@ Send Events
 
       A user message event in the session conversation.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -14214,17 +14911,19 @@ Send Events
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -14233,6 +14932,8 @@ Send Events
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -14245,8 +14946,6 @@ Send Events
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -14264,19 +14963,19 @@ Send Events
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -14285,6 +14984,8 @@ Send Events
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -14298,11 +14999,11 @@ Send Events
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -14313,8 +15014,6 @@ Send Events
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -14332,15 +15031,13 @@ Send Events
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -14356,8 +15053,6 @@ Send Events
 
           - `Type type`
 
-      - `Type type`
-
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
@@ -14368,11 +15063,11 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -14387,6 +15082,8 @@ Send Events
     - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
       A tool confirmation event that approves or denies a pending tool execution.
+
+      - `Type type`
 
       - `String id`
 
@@ -14403,8 +15100,6 @@ Send Events
       - `String toolUseId`
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<String> denyMessage`
 
@@ -14426,6 +15121,8 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -14433,8 +15130,6 @@ Send Events
       - `String customToolUseId`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -14456,6 +15151,8 @@ Send Events
 
           A block containing a web search result.
 
+          - `Type type`
+
           - `BetaManagedAgentsSearchResultCitations citations`
 
             Citation settings for a search result.
@@ -14468,13 +15165,13 @@ Send Events
 
             Array of text content blocks from the search result.
 
+            - `Type type`
+
             - `String text`
 
               The text content.
 
               minLength: 1
-
-            - `Type type`
 
           - `String source`
 
@@ -14487,8 +15184,6 @@ Send Events
             The title of the search result.
 
             minLength: 1
-
-          - `Type type`
 
       - `Optional<Boolean> isError`
 
@@ -14507,6 +15202,8 @@ Send Events
     - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `Type type`
 
       - `String id`
 
@@ -14540,27 +15237,27 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsUserToolResultEvent:`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+      - `Type type`
 
       - `String id`
 
@@ -14569,8 +15266,6 @@ Send Events
       - `String toolUseId`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -14610,6 +15305,8 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -14618,15 +15315,13 @@ Send Events
 
         System content blocks. Text-only.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -14757,6 +15452,8 @@ Stream Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -14799,6 +15496,8 @@ Stream Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsStreamSessionEvents: union`
@@ -14808,6 +15507,8 @@ Stream Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -14821,17 +15522,19 @@ Stream Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -14840,6 +15543,8 @@ Stream Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -14852,8 +15557,6 @@ Stream Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -14871,19 +15574,19 @@ Stream Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -14892,6 +15595,8 @@ Stream Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -14905,11 +15610,11 @@ Stream Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -14920,8 +15625,6 @@ Stream Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -14939,15 +15642,13 @@ Stream Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -14963,8 +15664,6 @@ Stream Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -14975,11 +15674,11 @@ Stream Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -14994,6 +15693,8 @@ Stream Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -15010,8 +15711,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -15033,6 +15732,8 @@ Stream Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -15040,8 +15741,6 @@ Stream Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -15063,6 +15762,8 @@ Stream Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -15075,13 +15776,13 @@ Stream Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -15094,8 +15795,6 @@ Stream Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -15115,6 +15814,8 @@ Stream Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -15133,8 +15834,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -15142,6 +15841,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -15165,11 +15866,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -15181,11 +15882,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -15209,8 +15910,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -15221,6 +15920,62 @@ Stream Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -15228,6 +15983,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -15242,8 +15999,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -15273,6 +16028,8 @@ Stream Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -15291,8 +16048,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -15303,6 +16058,10 @@ Stream Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -15310,6 +16069,8 @@ Stream Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -15324,8 +16085,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -15354,6 +16113,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -15389,8 +16150,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -15398,6 +16157,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -15433,8 +16194,6 @@ Stream Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -15442,6 +16201,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -15453,11 +16214,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -15471,6 +16232,8 @@ Stream Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -15496,13 +16259,13 @@ Stream Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -15522,13 +16285,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -15548,13 +16311,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -15575,11 +16338,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -15605,11 +16368,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -15635,11 +16398,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -15661,11 +16424,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -15691,8 +16454,6 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -15703,11 +16464,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -15718,13 +16479,13 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -15735,11 +16496,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -15765,11 +16526,11 @@ Stream Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -15783,11 +16544,11 @@ Stream Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -15799,11 +16560,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -15823,11 +16584,11 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -15849,11 +16610,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -15886,8 +16647,6 @@ Stream Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -15929,6 +16688,8 @@ Stream Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -15939,11 +16700,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -15967,11 +16728,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -15993,11 +16754,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -16031,27 +16792,27 @@ Stream Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -16063,11 +16824,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -16087,11 +16848,11 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -16131,11 +16892,11 @@ Stream Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -16155,11 +16916,11 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -16168,8 +16929,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -16209,6 +16968,8 @@ Stream Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -16227,11 +16988,11 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -16243,11 +17004,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -16255,9 +17016,9 @@ Stream Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -16377,6 +17138,8 @@ Stream Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -16385,15 +17148,17 @@ Stream Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -16409,9 +17174,9 @@ Stream Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -16419,9 +17184,9 @@ Stream Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -16431,11 +17196,15 @@ Stream Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -16457,11 +17226,17 @@ Stream Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -16479,11 +17254,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -16501,11 +17280,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -16523,11 +17306,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -16545,11 +17332,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -16567,11 +17358,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -16589,7 +17384,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -16602,6 +17399,8 @@ Stream Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -16619,7 +17418,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -16673,9 +17474,13 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -16695,6 +17500,10 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -16713,13 +17522,17 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -16735,10 +17548,6 @@ Stream Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -16747,13 +17556,11 @@ Stream Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -16779,8 +17586,6 @@ Stream Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -16788,6 +17593,8 @@ Stream Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -16801,8 +17608,6 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -16815,41 +17620,43 @@ Stream Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `Type type`
+
     - `BetaManagedAgentsStartEventPreview event`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview:`
 
+        - `Type type`
+
         - `String id`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `Type type`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `Type type`
 
         - `String id`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsDeltaEvent:`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Type type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `Type type`
+
       - `BetaManagedAgentsTextBlock content`
 
         Regular text content.
-
-      - `Type type`
 
       - `Optional<Long> index`
 
@@ -16861,11 +17668,11 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSystemMessageEvent:`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -16875,15 +17682,13 @@ Stream Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -16895,6 +17700,8 @@ Stream Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -16904,8 +17711,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -17079,6 +17884,8 @@ Add Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -17121,6 +17928,8 @@ Add Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
     Mount a file uploaded via the Files API into the session.
@@ -17128,6 +17937,8 @@ Add Session Resource
 #### Returns
 
 - `class BetaManagedAgentsFileResource:`
+
+  - `Type type`
 
   - `String id`
 
@@ -17140,8 +17951,6 @@ Add Session Resource
   - `String fileId`
 
   - `String mountPath`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -17265,6 +18074,8 @@ List Session Resources
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -17307,6 +18118,8 @@ List Session Resources
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionResource: union`
@@ -17314,6 +18127,8 @@ List Session Resources
   A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -17324,8 +18139,6 @@ List Session Resources
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -17339,15 +18152,17 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -17355,9 +18170,9 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -17371,8 +18186,6 @@ List Session Resources
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -17383,11 +18196,11 @@ List Session Resources
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -17532,6 +18345,8 @@ Get Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -17574,6 +18389,8 @@ Get Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class ResourceRetrieveResponse: union`
@@ -17581,6 +18398,8 @@ Get Session Resource
   The requested session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -17591,8 +18410,6 @@ Get Session Resource
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -17606,15 +18423,17 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -17622,9 +18441,9 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -17638,8 +18457,6 @@ Get Session Resource
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -17650,11 +18467,11 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -17790,6 +18607,8 @@ Update Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -17832,6 +18651,8 @@ Update Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `String authorizationToken`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
@@ -17846,6 +18667,8 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
+    - `Type type`
+
     - `String id`
 
     - `LocalDateTime createdAt`
@@ -17855,8 +18678,6 @@ Update Session Resource
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -17870,15 +18691,17 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -17886,9 +18709,9 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -17902,8 +18725,6 @@ Update Session Resource
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -17914,11 +18735,11 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -18055,6 +18876,8 @@ Delete Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -18097,15 +18920,17 @@ Delete Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsDeleteSessionResource:`
 
   Confirmation of resource deletion.
 
-  - `String id`
-
   - `Type type`
+
+  - `String id`
 
 #### Example
 
@@ -18217,6 +19042,8 @@ List Session Threads
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -18259,11 +19086,15 @@ List Session Threads
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread:`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `Type type`
 
   - `String id`
 
@@ -18277,15 +19108,17 @@ List Session Threads
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `Type type`
+
       - `String id`
 
       - `Optional<String> description`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -18409,9 +19242,9 @@ List Session Threads
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -18419,9 +19252,9 @@ List Session Threads
 
           A resolved user-created custom skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -18431,11 +19264,15 @@ List Session Threads
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
+          - `Type type`
+
           - `List<BetaManagedAgentsAgentToolConfig> configs`
 
             - `class BetaManagedAgentsBashToolConfig:`
 
               Configuration for the bash tool.
+
+              - `JsonValue type = "bash"`
 
               - `boolean enabled`
 
@@ -18457,11 +19294,17 @@ List Session Threads
 
                   - `Type type`
 
-              - `JsonValue type = "bash"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `JsonValue type = "auto"`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
               Configuration for the edit tool.
+
+              - `JsonValue type = "edit"`
 
               - `boolean enabled`
 
@@ -18479,11 +19322,15 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "edit"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig:`
 
               Configuration for the read tool.
+
+              - `JsonValue type = "read"`
 
               - `boolean enabled`
 
@@ -18501,11 +19348,15 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "read"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
               Configuration for the write tool.
+
+              - `JsonValue type = "write"`
 
               - `boolean enabled`
 
@@ -18523,11 +19374,15 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "write"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
               Configuration for the glob tool.
+
+              - `JsonValue type = "glob"`
 
               - `boolean enabled`
 
@@ -18545,11 +19400,15 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "glob"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
               Configuration for the grep tool.
+
+              - `JsonValue type = "grep"`
 
               - `boolean enabled`
 
@@ -18567,11 +19426,15 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "grep"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
               Configuration for the web_fetch tool.
+
+              - `JsonValue type = "web_fetch"`
 
               - `boolean enabled`
 
@@ -18589,7 +19452,9 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_fetch"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -18602,6 +19467,8 @@ List Session Threads
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
+
+              - `JsonValue type = "web_search"`
 
               - `boolean enabled`
 
@@ -18619,7 +19486,9 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_search"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -18673,9 +19542,13 @@ List Session Threads
 
                 Tool calls require user confirmation before execution.
 
-          - `Type type`
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMcpToolset:`
+
+          - `Type type`
 
           - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -18695,6 +19568,10 @@ List Session Threads
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
           - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
             Resolved default configuration for all tools from an MCP server.
@@ -18713,13 +19590,17 @@ List Session Threads
 
                 Tool calls require user confirmation before execution.
 
-          - `String mcpServerName`
+              - `class BetaManagedAgentsAutoPolicy:`
 
-          - `Type type`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `String mcpServerName`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
+
+          - `Type type`
 
           - `String description`
 
@@ -18735,10 +19616,6 @@ List Session Threads
 
           - `String name`
 
-          - `Type type`
-
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -18747,11 +19624,11 @@ List Session Threads
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `Type type`
+
       - `String model`
 
         The advisor model id.
-
-      - `Type type`
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -18806,8 +19683,6 @@ List Session Threads
     - `RESCHEDULING("rescheduling")`
 
     - `TERMINATED("terminated")`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -19068,6 +19943,8 @@ Get Session Thread
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -19110,11 +19987,15 @@ Get Session Thread
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread:`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `Type type`
 
   - `String id`
 
@@ -19128,15 +20009,17 @@ Get Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `Type type`
+
       - `String id`
 
       - `Optional<String> description`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -19260,9 +20143,9 @@ Get Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -19270,9 +20153,9 @@ Get Session Thread
 
           A resolved user-created custom skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -19282,11 +20165,15 @@ Get Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
+          - `Type type`
+
           - `List<BetaManagedAgentsAgentToolConfig> configs`
 
             - `class BetaManagedAgentsBashToolConfig:`
 
               Configuration for the bash tool.
+
+              - `JsonValue type = "bash"`
 
               - `boolean enabled`
 
@@ -19308,11 +20195,17 @@ Get Session Thread
 
                   - `Type type`
 
-              - `JsonValue type = "bash"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `JsonValue type = "auto"`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
               Configuration for the edit tool.
+
+              - `JsonValue type = "edit"`
 
               - `boolean enabled`
 
@@ -19330,11 +20223,15 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "edit"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig:`
 
               Configuration for the read tool.
+
+              - `JsonValue type = "read"`
 
               - `boolean enabled`
 
@@ -19352,11 +20249,15 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "read"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
               Configuration for the write tool.
+
+              - `JsonValue type = "write"`
 
               - `boolean enabled`
 
@@ -19374,11 +20275,15 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "write"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
               Configuration for the glob tool.
+
+              - `JsonValue type = "glob"`
 
               - `boolean enabled`
 
@@ -19396,11 +20301,15 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "glob"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
               Configuration for the grep tool.
+
+              - `JsonValue type = "grep"`
 
               - `boolean enabled`
 
@@ -19418,11 +20327,15 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "grep"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
               Configuration for the web_fetch tool.
+
+              - `JsonValue type = "web_fetch"`
 
               - `boolean enabled`
 
@@ -19440,7 +20353,9 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_fetch"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -19453,6 +20368,8 @@ Get Session Thread
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
+
+              - `JsonValue type = "web_search"`
 
               - `boolean enabled`
 
@@ -19470,7 +20387,9 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_search"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -19524,9 +20443,13 @@ Get Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `Type type`
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMcpToolset:`
+
+          - `Type type`
 
           - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -19546,6 +20469,10 @@ Get Session Thread
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
           - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
             Resolved default configuration for all tools from an MCP server.
@@ -19564,13 +20491,17 @@ Get Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `String mcpServerName`
+              - `class BetaManagedAgentsAutoPolicy:`
 
-          - `Type type`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `String mcpServerName`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
+
+          - `Type type`
 
           - `String description`
 
@@ -19586,10 +20517,6 @@ Get Session Thread
 
           - `String name`
 
-          - `Type type`
-
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -19598,11 +20525,11 @@ Get Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `Type type`
+
       - `String model`
 
         The advisor model id.
-
-      - `Type type`
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -19657,8 +20584,6 @@ Get Session Thread
     - `RESCHEDULING("rescheduling")`
 
     - `TERMINATED("terminated")`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -19918,6 +20843,8 @@ Archive Session Thread
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -19960,11 +20887,15 @@ Archive Session Thread
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread:`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `Type type`
 
   - `String id`
 
@@ -19978,15 +20909,17 @@ Archive Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `Type type`
+
       - `String id`
 
       - `Optional<String> description`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -20110,9 +21043,9 @@ Archive Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -20120,9 +21053,9 @@ Archive Session Thread
 
           A resolved user-created custom skill.
 
-          - `String skillId`
-
           - `Type type`
+
+          - `String skillId`
 
           - `String version`
 
@@ -20132,11 +21065,15 @@ Archive Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401:`
 
+          - `Type type`
+
           - `List<BetaManagedAgentsAgentToolConfig> configs`
 
             - `class BetaManagedAgentsBashToolConfig:`
 
               Configuration for the bash tool.
+
+              - `JsonValue type = "bash"`
 
               - `boolean enabled`
 
@@ -20158,11 +21095,17 @@ Archive Session Thread
 
                   - `Type type`
 
-              - `JsonValue type = "bash"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `JsonValue type = "auto"`
 
             - `class BetaManagedAgentsEditToolConfig:`
 
               Configuration for the edit tool.
+
+              - `JsonValue type = "edit"`
 
               - `boolean enabled`
 
@@ -20180,11 +21123,15 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "edit"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig:`
 
               Configuration for the read tool.
+
+              - `JsonValue type = "read"`
 
               - `boolean enabled`
 
@@ -20202,11 +21149,15 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "read"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig:`
 
               Configuration for the write tool.
+
+              - `JsonValue type = "write"`
 
               - `boolean enabled`
 
@@ -20224,11 +21175,15 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "write"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig:`
 
               Configuration for the glob tool.
+
+              - `JsonValue type = "glob"`
 
               - `boolean enabled`
 
@@ -20246,11 +21201,15 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "glob"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig:`
 
               Configuration for the grep tool.
+
+              - `JsonValue type = "grep"`
 
               - `boolean enabled`
 
@@ -20268,11 +21227,15 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "grep"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig:`
 
               Configuration for the web_fetch tool.
+
+              - `JsonValue type = "web_fetch"`
 
               - `boolean enabled`
 
@@ -20290,7 +21253,9 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_fetch"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -20303,6 +21268,8 @@ Archive Session Thread
             - `class BetaManagedAgentsWebSearchToolConfig:`
 
               Configuration for the web_search tool.
+
+              - `JsonValue type = "web_search"`
 
               - `boolean enabled`
 
@@ -20320,7 +21287,9 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `JsonValue type = "web_search"`
+                - `class BetaManagedAgentsAutoPolicy:`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Optional<List<String>> allowedDomains`
 
@@ -20374,9 +21343,13 @@ Archive Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `Type type`
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMcpToolset:`
+
+          - `Type type`
 
           - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -20396,6 +21369,10 @@ Archive Session Thread
 
                 Tool calls require user confirmation before execution.
 
+              - `class BetaManagedAgentsAutoPolicy:`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
           - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
             Resolved default configuration for all tools from an MCP server.
@@ -20414,13 +21391,17 @@ Archive Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `String mcpServerName`
+              - `class BetaManagedAgentsAutoPolicy:`
 
-          - `Type type`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `String mcpServerName`
 
         - `class BetaManagedAgentsCustomTool:`
 
           A custom tool as returned in API responses.
+
+          - `Type type`
 
           - `String description`
 
@@ -20436,10 +21417,6 @@ Archive Session Thread
 
           - `String name`
 
-          - `Type type`
-
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -20448,11 +21425,11 @@ Archive Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `Type type`
+
       - `String model`
 
         The advisor model id.
-
-      - `Type type`
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -20507,8 +21484,6 @@ Archive Session Thread
     - `RESCHEDULING("rescheduling")`
 
     - `TERMINATED("terminated")`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -20780,6 +21755,8 @@ List Session Thread Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -20822,6 +21799,8 @@ List Session Thread Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionEvent: union`
@@ -20831,6 +21810,8 @@ List Session Thread Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -20844,17 +21825,19 @@ List Session Thread Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -20863,6 +21846,8 @@ List Session Thread Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -20875,8 +21860,6 @@ List Session Thread Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -20894,19 +21877,19 @@ List Session Thread Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -20915,6 +21898,8 @@ List Session Thread Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -20928,11 +21913,11 @@ List Session Thread Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -20943,8 +21928,6 @@ List Session Thread Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -20962,15 +21945,13 @@ List Session Thread Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -20986,8 +21967,6 @@ List Session Thread Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -20998,11 +21977,11 @@ List Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -21017,6 +21996,8 @@ List Session Thread Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -21033,8 +22014,6 @@ List Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -21056,6 +22035,8 @@ List Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -21063,8 +22044,6 @@ List Session Thread Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -21086,6 +22065,8 @@ List Session Thread Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -21098,13 +22079,13 @@ List Session Thread Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -21117,8 +22098,6 @@ List Session Thread Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -21138,6 +22117,8 @@ List Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -21156,8 +22137,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -21165,6 +22144,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -21188,11 +22169,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -21204,11 +22185,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -21232,8 +22213,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -21244,6 +22223,62 @@ List Session Thread Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -21251,6 +22286,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -21265,8 +22302,6 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -21296,6 +22331,8 @@ List Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -21314,8 +22351,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -21326,6 +22361,10 @@ List Session Thread Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -21333,6 +22372,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -21347,8 +22388,6 @@ List Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -21377,6 +22416,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -21412,8 +22453,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -21421,6 +22460,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -21456,8 +22497,6 @@ List Session Thread Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -21465,6 +22504,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -21476,11 +22517,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -21494,6 +22535,8 @@ List Session Thread Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -21519,13 +22562,13 @@ List Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -21545,13 +22588,13 @@ List Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -21571,13 +22614,13 @@ List Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -21598,11 +22641,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -21628,11 +22671,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -21658,11 +22701,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -21684,11 +22727,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -21714,8 +22757,6 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -21726,11 +22767,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -21741,13 +22782,13 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -21758,11 +22799,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -21788,11 +22829,11 @@ List Session Thread Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -21806,11 +22847,11 @@ List Session Thread Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -21822,11 +22863,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -21846,11 +22887,11 @@ List Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -21872,11 +22913,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -21909,8 +22950,6 @@ List Session Thread Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -21952,6 +22991,8 @@ List Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -21962,11 +23003,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -21990,11 +23031,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -22016,11 +23057,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -22054,27 +23095,27 @@ List Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -22086,11 +23127,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -22110,11 +23151,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -22154,11 +23195,11 @@ List Session Thread Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -22178,11 +23219,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -22191,8 +23232,6 @@ List Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -22232,6 +23271,8 @@ List Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -22250,11 +23291,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -22266,11 +23307,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -22278,9 +23319,9 @@ List Session Thread Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -22400,6 +23441,8 @@ List Session Thread Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -22408,15 +23451,17 @@ List Session Thread Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -22432,9 +23477,9 @@ List Session Thread Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -22442,9 +23487,9 @@ List Session Thread Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -22454,11 +23499,15 @@ List Session Thread Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -22480,11 +23529,17 @@ List Session Thread Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -22502,11 +23557,15 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -22524,11 +23583,15 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -22546,11 +23609,15 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -22568,11 +23635,15 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -22590,11 +23661,15 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -22612,7 +23687,9 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -22625,6 +23702,8 @@ List Session Thread Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -22642,7 +23721,9 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -22696,9 +23777,13 @@ List Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -22718,6 +23803,10 @@ List Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -22736,13 +23825,17 @@ List Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -22758,10 +23851,6 @@ List Session Thread Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -22770,13 +23859,11 @@ List Session Thread Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -22802,8 +23889,6 @@ List Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -22811,6 +23896,8 @@ List Session Thread Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -22824,8 +23911,6 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -22838,6 +23923,8 @@ List Session Thread Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -22846,15 +23933,13 @@ List Session Thread Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -22866,6 +23951,8 @@ List Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -22875,8 +23962,6 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -23066,6 +24151,8 @@ Stream Session Thread Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -23108,6 +24195,8 @@ Stream Session Thread Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsStreamSessionThreadEvents: union`
@@ -23117,6 +24206,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -23130,17 +24221,19 @@ Stream Session Thread Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -23149,6 +24242,8 @@ Stream Session Thread Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -23161,8 +24256,6 @@ Stream Session Thread Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -23180,19 +24273,19 @@ Stream Session Thread Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -23201,6 +24294,8 @@ Stream Session Thread Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -23214,11 +24309,11 @@ Stream Session Thread Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -23229,8 +24324,6 @@ Stream Session Thread Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -23248,15 +24341,13 @@ Stream Session Thread Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -23272,8 +24363,6 @@ Stream Session Thread Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -23284,11 +24373,11 @@ Stream Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -23303,6 +24392,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -23319,8 +24410,6 @@ Stream Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -23342,6 +24431,8 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -23349,8 +24440,6 @@ Stream Session Thread Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -23372,6 +24461,8 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -23384,13 +24475,13 @@ Stream Session Thread Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -23403,8 +24494,6 @@ Stream Session Thread Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -23424,6 +24513,8 @@ Stream Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -23442,8 +24533,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -23451,6 +24540,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -23474,11 +24565,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -23490,11 +24581,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -23518,8 +24609,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -23530,6 +24619,62 @@ Stream Session Thread Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -23537,6 +24682,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -23551,8 +24698,6 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -23582,6 +24727,8 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -23600,8 +24747,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -23612,6 +24757,10 @@ Stream Session Thread Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -23619,6 +24768,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -23633,8 +24784,6 @@ Stream Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -23663,6 +24812,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -23698,8 +24849,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -23707,6 +24856,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -23742,8 +24893,6 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -23751,6 +24900,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -23762,11 +24913,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -23780,6 +24931,8 @@ Stream Session Thread Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -23805,13 +24958,13 @@ Stream Session Thread Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -23831,13 +24984,13 @@ Stream Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -23857,13 +25010,13 @@ Stream Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -23884,11 +25037,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -23914,11 +25067,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -23944,11 +25097,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -23970,11 +25123,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -24000,8 +25153,6 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -24012,11 +25163,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -24027,13 +25178,13 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -24044,11 +25195,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -24074,11 +25225,11 @@ Stream Session Thread Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -24092,11 +25243,11 @@ Stream Session Thread Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -24108,11 +25259,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -24132,11 +25283,11 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -24158,11 +25309,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -24195,8 +25346,6 @@ Stream Session Thread Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -24238,6 +25387,8 @@ Stream Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -24248,11 +25399,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -24276,11 +25427,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -24302,11 +25453,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -24340,27 +25491,27 @@ Stream Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -24372,11 +25523,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -24396,11 +25547,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -24440,11 +25591,11 @@ Stream Session Thread Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -24464,11 +25615,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -24477,8 +25628,6 @@ Stream Session Thread Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -24518,6 +25667,8 @@ Stream Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -24536,11 +25687,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -24552,11 +25703,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -24564,9 +25715,9 @@ Stream Session Thread Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -24686,6 +25837,8 @@ Stream Session Thread Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -24694,15 +25847,17 @@ Stream Session Thread Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -24718,9 +25873,9 @@ Stream Session Thread Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -24728,9 +25883,9 @@ Stream Session Thread Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -24740,11 +25895,15 @@ Stream Session Thread Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -24766,11 +25925,17 @@ Stream Session Thread Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -24788,11 +25953,15 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -24810,11 +25979,15 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -24832,11 +26005,15 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -24854,11 +26031,15 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -24876,11 +26057,15 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -24898,7 +26083,9 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -24911,6 +26098,8 @@ Stream Session Thread Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -24928,7 +26117,9 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -24982,9 +26173,13 @@ Stream Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -25004,6 +26199,10 @@ Stream Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -25022,13 +26221,17 @@ Stream Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -25044,10 +26247,6 @@ Stream Session Thread Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -25056,13 +26255,11 @@ Stream Session Thread Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -25088,8 +26285,6 @@ Stream Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -25097,6 +26292,8 @@ Stream Session Thread Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -25110,8 +26307,6 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -25124,41 +26319,43 @@ Stream Session Thread Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `Type type`
+
     - `BetaManagedAgentsStartEventPreview event`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview:`
 
+        - `Type type`
+
         - `String id`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `Type type`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `Type type`
 
         - `String id`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsDeltaEvent:`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Type type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `Type type`
+
       - `BetaManagedAgentsTextBlock content`
 
         Regular text content.
-
-      - `Type type`
 
       - `Optional<Long> index`
 
@@ -25170,11 +26367,11 @@ Stream Session Thread Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSystemMessageEvent:`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -25184,15 +26381,13 @@ Stream Session Thread Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -25204,6 +26399,8 @@ Stream Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -25213,8 +26410,6 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 

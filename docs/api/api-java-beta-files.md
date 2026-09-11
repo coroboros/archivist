@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files"
 category: "api"
 generated: true
 ---
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/java/beta/files
+---
+
 # Files
 
 ## Upload File
@@ -68,6 +73,8 @@ Upload File
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -110,9 +117,11 @@ Upload File
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `String file`
 
-    The file to upload
+    The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
     format: binary
 
@@ -125,6 +134,12 @@ Upload File
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonValue type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `String id`
 
@@ -156,12 +171,6 @@ Upload File
 
     minimum: 0
 
-  - `JsonValue type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
@@ -176,13 +185,13 @@ Upload File
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `String id`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonValue type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -310,6 +319,8 @@ List Files
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -352,9 +363,17 @@ List Files
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonValue type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `String id`
 
@@ -386,12 +405,6 @@ List Files
 
     minimum: 0
 
-  - `JsonValue type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
@@ -406,13 +419,13 @@ List Files
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `String id`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonValue type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -525,6 +538,8 @@ Download File
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -566,6 +581,8 @@ Download File
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `Optional<String> workspaceId`
 
 ### Example
 
@@ -654,6 +671,8 @@ Get File Metadata
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -696,9 +715,17 @@ Get File Metadata
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonValue type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `String id`
 
@@ -730,12 +757,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `JsonValue type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
@@ -750,13 +771,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `String id`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonValue type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -864,6 +885,8 @@ Delete File
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -906,19 +929,21 @@ Delete File
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaDeletedFile:`
-
-  - `String id`
-
-    ID of the deleted file.
 
   - `Optional<Type> type`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
+
+  - `String id`
+
+    ID of the deleted file.
 
 ### Example
 
@@ -956,19 +981,25 @@ public final class Main {
 
 - `class BetaDeletedFile:`
 
-  - `String id`
-
-    ID of the deleted file.
-
   - `Optional<Type> type`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
+  - `String id`
+
+    ID of the deleted file.
+
 ### Beta File Metadata
 
 - `class BetaFileMetadata:`
+
+  - `JsonValue type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `String id`
 
@@ -1000,12 +1031,6 @@ public final class Main {
 
     minimum: 0
 
-  - `JsonValue type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `Optional<Boolean> downloadable`
 
     Whether the file can be downloaded.
@@ -1020,22 +1045,22 @@ public final class Main {
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `String id`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonValue type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `String id`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Beta File Scope
 
 - `class BetaFileScope:`
 
-  - `String id`
-
-    The ID of the scoping resource (e.g., the session ID).
-
   - `JsonValue type = "session"`
 
     The type of scope (e.g., `"session"`).
+
+  - `String id`
+
+    The ID of the scoping resource (e.g., the session ID).

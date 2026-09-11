@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages"
 category: "api"
 generated: true
 ---
+---
+title: Messages
+url: https://platform.claude.com/docs/en/api/php/beta/messages
+---
+
 # Messages
 
 ## Create a Message
 
-`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): BetaMessage`
 
 **POST** `/v1/messages`
 
@@ -263,6 +268,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
+- `workspaceID?:optional string`
+
 - `outputFormat?:optional BetaJSONOutputFormat`
 
   **Deprecated**
@@ -304,6 +311,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 ### Returns
 
 - `BetaMessage`
+
+  - `"message" type`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
 
   - `string id`
 
@@ -393,12 +406,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     This value will be a non-null string if one of your custom stop sequences was generated.
 
-  - `"message" type`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
   - `BetaUsage usage`
 
     Billing and rate-limit usage.
@@ -433,19 +440,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `BetaRawMessageStartEvent`
 
-    - `BetaMessage message`
-
     - `"message_start" type`
 
+    - `BetaMessage message`
+
   - `BetaRawMessageDeltaEvent`
+
+    - `"message_delta" type`
 
     - `?BetaContextManagementResponse contextManagement`
 
       Information about context management strategies applied during the request
 
     - `Delta delta`
-
-    - `"message_delta" type`
 
     - `BetaMessageDeltaUsage usage`
 
@@ -483,27 +490,27 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `BetaRawContentBlockStartEvent`
 
+    - `"content_block_start" type`
+
     - `ContentBlock contentBlock`
 
       Response model for a file uploaded to the container.
 
     - `int index`
 
-    - `"content_block_start" type`
-
   - `BetaRawContentBlockDeltaEvent`
+
+    - `"content_block_delta" type`
 
     - `BetaRawContentBlockDelta delta`
 
     - `int index`
 
-    - `"content_block_delta" type`
-
   - `BetaRawContentBlockStopEvent`
 
-    - `int index`
-
     - `"content_block_stop" type`
+
+    - `int index`
 
 ### Example
 
@@ -615,6 +622,7 @@ $betaMessage = $client->beta->messages->create(
   topP: 0.7,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessage);
@@ -732,7 +740,7 @@ var_dump($betaMessage);
 
 ## Count tokens in a Message
 
-`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessageTokensCount`
+`$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): BetaMessageTokensCount`
 
 **POST** `/v1/messages/count_tokens`
 
@@ -913,6 +921,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
+- `workspaceID?:optional string`
+
 - `outputFormat?:optional BetaJSONOutputFormat`
 
   **Deprecated**
@@ -1026,6 +1036,7 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
   ],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessageTokensCount);
@@ -1047,6 +1058,10 @@ var_dump($betaMessageTokensCount);
 ### Beta Advisor Message Iteration Usage
 
 - `BetaAdvisorMessageIterationUsage`
+
+  - `"advisor_message" type`
+
+    Usage for an advisor sub-inference iteration
 
   - `?BetaCacheCreation cacheCreation`
 
@@ -1074,13 +1089,11 @@ var_dump($betaMessageTokensCount);
 
     The number of output tokens which were used.
 
-  - `"advisor_message" type`
-
-    Usage for an advisor sub-inference iteration
-
 ### Beta Advisor Redacted Result Block
 
 - `BetaAdvisorRedactedResultBlock`
+
+  - `"advisor_redacted_result" type`
 
   - `string encryptedContent`
 
@@ -1090,17 +1103,15 @@ var_dump($betaMessageTokensCount);
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-  - `"advisor_redacted_result" type`
-
 ### Beta Advisor Redacted Result Block Param
 
 - `BetaAdvisorRedactedResultBlockParam`
 
+  - `"advisor_redacted_result" type`
+
   - `string encryptedContent`
 
     Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-  - `"advisor_redacted_result" type`
 
   - `?string stopReason`
 
@@ -1108,27 +1119,29 @@ var_dump($betaMessageTokensCount);
 
 - `BetaAdvisorResultBlock`
 
+  - `"advisor_result" type`
+
   - `?string stopReason`
 
     The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `string text`
 
-  - `"advisor_result" type`
-
 ### Beta Advisor Result Block Param
 
 - `BetaAdvisorResultBlockParam`
 
-  - `string text`
-
   - `"advisor_result" type`
+
+  - `string text`
 
   - `?string stopReason`
 
 ### Beta Advisor Tool 20260301
 
 - `BetaAdvisorTool20260301`
+
+  - `"advisor_20260301" type`
 
   - `Model model`
 
@@ -1141,8 +1154,6 @@ var_dump($betaMessageTokensCount);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"advisor_20260301" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -1174,21 +1185,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaAdvisorToolResultBlock`
 
+  - `"advisor_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"advisor_tool_result" type`
 
 ### Beta Advisor Tool Result Block Param
 
 - `BetaAdvisorToolResultBlockParam`
 
+  - `"advisor_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"advisor_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -1198,17 +1209,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaAdvisorToolResultError`
 
-  - `ErrorCode errorCode`
-
   - `"advisor_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
 ### Beta Advisor Tool Result Error Param
 
 - `BetaAdvisorToolResultErrorParam`
 
-  - `ErrorCode errorCode`
-
   - `"advisor_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
 ### Beta All Thinking Turns
 
@@ -1220,41 +1231,43 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBase64ImageSource`
 
+  - `"base64" type`
+
   - `string data`
 
   - `MediaType mediaType`
-
-  - `"base64" type`
 
 ### Beta Base64 PDF Source
 
 - `BetaBase64PDFSource`
 
+  - `"base64" type`
+
   - `string data`
 
   - `"application/pdf" mediaType`
-
-  - `"base64" type`
 
 ### Beta Bash Code Execution Output Block
 
 - `BetaBashCodeExecutionOutputBlock`
 
-  - `string fileID`
-
   - `"bash_code_execution_output" type`
+
+  - `string fileID`
 
 ### Beta Bash Code Execution Output Block Param
 
 - `BetaBashCodeExecutionOutputBlockParam`
 
-  - `string fileID`
-
   - `"bash_code_execution_output" type`
+
+  - `string fileID`
 
 ### Beta Bash Code Execution Result Block
 
 - `BetaBashCodeExecutionResultBlock`
+
+  - `"bash_code_execution_result" type`
 
   - `list<BetaBashCodeExecutionOutputBlock> content`
 
@@ -1264,11 +1277,11 @@ var_dump($betaMessageTokensCount);
 
   - `string stdout`
 
-  - `"bash_code_execution_result" type`
-
 ### Beta Bash Code Execution Result Block Param
 
 - `BetaBashCodeExecutionResultBlockParam`
+
+  - `"bash_code_execution_result" type`
 
   - `list<BetaBashCodeExecutionOutputBlockParam> content`
 
@@ -1278,27 +1291,25 @@ var_dump($betaMessageTokensCount);
 
   - `string stdout`
 
-  - `"bash_code_execution_result" type`
-
 ### Beta Bash Code Execution Tool Result Block
 
 - `BetaBashCodeExecutionToolResultBlock`
 
+  - `"bash_code_execution_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"bash_code_execution_tool_result" type`
 
 ### Beta Bash Code Execution Tool Result Block Param
 
 - `BetaBashCodeExecutionToolResultBlockParam`
 
+  - `"bash_code_execution_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"bash_code_execution_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -1308,17 +1319,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBashCodeExecutionToolResultError`
 
-  - `ErrorCode errorCode`
-
   - `"bash_code_execution_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
 ### Beta Bash Code Execution Tool Result Error Param
 
 - `BetaBashCodeExecutionToolResultErrorParam`
 
-  - `ErrorCode errorCode`
-
   - `"bash_code_execution_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
 ### Beta Browser Close Tab Config
 
@@ -1636,11 +1647,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBrowserStateBlockParam`
 
+  - `"browser_state" type`
+
   - `list<BetaBrowserStateTabEntry> tabs`
 
     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
-
-  - `"browser_state" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -1656,19 +1667,19 @@ var_dump($betaMessageTokensCount);
 
   - `BetaBrowserStateChangeTabOpened`
 
+    - `"tab_opened" type`
+
     - `string tabID`
 
       The `tab_id` of the opened tab, present in `tabs`.
 
-    - `"tab_opened" type`
-
   - `BetaBrowserStateChangeDownloadStarted`
+
+    - `"download_started" type`
 
     - `string downloadID`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-    - `"download_started" type`
 
     - `string url`
 
@@ -1676,11 +1687,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaBrowserStateChangeDownloadCompleted`
 
+    - `"download_completed" type`
+
     - `string downloadID`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-    - `"download_completed" type`
 
     - `string url`
 
@@ -1696,11 +1707,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaBrowserStateChangeDownloadFailed`
 
+    - `"download_failed" type`
+
     - `string downloadID`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-    - `"download_failed" type`
 
     - `string url`
 
@@ -1714,11 +1725,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBrowserStateChangeDownloadCompleted`
 
+  - `"download_completed" type`
+
   - `string downloadID`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-  - `"download_completed" type`
 
   - `string url`
 
@@ -1736,11 +1747,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBrowserStateChangeDownloadFailed`
 
+  - `"download_failed" type`
+
   - `string downloadID`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-  - `"download_failed" type`
 
   - `string url`
 
@@ -1754,11 +1765,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBrowserStateChangeDownloadStarted`
 
+  - `"download_started" type`
+
   - `string downloadID`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
-
-  - `"download_started" type`
 
   - `string url`
 
@@ -1768,11 +1779,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaBrowserStateChangeTabOpened`
 
+  - `"tab_opened" type`
+
   - `string tabID`
 
     The `tab_id` of the opened tab, present in `tabs`.
-
-  - `"tab_opened" type`
 
 ### Beta Browser State Tab Entry
 
@@ -1828,6 +1839,10 @@ var_dump($betaMessageTokensCount);
 ### Beta Browser Toolset Configs
 
 - `BetaBrowserToolsetConfigs`
+
+  - `?BetaBrowserTypeConfig type`
+
+    `type`'s config overrides.
 
   - `?BetaBrowserCloseTabConfig closeTab`
 
@@ -1941,10 +1956,6 @@ var_dump($betaMessageTokensCount);
 
     `triple_click`'s config overrides.
 
-  - `?BetaBrowserTypeConfig type`
-
-    `type`'s config overrides.
-
   - `?BetaBrowserWaitConfig wait`
 
     `wait`'s config overrides.
@@ -2034,21 +2045,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCacheMissMessagesChanged`
 
+  - `"messages_changed" type`
+
   - `int cacheMissedInputTokens`
 
     Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-  - `"messages_changed" type`
 
 ### Beta Cache Miss Model Changed
 
 - `BetaCacheMissModelChanged`
 
+  - `"model_changed" type`
+
   - `int cacheMissedInputTokens`
 
     Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-  - `"model_changed" type`
 
 ### Beta Cache Miss Previous Message Not Found
 
@@ -2060,21 +2071,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCacheMissSystemChanged`
 
+  - `"system_changed" type`
+
   - `int cacheMissedInputTokens`
 
     Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-  - `"system_changed" type`
 
 ### Beta Cache Miss Tools Changed
 
 - `BetaCacheMissToolsChanged`
 
+  - `"tools_changed" type`
+
   - `int cacheMissedInputTokens`
 
     Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-  - `"tools_changed" type`
 
 ### Beta Cache Miss Unavailable
 
@@ -2086,6 +2097,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCitationCharLocation`
 
+  - `"char_location" type`
+
   - `string citedText`
 
   - `int documentIndex`
@@ -2098,11 +2111,11 @@ var_dump($betaMessageTokensCount);
 
   - `int startCharIndex`
 
-  - `"char_location" type`
-
 ### Beta Citation Char Location Param
 
 - `BetaCitationCharLocationParam`
+
+  - `"char_location" type`
 
   - `string citedText`
 
@@ -2113,8 +2126,6 @@ var_dump($betaMessageTokensCount);
   - `int endCharIndex`
 
   - `int startCharIndex`
-
-  - `"char_location" type`
 
 ### Beta Citation Config
 
@@ -2126,6 +2137,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCitationContentBlockLocation`
 
+  - `"content_block_location" type`
+
   - `string citedText`
 
     The full text of the cited block range, concatenated.
@@ -2147,13 +2160,13 @@ var_dump($betaMessageTokensCount);
   - `int startBlockIndex`
 
     0-based index of the first cited block in the source's `content` array.
-
-  - `"content_block_location" type`
 
 ### Beta Citation Content Block Location Param
 
 - `BetaCitationContentBlockLocationParam`
 
+  - `"content_block_location" type`
+
   - `string citedText`
 
     The full text of the cited block range, concatenated.
@@ -2174,11 +2187,11 @@ var_dump($betaMessageTokensCount);
 
     0-based index of the first cited block in the source's `content` array.
 
-  - `"content_block_location" type`
-
 ### Beta Citation Page Location
 
 - `BetaCitationPageLocation`
+
+  - `"page_location" type`
 
   - `string citedText`
 
@@ -2192,11 +2205,11 @@ var_dump($betaMessageTokensCount);
 
   - `int startPageNumber`
 
-  - `"page_location" type`
-
 ### Beta Citation Page Location Param
 
 - `BetaCitationPageLocationParam`
+
+  - `"page_location" type`
 
   - `string citedText`
 
@@ -2208,11 +2221,11 @@ var_dump($betaMessageTokensCount);
 
   - `int startPageNumber`
 
-  - `"page_location" type`
-
 ### Beta Citation Search Result Location
 
 - `BetaCitationSearchResultLocation`
+
+  - `"search_result_location" type`
 
   - `string citedText`
 
@@ -2239,13 +2252,13 @@ var_dump($betaMessageTokensCount);
     0-based index of the first cited block in the source's `content` array.
 
   - `?string title`
-
-  - `"search_result_location" type`
 
 ### Beta Citation Search Result Location Param
 
 - `BetaCitationSearchResultLocationParam`
 
+  - `"search_result_location" type`
+
   - `string citedText`
 
     The full text of the cited block range, concatenated.
@@ -2272,19 +2285,17 @@ var_dump($betaMessageTokensCount);
 
   - `?string title`
 
-  - `"search_result_location" type`
-
 ### Beta Citation Web Search Result Location Param
 
 - `BetaCitationWebSearchResultLocationParam`
+
+  - `"web_search_result_location" type`
 
   - `string citedText`
 
   - `string encryptedIndex`
 
   - `?string title`
-
-  - `"web_search_result_location" type`
 
   - `string url`
 
@@ -2298,21 +2309,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCitationsDelta`
 
-  - `Citation citation`
-
   - `"citations_delta" type`
+
+  - `Citation citation`
 
 ### Beta Citations Web Search Result Location
 
 - `BetaCitationsWebSearchResultLocation`
+
+  - `"web_search_result_location" type`
 
   - `string citedText`
 
   - `string encryptedIndex`
 
   - `?string title`
-
-  - `"web_search_result_location" type`
 
   - `string url`
 
@@ -2330,6 +2341,10 @@ var_dump($betaMessageTokensCount);
 
 - `BetaClearThinking20251015EditResponse`
 
+  - `"clear_thinking_20251015" type`
+
+    The type of context management edit applied.
+
   - `int clearedInputTokens`
 
     Number of input tokens cleared by this edit.
@@ -2337,10 +2352,6 @@ var_dump($betaMessageTokensCount);
   - `int clearedThinkingTurns`
 
     Number of thinking turns that were cleared.
-
-  - `"clear_thinking_20251015" type`
-
-    The type of context management edit applied.
 
 ### Beta Clear Tool Uses 20250919 Edit
 
@@ -2372,6 +2383,10 @@ var_dump($betaMessageTokensCount);
 
 - `BetaClearToolUses20250919EditResponse`
 
+  - `"clear_tool_uses_20250919" type`
+
+    The type of context management edit applied.
+
   - `int clearedInputTokens`
 
     Number of input tokens cleared by this edit.
@@ -2380,29 +2395,27 @@ var_dump($betaMessageTokensCount);
 
     Number of tool uses that were cleared.
 
-  - `"clear_tool_uses_20250919" type`
-
-    The type of context management edit applied.
-
 ### Beta Code Execution Output Block
 
 - `BetaCodeExecutionOutputBlock`
 
-  - `string fileID`
-
   - `"code_execution_output" type`
+
+  - `string fileID`
 
 ### Beta Code Execution Output Block Param
 
 - `BetaCodeExecutionOutputBlockParam`
 
-  - `string fileID`
-
   - `"code_execution_output" type`
+
+  - `string fileID`
 
 ### Beta Code Execution Result Block
 
 - `BetaCodeExecutionResultBlock`
+
+  - `"code_execution_result" type`
 
   - `list<BetaCodeExecutionOutputBlock> content`
 
@@ -2412,11 +2425,11 @@ var_dump($betaMessageTokensCount);
 
   - `string stdout`
 
-  - `"code_execution_result" type`
-
 ### Beta Code Execution Result Block Param
 
 - `BetaCodeExecutionResultBlockParam`
+
+  - `"code_execution_result" type`
 
   - `list<BetaCodeExecutionOutputBlockParam> content`
 
@@ -2426,19 +2439,17 @@ var_dump($betaMessageTokensCount);
 
   - `string stdout`
 
-  - `"code_execution_result" type`
-
 ### Beta Code Execution Tool 20250522
 
 - `BetaCodeExecutionTool20250522`
+
+  - `"code_execution_20250522" type`
 
   - `"code_execution" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"code_execution_20250522" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -2458,13 +2469,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCodeExecutionTool20250825`
 
+  - `"code_execution_20250825" type`
+
   - `"code_execution" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"code_execution_20250825" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -2484,13 +2495,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCodeExecutionTool20260120`
 
+  - `"code_execution_20260120" type`
+
   - `"code_execution" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"code_execution_20260120" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -2510,13 +2521,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCodeExecutionTool20260521`
 
+  - `"code_execution_20260521" type`
+
   - `"code_execution" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"code_execution_20260521" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -2536,13 +2547,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCodeExecutionToolResultBlock`
 
+  - `"code_execution_tool_result" type`
+
   - `BetaCodeExecutionToolResultBlockContent content`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
   - `string toolUseID`
-
-  - `"code_execution_tool_result" type`
 
 ### Beta Code Execution Tool Result Block Content
 
@@ -2550,11 +2561,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionToolResultError`
 
-    - `BetaCodeExecutionToolResultErrorCode errorCode`
-
     - `"code_execution_tool_result_error" type`
 
+    - `BetaCodeExecutionToolResultErrorCode errorCode`
+
   - `BetaCodeExecutionResultBlock`
+
+    - `"code_execution_result" type`
 
     - `list<BetaCodeExecutionOutputBlock> content`
 
@@ -2564,9 +2577,9 @@ var_dump($betaMessageTokensCount);
 
     - `string stdout`
 
-    - `"code_execution_result" type`
-
   - `BetaEncryptedCodeExecutionResultBlock`
+
+    - `"encrypted_code_execution_result" type`
 
     - `list<BetaCodeExecutionOutputBlock> content`
 
@@ -2576,19 +2589,17 @@ var_dump($betaMessageTokensCount);
 
     - `string stderr`
 
-    - `"encrypted_code_execution_result" type`
-
 ### Beta Code Execution Tool Result Block Param
 
 - `BetaCodeExecutionToolResultBlockParam`
+
+  - `"code_execution_tool_result" type`
 
   - `BetaCodeExecutionToolResultBlockParamContent content`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
   - `string toolUseID`
-
-  - `"code_execution_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -2600,11 +2611,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionToolResultErrorParam`
 
-    - `BetaCodeExecutionToolResultErrorCode errorCode`
-
     - `"code_execution_tool_result_error" type`
 
+    - `BetaCodeExecutionToolResultErrorCode errorCode`
+
   - `BetaCodeExecutionResultBlockParam`
+
+    - `"code_execution_result" type`
 
     - `list<BetaCodeExecutionOutputBlockParam> content`
 
@@ -2614,9 +2627,9 @@ var_dump($betaMessageTokensCount);
 
     - `string stdout`
 
-    - `"code_execution_result" type`
-
   - `BetaEncryptedCodeExecutionResultBlockParam`
+
+    - `"encrypted_code_execution_result" type`
 
     - `list<BetaCodeExecutionOutputBlockParam> content`
 
@@ -2626,15 +2639,13 @@ var_dump($betaMessageTokensCount);
 
     - `string stderr`
 
-    - `"encrypted_code_execution_result" type`
-
 ### Beta Code Execution Tool Result Error
 
 - `BetaCodeExecutionToolResultError`
 
-  - `BetaCodeExecutionToolResultErrorCode errorCode`
-
   - `"code_execution_tool_result_error" type`
+
+  - `BetaCodeExecutionToolResultErrorCode errorCode`
 
 ### Beta Code Execution Tool Result Error Code
 
@@ -2652,9 +2663,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCodeExecutionToolResultErrorParam`
 
-  - `BetaCodeExecutionToolResultErrorCode errorCode`
-
   - `"code_execution_tool_result_error" type`
+
+  - `BetaCodeExecutionToolResultErrorCode errorCode`
 
 ### Beta Compact 20260112 Edit
 
@@ -2678,6 +2689,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCompactionBlock`
 
+  - `"compaction" type`
+
   - `?string content`
 
     Summary of compacted content, or null if compaction failed
@@ -2685,8 +2698,6 @@ var_dump($betaMessageTokensCount);
   - `?string encryptedContent`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
-
-  - `"compaction" type`
 
 ### Beta Compaction Block Param
 
@@ -2710,17 +2721,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCompactionContentBlockDelta`
 
+  - `"compaction_delta" type`
+
   - `?string content`
 
   - `?string encryptedContent`
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `"compaction_delta" type`
-
 ### Beta Compaction Iteration Usage
 
 - `BetaCompactionIterationUsage`
+
+  - `"compaction" type`
+
+    Usage for a compaction iteration
 
   - `?BetaCacheCreation cacheCreation`
 
@@ -2741,10 +2756,6 @@ var_dump($betaMessageTokensCount);
   - `int outputTokens`
 
     The number of output tokens which were used.
-
-  - `"compaction" type`
-
-    Usage for a compaction iteration
 
 ### Beta Computer Cursor Position Config
 
@@ -2925,6 +2936,10 @@ var_dump($betaMessageTokensCount);
 
 - `BetaComputerToolsetConfigs`
 
+  - `?BetaComputerTypeConfig type`
+
+    `type`'s config overrides.
+
   - `?BetaComputerCursorPositionConfig cursorPosition`
 
     `cursor_position`'s config overrides.
@@ -2980,10 +2995,6 @@ var_dump($betaMessageTokensCount);
   - `?BetaComputerTripleClickConfig tripleClick`
 
     `triple_click`'s config overrides.
-
-  - `?BetaComputerTypeConfig type`
-
-    `type`'s config overrides.
 
   - `?BetaComputerWaitConfig wait`
 
@@ -3073,13 +3084,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaContainerSkill`
 
-  - `string skillID`
-
-    Skill ID
-
   - `Type type`
 
     Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+  - `string skillID`
+
+    Skill ID
 
   - `string version`
 
@@ -3089,17 +3100,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaContainerUploadBlock`
 
-  - `string fileID`
-
   - `"container_upload" type`
+
+  - `string fileID`
 
 ### Beta Container Upload Block Param
 
 - `BetaContainerUploadBlockParam`
 
-  - `string fileID`
-
   - `"container_upload" type`
+
+  - `string fileID`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3111,6 +3122,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaTextBlock`
 
+    - `"text" type`
+
     - `?list<BetaTextCitation> citations`
 
       Citations supporting the text block.
@@ -3119,9 +3132,9 @@ var_dump($betaMessageTokensCount);
 
     - `string text`
 
-    - `"text" type`
-
   - `BetaThinkingBlock`
+
+    - `"thinking" type`
 
     - `string signature`
 
@@ -3135,9 +3148,9 @@ var_dump($betaMessageTokensCount);
 
       The text of Claude's thinking process for this block.
 
-    - `"thinking" type`
-
   - `BetaRedactedThinkingBlock`
+
+    - `"redacted_thinking" type`
 
     - `string data`
 
@@ -3147,17 +3160,15 @@ var_dump($betaMessageTokensCount);
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `"redacted_thinking" type`
-
   - `BetaToolUseBlock`
+
+    - `"tool_use" type`
 
     - `string id`
 
     - `array<string,mixed> input`
 
     - `string name`
-
-    - `"tool_use" type`
 
     - `?Caller caller`
 
@@ -3169,13 +3180,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaServerToolUseBlock`
 
+    - `"server_tool_use" type`
+
     - `string id`
 
     - `array<string,mixed> input`
 
     - `Name name`
-
-    - `"server_tool_use" type`
 
     - `?Caller caller`
 
@@ -3183,11 +3194,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchToolResultBlock`
 
+    - `"web_search_tool_result" type`
+
     - `BetaWebSearchToolResultBlockContent content`
 
     - `string toolUseID`
-
-    - `"web_search_tool_result" type`
 
     - `?Caller caller`
 
@@ -3195,11 +3206,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchToolResultBlock`
 
+    - `"web_fetch_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"web_fetch_tool_result" type`
 
     - `?Caller caller`
 
@@ -3207,13 +3218,15 @@ var_dump($betaMessageTokensCount);
 
   - `BetaAdvisorToolResultBlock`
 
+    - `"advisor_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
 
-    - `"advisor_tool_result" type`
-
   - `BetaCodeExecutionToolResultBlock`
+
+    - `"code_execution_tool_result" type`
 
     - `BetaCodeExecutionToolResultBlockContent content`
 
@@ -3221,33 +3234,33 @@ var_dump($betaMessageTokensCount);
 
     - `string toolUseID`
 
-    - `"code_execution_tool_result" type`
-
   - `BetaBashCodeExecutionToolResultBlock`
-
-    - `Content content`
-
-    - `string toolUseID`
 
     - `"bash_code_execution_tool_result" type`
 
-  - `BetaTextEditorCodeExecutionToolResultBlock`
-
     - `Content content`
 
     - `string toolUseID`
+
+  - `BetaTextEditorCodeExecutionToolResultBlock`
 
     - `"text_editor_code_execution_tool_result" type`
 
+    - `Content content`
+
+    - `string toolUseID`
+
   - `BetaToolSearchToolResultBlock`
+
+    - `"tool_search_tool_result" type`
 
     - `Content content`
 
     - `string toolUseID`
 
-    - `"tool_search_tool_result" type`
-
   - `BetaMCPToolUseBlock`
+
+    - `"mcp_tool_use" type`
 
     - `string id`
 
@@ -3261,9 +3274,9 @@ var_dump($betaMessageTokensCount);
 
       The name of the MCP server
 
-    - `"mcp_tool_use" type`
-
   - `BetaMCPToolResultBlock`
+
+    - `"mcp_tool_result" type`
 
     - `Content content`
 
@@ -3271,15 +3284,15 @@ var_dump($betaMessageTokensCount);
 
     - `string toolUseID`
 
-    - `"mcp_tool_result" type`
-
   - `BetaContainerUploadBlock`
-
-    - `string fileID`
 
     - `"container_upload" type`
 
+    - `string fileID`
+
   - `BetaCompactionBlock`
+
+    - `"compaction" type`
 
     - `?string content`
 
@@ -3289,9 +3302,9 @@ var_dump($betaMessageTokensCount);
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `"compaction" type`
-
   - `BetaFallbackBlock`
+
+    - `"fallback" type`
 
     - `BetaFallbackInfo from`
 
@@ -3305,17 +3318,15 @@ var_dump($betaMessageTokensCount);
 
       What caused the `from` model to hand over at this hop.
 
-    - `"fallback" type`
-
 ### Beta Content Block Param
 
 - `BetaContentBlockParam`
 
   - `BetaTextBlockParam`
 
-    - `string text`
-
     - `"text" type`
+
+    - `string text`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3325,9 +3336,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaImageBlockParam`
 
-    - `Source source`
-
     - `"image" type`
+
+    - `Source source`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3339,9 +3350,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaRequestDocumentBlock`
 
-    - `Source source`
-
     - `"document" type`
+
+    - `Source source`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3355,13 +3366,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaSearchResultBlockParam`
 
+    - `"search_result" type`
+
     - `list<BetaTextBlockParam> content`
 
     - `string source`
 
     - `string title`
-
-    - `"search_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3370,6 +3381,8 @@ var_dump($betaMessageTokensCount);
     - `?BetaCitationsConfigParam citations`
 
   - `BetaThinkingBlockParam`
+
+    - `"thinking" type`
 
     - `string signature`
 
@@ -3381,25 +3394,23 @@ var_dump($betaMessageTokensCount);
 
       The `thinking` text of this block as returned by the API.
 
-    - `"thinking" type`
-
   - `BetaRedactedThinkingBlockParam`
+
+    - `"redacted_thinking" type`
 
     - `string data`
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-    - `"redacted_thinking" type`
-
   - `BetaToolUseBlockParam`
+
+    - `"tool_use" type`
 
     - `string id`
 
     - `array<string,mixed> input`
 
     - `string name`
-
-    - `"tool_use" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3415,9 +3426,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolResultBlockParam`
 
-    - `string toolUseID`
-
     - `"tool_result" type`
+
+    - `string toolUseID`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3433,13 +3444,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaServerToolUseBlockParam`
 
+    - `"server_tool_use" type`
+
     - `string id`
 
     - `array<string,mixed> input`
 
     - `Name name`
-
-    - `"server_tool_use" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3451,11 +3462,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchToolResultBlockParam`
 
+    - `"web_search_tool_result" type`
+
     - `BetaWebSearchToolResultBlockParamContent content`
 
     - `string toolUseID`
-
-    - `"web_search_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3467,11 +3478,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchToolResultBlockParam`
 
+    - `"web_fetch_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"web_fetch_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3483,11 +3494,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaAdvisorToolResultBlockParam`
 
+    - `"advisor_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"advisor_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3495,13 +3506,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionToolResultBlockParam`
 
+    - `"code_execution_tool_result" type`
+
     - `BetaCodeExecutionToolResultBlockParamContent content`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
     - `string toolUseID`
-
-    - `"code_execution_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3509,11 +3520,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaBashCodeExecutionToolResultBlockParam`
 
+    - `"bash_code_execution_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"bash_code_execution_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3521,11 +3532,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+    - `"text_editor_code_execution_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"text_editor_code_execution_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3533,17 +3544,19 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolSearchToolResultBlockParam`
 
+    - `"tool_search_tool_result" type`
+
     - `Content content`
 
     - `string toolUseID`
-
-    - `"tool_search_tool_result" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaMCPToolUseBlockParam`
+
+    - `"mcp_tool_use" type`
 
     - `string id`
 
@@ -3555,17 +3568,15 @@ var_dump($betaMessageTokensCount);
 
       The name of the MCP server
 
-    - `"mcp_tool_use" type`
-
     - `?BetaCacheControlEphemeral cacheControl`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaRequestMCPToolResultBlockParam`
 
-    - `string toolUseID`
-
     - `"mcp_tool_result" type`
+
+    - `string toolUseID`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3577,9 +3588,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaContainerUploadBlockParam`
 
-    - `string fileID`
-
     - `"container_upload" type`
+
+    - `string fileID`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3603,14 +3614,14 @@ var_dump($betaMessageTokensCount);
 
   - `BetaRequestToolAdditionBlock`
 
+    - `"tool_addition" type`
+
     - `Tool tool`
 
       Reference to a single tool the caller declared directly in
       `tools[]`. Does not accept the composed `{server}_{name}` form the
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
-
-    - `"tool_addition" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3618,6 +3629,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaRequestToolRemovalBlock`
 
+    - `"tool_removal" type`
+
     - `Tool tool`
 
       Reference to a single tool the caller declared directly in
@@ -3625,13 +3638,13 @@ var_dump($betaMessageTokensCount);
       server assigns to MCP-resolved tools — use `mcp_tool_reference` or
       `mcp_toolset_reference` for those.
 
-    - `"tool_removal" type`
-
     - `?BetaCacheControlEphemeral cacheControl`
 
       Create a cache control breakpoint at this content block.
 
   - `BetaFallbackBlockParam`
+
+    - `"fallback" type`
 
     - `BetaFallbackInfoParam from`
 
@@ -3641,8 +3654,6 @@ var_dump($betaMessageTokensCount);
 
       Identifies one hop of a fallback transition.
 
-    - `"fallback" type`
-
     - `?mixed trigger`
 
       The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -3651,9 +3662,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaContentBlockSource`
 
-  - `Content content`
-
   - `"content" type`
+
+  - `Content content`
 
 ### Beta Content Block Source Content
 
@@ -3661,9 +3672,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaTextBlockParam`
 
-    - `string text`
-
     - `"text" type`
+
+    - `string text`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3673,9 +3684,9 @@ var_dump($betaMessageTokensCount);
 
   - `BetaImageBlockParam`
 
-    - `Source source`
-
     - `"image" type`
+
+    - `Source source`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3735,6 +3746,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaDocumentBlock`
 
+  - `"document" type`
+
   - `?BetaCitationConfig citations`
 
     Citation configuration for the document
@@ -3745,11 +3758,11 @@ var_dump($betaMessageTokensCount);
 
     The title of the document
 
-  - `"document" type`
-
 ### Beta Encrypted Code Execution Result Block
 
 - `BetaEncryptedCodeExecutionResultBlock`
+
+  - `"encrypted_code_execution_result" type`
 
   - `list<BetaCodeExecutionOutputBlock> content`
 
@@ -3759,11 +3772,11 @@ var_dump($betaMessageTokensCount);
 
   - `string stderr`
 
-  - `"encrypted_code_execution_result" type`
-
 ### Beta Encrypted Code Execution Result Block Param
 
 - `BetaEncryptedCodeExecutionResultBlockParam`
+
+  - `"encrypted_code_execution_result" type`
 
   - `list<BetaCodeExecutionOutputBlockParam> content`
 
@@ -3773,11 +3786,11 @@ var_dump($betaMessageTokensCount);
 
   - `string stderr`
 
-  - `"encrypted_code_execution_result" type`
-
 ### Beta Fallback Block
 
 - `BetaFallbackBlock`
+
+  - `"fallback" type`
 
   - `BetaFallbackInfo from`
 
@@ -3791,11 +3804,11 @@ var_dump($betaMessageTokensCount);
 
     What caused the `from` model to hand over at this hop.
 
-  - `"fallback" type`
-
 ### Beta Fallback Block Param
 
 - `BetaFallbackBlockParam`
+
+  - `"fallback" type`
 
   - `BetaFallbackInfoParam from`
 
@@ -3805,8 +3818,6 @@ var_dump($betaMessageTokensCount);
 
     Identifies one hop of a fallback transition.
 
-  - `"fallback" type`
-
   - `?mixed trigger`
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -3815,14 +3826,14 @@ var_dump($betaMessageTokensCount);
 
 - `BetaFallbackCreditNotApplied`
 
+  - `"not_applied" type`
+
   - `Reason reason`
 
     Why the reprice was not applied.
 
     A closed enum; additions to the redemption-check vocabulary arrive as
     deliberate schema updates.
-
-  - `"not_applied" type`
 
   - `?list<string> removeToRedeem`
 
@@ -3890,6 +3901,10 @@ var_dump($betaMessageTokensCount);
 
 - `BetaFallbackMessageIterationUsage`
 
+  - `"fallback_message" type`
+
+    Usage for the fallback-model attempt that served the response
+
   - `?BetaCacheCreation cacheCreation`
 
     Breakdown of cached tokens by TTL
@@ -3916,10 +3931,6 @@ var_dump($betaMessageTokensCount);
 
     The number of output tokens which were used.
 
-  - `"fallback_message" type`
-
-    Usage for the fallback-model attempt that served the response
-
 ### Beta Fallback Param
 
 - `BetaFallbackParam`
@@ -3944,11 +3955,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaFallbackRefusalTrigger`
 
+  - `"refusal" type`
+
   - `?Category category`
 
     The policy category that triggered a refusal.
-
-  - `"refusal" type`
 
 ### Beta Fallbacks Param
 
@@ -3978,25 +3989,25 @@ var_dump($betaMessageTokensCount);
 
 - `BetaFileDocumentSource`
 
-  - `string fileID`
-
   - `"file" type`
+
+  - `string fileID`
 
 ### Beta File Image Source
 
 - `BetaFileImageSource`
 
-  - `string fileID`
-
   - `"file" type`
+
+  - `string fileID`
 
 ### Beta Image Block Param
 
 - `BetaImageBlockParam`
 
-  - `Source source`
-
   - `"image" type`
+
+  - `Source source`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -4018,9 +4029,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaInputJSONDelta`
 
-  - `string partialJSON`
-
   - `"input_json_delta" type`
+
+  - `string partialJSON`
 
 ### Beta Input Tokens Clear At Least
 
@@ -4044,6 +4055,10 @@ var_dump($betaMessageTokensCount);
 
   - `BetaMessageIterationUsage`
 
+    - `"message" type`
+
+      Usage for a sampling iteration
+
     - `?BetaCacheCreation cacheCreation`
 
       Breakdown of cached tokens by TTL
@@ -4070,38 +4085,12 @@ var_dump($betaMessageTokensCount);
 
       The number of output tokens which were used.
 
-    - `"message" type`
-
-      Usage for a sampling iteration
-
   - `BetaCompactionIterationUsage`
-
-    - `?BetaCacheCreation cacheCreation`
-
-      Breakdown of cached tokens by TTL
-
-    - `int cacheCreationInputTokens`
-
-      The number of input tokens used to create the cache entry.
-
-    - `int cacheReadInputTokens`
-
-      The number of input tokens read from the cache.
-
-    - `int inputTokens`
-
-      The number of input tokens which were used.
-
-    - `int outputTokens`
-
-      The number of output tokens which were used.
 
     - `"compaction" type`
 
       Usage for a compaction iteration
 
-  - `BetaAdvisorMessageIterationUsage`
-
     - `?BetaCacheCreation cacheCreation`
 
       Breakdown of cached tokens by TTL
@@ -4118,21 +4107,47 @@ var_dump($betaMessageTokensCount);
 
       The number of input tokens which were used.
 
-    - `Model model`
-
-      The model that will complete your prompt.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
     - `int outputTokens`
 
       The number of output tokens which were used.
+
+  - `BetaAdvisorMessageIterationUsage`
 
     - `"advisor_message" type`
 
       Usage for an advisor sub-inference iteration
 
+    - `?BetaCacheCreation cacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+    - `int cacheCreationInputTokens`
+
+      The number of input tokens used to create the cache entry.
+
+    - `int cacheReadInputTokens`
+
+      The number of input tokens read from the cache.
+
+    - `int inputTokens`
+
+      The number of input tokens which were used.
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `int outputTokens`
+
+      The number of output tokens which were used.
+
   - `BetaFallbackMessageIterationUsage`
+
+    - `"fallback_message" type`
+
+      Usage for the fallback-model attempt that served the response
 
     - `?BetaCacheCreation cacheCreation`
 
@@ -4160,19 +4175,15 @@ var_dump($betaMessageTokensCount);
 
       The number of output tokens which were used.
 
-    - `"fallback_message" type`
-
-      Usage for the fallback-model attempt that served the response
-
 ### Beta JSON Output Format
 
 - `BetaJSONOutputFormat`
 
+  - `"json_schema" type`
+
   - `array<string,mixed> schema`
 
     The JSON schema of the format
-
-  - `"json_schema" type`
 
 ### Beta MCP Tool Config
 
@@ -4194,17 +4205,19 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMCPToolResultBlock`
 
+  - `"mcp_tool_result" type`
+
   - `Content content`
 
   - `bool isError`
 
   - `string toolUseID`
 
-  - `"mcp_tool_result" type`
-
 ### Beta MCP Tool Use Block
 
 - `BetaMCPToolUseBlock`
+
+  - `"mcp_tool_use" type`
 
   - `string id`
 
@@ -4218,11 +4231,11 @@ var_dump($betaMessageTokensCount);
 
     The name of the MCP server
 
-  - `"mcp_tool_use" type`
-
 ### Beta MCP Tool Use Block Param
 
 - `BetaMCPToolUseBlockParam`
+
+  - `"mcp_tool_use" type`
 
   - `string id`
 
@@ -4234,8 +4247,6 @@ var_dump($betaMessageTokensCount);
 
     The name of the MCP server
 
-  - `"mcp_tool_use" type`
-
   - `?BetaCacheControlEphemeral cacheControl`
 
     Create a cache control breakpoint at this content block.
@@ -4244,11 +4255,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMCPToolset`
 
+  - `"mcp_toolset" type`
+
   - `string mcpServerName`
 
     Name of the MCP server to configure tools for
-
-  - `"mcp_toolset" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -4266,13 +4277,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMemoryTool20250818`
 
+  - `"memory_20250818" type`
+
   - `"memory" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"memory_20250818" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -4486,6 +4497,12 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMessage`
 
+  - `"message" type`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
   - `string id`
 
     Unique object identifier.
@@ -4574,12 +4591,6 @@ var_dump($betaMessageTokensCount);
 
     This value will be a non-null string if one of your custom stop sequences was generated.
 
-  - `"message" type`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
   - `BetaUsage usage`
 
     Billing and rate-limit usage.
@@ -4663,6 +4674,10 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMessageIterationUsage`
 
+  - `"message" type`
+
+    Usage for a sampling iteration
+
   - `?BetaCacheCreation cacheCreation`
 
     Breakdown of cached tokens by TTL
@@ -4688,10 +4703,6 @@ var_dump($betaMessageTokensCount);
   - `int outputTokens`
 
     The number of output tokens which were used.
-
-  - `"message" type`
-
-    Usage for a sampling iteration
 
 ### Beta Message Param
 
@@ -4770,11 +4781,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaPlainTextSource`
 
+  - `"text" type`
+
   - `string data`
 
   - `"text/plain" mediaType`
-
-  - `"text" type`
 
 ### Beta Raw Content Block Delta
 
@@ -4782,23 +4793,25 @@ var_dump($betaMessageTokensCount);
 
   - `BetaTextDelta`
 
-    - `string text`
-
     - `"text_delta" type`
+
+    - `string text`
 
   - `BetaInputJSONDelta`
 
-    - `string partialJSON`
-
     - `"input_json_delta" type`
+
+    - `string partialJSON`
 
   - `BetaCitationsDelta`
 
-    - `Citation citation`
-
     - `"citations_delta" type`
 
+    - `Citation citation`
+
   - `BetaThinkingDelta`
+
+    - `"thinking_delta" type`
 
     - `?int estimatedTokens`
 
@@ -4808,17 +4821,17 @@ var_dump($betaMessageTokensCount);
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `"thinking_delta" type`
-
   - `BetaSignatureDelta`
+
+    - `"signature_delta" type`
 
     - `string signature`
 
       The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-    - `"signature_delta" type`
-
   - `BetaCompactionContentBlockDelta`
+
+    - `"compaction_delta" type`
 
     - `?string content`
 
@@ -4826,21 +4839,21 @@ var_dump($betaMessageTokensCount);
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `"compaction_delta" type`
-
 ### Beta Raw Content Block Delta Event
 
 - `BetaRawContentBlockDeltaEvent`
+
+  - `"content_block_delta" type`
 
   - `BetaRawContentBlockDelta delta`
 
   - `int index`
 
-  - `"content_block_delta" type`
-
 ### Beta Raw Content Block Start Event
 
 - `BetaRawContentBlockStartEvent`
+
+  - `"content_block_start" type`
 
   - `ContentBlock contentBlock`
 
@@ -4848,27 +4861,25 @@ var_dump($betaMessageTokensCount);
 
   - `int index`
 
-  - `"content_block_start" type`
-
 ### Beta Raw Content Block Stop Event
 
 - `BetaRawContentBlockStopEvent`
 
-  - `int index`
-
   - `"content_block_stop" type`
+
+  - `int index`
 
 ### Beta Raw Message Delta Event
 
 - `BetaRawMessageDeltaEvent`
+
+  - `"message_delta" type`
 
   - `?BetaContextManagementResponse contextManagement`
 
     Information about context management strategies applied during the request
 
   - `Delta delta`
-
-  - `"message_delta" type`
 
   - `BetaMessageDeltaUsage usage`
 
@@ -4904,9 +4915,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaRawMessageStartEvent`
 
-  - `BetaMessage message`
-
   - `"message_start" type`
+
+  - `BetaMessage message`
 
 ### Beta Raw Message Stop Event
 
@@ -4920,19 +4931,19 @@ var_dump($betaMessageTokensCount);
 
   - `BetaRawMessageStartEvent`
 
-    - `BetaMessage message`
-
     - `"message_start" type`
 
+    - `BetaMessage message`
+
   - `BetaRawMessageDeltaEvent`
+
+    - `"message_delta" type`
 
     - `?BetaContextManagementResponse contextManagement`
 
       Information about context management strategies applied during the request
 
     - `Delta delta`
-
-    - `"message_delta" type`
 
     - `BetaMessageDeltaUsage usage`
 
@@ -4970,31 +4981,33 @@ var_dump($betaMessageTokensCount);
 
   - `BetaRawContentBlockStartEvent`
 
+    - `"content_block_start" type`
+
     - `ContentBlock contentBlock`
 
       Response model for a file uploaded to the container.
 
     - `int index`
 
-    - `"content_block_start" type`
-
   - `BetaRawContentBlockDeltaEvent`
+
+    - `"content_block_delta" type`
 
     - `BetaRawContentBlockDelta delta`
 
     - `int index`
 
-    - `"content_block_delta" type`
-
   - `BetaRawContentBlockStopEvent`
 
-    - `int index`
-
     - `"content_block_stop" type`
+
+    - `int index`
 
 ### Beta Redacted Thinking Block
 
 - `BetaRedactedThinkingBlock`
+
+  - `"redacted_thinking" type`
 
   - `string data`
 
@@ -5004,21 +5017,21 @@ var_dump($betaMessageTokensCount);
 
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `"redacted_thinking" type`
-
 ### Beta Redacted Thinking Block Param
 
 - `BetaRedactedThinkingBlockParam`
+
+  - `"redacted_thinking" type`
 
   - `string data`
 
     The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-  - `"redacted_thinking" type`
-
 ### Beta Refusal Stop Details
 
 - `BetaRefusalStopDetails`
+
+  - `"refusal" type`
 
   - `?Category category`
 
@@ -5079,15 +5092,13 @@ var_dump($betaMessageTokensCount);
 
     The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-  - `"refusal" type`
-
 ### Beta Request Document Block
 
 - `BetaRequestDocumentBlock`
 
-  - `Source source`
-
   - `"document" type`
+
+  - `Source source`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5111,9 +5122,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaRequestMCPServerURLDefinition`
 
-  - `string name`
-
   - `"url" type`
+
+  - `string name`
 
   - `string url`
 
@@ -5125,9 +5136,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaRequestMCPToolResultBlockParam`
 
-  - `string toolUseID`
-
   - `"mcp_tool_result" type`
+
+  - `string toolUseID`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5141,14 +5152,14 @@ var_dump($betaMessageTokensCount);
 
 - `BetaRequestToolAdditionBlock`
 
+  - `"tool_addition" type`
+
   - `Tool tool`
 
     Reference to a single tool the caller declared directly in
     `tools[]`. Does not accept the composed `{server}_{name}` form the
     server assigns to MCP-resolved tools — use `mcp_tool_reference` or
     `mcp_toolset_reference` for those.
-
-  - `"tool_addition" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5158,14 +5169,14 @@ var_dump($betaMessageTokensCount);
 
 - `BetaRequestToolRemovalBlock`
 
+  - `"tool_removal" type`
+
   - `Tool tool`
 
     Reference to a single tool the caller declared directly in
     `tools[]`. Does not accept the composed `{server}_{name}` form the
     server assigns to MCP-resolved tools — use `mcp_tool_reference` or
     `mcp_toolset_reference` for those.
-
-  - `"tool_removal" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5175,13 +5186,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaSearchResultBlockParam`
 
+  - `"search_result" type`
+
   - `list<BetaTextBlockParam> content`
 
   - `string source`
 
   - `string title`
-
-  - `"search_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5193,17 +5204,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaServerToolCaller`
 
-  - `string toolID`
-
   - `"code_execution_20250825" type`
+
+  - `string toolID`
 
 ### Beta Server Tool Caller 20260120
 
 - `BetaServerToolCaller20260120`
 
-  - `string toolID`
-
   - `"code_execution_20260120" type`
+
+  - `string toolID`
 
 ### Beta Server Tool Usage
 
@@ -5221,13 +5232,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaServerToolUseBlock`
 
+  - `"server_tool_use" type`
+
   - `string id`
 
   - `array<string,mixed> input`
 
   - `Name name`
-
-  - `"server_tool_use" type`
 
   - `?Caller caller`
 
@@ -5237,13 +5248,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaServerToolUseBlockParam`
 
+  - `"server_tool_use" type`
+
   - `string id`
 
   - `array<string,mixed> input`
 
   - `Name name`
-
-  - `"server_tool_use" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5257,23 +5268,23 @@ var_dump($betaMessageTokensCount);
 
 - `BetaSignatureDelta`
 
+  - `"signature_delta" type`
+
   - `string signature`
 
     The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
-
-  - `"signature_delta" type`
 
 ### Beta Skill Params
 
 - `BetaSkillParams`
 
-  - `string skillID`
-
-    Skill ID
-
   - `Type type`
 
     Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+  - `string skillID`
+
+    Skill ID
 
   - `?string version`
 
@@ -5311,6 +5322,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaTextBlock`
 
+  - `"text" type`
+
   - `?list<BetaTextCitation> citations`
 
     Citations supporting the text block.
@@ -5319,15 +5332,13 @@ var_dump($betaMessageTokensCount);
 
   - `string text`
 
-  - `"text" type`
-
 ### Beta Text Block Param
 
 - `BetaTextBlockParam`
 
-  - `string text`
-
   - `"text" type`
+
+  - `string text`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5341,6 +5352,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCitationCharLocation`
 
+    - `"char_location" type`
+
     - `string citedText`
 
     - `int documentIndex`
@@ -5353,9 +5366,9 @@ var_dump($betaMessageTokensCount);
 
     - `int startCharIndex`
 
-    - `"char_location" type`
-
   - `BetaCitationPageLocation`
+
+    - `"page_location" type`
 
     - `string citedText`
 
@@ -5369,9 +5382,9 @@ var_dump($betaMessageTokensCount);
 
     - `int startPageNumber`
 
-    - `"page_location" type`
-
   - `BetaCitationContentBlockLocation`
+
+    - `"content_block_location" type`
 
     - `string citedText`
 
@@ -5395,9 +5408,9 @@ var_dump($betaMessageTokensCount);
 
       0-based index of the first cited block in the source's `content` array.
 
-    - `"content_block_location" type`
-
   - `BetaCitationsWebSearchResultLocation`
+
+    - `"web_search_result_location" type`
 
     - `string citedText`
 
@@ -5405,11 +5418,11 @@ var_dump($betaMessageTokensCount);
 
     - `?string title`
 
-    - `"web_search_result_location" type`
-
     - `string url`
 
   - `BetaCitationSearchResultLocation`
+
+    - `"search_result_location" type`
 
     - `string citedText`
 
@@ -5436,8 +5449,6 @@ var_dump($betaMessageTokensCount);
       0-based index of the first cited block in the source's `content` array.
 
     - `?string title`
-
-    - `"search_result_location" type`
 
 ### Beta Text Citation Param
 
@@ -5445,6 +5456,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCitationCharLocationParam`
 
+    - `"char_location" type`
+
     - `string citedText`
 
     - `int documentIndex`
@@ -5455,9 +5468,9 @@ var_dump($betaMessageTokensCount);
 
     - `int startCharIndex`
 
-    - `"char_location" type`
-
   - `BetaCitationPageLocationParam`
+
+    - `"page_location" type`
 
     - `string citedText`
 
@@ -5469,9 +5482,9 @@ var_dump($betaMessageTokensCount);
 
     - `int startPageNumber`
 
-    - `"page_location" type`
-
   - `BetaCitationContentBlockLocationParam`
+
+    - `"content_block_location" type`
 
     - `string citedText`
 
@@ -5493,9 +5506,9 @@ var_dump($betaMessageTokensCount);
 
       0-based index of the first cited block in the source's `content` array.
 
-    - `"content_block_location" type`
-
   - `BetaCitationWebSearchResultLocationParam`
+
+    - `"web_search_result_location" type`
 
     - `string citedText`
 
@@ -5503,11 +5516,11 @@ var_dump($betaMessageTokensCount);
 
     - `?string title`
 
-    - `"web_search_result_location" type`
-
     - `string url`
 
   - `BetaCitationSearchResultLocationParam`
+
+    - `"search_result_location" type`
 
     - `string citedText`
 
@@ -5535,35 +5548,35 @@ var_dump($betaMessageTokensCount);
 
     - `?string title`
 
-    - `"search_result_location" type`
-
 ### Beta Text Delta
 
 - `BetaTextDelta`
 
-  - `string text`
-
   - `"text_delta" type`
+
+  - `string text`
 
 ### Beta Text Editor Code Execution Create Result Block
 
 - `BetaTextEditorCodeExecutionCreateResultBlock`
 
-  - `bool isFileUpdate`
-
   - `"text_editor_code_execution_create_result" type`
+
+  - `bool isFileUpdate`
 
 ### Beta Text Editor Code Execution Create Result Block Param
 
 - `BetaTextEditorCodeExecutionCreateResultBlockParam`
 
-  - `bool isFileUpdate`
-
   - `"text_editor_code_execution_create_result" type`
+
+  - `bool isFileUpdate`
 
 ### Beta Text Editor Code Execution Str Replace Result Block
 
 - `BetaTextEditorCodeExecutionStrReplaceResultBlock`
+
+  - `"text_editor_code_execution_str_replace_result" type`
 
   - `?list<string> lines`
 
@@ -5574,8 +5587,6 @@ var_dump($betaMessageTokensCount);
   - `?int oldLines`
 
   - `?int oldStart`
-
-  - `"text_editor_code_execution_str_replace_result" type`
 
 ### Beta Text Editor Code Execution Str Replace Result Block Param
 
@@ -5597,21 +5608,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaTextEditorCodeExecutionToolResultBlock`
 
+  - `"text_editor_code_execution_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"text_editor_code_execution_tool_result" type`
 
 ### Beta Text Editor Code Execution Tool Result Block Param
 
 - `BetaTextEditorCodeExecutionToolResultBlockParam`
 
+  - `"text_editor_code_execution_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"text_editor_code_execution_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -5621,25 +5632,27 @@ var_dump($betaMessageTokensCount);
 
 - `BetaTextEditorCodeExecutionToolResultError`
 
+  - `"text_editor_code_execution_tool_result_error" type`
+
   - `ErrorCode errorCode`
 
   - `?string errorMessage`
-
-  - `"text_editor_code_execution_tool_result_error" type`
 
 ### Beta Text Editor Code Execution Tool Result Error Param
 
 - `BetaTextEditorCodeExecutionToolResultErrorParam`
 
-  - `ErrorCode errorCode`
-
   - `"text_editor_code_execution_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
   - `?string errorMessage`
 
 ### Beta Text Editor Code Execution View Result Block
 
 - `BetaTextEditorCodeExecutionViewResultBlock`
+
+  - `"text_editor_code_execution_view_result" type`
 
   - `string content`
 
@@ -5651,17 +5664,15 @@ var_dump($betaMessageTokensCount);
 
   - `?int totalLines`
 
-  - `"text_editor_code_execution_view_result" type`
-
 ### Beta Text Editor Code Execution View Result Block Param
 
 - `BetaTextEditorCodeExecutionViewResultBlockParam`
 
+  - `"text_editor_code_execution_view_result" type`
+
   - `string content`
 
   - `FileType fileType`
-
-  - `"text_editor_code_execution_view_result" type`
 
   - `?int numLines`
 
@@ -5672,6 +5683,8 @@ var_dump($betaMessageTokensCount);
 ### Beta Thinking Block
 
 - `BetaThinkingBlock`
+
+  - `"thinking" type`
 
   - `string signature`
 
@@ -5684,8 +5697,6 @@ var_dump($betaMessageTokensCount);
   - `string thinking`
 
     The text of Claude's thinking process for this block.
-
-  - `"thinking" type`
 
 ### Beta Thinking Block Binding
 
@@ -5703,6 +5714,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaThinkingBlockParam`
 
+  - `"thinking" type`
+
   - `string signature`
 
     The `signature` value of this thinking block, exactly as returned by the API in a previous response. Used to verify that the block was generated by Claude.
@@ -5712,8 +5725,6 @@ var_dump($betaMessageTokensCount);
   - `string thinking`
 
     The `thinking` text of this block as returned by the API.
-
-  - `"thinking" type`
 
 ### Beta Thinking Config Adaptive
 
@@ -5741,6 +5752,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaThinkingConfigEnabled`
 
+  - `"enabled" type`
+
   - `int budgetTokens`
 
     Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -5748,8 +5761,6 @@ var_dump($betaMessageTokensCount);
     Must be ≥1024 and less than `max_tokens`.
 
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-  - `"enabled" type`
 
   - `?BetaThinkingBlockBinding blockBinding`
 
@@ -5767,6 +5778,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaThinkingConfigEnabled`
 
+    - `"enabled" type`
+
     - `int budgetTokens`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -5774,8 +5787,6 @@ var_dump($betaMessageTokensCount);
       Must be ≥1024 and less than `max_tokens`.
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-    - `"enabled" type`
 
     - `?BetaThinkingBlockBinding blockBinding`
 
@@ -5809,6 +5820,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaThinkingDelta`
 
+  - `"thinking_delta" type`
+
   - `?int estimatedTokens`
 
     Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
@@ -5817,11 +5830,13 @@ var_dump($betaMessageTokensCount);
 
     The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `"thinking_delta" type`
-
 ### Beta Thinking Dropped Input Transformation
 
 - `BetaThinkingDroppedInputTransformation`
+
+  - `"thinking_dropped" type`
+
+    Always `thinking_dropped` for this entry type.
 
   - `string path`
 
@@ -5845,10 +5860,6 @@ var_dump($betaMessageTokensCount);
     `organization_binding_mismatch`, `end_user_binding_mismatch`,
     `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-  - `"thinking_dropped" type`
-
-    Always `thinking_dropped` for this entry type.
-
 ### Beta Thinking Prefix Mismatch Behavior
 
 - `BetaThinkingPrefixMismatchBehavior`
@@ -5869,13 +5880,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaTokenTaskBudget`
 
-  - `int total`
-
-    Total token budget across all contexts in the session.
-
   - `"tokens" type`
 
     The budget type. Currently only 'tokens' is supported.
+
+  - `int total`
+
+    Total token budget across all contexts in the session.
 
   - `?int remaining`
 
@@ -5884,6 +5895,8 @@ var_dump($betaMessageTokensCount);
 ### Beta Tool
 
 - `BetaTool`
+
+  - `?Type type`
 
   - `InputSchema inputSchema`
 
@@ -5923,19 +5936,17 @@ var_dump($betaMessageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
-  - `?Type type`
-
 ### Beta Tool Bash 20241022
 
 - `BetaToolBash20241022`
+
+  - `"bash_20241022" type`
 
   - `"bash" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"bash_20241022" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -5957,13 +5968,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolBash20250124`
 
+  - `"bash_20250124" type`
+
   - `"bash" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"bash_20250124" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -5985,27 +5996,27 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolChangeMCPToolReference`
 
+  - `"mcp_tool_reference" type`
+
   - `string name`
 
   - `string serverName`
-
-  - `"mcp_tool_reference" type`
 
 ### Beta Tool Change MCP Toolset Reference
 
 - `BetaToolChangeMCPToolsetReference`
 
-  - `string serverName`
-
   - `"mcp_toolset_reference" type`
+
+  - `string serverName`
 
 ### Beta Tool Change Tool Reference
 
 - `BetaToolChangeToolReference`
 
-  - `string name`
-
   - `"tool_reference" type`
+
+  - `string name`
 
 ### Beta Tool Choice
 
@@ -6033,11 +6044,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolChoiceTool`
 
+    - `"tool" type`
+
     - `string name`
 
       The name of the tool to use.
-
-    - `"tool" type`
 
     - `?bool disableParallelToolUse`
 
@@ -6083,11 +6094,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolChoiceTool`
 
+  - `"tool" type`
+
   - `string name`
 
     The name of the tool to use.
-
-  - `"tool" type`
 
   - `?bool disableParallelToolUse`
 
@@ -6098,6 +6109,8 @@ var_dump($betaMessageTokensCount);
 ### Beta Tool Computer Use 20241022
 
 - `BetaToolComputerUse20241022`
+
+  - `"computer_20241022" type`
 
   - `int displayHeightPx`
 
@@ -6112,8 +6125,6 @@ var_dump($betaMessageTokensCount);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"computer_20241022" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6139,6 +6150,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolComputerUse20250124`
 
+  - `"computer_20250124" type`
+
   - `int displayHeightPx`
 
     The height of the display in pixels.
@@ -6152,8 +6165,6 @@ var_dump($betaMessageTokensCount);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"computer_20250124" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6179,6 +6190,8 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolComputerUse20251124`
 
+  - `"computer_20251124" type`
+
   - `int displayHeightPx`
 
     The height of the display in pixels.
@@ -6192,8 +6205,6 @@ var_dump($betaMessageTokensCount);
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"computer_20251124" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6223,17 +6234,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolReferenceBlock`
 
-  - `string toolName`
-
   - `"tool_reference" type`
+
+  - `string toolName`
 
 ### Beta Tool Reference Block Param
 
 - `BetaToolReferenceBlockParam`
 
-  - `string toolName`
-
   - `"tool_reference" type`
+
+  - `string toolName`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -6243,9 +6254,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolResultBlockParam`
 
-  - `string toolUseID`
-
   - `"tool_result" type`
+
+  - `string toolUseID`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -6263,13 +6274,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolSearchToolBm25_20251119`
 
+  - `Type type`
+
   - `"tool_search_tool_bm25" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `Type type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6289,13 +6300,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolSearchToolRegex20251119`
 
+  - `Type type`
+
   - `"tool_search_tool_regex" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `Type type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6315,21 +6326,21 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolSearchToolResultBlock`
 
+  - `"tool_search_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"tool_search_tool_result" type`
 
 ### Beta Tool Search Tool Result Block Param
 
 - `BetaToolSearchToolResultBlockParam`
 
+  - `"tool_search_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"tool_search_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -6339,19 +6350,19 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolSearchToolResultError`
 
+  - `"tool_search_tool_result_error" type`
+
   - `ErrorCode errorCode`
 
   - `?string errorMessage`
-
-  - `"tool_search_tool_result_error" type`
 
 ### Beta Tool Search Tool Result Error Param
 
 - `BetaToolSearchToolResultErrorParam`
 
-  - `ErrorCode errorCode`
-
   - `"tool_search_tool_result_error" type`
+
+  - `ErrorCode errorCode`
 
   - `?string errorMessage`
 
@@ -6359,29 +6370,29 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolSearchToolSearchResultBlock`
 
-  - `list<BetaToolReferenceBlock> toolReferences`
-
   - `"tool_search_tool_search_result" type`
+
+  - `list<BetaToolReferenceBlock> toolReferences`
 
 ### Beta Tool Search Tool Search Result Block Param
 
 - `BetaToolSearchToolSearchResultBlockParam`
 
-  - `list<BetaToolReferenceBlockParam> toolReferences`
-
   - `"tool_search_tool_search_result" type`
+
+  - `list<BetaToolReferenceBlockParam> toolReferences`
 
 ### Beta Tool Text Editor 20241022
 
 - `BetaToolTextEditor20241022`
+
+  - `"text_editor_20241022" type`
 
   - `"str_replace_editor" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"text_editor_20241022" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6403,13 +6414,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolTextEditor20250124`
 
+  - `"text_editor_20250124" type`
+
   - `"str_replace_editor" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"text_editor_20250124" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6431,13 +6442,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolTextEditor20250429`
 
+  - `"text_editor_20250429" type`
+
   - `"str_replace_based_edit_tool" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"text_editor_20250429" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6459,13 +6470,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolTextEditor20250728`
 
+  - `"text_editor_20250728" type`
+
   - `"str_replace_based_edit_tool" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"text_editor_20250728" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -6492,6 +6503,8 @@ var_dump($betaMessageTokensCount);
 - `BetaToolUnion`
 
   - `BetaTool`
+
+    - `?Type type`
 
     - `InputSchema inputSchema`
 
@@ -6531,17 +6544,15 @@ var_dump($betaMessageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `?Type type`
-
   - `BetaToolBash20241022`
+
+    - `"bash_20241022" type`
 
     - `"bash" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"bash_20241022" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6561,13 +6572,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolBash20250124`
 
+    - `"bash_20250124" type`
+
     - `"bash" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"bash_20250124" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6587,13 +6598,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionTool20250522`
 
+    - `"code_execution_20250522" type`
+
     - `"code_execution" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"code_execution_20250522" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6611,13 +6622,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionTool20250825`
 
+    - `"code_execution_20250825" type`
+
     - `"code_execution" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"code_execution_20250825" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6635,13 +6646,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionTool20260120`
 
+    - `"code_execution_20260120" type`
+
     - `"code_execution" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"code_execution_20260120" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6659,13 +6670,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCodeExecutionTool20260521`
 
+    - `"code_execution_20260521" type`
+
     - `"code_execution" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"code_execution_20260521" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6700,6 +6711,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolComputerUse20241022`
 
+    - `"computer_20241022" type`
+
     - `int displayHeightPx`
 
       The height of the display in pixels.
@@ -6713,8 +6726,6 @@ var_dump($betaMessageTokensCount);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"computer_20241022" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6738,13 +6749,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaMemoryTool20250818`
 
+    - `"memory_20250818" type`
+
     - `"memory" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"memory_20250818" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6764,6 +6775,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolComputerUse20250124`
 
+    - `"computer_20250124" type`
+
     - `int displayHeightPx`
 
       The height of the display in pixels.
@@ -6777,8 +6790,6 @@ var_dump($betaMessageTokensCount);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"computer_20250124" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6802,13 +6813,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolTextEditor20241022`
 
+    - `"text_editor_20241022" type`
+
     - `"str_replace_editor" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"text_editor_20241022" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6828,6 +6839,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolComputerUse20251124`
 
+    - `"computer_20251124" type`
+
     - `int displayHeightPx`
 
       The height of the display in pixels.
@@ -6841,8 +6854,6 @@ var_dump($betaMessageTokensCount);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"computer_20251124" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6887,13 +6898,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolTextEditor20250124`
 
+    - `"text_editor_20250124" type`
+
     - `"str_replace_editor" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"text_editor_20250124" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6913,13 +6924,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolTextEditor20250429`
 
+    - `"text_editor_20250429" type`
+
     - `"str_replace_based_edit_tool" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"text_editor_20250429" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6939,13 +6950,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolTextEditor20250728`
 
+    - `"text_editor_20250728" type`
+
     - `"str_replace_based_edit_tool" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"text_editor_20250728" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -6969,13 +6980,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchTool20250305`
 
+    - `"web_search_20250305" type`
+
     - `"web_search" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_search_20250305" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7009,13 +7020,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchTool20250910`
 
+    - `"web_fetch_20250910" type`
+
     - `"web_fetch" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_fetch_20250910" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7053,13 +7064,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchTool20260209`
 
+    - `"web_search_20260209" type`
+
     - `"web_search" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_search_20260209" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7093,13 +7104,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchTool20260209`
 
+    - `"web_fetch_20260209" type`
+
     - `"web_fetch" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_fetch_20260209" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7137,13 +7148,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchTool20260309`
 
+    - `"web_fetch_20260309" type`
+
     - `"web_fetch" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_fetch_20260309" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7185,13 +7196,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchTool20260318`
 
+    - `"web_search_20260318" type`
+
     - `"web_search" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_search_20260318" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7229,13 +7240,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebFetchTool20260318`
 
+    - `"web_fetch_20260318" type`
+
     - `"web_fetch" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"web_fetch_20260318" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7281,6 +7292,8 @@ var_dump($betaMessageTokensCount);
 
   - `BetaAdvisorTool20260301`
 
+    - `"advisor_20260301" type`
+
     - `Model model`
 
       The model that will complete your prompt.
@@ -7292,8 +7305,6 @@ var_dump($betaMessageTokensCount);
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `"advisor_20260301" type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7323,13 +7334,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolSearchToolBm25_20251119`
 
+    - `Type type`
+
     - `"tool_search_tool_bm25" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `Type type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7347,13 +7358,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaToolSearchToolRegex20251119`
 
+    - `Type type`
+
     - `"tool_search_tool_regex" name`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `Type type`
 
     - `?list<AllowedCaller> allowedCallers`
 
@@ -7371,11 +7382,11 @@ var_dump($betaMessageTokensCount);
 
   - `BetaMCPToolset`
 
+    - `"mcp_toolset" type`
+
     - `string mcpServerName`
 
       Name of the MCP server to configure tools for
-
-    - `"mcp_toolset" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -7393,13 +7404,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolUseBlock`
 
+  - `"tool_use" type`
+
   - `string id`
 
   - `array<string,mixed> input`
 
   - `string name`
-
-  - `"tool_use" type`
 
   - `?Caller caller`
 
@@ -7413,13 +7424,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaToolUseBlockParam`
 
+  - `"tool_use" type`
+
   - `string id`
 
   - `array<string,mixed> input`
 
   - `string name`
-
-  - `"tool_use" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -7556,13 +7567,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchBlock`
 
+  - `"web_fetch_result" type`
+
   - `BetaDocumentBlock content`
 
   - `?string retrievedAt`
 
     ISO 8601 timestamp when the content was retrieved
-
-  - `"web_fetch_result" type`
 
   - `string url`
 
@@ -7572,9 +7583,9 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchBlockParam`
 
-  - `BetaRequestDocumentBlock content`
-
   - `"web_fetch_result" type`
+
+  - `BetaRequestDocumentBlock content`
 
   - `string url`
 
@@ -7588,13 +7599,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchTool20250910`
 
+  - `"web_fetch_20250910" type`
+
   - `"web_fetch" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_fetch_20250910" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7634,13 +7645,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchTool20260209`
 
+  - `"web_fetch_20260209" type`
+
   - `"web_fetch" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_fetch_20260209" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7680,13 +7691,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchTool20260309`
 
+  - `"web_fetch_20260309" type`
+
   - `"web_fetch" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_fetch_20260309" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7730,13 +7741,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchTool20260318`
 
+  - `"web_fetch_20260318" type`
+
   - `"web_fetch" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_fetch_20260318" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7784,11 +7795,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchToolResultBlock`
 
+  - `"web_fetch_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"web_fetch_tool_result" type`
 
   - `?Caller caller`
 
@@ -7798,11 +7809,11 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchToolResultBlockParam`
 
+  - `"web_fetch_tool_result" type`
+
   - `Content content`
 
   - `string toolUseID`
-
-  - `"web_fetch_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -7816,17 +7827,17 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebFetchToolResultErrorBlock`
 
-  - `BetaWebFetchToolResultErrorCode errorCode`
-
   - `"web_fetch_tool_result_error" type`
+
+  - `BetaWebFetchToolResultErrorCode errorCode`
 
 ### Beta Web Fetch Tool Result Error Block Param
 
 - `BetaWebFetchToolResultErrorBlockParam`
 
-  - `BetaWebFetchToolResultErrorCode errorCode`
-
   - `"web_fetch_tool_result_error" type`
+
+  - `BetaWebFetchToolResultErrorCode errorCode`
 
 ### Beta Web Fetch Tool Result Error Code
 
@@ -7850,9 +7861,13 @@ var_dump($betaMessageTokensCount);
 
   - `"unavailable"`
 
+  - `"content_too_large"`
+
 ### Beta Web Search Result Block
 
 - `BetaWebSearchResultBlock`
+
+  - `"web_search_result" type`
 
   - `string encryptedContent`
 
@@ -7860,19 +7875,17 @@ var_dump($betaMessageTokensCount);
 
   - `string title`
 
-  - `"web_search_result" type`
-
   - `string url`
 
 ### Beta Web Search Result Block Param
 
 - `BetaWebSearchResultBlockParam`
 
+  - `"web_search_result" type`
+
   - `string encryptedContent`
 
   - `string title`
-
-  - `"web_search_result" type`
 
   - `string url`
 
@@ -7882,13 +7895,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebSearchTool20250305`
 
+  - `"web_search_20250305" type`
+
   - `"web_search" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_search_20250305" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7924,13 +7937,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebSearchTool20260209`
 
+  - `"web_search_20260209" type`
+
   - `"web_search" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_search_20260209" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -7966,13 +7979,13 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebSearchTool20260318`
 
+  - `"web_search_20260318" type`
+
   - `"web_search" name`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `"web_search_20260318" type`
 
   - `?list<AllowedCaller> allowedCallers`
 
@@ -8012,19 +8025,19 @@ var_dump($betaMessageTokensCount);
 
 - `BetaWebSearchToolRequestError`
 
-  - `BetaWebSearchToolResultErrorCode errorCode`
-
   - `"web_search_tool_result_error" type`
+
+  - `BetaWebSearchToolResultErrorCode errorCode`
 
 ### Beta Web Search Tool Result Block
 
 - `BetaWebSearchToolResultBlock`
 
+  - `"web_search_tool_result" type`
+
   - `BetaWebSearchToolResultBlockContent content`
 
   - `string toolUseID`
-
-  - `"web_search_tool_result" type`
 
   - `?Caller caller`
 
@@ -8036,11 +8049,13 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchToolResultError`
 
-    - `BetaWebSearchToolResultErrorCode errorCode`
-
     - `"web_search_tool_result_error" type`
 
+    - `BetaWebSearchToolResultErrorCode errorCode`
+
   - `list<BetaWebSearchResultBlock>`
+
+    - `"web_search_result" type`
 
     - `string encryptedContent`
 
@@ -8048,19 +8063,17 @@ var_dump($betaMessageTokensCount);
 
     - `string title`
 
-    - `"web_search_result" type`
-
     - `string url`
 
 ### Beta Web Search Tool Result Block Param
 
 - `BetaWebSearchToolResultBlockParam`
 
+  - `"web_search_tool_result" type`
+
   - `BetaWebSearchToolResultBlockParamContent content`
 
   - `string toolUseID`
-
-  - `"web_search_tool_result" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
@@ -8076,11 +8089,11 @@ var_dump($betaMessageTokensCount);
 
   - `list<BetaWebSearchResultBlockParam>`
 
+    - `"web_search_result" type`
+
     - `string encryptedContent`
 
     - `string title`
-
-    - `"web_search_result" type`
 
     - `string url`
 
@@ -8088,17 +8101,17 @@ var_dump($betaMessageTokensCount);
 
   - `BetaWebSearchToolRequestError`
 
-    - `BetaWebSearchToolResultErrorCode errorCode`
-
     - `"web_search_tool_result_error" type`
+
+    - `BetaWebSearchToolResultErrorCode errorCode`
 
 ### Beta Web Search Tool Result Error
 
 - `BetaWebSearchToolResultError`
 
-  - `BetaWebSearchToolResultErrorCode errorCode`
-
   - `"web_search_tool_result_error" type`
+
+  - `BetaWebSearchToolResultErrorCode errorCode`
 
 ### Beta Web Search Tool Result Error Code
 
@@ -8120,7 +8133,7 @@ var_dump($betaMessageTokensCount);
 
 ### Create a Message Batch
 
-`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`
+`$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): MessageBatch`
 
 **POST** `/v1/messages/batches`
 
@@ -8144,9 +8157,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `MessageBatch`
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `string id`
 
@@ -8191,12 +8212,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `"message_batch" type`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 #### Example
 
@@ -8322,6 +8337,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
   ],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessageBatch);
@@ -8352,7 +8368,7 @@ var_dump($betaMessageBatch);
 
 ### Retrieve a Message Batch
 
-`$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatch`
+`$client->beta->messages->batches->retrieve(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): MessageBatch`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
 
@@ -8370,9 +8386,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `MessageBatch`
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `string id`
 
@@ -8418,12 +8442,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `"message_batch" type`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 #### Example
 
 ```php
@@ -8434,7 +8452,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->retrieve(
-  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'message_batch_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessageBatch);
@@ -8465,7 +8485,7 @@ var_dump($betaMessageBatch);
 
 ### List Message Batches
 
-`$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<MessageBatch>`
+`$client->beta->messages->batches->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas, ?string workspaceID): Page<MessageBatch>`
 
 **GET** `/v1/messages/batches`
 
@@ -8495,9 +8515,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `MessageBatch`
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `string id`
 
@@ -8543,12 +8571,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `"message_batch" type`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 #### Example
 
 ```php
@@ -8563,6 +8585,7 @@ $page = $client->beta->messages->batches->list(
   beforeID: 'before_id',
   limit: 1,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -8600,7 +8623,7 @@ var_dump($page);
 
 ### Cancel a Message Batch
 
-`$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatch`
+`$client->beta->messages->batches->cancel(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): MessageBatch`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -8620,9 +8643,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `MessageBatch`
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `string id`
 
@@ -8668,12 +8699,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `"message_batch" type`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 #### Example
 
 ```php
@@ -8684,7 +8709,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->cancel(
-  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'message_batch_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessageBatch);
@@ -8715,7 +8742,7 @@ var_dump($betaMessageBatch);
 
 ### Delete a Message Batch
 
-`$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas): DeletedMessageBatch`
+`$client->beta->messages->batches->delete(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): DeletedMessageBatch`
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
 
@@ -8735,19 +8762,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `DeletedMessageBatch`
-
-  - `string id`
-
-    ID of the Message Batch.
 
   - `"message_batch_deleted" type`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
+
+  - `string id`
+
+    ID of the Message Batch.
 
 #### Example
 
@@ -8759,7 +8788,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedMessageBatch = $client->beta->messages->batches->delete(
-  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'message_batch_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaDeletedMessageBatch);
@@ -8776,7 +8807,7 @@ var_dump($betaDeletedMessageBatch);
 
 ### Retrieve Message Batch results
 
-`$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatchIndividualResponse`
+`$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): MessageBatchIndividualResponse`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -8795,6 +8826,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -8826,7 +8859,9 @@ $betaMessageBatchIndividualResponse = $client
   ->messages
   ->batches
   ->resultsStream(
-  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'message_batch_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaMessageBatchIndividualResponse);

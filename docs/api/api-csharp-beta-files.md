@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/files"
 category: "api"
 generated: true
 ---
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/csharp/beta/files
+---
+
 # Files
 
 ## Upload File
@@ -20,7 +25,7 @@ Upload File
 
   - `required string file`
 
-    Body param: The file to upload
+    Body param: The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
     format: binary
 
@@ -80,6 +85,8 @@ Upload File
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -122,9 +129,21 @@ Upload File
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonElement Type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `required string ID`
 
@@ -156,12 +175,6 @@ Upload File
 
     minimum: 0
 
-  - `JsonElement Type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `bool Downloadable`
 
     Whether the file can be downloaded.
@@ -176,13 +189,13 @@ Upload File
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `required string ID`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonElement Type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `required string ID`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -298,6 +311,8 @@ List Files
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -340,9 +355,21 @@ List Files
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonElement Type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `required string ID`
 
@@ -374,12 +401,6 @@ List Files
 
     minimum: 0
 
-  - `JsonElement Type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `bool Downloadable`
 
     Whether the file can be downloaded.
@@ -394,13 +415,13 @@ List Files
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `required string ID`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonElement Type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `required string ID`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -504,6 +525,8 @@ Download File
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -545,6 +568,12 @@ Download File
     - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Example
 
@@ -622,6 +651,8 @@ Get File Metadata
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -664,9 +695,21 @@ Get File Metadata
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonElement Type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `required string ID`
 
@@ -698,12 +741,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `JsonElement Type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `bool Downloadable`
 
     Whether the file can be downloaded.
@@ -718,13 +755,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `required string ID`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonElement Type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `required string ID`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -821,6 +858,8 @@ Delete File
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -863,19 +902,25 @@ Delete File
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaDeletedFile:`
-
-  - `required string ID`
-
-    ID of the deleted file.
 
   - `Type Type`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
+
+  - `required string ID`
+
+    ID of the deleted file.
 
 ### Example
 
@@ -902,19 +947,25 @@ Console.WriteLine(betaDeletedFile);
 
 - `class BetaDeletedFile:`
 
-  - `required string ID`
-
-    ID of the deleted file.
-
   - `Type Type`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
+  - `required string ID`
+
+    ID of the deleted file.
+
 ### Beta File Metadata
 
 - `class BetaFileMetadata:`
+
+  - `JsonElement Type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `required string ID`
 
@@ -946,12 +997,6 @@ Console.WriteLine(betaDeletedFile);
 
     minimum: 0
 
-  - `JsonElement Type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `bool Downloadable`
 
     Whether the file can be downloaded.
@@ -966,22 +1011,22 @@ Console.WriteLine(betaDeletedFile);
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `required string ID`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonElement Type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `required string ID`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Beta File Scope
 
 - `class BetaFileScope:`
 
-  - `required string ID`
-
-    The ID of the scoping resource (e.g., the session ID).
-
   - `JsonElement Type = "session"`
 
     The type of scope (e.g., `"session"`).
+
+  - `required string ID`
+
+    The ID of the scoping resource (e.g., the session ID).

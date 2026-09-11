@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/update
 category: "api"
 generated: true
 ---
+---
+title: Update Workspace Member
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/update
+---
+
 # Update Workspace Member
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
@@ -22,7 +27,7 @@ Update Workspace Member
 
 ## Body parameters
 
-- `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+- `workspace_role: BetaWorkspaceRole`
 
   New workspace role for the User.
 
@@ -38,7 +43,7 @@ Update Workspace Member
 
 ## Returns
 
-- `WorkspaceMember object`
+- `BetaWorkspaceMember object`
 
   - `type: "workspace_member"`
 
@@ -56,7 +61,7 @@ Update Workspace Member
 
     ID of the Workspace.
 
-  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+  - `workspace_role: BetaWorkspaceRole`
 
     Role of the Workspace Member.
 
@@ -76,7 +81,7 @@ Update Workspace Member
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "workspace_role": "workspace_admin"
         }'
@@ -89,6 +94,6 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
   "type": "workspace_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  "workspace_role": "workspace_user"
+  "workspace_role": "workspace_admin"
 }
 ```

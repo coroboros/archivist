@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/files/retrieve_meta
 category: "api"
 generated: true
 ---
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/csharp/beta/files/retrieve_metadata
+---
+
 # Get File Metadata
 
 `BetaFileMetadata Beta.Files.RetrieveMetadata(parameters, cancellationToken = default)`
@@ -70,6 +75,8 @@ Get File Metadata
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -112,9 +119,21 @@ Get File Metadata
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `class BetaFileMetadata:`
+
+  - `JsonElement Type = "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `required string ID`
 
@@ -146,12 +165,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `JsonElement Type = "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `bool Downloadable`
 
     Whether the file can be downloaded.
@@ -166,13 +179,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `required string ID`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `JsonElement Type = "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `required string ID`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ## Example
 

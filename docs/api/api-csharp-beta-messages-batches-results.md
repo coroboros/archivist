@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/re
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/results
+---
+
 # Retrieve Message Batch results
 
 `BetaMessageBatchIndividualResponse Beta.Messages.Batches.ResultsStreaming(parameters, cancellationToken = default)`
@@ -74,6 +79,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -116,6 +123,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `class BetaMessageBatchIndividualResponse:`
@@ -136,7 +149,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `class BetaMessageBatchSucceededResult:`
 
+      - `JsonElement Type = "succeeded"`
+
       - `required BetaMessage Message`
+
+        - `JsonElement Type = "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `required string ID`
 
@@ -162,12 +183,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `required string SkillID`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `required Type Type`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -175,6 +190,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Anthropic("anthropic")`
 
               - `Custom("custom")`
+
+            - `required string SkillID`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `required string Version`
 
@@ -213,6 +234,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaTextBlock:`
 
+            - `JsonElement Type = "text"`
+
             - `required IReadOnlyList<BetaTextCitation>? Citations`
 
               Citations supporting the text block.
@@ -220,6 +243,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `class BetaCitationCharLocation:`
+
+                - `JsonElement Type = "char_location"`
 
                 - `required string CitedText`
 
@@ -237,9 +262,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `JsonElement Type = "char_location"`
-
               - `class BetaCitationPageLocation:`
+
+                - `JsonElement Type = "page_location"`
 
                 - `required string CitedText`
 
@@ -257,9 +282,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `JsonElement Type = "page_location"`
-
               - `class BetaCitationContentBlockLocation:`
+
+                - `JsonElement Type = "content_block_location"`
 
                 - `required string CitedText`
 
@@ -287,9 +312,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `JsonElement Type = "content_block_location"`
-
               - `class BetaCitationsWebSearchResultLocation:`
+
+                - `JsonElement Type = "web_search_result_location"`
 
                 - `required string CitedText`
 
@@ -299,11 +324,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `JsonElement Type = "web_search_result_location"`
-
                 - `required string Url`
 
               - `class BetaCitationSearchResultLocation:`
+
+                - `JsonElement Type = "search_result_location"`
 
                 - `required string CitedText`
 
@@ -335,15 +360,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string? Title`
 
-                - `JsonElement Type = "search_result_location"`
-
             - `required string Text`
 
-              maxLength: 5000000, minLength: 0
-
-            - `JsonElement Type = "text"`
+              minLength: 0
 
           - `class BetaThinkingBlock:`
+
+            - `JsonElement Type = "thinking"`
 
             - `required string Signature`
 
@@ -357,9 +380,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `JsonElement Type = "thinking"`
-
           - `class BetaRedactedThinkingBlock:`
+
+            - `JsonElement Type = "redacted_thinking"`
 
             - `required string Data`
 
@@ -369,9 +392,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `JsonElement Type = "redacted_thinking"`
-
           - `class BetaToolUseBlock:`
+
+            - `JsonElement Type = "tool_use"`
 
             - `required string ID`
 
@@ -382,8 +405,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `required string Name`
 
               minLength: 1
-
-            - `JsonElement Type = "tool_use"`
 
             - `Caller Caller`
 
@@ -399,19 +420,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `JsonElement Type = "code_execution_20250825"`
+
                 - `required string ToolID`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `JsonElement Type = "code_execution_20250825"`
 
               - `class BetaServerToolCaller20260120:`
 
+                - `JsonElement Type = "code_execution_20260120"`
+
                 - `required string ToolID`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `JsonElement Type = "code_execution_20260120"`
 
             - `string? ToolsetName`
 
@@ -420,6 +441,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class BetaServerToolUseBlock:`
+
+            - `JsonElement Type = "server_tool_use"`
 
             - `required string ID`
 
@@ -445,8 +468,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `ToolSearchToolBm25("tool_search_tool_bm25")`
 
-            - `JsonElement Type = "server_tool_use"`
-
             - `Caller Caller`
 
               Tool invocation directly from the model.
@@ -463,9 +484,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaWebSearchToolResultBlock:`
 
+            - `JsonElement Type = "web_search_tool_result"`
+
             - `required BetaWebSearchToolResultBlockContent Content`
 
               - `class BetaWebSearchToolResultError:`
+
+                - `JsonElement Type = "web_search_tool_result_error"`
 
                 - `required BetaWebSearchToolResultErrorCode ErrorCode`
 
@@ -481,9 +506,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `RequestTooLarge("request_too_large")`
 
-                - `JsonElement Type = "web_search_tool_result_error"`
-
               - `IReadOnlyList<BetaWebSearchResultBlock>`
+
+                - `JsonElement Type = "web_search_result"`
 
                 - `required string EncryptedContent`
 
@@ -491,15 +516,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Title`
 
-                - `JsonElement Type = "web_search_result"`
-
                 - `required string Url`
 
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `JsonElement Type = "web_search_tool_result"`
 
             - `Caller Caller`
 
@@ -517,9 +538,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaWebFetchToolResultBlock:`
 
+            - `JsonElement Type = "web_fetch_tool_result"`
+
             - `required Content Content`
 
               - `class BetaWebFetchToolResultErrorBlock:`
+
+                - `JsonElement Type = "web_fetch_tool_result_error"`
 
                 - `required BetaWebFetchToolResultErrorCode ErrorCode`
 
@@ -541,11 +566,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Unavailable("unavailable")`
 
-                - `JsonElement Type = "web_fetch_tool_result_error"`
+                  - `ContentTooLarge("content_too_large")`
 
               - `class BetaWebFetchBlock:`
 
+                - `JsonElement Type = "web_fetch_result"`
+
                 - `required BetaDocumentBlock Content`
+
+                  - `JsonElement Type = "document"`
 
                   - `required BetaCitationConfig? Citations`
 
@@ -557,33 +586,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `class BetaBase64PdfSource:`
 
+                      - `JsonElement Type = "base64"`
+
                       - `required string Data`
 
                         format: byte
 
                       - `JsonElement MediaType = "application/pdf"`
 
-                      - `JsonElement Type = "base64"`
-
                     - `class BetaPlainTextSource:`
+
+                      - `JsonElement Type = "text"`
 
                       - `required string Data`
 
                       - `JsonElement MediaType = "text/plain"`
 
-                      - `JsonElement Type = "text"`
-
                   - `required string? Title`
 
                     The title of the document
 
-                  - `JsonElement Type = "document"`
-
                 - `required string? RetrievedAt`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `JsonElement Type = "web_fetch_result"`
 
                 - `required string Url`
 
@@ -592,8 +617,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `JsonElement Type = "web_fetch_tool_result"`
 
             - `Caller Caller`
 
@@ -611,9 +634,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `class BetaAdvisorToolResultBlock:`
 
+            - `JsonElement Type = "advisor_tool_result"`
+
             - `required Content Content`
 
               - `class BetaAdvisorToolResultError:`
+
+                - `JsonElement Type = "advisor_tool_result_error"`
 
                 - `required ErrorCode ErrorCode`
 
@@ -631,9 +658,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `ModelNotFound("model_not_found")`
 
-                - `JsonElement Type = "advisor_tool_result_error"`
-
               - `class BetaAdvisorResultBlock:`
+
+                - `JsonElement Type = "advisor_result"`
 
                 - `required string? StopReason`
 
@@ -641,9 +668,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Text`
 
-                - `JsonElement Type = "advisor_result"`
-
               - `class BetaAdvisorRedactedResultBlock:`
+
+                - `JsonElement Type = "advisor_redacted_result"`
 
                 - `required string EncryptedContent`
 
@@ -653,21 +680,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
-                - `JsonElement Type = "advisor_redacted_result"`
-
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `JsonElement Type = "advisor_tool_result"`
-
           - `class BetaCodeExecutionToolResultBlock:`
+
+            - `JsonElement Type = "code_execution_tool_result"`
 
             - `required BetaCodeExecutionToolResultBlockContent Content`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultError:`
+
+                - `JsonElement Type = "code_execution_tool_result_error"`
 
                 - `required BetaCodeExecutionToolResultErrorCode ErrorCode`
 
@@ -679,15 +706,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `ExecutionTimeExceeded("execution_time_exceeded")`
 
-                - `JsonElement Type = "code_execution_tool_result_error"`
-
               - `class BetaCodeExecutionResultBlock:`
+
+                - `JsonElement Type = "code_execution_result"`
 
                 - `required IReadOnlyList<BetaCodeExecutionOutputBlock> Content`
 
-                  - `required string FileID`
-
                   - `JsonElement Type = "code_execution_output"`
+
+                  - `required string FileID`
 
                 - `required long ReturnCode`
 
@@ -695,17 +722,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Stdout`
 
-                - `JsonElement Type = "code_execution_result"`
-
               - `class BetaEncryptedCodeExecutionResultBlock:`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `JsonElement Type = "encrypted_code_execution_result"`
+
                 - `required IReadOnlyList<BetaCodeExecutionOutputBlock> Content`
 
-                  - `required string FileID`
-
                   - `JsonElement Type = "code_execution_output"`
+
+                  - `required string FileID`
 
                 - `required string EncryptedStdout`
 
@@ -713,19 +740,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Stderr`
 
-                - `JsonElement Type = "encrypted_code_execution_result"`
-
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `JsonElement Type = "code_execution_tool_result"`
-
           - `class BetaBashCodeExecutionToolResultBlock:`
+
+            - `JsonElement Type = "bash_code_execution_tool_result"`
 
             - `required Content Content`
 
               - `class BetaBashCodeExecutionToolResultError:`
+
+                - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
                 - `required ErrorCode ErrorCode`
 
@@ -739,15 +766,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `OutputFileTooLarge("output_file_too_large")`
 
-                - `JsonElement Type = "bash_code_execution_tool_result_error"`
-
               - `class BetaBashCodeExecutionResultBlock:`
+
+                - `JsonElement Type = "bash_code_execution_result"`
 
                 - `required IReadOnlyList<BetaBashCodeExecutionOutputBlock> Content`
 
-                  - `required string FileID`
-
                   - `JsonElement Type = "bash_code_execution_output"`
+
+                  - `required string FileID`
 
                 - `required long ReturnCode`
 
@@ -755,19 +782,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Stdout`
 
-                - `JsonElement Type = "bash_code_execution_result"`
-
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `JsonElement Type = "bash_code_execution_tool_result"`
-
           - `class BetaTextEditorCodeExecutionToolResultBlock:`
+
+            - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
             - `required Content Content`
 
               - `class BetaTextEditorCodeExecutionToolResultError:`
+
+                - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
                 - `required ErrorCode ErrorCode`
 
@@ -783,9 +810,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string? ErrorMessage`
 
-                - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
-
               - `class BetaTextEditorCodeExecutionViewResultBlock:`
+
+                - `JsonElement Type = "text_editor_code_execution_view_result"`
 
                 - `required string Content`
 
@@ -803,15 +830,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required long? TotalLines`
 
-                - `JsonElement Type = "text_editor_code_execution_view_result"`
-
               - `class BetaTextEditorCodeExecutionCreateResultBlock:`
-
-                - `required bool IsFileUpdate`
 
                 - `JsonElement Type = "text_editor_code_execution_create_result"`
 
+                - `required bool IsFileUpdate`
+
               - `class BetaTextEditorCodeExecutionStrReplaceResultBlock:`
+
+                - `JsonElement Type = "text_editor_code_execution_str_replace_result"`
 
                 - `required IReadOnlyList<string>? Lines`
 
@@ -823,19 +850,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required long? OldStart`
 
-                - `JsonElement Type = "text_editor_code_execution_str_replace_result"`
-
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `JsonElement Type = "text_editor_code_execution_tool_result"`
-
           - `class BetaToolSearchToolResultBlock:`
+
+            - `JsonElement Type = "tool_search_tool_result"`
 
             - `required Content Content`
 
               - `class BetaToolSearchToolResultError:`
+
+                - `JsonElement Type = "tool_search_tool_result_error"`
 
                 - `required ErrorCode ErrorCode`
 
@@ -849,27 +876,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string? ErrorMessage`
 
-                - `JsonElement Type = "tool_search_tool_result_error"`
-
               - `class BetaToolSearchToolSearchResultBlock:`
 
+                - `JsonElement Type = "tool_search_tool_search_result"`
+
                 - `required IReadOnlyList<BetaToolReferenceBlock> ToolReferences`
+
+                  - `JsonElement Type = "tool_reference"`
 
                   - `required string ToolName`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `JsonElement Type = "tool_reference"`
-
-                - `JsonElement Type = "tool_search_tool_search_result"`
-
             - `required string ToolUseID`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `JsonElement Type = "tool_search_tool_result"`
-
           - `class BetaMcpToolUseBlock:`
+
+            - `JsonElement Type = "mcp_tool_use"`
 
             - `required string ID`
 
@@ -885,15 +910,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `JsonElement Type = "mcp_tool_use"`
-
           - `class BetaMcpToolResultBlock:`
+
+            - `JsonElement Type = "mcp_tool_result"`
 
             - `required Content Content`
 
               - `string`
 
               - `IReadOnlyList<BetaTextBlock>`
+
+                - `JsonElement Type = "text"`
 
                 - `required IReadOnlyList<BetaTextCitation>? Citations`
 
@@ -903,9 +930,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `required string Text`
 
-                  maxLength: 5000000, minLength: 0
-
-                - `JsonElement Type = "text"`
+                  minLength: 0
 
             - `required bool IsError`
 
@@ -913,15 +938,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `JsonElement Type = "mcp_tool_result"`
-
           - `class BetaContainerUploadBlock:`
 
             Response model for a file uploaded to the container.
 
-            - `required string FileID`
-
             - `JsonElement Type = "container_upload"`
+
+            - `required string FileID`
 
           - `class BetaCompactionBlock:`
 
@@ -931,6 +954,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
+            - `JsonElement Type = "compaction"`
+
             - `required string? Content`
 
               Summary of compacted content, or null if compaction failed
@@ -938,8 +963,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `required string? EncryptedContent`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
-
-            - `JsonElement Type = "compaction"`
 
           - `class BetaFallbackBlock:`
 
@@ -954,6 +977,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             The block is treated like a server-tool content block for streaming: it
             arrives via the standard `content_block_start` / `content_block_stop`
             pair and carries no deltas.
+
+            - `JsonElement Type = "fallback"`
 
             - `required BetaFallbackInfo From`
 
@@ -1041,6 +1066,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
+              - `JsonElement Type = "refusal"`
+
               - `required BetaFallbackRefusalTriggerCategory? Category`
 
                 The policy category that triggered a refusal.
@@ -1065,10 +1092,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-              - `JsonElement Type = "refusal"`
-
-            - `JsonElement Type = "fallback"`
-
         - `required BetaContextManagementResponse? ContextManagement`
 
           Context management response.
@@ -1080,6 +1103,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             List of context management edits that were applied.
 
             - `class BetaClearToolUses20250919EditResponse:`
+
+              - `JsonElement Type = "clear_tool_uses_20250919"`
+
+                The type of context management edit applied.
 
               - `required long ClearedInputTokens`
 
@@ -1093,11 +1120,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `JsonElement Type = "clear_tool_uses_20250919"`
+            - `class BetaClearThinking20251015EditResponse:`
+
+              - `JsonElement Type = "clear_thinking_20251015"`
 
                 The type of context management edit applied.
-
-            - `class BetaClearThinking20251015EditResponse:`
 
               - `required long ClearedInputTokens`
 
@@ -1111,10 +1138,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `JsonElement Type = "clear_thinking_20251015"`
-
-                The type of context management edit applied.
-
         - `required BetaDiagnostics? Diagnostics`
 
           Response envelope for request-level diagnostics. Present (possibly
@@ -1126,35 +1149,35 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class BetaCacheMissModelChanged:`
 
+              - `JsonElement Type = "model_changed"`
+
               - `required long CacheMissedInputTokens`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `JsonElement Type = "model_changed"`
 
             - `class BetaCacheMissSystemChanged:`
 
+              - `JsonElement Type = "system_changed"`
+
               - `required long CacheMissedInputTokens`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `JsonElement Type = "system_changed"`
 
             - `class BetaCacheMissToolsChanged:`
 
+              - `JsonElement Type = "tools_changed"`
+
               - `required long CacheMissedInputTokens`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `JsonElement Type = "tools_changed"`
 
             - `class BetaCacheMissMessagesChanged:`
 
+              - `JsonElement Type = "messages_changed"`
+
               - `required long CacheMissedInputTokens`
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
-
-              - `JsonElement Type = "messages_changed"`
 
             - `class BetaCacheMissPreviousMessageNotFound:`
 
@@ -1179,6 +1202,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `required BetaRefusalStopDetails? StopDetails`
 
           Structured information about a refusal.
+
+          - `JsonElement Type = "refusal"`
 
           - `required Category? Category`
 
@@ -1259,8 +1284,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
-          - `JsonElement Type = "refusal"`
-
         - `required BetaStopReason? StopReason`
 
           The reason that we stopped.
@@ -1298,12 +1321,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `JsonElement Type = "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `required BetaUsage Usage`
 
@@ -1369,6 +1386,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 No reprice was applied; `reason` says why.
 
+                - `JsonElement Type = "not_applied"`
+
                 - `required Reason Reason`
 
                   Why the reprice was not applied.
@@ -1399,8 +1418,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   - `WrongPlatform("wrong_platform")`
 
                   - `WrongWorkspace("wrong_workspace")`
-
-                - `JsonElement Type = "not_applied"`
 
                 - `IReadOnlyList<string>? RemoveToRedeem`
 
@@ -1439,6 +1456,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
+              - `JsonElement Type = "message"`
+
+                Usage for a sampling iteration
+
               - `required BetaCacheCreation? CacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1472,15 +1493,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `JsonElement Type = "message"`
-
-                Usage for a sampling iteration
 
             - `class BetaCompactionIterationUsage:`
 
               Token usage for a compaction iteration.
 
+              - `JsonElement Type = "compaction"`
+
+                Usage for a compaction iteration
+
               - `required BetaCacheCreation? CacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1509,13 +1530,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `JsonElement Type = "compaction"`
-
-                Usage for a compaction iteration
-
             - `class BetaAdvisorMessageIterationUsage:`
 
               Token usage for an advisor sub-inference iteration.
+
+              - `JsonElement Type = "advisor_message"`
+
+                Usage for an advisor sub-inference iteration
 
               - `required BetaCacheCreation? CacheCreation`
 
@@ -1550,10 +1571,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `JsonElement Type = "advisor_message"`
-
-                Usage for an advisor sub-inference iteration
 
             - `class BetaFallbackMessageIterationUsage:`
 
@@ -1564,6 +1581,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
+              - `JsonElement Type = "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
+
               - `required BetaCacheCreation? CacheCreation`
 
                 Breakdown of cached tokens by TTL
@@ -1597,10 +1618,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 The number of output tokens which were used.
 
                 minimum: 0
-
-              - `JsonElement Type = "fallback_message"`
-
-                Usage for the fallback-model attempt that served the response
 
           - `required long OutputTokens`
 
@@ -1682,6 +1699,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           fallback happened mid-stream, in which case it holds the serving model's
           entries and replaces the one in `message_start`.
 
+          - `JsonElement Type = "thinking_dropped"`
+
+            Always `thinking_dropped` for this entry type.
+
           - `required string Path`
 
             Where the removed block was in your request, as `messages.{i}.content.{j}`:
@@ -1712,77 +1733,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `EndUserBindingMismatch("end_user_binding_mismatch")`
 
-          - `JsonElement Type = "thinking_dropped"`
-
-            Always `thinking_dropped` for this entry type.
-
-      - `JsonElement Type = "succeeded"`
-
     - `class BetaMessageBatchErroredResult:`
 
+      - `JsonElement Type = "errored"`
+
       - `required BetaErrorResponse Error`
+
+        - `JsonElement Type = "error"`
 
         - `required BetaError Error`
 
           - `class BetaInvalidRequestError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "invalid_request_error"`
+
+            - `required string Message`
 
           - `class BetaAuthenticationError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "authentication_error"`
+
+            - `required string Message`
 
           - `class BetaBillingError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "billing_error"`
+
+            - `required string Message`
 
           - `class BetaPermissionError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "permission_error"`
+
+            - `required string Message`
 
           - `class BetaNotFoundError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "not_found_error"`
+
+            - `required string Message`
 
           - `class BetaRateLimitError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "rate_limit_error"`
+
+            - `required string Message`
 
           - `class BetaGatewayTimeoutError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "timeout_error"`
+
+            - `required string Message`
 
           - `class BetaApiError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "api_error"`
+
+            - `required string Message`
 
           - `class BetaOverloadedError:`
 
-            - `required string Message`
-
             - `JsonElement Type = "overloaded_error"`
 
+            - `required string Message`
+
         - `required string? RequestID`
-
-        - `JsonElement Type = "error"`
-
-      - `JsonElement Type = "errored"`
 
     - `class BetaMessageBatchCanceledResult:`
 

@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Agent
+url: https://platform.claude.com/docs/en/api/php/beta/agents/retrieve
+---
+
 # Get Agent
 
-`$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **GET** `/v1/agents/{agent_id}`
 
@@ -24,9 +29,13 @@ Get Agent
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaManagedAgentsAgent`
+
+  - `Type type`
 
   - `string id`
 
@@ -60,8 +69,6 @@ Get Agent
 
   - `list<Tool> tools`
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -83,6 +90,7 @@ $betaManagedAgentsAgent = $client->beta->agents->retrieve(
   'agent_011CZkYpogX7uDKUyvBTophP',
   version: 0,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsAgent);

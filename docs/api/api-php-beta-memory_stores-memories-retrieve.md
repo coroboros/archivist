@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a memory
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories/retrieve
+---
+
 # Retrieve a memory
 
-`$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
+`$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -26,9 +31,13 @@ Retrieve a memory
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `ManagedAgentsMemory`
+
+  - `Type type`
 
   - `string id`
 
@@ -58,8 +67,6 @@ Retrieve a memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -82,6 +89,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->retrieve(
   memoryStoreID: 'memory_store_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemory);

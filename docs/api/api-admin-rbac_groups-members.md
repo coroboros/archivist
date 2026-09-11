@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/members"
 category: "api"
 generated: true
 ---
+---
+title: Members
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/members
+---
+
 # Members
 
 ## List RBAC Group Members
@@ -36,7 +41,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `data: array of RbacGroupMember`
+- `data: array of BetaRBACGroupMember`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -51,14 +64,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `group_id: string`
 
     ID of the RBAC Group.
-
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
 
   - `user_id: string`
 
@@ -77,7 +82,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -120,7 +126,15 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroupMember object`
+- `BetaRBACGroupMember object`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -136,14 +150,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
-
   - `user_id: string`
 
     ID of the User.
@@ -154,7 +160,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
           "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
         }'
@@ -192,17 +199,17 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `RbacGroupMemberDeleted object`
-
-  - `group_id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupMemberDeleted object`
 
   - `type: "rbac_group_member_deleted"`
 
     Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
     default: rbac_group_member_deleted
+
+  - `group_id: string`
+
+    ID of the RBAC Group.
 
   - `user_id: string`
 
@@ -214,7 +221,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -229,9 +237,17 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$U
 
 ## Domain types
 
-### Rbac Group Member
+### Beta RBAC Group Member
 
-- `RbacGroupMember object`
+- `BetaRBACGroupMember object`
+
+  - `type: "rbac_group_member"`
+
+    Object type.
+
+    For RBAC Group Members, this is always `"rbac_group_member"`.
+
+    default: rbac_group_member
 
   - `created_at: string`
 
@@ -247,31 +263,23 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$U
 
     ID of the RBAC Group.
 
-  - `type: "rbac_group_member"`
-
-    Object type.
-
-    For RBAC Group Members, this is always `"rbac_group_member"`.
-
-    default: rbac_group_member
-
   - `user_id: string`
 
     ID of the User.
 
-### Rbac Group Member Deleted
+### Beta RBAC Group Member Deleted
 
-- `RbacGroupMemberDeleted object`
-
-  - `group_id: string`
-
-    ID of the RBAC Group.
+- `BetaRBACGroupMemberDeleted object`
 
   - `type: "rbac_group_member_deleted"`
 
     Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
     default: rbac_group_member_deleted
+
+  - `group_id: string`
+
+    ID of the RBAC Group.
 
   - `user_id: string`
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/delete
 category: "api"
 generated: true
 ---
+---
+title: Delete Workspace Member
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove
+---
+
 # Delete Workspace Member
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
@@ -44,7 +49,7 @@ Delete Workspace Member
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

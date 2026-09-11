@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/usage/list_by_u
 category: "api"
 generated: true
 ---
+---
+title: Get Per-User Token Usage
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/usage/list_by_user
+---
+
 # Get Per-User Token Usage
 
 **GET** `/v1/organizations/analytics/user_usage_report`
@@ -206,15 +211,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 ## Returns
 
-- `UserUsage object`
+- `BetaUserUsage object`
 
   - `data: array of object`
 
     Rows for this page, ranked by `order_by` in the `order` direction. One row per user, or several per user when `group_by[]` or `bucket_width` breaks that user's usage or cost out across rows. Rows split out by `cost_type` or `token_type` (cost endpoint only) stay adjacent and are ranked as one unit.
 
-    - `actor: AnalyticsUserActor`
+    - `actor: BetaAnalyticsUserActor`
 
       The user this row's usage or cost is attributed to. Always a `user_actor`.
+
+      - `type: "user_actor"`
+
+        Actor type. Always `"user_actor"`.
 
       - `deleted: boolean`
 
@@ -228,15 +237,11 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
         The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
 
-      - `type: "user_actor"`
-
-        Actor type. Always `"user_actor"`.
-
       - `user_id: string`
 
         Tagged user ID.
 
-    - `cache_creation: object`
+    - `cache_creation: BetaCacheCreation`
 
       The number of input tokens for cache creation.
 
@@ -244,9 +249,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
         The number of input tokens used to create the 1 hour cache entry.
 
+        default: 0, minimum: 0
+
       - `ephemeral_5m_input_tokens: number`
 
         The number of input tokens used to create the 5 minute cache entry.
+
+        default: 0, minimum: 0
 
     - `cache_read_input_tokens: number`
 
@@ -369,7 +378,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -386,8 +395,8 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
         "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "cache_creation": {
-        "ephemeral_1h_input_tokens": 1000,
-        "ephemeral_5m_input_tokens": 500
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
       },
       "cache_read_input_tokens": 3200000,
       "claude_tag_category": "dm",

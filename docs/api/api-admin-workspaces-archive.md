@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Workspace
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/archive
+---
+
 # Archive Workspace
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/archive`
@@ -16,7 +21,15 @@ Archive Workspace
 
 ## Returns
 
-- `Workspace object`
+- `BetaWorkspace object`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -48,7 +61,7 @@ Archive Workspace
 
     format: date-time
 
-  - `data_residency: object`
+  - `data_residency: BetaDataResidency`
 
     Data residency configuration.
 
@@ -56,9 +69,9 @@ Archive Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `array of string`
+      - `Geos = array of string`
 
-      - `"unrestricted"`
+      - `Unrestricted = "unrestricted"`
 
     - `default_inference_geo: string`
 
@@ -94,21 +107,13 @@ Archive Workspace
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
-
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

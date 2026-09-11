@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Environment
+url: https://platform.claude.com/docs/en/api/ruby/beta/environments/delete
+---
+
 # Delete Environment
 
 `beta.environments.delete(environment_id, **kwargs) -> BetaEnvironmentDeleteResponse`
@@ -22,7 +27,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -70,6 +75,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -112,19 +119,21 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class BetaEnvironmentDeleteResponse`
 
   Response after deleting an environment.
 
-  - `id: String`
-
-    Environment identifier
-
   - `type: :environment_deleted`
 
     The type of response
+
+  - `id: String`
+
+    Environment identifier
 
 ## Example
 

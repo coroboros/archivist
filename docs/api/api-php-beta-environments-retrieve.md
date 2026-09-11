@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/php/beta/environments/retrieve
+---
+
 # Get Environment
 
-`$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironment`
+`$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaEnvironment`
 
 **GET** `/v1/environments/{environment_id}`
 
@@ -20,9 +25,15 @@ Retrieve a specific environment by ID.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `BetaEnvironment`
+
+  - `"environment" type`
+
+    The type of object (always 'environment')
 
   - `string id`
 
@@ -52,10 +63,6 @@ Retrieve a specific environment by ID.
 
     Human-readable name for the environment
 
-  - `"environment" type`
-
-    The type of object (always 'environment')
-
   - `string updatedAt`
 
     RFC 3339 timestamp when environment was last updated
@@ -76,6 +83,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaEnvironment = $client->beta->environments->retrieve(
   'env_011CZkZ9X2dpNyB7HsEFoRfW',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaEnvironment);

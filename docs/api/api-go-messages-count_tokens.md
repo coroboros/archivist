@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/messages/count_tokens"
 category: "api"
 generated: true
 ---
+---
+title: Count tokens in a Message
+url: https://platform.claude.com/docs/en/api/go/messages/count_tokens
+---
+
 # Count tokens in a Message
 
 `client.Messages.CountTokens(ctx, params) (*MessageTokensCount, error)`
@@ -77,11 +82,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type TextBlockParamResp struct{…}`
 
+          - `Type Text`
+
           - `Text string`
 
             minLength: 1
-
-          - `Type Text`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -108,6 +113,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type CitationCharLocationParamResp struct{…}`
 
+              - `Type CharLocation`
+
               - `CitedText string`
 
               - `DocumentIndex int64`
@@ -124,9 +131,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `Type CharLocation`
-
             - `type CitationPageLocationParamResp struct{…}`
+
+              - `Type PageLocation`
 
               - `CitedText string`
 
@@ -144,9 +151,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 1
 
-              - `Type PageLocation`
-
             - `type CitationContentBlockLocationParamResp struct{…}`
+
+              - `Type ContentBlockLocation`
 
               - `CitedText string`
 
@@ -174,9 +181,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-              - `Type ContentBlockLocation`
-
             - `type CitationWebSearchResultLocationParamResp struct{…}`
+
+              - `Type WebSearchResultLocation`
 
               - `CitedText string`
 
@@ -186,13 +193,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 maxLength: 512, minLength: 1
 
-              - `Type WebSearchResultLocation`
-
               - `URL string`
 
                 minLength: 1
 
             - `type CitationSearchResultLocationParamResp struct{…}`
+
+              - `Type SearchResultLocation`
 
               - `CitedText string`
 
@@ -224,13 +231,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `Title string`
 
-              - `Type SearchResultLocation`
-
         - `type ImageBlockParamResp struct{…}`
+
+          - `Type Image`
 
           - `Source ImageBlockParamSourceUnionResp`
 
             - `type Base64ImageSource struct{…}`
+
+              - `Type Base64`
 
               - `Data string`
 
@@ -246,8 +255,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-              - `Type Base64`
-
             - `type URLImageSource struct{…}`
 
               - `Type URL`
@@ -256,11 +263,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type FileImageSource struct{…}`
 
-              - `FileID string`
-
               - `Type File`
 
-          - `Type Image`
+              - `FileID string`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -280,9 +285,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type DocumentBlockParamResp struct{…}`
 
+          - `Type Document`
+
           - `Source DocumentBlockParamSourceUnionResp`
 
             - `type Base64PDFSource struct{…}`
+
+              - `Type Base64`
 
               - `Data string`
 
@@ -290,17 +299,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `MediaType ApplicationPDF`
 
-              - `Type Base64`
-
             - `type PlainTextSource struct{…}`
+
+              - `Type Text`
 
               - `Data string`
 
               - `MediaType TextPlain`
 
-              - `Type Text`
-
             - `type ContentBlockSource struct{…}`
+
+              - `Type Content`
 
               - `Content ContentBlockSourceContentUnion`
 
@@ -312,8 +321,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   - `type ImageBlockParamResp struct{…}`
 
-              - `Type Content`
-
             - `type URLPDFSource struct{…}`
 
               - `Type URL`
@@ -322,11 +329,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type FileDocumentSource struct{…}`
 
-              - `FileID string`
-
               - `Type File`
 
-          - `Type Document`
+              - `FileID string`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -346,13 +351,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type SearchResultBlockParamResp struct{…}`
 
+          - `Type SearchResult`
+
           - `Content []TextBlockParamResp`
+
+            - `Type Text`
 
             - `Text string`
 
               minLength: 1
-
-            - `Type Text`
 
             - `CacheControl CacheControlEphemeral Optional`
 
@@ -364,8 +371,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Title string`
 
-          - `Type SearchResult`
-
           - `CacheControl CacheControlEphemeral Optional`
 
             Create a cache control breakpoint at this content block.
@@ -373,6 +378,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `Citations CitationsConfigParamResp Optional`
 
         - `type ThinkingBlockParamResp struct{…}`
+
+          - `Type Thinking`
 
           - `Signature string`
 
@@ -384,17 +391,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `thinking` text of this block as returned by the API.
 
-          - `Type Thinking`
-
         - `type RedactedThinkingBlockParamResp struct{…}`
+
+          - `Type RedactedThinking`
 
           - `Data string`
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `Type RedactedThinking`
-
         - `type ToolUseBlockParamResp struct{…}`
+
+          - `Type ToolUse`
 
           - `ID string`
 
@@ -405,8 +412,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `Name string`
 
             maxLength: 200, minLength: 1
-
-          - `Type ToolUse`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -426,19 +431,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               Tool invocation generated by a server-side tool.
 
+              - `Type CodeExecution20250825`
+
               - `ToolID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type CodeExecution20250825`
 
             - `type ServerToolCaller20260120 struct{…}`
 
+              - `Type CodeExecution20260120`
+
               - `ToolID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type CodeExecution20260120`
 
           - `ToolsetName string Optional`
 
@@ -448,11 +453,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type ToolResultBlockParamResp struct{…}`
 
+          - `Type ToolResult`
+
           - `ToolUseID string`
 
             pattern: ^[a-zA-Z0-9_-]+$
-
-          - `Type ToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -474,11 +479,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Tool reference block that can be included in tool_result content.
 
+                - `Type ToolReference`
+
                 - `ToolName string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `Type ToolReference`
 
                 - `CacheControl CacheControlEphemeral Optional`
 
@@ -493,6 +498,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                 At most one per `tool_result`, only on a non-error result answering a
                 browser toolset member `tool_use`. The server renders the
                 model-visible text from it; the model never sees the raw fields.
+
+                - `Type BrowserState`
 
                 - `Tabs []BrowserStateTabEntry`
 
@@ -522,8 +529,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `Type BrowserState`
-
                 - `CacheControl CacheControlEphemeral Optional`
 
                   Create a cache control breakpoint at this content block.
@@ -544,25 +549,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                     during a failed call gets no deferred `tab_opened`; it simply appears
                     in the next result's `tabs` inventory.
 
+                    - `Type TabOpened`
+
                     - `TabID string`
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `Type TabOpened`
-
                   - `type BrowserStateChangeDownloadStarted struct{…}`
 
                     A file download that started during this call.
+
+                    - `Type DownloadStarted`
 
                     - `DownloadID string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `Type DownloadStarted`
 
                     - `URL string`
 
@@ -577,13 +582,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                     `download_started`, when the download finished during the call that
                     started it (at most one state change per `download_id` per result).
 
+                    - `Type DownloadCompleted`
+
                     - `DownloadID string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `Type DownloadCompleted`
 
                     - `URL string`
 
@@ -607,13 +612,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     A file download that failed — or was cancelled — during this call.
 
+                    - `Type DownloadFailed`
+
                     - `DownloadID string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `Type DownloadFailed`
 
                     - `URL string`
 
@@ -637,6 +642,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type ServerToolUseBlockParamResp struct{…}`
 
+          - `Type ServerToolUse`
+
           - `ID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -659,8 +666,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `const ServerToolUseBlockParamNameToolSearchToolBm25 ServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-          - `Type ServerToolUse`
-
           - `CacheControl CacheControlEphemeral Optional`
 
             Create a cache control breakpoint at this content block.
@@ -681,21 +686,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type WebSearchToolResultBlockParamResp struct{…}`
 
+          - `Type WebSearchToolResult`
+
           - `Content WebSearchToolResultBlockParamContentUnionResp`
 
             - `[]WebSearchResultBlockParamResp`
 
+              - `Type WebSearchResult`
+
               - `EncryptedContent string`
 
               - `Title string`
-
-              - `Type WebSearchResult`
 
               - `URL string`
 
               - `PageAge string Optional`
 
             - `type WebSearchToolRequestError struct{…}`
+
+              - `Type WebSearchToolResultError`
 
               - `ErrorCode WebSearchToolResultErrorCode`
 
@@ -711,13 +720,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
-              - `Type WebSearchToolResultError`
-
           - `ToolUseID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `Type WebSearchToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -739,9 +744,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type WebFetchToolResultBlockParamResp struct{…}`
 
+          - `Type WebFetchToolResult`
+
           - `Content WebFetchToolResultBlockParamContentUnionResp`
 
             - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+
+              - `Type WebFetchToolResultError`
 
               - `ErrorCode WebFetchToolResultErrorCode`
 
@@ -763,13 +772,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const WebFetchToolResultErrorCodeUnavailable WebFetchToolResultErrorCode = "unavailable"`
 
-              - `Type WebFetchToolResultError`
+                - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
             - `type WebFetchBlockParamResp struct{…}`
 
-              - `Content DocumentBlockParamResp`
-
               - `Type WebFetchResult`
+
+              - `Content DocumentBlockParamResp`
 
               - `URL string`
 
@@ -782,8 +791,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `ToolUseID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `Type WebFetchToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -805,11 +812,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type CodeExecutionToolResultBlockParamResp struct{…}`
 
+          - `Type CodeExecutionToolResult`
+
           - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `type CodeExecutionToolResultErrorParamResp struct{…}`
+
+              - `Type CodeExecutionToolResultError`
 
               - `ErrorCode CodeExecutionToolResultErrorCode`
 
@@ -821,15 +832,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `Type CodeExecutionToolResultError`
-
             - `type CodeExecutionResultBlockParamResp struct{…}`
+
+              - `Type CodeExecutionResult`
 
               - `Content []CodeExecutionOutputBlockParamResp`
 
-                - `FileID string`
-
                 - `Type CodeExecutionOutput`
+
+                - `FileID string`
 
               - `ReturnCode int64`
 
@@ -837,17 +848,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `Stdout string`
 
-              - `Type CodeExecutionResult`
-
             - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `Type EncryptedCodeExecutionResult`
+
               - `Content []CodeExecutionOutputBlockParamResp`
 
-                - `FileID string`
-
                 - `Type CodeExecutionOutput`
+
+                - `FileID string`
 
               - `EncryptedStdout string`
 
@@ -855,13 +866,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `Stderr string`
 
-              - `Type EncryptedCodeExecutionResult`
-
           - `ToolUseID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `Type CodeExecutionToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -869,9 +876,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
 
+          - `Type BashCodeExecutionToolResult`
+
           - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
             - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+
+              - `Type BashCodeExecutionToolResultError`
 
               - `ErrorCode BashCodeExecutionToolResultErrorCode`
 
@@ -885,15 +896,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-              - `Type BashCodeExecutionToolResultError`
-
             - `type BashCodeExecutionResultBlockParamResp struct{…}`
+
+              - `Type BashCodeExecutionResult`
 
               - `Content []BashCodeExecutionOutputBlockParamResp`
 
-                - `FileID string`
-
                 - `Type BashCodeExecutionOutput`
+
+                - `FileID string`
 
               - `ReturnCode int64`
 
@@ -901,13 +912,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `Stdout string`
 
-              - `Type BashCodeExecutionResult`
-
           - `ToolUseID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `Type BashCodeExecutionToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -915,9 +922,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
+          - `Type TextEditorCodeExecutionToolResult`
+
           - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
             - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+
+              - `Type TextEditorCodeExecutionToolResultError`
 
               - `ErrorCode TextEditorCodeExecutionToolResultErrorCode`
 
@@ -931,11 +942,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
 
-              - `Type TextEditorCodeExecutionToolResultError`
-
               - `ErrorMessage string Optional`
 
             - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+
+              - `Type TextEditorCodeExecutionViewResult`
 
               - `Content string`
 
@@ -947,8 +958,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const TextEditorCodeExecutionViewResultBlockParamFileTypePDF TextEditorCodeExecutionViewResultBlockParamFileType = "pdf"`
 
-              - `Type TextEditorCodeExecutionViewResult`
-
               - `NumLines int64 Optional`
 
               - `StartLine int64 Optional`
@@ -957,9 +966,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
 
-              - `IsFileUpdate bool`
-
               - `Type TextEditorCodeExecutionCreateResult`
+
+              - `IsFileUpdate bool`
 
             - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
 
@@ -979,17 +988,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `Type TextEditorCodeExecutionToolResult`
-
           - `CacheControl CacheControlEphemeral Optional`
 
             Create a cache control breakpoint at this content block.
 
         - `type ToolSearchToolResultBlockParamResp struct{…}`
 
+          - `Type ToolSearchToolResult`
+
           - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
             - `type ToolSearchToolResultErrorParamResp struct{…}`
+
+              - `Type ToolSearchToolResultError`
 
               - `ErrorCode ToolSearchToolResultErrorCode`
 
@@ -1001,31 +1012,27 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
 
-              - `Type ToolSearchToolResultError`
-
               - `ErrorMessage string Optional`
 
             - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
 
+              - `Type ToolSearchToolSearchResult`
+
               - `ToolReferences []ToolReferenceBlockParamResp`
+
+                - `Type ToolReference`
 
                 - `ToolName string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `Type ToolReference`
-
                 - `CacheControl CacheControlEphemeral Optional`
 
                   Create a cache control breakpoint at this content block.
 
-              - `Type ToolSearchToolSearchResult`
-
           - `ToolUseID string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `Type ToolSearchToolResult`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -1036,9 +1043,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
 
-          - `FileID string`
-
           - `Type ContainerUpload`
+
+          - `FileID string`
 
           - `CacheControl CacheControlEphemeral Optional`
 
@@ -1076,11 +1083,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type MessageCountTokensParamsSystemArray []TextBlockParamResp`
 
+      - `Type Text`
+
       - `Text string`
 
         minLength: 1
-
-      - `Type Text`
 
       - `CacheControl CacheControlEphemeral Optional`
 
@@ -1166,6 +1173,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type Tool struct{…}`
 
+      - `Type ToolType Optional`
+
       - `InputSchema ToolInputSchema`
 
         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -1220,17 +1229,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `Type ToolType Optional`
-
     - `type ToolBash20250124 struct{…}`
+
+      - `Type Bash20250124`
 
       - `Name Bash`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type Bash20250124`
 
       - `AllowedCallers []string Optional`
 
@@ -1258,13 +1265,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type CodeExecutionTool20250522 struct{…}`
 
+      - `Type CodeExecution20250522`
+
       - `Name CodeExecution`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type CodeExecution20250522`
 
       - `AllowedCallers []string Optional`
 
@@ -1290,13 +1297,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type CodeExecutionTool20250825 struct{…}`
 
+      - `Type CodeExecution20250825`
+
       - `Name CodeExecution`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type CodeExecution20250825`
 
       - `AllowedCallers []string Optional`
 
@@ -1324,13 +1331,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+      - `Type CodeExecution20260120`
+
       - `Name CodeExecution`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type CodeExecution20260120`
 
       - `AllowedCallers []string Optional`
 
@@ -1358,13 +1365,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Code execution tool with REPL state persistence.
 
+      - `Type CodeExecution20260521`
+
       - `Name CodeExecution`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type CodeExecution20260521`
 
       - `AllowedCallers []string Optional`
 
@@ -1409,6 +1416,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `Type BrowserTypeConfig Optional`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool Optional`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool Optional`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `CloseTab BrowserCloseTabConfig Optional`
 
@@ -1746,18 +1765,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `Type BrowserTypeConfig Optional`
-
-          `type`'s config overrides.
-
-          - `DeferLoading bool Optional`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `Enabled bool Optional`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `Wait BrowserWaitConfig Optional`
 
           `wait`'s config overrides.
@@ -1784,13 +1791,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type MemoryTool20250818 struct{…}`
 
+      - `Type Memory20250818`
+
       - `Name Memory`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type Memory20250818`
 
       - `AllowedCallers []string Optional`
 
@@ -1841,6 +1848,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `Type ComputerTypeConfig Optional`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool Optional`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool Optional`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `CursorPosition ComputerCursorPositionConfig Optional`
 
@@ -2010,18 +2029,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `Type ComputerTypeConfig Optional`
-
-          `type`'s config overrides.
-
-          - `DeferLoading bool Optional`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `Enabled bool Optional`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `Wait ComputerWaitConfig Optional`
 
           `wait`'s config overrides.
@@ -2048,13 +2055,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type ToolTextEditor20250124 struct{…}`
 
+      - `Type TextEditor20250124`
+
       - `Name StrReplaceEditor`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type TextEditor20250124`
 
       - `AllowedCallers []string Optional`
 
@@ -2082,13 +2089,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type ToolTextEditor20250429 struct{…}`
 
+      - `Type TextEditor20250429`
+
       - `Name StrReplaceBasedEditTool`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type TextEditor20250429`
 
       - `AllowedCallers []string Optional`
 
@@ -2116,13 +2123,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type ToolTextEditor20250728 struct{…}`
 
+      - `Type TextEditor20250728`
+
       - `Name StrReplaceBasedEditTool`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type TextEditor20250728`
 
       - `AllowedCallers []string Optional`
 
@@ -2156,13 +2163,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebSearchTool20250305 struct{…}`
 
+      - `Type WebSearch20250305`
+
       - `Name WebSearch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebSearch20250305`
 
       - `AllowedCallers []string Optional`
 
@@ -2232,13 +2239,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebFetchTool20250910 struct{…}`
 
+      - `Type WebFetch20250910`
+
       - `Name WebFetch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebFetch20250910`
 
       - `AllowedCallers []string Optional`
 
@@ -2288,13 +2295,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebSearchTool20260209 struct{…}`
 
+      - `Type WebSearch20260209`
+
       - `Name WebSearch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebSearch20260209`
 
       - `AllowedCallers []string Optional`
 
@@ -2338,13 +2345,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebFetchTool20260209 struct{…}`
 
+      - `Type WebFetch20260209`
+
       - `Name WebFetch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebFetch20260209`
 
       - `AllowedCallers []string Optional`
 
@@ -2396,13 +2403,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
+      - `Type WebFetch20260309`
+
       - `Name WebFetch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebFetch20260309`
 
       - `AllowedCallers []string Optional`
 
@@ -2456,13 +2463,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebSearchTool20260318 struct{…}`
 
+      - `Type WebSearch20260318`
+
       - `Name WebSearch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebSearch20260318`
 
       - `AllowedCallers []string Optional`
 
@@ -2514,13 +2521,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type WebFetchTool20260318 struct{…}`
 
+      - `Type WebFetch20260318`
+
       - `Name WebFetch`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `Type WebFetch20260318`
 
       - `AllowedCallers []string Optional`
 
@@ -2582,17 +2589,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type ToolSearchToolBm25_20251119 struct{…}`
 
-      - `Name ToolSearchToolBm25`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `Type ToolSearchToolBm25_20251119Type`
 
         - `const ToolSearchToolBm25_20251119TypeToolSearchToolBm25_20251119 ToolSearchToolBm25_20251119Type = "tool_search_tool_bm25_20251119"`
 
         - `const ToolSearchToolBm25_20251119TypeToolSearchToolBm25 ToolSearchToolBm25_20251119Type = "tool_search_tool_bm25"`
+
+      - `Name ToolSearchToolBm25`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `AllowedCallers []string Optional`
 
@@ -2618,17 +2625,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `type ToolSearchToolRegex20251119 struct{…}`
 
-      - `Name ToolSearchToolRegex`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `Type ToolSearchToolRegex20251119Type`
 
         - `const ToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 ToolSearchToolRegex20251119Type = "tool_search_tool_regex_20251119"`
 
         - `const ToolSearchToolRegex20251119TypeToolSearchToolRegex ToolSearchToolRegex20251119Type = "tool_search_tool_regex"`
+
+      - `Name ToolSearchToolRegex`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `AllowedCallers []string Optional`
 
@@ -2655,6 +2662,12 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ## Returns
 

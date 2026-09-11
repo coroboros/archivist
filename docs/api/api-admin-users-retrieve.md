@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/users/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get User
+url: https://platform.claude.com/docs/en/api/beta/organization/users/retrieve
+---
+
 # Get User
 
 **GET** `/v1/organizations/users/{user_id}`
@@ -18,7 +23,15 @@ Retrieve a member of the organization by user ID.
 
 ## Returns
 
-- `User object`
+- `BetaOrganizationUser object`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
 
   - `id: string`
 
@@ -38,7 +51,7 @@ Retrieve a member of the organization by user ID.
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
+  - `role: BetaOrganizationRole`
 
     Organization role of the User.
 
@@ -60,20 +73,12 @@ Retrieve a member of the organization by user ID.
 
     - `"user"`
 
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
-
 ## Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -84,7 +89,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
-  "role": "user",
+  "role": "admin",
   "type": "user"
 }
 ```

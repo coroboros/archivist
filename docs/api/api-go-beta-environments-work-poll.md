@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/poll"
 category: "api"
 generated: true
 ---
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/go/beta/environments/work/poll
+---
+
 # Poll for Work
 
 `client.Beta.Environments.Work.Poll(ctx, environmentID, params) (*BetaSelfHostedWork, error)`
@@ -86,6 +91,8 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -142,6 +149,12 @@ Long poll for work items in the queue.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `Type Work`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `ID string`
 
     Work identifier (e.g., 'work_...')
@@ -158,13 +171,13 @@ Long poll for work items in the queue.
 
     The actual work to be performed
 
-    - `ID string`
-
-      Session identifier (e.g., 'session_...')
-
     - `Type Session`
 
       Type of work data
+
+    - `ID string`
+
+      Session identifier (e.g., 'session_...')
 
   - `EnvironmentID string`
 
@@ -207,12 +220,6 @@ Long poll for work items in the queue.
   - `StoppedAt string`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `Type Work`
-
-    The type of object (always 'work')
-
-    default: work
 
 ## Example
 

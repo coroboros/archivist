@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Environment
+url: https://platform.claude.com/docs/en/api/java/beta/environments/update
+---
+
 # Update Environment
 
 `BetaEnvironment beta().environments().update(params = EnvironmentUpdateParams.none(), requestOptions = RequestOptions.none())`
@@ -68,6 +73,8 @@ Update an existing environment's configuration.
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -109,6 +116,8 @@ Update an existing environment's configuration.
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `Optional<String> workspaceId`
 
   - `Optional<Config> config`
 
@@ -168,6 +177,10 @@ Update an existing environment's configuration.
 
         Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
+        - `Optional<Type> type`
+
+          Package configuration type
+
         - `Optional<List<String>> apt`
 
           Ubuntu/Debian packages to install
@@ -191,10 +204,6 @@ Update an existing environment's configuration.
         - `Optional<List<String>> pip`
 
           Python packages to install
-
-        - `Optional<Type> type`
-
-          Package configuration type
 
     - `class BetaSelfHostedConfigParams:`
 
@@ -234,6 +243,10 @@ Update an existing environment's configuration.
 
   Unified Environment resource for both cloud and self-hosted environments.
 
+  - `JsonValue type = "environment"`
+
+    The type of object (always 'environment')
+
   - `String id`
 
     Environment identifier (e.g., 'env_...')
@@ -249,6 +262,10 @@ Update an existing environment's configuration.
     - `class BetaCloudConfig:`
 
       `cloud` environment configuration.
+
+      - `JsonValue type = "cloud"`
+
+        Environment type
 
       - `Networking networking`
 
@@ -266,6 +283,10 @@ Update an existing environment's configuration.
 
           Limited network access.
 
+          - `JsonValue type = "limited"`
+
+            Network policy type
+
           - `boolean allowMcpServers`
 
             Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array.
@@ -278,13 +299,13 @@ Update an existing environment's configuration.
 
             Specifies domains the container can reach.
 
-          - `JsonValue type = "limited"`
-
-            Network policy type
-
       - `BetaPackages packages`
 
         Package manager configuration.
+
+        - `Optional<Type> type`
+
+          Package configuration type
 
         - `List<String> apt`
 
@@ -310,14 +331,6 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-        - `Optional<Type> type`
-
-          Package configuration type
-
-      - `JsonValue type = "cloud"`
-
-        Environment type
-
     - `class BetaSelfHostedConfig:`
 
       Configuration for self-hosted environments.
@@ -341,10 +354,6 @@ Update an existing environment's configuration.
   - `String name`
 
     Human-readable name for the environment
-
-  - `JsonValue type = "environment"`
-
-    The type of object (always 'environment')
 
   - `String updatedAt`
 

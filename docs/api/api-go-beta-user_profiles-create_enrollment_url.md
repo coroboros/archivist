@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/user_profiles/create_en
 category: "api"
 generated: true
 ---
+---
+title: Create Enrollment URL
+url: https://platform.claude.com/docs/en/api/go/beta/user_profiles/create_enrollment_url
+---
+
 # Create Enrollment URL
 
 `client.Beta.UserProfiles.NewEnrollmentURL(ctx, userProfileID, body) (*BetaUserProfileEnrollmentURL, error)`
@@ -72,6 +77,8 @@ Create Enrollment URL
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -118,15 +125,15 @@ Create Enrollment URL
 
 - `type BetaUserProfileEnrollmentURL struct{…}`
 
+  - `Type BetaUserProfileEnrollmentURLType`
+
+    Object type. Always `enrollment_url`.
+
   - `ExpiresAt Time`
 
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type BetaUserProfileEnrollmentURLType`
-
-    Object type. Always `enrollment_url`.
 
   - `URL string`
 

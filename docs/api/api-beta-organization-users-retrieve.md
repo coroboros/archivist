@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/organization/users/retriev
 category: "api"
 generated: true
 ---
+---
+title: Get User
+url: https://platform.claude.com/docs/en/api/beta/organization/users/retrieve
+---
+
 # Get User
 
 **GET** `/v1/organizations/users/{user_id}`
@@ -19,6 +24,14 @@ Retrieve a member of the organization by user ID.
 ## Returns
 
 - `BetaOrganizationUser object`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
 
   - `id: string`
 
@@ -59,14 +72,6 @@ Retrieve a member of the organization by user ID.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 ## Example
 

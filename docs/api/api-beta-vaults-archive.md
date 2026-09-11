@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/vaults/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Vault
+url: https://platform.claude.com/docs/en/api/beta/vaults/archive
+---
+
 # Archive Vault
 
 **POST** `/v1/vaults/{vault_id}/archive`
@@ -22,7 +27,7 @@ Archive Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -70,6 +75,8 @@ Archive Vault
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -112,11 +119,15 @@ Archive Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaManagedAgentsVault object`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `type: "vault"`
 
   - `id: string`
 
@@ -141,8 +152,6 @@ Archive Vault
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `type: "vault"`
 
   - `updated_at: string`
 

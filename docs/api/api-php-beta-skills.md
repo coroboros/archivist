@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills"
 category: "api"
 generated: true
 ---
+---
+title: Skills
+url: https://platform.claude.com/docs/en/api/php/beta/skills
+---
+
 # Skills
 
 ## Create Skill
 
-`$client->beta->skills->create(list<string> files, ?string displayName, ?list<AnthropicBeta> betas): BetaSkill`
+`$client->beta->skills->create(list<string> files, ?string displayName, ?list<AnthropicBeta> betas, ?string workspaceID): BetaSkill`
 
 **POST** `/v1/skills`
 
@@ -32,9 +37,17 @@ Create Skill
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaSkill`
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `string id`
 
@@ -67,12 +80,6 @@ Create Skill
     * `"anthropic_example"`: Anthropic-published sample Skill
     * `"plugin"`: resolved from an installed plugin
 
-  - `"skill" type`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
   - `\Datetime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
@@ -92,6 +99,7 @@ $betaSkill = $client->beta->skills->create(
   ],
   displayName: 'display_name',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSkill);
@@ -115,7 +123,7 @@ var_dump($betaSkill);
 
 ## List Skills
 
-`$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas): PageCursor<BetaSkill>`
+`$client->beta->skills->list(?int limit, ?string page, ?string source, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaSkill>`
 
 **GET** `/v1/skills`
 
@@ -150,9 +158,17 @@ List Skills
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaSkill`
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `string id`
 
@@ -185,12 +201,6 @@ List Skills
     * `"anthropic_example"`: Anthropic-published sample Skill
     * `"plugin"`: resolved from an installed plugin
 
-  - `"skill" type`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
   - `\Datetime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
@@ -209,6 +219,7 @@ $page = $client->beta->skills->list(
   page: 'page',
   source: 'source',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -237,7 +248,7 @@ var_dump($page);
 
 ## Get Skill
 
-`$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): BetaSkill`
+`$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaSkill`
 
 **GET** `/v1/skills/{skill_id}`
 
@@ -255,9 +266,17 @@ Get Skill
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaSkill`
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `string id`
 
@@ -290,12 +309,6 @@ Get Skill
     * `"anthropic_example"`: Anthropic-published sample Skill
     * `"plugin"`: resolved from an installed plugin
 
-  - `"skill" type`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
   - `\Datetime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
@@ -310,7 +323,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSkill = $client->beta->skills->retrieve(
-  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSkill);
@@ -334,7 +349,7 @@ var_dump($betaSkill);
 
 ## Delete Skill
 
-`$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas): BetaDeletedSkill`
+`$client->beta->skills->delete(string skillID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaDeletedSkill`
 
 **DELETE** `/v1/skills/{skill_id}`
 
@@ -352,21 +367,23 @@ Delete Skill
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaDeletedSkill`
-
-  - `string id`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
 
   - `"skill_deleted" type`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
+
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
 
 ### Example
 
@@ -378,7 +395,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedSkill = $client->beta->skills->delete(
-  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaDeletedSkill);
@@ -399,21 +418,27 @@ var_dump($betaDeletedSkill);
 
 - `BetaDeletedSkill`
 
-  - `string id`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
-
   - `"skill_deleted" type`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
 
+  - `string id`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
 ### Beta Skill
 
 - `BetaSkill`
+
+  - `"skill" type`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `string id`
 
@@ -445,12 +470,6 @@ var_dump($betaDeletedSkill);
     * `"anthropic"`: published by Anthropic; shared and read-only
     * `"anthropic_example"`: Anthropic-published sample Skill
     * `"plugin"`: resolved from an installed plugin
-
-  - `"skill" type`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `\Datetime updatedAt`
 
@@ -475,7 +494,7 @@ var_dump($betaDeletedSkill);
 
 ### Create Skill Version
 
-`$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): SkillVersion`
+`$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas, ?string workspaceID): SkillVersion`
 
 **POST** `/v1/skills/{skill_id}/versions`
 
@@ -499,9 +518,17 @@ Create Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `SkillVersion`
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `string id`
 
@@ -531,12 +558,6 @@ Create Skill Version
 
     The format and length of IDs may change over time.
 
-  - `"skill_version" type`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
 #### Example
 
 ```php
@@ -552,6 +573,7 @@ $betaSkillVersion = $client->beta->skills->versions->create(
     FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   ],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSkillVersion);
@@ -572,7 +594,7 @@ var_dump($betaSkillVersion);
 
 ### List Skill Versions
 
-`$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<SkillVersion>`
+`$client->beta->skills->versions->list(string skillID, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<SkillVersion>`
 
 **GET** `/v1/skills/{skill_id}/versions`
 
@@ -602,9 +624,17 @@ List Skill Versions
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `SkillVersion`
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `string id`
 
@@ -634,12 +664,6 @@ List Skill Versions
 
     The format and length of IDs may change over time.
 
-  - `"skill_version" type`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
 #### Example
 
 ```php
@@ -654,6 +678,7 @@ $page = $client->beta->skills->versions->list(
   limit: 1,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -679,7 +704,7 @@ var_dump($page);
 
 ### Download Skill Version Content
 
-`$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas): download`
+`$client->beta->skills->versions->download(string version, string skillID, ?list<AnthropicBeta> betas, ?string workspaceID): download`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
@@ -703,6 +728,8 @@ Download a skill version's content as a zip archive.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `mixed`
@@ -720,6 +747,7 @@ $response = $client->beta->skills->versions->download(
   'version',
   skillID: 'skill_id',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($response);
@@ -727,7 +755,7 @@ var_dump($response);
 
 ### Get Skill Version
 
-`$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas): SkillVersion`
+`$client->beta->skills->versions->retrieve(string version, string skillID, ?list<AnthropicBeta> betas, ?string workspaceID): SkillVersion`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -751,9 +779,17 @@ Get Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `SkillVersion`
+
+  - `"skill_version" type`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `string id`
 
@@ -783,12 +819,6 @@ Get Skill Version
 
     The format and length of IDs may change over time.
 
-  - `"skill_version" type`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
 #### Example
 
 ```php
@@ -802,6 +832,7 @@ $betaSkillVersion = $client->beta->skills->versions->retrieve(
   'version',
   skillID: 'skill_id',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSkillVersion);
@@ -822,7 +853,7 @@ var_dump($betaSkillVersion);
 
 ### Delete Skill Version
 
-`$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas): DeletedSkillVersion`
+`$client->beta->skills->versions->delete(string version, string skillID, ?list<AnthropicBeta> betas, ?string workspaceID): DeletedSkillVersion`
 
 **DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -846,20 +877,22 @@ Delete Skill Version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `DeletedSkillVersion`
-
-  - `string id`
-
-    Unique identifier for this Skill Version. The id addresses the version in
-    paths and pins it in references.
 
   - `"skill_version_deleted" type`
 
     Deleted object type.
 
     For Skill Versions, this is always `"skill_version_deleted"`.
+
+  - `string id`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
 #### Example
 
@@ -874,6 +907,7 @@ $betaDeletedSkillVersion = $client->beta->skills->versions->delete(
   'version',
   skillID: 'skill_id',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaDeletedSkillVersion);

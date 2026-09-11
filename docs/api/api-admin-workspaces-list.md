@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/list"
 category: "api"
 generated: true
 ---
+---
+title: List Workspaces
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/list
+---
+
 # List Workspaces
 
 **GET** `/v1/organizations/workspaces`
@@ -36,7 +41,15 @@ List Workspaces
 
 ## Returns
 
-- `data: array of Workspace`
+- `data: array of BetaWorkspace`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -68,7 +81,7 @@ List Workspaces
 
     format: date-time
 
-  - `data_residency: object`
+  - `data_residency: BetaDataResidency`
 
     Data residency configuration.
 
@@ -76,9 +89,9 @@ List Workspaces
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `array of string`
+      - `Geos = array of string`
 
-      - `"unrestricted"`
+      - `Unrestricted = "unrestricted"`
 
     - `default_inference_geo: string`
 
@@ -114,14 +127,6 @@ List Workspaces
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
-
 - `first_id: string or null`
 
   First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -139,7 +144,7 @@ List Workspaces
 ```bash
 curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

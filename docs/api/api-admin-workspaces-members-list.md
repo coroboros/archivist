@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/list"
 category: "api"
 generated: true
 ---
+---
+title: List Workspace Members
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/list
+---
+
 # List Workspace Members
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/members`
@@ -36,7 +41,7 @@ List Workspace Members
 
 ## Returns
 
-- `data: array of WorkspaceMember`
+- `data: array of BetaWorkspaceMember`
 
   - `type: "workspace_member"`
 
@@ -54,7 +59,7 @@ List Workspace Members
 
     ID of the Workspace.
 
-  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
+  - `workspace_role: BetaWorkspaceRole`
 
     Role of the Workspace Member.
 
@@ -85,7 +90,7 @@ List Workspace Members
 ```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -97,7 +102,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
       "type": "workspace_member",
       "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      "workspace_role": "workspace_user"
+      "workspace_role": "workspace_admin"
     }
   ],
   "first_id": "first_id",

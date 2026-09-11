@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions/li
 category: "api"
 generated: true
 ---
+---
+title: List RBAC Role Permissions
+url: https://platform.claude.com/docs/en/api/beta/organization/rbac_roles/permissions/list
+---
+
 # List RBAC Role Permissions
 
 **GET** `/v1/organizations/rbac_roles/{role_id}/permissions`
@@ -34,7 +39,15 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `data: array of RbacRolePermission`
+- `data: array of BetaRBACRolePermission`
+
+  - `type: "rbac_role_permission"`
+
+    Object type.
+
+    For RBAC Role Permissions, this is always `"rbac_role_permission"`.
+
+    default: rbac_role_permission
 
   - `action: string`
 
@@ -64,17 +77,23 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     - `Organization object`
 
-      - `organization_id: string`
-
-        UUID of the organization the permission applies to.
-
       - `type: "organization"`
 
         Kind of resource the permission applies to.
 
         default: organization
 
+      - `organization_id: string`
+
+        UUID of the organization the permission applies to.
+
     - `ConnectorTool object`
+
+      - `type: "connector_tool"`
+
+        Kind of resource the permission applies to.
+
+        default: connector_tool
 
       - `connector_id: string`
 
@@ -89,13 +108,13 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
         `{prefix}_{32-hex}` form — a shortened readable prefix of the name plus
         a hash — from which the published name is not recoverable.
 
-      - `type: "connector_tool"`
+    - `ConnectorScope object`
+
+      - `type: "connector_scope"`
 
         Kind of resource the permission applies to.
 
-        default: connector_tool
-
-    - `ConnectorScope object`
+        default: connector_scope
 
       - `connector_id: string`
 
@@ -111,23 +130,17 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
         appears server-encoded in a stable `{prefix}_{32-hex}` form. OAuth
         scopes routinely contain `:` and `/`, so most appear encoded.
 
-      - `type: "connector_scope"`
-
-        Kind of resource the permission applies to.
-
-        default: connector_scope
-
     - `Connector object`
-
-      - `connector_id: string`
-
-        ID of the connector the permission applies to.
 
       - `type: "connector"`
 
         Kind of resource the permission applies to.
 
         default: connector
+
+      - `connector_id: string`
+
+        ID of the connector the permission applies to.
 
     - `AllConnectors object`
 
@@ -136,14 +149,6 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
         Kind of resource the permission applies to.
 
         default: all_connectors
-
-  - `type: "rbac_role_permission"`
-
-    Object type.
-
-    For RBAC Role Permissions, this is always `"rbac_role_permission"`.
-
-    default: rbac_role_permission
 
 - `has_more: boolean`
 
@@ -159,7 +164,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID/permissions \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
+    -H 'anthropic-beta: ce-user-management-2026-07-13' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

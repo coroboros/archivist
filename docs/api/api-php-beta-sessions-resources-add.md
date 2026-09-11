@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/resources/add
 category: "api"
 generated: true
 ---
+---
+title: Add Session Resource
+url: https://platform.claude.com/docs/en/api/php/beta/sessions/resources/add
+---
+
 # Add Session Resource
 
-`$client->beta->sessions->resources->add(string sessionID, string fileID, Type type, ?string mountPath, ?list<AnthropicBeta> betas): ManagedAgentsFileResource`
+`$client->beta->sessions->resources->add(string sessionID, string fileID, Type type, ?string mountPath, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsFileResource`
 
 **POST** `/v1/sessions/{session_id}/resources`
 
@@ -30,9 +35,13 @@ Add Session Resource
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `ManagedAgentsFileResource`
+
+  - `Type type`
 
   - `string id`
 
@@ -43,8 +52,6 @@ Add Session Resource
   - `string fileID`
 
   - `string mountPath`
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -65,6 +72,7 @@ $betaManagedAgentsFileResource = $client->beta->sessions->resources->add(
   type: 'file',
   mountPath: '/uploads/receipt.pdf',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsFileResource);

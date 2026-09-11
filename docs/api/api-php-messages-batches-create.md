@@ -4,9 +4,14 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/php/messages/batches/create
+---
+
 # Create a Message Batch
 
-`$client->messages->batches->create(list<Request> requests, ?string userProfileID): MessageBatch`
+`$client->messages->batches->create(list<Request> requests, ?string userProfileID, ?string workspaceID): MessageBatch`
 
 **POST** `/v1/messages/batches`
 
@@ -26,9 +31,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `MessageBatch`
+
+  - `"message_batch" type`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `string id`
 
@@ -73,12 +86,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `"message_batch" type`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ## Example
 
@@ -157,6 +164,7 @@ $messageBatch = $client->messages->batches->create(
     ],
   ],
   userProfileID: 'anthropic-user-profile-id',
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($messageBatch);

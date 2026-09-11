@@ -4,11 +4,16 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work"
 category: "api"
 generated: true
 ---
+---
+title: Work
+url: https://platform.claude.com/docs/en/api/php/beta/environments/work
+---
+
 # Work
 
 ## Get Work Item
 
-`$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
+`$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas, ?string workspaceID): SelfHostedWork`
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -26,9 +31,15 @@ Retrieve detailed information about a specific work item.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `SelfHostedWork`
+
+  - `"work" type`
+
+    The type of object (always 'work')
 
   - `string id`
 
@@ -78,10 +89,6 @@ Retrieve detailed information about a specific work item.
 
     RFC 3339 timestamp when work execution stopped
 
-  - `"work" type`
-
-    The type of object (always 'work')
-
 ### Example
 
 ```php
@@ -95,6 +102,7 @@ $betaSelfHostedWork = $client->beta->environments->work->retrieve(
   'work_id',
   environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSelfHostedWork);
@@ -159,6 +167,10 @@ Long poll for work items in the queue.
 
 - `SelfHostedWork`
 
+  - `"work" type`
+
+    The type of object (always 'work')
+
   - `string id`
 
     Work identifier (e.g., 'work_...')
@@ -206,10 +218,6 @@ Long poll for work items in the queue.
   - `?string stoppedAt`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `"work" type`
-
-    The type of object (always 'work')
 
 ### Example
 
@@ -280,6 +288,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 - `SelfHostedWork`
 
+  - `"work" type`
+
+    The type of object (always 'work')
+
   - `string id`
 
     Work identifier (e.g., 'work_...')
@@ -327,10 +339,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `?string stoppedAt`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `"work" type`
-
-    The type of object (always 'work')
 
 ### Example
 
@@ -407,6 +415,10 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `SelfHostedWorkHeartbeatResponse`
 
+  - `"work_heartbeat" type`
+
+    The type of response
+
   - `string lastHeartbeat`
 
     RFC 3339 timestamp of the actual heartbeat from DB
@@ -422,10 +434,6 @@ Record a heartbeat for a work item to maintain the lease.
   - `int ttlSeconds`
 
     Effective TTL applied to the lease
-
-  - `"work_heartbeat" type`
-
-    The type of response
 
 ### Example
 
@@ -465,7 +473,7 @@ var_dump($betaSelfHostedWorkHeartbeatResponse);
 
 ## Stop Work
 
-`$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): SelfHostedWork`
+`$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas, ?string workspaceID): SelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
@@ -489,9 +497,15 @@ Stop a work item, initiating graceful or forced shutdown.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `SelfHostedWork`
+
+  - `"work" type`
+
+    The type of object (always 'work')
 
   - `string id`
 
@@ -541,10 +555,6 @@ Stop a work item, initiating graceful or forced shutdown.
 
     RFC 3339 timestamp when work execution stopped
 
-  - `"work" type`
-
-    The type of object (always 'work')
-
 ### Example
 
 ```php
@@ -559,6 +569,7 @@ $betaSelfHostedWork = $client->beta->environments->work->stop(
   environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
   force: true,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSelfHostedWork);
@@ -621,6 +632,10 @@ List work items in an environment.
 
 - `SelfHostedWork`
 
+  - `"work" type`
+
+    The type of object (always 'work')
+
   - `string id`
 
     Work identifier (e.g., 'work_...')
@@ -668,10 +683,6 @@ List work items in an environment.
   - `?string stoppedAt`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `"work" type`
-
-    The type of object (always 'work')
 
 ### Example
 
@@ -724,7 +735,7 @@ var_dump($page);
 
 ## Update Work Item
 
-`$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas): SelfHostedWork`
+`$client->beta->environments->work->update(string workID, string environmentID, array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): SelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -746,9 +757,15 @@ Update work item metadata with merge semantics.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `SelfHostedWork`
+
+  - `"work" type`
+
+    The type of object (always 'work')
 
   - `string id`
 
@@ -798,10 +815,6 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp when work execution stopped
 
-  - `"work" type`
-
-    The type of object (always 'work')
-
 ### Example
 
 ```php
@@ -816,6 +829,7 @@ $betaSelfHostedWork = $client->beta->environments->work->update(
   environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
   metadata: ['foo' => 'string'],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSelfHostedWork);
@@ -848,7 +862,7 @@ var_dump($betaSelfHostedWork);
 
 ## Get Queue Statistics
 
-`$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas): SelfHostedWorkQueueStats`
+`$client->beta->environments->work->stats(string environmentID, ?list<AnthropicBeta> betas, ?string workspaceID): SelfHostedWorkQueueStats`
 
 **GET** `/v1/environments/{environment_id}/work/stats`
 
@@ -862,9 +876,15 @@ Get statistics about the work queue for an environment.
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `SelfHostedWorkQueueStats`
+
+  - `"work_queue_stats" type`
+
+    The type of object
 
   - `int depth`
 
@@ -877,10 +897,6 @@ Get statistics about the work queue for an environment.
   - `int pending`
 
     Number of work items being processed (polled but not acknowledged)
-
-  - `"work_queue_stats" type`
-
-    The type of object
 
   - `?int workersPolling`
 
@@ -898,6 +914,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaSelfHostedWorkQueueStats = $client->beta->environments->work->stats(
   'env_011CZkZ9X2dpNyB7HsEFoRfW',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaSelfHostedWorkQueueStats);
@@ -920,6 +937,10 @@ var_dump($betaSelfHostedWorkQueueStats);
 ### Beta Self Hosted Work
 
 - `SelfHostedWork`
+
+  - `"work" type`
+
+    The type of object (always 'work')
 
   - `string id`
 
@@ -969,13 +990,13 @@ var_dump($betaSelfHostedWorkQueueStats);
 
     RFC 3339 timestamp when work execution stopped
 
-  - `"work" type`
-
-    The type of object (always 'work')
-
 ### Beta Self Hosted Work Heartbeat Response
 
 - `SelfHostedWorkHeartbeatResponse`
+
+  - `"work_heartbeat" type`
+
+    The type of response
 
   - `string lastHeartbeat`
 
@@ -993,10 +1014,6 @@ var_dump($betaSelfHostedWorkQueueStats);
 
     Effective TTL applied to the lease
 
-  - `"work_heartbeat" type`
-
-    The type of response
-
 ### Beta Self Hosted Work List Response
 
 - `SelfHostedWorkListResponse`
@@ -1013,6 +1030,10 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 - `SelfHostedWorkQueueStats`
 
+  - `"work_queue_stats" type`
+
+    The type of object
+
   - `int depth`
 
     Number of work items waiting to be picked up (lag from consumer group)
@@ -1024,10 +1045,6 @@ var_dump($betaSelfHostedWorkQueueStats);
   - `int pending`
 
     Number of work items being processed (polled but not acknowledged)
-
-  - `"work_queue_stats" type`
-
-    The type of object
 
   - `?int workersPolling`
 
@@ -1053,10 +1070,10 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 - `SessionWorkData`
 
-  - `string id`
-
-    Session identifier (e.g., 'session_...')
-
   - `"session" type`
 
     Type of work data
+
+  - `string id`
+
+    Session identifier (e.g., 'session_...')

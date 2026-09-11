@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/list
 category: "api"
 generated: true
 ---
+---
+title: List Work Items
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/list
+---
+
 # List Work Items
 
 `$ ant beta:environments:work list`
@@ -44,6 +49,10 @@ List work items in an environment.
 
     List of work items
 
+    - `type: "work"`
+
+      The type of object (always 'work')
+
     - `id: string`
 
       Work identifier (e.g., 'work_...')
@@ -60,13 +69,13 @@ List work items in an environment.
 
       The actual work to be performed
 
-      - `id: string`
-
-        Session identifier (e.g., 'session_...')
-
       - `type: "session"`
 
         Type of work data
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
 
     - `environment_id: string`
 
@@ -109,10 +118,6 @@ List work items in an environment.
     - `stopped_at: string`
 
       RFC 3339 timestamp when work execution stopped
-
-    - `type: "work"`
-
-      The type of object (always 'work')
 
   - `next_page: string`
 

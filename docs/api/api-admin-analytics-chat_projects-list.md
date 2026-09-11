@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/chat_projects/l
 category: "api"
 generated: true
 ---
+---
+title: Get Chat Project Usage
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/chat_projects/list
+---
+
 # Get Chat Project Usage
 
 **GET** `/v1/organizations/analytics/apps/chat/projects`
@@ -76,7 +81,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
 ## Returns
 
-- `ChatProjectUsage object`
+- `BetaChatProjectUsage object`
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
@@ -104,9 +109,15 @@ plan. Requires an API key with the `read:analytics` scope.
 
       format: date-time
 
-    - `created_by: optional AnalyticsUser or null`
+    - `created_by: optional BetaAnalyticsUser or null`
 
       A user in the organization, identified by tagged id and email address.
+
+      - `type: "user"`
+
+        Object type. Always `user`.
+
+        default: user
 
       - `id: string`
 
@@ -115,12 +126,6 @@ plan. Requires an API key with the `read:analytics` scope.
       - `email_address: string`
 
         Email address of the user
-
-      - `type: "user"`
-
-        Object type. Always `user`.
-
-        default: user
 
     - `distinct_conversation_count: optional number or null`
 
@@ -151,7 +156,7 @@ plan. Requires an API key with the `read:analytics` scope.
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

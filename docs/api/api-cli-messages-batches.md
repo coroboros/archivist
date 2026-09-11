@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/messages/batches"
 category: "api"
 generated: true
 ---
+---
+title: Batches
+url: https://platform.claude.com/docs/en/api/cli/messages/batches
+---
+
 # Batches
 
 ## Create a Message Batch
@@ -30,9 +35,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -121,12 +138,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ### Example
 
@@ -175,9 +186,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -267,12 +290,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 ### Example
 
 ```bash
@@ -318,25 +335,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `--after-id: optional string`
 
-  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
 - `--before-id: optional string`
 
-  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+  Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
 - `--limit: optional number`
 
-  Number of items to return per page.
+  Query param: Number of items to return per page.
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
   maximum: 1000, minimum: 1
+
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
 - `ListResponse_MessageBatch_: object`
 
   - `data: array of MessageBatch`
+
+    - `type: "message_batch"`
+
+      Object type.
+
+      For Message Batches, this is always `"message_batch"`.
 
     - `id: string`
 
@@ -426,12 +455,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-    - `type: "message_batch"`
-
-      Object type.
-
-      For Message Batches, this is always `"message_batch"`.
-
   - `first_id: string`
 
     First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -499,9 +522,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -590,12 +625,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ### Example
 
@@ -646,19 +675,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `deleted_message_batch: object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ### Example
 
@@ -695,6 +730,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   ID of the Message Batch.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `message_batch_individual_response: object`
@@ -715,7 +756,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `message_batch_succeeded_result: object`
 
+      - `type: "succeeded"`
+
       - `message: object`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: string`
 
@@ -741,12 +790,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -754,6 +797,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -792,6 +841,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `text_block: object`
 
+            - `type: "text"`
+
             - `citations: array of TextCitation`
 
               Citations supporting the text block.
@@ -799,6 +850,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `citation_char_location: object`
+
+                - `type: "char_location"`
 
                 - `cited_text: string`
 
@@ -816,9 +869,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `citation_page_location: object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -836,9 +889,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `citation_content_block_location: object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -866,9 +919,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `citations_web_search_result_location: object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -878,11 +931,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
               - `citations_search_result_location: object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -914,15 +967,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "search_result_location"`
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
+              minLength: 0
 
           - `thinking_block: object`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -936,9 +987,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
           - `redacted_thinking_block: object`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
@@ -948,9 +999,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
           - `tool_use_block: object`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -970,27 +1021,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `server_tool_caller_20260120: object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `input: map[unknown]`
 
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
 
             - `toolset_name: optional string`
 
@@ -999,6 +1048,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `server_tool_use_block: object`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -1036,9 +1087,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
           - `web_search_tool_result_block: object`
+
+            - `type: "web_search_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -1058,6 +1109,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `web_search_tool_result_error: object`
 
+                - `type: "web_search_tool_result_error"`
+
                 - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
                   - `"invalid_tool_input"`
@@ -1072,9 +1125,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
               - `union_member_1: array of WebSearchResultBlock`
+
+                - `type: "web_search_result"`
 
                 - `encrypted_content: string`
 
@@ -1082,17 +1135,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_search_tool_result"`
-
           - `web_fetch_tool_result_block: object`
+
+            - `type: "web_fetch_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -1112,7 +1163,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `web_fetch_tool_result_error_block: object`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+                - `type: "web_fetch_tool_result_error"`
+
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                   - `"invalid_tool_input"`
 
@@ -1132,11 +1185,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `web_fetch_block: object`
 
+                - `type: "web_fetch_result"`
+
                 - `content: object`
+
+                  - `type: "document"`
 
                   - `citations: object`
 
@@ -1148,33 +1205,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `base64_pdf_source: object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `plain_text_source: object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string`
 
                     The title of the document
 
-                  - `type: "document"`
-
                 - `retrieved_at: string`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
 
                 - `url: string`
 
@@ -1184,15 +1237,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_fetch_tool_result"`
-
           - `code_execution_tool_result_block: object`
+
+            - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `code_execution_tool_result_error: object`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -1204,15 +1259,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `code_execution_result_block: object`
+
+                - `type: "code_execution_result"`
 
                 - `content: array of CodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -1220,17 +1275,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `encrypted_code_execution_result_block: object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: array of CodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -1238,19 +1293,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
           - `bash_code_execution_tool_result_block: object`
+
+            - `type: "bash_code_execution_tool_result"`
 
             - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
               - `bash_code_execution_tool_result_error: object`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1264,15 +1319,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `bash_code_execution_result_block: object`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: array of BashCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -1280,19 +1335,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
           - `text_editor_code_execution_tool_result_block: object`
+
+            - `type: "text_editor_code_execution_tool_result"`
 
             - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `text_editor_code_execution_tool_result_error: object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -1308,9 +1363,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
               - `text_editor_code_execution_view_result_block: object`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -1328,15 +1383,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: number`
 
-                - `type: "text_editor_code_execution_view_result"`
-
               - `text_editor_code_execution_create_result_block: object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
+                - `is_file_update: boolean`
+
               - `text_editor_code_execution_str_replace_result_block: object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
 
                 - `lines: array of string`
 
@@ -1348,19 +1403,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `old_start: number`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
           - `tool_search_tool_result_block: object`
+
+            - `type: "tool_search_tool_result"`
 
             - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
               - `tool_search_tool_result_error: object`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -1374,33 +1429,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string`
 
-                - `type: "tool_search_tool_result_error"`
-
               - `tool_search_tool_search_result_block: object`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: array of ToolReferenceBlock`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
 
           - `container_upload_block: object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
         - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
@@ -1486,6 +1537,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
+          - `type: "refusal"`
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
@@ -1515,8 +1568,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-          - `type: "refusal"`
 
         - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -1553,12 +1604,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: object`
 
@@ -1664,73 +1709,71 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"batch"`
 
-      - `type: "succeeded"`
-
     - `message_batch_errored_result: object`
 
+      - `type: "errored"`
+
       - `error: object`
+
+        - `type: "error"`
 
         - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
 
           - `invalid_request_error: object`
 
-            - `message: string`
-
             - `type: "invalid_request_error"`
+
+            - `message: string`
 
           - `authentication_error: object`
 
-            - `message: string`
-
             - `type: "authentication_error"`
+
+            - `message: string`
 
           - `billing_error: object`
 
-            - `message: string`
-
             - `type: "billing_error"`
+
+            - `message: string`
 
           - `permission_error: object`
 
-            - `message: string`
-
             - `type: "permission_error"`
+
+            - `message: string`
 
           - `not_found_error: object`
 
-            - `message: string`
-
             - `type: "not_found_error"`
+
+            - `message: string`
 
           - `rate_limit_error: object`
 
-            - `message: string`
-
             - `type: "rate_limit_error"`
+
+            - `message: string`
 
           - `gateway_timeout_error: object`
 
-            - `message: string`
-
             - `type: "timeout_error"`
+
+            - `message: string`
 
           - `api_error_object: object`
 
-            - `message: string`
-
             - `type: "api_error"`
+
+            - `message: string`
 
           - `overloaded_error: object`
 
-            - `message: string`
-
             - `type: "overloaded_error"`
 
+            - `message: string`
+
         - `request_id: string`
-
-        - `type: "error"`
-
-      - `type: "errored"`
 
     - `message_batch_canceled_result: object`
 
@@ -1754,19 +1797,25 @@ ant messages:batches results \
 
 - `deleted_message_batch: object`
 
-  - `id: string`
-
-    ID of the Message Batch.
-
   - `type: "message_batch_deleted"`
 
     Deleted object type.
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
+  - `id: string`
+
+    ID of the Message Batch.
+
 ### Message Batch
 
 - `message_batch: object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: string`
 
@@ -1856,12 +1905,6 @@ ant messages:batches results \
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
 ### Message Batch Canceled Result
 
 - `message_batch_canceled_result: object`
@@ -1872,69 +1915,69 @@ ant messages:batches results \
 
 - `message_batch_errored_result: object`
 
+  - `type: "errored"`
+
   - `error: object`
+
+    - `type: "error"`
 
     - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
 
       - `invalid_request_error: object`
 
-        - `message: string`
-
         - `type: "invalid_request_error"`
+
+        - `message: string`
 
       - `authentication_error: object`
 
-        - `message: string`
-
         - `type: "authentication_error"`
+
+        - `message: string`
 
       - `billing_error: object`
 
-        - `message: string`
-
         - `type: "billing_error"`
+
+        - `message: string`
 
       - `permission_error: object`
 
-        - `message: string`
-
         - `type: "permission_error"`
+
+        - `message: string`
 
       - `not_found_error: object`
 
-        - `message: string`
-
         - `type: "not_found_error"`
+
+        - `message: string`
 
       - `rate_limit_error: object`
 
-        - `message: string`
-
         - `type: "rate_limit_error"`
+
+        - `message: string`
 
       - `gateway_timeout_error: object`
 
-        - `message: string`
-
         - `type: "timeout_error"`
+
+        - `message: string`
 
       - `api_error_object: object`
 
-        - `message: string`
-
         - `type: "api_error"`
+
+        - `message: string`
 
       - `overloaded_error: object`
 
-        - `message: string`
-
         - `type: "overloaded_error"`
 
+        - `message: string`
+
     - `request_id: string`
-
-    - `type: "error"`
-
-  - `type: "errored"`
 
 ### Message Batch Expired Result
 
@@ -1962,7 +2005,15 @@ ant messages:batches results \
 
     - `message_batch_succeeded_result: object`
 
+      - `type: "succeeded"`
+
       - `message: object`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
 
         - `id: string`
 
@@ -1988,12 +2039,6 @@ ant messages:batches results \
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" or "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -2001,6 +2046,12 @@ ant messages:batches results \
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -2039,6 +2090,8 @@ ant messages:batches results \
 
           - `text_block: object`
 
+            - `type: "text"`
+
             - `citations: array of TextCitation`
 
               Citations supporting the text block.
@@ -2046,6 +2099,8 @@ ant messages:batches results \
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `citation_char_location: object`
+
+                - `type: "char_location"`
 
                 - `cited_text: string`
 
@@ -2063,9 +2118,9 @@ ant messages:batches results \
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `citation_page_location: object`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -2083,9 +2138,9 @@ ant messages:batches results \
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `citation_content_block_location: object`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -2113,9 +2168,9 @@ ant messages:batches results \
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `citations_web_search_result_location: object`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -2125,11 +2180,11 @@ ant messages:batches results \
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
               - `citations_search_result_location: object`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -2161,15 +2216,13 @@ ant messages:batches results \
 
                 - `title: string`
 
-                - `type: "search_result_location"`
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
+              minLength: 0
 
           - `thinking_block: object`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -2183,9 +2236,9 @@ ant messages:batches results \
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
           - `redacted_thinking_block: object`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
@@ -2195,9 +2248,9 @@ ant messages:batches results \
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
           - `tool_use_block: object`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -2217,27 +2270,25 @@ ant messages:batches results \
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `server_tool_caller_20260120: object`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `input: map[unknown]`
 
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
 
             - `toolset_name: optional string`
 
@@ -2246,6 +2297,8 @@ ant messages:batches results \
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `server_tool_use_block: object`
+
+            - `type: "server_tool_use"`
 
             - `id: string`
 
@@ -2283,9 +2336,9 @@ ant messages:batches results \
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
           - `web_search_tool_result_block: object`
+
+            - `type: "web_search_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -2305,6 +2358,8 @@ ant messages:batches results \
 
               - `web_search_tool_result_error: object`
 
+                - `type: "web_search_tool_result_error"`
+
                 - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
                   - `"invalid_tool_input"`
@@ -2319,9 +2374,9 @@ ant messages:batches results \
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
               - `union_member_1: array of WebSearchResultBlock`
+
+                - `type: "web_search_result"`
 
                 - `encrypted_content: string`
 
@@ -2329,17 +2384,15 @@ ant messages:batches results \
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_search_tool_result"`
-
           - `web_fetch_tool_result_block: object`
+
+            - `type: "web_fetch_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -2359,7 +2412,9 @@ ant messages:batches results \
 
               - `web_fetch_tool_result_error_block: object`
 
-                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+                - `type: "web_fetch_tool_result_error"`
+
+                - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                   - `"invalid_tool_input"`
 
@@ -2379,11 +2434,15 @@ ant messages:batches results \
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `web_fetch_block: object`
 
+                - `type: "web_fetch_result"`
+
                 - `content: object`
+
+                  - `type: "document"`
 
                   - `citations: object`
 
@@ -2395,33 +2454,29 @@ ant messages:batches results \
 
                     - `base64_pdf_source: object`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `plain_text_source: object`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string`
 
                     The title of the document
 
-                  - `type: "document"`
-
                 - `retrieved_at: string`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
 
                 - `url: string`
 
@@ -2431,15 +2486,17 @@ ant messages:batches results \
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_fetch_tool_result"`
-
           - `code_execution_tool_result_block: object`
+
+            - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `code_execution_tool_result_error: object`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -2451,15 +2508,15 @@ ant messages:batches results \
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `code_execution_result_block: object`
+
+                - `type: "code_execution_result"`
 
                 - `content: array of CodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -2467,17 +2524,17 @@ ant messages:batches results \
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `encrypted_code_execution_result_block: object`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: array of CodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -2485,19 +2542,19 @@ ant messages:batches results \
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
           - `bash_code_execution_tool_result_block: object`
+
+            - `type: "bash_code_execution_tool_result"`
 
             - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
               - `bash_code_execution_tool_result_error: object`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -2511,15 +2568,15 @@ ant messages:batches results \
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `bash_code_execution_result_block: object`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: array of BashCodeExecutionOutputBlock`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -2527,19 +2584,19 @@ ant messages:batches results \
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
           - `text_editor_code_execution_tool_result_block: object`
+
+            - `type: "text_editor_code_execution_tool_result"`
 
             - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `text_editor_code_execution_tool_result_error: object`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -2555,9 +2612,9 @@ ant messages:batches results \
 
                 - `error_message: string`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
               - `text_editor_code_execution_view_result_block: object`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -2575,15 +2632,15 @@ ant messages:batches results \
 
                 - `total_lines: number`
 
-                - `type: "text_editor_code_execution_view_result"`
-
               - `text_editor_code_execution_create_result_block: object`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
+                - `is_file_update: boolean`
+
               - `text_editor_code_execution_str_replace_result_block: object`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
 
                 - `lines: array of string`
 
@@ -2595,19 +2652,19 @@ ant messages:batches results \
 
                 - `old_start: number`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
           - `tool_search_tool_result_block: object`
+
+            - `type: "tool_search_tool_result"`
 
             - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
               - `tool_search_tool_result_error: object`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -2621,33 +2678,29 @@ ant messages:batches results \
 
                 - `error_message: string`
 
-                - `type: "tool_search_tool_result_error"`
-
               - `tool_search_tool_search_result_block: object`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: array of ToolReferenceBlock`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
 
           - `container_upload_block: object`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
         - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
@@ -2733,6 +2786,8 @@ ant messages:batches results \
 
           Structured information about a refusal.
 
+          - `type: "refusal"`
+
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
@@ -2762,8 +2817,6 @@ ant messages:batches results \
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-          - `type: "refusal"`
 
         - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -2800,12 +2853,6 @@ ant messages:batches results \
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
 
         - `usage: object`
 
@@ -2911,73 +2958,71 @@ ant messages:batches results \
 
             - `"batch"`
 
-      - `type: "succeeded"`
-
     - `message_batch_errored_result: object`
 
+      - `type: "errored"`
+
       - `error: object`
+
+        - `type: "error"`
 
         - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
 
           - `invalid_request_error: object`
 
-            - `message: string`
-
             - `type: "invalid_request_error"`
+
+            - `message: string`
 
           - `authentication_error: object`
 
-            - `message: string`
-
             - `type: "authentication_error"`
+
+            - `message: string`
 
           - `billing_error: object`
 
-            - `message: string`
-
             - `type: "billing_error"`
+
+            - `message: string`
 
           - `permission_error: object`
 
-            - `message: string`
-
             - `type: "permission_error"`
+
+            - `message: string`
 
           - `not_found_error: object`
 
-            - `message: string`
-
             - `type: "not_found_error"`
+
+            - `message: string`
 
           - `rate_limit_error: object`
 
-            - `message: string`
-
             - `type: "rate_limit_error"`
+
+            - `message: string`
 
           - `gateway_timeout_error: object`
 
-            - `message: string`
-
             - `type: "timeout_error"`
+
+            - `message: string`
 
           - `api_error_object: object`
 
-            - `message: string`
-
             - `type: "api_error"`
+
+            - `message: string`
 
           - `overloaded_error: object`
 
-            - `message: string`
-
             - `type: "overloaded_error"`
 
+            - `message: string`
+
         - `request_id: string`
-
-        - `type: "error"`
-
-      - `type: "errored"`
 
     - `message_batch_canceled_result: object`
 
@@ -3029,7 +3074,15 @@ ant messages:batches results \
 
   - `message_batch_succeeded_result: object`
 
+    - `type: "succeeded"`
+
     - `message: object`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
 
       - `id: string`
 
@@ -3055,12 +3108,6 @@ ant messages:batches results \
 
           Skills loaded in the container
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" or "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -3068,6 +3115,12 @@ ant messages:batches results \
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: string`
 
@@ -3106,6 +3159,8 @@ ant messages:batches results \
 
         - `text_block: object`
 
+          - `type: "text"`
+
           - `citations: array of TextCitation`
 
             Citations supporting the text block.
@@ -3113,6 +3168,8 @@ ant messages:batches results \
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
             - `citation_char_location: object`
+
+              - `type: "char_location"`
 
               - `cited_text: string`
 
@@ -3130,9 +3187,9 @@ ant messages:batches results \
 
                 minimum: 0
 
-              - `type: "char_location"`
-
             - `citation_page_location: object`
+
+              - `type: "page_location"`
 
               - `cited_text: string`
 
@@ -3150,9 +3207,9 @@ ant messages:batches results \
 
                 minimum: 1
 
-              - `type: "page_location"`
-
             - `citation_content_block_location: object`
+
+              - `type: "content_block_location"`
 
               - `cited_text: string`
 
@@ -3180,9 +3237,9 @@ ant messages:batches results \
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
             - `citations_web_search_result_location: object`
+
+              - `type: "web_search_result_location"`
 
               - `cited_text: string`
 
@@ -3192,11 +3249,11 @@ ant messages:batches results \
 
                 maxLength: 512
 
-              - `type: "web_search_result_location"`
-
               - `url: string`
 
             - `citations_search_result_location: object`
+
+              - `type: "search_result_location"`
 
               - `cited_text: string`
 
@@ -3228,15 +3285,13 @@ ant messages:batches results \
 
               - `title: string`
 
-              - `type: "search_result_location"`
-
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
+            minLength: 0
 
         - `thinking_block: object`
+
+          - `type: "thinking"`
 
           - `signature: string`
 
@@ -3250,9 +3305,9 @@ ant messages:batches results \
 
             The text of Claude's thinking process for this block.
 
-          - `type: "thinking"`
-
         - `redacted_thinking_block: object`
+
+          - `type: "redacted_thinking"`
 
           - `data: string`
 
@@ -3262,9 +3317,9 @@ ant messages:batches results \
 
             See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type: "redacted_thinking"`
-
         - `tool_use_block: object`
+
+          - `type: "tool_use"`
 
           - `id: string`
 
@@ -3284,27 +3339,25 @@ ant messages:batches results \
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `server_tool_caller_20260120: object`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `input: map[unknown]`
 
           - `name: string`
 
             minLength: 1
-
-          - `type: "tool_use"`
 
           - `toolset_name: optional string`
 
@@ -3313,6 +3366,8 @@ ant messages:batches results \
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `server_tool_use_block: object`
+
+          - `type: "server_tool_use"`
 
           - `id: string`
 
@@ -3350,9 +3405,9 @@ ant messages:batches results \
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
         - `web_search_tool_result_block: object`
+
+          - `type: "web_search_tool_result"`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -3372,6 +3427,8 @@ ant messages:batches results \
 
             - `web_search_tool_result_error: object`
 
+              - `type: "web_search_tool_result_error"`
+
               - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
                 - `"invalid_tool_input"`
@@ -3386,9 +3443,9 @@ ant messages:batches results \
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
             - `union_member_1: array of WebSearchResultBlock`
+
+              - `type: "web_search_result"`
 
               - `encrypted_content: string`
 
@@ -3396,17 +3453,15 @@ ant messages:batches results \
 
               - `title: string`
 
-              - `type: "web_search_result"`
-
               - `url: string`
 
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_search_tool_result"`
-
         - `web_fetch_tool_result_block: object`
+
+          - `type: "web_fetch_tool_result"`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -3426,7 +3481,9 @@ ant messages:batches results \
 
             - `web_fetch_tool_result_error_block: object`
 
-              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+              - `type: "web_fetch_tool_result_error"`
+
+              - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
                 - `"invalid_tool_input"`
 
@@ -3446,11 +3503,15 @@ ant messages:batches results \
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
+                - `"content_too_large"`
 
             - `web_fetch_block: object`
 
+              - `type: "web_fetch_result"`
+
               - `content: object`
+
+                - `type: "document"`
 
                 - `citations: object`
 
@@ -3462,33 +3523,29 @@ ant messages:batches results \
 
                   - `base64_pdf_source: object`
 
+                    - `type: "base64"`
+
                     - `data: string`
 
                       format: byte
 
                     - `media_type: "application/pdf"`
 
-                    - `type: "base64"`
-
                   - `plain_text_source: object`
+
+                    - `type: "text"`
 
                     - `data: string`
 
                     - `media_type: "text/plain"`
 
-                    - `type: "text"`
-
                 - `title: string`
 
                   The title of the document
 
-                - `type: "document"`
-
               - `retrieved_at: string`
 
                 ISO 8601 timestamp when the content was retrieved
-
-              - `type: "web_fetch_result"`
 
               - `url: string`
 
@@ -3498,15 +3555,17 @@ ant messages:batches results \
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_fetch_tool_result"`
-
         - `code_execution_tool_result_block: object`
+
+          - `type: "code_execution_tool_result"`
 
           - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `code_execution_tool_result_error: object`
+
+              - `type: "code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -3518,15 +3577,15 @@ ant messages:batches results \
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
             - `code_execution_result_block: object`
+
+              - `type: "code_execution_result"`
 
               - `content: array of CodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -3534,17 +3593,17 @@ ant messages:batches results \
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
             - `encrypted_code_execution_result_block: object`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `type: "encrypted_code_execution_result"`
+
               - `content: array of CodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -3552,19 +3611,19 @@ ant messages:batches results \
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "code_execution_tool_result"`
-
         - `bash_code_execution_tool_result_block: object`
+
+          - `type: "bash_code_execution_tool_result"`
 
           - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
             - `bash_code_execution_tool_result_error: object`
+
+              - `type: "bash_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -3578,15 +3637,15 @@ ant messages:batches results \
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
             - `bash_code_execution_result_block: object`
+
+              - `type: "bash_code_execution_result"`
 
               - `content: array of BashCodeExecutionOutputBlock`
 
-                - `file_id: string`
-
                 - `type: "bash_code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -3594,19 +3653,19 @@ ant messages:batches results \
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "bash_code_execution_tool_result"`
-
         - `text_editor_code_execution_tool_result_block: object`
+
+          - `type: "text_editor_code_execution_tool_result"`
 
           - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
             - `text_editor_code_execution_tool_result_error: object`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -3622,9 +3681,9 @@ ant messages:batches results \
 
               - `error_message: string`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
             - `text_editor_code_execution_view_result_block: object`
+
+              - `type: "text_editor_code_execution_view_result"`
 
               - `content: string`
 
@@ -3642,15 +3701,15 @@ ant messages:batches results \
 
               - `total_lines: number`
 
-              - `type: "text_editor_code_execution_view_result"`
-
             - `text_editor_code_execution_create_result_block: object`
-
-              - `is_file_update: boolean`
 
               - `type: "text_editor_code_execution_create_result"`
 
+              - `is_file_update: boolean`
+
             - `text_editor_code_execution_str_replace_result_block: object`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
 
               - `lines: array of string`
 
@@ -3662,19 +3721,19 @@ ant messages:batches results \
 
               - `old_start: number`
 
-              - `type: "text_editor_code_execution_str_replace_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
         - `tool_search_tool_result_block: object`
+
+          - `type: "tool_search_tool_result"`
 
           - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
             - `tool_search_tool_result_error: object`
+
+              - `type: "tool_search_tool_result_error"`
 
               - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -3688,33 +3747,29 @@ ant messages:batches results \
 
               - `error_message: string`
 
-              - `type: "tool_search_tool_result_error"`
-
             - `tool_search_tool_search_result_block: object`
 
+              - `type: "tool_search_tool_search_result"`
+
               - `tool_references: array of ToolReferenceBlock`
+
+                - `type: "tool_reference"`
 
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `type: "tool_reference"`
-
-              - `type: "tool_search_tool_search_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "tool_search_tool_result"`
 
         - `container_upload_block: object`
 
           Response model for a file uploaded to the container.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
+
+          - `file_id: string`
 
       - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
@@ -3800,6 +3855,8 @@ ant messages:batches results \
 
         Structured information about a refusal.
 
+        - `type: "refusal"`
+
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
@@ -3829,8 +3886,6 @@ ant messages:batches results \
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-        - `type: "refusal"`
 
       - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -3867,12 +3922,6 @@ ant messages:batches results \
         Which custom stop sequence was generated, if any.
 
         This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
 
       - `usage: object`
 
@@ -3978,73 +4027,71 @@ ant messages:batches results \
 
           - `"batch"`
 
-    - `type: "succeeded"`
-
   - `message_batch_errored_result: object`
 
+    - `type: "errored"`
+
     - `error: object`
+
+      - `type: "error"`
 
       - `error: InvalidRequestError or AuthenticationError or BillingError or 6 more`
 
         - `invalid_request_error: object`
 
-          - `message: string`
-
           - `type: "invalid_request_error"`
+
+          - `message: string`
 
         - `authentication_error: object`
 
-          - `message: string`
-
           - `type: "authentication_error"`
+
+          - `message: string`
 
         - `billing_error: object`
 
-          - `message: string`
-
           - `type: "billing_error"`
+
+          - `message: string`
 
         - `permission_error: object`
 
-          - `message: string`
-
           - `type: "permission_error"`
+
+          - `message: string`
 
         - `not_found_error: object`
 
-          - `message: string`
-
           - `type: "not_found_error"`
+
+          - `message: string`
 
         - `rate_limit_error: object`
 
-          - `message: string`
-
           - `type: "rate_limit_error"`
+
+          - `message: string`
 
         - `gateway_timeout_error: object`
 
-          - `message: string`
-
           - `type: "timeout_error"`
+
+          - `message: string`
 
         - `api_error_object: object`
 
-          - `message: string`
-
           - `type: "api_error"`
+
+          - `message: string`
 
         - `overloaded_error: object`
 
-          - `message: string`
-
           - `type: "overloaded_error"`
 
+          - `message: string`
+
       - `request_id: string`
-
-      - `type: "error"`
-
-    - `type: "errored"`
 
   - `message_batch_canceled_result: object`
 
@@ -4058,7 +4105,15 @@ ant messages:batches results \
 
 - `message_batch_succeeded_result: object`
 
+  - `type: "succeeded"`
+
   - `message: object`
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
 
     - `id: string`
 
@@ -4084,12 +4139,6 @@ ant messages:batches results \
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" or "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -4097,6 +4146,12 @@ ant messages:batches results \
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -4135,6 +4190,8 @@ ant messages:batches results \
 
       - `text_block: object`
 
+        - `type: "text"`
+
         - `citations: array of TextCitation`
 
           Citations supporting the text block.
@@ -4142,6 +4199,8 @@ ant messages:batches results \
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `citation_char_location: object`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -4159,9 +4218,9 @@ ant messages:batches results \
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `citation_page_location: object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -4179,9 +4238,9 @@ ant messages:batches results \
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `citation_content_block_location: object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -4209,9 +4268,9 @@ ant messages:batches results \
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `citations_web_search_result_location: object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -4221,11 +4280,11 @@ ant messages:batches results \
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
           - `citations_search_result_location: object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -4257,15 +4316,13 @@ ant messages:batches results \
 
             - `title: string`
 
-            - `type: "search_result_location"`
-
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
+          minLength: 0
 
       - `thinking_block: object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -4279,9 +4336,9 @@ ant messages:batches results \
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
       - `redacted_thinking_block: object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
@@ -4291,9 +4348,9 @@ ant messages:batches results \
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
       - `tool_use_block: object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -4313,27 +4370,25 @@ ant messages:batches results \
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `server_tool_caller_20260120: object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `input: map[unknown]`
 
         - `name: string`
 
           minLength: 1
-
-        - `type: "tool_use"`
 
         - `toolset_name: optional string`
 
@@ -4342,6 +4397,8 @@ ant messages:batches results \
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `server_tool_use_block: object`
+
+        - `type: "server_tool_use"`
 
         - `id: string`
 
@@ -4379,9 +4436,9 @@ ant messages:batches results \
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
       - `web_search_tool_result_block: object`
+
+        - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -4401,6 +4458,8 @@ ant messages:batches results \
 
           - `web_search_tool_result_error: object`
 
+            - `type: "web_search_tool_result_error"`
+
             - `error_code: "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
 
               - `"invalid_tool_input"`
@@ -4415,9 +4474,9 @@ ant messages:batches results \
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
           - `union_member_1: array of WebSearchResultBlock`
+
+            - `type: "web_search_result"`
 
             - `encrypted_content: string`
 
@@ -4425,17 +4484,15 @@ ant messages:batches results \
 
             - `title: string`
 
-            - `type: "web_search_result"`
-
             - `url: string`
 
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_search_tool_result"`
-
       - `web_fetch_tool_result_block: object`
+
+        - `type: "web_fetch_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
@@ -4455,7 +4512,9 @@ ant messages:batches results \
 
           - `web_fetch_tool_result_error_block: object`
 
-            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 6 more`
+            - `type: "web_fetch_tool_result_error"`
+
+            - `error_code: "invalid_tool_input" or "url_too_long" or "url_not_allowed" or 7 more`
 
               - `"invalid_tool_input"`
 
@@ -4475,11 +4534,15 @@ ant messages:batches results \
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `web_fetch_block: object`
 
+            - `type: "web_fetch_result"`
+
             - `content: object`
+
+              - `type: "document"`
 
               - `citations: object`
 
@@ -4491,33 +4554,29 @@ ant messages:batches results \
 
                 - `base64_pdf_source: object`
 
+                  - `type: "base64"`
+
                   - `data: string`
 
                     format: byte
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `plain_text_source: object`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
               - `title: string`
 
                 The title of the document
 
-              - `type: "document"`
-
             - `retrieved_at: string`
 
               ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
 
             - `url: string`
 
@@ -4527,15 +4586,17 @@ ant messages:batches results \
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
       - `code_execution_tool_result_block: object`
+
+        - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `code_execution_tool_result_error: object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -4547,15 +4608,15 @@ ant messages:batches results \
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `code_execution_result_block: object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of CodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -4563,17 +4624,17 @@ ant messages:batches results \
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `encrypted_code_execution_result_block: object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of CodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -4581,19 +4642,19 @@ ant messages:batches results \
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
       - `bash_code_execution_tool_result_block: object`
+
+        - `type: "bash_code_execution_tool_result"`
 
         - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
 
           - `bash_code_execution_tool_result_error: object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -4607,15 +4668,15 @@ ant messages:batches results \
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `bash_code_execution_result_block: object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BashCodeExecutionOutputBlock`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -4623,19 +4684,19 @@ ant messages:batches results \
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
       - `text_editor_code_execution_tool_result_block: object`
+
+        - `type: "text_editor_code_execution_tool_result"`
 
         - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `text_editor_code_execution_tool_result_error: object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
 
@@ -4651,9 +4712,9 @@ ant messages:batches results \
 
             - `error_message: string`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
           - `text_editor_code_execution_view_result_block: object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -4671,15 +4732,15 @@ ant messages:batches results \
 
             - `total_lines: number`
 
-            - `type: "text_editor_code_execution_view_result"`
-
           - `text_editor_code_execution_create_result_block: object`
-
-            - `is_file_update: boolean`
 
             - `type: "text_editor_code_execution_create_result"`
 
+            - `is_file_update: boolean`
+
           - `text_editor_code_execution_str_replace_result_block: object`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
 
             - `lines: array of string`
 
@@ -4691,19 +4752,19 @@ ant messages:batches results \
 
             - `old_start: number`
 
-            - `type: "text_editor_code_execution_str_replace_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
       - `tool_search_tool_result_block: object`
+
+        - `type: "tool_search_tool_result"`
 
         - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
 
           - `tool_search_tool_result_error: object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -4717,33 +4778,29 @@ ant messages:batches results \
 
             - `error_message: string`
 
-            - `type: "tool_search_tool_result_error"`
-
           - `tool_search_tool_search_result_block: object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of ToolReferenceBlock`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
       - `container_upload_block: object`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
     - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
 
@@ -4829,6 +4886,8 @@ ant messages:batches results \
 
       Structured information about a refusal.
 
+      - `type: "refusal"`
+
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
@@ -4858,8 +4917,6 @@ ant messages:batches results \
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
-
-      - `type: "refusal"`
 
     - `stop_reason: "end_turn" or "max_tokens" or "stop_sequence" or 4 more`
 
@@ -4896,12 +4953,6 @@ ant messages:batches results \
       Which custom stop sequence was generated, if any.
 
       This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: "message"`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
 
     - `usage: object`
 
@@ -5006,5 +5057,3 @@ ant messages:batches results \
         - `"priority"`
 
         - `"batch"`
-
-  - `type: "succeeded"`

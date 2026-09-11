@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/retrie
 category: "api"
 generated: true
 ---
+---
+title: Get project details
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
+---
+
 # Get project details
 
 **GET** `/v1/compliance/apps/projects/{project_id}`
@@ -17,6 +22,12 @@ Get detailed information for a specific project.
   The project ID (tagged ID, e.g., claude_proj_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 
