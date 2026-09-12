@@ -181,8 +181,6 @@ Get Credential
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.

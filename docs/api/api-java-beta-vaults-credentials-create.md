@@ -171,8 +171,6 @@ Create Credential
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
 
             Token endpoint requires no client authentication.
@@ -344,8 +342,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth tokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 

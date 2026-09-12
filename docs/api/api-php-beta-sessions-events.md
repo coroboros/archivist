@@ -391,8 +391,6 @@ List Events
 
     - `Error error`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
     - `\Datetime processedAt`
 
       A timestamp in RFC 3339 format
@@ -434,8 +432,6 @@ List Events
       A timestamp in RFC 3339 format
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionStatusTerminatedEvent`
 
@@ -662,8 +658,6 @@ List Events
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
@@ -1281,8 +1275,6 @@ Stream Events
 
     - `Error error`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
     - `\Datetime processedAt`
 
       A timestamp in RFC 3339 format
@@ -1324,8 +1316,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionStatusTerminatedEvent`
 
@@ -1552,8 +1542,6 @@ Stream Events
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
@@ -2514,8 +2502,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
   - `Error error`
 
-    An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
   - `\Datetime processedAt`
 
     A timestamp in RFC 3339 format
@@ -2850,8 +2836,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `Error error`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
     - `\Datetime processedAt`
 
       A timestamp in RFC 3339 format
@@ -2893,8 +2877,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
       A timestamp in RFC 3339 format
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionStatusTerminatedEvent`
 
@@ -3122,8 +3104,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `StopReason stopReason`
 
-      The agent completed its turn naturally and is ready for the next user message.
-
   - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 
     - `Type type`
@@ -3288,8 +3268,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
   - `StopReason stopReason`
 
-    The agent completed its turn naturally and is ready for the next user message.
-
 ### Beta Managed Agents Session Status Rescheduled Event
 
 - `ManagedAgentsSessionStatusRescheduledEvent`
@@ -3377,8 +3355,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
     Public sthr_ ID of the thread that went idle.
 
   - `StopReason stopReason`
-
-    The agent completed its turn naturally and is ready for the next user message.
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
@@ -3954,8 +3930,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `Error error`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
     - `\Datetime processedAt`
 
       A timestamp in RFC 3339 format
@@ -3997,8 +3971,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
       A timestamp in RFC 3339 format
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionStatusTerminatedEvent`
 
@@ -4225,8 +4197,6 @@ var_dump($betaManagedAgentsStreamSessionEvents);
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason stopReason`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
   - `ManagedAgentsSessionThreadStatusTerminatedEvent`
 

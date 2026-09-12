@@ -435,8 +435,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -690,8 +688,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -747,8 +743,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Create a cache control breakpoint at this content block.
 
           - `Caller Caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -816,8 +810,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -833,8 +825,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `JsonElement Type = "code_execution_tool_result"`
 
           - `required CodeExecutionToolResultBlockParamContent Content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultErrorParam:`
 
@@ -3006,8 +2996,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -3054,8 +3042,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -3089,8 +3075,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonElement Type = "web_search_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -3143,8 +3127,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonElement Type = "web_fetch_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -3239,8 +3221,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonElement Type = "code_execution_tool_result"`
 
       - `required CodeExecutionToolResultBlockContent Content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -3788,8 +3768,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `JsonElement Type = "content_block_start"`
 
     - `required ContentBlock ContentBlock`
-
-      Response model for a file uploaded to the container.
 
       - `class TextBlock:`
 
@@ -4376,8 +4354,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4631,8 +4607,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4688,8 +4662,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Caller Caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -4757,8 +4729,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4774,8 +4744,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `JsonElement Type = "code_execution_tool_result"`
 
           - `required CodeExecutionToolResultBlockParamContent Content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultErrorParam:`
 
@@ -7440,14 +7408,6 @@ Console.WriteLine(messageTokensCount);
 
 - `class BrowserStateChange: union`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `class BrowserStateChangeTabOpened:`
 
     A tab this call's execution opened that remains open at its end —
@@ -9244,8 +9204,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required CodeExecutionToolResultBlockContent Content`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `class CodeExecutionToolResultError:`
 
       - `JsonElement Type = "code_execution_tool_result_error"`
@@ -9302,8 +9260,6 @@ Console.WriteLine(messageTokensCount);
 
 - `class CodeExecutionToolResultBlockContent: union`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `class CodeExecutionToolResultError:`
 
     - `JsonElement Type = "code_execution_tool_result_error"`
@@ -9359,8 +9315,6 @@ Console.WriteLine(messageTokensCount);
   - `JsonElement Type = "code_execution_tool_result"`
 
   - `required CodeExecutionToolResultBlockParamContent Content`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `class CodeExecutionToolResultErrorParam:`
 
@@ -9438,8 +9392,6 @@ Console.WriteLine(messageTokensCount);
 ### Code Execution Tool Result Block Param Content
 
 - `class CodeExecutionToolResultBlockParamContent: union`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `class CodeExecutionToolResultErrorParam:`
 
@@ -10383,8 +10335,6 @@ Console.WriteLine(messageTokensCount);
 
 - `class ContentBlock: union`
 
-  Response model for a file uploaded to the container.
-
   - `class TextBlock:`
 
     - `JsonElement Type = "text"`
@@ -10555,8 +10505,6 @@ Console.WriteLine(messageTokensCount);
 
     - `required Caller Caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -10603,8 +10551,6 @@ Console.WriteLine(messageTokensCount);
 
     - `required Caller Caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -10638,8 +10584,6 @@ Console.WriteLine(messageTokensCount);
     - `JsonElement Type = "web_search_tool_result"`
 
     - `required Caller Caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -10692,8 +10636,6 @@ Console.WriteLine(messageTokensCount);
     - `JsonElement Type = "web_fetch_tool_result"`
 
     - `required Caller Caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -10788,8 +10730,6 @@ Console.WriteLine(messageTokensCount);
     - `JsonElement Type = "code_execution_tool_result"`
 
     - `required CodeExecutionToolResultBlockContent Content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultError:`
 
@@ -11002,8 +10942,6 @@ Console.WriteLine(messageTokensCount);
 ### Content Block Param
 
 - `class ContentBlockParam: union`
-
-  Regular text content.
 
   - `class TextBlockParam:`
 
@@ -11344,8 +11282,6 @@ Console.WriteLine(messageTokensCount);
 
     - `Caller Caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11599,8 +11535,6 @@ Console.WriteLine(messageTokensCount);
 
     - `Caller Caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11656,8 +11590,6 @@ Console.WriteLine(messageTokensCount);
       Create a cache control breakpoint at this content block.
 
     - `Caller Caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -11725,8 +11657,6 @@ Console.WriteLine(messageTokensCount);
 
     - `Caller Caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11742,8 +11672,6 @@ Console.WriteLine(messageTokensCount);
     - `JsonElement Type = "code_execution_tool_result"`
 
     - `required CodeExecutionToolResultBlockParamContent Content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultErrorParam:`
 
@@ -13176,8 +13104,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -13224,8 +13150,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -13259,8 +13183,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "web_search_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -13313,8 +13235,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "web_fetch_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -13409,8 +13329,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "code_execution_tool_result"`
 
       - `required CodeExecutionToolResultBlockContent Content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -13879,8 +13797,6 @@ Console.WriteLine(messageTokensCount);
 ### Message Count Tokens Tool
 
 - `class MessageCountTokensTool: union`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `class Tool:`
 
@@ -15844,8 +15760,6 @@ Console.WriteLine(messageTokensCount);
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16099,8 +16013,6 @@ Console.WriteLine(messageTokensCount);
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16156,8 +16068,6 @@ Console.WriteLine(messageTokensCount);
           Create a cache control breakpoint at this content block.
 
         - `Caller Caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -16225,8 +16135,6 @@ Console.WriteLine(messageTokensCount);
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16242,8 +16150,6 @@ Console.WriteLine(messageTokensCount);
         - `JsonElement Type = "code_execution_tool_result"`
 
         - `required CodeExecutionToolResultBlockParamContent Content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam:`
 
@@ -16887,8 +16793,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required ContentBlock ContentBlock`
 
-    Response model for a file uploaded to the container.
-
     - `class TextBlock:`
 
       - `JsonElement Type = "text"`
@@ -17059,8 +16963,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -17107,8 +17009,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required Caller Caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -17142,8 +17042,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "web_search_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -17196,8 +17094,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "web_fetch_tool_result"`
 
       - `required Caller Caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -17292,8 +17188,6 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "code_execution_tool_result"`
 
       - `required CodeExecutionToolResultBlockContent Content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -17942,8 +17836,6 @@ Console.WriteLine(messageTokensCount);
 
         - `required Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -17990,8 +17882,6 @@ Console.WriteLine(messageTokensCount);
 
         - `required Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -18025,8 +17915,6 @@ Console.WriteLine(messageTokensCount);
         - `JsonElement Type = "web_search_tool_result"`
 
         - `required Caller Caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -18079,8 +17967,6 @@ Console.WriteLine(messageTokensCount);
         - `JsonElement Type = "web_fetch_tool_result"`
 
         - `required Caller Caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -18175,8 +18061,6 @@ Console.WriteLine(messageTokensCount);
         - `JsonElement Type = "code_execution_tool_result"`
 
         - `required CodeExecutionToolResultBlockContent Content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultError:`
 
@@ -18907,8 +18791,6 @@ Console.WriteLine(messageTokensCount);
 
           - `required Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -18955,8 +18837,6 @@ Console.WriteLine(messageTokensCount);
 
           - `required Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -18990,8 +18870,6 @@ Console.WriteLine(messageTokensCount);
           - `JsonElement Type = "web_search_tool_result"`
 
           - `required Caller Caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -19044,8 +18922,6 @@ Console.WriteLine(messageTokensCount);
           - `JsonElement Type = "web_fetch_tool_result"`
 
           - `required Caller Caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -19140,8 +19016,6 @@ Console.WriteLine(messageTokensCount);
           - `JsonElement Type = "code_execution_tool_result"`
 
           - `required CodeExecutionToolResultBlockContent Content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultError:`
 
@@ -19682,8 +19556,6 @@ Console.WriteLine(messageTokensCount);
 
     - `required ContentBlock ContentBlock`
 
-      Response model for a file uploaded to the container.
-
       - `class TextBlock:`
 
       - `class ThinkingBlock:`
@@ -20051,8 +19923,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required Caller Caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -20145,8 +20015,6 @@ Console.WriteLine(messageTokensCount);
       - `Ttl1h("1h")`
 
   - `Caller Caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -22452,8 +22320,6 @@ Console.WriteLine(messageTokensCount);
 
 - `class ToolUnion: union`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `class Tool:`
 
     - `Type? Type`
@@ -23973,8 +23839,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required Caller Caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -24049,8 +23913,6 @@ Console.WriteLine(messageTokensCount);
       - `Ttl1h("1h")`
 
   - `Caller Caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -24885,8 +24747,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required Caller Caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -25309,8 +25169,6 @@ Console.WriteLine(messageTokensCount);
     Create a cache control breakpoint at this content block.
 
   - `Caller Caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -25765,8 +25623,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required Caller Caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -25925,8 +25781,6 @@ Console.WriteLine(messageTokensCount);
       - `Ttl1h("1h")`
 
   - `Caller Caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -26468,8 +26322,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller Caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26723,8 +26575,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller Caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26780,8 +26630,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller Caller`
-
-                Tool invocation directly from the model.
 
                 - `class DirectCaller:`
 
@@ -26849,8 +26697,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller Caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26866,8 +26712,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `JsonElement Type = "code_execution_tool_result"`
 
               - `required CodeExecutionToolResultBlockParamContent Content`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `class CodeExecutionToolResultErrorParam:`
 
@@ -30115,8 +29959,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller:`
 
                 Tool invocation directly from the model.
@@ -30163,8 +30005,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller:`
 
                 Tool invocation directly from the model.
@@ -30198,8 +30038,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonElement Type = "web_search_tool_result"`
 
             - `required Caller Caller`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller:`
 
@@ -30252,8 +30090,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonElement Type = "web_fetch_tool_result"`
 
             - `required Caller Caller`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller:`
 
@@ -30348,8 +30184,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonElement Type = "code_execution_tool_result"`
 
             - `required CodeExecutionToolResultBlockContent Content`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class CodeExecutionToolResultError:`
 

@@ -419,8 +419,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller: …`
 
             Tool invocation directly from the model.
@@ -674,8 +672,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller: …`
 
             Tool invocation directly from the model.
@@ -731,8 +727,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller: …`
 
@@ -800,8 +794,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller: …`
 
             Tool invocation directly from the model.
@@ -817,8 +809,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `type: Literal["code_execution_tool_result"]`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam: …`
 

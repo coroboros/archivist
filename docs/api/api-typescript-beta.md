@@ -1585,8 +1585,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -1842,8 +1840,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -1899,8 +1895,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               Create a cache control breakpoint at this content block.
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -1967,8 +1961,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               Create a cache control breakpoint at this content block.
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -2037,8 +2029,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `type: "code_execution_tool_result"`
 
             - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultErrorParam`
 
@@ -2361,11 +2351,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
               - `BetaToolChangeToolReference`
 
                 Reference to a single tool the caller declared directly in
@@ -2413,11 +2398,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `type: "tool_removal"`
 
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
 
               - `BetaToolChangeToolReference`
 
@@ -5419,8 +5399,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -5483,8 +5461,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -5542,8 +5518,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller`
 
@@ -5649,8 +5623,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -5728,8 +5700,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `BetaCodeExecutionToolResultError`
 
@@ -7031,8 +7001,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
-      Response model for a file uploaded to the container.
-
       - `BetaTextBlock`
 
       - `BetaThinkingBlock`
@@ -7717,8 +7685,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `BetaDirectCaller`
 
               Tool invocation directly from the model.
@@ -7974,8 +7940,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `BetaDirectCaller`
 
               Tool invocation directly from the model.
@@ -8031,8 +7995,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller`
 
@@ -8099,8 +8061,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller`
 
@@ -8169,8 +8129,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `type: "code_execution_tool_result"`
 
           - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `BetaCodeExecutionToolResultErrorParam`
 
@@ -8493,11 +8451,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
             - `BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
@@ -8545,11 +8498,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `type: "tool_removal"`
 
           - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
 
             - `BetaToolChangeToolReference`
 
@@ -11534,8 +11482,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                Tool invocation directly from the model.
-
                 - `BetaDirectCaller`
 
                   Tool invocation directly from the model.
@@ -11791,8 +11737,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                Tool invocation directly from the model.
-
                 - `BetaDirectCaller`
 
                   Tool invocation directly from the model.
@@ -11848,8 +11792,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-                Tool invocation directly from the model.
 
                 - `BetaDirectCaller`
 
@@ -11916,8 +11858,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-                Tool invocation directly from the model.
 
                 - `BetaDirectCaller`
 
@@ -11986,8 +11926,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `type: "code_execution_tool_result"`
 
               - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `BetaCodeExecutionToolResultErrorParam`
 
@@ -12310,11 +12248,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
                 - `BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
@@ -12362,11 +12295,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `type: "tool_removal"`
 
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
 
                 - `BetaToolChangeToolReference`
 
@@ -16648,8 +16576,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -16712,8 +16638,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -16771,8 +16695,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -16878,8 +16800,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -16957,8 +16877,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError`
 
@@ -36930,8 +36848,6 @@ List Events
 
     - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -37217,8 +37133,6 @@ List Events
       format: date-time
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -37577,8 +37491,6 @@ List Events
       Public sthr_ ID of the thread that went idle.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -40306,8 +40218,6 @@ Stream Events
 
     - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -40593,8 +40503,6 @@ Stream Events
       format: date-time
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -40953,8 +40861,6 @@ Stream Events
       Public sthr_ ID of the thread that went idle.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -42217,8 +42123,6 @@ List Session Resources
 #### Returns
 
 - `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
-
-  A memory store attached to an agent session.
 
   - `BetaManagedAgentsGitHubRepositoryResource`
 
@@ -46654,8 +46558,6 @@ List Session Thread Events
 
     - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -46941,8 +46843,6 @@ List Session Thread Events
       format: date-time
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -47301,8 +47201,6 @@ List Session Thread Events
       Public sthr_ ID of the thread that went idle.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -49057,8 +48955,6 @@ Stream Session Thread Events
 
     - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -49344,8 +49240,6 @@ Stream Session Thread Events
       format: date-time
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -49704,8 +49598,6 @@ Stream Session Thread Events
       Public sthr_ ID of the thread that went idle.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `BetaManagedAgentsSessionEndTurn`
 
@@ -58912,8 +58804,6 @@ Create Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
-          Token endpoint requires no client authentication.
-
           - `BetaManagedAgentsTokenEndpointAuthNoneParam`
 
             Token endpoint requires no client authentication.
@@ -59189,8 +59079,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -59522,8 +59410,6 @@ List Credentials
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          Token endpoint requires no client authentication.
-
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
@@ -59843,8 +59729,6 @@ Get Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          Token endpoint requires no client authentication.
-
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
@@ -60042,8 +59926,6 @@ Update Credential
           maxLength: 8192
 
         - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
-
-          Updated HTTP Basic authentication parameters for the token endpoint.
 
           - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
@@ -60290,8 +60172,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -60766,8 +60646,6 @@ Archive Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -68576,7 +68454,7 @@ Create a Dream
 
   - `model: string | BetaDreamModelConfigParam`
 
-    Body param: Model identifier and configuration applied to every pipeline stage.
+    Body param
 
     - `string`
 
@@ -68606,7 +68484,7 @@ Create a Dream
 
   - `output_behavior?: BetaOutputBehavior`
 
-    Body param: The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+    Body param
 
     - `BetaOutputBehaviorCreateNew`
 
@@ -68805,8 +68683,6 @@ Create a Dream
       - `"fast"`
 
   - `output_behavior: BetaOutputBehavior`
-
-    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
     - `BetaOutputBehaviorCreateNew`
 
@@ -69169,8 +69045,6 @@ List Dreams
 
   - `output_behavior: BetaOutputBehavior`
 
-    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
-
     - `BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
@@ -69497,8 +69371,6 @@ Get a Dream
 
   - `output_behavior: BetaOutputBehavior`
 
-    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
-
     - `BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
@@ -69819,8 +69691,6 @@ Cancel a Dream
 
   - `output_behavior: BetaOutputBehavior`
 
-    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
-
     - `BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
@@ -70140,8 +70010,6 @@ Archive a Dream
       - `"fast"`
 
   - `output_behavior: BetaOutputBehavior`
-
-    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
     - `BetaOutputBehaviorCreateNew`
 

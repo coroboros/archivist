@@ -439,8 +439,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -694,8 +692,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -751,8 +747,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Create a cache control breakpoint at this content block.
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `DirectCaller object`
 
@@ -820,8 +814,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -837,8 +829,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam object`
 
@@ -3254,8 +3244,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -3306,8 +3294,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -3345,8 +3331,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: web_search_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -3407,8 +3391,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: web_fetch_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -3515,8 +3497,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError object`
 
@@ -4122,8 +4102,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       default: content_block_start
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
-
-      Response model for a file uploaded to the container.
 
       - `TextBlock object`
 
@@ -4754,8 +4732,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -5009,8 +4985,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -5066,8 +5040,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Create a cache control breakpoint at this content block.
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `DirectCaller object`
 
@@ -5135,8 +5107,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -5152,8 +5122,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam object`
 
@@ -8029,14 +7997,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `BrowserStateChange = BrowserStateChangeTabOpened or BrowserStateChangeDownloadStarted or BrowserStateChangeDownloadCompleted or BrowserStateChangeDownloadFailed`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `BrowserStateChangeTabOpened object`
 
     A tab this call's execution opened that remains open at its end —
@@ -9865,8 +9825,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: CodeExecutionToolResultBlockContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `CodeExecutionToolResultError object`
 
       - `type: "code_execution_tool_result_error"`
@@ -9933,8 +9891,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `CodeExecutionToolResultError object`
 
     - `type: "code_execution_tool_result_error"`
@@ -10000,8 +9956,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `type: "code_execution_tool_result"`
 
   - `content: CodeExecutionToolResultBlockParamContent`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `CodeExecutionToolResultErrorParam object`
 
@@ -10079,8 +10033,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Code Execution Tool Result Block Param Content
 
 - `CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam or CodeExecutionResultBlockParam or EncryptedCodeExecutionResultBlockParam`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `CodeExecutionToolResultErrorParam object`
 
@@ -11028,8 +10980,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ContentBlock = TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-  Response model for a file uploaded to the container.
-
   - `TextBlock object`
 
     - `type: "text"`
@@ -11218,8 +11168,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       default: {"type":"direct"}
 
       - `DirectCaller object`
@@ -11270,8 +11218,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       default: {"type":"direct"}
 
       - `DirectCaller object`
@@ -11309,8 +11255,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       default: web_search_tool_result
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       default: {"type":"direct"}
 
@@ -11371,8 +11315,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       default: web_fetch_tool_result
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       default: {"type":"direct"}
 
@@ -11479,8 +11421,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       default: code_execution_tool_result
 
     - `content: CodeExecutionToolResultBlockContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultError object`
 
@@ -11731,8 +11671,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Content Block Param
 
 - `ContentBlockParam = TextBlockParam or ImageBlockParam or DocumentBlockParam or 13 more`
-
-  Regular text content.
 
   - `TextBlockParam object`
 
@@ -12073,8 +12011,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller object`
 
         Tool invocation directly from the model.
@@ -12328,8 +12264,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller object`
 
         Tool invocation directly from the model.
@@ -12385,8 +12319,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Create a cache control breakpoint at this content block.
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `DirectCaller object`
 
@@ -12454,8 +12386,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller object`
 
         Tool invocation directly from the model.
@@ -12471,8 +12401,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `type: "code_execution_tool_result"`
 
     - `content: CodeExecutionToolResultBlockParamContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultErrorParam object`
 
@@ -13935,8 +13863,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -13987,8 +13913,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -14026,8 +13950,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: web_search_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -14088,8 +14010,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: web_fetch_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -14196,8 +14116,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError object`
 
@@ -14716,8 +14634,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Message Count Tokens Tool
 
 - `MessageCountTokensTool = Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `Tool object`
 
@@ -16681,8 +16597,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -16936,8 +16850,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -16993,8 +16905,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           Create a cache control breakpoint at this content block.
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `DirectCaller object`
 
@@ -17062,8 +16972,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller object`
 
             Tool invocation directly from the model.
@@ -17079,8 +16987,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam object`
 
@@ -17852,8 +17758,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-    Response model for a file uploaded to the container.
-
     - `TextBlock object`
 
       - `type: "text"`
@@ -18042,8 +17946,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -18094,8 +17996,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller object`
@@ -18133,8 +18033,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: web_search_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -18195,8 +18093,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: web_fetch_tool_result
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -18303,8 +18199,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError object`
 
@@ -19019,8 +18913,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `DirectCaller object`
@@ -19071,8 +18963,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `DirectCaller object`
@@ -19110,8 +19000,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           default: web_search_tool_result
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -19172,8 +19060,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           default: web_fetch_tool_result
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -19280,8 +19166,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           default: code_execution_tool_result
 
         - `content: CodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultError object`
 
@@ -20086,8 +19970,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `DirectCaller object`
@@ -20138,8 +20020,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `DirectCaller object`
@@ -20177,8 +20057,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             default: web_search_tool_result
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -20239,8 +20117,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             default: web_fetch_tool_result
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -20347,8 +20223,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             default: code_execution_tool_result
 
           - `content: CodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `CodeExecutionToolResultError object`
 
@@ -20945,8 +20819,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `TextBlock object`
 
       - `ThinkingBlock object`
@@ -21334,8 +21206,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller object`
@@ -21430,8 +21300,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller object`
 
@@ -23801,8 +23669,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ToolUnion = Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `Tool object`
 
     - `type: optional "custom" or null`
@@ -25324,8 +25190,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller object`
@@ -25402,8 +25266,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller object`
 
@@ -26246,8 +26108,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller object`
@@ -26680,8 +26540,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Create a cache control breakpoint at this content block.
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller object`
 
@@ -27142,8 +27000,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller object`
@@ -27312,8 +27168,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller object`
 
@@ -27861,8 +27715,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller object`
 
                 Tool invocation directly from the model.
@@ -28116,8 +27968,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller object`
 
                 Tool invocation directly from the model.
@@ -28173,8 +28023,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `DirectCaller object`
 
@@ -28242,8 +28090,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller object`
 
                 Tool invocation directly from the model.
@@ -28259,8 +28105,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultErrorParam object`
 
@@ -31442,8 +31286,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `DirectCaller object`
@@ -31494,8 +31336,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `DirectCaller object`
@@ -31533,8 +31373,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_search_tool_result
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -31595,8 +31433,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_fetch_tool_result
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -31703,8 +31539,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: CodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultError object`
 

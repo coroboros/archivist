@@ -521,8 +521,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller:`
 
               Tool invocation directly from the model.
@@ -778,8 +776,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller:`
 
               Tool invocation directly from the model.
@@ -835,8 +831,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Optional<Caller> caller`
-
-            Tool invocation directly from the model.
 
             - `class BetaDirectCaller:`
 
@@ -903,8 +897,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Optional<Caller> caller`
-
-            Tool invocation directly from the model.
 
             - `class BetaDirectCaller:`
 
@@ -973,8 +965,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `JsonValue type = "code_execution_tool_result"`
 
           - `BetaCodeExecutionToolResultBlockParamContent content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class BetaCodeExecutionToolResultErrorParam:`
 
@@ -1297,11 +1287,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Tool tool`
 
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
             - `class BetaToolChangeToolReference:`
 
               Reference to a single tool the caller declared directly in
@@ -1349,11 +1334,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `JsonValue type = "tool_removal"`
 
           - `Tool tool`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
 
             - `class BetaToolChangeToolReference:`
 

@@ -1333,8 +1333,6 @@ Create Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
 
-          Token endpoint requires no client authentication.
-
           - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}`
 
             Token endpoint requires no client authentication.
@@ -1610,8 +1608,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
-
-          Token endpoint requires no client authentication.
 
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 
@@ -1957,8 +1953,6 @@ List Credentials
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          Token endpoint requires no client authentication.
-
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 
             Token endpoint requires no client authentication.
@@ -2290,8 +2284,6 @@ Get Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          Token endpoint requires no client authentication.
-
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 
             Token endpoint requires no client authentication.
@@ -2503,8 +2495,6 @@ Update Credential
           maxLength: 8192
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
-
-          Updated HTTP Basic authentication parameters for the token endpoint.
 
           - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}`
 
@@ -2751,8 +2741,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
-
-          Token endpoint requires no client authentication.
 
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 
@@ -3255,8 +3243,6 @@ Archive Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
-
-          Token endpoint requires no client authentication.
 
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 

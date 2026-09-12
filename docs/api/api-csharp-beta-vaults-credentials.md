@@ -79,8 +79,6 @@ Create Credential
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
 
             Token endpoint requires no client authentication.
@@ -352,8 +350,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `required TokenEndpointAuth TokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
@@ -679,8 +675,6 @@ List Credentials
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -996,8 +990,6 @@ Get Credential
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -1194,8 +1186,6 @@ Update Credential
           maxLength: 8192
 
         - `TokenEndpointAuth TokenEndpointAuth`
-
-          Updated HTTP Basic authentication parameters for the token endpoint.
 
           - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
 
@@ -1438,8 +1428,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `required TokenEndpointAuth TokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
@@ -1905,8 +1893,6 @@ Archive Credential
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -2349,8 +2335,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
         - `required TokenEndpointAuth TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -2456,8 +2440,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 ### Beta Managed Agents Credential Networking Params
 
 - `class BetaManagedAgentsCredentialNetworkingParams: union`
-
-  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
   - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:`
 
@@ -2825,8 +2807,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     - `required TokenEndpointAuth TokenEndpointAuth`
 
-      Token endpoint requires no client authentication.
-
       - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
         Token endpoint requires no client authentication.
@@ -2903,8 +2883,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
     - `required TokenEndpointAuth TokenEndpointAuth`
 
-      Token endpoint requires no client authentication.
-
       - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
 
         Token endpoint requires no client authentication.
@@ -2973,8 +2951,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   - `required TokenEndpointAuth TokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
     - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
 
       Token endpoint requires no client authentication.
@@ -3033,8 +3009,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
   - `required TokenEndpointAuth TokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
     - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
       Token endpoint requires no client authentication.
@@ -3080,8 +3054,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
     maxLength: 8192
 
   - `TokenEndpointAuth TokenEndpointAuth`
-
-    Updated HTTP Basic authentication parameters for the token endpoint.
 
     - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
 
@@ -3144,8 +3116,6 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
       maxLength: 8192
 
     - `TokenEndpointAuth TokenEndpointAuth`
-
-      Updated HTTP Basic authentication parameters for the token endpoint.
 
       - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
 

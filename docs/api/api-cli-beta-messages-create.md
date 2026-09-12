@@ -571,8 +571,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `beta_direct_caller: object`
 
           Tool invocation directly from the model.
@@ -633,8 +631,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `beta_direct_caller: object`
 
           Tool invocation directly from the model.
@@ -686,8 +682,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `beta_direct_caller: object`
 
@@ -783,8 +777,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `beta_direct_caller: object`
 
           Tool invocation directly from the model.
@@ -852,8 +844,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "code_execution_tool_result"`
 
       - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `beta_code_execution_tool_result_error: object`
 
@@ -2643,8 +2633,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
-      Response model for a file uploaded to the container.
-
       - `beta_text_block: object`
 
         - `type: "text"`
@@ -2703,8 +2691,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `toolset_name: optional string`
 
           For a toolset member tool_use, the toolset family.
@@ -2725,8 +2711,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
       - `beta_web_search_tool_result_block: object`
 
         - `type: "web_search_tool_result"`
@@ -2739,8 +2723,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
       - `beta_web_fetch_tool_result_block: object`
 
         - `type: "web_fetch_tool_result"`
@@ -2752,8 +2734,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
       - `beta_advisor_tool_result_block: object`
 
@@ -2770,8 +2750,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "code_execution_tool_result"`
 
         - `content: BetaCodeExecutionToolResultError or BetaCodeExecutionResultBlock or BetaEncryptedCodeExecutionResultBlock`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
         - `tool_use_id: string`
 

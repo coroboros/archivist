@@ -455,8 +455,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller Caller`
 
-                Tool invocation directly from the model.
-
                 - `class BetaDirectCaller:`
 
                   Tool invocation directly from the model.
@@ -712,8 +710,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller Caller`
 
-                Tool invocation directly from the model.
-
                 - `class BetaDirectCaller:`
 
                   Tool invocation directly from the model.
@@ -769,8 +765,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller Caller`
-
-                Tool invocation directly from the model.
 
                 - `class BetaDirectCaller:`
 
@@ -837,8 +831,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller Caller`
-
-                Tool invocation directly from the model.
 
                 - `class BetaDirectCaller:`
 
@@ -907,8 +899,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `JsonElement Type = "code_execution_tool_result"`
 
               - `required BetaCodeExecutionToolResultBlockParamContent Content`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `class BetaCodeExecutionToolResultErrorParam:`
 
@@ -1231,11 +1221,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required Tool Tool`
 
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
                 - `class BetaToolChangeToolReference:`
 
                   Reference to a single tool the caller declared directly in
@@ -1283,11 +1268,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `JsonElement Type = "tool_removal"`
 
               - `required Tool Tool`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
 
                 - `class BetaToolChangeToolReference:`
 
@@ -5620,8 +5600,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -5682,8 +5660,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -5735,8 +5711,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `Caller Caller`
-
-              Tool invocation directly from the model.
 
               - `class BetaDirectCaller:`
 
@@ -5832,8 +5806,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -5901,8 +5873,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonElement Type = "code_execution_tool_result"`
 
             - `required BetaCodeExecutionToolResultBlockContent Content`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultError:`
 
@@ -7503,8 +7473,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -7565,8 +7533,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -7618,8 +7584,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `Caller Caller`
-
-              Tool invocation directly from the model.
 
               - `class BetaDirectCaller:`
 
@@ -7715,8 +7679,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `Caller Caller`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller:`
 
                 Tool invocation directly from the model.
@@ -7784,8 +7746,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             - `JsonElement Type = "code_execution_tool_result"`
 
             - `required BetaCodeExecutionToolResultBlockContent Content`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultError:`
 
@@ -9203,8 +9163,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller:`
 
               Tool invocation directly from the model.
@@ -9265,8 +9223,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller:`
 
               Tool invocation directly from the model.
@@ -9318,8 +9274,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `Caller Caller`
-
-            Tool invocation directly from the model.
 
             - `class BetaDirectCaller:`
 
@@ -9415,8 +9369,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `Caller Caller`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller:`
 
               Tool invocation directly from the model.
@@ -9484,8 +9436,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           - `JsonElement Type = "code_execution_tool_result"`
 
           - `required BetaCodeExecutionToolResultBlockContent Content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class BetaCodeExecutionToolResultError:`
 
@@ -10865,8 +10815,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller:`
 
             Tool invocation directly from the model.
@@ -10927,8 +10875,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller:`
 
             Tool invocation directly from the model.
@@ -10980,8 +10926,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `Caller Caller`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller:`
 
@@ -11077,8 +11021,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `Caller Caller`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller:`
 
             Tool invocation directly from the model.
@@ -11146,8 +11088,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
         - `JsonElement Type = "code_execution_tool_result"`
 
         - `required BetaCodeExecutionToolResultBlockContent Content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultError:`
 

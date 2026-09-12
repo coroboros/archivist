@@ -509,8 +509,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -557,8 +555,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -592,8 +588,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "web_search_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -646,8 +640,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "web_fetch_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -742,8 +734,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error: object`
 
@@ -1452,8 +1442,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `text_block: object`
 
         - `type: "text"`
@@ -1506,8 +1494,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: string`
@@ -1530,8 +1516,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
@@ -1541,8 +1525,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
         - `content: WebSearchToolResultError or array of WebSearchResultBlock`
 
@@ -1556,8 +1538,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
         - `tool_use_id: string`
@@ -1569,8 +1549,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
         - `tool_use_id: string`
 
@@ -2827,14 +2805,6 @@ ant messages count-tokens \
 ### Browser State Change
 
 - `browser_state_change: BrowserStateChangeTabOpened or BrowserStateChangeDownloadStarted or BrowserStateChangeDownloadCompleted or BrowserStateChangeDownloadFailed`
-
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
 
   - `browser_state_change_tab_opened: object`
 
@@ -4632,8 +4602,6 @@ ant messages count-tokens \
 
   - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `code_execution_tool_result_error: object`
 
       - `type: "code_execution_tool_result_error"`
@@ -4690,8 +4658,6 @@ ant messages count-tokens \
 
 - `code_execution_tool_result_block_content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `code_execution_tool_result_error: object`
 
     - `type: "code_execution_tool_result_error"`
@@ -4747,8 +4713,6 @@ ant messages count-tokens \
   - `type: "code_execution_tool_result"`
 
   - `content: CodeExecutionToolResultErrorParam or CodeExecutionResultBlockParam or EncryptedCodeExecutionResultBlockParam`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `code_execution_tool_result_error_param: object`
 
@@ -4826,8 +4790,6 @@ ant messages count-tokens \
 ### Code Execution Tool Result Block Param Content
 
 - `code_execution_tool_result_block_param_content: CodeExecutionToolResultErrorParam or CodeExecutionResultBlockParam or EncryptedCodeExecutionResultBlockParam`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `code_execution_tool_result_error_param: object`
 
@@ -5771,8 +5733,6 @@ ant messages count-tokens \
 
 - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-  Response model for a file uploaded to the container.
-
   - `text_block: object`
 
     - `type: "text"`
@@ -5943,8 +5903,6 @@ ant messages count-tokens \
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `direct_caller: object`
 
         Tool invocation directly from the model.
@@ -5991,8 +5949,6 @@ ant messages count-tokens \
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `direct_caller: object`
 
         Tool invocation directly from the model.
@@ -6026,8 +5982,6 @@ ant messages count-tokens \
     - `type: "web_search_tool_result"`
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `direct_caller: object`
 
@@ -6080,8 +6034,6 @@ ant messages count-tokens \
     - `type: "web_fetch_tool_result"`
 
     - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `direct_caller: object`
 
@@ -6176,8 +6128,6 @@ ant messages count-tokens \
     - `type: "code_execution_tool_result"`
 
     - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `code_execution_tool_result_error: object`
 
@@ -6390,8 +6340,6 @@ ant messages count-tokens \
 ### Content Block Param
 
 - `content_block_param: TextBlockParam or ImageBlockParam or DocumentBlockParam or 13 more`
-
-  Regular text content.
 
   - `text_block_param: object`
 
@@ -6810,8 +6758,6 @@ ant messages count-tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `direct_caller: object`
 
         Tool invocation directly from the model.
@@ -7169,8 +7115,6 @@ ant messages count-tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `direct_caller: object`
 
         Tool invocation directly from the model.
@@ -7239,8 +7183,6 @@ ant messages count-tokens \
         Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `direct_caller: object`
 
@@ -7339,8 +7281,6 @@ ant messages count-tokens \
 
     - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `direct_caller: object`
 
         Tool invocation directly from the model.
@@ -7356,8 +7296,6 @@ ant messages count-tokens \
     - `type: "code_execution_tool_result"`
 
     - `content: CodeExecutionToolResultErrorParam or CodeExecutionResultBlockParam or EncryptedCodeExecutionResultBlockParam`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `code_execution_tool_result_error_param: object`
 
@@ -8907,8 +8845,6 @@ ant messages count-tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -8955,8 +8891,6 @@ ant messages count-tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -8990,8 +8924,6 @@ ant messages count-tokens \
       - `type: "web_search_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -9044,8 +8976,6 @@ ant messages count-tokens \
       - `type: "web_fetch_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -9140,8 +9070,6 @@ ant messages count-tokens \
       - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error: object`
 
@@ -9610,8 +9538,6 @@ ant messages count-tokens \
 ### Message Count Tokens Tool
 
 - `message_count_tokens_tool: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `tool: object`
 
@@ -11967,8 +11893,6 @@ ant messages count-tokens \
 
       - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -12326,8 +12250,6 @@ ant messages count-tokens \
 
       - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -12396,8 +12318,6 @@ ant messages count-tokens \
           Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
       - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -12496,8 +12416,6 @@ ant messages count-tokens \
 
       - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -12513,8 +12431,6 @@ ant messages count-tokens \
       - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultErrorParam or CodeExecutionResultBlockParam or EncryptedCodeExecutionResultBlockParam`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error_param: object`
 
@@ -13223,8 +13139,6 @@ ant messages count-tokens \
 
   - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-    Response model for a file uploaded to the container.
-
     - `text_block: object`
 
       - `type: "text"`
@@ -13395,8 +13309,6 @@ ant messages count-tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -13443,8 +13355,6 @@ ant messages count-tokens \
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -13478,8 +13388,6 @@ ant messages count-tokens \
       - `type: "web_search_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -13532,8 +13440,6 @@ ant messages count-tokens \
       - `type: "web_fetch_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -13628,8 +13534,6 @@ ant messages count-tokens \
       - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error: object`
 
@@ -14278,8 +14182,6 @@ ant messages count-tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `direct_caller: object`
 
             Tool invocation directly from the model.
@@ -14326,8 +14228,6 @@ ant messages count-tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `direct_caller: object`
 
             Tool invocation directly from the model.
@@ -14361,8 +14261,6 @@ ant messages count-tokens \
         - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `direct_caller: object`
 
@@ -14415,8 +14313,6 @@ ant messages count-tokens \
         - `type: "web_fetch_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `direct_caller: object`
 
@@ -14511,8 +14407,6 @@ ant messages count-tokens \
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `code_execution_tool_result_error: object`
 
@@ -15243,8 +15137,6 @@ ant messages count-tokens \
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `direct_caller: object`
 
               Tool invocation directly from the model.
@@ -15291,8 +15183,6 @@ ant messages count-tokens \
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `direct_caller: object`
 
               Tool invocation directly from the model.
@@ -15326,8 +15216,6 @@ ant messages count-tokens \
           - `type: "web_search_tool_result"`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `direct_caller: object`
 
@@ -15380,8 +15268,6 @@ ant messages count-tokens \
           - `type: "web_fetch_tool_result"`
 
           - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `direct_caller: object`
 
@@ -15476,8 +15362,6 @@ ant messages count-tokens \
           - `type: "code_execution_tool_result"`
 
           - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `code_execution_tool_result_error: object`
 
@@ -16083,8 +15967,6 @@ ant messages count-tokens \
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `text_block: object`
 
         - `type: "text"`
@@ -16137,8 +16019,6 @@ ant messages count-tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: string`
@@ -16161,8 +16041,6 @@ ant messages count-tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
@@ -16172,8 +16050,6 @@ ant messages count-tokens \
         - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
         - `content: WebSearchToolResultError or array of WebSearchResultBlock`
 
@@ -16187,8 +16063,6 @@ ant messages count-tokens \
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
         - `tool_use_id: string`
@@ -16200,8 +16074,6 @@ ant messages count-tokens \
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
         - `tool_use_id: string`
 
@@ -16707,8 +16579,6 @@ ant messages count-tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `direct_caller: object`
 
       Tool invocation directly from the model.
@@ -16801,8 +16671,6 @@ ant messages count-tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `direct_caller: object`
 
@@ -19221,8 +19089,6 @@ ant messages count-tokens \
 
 - `tool_union: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `tool: object`
 
     - `type: optional "custom"`
@@ -21060,8 +20926,6 @@ ant messages count-tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `direct_caller: object`
 
       Tool invocation directly from the model.
@@ -21136,8 +21000,6 @@ ant messages count-tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `direct_caller: object`
 
@@ -21998,8 +21860,6 @@ ant messages count-tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `direct_caller: object`
 
       Tool invocation directly from the model.
@@ -22462,8 +22322,6 @@ ant messages count-tokens \
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `direct_caller: object`
 
       Tool invocation directly from the model.
@@ -22917,8 +22775,6 @@ ant messages count-tokens \
 
   - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `direct_caller: object`
 
       Tool invocation directly from the model.
@@ -23077,8 +22933,6 @@ ant messages count-tokens \
       - `"1h"`
 
   - `caller: optional DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `direct_caller: object`
 
@@ -24174,8 +24028,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `direct_caller: object`
 
                 Tool invocation directly from the model.
@@ -24222,8 +24074,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `direct_caller: object`
 
                 Tool invocation directly from the model.
@@ -24257,8 +24107,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "web_search_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `direct_caller: object`
 
@@ -24311,8 +24159,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "web_fetch_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `direct_caller: object`
 
@@ -24407,8 +24253,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `code_execution_tool_result_error: object`
 

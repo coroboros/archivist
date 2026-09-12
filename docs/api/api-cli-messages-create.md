@@ -507,8 +507,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -555,8 +553,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `direct_caller: object`
 
           Tool invocation directly from the model.
@@ -590,8 +586,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "web_search_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -644,8 +638,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "web_fetch_tool_result"`
 
       - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `direct_caller: object`
 
@@ -740,8 +732,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: "code_execution_tool_result"`
 
       - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `code_execution_tool_result_error: object`
 
@@ -1450,8 +1440,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: TextBlock or ThinkingBlock or RedactedThinkingBlock or 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `text_block: object`
 
         - `type: "text"`
@@ -1504,8 +1492,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: string`
@@ -1528,8 +1514,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `input: map[unknown]`
 
         - `name: "web_search" or "web_fetch" or "code_execution" or 4 more`
@@ -1539,8 +1523,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "web_search_tool_result"`
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
         - `content: WebSearchToolResultError or array of WebSearchResultBlock`
 
@@ -1554,8 +1536,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
         - `content: WebFetchToolResultErrorBlock or WebFetchBlock`
 
         - `tool_use_id: string`
@@ -1567,8 +1547,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
         - `tool_use_id: string`
 

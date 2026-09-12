@@ -433,8 +433,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -688,8 +686,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -745,8 +741,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Create a cache control breakpoint at this content block.
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-            Tool invocation directly from the model.
 
             - `type BetaDirectCaller struct{…}`
 
@@ -813,8 +807,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Create a cache control breakpoint at this content block.
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-            Tool invocation directly from the model.
 
             - `type BetaDirectCaller struct{…}`
 
@@ -883,8 +875,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -1207,11 +1197,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
             - `type BetaToolChangeToolReference struct{…}`
 
               Reference to a single tool the caller declared directly in
@@ -1259,11 +1244,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `Type ToolRemoval`
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
 
             - `type BetaToolChangeToolReference struct{…}`
 
@@ -3939,8 +3919,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -4003,8 +3981,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -4062,8 +4038,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-        Tool invocation directly from the model.
 
         - `type BetaDirectCaller struct{…}`
 
@@ -4169,8 +4143,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -4248,8 +4220,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -5543,8 +5513,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-      Response model for a file uploaded to the container.
-
       - `type BetaTextBlock struct{…}`
 
       - `type BetaThinkingBlock struct{…}`
@@ -6245,8 +6213,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -6500,8 +6466,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -6557,8 +6521,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-            Tool invocation directly from the model.
 
             - `type BetaDirectCaller struct{…}`
 
@@ -6625,8 +6587,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-            Tool invocation directly from the model.
 
             - `type BetaDirectCaller struct{…}`
 
@@ -6695,8 +6655,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -7019,11 +6977,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
             - `type BetaToolChangeToolReference struct{…}`
 
               Reference to a single tool the caller declared directly in
@@ -7071,11 +7024,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `Type ToolRemoval`
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
 
             - `type BetaToolChangeToolReference struct{…}`
 
@@ -10673,14 +10621,6 @@ func main() {
 
 - `type BetaBrowserStateChangeUnion interface{…}`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `type BetaBrowserStateChangeTabOpened struct{…}`
 
     A tab this call's execution opened that remains open at its end —
@@ -12699,8 +12639,6 @@ func main() {
 
   - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `type BetaCodeExecutionToolResultError struct{…}`
 
       - `Type CodeExecutionToolResultError`
@@ -12767,8 +12705,6 @@ func main() {
 
 - `type BetaCodeExecutionToolResultBlockContentUnion interface{…}`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `type BetaCodeExecutionToolResultError struct{…}`
 
     - `Type CodeExecutionToolResultError`
@@ -12834,8 +12770,6 @@ func main() {
   - `Type CodeExecutionToolResult`
 
   - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -12913,8 +12847,6 @@ func main() {
 ### Beta Code Execution Tool Result Block Param Content
 
 - `type BetaCodeExecutionToolResultBlockParamContentUnionResp interface{…}`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -14019,8 +13951,6 @@ func main() {
 
 - `type BetaContentBlockUnion interface{…}`
 
-  Response model for a file uploaded to the container.
-
   - `type BetaTextBlock struct{…}`
 
     - `Type Text`
@@ -14215,8 +14145,6 @@ func main() {
 
     - `Caller BetaToolUseBlockCallerUnion Optional`
 
-      Tool invocation directly from the model.
-
       - `type BetaDirectCaller struct{…}`
 
         Tool invocation directly from the model.
@@ -14279,8 +14207,6 @@ func main() {
 
     - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-      Tool invocation directly from the model.
-
       - `type BetaDirectCaller struct{…}`
 
         Tool invocation directly from the model.
@@ -14338,8 +14264,6 @@ func main() {
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
     - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-      Tool invocation directly from the model.
 
       - `type BetaDirectCaller struct{…}`
 
@@ -14445,8 +14369,6 @@ func main() {
 
     - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-      Tool invocation directly from the model.
-
       - `type BetaDirectCaller struct{…}`
 
         Tool invocation directly from the model.
@@ -14524,8 +14446,6 @@ func main() {
       default: code_execution_tool_result
 
     - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -14991,8 +14911,6 @@ func main() {
 
 - `type BetaContentBlockParamUnionResp interface{…}`
 
-  Regular text content.
-
   - `type BetaTextBlockParamResp struct{…}`
 
     - `Type Text`
@@ -15332,8 +15250,6 @@ func main() {
 
     - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-      Tool invocation directly from the model.
-
       - `type BetaDirectCaller struct{…}`
 
         Tool invocation directly from the model.
@@ -15587,8 +15503,6 @@ func main() {
 
     - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-      Tool invocation directly from the model.
-
       - `type BetaDirectCaller struct{…}`
 
         Tool invocation directly from the model.
@@ -15644,8 +15558,6 @@ func main() {
       Create a cache control breakpoint at this content block.
 
     - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-      Tool invocation directly from the model.
 
       - `type BetaDirectCaller struct{…}`
 
@@ -15712,8 +15624,6 @@ func main() {
       Create a cache control breakpoint at this content block.
 
     - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-      Tool invocation directly from the model.
 
       - `type BetaDirectCaller struct{…}`
 
@@ -15782,8 +15692,6 @@ func main() {
     - `Type CodeExecutionToolResult`
 
     - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -16106,11 +16014,6 @@ func main() {
 
     - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
-
       - `type BetaToolChangeToolReference struct{…}`
 
         Reference to a single tool the caller declared directly in
@@ -16158,11 +16061,6 @@ func main() {
     - `Type ToolRemoval`
 
     - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
 
       - `type BetaToolChangeToolReference struct{…}`
 
@@ -19522,8 +19420,6 @@ func main() {
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -19586,8 +19482,6 @@ func main() {
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -19645,8 +19539,6 @@ func main() {
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-        Tool invocation directly from the model.
 
         - `type BetaDirectCaller struct{…}`
 
@@ -19752,8 +19644,6 @@ func main() {
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -19831,8 +19721,6 @@ func main() {
         default: code_execution_tool_result
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -21861,8 +21749,6 @@ func main() {
 
         - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-          Tool invocation directly from the model.
-
           - `type BetaDirectCaller struct{…}`
 
             Tool invocation directly from the model.
@@ -22116,8 +22002,6 @@ func main() {
 
         - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-          Tool invocation directly from the model.
-
           - `type BetaDirectCaller struct{…}`
 
             Tool invocation directly from the model.
@@ -22173,8 +22057,6 @@ func main() {
           Create a cache control breakpoint at this content block.
 
         - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-          Tool invocation directly from the model.
 
           - `type BetaDirectCaller struct{…}`
 
@@ -22241,8 +22123,6 @@ func main() {
           Create a cache control breakpoint at this content block.
 
         - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-          Tool invocation directly from the model.
 
           - `type BetaDirectCaller struct{…}`
 
@@ -22311,8 +22191,6 @@ func main() {
         - `Type CodeExecutionToolResult`
 
         - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -22635,11 +22513,6 @@ func main() {
 
         - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
           - `type BetaToolChangeToolReference struct{…}`
 
             Reference to a single tool the caller declared directly in
@@ -22687,11 +22560,6 @@ func main() {
         - `Type ToolRemoval`
 
         - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
 
           - `type BetaToolChangeToolReference struct{…}`
 
@@ -23368,8 +23236,6 @@ func main() {
 
   - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-    Response model for a file uploaded to the container.
-
     - `type BetaTextBlock struct{…}`
 
       - `Type Text`
@@ -23564,8 +23430,6 @@ func main() {
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -23628,8 +23492,6 @@ func main() {
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -23687,8 +23549,6 @@ func main() {
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-        Tool invocation directly from the model.
 
         - `type BetaDirectCaller struct{…}`
 
@@ -23794,8 +23654,6 @@ func main() {
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        Tool invocation directly from the model.
-
         - `type BetaDirectCaller struct{…}`
 
           Tool invocation directly from the model.
@@ -23873,8 +23731,6 @@ func main() {
         default: code_execution_tool_result
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -25309,8 +25165,6 @@ func main() {
 
         - `Caller BetaToolUseBlockCallerUnion Optional`
 
-          Tool invocation directly from the model.
-
           - `type BetaDirectCaller struct{…}`
 
             Tool invocation directly from the model.
@@ -25373,8 +25227,6 @@ func main() {
 
         - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-          Tool invocation directly from the model.
-
           - `type BetaDirectCaller struct{…}`
 
             Tool invocation directly from the model.
@@ -25432,8 +25284,6 @@ func main() {
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-          Tool invocation directly from the model.
 
           - `type BetaDirectCaller struct{…}`
 
@@ -25539,8 +25389,6 @@ func main() {
 
         - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-          Tool invocation directly from the model.
-
           - `type BetaDirectCaller struct{…}`
 
             Tool invocation directly from the model.
@@ -25618,8 +25466,6 @@ func main() {
           default: code_execution_tool_result
 
         - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -27051,8 +26897,6 @@ func main() {
 
           - `Caller BetaToolUseBlockCallerUnion Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -27115,8 +26959,6 @@ func main() {
 
           - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -27174,8 +27016,6 @@ func main() {
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-            Tool invocation directly from the model.
 
             - `type BetaDirectCaller struct{…}`
 
@@ -27281,8 +27121,6 @@ func main() {
 
           - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-            Tool invocation directly from the model.
-
             - `type BetaDirectCaller struct{…}`
 
               Tool invocation directly from the model.
@@ -27360,8 +27198,6 @@ func main() {
             default: code_execution_tool_result
 
           - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `type BetaCodeExecutionToolResultError struct{…}`
 
@@ -28645,8 +28481,6 @@ func main() {
 
     - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-      Response model for a file uploaded to the container.
-
       - `type BetaTextBlock struct{…}`
 
       - `type BetaThinkingBlock struct{…}`
@@ -29384,11 +29218,6 @@ func main() {
 
   - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
-
     - `type BetaToolChangeToolReference struct{…}`
 
       Reference to a single tool the caller declared directly in
@@ -29455,11 +29284,6 @@ func main() {
   - `Type ToolRemoval`
 
   - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
 
     - `type BetaToolChangeToolReference struct{…}`
 
@@ -29755,8 +29579,6 @@ func main() {
 
   - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-    Tool invocation directly from the model.
-
     - `type BetaDirectCaller struct{…}`
 
       Tool invocation directly from the model.
@@ -29833,8 +29655,6 @@ func main() {
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
   - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
-
-    Tool invocation directly from the model.
 
     - `type BetaDirectCaller struct{…}`
 
@@ -32741,8 +32561,6 @@ func main() {
 
 - `type BetaToolUnion interface{…}`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `type BetaTool struct{…}`
 
     - `Type BetaToolType Optional`
@@ -34663,8 +34481,6 @@ func main() {
 
   - `Caller BetaToolUseBlockCallerUnion Optional`
 
-    Tool invocation directly from the model.
-
     - `type BetaDirectCaller struct{…}`
 
       Tool invocation directly from the model.
@@ -34733,8 +34549,6 @@ func main() {
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
   - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
-
-    Tool invocation directly from the model.
 
     - `type BetaDirectCaller struct{…}`
 
@@ -36026,8 +35840,6 @@ func main() {
 
   - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-    Tool invocation directly from the model.
-
     - `type BetaDirectCaller struct{…}`
 
       Tool invocation directly from the model.
@@ -36372,8 +36184,6 @@ func main() {
     Create a cache control breakpoint at this content block.
 
   - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-    Tool invocation directly from the model.
 
     - `type BetaDirectCaller struct{…}`
 
@@ -36874,8 +36684,6 @@ func main() {
 
   - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-    Tool invocation directly from the model.
-
     - `type BetaDirectCaller struct{…}`
 
       Tool invocation directly from the model.
@@ -37002,8 +36810,6 @@ func main() {
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
   - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-    Tool invocation directly from the model.
 
     - `type BetaDirectCaller struct{…}`
 
@@ -37545,8 +37351,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type BetaDirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -37800,8 +37604,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type BetaDirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -37857,8 +37659,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
-
-                Tool invocation directly from the model.
 
                 - `type BetaDirectCaller struct{…}`
 
@@ -37925,8 +37725,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
-
-                Tool invocation directly from the model.
 
                 - `type BetaDirectCaller struct{…}`
 
@@ -37995,8 +37793,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Type CodeExecutionToolResult`
 
               - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -38319,11 +38115,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
                 - `type BetaToolChangeToolReference struct{…}`
 
                   Reference to a single tool the caller declared directly in
@@ -38371,11 +38162,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Type ToolRemoval`
 
               - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
 
                 - `type BetaToolChangeToolReference struct{…}`
 
@@ -42726,8 +42512,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller BetaToolUseBlockCallerUnion Optional`
 
-              Tool invocation directly from the model.
-
               - `type BetaDirectCaller struct{…}`
 
                 Tool invocation directly from the model.
@@ -42790,8 +42574,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-              Tool invocation directly from the model.
-
               - `type BetaDirectCaller struct{…}`
 
                 Tool invocation directly from the model.
@@ -42849,8 +42631,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
-
-              Tool invocation directly from the model.
 
               - `type BetaDirectCaller struct{…}`
 
@@ -42956,8 +42736,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-              Tool invocation directly from the model.
-
               - `type BetaDirectCaller struct{…}`
 
                 Tool invocation directly from the model.
@@ -43035,8 +42813,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `type BetaCodeExecutionToolResultError struct{…}`
 

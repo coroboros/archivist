@@ -141,8 +141,6 @@ List Session Resources
 
 - `type BetaManagedAgentsSessionResourceUnion interface{…}`
 
-  A memory store attached to an agent session.
-
   - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
 
     - `Type BetaManagedAgentsGitHubRepositoryResourceType`

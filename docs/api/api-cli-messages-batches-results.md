@@ -306,8 +306,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `direct_caller: object`
 
                 Tool invocation directly from the model.
@@ -354,8 +352,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `direct_caller: object`
 
                 Tool invocation directly from the model.
@@ -389,8 +385,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "web_search_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `direct_caller: object`
 
@@ -443,8 +437,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "web_fetch_tool_result"`
 
             - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `direct_caller: object`
 
@@ -539,8 +531,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `code_execution_tool_result_error: object`
 

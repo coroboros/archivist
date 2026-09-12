@@ -1342,8 +1342,6 @@ Create Credential
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneParam:`
 
             Token endpoint requires no client authentication.
@@ -1515,8 +1513,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth tokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
@@ -1847,8 +1843,6 @@ List Credentials
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -2162,8 +2156,6 @@ Get Credential
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
             Token endpoint requires no client authentication.
@@ -2464,8 +2456,6 @@ Update Credential
 
         - `Optional<TokenEndpointAuth> tokenEndpointAuth`
 
-          Updated HTTP Basic authentication parameters for the token endpoint.
-
           - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
@@ -2607,8 +2597,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth tokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 
@@ -3079,8 +3067,6 @@ Archive Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth tokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
 

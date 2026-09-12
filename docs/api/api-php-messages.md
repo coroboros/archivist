@@ -385,8 +385,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `ContentBlock contentBlock`
 
-      Response model for a file uploaded to the container.
-
     - `int index`
 
   - `RawContentBlockDeltaEvent`
@@ -2007,8 +2005,6 @@ var_dump($messageTokensCount);
 
   - `CodeExecutionToolResultBlockContent content`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
   - `string toolUseID`
 
 ### Code Execution Tool Result Block Content
@@ -2052,8 +2048,6 @@ var_dump($messageTokensCount);
   - `"code_execution_tool_result" type`
 
   - `CodeExecutionToolResultBlockParamContent content`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
   - `string toolUseID`
 
@@ -2534,8 +2528,6 @@ var_dump($messageTokensCount);
 
     - `Caller caller`
 
-      Tool invocation directly from the model.
-
     - `array<string,mixed> input`
 
     - `string name`
@@ -2552,8 +2544,6 @@ var_dump($messageTokensCount);
 
     - `Caller caller`
 
-      Tool invocation directly from the model.
-
     - `array<string,mixed> input`
 
     - `Name name`
@@ -2563,8 +2553,6 @@ var_dump($messageTokensCount);
     - `"web_search_tool_result" type`
 
     - `Caller caller`
-
-      Tool invocation directly from the model.
 
     - `WebSearchToolResultBlockContent content`
 
@@ -2576,8 +2564,6 @@ var_dump($messageTokensCount);
 
     - `Caller caller`
 
-      Tool invocation directly from the model.
-
     - `Content content`
 
     - `string toolUseID`
@@ -2587,8 +2573,6 @@ var_dump($messageTokensCount);
     - `"code_execution_tool_result" type`
 
     - `CodeExecutionToolResultBlockContent content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
     - `string toolUseID`
 
@@ -2722,8 +2706,6 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-      Tool invocation directly from the model.
-
     - `?string toolsetName`
 
       For a toolset member tool_use, the toolset family this member belongs to.
@@ -2762,8 +2744,6 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-      Tool invocation directly from the model.
-
   - `WebSearchToolResultBlockParam`
 
     - `"web_search_tool_result" type`
@@ -2777,8 +2757,6 @@ var_dump($messageTokensCount);
       Create a cache control breakpoint at this content block.
 
     - `?Caller caller`
-
-      Tool invocation directly from the model.
 
   - `WebFetchToolResultBlockParam`
 
@@ -2794,15 +2772,11 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-      Tool invocation directly from the model.
-
   - `CodeExecutionToolResultBlockParam`
 
     - `"code_execution_tool_result" type`
 
     - `CodeExecutionToolResultBlockParamContent content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
     - `string toolUseID`
 
@@ -4057,8 +4031,6 @@ var_dump($messageTokensCount);
 
   - `ContentBlock contentBlock`
 
-    Response model for a file uploaded to the container.
-
   - `int index`
 
 ### Raw Content Block Stop Event
@@ -4140,8 +4112,6 @@ var_dump($messageTokensCount);
     - `"content_block_start" type`
 
     - `ContentBlock contentBlock`
-
-      Response model for a file uploaded to the container.
 
     - `int index`
 
@@ -4255,8 +4225,6 @@ var_dump($messageTokensCount);
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
   - `array<string,mixed> input`
 
   - `Name name`
@@ -4278,8 +4246,6 @@ var_dump($messageTokensCount);
     Create a cache control breakpoint at this content block.
 
   - `?Caller caller`
-
-    Tool invocation directly from the model.
 
 ### Signature Delta
 
@@ -5903,8 +5869,6 @@ var_dump($messageTokensCount);
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
   - `array<string,mixed> input`
 
   - `string name`
@@ -5930,8 +5894,6 @@ var_dump($messageTokensCount);
     Create a cache control breakpoint at this content block.
 
   - `?Caller caller`
-
-    Tool invocation directly from the model.
 
   - `?string toolsetName`
 
@@ -6256,8 +6218,6 @@ var_dump($messageTokensCount);
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
   - `Content content`
 
   - `string toolUseID`
@@ -6277,8 +6237,6 @@ var_dump($messageTokensCount);
     Create a cache control breakpoint at this content block.
 
   - `?Caller caller`
-
-    Tool invocation directly from the model.
 
 ### Web Fetch Tool Result Error Block
 
@@ -6494,8 +6452,6 @@ var_dump($messageTokensCount);
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
   - `WebSearchToolResultBlockContent content`
 
   - `string toolUseID`
@@ -6537,8 +6493,6 @@ var_dump($messageTokensCount);
     Create a cache control breakpoint at this content block.
 
   - `?Caller caller`
-
-    Tool invocation directly from the model.
 
 ### Web Search Tool Result Block Param Content
 

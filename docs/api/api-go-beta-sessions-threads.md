@@ -4316,8 +4316,6 @@ func main() {
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `type BetaManagedAgentsUnknownError struct{…}`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -4603,8 +4601,6 @@ func main() {
       format: date-time
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 
@@ -4963,8 +4959,6 @@ func main() {
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 
@@ -6740,8 +6734,6 @@ List Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `type BetaManagedAgentsUnknownError struct{…}`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -7027,8 +7019,6 @@ List Session Thread Events
       format: date-time
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 
@@ -7387,8 +7377,6 @@ List Session Thread Events
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 
@@ -9160,8 +9148,6 @@ Stream Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
-
       - `type BetaManagedAgentsUnknownError struct{…}`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
@@ -9447,8 +9433,6 @@ Stream Session Thread Events
       format: date-time
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 
@@ -9807,8 +9791,6 @@ Stream Session Thread Events
       Public sthr_ ID of the thread that went idle.
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
-
-      The agent completed its turn naturally and is ready for the next user message.
 
       - `type BetaManagedAgentsSessionEndTurn struct{…}`
 

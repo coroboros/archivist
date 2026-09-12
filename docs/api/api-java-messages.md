@@ -441,8 +441,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -696,8 +694,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -753,8 +749,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             Create a cache control breakpoint at this content block.
 
           - `Optional<Caller> caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -822,8 +816,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -839,8 +831,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `JsonValue type = "code_execution_tool_result"`
 
           - `CodeExecutionToolResultBlockParamContent content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultErrorParam:`
 
@@ -3002,8 +2992,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -3050,8 +3038,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -3085,8 +3071,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonValue type = "web_search_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -3139,8 +3123,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonValue type = "web_fetch_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -3235,8 +3217,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `JsonValue type = "code_execution_tool_result"`
 
       - `CodeExecutionToolResultBlockContent content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -3784,8 +3764,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `JsonValue type = "content_block_start"`
 
     - `ContentBlock contentBlock`
-
-      Response model for a file uploaded to the container.
 
       - `class TextBlock:`
 
@@ -4383,8 +4361,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4638,8 +4614,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4695,8 +4669,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `Optional<Caller> caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -4764,8 +4736,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `Optional<Caller> caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -4781,8 +4751,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `JsonValue type = "code_execution_tool_result"`
 
           - `CodeExecutionToolResultBlockParamContent content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultErrorParam:`
 
@@ -7442,14 +7410,6 @@ public final class Main {
 
 - `class BrowserStateChange: union`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `class BrowserStateChangeTabOpened:`
 
     A tab this call's execution opened that remains open at its end —
@@ -9246,8 +9206,6 @@ public final class Main {
 
   - `CodeExecutionToolResultBlockContent content`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `class CodeExecutionToolResultError:`
 
       - `JsonValue type = "code_execution_tool_result_error"`
@@ -9304,8 +9262,6 @@ public final class Main {
 
 - `class CodeExecutionToolResultBlockContent: union`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `class CodeExecutionToolResultError:`
 
     - `JsonValue type = "code_execution_tool_result_error"`
@@ -9361,8 +9317,6 @@ public final class Main {
   - `JsonValue type = "code_execution_tool_result"`
 
   - `CodeExecutionToolResultBlockParamContent content`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `class CodeExecutionToolResultErrorParam:`
 
@@ -9440,8 +9394,6 @@ public final class Main {
 ### Code Execution Tool Result Block Param Content
 
 - `class CodeExecutionToolResultBlockParamContent: union`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `class CodeExecutionToolResultErrorParam:`
 
@@ -10385,8 +10337,6 @@ public final class Main {
 
 - `class ContentBlock: union`
 
-  Response model for a file uploaded to the container.
-
   - `class TextBlock:`
 
     - `JsonValue type = "text"`
@@ -10557,8 +10507,6 @@ public final class Main {
 
     - `Caller caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -10605,8 +10553,6 @@ public final class Main {
 
     - `Caller caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -10640,8 +10586,6 @@ public final class Main {
     - `JsonValue type = "web_search_tool_result"`
 
     - `Caller caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -10694,8 +10638,6 @@ public final class Main {
     - `JsonValue type = "web_fetch_tool_result"`
 
     - `Caller caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -10790,8 +10732,6 @@ public final class Main {
     - `JsonValue type = "code_execution_tool_result"`
 
     - `CodeExecutionToolResultBlockContent content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultError:`
 
@@ -11004,8 +10944,6 @@ public final class Main {
 ### Content Block Param
 
 - `class ContentBlockParam: union`
-
-  Regular text content.
 
   - `class TextBlockParam:`
 
@@ -11346,8 +11284,6 @@ public final class Main {
 
     - `Optional<Caller> caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11601,8 +11537,6 @@ public final class Main {
 
     - `Optional<Caller> caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11658,8 +11592,6 @@ public final class Main {
       Create a cache control breakpoint at this content block.
 
     - `Optional<Caller> caller`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller:`
 
@@ -11727,8 +11659,6 @@ public final class Main {
 
     - `Optional<Caller> caller`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller:`
 
         Tool invocation directly from the model.
@@ -11744,8 +11674,6 @@ public final class Main {
     - `JsonValue type = "code_execution_tool_result"`
 
     - `CodeExecutionToolResultBlockParamContent content`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultErrorParam:`
 
@@ -13178,8 +13106,6 @@ public final class Main {
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -13226,8 +13152,6 @@ public final class Main {
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -13261,8 +13185,6 @@ public final class Main {
       - `JsonValue type = "web_search_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -13315,8 +13237,6 @@ public final class Main {
       - `JsonValue type = "web_fetch_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -13411,8 +13331,6 @@ public final class Main {
       - `JsonValue type = "code_execution_tool_result"`
 
       - `CodeExecutionToolResultBlockContent content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -13881,8 +13799,6 @@ public final class Main {
 ### Message Count Tokens Tool
 
 - `class MessageCountTokensTool: union`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `class Tool:`
 
@@ -15846,8 +15762,6 @@ public final class Main {
 
         - `Optional<Caller> caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16101,8 +16015,6 @@ public final class Main {
 
         - `Optional<Caller> caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16158,8 +16070,6 @@ public final class Main {
           Create a cache control breakpoint at this content block.
 
         - `Optional<Caller> caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -16227,8 +16137,6 @@ public final class Main {
 
         - `Optional<Caller> caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -16244,8 +16152,6 @@ public final class Main {
         - `JsonValue type = "code_execution_tool_result"`
 
         - `CodeExecutionToolResultBlockParamContent content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam:`
 
@@ -16965,8 +16871,6 @@ public final class Main {
 
   - `ContentBlock contentBlock`
 
-    Response model for a file uploaded to the container.
-
     - `class TextBlock:`
 
       - `JsonValue type = "text"`
@@ -17137,8 +17041,6 @@ public final class Main {
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -17185,8 +17087,6 @@ public final class Main {
 
       - `Caller caller`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller:`
 
           Tool invocation directly from the model.
@@ -17220,8 +17120,6 @@ public final class Main {
       - `JsonValue type = "web_search_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -17274,8 +17172,6 @@ public final class Main {
       - `JsonValue type = "web_fetch_tool_result"`
 
       - `Caller caller`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller:`
 
@@ -17370,8 +17266,6 @@ public final class Main {
       - `JsonValue type = "code_execution_tool_result"`
 
       - `CodeExecutionToolResultBlockContent content`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError:`
 
@@ -18020,8 +17914,6 @@ public final class Main {
 
         - `Caller caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -18068,8 +17960,6 @@ public final class Main {
 
         - `Caller caller`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller:`
 
             Tool invocation directly from the model.
@@ -18103,8 +17993,6 @@ public final class Main {
         - `JsonValue type = "web_search_tool_result"`
 
         - `Caller caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -18157,8 +18045,6 @@ public final class Main {
         - `JsonValue type = "web_fetch_tool_result"`
 
         - `Caller caller`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller:`
 
@@ -18253,8 +18139,6 @@ public final class Main {
         - `JsonValue type = "code_execution_tool_result"`
 
         - `CodeExecutionToolResultBlockContent content`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultError:`
 
@@ -18985,8 +18869,6 @@ public final class Main {
 
           - `Caller caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -19033,8 +18915,6 @@ public final class Main {
 
           - `Caller caller`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller:`
 
               Tool invocation directly from the model.
@@ -19068,8 +18948,6 @@ public final class Main {
           - `JsonValue type = "web_search_tool_result"`
 
           - `Caller caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -19122,8 +19000,6 @@ public final class Main {
           - `JsonValue type = "web_fetch_tool_result"`
 
           - `Caller caller`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller:`
 
@@ -19218,8 +19094,6 @@ public final class Main {
           - `JsonValue type = "code_execution_tool_result"`
 
           - `CodeExecutionToolResultBlockContent content`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultError:`
 
@@ -19760,8 +19634,6 @@ public final class Main {
 
     - `ContentBlock contentBlock`
 
-      Response model for a file uploaded to the container.
-
       - `class TextBlock:`
 
       - `class ThinkingBlock:`
@@ -20129,8 +20001,6 @@ public final class Main {
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -20223,8 +20093,6 @@ public final class Main {
       - `TTL_1H("1h")`
 
   - `Optional<Caller> caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -22530,8 +22398,6 @@ public final class Main {
 
 - `class ToolUnion: union`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `class Tool:`
 
     - `Optional<Type> type`
@@ -24051,8 +23917,6 @@ public final class Main {
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -24127,8 +23991,6 @@ public final class Main {
       - `TTL_1H("1h")`
 
   - `Optional<Caller> caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -24963,8 +24825,6 @@ public final class Main {
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -25387,8 +25247,6 @@ public final class Main {
     Create a cache control breakpoint at this content block.
 
   - `Optional<Caller> caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -25843,8 +25701,6 @@ public final class Main {
 
   - `Caller caller`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller:`
 
       Tool invocation directly from the model.
@@ -26003,8 +25859,6 @@ public final class Main {
       - `TTL_1H("1h")`
 
   - `Optional<Caller> caller`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller:`
 
@@ -26552,8 +26406,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26807,8 +26659,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26864,8 +26714,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Optional<Caller> caller`
-
-                Tool invocation directly from the model.
 
                 - `class DirectCaller:`
 
@@ -26933,8 +26781,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                Tool invocation directly from the model.
-
                 - `class DirectCaller:`
 
                   Tool invocation directly from the model.
@@ -26950,8 +26796,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `JsonValue type = "code_execution_tool_result"`
 
               - `CodeExecutionToolResultBlockParamContent content`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `class CodeExecutionToolResultErrorParam:`
 
@@ -30107,8 +29951,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller caller`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller:`
 
                 Tool invocation directly from the model.
@@ -30155,8 +29997,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller caller`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller:`
 
                 Tool invocation directly from the model.
@@ -30190,8 +30030,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonValue type = "web_search_tool_result"`
 
             - `Caller caller`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller:`
 
@@ -30244,8 +30082,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonValue type = "web_fetch_tool_result"`
 
             - `Caller caller`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller:`
 
@@ -30340,8 +30176,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `JsonValue type = "code_execution_tool_result"`
 
             - `CodeExecutionToolResultBlockContent content`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class CodeExecutionToolResultError:`
 

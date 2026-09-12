@@ -101,8 +101,6 @@ Create Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          Token endpoint requires no client authentication.
-
           - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
             Token endpoint requires no client authentication.
@@ -329,8 +327,6 @@ List Credentials
 
           - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-            Token endpoint requires no client authentication.
-
             - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
               Token endpoint requires no client authentication.
@@ -550,8 +546,6 @@ Get Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
@@ -778,8 +772,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
@@ -1050,8 +1042,6 @@ Archive Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
@@ -1411,8 +1401,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          Token endpoint requires no client authentication.
-
           - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
             Token endpoint requires no client authentication.
@@ -1518,8 +1506,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 ### Beta Managed Agents Credential Networking Params
 
 - `beta_managed_agents_credential_networking_params: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
-
-  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
   - `beta_managed_agents_unrestricted_credential_networking_params: object`
 
@@ -1905,8 +1891,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-      Token endpoint requires no client authentication.
-
       - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
         Token endpoint requires no client authentication.
@@ -1983,8 +1967,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
 
-      Token endpoint requires no client authentication.
-
       - `beta_managed_agents_token_endpoint_auth_none_param: object`
 
         Token endpoint requires no client authentication.
@@ -2053,8 +2035,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
 
-    Token endpoint requires no client authentication.
-
     - `beta_managed_agents_token_endpoint_auth_none_param: object`
 
       Token endpoint requires no client authentication.
@@ -2113,8 +2093,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-    Token endpoint requires no client authentication.
-
     - `beta_managed_agents_token_endpoint_auth_none_response: object`
 
       Token endpoint requires no client authentication.
@@ -2160,8 +2138,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
     maxLength: 8192
 
   - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
-
-    Updated HTTP Basic authentication parameters for the token endpoint.
 
     - `beta_managed_agents_token_endpoint_auth_basic_update_param: object`
 
@@ -2224,8 +2200,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
       maxLength: 8192
 
     - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
-
-      Updated HTTP Basic authentication parameters for the token endpoint.
 
       - `beta_managed_agents_token_endpoint_auth_basic_update_param: object`
 

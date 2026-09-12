@@ -451,8 +451,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -704,8 +702,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -761,8 +757,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
-
-                Tool invocation directly from the model.
 
                 - `type DirectCaller struct{…}`
 
@@ -830,8 +824,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -847,8 +839,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Type CodeExecutionToolResult`
 
               - `Content CodeExecutionToolResultBlockParamContentUnionResp`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `type CodeExecutionToolResultErrorParamResp struct{…}`
 

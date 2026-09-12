@@ -433,8 +433,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -690,8 +688,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -747,8 +743,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -815,8 +809,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -885,8 +877,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: Literal["code_execution_tool_result"]`
 
         - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -1209,11 +1199,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `tool: Tool`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
           - `class BetaToolChangeToolReference: …`
 
             Reference to a single tool the caller declared directly in
@@ -1261,11 +1246,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: Literal["tool_removal"]`
 
         - `tool: Tool`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
 
           - `class BetaToolChangeToolReference: …`
 
@@ -4221,8 +4201,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -4285,8 +4263,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -4344,8 +4320,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller: Optional[Caller]`
-
-        Tool invocation directly from the model.
 
         - `class BetaDirectCaller: …`
 
@@ -4451,8 +4425,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -4530,8 +4502,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class BetaCodeExecutionToolResultError: …`
 
@@ -5855,8 +5825,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: ContentBlock`
 
-      Response model for a file uploaded to the container.
-
       - `class BetaTextBlock: …`
 
       - `class BetaThinkingBlock: …`
@@ -6545,8 +6513,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -6802,8 +6768,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -6859,8 +6823,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -6927,8 +6889,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -6997,8 +6957,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `type: Literal["code_execution_tool_result"]`
 
         - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -7321,11 +7279,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `tool: Tool`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
           - `class BetaToolChangeToolReference: …`
 
             Reference to a single tool the caller declared directly in
@@ -7373,11 +7326,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `type: Literal["tool_removal"]`
 
         - `tool: Tool`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
 
           - `class BetaToolChangeToolReference: …`
 
@@ -11263,14 +11211,6 @@ print(beta_message_tokens_count.context_management)
 
 - `BetaBrowserStateChange`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `class BetaBrowserStateChangeTabOpened: …`
 
     A tab this call's execution opened that remains open at its end —
@@ -13289,8 +13229,6 @@ print(beta_message_tokens_count.context_management)
 
   - `content: BetaCodeExecutionToolResultBlockContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `class BetaCodeExecutionToolResultError: …`
 
       - `type: Literal["code_execution_tool_result_error"]`
@@ -13357,8 +13295,6 @@ print(beta_message_tokens_count.context_management)
 
 - `BetaCodeExecutionToolResultBlockContent`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `class BetaCodeExecutionToolResultError: …`
 
     - `type: Literal["code_execution_tool_result_error"]`
@@ -13424,8 +13360,6 @@ print(beta_message_tokens_count.context_management)
   - `type: Literal["code_execution_tool_result"]`
 
   - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -13503,8 +13437,6 @@ print(beta_message_tokens_count.context_management)
 ### Beta Code Execution Tool Result Block Param Content
 
 - `BetaCodeExecutionToolResultBlockParamContent`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -14609,8 +14541,6 @@ print(beta_message_tokens_count.context_management)
 
 - `BetaContentBlock`
 
-  Response model for a file uploaded to the container.
-
   - `class BetaTextBlock: …`
 
     - `type: Literal["text"]`
@@ -14805,8 +14735,6 @@ print(beta_message_tokens_count.context_management)
 
     - `caller: Optional[Caller]`
 
-      Tool invocation directly from the model.
-
       - `class BetaDirectCaller: …`
 
         Tool invocation directly from the model.
@@ -14869,8 +14797,6 @@ print(beta_message_tokens_count.context_management)
 
     - `caller: Optional[Caller]`
 
-      Tool invocation directly from the model.
-
       - `class BetaDirectCaller: …`
 
         Tool invocation directly from the model.
@@ -14928,8 +14854,6 @@ print(beta_message_tokens_count.context_management)
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
     - `caller: Optional[Caller]`
-
-      Tool invocation directly from the model.
 
       - `class BetaDirectCaller: …`
 
@@ -15035,8 +14959,6 @@ print(beta_message_tokens_count.context_management)
 
     - `caller: Optional[Caller]`
 
-      Tool invocation directly from the model.
-
       - `class BetaDirectCaller: …`
 
         Tool invocation directly from the model.
@@ -15114,8 +15036,6 @@ print(beta_message_tokens_count.context_management)
       default: code_execution_tool_result
 
     - `content: BetaCodeExecutionToolResultBlockContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class BetaCodeExecutionToolResultError: …`
 
@@ -15605,8 +15525,6 @@ print(beta_message_tokens_count.context_management)
 
 - `BetaContentBlockParam`
 
-  Regular text content.
-
   - `class BetaTextBlockParam: …`
 
     - `type: Literal["text"]`
@@ -15946,8 +15864,6 @@ print(beta_message_tokens_count.context_management)
 
     - `caller: Optional[Caller]`
 
-      Tool invocation directly from the model.
-
       - `class BetaDirectCaller: …`
 
         Tool invocation directly from the model.
@@ -16203,8 +16119,6 @@ print(beta_message_tokens_count.context_management)
 
     - `caller: Optional[Caller]`
 
-      Tool invocation directly from the model.
-
       - `class BetaDirectCaller: …`
 
         Tool invocation directly from the model.
@@ -16260,8 +16174,6 @@ print(beta_message_tokens_count.context_management)
       Create a cache control breakpoint at this content block.
 
     - `caller: Optional[Caller]`
-
-      Tool invocation directly from the model.
 
       - `class BetaDirectCaller: …`
 
@@ -16328,8 +16240,6 @@ print(beta_message_tokens_count.context_management)
       Create a cache control breakpoint at this content block.
 
     - `caller: Optional[Caller]`
-
-      Tool invocation directly from the model.
 
       - `class BetaDirectCaller: …`
 
@@ -16398,8 +16308,6 @@ print(beta_message_tokens_count.context_management)
     - `type: Literal["code_execution_tool_result"]`
 
     - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -16722,11 +16630,6 @@ print(beta_message_tokens_count.context_management)
 
     - `tool: Tool`
 
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
-
       - `class BetaToolChangeToolReference: …`
 
         Reference to a single tool the caller declared directly in
@@ -16774,11 +16677,6 @@ print(beta_message_tokens_count.context_management)
     - `type: Literal["tool_removal"]`
 
     - `tool: Tool`
-
-      Reference to a single tool the caller declared directly in
-      `tools[]`. Does not accept the composed `{server}_{name}` form the
-      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-      `mcp_toolset_reference` for those.
 
       - `class BetaToolChangeToolReference: …`
 
@@ -20312,8 +20210,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -20376,8 +20272,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -20435,8 +20329,6 @@ print(beta_message_tokens_count.context_management)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller: Optional[Caller]`
-
-        Tool invocation directly from the model.
 
         - `class BetaDirectCaller: …`
 
@@ -20542,8 +20434,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -20621,8 +20511,6 @@ print(beta_message_tokens_count.context_management)
         default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class BetaCodeExecutionToolResultError: …`
 
@@ -22719,8 +22607,6 @@ print(beta_message_tokens_count.context_management)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -22976,8 +22862,6 @@ print(beta_message_tokens_count.context_management)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -23033,8 +22917,6 @@ print(beta_message_tokens_count.context_management)
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -23101,8 +22983,6 @@ print(beta_message_tokens_count.context_management)
           Create a cache control breakpoint at this content block.
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -23171,8 +23051,6 @@ print(beta_message_tokens_count.context_management)
         - `type: Literal["code_execution_tool_result"]`
 
         - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -23495,11 +23373,6 @@ print(beta_message_tokens_count.context_management)
 
         - `tool: Tool`
 
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
           - `class BetaToolChangeToolReference: …`
 
             Reference to a single tool the caller declared directly in
@@ -23547,11 +23420,6 @@ print(beta_message_tokens_count.context_management)
         - `type: Literal["tool_removal"]`
 
         - `tool: Tool`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
 
           - `class BetaToolChangeToolReference: …`
 
@@ -24246,8 +24114,6 @@ print(beta_message_tokens_count.context_management)
 
   - `content_block: ContentBlock`
 
-    Response model for a file uploaded to the container.
-
     - `class BetaTextBlock: …`
 
       - `type: Literal["text"]`
@@ -24442,8 +24308,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -24506,8 +24370,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -24565,8 +24427,6 @@ print(beta_message_tokens_count.context_management)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller: Optional[Caller]`
-
-        Tool invocation directly from the model.
 
         - `class BetaDirectCaller: …`
 
@@ -24672,8 +24532,6 @@ print(beta_message_tokens_count.context_management)
 
       - `caller: Optional[Caller]`
 
-        Tool invocation directly from the model.
-
         - `class BetaDirectCaller: …`
 
           Tool invocation directly from the model.
@@ -24751,8 +24609,6 @@ print(beta_message_tokens_count.context_management)
         default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class BetaCodeExecutionToolResultError: …`
 
@@ -26235,8 +26091,6 @@ print(beta_message_tokens_count.context_management)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -26299,8 +26153,6 @@ print(beta_message_tokens_count.context_management)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -26358,8 +26210,6 @@ print(beta_message_tokens_count.context_management)
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `caller: Optional[Caller]`
-
-          Tool invocation directly from the model.
 
           - `class BetaDirectCaller: …`
 
@@ -26465,8 +26315,6 @@ print(beta_message_tokens_count.context_management)
 
         - `caller: Optional[Caller]`
 
-          Tool invocation directly from the model.
-
           - `class BetaDirectCaller: …`
 
             Tool invocation directly from the model.
@@ -26544,8 +26392,6 @@ print(beta_message_tokens_count.context_management)
           default: code_execution_tool_result
 
         - `content: BetaCodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class BetaCodeExecutionToolResultError: …`
 
@@ -28007,8 +27853,6 @@ print(beta_message_tokens_count.context_management)
 
           - `caller: Optional[Caller]`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller: …`
 
               Tool invocation directly from the model.
@@ -28071,8 +27915,6 @@ print(beta_message_tokens_count.context_management)
 
           - `caller: Optional[Caller]`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller: …`
 
               Tool invocation directly from the model.
@@ -28130,8 +27972,6 @@ print(beta_message_tokens_count.context_management)
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `caller: Optional[Caller]`
-
-            Tool invocation directly from the model.
 
             - `class BetaDirectCaller: …`
 
@@ -28237,8 +28077,6 @@ print(beta_message_tokens_count.context_management)
 
           - `caller: Optional[Caller]`
 
-            Tool invocation directly from the model.
-
             - `class BetaDirectCaller: …`
 
               Tool invocation directly from the model.
@@ -28316,8 +28154,6 @@ print(beta_message_tokens_count.context_management)
             default: code_execution_tool_result
 
           - `content: BetaCodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class BetaCodeExecutionToolResultError: …`
 
@@ -29631,8 +29467,6 @@ print(beta_message_tokens_count.context_management)
 
     - `content_block: ContentBlock`
 
-      Response model for a file uploaded to the container.
-
       - `class BetaTextBlock: …`
 
       - `class BetaThinkingBlock: …`
@@ -30376,11 +30210,6 @@ print(beta_message_tokens_count.context_management)
 
   - `tool: Tool`
 
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
-
     - `class BetaToolChangeToolReference: …`
 
       Reference to a single tool the caller declared directly in
@@ -30447,11 +30276,6 @@ print(beta_message_tokens_count.context_management)
   - `type: Literal["tool_removal"]`
 
   - `tool: Tool`
-
-    Reference to a single tool the caller declared directly in
-    `tools[]`. Does not accept the composed `{server}_{name}` form the
-    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-    `mcp_toolset_reference` for those.
 
     - `class BetaToolChangeToolReference: …`
 
@@ -30747,8 +30571,6 @@ print(beta_message_tokens_count.context_management)
 
   - `caller: Optional[Caller]`
 
-    Tool invocation directly from the model.
-
     - `class BetaDirectCaller: …`
 
       Tool invocation directly from the model.
@@ -30825,8 +30647,6 @@ print(beta_message_tokens_count.context_management)
       - `"1h"`
 
   - `caller: Optional[Caller]`
-
-    Tool invocation directly from the model.
 
     - `class BetaDirectCaller: …`
 
@@ -33735,8 +33555,6 @@ print(beta_message_tokens_count.context_management)
 
 - `BetaToolUnion`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `class BetaTool: …`
 
     - `type: Optional[Literal["custom"]]`
@@ -35675,8 +35493,6 @@ print(beta_message_tokens_count.context_management)
 
   - `caller: Optional[Caller]`
 
-    Tool invocation directly from the model.
-
     - `class BetaDirectCaller: …`
 
       Tool invocation directly from the model.
@@ -35745,8 +35561,6 @@ print(beta_message_tokens_count.context_management)
       - `"1h"`
 
   - `caller: Optional[Caller]`
-
-    Tool invocation directly from the model.
 
     - `class BetaDirectCaller: …`
 
@@ -37056,8 +36870,6 @@ print(beta_message_tokens_count.context_management)
 
   - `caller: Optional[Caller]`
 
-    Tool invocation directly from the model.
-
     - `class BetaDirectCaller: …`
 
       Tool invocation directly from the model.
@@ -37402,8 +37214,6 @@ print(beta_message_tokens_count.context_management)
     Create a cache control breakpoint at this content block.
 
   - `caller: Optional[Caller]`
-
-    Tool invocation directly from the model.
 
     - `class BetaDirectCaller: …`
 
@@ -37904,8 +37714,6 @@ print(beta_message_tokens_count.context_management)
 
   - `caller: Optional[Caller]`
 
-    Tool invocation directly from the model.
-
     - `class BetaDirectCaller: …`
 
       Tool invocation directly from the model.
@@ -38032,8 +37840,6 @@ print(beta_message_tokens_count.context_management)
       - `"1h"`
 
   - `caller: Optional[Caller]`
-
-    Tool invocation directly from the model.
 
     - `class BetaDirectCaller: …`
 
@@ -38575,8 +38381,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: Optional[Caller]`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller: …`
 
                 Tool invocation directly from the model.
@@ -38832,8 +38636,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: Optional[Caller]`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller: …`
 
                 Tool invocation directly from the model.
@@ -38889,8 +38691,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller: Optional[Caller]`
-
-              Tool invocation directly from the model.
 
               - `class BetaDirectCaller: …`
 
@@ -38957,8 +38757,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller: Optional[Caller]`
-
-              Tool invocation directly from the model.
 
               - `class BetaDirectCaller: …`
 
@@ -39027,8 +38825,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: Literal["code_execution_tool_result"]`
 
             - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultErrorParam: …`
 
@@ -39351,11 +39147,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool: Tool`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
               - `class BetaToolChangeToolReference: …`
 
                 Reference to a single tool the caller declared directly in
@@ -39403,11 +39194,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: Literal["tool_removal"]`
 
             - `tool: Tool`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
 
               - `class BetaToolChangeToolReference: …`
 
@@ -43645,8 +43431,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: Optional[Caller]`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller: …`
 
                 Tool invocation directly from the model.
@@ -43709,8 +43493,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: Optional[Caller]`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller: …`
 
                 Tool invocation directly from the model.
@@ -43768,8 +43550,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller: Optional[Caller]`
-
-              Tool invocation directly from the model.
 
               - `class BetaDirectCaller: …`
 
@@ -43875,8 +43655,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: Optional[Caller]`
 
-              Tool invocation directly from the model.
-
               - `class BetaDirectCaller: …`
 
                 Tool invocation directly from the model.
@@ -43954,8 +43732,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class BetaCodeExecutionToolResultError: …`
 

@@ -434,8 +434,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -498,8 +496,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -557,8 +553,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -664,8 +658,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -743,8 +735,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError`
 

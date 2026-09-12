@@ -464,8 +464,6 @@ Paginates by member, so a member's periods never split across pages.
 
   - `source: object or object or object or 2 more`
 
-    Scope selecting a single member of the organization.
-
     - `User object`
 
       Scope selecting a single member of the organization.
@@ -724,8 +722,6 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
 
   - `source: object or object or object or 2 more`
 
-    Scope selecting a single member of the organization.
-
     - `User object`
 
       Scope selecting a single member of the organization.
@@ -875,10 +871,6 @@ Requests whose requester is no longer a member are excluded.
 
   - `resolved_by: object or object or null`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
-
     - `UserActor object`
 
       A user within the organization. `name` and `email_address` are
@@ -990,8 +982,6 @@ Requests whose requester is no longer a member are excluded.
         Tagged ID of the member the spend limit applies to.
 
     - `source: object or object or object or 2 more`
-
-      Scope selecting a single member of the organization.
 
       - `User object`
 
@@ -1184,10 +1174,6 @@ requester at the request's period.
 
   - `resolved_by: object or object or null`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
-
     - `UserActor object`
 
       A user within the organization. `name` and `email_address` are
@@ -1299,8 +1285,6 @@ requester at the request's period.
         Tagged ID of the member the spend limit applies to.
 
     - `source: object or object or object or 2 more`
-
-      Scope selecting a single member of the organization.
 
       - `User object`
 
@@ -1501,10 +1485,6 @@ the member was blocked on. Anthropic emails the requester unless
   format: date-time
 
 - `resolved_by: object or object or null`
-
-  A user within the organization. `name` and `email_address` are
-  null when the underlying account is unavailable or has been deleted;
-  `deleted` is true only for deleted accounts.
 
   - `UserActor object`
 
@@ -1709,8 +1689,6 @@ the member was blocked on. Anthropic emails the requester unless
       Tagged ID of the member the spend limit applies to.
 
   - `source: object or object or object or 2 more`
-
-    Scope selecting a single member of the organization.
 
     - `User object`
 
@@ -1918,10 +1896,6 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   - `resolved_by: object or object or null`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
-
     - `UserActor object`
 
       A user within the organization. `name` and `email_address` are
@@ -2033,8 +2007,6 @@ Idempotent on `denied`; denying an already-`approved` request returns
         Tagged ID of the member the spend limit applies to.
 
     - `source: object or object or object or 2 more`
-
-      Scope selecting a single member of the organization.
 
       - `User object`
 

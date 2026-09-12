@@ -557,8 +557,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -814,8 +812,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -871,8 +867,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -939,8 +933,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -1009,8 +1001,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "code_execution_tool_result"`
 
             - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultErrorParam object`
 
@@ -1333,11 +1323,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
               - `BetaToolChangeToolReference object`
 
                 Reference to a single tool the caller declared directly in
@@ -1385,11 +1370,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: "tool_removal"`
 
             - `tool: BetaToolChangeToolReference or BetaToolChangeMCPToolReference or BetaToolChangeMCPToolsetReference`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
 
               - `BetaToolChangeToolReference object`
 
@@ -5528,8 +5508,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -5592,8 +5570,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -5651,8 +5627,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -5758,8 +5732,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -5837,8 +5809,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError object`
 
@@ -7655,8 +7625,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -7719,8 +7687,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -7778,8 +7744,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller object`
 
@@ -7885,8 +7849,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller object`
 
                 Tool invocation directly from the model.
@@ -7964,8 +7926,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
               default: code_execution_tool_result
 
             - `content: BetaCodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultError object`
 
@@ -9553,8 +9513,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `BetaDirectCaller object`
 
               Tool invocation directly from the model.
@@ -9617,8 +9575,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `BetaDirectCaller object`
 
               Tool invocation directly from the model.
@@ -9676,8 +9632,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `BetaDirectCaller object`
 
@@ -9783,8 +9737,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `BetaDirectCaller object`
 
               Tool invocation directly from the model.
@@ -9862,8 +9814,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
             default: code_execution_tool_result
 
           - `content: BetaCodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `BetaCodeExecutionToolResultError object`
 
@@ -11403,8 +11353,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `BetaDirectCaller object`
 
             Tool invocation directly from the model.
@@ -11467,8 +11415,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `BetaDirectCaller object`
 
             Tool invocation directly from the model.
@@ -11526,8 +11472,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `BetaDirectCaller object`
 
@@ -11633,8 +11577,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `BetaDirectCaller object`
 
             Tool invocation directly from the model.
@@ -11712,8 +11654,6 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
           default: code_execution_tool_result
 
         - `content: BetaCodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `BetaCodeExecutionToolResultError object`
 

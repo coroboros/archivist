@@ -67,8 +67,6 @@ Update Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
 
-          Updated HTTP Basic authentication parameters for the token endpoint.
-
           - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
@@ -314,8 +312,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
-
-          Token endpoint requires no client authentication.
 
           - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
 

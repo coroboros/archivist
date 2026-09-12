@@ -437,8 +437,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller`
 
                 Tool invocation directly from the model.
@@ -692,8 +690,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller`
 
                 Tool invocation directly from the model.
@@ -749,8 +745,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               Create a cache control breakpoint at this content block.
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `DirectCaller`
 
@@ -818,8 +812,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `DirectCaller`
 
                 Tool invocation directly from the model.
@@ -835,8 +827,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultErrorParam`
 
@@ -3274,8 +3264,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -3326,8 +3314,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -3365,8 +3351,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -3427,8 +3411,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -3535,8 +3517,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
 
@@ -4145,8 +4125,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `TextBlock`
 
       - `ThinkingBlock`
@@ -4742,8 +4720,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `DirectCaller`
 
               Tool invocation directly from the model.
@@ -4997,8 +4973,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `DirectCaller`
 
               Tool invocation directly from the model.
@@ -5054,8 +5028,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
             Create a cache control breakpoint at this content block.
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `DirectCaller`
 
@@ -5123,8 +5095,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `DirectCaller`
 
               Tool invocation directly from the model.
@@ -5140,8 +5110,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `type: "code_execution_tool_result"`
 
           - `content: CodeExecutionToolResultBlockParamContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `CodeExecutionToolResultErrorParam`
 
@@ -7998,14 +7966,6 @@ console.log(messageTokensCount.input_tokens);
 
 - `BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `BrowserStateChangeTabOpened`
 
     A tab this call's execution opened that remains open at its end —
@@ -9834,8 +9794,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: CodeExecutionToolResultBlockContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `CodeExecutionToolResultError`
 
       - `type: "code_execution_tool_result_error"`
@@ -9902,8 +9860,6 @@ console.log(messageTokensCount.input_tokens);
 
 - `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `CodeExecutionToolResultError`
 
     - `type: "code_execution_tool_result_error"`
@@ -9969,8 +9925,6 @@ console.log(messageTokensCount.input_tokens);
   - `type: "code_execution_tool_result"`
 
   - `content: CodeExecutionToolResultBlockParamContent`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `CodeExecutionToolResultErrorParam`
 
@@ -10048,8 +10002,6 @@ console.log(messageTokensCount.input_tokens);
 ### Code Execution Tool Result Block Param Content
 
 - `CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `CodeExecutionToolResultErrorParam`
 
@@ -10997,8 +10949,6 @@ console.log(messageTokensCount.input_tokens);
 
 - `ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-  Response model for a file uploaded to the container.
-
   - `TextBlock`
 
     - `type: "text"`
@@ -11187,8 +11137,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       default: {"type":"direct"}
 
       - `DirectCaller`
@@ -11239,8 +11187,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       default: {"type":"direct"}
 
       - `DirectCaller`
@@ -11278,8 +11224,6 @@ console.log(messageTokensCount.input_tokens);
       default: web_search_tool_result
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       default: {"type":"direct"}
 
@@ -11340,8 +11284,6 @@ console.log(messageTokensCount.input_tokens);
       default: web_fetch_tool_result
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       default: {"type":"direct"}
 
@@ -11448,8 +11390,6 @@ console.log(messageTokensCount.input_tokens);
       default: code_execution_tool_result
 
     - `content: CodeExecutionToolResultBlockContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultError`
 
@@ -11700,8 +11640,6 @@ console.log(messageTokensCount.input_tokens);
 ### Content Block Param
 
 - `ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
-
-  Regular text content.
 
   - `TextBlockParam`
 
@@ -12042,8 +11980,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller`
 
         Tool invocation directly from the model.
@@ -12297,8 +12233,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller`
 
         Tool invocation directly from the model.
@@ -12354,8 +12288,6 @@ console.log(messageTokensCount.input_tokens);
       Create a cache control breakpoint at this content block.
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `DirectCaller`
 
@@ -12423,8 +12355,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `DirectCaller`
 
         Tool invocation directly from the model.
@@ -12440,8 +12370,6 @@ console.log(messageTokensCount.input_tokens);
     - `type: "code_execution_tool_result"`
 
     - `content: CodeExecutionToolResultBlockParamContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultErrorParam`
 
@@ -13904,8 +13832,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -13956,8 +13882,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -13995,8 +13919,6 @@ console.log(messageTokensCount.input_tokens);
         default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -14057,8 +13979,6 @@ console.log(messageTokensCount.input_tokens);
         default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -14165,8 +14085,6 @@ console.log(messageTokensCount.input_tokens);
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
 
@@ -14687,8 +14605,6 @@ console.log(messageTokensCount.input_tokens);
 ### Message Count Tokens Tool
 
 - `MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `Tool`
 
@@ -16652,8 +16568,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller`
 
             Tool invocation directly from the model.
@@ -16907,8 +16821,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller`
 
             Tool invocation directly from the model.
@@ -16964,8 +16876,6 @@ console.log(messageTokensCount.input_tokens);
           Create a cache control breakpoint at this content block.
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `DirectCaller`
 
@@ -17033,8 +16943,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `DirectCaller`
 
             Tool invocation directly from the model.
@@ -17050,8 +16958,6 @@ console.log(messageTokensCount.input_tokens);
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam`
 
@@ -17819,8 +17725,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-    Response model for a file uploaded to the container.
-
     - `TextBlock`
 
       - `type: "text"`
@@ -18009,8 +17913,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -18061,8 +17963,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         default: {"type":"direct"}
 
         - `DirectCaller`
@@ -18100,8 +18000,6 @@ console.log(messageTokensCount.input_tokens);
         default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -18162,8 +18060,6 @@ console.log(messageTokensCount.input_tokens);
         default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         default: {"type":"direct"}
 
@@ -18270,8 +18166,6 @@ console.log(messageTokensCount.input_tokens);
         default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
 
@@ -18992,8 +18886,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `DirectCaller`
@@ -19044,8 +18936,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `DirectCaller`
@@ -19083,8 +18973,6 @@ console.log(messageTokensCount.input_tokens);
           default: web_search_tool_result
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -19145,8 +19033,6 @@ console.log(messageTokensCount.input_tokens);
           default: web_fetch_tool_result
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -19253,8 +19139,6 @@ console.log(messageTokensCount.input_tokens);
           default: code_execution_tool_result
 
         - `content: CodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultError`
 
@@ -20061,8 +19945,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `DirectCaller`
@@ -20113,8 +19995,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `DirectCaller`
@@ -20152,8 +20032,6 @@ console.log(messageTokensCount.input_tokens);
             default: web_search_tool_result
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -20214,8 +20092,6 @@ console.log(messageTokensCount.input_tokens);
             default: web_fetch_tool_result
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -20322,8 +20198,6 @@ console.log(messageTokensCount.input_tokens);
             default: code_execution_tool_result
 
           - `content: CodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `CodeExecutionToolResultError`
 
@@ -20922,8 +20796,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `TextBlock`
 
       - `ThinkingBlock`
@@ -21317,8 +21189,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller`
@@ -21413,8 +21283,6 @@ console.log(messageTokensCount.input_tokens);
       - `"1h"`
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller`
 
@@ -23784,8 +23652,6 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `Tool`
 
     - `type?: "custom" | null`
@@ -25307,8 +25173,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller`
@@ -25385,8 +25249,6 @@ console.log(messageTokensCount.input_tokens);
       - `"1h"`
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller`
 
@@ -26229,8 +26091,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller`
@@ -26663,8 +26523,6 @@ console.log(messageTokensCount.input_tokens);
     Create a cache control breakpoint at this content block.
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller`
 
@@ -27125,8 +26983,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     default: {"type":"direct"}
 
     - `DirectCaller`
@@ -27295,8 +27151,6 @@ console.log(messageTokensCount.input_tokens);
       - `"1h"`
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `DirectCaller`
 
@@ -27840,8 +27694,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                Tool invocation directly from the model.
-
                 - `DirectCaller`
 
                   Tool invocation directly from the model.
@@ -28095,8 +27947,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                Tool invocation directly from the model.
-
                 - `DirectCaller`
 
                   Tool invocation directly from the model.
@@ -28152,8 +28002,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-                Tool invocation directly from the model.
 
                 - `DirectCaller`
 
@@ -28221,8 +28069,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                Tool invocation directly from the model.
-
                 - `DirectCaller`
 
                   Tool invocation directly from the model.
@@ -28238,8 +28084,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `type: "code_execution_tool_result"`
 
               - `content: CodeExecutionToolResultBlockParamContent`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `CodeExecutionToolResultErrorParam`
 
@@ -31467,8 +31311,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `DirectCaller`
@@ -31519,8 +31361,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `DirectCaller`
@@ -31558,8 +31398,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_search_tool_result
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -31620,8 +31458,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_fetch_tool_result
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -31728,8 +31564,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `content: CodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultError`
 

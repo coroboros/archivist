@@ -1012,8 +1012,6 @@ var_dump($betaManagedAgentsCredentialValidation);
 
   - `TokenEndpointAuth tokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
   - `?string resource`
 
     OAuth resource indicator.
@@ -1036,8 +1034,6 @@ var_dump($betaManagedAgentsCredentialValidation);
 
   - `TokenEndpointAuth tokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
   - `?string resource`
 
     OAuth resource indicator.
@@ -1059,8 +1055,6 @@ var_dump($betaManagedAgentsCredentialValidation);
     Updated OAuth scope for the refresh request.
 
   - `?TokenEndpointAuth tokenEndpointAuth`
-
-    Updated HTTP Basic authentication parameters for the token endpoint.
 
 ### Beta Managed Agents MCP OAuth Update Params
 

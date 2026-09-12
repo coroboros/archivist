@@ -433,8 +433,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -688,8 +686,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -745,8 +741,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Create a cache control breakpoint at this content block.
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller`
 
@@ -814,8 +808,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -831,8 +823,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `type: :code_execution_tool_result`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam`
 
@@ -3234,8 +3224,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -3282,8 +3270,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -3317,8 +3303,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: :web_search_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -3371,8 +3355,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: :web_fetch_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -3467,8 +3449,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `type: :code_execution_tool_result`
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError`
 
@@ -4024,8 +4004,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `type: :content_block_start`
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
-
-      Response model for a file uploaded to the container.
 
       - `class TextBlock`
 
@@ -4604,8 +4582,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -4859,8 +4835,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -4916,8 +4890,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Create a cache control breakpoint at this content block.
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller`
 
@@ -4985,8 +4957,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -5002,8 +4972,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `type: :code_execution_tool_result`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam`
 
@@ -7842,14 +7810,6 @@ puts(message_tokens_count)
 
 - `BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
 
-  A tab this call's execution opened that remains open at its end —
-  the creation delta of the `tabs` inventory, not an event log.
-
-  Carries only the `tab_id`; the tab's `title` and `url` live on its
-  `tabs` entry, which must include the same `tab_id`. A tab opened
-  during a failed call gets no deferred `tab_opened`; it simply appears
-  in the next result's `tabs` inventory.
-
   - `class BrowserStateChangeTabOpened`
 
     A tab this call's execution opened that remains open at its end —
@@ -9646,8 +9606,6 @@ puts(message_tokens_count)
 
   - `content: CodeExecutionToolResultBlockContent`
 
-    Code execution result with encrypted stdout for PFC + web_search results.
-
     - `class CodeExecutionToolResultError`
 
       - `type: :code_execution_tool_result_error`
@@ -9704,8 +9662,6 @@ puts(message_tokens_count)
 
 - `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
 
-  Code execution result with encrypted stdout for PFC + web_search results.
-
   - `class CodeExecutionToolResultError`
 
     - `type: :code_execution_tool_result_error`
@@ -9761,8 +9717,6 @@ puts(message_tokens_count)
   - `type: :code_execution_tool_result`
 
   - `content: CodeExecutionToolResultBlockParamContent`
-
-    Code execution result with encrypted stdout for PFC + web_search results.
 
     - `class CodeExecutionToolResultErrorParam`
 
@@ -9840,8 +9794,6 @@ puts(message_tokens_count)
 ### Code Execution Tool Result Block Param Content
 
 - `CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
-
-  Code execution result with encrypted stdout for PFC + web_search results.
 
   - `class CodeExecutionToolResultErrorParam`
 
@@ -10785,8 +10737,6 @@ puts(message_tokens_count)
 
 - `ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-  Response model for a file uploaded to the container.
-
   - `class TextBlock`
 
     - `type: :text`
@@ -10957,8 +10907,6 @@ puts(message_tokens_count)
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller`
 
         Tool invocation directly from the model.
@@ -11005,8 +10953,6 @@ puts(message_tokens_count)
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller`
 
         Tool invocation directly from the model.
@@ -11040,8 +10986,6 @@ puts(message_tokens_count)
     - `type: :web_search_tool_result`
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller`
 
@@ -11094,8 +11038,6 @@ puts(message_tokens_count)
     - `type: :web_fetch_tool_result`
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller`
 
@@ -11190,8 +11132,6 @@ puts(message_tokens_count)
     - `type: :code_execution_tool_result`
 
     - `content: CodeExecutionToolResultBlockContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultError`
 
@@ -11404,8 +11344,6 @@ puts(message_tokens_count)
 ### Content Block Param
 
 - `ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
-
-  Regular text content.
 
   - `class TextBlockParam`
 
@@ -11746,8 +11684,6 @@ puts(message_tokens_count)
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller`
 
         Tool invocation directly from the model.
@@ -12001,8 +11937,6 @@ puts(message_tokens_count)
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller`
 
         Tool invocation directly from the model.
@@ -12058,8 +11992,6 @@ puts(message_tokens_count)
       Create a cache control breakpoint at this content block.
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-      Tool invocation directly from the model.
 
       - `class DirectCaller`
 
@@ -12127,8 +12059,6 @@ puts(message_tokens_count)
 
     - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      Tool invocation directly from the model.
-
       - `class DirectCaller`
 
         Tool invocation directly from the model.
@@ -12144,8 +12074,6 @@ puts(message_tokens_count)
     - `type: :code_execution_tool_result`
 
     - `content: CodeExecutionToolResultBlockParamContent`
-
-      Code execution result with encrypted stdout for PFC + web_search results.
 
       - `class CodeExecutionToolResultErrorParam`
 
@@ -13578,8 +13506,6 @@ puts(message_tokens_count)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -13626,8 +13552,6 @@ puts(message_tokens_count)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -13661,8 +13585,6 @@ puts(message_tokens_count)
       - `type: :web_search_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -13715,8 +13637,6 @@ puts(message_tokens_count)
       - `type: :web_fetch_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -13811,8 +13731,6 @@ puts(message_tokens_count)
       - `type: :code_execution_tool_result`
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError`
 
@@ -14289,8 +14207,6 @@ puts(message_tokens_count)
 ### Message Count Tokens Tool
 
 - `MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
-
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `class Tool`
 
@@ -16254,8 +16170,6 @@ puts(message_tokens_count)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -16509,8 +16423,6 @@ puts(message_tokens_count)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -16566,8 +16478,6 @@ puts(message_tokens_count)
           Create a cache control breakpoint at this content block.
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller`
 
@@ -16635,8 +16545,6 @@ puts(message_tokens_count)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -16652,8 +16560,6 @@ puts(message_tokens_count)
         - `type: :code_execution_tool_result`
 
         - `content: CodeExecutionToolResultBlockParamContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultErrorParam`
 
@@ -17381,8 +17287,6 @@ puts(message_tokens_count)
 
   - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-    Response model for a file uploaded to the container.
-
     - `class TextBlock`
 
       - `type: :text`
@@ -17553,8 +17457,6 @@ puts(message_tokens_count)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -17601,8 +17503,6 @@ puts(message_tokens_count)
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `class DirectCaller`
 
           Tool invocation directly from the model.
@@ -17636,8 +17536,6 @@ puts(message_tokens_count)
       - `type: :web_search_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -17690,8 +17588,6 @@ puts(message_tokens_count)
       - `type: :web_fetch_tool_result`
 
       - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `class DirectCaller`
 
@@ -17786,8 +17682,6 @@ puts(message_tokens_count)
       - `type: :code_execution_tool_result`
 
       - `content: CodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `class CodeExecutionToolResultError`
 
@@ -18436,8 +18330,6 @@ puts(message_tokens_count)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -18484,8 +18376,6 @@ puts(message_tokens_count)
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          Tool invocation directly from the model.
-
           - `class DirectCaller`
 
             Tool invocation directly from the model.
@@ -18519,8 +18409,6 @@ puts(message_tokens_count)
         - `type: :web_search_tool_result`
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller`
 
@@ -18573,8 +18461,6 @@ puts(message_tokens_count)
         - `type: :web_fetch_tool_result`
 
         - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-          Tool invocation directly from the model.
 
           - `class DirectCaller`
 
@@ -18669,8 +18555,6 @@ puts(message_tokens_count)
         - `type: :code_execution_tool_result`
 
         - `content: CodeExecutionToolResultBlockContent`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `class CodeExecutionToolResultError`
 
@@ -19409,8 +19293,6 @@ puts(message_tokens_count)
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller`
 
               Tool invocation directly from the model.
@@ -19457,8 +19339,6 @@ puts(message_tokens_count)
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            Tool invocation directly from the model.
-
             - `class DirectCaller`
 
               Tool invocation directly from the model.
@@ -19492,8 +19372,6 @@ puts(message_tokens_count)
           - `type: :web_search_tool_result`
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller`
 
@@ -19546,8 +19424,6 @@ puts(message_tokens_count)
           - `type: :web_fetch_tool_result`
 
           - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-            Tool invocation directly from the model.
 
             - `class DirectCaller`
 
@@ -19642,8 +19518,6 @@ puts(message_tokens_count)
           - `type: :code_execution_tool_result`
 
           - `content: CodeExecutionToolResultBlockContent`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `class CodeExecutionToolResultError`
 
@@ -20192,8 +20066,6 @@ puts(message_tokens_count)
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-      Response model for a file uploaded to the container.
-
       - `class TextBlock`
 
       - `class ThinkingBlock`
@@ -20561,8 +20433,6 @@ puts(message_tokens_count)
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller`
 
       Tool invocation directly from the model.
@@ -20655,8 +20525,6 @@ puts(message_tokens_count)
       - `:"1h"`
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller`
 
@@ -22962,8 +22830,6 @@ puts(message_tokens_count)
 
 - `ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
-  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
-
   - `class Tool`
 
     - `type: :custom`
@@ -24483,8 +24349,6 @@ puts(message_tokens_count)
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller`
 
       Tool invocation directly from the model.
@@ -24559,8 +24423,6 @@ puts(message_tokens_count)
       - `:"1h"`
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller`
 
@@ -25395,8 +25257,6 @@ puts(message_tokens_count)
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller`
 
       Tool invocation directly from the model.
@@ -25819,8 +25679,6 @@ puts(message_tokens_count)
     Create a cache control breakpoint at this content block.
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller`
 
@@ -26275,8 +26133,6 @@ puts(message_tokens_count)
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    Tool invocation directly from the model.
-
     - `class DirectCaller`
 
       Tool invocation directly from the model.
@@ -26435,8 +26291,6 @@ puts(message_tokens_count)
       - `:"1h"`
 
   - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-    Tool invocation directly from the model.
 
     - `class DirectCaller`
 
@@ -26976,8 +26830,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller`
 
                 Tool invocation directly from the model.
@@ -27231,8 +27083,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller`
 
                 Tool invocation directly from the model.
@@ -27288,8 +27138,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Create a cache control breakpoint at this content block.
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller`
 
@@ -27357,8 +27205,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller`
 
                 Tool invocation directly from the model.
@@ -27374,8 +27220,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: :code_execution_tool_result`
 
             - `content: CodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class CodeExecutionToolResultErrorParam`
 
@@ -30486,8 +30330,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller`
 
                 Tool invocation directly from the model.
@@ -30534,8 +30376,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `class DirectCaller`
 
                 Tool invocation directly from the model.
@@ -30569,8 +30409,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: :web_search_tool_result`
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller`
 
@@ -30623,8 +30461,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: :web_fetch_tool_result`
 
             - `caller_: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `class DirectCaller`
 
@@ -30719,8 +30555,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `type: :code_execution_tool_result`
 
             - `content: CodeExecutionToolResultBlockContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `class CodeExecutionToolResultError`
 

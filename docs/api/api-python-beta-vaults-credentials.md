@@ -75,8 +75,6 @@ Create Credential
 
       - `token_endpoint_auth: TokenEndpointAuth`
 
-        Token endpoint requires no client authentication.
-
         - `class BetaManagedAgentsTokenEndpointAuthNoneParam: …`
 
           Token endpoint requires no client authentication.
@@ -348,8 +346,6 @@ Create Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: TokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
@@ -674,8 +670,6 @@ List Credentials
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
             Token endpoint requires no client authentication.
@@ -988,8 +982,6 @@ Get Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
             Token endpoint requires no client authentication.
@@ -1184,8 +1176,6 @@ Update Credential
         maxLength: 8192
 
       - `token_endpoint_auth: Optional[TokenEndpointAuth]`
-
-        Updated HTTP Basic authentication parameters for the token endpoint.
 
         - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …`
 
@@ -1428,8 +1418,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: TokenEndpointAuth`
-
-          Token endpoint requires no client authentication.
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
@@ -1891,8 +1879,6 @@ Archive Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
             Token endpoint requires no client authentication.
@@ -2339,8 +2325,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          Token endpoint requires no client authentication.
-
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
             Token endpoint requires no client authentication.
@@ -2446,8 +2430,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 ### Beta Managed Agents Credential Networking Params
 
 - `BetaManagedAgentsCredentialNetworkingParams`
-
-  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
   - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …`
 
@@ -2815,8 +2797,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `token_endpoint_auth: TokenEndpointAuth`
 
-      Token endpoint requires no client authentication.
-
       - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
         Token endpoint requires no client authentication.
@@ -2893,8 +2873,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `token_endpoint_auth: TokenEndpointAuth`
 
-      Token endpoint requires no client authentication.
-
       - `class BetaManagedAgentsTokenEndpointAuthNoneParam: …`
 
         Token endpoint requires no client authentication.
@@ -2963,8 +2941,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `token_endpoint_auth: TokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
     - `class BetaManagedAgentsTokenEndpointAuthNoneParam: …`
 
       Token endpoint requires no client authentication.
@@ -3023,8 +2999,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `token_endpoint_auth: TokenEndpointAuth`
 
-    Token endpoint requires no client authentication.
-
     - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
 
       Token endpoint requires no client authentication.
@@ -3070,8 +3044,6 @@ print(beta_managed_agents_credential_validation.credential_id)
     maxLength: 8192
 
   - `token_endpoint_auth: Optional[TokenEndpointAuth]`
-
-    Updated HTTP Basic authentication parameters for the token endpoint.
 
     - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …`
 
@@ -3134,8 +3106,6 @@ print(beta_managed_agents_credential_validation.credential_id)
       maxLength: 8192
 
     - `token_endpoint_auth: Optional[TokenEndpointAuth]`
-
-      Updated HTTP Basic authentication parameters for the token endpoint.
 
       - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …`
 

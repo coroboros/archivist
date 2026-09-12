@@ -435,8 +435,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -692,8 +690,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-              Tool invocation directly from the model.
-
               - `BetaDirectCaller`
 
                 Tool invocation directly from the model.
@@ -749,8 +745,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               Create a cache control breakpoint at this content block.
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -817,8 +811,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               Create a cache control breakpoint at this content block.
 
             - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-              Tool invocation directly from the model.
 
               - `BetaDirectCaller`
 
@@ -887,8 +879,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `type: "code_execution_tool_result"`
 
             - `content: BetaCodeExecutionToolResultBlockParamContent`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `BetaCodeExecutionToolResultErrorParam`
 
@@ -1211,11 +1201,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
               - `BetaToolChangeToolReference`
 
                 Reference to a single tool the caller declared directly in
@@ -1263,11 +1248,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `type: "tool_removal"`
 
             - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
 
               - `BetaToolChangeToolReference`
 
@@ -4269,8 +4249,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -4333,8 +4311,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -4392,8 +4368,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
-
-        Tool invocation directly from the model.
 
         - `BetaDirectCaller`
 
@@ -4499,8 +4473,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-        Tool invocation directly from the model.
-
         - `BetaDirectCaller`
 
           Tool invocation directly from the model.
@@ -4578,8 +4550,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         default: code_execution_tool_result
 
       - `content: BetaCodeExecutionToolResultBlockContent`
-
-        Code execution result with encrypted stdout for PFC + web_search results.
 
         - `BetaCodeExecutionToolResultError`
 
@@ -5880,8 +5850,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       default: content_block_start
 
     - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
-
-      Response model for a file uploaded to the container.
 
       - `BetaTextBlock`
 

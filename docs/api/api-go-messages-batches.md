@@ -453,8 +453,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -706,8 +704,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -763,8 +759,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Create a cache control breakpoint at this content block.
 
               - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
-
-                Tool invocation directly from the model.
 
                 - `type DirectCaller struct{…}`
 
@@ -832,8 +826,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                Tool invocation directly from the model.
-
                 - `type DirectCaller struct{…}`
 
                   Tool invocation directly from the model.
@@ -849,8 +841,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Type CodeExecutionToolResult`
 
               - `Content CodeExecutionToolResultBlockParamContentUnionResp`
-
-                Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `type CodeExecutionToolResultErrorParamResp struct{…}`
 
@@ -4151,8 +4141,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller ToolUseBlockCallerUnion`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `type DirectCaller struct{…}`
@@ -4203,8 +4191,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Caller ServerToolUseBlockCallerUnion`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `type DirectCaller struct{…}`
@@ -4242,8 +4228,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_search_tool_result
 
             - `Caller WebSearchToolResultBlockCallerUnion`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -4304,8 +4288,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: web_fetch_tool_result
 
             - `Caller WebFetchToolResultBlockCallerUnion`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -4412,8 +4394,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               default: code_execution_tool_result
 
             - `Content CodeExecutionToolResultBlockContentUnion`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `type CodeExecutionToolResultError struct{…}`
 
@@ -5626,8 +5606,6 @@ func main() {
 
             - `Caller ToolUseBlockCallerUnion`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `type DirectCaller struct{…}`
@@ -5678,8 +5656,6 @@ func main() {
 
             - `Caller ServerToolUseBlockCallerUnion`
 
-              Tool invocation directly from the model.
-
               default: {"type":"direct"}
 
               - `type DirectCaller struct{…}`
@@ -5717,8 +5693,6 @@ func main() {
               default: web_search_tool_result
 
             - `Caller WebSearchToolResultBlockCallerUnion`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -5779,8 +5753,6 @@ func main() {
               default: web_fetch_tool_result
 
             - `Caller WebFetchToolResultBlockCallerUnion`
-
-              Tool invocation directly from the model.
 
               default: {"type":"direct"}
 
@@ -5887,8 +5859,6 @@ func main() {
               default: code_execution_tool_result
 
             - `Content CodeExecutionToolResultBlockContentUnion`
-
-              Code execution result with encrypted stdout for PFC + web_search results.
 
               - `type CodeExecutionToolResultError struct{…}`
 
@@ -6849,8 +6819,6 @@ func main() {
 
           - `Caller ToolUseBlockCallerUnion`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `type DirectCaller struct{…}`
@@ -6901,8 +6869,6 @@ func main() {
 
           - `Caller ServerToolUseBlockCallerUnion`
 
-            Tool invocation directly from the model.
-
             default: {"type":"direct"}
 
             - `type DirectCaller struct{…}`
@@ -6940,8 +6906,6 @@ func main() {
             default: web_search_tool_result
 
           - `Caller WebSearchToolResultBlockCallerUnion`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -7002,8 +6966,6 @@ func main() {
             default: web_fetch_tool_result
 
           - `Caller WebFetchToolResultBlockCallerUnion`
-
-            Tool invocation directly from the model.
 
             default: {"type":"direct"}
 
@@ -7110,8 +7072,6 @@ func main() {
             default: code_execution_tool_result
 
           - `Content CodeExecutionToolResultBlockContentUnion`
-
-            Code execution result with encrypted stdout for PFC + web_search results.
 
             - `type CodeExecutionToolResultError struct{…}`
 
@@ -8024,8 +7984,6 @@ func main() {
 
         - `Caller ToolUseBlockCallerUnion`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `type DirectCaller struct{…}`
@@ -8076,8 +8034,6 @@ func main() {
 
         - `Caller ServerToolUseBlockCallerUnion`
 
-          Tool invocation directly from the model.
-
           default: {"type":"direct"}
 
           - `type DirectCaller struct{…}`
@@ -8115,8 +8071,6 @@ func main() {
           default: web_search_tool_result
 
         - `Caller WebSearchToolResultBlockCallerUnion`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -8177,8 +8131,6 @@ func main() {
           default: web_fetch_tool_result
 
         - `Caller WebFetchToolResultBlockCallerUnion`
-
-          Tool invocation directly from the model.
 
           default: {"type":"direct"}
 
@@ -8285,8 +8237,6 @@ func main() {
           default: code_execution_tool_result
 
         - `Content CodeExecutionToolResultBlockContentUnion`
-
-          Code execution result with encrypted stdout for PFC + web_search results.
 
           - `type CodeExecutionToolResultError struct{…}`
 
