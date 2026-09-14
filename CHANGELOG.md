@@ -1,5 +1,38 @@
 # Changelog
 
+## 🤖 v1.5.169 - 14/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-streaming-output.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+
+
 ## 🤖 v1.5.168 - 13/09/2026
 
 File Changes:
