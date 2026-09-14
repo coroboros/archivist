@@ -363,7 +363,7 @@ When using [thinking](./build-with-claude-thinking.md#streaming-thinking) with s
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
-When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](./build-with-claude-thinking.md#progress-updates) that some models write between tool calls stream `thinking_delta` events. See [Controlling thinking display](./build-with-claude-thinking.md#controlling-thinking-display).
+When `display: "omitted"` is set on the thinking configuration, no thinking text is streamed. The thinking block opens, receives a `thinking_delta` with an empty `thinking` string and then a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](./build-with-claude-thinking.md#progress-updates) that some models write between tool calls stream `thinking_delta` events that carry text. See [Controlling thinking display](./build-with-claude-thinking.md#controlling-thinking-display).
 
 A typical thinking delta looks like:
 

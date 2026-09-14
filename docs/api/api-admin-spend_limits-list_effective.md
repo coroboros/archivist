@@ -119,7 +119,7 @@ Paginates by member, so a member's periods never split across pages.
 
       Tagged ID of the member the spend limit applies to.
 
-  - `source: object or object or object or 2 more`
+  - `source: User or SeatTier or RBACGroup or 2 more`
 
     - `User object`
 

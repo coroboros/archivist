@@ -1,5 +1,80 @@
 # Changelog
 
+## 🤖 v1.5.170 - 14/09/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-admin-organizations.md`
+- Modified: `docs/api/api-admin-rbac_roles-permissions-list.md`
+- Modified: `docs/api/api-admin-rbac_roles-permissions.md`
+- Modified: `docs/api/api-admin-rbac_roles.md`
+- Modified: `docs/api/api-admin-spend_limits-create.md`
+- Modified: `docs/api/api-admin-spend_limits-increase_requests-approve.md`
+- Modified: `docs/api/api-admin-spend_limits-increase_requests-deny.md`
+- Modified: `docs/api/api-admin-spend_limits-increase_requests-list.md`
+- Modified: `docs/api/api-admin-spend_limits-increase_requests-retrieve.md`
+- Modified: `docs/api/api-admin-spend_limits-increase_requests.md`
+- Modified: `docs/api/api-admin-spend_limits-list_effective.md`
+- Modified: `docs/api/api-admin-spend_limits-retrieve.md`
+- Modified: `docs/api/api-admin-spend_limits.md`
+- Modified: `docs/api/api-admin-usage_report-retrieve_claude_code.md`
+- Modified: `docs/api/api-admin-usage_report.md`
+- Modified: `docs/api/api-admin.md`
+- Modified: `docs/api/api-beta-organization-rbac_roles-permissions-list.md`
+- Modified: `docs/api/api-beta-organization-rbac_roles-permissions.md`
+- Modified: `docs/api/api-beta-organization-rbac_roles.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-create.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-increase_requests-approve.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-increase_requests-deny.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-increase_requests-list.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-increase_requests-retrieve.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-increase_requests.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-list_effective.md`
+- Modified: `docs/api/api-beta-organization-spend_limits-retrieve.md`
+- Modified: `docs/api/api-beta-organization-spend_limits.md`
+- Modified: `docs/api/api-beta-organization-usage_report-retrieve_claude_code.md`
+- Modified: `docs/api/api-beta-organization-usage_report.md`
+- Modified: `docs/api/api-beta-organization.md`
+- Modified: `docs/api/api-beta.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages-list.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages.md`
+- Modified: `docs/api/api-compliance-apps-chats.md`
+- Modified: `docs/api/api-compliance-apps-projects-attachments-list.md`
+- Modified: `docs/api/api-compliance-apps-projects-attachments.md`
+- Modified: `docs/api/api-compliance-apps-projects-collaborators-list.md`
+- Modified: `docs/api/api-compliance-apps-projects-collaborators.md`
+- Modified: `docs/api/api-compliance-apps-projects.md`
+- Modified: `docs/api/api-compliance-apps-sessions-local-messages-list.md`
+- Modified: `docs/api/api-compliance-apps-sessions-local-messages.md`
+- Modified: `docs/api/api-compliance-apps-sessions-local.md`
+- Modified: `docs/api/api-compliance-apps-sessions-remote-messages-list.md`
+- Modified: `docs/api/api-compliance-apps-sessions-remote-messages.md`
+- Modified: `docs/api/api-compliance-apps-sessions-remote.md`
+- Modified: `docs/api/api-compliance-apps-sessions.md`
+- Modified: `docs/api/api-compliance-apps.md`
+- Modified: `docs/api/api-compliance-organizations-settings-retrieve.md`
+- Modified: `docs/api/api-compliance-organizations-settings.md`
+- Modified: `docs/api/api-compliance-organizations.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-preserved-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-streaming.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-troubleshooting.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-configuration.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-endpoint.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks.md`
+
+
 ## 🤖 v1.5.169 - 14/09/2026
 
 File Changes:

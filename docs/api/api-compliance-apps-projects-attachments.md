@@ -56,7 +56,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ### Returns
 
-- `data: array of object or object`
+- `data: array of ComplianceProjectFileReference or ComplianceProjectDocReference`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
@@ -171,7 +171,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
 ### Attachment List Response
 
-- `AttachmentListResponse = object or object`
+- `AttachmentListResponse = ComplianceProjectFileReference or ComplianceProjectDocReference`
 
   - `ComplianceProjectFileReference object`
 
