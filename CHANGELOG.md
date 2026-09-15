@@ -1,5 +1,56 @@
 # Changelog
 
+## 🤖 v1.5.171 - 15/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-self-hosted-environments-reference.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-whats-new.md`
+- Modified: `docs/code/code-workflows.md`
+- Added: `docs/code/code-2026-w35.md`
+- Added: `docs/code/code-2026-w36.md`
+- Added: `docs/code/code-2026-w37.md`
+
+
 ## 🤖 v1.5.170 - 14/09/2026
 
 File Changes:
