@@ -203,6 +203,8 @@ Create User Profile
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaUserProfile: …`
@@ -494,6 +496,8 @@ List User Profiles
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaUserProfile: …`
@@ -766,6 +770,8 @@ Get User Profile
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+- `workspace_id: Optional[str]`
 
 ### Returns
 
@@ -1120,6 +1126,8 @@ Update User Profile
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaUserProfile: …`
@@ -1388,6 +1396,8 @@ Create Enrollment URL
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+- `workspace_id: Optional[str]`
 
 ### Returns
 

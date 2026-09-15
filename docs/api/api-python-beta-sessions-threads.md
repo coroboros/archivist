@@ -3817,7 +3817,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent: …`
 
@@ -3899,7 +3899,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
 
@@ -3927,7 +3927,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMessageEvent: …`
 
@@ -4069,7 +4069,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
 
@@ -4155,7 +4155,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentToolResultEvent: …`
 
@@ -5047,7 +5047,7 @@ print(beta_managed_agents_session_thread.id)
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
 
@@ -6242,7 +6242,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent: …`
 
@@ -6324,7 +6324,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
 
@@ -6352,7 +6352,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMessageEvent: …`
 
@@ -6494,7 +6494,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
 
@@ -6580,7 +6580,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentToolResultEvent: …`
 
@@ -7472,7 +7472,7 @@ List Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
 
@@ -8651,7 +8651,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent: …`
 
@@ -8733,7 +8733,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
 
@@ -8761,7 +8761,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMessageEvent: …`
 
@@ -8903,7 +8903,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
 
@@ -8989,7 +8989,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `class BetaManagedAgentsAgentToolResultEvent: …`
 
@@ -9881,7 +9881,7 @@ Stream Session Thread Events
 
     - `session_thread_id: Optional[str]`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
 

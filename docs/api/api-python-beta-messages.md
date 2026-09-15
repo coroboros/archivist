@@ -5409,7 +5409,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-        - `model: Model`
+        - `model: Optional[Model]`
 
           The model that will complete your prompt.
 
@@ -5507,10 +5507,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `type: Literal["fallback_message"]`
 
@@ -18259,10 +18261,12 @@ print(beta_message_tokens_count.context_management)
 
   Token usage for the fallback-model attempt of a server-side fallback request.
 
-  Produced in place of a `message` entry for whichever hop served the
-  response. A declined hop produces the existing `message` entry. Whether
-  a fallback model served the response is signalled by the presence of this
-  entry in `usage.iterations`.
+  The terminal entry of a fallback-served turn: when a fallback hop's
+  output is the returned message, the entry for the iteration that
+  completed it carries this type in place of `message`. A declined hop
+  and the serving hop's earlier tool-loop iterations produce `message`
+  entries. Whether a fallback model served the response is signalled by
+  the presence of this entry in `usage.iterations`.
 
   - `type: Literal["fallback_message"]`
 
@@ -19108,7 +19112,7 @@ print(beta_message_tokens_count.context_management)
 
       minimum: 0
 
-    - `model: Model`
+    - `model: Optional[Model]`
 
       The model that will complete your prompt.
 
@@ -19300,10 +19304,12 @@ print(beta_message_tokens_count.context_management)
 
     Token usage for the fallback-model attempt of a server-side fallback request.
 
-    Produced in place of a `message` entry for whichever hop served the
-    response. A declined hop produces the existing `message` entry. Whether
-    a fallback model served the response is signalled by the presence of this
-    entry in `usage.iterations`.
+    The terminal entry of a fallback-served turn: when a fallback hop's
+    output is the returned message, the entry for the iteration that
+    completed it carries this type in place of `message`. A declined hop
+    and the serving hop's earlier tool-loop iterations produce `message`
+    entries. Whether a fallback model served the response is signalled by
+    the presence of this entry in `usage.iterations`.
 
     - `type: Literal["fallback_message"]`
 
@@ -21418,7 +21424,7 @@ print(beta_message_tokens_count.context_management)
 
           minimum: 0
 
-        - `model: Model`
+        - `model: Optional[Model]`
 
           The model that will complete your prompt.
 
@@ -21516,10 +21522,12 @@ print(beta_message_tokens_count.context_management)
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `type: Literal["fallback_message"]`
 
@@ -21827,7 +21835,7 @@ print(beta_message_tokens_count.context_management)
 
         minimum: 0
 
-      - `model: Model`
+      - `model: Optional[Model]`
 
         The model that will complete your prompt.
 
@@ -22019,10 +22027,12 @@ print(beta_message_tokens_count.context_management)
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
-      Produced in place of a `message` entry for whichever hop served the
-      response. A declined hop produces the existing `message` entry. Whether
-      a fallback model served the response is signalled by the presence of this
-      entry in `usage.iterations`.
+      The terminal entry of a fallback-served turn: when a fallback hop's
+      output is the returned message, the entry for the iteration that
+      completed it carries this type in place of `message`. A declined hop
+      and the serving hop's earlier tool-loop iterations produce `message`
+      entries. Whether a fallback model served the response is signalled by
+      the presence of this entry in `usage.iterations`.
 
       - `type: Literal["fallback_message"]`
 
@@ -22152,7 +22162,7 @@ print(beta_message_tokens_count.context_management)
 
     minimum: 0
 
-  - `model: Model`
+  - `model: Optional[Model]`
 
     The model that will complete your prompt.
 
@@ -25473,7 +25483,7 @@ print(beta_message_tokens_count.context_management)
 
           minimum: 0
 
-        - `model: Model`
+        - `model: Optional[Model]`
 
           The model that will complete your prompt.
 
@@ -25665,10 +25675,12 @@ print(beta_message_tokens_count.context_management)
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `type: Literal["fallback_message"]`
 
@@ -27299,7 +27311,7 @@ print(beta_message_tokens_count.context_management)
 
             minimum: 0
 
-          - `model: Model`
+          - `model: Optional[Model]`
 
             The model that will complete your prompt.
 
@@ -27397,10 +27409,12 @@ print(beta_message_tokens_count.context_management)
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
-          Produced in place of a `message` entry for whichever hop served the
-          response. A declined hop produces the existing `message` entry. Whether
-          a fallback model served the response is signalled by the presence of this
-          entry in `usage.iterations`.
+          The terminal entry of a fallback-served turn: when a fallback hop's
+          output is the returned message, the entry for the iteration that
+          completed it carries this type in place of `message`. A declined hop
+          and the serving hop's earlier tool-loop iterations produce `message`
+          entries. Whether a fallback model served the response is signalled by
+          the presence of this entry in `usage.iterations`.
 
           - `type: Literal["fallback_message"]`
 
@@ -29061,7 +29075,7 @@ print(beta_message_tokens_count.context_management)
 
               minimum: 0
 
-            - `model: Model`
+            - `model: Optional[Model]`
 
               The model that will complete your prompt.
 
@@ -29159,10 +29173,12 @@ print(beta_message_tokens_count.context_management)
 
             Token usage for the fallback-model attempt of a server-side fallback request.
 
-            Produced in place of a `message` entry for whichever hop served the
-            response. A declined hop produces the existing `message` entry. Whether
-            a fallback model served the response is signalled by the presence of this
-            entry in `usage.iterations`.
+            The terminal entry of a fallback-served turn: when a fallback hop's
+            output is the returned message, the entry for the iteration that
+            completed it carries this type in place of `message`. A declined hop
+            and the serving hop's earlier tool-loop iterations produce `message`
+            entries. Whether a fallback model served the response is signalled by
+            the presence of this entry in `usage.iterations`.
 
             - `type: Literal["fallback_message"]`
 
@@ -35786,7 +35802,7 @@ print(beta_message_tokens_count.context_management)
 
         minimum: 0
 
-      - `model: Model`
+      - `model: Optional[Model]`
 
         The model that will complete your prompt.
 
@@ -35978,10 +35994,12 @@ print(beta_message_tokens_count.context_management)
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
-      Produced in place of a `message` entry for whichever hop served the
-      response. A declined hop produces the existing `message` entry. Whether
-      a fallback model served the response is signalled by the presence of this
-      entry in `usage.iterations`.
+      The terminal entry of a fallback-served turn: when a fallback hop's
+      output is the returned message, the entry for the iteration that
+      completed it carries this type in place of `message`. A declined hop
+      and the serving hop's earlier tool-loop iterations produce `message`
+      entries. Whether a fallback model served the response is signalled by
+      the presence of this entry in `usage.iterations`.
 
       - `type: Literal["fallback_message"]`
 
@@ -44639,7 +44657,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 0
 
-              - `model: Model`
+              - `model: Optional[Model]`
 
                 The model that will complete your prompt.
 
@@ -44737,10 +44755,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
-              Produced in place of a `message` entry for whichever hop served the
-              response. A declined hop produces the existing `message` entry. Whether
-              a fallback model served the response is signalled by the presence of this
-              entry in `usage.iterations`.
+              The terminal entry of a fallback-served turn: when a fallback hop's
+              output is the returned message, the entry for the iteration that
+              completed it carries this type in place of `message`. A declined hop
+              and the serving hop's earlier tool-loop iterations produce `message`
+              entries. Whether a fallback model served the response is signalled by
+              the presence of this entry in `usage.iterations`.
 
               - `type: Literal["fallback_message"]`
 
