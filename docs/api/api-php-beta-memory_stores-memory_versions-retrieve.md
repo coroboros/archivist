@@ -35,7 +35,7 @@ Retrieve a memory version
 
 ## Returns
 
-- `ManagedAgentsMemoryVersion`
+- `class ManagedAgentsMemoryVersion`
 
   - `Type type`
 

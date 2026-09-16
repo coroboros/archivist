@@ -15,7 +15,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Agent Archived Event Data
 
-- `BetaWebhookAgentArchivedEventData`
+- `class BetaWebhookAgentArchivedEventData`
 
   - `"agent.archived" type`
 
@@ -29,7 +29,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Agent Created Event Data
 
-- `BetaWebhookAgentCreatedEventData`
+- `class BetaWebhookAgentCreatedEventData`
 
   - `"agent.created" type`
 
@@ -43,7 +43,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Agent Deleted Event Data
 
-- `BetaWebhookAgentDeletedEventData`
+- `class BetaWebhookAgentDeletedEventData`
 
   - `"agent.deleted" type`
 
@@ -57,7 +57,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Agent Updated Event Data
 
-- `BetaWebhookAgentUpdatedEventData`
+- `class BetaWebhookAgentUpdatedEventData`
 
   - `"agent.updated" type`
 
@@ -71,7 +71,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Archived Event Data
 
-- `BetaWebhookDeploymentArchivedEventData`
+- `class BetaWebhookDeploymentArchivedEventData`
 
   - `"deployment.archived" type`
 
@@ -85,7 +85,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Created Event Data
 
-- `BetaWebhookDeploymentCreatedEventData`
+- `class BetaWebhookDeploymentCreatedEventData`
 
   - `"deployment.created" type`
 
@@ -99,7 +99,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Deleted Event Data
 
-- `BetaWebhookDeploymentDeletedEventData`
+- `class BetaWebhookDeploymentDeletedEventData`
 
   - `"deployment.deleted" type`
 
@@ -113,7 +113,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Paused Event Data
 
-- `BetaWebhookDeploymentPausedEventData`
+- `class BetaWebhookDeploymentPausedEventData`
 
   - `"deployment.paused" type`
 
@@ -127,7 +127,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Run Failed Event Data
 
-- `BetaWebhookDeploymentRunFailedEventData`
+- `class BetaWebhookDeploymentRunFailedEventData`
 
   - `"deployment_run.failed" type`
 
@@ -141,7 +141,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Run Started Event Data
 
-- `BetaWebhookDeploymentRunStartedEventData`
+- `class BetaWebhookDeploymentRunStartedEventData`
 
   - `"deployment_run.started" type`
 
@@ -155,7 +155,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Run Succeeded Event Data
 
-- `BetaWebhookDeploymentRunSucceededEventData`
+- `class BetaWebhookDeploymentRunSucceededEventData`
 
   - `"deployment_run.succeeded" type`
 
@@ -169,7 +169,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Unpaused Event Data
 
-- `BetaWebhookDeploymentUnpausedEventData`
+- `class BetaWebhookDeploymentUnpausedEventData`
 
   - `"deployment.unpaused" type`
 
@@ -183,7 +183,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Deployment Updated Event Data
 
-- `BetaWebhookDeploymentUpdatedEventData`
+- `class BetaWebhookDeploymentUpdatedEventData`
 
   - `"deployment.updated" type`
 
@@ -197,7 +197,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Environment Archived Event Data
 
-- `BetaWebhookEnvironmentArchivedEventData`
+- `class BetaWebhookEnvironmentArchivedEventData`
 
   - `"environment.archived" type`
 
@@ -211,7 +211,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Environment Created Event Data
 
-- `BetaWebhookEnvironmentCreatedEventData`
+- `class BetaWebhookEnvironmentCreatedEventData`
 
   - `"environment.created" type`
 
@@ -225,7 +225,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Environment Deleted Event Data
 
-- `BetaWebhookEnvironmentDeletedEventData`
+- `class BetaWebhookEnvironmentDeletedEventData`
 
   - `"environment.deleted" type`
 
@@ -239,7 +239,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Environment Updated Event Data
 
-- `BetaWebhookEnvironmentUpdatedEventData`
+- `class BetaWebhookEnvironmentUpdatedEventData`
 
   - `"environment.updated" type`
 
@@ -253,7 +253,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Event
 
-- `BetaWebhookEvent`
+- `class BetaWebhookEvent`
 
   - `"event" type`
 
@@ -271,9 +271,9 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData`
+- `class BetaWebhookEventData`
 
-  - `BetaWebhookSessionCreatedEventData`
+  - `class BetaWebhookSessionCreatedEventData`
 
     - `"session.created" type`
 
@@ -285,7 +285,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionPendingEventData`
+  - `class BetaWebhookSessionPendingEventData`
 
     - `"session.pending" type`
 
@@ -297,7 +297,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionRunningEventData`
+  - `class BetaWebhookSessionRunningEventData`
 
     - `"session.running" type`
 
@@ -309,7 +309,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionIdledEventData`
+  - `class BetaWebhookSessionIdledEventData`
 
     - `"session.idled" type`
 
@@ -321,7 +321,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionRequiresActionEventData`
+  - `class BetaWebhookSessionRequiresActionEventData`
 
     - `"session.requires_action" type`
 
@@ -333,7 +333,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionArchivedEventData`
+  - `class BetaWebhookSessionArchivedEventData`
 
     - `"session.archived" type`
 
@@ -345,7 +345,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionDeletedEventData`
+  - `class BetaWebhookSessionDeletedEventData`
 
     - `"session.deleted" type`
 
@@ -357,7 +357,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionStatusRescheduledEventData`
+  - `class BetaWebhookSessionStatusRescheduledEventData`
 
     - `"session.status_rescheduled" type`
 
@@ -369,7 +369,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionStatusRunStartedEventData`
+  - `class BetaWebhookSessionStatusRunStartedEventData`
 
     - `"session.status_run_started" type`
 
@@ -381,7 +381,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionStatusIdledEventData`
+  - `class BetaWebhookSessionStatusIdledEventData`
 
     - `"session.status_idled" type`
 
@@ -393,7 +393,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionStatusTerminatedEventData`
+  - `class BetaWebhookSessionStatusTerminatedEventData`
 
     - `"session.status_terminated" type`
 
@@ -405,7 +405,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionThreadCreatedEventData`
+  - `class BetaWebhookSessionThreadCreatedEventData`
 
     - `"session.thread_created" type`
 
@@ -421,7 +421,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionThreadIdledEventData`
+  - `class BetaWebhookSessionThreadIdledEventData`
 
     - `"session.thread_idled" type`
 
@@ -437,7 +437,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionThreadTerminatedEventData`
+  - `class BetaWebhookSessionThreadTerminatedEventData`
 
     - `"session.thread_terminated" type`
 
@@ -453,7 +453,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
     - `"session.outcome_evaluation_ended" type`
 
@@ -465,7 +465,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultCreatedEventData`
+  - `class BetaWebhookVaultCreatedEventData`
 
     - `"vault.created" type`
 
@@ -477,7 +477,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultArchivedEventData`
+  - `class BetaWebhookVaultArchivedEventData`
 
     - `"vault.archived" type`
 
@@ -489,7 +489,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultDeletedEventData`
+  - `class BetaWebhookVaultDeletedEventData`
 
     - `"vault.deleted" type`
 
@@ -501,7 +501,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultCredentialCreatedEventData`
+  - `class BetaWebhookVaultCredentialCreatedEventData`
 
     - `"vault_credential.created" type`
 
@@ -517,7 +517,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultCredentialArchivedEventData`
+  - `class BetaWebhookVaultCredentialArchivedEventData`
 
     - `"vault_credential.archived" type`
 
@@ -533,7 +533,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultCredentialDeletedEventData`
+  - `class BetaWebhookVaultCredentialDeletedEventData`
 
     - `"vault_credential.deleted" type`
 
@@ -549,7 +549,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookVaultCredentialRefreshFailedEventData`
+  - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
     - `"vault_credential.refresh_failed" type`
 
@@ -565,7 +565,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionUpdatedEventData`
+  - `class BetaWebhookSessionUpdatedEventData`
 
     - `"session.updated" type`
 
@@ -577,7 +577,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookAgentCreatedEventData`
+  - `class BetaWebhookAgentCreatedEventData`
 
     - `"agent.created" type`
 
@@ -589,7 +589,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookAgentArchivedEventData`
+  - `class BetaWebhookAgentArchivedEventData`
 
     - `"agent.archived" type`
 
@@ -601,7 +601,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookAgentDeletedEventData`
+  - `class BetaWebhookAgentDeletedEventData`
 
     - `"agent.deleted" type`
 
@@ -613,7 +613,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentPausedEventData`
+  - `class BetaWebhookDeploymentPausedEventData`
 
     - `"deployment.paused" type`
 
@@ -625,7 +625,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentRunFailedEventData`
+  - `class BetaWebhookDeploymentRunFailedEventData`
 
     - `"deployment_run.failed" type`
 
@@ -637,7 +637,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentCreatedEventData`
+  - `class BetaWebhookDeploymentCreatedEventData`
 
     - `"deployment.created" type`
 
@@ -649,7 +649,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentUpdatedEventData`
+  - `class BetaWebhookDeploymentUpdatedEventData`
 
     - `"deployment.updated" type`
 
@@ -661,7 +661,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentUnpausedEventData`
+  - `class BetaWebhookDeploymentUnpausedEventData`
 
     - `"deployment.unpaused" type`
 
@@ -673,7 +673,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookAgentUpdatedEventData`
+  - `class BetaWebhookAgentUpdatedEventData`
 
     - `"agent.updated" type`
 
@@ -685,7 +685,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentArchivedEventData`
+  - `class BetaWebhookDeploymentArchivedEventData`
 
     - `"deployment.archived" type`
 
@@ -697,7 +697,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentRunStartedEventData`
+  - `class BetaWebhookDeploymentRunStartedEventData`
 
     - `"deployment_run.started" type`
 
@@ -709,7 +709,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentDeletedEventData`
+  - `class BetaWebhookDeploymentDeletedEventData`
 
     - `"deployment.deleted" type`
 
@@ -721,7 +721,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookDeploymentRunSucceededEventData`
+  - `class BetaWebhookDeploymentRunSucceededEventData`
 
     - `"deployment_run.succeeded" type`
 
@@ -733,7 +733,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookEnvironmentCreatedEventData`
+  - `class BetaWebhookEnvironmentCreatedEventData`
 
     - `"environment.created" type`
 
@@ -745,7 +745,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookEnvironmentUpdatedEventData`
+  - `class BetaWebhookEnvironmentUpdatedEventData`
 
     - `"environment.updated" type`
 
@@ -757,7 +757,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookEnvironmentArchivedEventData`
+  - `class BetaWebhookEnvironmentArchivedEventData`
 
     - `"environment.archived" type`
 
@@ -769,7 +769,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookEnvironmentDeletedEventData`
+  - `class BetaWebhookEnvironmentDeletedEventData`
 
     - `"environment.deleted" type`
 
@@ -781,7 +781,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookMemoryStoreCreatedEventData`
+  - `class BetaWebhookMemoryStoreCreatedEventData`
 
     - `"memory_store.created" type`
 
@@ -793,7 +793,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookMemoryStoreArchivedEventData`
+  - `class BetaWebhookMemoryStoreArchivedEventData`
 
     - `"memory_store.archived" type`
 
@@ -805,7 +805,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookMemoryStoreDeletedEventData`
+  - `class BetaWebhookMemoryStoreDeletedEventData`
 
     - `"memory_store.deleted" type`
 
@@ -817,7 +817,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
-  - `BetaWebhookSessionBudgetReachedEventData`
+  - `class BetaWebhookSessionBudgetReachedEventData`
 
     - `"session.budget_reached" type`
 
@@ -831,7 +831,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Memory Store Archived Event Data
 
-- `BetaWebhookMemoryStoreArchivedEventData`
+- `class BetaWebhookMemoryStoreArchivedEventData`
 
   - `"memory_store.archived" type`
 
@@ -845,7 +845,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Memory Store Created Event Data
 
-- `BetaWebhookMemoryStoreCreatedEventData`
+- `class BetaWebhookMemoryStoreCreatedEventData`
 
   - `"memory_store.created" type`
 
@@ -859,7 +859,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Memory Store Deleted Event Data
 
-- `BetaWebhookMemoryStoreDeletedEventData`
+- `class BetaWebhookMemoryStoreDeletedEventData`
 
   - `"memory_store.deleted" type`
 
@@ -873,7 +873,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Archived Event Data
 
-- `BetaWebhookSessionArchivedEventData`
+- `class BetaWebhookSessionArchivedEventData`
 
   - `"session.archived" type`
 
@@ -887,7 +887,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Budget Reached Event Data
 
-- `BetaWebhookSessionBudgetReachedEventData`
+- `class BetaWebhookSessionBudgetReachedEventData`
 
   - `"session.budget_reached" type`
 
@@ -901,7 +901,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Created Event Data
 
-- `BetaWebhookSessionCreatedEventData`
+- `class BetaWebhookSessionCreatedEventData`
 
   - `"session.created" type`
 
@@ -915,7 +915,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Deleted Event Data
 
-- `BetaWebhookSessionDeletedEventData`
+- `class BetaWebhookSessionDeletedEventData`
 
   - `"session.deleted" type`
 
@@ -929,7 +929,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Idled Event Data
 
-- `BetaWebhookSessionIdledEventData`
+- `class BetaWebhookSessionIdledEventData`
 
   - `"session.idled" type`
 
@@ -943,7 +943,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-- `BetaWebhookSessionOutcomeEvaluationEndedEventData`
+- `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
   - `"session.outcome_evaluation_ended" type`
 
@@ -957,7 +957,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Pending Event Data
 
-- `BetaWebhookSessionPendingEventData`
+- `class BetaWebhookSessionPendingEventData`
 
   - `"session.pending" type`
 
@@ -971,7 +971,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Requires Action Event Data
 
-- `BetaWebhookSessionRequiresActionEventData`
+- `class BetaWebhookSessionRequiresActionEventData`
 
   - `"session.requires_action" type`
 
@@ -985,7 +985,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Running Event Data
 
-- `BetaWebhookSessionRunningEventData`
+- `class BetaWebhookSessionRunningEventData`
 
   - `"session.running" type`
 
@@ -999,7 +999,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Status Idled Event Data
 
-- `BetaWebhookSessionStatusIdledEventData`
+- `class BetaWebhookSessionStatusIdledEventData`
 
   - `"session.status_idled" type`
 
@@ -1013,7 +1013,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Status Rescheduled Event Data
 
-- `BetaWebhookSessionStatusRescheduledEventData`
+- `class BetaWebhookSessionStatusRescheduledEventData`
 
   - `"session.status_rescheduled" type`
 
@@ -1027,7 +1027,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Status Run Started Event Data
 
-- `BetaWebhookSessionStatusRunStartedEventData`
+- `class BetaWebhookSessionStatusRunStartedEventData`
 
   - `"session.status_run_started" type`
 
@@ -1041,7 +1041,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Status Terminated Event Data
 
-- `BetaWebhookSessionStatusTerminatedEventData`
+- `class BetaWebhookSessionStatusTerminatedEventData`
 
   - `"session.status_terminated" type`
 
@@ -1055,7 +1055,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Thread Created Event Data
 
-- `BetaWebhookSessionThreadCreatedEventData`
+- `class BetaWebhookSessionThreadCreatedEventData`
 
   - `"session.thread_created" type`
 
@@ -1073,7 +1073,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Thread Idled Event Data
 
-- `BetaWebhookSessionThreadIdledEventData`
+- `class BetaWebhookSessionThreadIdledEventData`
 
   - `"session.thread_idled" type`
 
@@ -1091,7 +1091,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Thread Terminated Event Data
 
-- `BetaWebhookSessionThreadTerminatedEventData`
+- `class BetaWebhookSessionThreadTerminatedEventData`
 
   - `"session.thread_terminated" type`
 
@@ -1109,7 +1109,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Session Updated Event Data
 
-- `BetaWebhookSessionUpdatedEventData`
+- `class BetaWebhookSessionUpdatedEventData`
 
   - `"session.updated" type`
 
@@ -1123,7 +1123,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Archived Event Data
 
-- `BetaWebhookVaultArchivedEventData`
+- `class BetaWebhookVaultArchivedEventData`
 
   - `"vault.archived" type`
 
@@ -1137,7 +1137,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Created Event Data
 
-- `BetaWebhookVaultCreatedEventData`
+- `class BetaWebhookVaultCreatedEventData`
 
   - `"vault.created" type`
 
@@ -1151,7 +1151,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Credential Archived Event Data
 
-- `BetaWebhookVaultCredentialArchivedEventData`
+- `class BetaWebhookVaultCredentialArchivedEventData`
 
   - `"vault_credential.archived" type`
 
@@ -1169,7 +1169,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Credential Created Event Data
 
-- `BetaWebhookVaultCredentialCreatedEventData`
+- `class BetaWebhookVaultCredentialCreatedEventData`
 
   - `"vault_credential.created" type`
 
@@ -1187,7 +1187,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Credential Deleted Event Data
 
-- `BetaWebhookVaultCredentialDeletedEventData`
+- `class BetaWebhookVaultCredentialDeletedEventData`
 
   - `"vault_credential.deleted" type`
 
@@ -1205,7 +1205,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Credential Refresh Failed Event Data
 
-- `BetaWebhookVaultCredentialRefreshFailedEventData`
+- `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
   - `"vault_credential.refresh_failed" type`
 
@@ -1223,7 +1223,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
 ### Beta Webhook Vault Deleted Event Data
 
-- `BetaWebhookVaultDeletedEventData`
+- `class BetaWebhookVaultDeletedEventData`
 
   - `"vault.deleted" type`
 

@@ -25,9 +25,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 ### Parameters
 
-- `MessageCreateParams = MessageCreateParamsNonStreaming | MessageCreateParamsStreaming`
+- `type MessageCreateParams = MessageCreateParamsNonStreaming | MessageCreateParamsStreaming`
 
-  - `MessageCreateParamsBase`
+  - `interface MessageCreateParamsBase`
 
     - `max_tokens: number`
 
@@ -98,7 +98,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `Array<ContentBlockParam>`
 
-          - `TextBlockParam`
+          - `interface TextBlockParam`
 
             - `type: "text"`
 
@@ -129,7 +129,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `citations?: Array<TextCitationParam> | null`
 
-              - `CitationCharLocationParam`
+              - `interface CitationCharLocationParam`
 
                 - `type: "char_location"`
 
@@ -149,7 +149,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 0
 
-              - `CitationPageLocationParam`
+              - `interface CitationPageLocationParam`
 
                 - `type: "page_location"`
 
@@ -169,7 +169,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 1
 
-              - `CitationContentBlockLocationParam`
+              - `interface CitationContentBlockLocationParam`
 
                 - `type: "content_block_location"`
 
@@ -199,7 +199,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minimum: 0
 
-              - `CitationWebSearchResultLocationParam`
+              - `interface CitationWebSearchResultLocationParam`
 
                 - `type: "web_search_result_location"`
 
@@ -215,7 +215,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   minLength: 1
 
-              - `CitationSearchResultLocationParam`
+              - `interface CitationSearchResultLocationParam`
 
                 - `type: "search_result_location"`
 
@@ -249,13 +249,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `title: string | null`
 
-          - `ImageBlockParam`
+          - `interface ImageBlockParam`
 
             - `type: "image"`
 
             - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-              - `Base64ImageSource`
+              - `interface Base64ImageSource`
 
                 - `type: "base64"`
 
@@ -273,13 +273,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"image/webp"`
 
-              - `URLImageSource`
+              - `interface URLImageSource`
 
                 - `type: "url"`
 
                 - `url: string`
 
-              - `FileImageSource`
+              - `interface FileImageSource`
 
                 - `type: "file"`
 
@@ -301,13 +301,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `"error"`
 
-          - `DocumentBlockParam`
+          - `interface DocumentBlockParam`
 
             - `type: "document"`
 
             - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-              - `Base64PDFSource`
+              - `interface Base64PDFSource`
 
                 - `type: "base64"`
 
@@ -317,7 +317,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `media_type: "application/pdf"`
 
-              - `PlainTextSource`
+              - `interface PlainTextSource`
 
                 - `type: "text"`
 
@@ -325,7 +325,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `media_type: "text/plain"`
 
-              - `ContentBlockSource`
+              - `interface ContentBlockSource`
 
                 - `type: "content"`
 
@@ -335,17 +335,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Array<ContentBlockSourceContent>`
 
-                    - `TextBlockParam`
+                    - `interface TextBlockParam`
 
-                    - `ImageBlockParam`
+                    - `interface ImageBlockParam`
 
-              - `URLPDFSource`
+              - `interface URLPDFSource`
 
                 - `type: "url"`
 
                 - `url: string`
 
-              - `FileDocumentSource`
+              - `interface FileDocumentSource`
 
                 - `type: "file"`
 
@@ -367,7 +367,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 500, minLength: 1
 
-          - `SearchResultBlockParam`
+          - `interface SearchResultBlockParam`
 
             - `type: "search_result"`
 
@@ -395,7 +395,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `citations?: CitationsConfigParam`
 
-          - `ThinkingBlockParam`
+          - `interface ThinkingBlockParam`
 
             - `type: "thinking"`
 
@@ -409,7 +409,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               The `thinking` text of this block as returned by the API.
 
-          - `RedactedThinkingBlockParam`
+          - `interface RedactedThinkingBlockParam`
 
             - `type: "redacted_thinking"`
 
@@ -417,7 +417,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `ToolUseBlockParam`
+          - `interface ToolUseBlockParam`
 
             - `type: "tool_use"`
 
@@ -437,13 +437,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `type: "direct"`
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -453,7 +453,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
                 - `type: "code_execution_20260120"`
 
@@ -467,7 +467,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `ToolResultBlockParam`
+          - `interface ToolResultBlockParam`
 
             - `type: "tool_result"`
 
@@ -485,15 +485,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-                - `TextBlockParam`
+                - `interface TextBlockParam`
 
-                - `ImageBlockParam`
+                - `interface ImageBlockParam`
 
-                - `SearchResultBlockParam`
+                - `interface SearchResultBlockParam`
 
-                - `DocumentBlockParam`
+                - `interface DocumentBlockParam`
 
-                - `ToolReferenceBlockParam`
+                - `interface ToolReferenceBlockParam`
 
                   Tool reference block that can be included in tool_result content.
 
@@ -507,7 +507,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Create a cache control breakpoint at this content block.
 
-                - `BrowserStateBlockParam`
+                - `interface BrowserStateBlockParam`
 
                   The caller's browser state after a browser toolset member call —
                   the full inventory of open tabs, which tab is active, and any side
@@ -557,7 +557,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     maxItems: 200, minItems: 1
 
-                    - `BrowserStateChangeTabOpened`
+                    - `interface BrowserStateChangeTabOpened`
 
                       A tab this call's execution opened that remains open at its end —
                       the creation delta of the `tabs` inventory, not an event log.
@@ -575,7 +575,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `BrowserStateChangeDownloadStarted`
+                    - `interface BrowserStateChangeDownloadStarted`
 
                       A file download that started during this call.
 
@@ -593,7 +593,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `BrowserStateChangeDownloadCompleted`
+                    - `interface BrowserStateChangeDownloadCompleted`
 
                       A file download that finished during this call, reported with the
                       same `download_id` as its `download_started` — or without a prior
@@ -626,7 +626,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         minimum: 0
 
-                    - `BrowserStateChangeDownloadFailed`
+                    - `interface BrowserStateChangeDownloadFailed`
 
                       A file download that failed — or was cancelled — during this call.
 
@@ -658,7 +658,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `ServerToolUseBlockParam`
+          - `interface ServerToolUseBlockParam`
 
             - `type: "server_tool_use"`
 
@@ -690,17 +690,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
-          - `WebSearchToolResultBlockParam`
+          - `interface WebSearchToolResultBlockParam`
 
             - `type: "web_search_tool_result"`
 
@@ -718,7 +718,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `page_age?: string | null`
 
-              - `WebSearchToolRequestError`
+              - `interface WebSearchToolRequestError`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -746,23 +746,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
-          - `WebFetchToolResultBlockParam`
+          - `interface WebFetchToolResultBlockParam`
 
             - `type: "web_fetch_tool_result"`
 
             - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-              - `WebFetchToolResultErrorBlockParam`
+              - `interface WebFetchToolResultErrorBlockParam`
 
                 - `type: "web_fetch_tool_result_error"`
 
@@ -788,7 +788,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"content_too_large"`
 
-              - `WebFetchBlockParam`
+              - `interface WebFetchBlockParam`
 
                 - `type: "web_fetch_result"`
 
@@ -812,23 +812,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
-          - `CodeExecutionToolResultBlockParam`
+          - `interface CodeExecutionToolResultBlockParam`
 
             - `type: "code_execution_tool_result"`
 
             - `content: CodeExecutionToolResultBlockParamContent`
 
-              - `CodeExecutionToolResultErrorParam`
+              - `interface CodeExecutionToolResultErrorParam`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -842,7 +842,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"execution_time_exceeded"`
 
-              - `CodeExecutionResultBlockParam`
+              - `interface CodeExecutionResultBlockParam`
 
                 - `type: "code_execution_result"`
 
@@ -858,7 +858,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `stdout: string`
 
-              - `EncryptedCodeExecutionResultBlockParam`
+              - `interface EncryptedCodeExecutionResultBlockParam`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -884,13 +884,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-          - `BashCodeExecutionToolResultBlockParam`
+          - `interface BashCodeExecutionToolResultBlockParam`
 
             - `type: "bash_code_execution_tool_result"`
 
             - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-              - `BashCodeExecutionToolResultErrorParam`
+              - `interface BashCodeExecutionToolResultErrorParam`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -906,7 +906,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"output_file_too_large"`
 
-              - `BashCodeExecutionResultBlockParam`
+              - `interface BashCodeExecutionResultBlockParam`
 
                 - `type: "bash_code_execution_result"`
 
@@ -930,13 +930,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-          - `TextEditorCodeExecutionToolResultBlockParam`
+          - `interface TextEditorCodeExecutionToolResultBlockParam`
 
             - `type: "text_editor_code_execution_tool_result"`
 
             - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-              - `TextEditorCodeExecutionToolResultErrorParam`
+              - `interface TextEditorCodeExecutionToolResultErrorParam`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -954,7 +954,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `error_message?: string | null`
 
-              - `TextEditorCodeExecutionViewResultBlockParam`
+              - `interface TextEditorCodeExecutionViewResultBlockParam`
 
                 - `type: "text_editor_code_execution_view_result"`
 
@@ -974,13 +974,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `total_lines?: number | null`
 
-              - `TextEditorCodeExecutionCreateResultBlockParam`
+              - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
                 - `type: "text_editor_code_execution_create_result"`
 
                 - `is_file_update: boolean`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+              - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -1002,13 +1002,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-          - `ToolSearchToolResultBlockParam`
+          - `interface ToolSearchToolResultBlockParam`
 
             - `type: "tool_search_tool_result"`
 
             - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-              - `ToolSearchToolResultErrorParam`
+              - `interface ToolSearchToolResultErrorParam`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -1024,7 +1024,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `error_message?: string | null`
 
-              - `ToolSearchToolSearchResultBlockParam`
+              - `interface ToolSearchToolSearchResultBlockParam`
 
                 - `type: "tool_search_tool_search_result"`
 
@@ -1048,7 +1048,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-          - `ContainerUploadBlockParam`
+          - `interface ContainerUploadBlockParam`
 
             A content block that represents a file to be uploaded to the container
             Files uploaded via this block will be available in the container's input directory.
@@ -1155,7 +1155,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Body param: Container identifier for reuse across requests.
 
-      - `ContainerParams`
+      - `interface ContainerParams`
 
         Container parameters with skills to be loaded.
 
@@ -1289,7 +1289,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-      - `ThinkingConfigEnabled`
+      - `interface ThinkingConfigEnabled`
 
         - `type: "enabled"`
 
@@ -1311,11 +1311,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"omitted"`
 
-      - `ThinkingConfigDisabled`
+      - `interface ThinkingConfigDisabled`
 
         - `type: "disabled"`
 
-      - `ThinkingConfigAdaptive`
+      - `interface ThinkingConfigAdaptive`
 
         - `type: "adaptive"`
 
@@ -1331,7 +1331,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-      - `ToolChoiceAuto`
+      - `interface ToolChoiceAuto`
 
         The model will automatically decide whether to use tools.
 
@@ -1343,7 +1343,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-      - `ToolChoiceAny`
+      - `interface ToolChoiceAny`
 
         The model will use any available tools.
 
@@ -1355,7 +1355,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `ToolChoiceTool`
+      - `interface ToolChoiceTool`
 
         The model will use the specified tool with `tool_choice.name`.
 
@@ -1371,7 +1371,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `ToolChoiceNone`
+      - `interface ToolChoiceNone`
 
         The model will not be allowed to use tools.
 
@@ -1441,7 +1441,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-      - `Tool`
+      - `interface Tool`
 
         - `type?: "custom" | null`
 
@@ -1499,7 +1499,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolBash20250124`
+      - `interface ToolBash20250124`
 
         - `type: "bash_20250124"`
 
@@ -1533,7 +1533,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20250522`
+      - `interface CodeExecutionTool20250522`
 
         - `type: "code_execution_20250522"`
 
@@ -1565,7 +1565,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20250825`
+      - `interface CodeExecutionTool20250825`
 
         - `type: "code_execution_20250825"`
 
@@ -1597,7 +1597,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20260120`
+      - `interface CodeExecutionTool20260120`
 
         Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -1631,7 +1631,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `CodeExecutionTool20260521`
+      - `interface CodeExecutionTool20260521`
 
         Code execution tool with REPL state persistence.
 
@@ -1665,7 +1665,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `BrowserToolset20260801`
+      - `interface BrowserToolset20260801`
 
         The browser toolset: a single `tools[]` entry (carrying no
         `name`) that declares the browser tool family. The model is served
@@ -2059,7 +2059,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `MemoryTool20250818`
+      - `interface MemoryTool20250818`
 
         - `type: "memory_20250818"`
 
@@ -2093,7 +2093,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ComputerToolset20260801`
+      - `interface ComputerToolset20260801`
 
         The computer toolset: a single `tools[]` entry (carrying no
         `name`) that declares the computer tool family. The model is
@@ -2323,7 +2323,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `ToolTextEditor20250124`
+      - `interface ToolTextEditor20250124`
 
         - `type: "text_editor_20250124"`
 
@@ -2357,7 +2357,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolTextEditor20250429`
+      - `interface ToolTextEditor20250429`
 
         - `type: "text_editor_20250429"`
 
@@ -2391,7 +2391,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolTextEditor20250728`
+      - `interface ToolTextEditor20250728`
 
         - `type: "text_editor_20250728"`
 
@@ -2431,7 +2431,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebSearchTool20250305`
+      - `interface WebSearchTool20250305`
 
         - `type: "web_search_20250305"`
 
@@ -2507,7 +2507,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             maxLength: 255, minLength: 1
 
-      - `WebFetchTool20250910`
+      - `interface WebFetchTool20250910`
 
         - `type: "web_fetch_20250910"`
 
@@ -2563,7 +2563,98 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebSearchTool20260209`
+        - `url_sources?: WebFetchURLSources | null`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
+          - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+            Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+            - `interface WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+              - `type: "all"`
+
+            - `interface WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
+              - `type: "none"`
+
+            - `interface WebFetchURLSourceOnly`
+
+              The tool filter variant under which only the named tools' results
+              contribute.
+
+              - `type: "only"`
+
+              - `tools: Array<WebFetchURLSourceToolReference>`
+
+                - `type: "tool_reference"`
+
+                - `name: string`
+
+            - `interface WebFetchURLSourceExcept`
+
+              The tool filter variant under which every result but the named
+              tools' contributes.
+
+              - `type: "except"`
+
+              - `tools: Array<WebFetchURLSourceToolReference>`
+
+                - `type: "tool_reference"`
+
+                - `name: string`
+
+          - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+            Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+            - `interface WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+            - `interface WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
+            - `interface WebFetchURLSourceOnly`
+
+              The tool filter variant under which only the named tools' results
+              contribute.
+
+            - `interface WebFetchURLSourceExcept`
+
+              The tool filter variant under which every result but the named
+              tools' contributes.
+
+          - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+            Whether URLs in user messages are fetchable: "all" or "none".
+
+            - `interface WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+            - `interface WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
+      - `interface WebSearchTool20260209`
 
         - `type: "web_search_20260209"`
 
@@ -2613,7 +2704,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Parameters for the user's location. Used to provide more relevant search results.
 
-      - `WebFetchTool20260209`
+      - `interface WebFetchTool20260209`
 
         - `type: "web_fetch_20260209"`
 
@@ -2669,7 +2760,16 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `WebFetchTool20260309`
+        - `url_sources?: WebFetchURLSources | null`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
+      - `interface WebFetchTool20260309`
 
         Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -2727,11 +2827,20 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
+        - `url_sources?: WebFetchURLSources | null`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
         - `use_cache?: boolean`
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-      - `WebSearchTool20260318`
+      - `interface WebSearchTool20260318`
 
         - `type: "web_search_20260318"`
 
@@ -2789,7 +2898,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Parameters for the user's location. Used to provide more relevant search results.
 
-      - `WebFetchTool20260318`
+      - `interface WebFetchTool20260318`
 
         - `type: "web_fetch_20260318"`
 
@@ -2853,11 +2962,20 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
+        - `url_sources?: WebFetchURLSources | null`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
         - `use_cache?: boolean`
 
           Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-      - `ToolSearchToolBm25_20251119`
+      - `interface ToolSearchToolBm25_20251119`
 
         - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -2893,7 +3011,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-      - `ToolSearchToolRegex20251119`
+      - `interface ToolSearchToolRegex20251119`
 
         - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -2975,7 +3093,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       maximum: 1, minimum: 0
 
-  - `MessageCreateParamsNonStreaming extends  MessageCreateParamsBase`
+  - `interface MessageCreateParamsNonStreaming extends  MessageCreateParamsBase`
 
     - `stream?: false`
 
@@ -2983,7 +3101,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
 
-  - `MessageCreateParamsStreaming extends  MessageCreateParamsBase`
+  - `interface MessageCreateParamsStreaming extends  MessageCreateParamsBase`
 
     - `stream: true`
 
@@ -2993,7 +3111,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 ### Returns
 
-- `Message`
+- `interface Message`
 
   - `type: "message"`
 
@@ -3076,7 +3194,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `TextBlock`
+    - `interface TextBlock`
 
       - `type: "text"`
 
@@ -3088,7 +3206,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation`
+        - `interface CitationCharLocation`
 
           - `type: "char_location"`
 
@@ -3110,7 +3228,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-        - `CitationPageLocation`
+        - `interface CitationPageLocation`
 
           - `type: "page_location"`
 
@@ -3132,7 +3250,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-        - `CitationContentBlockLocation`
+        - `interface CitationContentBlockLocation`
 
           - `type: "content_block_location"`
 
@@ -3164,7 +3282,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 0
 
-        - `CitationsWebSearchResultLocation`
+        - `interface CitationsWebSearchResultLocation`
 
           - `type: "web_search_result_location"`
 
@@ -3180,7 +3298,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `url: string`
 
-        - `CitationsSearchResultLocation`
+        - `interface CitationsSearchResultLocation`
 
           - `type: "search_result_location"`
 
@@ -3220,7 +3338,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         minLength: 0
 
-    - `ThinkingBlock`
+    - `interface ThinkingBlock`
 
       - `type: "thinking"`
 
@@ -3238,7 +3356,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The text of Claude's thinking process for this block.
 
-    - `RedactedThinkingBlock`
+    - `interface RedactedThinkingBlock`
 
       - `type: "redacted_thinking"`
 
@@ -3252,7 +3370,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `ToolUseBlock`
+    - `interface ToolUseBlock`
 
       - `type: "tool_use"`
 
@@ -3266,13 +3384,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
           - `type: "direct"`
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -3282,7 +3400,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
           - `type: "code_execution_20260120"`
 
@@ -3302,7 +3420,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `ServerToolUseBlock`
+    - `interface ServerToolUseBlock`
 
       - `type: "server_tool_use"`
 
@@ -3316,15 +3434,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `input: Record<string, unknown>`
 
@@ -3344,7 +3462,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"tool_search_tool_bm25"`
 
-    - `WebSearchToolResultBlock`
+    - `interface WebSearchToolResultBlock`
 
       - `type: "web_search_tool_result"`
 
@@ -3354,19 +3472,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError`
+        - `interface WebSearchToolResultError`
 
           - `type: "web_search_tool_result_error"`
 
@@ -3404,7 +3522,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `WebFetchToolResultBlock`
+    - `interface WebFetchToolResultBlock`
 
       - `type: "web_fetch_tool_result"`
 
@@ -3414,19 +3532,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock`
+        - `interface WebFetchToolResultErrorBlock`
 
           - `type: "web_fetch_tool_result_error"`
 
@@ -3454,7 +3572,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"content_too_large"`
 
-        - `WebFetchBlock`
+        - `interface WebFetchBlock`
 
           - `type: "web_fetch_result"`
 
@@ -3476,7 +3594,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `source: Base64PDFSource | PlainTextSource`
 
-              - `Base64PDFSource`
+              - `interface Base64PDFSource`
 
                 - `type: "base64"`
 
@@ -3486,7 +3604,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `media_type: "application/pdf"`
 
-              - `PlainTextSource`
+              - `interface PlainTextSource`
 
                 - `type: "text"`
 
@@ -3510,7 +3628,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `CodeExecutionToolResultBlock`
+    - `interface CodeExecutionToolResultBlock`
 
       - `type: "code_execution_tool_result"`
 
@@ -3518,7 +3636,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError`
+        - `interface CodeExecutionToolResultError`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -3534,7 +3652,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"execution_time_exceeded"`
 
-        - `CodeExecutionResultBlock`
+        - `interface CodeExecutionResultBlock`
 
           - `type: "code_execution_result"`
 
@@ -3554,7 +3672,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `stdout: string`
 
-        - `EncryptedCodeExecutionResultBlock`
+        - `interface EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -3580,7 +3698,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `BashCodeExecutionToolResultBlock`
+    - `interface BashCodeExecutionToolResultBlock`
 
       - `type: "bash_code_execution_tool_result"`
 
@@ -3588,7 +3706,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError`
+        - `interface BashCodeExecutionToolResultError`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -3606,7 +3724,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"output_file_too_large"`
 
-        - `BashCodeExecutionResultBlock`
+        - `interface BashCodeExecutionResultBlock`
 
           - `type: "bash_code_execution_result"`
 
@@ -3630,7 +3748,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `TextEditorCodeExecutionToolResultBlock`
+    - `interface TextEditorCodeExecutionToolResultBlock`
 
       - `type: "text_editor_code_execution_tool_result"`
 
@@ -3638,7 +3756,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError`
+        - `interface TextEditorCodeExecutionToolResultError`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -3658,7 +3776,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string | null`
 
-        - `TextEditorCodeExecutionViewResultBlock`
+        - `interface TextEditorCodeExecutionViewResultBlock`
 
           - `type: "text_editor_code_execution_view_result"`
 
@@ -3680,7 +3798,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `total_lines: number | null`
 
-        - `TextEditorCodeExecutionCreateResultBlock`
+        - `interface TextEditorCodeExecutionCreateResultBlock`
 
           - `type: "text_editor_code_execution_create_result"`
 
@@ -3688,7 +3806,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `is_file_update: boolean`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock`
+        - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -3708,7 +3826,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ToolSearchToolResultBlock`
+    - `interface ToolSearchToolResultBlock`
 
       - `type: "tool_search_tool_result"`
 
@@ -3716,7 +3834,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError`
+        - `interface ToolSearchToolResultError`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -3734,7 +3852,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `error_message: string | null`
 
-        - `ToolSearchToolSearchResultBlock`
+        - `interface ToolSearchToolSearchResultBlock`
 
           - `type: "tool_search_tool_search_result"`
 
@@ -3754,7 +3872,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ContainerUploadBlock`
+    - `interface ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -4034,9 +4152,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `"batch"`
 
-- `RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
+- `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
 
-  - `RawMessageStartEvent`
+  - `interface RawMessageStartEvent`
 
     - `type: "message_start"`
 
@@ -4044,7 +4162,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `message: Message`
 
-  - `RawMessageDeltaEvent`
+  - `interface RawMessageDeltaEvent`
 
     - `type: "message_delta"`
 
@@ -4111,13 +4229,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The number of server tool requests.
 
-  - `RawMessageStopEvent`
+  - `interface RawMessageStopEvent`
 
     - `type: "message_stop"`
 
       default: message_stop
 
-  - `RawContentBlockStartEvent`
+  - `interface RawContentBlockStartEvent`
 
     - `type: "content_block_start"`
 
@@ -4125,35 +4243,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-      - `TextBlock`
+      - `interface TextBlock`
 
-      - `ThinkingBlock`
+      - `interface ThinkingBlock`
 
-      - `RedactedThinkingBlock`
+      - `interface RedactedThinkingBlock`
 
-      - `ToolUseBlock`
+      - `interface ToolUseBlock`
 
-      - `ServerToolUseBlock`
+      - `interface ServerToolUseBlock`
 
-      - `WebSearchToolResultBlock`
+      - `interface WebSearchToolResultBlock`
 
-      - `WebFetchToolResultBlock`
+      - `interface WebFetchToolResultBlock`
 
-      - `CodeExecutionToolResultBlock`
+      - `interface CodeExecutionToolResultBlock`
 
-      - `BashCodeExecutionToolResultBlock`
+      - `interface BashCodeExecutionToolResultBlock`
 
-      - `TextEditorCodeExecutionToolResultBlock`
+      - `interface TextEditorCodeExecutionToolResultBlock`
 
-      - `ToolSearchToolResultBlock`
+      - `interface ToolSearchToolResultBlock`
 
-      - `ContainerUploadBlock`
+      - `interface ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
     - `index: number`
 
-  - `RawContentBlockDeltaEvent`
+  - `interface RawContentBlockDeltaEvent`
 
     - `type: "content_block_delta"`
 
@@ -4161,7 +4279,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `delta: RawContentBlockDelta`
 
-      - `TextDelta`
+      - `interface TextDelta`
 
         - `type: "text_delta"`
 
@@ -4169,7 +4287,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `text: string`
 
-      - `InputJSONDelta`
+      - `interface InputJSONDelta`
 
         - `type: "input_json_delta"`
 
@@ -4177,7 +4295,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `partial_json: string`
 
-      - `CitationsDelta`
+      - `interface CitationsDelta`
 
         - `type: "citations_delta"`
 
@@ -4185,17 +4303,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-          - `CitationCharLocation`
+          - `interface CitationCharLocation`
 
-          - `CitationPageLocation`
+          - `interface CitationPageLocation`
 
-          - `CitationContentBlockLocation`
+          - `interface CitationContentBlockLocation`
 
-          - `CitationsWebSearchResultLocation`
+          - `interface CitationsWebSearchResultLocation`
 
-          - `CitationsSearchResultLocation`
+          - `interface CitationsSearchResultLocation`
 
-      - `ThinkingDelta`
+      - `interface ThinkingDelta`
 
         - `type: "thinking_delta"`
 
@@ -4205,7 +4323,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `SignatureDelta`
+      - `interface SignatureDelta`
 
         - `type: "signature_delta"`
 
@@ -4217,7 +4335,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `index: number`
 
-  - `RawContentBlockStopEvent`
+  - `interface RawContentBlockStopEvent`
 
     - `type: "content_block_stop"`
 
@@ -4381,7 +4499,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `Array<ContentBlockParam>`
 
-        - `TextBlockParam`
+        - `interface TextBlockParam`
 
           - `type: "text"`
 
@@ -4412,7 +4530,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `citations?: Array<TextCitationParam> | null`
 
-            - `CitationCharLocationParam`
+            - `interface CitationCharLocationParam`
 
               - `type: "char_location"`
 
@@ -4432,7 +4550,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-            - `CitationPageLocationParam`
+            - `interface CitationPageLocationParam`
 
               - `type: "page_location"`
 
@@ -4452,7 +4570,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 1
 
-            - `CitationContentBlockLocationParam`
+            - `interface CitationContentBlockLocationParam`
 
               - `type: "content_block_location"`
 
@@ -4482,7 +4600,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minimum: 0
 
-            - `CitationWebSearchResultLocationParam`
+            - `interface CitationWebSearchResultLocationParam`
 
               - `type: "web_search_result_location"`
 
@@ -4498,7 +4616,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minLength: 1
 
-            - `CitationSearchResultLocationParam`
+            - `interface CitationSearchResultLocationParam`
 
               - `type: "search_result_location"`
 
@@ -4532,13 +4650,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `title: string | null`
 
-        - `ImageBlockParam`
+        - `interface ImageBlockParam`
 
           - `type: "image"`
 
           - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-            - `Base64ImageSource`
+            - `interface Base64ImageSource`
 
               - `type: "base64"`
 
@@ -4556,13 +4674,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"image/webp"`
 
-            - `URLImageSource`
+            - `interface URLImageSource`
 
               - `type: "url"`
 
               - `url: string`
 
-            - `FileImageSource`
+            - `interface FileImageSource`
 
               - `type: "file"`
 
@@ -4584,13 +4702,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"error"`
 
-        - `DocumentBlockParam`
+        - `interface DocumentBlockParam`
 
           - `type: "document"`
 
           - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-            - `Base64PDFSource`
+            - `interface Base64PDFSource`
 
               - `type: "base64"`
 
@@ -4600,7 +4718,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `media_type: "application/pdf"`
 
-            - `PlainTextSource`
+            - `interface PlainTextSource`
 
               - `type: "text"`
 
@@ -4608,7 +4726,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `media_type: "text/plain"`
 
-            - `ContentBlockSource`
+            - `interface ContentBlockSource`
 
               - `type: "content"`
 
@@ -4618,17 +4736,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `Array<ContentBlockSourceContent>`
 
-                  - `TextBlockParam`
+                  - `interface TextBlockParam`
 
-                  - `ImageBlockParam`
+                  - `interface ImageBlockParam`
 
-            - `URLPDFSource`
+            - `interface URLPDFSource`
 
               - `type: "url"`
 
               - `url: string`
 
-            - `FileDocumentSource`
+            - `interface FileDocumentSource`
 
               - `type: "file"`
 
@@ -4650,7 +4768,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             maxLength: 500, minLength: 1
 
-        - `SearchResultBlockParam`
+        - `interface SearchResultBlockParam`
 
           - `type: "search_result"`
 
@@ -4678,7 +4796,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `citations?: CitationsConfigParam`
 
-        - `ThinkingBlockParam`
+        - `interface ThinkingBlockParam`
 
           - `type: "thinking"`
 
@@ -4692,7 +4810,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `thinking` text of this block as returned by the API.
 
-        - `RedactedThinkingBlockParam`
+        - `interface RedactedThinkingBlockParam`
 
           - `type: "redacted_thinking"`
 
@@ -4700,7 +4818,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `ToolUseBlockParam`
+        - `interface ToolUseBlockParam`
 
           - `type: "tool_use"`
 
@@ -4720,13 +4838,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
               - `type: "direct"`
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -4736,7 +4854,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
               - `type: "code_execution_20260120"`
 
@@ -4750,7 +4868,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `ToolResultBlockParam`
+        - `interface ToolResultBlockParam`
 
           - `type: "tool_result"`
 
@@ -4768,15 +4886,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-              - `TextBlockParam`
+              - `interface TextBlockParam`
 
-              - `ImageBlockParam`
+              - `interface ImageBlockParam`
 
-              - `SearchResultBlockParam`
+              - `interface SearchResultBlockParam`
 
-              - `DocumentBlockParam`
+              - `interface DocumentBlockParam`
 
-              - `ToolReferenceBlockParam`
+              - `interface ToolReferenceBlockParam`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -4790,7 +4908,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Create a cache control breakpoint at this content block.
 
-              - `BrowserStateBlockParam`
+              - `interface BrowserStateBlockParam`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -4840,7 +4958,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   maxItems: 200, minItems: 1
 
-                  - `BrowserStateChangeTabOpened`
+                  - `interface BrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -4858,7 +4976,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `BrowserStateChangeDownloadStarted`
+                  - `interface BrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -4876,7 +4994,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `BrowserStateChangeDownloadCompleted`
+                  - `interface BrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -4909,7 +5027,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       minimum: 0
 
-                  - `BrowserStateChangeDownloadFailed`
+                  - `interface BrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -4941,7 +5059,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `ServerToolUseBlockParam`
+        - `interface ServerToolUseBlockParam`
 
           - `type: "server_tool_use"`
 
@@ -4973,17 +5091,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
-        - `WebSearchToolResultBlockParam`
+        - `interface WebSearchToolResultBlockParam`
 
           - `type: "web_search_tool_result"`
 
@@ -5001,7 +5119,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `page_age?: string | null`
 
-            - `WebSearchToolRequestError`
+            - `interface WebSearchToolRequestError`
 
               - `type: "web_search_tool_result_error"`
 
@@ -5029,23 +5147,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
-        - `WebFetchToolResultBlockParam`
+        - `interface WebFetchToolResultBlockParam`
 
           - `type: "web_fetch_tool_result"`
 
           - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-            - `WebFetchToolResultErrorBlockParam`
+            - `interface WebFetchToolResultErrorBlockParam`
 
               - `type: "web_fetch_tool_result_error"`
 
@@ -5071,7 +5189,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"content_too_large"`
 
-            - `WebFetchBlockParam`
+            - `interface WebFetchBlockParam`
 
               - `type: "web_fetch_result"`
 
@@ -5095,23 +5213,23 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
-        - `CodeExecutionToolResultBlockParam`
+        - `interface CodeExecutionToolResultBlockParam`
 
           - `type: "code_execution_tool_result"`
 
           - `content: CodeExecutionToolResultBlockParamContent`
 
-            - `CodeExecutionToolResultErrorParam`
+            - `interface CodeExecutionToolResultErrorParam`
 
               - `type: "code_execution_tool_result_error"`
 
@@ -5125,7 +5243,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"execution_time_exceeded"`
 
-            - `CodeExecutionResultBlockParam`
+            - `interface CodeExecutionResultBlockParam`
 
               - `type: "code_execution_result"`
 
@@ -5141,7 +5259,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `stdout: string`
 
-            - `EncryptedCodeExecutionResultBlockParam`
+            - `interface EncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -5167,13 +5285,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
-        - `BashCodeExecutionToolResultBlockParam`
+        - `interface BashCodeExecutionToolResultBlockParam`
 
           - `type: "bash_code_execution_tool_result"`
 
           - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-            - `BashCodeExecutionToolResultErrorParam`
+            - `interface BashCodeExecutionToolResultErrorParam`
 
               - `type: "bash_code_execution_tool_result_error"`
 
@@ -5189,7 +5307,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"output_file_too_large"`
 
-            - `BashCodeExecutionResultBlockParam`
+            - `interface BashCodeExecutionResultBlockParam`
 
               - `type: "bash_code_execution_result"`
 
@@ -5213,13 +5331,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
-        - `TextEditorCodeExecutionToolResultBlockParam`
+        - `interface TextEditorCodeExecutionToolResultBlockParam`
 
           - `type: "text_editor_code_execution_tool_result"`
 
           - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-            - `TextEditorCodeExecutionToolResultErrorParam`
+            - `interface TextEditorCodeExecutionToolResultErrorParam`
 
               - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -5237,7 +5355,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `error_message?: string | null`
 
-            - `TextEditorCodeExecutionViewResultBlockParam`
+            - `interface TextEditorCodeExecutionViewResultBlockParam`
 
               - `type: "text_editor_code_execution_view_result"`
 
@@ -5257,13 +5375,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `total_lines?: number | null`
 
-            - `TextEditorCodeExecutionCreateResultBlockParam`
+            - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
               - `type: "text_editor_code_execution_create_result"`
 
               - `is_file_update: boolean`
 
-            - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+            - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -5285,13 +5403,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
-        - `ToolSearchToolResultBlockParam`
+        - `interface ToolSearchToolResultBlockParam`
 
           - `type: "tool_search_tool_result"`
 
           - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-            - `ToolSearchToolResultErrorParam`
+            - `interface ToolSearchToolResultErrorParam`
 
               - `type: "tool_search_tool_result_error"`
 
@@ -5307,7 +5425,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `error_message?: string | null`
 
-            - `ToolSearchToolSearchResultBlockParam`
+            - `interface ToolSearchToolSearchResultBlockParam`
 
               - `type: "tool_search_tool_search_result"`
 
@@ -5331,7 +5449,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
-        - `ContainerUploadBlockParam`
+        - `interface ContainerUploadBlockParam`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -5492,7 +5610,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-    - `ThinkingConfigEnabled`
+    - `interface ThinkingConfigEnabled`
 
       - `type: "enabled"`
 
@@ -5514,11 +5632,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `"omitted"`
 
-    - `ThinkingConfigDisabled`
+    - `interface ThinkingConfigDisabled`
 
       - `type: "disabled"`
 
-    - `ThinkingConfigAdaptive`
+    - `interface ThinkingConfigAdaptive`
 
       - `type: "adaptive"`
 
@@ -5534,7 +5652,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-    - `ToolChoiceAuto`
+    - `interface ToolChoiceAuto`
 
       The model will automatically decide whether to use tools.
 
@@ -5546,7 +5664,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-    - `ToolChoiceAny`
+    - `interface ToolChoiceAny`
 
       The model will use any available tools.
 
@@ -5558,7 +5676,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-    - `ToolChoiceTool`
+    - `interface ToolChoiceTool`
 
       The model will use the specified tool with `tool_choice.name`.
 
@@ -5574,7 +5692,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-    - `ToolChoiceNone`
+    - `interface ToolChoiceNone`
 
       The model will not be allowed to use tools.
 
@@ -5644,7 +5762,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-    - `Tool`
+    - `interface Tool`
 
       - `type?: "custom" | null`
 
@@ -5702,7 +5820,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `ToolBash20250124`
+    - `interface ToolBash20250124`
 
       - `type: "bash_20250124"`
 
@@ -5736,7 +5854,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20250522`
+    - `interface CodeExecutionTool20250522`
 
       - `type: "code_execution_20250522"`
 
@@ -5768,7 +5886,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20250825`
+    - `interface CodeExecutionTool20250825`
 
       - `type: "code_execution_20250825"`
 
@@ -5800,7 +5918,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20260120`
+    - `interface CodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -5834,7 +5952,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `CodeExecutionTool20260521`
+    - `interface CodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -5868,7 +5986,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `BrowserToolset20260801`
+    - `interface BrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -6262,7 +6380,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `MemoryTool20250818`
+    - `interface MemoryTool20250818`
 
       - `type: "memory_20250818"`
 
@@ -6296,7 +6414,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `ComputerToolset20260801`
+    - `interface ComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -6526,7 +6644,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `ToolTextEditor20250124`
+    - `interface ToolTextEditor20250124`
 
       - `type: "text_editor_20250124"`
 
@@ -6560,7 +6678,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `ToolTextEditor20250429`
+    - `interface ToolTextEditor20250429`
 
       - `type: "text_editor_20250429"`
 
@@ -6594,7 +6712,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `ToolTextEditor20250728`
+    - `interface ToolTextEditor20250728`
 
       - `type: "text_editor_20250728"`
 
@@ -6634,7 +6752,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `WebSearchTool20250305`
+    - `interface WebSearchTool20250305`
 
       - `type: "web_search_20250305"`
 
@@ -6710,7 +6828,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           maxLength: 255, minLength: 1
 
-    - `WebFetchTool20250910`
+    - `interface WebFetchTool20250910`
 
       - `type: "web_fetch_20250910"`
 
@@ -6766,7 +6884,98 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `WebSearchTool20260209`
+      - `url_sources?: WebFetchURLSources | null`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `interface WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `type: "all"`
+
+          - `interface WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `type: "none"`
+
+          - `interface WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `type: "only"`
+
+            - `tools: Array<WebFetchURLSourceToolReference>`
+
+              - `type: "tool_reference"`
+
+              - `name: string`
+
+          - `interface WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `type: "except"`
+
+            - `tools: Array<WebFetchURLSourceToolReference>`
+
+              - `type: "tool_reference"`
+
+              - `name: string`
+
+        - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `interface WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `interface WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `interface WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `interface WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `interface WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `interface WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `interface WebSearchTool20260209`
 
       - `type: "web_search_20260209"`
 
@@ -6816,7 +7025,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `WebFetchTool20260209`
+    - `interface WebFetchTool20260209`
 
       - `type: "web_fetch_20260209"`
 
@@ -6872,7 +7081,16 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `WebFetchTool20260309`
+      - `url_sources?: WebFetchURLSources | null`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `interface WebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -6930,11 +7148,20 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `url_sources?: WebFetchURLSources | null`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `use_cache?: boolean`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `WebSearchTool20260318`
+    - `interface WebSearchTool20260318`
 
       - `type: "web_search_20260318"`
 
@@ -6992,7 +7219,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `WebFetchTool20260318`
+    - `interface WebFetchTool20260318`
 
       - `type: "web_fetch_20260318"`
 
@@ -7056,11 +7283,20 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `url_sources?: WebFetchURLSources | null`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `use_cache?: boolean`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `ToolSearchToolBm25_20251119`
+    - `interface ToolSearchToolBm25_20251119`
 
       - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -7096,7 +7332,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `ToolSearchToolRegex20251119`
+    - `interface ToolSearchToolRegex20251119`
 
       - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -7144,7 +7380,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 ### Returns
 
-- `MessageTokensCount`
+- `interface MessageTokensCount`
 
   - `input_tokens: number`
 
@@ -7179,7 +7415,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Base64 Image Source
 
-- `Base64ImageSource`
+- `interface Base64ImageSource`
 
   - `type: "base64"`
 
@@ -7199,7 +7435,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Base64 PDF Source
 
-- `Base64PDFSource`
+- `interface Base64PDFSource`
 
   - `type: "base64"`
 
@@ -7211,7 +7447,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Output Block
 
-- `BashCodeExecutionOutputBlock`
+- `interface BashCodeExecutionOutputBlock`
 
   - `type: "bash_code_execution_output"`
 
@@ -7221,7 +7457,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Output Block Param
 
-- `BashCodeExecutionOutputBlockParam`
+- `interface BashCodeExecutionOutputBlockParam`
 
   - `type: "bash_code_execution_output"`
 
@@ -7229,7 +7465,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Result Block
 
-- `BashCodeExecutionResultBlock`
+- `interface BashCodeExecutionResultBlock`
 
   - `type: "bash_code_execution_result"`
 
@@ -7251,7 +7487,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Result Block Param
 
-- `BashCodeExecutionResultBlockParam`
+- `interface BashCodeExecutionResultBlockParam`
 
   - `type: "bash_code_execution_result"`
 
@@ -7269,7 +7505,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Tool Result Block
 
-- `BashCodeExecutionToolResultBlock`
+- `interface BashCodeExecutionToolResultBlock`
 
   - `type: "bash_code_execution_tool_result"`
 
@@ -7277,7 +7513,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-    - `BashCodeExecutionToolResultError`
+    - `interface BashCodeExecutionToolResultError`
 
       - `type: "bash_code_execution_tool_result_error"`
 
@@ -7295,7 +7531,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"output_file_too_large"`
 
-    - `BashCodeExecutionResultBlock`
+    - `interface BashCodeExecutionResultBlock`
 
       - `type: "bash_code_execution_result"`
 
@@ -7321,13 +7557,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Tool Result Block Param
 
-- `BashCodeExecutionToolResultBlockParam`
+- `interface BashCodeExecutionToolResultBlockParam`
 
   - `type: "bash_code_execution_tool_result"`
 
   - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-    - `BashCodeExecutionToolResultErrorParam`
+    - `interface BashCodeExecutionToolResultErrorParam`
 
       - `type: "bash_code_execution_tool_result_error"`
 
@@ -7343,7 +7579,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"output_file_too_large"`
 
-    - `BashCodeExecutionResultBlockParam`
+    - `interface BashCodeExecutionResultBlockParam`
 
       - `type: "bash_code_execution_result"`
 
@@ -7386,7 +7622,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Tool Result Error
 
-- `BashCodeExecutionToolResultError`
+- `interface BashCodeExecutionToolResultError`
 
   - `type: "bash_code_execution_tool_result_error"`
 
@@ -7406,7 +7642,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Tool Result Error Code
 
-- `BashCodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
+- `type BashCodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
   - `"invalid_tool_input"`
 
@@ -7420,7 +7656,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Bash Code Execution Tool Result Error Param
 
-- `BashCodeExecutionToolResultErrorParam`
+- `interface BashCodeExecutionToolResultErrorParam`
 
   - `type: "bash_code_execution_tool_result_error"`
 
@@ -7438,7 +7674,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Close Tab Config
 
-- `BrowserCloseTabConfig`
+- `interface BrowserCloseTabConfig`
 
   `close_tab`'s config overrides.
 
@@ -7452,7 +7688,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Double Click Config
 
-- `BrowserDoubleClickConfig`
+- `interface BrowserDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -7466,7 +7702,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser File Upload Config
 
-- `BrowserFileUploadConfig`
+- `interface BrowserFileUploadConfig`
 
   `file_upload`'s config overrides.
 
@@ -7480,7 +7716,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Find Config
 
-- `BrowserFindConfig`
+- `interface BrowserFindConfig`
 
   `find`'s config overrides.
 
@@ -7494,7 +7730,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Form Input Config
 
-- `BrowserFormInputConfig`
+- `interface BrowserFormInputConfig`
 
   `form_input`'s config overrides.
 
@@ -7508,7 +7744,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Get Page Text Config
 
-- `BrowserGetPageTextConfig`
+- `interface BrowserGetPageTextConfig`
 
   `get_page_text`'s config overrides.
 
@@ -7522,7 +7758,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Hold Key Config
 
-- `BrowserHoldKeyConfig`
+- `interface BrowserHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -7536,7 +7772,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Hover Config
 
-- `BrowserHoverConfig`
+- `interface BrowserHoverConfig`
 
   `hover`'s config overrides.
 
@@ -7550,7 +7786,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Javascript Exec Config
 
-- `BrowserJavascriptExecConfig`
+- `interface BrowserJavascriptExecConfig`
 
   `javascript_exec`'s config overrides.
 
@@ -7564,7 +7800,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Key Config
 
-- `BrowserKeyConfig`
+- `interface BrowserKeyConfig`
 
   `key`'s config overrides.
 
@@ -7578,7 +7814,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Left Click Config
 
-- `BrowserLeftClickConfig`
+- `interface BrowserLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -7592,7 +7828,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Left Click Drag Config
 
-- `BrowserLeftClickDragConfig`
+- `interface BrowserLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -7606,7 +7842,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Left Mouse Down Config
 
-- `BrowserLeftMouseDownConfig`
+- `interface BrowserLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -7620,7 +7856,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Left Mouse Up Config
 
-- `BrowserLeftMouseUpConfig`
+- `interface BrowserLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -7634,7 +7870,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser List Tabs Config
 
-- `BrowserListTabsConfig`
+- `interface BrowserListTabsConfig`
 
   `list_tabs`'s config overrides.
 
@@ -7648,7 +7884,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Middle Click Config
 
-- `BrowserMiddleClickConfig`
+- `interface BrowserMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -7662,7 +7898,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Mouse Move Config
 
-- `BrowserMouseMoveConfig`
+- `interface BrowserMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -7676,7 +7912,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Navigate Config
 
-- `BrowserNavigateConfig`
+- `interface BrowserNavigateConfig`
 
   `navigate`'s config overrides.
 
@@ -7690,7 +7926,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser New Tab Config
 
-- `BrowserNewTabConfig`
+- `interface BrowserNewTabConfig`
 
   `new_tab`'s config overrides.
 
@@ -7704,7 +7940,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Read Console Config
 
-- `BrowserReadConsoleConfig`
+- `interface BrowserReadConsoleConfig`
 
   `read_console`'s config overrides.
 
@@ -7718,7 +7954,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Read Network Config
 
-- `BrowserReadNetworkConfig`
+- `interface BrowserReadNetworkConfig`
 
   `read_network`'s config overrides.
 
@@ -7732,7 +7968,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Read Page Config
 
-- `BrowserReadPageConfig`
+- `interface BrowserReadPageConfig`
 
   `read_page`'s config overrides.
 
@@ -7746,7 +7982,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Right Click Config
 
-- `BrowserRightClickConfig`
+- `interface BrowserRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -7760,7 +7996,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Screenshot Config
 
-- `BrowserScreenshotConfig`
+- `interface BrowserScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -7774,7 +8010,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Scroll Config
 
-- `BrowserScrollConfig`
+- `interface BrowserScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -7788,7 +8024,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Scroll To Config
 
-- `BrowserScrollToConfig`
+- `interface BrowserScrollToConfig`
 
   `scroll_to`'s config overrides.
 
@@ -7802,7 +8038,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Block Param
 
-- `BrowserStateBlockParam`
+- `interface BrowserStateBlockParam`
 
   The caller's browser state after a browser toolset member call —
   the full inventory of open tabs, which tab is active, and any side
@@ -7869,7 +8105,7 @@ console.log(messageTokensCount.input_tokens);
 
     maxItems: 200, minItems: 1
 
-    - `BrowserStateChangeTabOpened`
+    - `interface BrowserStateChangeTabOpened`
 
       A tab this call's execution opened that remains open at its end —
       the creation delta of the `tabs` inventory, not an event log.
@@ -7887,7 +8123,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `BrowserStateChangeDownloadStarted`
+    - `interface BrowserStateChangeDownloadStarted`
 
       A file download that started during this call.
 
@@ -7905,7 +8141,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `BrowserStateChangeDownloadCompleted`
+    - `interface BrowserStateChangeDownloadCompleted`
 
       A file download that finished during this call, reported with the
       same `download_id` as its `download_started` — or without a prior
@@ -7938,7 +8174,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `BrowserStateChangeDownloadFailed`
+    - `interface BrowserStateChangeDownloadFailed`
 
       A file download that failed — or was cancelled — during this call.
 
@@ -7964,9 +8200,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Change
 
-- `BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
+- `type BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
 
-  - `BrowserStateChangeTabOpened`
+  - `interface BrowserStateChangeTabOpened`
 
     A tab this call's execution opened that remains open at its end —
     the creation delta of the `tabs` inventory, not an event log.
@@ -7984,7 +8220,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `BrowserStateChangeDownloadStarted`
+  - `interface BrowserStateChangeDownloadStarted`
 
     A file download that started during this call.
 
@@ -8002,7 +8238,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `BrowserStateChangeDownloadCompleted`
+  - `interface BrowserStateChangeDownloadCompleted`
 
     A file download that finished during this call, reported with the
     same `download_id` as its `download_started` — or without a prior
@@ -8035,7 +8271,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-  - `BrowserStateChangeDownloadFailed`
+  - `interface BrowserStateChangeDownloadFailed`
 
     A file download that failed — or was cancelled — during this call.
 
@@ -8061,7 +8297,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Change Download Completed
 
-- `BrowserStateChangeDownloadCompleted`
+- `interface BrowserStateChangeDownloadCompleted`
 
   A file download that finished during this call, reported with the
   same `download_id` as its `download_started` — or without a prior
@@ -8096,7 +8332,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Change Download Failed
 
-- `BrowserStateChangeDownloadFailed`
+- `interface BrowserStateChangeDownloadFailed`
 
   A file download that failed — or was cancelled — during this call.
 
@@ -8122,7 +8358,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Change Download Started
 
-- `BrowserStateChangeDownloadStarted`
+- `interface BrowserStateChangeDownloadStarted`
 
   A file download that started during this call.
 
@@ -8142,7 +8378,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Change Tab Opened
 
-- `BrowserStateChangeTabOpened`
+- `interface BrowserStateChangeTabOpened`
 
   A tab this call's execution opened that remains open at its end —
   the creation delta of the `tabs` inventory, not an event log.
@@ -8162,7 +8398,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser State Tab Entry
 
-- `BrowserStateTabEntry`
+- `interface BrowserStateTabEntry`
 
   One open browser tab reported in a `browser_state` block's `tabs`
   inventory.
@@ -8197,7 +8433,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Switch Tab Config
 
-- `BrowserSwitchTabConfig`
+- `interface BrowserSwitchTabConfig`
 
   `switch_tab`'s config overrides.
 
@@ -8211,7 +8447,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Toolset 20260801
 
-- `BrowserToolset20260801`
+- `interface BrowserToolset20260801`
 
   The browser toolset: a single `tools[]` entry (carrying no
   `name`) that declares the browser tool family. The model is served
@@ -8624,7 +8860,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Toolset Configs
 
-- `BrowserToolsetConfigs`
+- `interface BrowserToolsetConfigs`
 
   Per-member configuration for `browser_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -9007,7 +9243,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Triple Click Config
 
-- `BrowserTripleClickConfig`
+- `interface BrowserTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -9021,7 +9257,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Type Config
 
-- `BrowserTypeConfig`
+- `interface BrowserTypeConfig`
 
   `type`'s config overrides.
 
@@ -9035,7 +9271,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Wait Config
 
-- `BrowserWaitConfig`
+- `interface BrowserWaitConfig`
 
   `wait`'s config overrides.
 
@@ -9049,7 +9285,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Browser Zoom Config
 
-- `BrowserZoomConfig`
+- `interface BrowserZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -9063,7 +9299,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Cache Control Ephemeral
 
-- `CacheControlEphemeral`
+- `interface CacheControlEphemeral`
 
   - `type: "ephemeral"`
 
@@ -9084,7 +9320,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Cache Creation
 
-- `CacheCreation`
+- `interface CacheCreation`
 
   - `ephemeral_1h_input_tokens: number`
 
@@ -9100,7 +9336,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Char Location
 
-- `CitationCharLocation`
+- `interface CitationCharLocation`
 
   - `type: "char_location"`
 
@@ -9124,7 +9360,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Char Location Param
 
-- `CitationCharLocationParam`
+- `interface CitationCharLocationParam`
 
   - `type: "char_location"`
 
@@ -9146,7 +9382,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Content Block Location
 
-- `CitationContentBlockLocation`
+- `interface CitationContentBlockLocation`
 
   - `type: "content_block_location"`
 
@@ -9180,7 +9416,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Content Block Location Param
 
-- `CitationContentBlockLocationParam`
+- `interface CitationContentBlockLocationParam`
 
   - `type: "content_block_location"`
 
@@ -9212,7 +9448,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Page Location
 
-- `CitationPageLocation`
+- `interface CitationPageLocation`
 
   - `type: "page_location"`
 
@@ -9236,7 +9472,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Page Location Param
 
-- `CitationPageLocationParam`
+- `interface CitationPageLocationParam`
 
   - `type: "page_location"`
 
@@ -9258,7 +9494,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Search Result Location Param
 
-- `CitationSearchResultLocationParam`
+- `interface CitationSearchResultLocationParam`
 
   - `type: "search_result_location"`
 
@@ -9294,7 +9530,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citation Web Search Result Location Param
 
-- `CitationWebSearchResultLocationParam`
+- `interface CitationWebSearchResultLocationParam`
 
   - `type: "web_search_result_location"`
 
@@ -9312,7 +9548,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citations Config
 
-- `CitationsConfig`
+- `interface CitationsConfig`
 
   - `enabled: boolean`
 
@@ -9320,13 +9556,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citations Config Param
 
-- `CitationsConfigParam`
+- `interface CitationsConfigParam`
 
   - `enabled?: boolean`
 
 ### Citations Delta
 
-- `CitationsDelta`
+- `interface CitationsDelta`
 
   - `type: "citations_delta"`
 
@@ -9334,7 +9570,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-    - `CitationCharLocation`
+    - `interface CitationCharLocation`
 
       - `type: "char_location"`
 
@@ -9356,7 +9592,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationPageLocation`
+    - `interface CitationPageLocation`
 
       - `type: "page_location"`
 
@@ -9378,7 +9614,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-    - `CitationContentBlockLocation`
+    - `interface CitationContentBlockLocation`
 
       - `type: "content_block_location"`
 
@@ -9410,7 +9646,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationsWebSearchResultLocation`
+    - `interface CitationsWebSearchResultLocation`
 
       - `type: "web_search_result_location"`
 
@@ -9426,7 +9662,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `url: string`
 
-    - `CitationsSearchResultLocation`
+    - `interface CitationsSearchResultLocation`
 
       - `type: "search_result_location"`
 
@@ -9464,7 +9700,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citations Search Result Location
 
-- `CitationsSearchResultLocation`
+- `interface CitationsSearchResultLocation`
 
   - `type: "search_result_location"`
 
@@ -9502,7 +9738,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Citations Web Search Result Location
 
-- `CitationsWebSearchResultLocation`
+- `interface CitationsWebSearchResultLocation`
 
   - `type: "web_search_result_location"`
 
@@ -9520,7 +9756,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Output Block
 
-- `CodeExecutionOutputBlock`
+- `interface CodeExecutionOutputBlock`
 
   - `type: "code_execution_output"`
 
@@ -9530,7 +9766,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Output Block Param
 
-- `CodeExecutionOutputBlockParam`
+- `interface CodeExecutionOutputBlockParam`
 
   - `type: "code_execution_output"`
 
@@ -9538,7 +9774,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Result Block
 
-- `CodeExecutionResultBlock`
+- `interface CodeExecutionResultBlock`
 
   - `type: "code_execution_result"`
 
@@ -9560,7 +9796,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Result Block Param
 
-- `CodeExecutionResultBlockParam`
+- `interface CodeExecutionResultBlockParam`
 
   - `type: "code_execution_result"`
 
@@ -9578,7 +9814,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool 20250522
 
-- `CodeExecutionTool20250522`
+- `interface CodeExecutionTool20250522`
 
   - `type: "code_execution_20250522"`
 
@@ -9629,7 +9865,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool 20250825
 
-- `CodeExecutionTool20250825`
+- `interface CodeExecutionTool20250825`
 
   - `type: "code_execution_20250825"`
 
@@ -9680,7 +9916,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool 20260120
 
-- `CodeExecutionTool20260120`
+- `interface CodeExecutionTool20260120`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -9733,7 +9969,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool 20260521
 
-- `CodeExecutionTool20260521`
+- `interface CodeExecutionTool20260521`
 
   Code execution tool with REPL state persistence.
 
@@ -9786,7 +10022,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Block
 
-- `CodeExecutionToolResultBlock`
+- `interface CodeExecutionToolResultBlock`
 
   - `type: "code_execution_tool_result"`
 
@@ -9794,7 +10030,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: CodeExecutionToolResultBlockContent`
 
-    - `CodeExecutionToolResultError`
+    - `interface CodeExecutionToolResultError`
 
       - `type: "code_execution_tool_result_error"`
 
@@ -9810,7 +10046,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"execution_time_exceeded"`
 
-    - `CodeExecutionResultBlock`
+    - `interface CodeExecutionResultBlock`
 
       - `type: "code_execution_result"`
 
@@ -9830,7 +10066,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `stdout: string`
 
-    - `EncryptedCodeExecutionResultBlock`
+    - `interface EncryptedCodeExecutionResultBlock`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9858,9 +10094,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Block Content
 
-- `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
+- `type CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
 
-  - `CodeExecutionToolResultError`
+  - `interface CodeExecutionToolResultError`
 
     - `type: "code_execution_tool_result_error"`
 
@@ -9876,7 +10112,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `"execution_time_exceeded"`
 
-  - `CodeExecutionResultBlock`
+  - `interface CodeExecutionResultBlock`
 
     - `type: "code_execution_result"`
 
@@ -9896,7 +10132,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `stdout: string`
 
-  - `EncryptedCodeExecutionResultBlock`
+  - `interface EncryptedCodeExecutionResultBlock`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9920,13 +10156,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Block Param
 
-- `CodeExecutionToolResultBlockParam`
+- `interface CodeExecutionToolResultBlockParam`
 
   - `type: "code_execution_tool_result"`
 
   - `content: CodeExecutionToolResultBlockParamContent`
 
-    - `CodeExecutionToolResultErrorParam`
+    - `interface CodeExecutionToolResultErrorParam`
 
       - `type: "code_execution_tool_result_error"`
 
@@ -9940,7 +10176,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"execution_time_exceeded"`
 
-    - `CodeExecutionResultBlockParam`
+    - `interface CodeExecutionResultBlockParam`
 
       - `type: "code_execution_result"`
 
@@ -9956,7 +10192,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `stdout: string`
 
-    - `EncryptedCodeExecutionResultBlockParam`
+    - `interface EncryptedCodeExecutionResultBlockParam`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10001,9 +10237,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Block Param Content
 
-- `CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
+- `type CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
 
-  - `CodeExecutionToolResultErrorParam`
+  - `interface CodeExecutionToolResultErrorParam`
 
     - `type: "code_execution_tool_result_error"`
 
@@ -10017,7 +10253,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `"execution_time_exceeded"`
 
-  - `CodeExecutionResultBlockParam`
+  - `interface CodeExecutionResultBlockParam`
 
     - `type: "code_execution_result"`
 
@@ -10033,7 +10269,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `stdout: string`
 
-  - `EncryptedCodeExecutionResultBlockParam`
+  - `interface EncryptedCodeExecutionResultBlockParam`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10053,7 +10289,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Error
 
-- `CodeExecutionToolResultError`
+- `interface CodeExecutionToolResultError`
 
   - `type: "code_execution_tool_result_error"`
 
@@ -10071,7 +10307,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Error Code
 
-- `CodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
+- `type CodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
   - `"invalid_tool_input"`
 
@@ -10083,7 +10319,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Code Execution Tool Result Error Param
 
-- `CodeExecutionToolResultErrorParam`
+- `interface CodeExecutionToolResultErrorParam`
 
   - `type: "code_execution_tool_result_error"`
 
@@ -10099,7 +10335,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Cursor Position Config
 
-- `ComputerCursorPositionConfig`
+- `interface ComputerCursorPositionConfig`
 
   `cursor_position`'s config overrides.
 
@@ -10113,7 +10349,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Double Click Config
 
-- `ComputerDoubleClickConfig`
+- `interface ComputerDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -10127,7 +10363,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Hold Key Config
 
-- `ComputerHoldKeyConfig`
+- `interface ComputerHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -10141,7 +10377,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Key Config
 
-- `ComputerKeyConfig`
+- `interface ComputerKeyConfig`
 
   `key`'s config overrides.
 
@@ -10155,7 +10391,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Left Click Config
 
-- `ComputerLeftClickConfig`
+- `interface ComputerLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -10169,7 +10405,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Left Click Drag Config
 
-- `ComputerLeftClickDragConfig`
+- `interface ComputerLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -10183,7 +10419,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Left Mouse Down Config
 
-- `ComputerLeftMouseDownConfig`
+- `interface ComputerLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -10197,7 +10433,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Left Mouse Up Config
 
-- `ComputerLeftMouseUpConfig`
+- `interface ComputerLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -10211,7 +10447,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Middle Click Config
 
-- `ComputerMiddleClickConfig`
+- `interface ComputerMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -10225,7 +10461,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Mouse Move Config
 
-- `ComputerMouseMoveConfig`
+- `interface ComputerMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -10239,7 +10475,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Right Click Config
 
-- `ComputerRightClickConfig`
+- `interface ComputerRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -10253,7 +10489,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Screenshot Config
 
-- `ComputerScreenshotConfig`
+- `interface ComputerScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -10267,7 +10503,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Scroll Config
 
-- `ComputerScrollConfig`
+- `interface ComputerScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -10281,7 +10517,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Toolset 20260801
 
-- `ComputerToolset20260801`
+- `interface ComputerToolset20260801`
 
   The computer toolset: a single `tools[]` entry (carrying no
   `name`) that declares the computer tool family. The model is
@@ -10530,7 +10766,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Toolset Configs
 
-- `ComputerToolsetConfigs`
+- `interface ComputerToolsetConfigs`
 
   Per-member configuration for `computer_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -10745,7 +10981,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Triple Click Config
 
-- `ComputerTripleClickConfig`
+- `interface ComputerTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -10759,7 +10995,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Type Config
 
-- `ComputerTypeConfig`
+- `interface ComputerTypeConfig`
 
   `type`'s config overrides.
 
@@ -10773,7 +11009,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Wait Config
 
-- `ComputerWaitConfig`
+- `interface ComputerWaitConfig`
 
   `wait`'s config overrides.
 
@@ -10787,7 +11023,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Computer Zoom Config
 
-- `ComputerZoomConfig`
+- `interface ComputerZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -10801,7 +11037,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Container
 
-- `Container`
+- `interface Container`
 
   Information about the container used in the request (for the code execution tool)
 
@@ -10841,7 +11077,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Container Params
 
-- `ContainerParams`
+- `interface ContainerParams`
 
   Container parameters with skills to be loaded.
 
@@ -10877,7 +11113,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Container Skill
 
-- `ContainerSkill`
+- `interface ContainerSkill`
 
   A skill that was loaded in a container (response model).
 
@@ -10903,7 +11139,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Container Upload Block
 
-- `ContainerUploadBlock`
+- `interface ContainerUploadBlock`
 
   Response model for a file uploaded to the container.
 
@@ -10915,7 +11151,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Container Upload Block Param
 
-- `ContainerUploadBlockParam`
+- `interface ContainerUploadBlockParam`
 
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
@@ -10947,9 +11183,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Content Block
 
-- `ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
+- `type ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-  - `TextBlock`
+  - `interface TextBlock`
 
     - `type: "text"`
 
@@ -10961,7 +11197,7 @@ console.log(messageTokensCount.input_tokens);
 
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-      - `CitationCharLocation`
+      - `interface CitationCharLocation`
 
         - `type: "char_location"`
 
@@ -10983,7 +11219,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationPageLocation`
+      - `interface CitationPageLocation`
 
         - `type: "page_location"`
 
@@ -11005,7 +11241,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-      - `CitationContentBlockLocation`
+      - `interface CitationContentBlockLocation`
 
         - `type: "content_block_location"`
 
@@ -11037,7 +11273,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationsWebSearchResultLocation`
+      - `interface CitationsWebSearchResultLocation`
 
         - `type: "web_search_result_location"`
 
@@ -11053,7 +11289,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `url: string`
 
-      - `CitationsSearchResultLocation`
+      - `interface CitationsSearchResultLocation`
 
         - `type: "search_result_location"`
 
@@ -11093,7 +11329,7 @@ console.log(messageTokensCount.input_tokens);
 
       minLength: 0
 
-  - `ThinkingBlock`
+  - `interface ThinkingBlock`
 
     - `type: "thinking"`
 
@@ -11111,7 +11347,7 @@ console.log(messageTokensCount.input_tokens);
 
       The text of Claude's thinking process for this block.
 
-  - `RedactedThinkingBlock`
+  - `interface RedactedThinkingBlock`
 
     - `type: "redacted_thinking"`
 
@@ -11125,7 +11361,7 @@ console.log(messageTokensCount.input_tokens);
 
       See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `ToolUseBlock`
+  - `interface ToolUseBlock`
 
     - `type: "tool_use"`
 
@@ -11139,13 +11375,13 @@ console.log(messageTokensCount.input_tokens);
 
       default: {"type":"direct"}
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
         - `type: "direct"`
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -11155,7 +11391,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
         - `type: "code_execution_20260120"`
 
@@ -11175,7 +11411,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `ServerToolUseBlock`
+  - `interface ServerToolUseBlock`
 
     - `type: "server_tool_use"`
 
@@ -11189,15 +11425,15 @@ console.log(messageTokensCount.input_tokens);
 
       default: {"type":"direct"}
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
     - `input: Record<string, unknown>`
 
@@ -11217,7 +11453,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `"tool_search_tool_bm25"`
 
-  - `WebSearchToolResultBlock`
+  - `interface WebSearchToolResultBlock`
 
     - `type: "web_search_tool_result"`
 
@@ -11227,19 +11463,19 @@ console.log(messageTokensCount.input_tokens);
 
       default: {"type":"direct"}
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
     - `content: WebSearchToolResultBlockContent`
 
-      - `WebSearchToolResultError`
+      - `interface WebSearchToolResultError`
 
         - `type: "web_search_tool_result_error"`
 
@@ -11277,7 +11513,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `WebFetchToolResultBlock`
+  - `interface WebFetchToolResultBlock`
 
     - `type: "web_fetch_tool_result"`
 
@@ -11287,19 +11523,19 @@ console.log(messageTokensCount.input_tokens);
 
       default: {"type":"direct"}
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
     - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-      - `WebFetchToolResultErrorBlock`
+      - `interface WebFetchToolResultErrorBlock`
 
         - `type: "web_fetch_tool_result_error"`
 
@@ -11327,7 +11563,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"content_too_large"`
 
-      - `WebFetchBlock`
+      - `interface WebFetchBlock`
 
         - `type: "web_fetch_result"`
 
@@ -11349,7 +11585,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `source: Base64PDFSource | PlainTextSource`
 
-            - `Base64PDFSource`
+            - `interface Base64PDFSource`
 
               - `type: "base64"`
 
@@ -11359,7 +11595,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `media_type: "application/pdf"`
 
-            - `PlainTextSource`
+            - `interface PlainTextSource`
 
               - `type: "text"`
 
@@ -11383,7 +11619,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `CodeExecutionToolResultBlock`
+  - `interface CodeExecutionToolResultBlock`
 
     - `type: "code_execution_tool_result"`
 
@@ -11391,7 +11627,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `content: CodeExecutionToolResultBlockContent`
 
-      - `CodeExecutionToolResultError`
+      - `interface CodeExecutionToolResultError`
 
         - `type: "code_execution_tool_result_error"`
 
@@ -11407,7 +11643,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"execution_time_exceeded"`
 
-      - `CodeExecutionResultBlock`
+      - `interface CodeExecutionResultBlock`
 
         - `type: "code_execution_result"`
 
@@ -11427,7 +11663,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-      - `EncryptedCodeExecutionResultBlock`
+      - `interface EncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -11453,7 +11689,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `BashCodeExecutionToolResultBlock`
+  - `interface BashCodeExecutionToolResultBlock`
 
     - `type: "bash_code_execution_tool_result"`
 
@@ -11461,7 +11697,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-      - `BashCodeExecutionToolResultError`
+      - `interface BashCodeExecutionToolResultError`
 
         - `type: "bash_code_execution_tool_result_error"`
 
@@ -11479,7 +11715,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"output_file_too_large"`
 
-      - `BashCodeExecutionResultBlock`
+      - `interface BashCodeExecutionResultBlock`
 
         - `type: "bash_code_execution_result"`
 
@@ -11503,7 +11739,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `TextEditorCodeExecutionToolResultBlock`
+  - `interface TextEditorCodeExecutionToolResultBlock`
 
     - `type: "text_editor_code_execution_tool_result"`
 
@@ -11511,7 +11747,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-      - `TextEditorCodeExecutionToolResultError`
+      - `interface TextEditorCodeExecutionToolResultError`
 
         - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -11531,7 +11767,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message: string | null`
 
-      - `TextEditorCodeExecutionViewResultBlock`
+      - `interface TextEditorCodeExecutionViewResultBlock`
 
         - `type: "text_editor_code_execution_view_result"`
 
@@ -11553,7 +11789,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `total_lines: number | null`
 
-      - `TextEditorCodeExecutionCreateResultBlock`
+      - `interface TextEditorCodeExecutionCreateResultBlock`
 
         - `type: "text_editor_code_execution_create_result"`
 
@@ -11561,7 +11797,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `is_file_update: boolean`
 
-      - `TextEditorCodeExecutionStrReplaceResultBlock`
+      - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -11581,7 +11817,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `ToolSearchToolResultBlock`
+  - `interface ToolSearchToolResultBlock`
 
     - `type: "tool_search_tool_result"`
 
@@ -11589,7 +11825,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-      - `ToolSearchToolResultError`
+      - `interface ToolSearchToolResultError`
 
         - `type: "tool_search_tool_result_error"`
 
@@ -11607,7 +11843,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message: string | null`
 
-      - `ToolSearchToolSearchResultBlock`
+      - `interface ToolSearchToolSearchResultBlock`
 
         - `type: "tool_search_tool_search_result"`
 
@@ -11627,7 +11863,7 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `ContainerUploadBlock`
+  - `interface ContainerUploadBlock`
 
     Response model for a file uploaded to the container.
 
@@ -11639,9 +11875,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Content Block Param
 
-- `ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
+- `type ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
 
-  - `TextBlockParam`
+  - `interface TextBlockParam`
 
     - `type: "text"`
 
@@ -11672,7 +11908,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `citations?: Array<TextCitationParam> | null`
 
-      - `CitationCharLocationParam`
+      - `interface CitationCharLocationParam`
 
         - `type: "char_location"`
 
@@ -11692,7 +11928,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationPageLocationParam`
+      - `interface CitationPageLocationParam`
 
         - `type: "page_location"`
 
@@ -11712,7 +11948,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-      - `CitationContentBlockLocationParam`
+      - `interface CitationContentBlockLocationParam`
 
         - `type: "content_block_location"`
 
@@ -11742,7 +11978,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationWebSearchResultLocationParam`
+      - `interface CitationWebSearchResultLocationParam`
 
         - `type: "web_search_result_location"`
 
@@ -11758,7 +11994,7 @@ console.log(messageTokensCount.input_tokens);
 
           minLength: 1
 
-      - `CitationSearchResultLocationParam`
+      - `interface CitationSearchResultLocationParam`
 
         - `type: "search_result_location"`
 
@@ -11792,13 +12028,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-  - `ImageBlockParam`
+  - `interface ImageBlockParam`
 
     - `type: "image"`
 
     - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-      - `Base64ImageSource`
+      - `interface Base64ImageSource`
 
         - `type: "base64"`
 
@@ -11816,13 +12052,13 @@ console.log(messageTokensCount.input_tokens);
 
           - `"image/webp"`
 
-      - `URLImageSource`
+      - `interface URLImageSource`
 
         - `type: "url"`
 
         - `url: string`
 
-      - `FileImageSource`
+      - `interface FileImageSource`
 
         - `type: "file"`
 
@@ -11844,13 +12080,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `"error"`
 
-  - `DocumentBlockParam`
+  - `interface DocumentBlockParam`
 
     - `type: "document"`
 
     - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-      - `Base64PDFSource`
+      - `interface Base64PDFSource`
 
         - `type: "base64"`
 
@@ -11860,7 +12096,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "application/pdf"`
 
-      - `PlainTextSource`
+      - `interface PlainTextSource`
 
         - `type: "text"`
 
@@ -11868,7 +12104,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "text/plain"`
 
-      - `ContentBlockSource`
+      - `interface ContentBlockSource`
 
         - `type: "content"`
 
@@ -11878,17 +12114,17 @@ console.log(messageTokensCount.input_tokens);
 
           - `Array<ContentBlockSourceContent>`
 
-            - `TextBlockParam`
+            - `interface TextBlockParam`
 
-            - `ImageBlockParam`
+            - `interface ImageBlockParam`
 
-      - `URLPDFSource`
+      - `interface URLPDFSource`
 
         - `type: "url"`
 
         - `url: string`
 
-      - `FileDocumentSource`
+      - `interface FileDocumentSource`
 
         - `type: "file"`
 
@@ -11910,7 +12146,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 500, minLength: 1
 
-  - `SearchResultBlockParam`
+  - `interface SearchResultBlockParam`
 
     - `type: "search_result"`
 
@@ -11938,7 +12174,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `citations?: CitationsConfigParam`
 
-  - `ThinkingBlockParam`
+  - `interface ThinkingBlockParam`
 
     - `type: "thinking"`
 
@@ -11952,7 +12188,7 @@ console.log(messageTokensCount.input_tokens);
 
       The `thinking` text of this block as returned by the API.
 
-  - `RedactedThinkingBlockParam`
+  - `interface RedactedThinkingBlockParam`
 
     - `type: "redacted_thinking"`
 
@@ -11960,7 +12196,7 @@ console.log(messageTokensCount.input_tokens);
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-  - `ToolUseBlockParam`
+  - `interface ToolUseBlockParam`
 
     - `type: "tool_use"`
 
@@ -11980,13 +12216,13 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
         - `type: "direct"`
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -11996,7 +12232,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
         - `type: "code_execution_20260120"`
 
@@ -12010,7 +12246,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `ToolResultBlockParam`
+  - `interface ToolResultBlockParam`
 
     - `type: "tool_result"`
 
@@ -12028,15 +12264,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-        - `TextBlockParam`
+        - `interface TextBlockParam`
 
-        - `ImageBlockParam`
+        - `interface ImageBlockParam`
 
-        - `SearchResultBlockParam`
+        - `interface SearchResultBlockParam`
 
-        - `DocumentBlockParam`
+        - `interface DocumentBlockParam`
 
-        - `ToolReferenceBlockParam`
+        - `interface ToolReferenceBlockParam`
 
           Tool reference block that can be included in tool_result content.
 
@@ -12050,7 +12286,7 @@ console.log(messageTokensCount.input_tokens);
 
             Create a cache control breakpoint at this content block.
 
-        - `BrowserStateBlockParam`
+        - `interface BrowserStateBlockParam`
 
           The caller's browser state after a browser toolset member call —
           the full inventory of open tabs, which tab is active, and any side
@@ -12100,7 +12336,7 @@ console.log(messageTokensCount.input_tokens);
 
             maxItems: 200, minItems: 1
 
-            - `BrowserStateChangeTabOpened`
+            - `interface BrowserStateChangeTabOpened`
 
               A tab this call's execution opened that remains open at its end —
               the creation delta of the `tabs` inventory, not an event log.
@@ -12118,7 +12354,7 @@ console.log(messageTokensCount.input_tokens);
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `BrowserStateChangeDownloadStarted`
+            - `interface BrowserStateChangeDownloadStarted`
 
               A file download that started during this call.
 
@@ -12136,7 +12372,7 @@ console.log(messageTokensCount.input_tokens);
 
                 maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `BrowserStateChangeDownloadCompleted`
+            - `interface BrowserStateChangeDownloadCompleted`
 
               A file download that finished during this call, reported with the
               same `download_id` as its `download_started` — or without a prior
@@ -12169,7 +12405,7 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 0
 
-            - `BrowserStateChangeDownloadFailed`
+            - `interface BrowserStateChangeDownloadFailed`
 
               A file download that failed — or was cancelled — during this call.
 
@@ -12201,7 +12437,7 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `ServerToolUseBlockParam`
+  - `interface ServerToolUseBlockParam`
 
     - `type: "server_tool_use"`
 
@@ -12233,17 +12469,17 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
-  - `WebSearchToolResultBlockParam`
+  - `interface WebSearchToolResultBlockParam`
 
     - `type: "web_search_tool_result"`
 
@@ -12261,7 +12497,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `page_age?: string | null`
 
-      - `WebSearchToolRequestError`
+      - `interface WebSearchToolRequestError`
 
         - `type: "web_search_tool_result_error"`
 
@@ -12289,23 +12525,23 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
-  - `WebFetchToolResultBlockParam`
+  - `interface WebFetchToolResultBlockParam`
 
     - `type: "web_fetch_tool_result"`
 
     - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-      - `WebFetchToolResultErrorBlockParam`
+      - `interface WebFetchToolResultErrorBlockParam`
 
         - `type: "web_fetch_tool_result_error"`
 
@@ -12331,7 +12567,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"content_too_large"`
 
-      - `WebFetchBlockParam`
+      - `interface WebFetchBlockParam`
 
         - `type: "web_fetch_result"`
 
@@ -12355,23 +12591,23 @@ console.log(messageTokensCount.input_tokens);
 
     - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-      - `DirectCaller`
+      - `interface DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `ServerToolCaller`
+      - `interface ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `ServerToolCaller20260120`
+      - `interface ServerToolCaller20260120`
 
-  - `CodeExecutionToolResultBlockParam`
+  - `interface CodeExecutionToolResultBlockParam`
 
     - `type: "code_execution_tool_result"`
 
     - `content: CodeExecutionToolResultBlockParamContent`
 
-      - `CodeExecutionToolResultErrorParam`
+      - `interface CodeExecutionToolResultErrorParam`
 
         - `type: "code_execution_tool_result_error"`
 
@@ -12385,7 +12621,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"execution_time_exceeded"`
 
-      - `CodeExecutionResultBlockParam`
+      - `interface CodeExecutionResultBlockParam`
 
         - `type: "code_execution_result"`
 
@@ -12401,7 +12637,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-      - `EncryptedCodeExecutionResultBlockParam`
+      - `interface EncryptedCodeExecutionResultBlockParam`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12427,13 +12663,13 @@ console.log(messageTokensCount.input_tokens);
 
       Create a cache control breakpoint at this content block.
 
-  - `BashCodeExecutionToolResultBlockParam`
+  - `interface BashCodeExecutionToolResultBlockParam`
 
     - `type: "bash_code_execution_tool_result"`
 
     - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-      - `BashCodeExecutionToolResultErrorParam`
+      - `interface BashCodeExecutionToolResultErrorParam`
 
         - `type: "bash_code_execution_tool_result_error"`
 
@@ -12449,7 +12685,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"output_file_too_large"`
 
-      - `BashCodeExecutionResultBlockParam`
+      - `interface BashCodeExecutionResultBlockParam`
 
         - `type: "bash_code_execution_result"`
 
@@ -12473,13 +12709,13 @@ console.log(messageTokensCount.input_tokens);
 
       Create a cache control breakpoint at this content block.
 
-  - `TextEditorCodeExecutionToolResultBlockParam`
+  - `interface TextEditorCodeExecutionToolResultBlockParam`
 
     - `type: "text_editor_code_execution_tool_result"`
 
     - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-      - `TextEditorCodeExecutionToolResultErrorParam`
+      - `interface TextEditorCodeExecutionToolResultErrorParam`
 
         - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -12497,7 +12733,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message?: string | null`
 
-      - `TextEditorCodeExecutionViewResultBlockParam`
+      - `interface TextEditorCodeExecutionViewResultBlockParam`
 
         - `type: "text_editor_code_execution_view_result"`
 
@@ -12517,13 +12753,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `total_lines?: number | null`
 
-      - `TextEditorCodeExecutionCreateResultBlockParam`
+      - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
         - `type: "text_editor_code_execution_create_result"`
 
         - `is_file_update: boolean`
 
-      - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+      - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
         - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -12545,13 +12781,13 @@ console.log(messageTokensCount.input_tokens);
 
       Create a cache control breakpoint at this content block.
 
-  - `ToolSearchToolResultBlockParam`
+  - `interface ToolSearchToolResultBlockParam`
 
     - `type: "tool_search_tool_result"`
 
     - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-      - `ToolSearchToolResultErrorParam`
+      - `interface ToolSearchToolResultErrorParam`
 
         - `type: "tool_search_tool_result_error"`
 
@@ -12567,7 +12803,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message?: string | null`
 
-      - `ToolSearchToolSearchResultBlockParam`
+      - `interface ToolSearchToolSearchResultBlockParam`
 
         - `type: "tool_search_tool_search_result"`
 
@@ -12591,7 +12827,7 @@ console.log(messageTokensCount.input_tokens);
 
       Create a cache control breakpoint at this content block.
 
-  - `ContainerUploadBlockParam`
+  - `interface ContainerUploadBlockParam`
 
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
@@ -12606,7 +12842,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Content Block Source
 
-- `ContentBlockSource`
+- `interface ContentBlockSource`
 
   - `type: "content"`
 
@@ -12616,7 +12852,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `Array<ContentBlockSourceContent>`
 
-      - `TextBlockParam`
+      - `interface TextBlockParam`
 
         - `type: "text"`
 
@@ -12647,7 +12883,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `citations?: Array<TextCitationParam> | null`
 
-          - `CitationCharLocationParam`
+          - `interface CitationCharLocationParam`
 
             - `type: "char_location"`
 
@@ -12667,7 +12903,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationPageLocationParam`
+          - `interface CitationPageLocationParam`
 
             - `type: "page_location"`
 
@@ -12687,7 +12923,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-          - `CitationContentBlockLocationParam`
+          - `interface CitationContentBlockLocationParam`
 
             - `type: "content_block_location"`
 
@@ -12717,7 +12953,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationWebSearchResultLocationParam`
+          - `interface CitationWebSearchResultLocationParam`
 
             - `type: "web_search_result_location"`
 
@@ -12733,7 +12969,7 @@ console.log(messageTokensCount.input_tokens);
 
               minLength: 1
 
-          - `CitationSearchResultLocationParam`
+          - `interface CitationSearchResultLocationParam`
 
             - `type: "search_result_location"`
 
@@ -12767,13 +13003,13 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-      - `ImageBlockParam`
+      - `interface ImageBlockParam`
 
         - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-          - `Base64ImageSource`
+          - `interface Base64ImageSource`
 
             - `type: "base64"`
 
@@ -12791,13 +13027,13 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-          - `URLImageSource`
+          - `interface URLImageSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileImageSource`
+          - `interface FileImageSource`
 
             - `type: "file"`
 
@@ -12821,9 +13057,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Content Block Source Content
 
-- `ContentBlockSourceContent = TextBlockParam | ImageBlockParam`
+- `type ContentBlockSourceContent = TextBlockParam | ImageBlockParam`
 
-  - `TextBlockParam`
+  - `interface TextBlockParam`
 
     - `type: "text"`
 
@@ -12854,7 +13090,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `citations?: Array<TextCitationParam> | null`
 
-      - `CitationCharLocationParam`
+      - `interface CitationCharLocationParam`
 
         - `type: "char_location"`
 
@@ -12874,7 +13110,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationPageLocationParam`
+      - `interface CitationPageLocationParam`
 
         - `type: "page_location"`
 
@@ -12894,7 +13130,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-      - `CitationContentBlockLocationParam`
+      - `interface CitationContentBlockLocationParam`
 
         - `type: "content_block_location"`
 
@@ -12924,7 +13160,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationWebSearchResultLocationParam`
+      - `interface CitationWebSearchResultLocationParam`
 
         - `type: "web_search_result_location"`
 
@@ -12940,7 +13176,7 @@ console.log(messageTokensCount.input_tokens);
 
           minLength: 1
 
-      - `CitationSearchResultLocationParam`
+      - `interface CitationSearchResultLocationParam`
 
         - `type: "search_result_location"`
 
@@ -12974,13 +13210,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-  - `ImageBlockParam`
+  - `interface ImageBlockParam`
 
     - `type: "image"`
 
     - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-      - `Base64ImageSource`
+      - `interface Base64ImageSource`
 
         - `type: "base64"`
 
@@ -12998,13 +13234,13 @@ console.log(messageTokensCount.input_tokens);
 
           - `"image/webp"`
 
-      - `URLImageSource`
+      - `interface URLImageSource`
 
         - `type: "url"`
 
         - `url: string`
 
-      - `FileImageSource`
+      - `interface FileImageSource`
 
         - `type: "file"`
 
@@ -13028,7 +13264,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Direct Caller
 
-- `DirectCaller`
+- `interface DirectCaller`
 
   Tool invocation directly from the model.
 
@@ -13036,7 +13272,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Document Block
 
-- `DocumentBlock`
+- `interface DocumentBlock`
 
   - `type: "document"`
 
@@ -13052,7 +13288,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `source: Base64PDFSource | PlainTextSource`
 
-    - `Base64PDFSource`
+    - `interface Base64PDFSource`
 
       - `type: "base64"`
 
@@ -13062,7 +13298,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `media_type: "application/pdf"`
 
-    - `PlainTextSource`
+    - `interface PlainTextSource`
 
       - `type: "text"`
 
@@ -13076,13 +13312,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Document Block Param
 
-- `DocumentBlockParam`
+- `interface DocumentBlockParam`
 
   - `type: "document"`
 
   - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-    - `Base64PDFSource`
+    - `interface Base64PDFSource`
 
       - `type: "base64"`
 
@@ -13092,7 +13328,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `media_type: "application/pdf"`
 
-    - `PlainTextSource`
+    - `interface PlainTextSource`
 
       - `type: "text"`
 
@@ -13100,7 +13336,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `media_type: "text/plain"`
 
-    - `ContentBlockSource`
+    - `interface ContentBlockSource`
 
       - `type: "content"`
 
@@ -13110,7 +13346,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `Array<ContentBlockSourceContent>`
 
-          - `TextBlockParam`
+          - `interface TextBlockParam`
 
             - `type: "text"`
 
@@ -13141,7 +13377,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `citations?: Array<TextCitationParam> | null`
 
-              - `CitationCharLocationParam`
+              - `interface CitationCharLocationParam`
 
                 - `type: "char_location"`
 
@@ -13161,7 +13397,7 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 0
 
-              - `CitationPageLocationParam`
+              - `interface CitationPageLocationParam`
 
                 - `type: "page_location"`
 
@@ -13181,7 +13417,7 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 1
 
-              - `CitationContentBlockLocationParam`
+              - `interface CitationContentBlockLocationParam`
 
                 - `type: "content_block_location"`
 
@@ -13211,7 +13447,7 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 0
 
-              - `CitationWebSearchResultLocationParam`
+              - `interface CitationWebSearchResultLocationParam`
 
                 - `type: "web_search_result_location"`
 
@@ -13227,7 +13463,7 @@ console.log(messageTokensCount.input_tokens);
 
                   minLength: 1
 
-              - `CitationSearchResultLocationParam`
+              - `interface CitationSearchResultLocationParam`
 
                 - `type: "search_result_location"`
 
@@ -13261,13 +13497,13 @@ console.log(messageTokensCount.input_tokens);
 
                 - `title: string | null`
 
-          - `ImageBlockParam`
+          - `interface ImageBlockParam`
 
             - `type: "image"`
 
             - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-              - `Base64ImageSource`
+              - `interface Base64ImageSource`
 
                 - `type: "base64"`
 
@@ -13285,13 +13521,13 @@ console.log(messageTokensCount.input_tokens);
 
                   - `"image/webp"`
 
-              - `URLImageSource`
+              - `interface URLImageSource`
 
                 - `type: "url"`
 
                 - `url: string`
 
-              - `FileImageSource`
+              - `interface FileImageSource`
 
                 - `type: "file"`
 
@@ -13313,13 +13549,13 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"error"`
 
-    - `URLPDFSource`
+    - `interface URLPDFSource`
 
       - `type: "url"`
 
       - `url: string`
 
-    - `FileDocumentSource`
+    - `interface FileDocumentSource`
 
       - `type: "file"`
 
@@ -13343,7 +13579,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Encrypted Code Execution Result Block
 
-- `EncryptedCodeExecutionResultBlock`
+- `interface EncryptedCodeExecutionResultBlock`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -13367,7 +13603,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Encrypted Code Execution Result Block Param
 
-- `EncryptedCodeExecutionResultBlockParam`
+- `interface EncryptedCodeExecutionResultBlockParam`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -13387,7 +13623,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### File Document Source
 
-- `FileDocumentSource`
+- `interface FileDocumentSource`
 
   - `type: "file"`
 
@@ -13395,7 +13631,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### File Image Source
 
-- `FileImageSource`
+- `interface FileImageSource`
 
   - `type: "file"`
 
@@ -13403,13 +13639,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Image Block Param
 
-- `ImageBlockParam`
+- `interface ImageBlockParam`
 
   - `type: "image"`
 
   - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-    - `Base64ImageSource`
+    - `interface Base64ImageSource`
 
       - `type: "base64"`
 
@@ -13427,13 +13663,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `"image/webp"`
 
-    - `URLImageSource`
+    - `interface URLImageSource`
 
       - `type: "url"`
 
       - `url: string`
 
-    - `FileImageSource`
+    - `interface FileImageSource`
 
       - `type: "file"`
 
@@ -13474,7 +13710,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Image Transformations Param
 
-- `ImageTransformationsParam`
+- `interface ImageTransformationsParam`
 
   Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -13488,7 +13724,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Input JSON Delta
 
-- `InputJSONDelta`
+- `interface InputJSONDelta`
 
   - `type: "input_json_delta"`
 
@@ -13498,7 +13734,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### JSON Output Format
 
-- `JSONOutputFormat`
+- `interface JSONOutputFormat`
 
   - `type: "json_schema"`
 
@@ -13508,7 +13744,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Memory Tool 20250818
 
-- `MemoryTool20250818`
+- `interface MemoryTool20250818`
 
   - `type: "memory_20250818"`
 
@@ -13561,7 +13797,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message
 
-- `Message`
+- `interface Message`
 
   - `type: "message"`
 
@@ -13644,7 +13880,7 @@ console.log(messageTokensCount.input_tokens);
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `TextBlock`
+    - `interface TextBlock`
 
       - `type: "text"`
 
@@ -13656,7 +13892,7 @@ console.log(messageTokensCount.input_tokens);
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation`
+        - `interface CitationCharLocation`
 
           - `type: "char_location"`
 
@@ -13678,7 +13914,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationPageLocation`
+        - `interface CitationPageLocation`
 
           - `type: "page_location"`
 
@@ -13700,7 +13936,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-        - `CitationContentBlockLocation`
+        - `interface CitationContentBlockLocation`
 
           - `type: "content_block_location"`
 
@@ -13732,7 +13968,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationsWebSearchResultLocation`
+        - `interface CitationsWebSearchResultLocation`
 
           - `type: "web_search_result_location"`
 
@@ -13748,7 +13984,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `url: string`
 
-        - `CitationsSearchResultLocation`
+        - `interface CitationsSearchResultLocation`
 
           - `type: "search_result_location"`
 
@@ -13788,7 +14024,7 @@ console.log(messageTokensCount.input_tokens);
 
         minLength: 0
 
-    - `ThinkingBlock`
+    - `interface ThinkingBlock`
 
       - `type: "thinking"`
 
@@ -13806,7 +14042,7 @@ console.log(messageTokensCount.input_tokens);
 
         The text of Claude's thinking process for this block.
 
-    - `RedactedThinkingBlock`
+    - `interface RedactedThinkingBlock`
 
       - `type: "redacted_thinking"`
 
@@ -13820,7 +14056,7 @@ console.log(messageTokensCount.input_tokens);
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `ToolUseBlock`
+    - `interface ToolUseBlock`
 
       - `type: "tool_use"`
 
@@ -13834,13 +14070,13 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
           - `type: "direct"`
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -13850,7 +14086,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
           - `type: "code_execution_20260120"`
 
@@ -13870,7 +14106,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `ServerToolUseBlock`
+    - `interface ServerToolUseBlock`
 
       - `type: "server_tool_use"`
 
@@ -13884,15 +14120,15 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `input: Record<string, unknown>`
 
@@ -13912,7 +14148,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"tool_search_tool_bm25"`
 
-    - `WebSearchToolResultBlock`
+    - `interface WebSearchToolResultBlock`
 
       - `type: "web_search_tool_result"`
 
@@ -13922,19 +14158,19 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError`
+        - `interface WebSearchToolResultError`
 
           - `type: "web_search_tool_result_error"`
 
@@ -13972,7 +14208,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `WebFetchToolResultBlock`
+    - `interface WebFetchToolResultBlock`
 
       - `type: "web_fetch_tool_result"`
 
@@ -13982,19 +14218,19 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock`
+        - `interface WebFetchToolResultErrorBlock`
 
           - `type: "web_fetch_tool_result_error"`
 
@@ -14022,7 +14258,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"content_too_large"`
 
-        - `WebFetchBlock`
+        - `interface WebFetchBlock`
 
           - `type: "web_fetch_result"`
 
@@ -14044,7 +14280,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `source: Base64PDFSource | PlainTextSource`
 
-              - `Base64PDFSource`
+              - `interface Base64PDFSource`
 
                 - `type: "base64"`
 
@@ -14054,7 +14290,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `media_type: "application/pdf"`
 
-              - `PlainTextSource`
+              - `interface PlainTextSource`
 
                 - `type: "text"`
 
@@ -14078,7 +14314,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `CodeExecutionToolResultBlock`
+    - `interface CodeExecutionToolResultBlock`
 
       - `type: "code_execution_tool_result"`
 
@@ -14086,7 +14322,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError`
+        - `interface CodeExecutionToolResultError`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -14102,7 +14338,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"execution_time_exceeded"`
 
-        - `CodeExecutionResultBlock`
+        - `interface CodeExecutionResultBlock`
 
           - `type: "code_execution_result"`
 
@@ -14122,7 +14358,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-        - `EncryptedCodeExecutionResultBlock`
+        - `interface EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -14148,7 +14384,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `BashCodeExecutionToolResultBlock`
+    - `interface BashCodeExecutionToolResultBlock`
 
       - `type: "bash_code_execution_tool_result"`
 
@@ -14156,7 +14392,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError`
+        - `interface BashCodeExecutionToolResultError`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -14174,7 +14410,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"output_file_too_large"`
 
-        - `BashCodeExecutionResultBlock`
+        - `interface BashCodeExecutionResultBlock`
 
           - `type: "bash_code_execution_result"`
 
@@ -14198,7 +14434,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `TextEditorCodeExecutionToolResultBlock`
+    - `interface TextEditorCodeExecutionToolResultBlock`
 
       - `type: "text_editor_code_execution_tool_result"`
 
@@ -14206,7 +14442,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError`
+        - `interface TextEditorCodeExecutionToolResultError`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -14226,7 +14462,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-        - `TextEditorCodeExecutionViewResultBlock`
+        - `interface TextEditorCodeExecutionViewResultBlock`
 
           - `type: "text_editor_code_execution_view_result"`
 
@@ -14248,7 +14484,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `total_lines: number | null`
 
-        - `TextEditorCodeExecutionCreateResultBlock`
+        - `interface TextEditorCodeExecutionCreateResultBlock`
 
           - `type: "text_editor_code_execution_create_result"`
 
@@ -14256,7 +14492,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `is_file_update: boolean`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock`
+        - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -14276,7 +14512,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ToolSearchToolResultBlock`
+    - `interface ToolSearchToolResultBlock`
 
       - `type: "tool_search_tool_result"`
 
@@ -14284,7 +14520,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError`
+        - `interface ToolSearchToolResultError`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -14302,7 +14538,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-        - `ToolSearchToolSearchResultBlock`
+        - `interface ToolSearchToolSearchResultBlock`
 
           - `type: "tool_search_tool_search_result"`
 
@@ -14322,7 +14558,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ContainerUploadBlock`
+    - `interface ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -14604,9 +14840,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message Count Tokens Tool
 
-- `MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
+- `type MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
-  - `Tool`
+  - `interface Tool`
 
     - `type?: "custom" | null`
 
@@ -14681,7 +14917,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolBash20250124`
+  - `interface ToolBash20250124`
 
     - `type: "bash_20250124"`
 
@@ -14715,7 +14951,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522`
+  - `interface CodeExecutionTool20250522`
 
     - `type: "code_execution_20250522"`
 
@@ -14747,7 +14983,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825`
+  - `interface CodeExecutionTool20250825`
 
     - `type: "code_execution_20250825"`
 
@@ -14779,7 +15015,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `interface CodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -14813,7 +15049,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260521`
+  - `interface CodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -14847,7 +15083,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `BrowserToolset20260801`
+  - `interface BrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -15241,7 +15477,7 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `MemoryTool20250818`
+  - `interface MemoryTool20250818`
 
     - `type: "memory_20250818"`
 
@@ -15275,7 +15511,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ComputerToolset20260801`
+  - `interface ComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -15505,7 +15741,7 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `ToolTextEditor20250124`
+  - `interface ToolTextEditor20250124`
 
     - `type: "text_editor_20250124"`
 
@@ -15539,7 +15775,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429`
+  - `interface ToolTextEditor20250429`
 
     - `type: "text_editor_20250429"`
 
@@ -15573,7 +15809,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728`
+  - `interface ToolTextEditor20250728`
 
     - `type: "text_editor_20250728"`
 
@@ -15613,7 +15849,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305`
+  - `interface WebSearchTool20250305`
 
     - `type: "web_search_20250305"`
 
@@ -15689,7 +15925,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 255, minLength: 1
 
-  - `WebFetchTool20250910`
+  - `interface WebFetchTool20250910`
 
     - `type: "web_fetch_20250910"`
 
@@ -15747,7 +15983,98 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: "all"`
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: "none"`
+
+        - `interface WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: "only"`
+
+          - `tools: Array<WebFetchURLSourceToolReference>`
+
+            - `type: "tool_reference"`
+
+            - `name: string`
+
+        - `interface WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: "except"`
+
+          - `tools: Array<WebFetchURLSourceToolReference>`
+
+            - `type: "tool_reference"`
+
+            - `name: string`
+
+      - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `interface WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `interface WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `interface WebSearchTool20260209`
 
     - `type: "web_search_20260209"`
 
@@ -15797,7 +16124,7 @@ console.log(messageTokensCount.input_tokens);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260209`
+  - `interface WebFetchTool20260209`
 
     - `type: "web_fetch_20260209"`
 
@@ -15853,7 +16180,16 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309`
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `interface WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -15911,11 +16247,20 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache?: boolean`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `WebSearchTool20260318`
+  - `interface WebSearchTool20260318`
 
     - `type: "web_search_20260318"`
 
@@ -15973,7 +16318,7 @@ console.log(messageTokensCount.input_tokens);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260318`
+  - `interface WebFetchTool20260318`
 
     - `type: "web_fetch_20260318"`
 
@@ -16037,11 +16382,20 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache?: boolean`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119`
+  - `interface ToolSearchToolBm25_20251119`
 
     - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -16077,7 +16431,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119`
+  - `interface ToolSearchToolRegex20251119`
 
     - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -16115,11 +16469,11 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message Create Params Container
 
-- `MessageCreateParamsContainer = ContainerParams | string | null`
+- `type MessageCreateParamsContainer = ContainerParams | string | null`
 
   Container identifier for reuse across requests.
 
-  - `ContainerParams`
+  - `interface ContainerParams`
 
     Container parameters with skills to be loaded.
 
@@ -16157,7 +16511,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message Delta Usage
 
-- `MessageDeltaUsage`
+- `interface MessageDeltaUsage`
 
   - `cache_creation_input_tokens: number | null`
 
@@ -16221,7 +16575,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message Param
 
-- `MessageParam`
+- `interface MessageParam`
 
   - `content: string | Array<ContentBlockParam>`
 
@@ -16229,7 +16583,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `Array<ContentBlockParam>`
 
-      - `TextBlockParam`
+      - `interface TextBlockParam`
 
         - `type: "text"`
 
@@ -16260,7 +16614,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `citations?: Array<TextCitationParam> | null`
 
-          - `CitationCharLocationParam`
+          - `interface CitationCharLocationParam`
 
             - `type: "char_location"`
 
@@ -16280,7 +16634,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationPageLocationParam`
+          - `interface CitationPageLocationParam`
 
             - `type: "page_location"`
 
@@ -16300,7 +16654,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-          - `CitationContentBlockLocationParam`
+          - `interface CitationContentBlockLocationParam`
 
             - `type: "content_block_location"`
 
@@ -16330,7 +16684,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationWebSearchResultLocationParam`
+          - `interface CitationWebSearchResultLocationParam`
 
             - `type: "web_search_result_location"`
 
@@ -16346,7 +16700,7 @@ console.log(messageTokensCount.input_tokens);
 
               minLength: 1
 
-          - `CitationSearchResultLocationParam`
+          - `interface CitationSearchResultLocationParam`
 
             - `type: "search_result_location"`
 
@@ -16380,13 +16734,13 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-      - `ImageBlockParam`
+      - `interface ImageBlockParam`
 
         - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-          - `Base64ImageSource`
+          - `interface Base64ImageSource`
 
             - `type: "base64"`
 
@@ -16404,13 +16758,13 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-          - `URLImageSource`
+          - `interface URLImageSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileImageSource`
+          - `interface FileImageSource`
 
             - `type: "file"`
 
@@ -16432,13 +16786,13 @@ console.log(messageTokensCount.input_tokens);
 
             - `"error"`
 
-      - `DocumentBlockParam`
+      - `interface DocumentBlockParam`
 
         - `type: "document"`
 
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-          - `Base64PDFSource`
+          - `interface Base64PDFSource`
 
             - `type: "base64"`
 
@@ -16448,7 +16802,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-          - `PlainTextSource`
+          - `interface PlainTextSource`
 
             - `type: "text"`
 
@@ -16456,7 +16810,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "text/plain"`
 
-          - `ContentBlockSource`
+          - `interface ContentBlockSource`
 
             - `type: "content"`
 
@@ -16466,17 +16820,17 @@ console.log(messageTokensCount.input_tokens);
 
               - `Array<ContentBlockSourceContent>`
 
-                - `TextBlockParam`
+                - `interface TextBlockParam`
 
-                - `ImageBlockParam`
+                - `interface ImageBlockParam`
 
-          - `URLPDFSource`
+          - `interface URLPDFSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileDocumentSource`
+          - `interface FileDocumentSource`
 
             - `type: "file"`
 
@@ -16498,7 +16852,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 500, minLength: 1
 
-      - `SearchResultBlockParam`
+      - `interface SearchResultBlockParam`
 
         - `type: "search_result"`
 
@@ -16526,7 +16880,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `citations?: CitationsConfigParam`
 
-      - `ThinkingBlockParam`
+      - `interface ThinkingBlockParam`
 
         - `type: "thinking"`
 
@@ -16540,7 +16894,7 @@ console.log(messageTokensCount.input_tokens);
 
           The `thinking` text of this block as returned by the API.
 
-      - `RedactedThinkingBlockParam`
+      - `interface RedactedThinkingBlockParam`
 
         - `type: "redacted_thinking"`
 
@@ -16548,7 +16902,7 @@ console.log(messageTokensCount.input_tokens);
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-      - `ToolUseBlockParam`
+      - `interface ToolUseBlockParam`
 
         - `type: "tool_use"`
 
@@ -16568,13 +16922,13 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
             - `type: "direct"`
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -16584,7 +16938,7 @@ console.log(messageTokensCount.input_tokens);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
             - `type: "code_execution_20260120"`
 
@@ -16598,7 +16952,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `ToolResultBlockParam`
+      - `interface ToolResultBlockParam`
 
         - `type: "tool_result"`
 
@@ -16616,15 +16970,15 @@ console.log(messageTokensCount.input_tokens);
 
           - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-            - `TextBlockParam`
+            - `interface TextBlockParam`
 
-            - `ImageBlockParam`
+            - `interface ImageBlockParam`
 
-            - `SearchResultBlockParam`
+            - `interface SearchResultBlockParam`
 
-            - `DocumentBlockParam`
+            - `interface DocumentBlockParam`
 
-            - `ToolReferenceBlockParam`
+            - `interface ToolReferenceBlockParam`
 
               Tool reference block that can be included in tool_result content.
 
@@ -16638,7 +16992,7 @@ console.log(messageTokensCount.input_tokens);
 
                 Create a cache control breakpoint at this content block.
 
-            - `BrowserStateBlockParam`
+            - `interface BrowserStateBlockParam`
 
               The caller's browser state after a browser toolset member call —
               the full inventory of open tabs, which tab is active, and any side
@@ -16688,7 +17042,7 @@ console.log(messageTokensCount.input_tokens);
 
                 maxItems: 200, minItems: 1
 
-                - `BrowserStateChangeTabOpened`
+                - `interface BrowserStateChangeTabOpened`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -16706,7 +17060,7 @@ console.log(messageTokensCount.input_tokens);
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `BrowserStateChangeDownloadStarted`
+                - `interface BrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
 
@@ -16724,7 +17078,7 @@ console.log(messageTokensCount.input_tokens);
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `BrowserStateChangeDownloadCompleted`
+                - `interface BrowserStateChangeDownloadCompleted`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -16757,7 +17111,7 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 0
 
-                - `BrowserStateChangeDownloadFailed`
+                - `interface BrowserStateChangeDownloadFailed`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -16789,7 +17143,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `ServerToolUseBlockParam`
+      - `interface ServerToolUseBlockParam`
 
         - `type: "server_tool_use"`
 
@@ -16821,17 +17175,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
-      - `WebSearchToolResultBlockParam`
+      - `interface WebSearchToolResultBlockParam`
 
         - `type: "web_search_tool_result"`
 
@@ -16849,7 +17203,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `page_age?: string | null`
 
-          - `WebSearchToolRequestError`
+          - `interface WebSearchToolRequestError`
 
             - `type: "web_search_tool_result_error"`
 
@@ -16877,23 +17231,23 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
-      - `WebFetchToolResultBlockParam`
+      - `interface WebFetchToolResultBlockParam`
 
         - `type: "web_fetch_tool_result"`
 
         - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-          - `WebFetchToolResultErrorBlockParam`
+          - `interface WebFetchToolResultErrorBlockParam`
 
             - `type: "web_fetch_tool_result_error"`
 
@@ -16919,7 +17273,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"content_too_large"`
 
-          - `WebFetchBlockParam`
+          - `interface WebFetchBlockParam`
 
             - `type: "web_fetch_result"`
 
@@ -16943,23 +17297,23 @@ console.log(messageTokensCount.input_tokens);
 
         - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
-      - `CodeExecutionToolResultBlockParam`
+      - `interface CodeExecutionToolResultBlockParam`
 
         - `type: "code_execution_tool_result"`
 
         - `content: CodeExecutionToolResultBlockParamContent`
 
-          - `CodeExecutionToolResultErrorParam`
+          - `interface CodeExecutionToolResultErrorParam`
 
             - `type: "code_execution_tool_result_error"`
 
@@ -16973,7 +17327,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"execution_time_exceeded"`
 
-          - `CodeExecutionResultBlockParam`
+          - `interface CodeExecutionResultBlockParam`
 
             - `type: "code_execution_result"`
 
@@ -16989,7 +17343,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-          - `EncryptedCodeExecutionResultBlockParam`
+          - `interface EncryptedCodeExecutionResultBlockParam`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -17015,13 +17369,13 @@ console.log(messageTokensCount.input_tokens);
 
           Create a cache control breakpoint at this content block.
 
-      - `BashCodeExecutionToolResultBlockParam`
+      - `interface BashCodeExecutionToolResultBlockParam`
 
         - `type: "bash_code_execution_tool_result"`
 
         - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-          - `BashCodeExecutionToolResultErrorParam`
+          - `interface BashCodeExecutionToolResultErrorParam`
 
             - `type: "bash_code_execution_tool_result_error"`
 
@@ -17037,7 +17391,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"output_file_too_large"`
 
-          - `BashCodeExecutionResultBlockParam`
+          - `interface BashCodeExecutionResultBlockParam`
 
             - `type: "bash_code_execution_result"`
 
@@ -17061,13 +17415,13 @@ console.log(messageTokensCount.input_tokens);
 
           Create a cache control breakpoint at this content block.
 
-      - `TextEditorCodeExecutionToolResultBlockParam`
+      - `interface TextEditorCodeExecutionToolResultBlockParam`
 
         - `type: "text_editor_code_execution_tool_result"`
 
         - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-          - `TextEditorCodeExecutionToolResultErrorParam`
+          - `interface TextEditorCodeExecutionToolResultErrorParam`
 
             - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -17085,7 +17439,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message?: string | null`
 
-          - `TextEditorCodeExecutionViewResultBlockParam`
+          - `interface TextEditorCodeExecutionViewResultBlockParam`
 
             - `type: "text_editor_code_execution_view_result"`
 
@@ -17105,13 +17459,13 @@ console.log(messageTokensCount.input_tokens);
 
             - `total_lines?: number | null`
 
-          - `TextEditorCodeExecutionCreateResultBlockParam`
+          - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
             - `type: "text_editor_code_execution_create_result"`
 
             - `is_file_update: boolean`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+          - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -17133,13 +17487,13 @@ console.log(messageTokensCount.input_tokens);
 
           Create a cache control breakpoint at this content block.
 
-      - `ToolSearchToolResultBlockParam`
+      - `interface ToolSearchToolResultBlockParam`
 
         - `type: "tool_search_tool_result"`
 
         - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-          - `ToolSearchToolResultErrorParam`
+          - `interface ToolSearchToolResultErrorParam`
 
             - `type: "tool_search_tool_result_error"`
 
@@ -17155,7 +17509,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message?: string | null`
 
-          - `ToolSearchToolSearchResultBlockParam`
+          - `interface ToolSearchToolSearchResultBlockParam`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -17179,7 +17533,7 @@ console.log(messageTokensCount.input_tokens);
 
           Create a cache control breakpoint at this content block.
 
-      - `ContainerUploadBlockParam`
+      - `interface ContainerUploadBlockParam`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -17202,7 +17556,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Message Tokens Count
 
-- `MessageTokensCount`
+- `interface MessageTokensCount`
 
   - `input_tokens: number`
 
@@ -17210,7 +17564,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Metadata
 
-- `Metadata`
+- `interface Metadata`
 
   - `user_id?: string | null`
 
@@ -17222,7 +17576,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Model
 
-- `Model = "claude-fable-5-1" | "claude-mythos-5-1" | "claude-sonnet-5" | 14 more | (string & {})`
+- `type Model = "claude-fable-5-1" | "claude-mythos-5-1" | "claude-sonnet-5" | 14 more | (string & {})`
 
   The model that will complete your prompt.
 
@@ -17302,7 +17656,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Output Config
 
-- `OutputConfig`
+- `interface OutputConfig`
 
   - `effort?: "low" | "medium" | "high" | 2 more | null`
 
@@ -17330,7 +17684,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Output Tokens Details
 
-- `OutputTokensDetails`
+- `interface OutputTokensDetails`
 
   - `thinking_tokens: number`
 
@@ -17347,7 +17701,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Plain Text Source
 
-- `PlainTextSource`
+- `interface PlainTextSource`
 
   - `type: "text"`
 
@@ -17357,9 +17711,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Content Block Delta
 
-- `RawContentBlockDelta = TextDelta | InputJSONDelta | CitationsDelta | 2 more`
+- `type RawContentBlockDelta = TextDelta | InputJSONDelta | CitationsDelta | 2 more`
 
-  - `TextDelta`
+  - `interface TextDelta`
 
     - `type: "text_delta"`
 
@@ -17367,7 +17721,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `text: string`
 
-  - `InputJSONDelta`
+  - `interface InputJSONDelta`
 
     - `type: "input_json_delta"`
 
@@ -17375,7 +17729,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `partial_json: string`
 
-  - `CitationsDelta`
+  - `interface CitationsDelta`
 
     - `type: "citations_delta"`
 
@@ -17383,7 +17737,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-      - `CitationCharLocation`
+      - `interface CitationCharLocation`
 
         - `type: "char_location"`
 
@@ -17405,7 +17759,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationPageLocation`
+      - `interface CitationPageLocation`
 
         - `type: "page_location"`
 
@@ -17427,7 +17781,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-      - `CitationContentBlockLocation`
+      - `interface CitationContentBlockLocation`
 
         - `type: "content_block_location"`
 
@@ -17459,7 +17813,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationsWebSearchResultLocation`
+      - `interface CitationsWebSearchResultLocation`
 
         - `type: "web_search_result_location"`
 
@@ -17475,7 +17829,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `url: string`
 
-      - `CitationsSearchResultLocation`
+      - `interface CitationsSearchResultLocation`
 
         - `type: "search_result_location"`
 
@@ -17511,7 +17865,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-  - `ThinkingDelta`
+  - `interface ThinkingDelta`
 
     - `type: "thinking_delta"`
 
@@ -17521,7 +17875,7 @@ console.log(messageTokensCount.input_tokens);
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `SignatureDelta`
+  - `interface SignatureDelta`
 
     - `type: "signature_delta"`
 
@@ -17533,7 +17887,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Content Block Delta Event
 
-- `RawContentBlockDeltaEvent`
+- `interface RawContentBlockDeltaEvent`
 
   - `type: "content_block_delta"`
 
@@ -17541,7 +17895,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `delta: RawContentBlockDelta`
 
-    - `TextDelta`
+    - `interface TextDelta`
 
       - `type: "text_delta"`
 
@@ -17549,7 +17903,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `text: string`
 
-    - `InputJSONDelta`
+    - `interface InputJSONDelta`
 
       - `type: "input_json_delta"`
 
@@ -17557,7 +17911,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `partial_json: string`
 
-    - `CitationsDelta`
+    - `interface CitationsDelta`
 
       - `type: "citations_delta"`
 
@@ -17565,7 +17919,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-        - `CitationCharLocation`
+        - `interface CitationCharLocation`
 
           - `type: "char_location"`
 
@@ -17587,7 +17941,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationPageLocation`
+        - `interface CitationPageLocation`
 
           - `type: "page_location"`
 
@@ -17609,7 +17963,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-        - `CitationContentBlockLocation`
+        - `interface CitationContentBlockLocation`
 
           - `type: "content_block_location"`
 
@@ -17641,7 +17995,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationsWebSearchResultLocation`
+        - `interface CitationsWebSearchResultLocation`
 
           - `type: "web_search_result_location"`
 
@@ -17657,7 +18011,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `url: string`
 
-        - `CitationsSearchResultLocation`
+        - `interface CitationsSearchResultLocation`
 
           - `type: "search_result_location"`
 
@@ -17693,7 +18047,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string | null`
 
-    - `ThinkingDelta`
+    - `interface ThinkingDelta`
 
       - `type: "thinking_delta"`
 
@@ -17703,7 +18057,7 @@ console.log(messageTokensCount.input_tokens);
 
         The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `SignatureDelta`
+    - `interface SignatureDelta`
 
       - `type: "signature_delta"`
 
@@ -17717,7 +18071,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Content Block Start Event
 
-- `RawContentBlockStartEvent`
+- `interface RawContentBlockStartEvent`
 
   - `type: "content_block_start"`
 
@@ -17725,7 +18079,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-    - `TextBlock`
+    - `interface TextBlock`
 
       - `type: "text"`
 
@@ -17737,7 +18091,7 @@ console.log(messageTokensCount.input_tokens);
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `CitationCharLocation`
+        - `interface CitationCharLocation`
 
           - `type: "char_location"`
 
@@ -17759,7 +18113,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationPageLocation`
+        - `interface CitationPageLocation`
 
           - `type: "page_location"`
 
@@ -17781,7 +18135,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-        - `CitationContentBlockLocation`
+        - `interface CitationContentBlockLocation`
 
           - `type: "content_block_location"`
 
@@ -17813,7 +18167,7 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-        - `CitationsWebSearchResultLocation`
+        - `interface CitationsWebSearchResultLocation`
 
           - `type: "web_search_result_location"`
 
@@ -17829,7 +18183,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `url: string`
 
-        - `CitationsSearchResultLocation`
+        - `interface CitationsSearchResultLocation`
 
           - `type: "search_result_location"`
 
@@ -17869,7 +18223,7 @@ console.log(messageTokensCount.input_tokens);
 
         minLength: 0
 
-    - `ThinkingBlock`
+    - `interface ThinkingBlock`
 
       - `type: "thinking"`
 
@@ -17887,7 +18241,7 @@ console.log(messageTokensCount.input_tokens);
 
         The text of Claude's thinking process for this block.
 
-    - `RedactedThinkingBlock`
+    - `interface RedactedThinkingBlock`
 
       - `type: "redacted_thinking"`
 
@@ -17901,7 +18255,7 @@ console.log(messageTokensCount.input_tokens);
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `ToolUseBlock`
+    - `interface ToolUseBlock`
 
       - `type: "tool_use"`
 
@@ -17915,13 +18269,13 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
           - `type: "direct"`
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -17931,7 +18285,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
           - `type: "code_execution_20260120"`
 
@@ -17951,7 +18305,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `ServerToolUseBlock`
+    - `interface ServerToolUseBlock`
 
       - `type: "server_tool_use"`
 
@@ -17965,15 +18319,15 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `input: Record<string, unknown>`
 
@@ -17993,7 +18347,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"tool_search_tool_bm25"`
 
-    - `WebSearchToolResultBlock`
+    - `interface WebSearchToolResultBlock`
 
       - `type: "web_search_tool_result"`
 
@@ -18003,19 +18357,19 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError`
+        - `interface WebSearchToolResultError`
 
           - `type: "web_search_tool_result_error"`
 
@@ -18053,7 +18407,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `WebFetchToolResultBlock`
+    - `interface WebFetchToolResultBlock`
 
       - `type: "web_fetch_tool_result"`
 
@@ -18063,19 +18417,19 @@ console.log(messageTokensCount.input_tokens);
 
         default: {"type":"direct"}
 
-        - `DirectCaller`
+        - `interface DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `ServerToolCaller`
+        - `interface ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `ServerToolCaller20260120`
+        - `interface ServerToolCaller20260120`
 
       - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-        - `WebFetchToolResultErrorBlock`
+        - `interface WebFetchToolResultErrorBlock`
 
           - `type: "web_fetch_tool_result_error"`
 
@@ -18103,7 +18457,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"content_too_large"`
 
-        - `WebFetchBlock`
+        - `interface WebFetchBlock`
 
           - `type: "web_fetch_result"`
 
@@ -18125,7 +18479,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `source: Base64PDFSource | PlainTextSource`
 
-              - `Base64PDFSource`
+              - `interface Base64PDFSource`
 
                 - `type: "base64"`
 
@@ -18135,7 +18489,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `media_type: "application/pdf"`
 
-              - `PlainTextSource`
+              - `interface PlainTextSource`
 
                 - `type: "text"`
 
@@ -18159,7 +18513,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `CodeExecutionToolResultBlock`
+    - `interface CodeExecutionToolResultBlock`
 
       - `type: "code_execution_tool_result"`
 
@@ -18167,7 +18521,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError`
+        - `interface CodeExecutionToolResultError`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -18183,7 +18537,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"execution_time_exceeded"`
 
-        - `CodeExecutionResultBlock`
+        - `interface CodeExecutionResultBlock`
 
           - `type: "code_execution_result"`
 
@@ -18203,7 +18557,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-        - `EncryptedCodeExecutionResultBlock`
+        - `interface EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -18229,7 +18583,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `BashCodeExecutionToolResultBlock`
+    - `interface BashCodeExecutionToolResultBlock`
 
       - `type: "bash_code_execution_tool_result"`
 
@@ -18237,7 +18591,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError`
+        - `interface BashCodeExecutionToolResultError`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -18255,7 +18609,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"output_file_too_large"`
 
-        - `BashCodeExecutionResultBlock`
+        - `interface BashCodeExecutionResultBlock`
 
           - `type: "bash_code_execution_result"`
 
@@ -18279,7 +18633,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `TextEditorCodeExecutionToolResultBlock`
+    - `interface TextEditorCodeExecutionToolResultBlock`
 
       - `type: "text_editor_code_execution_tool_result"`
 
@@ -18287,7 +18641,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError`
+        - `interface TextEditorCodeExecutionToolResultError`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -18307,7 +18661,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-        - `TextEditorCodeExecutionViewResultBlock`
+        - `interface TextEditorCodeExecutionViewResultBlock`
 
           - `type: "text_editor_code_execution_view_result"`
 
@@ -18329,7 +18683,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `total_lines: number | null`
 
-        - `TextEditorCodeExecutionCreateResultBlock`
+        - `interface TextEditorCodeExecutionCreateResultBlock`
 
           - `type: "text_editor_code_execution_create_result"`
 
@@ -18337,7 +18691,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `is_file_update: boolean`
 
-        - `TextEditorCodeExecutionStrReplaceResultBlock`
+        - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -18357,7 +18711,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ToolSearchToolResultBlock`
+    - `interface ToolSearchToolResultBlock`
 
       - `type: "tool_search_tool_result"`
 
@@ -18365,7 +18719,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError`
+        - `interface ToolSearchToolResultError`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -18383,7 +18737,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-        - `ToolSearchToolSearchResultBlock`
+        - `interface ToolSearchToolSearchResultBlock`
 
           - `type: "tool_search_tool_search_result"`
 
@@ -18403,7 +18757,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ContainerUploadBlock`
+    - `interface ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -18417,7 +18771,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Content Block Stop Event
 
-- `RawContentBlockStopEvent`
+- `interface RawContentBlockStopEvent`
 
   - `type: "content_block_stop"`
 
@@ -18427,7 +18781,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Message Delta Event
 
-- `RawMessageDeltaEvent`
+- `interface RawMessageDeltaEvent`
 
   - `type: "message_delta"`
 
@@ -18609,7 +18963,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Message Start Event
 
-- `RawMessageStartEvent`
+- `interface RawMessageStartEvent`
 
   - `type: "message_start"`
 
@@ -18698,7 +19052,7 @@ console.log(messageTokensCount.input_tokens);
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `TextBlock`
+      - `interface TextBlock`
 
         - `type: "text"`
 
@@ -18710,7 +19064,7 @@ console.log(messageTokensCount.input_tokens);
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `CitationCharLocation`
+          - `interface CitationCharLocation`
 
             - `type: "char_location"`
 
@@ -18732,7 +19086,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationPageLocation`
+          - `interface CitationPageLocation`
 
             - `type: "page_location"`
 
@@ -18754,7 +19108,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-          - `CitationContentBlockLocation`
+          - `interface CitationContentBlockLocation`
 
             - `type: "content_block_location"`
 
@@ -18786,7 +19140,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationsWebSearchResultLocation`
+          - `interface CitationsWebSearchResultLocation`
 
             - `type: "web_search_result_location"`
 
@@ -18802,7 +19156,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `url: string`
 
-          - `CitationsSearchResultLocation`
+          - `interface CitationsSearchResultLocation`
 
             - `type: "search_result_location"`
 
@@ -18842,7 +19196,7 @@ console.log(messageTokensCount.input_tokens);
 
           minLength: 0
 
-      - `ThinkingBlock`
+      - `interface ThinkingBlock`
 
         - `type: "thinking"`
 
@@ -18860,7 +19214,7 @@ console.log(messageTokensCount.input_tokens);
 
           The text of Claude's thinking process for this block.
 
-      - `RedactedThinkingBlock`
+      - `interface RedactedThinkingBlock`
 
         - `type: "redacted_thinking"`
 
@@ -18874,7 +19228,7 @@ console.log(messageTokensCount.input_tokens);
 
           See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `ToolUseBlock`
+      - `interface ToolUseBlock`
 
         - `type: "tool_use"`
 
@@ -18888,13 +19242,13 @@ console.log(messageTokensCount.input_tokens);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
             - `type: "direct"`
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -18904,7 +19258,7 @@ console.log(messageTokensCount.input_tokens);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
             - `type: "code_execution_20260120"`
 
@@ -18924,7 +19278,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `ServerToolUseBlock`
+      - `interface ServerToolUseBlock`
 
         - `type: "server_tool_use"`
 
@@ -18938,15 +19292,15 @@ console.log(messageTokensCount.input_tokens);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `input: Record<string, unknown>`
 
@@ -18966,7 +19320,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"tool_search_tool_bm25"`
 
-      - `WebSearchToolResultBlock`
+      - `interface WebSearchToolResultBlock`
 
         - `type: "web_search_tool_result"`
 
@@ -18976,19 +19330,19 @@ console.log(messageTokensCount.input_tokens);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError`
+          - `interface WebSearchToolResultError`
 
             - `type: "web_search_tool_result_error"`
 
@@ -19026,7 +19380,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `WebFetchToolResultBlock`
+      - `interface WebFetchToolResultBlock`
 
         - `type: "web_fetch_tool_result"`
 
@@ -19036,19 +19390,19 @@ console.log(messageTokensCount.input_tokens);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-          - `WebFetchToolResultErrorBlock`
+          - `interface WebFetchToolResultErrorBlock`
 
             - `type: "web_fetch_tool_result_error"`
 
@@ -19076,7 +19430,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"content_too_large"`
 
-          - `WebFetchBlock`
+          - `interface WebFetchBlock`
 
             - `type: "web_fetch_result"`
 
@@ -19098,7 +19452,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `source: Base64PDFSource | PlainTextSource`
 
-                - `Base64PDFSource`
+                - `interface Base64PDFSource`
 
                   - `type: "base64"`
 
@@ -19108,7 +19462,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `media_type: "application/pdf"`
 
-                - `PlainTextSource`
+                - `interface PlainTextSource`
 
                   - `type: "text"`
 
@@ -19132,7 +19486,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `CodeExecutionToolResultBlock`
+      - `interface CodeExecutionToolResultBlock`
 
         - `type: "code_execution_tool_result"`
 
@@ -19140,7 +19494,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `content: CodeExecutionToolResultBlockContent`
 
-          - `CodeExecutionToolResultError`
+          - `interface CodeExecutionToolResultError`
 
             - `type: "code_execution_tool_result_error"`
 
@@ -19156,7 +19510,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"execution_time_exceeded"`
 
-          - `CodeExecutionResultBlock`
+          - `interface CodeExecutionResultBlock`
 
             - `type: "code_execution_result"`
 
@@ -19176,7 +19530,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-          - `EncryptedCodeExecutionResultBlock`
+          - `interface EncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -19202,7 +19556,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `BashCodeExecutionToolResultBlock`
+      - `interface BashCodeExecutionToolResultBlock`
 
         - `type: "bash_code_execution_tool_result"`
 
@@ -19210,7 +19564,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError`
+          - `interface BashCodeExecutionToolResultError`
 
             - `type: "bash_code_execution_tool_result_error"`
 
@@ -19228,7 +19582,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `"output_file_too_large"`
 
-          - `BashCodeExecutionResultBlock`
+          - `interface BashCodeExecutionResultBlock`
 
             - `type: "bash_code_execution_result"`
 
@@ -19252,7 +19606,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `TextEditorCodeExecutionToolResultBlock`
+      - `interface TextEditorCodeExecutionToolResultBlock`
 
         - `type: "text_editor_code_execution_tool_result"`
 
@@ -19260,7 +19614,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError`
+          - `interface TextEditorCodeExecutionToolResultError`
 
             - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -19280,7 +19634,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message: string | null`
 
-          - `TextEditorCodeExecutionViewResultBlock`
+          - `interface TextEditorCodeExecutionViewResultBlock`
 
             - `type: "text_editor_code_execution_view_result"`
 
@@ -19302,7 +19656,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `total_lines: number | null`
 
-          - `TextEditorCodeExecutionCreateResultBlock`
+          - `interface TextEditorCodeExecutionCreateResultBlock`
 
             - `type: "text_editor_code_execution_create_result"`
 
@@ -19310,7 +19664,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `is_file_update: boolean`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlock`
+          - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -19330,7 +19684,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ToolSearchToolResultBlock`
+      - `interface ToolSearchToolResultBlock`
 
         - `type: "tool_search_tool_result"`
 
@@ -19338,7 +19692,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError`
+          - `interface ToolSearchToolResultError`
 
             - `type: "tool_search_tool_result_error"`
 
@@ -19356,7 +19710,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message: string | null`
 
-          - `ToolSearchToolSearchResultBlock`
+          - `interface ToolSearchToolSearchResultBlock`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -19376,7 +19730,7 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ContainerUploadBlock`
+      - `interface ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
@@ -19658,7 +20012,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Message Stop Event
 
-- `RawMessageStopEvent`
+- `interface RawMessageStopEvent`
 
   - `type: "message_stop"`
 
@@ -19666,9 +20020,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Raw Message Stream Event
 
-- `RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
+- `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
 
-  - `RawMessageStartEvent`
+  - `interface RawMessageStartEvent`
 
     - `type: "message_start"`
 
@@ -19757,7 +20111,7 @@ console.log(messageTokensCount.input_tokens);
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `TextBlock`
+        - `interface TextBlock`
 
           - `type: "text"`
 
@@ -19769,7 +20123,7 @@ console.log(messageTokensCount.input_tokens);
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `CitationCharLocation`
+            - `interface CitationCharLocation`
 
               - `type: "char_location"`
 
@@ -19791,7 +20145,7 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 0
 
-            - `CitationPageLocation`
+            - `interface CitationPageLocation`
 
               - `type: "page_location"`
 
@@ -19813,7 +20167,7 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 1
 
-            - `CitationContentBlockLocation`
+            - `interface CitationContentBlockLocation`
 
               - `type: "content_block_location"`
 
@@ -19845,7 +20199,7 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 0
 
-            - `CitationsWebSearchResultLocation`
+            - `interface CitationsWebSearchResultLocation`
 
               - `type: "web_search_result_location"`
 
@@ -19861,7 +20215,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `url: string`
 
-            - `CitationsSearchResultLocation`
+            - `interface CitationsSearchResultLocation`
 
               - `type: "search_result_location"`
 
@@ -19901,7 +20255,7 @@ console.log(messageTokensCount.input_tokens);
 
             minLength: 0
 
-        - `ThinkingBlock`
+        - `interface ThinkingBlock`
 
           - `type: "thinking"`
 
@@ -19919,7 +20273,7 @@ console.log(messageTokensCount.input_tokens);
 
             The text of Claude's thinking process for this block.
 
-        - `RedactedThinkingBlock`
+        - `interface RedactedThinkingBlock`
 
           - `type: "redacted_thinking"`
 
@@ -19933,7 +20287,7 @@ console.log(messageTokensCount.input_tokens);
 
             See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `ToolUseBlock`
+        - `interface ToolUseBlock`
 
           - `type: "tool_use"`
 
@@ -19947,13 +20301,13 @@ console.log(messageTokensCount.input_tokens);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
               - `type: "direct"`
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -19963,7 +20317,7 @@ console.log(messageTokensCount.input_tokens);
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
               - `type: "code_execution_20260120"`
 
@@ -19983,7 +20337,7 @@ console.log(messageTokensCount.input_tokens);
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `ServerToolUseBlock`
+        - `interface ServerToolUseBlock`
 
           - `type: "server_tool_use"`
 
@@ -19997,15 +20351,15 @@ console.log(messageTokensCount.input_tokens);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `input: Record<string, unknown>`
 
@@ -20025,7 +20379,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"tool_search_tool_bm25"`
 
-        - `WebSearchToolResultBlock`
+        - `interface WebSearchToolResultBlock`
 
           - `type: "web_search_tool_result"`
 
@@ -20035,19 +20389,19 @@ console.log(messageTokensCount.input_tokens);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError`
+            - `interface WebSearchToolResultError`
 
               - `type: "web_search_tool_result_error"`
 
@@ -20085,7 +20439,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `WebFetchToolResultBlock`
+        - `interface WebFetchToolResultBlock`
 
           - `type: "web_fetch_tool_result"`
 
@@ -20095,19 +20449,19 @@ console.log(messageTokensCount.input_tokens);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-            - `WebFetchToolResultErrorBlock`
+            - `interface WebFetchToolResultErrorBlock`
 
               - `type: "web_fetch_tool_result_error"`
 
@@ -20135,7 +20489,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"content_too_large"`
 
-            - `WebFetchBlock`
+            - `interface WebFetchBlock`
 
               - `type: "web_fetch_result"`
 
@@ -20157,7 +20511,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `source: Base64PDFSource | PlainTextSource`
 
-                  - `Base64PDFSource`
+                  - `interface Base64PDFSource`
 
                     - `type: "base64"`
 
@@ -20167,7 +20521,7 @@ console.log(messageTokensCount.input_tokens);
 
                     - `media_type: "application/pdf"`
 
-                  - `PlainTextSource`
+                  - `interface PlainTextSource`
 
                     - `type: "text"`
 
@@ -20191,7 +20545,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `CodeExecutionToolResultBlock`
+        - `interface CodeExecutionToolResultBlock`
 
           - `type: "code_execution_tool_result"`
 
@@ -20199,7 +20553,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `content: CodeExecutionToolResultBlockContent`
 
-            - `CodeExecutionToolResultError`
+            - `interface CodeExecutionToolResultError`
 
               - `type: "code_execution_tool_result_error"`
 
@@ -20215,7 +20569,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"execution_time_exceeded"`
 
-            - `CodeExecutionResultBlock`
+            - `interface CodeExecutionResultBlock`
 
               - `type: "code_execution_result"`
 
@@ -20235,7 +20589,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `stdout: string`
 
-            - `EncryptedCodeExecutionResultBlock`
+            - `interface EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -20261,7 +20615,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `BashCodeExecutionToolResultBlock`
+        - `interface BashCodeExecutionToolResultBlock`
 
           - `type: "bash_code_execution_tool_result"`
 
@@ -20269,7 +20623,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError`
+            - `interface BashCodeExecutionToolResultError`
 
               - `type: "bash_code_execution_tool_result_error"`
 
@@ -20287,7 +20641,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"output_file_too_large"`
 
-            - `BashCodeExecutionResultBlock`
+            - `interface BashCodeExecutionResultBlock`
 
               - `type: "bash_code_execution_result"`
 
@@ -20311,7 +20665,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `TextEditorCodeExecutionToolResultBlock`
+        - `interface TextEditorCodeExecutionToolResultBlock`
 
           - `type: "text_editor_code_execution_tool_result"`
 
@@ -20319,7 +20673,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError`
+            - `interface TextEditorCodeExecutionToolResultError`
 
               - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -20339,7 +20693,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `error_message: string | null`
 
-            - `TextEditorCodeExecutionViewResultBlock`
+            - `interface TextEditorCodeExecutionViewResultBlock`
 
               - `type: "text_editor_code_execution_view_result"`
 
@@ -20361,7 +20715,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `total_lines: number | null`
 
-            - `TextEditorCodeExecutionCreateResultBlock`
+            - `interface TextEditorCodeExecutionCreateResultBlock`
 
               - `type: "text_editor_code_execution_create_result"`
 
@@ -20369,7 +20723,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `is_file_update: boolean`
 
-            - `TextEditorCodeExecutionStrReplaceResultBlock`
+            - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -20389,7 +20743,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ToolSearchToolResultBlock`
+        - `interface ToolSearchToolResultBlock`
 
           - `type: "tool_search_tool_result"`
 
@@ -20397,7 +20751,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError`
+            - `interface ToolSearchToolResultError`
 
               - `type: "tool_search_tool_result_error"`
 
@@ -20415,7 +20769,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `error_message: string | null`
 
-            - `ToolSearchToolSearchResultBlock`
+            - `interface ToolSearchToolSearchResultBlock`
 
               - `type: "tool_search_tool_search_result"`
 
@@ -20435,7 +20789,7 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ContainerUploadBlock`
+        - `interface ContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
@@ -20715,7 +21069,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `"batch"`
 
-  - `RawMessageDeltaEvent`
+  - `interface RawMessageDeltaEvent`
 
     - `type: "message_delta"`
 
@@ -20782,13 +21136,13 @@ console.log(messageTokensCount.input_tokens);
 
         The number of server tool requests.
 
-  - `RawMessageStopEvent`
+  - `interface RawMessageStopEvent`
 
     - `type: "message_stop"`
 
       default: message_stop
 
-  - `RawContentBlockStartEvent`
+  - `interface RawContentBlockStartEvent`
 
     - `type: "content_block_start"`
 
@@ -20796,35 +21150,35 @@ console.log(messageTokensCount.input_tokens);
 
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
-      - `TextBlock`
+      - `interface TextBlock`
 
-      - `ThinkingBlock`
+      - `interface ThinkingBlock`
 
-      - `RedactedThinkingBlock`
+      - `interface RedactedThinkingBlock`
 
-      - `ToolUseBlock`
+      - `interface ToolUseBlock`
 
-      - `ServerToolUseBlock`
+      - `interface ServerToolUseBlock`
 
-      - `WebSearchToolResultBlock`
+      - `interface WebSearchToolResultBlock`
 
-      - `WebFetchToolResultBlock`
+      - `interface WebFetchToolResultBlock`
 
-      - `CodeExecutionToolResultBlock`
+      - `interface CodeExecutionToolResultBlock`
 
-      - `BashCodeExecutionToolResultBlock`
+      - `interface BashCodeExecutionToolResultBlock`
 
-      - `TextEditorCodeExecutionToolResultBlock`
+      - `interface TextEditorCodeExecutionToolResultBlock`
 
-      - `ToolSearchToolResultBlock`
+      - `interface ToolSearchToolResultBlock`
 
-      - `ContainerUploadBlock`
+      - `interface ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
     - `index: number`
 
-  - `RawContentBlockDeltaEvent`
+  - `interface RawContentBlockDeltaEvent`
 
     - `type: "content_block_delta"`
 
@@ -20832,7 +21186,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `delta: RawContentBlockDelta`
 
-      - `TextDelta`
+      - `interface TextDelta`
 
         - `type: "text_delta"`
 
@@ -20840,7 +21194,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `text: string`
 
-      - `InputJSONDelta`
+      - `interface InputJSONDelta`
 
         - `type: "input_json_delta"`
 
@@ -20848,7 +21202,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `partial_json: string`
 
-      - `CitationsDelta`
+      - `interface CitationsDelta`
 
         - `type: "citations_delta"`
 
@@ -20856,17 +21210,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-          - `CitationCharLocation`
+          - `interface CitationCharLocation`
 
-          - `CitationPageLocation`
+          - `interface CitationPageLocation`
 
-          - `CitationContentBlockLocation`
+          - `interface CitationContentBlockLocation`
 
-          - `CitationsWebSearchResultLocation`
+          - `interface CitationsWebSearchResultLocation`
 
-          - `CitationsSearchResultLocation`
+          - `interface CitationsSearchResultLocation`
 
-      - `ThinkingDelta`
+      - `interface ThinkingDelta`
 
         - `type: "thinking_delta"`
 
@@ -20876,7 +21230,7 @@ console.log(messageTokensCount.input_tokens);
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `SignatureDelta`
+      - `interface SignatureDelta`
 
         - `type: "signature_delta"`
 
@@ -20888,7 +21242,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `index: number`
 
-  - `RawContentBlockStopEvent`
+  - `interface RawContentBlockStopEvent`
 
     - `type: "content_block_stop"`
 
@@ -20898,7 +21252,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Redacted Thinking Block
 
-- `RedactedThinkingBlock`
+- `interface RedactedThinkingBlock`
 
   - `type: "redacted_thinking"`
 
@@ -20914,7 +21268,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Redacted Thinking Block Param
 
-- `RedactedThinkingBlockParam`
+- `interface RedactedThinkingBlockParam`
 
   - `type: "redacted_thinking"`
 
@@ -20924,7 +21278,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Refusal Stop Details
 
-- `RefusalStopDetails`
+- `interface RefusalStopDetails`
 
   Structured information about a refusal.
 
@@ -20970,7 +21324,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Search Result Block Param
 
-- `SearchResultBlockParam`
+- `interface SearchResultBlockParam`
 
   - `type: "search_result"`
 
@@ -21005,7 +21359,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `citations?: Array<TextCitationParam> | null`
 
-      - `CitationCharLocationParam`
+      - `interface CitationCharLocationParam`
 
         - `type: "char_location"`
 
@@ -21025,7 +21379,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationPageLocationParam`
+      - `interface CitationPageLocationParam`
 
         - `type: "page_location"`
 
@@ -21045,7 +21399,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-      - `CitationContentBlockLocationParam`
+      - `interface CitationContentBlockLocationParam`
 
         - `type: "content_block_location"`
 
@@ -21075,7 +21429,7 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-      - `CitationWebSearchResultLocationParam`
+      - `interface CitationWebSearchResultLocationParam`
 
         - `type: "web_search_result_location"`
 
@@ -21091,7 +21445,7 @@ console.log(messageTokensCount.input_tokens);
 
           minLength: 1
 
-      - `CitationSearchResultLocationParam`
+      - `interface CitationSearchResultLocationParam`
 
         - `type: "search_result_location"`
 
@@ -21139,7 +21493,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Server Tool Caller
 
-- `ServerToolCaller`
+- `interface ServerToolCaller`
 
   Tool invocation generated by a server-side tool.
 
@@ -21151,7 +21505,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Server Tool Caller 20260120
 
-- `ServerToolCaller20260120`
+- `interface ServerToolCaller20260120`
 
   - `type: "code_execution_20260120"`
 
@@ -21161,7 +21515,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Server Tool Usage
 
-- `ServerToolUsage`
+- `interface ServerToolUsage`
 
   - `web_fetch_requests: number`
 
@@ -21177,7 +21531,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Server Tool Use Block
 
-- `ServerToolUseBlock`
+- `interface ServerToolUseBlock`
 
   - `type: "server_tool_use"`
 
@@ -21191,13 +21545,13 @@ console.log(messageTokensCount.input_tokens);
 
     default: {"type":"direct"}
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -21207,7 +21561,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -21235,7 +21589,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Server Tool Use Block Param
 
-- `ServerToolUseBlockParam`
+- `interface ServerToolUseBlockParam`
 
   - `type: "server_tool_use"`
 
@@ -21284,13 +21638,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -21300,7 +21654,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -21310,7 +21664,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Signature Delta
 
-- `SignatureDelta`
+- `interface SignatureDelta`
 
   - `type: "signature_delta"`
 
@@ -21322,7 +21676,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Skill Params
 
-- `SkillParams`
+- `interface SkillParams`
 
   Specification for a skill to be loaded in a container (request model).
 
@@ -21348,7 +21702,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Stop Reason
 
-- `StopReason = "end_turn" | "max_tokens" | "stop_sequence" | 4 more`
+- `type StopReason = "end_turn" | "max_tokens" | "stop_sequence" | 4 more`
 
   - `"end_turn"`
 
@@ -21366,7 +21720,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Block
 
-- `TextBlock`
+- `interface TextBlock`
 
   - `type: "text"`
 
@@ -21378,7 +21732,7 @@ console.log(messageTokensCount.input_tokens);
 
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-    - `CitationCharLocation`
+    - `interface CitationCharLocation`
 
       - `type: "char_location"`
 
@@ -21400,7 +21754,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationPageLocation`
+    - `interface CitationPageLocation`
 
       - `type: "page_location"`
 
@@ -21422,7 +21776,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-    - `CitationContentBlockLocation`
+    - `interface CitationContentBlockLocation`
 
       - `type: "content_block_location"`
 
@@ -21454,7 +21808,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationsWebSearchResultLocation`
+    - `interface CitationsWebSearchResultLocation`
 
       - `type: "web_search_result_location"`
 
@@ -21470,7 +21824,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `url: string`
 
-    - `CitationsSearchResultLocation`
+    - `interface CitationsSearchResultLocation`
 
       - `type: "search_result_location"`
 
@@ -21512,7 +21866,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Block Param
 
-- `TextBlockParam`
+- `interface TextBlockParam`
 
   - `type: "text"`
 
@@ -21543,7 +21897,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `citations?: Array<TextCitationParam> | null`
 
-    - `CitationCharLocationParam`
+    - `interface CitationCharLocationParam`
 
       - `type: "char_location"`
 
@@ -21563,7 +21917,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationPageLocationParam`
+    - `interface CitationPageLocationParam`
 
       - `type: "page_location"`
 
@@ -21583,7 +21937,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-    - `CitationContentBlockLocationParam`
+    - `interface CitationContentBlockLocationParam`
 
       - `type: "content_block_location"`
 
@@ -21613,7 +21967,7 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-    - `CitationWebSearchResultLocationParam`
+    - `interface CitationWebSearchResultLocationParam`
 
       - `type: "web_search_result_location"`
 
@@ -21629,7 +21983,7 @@ console.log(messageTokensCount.input_tokens);
 
         minLength: 1
 
-    - `CitationSearchResultLocationParam`
+    - `interface CitationSearchResultLocationParam`
 
       - `type: "search_result_location"`
 
@@ -21665,9 +22019,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Citation
 
-- `TextCitation = CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
+- `type TextCitation = CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
-  - `CitationCharLocation`
+  - `interface CitationCharLocation`
 
     - `type: "char_location"`
 
@@ -21689,7 +22043,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-  - `CitationPageLocation`
+  - `interface CitationPageLocation`
 
     - `type: "page_location"`
 
@@ -21711,7 +22065,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 1
 
-  - `CitationContentBlockLocation`
+  - `interface CitationContentBlockLocation`
 
     - `type: "content_block_location"`
 
@@ -21743,7 +22097,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-  - `CitationsWebSearchResultLocation`
+  - `interface CitationsWebSearchResultLocation`
 
     - `type: "web_search_result_location"`
 
@@ -21759,7 +22113,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url: string`
 
-  - `CitationsSearchResultLocation`
+  - `interface CitationsSearchResultLocation`
 
     - `type: "search_result_location"`
 
@@ -21797,9 +22151,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Citation Param
 
-- `TextCitationParam = CitationCharLocationParam | CitationPageLocationParam | CitationContentBlockLocationParam | 2 more`
+- `type TextCitationParam = CitationCharLocationParam | CitationPageLocationParam | CitationContentBlockLocationParam | 2 more`
 
-  - `CitationCharLocationParam`
+  - `interface CitationCharLocationParam`
 
     - `type: "char_location"`
 
@@ -21819,7 +22173,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-  - `CitationPageLocationParam`
+  - `interface CitationPageLocationParam`
 
     - `type: "page_location"`
 
@@ -21839,7 +22193,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 1
 
-  - `CitationContentBlockLocationParam`
+  - `interface CitationContentBlockLocationParam`
 
     - `type: "content_block_location"`
 
@@ -21869,7 +22223,7 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-  - `CitationWebSearchResultLocationParam`
+  - `interface CitationWebSearchResultLocationParam`
 
     - `type: "web_search_result_location"`
 
@@ -21885,7 +22239,7 @@ console.log(messageTokensCount.input_tokens);
 
       minLength: 1
 
-  - `CitationSearchResultLocationParam`
+  - `interface CitationSearchResultLocationParam`
 
     - `type: "search_result_location"`
 
@@ -21921,7 +22275,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Delta
 
-- `TextDelta`
+- `interface TextDelta`
 
   - `type: "text_delta"`
 
@@ -21931,7 +22285,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Create Result Block
 
-- `TextEditorCodeExecutionCreateResultBlock`
+- `interface TextEditorCodeExecutionCreateResultBlock`
 
   - `type: "text_editor_code_execution_create_result"`
 
@@ -21941,7 +22295,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Create Result Block Param
 
-- `TextEditorCodeExecutionCreateResultBlockParam`
+- `interface TextEditorCodeExecutionCreateResultBlockParam`
 
   - `type: "text_editor_code_execution_create_result"`
 
@@ -21949,7 +22303,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Str Replace Result Block
 
-- `TextEditorCodeExecutionStrReplaceResultBlock`
+- `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -21967,7 +22321,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
-- `TextEditorCodeExecutionStrReplaceResultBlockParam`
+- `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -21983,7 +22337,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Tool Result Block
 
-- `TextEditorCodeExecutionToolResultBlock`
+- `interface TextEditorCodeExecutionToolResultBlock`
 
   - `type: "text_editor_code_execution_tool_result"`
 
@@ -21991,7 +22345,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-    - `TextEditorCodeExecutionToolResultError`
+    - `interface TextEditorCodeExecutionToolResultError`
 
       - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -22011,7 +22365,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message: string | null`
 
-    - `TextEditorCodeExecutionViewResultBlock`
+    - `interface TextEditorCodeExecutionViewResultBlock`
 
       - `type: "text_editor_code_execution_view_result"`
 
@@ -22033,7 +22387,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `total_lines: number | null`
 
-    - `TextEditorCodeExecutionCreateResultBlock`
+    - `interface TextEditorCodeExecutionCreateResultBlock`
 
       - `type: "text_editor_code_execution_create_result"`
 
@@ -22041,7 +22395,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `is_file_update: boolean`
 
-    - `TextEditorCodeExecutionStrReplaceResultBlock`
+    - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
       - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -22063,13 +22417,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Tool Result Block Param
 
-- `TextEditorCodeExecutionToolResultBlockParam`
+- `interface TextEditorCodeExecutionToolResultBlockParam`
 
   - `type: "text_editor_code_execution_tool_result"`
 
   - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-    - `TextEditorCodeExecutionToolResultErrorParam`
+    - `interface TextEditorCodeExecutionToolResultErrorParam`
 
       - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -22087,7 +22441,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message?: string | null`
 
-    - `TextEditorCodeExecutionViewResultBlockParam`
+    - `interface TextEditorCodeExecutionViewResultBlockParam`
 
       - `type: "text_editor_code_execution_view_result"`
 
@@ -22107,13 +22461,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `total_lines?: number | null`
 
-    - `TextEditorCodeExecutionCreateResultBlockParam`
+    - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
       - `type: "text_editor_code_execution_create_result"`
 
       - `is_file_update: boolean`
 
-    - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+    - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
       - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -22154,7 +22508,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Tool Result Error
 
-- `TextEditorCodeExecutionToolResultError`
+- `interface TextEditorCodeExecutionToolResultError`
 
   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -22176,7 +22530,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Tool Result Error Code
 
-- `TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
+- `type TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | 2 more`
 
   - `"invalid_tool_input"`
 
@@ -22190,7 +22544,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution Tool Result Error Param
 
-- `TextEditorCodeExecutionToolResultErrorParam`
+- `interface TextEditorCodeExecutionToolResultErrorParam`
 
   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -22210,7 +22564,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution View Result Block
 
-- `TextEditorCodeExecutionViewResultBlock`
+- `interface TextEditorCodeExecutionViewResultBlock`
 
   - `type: "text_editor_code_execution_view_result"`
 
@@ -22234,7 +22588,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Text Editor Code Execution View Result Block Param
 
-- `TextEditorCodeExecutionViewResultBlockParam`
+- `interface TextEditorCodeExecutionViewResultBlockParam`
 
   - `type: "text_editor_code_execution_view_result"`
 
@@ -22256,7 +22610,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Block
 
-- `ThinkingBlock`
+- `interface ThinkingBlock`
 
   - `type: "thinking"`
 
@@ -22276,7 +22630,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Block Param
 
-- `ThinkingBlockParam`
+- `interface ThinkingBlockParam`
 
   - `type: "thinking"`
 
@@ -22292,7 +22646,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Config Adaptive
 
-- `ThinkingConfigAdaptive`
+- `interface ThinkingConfigAdaptive`
 
   - `type: "adaptive"`
 
@@ -22306,13 +22660,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Config Disabled
 
-- `ThinkingConfigDisabled`
+- `interface ThinkingConfigDisabled`
 
   - `type: "disabled"`
 
 ### Thinking Config Enabled
 
-- `ThinkingConfigEnabled`
+- `interface ThinkingConfigEnabled`
 
   - `type: "enabled"`
 
@@ -22336,7 +22690,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Config Param
 
-- `ThinkingConfigParam = ThinkingConfigEnabled | ThinkingConfigDisabled | ThinkingConfigAdaptive`
+- `type ThinkingConfigParam = ThinkingConfigEnabled | ThinkingConfigDisabled | ThinkingConfigAdaptive`
 
   Configuration for enabling Claude's extended thinking.
 
@@ -22344,7 +22698,7 @@ console.log(messageTokensCount.input_tokens);
 
   See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-  - `ThinkingConfigEnabled`
+  - `interface ThinkingConfigEnabled`
 
     - `type: "enabled"`
 
@@ -22366,11 +22720,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `"omitted"`
 
-  - `ThinkingConfigDisabled`
+  - `interface ThinkingConfigDisabled`
 
     - `type: "disabled"`
 
-  - `ThinkingConfigAdaptive`
+  - `interface ThinkingConfigAdaptive`
 
     - `type: "adaptive"`
 
@@ -22384,7 +22738,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Thinking Delta
 
-- `ThinkingDelta`
+- `interface ThinkingDelta`
 
   - `type: "thinking_delta"`
 
@@ -22396,7 +22750,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool
 
-- `Tool`
+- `interface Tool`
 
   - `type?: "custom" | null`
 
@@ -22473,7 +22827,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Bash 20250124
 
-- `ToolBash20250124`
+- `interface ToolBash20250124`
 
   - `type: "bash_20250124"`
 
@@ -22526,11 +22880,11 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Choice
 
-- `ToolChoice = ToolChoiceAuto | ToolChoiceAny | ToolChoiceTool | ToolChoiceNone`
+- `type ToolChoice = ToolChoiceAuto | ToolChoiceAny | ToolChoiceTool | ToolChoiceNone`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `ToolChoiceAuto`
+  - `interface ToolChoiceAuto`
 
     The model will automatically decide whether to use tools.
 
@@ -22542,7 +22896,7 @@ console.log(messageTokensCount.input_tokens);
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `ToolChoiceAny`
+  - `interface ToolChoiceAny`
 
     The model will use any available tools.
 
@@ -22554,7 +22908,7 @@ console.log(messageTokensCount.input_tokens);
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceTool`
+  - `interface ToolChoiceTool`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -22570,7 +22924,7 @@ console.log(messageTokensCount.input_tokens);
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceNone`
+  - `interface ToolChoiceNone`
 
     The model will not be allowed to use tools.
 
@@ -22578,7 +22932,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Choice Any
 
-- `ToolChoiceAny`
+- `interface ToolChoiceAny`
 
   The model will use any available tools.
 
@@ -22592,7 +22946,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Choice Auto
 
-- `ToolChoiceAuto`
+- `interface ToolChoiceAuto`
 
   The model will automatically decide whether to use tools.
 
@@ -22606,7 +22960,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Choice None
 
-- `ToolChoiceNone`
+- `interface ToolChoiceNone`
 
   The model will not be allowed to use tools.
 
@@ -22614,7 +22968,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Choice Tool
 
-- `ToolChoiceTool`
+- `interface ToolChoiceTool`
 
   The model will use the specified tool with `tool_choice.name`.
 
@@ -22632,7 +22986,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Reference Block
 
-- `ToolReferenceBlock`
+- `interface ToolReferenceBlock`
 
   - `type: "tool_reference"`
 
@@ -22644,7 +22998,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Reference Block Param
 
-- `ToolReferenceBlockParam`
+- `interface ToolReferenceBlockParam`
 
   Tool reference block that can be included in tool_result content.
 
@@ -22677,7 +23031,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Result Block Param
 
-- `ToolResultBlockParam`
+- `interface ToolResultBlockParam`
 
   - `type: "tool_result"`
 
@@ -22712,7 +23066,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-      - `TextBlockParam`
+      - `interface TextBlockParam`
 
         - `type: "text"`
 
@@ -22726,7 +23080,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `citations?: Array<TextCitationParam> | null`
 
-          - `CitationCharLocationParam`
+          - `interface CitationCharLocationParam`
 
             - `type: "char_location"`
 
@@ -22746,7 +23100,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationPageLocationParam`
+          - `interface CitationPageLocationParam`
 
             - `type: "page_location"`
 
@@ -22766,7 +23120,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-          - `CitationContentBlockLocationParam`
+          - `interface CitationContentBlockLocationParam`
 
             - `type: "content_block_location"`
 
@@ -22796,7 +23150,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `CitationWebSearchResultLocationParam`
+          - `interface CitationWebSearchResultLocationParam`
 
             - `type: "web_search_result_location"`
 
@@ -22812,7 +23166,7 @@ console.log(messageTokensCount.input_tokens);
 
               minLength: 1
 
-          - `CitationSearchResultLocationParam`
+          - `interface CitationSearchResultLocationParam`
 
             - `type: "search_result_location"`
 
@@ -22846,13 +23200,13 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-      - `ImageBlockParam`
+      - `interface ImageBlockParam`
 
         - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-          - `Base64ImageSource`
+          - `interface Base64ImageSource`
 
             - `type: "base64"`
 
@@ -22870,13 +23224,13 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-          - `URLImageSource`
+          - `interface URLImageSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileImageSource`
+          - `interface FileImageSource`
 
             - `type: "file"`
 
@@ -22898,7 +23252,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `"error"`
 
-      - `SearchResultBlockParam`
+      - `interface SearchResultBlockParam`
 
         - `type: "search_result"`
 
@@ -22928,13 +23282,13 @@ console.log(messageTokensCount.input_tokens);
 
           - `enabled?: boolean`
 
-      - `DocumentBlockParam`
+      - `interface DocumentBlockParam`
 
         - `type: "document"`
 
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-          - `Base64PDFSource`
+          - `interface Base64PDFSource`
 
             - `type: "base64"`
 
@@ -22944,7 +23298,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-          - `PlainTextSource`
+          - `interface PlainTextSource`
 
             - `type: "text"`
 
@@ -22952,7 +23306,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "text/plain"`
 
-          - `ContentBlockSource`
+          - `interface ContentBlockSource`
 
             - `type: "content"`
 
@@ -22962,17 +23316,17 @@ console.log(messageTokensCount.input_tokens);
 
               - `Array<ContentBlockSourceContent>`
 
-                - `TextBlockParam`
+                - `interface TextBlockParam`
 
-                - `ImageBlockParam`
+                - `interface ImageBlockParam`
 
-          - `URLPDFSource`
+          - `interface URLPDFSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileDocumentSource`
+          - `interface FileDocumentSource`
 
             - `type: "file"`
 
@@ -22992,7 +23346,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 500, minLength: 1
 
-      - `ToolReferenceBlockParam`
+      - `interface ToolReferenceBlockParam`
 
         Tool reference block that can be included in tool_result content.
 
@@ -23006,7 +23360,7 @@ console.log(messageTokensCount.input_tokens);
 
           Create a cache control breakpoint at this content block.
 
-      - `BrowserStateBlockParam`
+      - `interface BrowserStateBlockParam`
 
         The caller's browser state after a browser toolset member call —
         the full inventory of open tabs, which tab is active, and any side
@@ -23056,7 +23410,7 @@ console.log(messageTokensCount.input_tokens);
 
           maxItems: 200, minItems: 1
 
-          - `BrowserStateChangeTabOpened`
+          - `interface BrowserStateChangeTabOpened`
 
             A tab this call's execution opened that remains open at its end —
             the creation delta of the `tabs` inventory, not an event log.
@@ -23074,7 +23428,7 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `BrowserStateChangeDownloadStarted`
+          - `interface BrowserStateChangeDownloadStarted`
 
             A file download that started during this call.
 
@@ -23092,7 +23446,7 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `BrowserStateChangeDownloadCompleted`
+          - `interface BrowserStateChangeDownloadCompleted`
 
             A file download that finished during this call, reported with the
             same `download_id` as its `download_started` — or without a prior
@@ -23125,7 +23479,7 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-          - `BrowserStateChangeDownloadFailed`
+          - `interface BrowserStateChangeDownloadFailed`
 
             A file download that failed — or was cancelled — during this call.
 
@@ -23159,7 +23513,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Bm25 20251119
 
-- `ToolSearchToolBm25_20251119`
+- `interface ToolSearchToolBm25_20251119`
 
   - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -23214,7 +23568,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Regex 20251119
 
-- `ToolSearchToolRegex20251119`
+- `interface ToolSearchToolRegex20251119`
 
   - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -23269,7 +23623,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Result Block
 
-- `ToolSearchToolResultBlock`
+- `interface ToolSearchToolResultBlock`
 
   - `type: "tool_search_tool_result"`
 
@@ -23277,7 +23631,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-    - `ToolSearchToolResultError`
+    - `interface ToolSearchToolResultError`
 
       - `type: "tool_search_tool_result_error"`
 
@@ -23295,7 +23649,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message: string | null`
 
-    - `ToolSearchToolSearchResultBlock`
+    - `interface ToolSearchToolSearchResultBlock`
 
       - `type: "tool_search_tool_search_result"`
 
@@ -23317,13 +23671,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Result Block Param
 
-- `ToolSearchToolResultBlockParam`
+- `interface ToolSearchToolResultBlockParam`
 
   - `type: "tool_search_tool_result"`
 
   - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-    - `ToolSearchToolResultErrorParam`
+    - `interface ToolSearchToolResultErrorParam`
 
       - `type: "tool_search_tool_result_error"`
 
@@ -23339,7 +23693,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message?: string | null`
 
-    - `ToolSearchToolSearchResultBlockParam`
+    - `interface ToolSearchToolSearchResultBlockParam`
 
       - `type: "tool_search_tool_search_result"`
 
@@ -23382,7 +23736,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Result Error
 
-- `ToolSearchToolResultError`
+- `interface ToolSearchToolResultError`
 
   - `type: "tool_search_tool_result_error"`
 
@@ -23402,7 +23756,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Result Error Code
 
-- `ToolSearchToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
+- `type ToolSearchToolResultErrorCode = "invalid_tool_input" | "unavailable" | "too_many_requests" | "execution_time_exceeded"`
 
   - `"invalid_tool_input"`
 
@@ -23414,7 +23768,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Result Error Param
 
-- `ToolSearchToolResultErrorParam`
+- `interface ToolSearchToolResultErrorParam`
 
   - `type: "tool_search_tool_result_error"`
 
@@ -23432,7 +23786,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Search Result Block
 
-- `ToolSearchToolSearchResultBlock`
+- `interface ToolSearchToolSearchResultBlock`
 
   - `type: "tool_search_tool_search_result"`
 
@@ -23450,7 +23804,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Search Tool Search Result Block Param
 
-- `ToolSearchToolSearchResultBlockParam`
+- `interface ToolSearchToolSearchResultBlockParam`
 
   - `type: "tool_search_tool_search_result"`
 
@@ -23485,7 +23839,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Text Editor 20250124
 
-- `ToolTextEditor20250124`
+- `interface ToolTextEditor20250124`
 
   - `type: "text_editor_20250124"`
 
@@ -23538,7 +23892,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Text Editor 20250429
 
-- `ToolTextEditor20250429`
+- `interface ToolTextEditor20250429`
 
   - `type: "text_editor_20250429"`
 
@@ -23591,7 +23945,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Text Editor 20250728
 
-- `ToolTextEditor20250728`
+- `interface ToolTextEditor20250728`
 
   - `type: "text_editor_20250728"`
 
@@ -23650,9 +24004,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Union
 
-- `ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
+- `type ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
-  - `Tool`
+  - `interface Tool`
 
     - `type?: "custom" | null`
 
@@ -23727,7 +24081,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolBash20250124`
+  - `interface ToolBash20250124`
 
     - `type: "bash_20250124"`
 
@@ -23761,7 +24115,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522`
+  - `interface CodeExecutionTool20250522`
 
     - `type: "code_execution_20250522"`
 
@@ -23793,7 +24147,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825`
+  - `interface CodeExecutionTool20250825`
 
     - `type: "code_execution_20250825"`
 
@@ -23825,7 +24179,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `interface CodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -23859,7 +24213,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260521`
+  - `interface CodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -23893,7 +24247,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `BrowserToolset20260801`
+  - `interface BrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -24287,7 +24641,7 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `MemoryTool20250818`
+  - `interface MemoryTool20250818`
 
     - `type: "memory_20250818"`
 
@@ -24321,7 +24675,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ComputerToolset20260801`
+  - `interface ComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -24551,7 +24905,7 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `ToolTextEditor20250124`
+  - `interface ToolTextEditor20250124`
 
     - `type: "text_editor_20250124"`
 
@@ -24585,7 +24939,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429`
+  - `interface ToolTextEditor20250429`
 
     - `type: "text_editor_20250429"`
 
@@ -24619,7 +24973,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728`
+  - `interface ToolTextEditor20250728`
 
     - `type: "text_editor_20250728"`
 
@@ -24659,7 +25013,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305`
+  - `interface WebSearchTool20250305`
 
     - `type: "web_search_20250305"`
 
@@ -24735,7 +25089,7 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 255, minLength: 1
 
-  - `WebFetchTool20250910`
+  - `interface WebFetchTool20250910`
 
     - `type: "web_fetch_20250910"`
 
@@ -24793,7 +25147,98 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: "all"`
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: "none"`
+
+        - `interface WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: "only"`
+
+          - `tools: Array<WebFetchURLSourceToolReference>`
+
+            - `type: "tool_reference"`
+
+            - `name: string`
+
+        - `interface WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: "except"`
+
+          - `tools: Array<WebFetchURLSourceToolReference>`
+
+            - `type: "tool_reference"`
+
+            - `name: string`
+
+      - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `interface WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `interface WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `interface WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `interface WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `interface WebSearchTool20260209`
 
     - `type: "web_search_20260209"`
 
@@ -24843,7 +25288,7 @@ console.log(messageTokensCount.input_tokens);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260209`
+  - `interface WebFetchTool20260209`
 
     - `type: "web_fetch_20260209"`
 
@@ -24899,7 +25344,16 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309`
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `interface WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -24957,11 +25411,20 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache?: boolean`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `WebSearchTool20260318`
+  - `interface WebSearchTool20260318`
 
     - `type: "web_search_20260318"`
 
@@ -25019,7 +25482,7 @@ console.log(messageTokensCount.input_tokens);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260318`
+  - `interface WebFetchTool20260318`
 
     - `type: "web_fetch_20260318"`
 
@@ -25083,11 +25546,20 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources?: WebFetchURLSources | null`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache?: boolean`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119`
+  - `interface ToolSearchToolBm25_20251119`
 
     - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -25123,7 +25595,7 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119`
+  - `interface ToolSearchToolRegex20251119`
 
     - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -25161,7 +25633,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Use Block
 
-- `ToolUseBlock`
+- `interface ToolUseBlock`
 
   - `type: "tool_use"`
 
@@ -25175,13 +25647,13 @@ console.log(messageTokensCount.input_tokens);
 
     default: {"type":"direct"}
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -25191,7 +25663,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -25213,7 +25685,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Tool Use Block Param
 
-- `ToolUseBlockParam`
+- `interface ToolUseBlockParam`
 
   - `type: "tool_use"`
 
@@ -25250,13 +25722,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -25266,7 +25738,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -25282,7 +25754,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### URL Image Source
 
-- `URLImageSource`
+- `interface URLImageSource`
 
   - `type: "url"`
 
@@ -25290,7 +25762,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### URL PDF Source
 
-- `URLPDFSource`
+- `interface URLPDFSource`
 
   - `type: "url"`
 
@@ -25298,7 +25770,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Usage
 
-- `Usage`
+- `interface Usage`
 
   - `cache_creation: CacheCreation | null`
 
@@ -25394,7 +25866,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### User Location
 
-- `UserLocation`
+- `interface UserLocation`
 
   - `type: "approximate"`
 
@@ -25424,7 +25896,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Block
 
-- `WebFetchBlock`
+- `interface WebFetchBlock`
 
   - `type: "web_fetch_result"`
 
@@ -25446,7 +25918,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `source: Base64PDFSource | PlainTextSource`
 
-      - `Base64PDFSource`
+      - `interface Base64PDFSource`
 
         - `type: "base64"`
 
@@ -25456,7 +25928,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "application/pdf"`
 
-      - `PlainTextSource`
+      - `interface PlainTextSource`
 
         - `type: "text"`
 
@@ -25478,7 +25950,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Block Param
 
-- `WebFetchBlockParam`
+- `interface WebFetchBlockParam`
 
   - `type: "web_fetch_result"`
 
@@ -25488,7 +25960,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-      - `Base64PDFSource`
+      - `interface Base64PDFSource`
 
         - `type: "base64"`
 
@@ -25498,7 +25970,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "application/pdf"`
 
-      - `PlainTextSource`
+      - `interface PlainTextSource`
 
         - `type: "text"`
 
@@ -25506,7 +25978,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "text/plain"`
 
-      - `ContentBlockSource`
+      - `interface ContentBlockSource`
 
         - `type: "content"`
 
@@ -25516,7 +25988,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `Array<ContentBlockSourceContent>`
 
-            - `TextBlockParam`
+            - `interface TextBlockParam`
 
               - `type: "text"`
 
@@ -25547,7 +26019,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `citations?: Array<TextCitationParam> | null`
 
-                - `CitationCharLocationParam`
+                - `interface CitationCharLocationParam`
 
                   - `type: "char_location"`
 
@@ -25567,7 +26039,7 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 0
 
-                - `CitationPageLocationParam`
+                - `interface CitationPageLocationParam`
 
                   - `type: "page_location"`
 
@@ -25587,7 +26059,7 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 1
 
-                - `CitationContentBlockLocationParam`
+                - `interface CitationContentBlockLocationParam`
 
                   - `type: "content_block_location"`
 
@@ -25617,7 +26089,7 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 0
 
-                - `CitationWebSearchResultLocationParam`
+                - `interface CitationWebSearchResultLocationParam`
 
                   - `type: "web_search_result_location"`
 
@@ -25633,7 +26105,7 @@ console.log(messageTokensCount.input_tokens);
 
                     minLength: 1
 
-                - `CitationSearchResultLocationParam`
+                - `interface CitationSearchResultLocationParam`
 
                   - `type: "search_result_location"`
 
@@ -25667,13 +26139,13 @@ console.log(messageTokensCount.input_tokens);
 
                   - `title: string | null`
 
-            - `ImageBlockParam`
+            - `interface ImageBlockParam`
 
               - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-                - `Base64ImageSource`
+                - `interface Base64ImageSource`
 
                   - `type: "base64"`
 
@@ -25691,13 +26163,13 @@ console.log(messageTokensCount.input_tokens);
 
                     - `"image/webp"`
 
-                - `URLImageSource`
+                - `interface URLImageSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `FileImageSource`
+                - `interface FileImageSource`
 
                   - `type: "file"`
 
@@ -25719,13 +26191,13 @@ console.log(messageTokensCount.input_tokens);
 
                   - `"error"`
 
-      - `URLPDFSource`
+      - `interface URLPDFSource`
 
         - `type: "url"`
 
         - `url: string`
 
-      - `FileDocumentSource`
+      - `interface FileDocumentSource`
 
         - `type: "file"`
 
@@ -25757,7 +26229,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Tool 20250910
 
-- `WebFetchTool20250910`
+- `interface WebFetchTool20250910`
 
   - `type: "web_fetch_20250910"`
 
@@ -25832,9 +26304,100 @@ console.log(messageTokensCount.input_tokens);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `url_sources?: WebFetchURLSources | null`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: "all"`
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: "none"`
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: "only"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: "except"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+    - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Web Fetch Tool 20260209
 
-- `WebFetchTool20260209`
+- `interface WebFetchTool20260209`
 
   - `type: "web_fetch_20260209"`
 
@@ -25909,9 +26472,100 @@ console.log(messageTokensCount.input_tokens);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `url_sources?: WebFetchURLSources | null`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: "all"`
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: "none"`
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: "only"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: "except"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+    - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Web Fetch Tool 20260309
 
-- `WebFetchTool20260309`
+- `interface WebFetchTool20260309`
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -25988,13 +26642,104 @@ console.log(messageTokensCount.input_tokens);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `url_sources?: WebFetchURLSources | null`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: "all"`
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: "none"`
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: "only"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: "except"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+    - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `use_cache?: boolean`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool 20260318
 
-- `WebFetchTool20260318`
+- `interface WebFetchTool20260318`
 
   - `type: "web_fetch_20260318"`
 
@@ -26077,13 +26822,104 @@ console.log(messageTokensCount.input_tokens);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `url_sources?: WebFetchURLSources | null`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: "all"`
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: "none"`
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: "only"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: "except"`
+
+        - `tools: Array<WebFetchURLSourceToolReference>`
+
+          - `type: "tool_reference"`
+
+          - `name: string`
+
+    - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `interface WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `interface WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `interface WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `interface WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `use_cache?: boolean`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool Result Block
 
-- `WebFetchToolResultBlock`
+- `interface WebFetchToolResultBlock`
 
   - `type: "web_fetch_tool_result"`
 
@@ -26093,13 +26929,13 @@ console.log(messageTokensCount.input_tokens);
 
     default: {"type":"direct"}
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -26109,7 +26945,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -26119,7 +26955,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-    - `WebFetchToolResultErrorBlock`
+    - `interface WebFetchToolResultErrorBlock`
 
       - `type: "web_fetch_tool_result_error"`
 
@@ -26147,7 +26983,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"content_too_large"`
 
-    - `WebFetchBlock`
+    - `interface WebFetchBlock`
 
       - `type: "web_fetch_result"`
 
@@ -26169,7 +27005,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `source: Base64PDFSource | PlainTextSource`
 
-          - `Base64PDFSource`
+          - `interface Base64PDFSource`
 
             - `type: "base64"`
 
@@ -26179,7 +27015,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-          - `PlainTextSource`
+          - `interface PlainTextSource`
 
             - `type: "text"`
 
@@ -26205,13 +27041,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Tool Result Block Param
 
-- `WebFetchToolResultBlockParam`
+- `interface WebFetchToolResultBlockParam`
 
   - `type: "web_fetch_tool_result"`
 
   - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-    - `WebFetchToolResultErrorBlockParam`
+    - `interface WebFetchToolResultErrorBlockParam`
 
       - `type: "web_fetch_tool_result_error"`
 
@@ -26237,7 +27073,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `"content_too_large"`
 
-    - `WebFetchBlockParam`
+    - `interface WebFetchBlockParam`
 
       - `type: "web_fetch_result"`
 
@@ -26247,7 +27083,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-          - `Base64PDFSource`
+          - `interface Base64PDFSource`
 
             - `type: "base64"`
 
@@ -26257,7 +27093,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-          - `PlainTextSource`
+          - `interface PlainTextSource`
 
             - `type: "text"`
 
@@ -26265,7 +27101,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "text/plain"`
 
-          - `ContentBlockSource`
+          - `interface ContentBlockSource`
 
             - `type: "content"`
 
@@ -26275,7 +27111,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `Array<ContentBlockSourceContent>`
 
-                - `TextBlockParam`
+                - `interface TextBlockParam`
 
                   - `type: "text"`
 
@@ -26306,7 +27142,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `citations?: Array<TextCitationParam> | null`
 
-                    - `CitationCharLocationParam`
+                    - `interface CitationCharLocationParam`
 
                       - `type: "char_location"`
 
@@ -26326,7 +27162,7 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 0
 
-                    - `CitationPageLocationParam`
+                    - `interface CitationPageLocationParam`
 
                       - `type: "page_location"`
 
@@ -26346,7 +27182,7 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 1
 
-                    - `CitationContentBlockLocationParam`
+                    - `interface CitationContentBlockLocationParam`
 
                       - `type: "content_block_location"`
 
@@ -26376,7 +27212,7 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 0
 
-                    - `CitationWebSearchResultLocationParam`
+                    - `interface CitationWebSearchResultLocationParam`
 
                       - `type: "web_search_result_location"`
 
@@ -26392,7 +27228,7 @@ console.log(messageTokensCount.input_tokens);
 
                         minLength: 1
 
-                    - `CitationSearchResultLocationParam`
+                    - `interface CitationSearchResultLocationParam`
 
                       - `type: "search_result_location"`
 
@@ -26426,13 +27262,13 @@ console.log(messageTokensCount.input_tokens);
 
                       - `title: string | null`
 
-                - `ImageBlockParam`
+                - `interface ImageBlockParam`
 
                   - `type: "image"`
 
                   - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-                    - `Base64ImageSource`
+                    - `interface Base64ImageSource`
 
                       - `type: "base64"`
 
@@ -26450,13 +27286,13 @@ console.log(messageTokensCount.input_tokens);
 
                         - `"image/webp"`
 
-                    - `URLImageSource`
+                    - `interface URLImageSource`
 
                       - `type: "url"`
 
                       - `url: string`
 
-                    - `FileImageSource`
+                    - `interface FileImageSource`
 
                       - `type: "file"`
 
@@ -26478,13 +27314,13 @@ console.log(messageTokensCount.input_tokens);
 
                       - `"error"`
 
-          - `URLPDFSource`
+          - `interface URLPDFSource`
 
             - `type: "url"`
 
             - `url: string`
 
-          - `FileDocumentSource`
+          - `interface FileDocumentSource`
 
             - `type: "file"`
 
@@ -26524,13 +27360,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -26540,7 +27376,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -26550,7 +27386,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Tool Result Error Block
 
-- `WebFetchToolResultErrorBlock`
+- `interface WebFetchToolResultErrorBlock`
 
   - `type: "web_fetch_tool_result_error"`
 
@@ -26580,7 +27416,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Tool Result Error Block Param
 
-- `WebFetchToolResultErrorBlockParam`
+- `interface WebFetchToolResultErrorBlockParam`
 
   - `type: "web_fetch_tool_result_error"`
 
@@ -26608,7 +27444,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Fetch Tool Result Error Code
 
-- `WebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 7 more`
+- `type WebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 7 more`
 
   - `"invalid_tool_input"`
 
@@ -26630,9 +27466,161 @@ console.log(messageTokensCount.input_tokens);
 
   - `"content_too_large"`
 
+### Web Fetch URL Source All
+
+- `interface WebFetchURLSourceAll`
+
+  The `url_sources` variant under which a source contributes in
+  full: every result of the tool filter's source, or all user input.
+
+  - `type: "all"`
+
+### Web Fetch URL Source Except
+
+- `interface WebFetchURLSourceExcept`
+
+  The tool filter variant under which every result but the named
+  tools' contributes.
+
+  - `type: "except"`
+
+  - `tools: Array<WebFetchURLSourceToolReference>`
+
+    - `type: "tool_reference"`
+
+    - `name: string`
+
+### Web Fetch URL Source None
+
+- `interface WebFetchURLSourceNone`
+
+  The `url_sources` variant under which a source contributes nothing:
+  no result of the tool filter's source, or no user input.
+
+  - `type: "none"`
+
+### Web Fetch URL Source Only
+
+- `interface WebFetchURLSourceOnly`
+
+  The tool filter variant under which only the named tools' results
+  contribute.
+
+  - `type: "only"`
+
+  - `tools: Array<WebFetchURLSourceToolReference>`
+
+    - `type: "tool_reference"`
+
+    - `name: string`
+
+### Web Fetch URL Source Tool Reference
+
+- `interface WebFetchURLSourceToolReference`
+
+  One entry of a tool filter's `tools`: it must name a tool declared
+  in this request's `tools[]`.
+
+  - `type: "tool_reference"`
+
+  - `name: string`
+
+### Web Fetch URL Sources
+
+- `interface WebFetchURLSources`
+
+  Which sources contribute to the set of URLs web fetch may fetch.
+
+  Each key is a tagged variant: `user_input` is `all` or `none`; the
+  two tool filters are `all`, `none`, `only` (only the named tools'
+  results) or `except` (every result but the named tools'). A named tool
+  must be declared in this request's `tools[]`.
+
+  - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+    Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+    - `interface WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+      - `type: "all"`
+
+    - `interface WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+      - `type: "none"`
+
+    - `interface WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+      - `type: "only"`
+
+      - `tools: Array<WebFetchURLSourceToolReference>`
+
+        - `type: "tool_reference"`
+
+        - `name: string`
+
+    - `interface WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+      - `type: "except"`
+
+      - `tools: Array<WebFetchURLSourceToolReference>`
+
+        - `type: "tool_reference"`
+
+        - `name: string`
+
+  - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+    Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+    - `interface WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `interface WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+    - `interface WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+    - `interface WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+  - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+    Whether URLs in user messages are fetchable: "all" or "none".
+
+    - `interface WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `interface WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
 ### Web Search Result Block
 
-- `WebSearchResultBlock`
+- `interface WebSearchResultBlock`
 
   - `type: "web_search_result"`
 
@@ -26648,7 +27636,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Result Block Param
 
-- `WebSearchResultBlockParam`
+- `interface WebSearchResultBlockParam`
 
   - `type: "web_search_result"`
 
@@ -26662,7 +27650,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool 20250305
 
-- `WebSearchTool20250305`
+- `interface WebSearchTool20250305`
 
   - `type: "web_search_20250305"`
 
@@ -26757,7 +27745,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool 20260209
 
-- `WebSearchTool20260209`
+- `interface WebSearchTool20260209`
 
   - `type: "web_search_20260209"`
 
@@ -26852,7 +27840,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool 20260318
 
-- `WebSearchTool20260318`
+- `interface WebSearchTool20260318`
 
   - `type: "web_search_20260318"`
 
@@ -26955,7 +27943,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Request Error
 
-- `WebSearchToolRequestError`
+- `interface WebSearchToolRequestError`
 
   - `type: "web_search_tool_result_error"`
 
@@ -26975,7 +27963,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Block
 
-- `WebSearchToolResultBlock`
+- `interface WebSearchToolResultBlock`
 
   - `type: "web_search_tool_result"`
 
@@ -26985,13 +27973,13 @@ console.log(messageTokensCount.input_tokens);
 
     default: {"type":"direct"}
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -27001,7 +27989,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -27011,7 +27999,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `content: WebSearchToolResultBlockContent`
 
-    - `WebSearchToolResultError`
+    - `interface WebSearchToolResultError`
 
       - `type: "web_search_tool_result_error"`
 
@@ -27051,9 +28039,9 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Block Content
 
-- `WebSearchToolResultBlockContent = WebSearchToolResultError | Array<WebSearchResultBlock>`
+- `type WebSearchToolResultBlockContent = WebSearchToolResultError | Array<WebSearchResultBlock>`
 
-  - `WebSearchToolResultError`
+  - `interface WebSearchToolResultError`
 
     - `type: "web_search_tool_result_error"`
 
@@ -27089,7 +28077,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Block Param
 
-- `WebSearchToolResultBlockParam`
+- `interface WebSearchToolResultBlockParam`
 
   - `type: "web_search_tool_result"`
 
@@ -27107,7 +28095,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `page_age?: string | null`
 
-    - `WebSearchToolRequestError`
+    - `interface WebSearchToolRequestError`
 
       - `type: "web_search_tool_result_error"`
 
@@ -27152,13 +28140,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-    - `DirectCaller`
+    - `interface DirectCaller`
 
       Tool invocation directly from the model.
 
       - `type: "direct"`
 
-    - `ServerToolCaller`
+    - `interface ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -27168,7 +28156,7 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `ServerToolCaller20260120`
+    - `interface ServerToolCaller20260120`
 
       - `type: "code_execution_20260120"`
 
@@ -27178,7 +28166,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Block Param Content
 
-- `WebSearchToolResultBlockParamContent = Array<WebSearchResultBlockParam> | WebSearchToolRequestError`
+- `type WebSearchToolResultBlockParamContent = Array<WebSearchResultBlockParam> | WebSearchToolRequestError`
 
   - `Array<WebSearchResultBlockParam>`
 
@@ -27192,7 +28180,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `page_age?: string | null`
 
-  - `WebSearchToolRequestError`
+  - `interface WebSearchToolRequestError`
 
     - `type: "web_search_tool_result_error"`
 
@@ -27212,7 +28200,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Error
 
-- `WebSearchToolResultError`
+- `interface WebSearchToolResultError`
 
   - `type: "web_search_tool_result_error"`
 
@@ -27234,7 +28222,7 @@ console.log(messageTokensCount.input_tokens);
 
 ### Web Search Tool Result Error Code
 
-- `WebSearchToolResultErrorCode = "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
+- `type WebSearchToolResultErrorCode = "invalid_tool_input" | "unavailable" | "max_uses_exceeded" | 3 more`
 
   - `"invalid_tool_input"`
 
@@ -27355,7 +28343,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `Array<ContentBlockParam>`
 
-            - `TextBlockParam`
+            - `interface TextBlockParam`
 
               - `type: "text"`
 
@@ -27386,7 +28374,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `citations?: Array<TextCitationParam> | null`
 
-                - `CitationCharLocationParam`
+                - `interface CitationCharLocationParam`
 
                   - `type: "char_location"`
 
@@ -27406,7 +28394,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                - `CitationPageLocationParam`
+                - `interface CitationPageLocationParam`
 
                   - `type: "page_location"`
 
@@ -27426,7 +28414,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 1
 
-                - `CitationContentBlockLocationParam`
+                - `interface CitationContentBlockLocationParam`
 
                   - `type: "content_block_location"`
 
@@ -27456,7 +28444,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                - `CitationWebSearchResultLocationParam`
+                - `interface CitationWebSearchResultLocationParam`
 
                   - `type: "web_search_result_location"`
 
@@ -27472,7 +28460,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minLength: 1
 
-                - `CitationSearchResultLocationParam`
+                - `interface CitationSearchResultLocationParam`
 
                   - `type: "search_result_location"`
 
@@ -27506,13 +28494,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `title: string | null`
 
-            - `ImageBlockParam`
+            - `interface ImageBlockParam`
 
               - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-                - `Base64ImageSource`
+                - `interface Base64ImageSource`
 
                   - `type: "base64"`
 
@@ -27530,13 +28518,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"image/webp"`
 
-                - `URLImageSource`
+                - `interface URLImageSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `FileImageSource`
+                - `interface FileImageSource`
 
                   - `type: "file"`
 
@@ -27558,13 +28546,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"error"`
 
-            - `DocumentBlockParam`
+            - `interface DocumentBlockParam`
 
               - `type: "document"`
 
               - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-                - `Base64PDFSource`
+                - `interface Base64PDFSource`
 
                   - `type: "base64"`
 
@@ -27574,7 +28562,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `media_type: "application/pdf"`
 
-                - `PlainTextSource`
+                - `interface PlainTextSource`
 
                   - `type: "text"`
 
@@ -27582,7 +28570,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `media_type: "text/plain"`
 
-                - `ContentBlockSource`
+                - `interface ContentBlockSource`
 
                   - `type: "content"`
 
@@ -27592,17 +28580,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `Array<ContentBlockSourceContent>`
 
-                      - `TextBlockParam`
+                      - `interface TextBlockParam`
 
-                      - `ImageBlockParam`
+                      - `interface ImageBlockParam`
 
-                - `URLPDFSource`
+                - `interface URLPDFSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `FileDocumentSource`
+                - `interface FileDocumentSource`
 
                   - `type: "file"`
 
@@ -27624,7 +28612,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 500, minLength: 1
 
-            - `SearchResultBlockParam`
+            - `interface SearchResultBlockParam`
 
               - `type: "search_result"`
 
@@ -27652,7 +28640,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `citations?: CitationsConfigParam`
 
-            - `ThinkingBlockParam`
+            - `interface ThinkingBlockParam`
 
               - `type: "thinking"`
 
@@ -27666,7 +28654,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `thinking` text of this block as returned by the API.
 
-            - `RedactedThinkingBlockParam`
+            - `interface RedactedThinkingBlockParam`
 
               - `type: "redacted_thinking"`
 
@@ -27674,7 +28662,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `ToolUseBlockParam`
+            - `interface ToolUseBlockParam`
 
               - `type: "tool_use"`
 
@@ -27694,13 +28682,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `type: "direct"`
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -27710,7 +28698,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
                   - `type: "code_execution_20260120"`
 
@@ -27724,7 +28712,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `ToolResultBlockParam`
+            - `interface ToolResultBlockParam`
 
               - `type: "tool_result"`
 
@@ -27742,15 +28730,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-                  - `TextBlockParam`
+                  - `interface TextBlockParam`
 
-                  - `ImageBlockParam`
+                  - `interface ImageBlockParam`
 
-                  - `SearchResultBlockParam`
+                  - `interface SearchResultBlockParam`
 
-                  - `DocumentBlockParam`
+                  - `interface DocumentBlockParam`
 
-                  - `ToolReferenceBlockParam`
+                  - `interface ToolReferenceBlockParam`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -27764,7 +28752,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Create a cache control breakpoint at this content block.
 
-                  - `BrowserStateBlockParam`
+                  - `interface BrowserStateBlockParam`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -27814,7 +28802,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       maxItems: 200, minItems: 1
 
-                      - `BrowserStateChangeTabOpened`
+                      - `interface BrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -27832,7 +28820,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BrowserStateChangeDownloadStarted`
+                      - `interface BrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -27850,7 +28838,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BrowserStateChangeDownloadCompleted`
+                      - `interface BrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -27883,7 +28871,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           minimum: 0
 
-                      - `BrowserStateChangeDownloadFailed`
+                      - `interface BrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -27915,7 +28903,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `ServerToolUseBlockParam`
+            - `interface ServerToolUseBlockParam`
 
               - `type: "server_tool_use"`
 
@@ -27947,17 +28935,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `WebSearchToolResultBlockParam`
+            - `interface WebSearchToolResultBlockParam`
 
               - `type: "web_search_tool_result"`
 
@@ -27975,7 +28963,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `page_age?: string | null`
 
-                - `WebSearchToolRequestError`
+                - `interface WebSearchToolRequestError`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -28003,23 +28991,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `WebFetchToolResultBlockParam`
+            - `interface WebFetchToolResultBlockParam`
 
               - `type: "web_fetch_tool_result"`
 
               - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-                - `WebFetchToolResultErrorBlockParam`
+                - `interface WebFetchToolResultErrorBlockParam`
 
                   - `type: "web_fetch_tool_result_error"`
 
@@ -28045,7 +29033,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"content_too_large"`
 
-                - `WebFetchBlockParam`
+                - `interface WebFetchBlockParam`
 
                   - `type: "web_fetch_result"`
 
@@ -28069,23 +29057,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `CodeExecutionToolResultBlockParam`
+            - `interface CodeExecutionToolResultBlockParam`
 
               - `type: "code_execution_tool_result"`
 
               - `content: CodeExecutionToolResultBlockParamContent`
 
-                - `CodeExecutionToolResultErrorParam`
+                - `interface CodeExecutionToolResultErrorParam`
 
                   - `type: "code_execution_tool_result_error"`
 
@@ -28099,7 +29087,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"execution_time_exceeded"`
 
-                - `CodeExecutionResultBlockParam`
+                - `interface CodeExecutionResultBlockParam`
 
                   - `type: "code_execution_result"`
 
@@ -28115,7 +29103,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `stdout: string`
 
-                - `EncryptedCodeExecutionResultBlockParam`
+                - `interface EncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -28141,13 +29129,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `BashCodeExecutionToolResultBlockParam`
+            - `interface BashCodeExecutionToolResultBlockParam`
 
               - `type: "bash_code_execution_tool_result"`
 
               - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-                - `BashCodeExecutionToolResultErrorParam`
+                - `interface BashCodeExecutionToolResultErrorParam`
 
                   - `type: "bash_code_execution_tool_result_error"`
 
@@ -28163,7 +29151,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"output_file_too_large"`
 
-                - `BashCodeExecutionResultBlockParam`
+                - `interface BashCodeExecutionResultBlockParam`
 
                   - `type: "bash_code_execution_result"`
 
@@ -28187,13 +29175,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `TextEditorCodeExecutionToolResultBlockParam`
+            - `interface TextEditorCodeExecutionToolResultBlockParam`
 
               - `type: "text_editor_code_execution_tool_result"`
 
               - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-                - `TextEditorCodeExecutionToolResultErrorParam`
+                - `interface TextEditorCodeExecutionToolResultErrorParam`
 
                   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -28211,7 +29199,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `error_message?: string | null`
 
-                - `TextEditorCodeExecutionViewResultBlockParam`
+                - `interface TextEditorCodeExecutionViewResultBlockParam`
 
                   - `type: "text_editor_code_execution_view_result"`
 
@@ -28231,13 +29219,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `total_lines?: number | null`
 
-                - `TextEditorCodeExecutionCreateResultBlockParam`
+                - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
                   - `type: "text_editor_code_execution_create_result"`
 
                   - `is_file_update: boolean`
 
-                - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+                - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -28259,13 +29247,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `ToolSearchToolResultBlockParam`
+            - `interface ToolSearchToolResultBlockParam`
 
               - `type: "tool_search_tool_result"`
 
               - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-                - `ToolSearchToolResultErrorParam`
+                - `interface ToolSearchToolResultErrorParam`
 
                   - `type: "tool_search_tool_result_error"`
 
@@ -28281,7 +29269,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `error_message?: string | null`
 
-                - `ToolSearchToolSearchResultBlockParam`
+                - `interface ToolSearchToolSearchResultBlockParam`
 
                   - `type: "tool_search_tool_search_result"`
 
@@ -28305,7 +29293,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `ContainerUploadBlockParam`
+            - `interface ContainerUploadBlockParam`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -28412,7 +29400,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Container identifier for reuse across requests.
 
-        - `ContainerParams`
+        - `interface ContainerParams`
 
           Container parameters with skills to be loaded.
 
@@ -28546,7 +29534,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-        - `ThinkingConfigEnabled`
+        - `interface ThinkingConfigEnabled`
 
           - `type: "enabled"`
 
@@ -28568,11 +29556,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"omitted"`
 
-        - `ThinkingConfigDisabled`
+        - `interface ThinkingConfigDisabled`
 
           - `type: "disabled"`
 
-        - `ThinkingConfigAdaptive`
+        - `interface ThinkingConfigAdaptive`
 
           - `type: "adaptive"`
 
@@ -28588,7 +29576,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `ToolChoiceAuto`
+        - `interface ToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -28600,7 +29588,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `ToolChoiceAny`
+        - `interface ToolChoiceAny`
 
           The model will use any available tools.
 
@@ -28612,7 +29600,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `ToolChoiceTool`
+        - `interface ToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -28628,7 +29616,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `ToolChoiceNone`
+        - `interface ToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -28698,7 +29686,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-        - `Tool`
+        - `interface Tool`
 
           - `type?: "custom" | null`
 
@@ -28756,7 +29744,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolBash20250124`
+        - `interface ToolBash20250124`
 
           - `type: "bash_20250124"`
 
@@ -28790,7 +29778,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20250522`
+        - `interface CodeExecutionTool20250522`
 
           - `type: "code_execution_20250522"`
 
@@ -28822,7 +29810,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20250825`
+        - `interface CodeExecutionTool20250825`
 
           - `type: "code_execution_20250825"`
 
@@ -28854,7 +29842,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260120`
+        - `interface CodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -28888,7 +29876,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260521`
+        - `interface CodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -28922,7 +29910,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BrowserToolset20260801`
+        - `interface BrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -29316,7 +30304,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `MemoryTool20250818`
+        - `interface MemoryTool20250818`
 
           - `type: "memory_20250818"`
 
@@ -29350,7 +30338,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ComputerToolset20260801`
+        - `interface ComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -29580,7 +30568,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `ToolTextEditor20250124`
+        - `interface ToolTextEditor20250124`
 
           - `type: "text_editor_20250124"`
 
@@ -29614,7 +30602,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolTextEditor20250429`
+        - `interface ToolTextEditor20250429`
 
           - `type: "text_editor_20250429"`
 
@@ -29648,7 +30636,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolTextEditor20250728`
+        - `interface ToolTextEditor20250728`
 
           - `type: "text_editor_20250728"`
 
@@ -29688,7 +30676,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20250305`
+        - `interface WebSearchTool20250305`
 
           - `type: "web_search_20250305"`
 
@@ -29764,7 +30752,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               maxLength: 255, minLength: 1
 
-        - `WebFetchTool20250910`
+        - `interface WebFetchTool20250910`
 
           - `type: "web_fetch_20250910"`
 
@@ -29820,7 +30808,98 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20260209`
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `type: "all"`
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `type: "none"`
+
+              - `interface WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `type: "only"`
+
+                - `tools: Array<WebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+              - `interface WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `type: "except"`
+
+                - `tools: Array<WebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+            - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `interface WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `interface WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `interface WebSearchTool20260209`
 
           - `type: "web_search_20260209"`
 
@@ -29870,7 +30949,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `WebFetchTool20260209`
+        - `interface WebFetchTool20260209`
 
           - `type: "web_fetch_20260209"`
 
@@ -29926,7 +31005,16 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebFetchTool20260309`
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `interface WebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -29984,11 +31072,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `WebSearchTool20260318`
+        - `interface WebSearchTool20260318`
 
           - `type: "web_search_20260318"`
 
@@ -30046,7 +31143,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `WebFetchTool20260318`
+        - `interface WebFetchTool20260318`
 
           - `type: "web_fetch_20260318"`
 
@@ -30110,11 +31207,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `ToolSearchToolBm25_20251119`
+        - `interface ToolSearchToolBm25_20251119`
 
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -30150,7 +31256,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolSearchToolRegex20251119`
+        - `interface ToolSearchToolRegex20251119`
 
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -30234,7 +31340,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -30416,7 +31522,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -30599,7 +31705,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -30780,7 +31886,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -30953,7 +32059,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `DeletedMessageBatch`
+- `interface DeletedMessageBatch`
 
   - `type: "message_batch_deleted"`
 
@@ -31018,7 +32124,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Returns
 
-- `MessageBatchIndividualResponse`
+- `interface MessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -31034,7 +32140,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult`
+    - `interface MessageBatchSucceededResult`
 
       - `type: "succeeded"`
 
@@ -31123,7 +32229,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock`
+          - `interface TextBlock`
 
             - `type: "text"`
 
@@ -31135,7 +32241,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation`
+              - `interface CitationCharLocation`
 
                 - `type: "char_location"`
 
@@ -31157,7 +32263,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-              - `CitationPageLocation`
+              - `interface CitationPageLocation`
 
                 - `type: "page_location"`
 
@@ -31179,7 +32285,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-              - `CitationContentBlockLocation`
+              - `interface CitationContentBlockLocation`
 
                 - `type: "content_block_location"`
 
@@ -31211,7 +32317,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 0
 
-              - `CitationsWebSearchResultLocation`
+              - `interface CitationsWebSearchResultLocation`
 
                 - `type: "web_search_result_location"`
 
@@ -31227,7 +32333,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation`
+              - `interface CitationsSearchResultLocation`
 
                 - `type: "search_result_location"`
 
@@ -31267,7 +32373,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minLength: 0
 
-          - `ThinkingBlock`
+          - `interface ThinkingBlock`
 
             - `type: "thinking"`
 
@@ -31285,7 +32391,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The text of Claude's thinking process for this block.
 
-          - `RedactedThinkingBlock`
+          - `interface RedactedThinkingBlock`
 
             - `type: "redacted_thinking"`
 
@@ -31299,7 +32405,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `ToolUseBlock`
+          - `interface ToolUseBlock`
 
             - `type: "tool_use"`
 
@@ -31313,13 +32419,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `type: "direct"`
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -31329,7 +32435,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
                 - `type: "code_execution_20260120"`
 
@@ -31349,7 +32455,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `ServerToolUseBlock`
+          - `interface ServerToolUseBlock`
 
             - `type: "server_tool_use"`
 
@@ -31363,15 +32469,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `input: Record<string, unknown>`
 
@@ -31391,7 +32497,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-          - `WebSearchToolResultBlock`
+          - `interface WebSearchToolResultBlock`
 
             - `type: "web_search_tool_result"`
 
@@ -31401,19 +32507,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError`
+              - `interface WebSearchToolResultError`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -31451,7 +32557,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `WebFetchToolResultBlock`
+          - `interface WebFetchToolResultBlock`
 
             - `type: "web_fetch_tool_result"`
 
@@ -31461,19 +32567,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock`
+              - `interface WebFetchToolResultErrorBlock`
 
                 - `type: "web_fetch_tool_result_error"`
 
@@ -31501,7 +32607,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"content_too_large"`
 
-              - `WebFetchBlock`
+              - `interface WebFetchBlock`
 
                 - `type: "web_fetch_result"`
 
@@ -31523,7 +32629,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `source: Base64PDFSource | PlainTextSource`
 
-                    - `Base64PDFSource`
+                    - `interface Base64PDFSource`
 
                       - `type: "base64"`
 
@@ -31533,7 +32639,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       - `media_type: "application/pdf"`
 
-                    - `PlainTextSource`
+                    - `interface PlainTextSource`
 
                       - `type: "text"`
 
@@ -31557,7 +32663,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CodeExecutionToolResultBlock`
+          - `interface CodeExecutionToolResultBlock`
 
             - `type: "code_execution_tool_result"`
 
@@ -31565,7 +32671,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError`
+              - `interface CodeExecutionToolResultError`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -31581,7 +32687,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-              - `CodeExecutionResultBlock`
+              - `interface CodeExecutionResultBlock`
 
                 - `type: "code_execution_result"`
 
@@ -31601,7 +32707,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `stdout: string`
 
-              - `EncryptedCodeExecutionResultBlock`
+              - `interface EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -31627,7 +32733,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `BashCodeExecutionToolResultBlock`
+          - `interface BashCodeExecutionToolResultBlock`
 
             - `type: "bash_code_execution_tool_result"`
 
@@ -31635,7 +32741,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError`
+              - `interface BashCodeExecutionToolResultError`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -31653,7 +32759,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"output_file_too_large"`
 
-              - `BashCodeExecutionResultBlock`
+              - `interface BashCodeExecutionResultBlock`
 
                 - `type: "bash_code_execution_result"`
 
@@ -31677,7 +32783,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `TextEditorCodeExecutionToolResultBlock`
+          - `interface TextEditorCodeExecutionToolResultBlock`
 
             - `type: "text_editor_code_execution_tool_result"`
 
@@ -31685,7 +32791,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError`
+              - `interface TextEditorCodeExecutionToolResultError`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -31705,7 +32811,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string | null`
 
-              - `TextEditorCodeExecutionViewResultBlock`
+              - `interface TextEditorCodeExecutionViewResultBlock`
 
                 - `type: "text_editor_code_execution_view_result"`
 
@@ -31727,7 +32833,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `total_lines: number | null`
 
-              - `TextEditorCodeExecutionCreateResultBlock`
+              - `interface TextEditorCodeExecutionCreateResultBlock`
 
                 - `type: "text_editor_code_execution_create_result"`
 
@@ -31735,7 +32841,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `is_file_update: boolean`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock`
+              - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -31755,7 +32861,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ToolSearchToolResultBlock`
+          - `interface ToolSearchToolResultBlock`
 
             - `type: "tool_search_tool_result"`
 
@@ -31763,7 +32869,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError`
+              - `interface ToolSearchToolResultError`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -31781,7 +32887,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `error_message: string | null`
 
-              - `ToolSearchToolSearchResultBlock`
+              - `interface ToolSearchToolSearchResultBlock`
 
                 - `type: "tool_search_tool_search_result"`
 
@@ -31801,7 +32907,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ContainerUploadBlock`
+          - `interface ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -32081,7 +33187,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"batch"`
 
-    - `MessageBatchErroredResult`
+    - `interface MessageBatchErroredResult`
 
       - `type: "errored"`
 
@@ -32095,7 +33201,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError`
+          - `interface InvalidRequestError`
 
             - `type: "invalid_request_error"`
 
@@ -32105,7 +33211,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Invalid request
 
-          - `AuthenticationError`
+          - `interface AuthenticationError`
 
             - `type: "authentication_error"`
 
@@ -32115,7 +33221,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Authentication error
 
-          - `BillingError`
+          - `interface BillingError`
 
             - `type: "billing_error"`
 
@@ -32125,7 +33231,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Billing error
 
-          - `PermissionError`
+          - `interface PermissionError`
 
             - `type: "permission_error"`
 
@@ -32135,7 +33241,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Permission denied
 
-          - `NotFoundError`
+          - `interface NotFoundError`
 
             - `type: "not_found_error"`
 
@@ -32145,7 +33251,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Not found
 
-          - `RateLimitError`
+          - `interface RateLimitError`
 
             - `type: "rate_limit_error"`
 
@@ -32155,7 +33261,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Rate limited
 
-          - `GatewayTimeoutError`
+          - `interface GatewayTimeoutError`
 
             - `type: "timeout_error"`
 
@@ -32165,7 +33271,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Request timeout
 
-          - `APIErrorObject`
+          - `interface APIErrorObject`
 
             - `type: "api_error"`
 
@@ -32175,7 +33281,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               default: Internal server error
 
-          - `OverloadedError`
+          - `interface OverloadedError`
 
             - `type: "overloaded_error"`
 
@@ -32187,13 +33293,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `request_id: string | null`
 
-    - `MessageBatchCanceledResult`
+    - `interface MessageBatchCanceledResult`
 
       - `type: "canceled"`
 
         default: canceled
 
-    - `MessageBatchExpiredResult`
+    - `interface MessageBatchExpiredResult`
 
       - `type: "expired"`
 

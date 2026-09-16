@@ -29,7 +29,7 @@ Create Enrollment URL
 
 ## Returns
 
-- `BetaUserProfileEnrollmentURL`
+- `class BetaUserProfileEnrollmentURL`
 
   - `Type type`
 

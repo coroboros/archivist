@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/messages/create
 
 # Create a Message
 
-`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): BetaMessage`
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaCompactionConfig compaction, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID, ?string workspaceID): BetaMessage`
 
 **POST** `/v1/messages`
 
@@ -93,6 +93,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 - `cacheControl?:optional BetaCacheControlEphemeral`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+
+- `compaction?:optional BetaCompactionConfig`
+
+  Compact the whole conversation and return a signed `compaction` block,
+  alone, that a later request sends back first in `messages`, in place of
+  the messages it summarizes. There is no trigger and no pause flag: sending
+  the parameter compacts, and nothing is sampled after the block.
+
+  The summarization prompt is the server's own unless `instructions` are
+  given, which then replace it for this request; a value that is empty or
+  only whitespace counts as absent.
 
 - `container?:optional Container`
 
@@ -308,7 +319,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 ## Returns
 
-- `BetaMessage`
+- `class BetaMessage`
 
   - `"message" type`
 
@@ -416,33 +427,39 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-  - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
+  - `?list<BetaInputTransformation> inputTransformations`
 
-    Changes the API made to the request's input before showing it to the model:
-    one entry per change, in request order. Today the only entry type is
-    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-    block from the request's `messages` that was removed from the prompt instead
-    of being shown to the model because it failed a binding check. More entry
-    types may be added over time; ignore types you do not recognize.
+    Changes the API made to the request's input before showing it to the model,
+    and blocks that failed a binding check but were left unchanged: one entry per
+    block, in request order. Two entry types today. `thinking_dropped` — a
+    `thinking`, `redacted_thinking` or `connector_text` block from the request's
+    `messages` that was removed from the prompt instead of being shown to the
+    model because it failed a binding check. `thinking_mismatch_allowed` — a
+    `thinking` or `redacted_thinking` block that failed the conversation check
+    (the conversation before it differs from the one it was created in, or it
+    carries no record of one on a model that requires it) and was shown to the
+    model all the same, because that check is not enforced for this request.
+    More entry types may be added over time; ignore types you do not recognize.
 
     Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
     every such response from a model that supports extended thinking, as `[]`
-    when nothing was changed; without the beta, blocks are removed all the same
-    but nothing is reported. Removed blocks contribute nothing to
-    `usage.input_tokens`. When streaming, the array is final in `message_start`;
-    the final `message_delta` event carries it only when a server-side model
-    fallback happened mid-stream, in which case it holds the serving model's
-    entries and replaces the one in `message_start`.
+    when there is no entry to report; without the beta, blocks are removed or
+    left in place all the same but nothing is reported. Removed blocks contribute
+    nothing to `usage.input_tokens`; blocks left in place count as sent. When
+    streaming, the array is final in `message_start`; the final `message_delta`
+    event carries it only when a server-side model fallback happened mid-stream,
+    in which case it holds the serving model's entries and replaces the one in
+    `message_start`.
 
-- `BetaRawMessageStreamEvent`
+- `class BetaRawMessageStreamEvent`
 
-  - `BetaRawMessageStartEvent`
+  - `class BetaRawMessageStartEvent`
 
     - `"message_start" type`
 
     - `BetaMessage message`
 
-  - `BetaRawMessageDeltaEvent`
+  - `class BetaRawMessageDeltaEvent`
 
     - `"message_delta" type`
 
@@ -464,29 +481,35 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-    - `?list<BetaThinkingDroppedInputTransformation> inputTransformations`
+    - `?list<BetaInputTransformation> inputTransformations`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-  - `BetaRawMessageStopEvent`
+  - `class BetaRawMessageStopEvent`
 
     - `"message_stop" type`
 
-  - `BetaRawContentBlockStartEvent`
+  - `class BetaRawContentBlockStartEvent`
 
     - `"content_block_start" type`
 
@@ -494,7 +517,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `int index`
 
-  - `BetaRawContentBlockDeltaEvent`
+  - `class BetaRawContentBlockDeltaEvent`
 
     - `"content_block_delta" type`
 
@@ -502,7 +525,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `int index`
 
-  - `BetaRawContentBlockStopEvent`
+  - `class BetaRawContentBlockStopEvent`
 
     - `"content_block_stop" type`
 
@@ -529,6 +552,7 @@ $betaMessage = $client->beta->messages->create(
   ],
   model: Model::CLAUDE_OPUS_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
+  compaction: ['type' => 'summarize', 'instructions' => 'instructions'],
   container: [
     'id' => 'id',
     'skills' => [

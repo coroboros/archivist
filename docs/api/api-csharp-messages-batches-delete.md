@@ -37,7 +37,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `class DeletedMessageBatch:`
+- `class DeletedMessageBatch`
 
   - `JsonElement Type = "message_batch_deleted"`
 

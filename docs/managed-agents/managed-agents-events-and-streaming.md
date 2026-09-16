@@ -1,5 +1,5 @@
 ---
-title: "Event types"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/managed-agents/events-and-streaming"
 category: "managed-agents"
 generated: true
@@ -10,11 +10,11 @@ url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
 description: Send events, stream responses, and interrupt or redirect your session mid-execution.
 ---
 
-Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
-</Note>
+Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 
 ## Event types
 
@@ -2809,7 +2809,7 @@ The Claude Console includes a session viewer for inspecting what an agent did wi
 
 Append `?event={event_id}` to a session URL to open the session at a specific event.
 
-With `ant beta:sessions connect`, you can open the same viewer from the `ant` CLI or follow the session in your terminal. See [Connect to a Managed Agents session from your terminal](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/sessions-connect.md).
+With `ant beta:sessions connect`, you can open the same viewer from the `ant` CLI or follow the session in your terminal. See [Connect to a Managed Agents session from your terminal](../general/general-cli-sdks-libraries-cli-sessions-connect.md).
 
 ## Debugging tips
 

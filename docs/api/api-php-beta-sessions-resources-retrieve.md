@@ -31,9 +31,9 @@ Get Session Resource
 
 ## Returns
 
-- `ResourceGetResponse`
+- `class ResourceGetResponse`
 
-  - `ManagedAgentsGitHubRepositoryResource`
+  - `class ManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -53,7 +53,7 @@ Get Session Resource
 
     - `?Checkout checkout`
 
-  - `ManagedAgentsFileResource`
+  - `class ManagedAgentsFileResource`
 
     - `Type type`
 
@@ -71,7 +71,7 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsMemoryStoreResource`
+  - `class ManagedAgentsMemoryStoreResource`
 
     - `Type type`
 

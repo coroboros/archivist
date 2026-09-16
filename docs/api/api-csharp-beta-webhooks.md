@@ -15,7 +15,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Agent Archived Event Data
 
-- `class BetaWebhookAgentArchivedEventData:`
+- `class BetaWebhookAgentArchivedEventData`
 
   - `JsonElement Type = "agent.archived"`
 
@@ -29,7 +29,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Agent Created Event Data
 
-- `class BetaWebhookAgentCreatedEventData:`
+- `class BetaWebhookAgentCreatedEventData`
 
   - `JsonElement Type = "agent.created"`
 
@@ -43,7 +43,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Agent Deleted Event Data
 
-- `class BetaWebhookAgentDeletedEventData:`
+- `class BetaWebhookAgentDeletedEventData`
 
   - `JsonElement Type = "agent.deleted"`
 
@@ -57,7 +57,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Agent Updated Event Data
 
-- `class BetaWebhookAgentUpdatedEventData:`
+- `class BetaWebhookAgentUpdatedEventData`
 
   - `JsonElement Type = "agent.updated"`
 
@@ -71,7 +71,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Archived Event Data
 
-- `class BetaWebhookDeploymentArchivedEventData:`
+- `class BetaWebhookDeploymentArchivedEventData`
 
   - `JsonElement Type = "deployment.archived"`
 
@@ -85,7 +85,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Created Event Data
 
-- `class BetaWebhookDeploymentCreatedEventData:`
+- `class BetaWebhookDeploymentCreatedEventData`
 
   - `JsonElement Type = "deployment.created"`
 
@@ -99,7 +99,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Deleted Event Data
 
-- `class BetaWebhookDeploymentDeletedEventData:`
+- `class BetaWebhookDeploymentDeletedEventData`
 
   - `JsonElement Type = "deployment.deleted"`
 
@@ -113,7 +113,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Paused Event Data
 
-- `class BetaWebhookDeploymentPausedEventData:`
+- `class BetaWebhookDeploymentPausedEventData`
 
   - `JsonElement Type = "deployment.paused"`
 
@@ -127,7 +127,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Run Failed Event Data
 
-- `class BetaWebhookDeploymentRunFailedEventData:`
+- `class BetaWebhookDeploymentRunFailedEventData`
 
   - `JsonElement Type = "deployment_run.failed"`
 
@@ -141,7 +141,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Run Started Event Data
 
-- `class BetaWebhookDeploymentRunStartedEventData:`
+- `class BetaWebhookDeploymentRunStartedEventData`
 
   - `JsonElement Type = "deployment_run.started"`
 
@@ -155,7 +155,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Run Succeeded Event Data
 
-- `class BetaWebhookDeploymentRunSucceededEventData:`
+- `class BetaWebhookDeploymentRunSucceededEventData`
 
   - `JsonElement Type = "deployment_run.succeeded"`
 
@@ -169,7 +169,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Unpaused Event Data
 
-- `class BetaWebhookDeploymentUnpausedEventData:`
+- `class BetaWebhookDeploymentUnpausedEventData`
 
   - `JsonElement Type = "deployment.unpaused"`
 
@@ -183,7 +183,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Deployment Updated Event Data
 
-- `class BetaWebhookDeploymentUpdatedEventData:`
+- `class BetaWebhookDeploymentUpdatedEventData`
 
   - `JsonElement Type = "deployment.updated"`
 
@@ -197,7 +197,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Environment Archived Event Data
 
-- `class BetaWebhookEnvironmentArchivedEventData:`
+- `class BetaWebhookEnvironmentArchivedEventData`
 
   - `JsonElement Type = "environment.archived"`
 
@@ -211,7 +211,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Environment Created Event Data
 
-- `class BetaWebhookEnvironmentCreatedEventData:`
+- `class BetaWebhookEnvironmentCreatedEventData`
 
   - `JsonElement Type = "environment.created"`
 
@@ -225,7 +225,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Environment Deleted Event Data
 
-- `class BetaWebhookEnvironmentDeletedEventData:`
+- `class BetaWebhookEnvironmentDeletedEventData`
 
   - `JsonElement Type = "environment.deleted"`
 
@@ -239,7 +239,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Environment Updated Event Data
 
-- `class BetaWebhookEnvironmentUpdatedEventData:`
+- `class BetaWebhookEnvironmentUpdatedEventData`
 
   - `JsonElement Type = "environment.updated"`
 
@@ -253,7 +253,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Event
 
-- `class UnwrapWebhookEvent:`
+- `class UnwrapWebhookEvent`
 
   - `JsonElement Type = "event"`
 
@@ -271,7 +271,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
   - `required BetaWebhookEventData Data`
 
-    - `class BetaWebhookSessionCreatedEventData:`
+    - `class BetaWebhookSessionCreatedEventData`
 
       - `JsonElement Type = "session.created"`
 
@@ -283,7 +283,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionPendingEventData:`
+    - `class BetaWebhookSessionPendingEventData`
 
       - `JsonElement Type = "session.pending"`
 
@@ -295,7 +295,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionRunningEventData:`
+    - `class BetaWebhookSessionRunningEventData`
 
       - `JsonElement Type = "session.running"`
 
@@ -307,7 +307,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionIdledEventData:`
+    - `class BetaWebhookSessionIdledEventData`
 
       - `JsonElement Type = "session.idled"`
 
@@ -319,7 +319,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionRequiresActionEventData:`
+    - `class BetaWebhookSessionRequiresActionEventData`
 
       - `JsonElement Type = "session.requires_action"`
 
@@ -331,7 +331,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionArchivedEventData:`
+    - `class BetaWebhookSessionArchivedEventData`
 
       - `JsonElement Type = "session.archived"`
 
@@ -343,7 +343,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionDeletedEventData:`
+    - `class BetaWebhookSessionDeletedEventData`
 
       - `JsonElement Type = "session.deleted"`
 
@@ -355,7 +355,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionStatusRescheduledEventData:`
+    - `class BetaWebhookSessionStatusRescheduledEventData`
 
       - `JsonElement Type = "session.status_rescheduled"`
 
@@ -367,7 +367,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionStatusRunStartedEventData:`
+    - `class BetaWebhookSessionStatusRunStartedEventData`
 
       - `JsonElement Type = "session.status_run_started"`
 
@@ -379,7 +379,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionStatusIdledEventData:`
+    - `class BetaWebhookSessionStatusIdledEventData`
 
       - `JsonElement Type = "session.status_idled"`
 
@@ -391,7 +391,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionStatusTerminatedEventData:`
+    - `class BetaWebhookSessionStatusTerminatedEventData`
 
       - `JsonElement Type = "session.status_terminated"`
 
@@ -403,7 +403,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionThreadCreatedEventData:`
+    - `class BetaWebhookSessionThreadCreatedEventData`
 
       - `JsonElement Type = "session.thread_created"`
 
@@ -419,7 +419,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionThreadIdledEventData:`
+    - `class BetaWebhookSessionThreadIdledEventData`
 
       - `JsonElement Type = "session.thread_idled"`
 
@@ -435,7 +435,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionThreadTerminatedEventData:`
+    - `class BetaWebhookSessionThreadTerminatedEventData`
 
       - `JsonElement Type = "session.thread_terminated"`
 
@@ -451,7 +451,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
       - `JsonElement Type = "session.outcome_evaluation_ended"`
 
@@ -463,7 +463,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultCreatedEventData:`
+    - `class BetaWebhookVaultCreatedEventData`
 
       - `JsonElement Type = "vault.created"`
 
@@ -475,7 +475,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultArchivedEventData:`
+    - `class BetaWebhookVaultArchivedEventData`
 
       - `JsonElement Type = "vault.archived"`
 
@@ -487,7 +487,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultDeletedEventData:`
+    - `class BetaWebhookVaultDeletedEventData`
 
       - `JsonElement Type = "vault.deleted"`
 
@@ -499,7 +499,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultCredentialCreatedEventData:`
+    - `class BetaWebhookVaultCredentialCreatedEventData`
 
       - `JsonElement Type = "vault_credential.created"`
 
@@ -515,7 +515,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultCredentialArchivedEventData:`
+    - `class BetaWebhookVaultCredentialArchivedEventData`
 
       - `JsonElement Type = "vault_credential.archived"`
 
@@ -531,7 +531,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultCredentialDeletedEventData:`
+    - `class BetaWebhookVaultCredentialDeletedEventData`
 
       - `JsonElement Type = "vault_credential.deleted"`
 
@@ -547,7 +547,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+    - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
       - `JsonElement Type = "vault_credential.refresh_failed"`
 
@@ -563,7 +563,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionUpdatedEventData:`
+    - `class BetaWebhookSessionUpdatedEventData`
 
       - `JsonElement Type = "session.updated"`
 
@@ -575,7 +575,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookAgentCreatedEventData:`
+    - `class BetaWebhookAgentCreatedEventData`
 
       - `JsonElement Type = "agent.created"`
 
@@ -587,7 +587,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookAgentArchivedEventData:`
+    - `class BetaWebhookAgentArchivedEventData`
 
       - `JsonElement Type = "agent.archived"`
 
@@ -599,7 +599,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookAgentDeletedEventData:`
+    - `class BetaWebhookAgentDeletedEventData`
 
       - `JsonElement Type = "agent.deleted"`
 
@@ -611,7 +611,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentPausedEventData:`
+    - `class BetaWebhookDeploymentPausedEventData`
 
       - `JsonElement Type = "deployment.paused"`
 
@@ -623,7 +623,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentRunFailedEventData:`
+    - `class BetaWebhookDeploymentRunFailedEventData`
 
       - `JsonElement Type = "deployment_run.failed"`
 
@@ -635,7 +635,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentCreatedEventData:`
+    - `class BetaWebhookDeploymentCreatedEventData`
 
       - `JsonElement Type = "deployment.created"`
 
@@ -647,7 +647,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentUpdatedEventData:`
+    - `class BetaWebhookDeploymentUpdatedEventData`
 
       - `JsonElement Type = "deployment.updated"`
 
@@ -659,7 +659,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentUnpausedEventData:`
+    - `class BetaWebhookDeploymentUnpausedEventData`
 
       - `JsonElement Type = "deployment.unpaused"`
 
@@ -671,7 +671,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookAgentUpdatedEventData:`
+    - `class BetaWebhookAgentUpdatedEventData`
 
       - `JsonElement Type = "agent.updated"`
 
@@ -683,7 +683,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentArchivedEventData:`
+    - `class BetaWebhookDeploymentArchivedEventData`
 
       - `JsonElement Type = "deployment.archived"`
 
@@ -695,7 +695,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentRunStartedEventData:`
+    - `class BetaWebhookDeploymentRunStartedEventData`
 
       - `JsonElement Type = "deployment_run.started"`
 
@@ -707,7 +707,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentDeletedEventData:`
+    - `class BetaWebhookDeploymentDeletedEventData`
 
       - `JsonElement Type = "deployment.deleted"`
 
@@ -719,7 +719,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookDeploymentRunSucceededEventData:`
+    - `class BetaWebhookDeploymentRunSucceededEventData`
 
       - `JsonElement Type = "deployment_run.succeeded"`
 
@@ -731,7 +731,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookEnvironmentCreatedEventData:`
+    - `class BetaWebhookEnvironmentCreatedEventData`
 
       - `JsonElement Type = "environment.created"`
 
@@ -743,7 +743,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookEnvironmentUpdatedEventData:`
+    - `class BetaWebhookEnvironmentUpdatedEventData`
 
       - `JsonElement Type = "environment.updated"`
 
@@ -755,7 +755,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookEnvironmentArchivedEventData:`
+    - `class BetaWebhookEnvironmentArchivedEventData`
 
       - `JsonElement Type = "environment.archived"`
 
@@ -767,7 +767,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookEnvironmentDeletedEventData:`
+    - `class BetaWebhookEnvironmentDeletedEventData`
 
       - `JsonElement Type = "environment.deleted"`
 
@@ -779,7 +779,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookMemoryStoreCreatedEventData:`
+    - `class BetaWebhookMemoryStoreCreatedEventData`
 
       - `JsonElement Type = "memory_store.created"`
 
@@ -791,7 +791,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookMemoryStoreArchivedEventData:`
+    - `class BetaWebhookMemoryStoreArchivedEventData`
 
       - `JsonElement Type = "memory_store.archived"`
 
@@ -803,7 +803,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookMemoryStoreDeletedEventData:`
+    - `class BetaWebhookMemoryStoreDeletedEventData`
 
       - `JsonElement Type = "memory_store.deleted"`
 
@@ -815,7 +815,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string WorkspaceID`
 
-    - `class BetaWebhookSessionBudgetReachedEventData:`
+    - `class BetaWebhookSessionBudgetReachedEventData`
 
       - `JsonElement Type = "session.budget_reached"`
 
@@ -831,7 +831,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 - `class BetaWebhookEventData: union`
 
-  - `class BetaWebhookSessionCreatedEventData:`
+  - `class BetaWebhookSessionCreatedEventData`
 
     - `JsonElement Type = "session.created"`
 
@@ -843,7 +843,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionPendingEventData:`
+  - `class BetaWebhookSessionPendingEventData`
 
     - `JsonElement Type = "session.pending"`
 
@@ -855,7 +855,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionRunningEventData:`
+  - `class BetaWebhookSessionRunningEventData`
 
     - `JsonElement Type = "session.running"`
 
@@ -867,7 +867,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionIdledEventData:`
+  - `class BetaWebhookSessionIdledEventData`
 
     - `JsonElement Type = "session.idled"`
 
@@ -879,7 +879,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionRequiresActionEventData:`
+  - `class BetaWebhookSessionRequiresActionEventData`
 
     - `JsonElement Type = "session.requires_action"`
 
@@ -891,7 +891,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionArchivedEventData:`
+  - `class BetaWebhookSessionArchivedEventData`
 
     - `JsonElement Type = "session.archived"`
 
@@ -903,7 +903,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionDeletedEventData:`
+  - `class BetaWebhookSessionDeletedEventData`
 
     - `JsonElement Type = "session.deleted"`
 
@@ -915,7 +915,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionStatusRescheduledEventData:`
+  - `class BetaWebhookSessionStatusRescheduledEventData`
 
     - `JsonElement Type = "session.status_rescheduled"`
 
@@ -927,7 +927,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionStatusRunStartedEventData:`
+  - `class BetaWebhookSessionStatusRunStartedEventData`
 
     - `JsonElement Type = "session.status_run_started"`
 
@@ -939,7 +939,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionStatusIdledEventData:`
+  - `class BetaWebhookSessionStatusIdledEventData`
 
     - `JsonElement Type = "session.status_idled"`
 
@@ -951,7 +951,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionStatusTerminatedEventData:`
+  - `class BetaWebhookSessionStatusTerminatedEventData`
 
     - `JsonElement Type = "session.status_terminated"`
 
@@ -963,7 +963,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionThreadCreatedEventData:`
+  - `class BetaWebhookSessionThreadCreatedEventData`
 
     - `JsonElement Type = "session.thread_created"`
 
@@ -979,7 +979,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionThreadIdledEventData:`
+  - `class BetaWebhookSessionThreadIdledEventData`
 
     - `JsonElement Type = "session.thread_idled"`
 
@@ -995,7 +995,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionThreadTerminatedEventData:`
+  - `class BetaWebhookSessionThreadTerminatedEventData`
 
     - `JsonElement Type = "session.thread_terminated"`
 
@@ -1011,7 +1011,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
     - `JsonElement Type = "session.outcome_evaluation_ended"`
 
@@ -1023,7 +1023,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultCreatedEventData:`
+  - `class BetaWebhookVaultCreatedEventData`
 
     - `JsonElement Type = "vault.created"`
 
@@ -1035,7 +1035,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultArchivedEventData:`
+  - `class BetaWebhookVaultArchivedEventData`
 
     - `JsonElement Type = "vault.archived"`
 
@@ -1047,7 +1047,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultDeletedEventData:`
+  - `class BetaWebhookVaultDeletedEventData`
 
     - `JsonElement Type = "vault.deleted"`
 
@@ -1059,7 +1059,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultCredentialCreatedEventData:`
+  - `class BetaWebhookVaultCredentialCreatedEventData`
 
     - `JsonElement Type = "vault_credential.created"`
 
@@ -1075,7 +1075,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultCredentialArchivedEventData:`
+  - `class BetaWebhookVaultCredentialArchivedEventData`
 
     - `JsonElement Type = "vault_credential.archived"`
 
@@ -1091,7 +1091,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultCredentialDeletedEventData:`
+  - `class BetaWebhookVaultCredentialDeletedEventData`
 
     - `JsonElement Type = "vault_credential.deleted"`
 
@@ -1107,7 +1107,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+  - `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
     - `JsonElement Type = "vault_credential.refresh_failed"`
 
@@ -1123,7 +1123,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionUpdatedEventData:`
+  - `class BetaWebhookSessionUpdatedEventData`
 
     - `JsonElement Type = "session.updated"`
 
@@ -1135,7 +1135,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookAgentCreatedEventData:`
+  - `class BetaWebhookAgentCreatedEventData`
 
     - `JsonElement Type = "agent.created"`
 
@@ -1147,7 +1147,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookAgentArchivedEventData:`
+  - `class BetaWebhookAgentArchivedEventData`
 
     - `JsonElement Type = "agent.archived"`
 
@@ -1159,7 +1159,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookAgentDeletedEventData:`
+  - `class BetaWebhookAgentDeletedEventData`
 
     - `JsonElement Type = "agent.deleted"`
 
@@ -1171,7 +1171,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentPausedEventData:`
+  - `class BetaWebhookDeploymentPausedEventData`
 
     - `JsonElement Type = "deployment.paused"`
 
@@ -1183,7 +1183,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentRunFailedEventData:`
+  - `class BetaWebhookDeploymentRunFailedEventData`
 
     - `JsonElement Type = "deployment_run.failed"`
 
@@ -1195,7 +1195,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentCreatedEventData:`
+  - `class BetaWebhookDeploymentCreatedEventData`
 
     - `JsonElement Type = "deployment.created"`
 
@@ -1207,7 +1207,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentUpdatedEventData:`
+  - `class BetaWebhookDeploymentUpdatedEventData`
 
     - `JsonElement Type = "deployment.updated"`
 
@@ -1219,7 +1219,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentUnpausedEventData:`
+  - `class BetaWebhookDeploymentUnpausedEventData`
 
     - `JsonElement Type = "deployment.unpaused"`
 
@@ -1231,7 +1231,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookAgentUpdatedEventData:`
+  - `class BetaWebhookAgentUpdatedEventData`
 
     - `JsonElement Type = "agent.updated"`
 
@@ -1243,7 +1243,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentArchivedEventData:`
+  - `class BetaWebhookDeploymentArchivedEventData`
 
     - `JsonElement Type = "deployment.archived"`
 
@@ -1255,7 +1255,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentRunStartedEventData:`
+  - `class BetaWebhookDeploymentRunStartedEventData`
 
     - `JsonElement Type = "deployment_run.started"`
 
@@ -1267,7 +1267,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentDeletedEventData:`
+  - `class BetaWebhookDeploymentDeletedEventData`
 
     - `JsonElement Type = "deployment.deleted"`
 
@@ -1279,7 +1279,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookDeploymentRunSucceededEventData:`
+  - `class BetaWebhookDeploymentRunSucceededEventData`
 
     - `JsonElement Type = "deployment_run.succeeded"`
 
@@ -1291,7 +1291,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookEnvironmentCreatedEventData:`
+  - `class BetaWebhookEnvironmentCreatedEventData`
 
     - `JsonElement Type = "environment.created"`
 
@@ -1303,7 +1303,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookEnvironmentUpdatedEventData:`
+  - `class BetaWebhookEnvironmentUpdatedEventData`
 
     - `JsonElement Type = "environment.updated"`
 
@@ -1315,7 +1315,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookEnvironmentArchivedEventData:`
+  - `class BetaWebhookEnvironmentArchivedEventData`
 
     - `JsonElement Type = "environment.archived"`
 
@@ -1327,7 +1327,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookEnvironmentDeletedEventData:`
+  - `class BetaWebhookEnvironmentDeletedEventData`
 
     - `JsonElement Type = "environment.deleted"`
 
@@ -1339,7 +1339,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookMemoryStoreCreatedEventData:`
+  - `class BetaWebhookMemoryStoreCreatedEventData`
 
     - `JsonElement Type = "memory_store.created"`
 
@@ -1351,7 +1351,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookMemoryStoreArchivedEventData:`
+  - `class BetaWebhookMemoryStoreArchivedEventData`
 
     - `JsonElement Type = "memory_store.archived"`
 
@@ -1363,7 +1363,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookMemoryStoreDeletedEventData:`
+  - `class BetaWebhookMemoryStoreDeletedEventData`
 
     - `JsonElement Type = "memory_store.deleted"`
 
@@ -1375,7 +1375,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string WorkspaceID`
 
-  - `class BetaWebhookSessionBudgetReachedEventData:`
+  - `class BetaWebhookSessionBudgetReachedEventData`
 
     - `JsonElement Type = "session.budget_reached"`
 
@@ -1389,7 +1389,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Memory Store Archived Event Data
 
-- `class BetaWebhookMemoryStoreArchivedEventData:`
+- `class BetaWebhookMemoryStoreArchivedEventData`
 
   - `JsonElement Type = "memory_store.archived"`
 
@@ -1403,7 +1403,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Memory Store Created Event Data
 
-- `class BetaWebhookMemoryStoreCreatedEventData:`
+- `class BetaWebhookMemoryStoreCreatedEventData`
 
   - `JsonElement Type = "memory_store.created"`
 
@@ -1417,7 +1417,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Memory Store Deleted Event Data
 
-- `class BetaWebhookMemoryStoreDeletedEventData:`
+- `class BetaWebhookMemoryStoreDeletedEventData`
 
   - `JsonElement Type = "memory_store.deleted"`
 
@@ -1431,7 +1431,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Archived Event Data
 
-- `class BetaWebhookSessionArchivedEventData:`
+- `class BetaWebhookSessionArchivedEventData`
 
   - `JsonElement Type = "session.archived"`
 
@@ -1445,7 +1445,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Budget Reached Event Data
 
-- `class BetaWebhookSessionBudgetReachedEventData:`
+- `class BetaWebhookSessionBudgetReachedEventData`
 
   - `JsonElement Type = "session.budget_reached"`
 
@@ -1459,7 +1459,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Created Event Data
 
-- `class BetaWebhookSessionCreatedEventData:`
+- `class BetaWebhookSessionCreatedEventData`
 
   - `JsonElement Type = "session.created"`
 
@@ -1473,7 +1473,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Deleted Event Data
 
-- `class BetaWebhookSessionDeletedEventData:`
+- `class BetaWebhookSessionDeletedEventData`
 
   - `JsonElement Type = "session.deleted"`
 
@@ -1487,7 +1487,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Idled Event Data
 
-- `class BetaWebhookSessionIdledEventData:`
+- `class BetaWebhookSessionIdledEventData`
 
   - `JsonElement Type = "session.idled"`
 
@@ -1501,7 +1501,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Outcome Evaluation Ended Event Data
 
-- `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+- `class BetaWebhookSessionOutcomeEvaluationEndedEventData`
 
   - `JsonElement Type = "session.outcome_evaluation_ended"`
 
@@ -1515,7 +1515,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Pending Event Data
 
-- `class BetaWebhookSessionPendingEventData:`
+- `class BetaWebhookSessionPendingEventData`
 
   - `JsonElement Type = "session.pending"`
 
@@ -1529,7 +1529,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Requires Action Event Data
 
-- `class BetaWebhookSessionRequiresActionEventData:`
+- `class BetaWebhookSessionRequiresActionEventData`
 
   - `JsonElement Type = "session.requires_action"`
 
@@ -1543,7 +1543,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Running Event Data
 
-- `class BetaWebhookSessionRunningEventData:`
+- `class BetaWebhookSessionRunningEventData`
 
   - `JsonElement Type = "session.running"`
 
@@ -1557,7 +1557,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Status Idled Event Data
 
-- `class BetaWebhookSessionStatusIdledEventData:`
+- `class BetaWebhookSessionStatusIdledEventData`
 
   - `JsonElement Type = "session.status_idled"`
 
@@ -1571,7 +1571,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Status Rescheduled Event Data
 
-- `class BetaWebhookSessionStatusRescheduledEventData:`
+- `class BetaWebhookSessionStatusRescheduledEventData`
 
   - `JsonElement Type = "session.status_rescheduled"`
 
@@ -1585,7 +1585,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Status Run Started Event Data
 
-- `class BetaWebhookSessionStatusRunStartedEventData:`
+- `class BetaWebhookSessionStatusRunStartedEventData`
 
   - `JsonElement Type = "session.status_run_started"`
 
@@ -1599,7 +1599,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Status Terminated Event Data
 
-- `class BetaWebhookSessionStatusTerminatedEventData:`
+- `class BetaWebhookSessionStatusTerminatedEventData`
 
   - `JsonElement Type = "session.status_terminated"`
 
@@ -1613,7 +1613,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Thread Created Event Data
 
-- `class BetaWebhookSessionThreadCreatedEventData:`
+- `class BetaWebhookSessionThreadCreatedEventData`
 
   - `JsonElement Type = "session.thread_created"`
 
@@ -1631,7 +1631,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Thread Idled Event Data
 
-- `class BetaWebhookSessionThreadIdledEventData:`
+- `class BetaWebhookSessionThreadIdledEventData`
 
   - `JsonElement Type = "session.thread_idled"`
 
@@ -1649,7 +1649,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Thread Terminated Event Data
 
-- `class BetaWebhookSessionThreadTerminatedEventData:`
+- `class BetaWebhookSessionThreadTerminatedEventData`
 
   - `JsonElement Type = "session.thread_terminated"`
 
@@ -1667,7 +1667,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Session Updated Event Data
 
-- `class BetaWebhookSessionUpdatedEventData:`
+- `class BetaWebhookSessionUpdatedEventData`
 
   - `JsonElement Type = "session.updated"`
 
@@ -1681,7 +1681,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Archived Event Data
 
-- `class BetaWebhookVaultArchivedEventData:`
+- `class BetaWebhookVaultArchivedEventData`
 
   - `JsonElement Type = "vault.archived"`
 
@@ -1695,7 +1695,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Created Event Data
 
-- `class BetaWebhookVaultCreatedEventData:`
+- `class BetaWebhookVaultCreatedEventData`
 
   - `JsonElement Type = "vault.created"`
 
@@ -1709,7 +1709,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Credential Archived Event Data
 
-- `class BetaWebhookVaultCredentialArchivedEventData:`
+- `class BetaWebhookVaultCredentialArchivedEventData`
 
   - `JsonElement Type = "vault_credential.archived"`
 
@@ -1727,7 +1727,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Credential Created Event Data
 
-- `class BetaWebhookVaultCredentialCreatedEventData:`
+- `class BetaWebhookVaultCredentialCreatedEventData`
 
   - `JsonElement Type = "vault_credential.created"`
 
@@ -1745,7 +1745,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Credential Deleted Event Data
 
-- `class BetaWebhookVaultCredentialDeletedEventData:`
+- `class BetaWebhookVaultCredentialDeletedEventData`
 
   - `JsonElement Type = "vault_credential.deleted"`
 
@@ -1763,7 +1763,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Credential Refresh Failed Event Data
 
-- `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+- `class BetaWebhookVaultCredentialRefreshFailedEventData`
 
   - `JsonElement Type = "vault_credential.refresh_failed"`
 
@@ -1781,7 +1781,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
 ### Beta Webhook Vault Deleted Event Data
 
-- `class BetaWebhookVaultDeletedEventData:`
+- `class BetaWebhookVaultDeletedEventData`
 
   - `JsonElement Type = "vault.deleted"`
 

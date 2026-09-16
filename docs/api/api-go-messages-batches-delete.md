@@ -37,7 +37,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `type DeletedMessageBatch struct{…}`
+- `type DeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 

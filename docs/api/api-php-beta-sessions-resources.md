@@ -41,7 +41,7 @@ Add Session Resource
 
 ### Returns
 
-- `ManagedAgentsFileResource`
+- `class ManagedAgentsFileResource`
 
   - `Type type`
 
@@ -121,9 +121,9 @@ List Session Resources
 
 ### Returns
 
-- `ManagedAgentsSessionResource`
+- `class ManagedAgentsSessionResource`
 
-  - `ManagedAgentsGitHubRepositoryResource`
+  - `class ManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -143,7 +143,7 @@ List Session Resources
 
     - `?Checkout checkout`
 
-  - `ManagedAgentsFileResource`
+  - `class ManagedAgentsFileResource`
 
     - `Type type`
 
@@ -161,7 +161,7 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsMemoryStoreResource`
+  - `class ManagedAgentsMemoryStoreResource`
 
     - `Type type`
 
@@ -261,9 +261,9 @@ Get Session Resource
 
 ### Returns
 
-- `ResourceGetResponse`
+- `class ResourceGetResponse`
 
-  - `ManagedAgentsGitHubRepositoryResource`
+  - `class ManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -283,7 +283,7 @@ Get Session Resource
 
     - `?Checkout checkout`
 
-  - `ManagedAgentsFileResource`
+  - `class ManagedAgentsFileResource`
 
     - `Type type`
 
@@ -301,7 +301,7 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsMemoryStoreResource`
+  - `class ManagedAgentsMemoryStoreResource`
 
     - `Type type`
 
@@ -391,9 +391,9 @@ Update Session Resource
 
 ### Returns
 
-- `ResourceUpdateResponse`
+- `class ResourceUpdateResponse`
 
-  - `ManagedAgentsGitHubRepositoryResource`
+  - `class ManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -413,7 +413,7 @@ Update Session Resource
 
     - `?Checkout checkout`
 
-  - `ManagedAgentsFileResource`
+  - `class ManagedAgentsFileResource`
 
     - `Type type`
 
@@ -431,7 +431,7 @@ Update Session Resource
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsMemoryStoreResource`
+  - `class ManagedAgentsMemoryStoreResource`
 
     - `Type type`
 
@@ -518,7 +518,7 @@ Delete Session Resource
 
 ### Returns
 
-- `ManagedAgentsDeleteSessionResource`
+- `class ManagedAgentsDeleteSessionResource`
 
   - `Type type`
 
@@ -560,7 +560,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### Beta Managed Agents Delete Session Resource
 
-- `ManagedAgentsDeleteSessionResource`
+- `class ManagedAgentsDeleteSessionResource`
 
   - `Type type`
 
@@ -568,7 +568,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### Beta Managed Agents File Resource
 
-- `ManagedAgentsFileResource`
+- `class ManagedAgentsFileResource`
 
   - `Type type`
 
@@ -588,7 +588,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### Beta Managed Agents GitHub Repository Resource
 
-- `ManagedAgentsGitHubRepositoryResource`
+- `class ManagedAgentsGitHubRepositoryResource`
 
   - `Type type`
 
@@ -610,7 +610,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### Beta Managed Agents Memory Store Resource
 
-- `ManagedAgentsMemoryStoreResource`
+- `class ManagedAgentsMemoryStoreResource`
 
   - `Type type`
 
@@ -640,9 +640,9 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### Beta Managed Agents Session Resource
 
-- `ManagedAgentsSessionResource`
+- `class ManagedAgentsSessionResource`
 
-  - `ManagedAgentsGitHubRepositoryResource`
+  - `class ManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -662,7 +662,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
     - `?Checkout checkout`
 
-  - `ManagedAgentsFileResource`
+  - `class ManagedAgentsFileResource`
 
     - `Type type`
 
@@ -680,7 +680,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsMemoryStoreResource`
+  - `class ManagedAgentsMemoryStoreResource`
 
     - `Type type`
 

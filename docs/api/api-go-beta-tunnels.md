@@ -129,6 +129,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -137,7 +139,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 ### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -319,6 +321,8 @@ Fetches a tunnel by ID.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -327,7 +331,7 @@ Fetches a tunnel by ID.
 
 ### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -525,6 +529,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -533,7 +539,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 ### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -720,6 +726,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -728,7 +736,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 ### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -914,6 +922,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -922,7 +932,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 ### Returns
 
-- `type BetaTunnelToken struct{…}`
+- `type BetaTunnelToken`
 
   A tunnel's connector token.
 
@@ -1095,6 +1105,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1103,7 +1115,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 ### Returns
 
-- `type BetaTunnelToken struct{…}`
+- `type BetaTunnelToken`
 
   A tunnel's connector token.
 
@@ -1160,7 +1172,7 @@ func main() {
 
 ### Beta Tunnel
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -1192,7 +1204,7 @@ func main() {
 
 ### Beta Tunnel Token
 
-- `type BetaTunnelToken struct{…}`
+- `type BetaTunnelToken`
 
   A tunnel's connector token.
 
@@ -1328,6 +1340,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1336,7 +1350,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -1535,6 +1549,8 @@ Fetches a tunnel certificate by ID.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1543,7 +1559,7 @@ Fetches a tunnel certificate by ID.
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -1752,6 +1768,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1760,7 +1778,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -1962,6 +1980,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1970,7 +1990,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 

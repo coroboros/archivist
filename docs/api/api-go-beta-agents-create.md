@@ -25,7 +25,7 @@ Create Agent
 
     Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+    - `type BetaManagedAgentsModelConfigParamsResp`
 
       An object that defines additional configuration control over model use
 
@@ -115,31 +115,31 @@ Create Agent
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -199,7 +199,7 @@ Create Agent
 
     Body param: Skills available to the agent.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsAnthropicSkillParamsResp`
 
       An Anthropic-managed skill.
 
@@ -217,7 +217,7 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomSkillParamsResp`
 
       A user-created custom skill.
 
@@ -245,7 +245,7 @@ Create Agent
 
     Body param: Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -255,7 +255,7 @@ Create Agent
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsBashToolConfigParamsResp`
 
           Configuration override for the bash tool.
 
@@ -273,25 +273,25 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsEditToolConfigParamsResp`
 
           Configuration override for the edit tool.
 
@@ -309,19 +309,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsReadToolConfigParamsResp`
 
           Configuration override for the read tool.
 
@@ -339,19 +339,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWriteToolConfigParamsResp`
 
           Configuration override for the write tool.
 
@@ -369,19 +369,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGlobToolConfigParamsResp`
 
           Configuration override for the glob tool.
 
@@ -399,19 +399,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGrepToolConfigParamsResp`
 
           Configuration override for the grep tool.
 
@@ -429,19 +429,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
 
           Configuration override for the web_fetch tool.
 
@@ -473,19 +473,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
           Configuration override for the web_search tool.
 
@@ -511,15 +511,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -565,19 +565,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+    - `type BetaManagedAgentsMCPToolsetParamsResp`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -607,15 +607,15 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -631,19 +631,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomToolParamsResp`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -769,6 +769,8 @@ Create Agent
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -777,7 +779,7 @@ Create Agent
 
 ## Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -887,31 +889,31 @@ Create Agent
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -939,7 +941,7 @@ Create Agent
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -951,7 +953,7 @@ Create Agent
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -965,7 +967,7 @@ Create Agent
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -975,7 +977,7 @@ Create Agent
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -989,13 +991,13 @@ Create Agent
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -1009,25 +1011,25 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -1041,19 +1043,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -1067,19 +1069,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -1093,19 +1095,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -1119,19 +1121,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -1145,19 +1147,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -1171,15 +1173,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1191,7 +1193,7 @@ Create Agent
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -1205,15 +1207,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1261,19 +1263,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -1287,15 +1289,15 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1309,21 +1311,21 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 

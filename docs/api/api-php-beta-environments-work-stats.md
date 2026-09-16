@@ -29,7 +29,7 @@ Get statistics about the work queue for an environment.
 
 ## Returns
 
-- `SelfHostedWorkQueueStats`
+- `class SelfHostedWorkQueueStats`
 
   - `"work_queue_stats" type`
 

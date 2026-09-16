@@ -49,7 +49,7 @@ Create a new environment with the specified configuration.
 
 ### Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -213,7 +213,7 @@ List environments with pagination support.
 
 ### Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -349,7 +349,7 @@ Retrieve a specific environment by ID.
 
 ### Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -498,7 +498,7 @@ Update an existing environment's configuration.
 
 ### Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -649,7 +649,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 ### Returns
 
-- `BetaEnvironmentDeleteResponse`
+- `class BetaEnvironmentDeleteResponse`
 
   - `Type type`
 
@@ -706,7 +706,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 ### Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -819,7 +819,7 @@ var_dump($betaEnvironment);
 
 ### Beta Cloud Config
 
-- `BetaCloudConfig`
+- `class BetaCloudConfig`
 
   - `"cloud" type`
 
@@ -835,7 +835,7 @@ var_dump($betaEnvironment);
 
 ### Beta Cloud Config Params
 
-- `BetaCloudConfigParams`
+- `class BetaCloudConfigParams`
 
   - `"cloud" type`
 
@@ -855,7 +855,7 @@ var_dump($betaEnvironment);
 
 ### Beta Environment
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 
@@ -899,7 +899,7 @@ var_dump($betaEnvironment);
 
 ### Beta Environment Delete Response
 
-- `BetaEnvironmentDeleteResponse`
+- `class BetaEnvironmentDeleteResponse`
 
   - `Type type`
 
@@ -911,7 +911,7 @@ var_dump($betaEnvironment);
 
 ### Beta Limited Network
 
-- `BetaLimitedNetwork`
+- `class BetaLimitedNetwork`
 
   - `"limited" type`
 
@@ -931,7 +931,7 @@ var_dump($betaEnvironment);
 
 ### Beta Limited Network Params
 
-- `BetaLimitedNetworkParams`
+- `class BetaLimitedNetworkParams`
 
   - `"limited" type`
 
@@ -951,7 +951,7 @@ var_dump($betaEnvironment);
 
 ### Beta Packages
 
-- `BetaPackages`
+- `class BetaPackages`
 
   - `?Type type`
 
@@ -983,7 +983,7 @@ var_dump($betaEnvironment);
 
 ### Beta Packages Params
 
-- `BetaPackagesParams`
+- `class BetaPackagesParams`
 
   - `?Type type`
 
@@ -1015,7 +1015,7 @@ var_dump($betaEnvironment);
 
 ### Beta Self Hosted Config
 
-- `BetaSelfHostedConfig`
+- `class BetaSelfHostedConfig`
 
   - `"self_hosted" type`
 
@@ -1023,7 +1023,7 @@ var_dump($betaEnvironment);
 
 ### Beta Self Hosted Config Params
 
-- `BetaSelfHostedConfigParams`
+- `class BetaSelfHostedConfigParams`
 
   - `"self_hosted" type`
 
@@ -1031,7 +1031,7 @@ var_dump($betaEnvironment);
 
 ### Beta Unrestricted Network
 
-- `BetaUnrestrictedNetwork`
+- `class BetaUnrestrictedNetwork`
 
   - `"unrestricted" type`
 
@@ -1063,7 +1063,7 @@ Retrieve detailed information about a specific work item.
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1193,7 +1193,7 @@ Long poll for work items in the queue.
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1314,7 +1314,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1441,7 +1441,7 @@ Record a heartbeat for a work item to maintain the lease.
 
 #### Returns
 
-- `SelfHostedWorkHeartbeatResponse`
+- `class SelfHostedWorkHeartbeatResponse`
 
   - `"work_heartbeat" type`
 
@@ -1529,7 +1529,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1658,7 +1658,7 @@ List work items in an environment.
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1789,7 +1789,7 @@ Update work item metadata with merge semantics.
 
 #### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -1908,7 +1908,7 @@ Get statistics about the work queue for an environment.
 
 #### Returns
 
-- `SelfHostedWorkQueueStats`
+- `class SelfHostedWorkQueueStats`
 
   - `"work_queue_stats" type`
 

@@ -27,7 +27,7 @@ Create Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentParamsResp`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -55,7 +55,7 @@ Create Deployment
 
     Body param: Events to send to each session immediately after creation. At least 1, maximum 50.
 
-    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
+    - `type BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -65,7 +65,7 @@ Create Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -77,7 +77,7 @@ Create Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -87,7 +87,7 @@ Create Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -105,7 +105,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -117,7 +117,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -129,7 +129,7 @@ Create Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -139,7 +139,7 @@ Create Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -157,7 +157,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -173,7 +173,7 @@ Create Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -185,7 +185,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -205,13 +205,13 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -225,7 +225,7 @@ Create Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubricParams struct{…}`
+        - `type BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -235,7 +235,7 @@ Create Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubricParams struct{…}`
+        - `type BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -253,7 +253,7 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+    - `type BetaManagedAgentsSystemMessageEventParamsResp`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -295,7 +295,7 @@ Create Deployment
 
     Body param: Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
 
       Mount a GitHub repository into the session's container.
 
@@ -317,7 +317,7 @@ Create Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -327,7 +327,7 @@ Create Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -343,7 +343,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsFileResourceParamsResp`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -361,7 +361,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -491,6 +491,8 @@ Create Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -499,7 +501,7 @@ Create Deployment
 
 ## Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -545,7 +547,7 @@ Create Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -555,7 +557,7 @@ Create Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -567,7 +569,7 @@ Create Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -577,7 +579,7 @@ Create Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -595,7 +597,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -607,7 +609,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -619,7 +621,7 @@ Create Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -629,7 +631,7 @@ Create Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -647,7 +649,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -663,7 +665,7 @@ Create Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -675,7 +677,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -695,13 +697,13 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -715,7 +717,7 @@ Create Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -725,7 +727,7 @@ Create Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -741,7 +743,7 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -771,13 +773,13 @@ Create Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -787,85 +789,85 @@ Create Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -875,7 +877,7 @@ Create Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -889,7 +891,7 @@ Create Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -899,7 +901,7 @@ Create Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -913,7 +915,7 @@ Create Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -927,7 +929,7 @@ Create Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 

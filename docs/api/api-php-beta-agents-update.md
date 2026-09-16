@@ -69,7 +69,7 @@ Update Agent
 
 ## Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 

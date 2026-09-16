@@ -129,6 +129,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -137,7 +139,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 ### Returns
 
-- `class BetaTunnelCertificate:`
+- `class BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -317,6 +319,8 @@ Fetches a tunnel certificate by ID.
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -325,7 +329,7 @@ Fetches a tunnel certificate by ID.
 
 ### Returns
 
-- `class BetaTunnelCertificate:`
+- `class BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -515,6 +519,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -523,7 +529,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 ### Returns
 
-- `class BetaTunnelCertificate:`
+- `class BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -706,6 +712,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -714,7 +722,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 ### Returns
 
-- `class BetaTunnelCertificate:`
+- `class BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -782,7 +790,7 @@ Console.WriteLine(betaTunnelCertificate);
 
 ### Beta Tunnel Certificate
 
-- `class BetaTunnelCertificate:`
+- `class BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 

@@ -33,7 +33,7 @@ Send Events
 
 ## Returns
 
-- `ManagedAgentsSendSessionEvents`
+- `class ManagedAgentsSendSessionEvents`
 
   - `?list<Data> data`
 

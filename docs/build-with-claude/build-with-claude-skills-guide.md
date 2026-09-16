@@ -572,12 +572,12 @@ To provide input files for Skills to work on, [upload them with the Files API](.
 
   	// Step 3: Download the file using Files API
   	for _, fileID := range fileIDs {
-  		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID)
+  		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
   		if err != nil {
   			log.Fatal(err)
   		}
 
-  		fileContent, err := client.Files.Download(context.TODO(), fileID)
+  		fileContent, err := client.Files.Download(context.TODO(), fileID, anthropic.FileDownloadParams{})
   		if err != nil {
   			log.Fatal(err)
   		}
@@ -853,7 +853,7 @@ To provide input files for Skills to work on, [upload them with the Files API](.
   fileID := "file_011CNha8iCJcU1wXNR6q4V8w"
 
   // Get file metadata
-  fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID)
+  fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
   if err != nil {
   	log.Fatal(err)
   }
@@ -870,7 +870,7 @@ To provide input files for Skills to work on, [upload them with the Files API](.
   }
 
   // Delete a file
-  _, err = client.Files.Delete(context.TODO(), fileID)
+  _, err = client.Files.Delete(context.TODO(), fileID, anthropic.FileDeleteParams{})
   if err != nil {
   	log.Fatal(err)
   }
@@ -2670,6 +2670,7 @@ Get details about a specific Skill:
   skill, err := client.Skills.Get(
   	context.TODO(),
   	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+  	anthropic.SkillGetParams{},
   )
   if err != nil {
   	log.Fatal(err)
@@ -2754,6 +2755,7 @@ Deleting a Skill also removes all of its versions.
   _, err := client.Skills.Delete(
   	context.TODO(),
   	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+  	anthropic.SkillDeleteParams{},
   )
   if err != nil {
   	log.Fatal(err)

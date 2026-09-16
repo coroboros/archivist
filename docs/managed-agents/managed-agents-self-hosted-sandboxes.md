@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes
 description: Run Claude Managed Agents sessions in self-hosted sandboxes, keeping tool execution, files, and network egress in your own infrastructure.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
+
 By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](./managed-agents-cloud-sandboxes-reference.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
 
 Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. The agent's [skills](./managed-agents-skills.md) and the contents of any [memory stores](./managed-agents-memory.md) attached to the session are stored by Anthropic and copied into your sandbox for the session; changes the agent makes to memory files sync back to the store. See the [security model](./managed-agents-self-hosted-sandboxes-security.md) for the full data-flow boundary.
@@ -220,7 +224,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
             For Linux environments, download the release binary directly.
 
             ```bash
-            VERSION=1.30.0
+            VERSION=1.33.0
             OS=$(uname -s | tr '[:upper:]' '[:lower:]')
             case $(uname -m) in
               x86_64) ARCH=amd64 ;;
@@ -258,7 +262,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
 
         ```text
         FROM your-base-image
-        ARG ANT_VERSION=1.30.0
+        ARG ANT_VERSION=1.33.0
         ARG TARGETARCH
         RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
             curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \

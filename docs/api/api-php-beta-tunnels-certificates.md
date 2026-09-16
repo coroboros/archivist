@@ -37,7 +37,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 ### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -122,7 +122,7 @@ Fetches a tunnel certificate by ID.
 
 ### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -217,7 +217,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 ### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -309,7 +309,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 ### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -374,7 +374,7 @@ var_dump($betaTunnelCertificate);
 
 ### Beta Tunnel Certificate
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 

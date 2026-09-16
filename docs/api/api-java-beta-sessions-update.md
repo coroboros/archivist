@@ -117,6 +117,8 @@ Update Session
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `Optional<BetaManagedAgentsSessionAgentUpdate> agent`
@@ -143,7 +145,7 @@ Update Session
 
 ## Returns
 
-- `class BetaManagedAgentsSession:`
+- `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -239,31 +241,31 @@ Update Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `class BetaManagedAgentsEffortLow:`
+        - `class BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type type`
 
-        - `class BetaManagedAgentsEffortMedium:`
+        - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type type`
 
-        - `class BetaManagedAgentsEffortHigh:`
+        - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type type`
 
-        - `class BetaManagedAgentsEffortXhigh:`
+        - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type type`
 
-        - `class BetaManagedAgentsEffortMax:`
+        - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -291,7 +293,7 @@ Update Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `class BetaManagedAgentsSessionThreadAgent:`
+        - `class BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -317,7 +319,7 @@ Update Session
 
           - `List<Skill> skills`
 
-            - `class BetaManagedAgentsAnthropicSkill:`
+            - `class BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -327,7 +329,7 @@ Update Session
 
               - `String version`
 
-            - `class BetaManagedAgentsCustomSkill:`
+            - `class BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -341,13 +343,13 @@ Update Session
 
           - `List<Tool> tools`
 
-            - `class BetaManagedAgentsAgentToolset20260401:`
+            - `class BetaManagedAgentsAgentToolset20260401`
 
               - `Type type`
 
               - `List<BetaManagedAgentsAgentToolConfig> configs`
 
-                - `class BetaManagedAgentsBashToolConfig:`
+                - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -361,25 +363,25 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type type`
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type type`
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `JsonValue type = "auto"`
 
-                - `class BetaManagedAgentsEditToolConfig:`
+                - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -393,19 +395,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `class BetaManagedAgentsReadToolConfig:`
+                - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -419,19 +421,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `class BetaManagedAgentsWriteToolConfig:`
+                - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -445,19 +447,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `class BetaManagedAgentsGlobToolConfig:`
+                - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -471,19 +473,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `class BetaManagedAgentsGrepToolConfig:`
+                - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -497,19 +499,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `class BetaManagedAgentsWebFetchToolConfig:`
+                - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -523,15 +525,15 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -543,7 +545,7 @@ Update Session
 
                     format: int32
 
-                - `class BetaManagedAgentsWebSearchToolConfig:`
+                - `class BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -557,15 +559,15 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy:`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -613,19 +615,19 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `class BetaManagedAgentsAutoPolicy:`
+                  - `class BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `class BetaManagedAgentsMcpToolset:`
+            - `class BetaManagedAgentsMcpToolset`
 
               - `Type type`
 
@@ -639,15 +641,15 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `class BetaManagedAgentsAutoPolicy:`
+                  - `class BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -661,21 +663,21 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `class BetaManagedAgentsAutoPolicy:`
+                  - `class BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `String mcpServerName`
 
-            - `class BetaManagedAgentsCustomTool:`
+            - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -699,7 +701,7 @@ Update Session
 
             format: int32
 
-        - `class BetaManagedAgentsAdvisor:`
+        - `class BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -713,11 +715,11 @@ Update Session
 
     - `List<Skill> skills`
 
-      - `class BetaManagedAgentsAnthropicSkill:`
+      - `class BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `class BetaManagedAgentsCustomSkill:`
+      - `class BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -725,11 +727,11 @@ Update Session
 
     - `List<Tool> tools`
 
-      - `class BetaManagedAgentsAgentToolset20260401:`
+      - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `class BetaManagedAgentsMcpToolset:`
+      - `class BetaManagedAgentsMcpToolset`
 
-      - `class BetaManagedAgentsCustomTool:`
+      - `class BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -807,7 +809,7 @@ Update Session
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
-    - `class BetaManagedAgentsGitHubRepositoryResource:`
+    - `class BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type type`
 
@@ -831,7 +833,7 @@ Update Session
 
       - `Optional<Checkout> checkout`
 
-        - `class BetaManagedAgentsBranchCheckout:`
+        - `class BetaManagedAgentsBranchCheckout`
 
           - `Type type`
 
@@ -841,7 +843,7 @@ Update Session
 
             minLength: 1, maxLength: 255
 
-        - `class BetaManagedAgentsCommitCheckout:`
+        - `class BetaManagedAgentsCommitCheckout`
 
           - `Type type`
 
@@ -851,7 +853,7 @@ Update Session
 
             minLength: 7, maxLength: 64
 
-    - `class BetaManagedAgentsFileResource:`
+    - `class BetaManagedAgentsFileResource`
 
       - `Type type`
 
@@ -873,7 +875,7 @@ Update Session
 
         format: date-time
 
-    - `class BetaManagedAgentsMemoryStoreResource:`
+    - `class BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 

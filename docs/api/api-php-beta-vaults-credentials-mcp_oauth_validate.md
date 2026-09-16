@@ -31,7 +31,7 @@ Validate Credential
 
 ## Returns
 
-- `ManagedAgentsCredentialValidation`
+- `class ManagedAgentsCredentialValidation`
 
   - `Type type`
 

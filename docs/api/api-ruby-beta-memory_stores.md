@@ -43,7 +43,7 @@ Create a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -134,6 +134,8 @@ Create a memory store
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -250,7 +252,7 @@ List memory stores
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -341,6 +343,8 @@ List memory stores
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -438,7 +442,7 @@ Retrieve a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -529,6 +533,8 @@ Retrieve a memory store
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -637,7 +643,7 @@ Update a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -728,6 +734,8 @@ Update a memory store
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -820,7 +828,7 @@ Delete a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -911,6 +919,8 @@ Delete a memory store
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -965,7 +975,7 @@ Archive a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1056,6 +1066,8 @@ Archive a memory store
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -1224,7 +1236,7 @@ Create a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1315,6 +1327,8 @@ Create a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -1443,7 +1457,7 @@ List memories
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1535,11 +1549,13 @@ List memories
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `:"compact-2026-09-04"`
+
 - `workspace_id: String`
 
 #### Returns
 
-- `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
+- `type BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
 
   One item in a [List memories](./api-beta-memory_stores-memories-list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
@@ -1663,7 +1679,7 @@ Retrieve a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1754,6 +1770,8 @@ Retrieve a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -1884,7 +1902,7 @@ Update a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1975,6 +1993,8 @@ Update a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -2081,7 +2101,7 @@ Delete a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2172,6 +2192,8 @@ Delete a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -2284,7 +2306,7 @@ List memory versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2375,6 +2397,8 @@ List memory versions
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -2565,7 +2589,7 @@ Retrieve a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2656,6 +2680,8 @@ Retrieve a memory version
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -2836,7 +2862,7 @@ Redact a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2927,6 +2953,8 @@ Redact a memory version
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 

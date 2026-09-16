@@ -29,7 +29,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 ## Returns
 
-- `BetaEnvironmentDeleteResponse`
+- `class BetaEnvironmentDeleteResponse`
 
   - `Type type`
 

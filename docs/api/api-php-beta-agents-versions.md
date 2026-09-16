@@ -39,7 +39,7 @@ List Agent Versions
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 

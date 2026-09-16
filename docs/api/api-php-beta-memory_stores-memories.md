@@ -43,7 +43,7 @@ Create a memory
 
 ### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -161,9 +161,9 @@ List memories
 
 ### Returns
 
-- `ManagedAgentsMemoryListItem`
+- `class ManagedAgentsMemoryListItem`
 
-  - `ManagedAgentsMemory`
+  - `class ManagedAgentsMemory`
 
     - `Type type`
 
@@ -203,7 +203,7 @@ List memories
 
       The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-  - `ManagedAgentsMemoryPrefix`
+  - `class ManagedAgentsMemoryPrefix`
 
     - `Type type`
 
@@ -282,7 +282,7 @@ Retrieve a memory
 
 ### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -397,7 +397,7 @@ Update a memory
 
 ### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -505,7 +505,7 @@ Delete a memory
 
 ### Returns
 
-- `ManagedAgentsDeletedMemory`
+- `class ManagedAgentsDeletedMemory`
 
   - `Type type`
 
@@ -546,7 +546,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Conflict Error
 
-- `ManagedAgentsConflictError`
+- `class ManagedAgentsConflictError`
 
   - `Type type`
 
@@ -554,7 +554,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Content Sha256 Precondition
 
-- `ManagedAgentsContentSha256Precondition`
+- `class ManagedAgentsContentSha256Precondition`
 
   - `Type type`
 
@@ -564,7 +564,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Deleted Memory
 
-- `ManagedAgentsDeletedMemory`
+- `class ManagedAgentsDeletedMemory`
 
   - `Type type`
 
@@ -574,69 +574,69 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Error
 
-- `ManagedAgentsError`
+- `class ManagedAgentsError`
 
-  - `BetaInvalidRequestError`
+  - `class BetaInvalidRequestError`
 
     - `"invalid_request_error" type`
 
     - `string message`
 
-  - `BetaAuthenticationError`
+  - `class BetaAuthenticationError`
 
     - `"authentication_error" type`
 
     - `string message`
 
-  - `BetaBillingError`
+  - `class BetaBillingError`
 
     - `"billing_error" type`
 
     - `string message`
 
-  - `BetaPermissionError`
+  - `class BetaPermissionError`
 
     - `"permission_error" type`
 
     - `string message`
 
-  - `BetaNotFoundError`
+  - `class BetaNotFoundError`
 
     - `"not_found_error" type`
 
     - `string message`
 
-  - `BetaRateLimitError`
+  - `class BetaRateLimitError`
 
     - `"rate_limit_error" type`
 
     - `string message`
 
-  - `BetaGatewayTimeoutError`
+  - `class BetaGatewayTimeoutError`
 
     - `"timeout_error" type`
 
     - `string message`
 
-  - `BetaAPIError`
+  - `class BetaAPIError`
 
     - `"api_error" type`
 
     - `string message`
 
-  - `BetaOverloadedError`
+  - `class BetaOverloadedError`
 
     - `"overloaded_error" type`
 
     - `string message`
 
-  - `ManagedAgentsMemoryPreconditionFailedError`
+  - `class ManagedAgentsMemoryPreconditionFailedError`
 
     - `Type type`
 
     - `?string message`
 
-  - `ManagedAgentsMemoryPathConflictError`
+  - `class ManagedAgentsMemoryPathConflictError`
 
     - `Type type`
 
@@ -646,7 +646,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
     - `?string message`
 
-  - `ManagedAgentsConflictError`
+  - `class ManagedAgentsConflictError`
 
     - `Type type`
 
@@ -654,7 +654,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -696,9 +696,9 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory List Item
 
-- `ManagedAgentsMemoryListItem`
+- `class ManagedAgentsMemoryListItem`
 
-  - `ManagedAgentsMemory`
+  - `class ManagedAgentsMemory`
 
     - `Type type`
 
@@ -738,7 +738,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-  - `ManagedAgentsMemoryPrefix`
+  - `class ManagedAgentsMemoryPrefix`
 
     - `Type type`
 
@@ -748,7 +748,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory Path Conflict Error
 
-- `ManagedAgentsMemoryPathConflictError`
+- `class ManagedAgentsMemoryPathConflictError`
 
   - `Type type`
 
@@ -760,7 +760,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory Precondition Failed Error
 
-- `ManagedAgentsMemoryPreconditionFailedError`
+- `class ManagedAgentsMemoryPreconditionFailedError`
 
   - `Type type`
 
@@ -768,7 +768,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory Prefix
 
-- `ManagedAgentsMemoryPrefix`
+- `class ManagedAgentsMemoryPrefix`
 
   - `Type type`
 
@@ -778,7 +778,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Memory View
 
-- `ManagedAgentsMemoryView`
+- `enum ManagedAgentsMemoryView`
 
   - `"basic"`
 
@@ -786,7 +786,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### Beta Managed Agents Precondition
 
-- `ManagedAgentsPrecondition`
+- `class ManagedAgentsPrecondition`
 
   - `Type type`
 

@@ -119,11 +119,13 @@ Archive Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ## Returns
 
-- `class BetaManagedAgentsCredential:`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -143,7 +145,7 @@ Archive Credential
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMcpOAuthAuthResponse:`
+    - `class BetaManagedAgentsMcpOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -173,19 +175,19 @@ Archive Credential
 
         - `TokenEndpointAuth tokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse:`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type type`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse:`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type type`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse:`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -199,7 +201,7 @@ Archive Credential
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse:`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -209,7 +211,7 @@ Archive Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -231,13 +233,13 @@ Archive Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type type`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse:`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 

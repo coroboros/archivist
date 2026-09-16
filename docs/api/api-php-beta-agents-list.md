@@ -47,7 +47,7 @@ List Agents
 
 ## Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 

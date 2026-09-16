@@ -33,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `class MessageBatch:`
+- `class MessageBatch`
 
   - `JsonValue type = "message_batch"`
 

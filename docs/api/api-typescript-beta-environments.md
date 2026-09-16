@@ -33,7 +33,7 @@ Create a new environment with the specified configuration.
 
     Body param: Environment configuration
 
-    - `BetaCloudConfigParams`
+    - `interface BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -48,7 +48,7 @@ Create a new environment with the specified configuration.
 
         Network configuration policy. Omit on update to preserve the existing value.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -56,7 +56,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `BetaLimitedNetworkParams`
+        - `interface BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -117,7 +117,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `BetaSelfHostedConfigParams`
+    - `interface BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -149,7 +149,7 @@ Create a new environment with the specified configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -241,6 +241,8 @@ Create a new environment with the specified configuration.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -249,7 +251,7 @@ Create a new environment with the specified configuration.
 
 ### Returns
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -271,7 +273,7 @@ Create a new environment with the specified configuration.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -283,7 +285,7 @@ Create a new environment with the specified configuration.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -291,7 +293,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -345,7 +347,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -478,7 +480,7 @@ List environments with pagination support.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -570,6 +572,8 @@ List environments with pagination support.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -578,7 +582,7 @@ List environments with pagination support.
 
 ### Returns
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -600,7 +604,7 @@ List environments with pagination support.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -612,7 +616,7 @@ List environments with pagination support.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -620,7 +624,7 @@ List environments with pagination support.
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -674,7 +678,7 @@ List environments with pagination support.
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -799,7 +803,7 @@ Retrieve a specific environment by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -891,6 +895,8 @@ Retrieve a specific environment by ID.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -899,7 +905,7 @@ Retrieve a specific environment by ID.
 
 ### Returns
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -921,7 +927,7 @@ Retrieve a specific environment by ID.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -933,7 +939,7 @@ Retrieve a specific environment by ID.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -941,7 +947,7 @@ Retrieve a specific environment by ID.
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -995,7 +1001,7 @@ Retrieve a specific environment by ID.
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -1114,7 +1120,7 @@ Update an existing environment's configuration.
 
     Body param: Updated environment configuration
 
-    - `BetaCloudConfigParams`
+    - `interface BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -1129,7 +1135,7 @@ Update an existing environment's configuration.
 
         Network configuration policy. Omit on update to preserve the existing value.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -1137,7 +1143,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `BetaLimitedNetworkParams`
+        - `interface BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -1198,7 +1204,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `BetaSelfHostedConfigParams`
+    - `interface BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -1236,7 +1242,7 @@ Update an existing environment's configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1328,6 +1334,8 @@ Update an existing environment's configuration.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1336,7 +1344,7 @@ Update an existing environment's configuration.
 
 ### Returns
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -1358,7 +1366,7 @@ Update an existing environment's configuration.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -1370,7 +1378,7 @@ Update an existing environment's configuration.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -1378,7 +1386,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -1432,7 +1440,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -1551,7 +1559,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1643,6 +1651,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1651,7 +1661,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 ### Returns
 
-- `BetaEnvironmentDeleteResponse`
+- `interface BetaEnvironmentDeleteResponse`
 
   Response after deleting an environment.
 
@@ -1710,7 +1720,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1802,6 +1812,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1810,7 +1822,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 ### Returns
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -1832,7 +1844,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -1844,7 +1856,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -1852,7 +1864,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -1906,7 +1918,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -2009,7 +2021,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Cloud Config
 
-- `BetaCloudConfig`
+- `interface BetaCloudConfig`
 
   `cloud` environment configuration.
 
@@ -2021,7 +2033,7 @@ console.log(betaEnvironment.id);
 
     Network configuration policy.
 
-    - `BetaUnrestrictedNetwork`
+    - `interface BetaUnrestrictedNetwork`
 
       Unrestricted network access.
 
@@ -2029,7 +2041,7 @@ console.log(betaEnvironment.id);
 
         Network policy type
 
-    - `BetaLimitedNetwork`
+    - `interface BetaLimitedNetwork`
 
       Limited network access.
 
@@ -2085,7 +2097,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Cloud Config Params
 
-- `BetaCloudConfigParams`
+- `interface BetaCloudConfigParams`
 
   Request params for `cloud` environment configuration.
 
@@ -2100,7 +2112,7 @@ console.log(betaEnvironment.id);
 
     Network configuration policy. Omit on update to preserve the existing value.
 
-    - `BetaUnrestrictedNetwork`
+    - `interface BetaUnrestrictedNetwork`
 
       Unrestricted network access.
 
@@ -2108,7 +2120,7 @@ console.log(betaEnvironment.id);
 
         Network policy type
 
-    - `BetaLimitedNetworkParams`
+    - `interface BetaLimitedNetworkParams`
 
       Limited network request params.
 
@@ -2171,7 +2183,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Environment
 
-- `BetaEnvironment`
+- `interface BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -2193,7 +2205,7 @@ console.log(betaEnvironment.id);
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig`
+    - `interface BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -2205,7 +2217,7 @@ console.log(betaEnvironment.id);
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork`
+        - `interface BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -2213,7 +2225,7 @@ console.log(betaEnvironment.id);
 
             Network policy type
 
-        - `BetaLimitedNetwork`
+        - `interface BetaLimitedNetwork`
 
           Limited network access.
 
@@ -2267,7 +2279,7 @@ console.log(betaEnvironment.id);
 
           Python packages to install
 
-    - `BetaSelfHostedConfig`
+    - `interface BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -2305,7 +2317,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Environment Delete Response
 
-- `BetaEnvironmentDeleteResponse`
+- `interface BetaEnvironmentDeleteResponse`
 
   Response after deleting an environment.
 
@@ -2321,7 +2333,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Limited Network
 
-- `BetaLimitedNetwork`
+- `interface BetaLimitedNetwork`
 
   Limited network access.
 
@@ -2343,7 +2355,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Limited Network Params
 
-- `BetaLimitedNetworkParams`
+- `interface BetaLimitedNetworkParams`
 
   Limited network request params.
 
@@ -2368,7 +2380,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Packages
 
-- `BetaPackages`
+- `interface BetaPackages`
 
   Packages (and their versions) available in this environment.
 
@@ -2404,7 +2416,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Packages Params
 
-- `BetaPackagesParams`
+- `interface BetaPackagesParams`
 
   Specify packages (and optionally their versions) available in this environment.
 
@@ -2444,7 +2456,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Self Hosted Config
 
-- `BetaSelfHostedConfig`
+- `interface BetaSelfHostedConfig`
 
   Configuration for self-hosted environments.
 
@@ -2454,7 +2466,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Self Hosted Config Params
 
-- `BetaSelfHostedConfigParams`
+- `interface BetaSelfHostedConfigParams`
 
   Request params for `self_hosted` environment configuration.
 
@@ -2464,7 +2476,7 @@ console.log(betaEnvironment.id);
 
 ### Beta Unrestricted Network
 
-- `BetaUnrestrictedNetwork`
+- `interface BetaUnrestrictedNetwork`
 
   Unrestricted network access.
 
@@ -2500,7 +2512,7 @@ Retrieve detailed information about a specific work item.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2592,6 +2604,8 @@ Retrieve detailed information about a specific work item.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2600,7 +2614,7 @@ Retrieve detailed information about a specific work item.
 
 #### Returns
 
-- `BetaSelfHostedWork`
+- `interface BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -2755,7 +2769,7 @@ Long poll for work items in the queue.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2846,6 +2860,8 @@ Long poll for work items in the queue.
       - `"thinking-binding-controls-2026-08-01"`
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
+
+      - `"compact-2026-09-04"`
 
   - `"Anthropic-Worker-ID"?: string`
 
@@ -2994,7 +3010,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3086,9 +3102,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
 #### Returns
 
-- `BetaSelfHostedWork`
+- `interface BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -3243,7 +3261,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3335,9 +3353,11 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
 #### Returns
 
-- `BetaSelfHostedWorkHeartbeatResponse`
+- `interface BetaSelfHostedWorkHeartbeatResponse`
 
   Response after recording a heartbeat for a work item.
 
@@ -3432,7 +3452,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3524,6 +3544,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3532,7 +3554,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 #### Returns
 
-- `BetaSelfHostedWork`
+- `interface BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -3685,7 +3707,7 @@ List work items in an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3777,9 +3799,11 @@ List work items in an environment.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
 #### Returns
 
-- `BetaSelfHostedWork`
+- `interface BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -3936,7 +3960,7 @@ Update work item metadata with merge semantics.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -4028,6 +4052,8 @@ Update work item metadata with merge semantics.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4036,7 +4062,7 @@ Update work item metadata with merge semantics.
 
 #### Returns
 
-- `BetaSelfHostedWork`
+- `interface BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -4178,7 +4204,7 @@ Get statistics about the work queue for an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -4270,6 +4296,8 @@ Get statistics about the work queue for an environment.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4278,7 +4306,7 @@ Get statistics about the work queue for an environment.
 
 #### Returns
 
-- `BetaSelfHostedWorkQueueStats`
+- `interface BetaSelfHostedWorkQueueStats`
 
   Statistics about the work queue for an environment.
 

@@ -37,7 +37,7 @@ Create Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -129,11 +129,13 @@ Create Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -232,7 +234,7 @@ List Vaults
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -324,11 +326,13 @@ List Vaults
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -419,7 +423,7 @@ Get Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -511,11 +515,13 @@ Get Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -612,7 +618,7 @@ Update Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -704,11 +710,13 @@ Update Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -795,7 +803,7 @@ Delete Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -887,11 +895,13 @@ Delete Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsDeletedVault: …`
+- `class BetaManagedAgentsDeletedVault`
 
   Confirmation of a deleted vault.
 
@@ -945,7 +955,7 @@ Archive Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1037,11 +1047,13 @@ Archive Vault
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -1114,7 +1126,7 @@ print(beta_managed_agents_vault.id)
 
 ### Beta Managed Agents Deleted Vault
 
-- `class BetaManagedAgentsDeletedVault: …`
+- `class BetaManagedAgentsDeletedVault`
 
   Confirmation of a deleted vault.
 
@@ -1126,7 +1138,7 @@ print(beta_managed_agents_vault.id)
 
 ### Beta Managed Agents Vault
 
-- `class BetaManagedAgentsVault: …`
+- `class BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -1180,7 +1192,7 @@ Create Credential
 
   Authentication details for creating a credential.
 
-  - `class BetaManagedAgentsMCPOAuthCreateParams: …`
+  - `class BetaManagedAgentsMCPOAuthCreateParams`
 
     Parameters for creating an MCP OAuth credential.
 
@@ -1228,13 +1240,13 @@ Create Credential
 
       - `token_endpoint_auth: TokenEndpointAuth`
 
-        - `class BetaManagedAgentsTokenEndpointAuthNoneParam: …`
+        - `class BetaManagedAgentsTokenEndpointAuthNoneParam`
 
           Token endpoint requires no client authentication.
 
           - `type: Literal["none"]`
 
-        - `class BetaManagedAgentsTokenEndpointAuthBasicParam: …`
+        - `class BetaManagedAgentsTokenEndpointAuthBasicParam`
 
           Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -1246,7 +1258,7 @@ Create Credential
 
             minLength: 1, maxLength: 512
 
-        - `class BetaManagedAgentsTokenEndpointAuthPostParam: …`
+        - `class BetaManagedAgentsTokenEndpointAuthPostParam`
 
           Token endpoint uses POST body authentication with client credentials.
 
@@ -1270,7 +1282,7 @@ Create Credential
 
         minLength: 1, maxLength: 8192
 
-  - `class BetaManagedAgentsStaticBearerCreateParams: …`
+  - `class BetaManagedAgentsStaticBearerCreateParams`
 
     Parameters for creating a static bearer token credential.
 
@@ -1288,7 +1300,7 @@ Create Credential
 
       minLength: 1, maxLength: 2047
 
-  - `class BetaManagedAgentsEnvironmentVariableCreateParams: …`
+  - `class BetaManagedAgentsEnvironmentVariableCreateParams`
 
     Parameters for creating an environment variable credential.
 
@@ -1298,13 +1310,13 @@ Create Credential
 
       Outbound hosts the secret value is substituted on.
 
-      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …`
+      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
         Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
         - `type: Literal["unrestricted"]`
 
-      - `class BetaManagedAgentsLimitedCredentialNetworkingParams: …`
+      - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
 
         Substitute the secret only on requests to the listed hosts.
 
@@ -1354,7 +1366,7 @@ Create Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1446,11 +1458,13 @@ Create Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredential: …`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1470,7 +1484,7 @@ Create Credential
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
+    - `class BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -1500,19 +1514,19 @@ Create Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: Literal["none"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: Literal["client_secret_basic"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -1526,7 +1540,7 @@ Create Credential
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -1536,7 +1550,7 @@ Create Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1558,13 +1572,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: Literal["unrestricted"]`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1677,7 +1691,7 @@ List Credentials
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1769,11 +1783,13 @@ List Credentials
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredential: …`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1793,7 +1809,7 @@ List Credentials
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
+    - `class BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -1823,19 +1839,19 @@ List Credentials
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: Literal["none"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: Literal["client_secret_basic"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -1849,7 +1865,7 @@ List Credentials
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -1859,7 +1875,7 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1881,13 +1897,13 @@ List Credentials
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: Literal["unrestricted"]`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1989,7 +2005,7 @@ Get Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2081,11 +2097,13 @@ Get Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredential: …`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -2105,7 +2123,7 @@ Get Credential
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
+    - `class BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -2135,19 +2153,19 @@ Get Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: Literal["none"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: Literal["client_secret_basic"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -2161,7 +2179,7 @@ Get Credential
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -2171,7 +2189,7 @@ Get Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -2193,13 +2211,13 @@ Get Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: Literal["unrestricted"]`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -2294,7 +2312,7 @@ Update Credential
 
   Updated authentication details for a credential.
 
-  - `class BetaManagedAgentsMCPOAuthUpdateParams: …`
+  - `class BetaManagedAgentsMCPOAuthUpdateParams`
 
     Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -2330,7 +2348,7 @@ Update Credential
 
       - `token_endpoint_auth: Optional[TokenEndpointAuth]`
 
-        - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …`
+        - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
           Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -2342,7 +2360,7 @@ Update Credential
 
             minLength: 1, maxLength: 512
 
-        - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam: …`
+        - `class BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
           Updated POST body authentication parameters for the token endpoint.
 
@@ -2354,7 +2372,7 @@ Update Credential
 
             minLength: 1, maxLength: 512
 
-  - `class BetaManagedAgentsStaticBearerUpdateParams: …`
+  - `class BetaManagedAgentsStaticBearerUpdateParams`
 
     Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -2366,7 +2384,7 @@ Update Credential
 
       minLength: 1, maxLength: 8192
 
-  - `class BetaManagedAgentsEnvironmentVariableUpdateParams: …`
+  - `class BetaManagedAgentsEnvironmentVariableUpdateParams`
 
     Parameters for updating an environment variable credential. `secret_name` is immutable.
 
@@ -2388,13 +2406,13 @@ Update Credential
 
       Updated networking scope. Full replacement.
 
-      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …`
+      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
         Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
         - `type: Literal["unrestricted"]`
 
-      - `class BetaManagedAgentsLimitedCredentialNetworkingParams: …`
+      - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
 
         Substitute the secret only on requests to the listed hosts.
 
@@ -2426,7 +2444,7 @@ Update Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2518,11 +2536,13 @@ Update Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredential: …`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -2542,7 +2562,7 @@ Update Credential
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
+    - `class BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -2572,19 +2592,19 @@ Update Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: Literal["none"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: Literal["client_secret_basic"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -2598,7 +2618,7 @@ Update Credential
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -2608,7 +2628,7 @@ Update Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -2630,13 +2650,13 @@ Update Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: Literal["unrestricted"]`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -2733,7 +2753,7 @@ Delete Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2825,11 +2845,13 @@ Delete Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsDeletedCredential: …`
+- `class BetaManagedAgentsDeletedCredential`
 
   Confirmation of a deleted credential.
 
@@ -2886,7 +2908,7 @@ Archive Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2978,11 +3000,13 @@ Archive Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredential: …`
+- `class BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -3002,7 +3026,7 @@ Archive Credential
 
     Authentication details for a credential.
 
-    - `class BetaManagedAgentsMCPOAuthAuthResponse: …`
+    - `class BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -3032,19 +3056,19 @@ Archive Credential
 
         - `token_endpoint_auth: TokenEndpointAuth`
 
-          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: Literal["none"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: Literal["client_secret_basic"]`
 
-          - `class BetaManagedAgentsTokenEndpointAuthPostResponse: …`
+          - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -3058,7 +3082,7 @@ Archive Credential
 
           OAuth scope for the refresh request.
 
-    - `class BetaManagedAgentsStaticBearerAuthResponse: …`
+    - `class BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -3068,7 +3092,7 @@ Archive Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -3090,13 +3114,13 @@ Archive Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: Literal["unrestricted"]`
 
-        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse: …`
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -3193,7 +3217,7 @@ Validate Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3285,11 +3309,13 @@ Validate Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 #### Returns
 
-- `class BetaManagedAgentsCredentialValidation: …`
+- `class BetaManagedAgentsCredentialValidation`
 
   Result of live-probing a credential against its configured MCP server.
 

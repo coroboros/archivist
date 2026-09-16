@@ -43,7 +43,7 @@ Update Credential
 
 ## Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 

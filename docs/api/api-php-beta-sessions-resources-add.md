@@ -39,7 +39,7 @@ Add Session Resource
 
 ## Returns
 
-- `ManagedAgentsFileResource`
+- `class ManagedAgentsFileResource`
 
   - `Type type`
 

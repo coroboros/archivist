@@ -1,5 +1,5 @@
 ---
-title: "Create a vault"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/managed-agents/vaults"
 category: "managed-agents"
 generated: true
@@ -10,13 +10,13 @@ url: https://platform.claude.com/docs/en/managed-agents/vaults
 description: Register per-user credentials when creating sessions.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
+
 Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret store, transmit tokens on every call, or lose track of which end user an agent acted on behalf of.
 
 The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
-
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
-</Note>
 
 ## Create a vault
 
@@ -174,7 +174,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
           "access_token": "xoxp-...",
           "expires_at": "2099-12-31T23:59:59Z",
           "refresh": {
-            "token_endpoint": "https://slack.com/api/oauth.v2.access",
+            "token_endpoint": "https://slack.com/api/oauth.v2.user.access",
             "client_id": "1234567890.0987654321",
             "scope": "channels:read chat:write",
             "refresh_token": "xoxe-1-...",
@@ -197,7 +197,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
         access_token: xoxp-...
         expires_at: "2099-12-31T23:59:59Z"
         refresh:
-          token_endpoint: https://slack.com/api/oauth.v2.access
+          token_endpoint: https://slack.com/api/oauth.v2.user.access
           client_id: "1234567890.0987654321"
           scope: channels:read chat:write
           refresh_token: xoxe-1-...
@@ -218,7 +218,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
               "access_token": "xoxp-...",
               "expires_at": "2099-12-31T23:59:59Z",
               "refresh": {
-                  "token_endpoint": "https://slack.com/api/oauth.v2.access",
+                  "token_endpoint": "https://slack.com/api/oauth.v2.user.access",
                   "client_id": "1234567890.0987654321",
                   "scope": "channels:read chat:write",
                   "refresh_token": "xoxe-1-...",
@@ -237,7 +237,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
           access_token: "xoxp-...",
           expires_at: "2099-12-31T23:59:59Z",
           refresh: {
-            token_endpoint: "https://slack.com/api/oauth.v2.access",
+            token_endpoint: "https://slack.com/api/oauth.v2.user.access",
             client_id: "1234567890.0987654321",
             scope: "channels:read chat:write",
             refresh_token: "xoxe-1-...",
@@ -262,7 +262,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
               ExpiresAt = DateTimeOffset.Parse("2099-12-31T23:59:59Z"),
               Refresh = new()
               {
-                  TokenEndpoint = "https://slack.com/api/oauth.v2.access",
+                  TokenEndpoint = "https://slack.com/api/oauth.v2.user.access",
                   ClientID = "1234567890.0987654321",
                   Scope = "channels:read chat:write",
                   RefreshToken = "xoxe-1-...",
@@ -286,7 +286,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       			AccessToken:  "xoxp-...",
       			ExpiresAt:    anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
       			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshParams{
-      				TokenEndpoint: "https://slack.com/api/oauth.v2.access",
+      				TokenEndpoint: "https://slack.com/api/oauth.v2.user.access",
       				ClientID:      "1234567890.0987654321",
       				Scope:         anthropic.String("channels:read chat:write"),
       				RefreshToken:  "xoxe-1-...",
@@ -315,7 +315,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
                   .accessToken("xoxp-...")
                   .expiresAt(OffsetDateTime.parse("2099-12-31T23:59:59Z"))
                   .refresh(BetaManagedAgentsMcpOAuthRefreshParams.builder()
-                      .tokenEndpoint("https://slack.com/api/oauth.v2.access")
+                      .tokenEndpoint("https://slack.com/api/oauth.v2.user.access")
                       .clientId("1234567890.0987654321")
                       .scope("channels:read chat:write")
                       .refreshToken("xoxe-1-...")
@@ -335,7 +335,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
               accessToken: 'xoxp-...',
               expiresAt: new DateTimeImmutable('2099-12-31T23:59:59Z'),
               refresh: ManagedAgentsMCPOAuthRefreshParams::with(
-                  tokenEndpoint: 'https://slack.com/api/oauth.v2.access',
+                  tokenEndpoint: 'https://slack.com/api/oauth.v2.user.access',
                   clientID: '1234567890.0987654321',
                   scope: 'channels:read chat:write',
                   refreshToken: 'xoxe-1-...',
@@ -358,7 +358,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
           access_token: "xoxp-...",
           expires_at: "2099-12-31T23:59:59Z",
           refresh: {
-            token_endpoint: "https://slack.com/api/oauth.v2.access",
+            token_endpoint: "https://slack.com/api/oauth.v2.user.access",
             client_id: "1234567890.0987654321",
             scope: "channels:read chat:write",
             refresh_token: "xoxe-1-...",
@@ -371,6 +371,8 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
       )
       ```
     </CodeGroup>
+
+    Set `refresh.token_endpoint` to the token endpoint of the OAuth flow that issued the refresh token, because Anthropic sends every refresh request to that URL and the field can't be changed after the credential is created.
   </Tab>
 
   <Tab title="MCP static bearer">

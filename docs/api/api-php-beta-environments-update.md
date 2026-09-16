@@ -49,7 +49,7 @@ Update an existing environment's configuration.
 
 ## Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 

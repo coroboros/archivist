@@ -31,7 +31,7 @@ Get File Metadata
 
 ## Returns
 
-- `BetaFileMetadata`
+- `class BetaFileMetadata`
 
   - `"file" type`
 

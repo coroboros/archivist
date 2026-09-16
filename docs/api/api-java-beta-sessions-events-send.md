@@ -117,13 +117,15 @@ Send Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.
 
-    - `class BetaManagedAgentsUserMessageEventParams:`
+    - `class BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -133,7 +135,7 @@ Send Events
 
         Array of content blocks for the user message.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -145,7 +147,7 @@ Send Events
 
             minLength: 1
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -155,7 +157,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `class BetaManagedAgentsBase64ImageSource:`
+            - `class BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -173,7 +175,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsUrlImageSource:`
+            - `class BetaManagedAgentsUrlImageSource`
 
               Image referenced by URL.
 
@@ -185,7 +187,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileImageSource:`
+            - `class BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -197,7 +199,7 @@ Send Events
 
                 minLength: 1
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -207,7 +209,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `class BetaManagedAgentsBase64DocumentSource:`
+            - `class BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -225,7 +227,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
+            - `class BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -241,7 +243,7 @@ Send Events
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `class BetaManagedAgentsUrlDocumentSource:`
+            - `class BetaManagedAgentsUrlDocumentSource`
 
               Document referenced by URL.
 
@@ -253,7 +255,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileDocumentSource:`
+            - `class BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -273,13 +275,13 @@ Send Events
 
             The title of the document.
 
-        - `class BetaManagedAgentsRedactedBlock:`
+        - `class BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type type`
 
-    - `class BetaManagedAgentsUserInterruptEventParams:`
+    - `class BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
@@ -289,7 +291,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `class BetaManagedAgentsUserToolConfirmationEventParams:`
+    - `class BetaManagedAgentsUserToolConfirmationEventParams`
 
       Parameters for confirming or denying a tool execution request.
 
@@ -315,7 +317,7 @@ Send Events
 
         maxLength: 10000
 
-    - `class BetaManagedAgentsUserCustomToolResultEventParams:`
+    - `class BetaManagedAgentsUserCustomToolResultEventParams`
 
       Parameters for providing the result of a custom tool execution.
 
@@ -331,19 +333,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock:`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -385,7 +387,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
+    - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -399,7 +401,7 @@ Send Events
 
         Rubric for grading the quality of an outcome.
 
-        - `class BetaManagedAgentsFileRubricParams:`
+        - `class BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -409,7 +411,7 @@ Send Events
 
             ID of the rubric file.
 
-        - `class BetaManagedAgentsTextRubricParams:`
+        - `class BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -427,7 +429,7 @@ Send Events
 
         format: int32
 
-    - `class BetaManagedAgentsUserToolResultEventParams:`
+    - `class BetaManagedAgentsUserToolResultEventParams`
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -443,19 +445,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock:`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -463,7 +465,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `class BetaManagedAgentsSystemMessageEventParams:`
+    - `class BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -483,7 +485,7 @@ Send Events
 
 ## Returns
 
-- `class BetaManagedAgentsSendSessionEvents:`
+- `class BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
@@ -491,7 +493,7 @@ Send Events
 
     Sent events
 
-    - `class BetaManagedAgentsUserMessageEvent:`
+    - `class BetaManagedAgentsUserMessageEvent`
 
       A user message event in the session conversation.
 
@@ -505,7 +507,7 @@ Send Events
 
         Array of content blocks comprising the user message.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -517,7 +519,7 @@ Send Events
 
             minLength: 1
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -527,7 +529,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `class BetaManagedAgentsBase64ImageSource:`
+            - `class BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -545,7 +547,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsUrlImageSource:`
+            - `class BetaManagedAgentsUrlImageSource`
 
               Image referenced by URL.
 
@@ -557,7 +559,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileImageSource:`
+            - `class BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -569,7 +571,7 @@ Send Events
 
                 minLength: 1
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -579,7 +581,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `class BetaManagedAgentsBase64DocumentSource:`
+            - `class BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -597,7 +599,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsPlainTextDocumentSource:`
+            - `class BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -613,7 +615,7 @@ Send Events
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `class BetaManagedAgentsUrlDocumentSource:`
+            - `class BetaManagedAgentsUrlDocumentSource`
 
               Document referenced by URL.
 
@@ -625,7 +627,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileDocumentSource:`
+            - `class BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -645,7 +647,7 @@ Send Events
 
             The title of the document.
 
-        - `class BetaManagedAgentsRedactedBlock:`
+        - `class BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -657,7 +659,7 @@ Send Events
 
         format: date-time
 
-    - `class BetaManagedAgentsUserInterruptEvent:`
+    - `class BetaManagedAgentsUserInterruptEvent`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -677,7 +679,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `class BetaManagedAgentsUserToolConfirmationEvent:`
+    - `class BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -715,7 +717,7 @@ Send Events
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserCustomToolResultEvent:`
+    - `class BetaManagedAgentsUserCustomToolResultEvent`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -733,19 +735,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock:`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -797,7 +799,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+    - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -831,7 +833,7 @@ Send Events
 
         Rubric for grading the quality of an outcome.
 
-        - `class BetaManagedAgentsFileRubric:`
+        - `class BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -841,7 +843,7 @@ Send Events
 
             ID of the rubric file.
 
-        - `class BetaManagedAgentsTextRubric:`
+        - `class BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -851,7 +853,7 @@ Send Events
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `class BetaManagedAgentsUserToolResultEvent:`
+    - `class BetaManagedAgentsUserToolResultEvent`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -869,19 +871,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock:`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock:`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock:`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock:`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -899,7 +901,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsSystemMessageEvent:`
+    - `class BetaManagedAgentsSystemMessageEvent`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 

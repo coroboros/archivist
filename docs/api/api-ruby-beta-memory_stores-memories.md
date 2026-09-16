@@ -47,7 +47,7 @@ Create a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -138,6 +138,8 @@ Create a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -266,7 +268,7 @@ List memories
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -358,11 +360,13 @@ List memories
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `:"compact-2026-09-04"`
+
 - `workspace_id: String`
 
 ### Returns
 
-- `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
+- `type BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
 
   One item in a [List memories](./api-beta-memory_stores-memories-list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
@@ -486,7 +490,7 @@ Retrieve a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -577,6 +581,8 @@ Retrieve a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -707,7 +713,7 @@ Update a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -798,6 +804,8 @@ Update a memory
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -904,7 +912,7 @@ Delete a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -996,6 +1004,8 @@ Delete a memory
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `:"compact-2026-09-04"`
+
 - `workspace_id: String`
 
 ### Returns
@@ -1067,7 +1077,7 @@ puts(beta_managed_agents_deleted_memory)
 
 ### Beta Managed Agents Error
 
-- `BetaManagedAgentsError = BetaInvalidRequestError | BetaAuthenticationError | BetaBillingError | 9 more`
+- `type BetaManagedAgentsError = BetaInvalidRequestError | BetaAuthenticationError | BetaBillingError | 9 more`
 
   - `class BetaInvalidRequestError`
 
@@ -1197,7 +1207,7 @@ puts(beta_managed_agents_deleted_memory)
 
 ### Beta Managed Agents Memory List Item
 
-- `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
+- `type BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory | BetaManagedAgentsMemoryPrefix`
 
   One item in a [List memories](./api-beta-memory_stores-memories-list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
@@ -1293,7 +1303,7 @@ puts(beta_managed_agents_deleted_memory)
 
 ### Beta Managed Agents Memory View
 
-- `BetaManagedAgentsMemoryView = :basic | :full`
+- `type BetaManagedAgentsMemoryView = :basic | :full`
 
   Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 

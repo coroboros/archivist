@@ -39,7 +39,7 @@ List Vaults
 
 ## Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 

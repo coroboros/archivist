@@ -135,6 +135,8 @@ The Models API response can be used to determine which models are available for 
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -143,7 +145,7 @@ The Models API response can be used to determine which models are available for 
 
 ### Returns
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -478,6 +480,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -486,7 +490,7 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -704,7 +708,7 @@ Console.WriteLine(modelInfo);
 
 ### Capability Support
 
-- `class CapabilitySupport:`
+- `class CapabilitySupport`
 
   Indicates whether a capability is supported.
 
@@ -714,7 +718,7 @@ Console.WriteLine(modelInfo);
 
 ### Context Management Capability
 
-- `class ContextManagementCapability:`
+- `class ContextManagementCapability`
 
   Context management capability details.
 
@@ -740,7 +744,7 @@ Console.WriteLine(modelInfo);
 
 ### Effort Capability
 
-- `class EffortCapability:`
+- `class EffortCapability`
 
   Effort (reasoning_effort) capability details.
 
@@ -774,7 +778,7 @@ Console.WriteLine(modelInfo);
 
 ### Model Capabilities
 
-- `class ModelCapabilities:`
+- `class ModelCapabilities`
 
   Model capability information.
 
@@ -876,7 +880,7 @@ Console.WriteLine(modelInfo);
 
 ### Model Info
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -1008,7 +1012,7 @@ Console.WriteLine(modelInfo);
 
 ### Thinking Capability
 
-- `class ThinkingCapability:`
+- `class ThinkingCapability`
 
   Thinking capability details.
 
@@ -1034,7 +1038,7 @@ Console.WriteLine(modelInfo);
 
 ### Thinking Types
 
-- `class ThinkingTypes:`
+- `class ThinkingTypes`
 
   Supported thinking type configurations.
 

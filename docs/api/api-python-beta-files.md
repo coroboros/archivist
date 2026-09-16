@@ -39,7 +39,7 @@ Upload File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -131,11 +131,13 @@ Upload File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaFileMetadata: …`
+- `class BetaFileMetadata`
 
   - `type: Literal["file"]`
 
@@ -269,7 +271,7 @@ List Files
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -361,11 +363,13 @@ List Files
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaFileMetadata: …`
+- `class BetaFileMetadata`
 
   - `type: Literal["file"]`
 
@@ -487,7 +491,7 @@ Download File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -578,6 +582,8 @@ Download File
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
 
@@ -624,7 +630,7 @@ Get File Metadata
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -716,11 +722,13 @@ Get File Metadata
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaFileMetadata: …`
+- `class BetaFileMetadata`
 
   - `type: Literal["file"]`
 
@@ -838,7 +846,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -930,11 +938,13 @@ Delete File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaDeletedFile: …`
+- `class BetaDeletedFile`
 
   - `type: Optional[Literal["file_deleted"]]`
 
@@ -978,7 +988,7 @@ print(beta_deleted_file.id)
 
 ### Beta Deleted File
 
-- `class BetaDeletedFile: …`
+- `class BetaDeletedFile`
 
   - `type: Optional[Literal["file_deleted"]]`
 
@@ -994,7 +1004,7 @@ print(beta_deleted_file.id)
 
 ### Beta File Metadata
 
-- `class BetaFileMetadata: …`
+- `class BetaFileMetadata`
 
   - `type: Literal["file"]`
 
@@ -1058,7 +1068,7 @@ print(beta_deleted_file.id)
 
 ### Beta File Scope
 
-- `class BetaFileScope: …`
+- `class BetaFileScope`
 
   - `type: Literal["session"]`
 

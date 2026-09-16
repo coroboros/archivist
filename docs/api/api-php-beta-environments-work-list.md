@@ -39,7 +39,7 @@ List work items in an environment.
 
 ## Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 

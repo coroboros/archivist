@@ -41,7 +41,7 @@ Create Skill
 
 ### Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 
@@ -162,7 +162,7 @@ List Skills
 
 ### Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 
@@ -270,7 +270,7 @@ Get Skill
 
 ### Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 
@@ -371,7 +371,7 @@ Delete Skill
 
 ### Returns
 
-- `BetaDeletedSkill`
+- `class BetaDeletedSkill`
 
   - `"skill_deleted" type`
 
@@ -416,7 +416,7 @@ var_dump($betaDeletedSkill);
 
 ### Beta Deleted Skill
 
-- `BetaDeletedSkill`
+- `class BetaDeletedSkill`
 
   - `"skill_deleted" type`
 
@@ -432,7 +432,7 @@ var_dump($betaDeletedSkill);
 
 ### Beta Skill
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 
@@ -477,7 +477,7 @@ var_dump($betaDeletedSkill);
 
 ### Beta Skill Source
 
-- `BetaSkillSource`
+- `class BetaSkillSource`
 
   - `Type type`
 
@@ -522,7 +522,7 @@ Create Skill Version
 
 #### Returns
 
-- `SkillVersion`
+- `class SkillVersion`
 
   - `"skill_version" type`
 
@@ -628,7 +628,7 @@ List Skill Versions
 
 #### Returns
 
-- `SkillVersion`
+- `class SkillVersion`
 
   - `"skill_version" type`
 
@@ -783,7 +783,7 @@ Get Skill Version
 
 #### Returns
 
-- `SkillVersion`
+- `class SkillVersion`
 
   - `"skill_version" type`
 
@@ -881,7 +881,7 @@ Delete Skill Version
 
 #### Returns
 
-- `DeletedSkillVersion`
+- `class DeletedSkillVersion`
 
   - `"skill_version_deleted" type`
 

@@ -39,7 +39,7 @@ Delete Skill Version
 
 ## Returns
 
-- `DeletedSkillVersion`
+- `class DeletedSkillVersion`
 
   - `"skill_version_deleted" type`
 

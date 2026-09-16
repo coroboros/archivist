@@ -117,6 +117,8 @@ Add Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
@@ -125,7 +127,7 @@ Add Session Resource
 
 ## Returns
 
-- `class BetaManagedAgentsFileResource:`
+- `class BetaManagedAgentsFileResource`
 
   - `Type type`
 

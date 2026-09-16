@@ -117,6 +117,8 @@ Create User Profile
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `Optional<AccessType> accessType`
@@ -155,7 +157,7 @@ Create User Profile
 
 ### Returns
 
-- `class BetaUserProfile:`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -448,11 +450,13 @@ List User Profiles
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaUserProfile:`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -726,11 +730,13 @@ Get User Profile
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaUserProfile:`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -999,6 +1005,8 @@ Update User Profile
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `Optional<AccessType> accessType`
@@ -1037,7 +1045,7 @@ Update User Profile
 
 ### Returns
 
-- `class BetaUserProfile:`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -1306,11 +1314,13 @@ Create Enrollment URL
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaUserProfileEnrollmentUrl:`
+- `class BetaUserProfileEnrollmentUrl`
 
   - `Type type`
 
@@ -1361,7 +1371,7 @@ public final class Main {
 
 ### Beta User Profile
 
-- `class BetaUserProfile:`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -1473,7 +1483,7 @@ public final class Main {
 
 ### Beta User Profile Enrollment URL
 
-- `class BetaUserProfileEnrollmentUrl:`
+- `class BetaUserProfileEnrollmentUrl`
 
   - `Type type`
 
@@ -1491,7 +1501,7 @@ public final class Main {
 
 ### Beta User Profile External User Details
 
-- `class BetaUserProfileExternalUserDetails:`
+- `class BetaUserProfileExternalUserDetails`
 
   Details about the entity this profile represents, as the platform states them. Anthropic does not verify them. Every field is present, `null` until the platform supplies a value.
 
@@ -1541,7 +1551,7 @@ public final class Main {
 
 ### Beta User Profile External User Details Params
 
-- `class BetaUserProfileExternalUserDetailsParams:`
+- `class BetaUserProfileExternalUserDetailsParams`
 
   - `Optional<AccountStatus> accountStatus`
 
@@ -1595,7 +1605,7 @@ public final class Main {
 
 ### Beta User Profile Trust Grant
 
-- `class BetaUserProfileTrustGrant:`
+- `class BetaUserProfileTrustGrant`
 
   - `Status status`
 

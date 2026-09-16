@@ -135,6 +135,8 @@ The Models API response can be used to determine which models are available for 
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -143,7 +145,7 @@ The Models API response can be used to determine which models are available for 
 
 ### Returns
 
-- `class BetaModelInfo:`
+- `class BetaModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -178,6 +180,20 @@ The Models API response can be used to determine which models are available for 
     - `required BetaCapabilitySupport CodeExecution`
 
       Whether the model supports code execution tools.
+
+    - `required BetaCompactionCapability? Compaction`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `required BetaCapabilitySupport Summarize`
+
+        Whether the summarize compaction type is supported.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
 
     - `required BetaContextManagementCapability ContextManagement`
 
@@ -307,6 +323,12 @@ await foreach (var item in page.Paginate())
           "supported": true
         },
         "code_execution": {
+          "supported": true
+        },
+        "compaction": {
+          "summarize": {
+            "supported": true
+          },
           "supported": true
         },
         "context_management": {
@@ -485,6 +507,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -493,7 +517,7 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `class BetaModelInfo:`
+- `class BetaModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -528,6 +552,20 @@ The Models API response can be used to determine information about a specific mo
     - `required BetaCapabilitySupport CodeExecution`
 
       Whether the model supports code execution tools.
+
+    - `required BetaCompactionCapability? Compaction`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `required BetaCapabilitySupport Summarize`
+
+        Whether the summarize compaction type is supported.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
 
     - `required BetaContextManagementCapability ContextManagement`
 
@@ -655,6 +693,12 @@ Console.WriteLine(betaModelInfo);
     "code_execution": {
       "supported": true
     },
+    "compaction": {
+      "summarize": {
+        "supported": true
+      },
+      "supported": true
+    },
     "context_management": {
       "clear_thinking_20251015": {
         "supported": true
@@ -718,7 +762,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Capability Support
 
-- `class BetaCapabilitySupport:`
+- `class BetaCapabilitySupport`
 
   Indicates whether a capability is supported.
 
@@ -726,9 +770,29 @@ Console.WriteLine(betaModelInfo);
 
     Whether this capability is supported by the model.
 
+### Beta Compaction Capability
+
+- `class BetaCompactionCapability`
+
+  Compaction capability details: whether the model accepts the top-level
+  `compaction` request parameter, with one entry per supported
+  `compaction.type` value.
+
+  - `required BetaCapabilitySupport Summarize`
+
+    Whether the summarize compaction type is supported.
+
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
+
+  - `required bool Supported`
+
+    Whether this capability is supported by the model.
+
 ### Beta Context Management Capability
 
-- `class BetaContextManagementCapability:`
+- `class BetaContextManagementCapability`
 
   Context management capability details.
 
@@ -754,7 +818,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Effort Capability
 
-- `class BetaEffortCapability:`
+- `class BetaEffortCapability`
 
   Effort (reasoning_effort) capability details.
 
@@ -788,7 +852,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Model Capabilities
 
-- `class BetaModelCapabilities:`
+- `class BetaModelCapabilities`
 
   Model capability information.
 
@@ -807,6 +871,20 @@ Console.WriteLine(betaModelInfo);
   - `required BetaCapabilitySupport CodeExecution`
 
     Whether the model supports code execution tools.
+
+  - `required BetaCompactionCapability? Compaction`
+
+    Compaction capability details: whether the model accepts the top-level
+    `compaction` request parameter, with one entry per supported
+    `compaction.type` value.
+
+    - `required BetaCapabilitySupport Summarize`
+
+      Whether the summarize compaction type is supported.
+
+    - `required bool Supported`
+
+      Whether this capability is supported by the model.
 
   - `required BetaContextManagementCapability ContextManagement`
 
@@ -890,7 +968,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Model Info
 
-- `class BetaModelInfo:`
+- `class BetaModelInfo`
 
   - `JsonElement Type = "model"`
 
@@ -925,6 +1003,20 @@ Console.WriteLine(betaModelInfo);
     - `required BetaCapabilitySupport CodeExecution`
 
       Whether the model supports code execution tools.
+
+    - `required BetaCompactionCapability? Compaction`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `required BetaCapabilitySupport Summarize`
+
+        Whether the summarize compaction type is supported.
+
+      - `required bool Supported`
+
+        Whether this capability is supported by the model.
 
     - `required BetaContextManagementCapability ContextManagement`
 
@@ -1026,7 +1118,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Thinking Capability
 
-- `class BetaThinkingCapability:`
+- `class BetaThinkingCapability`
 
   Thinking capability details.
 
@@ -1052,7 +1144,7 @@ Console.WriteLine(betaModelInfo);
 
 ### Beta Thinking Types
 
-- `class BetaThinkingTypes:`
+- `class BetaThinkingTypes`
 
   Supported thinking type configurations.
 

@@ -31,7 +31,7 @@ Delete Session Resource
 
 ## Returns
 
-- `ManagedAgentsDeleteSessionResource`
+- `class ManagedAgentsDeleteSessionResource`
 
   - `Type type`
 

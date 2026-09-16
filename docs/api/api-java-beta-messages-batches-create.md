@@ -119,6 +119,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> userProfileId`
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -214,7 +216,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `List<BetaContentBlockParam>`
 
-            - `class BetaTextBlockParam:`
+            - `class BetaTextBlockParam`
 
               - `JsonValue type = "text"`
 
@@ -245,7 +247,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<List<BetaTextCitationParam>> citations`
 
-                - `class BetaCitationCharLocationParam:`
+                - `class BetaCitationCharLocationParam`
 
                   - `JsonValue type = "char_location"`
 
@@ -265,7 +267,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                - `class BetaCitationPageLocationParam:`
+                - `class BetaCitationPageLocationParam`
 
                   - `JsonValue type = "page_location"`
 
@@ -285,7 +287,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 1
 
-                - `class BetaCitationContentBlockLocationParam:`
+                - `class BetaCitationContentBlockLocationParam`
 
                   - `JsonValue type = "content_block_location"`
 
@@ -315,7 +317,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minimum: 0
 
-                - `class BetaCitationWebSearchResultLocationParam:`
+                - `class BetaCitationWebSearchResultLocationParam`
 
                   - `JsonValue type = "web_search_result_location"`
 
@@ -331,7 +333,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minLength: 1
 
-                - `class BetaCitationSearchResultLocationParam:`
+                - `class BetaCitationSearchResultLocationParam`
 
                   - `JsonValue type = "search_result_location"`
 
@@ -365,13 +367,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> title`
 
-            - `class BetaImageBlockParam:`
+            - `class BetaImageBlockParam`
 
               - `JsonValue type = "image"`
 
               - `Source source`
 
-                - `class BetaBase64ImageSource:`
+                - `class BetaBase64ImageSource`
 
                   - `JsonValue type = "base64"`
 
@@ -389,13 +391,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `IMAGE_WEBP("image/webp")`
 
-                - `class BetaUrlImageSource:`
+                - `class BetaUrlImageSource`
 
                   - `JsonValue type = "url"`
 
                   - `String url`
 
-                - `class BetaFileImageSource:`
+                - `class BetaFileImageSource`
 
                   - `JsonValue type = "file"`
 
@@ -417,13 +419,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `ERROR("error")`
 
-            - `class BetaRequestDocumentBlock:`
+            - `class BetaRequestDocumentBlock`
 
               - `JsonValue type = "document"`
 
               - `Source source`
 
-                - `class BetaBase64PdfSource:`
+                - `class BetaBase64PdfSource`
 
                   - `JsonValue type = "base64"`
 
@@ -433,7 +435,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `JsonValue mediaType = "application/pdf"`
 
-                - `class BetaPlainTextSource:`
+                - `class BetaPlainTextSource`
 
                   - `JsonValue type = "text"`
 
@@ -441,7 +443,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `JsonValue mediaType = "text/plain"`
 
-                - `class BetaContentBlockSource:`
+                - `class BetaContentBlockSource`
 
                   - `JsonValue type = "content"`
 
@@ -451,17 +453,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `List<BetaContentBlockSourceContent>`
 
-                      - `class BetaTextBlockParam:`
+                      - `class BetaTextBlockParam`
 
-                      - `class BetaImageBlockParam:`
+                      - `class BetaImageBlockParam`
 
-                - `class BetaUrlPdfSource:`
+                - `class BetaUrlPdfSource`
 
                   - `JsonValue type = "url"`
 
                   - `String url`
 
-                - `class BetaFileDocumentSource:`
+                - `class BetaFileDocumentSource`
 
                   - `JsonValue type = "file"`
 
@@ -483,7 +485,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 500, minLength: 1
 
-            - `class BetaSearchResultBlockParam:`
+            - `class BetaSearchResultBlockParam`
 
               - `JsonValue type = "search_result"`
 
@@ -511,7 +513,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<BetaCitationsConfigParam> citations`
 
-            - `class BetaThinkingBlockParam:`
+            - `class BetaThinkingBlockParam`
 
               - `JsonValue type = "thinking"`
 
@@ -525,7 +527,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `thinking` text of this block as returned by the API.
 
-            - `class BetaRedactedThinkingBlockParam:`
+            - `class BetaRedactedThinkingBlockParam`
 
               - `JsonValue type = "redacted_thinking"`
 
@@ -533,7 +535,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `class BetaToolUseBlockParam:`
+            - `class BetaToolUseBlockParam`
 
               - `JsonValue type = "tool_use"`
 
@@ -553,13 +555,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                - `class BetaDirectCaller:`
+                - `class BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `JsonValue type = "direct"`
 
-                - `class BetaServerToolCaller:`
+                - `class BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -569,7 +571,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `class BetaServerToolCaller20260120:`
+                - `class BetaServerToolCaller20260120`
 
                   - `JsonValue type = "code_execution_20260120"`
 
@@ -583,7 +585,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `class BetaToolResultBlockParam:`
+            - `class BetaToolResultBlockParam`
 
               - `JsonValue type = "tool_result"`
 
@@ -601,15 +603,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `List<Block>`
 
-                  - `class BetaTextBlockParam:`
+                  - `class BetaTextBlockParam`
 
-                  - `class BetaImageBlockParam:`
+                  - `class BetaImageBlockParam`
 
-                  - `class BetaSearchResultBlockParam:`
+                  - `class BetaSearchResultBlockParam`
 
-                  - `class BetaRequestDocumentBlock:`
+                  - `class BetaRequestDocumentBlock`
 
-                  - `class BetaToolReferenceBlockParam:`
+                  - `class BetaToolReferenceBlockParam`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -623,7 +625,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Create a cache control breakpoint at this content block.
 
-                  - `class BetaBrowserStateBlockParam:`
+                  - `class BetaBrowserStateBlockParam`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -673,7 +675,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       maxItems: 200, minItems: 1
 
-                      - `class BetaBrowserStateChangeTabOpened:`
+                      - `class BetaBrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -691,7 +693,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `class BetaBrowserStateChangeDownloadStarted:`
+                      - `class BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -709,7 +711,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `class BetaBrowserStateChangeDownloadCompleted:`
+                      - `class BetaBrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -742,7 +744,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           minimum: 0
 
-                      - `class BetaBrowserStateChangeDownloadFailed:`
+                      - `class BetaBrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -774,7 +776,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `class BetaServerToolUseBlockParam:`
+            - `class BetaServerToolUseBlockParam`
 
               - `JsonValue type = "server_tool_use"`
 
@@ -808,17 +810,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                - `class BetaDirectCaller:`
+                - `class BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `class BetaServerToolCaller:`
+                - `class BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `class BetaServerToolCaller20260120:`
+                - `class BetaServerToolCaller20260120`
 
-            - `class BetaWebSearchToolResultBlockParam:`
+            - `class BetaWebSearchToolResultBlockParam`
 
               - `JsonValue type = "web_search_tool_result"`
 
@@ -836,7 +838,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> pageAge`
 
-                - `class BetaWebSearchToolRequestError:`
+                - `class BetaWebSearchToolRequestError`
 
                   - `JsonValue type = "web_search_tool_result_error"`
 
@@ -864,23 +866,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                - `class BetaDirectCaller:`
+                - `class BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `class BetaServerToolCaller:`
+                - `class BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `class BetaServerToolCaller20260120:`
+                - `class BetaServerToolCaller20260120`
 
-            - `class BetaWebFetchToolResultBlockParam:`
+            - `class BetaWebFetchToolResultBlockParam`
 
               - `JsonValue type = "web_fetch_tool_result"`
 
               - `Content content`
 
-                - `class BetaWebFetchToolResultErrorBlockParam:`
+                - `class BetaWebFetchToolResultErrorBlockParam`
 
                   - `JsonValue type = "web_fetch_tool_result_error"`
 
@@ -906,7 +908,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `CONTENT_TOO_LARGE("content_too_large")`
 
-                - `class BetaWebFetchBlockParam:`
+                - `class BetaWebFetchBlockParam`
 
                   - `JsonValue type = "web_fetch_result"`
 
@@ -930,23 +932,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Caller> caller`
 
-                - `class BetaDirectCaller:`
+                - `class BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `class BetaServerToolCaller:`
+                - `class BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `class BetaServerToolCaller20260120:`
+                - `class BetaServerToolCaller20260120`
 
-            - `class BetaAdvisorToolResultBlockParam:`
+            - `class BetaAdvisorToolResultBlockParam`
 
               - `JsonValue type = "advisor_tool_result"`
 
               - `Content content`
 
-                - `class BetaAdvisorToolResultErrorParam:`
+                - `class BetaAdvisorToolResultErrorParam`
 
                   - `JsonValue type = "advisor_tool_result_error"`
 
@@ -966,7 +968,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `MODEL_NOT_FOUND("model_not_found")`
 
-                - `class BetaAdvisorResultBlockParam:`
+                - `class BetaAdvisorResultBlockParam`
 
                   - `JsonValue type = "advisor_result"`
 
@@ -974,7 +976,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> stopReason`
 
-                - `class BetaAdvisorRedactedResultBlockParam:`
+                - `class BetaAdvisorRedactedResultBlockParam`
 
                   - `JsonValue type = "advisor_redacted_result"`
 
@@ -992,13 +994,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaCodeExecutionToolResultBlockParam:`
+            - `class BetaCodeExecutionToolResultBlockParam`
 
               - `JsonValue type = "code_execution_tool_result"`
 
               - `BetaCodeExecutionToolResultBlockParamContent content`
 
-                - `class BetaCodeExecutionToolResultErrorParam:`
+                - `class BetaCodeExecutionToolResultErrorParam`
 
                   - `JsonValue type = "code_execution_tool_result_error"`
 
@@ -1012,7 +1014,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `EXECUTION_TIME_EXCEEDED("execution_time_exceeded")`
 
-                - `class BetaCodeExecutionResultBlockParam:`
+                - `class BetaCodeExecutionResultBlockParam`
 
                   - `JsonValue type = "code_execution_result"`
 
@@ -1028,7 +1030,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String stdout`
 
-                - `class BetaEncryptedCodeExecutionResultBlockParam:`
+                - `class BetaEncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -1054,13 +1056,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaBashCodeExecutionToolResultBlockParam:`
+            - `class BetaBashCodeExecutionToolResultBlockParam`
 
               - `JsonValue type = "bash_code_execution_tool_result"`
 
               - `Content content`
 
-                - `class BetaBashCodeExecutionToolResultErrorParam:`
+                - `class BetaBashCodeExecutionToolResultErrorParam`
 
                   - `JsonValue type = "bash_code_execution_tool_result_error"`
 
@@ -1076,7 +1078,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `OUTPUT_FILE_TOO_LARGE("output_file_too_large")`
 
-                - `class BetaBashCodeExecutionResultBlockParam:`
+                - `class BetaBashCodeExecutionResultBlockParam`
 
                   - `JsonValue type = "bash_code_execution_result"`
 
@@ -1100,13 +1102,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaTextEditorCodeExecutionToolResultBlockParam:`
+            - `class BetaTextEditorCodeExecutionToolResultBlockParam`
 
               - `JsonValue type = "text_editor_code_execution_tool_result"`
 
               - `Content content`
 
-                - `class BetaTextEditorCodeExecutionToolResultErrorParam:`
+                - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
                   - `JsonValue type = "text_editor_code_execution_tool_result_error"`
 
@@ -1124,7 +1126,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> errorMessage`
 
-                - `class BetaTextEditorCodeExecutionViewResultBlockParam:`
+                - `class BetaTextEditorCodeExecutionViewResultBlockParam`
 
                   - `JsonValue type = "text_editor_code_execution_view_result"`
 
@@ -1144,13 +1146,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<Long> totalLines`
 
-                - `class BetaTextEditorCodeExecutionCreateResultBlockParam:`
+                - `class BetaTextEditorCodeExecutionCreateResultBlockParam`
 
                   - `JsonValue type = "text_editor_code_execution_create_result"`
 
                   - `boolean isFileUpdate`
 
-                - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam:`
+                - `class BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
                   - `JsonValue type = "text_editor_code_execution_str_replace_result"`
 
@@ -1172,13 +1174,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaToolSearchToolResultBlockParam:`
+            - `class BetaToolSearchToolResultBlockParam`
 
               - `JsonValue type = "tool_search_tool_result"`
 
               - `Content content`
 
-                - `class BetaToolSearchToolResultErrorParam:`
+                - `class BetaToolSearchToolResultErrorParam`
 
                   - `JsonValue type = "tool_search_tool_result_error"`
 
@@ -1194,7 +1196,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `Optional<String> errorMessage`
 
-                - `class BetaToolSearchToolSearchResultBlockParam:`
+                - `class BetaToolSearchToolSearchResultBlockParam`
 
                   - `JsonValue type = "tool_search_tool_search_result"`
 
@@ -1218,7 +1220,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaMcpToolUseBlockParam:`
+            - `class BetaMcpToolUseBlockParam`
 
               - `JsonValue type = "mcp_tool_use"`
 
@@ -1238,7 +1240,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaRequestMcpToolResultBlockParam:`
+            - `class BetaRequestMcpToolResultBlockParam`
 
               - `JsonValue type = "mcp_tool_result"`
 
@@ -1270,7 +1272,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Optional<Boolean> isError`
 
-            - `class BetaContainerUploadBlockParam:`
+            - `class BetaContainerUploadBlockParam`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -1283,7 +1285,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaCompactionBlockParam:`
+            - `class BetaCompactionBlockParam`
 
               A compaction block containing summary of previous context.
 
@@ -1307,7 +1309,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `class BetaRequestToolAdditionBlock:`
+              - `Optional<String> signature`
+
+                The block's signature as returned, to be sent back verbatim
+
+            - `class BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
 
@@ -1319,7 +1325,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Tool tool`
 
-                - `class BetaToolChangeToolReference:`
+                - `class BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -1332,7 +1338,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `class BetaToolChangeMcpToolReference:`
+                - `class BetaToolChangeMcpToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -1343,7 +1349,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `String serverName`
 
-                - `class BetaToolChangeMcpToolsetReference:`
+                - `class BetaToolChangeMcpToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1355,7 +1361,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaRequestToolRemovalBlock:`
+            - `class BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -1367,19 +1373,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `Tool tool`
 
-                - `class BetaToolChangeToolReference:`
+                - `class BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `class BetaToolChangeMcpToolReference:`
+                - `class BetaToolChangeMcpToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `class BetaToolChangeMcpToolsetReference:`
+                - `class BetaToolChangeMcpToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1387,7 +1393,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BetaFallbackBlockParam:`
+            - `class BetaFallbackBlockParam`
 
               A `fallback` block echoed back from a prior response.
 
@@ -1539,11 +1545,30 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+      - `Optional<BetaCompactionConfig> compaction`
+
+        Compact the whole conversation and return a signed `compaction` block,
+        alone, that a later request sends back first in `messages`, in place of
+        the messages it summarizes. There is no trigger and no pause flag: sending
+        the parameter compacts, and nothing is sampled after the block.
+
+        The summarization prompt is the server's own unless `instructions` are
+        given, which then replace it for this request; a value that is empty or
+        only whitespace counts as absent.
+
+        - `JsonValue type = "summarize"`
+
+        - `Optional<String> instructions`
+
+          Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+          maxLength: 16384
+
       - `Optional<Container> container`
 
         Container identifier for reuse across requests.
 
-        - `class BetaContainerParams:`
+        - `class BetaContainerParams`
 
           Container parameters with skills to be loaded.
 
@@ -1591,7 +1616,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           minItems: 0
 
-          - `class BetaClearToolUses20250919Edit:`
+          - `class BetaClearToolUses20250919Edit`
 
             - `JsonValue type = "clear_tool_uses_20250919"`
 
@@ -1631,7 +1656,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Condition that triggers the context management strategy
 
-              - `class BetaInputTokensTrigger:`
+              - `class BetaInputTokensTrigger`
 
                 - `JsonValue type = "input_tokens"`
 
@@ -1639,7 +1664,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-              - `class BetaToolUsesTrigger:`
+              - `class BetaToolUsesTrigger`
 
                 - `JsonValue type = "tool_uses"`
 
@@ -1647,7 +1672,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-          - `class BetaClearThinking20251015Edit:`
+          - `class BetaClearThinking20251015Edit`
 
             - `JsonValue type = "clear_thinking_20251015"`
 
@@ -1655,7 +1680,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `class BetaThinkingTurns:`
+              - `class BetaThinkingTurns`
 
                 - `JsonValue type = "thinking_turns"`
 
@@ -1663,13 +1688,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minimum: 1
 
-              - `class BetaAllThinkingTurns:`
+              - `class BetaAllThinkingTurns`
 
                 - `JsonValue type = "all"`
 
               - `JsonValue`
 
-          - `class BetaCompact20260112Edit:`
+          - `class BetaCompact20260112Edit`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -1723,7 +1748,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `String`
 
-        - `class BetaFallbackCreditTokenParam:`
+        - `class BetaFallbackCreditTokenParam`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -1817,7 +1842,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `Optional<Thinking> thinking`
 
-            - `class BetaThinkingConfigEnabled:`
+            - `class BetaThinkingConfigEnabled`
 
               - `JsonValue type = "enabled"`
 
@@ -1859,11 +1884,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `UPDATES("updates")`
 
-            - `class BetaThinkingConfigDisabled:`
+            - `class BetaThinkingConfigDisabled`
 
               - `JsonValue type = "disabled"`
 
-            - `class BetaThinkingConfigAdaptive:`
+            - `class BetaThinkingConfigAdaptive`
 
               - `JsonValue type = "adaptive"`
 
@@ -1987,17 +2012,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-        - `class BetaThinkingConfigEnabled:`
+        - `class BetaThinkingConfigEnabled`
 
-        - `class BetaThinkingConfigDisabled:`
+        - `class BetaThinkingConfigDisabled`
 
-        - `class BetaThinkingConfigAdaptive:`
+        - `class BetaThinkingConfigAdaptive`
 
       - `Optional<BetaToolChoice> toolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `class BetaToolChoiceAuto:`
+        - `class BetaToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -2009,7 +2034,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `class BetaToolChoiceAny:`
+        - `class BetaToolChoiceAny`
 
           The model will use any available tools.
 
@@ -2021,7 +2046,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `class BetaToolChoiceTool:`
+        - `class BetaToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -2037,7 +2062,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `class BetaToolChoiceNone:`
+        - `class BetaToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -2107,7 +2132,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-        - `class BetaTool:`
+        - `class BetaTool`
 
           - `Optional<Type> type`
 
@@ -2165,7 +2190,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolBash20241022:`
+        - `class BetaToolBash20241022`
 
           - `JsonValue type = "bash_20241022"`
 
@@ -2199,7 +2224,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolBash20250124:`
+        - `class BetaToolBash20250124`
 
           - `JsonValue type = "bash_20250124"`
 
@@ -2233,7 +2258,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaCodeExecutionTool20250522:`
+        - `class BetaCodeExecutionTool20250522`
 
           - `JsonValue type = "code_execution_20250522"`
 
@@ -2265,7 +2290,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaCodeExecutionTool20250825:`
+        - `class BetaCodeExecutionTool20250825`
 
           - `JsonValue type = "code_execution_20250825"`
 
@@ -2297,7 +2322,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaCodeExecutionTool20260120:`
+        - `class BetaCodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -2331,7 +2356,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaCodeExecutionTool20260521:`
+        - `class BetaCodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -2365,7 +2390,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaBrowserToolset20260801:`
+        - `class BetaBrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -2759,7 +2784,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `class BetaToolComputerUse20241022:`
+        - `class BetaToolComputerUse20241022`
 
           - `JsonValue type = "computer_20241022"`
 
@@ -2811,7 +2836,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaMemoryTool20250818:`
+        - `class BetaMemoryTool20250818`
 
           - `JsonValue type = "memory_20250818"`
 
@@ -2845,7 +2870,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolComputerUse20250124:`
+        - `class BetaToolComputerUse20250124`
 
           - `JsonValue type = "computer_20250124"`
 
@@ -2897,7 +2922,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolTextEditor20241022:`
+        - `class BetaToolTextEditor20241022`
 
           - `JsonValue type = "text_editor_20241022"`
 
@@ -2931,7 +2956,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolComputerUse20251124:`
+        - `class BetaToolComputerUse20251124`
 
           - `JsonValue type = "computer_20251124"`
 
@@ -2987,7 +3012,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaComputerToolset20260801:`
+        - `class BetaComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -3217,7 +3242,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `class BetaToolTextEditor20250124:`
+        - `class BetaToolTextEditor20250124`
 
           - `JsonValue type = "text_editor_20250124"`
 
@@ -3251,7 +3276,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolTextEditor20250429:`
+        - `class BetaToolTextEditor20250429`
 
           - `JsonValue type = "text_editor_20250429"`
 
@@ -3285,7 +3310,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolTextEditor20250728:`
+        - `class BetaToolTextEditor20250728`
 
           - `JsonValue type = "text_editor_20250728"`
 
@@ -3325,7 +3350,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaWebSearchTool20250305:`
+        - `class BetaWebSearchTool20250305`
 
           - `JsonValue type = "web_search_20250305"`
 
@@ -3401,7 +3426,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               maxLength: 255, minLength: 1
 
-        - `class BetaWebFetchTool20250910:`
+        - `class BetaWebFetchTool20250910`
 
           - `JsonValue type = "web_fetch_20250910"`
 
@@ -3457,7 +3482,98 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaWebSearchTool20260209:`
+          - `Optional<BetaWebFetchUrlSources> urlSources`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `Optional<ClientToolResults> clientToolResults`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `class BetaWebFetchUrlSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `JsonValue type = "all"`
+
+              - `class BetaWebFetchUrlSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `JsonValue type = "none"`
+
+              - `class BetaWebFetchUrlSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `JsonValue type = "only"`
+
+                - `List<BetaWebFetchUrlSourceToolReference> tools`
+
+                  - `JsonValue type = "tool_reference"`
+
+                  - `String name`
+
+              - `class BetaWebFetchUrlSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `JsonValue type = "except"`
+
+                - `List<BetaWebFetchUrlSourceToolReference> tools`
+
+                  - `JsonValue type = "tool_reference"`
+
+                  - `String name`
+
+            - `Optional<ServerToolResults> serverToolResults`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `class BetaWebFetchUrlSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `class BetaWebFetchUrlSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `class BetaWebFetchUrlSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `class BetaWebFetchUrlSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `Optional<UserInput> userInput`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `class BetaWebFetchUrlSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `class BetaWebFetchUrlSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `class BetaWebSearchTool20260209`
 
           - `JsonValue type = "web_search_20260209"`
 
@@ -3507,7 +3623,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `class BetaWebFetchTool20260209:`
+        - `class BetaWebFetchTool20260209`
 
           - `JsonValue type = "web_fetch_20260209"`
 
@@ -3563,7 +3679,16 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaWebFetchTool20260309:`
+          - `Optional<BetaWebFetchUrlSources> urlSources`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `class BetaWebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -3621,11 +3746,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `Optional<BetaWebFetchUrlSources> urlSources`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `Optional<Boolean> useCache`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `class BetaWebSearchTool20260318:`
+        - `class BetaWebSearchTool20260318`
 
           - `JsonValue type = "web_search_20260318"`
 
@@ -3683,7 +3817,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `class BetaWebFetchTool20260318:`
+        - `class BetaWebFetchTool20260318`
 
           - `JsonValue type = "web_fetch_20260318"`
 
@@ -3747,11 +3881,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `Optional<BetaWebFetchUrlSources> urlSources`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `Optional<Boolean> useCache`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `class BetaAdvisorTool20260301:`
+        - `class BetaAdvisorTool20260301`
 
           - `JsonValue type = "advisor_20260301"`
 
@@ -3805,7 +3948,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolSearchToolBm25_20251119:`
+        - `class BetaToolSearchToolBm25_20251119`
 
           - `Type type`
 
@@ -3841,7 +3984,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaToolSearchToolRegex20251119:`
+        - `class BetaToolSearchToolRegex20251119`
 
           - `Type type`
 
@@ -3877,7 +4020,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `class BetaMcpToolset:`
+        - `class BetaMcpToolset`
 
           Configuration for a group of tools from an MCP server.
 
@@ -3958,7 +4101,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `class BetaMessageBatch:`
+- `class BetaMessageBatch`
 
   - `JsonValue type = "message_batch"`
 

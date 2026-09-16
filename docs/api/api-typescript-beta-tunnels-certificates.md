@@ -39,7 +39,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -131,6 +131,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -139,7 +141,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 ### Returns
 
-- `BetaTunnelCertificate`
+- `interface BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -231,7 +233,7 @@ Fetches a tunnel certificate by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -323,6 +325,8 @@ Fetches a tunnel certificate by ID.
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -331,7 +335,7 @@ Fetches a tunnel certificate by ID.
 
 ### Returns
 
-- `BetaTunnelCertificate`
+- `interface BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -434,7 +438,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -526,6 +530,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -534,7 +540,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 ### Returns
 
-- `BetaTunnelCertificate`
+- `interface BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -630,7 +636,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -722,6 +728,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -730,7 +738,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 ### Returns
 
-- `BetaTunnelCertificate`
+- `interface BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -801,7 +809,7 @@ console.log(betaTunnelCertificate.id);
 
 ### Beta Tunnel Certificate
 
-- `BetaTunnelCertificate`
+- `interface BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 

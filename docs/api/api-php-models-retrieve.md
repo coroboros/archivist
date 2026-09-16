@@ -33,7 +33,7 @@ The Models API response can be used to determine information about a specific mo
 
 ## Returns
 
-- `ModelInfo`
+- `class ModelInfo`
 
   - `"model" type`
 

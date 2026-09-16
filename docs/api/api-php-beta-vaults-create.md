@@ -35,7 +35,7 @@ Create Vault
 
 ## Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 

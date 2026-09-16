@@ -39,7 +39,7 @@ Update Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -131,6 +131,8 @@ Update Session Resource
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -139,11 +141,11 @@ Update Session Resource
 
 ## Returns
 
-- `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
+- `type ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
 
   The updated session resource.
 
-  - `BetaManagedAgentsGitHubRepositoryResource`
+  - `interface BetaManagedAgentsGitHubRepositoryResource`
 
     - `type: "github_repository"`
 
@@ -167,7 +169,7 @@ Update Session Resource
 
     - `checkout?: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | null`
 
-      - `BetaManagedAgentsBranchCheckout`
+      - `interface BetaManagedAgentsBranchCheckout`
 
         - `type: "branch"`
 
@@ -177,7 +179,7 @@ Update Session Resource
 
           minLength: 1, maxLength: 255
 
-      - `BetaManagedAgentsCommitCheckout`
+      - `interface BetaManagedAgentsCommitCheckout`
 
         - `type: "commit"`
 
@@ -187,7 +189,7 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-  - `BetaManagedAgentsFileResource`
+  - `interface BetaManagedAgentsFileResource`
 
     - `type: "file"`
 
@@ -209,7 +211,7 @@ Update Session Resource
 
       format: date-time
 
-  - `BetaManagedAgentsMemoryStoreResource`
+  - `interface BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 

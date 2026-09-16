@@ -29,7 +29,7 @@ Get User Profile
 
 ## Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 

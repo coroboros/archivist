@@ -37,7 +37,7 @@ List Session Threads
 
 ## Returns
 
-- `ManagedAgentsSessionThread`
+- `class ManagedAgentsSessionThread`
 
   - `Type type`
 

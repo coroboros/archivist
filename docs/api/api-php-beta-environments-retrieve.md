@@ -29,7 +29,7 @@ Retrieve a specific environment by ID.
 
 ## Returns
 
-- `BetaEnvironment`
+- `class BetaEnvironment`
 
   - `"environment" type`
 

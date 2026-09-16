@@ -69,7 +69,7 @@ List memory versions
 
 ## Returns
 
-- `ManagedAgentsMemoryVersion`
+- `class ManagedAgentsMemoryVersion`
 
   - `Type type`
 

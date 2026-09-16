@@ -50,7 +50,7 @@ List Skills
 
 ## Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 

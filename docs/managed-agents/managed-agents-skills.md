@@ -1,5 +1,5 @@
 ---
-title: "Create a custom skill"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/managed-agents/skills"
 category: "managed-agents"
 generated: true
@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/managed-agents/skills
 description: Attach pre-built or custom skills to an agent in Claude Managed Agents to give it reusable, filesystem-based expertise for domain-specific workflows.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
+
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) overview.
 
 Skills reach your agent in two ways: attach them through the agent's `skills` array, or [load them from a GitHub repository](./managed-agents-skills.md#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
@@ -18,10 +22,6 @@ Skills reach your agent in two ways: attach them through the agent's `skills` ar
 * **Custom skills:** Skills you author and upload to your workspace.
 
 To learn how to author custom skills, see [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and [Skill authoring best practices](../agents-and-tools/agents-and-tools-agent-skills-best-practices.md). To upload a custom skill to your workspace, see [Create a custom skill](./managed-agents-skills.md#create-a-custom-skill).
-
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
-</Note>
 
 ## Create a custom skill
 

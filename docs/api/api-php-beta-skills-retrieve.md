@@ -33,7 +33,7 @@ Get Skill
 
 ## Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 

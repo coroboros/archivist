@@ -31,7 +31,7 @@ Archive Session Thread
 
 ## Returns
 
-- `ManagedAgentsSessionThread`
+- `class ManagedAgentsSessionThread`
 
   - `Type type`
 

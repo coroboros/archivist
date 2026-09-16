@@ -37,7 +37,7 @@ Delete a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -129,6 +129,8 @@ Delete a memory
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -137,7 +139,7 @@ Delete a memory
 
 ## Returns
 
-- `BetaManagedAgentsDeletedMemory`
+- `interface BetaManagedAgentsDeletedMemory`
 
   Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 

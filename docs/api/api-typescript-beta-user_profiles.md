@@ -113,7 +113,7 @@ Create User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -205,6 +205,8 @@ Create User Profile
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -213,7 +215,7 @@ Create User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `interface BetaUserProfile`
 
   - `type: "user_profile"`
 
@@ -411,7 +413,7 @@ List User Profiles
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -503,6 +505,8 @@ List User Profiles
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -511,7 +515,7 @@ List User Profiles
 
 ### Returns
 
-- `BetaUserProfile`
+- `interface BetaUserProfile`
 
   - `type: "user_profile"`
 
@@ -691,7 +695,7 @@ Get User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -783,6 +787,8 @@ Get User Profile
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -791,7 +797,7 @@ Get User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `interface BetaUserProfile`
 
   - `type: "user_profile"`
 
@@ -1051,7 +1057,7 @@ Update User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1143,6 +1149,8 @@ Update User Profile
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1151,7 +1159,7 @@ Update User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `interface BetaUserProfile`
 
   - `type: "user_profile"`
 
@@ -1327,7 +1335,7 @@ Create Enrollment URL
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1419,6 +1427,8 @@ Create Enrollment URL
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1427,7 +1437,7 @@ Create Enrollment URL
 
 ### Returns
 
-- `BetaUserProfileEnrollmentURL`
+- `interface BetaUserProfileEnrollmentURL`
 
   - `type: "enrollment_url"`
 
@@ -1473,7 +1483,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 ### Beta User Profile
 
-- `BetaUserProfile`
+- `interface BetaUserProfile`
 
   - `type: "user_profile"`
 
@@ -1585,7 +1595,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 ### Beta User Profile Enrollment URL
 
-- `BetaUserProfileEnrollmentURL`
+- `interface BetaUserProfileEnrollmentURL`
 
   - `type: "enrollment_url"`
 
@@ -1603,7 +1613,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 ### Beta User Profile External User Details
 
-- `BetaUserProfileExternalUserDetails`
+- `interface BetaUserProfileExternalUserDetails`
 
   Details about the entity this profile represents, as the platform states them. Anthropic does not verify them. Every field is present, `null` until the platform supplies a value.
 
@@ -1653,7 +1663,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 ### Beta User Profile External User Details Params
 
-- `BetaUserProfileExternalUserDetailsParams`
+- `interface BetaUserProfileExternalUserDetailsParams`
 
   - `account_status?: "active" | "suspended" | "blocked" | null`
 
@@ -1707,7 +1717,7 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 ### Beta User Profile Trust Grant
 
-- `BetaUserProfileTrustGrant`
+- `interface BetaUserProfileTrustGrant`
 
   - `status: "active" | "pending" | "rejected"`
 

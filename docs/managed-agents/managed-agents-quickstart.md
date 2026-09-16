@@ -1,5 +1,5 @@
 ---
-title: "Core concepts"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/managed-agents/quickstart"
 category: "managed-agents"
 generated: true
@@ -9,6 +9,10 @@ title: Get started with Claude Managed Agents
 url: https://platform.claude.com/docs/en/managed-agents/quickstart
 description: Create your first autonomous agent.
 ---
+
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
@@ -43,7 +47,7 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.30.0
+    VERSION=1.33.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -130,10 +134,6 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 ```
 
 ## Create your first session
-
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
-</Note>
 
 <Steps>
   <Step title="Create an agent">

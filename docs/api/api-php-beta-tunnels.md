@@ -35,7 +35,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 ### Returns
 
-- `BetaTunnel`
+- `class BetaTunnel`
 
   - `"tunnel" type`
 
@@ -112,7 +112,7 @@ Fetches a tunnel by ID.
 
 ### Returns
 
-- `BetaTunnel`
+- `class BetaTunnel`
 
   - `"tunnel" type`
 
@@ -199,7 +199,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 ### Returns
 
-- `BetaTunnel`
+- `class BetaTunnel`
 
   - `"tunnel" type`
 
@@ -283,7 +283,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 ### Returns
 
-- `BetaTunnel`
+- `class BetaTunnel`
 
   - `"tunnel" type`
 
@@ -360,7 +360,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 ### Returns
 
-- `BetaTunnelToken`
+- `class BetaTunnelToken`
 
   - `"tunnel_token" type`
 
@@ -426,7 +426,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 ### Returns
 
-- `BetaTunnelToken`
+- `class BetaTunnelToken`
 
   - `"tunnel_token" type`
 
@@ -471,7 +471,7 @@ var_dump($betaTunnelToken);
 
 ### Beta Tunnel
 
-- `BetaTunnel`
+- `class BetaTunnel`
 
   - `"tunnel" type`
 
@@ -497,7 +497,7 @@ var_dump($betaTunnelToken);
 
 ### Beta Tunnel Token
 
-- `BetaTunnelToken`
+- `class BetaTunnelToken`
 
   - `"tunnel_token" type`
 
@@ -537,7 +537,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 #### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -622,7 +622,7 @@ Fetches a tunnel certificate by ID.
 
 #### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -717,7 +717,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 #### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 
@@ -809,7 +809,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 #### Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 

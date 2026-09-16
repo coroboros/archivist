@@ -29,7 +29,7 @@ Delete Vault
 
 ## Returns
 
-- `BetaManagedAgentsDeletedVault`
+- `class BetaManagedAgentsDeletedVault`
 
   - `Type type`
 

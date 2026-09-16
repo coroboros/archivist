@@ -29,7 +29,7 @@ Retrieve a memory store
 
 ## Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 

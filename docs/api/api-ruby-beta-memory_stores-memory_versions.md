@@ -85,7 +85,7 @@ List memory versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -176,6 +176,8 @@ List memory versions
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -366,7 +368,7 @@ Retrieve a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -457,6 +459,8 @@ Retrieve a memory version
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -637,7 +641,7 @@ Redact a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -728,6 +732,8 @@ Redact a memory version
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `:"compact-2026-09-04"`
 
 - `workspace_id: String`
 
@@ -892,7 +898,7 @@ puts(beta_managed_agents_memory_version)
 
 ### Beta Managed Agents Actor
 
-- `BetaManagedAgentsActor = BetaManagedAgentsSessionActor | BetaManagedAgentsAPIActor | BetaManagedAgentsUserActor | BetaManagedAgentsServiceAccountActor`
+- `type BetaManagedAgentsActor = BetaManagedAgentsSessionActor | BetaManagedAgentsAPIActor | BetaManagedAgentsUserActor | BetaManagedAgentsServiceAccountActor`
 
   Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
 
@@ -1076,7 +1082,7 @@ puts(beta_managed_agents_memory_version)
 
 ### Beta Managed Agents Memory Version Operation
 
-- `BetaManagedAgentsMemoryVersionOperation = :created | :modified | :deleted`
+- `type BetaManagedAgentsMemoryVersionOperation = :created | :modified | :deleted`
 
   The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 

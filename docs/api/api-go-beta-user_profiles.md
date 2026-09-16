@@ -155,6 +155,8 @@ Create User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -163,7 +165,7 @@ Create User Profile
 
 ### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -464,6 +466,8 @@ List User Profiles
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -472,7 +476,7 @@ List User Profiles
 
 ### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -754,6 +758,8 @@ Get User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -762,7 +768,7 @@ Get User Profile
 
 ### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -1077,6 +1083,8 @@ Update User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1085,7 +1093,7 @@ Update User Profile
 
 ### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -1366,6 +1374,8 @@ Create Enrollment URL
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1374,7 +1384,7 @@ Create Enrollment URL
 
 ### Returns
 
-- `type BetaUserProfileEnrollmentURL struct{…}`
+- `type BetaUserProfileEnrollmentURL`
 
   - `Type BetaUserProfileEnrollmentURLType`
 
@@ -1433,7 +1443,7 @@ func main() {
 
 ### Beta User Profile
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -1545,7 +1555,7 @@ func main() {
 
 ### Beta User Profile Enrollment URL
 
-- `type BetaUserProfileEnrollmentURL struct{…}`
+- `type BetaUserProfileEnrollmentURL`
 
   - `Type BetaUserProfileEnrollmentURLType`
 
@@ -1563,7 +1573,7 @@ func main() {
 
 ### Beta User Profile External User Details
 
-- `type BetaUserProfileExternalUserDetails struct{…}`
+- `type BetaUserProfileExternalUserDetails`
 
   Details about the entity this profile represents, as the platform states them. Anthropic does not verify them. Every field is present, `null` until the platform supplies a value.
 
@@ -1613,7 +1623,7 @@ func main() {
 
 ### Beta User Profile External User Details Params
 
-- `type BetaUserProfileExternalUserDetailsParamsResp struct{…}`
+- `type BetaUserProfileExternalUserDetailsParamsResp`
 
   - `AccountStatus BetaUserProfileExternalUserDetailsParamsAccountStatus Optional`
 
@@ -1667,7 +1677,7 @@ func main() {
 
 ### Beta User Profile Trust Grant
 
-- `type BetaUserProfileTrustGrant struct{…}`
+- `type BetaUserProfileTrustGrant`
 
   - `Status BetaUserProfileTrustGrantStatus`
 

@@ -1,5 +1,5 @@
 ---
-title: "Permission policy types"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/managed-agents/permission-policies"
 category: "managed-agents"
 generated: true
@@ -10,11 +10,11 @@ url: https://platform.claude.com/docs/en/managed-agents/permission-policies
 description: Control when agent and MCP tools execute.
 ---
 
-Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically, wait for your approval, or have each call evaluated by the server. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
-</Note>
+Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically, wait for your approval, or have each call evaluated by the server. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
 
 ## Permission policy types
 
@@ -1077,7 +1077,7 @@ A tool call evaluates to `ask` under an `always_ask` policy, or under `auto` whe
 
 If you send a `user.tool_confirmation` for an event whose `evaluated_permission` is not `ask`, the API rejects it with a 400 error. That includes calls the server denied under `auto`: your client cannot override them.
 
-To answer interactively instead, use `ant beta:sessions connect`, which shows the waiting call and sends this event when you allow or deny it. See [Connect to a Managed Agents session from your terminal](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/sessions-connect.md#follow-and-steer-the-session).
+To answer interactively instead, use `ant beta:sessions connect`, which shows the waiting call and sends this event when you allow or deny it. See [Connect to a Managed Agents session from your terminal](../general/general-cli-sdks-libraries-cli-sessions-connect.md#follow-and-steer-the-session).
 
 In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](./managed-agents-events-and-streaming.md#integrating-events) guide, or [subscribe to webhooks](./managed-agents-webhooks.md) to be notified when a session pauses for input.
 

@@ -37,7 +37,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 

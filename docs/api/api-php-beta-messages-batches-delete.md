@@ -35,7 +35,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Returns
 
-- `DeletedMessageBatch`
+- `class DeletedMessageBatch`
 
   - `"message_batch_deleted" type`
 
