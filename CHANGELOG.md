@@ -1,5 +1,25 @@
 # Changelog
 
+## 🤖 v1.5.176 - 17/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-sessions.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.175 - 17/09/2026
 
 File Changes:
