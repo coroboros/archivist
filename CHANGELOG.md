@@ -1,5 +1,123 @@
 # Changelog
 
+## 🤖 v1.5.177 - 18/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-runner.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Modified: `docs/api/api-compliance-organizations-settings-retrieve.md`
+- Modified: `docs/api/api-compliance-organizations-settings.md`
+- Modified: `docs/api/api-compliance-organizations.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-sdks-java.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-cache-diagnostics.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-handling-stop-reasons.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-effort-example.md`
+- Modified: `docs/build-with-claude/build-with-claude-streaming.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp-quickstart.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-platforms.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugin-relevance.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-claude_api_primer.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-java.md`
+- Modified: `docs/general/general-models-opus-5-migration-guide.md`
+- Modified: `docs/general/general-models-opus-5-overview.md`
+- Modified: `docs/general/general-models-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-migration-guide.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-integration-patterns.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-multiagent-orchestration.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-README.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-develop-tests.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-eval-tool.md`
+- Added: `docs/code/code-claude-projects.md`
+
+
 ## 🤖 v1.5.176 - 17/09/2026
 
 File Changes:

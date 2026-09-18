@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | Test & Evaluate). It is updated automatically._
 
-**Last updated:** Wed, 16 Sep 2026 03:23:53 GMT
+**Last updated:** Fri, 18 Sep 2026 03:15:29 GMT
 
 ---
 
@@ -10,10 +10,10 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 - [Strengthen Guardrails | Increase Consistency](./test-and-evaluate-strengthen-guardrails-increase-consistency.md)
 - [Strengthen Guardrails | Reduce Hallucinations](./test-and-evaluate-strengthen-guardrails-reduce-hallucinations.md)
-- [Strengthen Guardrails | Reduce Latency](./test-and-evaluate-strengthen-guardrails-reduce-latency.md)
-- [Strengthen Guardrails | Reduce Prompt Leak](./test-and-evaluate-strengthen-guardrails-reduce-prompt-leak.md)
 - [Strengthen Guardrails | Mitigate Jailbreaks](./test-and-evaluate-strengthen-guardrails-mitigate-jailbreaks.md)
 - [Strengthen Guardrails | Handle Streaming Refusals](./test-and-evaluate-strengthen-guardrails-handle-streaming-refusals.md)
+- [Strengthen Guardrails | Reduce Prompt Leak](./test-and-evaluate-strengthen-guardrails-reduce-prompt-leak.md)
+- [Strengthen Guardrails | Reduce Latency](./test-and-evaluate-strengthen-guardrails-reduce-latency.md)
 - [Develop Tests](./test-and-evaluate-develop-tests.md)
 - [Eval Tool](./test-and-evaluate-eval-tool.md)
 
