@@ -1,5 +1,13 @@
 # Changelog
 
+## 🤖 v1.5.178 - 18/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.177 - 18/09/2026
 
 File Changes:
