@@ -41,7 +41,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
 
 Config entries for `web_search` and `web_fetch` also accept domain filters and other web settings; see [Restrict web search and web fetch domains](./managed-agents-tools.md#restrict-web-search-and-web-fetch-domains).
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -264,7 +264,7 @@ The following toolset limits `web_search` to two sites and localizes its results
 
 The following request creates an agent with this toolset and prints the `configs` array from the response:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

@@ -37,7 +37,7 @@ The semantics of a `tools` or `mcp_servers` update are full replacement: the pro
 
 The session must be `idle` to update the agent. To update the agent while the session is running, send a [`user.interrupt` event](./managed-agents-events-and-streaming.md#integrating-events) by itself and wait for the session to become `idle`.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -223,13 +223,12 @@ A session [created with a budget](./managed-agents-sessions.md#set-a-session-bud
 
 ## Retrieving a session
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  retrieved=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
+  curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01")
-  echo "Status: $(jq -r '.status' <<< "$retrieved")"
+    -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
   ```bash CLI
@@ -283,7 +282,7 @@ To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `nul
 
 A `page` cursor is opaque and encodes the `order` of the request that produced it. The `order` query parameter sets the sort direction of the results, `asc` or `desc` by creation time; the default is `desc` (newest first). Reusing a cursor with a different `order` returns a 400 error, as does changing a `created_at` filter so that it excludes the cursor's position. Other query parameters, including the remaining filters and `limit`, can change between paginated requests. For the pagination fields shared across list endpoints, see [Pagination](../api/api-overview.md#pagination).
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   first_page=$(curl -sS --fail-with-body \
     "https://api.anthropic.com/v1/sessions?agent_id=$AGENT_ID&limit=1" \
@@ -540,7 +539,7 @@ A `page` cursor is opaque and encodes the `order` of the request that produced i
 
 Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; to archive one, send a [`user.interrupt` event](./managed-agents-events-and-streaming.md#integrating-events) by itself and wait for the session to become `idle`.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -591,7 +590,7 @@ Delete a session to permanently remove its record, events, and associated sandbo
 
 Memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion. Files you uploaded through the Files API are also unaffected, but files the session itself produced are scoped to it and are permanently deleted along with its filesystem. Download anything you need to keep before deleting the session. An output file written at the end of the last turn can take a few seconds after the session goes idle to appear in the [session's file list](./managed-agents-files.md#listing-and-downloading-session-files), so check that the files you expect are listed first.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

@@ -26,15 +26,14 @@ When creating a deployment, you pass the [session configurations](./managed-agen
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work.
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  DEPLOYMENT_ID=$(
-    curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" \
-      -d @- <<EOF | jq -er '.id'
+  curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<EOF
   {
     "name": "Weekly compliance scan",
     "agent": "$AGENT_ID",
@@ -49,11 +48,10 @@ When creating a deployment, you pass the [session configurations](./managed-agen
     }
   }
   EOF
-  )
   ```
 
   ```bash CLI
-  DEPLOYMENT_ID=$(ant beta:deployments create <<YAML | jq -er '.id'
+  ant beta:deployments create <<YAML
   name: Weekly compliance scan
   agent: $AGENT_ID
   environment_id: $ENVIRONMENT_ID
@@ -67,7 +65,6 @@ When creating a deployment, you pass the [session configurations](./managed-agen
     expression: "0 20 * * 5"
     timezone: America/New_York
   YAML
-  )
   ```
 
   ```python Python
@@ -296,7 +293,7 @@ Successful deployments generate active sessions, and a successful deployment run
 
 List all deployment runs for a deployment as follows:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -385,7 +382,7 @@ List all deployment runs for a deployment as follows:
 
 You can additionally filter on deployment runs with errors:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID&has_error=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -495,7 +492,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -540,7 +537,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 
 **Unpause** resumes the schedule from the next scheduled occurrence. Missed triggers are not backfilled.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -585,7 +582,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 
 **Archive**, unlike **pause**, is terminal: the schedule terminates and the deployment cannot be modified.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -638,7 +635,7 @@ If a deployment's agent has been archived, the deployment is automatically archi
 
 To run a deployment outside its schedule, call the [`run` endpoint](../api/api-beta-deployments-run.md). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
