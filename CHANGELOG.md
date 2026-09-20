@@ -1,5 +1,25 @@
 # Changelog
 
+## 🤖 v1.5.182 - 20/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Added: `docs/code/code-2026-w26.md`
+- Added: `docs/code/code-migration-guide.md`
+- Added: `docs/general/general-cli-sdks-libraries-libraries-apple-foundation-models.md`
+- Added: `docs/general/general-models-sonnet-5-whats-new-sonnet-5.md`
+- Added: `docs/managed-agents/managed-agents-quickstart.md`
+
+
 ## 🤖 v1.5.181 - 20/09/2026
 
 File Changes:
