@@ -1,5 +1,26 @@
 # Changelog
 
+## 🤖 v1.5.181 - 20/09/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Deleted: `docs/api/api-admin-federation_issuers-create.md`
+- Deleted: `docs/api/api-admin-federation_rules-workspaces-list.md`
+- Deleted: `docs/code/code-2026-w26.md`
+- Modified: `docs/code/code-README.md`
+- Deleted: `docs/code/code-migration-guide.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/general/general-README.md`
+- Deleted: `docs/general/general-cli-sdks-libraries-libraries-apple-foundation-models.md`
+- Deleted: `docs/general/general-models-sonnet-5-whats-new-sonnet-5.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Deleted: `docs/managed-agents/managed-agents-quickstart.md`
+
+
 ## 🤖 v1.5.180 - 19/09/2026
 
 File Changes:
