@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.5.183 - 21/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.182 - 20/09/2026
 
 File Changes:
