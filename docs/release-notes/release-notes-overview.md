@@ -149,7 +149,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### July 8, 2026
 
-* You can now set an expiration when you create an API key or an Admin API key in the [Claude Console](https://platform.claude.com/settings/keys). Choose a preset, a custom duration, or **Never**. For keys with a lifetime of at least 7 days, Anthropic emails the creator before expiration. Existing keys are unaffected. The Admin API reports each key's expiration in the [`expires_at`](../api/api-admin-api_keys-list.md) field. See [Authentication](../manage-claude/manage-claude-authentication.md#key-expiration).
+* You can now set an expiration when you create an API key or an Admin API key in the [Claude Console](https://platform.claude.com/settings/keys). Choose a preset, a custom duration, or **Never**. For keys with a lifetime of at least 7 days, Anthropic emails the creator before expiration. Existing keys are unaffected. The Admin API reports each key's expiration in the [`expires_at`](https://platform.claude.com/docs/en/api/admin/api_keys/list.md) field. See [Authentication](../manage-claude/manage-claude-authentication.md#key-expiration).
 
 ### July 2, 2026
 

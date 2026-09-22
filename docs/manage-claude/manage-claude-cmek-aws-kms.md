@@ -134,7 +134,7 @@ How you register the key depends on which product you use.
     </Note>
 
     <Note>
-      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](https://platform.claude.com/docs/en/api/admin-api/workspaces/get-workspace.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
+      **Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. To find it in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read the `compartment_id` field returned by the [Get Workspace](https://platform.claude.com/docs/en/api/admin-api/workspaces/get-workspace.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
 
       Key validation always sends the all-zeros compartment UUID (`00000000-0000-0000-0000-000000000000`) as the encryption context, because validation runs before the key is attached to any workspace. Live traffic sends the compartment ID of each attached workspace.
 
@@ -157,7 +157,7 @@ How you register the key depends on which product you use.
           </Step>
 
           <Step title="Attach the key to a workspace">
-            Open **Settings > Workspaces**, choose the workspace, and open its **Security** tab. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](./manage-claude-cmek.md#how-it-works).
+            In the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](./manage-claude-cmek.md#how-it-works).
           </Step>
         </Steps>
       </Tab>
@@ -580,7 +580,7 @@ On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platfo
 
 The key policy has three statements: your account's root admin statement; a statement that lets the Claude Platform on AWS service principal encrypt, decrypt, and generate data keys; and a separate statement for `kms:DescribeKey`. Both service-principal statements carry a recommended `aws:SourceArn` condition: the service calls your key on behalf of a specific workspace and passes that [workspace's ARN](../api/api-claude-platform-on-aws-iam-actions.md#service-details) as the source ARN, so the pattern shown limits the grant to workspaces in your own AWS account. `DescribeKey` is granted separately because it has no `EncryptionContext` parameter, so an `EncryptionContext` condition on that action would always deny.
 
-If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key) and copy its compartment ID from the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or from the `compartment_id` field returned by the [Get Workspace](https://platform.claude.com/docs/en/api/admin-api/workspaces/get-workspace.md) endpoint. Substitute it for `<compartment-uuid>`. Otherwise, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
+If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key), copy its compartment ID, and substitute it for `<compartment-uuid>`. To find the ID in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read it from the `compartment_id` field returned by the [Get Workspace](https://platform.claude.com/docs/en/api/admin-api/workspaces/get-workspace.md) endpoint. If you don't plan to use the condition, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
 
 ```bash
 export YOUR_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
@@ -646,7 +646,7 @@ You can also create the key from the AWS Console: choose a symmetric key with th
   </Step>
 
   <Step title="Attach the key to a workspace">
-    Attach the key to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](./manage-claude-cmek.md#how-it-works). In the Claude Console, open the workspace and, under **Security**, select the key in **Encryption key**, save, and confirm. You can also select a key when you create a workspace in the Claude Console, but only if your key policy does not yet name specific workspaces (no `EncryptionContext` condition, and the account-wide `aws:SourceArn` pattern rather than individual workspace ARNs), because the workspace's ID and compartment ID are assigned at creation. Once attached, a workspace's key can't be changed.
+    Attach the key to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](./manage-claude-cmek.md#how-it-works). In the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. Under **Encryption key**, select the key, click **Save**, and confirm. You can also select a key when you create a workspace in the Claude Console, but only if your key policy does not yet name specific workspaces (no `EncryptionContext` condition, and the account-wide `aws:SourceArn` pattern rather than individual workspace ARNs), because the workspace's ID and compartment ID are assigned at creation. Once attached, a workspace's key can't be changed.
 
     This is when the key is validated: the attach call checks your principal's access to the key and performs an encrypt/decrypt round against it with the workspace's compartment ID as the encryption context, so a problem with either the key policy or your principal's permissions surfaces as an error on that call. If the attach fails with a KMS access error, check the following:
 

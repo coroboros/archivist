@@ -830,7 +830,7 @@ Archive an issuer:
 
 To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](./manage-claude-wif-admin-api.md#permissions-and-constraints).
 
-For complete parameter details and response schemas, see the [Federation issuers API reference](../api/api-admin-federation_issuers.md).
+For complete parameter details and response schemas, see the [Federation issuers API reference](https://platform.claude.com/docs/en/api/admin/federation_issuers.md).
 
 ## Federation rules
 

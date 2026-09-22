@@ -168,7 +168,7 @@ curl "https://api.anthropic.com/v1/organizations/spend_limits/spl_01AbCdEfGhIjKl
 
 `POST /v1/organizations/spend_limits` sets a per-user spend limit override. This is an upsert keyed on `(scope, period)`: setting a limit for a user and period that already has one overwrites it in place. This endpoint accepts only `scope.type: "user"`; seat-tier, group, and organization-level defaults are configured in claude.ai settings. Requires the `write:spend_limits` scope.
 
-For complete parameter details and response schemas, see [Create a spend limit](../api/api-admin-spend_limits-create.md) in the API reference.
+For complete parameter details and response schemas, see [Create a spend limit](https://platform.claude.com/docs/en/api/admin/spend_limits/create.md) in the API reference.
 
 ```bash cURL
 curl --request POST "https://api.anthropic.com/v1/organizations/spend_limits" \

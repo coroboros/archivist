@@ -139,7 +139,7 @@ curl "https://api.anthropic.com/v1/organizations/users?email=jane@example.com" \
 
 `GET /v1/organizations/users/{user_id}` returns one member by ID. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [Get user](../api/api-admin-users-retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get user](https://platform.claude.com/docs/en/api/admin/users/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -151,7 +151,7 @@ curl "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQr
 
 `POST /v1/organizations/users/{user_id}` sets the member's role to `user` or `managed`. Members holding an administrative role (`owner`, `membership_admin`, or `primary_owner`) cannot be changed through this endpoint, and administrative roles cannot be assigned; both return 400 and are managed in claude.ai organization settings. If your organization's identity provider manages roles (advanced SSO or advanced SCIM provisioning), role updates return 400. Requires the `write:members` scope.
 
-For complete parameter details and response schemas, see [Update user](../api/api-admin-users-update.md) in the API reference.
+For complete parameter details and response schemas, see [Update user](https://platform.claude.com/docs/en/api/admin/users/update.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -293,7 +293,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
 
 `GET /v1/organizations/rbac_groups/{rbac_group_id}` returns one group by ID. Requires the `read:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Get group](../api/api-admin-rbac_groups-retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get group](https://platform.claude.com/docs/en/api/admin/rbac_groups/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
@@ -419,7 +419,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_
 
 `DELETE /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}` removes the member from the group; they remain a member of their organization. The request returns 404 if the user is not a member of the group, and 400 for `scim` groups, whose membership is managed in your identity provider. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Remove group member](../api/api-admin-rbac_groups-members-delete.md) in the API reference.
+For complete parameter details and response schemas, see [Remove group member](https://platform.claude.com/docs/en/api/admin/rbac_groups/members/delete.md) in the API reference.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -444,7 +444,7 @@ Custom roles are read-only through the API: these endpoints catalog your organiz
 
 `GET /v1/organizations/rbac_roles` returns your organization's custom roles. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [List roles](../api/api-admin-rbac_roles-list.md) in the API reference.
+For complete parameter details and response schemas, see [List roles](https://platform.claude.com/docs/en/api/admin/rbac_roles/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
@@ -472,7 +472,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
 
 `GET /v1/organizations/rbac_roles/{rbac_role_id}` returns one role by ID. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [Get role](../api/api-admin-rbac_roles-retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get role](https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv" \

@@ -30,15 +30,7 @@ When you choose "Yes, and don't ask again" and the approval saves permanently, s
 
 Before v2.1.211, Claude Code always saved the rule in the starting directory, so an approval granted in a worktree or subdirectory didn't apply to the rest of the repository. Rules that earlier versions saved in a subdirectory or worktree still apply to sessions started there.
 
-Sometimes a permission prompt offers only a one-time approval, with no "don't ask again" option and no option to allow the action for the rest of the session. Claude Code offers those options only when the prompt can show you everything they would allow, so a rule you save from a prompt covers only what its option named.
-
-When the directory you started Claude Code in is what makes the option's label too long, Claude Code shortens it in the label, replacing your home directory with `~` and then the end of the path with `…`, and keeps the option. You still save the same rule. Claude Code leaves the options out in three cases:
-
-* **Command or edit:** too large to show in full.
-* **Commands or paths the rule would cover:** the label can't fit them all.
-* **Starting directory too long, not shortened:** it contains characters Claude Code can't display safely, or even its start doesn't fit.
-
-Approve the action once, or add the rule yourself in [`/permissions`](#manage-permissions).
+Sometimes a permission prompt offers only a one-time approval, with no "don't ask again" option and no option to allow the action for the rest of the session. Claude Code offers those options only when the prompt can show you everything they would allow, so a rule you save from a prompt covers only what its option named. When a prompt offers only the one-time approval, approve the action once, or add the rule yourself in [`/permissions`](#manage-permissions).
 
 ### Add a comment when you answer a permission prompt
 

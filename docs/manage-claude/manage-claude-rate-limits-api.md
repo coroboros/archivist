@@ -477,10 +477,10 @@ The response only includes overrides, so anything missing from it is inherited f
 * Within a group that is present, a limiter type that is absent from `limits[]` has no workspace override for that limiter. The workspace inherits the organization value for it.
 * For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
-For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](../api/api-admin-workspaces-rate_limits-list.md).
+For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](https://platform.claude.com/docs/en/api/admin/workspaces/rate_limits/list.md).
 
 <Tip>
-  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-admin-workspaces-list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 </Tip>
 
 <CodeGroup>

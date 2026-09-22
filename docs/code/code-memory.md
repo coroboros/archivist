@@ -251,7 +251,7 @@ Personal rules in `~/.claude/rules/` apply to every project on your machine. Use
 └── workflows.md      # Your preferred workflows
 ```
 
-User-level rules are loaded before project rules, giving project rules higher priority.
+Claude Code loads user-level rules before project rules, so a project rule appears later in Claude's context than a user rule. Neither set overrides the other: if a user rule and a project rule conflict, Claude may follow either one, so keep the two consistent.
 
 ### Manage CLAUDE.md for large teams
 

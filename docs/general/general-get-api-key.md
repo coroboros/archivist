@@ -54,7 +54,7 @@ To make your first request, follow the [Quickstart](../api/api-get-started.md), 
 
 ## API keys and the Admin API
 
-The [Admin API](../api/api-admin.md) includes endpoints for managing your organization's API keys programmatically, such as [Retrieve API Key](../api/api-admin-api_keys-retrieve.md) and [List API Keys](../api/api-admin-api_keys-list.md). These endpoints are for organization admins automating key management. They accept an [Admin API key](../manage-claude/manage-claude-admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a specific workspace; workspace keys don't work there. They never return a key's secret value, only a partially redacted hint.
+The [Admin API](../api/api-admin.md) includes endpoints for managing your organization's API keys programmatically, such as [Retrieve API Key](../api/api-admin-api_keys-retrieve.md) and [List API Keys](https://platform.claude.com/docs/en/api/admin/api_keys/list.md). These endpoints are for organization admins automating key management. They accept an [Admin API key](../manage-claude/manage-claude-admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a specific workspace; workspace keys don't work there. They never return a key's secret value, only a partially redacted hint.
 
 <Note>
   The Admin API can't recover a lost key or give you a key to call the Claude API with. To get a usable API key, create one in [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console.

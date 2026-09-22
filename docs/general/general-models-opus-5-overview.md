@@ -119,7 +119,7 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 ## Reference
 
 <CardGroup cols={3}>
-  <Card title="System prompt" icon="text" href="../release-notes/release-notes-system-prompts.md">
+  <Card title="System prompt" icon="text" href="https://platform.claude.com/docs/en/release-notes/system-prompts.md">
     The system prompt Claude Opus 5 uses on claude.ai and the Claude apps.
   </Card>
 
