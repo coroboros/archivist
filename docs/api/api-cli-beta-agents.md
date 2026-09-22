@@ -1458,7 +1458,7 @@ Get Agent
 
 - `--agent-id: string`
 
-  Path param: Path parameter agent_id
+  Path param: Unique identifier of the agent to retrieve.
 
 - `--version: optional number`
 
@@ -2145,7 +2145,7 @@ Update Agent
 
 - `--agent-id: string`
 
-  Path param: Path parameter agent_id
+  Path param: Unique identifier of the agent to update.
 
 - `--description: optional string`
 
@@ -2874,7 +2874,7 @@ Archive Agent
 
 - `--agent-id: string`
 
-  Path parameter agent_id
+  Unique identifier of the agent to archive.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -6459,13 +6459,23 @@ ant beta:agents archive \
 
       - `"low"`
 
+        Low effort. Favors latency over reasoning depth.
+
       - `"medium"`
+
+        Medium effort. Balances latency and reasoning depth.
 
       - `"high"`
 
+        High effort. Favors reasoning depth.
+
       - `"xhigh"`
 
+        Extra-high effort. Not all models accept this level.
+
       - `"max"`
+
+        Maximum effort. Favors reasoning depth over latency.
 
     - `beta_managed_agents_effort_low: object`
 
@@ -7609,7 +7619,7 @@ List Agent Versions
 
 - `--agent-id: string`
 
-  Path param: Path parameter agent_id
+  Path param: Agent ID to list versions for.
 
 - `--limit: optional number`
 

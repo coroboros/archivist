@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Declare MCP servers on the agent"
 source: "https://platform.claude.com/docs/en/managed-agents/mcp-connector"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: MCP connector
 url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
 description: Connect MCP servers to your agents for access to external tools and data sources.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
 

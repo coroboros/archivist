@@ -987,7 +987,11 @@ Create Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -1764,7 +1768,11 @@ List Deployments
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -1902,6 +1910,8 @@ Get Deployment
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment.
 
 - `query BetaDeploymentGetParams`
 
@@ -2497,7 +2507,11 @@ Get Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -2634,6 +2648,8 @@ Update Deployment
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment to update.
 
 - `params BetaDeploymentUpdateParams`
 
@@ -3601,7 +3617,11 @@ Update Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -3738,6 +3758,8 @@ Archive Deployment
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment to archive.
 
 - `body BetaDeploymentArchiveParams`
 
@@ -4333,7 +4355,11 @@ Archive Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -4470,6 +4496,8 @@ Run Deployment Now
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment to run.
 
 - `body BetaDeploymentRunParams`
 
@@ -4868,6 +4896,8 @@ Pause Deployment
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment to pause.
 
 - `body BetaDeploymentPauseParams`
 
@@ -5463,7 +5493,11 @@ Pause Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -5600,6 +5634,8 @@ Unpause Deployment
 ### Parameters
 
 - `deploymentID string`
+
+  Unique identifier of the deployment to unpause.
 
 - `body BetaDeploymentUnpauseParams`
 
@@ -6195,7 +6231,11 @@ Unpause Deployment
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -6867,7 +6907,11 @@ func main() {
 
     - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `UpdatedAt Time`
 
@@ -7543,7 +7587,11 @@ func main() {
 
   - `const BetaManagedAgentsDeploymentStatusActive BetaManagedAgentsDeploymentStatus = "active"`
 
+    The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
   - `const BetaManagedAgentsDeploymentStatusPaused BetaManagedAgentsDeploymentStatus = "paused"`
+
+    The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
 ### Beta Managed Agents Deployment System Message Event
 

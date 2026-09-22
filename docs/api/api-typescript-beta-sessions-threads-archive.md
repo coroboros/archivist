@@ -25,7 +25,7 @@ Archive Session Thread
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -147,7 +147,7 @@ Archive Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `interface BetaManagedAgentsSessionThreadAgent`
 

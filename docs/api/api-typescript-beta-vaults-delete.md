@@ -21,6 +21,8 @@ Delete Vault
 
 - `vaultID: string`
 
+  Unique identifier of the vault to delete.
+
 - `params: VaultDeleteParams`
 
   - `betas?: Array<AnthropicBeta>`

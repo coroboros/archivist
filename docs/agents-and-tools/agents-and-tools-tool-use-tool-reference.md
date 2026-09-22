@@ -46,7 +46,7 @@ When a tool has multiple active versions, the relationship between them varies:
 * **Model-keyed:** `text_editor_20250728` is for Claude 4 and later models and `text_editor_20250124` is for earlier models. The version you use depends on the model you target.
 * **Variant, not version:** `tool_search_tool_regex_20251119` and `tool_search_tool_bm25_20251119` are two search algorithms released together. Neither supersedes the other.
 * **Legacy:** `code_execution_20250522` supports only Python. `code_execution_20250825` adds Bash and file operations.
-* **Successor:** `computer_toolset_20260801` is the stable successor to the beta `computer_20251124` and `computer_20250124` versions, which remain available for existing integrations and for models that don't support the toolset ([Earlier tool versions](./agents-and-tools-tool-use-computer-use-tool.md#earlier-tool-versions)). `browser_toolset_20260801` is the first version of the browser use tool. Both are [client toolsets](./agents-and-tools-tool-use-tool-reference.md#client-toolsets).
+* **Successor:** `computer_toolset_20260801` is the stable successor to the beta `computer_20251124` and `computer_20250124` versions, which remain available on the models listed for them under [Earlier tool versions](./agents-and-tools-tool-use-computer-use-tool.md#earlier-tool-versions). `browser_toolset_20260801` is the first version of the browser use tool. Both are [client toolsets](./agents-and-tools-tool-use-tool-reference.md#client-toolsets).
 
 The `mcp_toolset` type is not date-versioned; versioning is carried in the `anthropic-beta` header instead.
 

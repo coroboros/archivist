@@ -1059,7 +1059,7 @@ To keep thinking valid, send every assistant turn back exactly as you received i
 * [What counts as an edit](./build-with-claude-preserved-thinking.md#what-counts-as-an-edit), and [how to check whether your code makes one](./build-with-claude-preserved-thinking.md#how-to-tell-whether-your-integration-is-impacted).
 * [The API feature that replaces each common edit](./build-with-claude-preserved-thinking.md#replace-prefix-edits): mid-conversation system messages for new instructions and per-turn reminders, `tool_addition` and `tool_removal` blocks for tool changes, per-message `output_config` for effort changes, and server-side compaction and context editing for trimming.
 * [Client-side compaction](./build-with-claude-preserved-thinking.md#custom-compaction-on-the-client): which patterns keep thinking valid and which don't.
-* [The `thinking-binding-controls-2026-08-01` beta header](./build-with-claude-preserved-thinking.md#preserved-thinking-controls). It adds an `input_transformations` array to every response that lists the blocks the API dropped, and a `block_binding.prefix_mismatch_behavior` field on the thinking configuration that accepts `"error"` or `"drop_block"`.
+* [The `thinking-binding-controls-2026-08-01` beta header](./build-with-claude-preserved-thinking.md#preserved-thinking-controls). It adds a `block_binding.prefix_mismatch_behavior` field (`"error"` or `"drop_block"`) to the thinking configuration and an `input_transformations` array to every response. The array lists each thinking block that the API dropped, or that failed the prefix check and was let through.
 
 ## Thinking and prompt caching
 

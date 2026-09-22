@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Quick start"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool"
 category: "agents-and-tools"
 generated: true
@@ -8,12 +8,26 @@ generated: true
 title: Browser use tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool
 description: Let Claude navigate, read, and interact with webpages in your own browser environment with the browser use tool.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-opus-5
+    - claude-sonnet-5
+    - claude-opus-4-8
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: not available
+    Amazon Bedrock: not available
+    Google Cloud: ga
+    Microsoft Foundry: not available
 ---
-
-## Compatibility
-- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
-- Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-opus-4-8`
-- Platforms: Claude API, Google Cloud; not available on Claude Platform on AWS, Amazon Bedrock, Microsoft Foundry
 
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 

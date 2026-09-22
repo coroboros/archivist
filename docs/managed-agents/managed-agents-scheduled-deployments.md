@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Create a scheduled deployment"
 source: "https://platform.claude.com/docs/en/managed-agents/scheduled-deployments"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Scheduled deployments
 url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
 description: "Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history."
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 A **scheduled deployment** allows an [agent](./managed-agents-agent-setup.md) to start [sessions](./managed-agents-sessions.md) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
 
@@ -23,10 +25,10 @@ For the launch context and examples of what teams run on schedules, see [schedul
 When creating a deployment, you pass the [session configurations](./managed-agents-sessions.md) required for execution, in addition to a `schedule`.
 
 * Deployments require [agent configuration](./managed-agents-agent-setup.md) and [environment configuration](./managed-agents-environments.md), and optionally accept [files](./managed-agents-files.md), [GitHub](./managed-agents-github.md), [memory stores](./managed-agents-memory.md), and [vaults](./managed-agents-vaults.md). A deployment that targets a [self-hosted environment](./managed-agents-self-hosted-sandboxes.md#use-memory-stores) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
-* Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work.
+* Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work. In a deployment file for `ant apply`, the text below the frontmatter becomes that `user.message`.
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -50,22 +52,27 @@ When creating a deployment, you pass the [session configurations](./managed-agen
   EOF
   ```
 
-  ```bash CLI
-  ant beta:deployments create <<YAML
-  name: Weekly compliance scan
-  agent: $AGENT_ID
-  environment_id: $ENVIRONMENT_ID
-  initial_events:
-    - type: user.message
-      content:
-        - type: text
-          text: Run the weekly compliance scan.
-  schedule:
-    type: cron
-    expression: "0 20 * * 5"
-    timezone: America/New_York
-  YAML
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant apply deployment.md
+    ```
+
+    <File filename="deployment.md">
+      ```markdown
+      ---
+      name: Weekly compliance scan
+      agent: agent_011CYm1BLqPXpQRk5khsSXrs
+      environment_id: env_01595EKxaaTTGwwY3kyXdtbs
+      schedule:
+        type: cron
+        expression: "0 20 * * 5"
+        timezone: America/New_York
+      ---
+
+      Run the weekly compliance scan.
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   deployment = client.beta.deployments.create(
@@ -222,6 +229,10 @@ When creating a deployment, you pass the [session configurations](./managed-agen
     }
   )
   ```
+
+  <ForLanguage tab="CLI">
+    [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) prints the new deployment's ID and records it in `claude-lock.json`. To see the deployment object, run `ant beta:deployments retrieve`.
+  </ForLanguage>
 </CodeGroup>
 
 The response includes a deployment object with a populated `schedule.upcoming_runs_at` with the next upcoming fire times, to confirm your schedule was set correctly.

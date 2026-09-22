@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Core concepts"
 source: "https://platform.claude.com/docs/en/managed-agents/quickstart"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Get started with Claude Managed Agents
 url: https://platform.claude.com/docs/en/managed-agents/quickstart
 description: Create your first autonomous agent.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
@@ -186,6 +188,10 @@ export ANTHROPIC_API_KEY="your-api-key-here"
         </File>
       </MultiFileExample>
 
+      <ForLanguage tab="CLI">
+        [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) prints the agent's ID and records it in `claude-lock.json`. You'll reference it in every session you create.
+      </ForLanguage>
+
       ```python Python
       from anthropic import Anthropic
 
@@ -338,11 +344,13 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       puts "Agent ID: #{agent.id}, version: #{agent.version}"
       ```
+
+      <ForLanguage not="CLI">
+        Save the returned `agent.id`. You'll reference it in every session you create.
+      </ForLanguage>
     </CodeGroup>
 
     The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](./managed-agents-tools.md) for the complete list and per-tool configuration options.
-
-    Save the returned `agent.id` (the CLI's [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) prints it and records it in `claude-lock.json`). You'll reference it in every session you create.
   </Step>
 
   <Step title="Create an environment">
@@ -387,6 +395,10 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           ```
         </File>
       </MultiFileExample>
+
+      <ForLanguage tab="CLI">
+        [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) records the environment's ID in `claude-lock.json` too. To create the agent and the environment with one command, pass both files: `ant apply coding-assistant.md environment.yaml`.
+      </ForLanguage>
 
       ```python Python
       environment = client.beta.environments.create(
@@ -468,9 +480,11 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       puts "Environment ID: #{environment.id}"
       ```
-    </CodeGroup>
 
-    Save the returned `environment.id` (also in `claude-lock.json` if you used `ant apply`). You'll reference it in every session you create.
+      <ForLanguage not="CLI">
+        Save the returned `environment.id` too.
+      </ForLanguage>
+    </CodeGroup>
 
     <Tip>
       To run the sandbox on your own infrastructure instead of a cloud sandbox, see 

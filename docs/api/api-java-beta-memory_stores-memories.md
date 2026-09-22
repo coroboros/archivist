@@ -25,9 +25,11 @@ Create a memory
 
   - `Optional<String> memoryStoreId`
 
+    The ID of the memory store to create the memory in (`memstore_...`).
+
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -126,6 +128,10 @@ Create a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `Optional<String> content`
 
@@ -243,6 +249,8 @@ List memories
 - `MemoryListParams params`
 
   - `Optional<String> memoryStoreId`
+
+    The ID of the memory store to list memories from (`memstore_...`).
 
   - `Optional<Long> depth`
 
@@ -366,6 +374,10 @@ List memories
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryListItem: union`
@@ -487,11 +499,15 @@ Retrieve a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to retrieve (`mem_...`).
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -590,6 +606,10 @@ Retrieve a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -697,11 +717,15 @@ Update a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to update (`mem_...`).
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -800,6 +824,10 @@ Update a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `Optional<String> content`
 
@@ -921,11 +949,17 @@ Delete a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to delete (`mem_...`).
 
   - `Optional<String> expectedContentSha256`
 
-    Query parameter for expected_content_sha256
+    Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
+
+    If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -1024,6 +1058,10 @@ Delete a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -1165,19 +1203,39 @@ public final class Main {
 
   - `class BetaManagedAgentsMemoryPreconditionFailedError`
 
+    The error returned with HTTP status 409 when a request's precondition doesn't hold for the memory's current state, such as `precondition` on an update or `expected_content_sha256` on a delete.
+
+    The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+
     - `Type type`
 
     - `Optional<String> message`
 
+      A human-readable explanation of why the precondition failed.
+
   - `class BetaManagedAgentsMemoryPathConflictError`
+
+    The error returned with HTTP status 409 when a create or rename targets a path that another memory uses, or a path that overlaps another memory's path.
+
+    Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
     - `Type type`
 
     - `Optional<String> conflictingMemoryId`
 
+      The ID of the memory that blocked the write (`mem_...`), or an empty string if that memory can't be identified.
+
+      Retry the request when it is empty.
+
     - `Optional<String> conflictingPath`
 
+      The path that blocked the write: the requested path, or the path of a memory that is an ancestor or descendant of it.
+
     - `Optional<String> message`
+
+      A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
 
   - `class BetaManagedAgentsConflictError`
 
@@ -1303,21 +1361,41 @@ public final class Main {
 
 - `class BetaManagedAgentsMemoryPathConflictError`
 
+  The error returned with HTTP status 409 when a create or rename targets a path that another memory uses, or a path that overlaps another memory's path.
+
+  Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
+
   - `Type type`
 
   - `Optional<String> conflictingMemoryId`
 
+    The ID of the memory that blocked the write (`mem_...`), or an empty string if that memory can't be identified.
+
+    Retry the request when it is empty.
+
   - `Optional<String> conflictingPath`
 
+    The path that blocked the write: the requested path, or the path of a memory that is an ancestor or descendant of it.
+
   - `Optional<String> message`
+
+    A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
 
 ### Beta Managed Agents Memory Precondition Failed Error
 
 - `class BetaManagedAgentsMemoryPreconditionFailedError`
 
+  The error returned with HTTP status 409 when a request's precondition doesn't hold for the memory's current state, such as `precondition` on an update or `expected_content_sha256` on a delete.
+
+  The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+
   - `Type type`
 
   - `Optional<String> message`
+
+    A human-readable explanation of why the precondition failed.
 
 ### Beta Managed Agents Memory Prefix
 
@@ -1339,7 +1417,11 @@ public final class Main {
 
   - `BASIC("basic")`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `FULL("full")`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 ### Beta Managed Agents Precondition
 

@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Tool versions"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool"
 category: "agents-and-tools"
 generated: true
@@ -8,15 +8,35 @@ generated: true
 title: Code execution tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
 description: Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
+featureMetadata:
+  status: ga
+  zdr: not-eligible
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-opus-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-5
+    - claude-sonnet-4-6
+    - claude-sonnet-4-5-20250929
+    - claude-haiku-4-5-20251001
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: not available
+    Google Cloud: not available
+    Microsoft Foundry:
+      availability: ga
+      note: On [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), code execution requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
+  details:
+    - Every supported model accepts all three [tool versions](./agents-and-tools-tool-use-code-execution-tool.md#tool-versions). On Claude Haiku 4.5, programmatic tool calling and REPL state persistence aren't available, so the newer versions behave like `code_execution_20250825` there.
+    - For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry.
 ---
-
-## Compatibility
-- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): not eligible
-- Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5-20251101`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-sonnet-4-5-20250929`, `claude-haiku-4-5-20251001`
-- Platforms: Claude API, Claude Platform on AWS, Microsoft Foundry [1]; not available on Amazon Bedrock, Google Cloud
-- Every supported model accepts all three [tool versions](./agents-and-tools-tool-use-code-execution-tool.md#tool-versions). On Claude Haiku 4.5, programmatic tool calling and REPL state persistence aren't available, so the newer versions behave like `code_execution_20250825` there.
-- For [Claude Mythos Preview](https://anthropic.com/glasswing), code execution is supported on the Claude API and Microsoft Foundry.
-1. On [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), code execution requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 
 Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
 

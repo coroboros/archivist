@@ -119,6 +119,10 @@ Create Agent
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
   - `Model model`
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
@@ -205,13 +209,23 @@ Create Agent
 
           - `LOW("low")`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `MEDIUM("medium")`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `HIGH("high")`
 
+            High effort. Favors reasoning depth.
+
           - `XHIGH("xhigh")`
 
+            Extra-high effort. Not all models accept this level.
+
           - `MAX("max")`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 

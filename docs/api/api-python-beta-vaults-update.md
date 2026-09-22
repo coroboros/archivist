@@ -21,6 +21,8 @@ Update Vault
 
 - `vault_id: str`
 
+  Unique identifier of the vault to update.
+
 - `display_name: Optional[str]`
 
   Updated human-readable name for the vault. 1-255 characters.
@@ -132,6 +134,10 @@ Update Vault
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ## Returns
 

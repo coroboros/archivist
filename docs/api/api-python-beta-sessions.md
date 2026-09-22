@@ -201,15 +201,31 @@ Create Session
 
             How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
+            - `low` - Low effort. Favors latency over reasoning depth.
+            - `medium` - Medium effort. Balances latency and reasoning depth.
+            - `high` - High effort. Favors reasoning depth.
+            - `xhigh` - Extra-high effort. Not all models accept this level.
+            - `max` - Maximum effort. Favors reasoning depth over latency.
+
             - `"low"`
+
+              Low effort. Favors latency over reasoning depth.
 
             - `"medium"`
 
+              Medium effort. Balances latency and reasoning depth.
+
             - `"high"`
+
+              High effort. Favors reasoning depth.
 
             - `"xhigh"`
 
+              Extra-high effort. Not all models accept this level.
+
             - `"max"`
+
+              Maximum effort. Favors reasoning depth over latency.
 
           - `class BetaManagedAgentsEffortLow`
 
@@ -1171,6 +1187,10 @@ Create Session
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -1982,13 +2002,26 @@ Create Session
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -2362,11 +2395,19 @@ List Sessions
 
   - `"rescheduling"`
 
+    Transient error occurred, retrying automatically.
+
   - `"running"`
+
+    Agent is actively executing.
 
   - `"idle"`
 
+    Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
   - `"terminated"`
+
+    Session has ended, either due to an error or completion.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -2469,6 +2510,10 @@ List Sessions
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -3281,13 +3326,26 @@ List Sessions
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -3699,6 +3757,10 @@ Get Session
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -4510,13 +4572,26 @@ Get Session
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -5407,6 +5482,10 @@ Update Session
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -6218,13 +6297,26 @@ Update Session
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -6631,6 +6723,10 @@ Delete Session
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession`
@@ -6780,6 +6876,10 @@ Archive Session
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -7592,13 +7692,26 @@ Archive Session
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -8105,15 +8218,31 @@ print(beta_managed_agents_session.id)
 
           How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
+          - `low` - Low effort. Favors latency over reasoning depth.
+          - `medium` - Medium effort. Balances latency and reasoning depth.
+          - `high` - High effort. Favors reasoning depth.
+          - `xhigh` - Extra-high effort. Not all models accept this level.
+          - `max` - Maximum effort. Favors reasoning depth over latency.
+
           - `"low"`
+
+            Low effort. Favors latency over reasoning depth.
 
           - `"medium"`
 
+            Medium effort. Balances latency and reasoning depth.
+
           - `"high"`
+
+            High effort. Favors reasoning depth.
 
           - `"xhigh"`
 
+            Extra-high effort. Not all models accept this level.
+
           - `"max"`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -9870,13 +9999,26 @@ print(beta_managed_agents_session.id)
 
     SessionStatus enum
 
+    - `rescheduling` - Transient error occurred, retrying automatically.
+    - `running` - Agent is actively executing.
+    - `idle` - Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+    - `terminated` - Session has ended, either due to an error or completion.
+
     - `"rescheduling"`
+
+      Transient error occurred, retrying automatically.
 
     - `"running"`
 
+      Agent is actively executing.
+
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: Optional[str]`
 
@@ -12773,8 +12915,6 @@ List Events
 
 - `limit: Optional[int]`
 
-  Query parameter for limit
-
   format: int32
 
 - `order: Optional[Literal["asc", "desc"]]`
@@ -12894,6 +13034,10 @@ List Events
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -15668,6 +15812,10 @@ Send Events
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsSendSessionEvents`
@@ -16283,6 +16431,10 @@ Stream Events
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -18746,6 +18898,10 @@ Add Session Resource
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsFileResource`
@@ -18925,6 +19081,10 @@ List Session Resources
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -19196,6 +19356,10 @@ Get Session Resource
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type ResourceRetrieveResponse = ...`
@@ -19461,6 +19625,10 @@ Update Session Resource
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type ResourceUpdateResponse = ...`
@@ -19721,6 +19889,10 @@ Delete Session Resource
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsDeleteSessionResource`
@@ -19884,6 +20056,10 @@ List Session Threads
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -19898,7 +20074,7 @@ List Session Threads
 
   - `agent: Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -20809,6 +20985,10 @@ Get Session Thread
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -20823,7 +21003,7 @@ Get Session Thread
 
   - `agent: Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -21729,6 +21909,10 @@ Archive Session Thread
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -21743,7 +21927,7 @@ Archive Session Thread
 
   - `agent: Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -22551,13 +22735,9 @@ List Session Thread Events
 
 - `limit: Optional[int]`
 
-  Query parameter for limit
-
   format: int32
 
 - `page: Optional[str]`
-
-  Query parameter for page
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -22660,6 +22840,10 @@ List Session Thread Events
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -25071,6 +25255,10 @@ Stream Session Thread Events
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 

@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Event types"
 source: "https://platform.claude.com/docs/en/managed-agents/events-and-streaming"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Session event stream
 url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
 description: Send events, stream responses, and interrupt or redirect your session mid-execution.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 Communication with Claude Managed Agents is event-based. You send user events to the agent, and receive agent and session events back to track status.
 

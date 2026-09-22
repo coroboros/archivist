@@ -21,7 +21,7 @@ List Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--created-at-gt: optional string`
 
@@ -49,7 +49,7 @@ List Events
 
 - `--limit: optional number`
 
-  Query param: Query parameter for limit
+  Query param
 
   format: int32
 

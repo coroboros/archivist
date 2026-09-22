@@ -25,7 +25,7 @@ Archive Session Thread
 
   - `SessionID param.Field[string]`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -147,7 +147,7 @@ Archive Session Thread
 
   - `Agent BetaManagedAgentsSessionThreadAgentUnion`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `type BetaManagedAgentsSessionThreadAgent`
 

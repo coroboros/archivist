@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Set the effort level"
 source: "https://platform.claude.com/docs/en/build-with-claude/effort"
 category: "build-with-claude"
 generated: true
@@ -8,12 +8,31 @@ generated: true
 title: Effort
 url: https://platform.claude.com/docs/en/build-with-claude/effort
 description: Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-5
+    - claude-sonnet-4-6
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Google Cloud: ga
+    Microsoft Foundry: ga
 ---
-
-## Compatibility
-- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
-- Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5-20251101`, `claude-sonnet-5`, `claude-sonnet-4-6`
-- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The top-level effort parameter is available on all supported models with no beta header required. [Per-message effort](./build-with-claude-effort.md#change-effort-mid-conversation-beta) is in beta.
 
@@ -329,7 +348,7 @@ Higher effort levels may:
 
 The `thinking` parameter controls whether Claude thinks in [thinking blocks](./build-with-claude-thinking.md) before answering; the `effort` parameter controls how much work Claude puts into the whole response, which in adaptive mode includes how often and how deeply it thinks. Don't pass `adaptive` as an `effort` value: `adaptive` is a thinking mode, not an effort level.
 
-At higher effort levels, Claude thinks on most requests and at greater length. At lower levels, it can skip thinking entirely for simpler problems. See [Thinking and effort](./build-with-claude-thinking.md#thinking-and-effort) for full guidance on how the two controls work together.
+At higher effort levels, Claude thinks more readily and at greater length. In a tool-use loop, follow-up requests that only process tool results can still skip thinking at any level. At lower levels, Claude can skip thinking entirely for simpler problems. See [Thinking and effort](./build-with-claude-thinking.md#thinking-and-effort) for full guidance on how the two controls work together.
 
 On Claude Opus 4.5, the only extended-thinking-only model that supports effort, it works alongside [`budget_tokens`](./build-with-claude-extended-thinking.md): set the effort level for your task, then set the thinking token budget based on how much reasoning depth the task needs.
 

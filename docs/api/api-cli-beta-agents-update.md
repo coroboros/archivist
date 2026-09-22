@@ -21,7 +21,7 @@ Update Agent
 
 - `--agent-id: string`
 
-  Path param: Path parameter agent_id
+  Path param: Unique identifier of the agent to update.
 
 - `--description: optional string`
 

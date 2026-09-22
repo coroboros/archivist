@@ -25,7 +25,7 @@ Stream Session Thread Events
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `event_deltas?: Array<BetaManagedAgentsDeltaType>`
 

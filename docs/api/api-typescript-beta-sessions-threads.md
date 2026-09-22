@@ -155,7 +155,7 @@ List Session Threads
 
   - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `interface BetaManagedAgentsSessionThreadAgent`
 
@@ -946,7 +946,7 @@ Get Session Thread
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -1068,7 +1068,7 @@ Get Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `interface BetaManagedAgentsSessionThreadAgent`
 
@@ -1854,7 +1854,7 @@ Archive Session Thread
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -1976,7 +1976,7 @@ Archive Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `interface BetaManagedAgentsSessionThreadAgent`
 
@@ -2762,7 +2762,7 @@ console.log(betaManagedAgentsSessionThread.id);
 
   - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `interface BetaManagedAgentsSessionThreadAgent`
 
@@ -5836,17 +5836,17 @@ List Session Thread Events
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `limit?: number`
 
-    Query param: Query parameter for limit
+    Query param
 
     format: int32
 
   - `page?: string`
 
-    Query param: Query parameter for page
+    Query param
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -8237,7 +8237,7 @@ Stream Session Thread Events
 
   - `session_id: string`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `event_deltas?: Array<BetaManagedAgentsDeltaType>`
 

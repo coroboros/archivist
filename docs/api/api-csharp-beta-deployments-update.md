@@ -23,7 +23,7 @@ Update Deployment
 
   - `required string deploymentID`
 
-    Path param: Path parameter deployment_id
+    Path param: Unique identifier of the deployment to update.
 
   - `Agent agent`
 
@@ -985,7 +985,11 @@ Update Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 

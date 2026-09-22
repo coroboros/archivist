@@ -27,9 +27,16 @@ Create User Profile
 
     Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -45,11 +52,21 @@ Create User Profile
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country?: string | null`
 
@@ -217,6 +234,10 @@ Create User Profile
 
 - `interface BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -259,9 +280,16 @@ Create User Profile
 
     How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -275,11 +303,21 @@ Create User Profile
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string | null`
 
@@ -383,29 +421,45 @@ List User Profiles
 
   - `limit?: number`
 
-    Query param: Query parameter for limit
+    Query param: The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
   - `order?: "asc" | "desc"`
 
-    Query param: Query parameter for order
+    Query param: The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
+
+    - `asc` - Oldest first when `order_by` is `created_at`, or names in ascending order when `order_by` is `name`.
+    - `desc` - Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
     - `"asc"`
 
+      Oldest first when `order_by` is `created_at`, or names in ascending order when `order_by` is `name`.
+
     - `"desc"`
+
+      Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
   - `order_by?: "created_at" | "name"`
 
-    Query param: Query parameter for order_by
+    Query param: The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
+
+    - `created_at` - Sort by when each user profile was created. This is the default.
+    - `name` - Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
     - `"created_at"`
 
+      Sort by when each user profile was created. This is the default.
+
     - `"name"`
+
+      Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
   - `page?: string`
 
-    Query param: Query parameter for page
+    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+
+    Leave it out to get the first page.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -517,6 +571,10 @@ List User Profiles
 
 - `interface BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -559,9 +617,16 @@ List User Profiles
 
     How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -575,11 +640,21 @@ List User Profiles
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string | null`
 
@@ -686,6 +761,8 @@ Get User Profile
 ### Parameters
 
 - `userProfileID: string`
+
+  The ID of the user profile to get (`uprof_...`).
 
 - `params: UserProfileRetrieveParams`
 
@@ -799,6 +876,10 @@ Get User Profile
 
 - `interface BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -841,9 +922,16 @@ Get User Profile
 
     How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -857,11 +945,21 @@ Get User Profile
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string | null`
 
@@ -965,15 +1063,24 @@ Update User Profile
 
 - `userProfileID: string`
 
+  The ID of the user profile to update (`uprof_...`).
+
 - `params: UserProfileUpdateParams`
 
   - `access_type?: "application" | "passthrough" | null`
 
     Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -989,11 +1096,21 @@ Update User Profile
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country?: string | null`
 
@@ -1161,6 +1278,10 @@ Update User Profile
 
 - `interface BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -1203,9 +1324,16 @@ Update User Profile
 
     How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -1219,11 +1347,21 @@ Update User Profile
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string | null`
 
@@ -1326,6 +1464,8 @@ Create Enrollment URL
 ### Parameters
 
 - `userProfileID: string`
+
+  The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
 - `params: UserProfileCreateEnrollmentURLParams`
 
@@ -1439,6 +1579,8 @@ Create Enrollment URL
 
 - `interface BetaUserProfileEnrollmentURL`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
@@ -1485,6 +1627,10 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 - `interface BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -1527,9 +1673,16 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
+    - `application` - The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+    - `passthrough` - The user profile represents a company that the platform resells Claude access to.
+
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id?: string | null`
 
@@ -1543,11 +1696,21 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
       The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+      - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+      - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+      - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
       - `"active"`
+
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string | null`
 
@@ -1597,6 +1760,8 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
 - `interface BetaUserProfileEnrollmentURL`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
@@ -1621,11 +1786,21 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+    - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+    - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+    - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
     - `"active"`
+
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
     - `"suspended"`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `"blocked"`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `country: string | null`
 
@@ -1669,11 +1844,21 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     The status of the entity's account on the platform, as the platform states it: `active`; `suspended`, when the platform has restricted the account and may restore it; or `blocked`, when the platform has barred it. It records the platform's decision only; the statuses in `trust_grants` are Anthropic's and do not follow it.
 
+    - `active` - The platform has neither restricted nor barred the account of the entity that the user profile represents.
+    - `suspended` - The platform has restricted the account of the entity that the user profile represents and may restore it.
+    - `blocked` - The platform has barred the account of the entity that the user profile represents.
+
     - `"active"`
+
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
 
     - `"suspended"`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `"blocked"`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `country?: string | null`
 
@@ -1718,6 +1903,8 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 ### Beta User Profile Trust Grant
 
 - `interface BetaUserProfileTrustGrant`
+
+  The status of one trust grant on a user profile, listed in the profile's `trust_grants` map under the grant's name.
 
   - `status: "active" | "pending" | "rejected"`
 

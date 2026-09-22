@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Creating a session"
 source: "https://platform.claude.com/docs/en/managed-agents/sessions"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Start a session
 url: https://platform.claude.com/docs/en/managed-agents/sessions
 description: Create a session to run your agent and begin executing tasks.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 A session is an agent instance within an environment. Each session references an [agent](./managed-agents-agent-setup.md) and an [environment](./managed-agents-environments.md) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](./managed-agents-sessions.md#creating-a-session), then [send a user event](./managed-agents-sessions.md#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](./managed-agents-sessions.md#seed-the-session-with-initial-events).
 

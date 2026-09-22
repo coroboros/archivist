@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "How cache diagnostics works"
 source: "https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics"
 category: "build-with-claude"
 generated: true
@@ -8,13 +8,19 @@ generated: true
 title: Cache diagnostics
 url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
 description: Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.
+featureMetadata:
+  status: beta
+  betaHeader: cache-diagnosis-2026-04-07
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: not available
+    Amazon Bedrock: not available
+    Google Cloud: not available
+    Microsoft Foundry: not available
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `cache-diagnosis-2026-04-07`
-- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
-- Platforms: Claude API (beta); not available on Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
 [Prompt caching](./build-with-claude-prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
 

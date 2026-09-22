@@ -21,6 +21,8 @@ Unpause Deployment
 
 - `deploymentID: string`
 
+  Unique identifier of the deployment to unpause.
+
 - `params: DeploymentUnpauseParams`
 
   - `betas?: Array<AnthropicBeta>`
@@ -615,7 +617,11 @@ Unpause Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 

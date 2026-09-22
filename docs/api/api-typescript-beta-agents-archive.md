@@ -21,6 +21,8 @@ Archive Agent
 
 - `agentID: string`
 
+  Unique identifier of the agent to archive.
+
 - `params: AgentArchiveParams`
 
   - `betas?: Array<AnthropicBeta>`

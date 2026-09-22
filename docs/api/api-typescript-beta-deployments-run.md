@@ -21,6 +21,8 @@ Run Deployment Now
 
 - `deploymentID: string`
 
+  Unique identifier of the deployment to run.
+
 - `params: DeploymentRunParams`
 
   - `betas?: Array<AnthropicBeta>`

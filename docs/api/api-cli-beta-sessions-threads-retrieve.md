@@ -21,11 +21,11 @@ Get Session Thread
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--thread-id: string`
 
-  Path param: Path parameter thread_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -51,7 +51,7 @@ Get Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent or BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `beta_managed_agents_session_thread_agent: object`
 

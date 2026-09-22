@@ -23,8 +23,6 @@ Delete Session
 
   - `required string sessionID`
 
-    Path parameter session_id
-
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Optional header to specify the beta version(s) you want to use.

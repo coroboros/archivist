@@ -875,11 +875,19 @@ Create Session
 
     - `"rescheduling"`
 
+      Transient error occurred, retrying automatically.
+
     - `"running"`
+
+      Agent is actively executing.
 
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: string`
 
@@ -2068,11 +2076,19 @@ List Sessions
 
       - `"rescheduling"`
 
+        Transient error occurred, retrying automatically.
+
       - `"running"`
+
+        Agent is actively executing.
 
       - `"idle"`
 
+        Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
       - `"terminated"`
+
+        Session has ended, either due to an error or completion.
 
     - `title: string`
 
@@ -2388,8 +2404,6 @@ Get Session
 ### Parameters
 
 - `--session-id: string`
-
-  Path parameter session_id
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -3209,11 +3223,19 @@ Get Session
 
     - `"rescheduling"`
 
+      Transient error occurred, retrying automatically.
+
     - `"running"`
+
+      Agent is actively executing.
 
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: string`
 
@@ -3517,7 +3539,7 @@ Update Session
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--agent: optional object`
 
@@ -4359,11 +4381,19 @@ Update Session
 
     - `"rescheduling"`
 
+      Transient error occurred, retrying automatically.
+
     - `"running"`
+
+      Agent is actively executing.
 
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: string`
 
@@ -4667,8 +4697,6 @@ Delete Session
 
 - `--session-id: string`
 
-  Path parameter session_id
-
 - `--beta: optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -4717,8 +4745,6 @@ Archive Session
 ### Parameters
 
 - `--session-id: string`
-
-  Path parameter session_id
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -5538,11 +5564,19 @@ Archive Session
 
     - `"rescheduling"`
 
+      Transient error occurred, retrying automatically.
+
     - `"running"`
+
+      Agent is actively executing.
 
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: string`
 
@@ -5998,13 +6032,23 @@ ant beta:sessions archive \
 
         - `"low"`
 
+          Low effort. Favors latency over reasoning depth.
+
         - `"medium"`
+
+          Medium effort. Balances latency and reasoning depth.
 
         - `"high"`
 
+          High effort. Favors reasoning depth.
+
         - `"xhigh"`
 
+          Extra-high effort. Not all models accept this level.
+
         - `"max"`
+
+          Maximum effort. Favors reasoning depth over latency.
 
       - `beta_managed_agents_effort_low: object`
 
@@ -7758,11 +7802,19 @@ ant beta:sessions archive \
 
     - `"rescheduling"`
 
+      Transient error occurred, retrying automatically.
+
     - `"running"`
+
+      Agent is actively executing.
 
     - `"idle"`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `"terminated"`
+
+      Session has ended, either due to an error or completion.
 
   - `title: string`
 
@@ -10616,7 +10668,7 @@ List Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--created-at-gt: optional string`
 
@@ -10644,7 +10696,7 @@ List Events
 
 - `--limit: optional number`
 
-  Query param: Query parameter for limit
+  Query param
 
   format: int32
 
@@ -13026,7 +13078,7 @@ Send Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--event: array of BetaManagedAgentsEventParams`
 
@@ -13529,7 +13581,7 @@ Stream Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--event-delta: optional array of BetaManagedAgentsDeltaType`
 
@@ -15939,7 +15991,7 @@ Add Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--file-id: string`
 
@@ -16026,7 +16078,7 @@ List Session Resources
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--limit: optional number`
 
@@ -16214,11 +16266,11 @@ Get Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -16376,11 +16428,11 @@ Update Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--authorization-token: string`
 
@@ -16545,11 +16597,11 @@ Delete Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -16603,7 +16655,7 @@ List Session Threads
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--limit: optional number`
 
@@ -16643,7 +16695,7 @@ List Session Threads
 
     - `agent: BetaManagedAgentsSessionThreadAgent or BetaManagedAgentsAdvisor`
 
-      The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+      The resolved agent a `session_thread` runs.
 
       - `beta_managed_agents_session_thread_agent: object`
 
@@ -17421,11 +17473,11 @@ Get Session Thread
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--thread-id: string`
 
-  Path param: Path parameter thread_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -17451,7 +17503,7 @@ Get Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent or BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `beta_managed_agents_session_thread_agent: object`
 
@@ -18221,11 +18273,11 @@ Archive Session Thread
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--thread-id: string`
 
-  Path param: Path parameter thread_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -18251,7 +18303,7 @@ Archive Session Thread
 
   - `agent: BetaManagedAgentsSessionThreadAgent or BetaManagedAgentsAdvisor`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `beta_managed_agents_session_thread_agent: object`
 
@@ -19023,21 +19075,21 @@ List Session Thread Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--thread-id: string`
 
-  Path param: Path parameter thread_id
+  Path param
 
 - `--limit: optional number`
 
-  Query param: Query parameter for limit
+  Query param
 
   format: int32
 
 - `--page: optional string`
 
-  Query param: Query parameter for page
+  Query param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -21395,11 +21447,11 @@ Stream Session Thread Events
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--thread-id: string`
 
-  Path param: Path parameter thread_id
+  Path param
 
 - `--event-delta: optional array of BetaManagedAgentsDeltaType`
 

@@ -167,6 +167,10 @@ List Deployment Runs
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsDeploymentRun`
@@ -456,6 +460,8 @@ Get Deployment Run
 
   - `Optional<String> deploymentRunId`
 
+    Unique identifier of the deployment run.
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -553,6 +559,10 @@ Get Deployment Run
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -1248,7 +1258,11 @@ public final class Main {
 
   - `SCHEDULE("schedule")`
 
+    The run was fired by the deployment's cron schedule.
+
   - `MANUAL("manual")`
+
+    The run was started manually by creating a session directly against the deployment.
 
 ### Beta Managed Agents Unknown Run Error
 

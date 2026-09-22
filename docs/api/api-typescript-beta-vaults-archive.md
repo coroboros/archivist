@@ -21,6 +21,8 @@ Archive Vault
 
 - `vaultID: string`
 
+  Unique identifier of the vault to archive.
+
 - `params: VaultArchiveParams`
 
   - `betas?: Array<AnthropicBeta>`

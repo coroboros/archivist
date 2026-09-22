@@ -41,7 +41,7 @@ export const ContextWindow = () => {
     tokens: 280,
     color: '#6B6964',
     vis: 'hidden',
-    desc: 'Working directory, platform, shell, OS version, and whether this is a git repo. Git branch, status, and recent commits load as a separate block at the very end of the system prompt.',
+    desc: 'Working directory, platform, shell, OS version, and whether this is a git repo. Git branch, status, and recent commits load as a separate block.',
     link: null
   }, {
     t: 0.08,
@@ -1604,6 +1604,7 @@ When a long session compacts, Claude Code summarizes the conversation history to
 | System prompt and output style                                                                                                                            | Both still apply                                                                                      |
 | Project-root CLAUDE.md and unscoped rules                                                                                                                 | Re-injected from disk                                                                                 |
 | Auto memory                                                                                                                                               | Re-injected from disk                                                                                 |
+| [Git status snapshot](/docs/en/settings-reference#includegitinstructions)                                                                                      | Claude Code reads a fresh one from your repository                                                    |
 | The plan Claude wrote in [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode)                                                         | Re-injected from disk                                                                                 |
 | Rules with `paths:` frontmatter                                                                                                                           | Claude Code reloads them as Claude reads files they match                                             |
 | Nested CLAUDE.md in subdirectories                                                                                                                        | Claude Code reloads them as Claude reads files in that subdirectory                                   |

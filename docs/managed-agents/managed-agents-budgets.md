@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Set a budget at session creation"
 source: "https://platform.claude.com/docs/en/managed-agents/budgets"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Session budgets
 url: https://platform.claude.com/docs/en/managed-agents/budgets
 description: Cap a session's spend with a hard dollar budget enforced at public list rates.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 A session budget is an optional hard spend ceiling you set when you [create a session](./managed-agents-sessions.md). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](./managed-agents-budgets.md#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](./managed-agents-session-operations.md#session-statuses) rather than terminating; changing or removing the budget resumes its work automatically. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](./managed-agents-budgets.md#budgets-on-deployments).
 

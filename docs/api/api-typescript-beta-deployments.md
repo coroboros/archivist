@@ -1015,7 +1015,11 @@ Create Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -1181,7 +1185,11 @@ List Deployments
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -1775,7 +1783,11 @@ List Deployments
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -1903,6 +1915,8 @@ Get Deployment
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment.
 
 - `params: DeploymentRetrieveParams`
 
@@ -2498,7 +2512,11 @@ Get Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -2622,6 +2640,8 @@ Update Deployment
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment to update.
 
 - `params: DeploymentUpdateParams`
 
@@ -3617,7 +3637,11 @@ Update Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -3741,6 +3765,8 @@ Archive Deployment
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment to archive.
 
 - `params: DeploymentArchiveParams`
 
@@ -4336,7 +4362,11 @@ Archive Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -4460,6 +4490,8 @@ Run Deployment Now
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment to run.
 
 - `params: DeploymentRunParams`
 
@@ -4845,6 +4877,8 @@ Pause Deployment
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment to pause.
 
 - `params: DeploymentPauseParams`
 
@@ -5440,7 +5474,11 @@ Pause Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -5564,6 +5602,8 @@ Unpause Deployment
 ### Parameters
 
 - `deploymentID: string`
+
+  Unique identifier of the deployment to unpause.
 
 - `params: DeploymentUnpauseParams`
 
@@ -6159,7 +6199,11 @@ Unpause Deployment
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -6818,7 +6862,11 @@ console.log(betaManagedAgentsDeployment.id);
 
     - `"active"`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `"paused"`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `updated_at: string`
 
@@ -7492,9 +7540,16 @@ console.log(betaManagedAgentsDeployment.id);
 
   Lifecycle status of a deployment.
 
+  - `active` - The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+  - `paused` - The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
+
   - `"active"`
 
+    The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
   - `"paused"`
+
+    The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
 ### Beta Managed Agents Deployment System Message Event
 

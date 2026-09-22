@@ -21,7 +21,7 @@ Add Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--file-id: string`
 

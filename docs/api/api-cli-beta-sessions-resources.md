@@ -23,7 +23,7 @@ Add Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--file-id: string`
 
@@ -110,7 +110,7 @@ List Session Resources
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--limit: optional number`
 
@@ -298,11 +298,11 @@ Get Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -460,11 +460,11 @@ Update Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--authorization-token: string`
 
@@ -629,11 +629,11 @@ Delete Session Resource
 
 - `--session-id: string`
 
-  Path param: Path parameter session_id
+  Path param
 
 - `--resource-id: string`
 
-  Path param: Path parameter resource_id
+  Path param
 
 - `--beta: optional array of AnthropicBeta`
 

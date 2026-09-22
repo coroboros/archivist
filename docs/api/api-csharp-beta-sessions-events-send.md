@@ -23,7 +23,7 @@ Send Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required IReadOnlyList<BetaManagedAgentsEventParams> events`
 

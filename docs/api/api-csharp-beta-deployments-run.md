@@ -23,7 +23,7 @@ Run Deployment Now
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to run.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 

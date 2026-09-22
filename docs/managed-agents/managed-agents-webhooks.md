@@ -1,5 +1,5 @@
 ---
-title: "Compatibility"
+title: "Supported event types"
 source: "https://platform.claude.com/docs/en/managed-agents/webhooks"
 category: "managed-agents"
 generated: true
@@ -8,11 +8,13 @@ generated: true
 title: Subscribe to webhooks
 url: https://platform.claude.com/docs/en/managed-agents/webhooks
 description: Get notified when major events happen without polling.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/api-beta-headers.md): `managed-agents-2026-04-01`
 
 Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](./managed-agents-events-and-streaming.md), webhooks notify you of major state changes.
 

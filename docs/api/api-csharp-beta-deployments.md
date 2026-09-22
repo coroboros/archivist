@@ -983,7 +983,11 @@ Create Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -1744,7 +1748,11 @@ List Deployments
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -1872,7 +1880,7 @@ Get Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -2462,7 +2470,11 @@ Get Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -2586,7 +2598,7 @@ Update Deployment
 
   - `required string deploymentID`
 
-    Path param: Path parameter deployment_id
+    Path param: Unique identifier of the deployment to update.
 
   - `Agent agent`
 
@@ -3548,7 +3560,11 @@ Update Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -3672,7 +3688,7 @@ Archive Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -4262,7 +4278,11 @@ Archive Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -4386,7 +4406,7 @@ Run Deployment Now
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to run.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -4766,7 +4786,7 @@ Pause Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to pause.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -5356,7 +5376,11 @@ Pause Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -5480,7 +5504,7 @@ Unpause Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to unpause.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -6070,7 +6094,11 @@ Unpause Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -6726,7 +6754,11 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -7402,7 +7434,11 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   - `Active("active")`
 
+    The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
   - `Paused("paused")`
+
+    The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
 ### Beta Managed Agents Deployment System Message Event
 
