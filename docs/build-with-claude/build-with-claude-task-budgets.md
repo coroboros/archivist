@@ -16,6 +16,7 @@ featureMetadata:
     - claude-mythos-5-1
     - claude-fable-5
     - claude-mythos-5
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -46,7 +47,7 @@ Add `task_budget` to `output_config` and include the beta header:
     -H "anthropic-beta: task-budgets-2026-03-13" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 128000,
       "stream": true,
       "messages": [{
@@ -63,7 +64,7 @@ Add `task_budget` to `output_config` and include the beta header:
   ```bash CLI
   ant beta:messages create --beta task-budgets-2026-03-13 \
     --stream --format jsonl <<'YAML' | jq 'select(.type == "message_delta").usage'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 128000
   messages:
     - role: user
@@ -80,7 +81,7 @@ Add `task_budget` to `output_config` and include the beta header:
   client = anthropic.Anthropic()
 
   with client.beta.messages.stream(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=128000,
       output_config={
           "effort": "high",
@@ -100,7 +101,7 @@ Add `task_budget` to `output_config` and include the beta header:
   const client = new Anthropic();
 
   const stream = client.beta.messages.stream({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 128000,
     output_config: {
       effort: "high",
@@ -120,7 +121,7 @@ Add `task_budget` to `output_config` and include the beta header:
 
   var responseUpdates = client.Beta.Messages.CreateStreaming(new MessageCreateParams
   {
-      Model = Messages::Model.ClaudeOpus5,
+      Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 128000,
       Messages = [new() { Role = Role.User, Content = "Review the codebase and propose a refactor plan." }],
       OutputConfig = new BetaOutputConfig
@@ -139,7 +140,7 @@ Add `task_budget` to `output_config` and include the beta header:
   client := anthropic.NewClient()
 
   stream := client.Beta.Messages.NewStreaming(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 128000,
   	Betas:     []anthropic.AnthropicBeta{"task-budgets-2026-03-13"},
   	Messages: []anthropic.BetaMessageParam{{
@@ -174,7 +175,7 @@ Add `task_budget` to `output_config` and include the beta header:
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(128000L)
       .addUserMessage("Review the codebase and propose a refactor plan.")
       .outputConfig(BetaOutputConfig.builder()
@@ -200,7 +201,7 @@ Add `task_budget` to `output_config` and include the beta header:
   $client = new Client();
 
   $stream = $client->beta->messages->createStream(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 128000,
       messages: [
           ['role' => 'user', 'content' => 'Review the codebase and propose a refactor plan.'],
@@ -227,7 +228,7 @@ Add `task_budget` to `output_config` and include the beta header:
   client = Anthropic::Client.new
 
   stream = client.beta.messages.stream(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 128_000,
     messages: [
       { role: "user", content: "Review the codebase and propose a refactor plan." }
@@ -520,7 +521,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
 <CodeGroup>
   ```bash CLI
   ant messages create --transform 'usage.output_tokens' <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -532,7 +533,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=[
           {"role": "user", "content": "Review the codebase and propose a refactor plan."}
@@ -547,7 +548,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: [{ role: "user", content: "Review the codebase and propose a refactor plan." }]
   });
@@ -562,7 +563,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = [new() { Role = Role.User, Content = "Review the codebase and propose a refactor plan." }],
   });
@@ -575,7 +576,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Review the codebase and propose a refactor plan.")),
@@ -593,7 +594,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(4096L)
       .addUserMessage("Review the codebase and propose a refactor plan.")
       .build();
@@ -607,7 +608,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   $client = new Client();
 
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 4096,
       messages: [
           ['role' => 'user', 'content' => 'Review the codebase and propose a refactor plan.'],
@@ -622,7 +623,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: [
       { role: "user", content: "Review the codebase and propose a refactor plan." }
@@ -651,6 +652,7 @@ The minimum accepted `task_budget.total` is **20,000 tokens** on every model tha
 | ----------------- | ------------------------------------------- |
 | Claude Fable 5.1  | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5.1 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 5.5   | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 5     | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Fable 5    | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5   | Beta (set `task-budgets-2026-03-13` header) |

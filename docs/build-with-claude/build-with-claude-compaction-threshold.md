@@ -20,6 +20,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -72,7 +73,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -92,7 +93,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -110,7 +111,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={"edits": [{"type": "compact_20260112"}]},
@@ -129,7 +130,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -159,7 +160,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -188,7 +189,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
   }
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages:  messages,
   	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -216,7 +217,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addUserMessage("Help me build a website")
               .contextManagement(BetaContextManagementConfig.builder()
@@ -241,7 +242,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
   $response = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -265,7 +266,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -301,7 +302,7 @@ Configure when compaction triggers using the `trigger` parameter:
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -325,7 +326,7 @@ Configure when compaction triggers using the `trigger` parameter:
 
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -344,7 +345,7 @@ Configure when compaction triggers using the `trigger` parameter:
   messages = [{"role": "user", "content": "Hello, Claude"}]
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={
@@ -366,7 +367,7 @@ Configure when compaction triggers using the `trigger` parameter:
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -389,7 +390,7 @@ Configure when compaction triggers using the `trigger` parameter:
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Betas = ["compact-2026-01-12"],
       Messages = messages,
@@ -411,7 +412,7 @@ Configure when compaction triggers using the `trigger` parameter:
   messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages:  messages,
   	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -437,7 +438,7 @@ Configure when compaction triggers using the `trigger` parameter:
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Hello, Claude")
@@ -461,7 +462,7 @@ Configure when compaction triggers using the `trigger` parameter:
   $message = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -485,7 +486,7 @@ Configure when compaction triggers using the `trigger` parameter:
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -522,7 +523,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -543,7 +544,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
 
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -562,7 +563,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
   messages = [{"role": "user", "content": "Hello, Claude"}]
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={
@@ -584,7 +585,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -605,7 +606,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages =
       [
@@ -630,7 +631,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
   client := anthropic.NewClient()
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages: []anthropic.BetaMessageParam{
   		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Help me build a Python web scraper")),
@@ -660,7 +661,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addUserMessage("Help me build a Python web scraper")
               .addAssistantMessage("I'll help you build a web scraper...")
@@ -686,7 +687,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
           ['role' => 'assistant', 'content' => "I'll help you build a web scraper..."],
           ['role' => 'user', 'content' => 'Add support for JavaScript-rendered pages']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -706,7 +707,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: [
       { role: "user", content: "Help me build a Python web scraper" },
@@ -748,7 +749,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -773,7 +774,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
   # step doesn't translate well to a one-off CLI command; see the SDK tabs
   # for the full pause-and-continue flow. Single paused request:
   ant beta:messages create --beta compact-2026-01-12 --format jsonl <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -790,7 +791,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
   messages = [{"role": "user", "content": "Hello, Claude"}]
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={
@@ -806,7 +807,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
       # Continue the request
       response = client.beta.messages.create(
           betas=["compact-2026-01-12"],
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           messages=messages,
           context_management={"edits": [{"type": "compact_20260112"}]},
@@ -821,7 +822,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
   let response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -845,7 +846,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
     // Continue the request
     response = await client.beta.messages.create({
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages,
       context_management: {
@@ -864,7 +865,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Betas = ["compact-2026-01-12"],
       Messages = messages,
@@ -889,7 +890,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
       parameters = new()
       {
-          Model = "claude-opus-5",
+          Model = "claude-opus-5-5",
           MaxTokens = 4096,
           Betas = ["compact-2026-01-12"],
           Messages = messages,
@@ -918,7 +919,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
   }
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:             anthropic.ModelClaudeOpus5,
+  	Model:             anthropic.ModelClaudeOpus5_5,
   	MaxTokens:         4096,
   	Messages:          messages,
   	ContextManagement: compactEdit,
@@ -932,7 +933,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
   	messages = append(messages, response.ToParam())
 
   	response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus5,
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 4096,
   		Messages:  messages,
   		ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -958,7 +959,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Help me build a website")
@@ -977,7 +978,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
               // Append the compaction block and continue the request
               // by building a new request with the compacted context
               MessageCreateParams continueParams = MessageCreateParams.builder()
-                  .model("claude-opus-5")
+                  .model("claude-opus-5-5")
                   .maxTokens(4096L)
                   .addBeta("compact-2026-01-12")
                   .addUserMessage("Help me build a website")
@@ -1000,7 +1001,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
   $response = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -1021,7 +1022,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
       $response = $client->beta->messages->create(
           maxTokens: 4096,
           messages: $messages,
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           betas: ['compact-2026-01-12'],
           contextManagement: [
               'edits' => [
@@ -1040,7 +1041,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -1058,7 +1059,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
     response = client.beta.messages.create(
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages: messages,
       context_management: {
@@ -1087,7 +1088,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
 
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={
@@ -1126,7 +1127,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -1165,7 +1166,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
   var response = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1210,7 +1211,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
   compactionCount := 0
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages:  messages,
   	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -1260,7 +1261,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -1304,7 +1305,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
   $response = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -1340,7 +1341,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -1406,7 +1407,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -1429,7 +1430,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
     --beta compact-2026-01-12 \
     --transform content \
     --format jsonl <<'YAML' > content.json
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -1442,7 +1443,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   # After receiving a response with a compaction block, append it as the
   # assistant turn and continue the conversation
   ant beta:messages create --beta compact-2026-01-12 <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -1462,7 +1463,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   messages = [{"role": "user", "content": "Hello, Claude"}]
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1475,7 +1476,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1490,7 +1491,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -1509,7 +1510,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   const nextResponse = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -1529,7 +1530,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   var response = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1549,7 +1550,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   var nextResponse = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1575,7 +1576,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   }
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:             anthropic.ModelClaudeOpus5,
+  	Model:             anthropic.ModelClaudeOpus5_5,
   	MaxTokens:         4096,
   	Messages:          messages,
   	ContextManagement: compactEdit,
@@ -1590,7 +1591,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Now add error handling")))
 
   nextResponse, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:             anthropic.ModelClaudeOpus5,
+  	Model:             anthropic.ModelClaudeOpus5_5,
   	MaxTokens:         4096,
   	Messages:          messages,
   	ContextManagement: compactEdit,
@@ -1613,7 +1614,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
           BetaMessage response = client.beta().messages().create(
               MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5")
+                  .model("claude-opus-5-5")
                   .maxTokens(4096L)
                   .addUserMessage("Help me build a web scraper")
                   .contextManagement(BetaContextManagementConfig.builder()
@@ -1626,7 +1627,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
           BetaMessage nextResponse = client.beta().messages().create(
               MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5")
+                  .model("claude-opus-5-5")
                   .maxTokens(4096L)
                   .addUserMessage("Help me build a web scraper")
                   .addMessage(response)
@@ -1649,7 +1650,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   $response = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [['type' => 'compact_20260112']]
@@ -1663,7 +1664,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   $nextResponse = $client->beta->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [['type' => 'compact_20260112']]
@@ -1682,7 +1683,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -1696,7 +1697,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
 
   next_response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -1715,7 +1716,7 @@ When the API receives a `compaction` block, all content blocks before it are ign
 * Keep the original messages in your list and let the API handle removing the compacted content
 * Manually drop the compacted messages and only include the compaction block onwards
 
-On Claude Fable 5.1 and Claude Mythos 5.1, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](./build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#tell-the-model-what-to-preserve-in-compaction-summaries).
+On Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](./build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#tell-the-model-what-to-preserve-in-compaction-summaries).
 
 ### Streaming
 
@@ -1729,7 +1730,7 @@ The compaction block streams differently from text blocks. You receive a `conten
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "stream": true,
       "messages": [
@@ -1753,7 +1754,7 @@ The compaction block streams differently from text blocks. You receive a `conten
     --stream \
     --beta compact-2026-01-12 \
     --format jsonl <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -1770,7 +1771,7 @@ The compaction block streams differently from text blocks. You receive a `conten
 
   with client.beta.messages.stream(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       messages=messages,
       context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1806,7 +1807,7 @@ The compaction block streams differently from text blocks. You receive a `conten
 
   const stream = await client.beta.messages.stream({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -1854,7 +1855,7 @@ The compaction block streams differently from text blocks. You receive a `conten
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1895,7 +1896,7 @@ The compaction block streams differently from text blocks. You receive a `conten
   messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
   stream := client.Beta.Messages.NewStreaming(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Messages:  messages,
   	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -1937,7 +1938,7 @@ The compaction block streams differently from text blocks. You receive a `conten
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Hello, Claude")
@@ -1983,7 +1984,7 @@ The compaction block streams differently from text blocks. You receive a `conten
   $stream = $client->beta->messages->createStream(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -2024,7 +2025,7 @@ The compaction block streams differently from text blocks. You receive a `conten
 
   stream = client.beta.messages.stream(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -2092,7 +2093,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "system": [
         {
@@ -2121,7 +2122,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 
   ```bash CLI
   ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   system:
     - type: text
@@ -2142,7 +2143,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   messages = [{"role": "user", "content": "Hello, Claude"}]
   response = client.beta.messages.create(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       system=[
           {
@@ -2166,7 +2167,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     system: [
       {
@@ -2188,7 +2189,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       System = new List<BetaTextBlockParam>
       {
@@ -2213,7 +2214,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   client := anthropic.NewClient()
 
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	System: []anthropic.BetaTextBlockParam{
   		{
@@ -2243,7 +2244,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .systemOfBetaTextBlockParams(List.of(
@@ -2268,7 +2269,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   $response = $client->beta->messages->create(
       maxTokens: 4096,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       system: [
           [
@@ -2294,7 +2295,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     system: [
       {
@@ -2367,7 +2368,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "messages": [
         {
           "role": "user",
@@ -2386,7 +2387,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   ```bash CLI
   cat > request.yaml <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   messages:
     - role: user
       content: Hello, Claude
@@ -2414,7 +2415,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
   messages = [{"role": "user", "content": "Hello, Claude"}]
   count_response = client.beta.messages.count_tokens(
       betas=["compact-2026-01-12"],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       messages=messages,
       context_management={"edits": [{"type": "compact_20260112"}]},
   )
@@ -2431,7 +2432,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   const countResponse = await client.beta.messages.countTokens({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     messages,
     context_management: {
       edits: [{ type: "compact_20260112" }]
@@ -2448,7 +2449,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   var countParams = new MessageCountTokensParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
       {
@@ -2467,7 +2468,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
   messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
   countResponse, err := client.Beta.Messages.CountTokens(context.TODO(), anthropic.BetaMessageCountTokensParams{
-  	Model:    anthropic.ModelClaudeOpus5,
+  	Model:    anthropic.ModelClaudeOpus5_5,
   	Messages: messages,
   	ContextManagement: anthropic.BetaContextManagementConfigParam{
   		Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
@@ -2493,7 +2494,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCountTokensParams params = MessageCountTokensParams.builder()
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .addUserMessage("Hello, Claude")
               .contextManagement(BetaContextManagementConfig.builder()
                   .addEdit(BetaCompact20260112Edit.builder().build())
@@ -2512,7 +2513,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   $countResponse = $client->beta->messages->countTokens(
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       betas: ['compact-2026-01-12'],
       contextManagement: [
           'edits' => [
@@ -2531,7 +2532,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   count_response = client.beta.messages.count_tokens(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     messages: messages,
     context_management: {
       edits: [{ type: "compact_20260112" }]
@@ -2558,7 +2559,7 @@ Here's a complete example of a long-running conversation with compaction:
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -2588,7 +2589,7 @@ Here's a complete example of a long-running conversation with compaction:
     --beta compact-2026-01-12 \
     --transform 'content.#(type=="text").text' \
     --raw-output <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -2613,7 +2614,7 @@ Here's a complete example of a long-running conversation with compaction:
 
       response = client.beta.messages.create(
           betas=["compact-2026-01-12"],
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           messages=messages,
           context_management={
@@ -2650,7 +2651,7 @@ Here's a complete example of a long-running conversation with compaction:
 
     const response = await client.beta.messages.create({
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages,
       context_management: {
@@ -2693,7 +2694,7 @@ Here's a complete example of a long-running conversation with compaction:
       var parameters = new MessageCreateParams
       {
           Betas = ["compact-2026-01-12"],
-          Model = "claude-opus-5",
+          Model = "claude-opus-5-5",
           MaxTokens = 4096,
           Messages = messages,
           ContextManagement = new BetaContextManagementConfig
@@ -2741,7 +2742,7 @@ Here's a complete example of a long-running conversation with compaction:
   	messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(userMessage)))
 
   	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus5,
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 4096,
   		Messages:  messages,
   		ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -2796,7 +2797,7 @@ Here's a complete example of a long-running conversation with compaction:
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -2831,7 +2832,7 @@ Here's a complete example of a long-running conversation with compaction:
       $response = $client->beta->messages->create(
           maxTokens: 4096,
           messages: $messages,
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           betas: ['compact-2026-01-12'],
           contextManagement: [
               'edits' => [
@@ -2867,7 +2868,7 @@ Here's a complete example of a long-running conversation with compaction:
 
     response = client.beta.messages.create(
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages: messages,
       context_management: {
@@ -2891,7 +2892,7 @@ Here's a complete example of a long-running conversation with compaction:
   ```
 </CodeGroup>
 
-On Claude Fable 5.1, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](../api/api-beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](./build-with-claude-thinking.md#preserved-in-conversation). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
+On Claude Fable 5.1 and Claude Opus 5.5, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](../api/api-beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](./build-with-claude-thinking.md#preserved-in-conversation). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
 
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
@@ -2906,7 +2907,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
     -H "anthropic-beta: compact-2026-01-12" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "messages": [
         {
@@ -2937,7 +2938,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
     --beta compact-2026-01-12 \
     --transform 'content.#(type=="text").text' \
     --raw-output <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   messages:
     - role: user
@@ -2965,7 +2966,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
       response = client.beta.messages.create(
           betas=["compact-2026-01-12"],
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           messages=messages,
           context_management={
@@ -2997,7 +2998,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
           # Continue the request with the compacted context + preserved messages
           response = client.beta.messages.create(
               betas=["compact-2026-01-12"],
-              model="claude-opus-5",
+              model="claude-opus-5-5",
               max_tokens=4096,
               messages=messages_after_compaction,
               context_management={"edits": [{"type": "compact_20260112"}]},
@@ -3031,7 +3032,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
     let response = await client.beta.messages.create({
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages,
       context_management: {
@@ -3063,7 +3064,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
       // Continue the request with the compacted context + preserved messages
       response = await client.beta.messages.create({
         betas: ["compact-2026-01-12"],
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 4096,
         messages: messagesAfterCompaction,
         context_management: {
@@ -3105,7 +3106,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
       var response = await client.Beta.Messages.Create(new()
       {
           Betas = ["compact-2026-01-12"],
-          Model = "claude-opus-5",
+          Model = "claude-opus-5-5",
           MaxTokens = 4096,
           Messages = messages,
           ContextManagement = new BetaContextManagementConfig
@@ -3140,7 +3141,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
           response = await client.Beta.Messages.Create(new()
           {
               Betas = ["compact-2026-01-12"],
-              Model = "claude-opus-5",
+              Model = "claude-opus-5-5",
               MaxTokens = 4096,
               Messages = messagesAfterCompaction,
               ContextManagement = new BetaContextManagementConfig
@@ -3195,7 +3196,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
   	}
 
   	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  		Model:             anthropic.ModelClaudeOpus5,
+  		Model:             anthropic.ModelClaudeOpus5_5,
   		MaxTokens:         4096,
   		Messages:          messages,
   		ContextManagement: compactEdit,
@@ -3221,7 +3222,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
   		messagesAfterCompaction = append(messagesAfterCompaction, preserved...)
 
   		response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  			Model:     anthropic.ModelClaudeOpus5,
+  			Model:     anthropic.ModelClaudeOpus5_5,
   			MaxTokens: 4096,
   			Messages:  messagesAfterCompaction,
   			ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -3272,7 +3273,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5")
+              .model("claude-opus-5-5")
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -3303,7 +3304,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
               // Continue the request with the compacted context + preserved messages
               MessageCreateParams continueParams = MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5")
+                  .model("claude-opus-5-5")
                   .maxTokens(4096L)
                   .messages(messagesAfterCompaction)
                   .contextManagement(BetaContextManagementConfig.builder()
@@ -3345,7 +3346,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
       $response = $client->beta->messages->create(
           maxTokens: 4096,
           messages: $messages,
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           betas: ['compact-2026-01-12'],
           contextManagement: [
               'edits' => [
@@ -3373,7 +3374,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
           $response = $client->beta->messages->create(
               maxTokens: 4096,
               messages: $messagesAfterCompaction,
-              model: 'claude-opus-5',
+              model: 'claude-opus-5-5',
               betas: ['compact-2026-01-12'],
               contextManagement: [
                   'edits' => [['type' => 'compact_20260112']]
@@ -3407,7 +3408,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
     response = client.beta.messages.create(
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages: messages,
       context_management: {
@@ -3432,7 +3433,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
       response = client.beta.messages.create(
         betas: ["compact-2026-01-12"],
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 4096,
         messages: messages_after_compaction,
         context_management: {

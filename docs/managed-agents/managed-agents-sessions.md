@@ -665,7 +665,7 @@ The following example starts a session from an agent whose model has no geo pin,
     "agent": {
       "type": "agent_with_overrides",
       "id": "$AGENT_ID",
-      "model": {"id": "claude-opus-5", "inference_geo": "us"}
+      "model": {"id": "claude-opus-5-5", "inference_geo": "us"}
     },
     "environment_id": "$ENVIRONMENT_ID"
   }
@@ -681,7 +681,7 @@ The following example starts a session from an agent whose model has no geo pin,
     type: agent_with_overrides
     id: $AGENT_ID
     model:
-      id: claude-opus-5
+      id: claude-opus-5-5
       inference_geo: us
   environment_id: $ENVIRONMENT_ID
   YAML
@@ -695,7 +695,7 @@ The following example starts a session from an agent whose model has no geo pin,
           "type": "agent_with_overrides",
           "id": agent.id,
           # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-          "model": {"id": "claude-opus-5", "inference_geo": "us"},
+          "model": {"id": "claude-opus-5-5", "inference_geo": "us"},
       },
       environment_id=environment.id,
   )
@@ -708,7 +708,7 @@ The following example starts a session from an agent whose model has no geo pin,
       type: "agent_with_overrides",
       id: agent.id,
       // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-      model: { id: "claude-opus-5", inference_geo: "us" }
+      model: { id: "claude-opus-5-5", inference_geo: "us" }
     },
     environment_id: environment.id
   });
@@ -725,7 +725,7 @@ The following example starts a session from an agent whose model has no geo pin,
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           Model = new BetaManagedAgentsModelConfigParams
           {
-              ID = BetaManagedAgentsModel.ClaudeOpus5,
+              ID = BetaManagedAgentsModel.ClaudeOpus5_5,
               InferenceGeo = "us",
           },
       },
@@ -742,7 +742,7 @@ The following example starts a session from an agent whose model has no geo pin,
   			ID:   agent.ID,
   			// Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
   			Model: anthropic.BetaManagedAgentsModelConfigParams{
-  				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5,
+  				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   				InferenceGeo: anthropic.String("us"),
   			},
   		},
@@ -762,7 +762,7 @@ The following example starts a session from an agent whose model has no geo pin,
           .id(agent.id())
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           .model(BetaManagedAgentsModelConfigParams.builder()
-              .id(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+              .id(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
               .inferenceGeo("us")
               .build())
           .build())
@@ -778,7 +778,7 @@ The following example starts a session from an agent whose model has no geo pin,
           type: 'agent_with_overrides',
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           model: BetaManagedAgentsModelConfigParams::with(
-              id: 'claude-opus-5',
+              id: 'claude-opus-5-5',
               inferenceGeo: 'us',
           ),
       ),
@@ -793,7 +793,7 @@ The following example starts a session from an agent whose model has no geo pin,
       type: :agent_with_overrides,
       id: agent.id,
       # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-      model: {id: "claude-opus-5", inference_geo: "us"}
+      model: {id: "claude-opus-5-5", inference_geo: "us"}
     },
     environment_id: environment.id
   )

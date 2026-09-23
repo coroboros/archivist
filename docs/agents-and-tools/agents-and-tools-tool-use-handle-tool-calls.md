@@ -32,7 +32,7 @@ A `tool_use` block for a member of the [computer use](./agents-and-tools-tool-us
   ```json JSON
   {
     "id": "msg_01Aq9w938a90dw8q",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "stop_reason": "tool_use",
     "role": "assistant",
     "content": [

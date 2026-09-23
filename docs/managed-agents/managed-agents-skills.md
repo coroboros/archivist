@@ -233,7 +233,7 @@ Each entry in the `skills` array uses the following fields:
     --json @- <<'EOF'
   {
     "name": "Financial Analyst",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "system": "You are a financial analysis agent.",
     "skills": [
       {"type": "anthropic", "skill_id": "xlsx"},
@@ -253,7 +253,7 @@ Each entry in the `skills` array uses the following fields:
       ```markdown
       ---
       name: Financial Analyst
-      model: claude-opus-5
+      model: claude-opus-5-5
       skills:
         - type: anthropic
           skill_id: xlsx
@@ -270,7 +270,7 @@ Each entry in the `skills` array uses the following fields:
   ```python Python
   agent = client.beta.agents.create(
       name="Financial Analyst",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       system="You are a financial analysis agent.",
       skills=[
           {
@@ -289,7 +289,7 @@ Each entry in the `skills` array uses the following fields:
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Financial Analyst",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system: "You are a financial analysis agent.",
     skills: [
       {
@@ -311,7 +311,7 @@ Each entry in the `skills` array uses the following fields:
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Financial Analyst",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       System = "You are a financial analysis agent.",
       Skills =
       [
@@ -325,7 +325,7 @@ Each entry in the `skills` array uses the following fields:
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Financial Analyst",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	System: anthropic.String("You are a financial analysis agent."),
   	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
@@ -352,7 +352,7 @@ Each entry in the `skills` array uses the following fields:
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Financial Analyst")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .system("You are a financial analysis agent.")
           .addSkill(
               BetaManagedAgentsAnthropicSkillParams.builder()
@@ -374,7 +374,7 @@ Each entry in the `skills` array uses the following fields:
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Financial Analyst',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       system: 'You are a financial analysis agent.',
       skills: [
           ['type' => 'anthropic', 'skillID' => 'xlsx'],
@@ -386,7 +386,7 @@ Each entry in the `skills` array uses the following fields:
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Financial Analyst",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system_: "You are a financial analysis agent.",
     skills: [
       {type: "anthropic", skill_id: "xlsx"},

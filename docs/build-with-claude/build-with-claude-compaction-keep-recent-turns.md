@@ -17,6 +17,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -51,7 +52,7 @@ In the following example, the history holds two turns, and the cut keeps the sec
 
 ```json
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 4096,
   "messages": [
     {
@@ -97,7 +98,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
   for turn, question in enumerate(QUESTIONS, start=1):
       history.append({"role": "user", "content": question})
       response = client.beta.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=8192,
           system=SYSTEM,
           betas=["compact-2026-09-04"],
@@ -113,7 +114,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
           split = -2 * KEEP_TURNS
           older, recent = history[:split], history[split:]
           summary = client.beta.messages.create(
-              model="claude-opus-5",
+              model="claude-opus-5-5",
               max_tokens=4096,
               system=SYSTEM,
               betas=["compact-2026-09-04"],
@@ -149,7 +150,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
     const turn = index + 1;
     history.push({ role: "user", content: question });
     const response = await client.beta.messages.create({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 8192,
       system: systemPrompt,
       betas: ["compact-2026-09-04"],
@@ -164,7 +165,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
       const older = history.slice(0, -2 * keepTurns);
       const recent = history.slice(-2 * keepTurns);
       const summary = await client.beta.messages.create({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 4096,
         system: systemPrompt,
         betas: ["compact-2026-09-04"],
@@ -210,7 +211,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
       history.Add(new() { Role = Role.User, Content = question });
       var response = await client.Beta.Messages.Create(new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 8192,
           System = SystemPrompt,
           Betas = [AnthropicBeta.Compact2026_09_04],
@@ -231,7 +232,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
           var recent = history[^(2 * KeepTurns)..];
           var summary = await client.Beta.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus5,
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 4096,
               System = SystemPrompt,
               Betas = [AnthropicBeta.Compact2026_09_04],
@@ -280,7 +281,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
   	turn := i + 1
   	history = append(history, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(question)))
   	response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus5,
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 8192,
   		System:    system,
   		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -298,7 +299,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
   		split := len(history) - 2*keepTurns
   		older, recent := history[:split], history[split:]
   		summary, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-  			Model:     anthropic.ModelClaudeOpus5,
+  			Model:     anthropic.ModelClaudeOpus5_5,
   			MaxTokens: 4096,
   			System:    system,
   			Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -351,7 +352,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
               .content(questions.get(turn - 1))
               .build());
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(8192)
               .system(SYSTEM)
               .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -366,7 +367,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
               // A turn is one user message and one assistant reply, so the kept turns start with a user message.
               var older = history.subList(0, history.size() - 2 * KEEP_TURNS);
               var summaryParams = MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_5)
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096)
                   .system(SYSTEM)
                   .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -414,7 +415,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
       $turn = $index + 1;
       $history[] = BetaMessageParam::with(role: Role::USER, content: $question);
       $response = $client->beta->messages->create(
-          model: Model::CLAUDE_OPUS_5,
+          model: Model::CLAUDE_OPUS_5_5,
           maxTokens: 8192,
           system: SYSTEM,
           betas: [AnthropicBeta::COMPACT_2026_09_04],
@@ -429,7 +430,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
           $older = array_slice($history, 0, -2 * KEEP_TURNS);
           $recent = array_slice($history, -2 * KEEP_TURNS);
           $summary = $client->beta->messages->create(
-              model: Model::CLAUDE_OPUS_5,
+              model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 4096,
               system: SYSTEM,
               betas: [AnthropicBeta::COMPACT_2026_09_04],
@@ -467,7 +468,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
   questions.each.with_index(1) do |question, turn|
     history << { role: "user", content: question }
     response = client.beta.messages.create(
-      model: Anthropic::Model::CLAUDE_OPUS_5,
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 8192,
       system_: SYSTEM,
       betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],
@@ -481,7 +482,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
       # A turn is one user message and one assistant reply, so the kept turns start with a user message.
       older, recent = history[...-2 * KEEP_TURNS], history.last(2 * KEEP_TURNS)
       summary = client.beta.messages.create(
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 4096,
         system_: SYSTEM,
         betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],

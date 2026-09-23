@@ -52,7 +52,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
     -d @- <<EOF
   {
     "name": "Engineering Lead",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     "tools": [
       {
@@ -80,7 +80,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
       ```markdown
       ---
       name: Engineering Lead
-      model: claude-opus-5
+      model: claude-opus-5-5
       tools:
         - type: agent_toolset_20260401
       multiagent:
@@ -120,7 +120,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   ```python Python
   coordinator = client.beta.agents.create(
       name="Engineering Lead",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       system="You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
       tools=[
           {"type": "agent_toolset_20260401"},
@@ -138,7 +138,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   ```typescript TypeScript
   const coordinator = await client.beta.agents.create({
     name: "Engineering Lead",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system:
       "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools: [{ type: "agent_toolset_20260401" }],
@@ -156,7 +156,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   var coordinator = await client.Beta.Agents.Create(new()
   {
       Name = "Engineering Lead",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       System = "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
       Tools =
       [
@@ -176,7 +176,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   ```go Go
   coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name:   "Engineering Lead",
-  	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5},
+  	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5},
   	System: anthropic.String("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -200,7 +200,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   var coordinator = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Engineering Lead")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .system("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.")
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -225,7 +225,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   ```php PHP
   $coordinator = $client->beta->agents->create(
       name: 'Engineering Lead',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       system: 'You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.',
       tools: [
           ['type' => 'agent_toolset_20260401'],
@@ -243,7 +243,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
   ```ruby Ruby
   coordinator = client.beta.agents.create(
     name: "Engineering Lead",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system: "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools: [
       {type: "agent_toolset_20260401"}
@@ -291,7 +291,7 @@ curl -fsS https://api.anthropic.com/v1/agents \
     "multiagent": {
       "type": "coordinator",
       "agents": [
-        {"type": "advisor", "model": "claude-opus-5"}
+        {"type": "advisor", "model": "claude-opus-5-5"}
       ]
     }
   }'
@@ -440,7 +440,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
   coordinator_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
   {
     "name": "coordinator",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "tools": [{"type": "agent_toolset_20260401"}],
     "multiagent": {
       "type": "coordinator",
@@ -460,7 +460,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
       ```markdown
       ---
       name: coordinator
-      model: claude-opus-5
+      model: claude-opus-5-5
       tools:
         - type: agent_toolset_20260401
       multiagent:
@@ -500,7 +500,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
 
   coordinator = client.beta.agents.create(
       name="coordinator",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       tools=[{"type": "agent_toolset_20260401"}],
       multiagent={
           "type": "coordinator",
@@ -521,7 +521,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
 
   const coordinator = await client.beta.agents.create({
     name: "coordinator",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     tools: [{ type: "agent_toolset_20260401" }],
     multiagent: {
       type: "coordinator",
@@ -557,7 +557,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
   var coordinator = await client.Beta.Agents.Create(new()
   {
       Name = "coordinator",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -602,7 +602,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
 
   coordinator, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name:  "coordinator",
-  	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5},
+  	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
   			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
@@ -643,7 +643,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
   var coordinator = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("coordinator")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
               .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
               .build())
@@ -672,7 +672,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
 
   $coordinator = $client->beta->agents->create(
       name: 'coordinator',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       tools: [
           ['type' => 'agent_toolset_20260401'],
       ],
@@ -699,7 +699,7 @@ Create the researcher, which declares the GitHub MCP server, and the coordinator
 
   coordinator = client.beta.agents.create(
     name: "coordinator",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     tools: [
       {type: "agent_toolset_20260401"}
     ],

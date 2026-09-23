@@ -207,7 +207,7 @@ curl --fail-with-body -sS \
       "type": "compliance_local_session_message",
       "id": "clsm_01J4KpLmNoPqRsTuVwXyZaBd",
       "role": "assistant",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "created_at": "2026-07-09T14:02:11Z",
       "provenance": null,
       "content": [
@@ -252,7 +252,7 @@ curl --fail-with-body -sS \
       "type": "compliance_local_session_message",
       "id": "clsm_01J4KpLmNoPqRsTuVwXyZaBf",
       "role": "assistant",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "created_at": "2026-07-09T14:02:38Z",
       "provenance": null,
       "content": [
