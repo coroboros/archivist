@@ -672,7 +672,7 @@ The following table shows which parts of the cache are invalidated by different 
 | **Thinking parameters**                                   | Model-specific | Model-specific | ✘              | The thinking configuration (mode, and `budget_tokens` in extended mode) is rendered into the prompt, so changing it always invalidates message blocks; tool and system caches are also invalidated on models that render the configuration ahead of them. See [Thinking and prompt caching](./build-with-claude-thinking.md#thinking-and-prompt-caching).                                                                                                                                                                                                           |
 | **Effort setting**                                        | Model-specific | Model-specific | ✘              | Changing the [`output_config.effort`](./build-with-claude-effort.md) value always invalidates message blocks, with the same model-specific effect on tool and system caches as thinking parameters. Setting effort explicitly to the model's default is equivalent to omitting it and does not invalidate. On models that support [per-message effort](./build-with-claude-effort.md#change-effort-mid-conversation-beta), an effort change carried in a `role: "system"` message inside `messages` leaves the cached prefix intact. |
 | **Non-tool results passed to extended thinking requests** | ✓              | ✓              | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](./build-with-claude-prompt-caching.md#caching-with-thinking-blocks).                                                                                                                           |
-| **Dropped thinking blocks**                               | ✓              | ✓              | ✘              | When the API drops a Claude Fable 5.1 or Claude Mythos 5.1 thinking block that isn't [preserved](./build-with-claude-thinking.md#preserved-thinking) on that request (for example, one you replay to an earlier model), the cached prefix changes from that block's position onward on that request. Blocks the receiving model can read, passed back unchanged, keep the cache intact.                                                                                                                                                                             |
+| **Dropped thinking blocks**                               | ✓              | ✓              | ✘              | When the API drops a Claude Fable 5.1, Claude Mythos 5.1, or Claude Opus 5.5 thinking block that isn't [preserved](./build-with-claude-thinking.md#preserved-thinking) on that request (for example, one you replay to a model that can't read it), the cached prefix changes from that block's position onward on that request. Blocks the receiving model can read, passed back unchanged, keep the cache intact.                                                                                                                                                 |
 
 On models that support [mid-conversation tool changes](./build-with-claude-mid-conversation-system-messages.md#mid-conversation-tool-changes), the `inline-tools-2026-09-15` beta header lets you add a tool, or change a tool's definition, partway through a conversation without editing `tools`. Send the definition in a `tool_addition` block in a mid-conversation system message and leave `tools` exactly as you first sent it. The cached prefix still matches, so only the appended message is processed as new input. The one exception is a `tools` array with no non-deferred tool, where the first tool defined this way costs one full cache miss on that request. See [Define tools in a message](./build-with-claude-mid-conversation-system-messages.md#define-tools-in-a-message-beta).
 
@@ -1072,7 +1072,7 @@ Place the `cache_control` breakpoint on the last block that is shared with the f
       messages: [['role' => 'user', 'content' => 'warmup']],
   );
 
-  echo $prewarm->stopReason->value, PHP_EOL; // "max_tokens"
+  echo $prewarm->stopReason, PHP_EOL; // "max_tokens"
   echo json_encode($prewarm->content), PHP_EOL; // []
   echo json_encode($prewarm->usage), PHP_EOL;
   ```
@@ -3324,7 +3324,7 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
   <Accordion title="Why am I seeing the error `AttributeError: 'Beta' object has no attribute 'prompt_caching'` in Python?">
     This error typically appears when you have upgraded your SDK or you are using outdated code examples. Prompt caching no longer requires the beta prefix. Instead of:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell:cURL, shell:CLI, typescript, csharp, go, java, php, ruby">
       ```python Python
       client.beta.prompt_caching.messages.create(**params)
       ```
@@ -3332,7 +3332,7 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 
     Use:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell:cURL, shell:CLI, typescript, csharp, go, java, php, ruby">
       ```python Python
       client.messages.create(**params)
       ```

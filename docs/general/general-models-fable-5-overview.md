@@ -30,7 +30,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------------------- | :------------- | :--------------- |
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md) | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jun 2026         |
 | **Claude Fable 5** (this model)                                                   | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jan 2026         |
-| [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview.md)   | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
+| [Claude Opus 5.5](./general-models-opus-5-5-overview.md)   | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
 | [Claude Sonnet 5](./general-models-sonnet-5-overview.md)   | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jan 2026         |
 | [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) | 200K    | 64K        | $1 / $5      | Extended             | —              | Feb 2025         |
 
@@ -55,15 +55,16 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 ### Pricing
 
-| Feature                                                                                | Value                                                               |
-| :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
-| Input                                                                                  | $10 / MTok                                                          |
-| Output                                                                                 | $50 / MTok                                                          |
-| [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $12.50 / MTok                                                       |
-| [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $20 / MTok                                                          |
-| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $1 / MTok                                                           |
-| [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](../about-claude/about-claude-pricing.md) |
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $10 / MTok                       |
+| Output                                                                                 | $50 / MTok                       |
+| [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $12.50 / MTok                    |
+| [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $20 / MTok                       |
+| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $1 / MTok                        |
+| [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output |
+
+[Full price list](../about-claude/about-claude-pricing.md)
 
 ### Capabilities
 

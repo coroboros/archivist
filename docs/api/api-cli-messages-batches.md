@@ -1443,7 +1443,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `file_id: string`
 
-        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+        - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
           The model that will complete your prompt.
 
@@ -1452,6 +1452,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `"claude-fable-5-1"`
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-mythos-5-1"`
 
@@ -2682,7 +2686,7 @@ ant messages:batches results \
 
             - `file_id: string`
 
-        - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+        - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
           The model that will complete your prompt.
 
@@ -2691,6 +2695,10 @@ ant messages:batches results \
           - `"claude-fable-5-1"`
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-mythos-5-1"`
 
@@ -3741,7 +3749,7 @@ ant messages:batches results \
 
           - `file_id: string`
 
-      - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+      - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
         The model that will complete your prompt.
 
@@ -3750,6 +3758,10 @@ ant messages:batches results \
         - `"claude-fable-5-1"`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-mythos-5-1"`
 
@@ -4762,7 +4774,7 @@ ant messages:batches results \
 
         - `file_id: string`
 
-    - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+    - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
       The model that will complete your prompt.
 
@@ -4771,6 +4783,10 @@ ant messages:batches results \
       - `"claude-fable-5-1"`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+      - `"claude-opus-5-5"`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `"claude-mythos-5-1"`
 

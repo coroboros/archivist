@@ -1099,6 +1099,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+          - `const ModelClaudeOpus5_5 Model = "claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
+
           - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 
             Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -4775,6 +4779,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+            - `const ModelClaudeOpus5_5 Model = "claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
+
             - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 
               Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -6240,6 +6248,10 @@ func main() {
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+            - `const ModelClaudeOpus5_5 Model = "claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
+
             - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 
               Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -7453,6 +7465,10 @@ func main() {
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+          - `const ModelClaudeOpus5_5 Model = "claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
+
           - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 
             Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -8617,6 +8633,10 @@ func main() {
         - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+        - `const ModelClaudeOpus5_5 Model = "claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `const ModelClaudeMythos5_1 Model = "claude-mythos-5-1"`
 

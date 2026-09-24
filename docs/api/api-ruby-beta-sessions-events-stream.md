@@ -35,7 +35,7 @@ Stream Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -128,6 +128,10 @@ Stream Events
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -547,7 +551,7 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: :allow | :ask | :deny`
+    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -685,15 +689,9 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: :allow | :ask | :deny`
+    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
 
       AgentEvaluatedPermission enum
-
-      - `:allow`
-
-      - `:ask`
-
-      - `:deny`
 
     - `evaluation: BetaManagedAgentsAgentToolEvaluation`
 
@@ -1663,11 +1661,15 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-fable-5-1" | :"claude-sonnet-5" | :"claude-fable-5" | 11 more`
+          - `BetaManagedAgentsModel = :"claude-opus-5-5" | :"claude-fable-5-1" | :"claude-sonnet-5" | 12 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `:"claude-fable-5-1"`
 

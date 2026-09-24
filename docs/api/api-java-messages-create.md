@@ -3556,6 +3556,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+    - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
+
     - `CLAUDE_MYTHOS_5_1("claude-mythos-5-1")`
 
       Our most capable model for cybersecurity and biology research, available through trusted access programs

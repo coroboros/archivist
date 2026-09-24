@@ -41,7 +41,7 @@ Create Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -134,6 +134,10 @@ Create Skill
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -284,7 +288,7 @@ List Skills
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -377,6 +381,10 @@ List Skills
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -514,7 +522,7 @@ Get Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -607,6 +615,10 @@ Get Skill
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -738,7 +750,7 @@ Delete Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -831,6 +843,10 @@ Delete Skill
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1024,7 +1040,7 @@ Create Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1117,6 +1133,10 @@ Create Skill Version
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1231,7 +1251,7 @@ List Skill Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1324,6 +1344,10 @@ List Skill Versions
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1436,7 +1460,7 @@ Download a skill version's content as a zip archive.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1529,6 +1553,10 @@ Download a skill version's content as a zip archive.
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1589,7 +1617,7 @@ Get Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1682,6 +1710,10 @@ Get Skill Version
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1790,7 +1822,7 @@ Delete Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1883,6 +1915,10 @@ Delete Skill Version
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 

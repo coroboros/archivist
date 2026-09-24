@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "How it compares to the current lineup"
 source: "https://platform.claude.com/docs/en/models/opus-5/overview"
 category: "general"
 generated: true
@@ -7,33 +7,25 @@ generated: true
 ---
 title: Claude Opus 5
 url: https://platform.claude.com/docs/en/models/opus-5/overview
-description: "Claude Opus 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Opus 5.5 is the current Opus model."
+description: "Claude Opus 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Opus 5 is a legacy model; Claude Opus 5.5 is the current Opus model."
 ---
 
 **Legacy.** Released July 24, 2026.
 
-For complex agentic coding and enterprise work
-
-Although Claude Opus 5 is still available, you should consider migrating to Claude Opus 5.5 for improved performance. [See Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview.md) · [Migrate to Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide.md)
+Although Claude Opus 5 is still available, you should consider migrating to Claude Opus 5.5 for improved performance. [See Claude Opus 5.5](./general-models-opus-5-5-overview.md) · [Migrate to Claude Opus 5.5](./general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-5)
 
 Model ID: `claude-opus-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok · Output pricing: $25 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-opus-5) · [What’s new](./general-models-opus-5-whats-new-opus-5.md)
+[Announcement](https://www.anthropic.com/news/claude-opus-5)
 
-## Overview
-
-Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the largest gains in deep reasoning, agentic and long-horizon tasks, and test-time compute scaling. This page summarizes everything new in Claude Opus 5, including mid-conversation tool changes and two breaking changes for code running on Claude Opus 4.8: thinking is on by default, and thinking can be disabled only at effort `high` or below.
-
-[What's new in Claude Opus 5](./general-models-opus-5-whats-new-opus-5.md)
-
-## How it compares
+## How it compares to the current lineup
 
 | Model                                                                             | Context | Max output | Price / MTok | Thinking             | Default effort | Knowledge cutoff |
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------------------- | :------------- | :--------------- |
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md) | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jun 2026         |
-| [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview.md)   | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
+| [Claude Opus 5.5](./general-models-opus-5-5-overview.md)   | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
 | **Claude Opus 5** (this model)                                                    | 1M      | 128K       | $5 / $25     | Adaptive             | `high`         | May 2026         |
 | [Claude Sonnet 5](./general-models-sonnet-5-overview.md)   | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jan 2026         |
 | [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md) | 200K    | 64K        | $1 / $5      | Extended             | —              | Feb 2025         |
@@ -59,15 +51,16 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 
 ### Pricing
 
-| Feature                                                                                | Value                                                               |
-| :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
-| Input                                                                                  | $5 / MTok                                                           |
-| Output                                                                                 | $25 / MTok                                                          |
-| [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $6.25 / MTok                                                        |
-| [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $10 / MTok                                                          |
-| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $0.50 / MTok                                                        |
-| [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](../about-claude/about-claude-pricing.md) |
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $5 / MTok                        |
+| Output                                                                                 | $25 / MTok                       |
+| [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $6.25 / MTok                     |
+| [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $10 / MTok                       |
+| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $0.50 / MTok                     |
+| [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output |
+
+[Full price list](../about-claude/about-claude-pricing.md)
 
 ### Capabilities
 
@@ -100,28 +93,16 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Opus 5.5" icon="arrows-left-right" href="https://platform.claude.com/docs/en/models/opus-5-5/migration-guide.md">
+  <Card title="Migrate to Claude Opus 5.5" icon="arrows-left-right" href="./general-models-opus-5-5-migration-guide.md">
     What changes when moving from Claude Opus 5 to Claude Opus 5.5.
   </Card>
 
-  <Card title="Claude Opus 5.5" icon="arrow-right" href="https://platform.claude.com/docs/en/models/opus-5-5/overview.md">
+  <Card title="Claude Opus 5.5" icon="arrow-right" href="./general-models-opus-5-5-overview.md">
     The current Opus model: overview, specs, and resources.
   </Card>
 
   <Card title="Prompting Claude Opus 5" icon="lightbulb" href="../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-5.md">
     Model-specific prompting guidance.
-  </Card>
-
-  <Card title="Effort" icon="sliders" href="../build-with-claude/build-with-claude-effort.md">
-    Effort defaults to `high` on Claude Opus 5 and matters more than on earlier models. Choose a level per workload.
-  </Card>
-
-  <Card title="Adaptive thinking" icon="brain" href="../build-with-claude/build-with-claude-thinking.md">
-    On by default. Disabling thinking requires effort `high` or below.
-  </Card>
-
-  <Card title="Fast mode" icon="lightning" href="../build-with-claude/build-with-claude-fast-mode.md">
-    Lower-latency Claude Opus 5 on the Claude API (research preview), priced separately.
   </Card>
 </CardGroup>
 

@@ -35,7 +35,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -128,6 +128,10 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -214,7 +218,7 @@ Fetches a tunnel by ID.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -307,6 +311,10 @@ Fetches a tunnel by ID.
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -403,7 +411,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -496,6 +504,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -587,7 +599,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -680,6 +692,10 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -766,7 +782,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -859,6 +875,10 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -932,7 +952,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1025,6 +1045,10 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -1150,7 +1174,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1243,6 +1267,10 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -1340,7 +1368,7 @@ Fetches a tunnel certificate by ID.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1433,6 +1461,10 @@ Fetches a tunnel certificate by ID.
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -1540,7 +1572,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1633,6 +1665,10 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -1735,7 +1771,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1828,6 +1864,10 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 

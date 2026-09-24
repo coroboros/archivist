@@ -108,6 +108,10 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Haiku 4.5                                                                                                                      | $0.50 / MTok | $2.50 / MTok  |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | $0.40 / MTok | $2 / MTok     |
 
+* **MTok:** Million tokens. $5 / MTok is $5 for every million tokens.
+* **Limited access:** Offered separately, by invitation only, as part of [Project Glasswing](https://anthropic.com/glasswing). For access, contact your Anthropic, AWS, or Google Cloud account team.
+* **Retired:** May still be available on other cloud platforms. See [Model deprecations](../about-claude/about-claude-model-deprecations.md) for more.
+
 ## How to use the Message Batches API
 
 ### Prepare and create your batch

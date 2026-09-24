@@ -35,7 +35,7 @@ If you built an agent by calling `messages.create` in a `while` loop, running to
 
 **Before** (Messages API loop, simplified):
 
-<CodeGroup>
+<CodeGroup exclude="shell:cURL, shell:CLI">
   ```python Python
   messages = [{"role": "user", "content": task}]
   while True:
