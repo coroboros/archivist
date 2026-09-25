@@ -73,7 +73,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required Container? Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `required string ID`
 
@@ -101,13 +103,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `required string Version`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -268,8 +270,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Text`
 
-              minLength: 0
-
           - `class ThinkingBlock`
 
             - `JsonElement Type = "thinking"`
@@ -342,7 +342,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
 
@@ -728,7 +728,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string ToolName`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `required string ToolUseID`
 
@@ -744,8 +744,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required Diagnostics? Diagnostics`
 
-          Request-level diagnostics: why the prompt cache could not fully reuse
-          the prefix of the request named by `diagnostics.previous_message_id`.
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
           - `required CacheMissReason? CacheMissReason`
 
@@ -833,10 +832,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Powerful intelligence for long-running agents and coding
 
-          - `ClaudeMythosPreview("claude-mythos-preview")`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `ClaudeOpus4_6("claude-opus-4-6")`
 
             Powerful intelligence for long-running agents and coding
@@ -869,6 +864,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             High-performance model for agents and coding
 
+          - `ClaudeMythosPreview("claude-mythos-preview")`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
+
         - `JsonElement Role = "assistant"`
 
           Conversational role of the generated message.
@@ -877,13 +878,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required RefusalStopDetails? StopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `JsonElement Type = "refusal"`
 
           - `required Category? Category`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `Cyber("cyber")`
 

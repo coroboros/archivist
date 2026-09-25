@@ -18,24 +18,26 @@ To install and authenticate the CLI, see the [CLI quickstart](./general-cli-sdks
 
 Write the agent as a Markdown file under `agents/` and apply it:
 
-<MultiFileExample language="cli" label="CLI">
-  ```bash CLI
-  ant apply agents/summarizer.md
-  ```
-
-  <File filename="agents/summarizer.md">
-    ```markdown
-    ---
-    name: Summarizer
-    model: claude-opus-5-5
-    tools:
-      - type: agent_toolset_20260401
-    ---
-
-    You are a helpful assistant that writes concise summaries.
+<CodeGroup>
+  <CodeGroupItem>
+    ```bash CLI
+    ant apply agents/summarizer.md
     ```
-  </File>
-</MultiFileExample>
+
+    <File filename="agents/summarizer.md">
+      ```markdown
+      ---
+      name: Summarizer
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+      ---
+
+      You are a helpful assistant that writes concise summaries.
+      ```
+    </File>
+  </CodeGroupItem>
+</CodeGroup>
 
 The frontmatter holds the agent's configuration (the fields from [Define your agent](../managed-agents/managed-agents-agent-setup.md)) and the body is its system prompt. `ant apply` [infers](./general-cli-sdks-libraries-cli-apply.md#kind-inference) that the file is an agent from its path, here the `agents/` directory.
 
@@ -112,7 +114,7 @@ Any resource except a skill can be written as YAML, JSON, or Markdown. In Markdo
 
 Resources refer to each other by path. Wherever the API expects another resource's ID, write the relative path to that resource's file instead. In this project, the reviewer agent lists `../skills/pr-summary` under `skills`, the lead agent lists `./reviewer.md` in its roster, and the deployment names its agent, environment, and memory store by path. `ant apply` creates them in dependency order and fills in the real IDs. The project has six files:
 
-<MultiFileExample variant="explorer">
+<FileExplorer>
   <File filename="agents/reviewer.md">
     ```markdown
     ---
@@ -194,7 +196,7 @@ Resources refer to each other by path. Wherever the API expects another resource
     Review any open pull requests. Start with the oldest.
     ```
   </File>
-</MultiFileExample>
+</FileExplorer>
 
 Apply the whole directory:
 

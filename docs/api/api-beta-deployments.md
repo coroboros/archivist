@@ -195,7 +195,7 @@ Create Deployment
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `BetaManagedAgentsBase64ImageSource object`
 
@@ -247,7 +247,7 @@ Create Deployment
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -333,7 +333,7 @@ Create Deployment
 
     - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `BetaManagedAgentsFileRubricParams object`
 
@@ -389,13 +389,13 @@ Create Deployment
 
 - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+  Enforced spend ceiling stamped onto each session created from this deployment, copied at session-creation time. Omit to leave sessions uncapped. The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
   - `type: "limit"`
 
   - `max_list_cost: BetaMonetaryAmount`
 
-    A monetary amount in a specific currency.
+    Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
     - `amount: string`
 
@@ -497,7 +497,7 @@ Create Deployment
 
     - `access: optional "read_write" or "read_only" or null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to read_write. read_only mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -511,7 +511,7 @@ Create Deployment
 
 - `schedule: optional BetaManagedAgentsScheduleParams or null`
 
-  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+  Optional recurring cron schedule. When present, the deployment fires automatically. Both expression and timezone are required when schedule is set.
 
   - `type: "cron"`
 
@@ -545,7 +545,7 @@ Create Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -557,13 +557,13 @@ Create Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -609,7 +609,7 @@ Create Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -661,7 +661,7 @@ Create Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -747,7 +747,7 @@ Create Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -803,7 +803,7 @@ Create Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -819,7 +819,7 @@ Create Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -973,7 +973,7 @@ Create Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -985,7 +985,7 @@ Create Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -1003,7 +1003,7 @@ Create Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -1013,7 +1013,7 @@ Create Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -1025,7 +1025,7 @@ Create Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -1035,13 +1035,13 @@ Create Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -1073,7 +1073,12 @@ curl https://api.anthropic.com/v1/deployments \
               "type": "user.message"
             }
           ],
-          "name": "x"
+          "name": "x",
+          "schedule": {
+            "expression": "0 9 * * 1-5",
+            "timezone": "America/Los_Angeles",
+            "type": "cron"
+          }
         }'
 ```
 
@@ -1320,7 +1325,7 @@ List Deployments
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -1332,13 +1337,13 @@ List Deployments
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -1384,7 +1389,7 @@ List Deployments
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -1436,7 +1441,7 @@ List Deployments
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -1522,7 +1527,7 @@ List Deployments
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -1578,7 +1583,7 @@ List Deployments
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -1594,7 +1599,7 @@ List Deployments
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -1748,7 +1753,7 @@ List Deployments
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -1760,7 +1765,7 @@ List Deployments
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -1778,7 +1783,7 @@ List Deployments
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -1788,7 +1793,7 @@ List Deployments
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -1800,7 +1805,7 @@ List Deployments
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -1810,13 +1815,13 @@ List Deployments
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -2049,7 +2054,7 @@ Get Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -2061,13 +2066,13 @@ Get Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -2113,7 +2118,7 @@ Get Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -2165,7 +2170,7 @@ Get Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -2251,7 +2256,7 @@ Get Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -2307,7 +2312,7 @@ Get Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -2323,7 +2328,7 @@ Get Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -2477,7 +2482,7 @@ Get Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -2489,7 +2494,7 @@ Get Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -2507,7 +2512,7 @@ Get Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -2517,7 +2522,7 @@ Get Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -2529,7 +2534,7 @@ Get Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -2539,13 +2544,13 @@ Get Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -2783,13 +2788,13 @@ Update Deployment
 
 - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-  A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+  Spend ceiling for future sessions. Full replacement. Omit to preserve; send null to clear (sessions created afterwards are uncapped). The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
   - `type: "limit"`
 
   - `max_list_cost: BetaMonetaryAmount`
 
-    A monetary amount in a specific currency.
+    Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
     - `amount: string`
 
@@ -2845,7 +2850,7 @@ Update Deployment
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `BetaManagedAgentsBase64ImageSource object`
 
@@ -2897,7 +2902,7 @@ Update Deployment
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -2983,7 +2988,7 @@ Update Deployment
 
     - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `BetaManagedAgentsFileRubricParams object`
 
@@ -3123,7 +3128,7 @@ Update Deployment
 
     - `access: optional "read_write" or "read_only" or null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to read_write. read_only mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -3137,7 +3142,7 @@ Update Deployment
 
 - `schedule: optional BetaManagedAgentsScheduleParams or null`
 
-  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+  Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
 
   - `type: "cron"`
 
@@ -3171,7 +3176,7 @@ Update Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -3183,13 +3188,13 @@ Update Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -3235,7 +3240,7 @@ Update Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -3287,7 +3292,7 @@ Update Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -3373,7 +3378,7 @@ Update Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -3429,7 +3434,7 @@ Update Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -3445,7 +3450,7 @@ Update Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -3599,7 +3604,7 @@ Update Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -3611,7 +3616,7 @@ Update Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -3629,7 +3634,7 @@ Update Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -3639,7 +3644,7 @@ Update Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -3651,7 +3656,7 @@ Update Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -3661,13 +3666,13 @@ Update Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -3685,7 +3690,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d '{}'
+    -d '{
+          "schedule": {
+            "expression": "0 9 * * 1-5",
+            "timezone": "America/Los_Angeles",
+            "type": "cron"
+          }
+        }'
 ```
 
 #### Response (200)
@@ -3893,7 +3904,7 @@ Archive Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -3905,13 +3916,13 @@ Archive Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -3957,7 +3968,7 @@ Archive Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -4009,7 +4020,7 @@ Archive Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -4095,7 +4106,7 @@ Archive Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -4151,7 +4162,7 @@ Archive Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -4167,7 +4178,7 @@ Archive Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -4321,7 +4332,7 @@ Archive Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -4333,7 +4344,7 @@ Archive Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -4351,7 +4362,7 @@ Archive Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -4361,7 +4372,7 @@ Archive Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -4373,7 +4384,7 @@ Archive Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -4383,13 +4394,13 @@ Archive Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -4614,7 +4625,7 @@ Run Deployment Now
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
     - `type: "agent"`
 
@@ -4626,7 +4637,7 @@ Run Deployment Now
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time this run record was persisted.
 
     format: date-time
 
@@ -4636,7 +4647,7 @@ Run Deployment Now
 
   - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more or null`
 
-    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
     - `BetaManagedAgentsEnvironmentArchivedRunError object`
 
@@ -4804,7 +4815,7 @@ Run Deployment Now
 
   - `trigger_context: BetaManagedAgentsTriggerContext`
 
-    Describes what triggered a deployment run, with trigger-specific metadata.
+    What triggered this run and trigger-specific metadata.
 
     - `BetaManagedAgentsScheduleTriggerContext object`
 
@@ -4814,7 +4825,7 @@ Run Deployment Now
 
       - `scheduled_at: string`
 
-        A timestamp in RFC 3339 format
+        The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
         format: date-time
 
@@ -4997,7 +5008,7 @@ Pause Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -5009,13 +5020,13 @@ Pause Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -5061,7 +5072,7 @@ Pause Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -5113,7 +5124,7 @@ Pause Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -5199,7 +5210,7 @@ Pause Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -5255,7 +5266,7 @@ Pause Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -5271,7 +5282,7 @@ Pause Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -5425,7 +5436,7 @@ Pause Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -5437,7 +5448,7 @@ Pause Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -5455,7 +5466,7 @@ Pause Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -5465,7 +5476,7 @@ Pause Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -5477,7 +5488,7 @@ Pause Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -5487,13 +5498,13 @@ Pause Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -5718,7 +5729,7 @@ Unpause Deployment
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -5730,13 +5741,13 @@ Unpause Deployment
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -5782,7 +5793,7 @@ Unpause Deployment
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -5834,7 +5845,7 @@ Unpause Deployment
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -5920,7 +5931,7 @@ Unpause Deployment
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -5976,7 +5987,7 @@ Unpause Deployment
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -5992,7 +6003,7 @@ Unpause Deployment
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -6146,7 +6157,7 @@ Unpause Deployment
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -6158,7 +6169,7 @@ Unpause Deployment
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -6176,7 +6187,7 @@ Unpause Deployment
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -6186,7 +6197,7 @@ Unpause Deployment
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -6198,7 +6209,7 @@ Unpause Deployment
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -6208,13 +6219,13 @@ Unpause Deployment
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -6333,7 +6344,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `last_run_at: optional string or null`
 
-    A timestamp in RFC 3339 format
+    Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
@@ -6375,7 +6386,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Reference to the agent this deployment runs, resolved to a concrete version.
 
     - `type: "agent"`
 
@@ -6387,13 +6398,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was archived. Null if not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was created.
 
     format: date-time
 
@@ -6439,7 +6450,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `BetaManagedAgentsBase64ImageSource object`
 
@@ -6491,7 +6502,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -6577,7 +6588,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `BetaManagedAgentsFileRubric object`
 
@@ -6633,7 +6644,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `paused_reason: BetaManagedAgentsDeploymentPausedReason or null`
 
-    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+    Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
     - `BetaManagedAgentsManualDeploymentPausedReason object`
 
@@ -6649,7 +6660,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+        The failed run's error.
 
         - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -6803,7 +6814,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `access: optional "read_write" or "read_only" or null`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `"read_write"`
 
@@ -6815,7 +6826,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `schedule: BetaManagedAgentsSchedule or null`
 
-    5-field POSIX cron schedule with computed runtime timestamps.
+    Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
     - `type: "cron"`
 
@@ -6833,7 +6844,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `last_run_at: optional string or null`
 
-      A timestamp in RFC 3339 format
+      Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
@@ -6843,7 +6854,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `status: BetaManagedAgentsDeploymentStatus`
 
-    Lifecycle status of a deployment.
+    Computed status of the deployment: `active` or `paused`. Archived deployments report `active` with `archived_at` set.
 
     - `"active"`
 
@@ -6855,7 +6866,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `updated_at: string`
 
-    A timestamp in RFC 3339 format
+    Time the deployment was last updated.
 
     format: date-time
 
@@ -6865,13 +6876,13 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
     - `type: "limit"`
 
     - `max_list_cost: BetaMonetaryAmount`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `amount: string`
 
@@ -6917,7 +6928,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `BetaManagedAgentsBase64ImageSource object`
 
@@ -6969,7 +6980,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -7055,7 +7066,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `BetaManagedAgentsFileRubric object`
 
@@ -7137,7 +7148,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `BetaManagedAgentsBase64ImageSource object`
 
@@ -7189,7 +7200,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -7275,7 +7286,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `BetaManagedAgentsFileRubricParams object`
 
@@ -7343,7 +7354,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-      The error that triggered an auto-pause. Matches the failed run's `error.type`.
+      The failed run's error.
 
       - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -7567,7 +7578,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-    Rubric for grading the quality of an outcome.
+    How to grade the outcome. Text or file reference.
 
     - `BetaManagedAgentsFileRubric object`
 
@@ -7627,7 +7638,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `BetaManagedAgentsBase64ImageSource object`
 
@@ -7679,7 +7690,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `BetaManagedAgentsBase64DocumentSource object`
 
@@ -7779,7 +7790,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `error: BetaManagedAgentsDeploymentPausedReasonError`
 
-    The error that triggered an auto-pause. Matches the failed run's `error.type`.
+    The failed run's error.
 
     - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
 
@@ -7967,7 +7978,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `access: optional "read_write" or "read_only" or null`
 
-    Access mode for an attached memory store.
+    Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
     - `"read_write"`
 
@@ -7989,7 +8000,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 - `BetaManagedAgentsSchedule object`
 
-  5-field POSIX cron schedule with computed runtime timestamps.
+  A recurring schedule with computed runtime timestamps. Discriminated union — only cron is supported currently.
 
   - `type: "cron"`
 
@@ -8007,7 +8018,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
   - `last_run_at: optional string or null`
 
-    A timestamp in RFC 3339 format
+    Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
@@ -8019,7 +8030,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
 - `BetaManagedAgentsScheduleParams object`
 
-  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+  A recurring schedule. Discriminated union — only cron is supported currently.
 
   - `type: "cron"`
 
@@ -8113,7 +8124,7 @@ curl https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause \
 
     - `access: optional "read_write" or "read_only" or null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 

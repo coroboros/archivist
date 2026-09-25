@@ -199,7 +199,7 @@ List Deployment Runs
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
     - `type: Literal["agent"]`
 
@@ -211,7 +211,7 @@ List Deployment Runs
 
   - `created_at: datetime`
 
-    A timestamp in RFC 3339 format
+    Time this run record was persisted.
 
     format: date-time
 
@@ -221,7 +221,7 @@ List Deployment Runs
 
   - `error: Optional[Error]`
 
-    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
     - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -389,7 +389,7 @@ List Deployment Runs
 
   - `trigger_context: BetaManagedAgentsTriggerContext`
 
-    Describes what triggered a deployment run, with trigger-specific metadata.
+    What triggered this run and trigger-specific metadata.
 
     - `class BetaManagedAgentsScheduleTriggerContext`
 
@@ -399,7 +399,7 @@ List Deployment Runs
 
       - `scheduled_at: datetime`
 
-        A timestamp in RFC 3339 format
+        The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
         format: date-time
 
@@ -593,7 +593,7 @@ Get Deployment Run
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
     - `type: Literal["agent"]`
 
@@ -605,7 +605,7 @@ Get Deployment Run
 
   - `created_at: datetime`
 
-    A timestamp in RFC 3339 format
+    Time this run record was persisted.
 
     format: date-time
 
@@ -615,7 +615,7 @@ Get Deployment Run
 
   - `error: Optional[Error]`
 
-    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
     - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -783,7 +783,7 @@ Get Deployment Run
 
   - `trigger_context: BetaManagedAgentsTriggerContext`
 
-    Describes what triggered a deployment run, with trigger-specific metadata.
+    What triggered this run and trigger-specific metadata.
 
     - `class BetaManagedAgentsScheduleTriggerContext`
 
@@ -793,7 +793,7 @@ Get Deployment Run
 
       - `scheduled_at: datetime`
 
-        A timestamp in RFC 3339 format
+        The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
         format: date-time
 
@@ -873,7 +873,7 @@ print(beta_managed_agents_deployment_run.id)
 
   - `agent: BetaManagedAgentsAgentReference`
 
-    A resolved agent reference with a concrete version.
+    Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
     - `type: Literal["agent"]`
 
@@ -885,7 +885,7 @@ print(beta_managed_agents_deployment_run.id)
 
   - `created_at: datetime`
 
-    A timestamp in RFC 3339 format
+    Time this run record was persisted.
 
     format: date-time
 
@@ -895,7 +895,7 @@ print(beta_managed_agents_deployment_run.id)
 
   - `error: Optional[Error]`
 
-    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
     - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -1063,7 +1063,7 @@ print(beta_managed_agents_deployment_run.id)
 
   - `trigger_context: BetaManagedAgentsTriggerContext`
 
-    Describes what triggered a deployment run, with trigger-specific metadata.
+    What triggered this run and trigger-specific metadata.
 
     - `class BetaManagedAgentsScheduleTriggerContext`
 
@@ -1073,7 +1073,7 @@ print(beta_managed_agents_deployment_run.id)
 
       - `scheduled_at: datetime`
 
-        A timestamp in RFC 3339 format
+        The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
         format: date-time
 
@@ -1173,7 +1173,7 @@ print(beta_managed_agents_deployment_run.id)
 
   - `scheduled_at: datetime`
 
-    A timestamp in RFC 3339 format
+    The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
     format: date-time
 
@@ -1251,7 +1251,7 @@ print(beta_managed_agents_deployment_run.id)
 
     - `scheduled_at: datetime`
 
-      A timestamp in RFC 3339 format
+      The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
       format: date-time
 
@@ -1266,9 +1266,6 @@ print(beta_managed_agents_deployment_run.id)
 - `type BetaManagedAgentsTriggerType = Literal["schedule", "manual"]`
 
   What triggered a deployment run.
-
-  - `schedule` - The run was fired by the deployment's cron schedule.
-  - `manual` - The run was started manually by creating a session directly against the deployment.
 
   - `"schedule"`
 

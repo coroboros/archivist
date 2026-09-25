@@ -55,7 +55,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `capabilities: object`
 
-    Model capability information.
+    Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
     - `batch: object`
 
@@ -83,9 +83,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `compaction: object`
 
-      Compaction capability details: whether the model accepts the top-level
-      `compaction` request parameter, with one entry per supported
-      `compaction.type` value.
+      Server-side compaction support (the top-level `compaction` parameter) and the accepted `compaction.type` values.
 
       - `summarize: object`
 
@@ -105,7 +103,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `clear_thinking_20251015: object`
 
-        Indicates whether a capability is supported.
+        Whether the clear_thinking_20251015 strategy is supported.
 
         - `supported: boolean`
 
@@ -113,7 +111,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `clear_tool_uses_20250919: object`
 
-        Indicates whether a capability is supported.
+        Whether the clear_tool_uses_20250919 strategy is supported.
 
         - `supported: boolean`
 
@@ -121,7 +119,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `compact_20260112: object`
 
-        Indicates whether a capability is supported.
+        Whether the compact_20260112 strategy is supported.
 
         - `supported: boolean`
 
@@ -173,7 +171,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `xhigh: object`
 
-        Indicates whether a capability is supported.
+        Whether the model supports xhigh effort level.
 
         - `supported: boolean`
 

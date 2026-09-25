@@ -162,7 +162,7 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 * **`models` list:** For `model_group` entries, the `models` field lists every model ID and alias that counts against that group's limits. Use this list to look up which group any model string falls under. For other group types, `models` is `null`.
 * **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](../api/api-rate-limits.md) for how each limiter is measured and enforced.
 
-For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/api-admin-rate_limits-list.md).
+For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/api-beta-organization-rate_limits-list.md).
 
 ### List all organization rate limits
 
@@ -477,10 +477,10 @@ The response only includes overrides, so anything missing from it is inherited f
 * Within a group that is present, a limiter type that is absent from `limits[]` has no workspace override for that limiter. The workspace inherits the organization value for it.
 * For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
-For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](https://platform.claude.com/docs/en/api/admin/workspaces/rate_limits/list.md).
+For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](../api/api-beta-organization-workspaces-rate_limits-list.md).
 
 <Tip>
-  To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-beta-organization-workspaces-list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 </Tip>
 
 <CodeGroup>
@@ -815,6 +815,6 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](htt
 
 * [Rate limits](../api/api-rate-limits.md)
 * [Admin API](./manage-claude-admin-api.md)
-* [Admin API reference](../api/api-admin.md)
+* [Admin API reference](../api/api-beta-organization.md)
 * [Workspaces](./manage-claude-workspaces.md)
 * [Usage and Cost API](./manage-claude-usage-cost-api.md)

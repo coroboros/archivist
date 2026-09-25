@@ -121,7 +121,7 @@ List Events
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `beta_managed_agents_base64_image_source: object`
 
@@ -173,7 +173,7 @@ List Events
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `beta_managed_agents_base64_document_source: object`
 
@@ -249,7 +249,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the agent finished processing this message.
 
         format: date-time
 
@@ -265,7 +265,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the interrupt was processed.
 
         format: date-time
 
@@ -285,7 +285,7 @@ List Events
 
       - `result: "allow" or "deny"`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `"allow"`
 
@@ -303,7 +303,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the confirmation was processed.
 
         format: date-time
 
@@ -349,7 +349,7 @@ List Events
 
           - `citations: object`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `enabled: boolean`
 
@@ -385,7 +385,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -413,7 +413,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this tool use was processed.
 
         format: date-time
 
@@ -445,7 +445,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this response was generated.
 
         format: date-time
 
@@ -461,7 +461,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this thinking was produced.
 
         format: date-time
 
@@ -489,13 +489,13 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this event was processed.
 
         format: date-time
 
       - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-        AgentEvaluatedPermission enum
+        The evaluated permission policy for this tool invocation.
 
         - `"allow"`
 
@@ -505,7 +505,7 @@ List Events
 
       - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-        Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+        Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
         - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -527,7 +527,7 @@ List Events
 
           - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-            The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+            The server's judgement for this invocation.
 
             - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -579,7 +579,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this event was processed.
 
         format: date-time
 
@@ -627,13 +627,13 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this event was processed.
 
         format: date-time
 
       - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-        AgentEvaluatedPermission enum
+        The evaluated permission policy for this tool invocation.
 
         - `"allow"`
 
@@ -643,7 +643,7 @@ List Events
 
       - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-        Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+        Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
         - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -673,7 +673,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this event was processed.
 
         format: date-time
 
@@ -741,7 +741,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the message was received.
 
         format: date-time
 
@@ -781,7 +781,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the message was sent.
 
         format: date-time
 
@@ -805,7 +805,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when compaction was processed.
 
         format: date-time
 
@@ -833,7 +833,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -865,7 +865,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -891,7 +891,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -917,7 +917,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -947,7 +947,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -977,7 +977,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -1003,7 +1003,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -1033,7 +1033,7 @@ List Events
 
           - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-            What the client should do next in response to this error.
+            What the client should do next.
 
             - `beta_managed_agents_retry_status_retrying: object`
 
@@ -1053,7 +1053,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the error occurred.
 
         format: date-time
 
@@ -1069,7 +1069,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of status change.
 
         format: date-time
 
@@ -1085,7 +1085,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of status change.
 
         format: date-time
 
@@ -1101,7 +1101,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of status change.
 
         format: date-time
 
@@ -1147,7 +1147,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of status change.
 
         format: date-time
 
@@ -1167,7 +1167,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the thread was created.
 
         format: date-time
 
@@ -1197,7 +1197,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when outcome evaluation started.
 
         format: date-time
 
@@ -1231,7 +1231,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when outcome evaluation ended.
 
         format: date-time
 
@@ -1241,7 +1241,7 @@ List Events
 
       - `usage: object`
 
-        Token usage for a single model request.
+        Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
         - `cache_creation_input_tokens: number`
 
@@ -1269,7 +1269,7 @@ List Events
 
         - `speed: optional "standard" or "fast"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
           - `"standard"`
 
@@ -1287,7 +1287,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the model request started.
 
         format: date-time
 
@@ -1311,7 +1311,7 @@ List Events
 
       - `model_usage: object`
 
-        Token usage for a single model request.
+        Token usage for this model request.
 
         - `cache_creation_input_tokens: number`
 
@@ -1339,11 +1339,11 @@ List Events
 
         - `speed: optional "standard" or "fast"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the model request completed.
 
         format: date-time
 
@@ -1369,7 +1369,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this heartbeat was emitted.
 
         format: date-time
 
@@ -1399,13 +1399,13 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the outcome was accepted.
 
         format: date-time
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
         - `beta_managed_agents_file_rubric: object`
 
@@ -1439,7 +1439,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the session was deleted.
 
         format: date-time
 
@@ -1459,7 +1459,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of the status transition.
 
         format: date-time
 
@@ -1483,7 +1483,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of the status transition.
 
         format: date-time
 
@@ -1525,7 +1525,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of the status transition.
 
         format: date-time
 
@@ -1573,7 +1573,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -1597,7 +1597,7 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp of the status transition.
 
         format: date-time
 
@@ -1617,13 +1617,13 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the update was applied.
 
         format: date-time
 
       - `agent: optional object`
 
-        Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+        The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
         - `type: "agent"`
 
@@ -1643,7 +1643,7 @@ List Events
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+          - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
             The model that will power your agent.
 
@@ -1711,7 +1711,7 @@ List Events
 
           - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+            How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
             - `beta_managed_agents_effort_low: object`
 
@@ -1749,7 +1749,7 @@ List Events
 
           - `speed: optional "standard" or "fast"`
 
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -1757,7 +1757,7 @@ List Events
 
         - `multiagent: object`
 
-          Resolved coordinator topology with full agent definitions for each roster member.
+          Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
           - `type: "coordinator"`
 
@@ -1787,7 +1787,7 @@ List Events
 
                 Model identifier and configuration.
 
-                - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+                - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
                   The model that will power your agent.
 
@@ -1795,7 +1795,7 @@ List Events
 
                 - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-                  How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+                  How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
                 - `inference_geo: optional string`
 
@@ -1803,7 +1803,7 @@ List Events
 
                 - `speed: optional "standard" or "fast"`
 
-                  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
               - `name: string`
 
@@ -2231,13 +2231,13 @@ List Events
 
       - `budget: optional object`
 
-        A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+        The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
         - `type: "limit"`
 
         - `max_list_cost: object`
 
-          A monetary amount in a specific currency.
+          Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
           - `amount: string`
 
@@ -2279,7 +2279,7 @@ List Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this system message was processed.
 
         format: date-time
 
@@ -2295,13 +2295,13 @@ List Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the snapshot was taken.
 
         format: date-time
 
       - `usage: object`
 
-        Point-in-time snapshot of a session's cumulative usage.
+        The session's cumulative usage at the snapshot time.
 
         - `active_seconds: optional number`
 
@@ -2311,7 +2311,7 @@ List Events
 
         - `cache_creation: optional object`
 
-          Prompt-cache creation token usage broken down by cache lifetime.
+          Tokens used to create prompt cache entries, broken down by cache TTL.
 
           - `ephemeral_1h_input_tokens: optional number`
 
@@ -2339,7 +2339,7 @@ List Events
 
         - `list_cost: optional object`
 
-          A monetary amount in a specific currency.
+          Cumulative list cost of the session across all turns, priced at public list rates.
 
           - `amount: string`
 
@@ -2357,7 +2357,7 @@ List Events
 
         - `server_tool_use: optional object`
 
-          Cumulative count of server-executed tool invocations, broken down by tool.
+          Cumulative server-executed tool usage across all turns.
 
           - `web_fetch_requests: optional number`
 
@@ -2373,13 +2373,13 @@ List Events
 
       - `budget: optional object`
 
-        A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+        The session's configured budget at the snapshot time, or null when the session has no budget.
 
         - `type: "limit"`
 
         - `max_list_cost: object`
 
-          A monetary amount in a specific currency.
+          Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
   - `next_page: optional string`
 
@@ -2497,7 +2497,7 @@ Send Events
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `beta_managed_agents_base64_image_source: object`
 
@@ -2549,7 +2549,7 @@ Send Events
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `beta_managed_agents_base64_document_source: object`
 
@@ -2625,7 +2625,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the agent finished processing this message.
 
         format: date-time
 
@@ -2641,7 +2641,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the interrupt was processed.
 
         format: date-time
 
@@ -2661,7 +2661,7 @@ Send Events
 
       - `result: "allow" or "deny"`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `"allow"`
 
@@ -2679,7 +2679,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the confirmation was processed.
 
         format: date-time
 
@@ -2725,7 +2725,7 @@ Send Events
 
           - `citations: object`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `enabled: boolean`
 
@@ -2761,7 +2761,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -2795,13 +2795,13 @@ Send Events
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the outcome was accepted.
 
         format: date-time
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
         - `beta_managed_agents_file_rubric: object`
 
@@ -2863,7 +2863,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -2895,7 +2895,7 @@ Send Events
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this system message was processed.
 
         format: date-time
 
@@ -2996,7 +2996,7 @@ Stream Events
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `beta_managed_agents_base64_image_source: object`
 
@@ -3048,7 +3048,7 @@ Stream Events
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `beta_managed_agents_base64_document_source: object`
 
@@ -3124,7 +3124,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the agent finished processing this message.
 
       format: date-time
 
@@ -3140,7 +3140,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the interrupt was processed.
 
       format: date-time
 
@@ -3160,7 +3160,7 @@ Stream Events
 
     - `result: "allow" or "deny"`
 
-      UserToolConfirmationResult enum
+      The confirmation result: 'allow' or 'deny'.
 
       - `"allow"`
 
@@ -3178,7 +3178,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the confirmation was processed.
 
       format: date-time
 
@@ -3224,7 +3224,7 @@ Stream Events
 
         - `citations: object`
 
-          Citation settings for a search result.
+          Citation settings for this search result.
 
           - `enabled: boolean`
 
@@ -3260,7 +3260,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -3288,7 +3288,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this tool use was processed.
 
       format: date-time
 
@@ -3320,7 +3320,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this response was generated.
 
       format: date-time
 
@@ -3336,7 +3336,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this thinking was produced.
 
       format: date-time
 
@@ -3364,13 +3364,13 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -3380,7 +3380,7 @@ Stream Events
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -3402,7 +3402,7 @@ Stream Events
 
         - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+          The server's judgement for this invocation.
 
           - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -3454,7 +3454,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -3502,13 +3502,13 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -3518,7 +3518,7 @@ Stream Events
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -3548,7 +3548,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -3616,7 +3616,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was received.
 
       format: date-time
 
@@ -3656,7 +3656,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was sent.
 
       format: date-time
 
@@ -3680,7 +3680,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when compaction was processed.
 
       format: date-time
 
@@ -3708,7 +3708,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3740,7 +3740,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3766,7 +3766,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3792,7 +3792,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3822,7 +3822,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3852,7 +3852,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3878,7 +3878,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3908,7 +3908,7 @@ Stream Events
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -3928,7 +3928,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the error occurred.
 
       format: date-time
 
@@ -3944,7 +3944,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -3960,7 +3960,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -3976,7 +3976,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -4022,7 +4022,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -4042,7 +4042,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the thread was created.
 
       format: date-time
 
@@ -4072,7 +4072,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation started.
 
       format: date-time
 
@@ -4106,7 +4106,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation ended.
 
       format: date-time
 
@@ -4116,7 +4116,7 @@ Stream Events
 
     - `usage: object`
 
-      Token usage for a single model request.
+      Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
       - `cache_creation_input_tokens: number`
 
@@ -4144,7 +4144,7 @@ Stream Events
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
         - `"standard"`
 
@@ -4162,7 +4162,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request started.
 
       format: date-time
 
@@ -4186,7 +4186,7 @@ Stream Events
 
     - `model_usage: object`
 
-      Token usage for a single model request.
+      Token usage for this model request.
 
       - `cache_creation_input_tokens: number`
 
@@ -4214,11 +4214,11 @@ Stream Events
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request completed.
 
       format: date-time
 
@@ -4244,7 +4244,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this heartbeat was emitted.
 
       format: date-time
 
@@ -4274,13 +4274,13 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the outcome was accepted.
 
       format: date-time
 
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
       - `beta_managed_agents_file_rubric: object`
 
@@ -4314,7 +4314,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the session was deleted.
 
       format: date-time
 
@@ -4334,7 +4334,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -4358,7 +4358,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -4400,7 +4400,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -4448,7 +4448,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -4472,7 +4472,7 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -4492,13 +4492,13 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the update was applied.
 
       format: date-time
 
     - `agent: optional object`
 
-      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+      The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
       - `type: "agent"`
 
@@ -4518,7 +4518,7 @@ Stream Events
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
           The model that will power your agent.
 
@@ -4586,7 +4586,7 @@ Stream Events
 
         - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
           - `beta_managed_agents_effort_low: object`
 
@@ -4624,7 +4624,7 @@ Stream Events
 
         - `speed: optional "standard" or "fast"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -4632,7 +4632,7 @@ Stream Events
 
       - `multiagent: object`
 
-        Resolved coordinator topology with full agent definitions for each roster member.
+        Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
         - `type: "coordinator"`
 
@@ -4662,7 +4662,7 @@ Stream Events
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
                 The model that will power your agent.
 
@@ -4670,7 +4670,7 @@ Stream Events
 
               - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-                How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+                How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
               - `inference_geo: optional string`
 
@@ -4678,7 +4678,7 @@ Stream Events
 
               - `speed: optional "standard" or "fast"`
 
-                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `name: string`
 
@@ -5106,13 +5106,13 @@ Stream Events
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
         - `amount: string`
 
@@ -5170,7 +5170,7 @@ Stream Events
 
       - `content: object`
 
-        Regular text content.
+        A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
         - `type: "text"`
 
@@ -5183,8 +5183,6 @@ Stream Events
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
-
-        format: uint32
 
     - `event_id: string`
 
@@ -5214,7 +5212,7 @@ Stream Events
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this system message was processed.
 
       format: date-time
 
@@ -5230,13 +5228,13 @@ Stream Events
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the snapshot was taken.
 
       format: date-time
 
     - `usage: object`
 
-      Point-in-time snapshot of a session's cumulative usage.
+      The session's cumulative usage at the snapshot time.
 
       - `active_seconds: optional number`
 
@@ -5246,7 +5244,7 @@ Stream Events
 
       - `cache_creation: optional object`
 
-        Prompt-cache creation token usage broken down by cache lifetime.
+        Tokens used to create prompt cache entries, broken down by cache TTL.
 
         - `ephemeral_1h_input_tokens: optional number`
 
@@ -5274,7 +5272,7 @@ Stream Events
 
       - `list_cost: optional object`
 
-        A monetary amount in a specific currency.
+        Cumulative list cost of the session across all turns, priced at public list rates.
 
         - `amount: string`
 
@@ -5292,7 +5290,7 @@ Stream Events
 
       - `server_tool_use: optional object`
 
-        Cumulative count of server-executed tool invocations, broken down by tool.
+        Cumulative server-executed tool usage across all turns.
 
         - `web_fetch_requests: optional number`
 
@@ -5308,13 +5306,13 @@ Stream Events
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's configured budget at the snapshot time, or null when the session has no budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
 ### Example
 
@@ -5436,7 +5434,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this tool use was processed.
 
     format: date-time
 
@@ -5474,7 +5472,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this event was processed.
 
     format: date-time
 
@@ -5502,7 +5500,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -5554,7 +5552,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -5630,7 +5628,7 @@ ant beta:sessions:events stream \
 
       - `citations: object`
 
-        Citation settings for a search result.
+        Citation settings for this search result.
 
         - `enabled: boolean`
 
@@ -5690,13 +5688,13 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this event was processed.
 
     format: date-time
 
   - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-    AgentEvaluatedPermission enum
+    The evaluated permission policy for this tool invocation.
 
     - `"allow"`
 
@@ -5706,7 +5704,7 @@ ant beta:sessions:events stream \
 
   - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-    Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+    Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
     - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -5728,7 +5726,7 @@ ant beta:sessions:events stream \
 
       - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-        The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+        The server's judgement for this invocation.
 
         - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -5800,7 +5798,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this response was generated.
 
     format: date-time
 
@@ -5818,7 +5816,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this thinking was produced.
 
     format: date-time
 
@@ -5836,7 +5834,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when compaction was processed.
 
     format: date-time
 
@@ -5876,7 +5874,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -5928,7 +5926,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -6008,7 +6006,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the message was received.
 
     format: date-time
 
@@ -6052,7 +6050,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -6104,7 +6102,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -6180,7 +6178,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the message was sent.
 
     format: date-time
 
@@ -6218,7 +6216,7 @@ ant beta:sessions:events stream \
 
     - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-      The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+      The server's judgement for this invocation.
 
       - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -6276,7 +6274,7 @@ ant beta:sessions:events stream \
 
   - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-    The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+    The server's judgement for this invocation.
 
     - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -6322,7 +6320,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this event was processed.
 
     format: date-time
 
@@ -6354,7 +6352,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -6406,7 +6404,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -6482,7 +6480,7 @@ ant beta:sessions:events stream \
 
       - `citations: object`
 
-        Citation settings for a search result.
+        Citation settings for this search result.
 
         - `enabled: boolean`
 
@@ -6538,13 +6536,13 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this event was processed.
 
     format: date-time
 
   - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-    AgentEvaluatedPermission enum
+    The evaluated permission policy for this tool invocation.
 
     - `"allow"`
 
@@ -6554,7 +6552,7 @@ ant beta:sessions:events stream \
 
   - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-    Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+    Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
     - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -6576,7 +6574,7 @@ ant beta:sessions:events stream \
 
       - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-        The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+        The server's judgement for this invocation.
 
         - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -6666,7 +6664,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -6704,7 +6702,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -6738,7 +6736,7 @@ ant beta:sessions:events stream \
 
   - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-    Union type for document source variants.
+    The source of the document data.
 
     - `beta_managed_agents_base64_document_source: object`
 
@@ -6842,7 +6840,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `beta_managed_agents_base64_image_source: object`
 
@@ -6894,7 +6892,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `beta_managed_agents_base64_document_source: object`
 
@@ -6986,7 +6984,7 @@ ant beta:sessions:events stream \
 
     - `result: "allow" or "deny"`
 
-      UserToolConfirmationResult enum
+      The confirmation result: 'allow' or 'deny'.
 
       - `"allow"`
 
@@ -7040,7 +7038,7 @@ ant beta:sessions:events stream \
 
         - `citations: object`
 
-          Citation settings for a search result.
+          Citation settings for this search result.
 
           - `enabled: boolean`
 
@@ -7086,7 +7084,7 @@ ant beta:sessions:events stream \
 
     - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `beta_managed_agents_file_rubric_params: object`
 
@@ -7232,7 +7230,7 @@ ant beta:sessions:events stream \
 
   - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-    Union type for image source variants.
+    The source of the image data.
 
     - `beta_managed_agents_base64_image_source: object`
 
@@ -7294,7 +7292,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -7332,7 +7330,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -7366,7 +7364,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -7400,7 +7398,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -7434,7 +7432,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -7514,7 +7512,7 @@ ant beta:sessions:events stream \
 
   - `citations: object`
 
-    Citation settings for a search result.
+    Citation settings for this search result.
 
     - `enabled: boolean`
 
@@ -7612,7 +7610,7 @@ ant beta:sessions:events stream \
 
           - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `beta_managed_agents_base64_image_source: object`
 
@@ -7664,7 +7662,7 @@ ant beta:sessions:events stream \
 
           - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `beta_managed_agents_base64_document_source: object`
 
@@ -7740,7 +7738,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the agent finished processing this message.
 
         format: date-time
 
@@ -7756,7 +7754,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the interrupt was processed.
 
         format: date-time
 
@@ -7776,7 +7774,7 @@ ant beta:sessions:events stream \
 
       - `result: "allow" or "deny"`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `"allow"`
 
@@ -7794,7 +7792,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the confirmation was processed.
 
         format: date-time
 
@@ -7840,7 +7838,7 @@ ant beta:sessions:events stream \
 
           - `citations: object`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `enabled: boolean`
 
@@ -7876,7 +7874,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -7910,13 +7908,13 @@ ant beta:sessions:events stream \
 
       - `processed_at: string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the outcome was accepted.
 
         format: date-time
 
       - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
         - `beta_managed_agents_file_rubric: object`
 
@@ -7978,7 +7976,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -8010,7 +8008,7 @@ ant beta:sessions:events stream \
 
       - `processed_at: optional string`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this system message was processed.
 
         format: date-time
 
@@ -8036,7 +8034,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the session was deleted.
 
     format: date-time
 
@@ -8074,7 +8072,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8106,7 +8104,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8132,7 +8130,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8158,7 +8156,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8188,7 +8186,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8218,7 +8216,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8244,7 +8242,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8274,7 +8272,7 @@ ant beta:sessions:events stream \
 
       - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-        What the client should do next in response to this error.
+        What the client should do next.
 
         - `beta_managed_agents_retry_status_retrying: object`
 
@@ -8294,7 +8292,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the error occurred.
 
     format: date-time
 
@@ -8338,7 +8336,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `beta_managed_agents_base64_image_source: object`
 
@@ -8390,7 +8388,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `beta_managed_agents_base64_document_source: object`
 
@@ -8466,7 +8464,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the agent finished processing this message.
 
       format: date-time
 
@@ -8482,7 +8480,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the interrupt was processed.
 
       format: date-time
 
@@ -8502,7 +8500,7 @@ ant beta:sessions:events stream \
 
     - `result: "allow" or "deny"`
 
-      UserToolConfirmationResult enum
+      The confirmation result: 'allow' or 'deny'.
 
       - `"allow"`
 
@@ -8520,7 +8518,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the confirmation was processed.
 
       format: date-time
 
@@ -8566,7 +8564,7 @@ ant beta:sessions:events stream \
 
         - `citations: object`
 
-          Citation settings for a search result.
+          Citation settings for this search result.
 
           - `enabled: boolean`
 
@@ -8602,7 +8600,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -8630,7 +8628,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this tool use was processed.
 
       format: date-time
 
@@ -8662,7 +8660,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this response was generated.
 
       format: date-time
 
@@ -8678,7 +8676,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this thinking was produced.
 
       format: date-time
 
@@ -8706,13 +8704,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -8722,7 +8720,7 @@ ant beta:sessions:events stream \
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -8744,7 +8742,7 @@ ant beta:sessions:events stream \
 
         - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+          The server's judgement for this invocation.
 
           - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -8796,7 +8794,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -8844,13 +8842,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -8860,7 +8858,7 @@ ant beta:sessions:events stream \
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -8890,7 +8888,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -8958,7 +8956,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was received.
 
       format: date-time
 
@@ -8998,7 +8996,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was sent.
 
       format: date-time
 
@@ -9022,7 +9020,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when compaction was processed.
 
       format: date-time
 
@@ -9050,7 +9048,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9082,7 +9080,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9108,7 +9106,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9134,7 +9132,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9164,7 +9162,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9194,7 +9192,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9220,7 +9218,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9250,7 +9248,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -9270,7 +9268,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the error occurred.
 
       format: date-time
 
@@ -9286,7 +9284,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -9302,7 +9300,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -9318,7 +9316,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -9364,7 +9362,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -9384,7 +9382,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the thread was created.
 
       format: date-time
 
@@ -9414,7 +9412,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation started.
 
       format: date-time
 
@@ -9448,7 +9446,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation ended.
 
       format: date-time
 
@@ -9458,7 +9456,7 @@ ant beta:sessions:events stream \
 
     - `usage: object`
 
-      Token usage for a single model request.
+      Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
       - `cache_creation_input_tokens: number`
 
@@ -9486,7 +9484,7 @@ ant beta:sessions:events stream \
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
         - `"standard"`
 
@@ -9504,7 +9502,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request started.
 
       format: date-time
 
@@ -9528,7 +9526,7 @@ ant beta:sessions:events stream \
 
     - `model_usage: object`
 
-      Token usage for a single model request.
+      Token usage for this model request.
 
       - `cache_creation_input_tokens: number`
 
@@ -9556,11 +9554,11 @@ ant beta:sessions:events stream \
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request completed.
 
       format: date-time
 
@@ -9586,7 +9584,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this heartbeat was emitted.
 
       format: date-time
 
@@ -9616,13 +9614,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the outcome was accepted.
 
       format: date-time
 
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
       - `beta_managed_agents_file_rubric: object`
 
@@ -9656,7 +9654,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the session was deleted.
 
       format: date-time
 
@@ -9676,7 +9674,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -9700,7 +9698,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -9742,7 +9740,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -9790,7 +9788,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -9814,7 +9812,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -9834,13 +9832,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the update was applied.
 
       format: date-time
 
     - `agent: optional object`
 
-      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+      The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
       - `type: "agent"`
 
@@ -9860,7 +9858,7 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
           The model that will power your agent.
 
@@ -9928,7 +9926,7 @@ ant beta:sessions:events stream \
 
         - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
           - `beta_managed_agents_effort_low: object`
 
@@ -9966,7 +9964,7 @@ ant beta:sessions:events stream \
 
         - `speed: optional "standard" or "fast"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -9974,7 +9972,7 @@ ant beta:sessions:events stream \
 
       - `multiagent: object`
 
-        Resolved coordinator topology with full agent definitions for each roster member.
+        Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
         - `type: "coordinator"`
 
@@ -10004,7 +10002,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
                 The model that will power your agent.
 
@@ -10012,7 +10010,7 @@ ant beta:sessions:events stream \
 
               - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-                How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+                How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
               - `inference_geo: optional string`
 
@@ -10020,7 +10018,7 @@ ant beta:sessions:events stream \
 
               - `speed: optional "standard" or "fast"`
 
-                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `name: string`
 
@@ -10448,13 +10446,13 @@ ant beta:sessions:events stream \
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
         - `amount: string`
 
@@ -10496,7 +10494,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this system message was processed.
 
       format: date-time
 
@@ -10512,13 +10510,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the snapshot was taken.
 
       format: date-time
 
     - `usage: object`
 
-      Point-in-time snapshot of a session's cumulative usage.
+      The session's cumulative usage at the snapshot time.
 
       - `active_seconds: optional number`
 
@@ -10528,7 +10526,7 @@ ant beta:sessions:events stream \
 
       - `cache_creation: optional object`
 
-        Prompt-cache creation token usage broken down by cache lifetime.
+        Tokens used to create prompt cache entries, broken down by cache TTL.
 
         - `ephemeral_1h_input_tokens: optional number`
 
@@ -10556,7 +10554,7 @@ ant beta:sessions:events stream \
 
       - `list_cost: optional object`
 
-        A monetary amount in a specific currency.
+        Cumulative list cost of the session across all turns, priced at public list rates.
 
         - `amount: string`
 
@@ -10574,7 +10572,7 @@ ant beta:sessions:events stream \
 
       - `server_tool_use: optional object`
 
-        Cumulative count of server-executed tool invocations, broken down by tool.
+        Cumulative server-executed tool usage across all turns.
 
         - `web_fetch_requests: optional number`
 
@@ -10590,13 +10588,13 @@ ant beta:sessions:events stream \
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's configured budget at the snapshot time, or null when the session has no budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
 ### Beta Managed Agents Session Requires Action
 
@@ -10632,7 +10630,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of status change.
 
     format: date-time
 
@@ -10680,7 +10678,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of status change.
 
     format: date-time
 
@@ -10698,7 +10696,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of status change.
 
     format: date-time
 
@@ -10716,7 +10714,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of status change.
 
     format: date-time
 
@@ -10738,7 +10736,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the thread was created.
 
     format: date-time
 
@@ -10764,7 +10762,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of the status transition.
 
     format: date-time
 
@@ -10820,7 +10818,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of the status transition.
 
     format: date-time
 
@@ -10846,7 +10844,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of the status transition.
 
     format: date-time
 
@@ -10872,7 +10870,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp of the status transition.
 
     format: date-time
 
@@ -10894,7 +10892,7 @@ ant beta:sessions:events stream \
 
   - `cache_creation: optional object`
 
-    Prompt-cache creation token usage broken down by cache lifetime.
+    Tokens used to create prompt cache entries, broken down by cache TTL.
 
     - `ephemeral_1h_input_tokens: optional number`
 
@@ -10922,7 +10920,7 @@ ant beta:sessions:events stream \
 
   - `list_cost: optional object`
 
-    A monetary amount in a specific currency.
+    Cumulative list cost of the session across all turns, priced at public list rates.
 
     - `amount: string`
 
@@ -10940,7 +10938,7 @@ ant beta:sessions:events stream \
 
   - `server_tool_use: optional object`
 
-    Cumulative count of server-executed tool invocations, broken down by tool.
+    Cumulative server-executed tool usage across all turns.
 
     - `web_fetch_requests: optional number`
 
@@ -10976,7 +10974,7 @@ ant beta:sessions:events stream \
 
   - `model_usage: object`
 
-    Token usage for a single model request.
+    Token usage for this model request.
 
     - `cache_creation_input_tokens: number`
 
@@ -11004,7 +11002,7 @@ ant beta:sessions:events stream \
 
     - `speed: optional "standard" or "fast"`
 
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+      Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
       - `"standard"`
 
@@ -11012,7 +11010,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the model request completed.
 
     format: date-time
 
@@ -11030,7 +11028,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the model request started.
 
     format: date-time
 
@@ -11066,7 +11064,7 @@ ant beta:sessions:events stream \
 
   - `speed: optional "standard" or "fast"`
 
-    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+    Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
     - `"standard"`
 
@@ -11104,7 +11102,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when outcome evaluation ended.
 
     format: date-time
 
@@ -11114,7 +11112,7 @@ ant beta:sessions:events stream \
 
   - `usage: object`
 
-    Token usage for a single model request.
+    Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
     - `cache_creation_input_tokens: number`
 
@@ -11142,7 +11140,7 @@ ant beta:sessions:events stream \
 
     - `speed: optional "standard" or "fast"`
 
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+      Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
       - `"standard"`
 
@@ -11172,7 +11170,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this heartbeat was emitted.
 
     format: date-time
 
@@ -11200,7 +11198,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when outcome evaluation started.
 
     format: date-time
 
@@ -11244,7 +11242,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `beta_managed_agents_base64_image_source: object`
 
@@ -11296,7 +11294,7 @@ ant beta:sessions:events stream \
 
         - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `beta_managed_agents_base64_document_source: object`
 
@@ -11372,7 +11370,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the agent finished processing this message.
 
       format: date-time
 
@@ -11388,7 +11386,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the interrupt was processed.
 
       format: date-time
 
@@ -11408,7 +11406,7 @@ ant beta:sessions:events stream \
 
     - `result: "allow" or "deny"`
 
-      UserToolConfirmationResult enum
+      The confirmation result: 'allow' or 'deny'.
 
       - `"allow"`
 
@@ -11426,7 +11424,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the confirmation was processed.
 
       format: date-time
 
@@ -11472,7 +11470,7 @@ ant beta:sessions:events stream \
 
         - `citations: object`
 
-          Citation settings for a search result.
+          Citation settings for this search result.
 
           - `enabled: boolean`
 
@@ -11508,7 +11506,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -11536,7 +11534,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this tool use was processed.
 
       format: date-time
 
@@ -11568,7 +11566,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this response was generated.
 
       format: date-time
 
@@ -11584,7 +11582,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this thinking was produced.
 
       format: date-time
 
@@ -11612,13 +11610,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -11628,7 +11626,7 @@ ant beta:sessions:events stream \
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -11650,7 +11648,7 @@ ant beta:sessions:events stream \
 
         - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermissionAllow or BetaManagedAgentsAgentAutoEvaluatedPermissionAsk or BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
-          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+          The server's judgement for this invocation.
 
           - `beta_managed_agents_agent_auto_evaluated_permission_allow: object`
 
@@ -11702,7 +11700,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -11750,13 +11748,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
     - `evaluated_permission: optional "allow" or "ask" or "deny"`
 
-      AgentEvaluatedPermission enum
+      The evaluated permission policy for this tool invocation.
 
       - `"allow"`
 
@@ -11766,7 +11764,7 @@ ant beta:sessions:events stream \
 
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
-      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+      Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
       - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
 
@@ -11796,7 +11794,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this event was processed.
 
       format: date-time
 
@@ -11864,7 +11862,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was received.
 
       format: date-time
 
@@ -11904,7 +11902,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the message was sent.
 
       format: date-time
 
@@ -11928,7 +11926,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when compaction was processed.
 
       format: date-time
 
@@ -11956,7 +11954,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -11988,7 +11986,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12014,7 +12012,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12040,7 +12038,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12070,7 +12068,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12100,7 +12098,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12126,7 +12124,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12156,7 +12154,7 @@ ant beta:sessions:events stream \
 
         - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-          What the client should do next in response to this error.
+          What the client should do next.
 
           - `beta_managed_agents_retry_status_retrying: object`
 
@@ -12176,7 +12174,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the error occurred.
 
       format: date-time
 
@@ -12192,7 +12190,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -12208,7 +12206,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -12224,7 +12222,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -12270,7 +12268,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of status change.
 
       format: date-time
 
@@ -12290,7 +12288,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the thread was created.
 
       format: date-time
 
@@ -12320,7 +12318,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation started.
 
       format: date-time
 
@@ -12354,7 +12352,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when outcome evaluation ended.
 
       format: date-time
 
@@ -12364,7 +12362,7 @@ ant beta:sessions:events stream \
 
     - `usage: object`
 
-      Token usage for a single model request.
+      Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
       - `cache_creation_input_tokens: number`
 
@@ -12392,7 +12390,7 @@ ant beta:sessions:events stream \
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
         - `"standard"`
 
@@ -12410,7 +12408,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request started.
 
       format: date-time
 
@@ -12434,7 +12432,7 @@ ant beta:sessions:events stream \
 
     - `model_usage: object`
 
-      Token usage for a single model request.
+      Token usage for this model request.
 
       - `cache_creation_input_tokens: number`
 
@@ -12462,11 +12460,11 @@ ant beta:sessions:events stream \
 
       - `speed: optional "standard" or "fast"`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the model request completed.
 
       format: date-time
 
@@ -12492,7 +12490,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this heartbeat was emitted.
 
       format: date-time
 
@@ -12522,13 +12520,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the outcome was accepted.
 
       format: date-time
 
     - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
       - `beta_managed_agents_file_rubric: object`
 
@@ -12562,7 +12560,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the session was deleted.
 
       format: date-time
 
@@ -12582,7 +12580,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -12606,7 +12604,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -12648,7 +12646,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -12696,7 +12694,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this result was processed.
 
       format: date-time
 
@@ -12720,7 +12718,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp of the status transition.
 
       format: date-time
 
@@ -12740,13 +12738,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the update was applied.
 
       format: date-time
 
     - `agent: optional object`
 
-      Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+      The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
       - `type: "agent"`
 
@@ -12766,7 +12764,7 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
           The model that will power your agent.
 
@@ -12834,7 +12832,7 @@ ant beta:sessions:events stream \
 
         - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
           - `beta_managed_agents_effort_low: object`
 
@@ -12872,7 +12870,7 @@ ant beta:sessions:events stream \
 
         - `speed: optional "standard" or "fast"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -12880,7 +12878,7 @@ ant beta:sessions:events stream \
 
       - `multiagent: object`
 
-        Resolved coordinator topology with full agent definitions for each roster member.
+        Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
         - `type: "coordinator"`
 
@@ -12910,7 +12908,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
+              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
 
                 The model that will power your agent.
 
@@ -12918,7 +12916,7 @@ ant beta:sessions:events stream \
 
               - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
 
-                How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+                How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
               - `inference_geo: optional string`
 
@@ -12926,7 +12924,7 @@ ant beta:sessions:events stream \
 
               - `speed: optional "standard" or "fast"`
 
-                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `name: string`
 
@@ -13354,13 +13352,13 @@ ant beta:sessions:events stream \
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
         - `amount: string`
 
@@ -13418,7 +13416,7 @@ ant beta:sessions:events stream \
 
       - `content: object`
 
-        Regular text content.
+        A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
         - `type: "text"`
 
@@ -13431,8 +13429,6 @@ ant beta:sessions:events stream \
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
-
-        format: uint32
 
     - `event_id: string`
 
@@ -13462,7 +13458,7 @@ ant beta:sessions:events stream \
 
     - `processed_at: optional string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when this system message was processed.
 
       format: date-time
 
@@ -13478,13 +13474,13 @@ ant beta:sessions:events stream \
 
     - `processed_at: string`
 
-      A timestamp in RFC 3339 format
+      Timestamp when the snapshot was taken.
 
       format: date-time
 
     - `usage: object`
 
-      Point-in-time snapshot of a session's cumulative usage.
+      The session's cumulative usage at the snapshot time.
 
       - `active_seconds: optional number`
 
@@ -13494,7 +13490,7 @@ ant beta:sessions:events stream \
 
       - `cache_creation: optional object`
 
-        Prompt-cache creation token usage broken down by cache lifetime.
+        Tokens used to create prompt cache entries, broken down by cache TTL.
 
         - `ephemeral_1h_input_tokens: optional number`
 
@@ -13522,7 +13518,7 @@ ant beta:sessions:events stream \
 
       - `list_cost: optional object`
 
-        A monetary amount in a specific currency.
+        Cumulative list cost of the session across all turns, priced at public list rates.
 
         - `amount: string`
 
@@ -13540,7 +13536,7 @@ ant beta:sessions:events stream \
 
       - `server_tool_use: optional object`
 
-        Cumulative count of server-executed tool invocations, broken down by tool.
+        Cumulative server-executed tool usage across all turns.
 
         - `web_fetch_requests: optional number`
 
@@ -13556,13 +13552,13 @@ ant beta:sessions:events stream \
 
     - `budget: optional object`
 
-      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+      The session's configured budget at the snapshot time, or null when the session has no budget.
 
       - `type: "limit"`
 
       - `max_list_cost: object`
 
-        A monetary amount in a specific currency.
+        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
 ### Beta Managed Agents System Message Event Params
 
@@ -13638,7 +13634,7 @@ ant beta:sessions:events stream \
 
   - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
 
-    What the client should do next in response to this error.
+    What the client should do next.
 
     - `beta_managed_agents_retry_status_retrying: object`
 
@@ -13726,7 +13722,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -13778,7 +13774,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -13854,7 +13850,7 @@ ant beta:sessions:events stream \
 
       - `citations: object`
 
-        Citation settings for a search result.
+        Citation settings for this search result.
 
         - `enabled: boolean`
 
@@ -13890,7 +13886,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: optional string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when this result was processed.
 
     format: date-time
 
@@ -13936,7 +13932,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -13988,7 +13984,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -14064,7 +14060,7 @@ ant beta:sessions:events stream \
 
       - `citations: object`
 
-        Citation settings for a search result.
+        Citation settings for this search result.
 
         - `enabled: boolean`
 
@@ -14126,13 +14122,13 @@ ant beta:sessions:events stream \
 
   - `processed_at: string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the outcome was accepted.
 
     format: date-time
 
   - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
 
-    Rubric for grading the quality of an outcome.
+    How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
     - `beta_managed_agents_file_rubric: object`
 
@@ -14168,7 +14164,7 @@ ant beta:sessions:events stream \
 
   - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
 
-    Rubric for grading the quality of an outcome.
+    How to grade the outcome. Text or file reference.
 
     - `beta_managed_agents_file_rubric_params: object`
 
@@ -14212,7 +14208,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: optional string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the interrupt was processed.
 
     format: date-time
 
@@ -14268,7 +14264,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -14320,7 +14316,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -14396,7 +14392,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: optional string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the agent finished processing this message.
 
     format: date-time
 
@@ -14432,7 +14428,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -14484,7 +14480,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -14572,7 +14568,7 @@ ant beta:sessions:events stream \
 
   - `result: "allow" or "deny"`
 
-    UserToolConfirmationResult enum
+    The confirmation result: 'allow' or 'deny'.
 
     - `"allow"`
 
@@ -14590,7 +14586,7 @@ ant beta:sessions:events stream \
 
   - `processed_at: optional string`
 
-    A timestamp in RFC 3339 format
+    Timestamp when the confirmation was processed.
 
     format: date-time
 
@@ -14608,7 +14604,7 @@ ant beta:sessions:events stream \
 
   - `result: "allow" or "deny"`
 
-    UserToolConfirmationResult enum
+    The confirmation result: 'allow' or 'deny'.
 
     - `"allow"`
 
@@ -14664,7 +14660,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
 
-        Union type for image source variants.
+        The source of the image data.
 
         - `beta_managed_agents_base64_image_source: object`
 
@@ -14716,7 +14712,7 @@ ant beta:sessions:events stream \
 
       - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
 
-        Union type for document source variants.
+        The source of the document data.
 
         - `beta_managed_agents_base64_document_source: object`
 
@@ -14792,7 +14788,7 @@ ant beta:sessions:events stream \
 
       - `citations: object`
 
-        Citation settings for a search result.
+        Citation settings for this search result.
 
         - `enabled: boolean`
 

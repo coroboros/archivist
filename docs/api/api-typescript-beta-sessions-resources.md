@@ -421,7 +421,7 @@ List Session Resources
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -704,7 +704,7 @@ Get Session Resource
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -980,7 +980,7 @@ Update Session Resource
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -1298,7 +1298,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
   - `access?: "read_write" | "read_only" | null`
 
-    Access mode for an attached memory store.
+    Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
     - `"read_write"`
 
@@ -1404,7 +1404,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -1512,7 +1512,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 
@@ -1620,7 +1620,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
     - `access?: "read_write" | "read_only" | null`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `"read_write"`
 

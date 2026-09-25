@@ -139,7 +139,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_char_index: number`
 
@@ -159,7 +159,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_page_number: number`
 
@@ -183,7 +183,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_block_index: number`
 
@@ -207,7 +207,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `title: string | null`
 
-                maxLength: 512, minLength: 1
+                minLength: 1, maxLength: 512
 
               - `url: string`
 
@@ -363,7 +363,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `title?: string | null`
 
-            maxLength: 500, minLength: 1
+            minLength: 1, maxLength: 500
 
         - `interface SearchResultBlockParam`
 
@@ -427,7 +427,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `name: string`
 
-            maxLength: 200, minLength: 1
+            minLength: 1, maxLength: 200
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -463,7 +463,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `interface ToolResultBlockParam`
 
@@ -499,7 +499,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -527,7 +527,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The caller-assigned identifier for this tab, unique within the inventory.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `title: string`
 
@@ -553,7 +553,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                  maxItems: 200, minItems: 1
+                  minItems: 1, maxItems: 200
 
                   - `interface BrowserStateChangeTabOpened`
 
@@ -571,7 +571,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `interface BrowserStateChangeDownloadStarted`
 
@@ -583,7 +583,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -604,7 +604,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -616,7 +616,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `size_bytes?: number | null`
 
@@ -634,7 +634,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -646,7 +646,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The failure or cancellation detail, when known.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `is_error?: boolean`
 
@@ -654,7 +654,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `interface ServerToolUseBlockParam`
 
@@ -1032,7 +1032,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -1073,6 +1073,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `(string & {})`
+
     - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
       - `"claude-fable-5-1"`
@@ -1111,10 +1113,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Powerful intelligence for long-running agents and coding
 
-      - `"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -1147,7 +1145,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         High-performance model for agents and coding
 
-    - `(string & {})`
+      - `"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -1183,20 +1185,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `version?: string`
 
           Skill version or 'latest' for most recent version
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `string`
 
   - `diagnostics?: DiagnosticsParam | null`
 
-    Body param: Request-level diagnostics. Currently carries the previous response
-    id for prompt-cache divergence reporting.
+    Body param: Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
     - `previous_message_id?: string | null`
 
@@ -1226,7 +1227,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `effort?: "low" | "medium" | "high" | 2 more | null`
 
-      All possible effort levels.
+      How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+      Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
       - `"low"`
 
@@ -1476,7 +1479,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1693,12 +1696,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `configs?: BrowserToolsetConfigs | null`
 
-        Per-member configuration for `browser_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `type?: BrowserTypeConfig | null`
 
@@ -2125,12 +2123,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `configs?: ComputerToolsetConfigs | null`
 
-        Per-member configuration for `computer_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `type?: ComputerTypeConfig | null`
 
@@ -2484,7 +2477,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -2500,25 +2493,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The city of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `country?: string | null`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-          maxLength: 2, minLength: 2
+          minLength: 2, maxLength: 2
 
         - `region?: string | null`
 
           The region of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `timezone?: string | null`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
     - `interface WebFetchTool20250910`
 
@@ -2564,13 +2557,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -2578,12 +2571,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -2707,7 +2695,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -2761,13 +2749,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -2775,12 +2763,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `interface WebFetchTool20260309`
 
@@ -2828,13 +2811,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -2842,12 +2825,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `use_cache?: boolean`
 
@@ -2893,7 +2871,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `response_inclusion?: "full" | "excluded"`
 
@@ -2955,13 +2933,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `response_inclusion?: "full" | "excluded"`
 
@@ -2977,12 +2955,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `use_cache?: boolean`
 
@@ -3080,7 +3053,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `top_k?: number`
 
@@ -3104,11 +3077,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Recommended for advanced use cases only.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
 ### Returns
 
-- `interface Message`
+- When `stream` is `false` or omitted: `interface Message`
 
   - `type: "message"`
 
@@ -3126,7 +3099,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `container: Container | null`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
     - `id: string`
 
@@ -3154,13 +3129,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `version: string`
 
         The resolved version: a skill version ID for custom skills.
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `content: Array<ContentBlock>`
 
@@ -3333,8 +3308,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `text: string`
 
-        minLength: 0
-
     - `interface ThinkingBlock`
 
       - `type: "thinking"`
@@ -3415,7 +3388,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `interface ServerToolUseBlock`
 
@@ -3863,7 +3836,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool_name: string`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `tool_use_id: string`
 
@@ -3881,8 +3854,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `diagnostics: Diagnostics | null`
 
-    Request-level diagnostics: why the prompt cache could not fully reuse
-    the prefix of the request named by `diagnostics.previous_message_id`.
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
     - `cache_miss_reason: CacheMissReason | null`
 
@@ -3946,6 +3918,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `(string & {})`
+
     - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
       - `"claude-fable-5-1"`
@@ -3984,10 +3958,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Powerful intelligence for long-running agents and coding
 
-      - `"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -4020,7 +3990,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         High-performance model for agents and coding
 
-    - `(string & {})`
+      - `"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `role: "assistant"`
 
@@ -4032,7 +4006,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `stop_details: RefusalStopDetails | null`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
     - `type: "refusal"`
 
@@ -4040,13 +4016,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-      The policy category that triggered a refusal.
+      The policy category that triggered the refusal.
 
-      - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-      - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-      - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-      - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-      - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+      `null` when the refusal doesn't map to a named category.
 
       - `"cyber"`
 
@@ -4214,7 +4186,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `"batch"`
 
-- `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
+- When `stream` is `true`: `Stream<RawMessageStreamEvent>`
 
   - `interface RawMessageStartEvent`
 
@@ -4234,11 +4206,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `container: Container | null`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
       - `stop_details: RefusalStopDetails | null`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
       - `stop_reason: StopReason | null`
 
@@ -4610,7 +4586,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_char_index: number`
 
@@ -4630,7 +4606,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_page_number: number`
 
@@ -4654,7 +4630,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `document_title: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `end_block_index: number`
 
@@ -4678,7 +4654,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `title: string | null`
 
-                maxLength: 512, minLength: 1
+                minLength: 1, maxLength: 512
 
               - `url: string`
 
@@ -4834,7 +4810,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `title?: string | null`
 
-            maxLength: 500, minLength: 1
+            minLength: 1, maxLength: 500
 
         - `interface SearchResultBlockParam`
 
@@ -4898,7 +4874,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `name: string`
 
-            maxLength: 200, minLength: 1
+            minLength: 1, maxLength: 200
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4934,7 +4910,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `interface ToolResultBlockParam`
 
@@ -4970,7 +4946,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -4998,7 +4974,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     The caller-assigned identifier for this tab, unique within the inventory.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `title: string`
 
@@ -5024,7 +5000,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                  maxItems: 200, minItems: 1
+                  minItems: 1, maxItems: 200
 
                   - `interface BrowserStateChangeTabOpened`
 
@@ -5042,7 +5018,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `interface BrowserStateChangeDownloadStarted`
 
@@ -5054,7 +5030,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -5075,7 +5051,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -5087,7 +5063,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `size_bytes?: number | null`
 
@@ -5105,7 +5081,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `url: string`
 
@@ -5117,7 +5093,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       The failure or cancellation detail, when known.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `is_error?: boolean`
 
@@ -5125,7 +5101,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `interface ServerToolUseBlockParam`
 
@@ -5503,7 +5479,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -5544,6 +5520,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `(string & {})`
+
     - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
       - `"claude-fable-5-1"`
@@ -5582,10 +5560,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Powerful intelligence for long-running agents and coding
 
-      - `"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -5618,7 +5592,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         High-performance model for agents and coding
 
-    - `(string & {})`
+      - `"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -5630,7 +5608,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `effort?: "low" | "medium" | "high" | 2 more | null`
 
-      All possible effort levels.
+      How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+      Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
       - `"low"`
 
@@ -5856,7 +5836,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6073,12 +6053,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `configs?: BrowserToolsetConfigs | null`
 
-        Per-member configuration for `browser_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `type?: BrowserTypeConfig | null`
 
@@ -6505,12 +6480,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `configs?: ComputerToolsetConfigs | null`
 
-        Per-member configuration for `computer_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `type?: ComputerTypeConfig | null`
 
@@ -6864,7 +6834,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -6880,25 +6850,25 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           The city of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `country?: string | null`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-          maxLength: 2, minLength: 2
+          minLength: 2, maxLength: 2
 
         - `region?: string | null`
 
           The region of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `timezone?: string | null`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
     - `interface WebFetchTool20250910`
 
@@ -6944,13 +6914,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -6958,12 +6928,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -7087,7 +7052,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -7141,13 +7106,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -7155,12 +7120,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `interface WebFetchTool20260309`
 
@@ -7208,13 +7168,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `strict?: boolean`
 
@@ -7222,12 +7182,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `use_cache?: boolean`
 
@@ -7273,7 +7228,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `response_inclusion?: "full" | "excluded"`
 
@@ -7335,13 +7290,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `max_uses?: number | null`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `response_inclusion?: "full" | "excluded"`
 
@@ -7357,12 +7312,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `url_sources?: WebFetchURLSources | null`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `use_cache?: boolean`
 
@@ -8132,7 +8082,7 @@ console.log(messageTokensCount.input_tokens);
 
       The caller-assigned identifier for this tab, unique within the inventory.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `title: string`
 
@@ -8175,7 +8125,7 @@ console.log(messageTokensCount.input_tokens);
 
     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-    maxItems: 200, minItems: 1
+    minItems: 1, maxItems: 200
 
     - `interface BrowserStateChangeTabOpened`
 
@@ -8193,7 +8143,7 @@ console.log(messageTokensCount.input_tokens);
 
         The `tab_id` of the opened tab, present in `tabs`.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `interface BrowserStateChangeDownloadStarted`
 
@@ -8205,7 +8155,7 @@ console.log(messageTokensCount.input_tokens);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `url: string`
 
@@ -8226,7 +8176,7 @@ console.log(messageTokensCount.input_tokens);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `url: string`
 
@@ -8238,7 +8188,7 @@ console.log(messageTokensCount.input_tokens);
 
         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `size_bytes?: number | null`
 
@@ -8256,7 +8206,7 @@ console.log(messageTokensCount.input_tokens);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `url: string`
 
@@ -8268,7 +8218,7 @@ console.log(messageTokensCount.input_tokens);
 
         The failure or cancellation detail, when known.
 
-        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change
 
@@ -8290,7 +8240,7 @@ console.log(messageTokensCount.input_tokens);
 
       The `tab_id` of the opened tab, present in `tabs`.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `interface BrowserStateChangeDownloadStarted`
 
@@ -8302,7 +8252,7 @@ console.log(messageTokensCount.input_tokens);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `url: string`
 
@@ -8323,7 +8273,7 @@ console.log(messageTokensCount.input_tokens);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `url: string`
 
@@ -8335,7 +8285,7 @@ console.log(messageTokensCount.input_tokens);
 
       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `size_bytes?: number | null`
 
@@ -8353,7 +8303,7 @@ console.log(messageTokensCount.input_tokens);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `url: string`
 
@@ -8365,7 +8315,7 @@ console.log(messageTokensCount.input_tokens);
 
       The failure or cancellation detail, when known.
 
-      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change Download Completed
 
@@ -8382,7 +8332,7 @@ console.log(messageTokensCount.input_tokens);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `url: string`
 
@@ -8394,7 +8344,7 @@ console.log(messageTokensCount.input_tokens);
 
     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `size_bytes?: number | null`
 
@@ -8414,7 +8364,7 @@ console.log(messageTokensCount.input_tokens);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `url: string`
 
@@ -8426,7 +8376,7 @@ console.log(messageTokensCount.input_tokens);
 
     The failure or cancellation detail, when known.
 
-    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change Download Started
 
@@ -8440,7 +8390,7 @@ console.log(messageTokensCount.input_tokens);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `url: string`
 
@@ -8466,7 +8416,7 @@ console.log(messageTokensCount.input_tokens);
 
     The `tab_id` of the opened tab, present in `tabs`.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Tab Entry
 
@@ -8485,7 +8435,7 @@ console.log(messageTokensCount.input_tokens);
 
     The caller-assigned identifier for this tab, unique within the inventory.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `title: string`
 
@@ -8551,12 +8501,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `configs?: BrowserToolsetConfigs | null`
 
-    Per-member configuration for `browser_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
     - `type?: BrowserTypeConfig | null`
 
@@ -9564,7 +9509,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `document_title: string | null`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `end_char_index: number`
 
@@ -9624,7 +9569,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `document_title: string | null`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `end_block_index: number`
 
@@ -9676,7 +9621,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `document_title: string | null`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `end_page_number: number`
 
@@ -9732,7 +9677,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `title: string | null`
 
-    maxLength: 512, minLength: 1
+    minLength: 1, maxLength: 512
 
   - `url: string`
 
@@ -10745,12 +10690,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `configs?: ComputerToolsetConfigs | null`
 
-    Per-member configuration for `computer_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
     - `type?: ComputerTypeConfig | null`
 
@@ -11259,13 +11199,13 @@ console.log(messageTokensCount.input_tokens);
 
       Skill ID
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
     - `version: string`
 
       The resolved version: a skill version ID for custom skills.
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
 ### Container Params
 
@@ -11295,13 +11235,13 @@ console.log(messageTokensCount.input_tokens);
 
       Skill ID
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
     - `version?: string`
 
       Skill version or 'latest' for most recent version
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
 ### Container Skill
 
@@ -11321,13 +11261,13 @@ console.log(messageTokensCount.input_tokens);
 
     Skill ID
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
   - `version: string`
 
     The resolved version: a skill version ID for custom skills.
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
 ### Container Upload Block
 
@@ -11519,8 +11459,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `text: string`
 
-      minLength: 0
-
   - `interface ThinkingBlock`
 
     - `type: "thinking"`
@@ -11601,7 +11539,7 @@ console.log(messageTokensCount.input_tokens);
 
       For a toolset member tool_use, the toolset family.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `interface ServerToolUseBlock`
 
@@ -12049,7 +11987,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `tool_name: string`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `tool_use_id: string`
 
@@ -12112,7 +12050,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_char_index: number`
 
@@ -12132,7 +12070,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_page_number: number`
 
@@ -12156,7 +12094,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_block_index: number`
 
@@ -12180,7 +12118,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `url: string`
 
@@ -12336,7 +12274,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `title?: string | null`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
   - `interface SearchResultBlockParam`
 
@@ -12400,7 +12338,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `name: string`
 
-      maxLength: 200, minLength: 1
+      minLength: 1, maxLength: 200
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12436,7 +12374,7 @@ console.log(messageTokensCount.input_tokens);
 
       For a toolset member tool_use, the toolset family this member belongs to.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `interface ToolResultBlockParam`
 
@@ -12472,7 +12410,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `tool_name: string`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -12500,7 +12438,7 @@ console.log(messageTokensCount.input_tokens);
 
               The caller-assigned identifier for this tab, unique within the inventory.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `title: string`
 
@@ -12526,7 +12464,7 @@ console.log(messageTokensCount.input_tokens);
 
             Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-            maxItems: 200, minItems: 1
+            minItems: 1, maxItems: 200
 
             - `interface BrowserStateChangeTabOpened`
 
@@ -12544,7 +12482,7 @@ console.log(messageTokensCount.input_tokens);
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `interface BrowserStateChangeDownloadStarted`
 
@@ -12556,7 +12494,7 @@ console.log(messageTokensCount.input_tokens);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `url: string`
 
@@ -12577,7 +12515,7 @@ console.log(messageTokensCount.input_tokens);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `url: string`
 
@@ -12589,7 +12527,7 @@ console.log(messageTokensCount.input_tokens);
 
                 Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `size_bytes?: number | null`
 
@@ -12607,7 +12545,7 @@ console.log(messageTokensCount.input_tokens);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `url: string`
 
@@ -12619,7 +12557,7 @@ console.log(messageTokensCount.input_tokens);
 
                 The failure or cancellation detail, when known.
 
-                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `is_error?: boolean`
 
@@ -12627,7 +12565,7 @@ console.log(messageTokensCount.input_tokens);
 
       For a toolset member tool_result, the toolset family of the paired tool_use.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `interface ServerToolUseBlockParam`
 
@@ -13005,7 +12943,7 @@ console.log(messageTokensCount.input_tokens);
 
           - `tool_name: string`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -13087,7 +13025,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_char_index: number`
 
@@ -13107,7 +13045,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_page_number: number`
 
@@ -13131,7 +13069,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_block_index: number`
 
@@ -13155,7 +13093,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `url: string`
 
@@ -13294,7 +13232,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_char_index: number`
 
@@ -13314,7 +13252,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_page_number: number`
 
@@ -13338,7 +13276,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_block_index: number`
 
@@ -13362,7 +13300,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `url: string`
 
@@ -13657,7 +13595,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `document_title: string | null`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_char_index: number`
 
@@ -13677,7 +13615,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `document_title: string | null`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_page_number: number`
 
@@ -13701,7 +13639,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `document_title: string | null`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_block_index: number`
 
@@ -13725,7 +13663,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `title: string | null`
 
-                  maxLength: 512, minLength: 1
+                  minLength: 1, maxLength: 512
 
                 - `url: string`
 
@@ -13843,7 +13781,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `title?: string | null`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
 ### Encrypted Code Execution Result Block
 
@@ -14083,7 +14021,9 @@ console.log(messageTokensCount.input_tokens);
 
   - `container: Container | null`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
     - `id: string`
 
@@ -14111,13 +14051,13 @@ console.log(messageTokensCount.input_tokens);
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `version: string`
 
         The resolved version: a skill version ID for custom skills.
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `content: Array<ContentBlock>`
 
@@ -14290,8 +14230,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `text: string`
 
-        minLength: 0
-
     - `interface ThinkingBlock`
 
       - `type: "thinking"`
@@ -14372,7 +14310,7 @@ console.log(messageTokensCount.input_tokens);
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `interface ServerToolUseBlock`
 
@@ -14820,7 +14758,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `tool_name: string`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `tool_use_id: string`
 
@@ -14838,8 +14776,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `diagnostics: Diagnostics | null`
 
-    Request-level diagnostics: why the prompt cache could not fully reuse
-    the prefix of the request named by `diagnostics.previous_message_id`.
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
     - `cache_miss_reason: CacheMissReason | null`
 
@@ -14903,6 +14840,8 @@ console.log(messageTokensCount.input_tokens);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `(string & {})`
+
     - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
       - `"claude-fable-5-1"`
@@ -14941,10 +14880,6 @@ console.log(messageTokensCount.input_tokens);
 
         Powerful intelligence for long-running agents and coding
 
-      - `"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -14977,7 +14912,11 @@ console.log(messageTokensCount.input_tokens);
 
         High-performance model for agents and coding
 
-    - `(string & {})`
+      - `"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `role: "assistant"`
 
@@ -14989,7 +14928,9 @@ console.log(messageTokensCount.input_tokens);
 
   - `stop_details: RefusalStopDetails | null`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
     - `type: "refusal"`
 
@@ -14997,13 +14938,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-      The policy category that triggered a refusal.
+      The policy category that triggered the refusal.
 
-      - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-      - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-      - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-      - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-      - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+      `null` when the refusal doesn't map to a named category.
 
       - `"cyber"`
 
@@ -15197,7 +15134,7 @@ console.log(messageTokensCount.input_tokens);
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15431,12 +15368,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `configs?: BrowserToolsetConfigs | null`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type?: BrowserTypeConfig | null`
 
@@ -15863,12 +15795,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `configs?: ComputerToolsetConfigs | null`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type?: ComputerTypeConfig | null`
 
@@ -16222,7 +16149,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -16238,25 +16165,25 @@ console.log(messageTokensCount.input_tokens);
 
         The city of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `country?: string | null`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-        maxLength: 2, minLength: 2
+        minLength: 2, maxLength: 2
 
       - `region?: string | null`
 
         The region of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `timezone?: string | null`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
   - `interface WebFetchTool20250910`
 
@@ -16304,13 +16231,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -16318,12 +16245,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -16447,7 +16369,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -16501,13 +16423,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -16515,12 +16437,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `interface WebFetchTool20260309`
 
@@ -16568,13 +16485,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -16582,12 +16499,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache?: boolean`
 
@@ -16633,7 +16545,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion?: "full" | "excluded"`
 
@@ -16695,13 +16607,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion?: "full" | "excluded"`
 
@@ -16717,12 +16629,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache?: boolean`
 
@@ -16832,13 +16739,13 @@ console.log(messageTokensCount.input_tokens);
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `version?: string`
 
         Skill version or 'latest' for most recent version
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `string`
 
@@ -16959,7 +16866,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_char_index: number`
 
@@ -16979,7 +16886,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_page_number: number`
 
@@ -17003,7 +16910,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_block_index: number`
 
@@ -17027,7 +16934,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `url: string`
 
@@ -17183,7 +17090,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title?: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `interface SearchResultBlockParam`
 
@@ -17247,7 +17154,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `name: string`
 
-          maxLength: 200, minLength: 1
+          minLength: 1, maxLength: 200
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17283,7 +17190,7 @@ console.log(messageTokensCount.input_tokens);
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `interface ToolResultBlockParam`
 
@@ -17319,7 +17226,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -17347,7 +17254,7 @@ console.log(messageTokensCount.input_tokens);
 
                   The caller-assigned identifier for this tab, unique within the inventory.
 
-                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                  minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: string`
 
@@ -17373,7 +17280,7 @@ console.log(messageTokensCount.input_tokens);
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                maxItems: 200, minItems: 1
+                minItems: 1, maxItems: 200
 
                 - `interface BrowserStateChangeTabOpened`
 
@@ -17391,7 +17298,7 @@ console.log(messageTokensCount.input_tokens);
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `interface BrowserStateChangeDownloadStarted`
 
@@ -17403,7 +17310,7 @@ console.log(messageTokensCount.input_tokens);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -17424,7 +17331,7 @@ console.log(messageTokensCount.input_tokens);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -17436,7 +17343,7 @@ console.log(messageTokensCount.input_tokens);
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `size_bytes?: number | null`
 
@@ -17454,7 +17361,7 @@ console.log(messageTokensCount.input_tokens);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -17466,7 +17373,7 @@ console.log(messageTokensCount.input_tokens);
 
                     The failure or cancellation detail, when known.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
         - `is_error?: boolean`
 
@@ -17474,7 +17381,7 @@ console.log(messageTokensCount.input_tokens);
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `interface ServerToolUseBlockParam`
 
@@ -17852,7 +17759,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -17909,11 +17816,13 @@ console.log(messageTokensCount.input_tokens);
 
 ### Model
 
-- `type Model = "claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more | (string & {})`
+- `type Model = (string & {}) | "claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `(string & {})`
 
   - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
@@ -17953,10 +17862,6 @@ console.log(messageTokensCount.input_tokens);
 
       Powerful intelligence for long-running agents and coding
 
-    - `"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `"claude-opus-4-6"`
 
       Powerful intelligence for long-running agents and coding
@@ -17989,7 +17894,11 @@ console.log(messageTokensCount.input_tokens);
 
       High-performance model for agents and coding
 
-  - `(string & {})`
+    - `"claude-mythos-preview"`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
 ### Output Config
 
@@ -17997,7 +17906,9 @@ console.log(messageTokensCount.input_tokens);
 
   - `effort?: "low" | "medium" | "high" | 2 more | null`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
     - `"low"`
 
@@ -18558,8 +18469,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `text: string`
 
-        minLength: 0
-
     - `interface ThinkingBlock`
 
       - `type: "thinking"`
@@ -18640,7 +18549,7 @@ console.log(messageTokensCount.input_tokens);
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `interface ServerToolUseBlock`
 
@@ -19088,7 +18997,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `tool_name: string`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `tool_use_id: string`
 
@@ -19128,7 +19037,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `container: Container | null`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `id: string`
 
@@ -19156,17 +19067,19 @@ console.log(messageTokensCount.input_tokens);
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `version: string`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `stop_details: RefusalStopDetails | null`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `type: "refusal"`
 
@@ -19174,13 +19087,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
 
-        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+        `null` when the refusal doesn't map to a named category.
 
         - `"cyber"`
 
@@ -19324,7 +19233,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `container: Container | null`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `id: string`
 
@@ -19352,13 +19263,13 @@ console.log(messageTokensCount.input_tokens);
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `version: string`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `content: Array<ContentBlock>`
 
@@ -19531,8 +19442,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `text: string`
 
-          minLength: 0
-
       - `interface ThinkingBlock`
 
         - `type: "thinking"`
@@ -19613,7 +19522,7 @@ console.log(messageTokensCount.input_tokens);
 
           For a toolset member tool_use, the toolset family.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `interface ServerToolUseBlock`
 
@@ -20061,7 +19970,7 @@ console.log(messageTokensCount.input_tokens);
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `tool_use_id: string`
 
@@ -20079,8 +19988,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `diagnostics: Diagnostics | null`
 
-      Request-level diagnostics: why the prompt cache could not fully reuse
-      the prefix of the request named by `diagnostics.previous_message_id`.
+      Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
       - `cache_miss_reason: CacheMissReason | null`
 
@@ -20144,6 +20052,8 @@ console.log(messageTokensCount.input_tokens);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `(string & {})`
+
       - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
         - `"claude-fable-5-1"`
@@ -20182,10 +20092,6 @@ console.log(messageTokensCount.input_tokens);
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `"claude-opus-4-6"`
 
           Powerful intelligence for long-running agents and coding
@@ -20218,7 +20124,11 @@ console.log(messageTokensCount.input_tokens);
 
           High-performance model for agents and coding
 
-      - `(string & {})`
+        - `"claude-mythos-preview"`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
 
     - `role: "assistant"`
 
@@ -20230,7 +20140,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `stop_details: RefusalStopDetails | null`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `type: "refusal"`
 
@@ -20238,13 +20150,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
 
-        - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-        - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-        - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-        - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-        - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+        `null` when the refusal doesn't map to a named category.
 
         - `"cyber"`
 
@@ -20448,7 +20356,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `container: Container | null`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
         - `id: string`
 
@@ -20476,13 +20386,13 @@ console.log(messageTokensCount.input_tokens);
 
             Skill ID
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
           - `version: string`
 
             The resolved version: a skill version ID for custom skills.
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
       - `content: Array<ContentBlock>`
 
@@ -20655,8 +20565,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `text: string`
 
-            minLength: 0
-
         - `interface ThinkingBlock`
 
           - `type: "thinking"`
@@ -20737,7 +20645,7 @@ console.log(messageTokensCount.input_tokens);
 
             For a toolset member tool_use, the toolset family.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `interface ServerToolUseBlock`
 
@@ -21185,7 +21093,7 @@ console.log(messageTokensCount.input_tokens);
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `tool_use_id: string`
 
@@ -21203,8 +21111,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `diagnostics: Diagnostics | null`
 
-        Request-level diagnostics: why the prompt cache could not fully reuse
-        the prefix of the request named by `diagnostics.previous_message_id`.
+        Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
         - `cache_miss_reason: CacheMissReason | null`
 
@@ -21268,6 +21175,8 @@ console.log(messageTokensCount.input_tokens);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `(string & {})`
+
         - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
           - `"claude-fable-5-1"`
@@ -21306,10 +21215,6 @@ console.log(messageTokensCount.input_tokens);
 
             Powerful intelligence for long-running agents and coding
 
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `"claude-opus-4-6"`
 
             Powerful intelligence for long-running agents and coding
@@ -21342,7 +21247,11 @@ console.log(messageTokensCount.input_tokens);
 
             High-performance model for agents and coding
 
-        - `(string & {})`
+          - `"claude-mythos-preview"`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
 
       - `role: "assistant"`
 
@@ -21354,7 +21263,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `stop_details: RefusalStopDetails | null`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
         - `type: "refusal"`
 
@@ -21362,13 +21273,9 @@ console.log(messageTokensCount.input_tokens);
 
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-          The policy category that triggered a refusal.
+          The policy category that triggered the refusal.
 
-          - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-          - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-          - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-          - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-          - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+          `null` when the refusal doesn't map to a named category.
 
           - `"cyber"`
 
@@ -21546,11 +21453,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `container: Container | null`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
       - `stop_details: RefusalStopDetails | null`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
       - `stop_reason: StopReason | null`
 
@@ -21755,13 +21666,9 @@ console.log(messageTokensCount.input_tokens);
 
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-    The policy category that triggered a refusal.
+    The policy category that triggered the refusal.
 
-    - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-    - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-    - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-    - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-    - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+    `null` when the refusal doesn't map to a named category.
 
     - `"cyber"`
 
@@ -21838,7 +21745,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_char_index: number`
 
@@ -21858,7 +21765,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_page_number: number`
 
@@ -21882,7 +21789,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `document_title: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `end_block_index: number`
 
@@ -21906,7 +21813,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `url: string`
 
@@ -22159,13 +22066,13 @@ console.log(messageTokensCount.input_tokens);
 
     Skill ID
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
   - `version?: string`
 
     Skill version or 'latest' for most recent version
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
 ### Stop Reason
 
@@ -22329,8 +22236,6 @@ console.log(messageTokensCount.input_tokens);
 
   - `text: string`
 
-    minLength: 0
-
 ### Text Block Param
 
 - `interface TextBlockParam`
@@ -22376,7 +22281,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `document_title: string | null`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `end_char_index: number`
 
@@ -22396,7 +22301,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `document_title: string | null`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `end_page_number: number`
 
@@ -22420,7 +22325,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `document_title: string | null`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `end_block_index: number`
 
@@ -22444,7 +22349,7 @@ console.log(messageTokensCount.input_tokens);
 
       - `title: string | null`
 
-        maxLength: 512, minLength: 1
+        minLength: 1, maxLength: 512
 
       - `url: string`
 
@@ -22632,7 +22537,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `document_title: string | null`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `end_char_index: number`
 
@@ -22652,7 +22557,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `document_title: string | null`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `end_page_number: number`
 
@@ -22676,7 +22581,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `document_title: string | null`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `end_block_index: number`
 
@@ -22700,7 +22605,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `title: string | null`
 
-      maxLength: 512, minLength: 1
+      minLength: 1, maxLength: 512
 
     - `url: string`
 
@@ -23239,7 +23144,7 @@ console.log(messageTokensCount.input_tokens);
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+    minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23461,7 +23366,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `tool_name: string`
 
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Reference Block Param
 
@@ -23473,7 +23378,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `tool_name: string`
 
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -23559,7 +23464,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_char_index: number`
 
@@ -23579,7 +23484,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_page_number: number`
 
@@ -23603,7 +23508,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `document_title: string | null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_block_index: number`
 
@@ -23627,7 +23532,7 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `url: string`
 
@@ -23811,7 +23716,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title?: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `interface ToolReferenceBlockParam`
 
@@ -23821,7 +23726,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `tool_name: string`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -23849,7 +23754,7 @@ console.log(messageTokensCount.input_tokens);
 
             The caller-assigned identifier for this tab, unique within the inventory.
 
-            maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+            minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `title: string`
 
@@ -23875,7 +23780,7 @@ console.log(messageTokensCount.input_tokens);
 
           Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-          maxItems: 200, minItems: 1
+          minItems: 1, maxItems: 200
 
           - `interface BrowserStateChangeTabOpened`
 
@@ -23893,7 +23798,7 @@ console.log(messageTokensCount.input_tokens);
 
               The `tab_id` of the opened tab, present in `tabs`.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `interface BrowserStateChangeDownloadStarted`
 
@@ -23905,7 +23810,7 @@ console.log(messageTokensCount.input_tokens);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `url: string`
 
@@ -23926,7 +23831,7 @@ console.log(messageTokensCount.input_tokens);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `url: string`
 
@@ -23938,7 +23843,7 @@ console.log(messageTokensCount.input_tokens);
 
               Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `size_bytes?: number | null`
 
@@ -23956,7 +23861,7 @@ console.log(messageTokensCount.input_tokens);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `url: string`
 
@@ -23968,7 +23873,7 @@ console.log(messageTokensCount.input_tokens);
 
               The failure or cancellation detail, when known.
 
-              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `is_error?: boolean`
 
@@ -23976,7 +23881,7 @@ console.log(messageTokensCount.input_tokens);
 
     For a toolset member tool_result, the toolset family of the paired tool_use.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Search Tool Bm25 20251119
 
@@ -24130,7 +24035,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `tool_name: string`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
   - `tool_use_id: string`
 
@@ -24170,7 +24075,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `tool_name: string`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -24267,7 +24172,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `tool_name: string`
 
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Search Tool Search Result Block Param
 
@@ -24281,7 +24186,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `tool_name: string`
 
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -24495,7 +24400,7 @@ console.log(messageTokensCount.input_tokens);
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24729,12 +24634,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `configs?: BrowserToolsetConfigs | null`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type?: BrowserTypeConfig | null`
 
@@ -25161,12 +25061,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `configs?: ComputerToolsetConfigs | null`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type?: ComputerTypeConfig | null`
 
@@ -25520,7 +25415,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -25536,25 +25431,25 @@ console.log(messageTokensCount.input_tokens);
 
         The city of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `country?: string | null`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-        maxLength: 2, minLength: 2
+        minLength: 2, maxLength: 2
 
       - `region?: string | null`
 
         The region of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `timezone?: string | null`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
   - `interface WebFetchTool20250910`
 
@@ -25602,13 +25497,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -25616,12 +25511,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -25745,7 +25635,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -25799,13 +25689,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -25813,12 +25703,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `interface WebFetchTool20260309`
 
@@ -25866,13 +25751,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict?: boolean`
 
@@ -25880,12 +25765,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache?: boolean`
 
@@ -25931,7 +25811,7 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion?: "full" | "excluded"`
 
@@ -25993,13 +25873,13 @@ console.log(messageTokensCount.input_tokens);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses?: number | null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion?: "full" | "excluded"`
 
@@ -26015,12 +25895,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `url_sources?: WebFetchURLSources | null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache?: boolean`
 
@@ -26148,7 +26023,7 @@ console.log(messageTokensCount.input_tokens);
 
     For a toolset member tool_use, the toolset family.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Use Block Param
 
@@ -26164,7 +26039,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `name: string`
 
-    maxLength: 200, minLength: 1
+    minLength: 1, maxLength: 200
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -26217,7 +26092,7 @@ console.log(messageTokensCount.input_tokens);
 
     For a toolset member tool_use, the toolset family this member belongs to.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### URL Image Source
 
@@ -26341,25 +26216,25 @@ console.log(messageTokensCount.input_tokens);
 
     The city of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
   - `country?: string | null`
 
     The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-    maxLength: 2, minLength: 2
+    minLength: 2, maxLength: 2
 
   - `region?: string | null`
 
     The region of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
   - `timezone?: string | null`
 
     The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
 ### Web Fetch Block
 
@@ -26498,7 +26373,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_char_index: number`
 
@@ -26518,7 +26393,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_page_number: number`
 
@@ -26542,7 +26417,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_block_index: number`
 
@@ -26566,7 +26441,7 @@ console.log(messageTokensCount.input_tokens);
 
                   - `title: string | null`
 
-                    maxLength: 512, minLength: 1
+                    minLength: 1, maxLength: 512
 
                   - `url: string`
 
@@ -26684,7 +26559,7 @@ console.log(messageTokensCount.input_tokens);
 
     - `title?: string | null`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
   - `url: string`
 
@@ -26759,13 +26634,13 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `max_uses?: number | null`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `strict?: boolean`
 
@@ -26773,12 +26648,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `url_sources?: WebFetchURLSources | null`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -26927,13 +26797,13 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `max_uses?: number | null`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `strict?: boolean`
 
@@ -26941,12 +26811,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `url_sources?: WebFetchURLSources | null`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -27097,13 +26962,13 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `max_uses?: number | null`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `strict?: boolean`
 
@@ -27111,12 +26976,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `url_sources?: WebFetchURLSources | null`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -27269,13 +27129,13 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `max_uses?: number | null`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `response_inclusion?: "full" | "excluded"`
 
@@ -27291,12 +27151,7 @@ console.log(messageTokensCount.input_tokens);
 
   - `url_sources?: WebFetchURLSources | null`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -27621,7 +27476,7 @@ console.log(messageTokensCount.input_tokens);
 
                       - `document_title: string | null`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `end_char_index: number`
 
@@ -27641,7 +27496,7 @@ console.log(messageTokensCount.input_tokens);
 
                       - `document_title: string | null`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `end_page_number: number`
 
@@ -27665,7 +27520,7 @@ console.log(messageTokensCount.input_tokens);
 
                       - `document_title: string | null`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `end_block_index: number`
 
@@ -27689,7 +27544,7 @@ console.log(messageTokensCount.input_tokens);
 
                       - `title: string | null`
 
-                        maxLength: 512, minLength: 1
+                        minLength: 1, maxLength: 512
 
                       - `url: string`
 
@@ -27807,7 +27662,7 @@ console.log(messageTokensCount.input_tokens);
 
         - `title?: string | null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `url: string`
 
@@ -28174,7 +28029,7 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `strict?: boolean`
 
@@ -28190,25 +28045,25 @@ console.log(messageTokensCount.input_tokens);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `country?: string | null`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `region?: string | null`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `timezone?: string | null`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool 20260209
 
@@ -28269,7 +28124,7 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `strict?: boolean`
 
@@ -28285,25 +28140,25 @@ console.log(messageTokensCount.input_tokens);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `country?: string | null`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `region?: string | null`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `timezone?: string | null`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool 20260318
 
@@ -28364,7 +28219,7 @@ console.log(messageTokensCount.input_tokens);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `response_inclusion?: "full" | "excluded"`
 
@@ -28388,25 +28243,25 @@ console.log(messageTokensCount.input_tokens);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `country?: string | null`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `region?: string | null`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `timezone?: string | null`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool Request Error
 
@@ -28725,7 +28580,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
-    maxItems: 100000, minItems: 1
+    minItems: 1, maxItems: 100000
 
     - `custom_id: string`
 
@@ -28733,7 +28588,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Must be unique for each request within the Message Batch.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
     - `params: Params`
 
@@ -28853,7 +28708,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_char_index: number`
 
@@ -28873,7 +28728,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_page_number: number`
 
@@ -28897,7 +28752,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `document_title: string | null`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `end_block_index: number`
 
@@ -28921,7 +28776,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `title: string | null`
 
-                    maxLength: 512, minLength: 1
+                    minLength: 1, maxLength: 512
 
                   - `url: string`
 
@@ -29077,7 +28932,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `title?: string | null`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
             - `interface SearchResultBlockParam`
 
@@ -29141,7 +28996,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `name: string`
 
-                maxLength: 200, minLength: 1
+                minLength: 1, maxLength: 200
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -29177,7 +29032,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 For a toolset member tool_use, the toolset family this member belongs to.
 
-                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+                minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
             - `interface ToolResultBlockParam`
 
@@ -29213,7 +29068,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `tool_name: string`
 
-                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                     - `cache_control?: CacheControlEphemeral | null`
 
@@ -29241,7 +29096,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         The caller-assigned identifier for this tab, unique within the inventory.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `title: string`
 
@@ -29267,7 +29122,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                      maxItems: 200, minItems: 1
+                      minItems: 1, maxItems: 200
 
                       - `interface BrowserStateChangeTabOpened`
 
@@ -29285,7 +29140,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `interface BrowserStateChangeDownloadStarted`
 
@@ -29297,7 +29152,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `url: string`
 
@@ -29318,7 +29173,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `url: string`
 
@@ -29330,7 +29185,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `size_bytes?: number | null`
 
@@ -29348,7 +29203,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `url: string`
 
@@ -29360,7 +29215,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           The failure or cancellation detail, when known.
 
-                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `is_error?: boolean`
 
@@ -29368,7 +29223,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 For a toolset member tool_result, the toolset family of the paired tool_use.
 
-                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+                minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
             - `interface ServerToolUseBlockParam`
 
@@ -29746,7 +29601,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `tool_name: string`
 
-                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                     - `cache_control?: CacheControlEphemeral | null`
 
@@ -29787,6 +29642,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `(string & {})`
+
         - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
           - `"claude-fable-5-1"`
@@ -29825,10 +29682,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Powerful intelligence for long-running agents and coding
 
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `"claude-opus-4-6"`
 
             Powerful intelligence for long-running agents and coding
@@ -29861,7 +29714,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             High-performance model for agents and coding
 
-        - `(string & {})`
+          - `"claude-mythos-preview"`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
 
       - `cache_control?: CacheControlEphemeral | null`
 
@@ -29897,20 +29754,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version?: string`
 
               Skill version or 'latest' for most recent version
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `string`
 
       - `diagnostics?: DiagnosticsParam | null`
 
-        Request-level diagnostics. Currently carries the previous response
-        id for prompt-cache divergence reporting.
+        Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
         - `previous_message_id?: string | null`
 
@@ -29940,7 +29796,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `effort?: "low" | "medium" | "high" | 2 more | null`
 
-          All possible effort levels.
+          How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+          Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
           - `"low"`
 
@@ -30190,7 +30048,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-            maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+            minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30407,12 +30265,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `configs?: BrowserToolsetConfigs | null`
 
-            Per-member configuration for `browser_toolset_20260801`: one
-            optional field per member tool, keyed by the member name — the same
-            name the member's `tool_use` blocks carry. Every member is an
-            accepted key, and a member's defaults apply wherever its key is
-            absent. Unknown keys are rejected: the field set is this toolset
-            version's complete member set.
+            Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
             - `type?: BrowserTypeConfig | null`
 
@@ -30839,12 +30692,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `configs?: ComputerToolsetConfigs | null`
 
-            Per-member configuration for `computer_toolset_20260801`: one
-            optional field per member tool, keyed by the member name — the same
-            name the member's `tool_use` blocks carry. Every member is an
-            accepted key, and a member's defaults apply wherever its key is
-            absent. Unknown keys are rejected: the field set is this toolset
-            version's complete member set.
+            Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
             - `type?: ComputerTypeConfig | null`
 
@@ -31198,7 +31046,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `strict?: boolean`
 
@@ -31214,25 +31062,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The city of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
             - `country?: string | null`
 
               The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-              maxLength: 2, minLength: 2
+              minLength: 2, maxLength: 2
 
             - `region?: string | null`
 
               The region of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
             - `timezone?: string | null`
 
               The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
         - `interface WebFetchTool20250910`
 
@@ -31278,13 +31126,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `max_uses?: number | null`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `strict?: boolean`
 
@@ -31292,12 +31140,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `url_sources?: WebFetchURLSources | null`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
             - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -31421,7 +31264,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `strict?: boolean`
 
@@ -31475,13 +31318,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `max_uses?: number | null`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `strict?: boolean`
 
@@ -31489,12 +31332,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `url_sources?: WebFetchURLSources | null`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `interface WebFetchTool20260309`
 
@@ -31542,13 +31380,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `max_uses?: number | null`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `strict?: boolean`
 
@@ -31556,12 +31394,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `url_sources?: WebFetchURLSources | null`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
           - `use_cache?: boolean`
 
@@ -31607,7 +31440,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `response_inclusion?: "full" | "excluded"`
 
@@ -31669,13 +31502,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `max_uses?: number | null`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `response_inclusion?: "full" | "excluded"`
 
@@ -31691,12 +31524,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `url_sources?: WebFetchURLSources | null`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
           - `use_cache?: boolean`
 
@@ -31784,7 +31612,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-        maximum: 1, minimum: 0
+        minimum: 0, maximum: 1
 
       - `top_k?: number`
 
@@ -31808,7 +31636,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         Recommended for advanced use cases only.
 
-        maximum: 1, minimum: 0
+        minimum: 0, maximum: 1
 
   - `user_profile_id?: string`
 
@@ -32177,7 +32005,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
-    maximum: 1000, minimum: 1
+    minimum: 1, maximum: 1000
 
   - `workspace_id?: string`
 
@@ -32646,7 +32474,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `container: Container | null`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: string`
 
@@ -32674,13 +32504,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: string`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: Array<ContentBlock>`
 
@@ -32853,8 +32683,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `text: string`
 
-              minLength: 0
-
           - `interface ThinkingBlock`
 
             - `type: "thinking"`
@@ -32935,7 +32763,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `interface ServerToolUseBlock`
 
@@ -33383,7 +33211,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `tool_name: string`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: string`
 
@@ -33401,8 +33229,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `diagnostics: Diagnostics | null`
 
-          Request-level diagnostics: why the prompt cache could not fully reuse
-          the prefix of the request named by `diagnostics.previous_message_id`.
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
           - `cache_miss_reason: CacheMissReason | null`
 
@@ -33466,6 +33293,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `(string & {})`
+
           - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
             - `"claude-fable-5-1"`
@@ -33504,10 +33333,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Powerful intelligence for long-running agents and coding
 
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
             - `"claude-opus-4-6"`
 
               Powerful intelligence for long-running agents and coding
@@ -33540,7 +33365,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               High-performance model for agents and coding
 
-          - `(string & {})`
+            - `"claude-mythos-preview"`
+
+              **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              New class of intelligence, strongest in coding and cybersecurity
 
         - `role: "assistant"`
 
@@ -33552,7 +33381,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `stop_details: RefusalStopDetails | null`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: "refusal"`
 
@@ -33560,13 +33391,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
 
-            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
-            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+            `null` when the refusal doesn't map to a named category.
 
             - `"cyber"`
 

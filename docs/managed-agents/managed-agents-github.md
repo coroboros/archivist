@@ -55,7 +55,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   )
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply code-reviewer.md
     ```
@@ -78,7 +78,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
       You are a code review assistant with access to GitHub.
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(

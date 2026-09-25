@@ -37,7 +37,7 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `status: optional "active" or "archived" or "expired" or "inactive"`
 
@@ -422,7 +422,7 @@ Update API Key
 
   Name of the API key.
 
-  maxLength: 500, minLength: 1
+  minLength: 1, maxLength: 500
 
 - `status: optional "active" or "archived" or "inactive" or null`
 

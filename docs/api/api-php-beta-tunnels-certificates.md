@@ -53,15 +53,15 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `?\Datetime archivedAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
   - `?\Datetime expiresAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
   - `string fingerprint`
 
@@ -146,15 +146,15 @@ Fetches a tunnel certificate by ID.
 
   - `?\Datetime archivedAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
   - `?\Datetime expiresAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
   - `string fingerprint`
 
@@ -247,15 +247,15 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `?\Datetime archivedAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
   - `?\Datetime expiresAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
   - `string fingerprint`
 
@@ -347,15 +347,15 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `?\Datetime archivedAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
   - `?\Datetime expiresAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
   - `string fingerprint`
 
@@ -412,15 +412,15 @@ var_dump($betaTunnelCertificate);
 
   - `?\Datetime archivedAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
   - `?\Datetime expiresAt`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
   - `string fingerprint`
 

@@ -65,7 +65,7 @@ Create a memory
 
   - `\Datetime createdAt`
 
-    A timestamp in RFC 3339 format
+    When this memory was created, in RFC 3339 format.
 
   - `string memoryStoreID`
 
@@ -81,7 +81,7 @@ Create a memory
 
   - `\Datetime updatedAt`
 
-    A timestamp in RFC 3339 format
+    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `?string content`
 

@@ -229,7 +229,7 @@ Archive Session
 
       - `Optional<Effort> effort`
 
-        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+        How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -267,7 +267,7 @@ Archive Session
 
       - `Optional<Speed> speed`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `STANDARD("standard")`
 
@@ -275,7 +275,7 @@ Archive Session
 
     - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
 
-      Resolved coordinator topology with full agent definitions for each roster member.
+      Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
       - `Type type`
 
@@ -731,19 +731,19 @@ Archive Session
 
   - `Optional<LocalDateTime> archivedAt`
 
-    A timestamp in RFC 3339 format
+    When the session was archived. Null if not archived.
 
     format: date-time
 
   - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    The session's enforced spend ceiling, or null when no budget is set.
 
     - `Type type`
 
     - `BetaMonetaryAmount maxListCost`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `String amount`
 
@@ -771,7 +771,7 @@ Archive Session
 
     - `Optional<LocalDateTime> completedAt`
 
-      A timestamp in RFC 3339 format
+      When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
       format: date-time
 
@@ -877,7 +877,7 @@ Archive Session
 
       - `Optional<Access> access`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `READ_WRITE("read_write")`
 
@@ -903,7 +903,7 @@ Archive Session
 
   - `BetaManagedAgentsSessionStats stats`
 
-    Timing statistics for a session.
+    Timing statistics for the session.
 
     - `Optional<Double> activeSeconds`
 
@@ -947,7 +947,7 @@ Archive Session
 
   - `BetaManagedAgentsSessionUsage usage`
 
-    Cumulative token usage for a session across all turns.
+    Cumulative token usage for the session.
 
     - `Optional<Double> activeSeconds`
 
@@ -957,7 +957,7 @@ Archive Session
 
     - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
 
-      Prompt-cache creation token usage broken down by cache lifetime.
+      Tokens used to create prompt cache entries, broken down by cache TTL.
 
       - `Optional<Long> ephemeral1hInputTokens`
 
@@ -985,7 +985,7 @@ Archive Session
 
     - `Optional<BetaMonetaryAmount> listCost`
 
-      A monetary amount in a specific currency.
+      Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
     - `Optional<Long> outputTokens`
 
@@ -995,7 +995,7 @@ Archive Session
 
     - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
 
-      Cumulative count of server-executed tool invocations, broken down by tool.
+      Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
       - `Optional<Long> webFetchRequests`
 

@@ -279,7 +279,7 @@ Create Session
 
           - `Speed? Speed`
 
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+            Inference speed mode. Defaults to `standard`.
 
             - `Standard("standard")`
 
@@ -361,7 +361,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -397,7 +397,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -427,7 +427,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -457,7 +457,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -487,7 +487,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -517,7 +517,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -561,7 +561,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -599,7 +599,7 @@ Create Session
 
               - `PermissionPolicy? PermissionPolicy`
 
-                Permission policy for tool execution.
+                Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
                 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -645,7 +645,7 @@ Create Session
 
           - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
-            Default configuration for all tools in a toolset.
+            Default configuration applied to all tools in this set.
 
             - `bool? Enabled`
 
@@ -653,7 +653,7 @@ Create Session
 
             - `PermissionPolicy? PermissionPolicy`
 
-              Permission policy for tool execution.
+              Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
               - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -695,7 +695,7 @@ Create Session
 
             - `PermissionPolicy? PermissionPolicy`
 
-              Permission policy for tool execution.
+              Permission policy for this tool. Overrides the `default_config` setting.
 
               - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -711,7 +711,7 @@ Create Session
 
           - `BetaManagedAgentsMcpToolsetDefaultConfigParams? DefaultConfig`
 
-            Default configuration for all tools from an MCP server.
+            Default configuration for all tools from this server.
 
             - `bool? Enabled`
 
@@ -719,7 +719,7 @@ Create Session
 
             - `PermissionPolicy? PermissionPolicy`
 
-              Permission policy for tool execution.
+              Default permission policy for tools from this server.
 
               - `class BetaManagedAgentsAlwaysAllowPolicy`
 
@@ -747,7 +747,7 @@ Create Session
 
           - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
-            JSON Schema for custom tool input parameters.
+            JSON Schema defining the expected input parameters for the tool.
 
             - `JsonElement Type = "object"`
 
@@ -775,7 +775,7 @@ Create Session
 
   - `BetaManagedAgentsBudgetLimit budget`
 
-    Body param: A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    Body param: Enforced spend ceiling for the session. Omit to create an uncapped session. Every model the session can run — the agent's model and each callable agent's model — must have a public list price, or the request is rejected with reason `model_not_budgetable`.
 
   - `IReadOnlyList<InitialEvent> initialEvents`
 
@@ -811,7 +811,7 @@ Create Session
 
           - `required Source Source`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `class BetaManagedAgentsBase64ImageSource`
 
@@ -863,7 +863,7 @@ Create Session
 
           - `required Source Source`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `class BetaManagedAgentsBase64DocumentSource`
 
@@ -949,7 +949,7 @@ Create Session
 
       - `required Rubric Rubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `class BetaManagedAgentsFileRubricParams`
 
@@ -1065,7 +1065,7 @@ Create Session
 
       - `Access? Access`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to read_write. read_only mounts the store as a read-only filesystem.
 
         - `ReadWrite("read_write")`
 
@@ -1293,7 +1293,7 @@ Create Session
 
       - `Effort Effort`
 
-        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+        How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -1331,7 +1331,7 @@ Create Session
 
       - `Speed Speed`
 
-        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `Standard("standard")`
 
@@ -1339,7 +1339,7 @@ Create Session
 
     - `required BetaManagedAgentsSessionMultiagentCoordinator? Multiagent`
 
-      Resolved coordinator topology with full agent definitions for each roster member.
+      Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
       - `required Type Type`
 
@@ -1795,19 +1795,19 @@ Create Session
 
   - `required DateTimeOffset? ArchivedAt`
 
-    A timestamp in RFC 3339 format
+    When the session was archived. Null if not archived.
 
     format: date-time
 
   - `required BetaManagedAgentsBudgetLimit? Budget`
 
-    A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+    The session's enforced spend ceiling, or null when no budget is set.
 
     - `required Type Type`
 
     - `required BetaMonetaryAmount MaxListCost`
 
-      A monetary amount in a specific currency.
+      Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
       - `required string Amount`
 
@@ -1835,7 +1835,7 @@ Create Session
 
     - `required DateTimeOffset? CompletedAt`
 
-      A timestamp in RFC 3339 format
+      When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
       format: date-time
 
@@ -1941,7 +1941,7 @@ Create Session
 
       - `Access? Access`
 
-        Access mode for an attached memory store.
+        Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
         - `ReadWrite("read_write")`
 
@@ -1967,7 +1967,7 @@ Create Session
 
   - `required BetaManagedAgentsSessionStats Stats`
 
-    Timing statistics for a session.
+    Timing statistics for the session.
 
     - `double ActiveSeconds`
 
@@ -2011,7 +2011,7 @@ Create Session
 
   - `required BetaManagedAgentsSessionUsage Usage`
 
-    Cumulative token usage for a session across all turns.
+    Cumulative token usage for the session.
 
     - `double ActiveSeconds`
 
@@ -2021,7 +2021,7 @@ Create Session
 
     - `BetaManagedAgentsCacheCreationUsage CacheCreation`
 
-      Prompt-cache creation token usage broken down by cache lifetime.
+      Tokens used to create prompt cache entries, broken down by cache TTL.
 
       - `int Ephemeral1hInputTokens`
 
@@ -2049,7 +2049,7 @@ Create Session
 
     - `BetaMonetaryAmount? ListCost`
 
-      A monetary amount in a specific currency.
+      Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
     - `int OutputTokens`
 
@@ -2059,7 +2059,7 @@ Create Session
 
     - `BetaManagedAgentsServerToolUsage? ServerToolUse`
 
-      Cumulative count of server-executed tool invocations, broken down by tool.
+      Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
       - `int WebFetchRequests`
 

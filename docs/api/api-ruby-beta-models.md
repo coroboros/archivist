@@ -37,7 +37,7 @@ The Models API response can be used to determine which models are available for 
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  maximum: 1000, minimum: 1
+  minimum: 1, maximum: 1000
 
 - `betas: Array[AnthropicBeta]`
 
@@ -169,7 +169,7 @@ The Models API response can be used to determine which models are available for 
 
   - `capabilities: BetaModelCapabilities`
 
-    Model capability information.
+    Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
     - `batch: BetaCapabilitySupport`
 
@@ -189,9 +189,7 @@ The Models API response can be used to determine which models are available for 
 
     - `compaction: BetaCompactionCapability`
 
-      Compaction capability details: whether the model accepts the top-level
-      `compaction` request parameter, with one entry per supported
-      `compaction.type` value.
+      Server-side compaction support (the top-level `compaction` parameter) and the accepted `compaction.type` values.
 
       - `summarize: BetaCapabilitySupport`
 
@@ -207,15 +205,15 @@ The Models API response can be used to determine which models are available for 
 
       - `clear_thinking_20251015: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_thinking_20251015 strategy is supported.
 
       - `clear_tool_uses_20250919: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_tool_uses_20250919 strategy is supported.
 
       - `compact_20260112: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the compact_20260112 strategy is supported.
 
       - `supported: bool`
 
@@ -247,7 +245,7 @@ The Models API response can be used to determine which models are available for 
 
       - `xhigh: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the model supports xhigh effort level.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -547,7 +545,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `capabilities: BetaModelCapabilities`
 
-    Model capability information.
+    Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
     - `batch: BetaCapabilitySupport`
 
@@ -567,9 +565,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `compaction: BetaCompactionCapability`
 
-      Compaction capability details: whether the model accepts the top-level
-      `compaction` request parameter, with one entry per supported
-      `compaction.type` value.
+      Server-side compaction support (the top-level `compaction` parameter) and the accepted `compaction.type` values.
 
       - `summarize: BetaCapabilitySupport`
 
@@ -585,15 +581,15 @@ The Models API response can be used to determine information about a specific mo
 
       - `clear_thinking_20251015: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_thinking_20251015 strategy is supported.
 
       - `clear_tool_uses_20250919: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_tool_uses_20250919 strategy is supported.
 
       - `compact_20260112: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the compact_20260112 strategy is supported.
 
       - `supported: bool`
 
@@ -625,7 +621,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `xhigh: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the model supports xhigh effort level.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -812,7 +808,7 @@ puts(beta_model_info)
 
   - `clear_thinking_20251015: BetaCapabilitySupport`
 
-    Indicates whether a capability is supported.
+    Whether the clear_thinking_20251015 strategy is supported.
 
     - `supported: bool`
 
@@ -820,11 +816,11 @@ puts(beta_model_info)
 
   - `clear_tool_uses_20250919: BetaCapabilitySupport`
 
-    Indicates whether a capability is supported.
+    Whether the clear_tool_uses_20250919 strategy is supported.
 
   - `compact_20260112: BetaCapabilitySupport`
 
-    Indicates whether a capability is supported.
+    Whether the compact_20260112 strategy is supported.
 
   - `supported: bool`
 
@@ -862,7 +858,7 @@ puts(beta_model_info)
 
   - `xhigh: BetaCapabilitySupport`
 
-    Indicates whether a capability is supported.
+    Whether the model supports xhigh effort level.
 
 ### Beta Model Capabilities
 
@@ -888,9 +884,7 @@ puts(beta_model_info)
 
   - `compaction: BetaCompactionCapability`
 
-    Compaction capability details: whether the model accepts the top-level
-    `compaction` request parameter, with one entry per supported
-    `compaction.type` value.
+    Server-side compaction support (the top-level `compaction` parameter) and the accepted `compaction.type` values.
 
     - `summarize: BetaCapabilitySupport`
 
@@ -906,15 +900,15 @@ puts(beta_model_info)
 
     - `clear_thinking_20251015: BetaCapabilitySupport`
 
-      Indicates whether a capability is supported.
+      Whether the clear_thinking_20251015 strategy is supported.
 
     - `clear_tool_uses_20250919: BetaCapabilitySupport`
 
-      Indicates whether a capability is supported.
+      Whether the clear_tool_uses_20250919 strategy is supported.
 
     - `compact_20260112: BetaCapabilitySupport`
 
-      Indicates whether a capability is supported.
+      Whether the compact_20260112 strategy is supported.
 
     - `supported: bool`
 
@@ -946,7 +940,7 @@ puts(beta_model_info)
 
     - `xhigh: BetaCapabilitySupport`
 
-      Indicates whether a capability is supported.
+      Whether the model supports xhigh effort level.
 
   - `image_input: BetaCapabilitySupport`
 
@@ -1000,7 +994,7 @@ puts(beta_model_info)
 
   - `capabilities: BetaModelCapabilities`
 
-    Model capability information.
+    Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
     - `batch: BetaCapabilitySupport`
 
@@ -1020,9 +1014,7 @@ puts(beta_model_info)
 
     - `compaction: BetaCompactionCapability`
 
-      Compaction capability details: whether the model accepts the top-level
-      `compaction` request parameter, with one entry per supported
-      `compaction.type` value.
+      Server-side compaction support (the top-level `compaction` parameter) and the accepted `compaction.type` values.
 
       - `summarize: BetaCapabilitySupport`
 
@@ -1038,15 +1030,15 @@ puts(beta_model_info)
 
       - `clear_thinking_20251015: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_thinking_20251015 strategy is supported.
 
       - `clear_tool_uses_20250919: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_tool_uses_20250919 strategy is supported.
 
       - `compact_20260112: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the compact_20260112 strategy is supported.
 
       - `supported: bool`
 
@@ -1078,7 +1070,7 @@ puts(beta_model_info)
 
       - `xhigh: BetaCapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the model supports xhigh effort level.
 
     - `image_input: BetaCapabilitySupport`
 

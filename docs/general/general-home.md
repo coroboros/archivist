@@ -169,7 +169,7 @@ with Claude"
         </HomeJourneyStep>
 
         <HomeJourneyStep title="Operate">
-          <HomeJourneyLink icon="settings" href="../build-with-claude/build-with-claude-workspaces.md">
+          <HomeJourneyLink icon="settings" href="../manage-claude/manage-claude-workspaces.md">
             Workspaces and admin
           </HomeJourneyLink>
 
@@ -177,7 +177,7 @@ with Claude"
             API key management
           </HomeJourneyLink>
 
-          <HomeJourneyLink icon="chart" href="../build-with-claude/build-with-claude-usage-cost-api.md">
+          <HomeJourneyLink icon="chart" href="../manage-claude/manage-claude-usage-cost-api.md">
             Usage monitoring
           </HomeJourneyLink>
 
@@ -227,7 +227,7 @@ with Claude"
         </HomeJourneyStep>
 
         <HomeJourneyStep title="Operate">
-          <HomeJourneyLink icon="settings" href="../build-with-claude/build-with-claude-workspaces.md">
+          <HomeJourneyLink icon="settings" href="../manage-claude/manage-claude-workspaces.md">
             Workspaces and admin
           </HomeJourneyLink>
 
@@ -235,7 +235,7 @@ with Claude"
             API key management
           </HomeJourneyLink>
 
-          <HomeJourneyLink icon="chart" href="../build-with-claude/build-with-claude-usage-cost-api.md">
+          <HomeJourneyLink icon="chart" href="../manage-claude/manage-claude-usage-cost-api.md">
             Usage monitoring
           </HomeJourneyLink>
         </HomeJourneyStep>

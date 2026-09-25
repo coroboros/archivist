@@ -31,7 +31,7 @@ Token counting lets you determine the number of tokens in a message before you s
 
 ## How to count message tokens
 
-The [token counting](https://platform.claude.com/docs/en/api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/agents-and-tools-tool-use-overview.md), [images](./build-with-claude-vision.md), and [PDFs](./build-with-claude-pdf-support.md). The response contains the total number of input tokens.
+The [token counting](../api/api-messages-count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/agents-and-tools-tool-use-overview.md), [images](./build-with-claude-vision.md), and [PDFs](./build-with-claude-pdf-support.md). The response contains the total number of input tokens.
 
 This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts: [server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md)), the [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md), and `image` or `document` blocks with a `url` or `file` source. Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
 
@@ -1442,7 +1442,7 @@ Token counting is **free to use** but subject to requests per minute rate limits
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Count message tokens" icon="code" href="https://platform.claude.com/docs/en/api/messages-count-tokens.md">
+  <Card title="Count message tokens" icon="code" href="../api/api-messages-count_tokens.md">
     Read the full API reference for the token counting endpoint.
   </Card>
 

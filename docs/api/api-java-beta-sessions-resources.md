@@ -133,7 +133,7 @@ Add Session Resource
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
-    Mount a file uploaded via the Files API into the session.
+    Request parameters for adding a resource to a session.
 
 ### Returns
 
@@ -413,7 +413,7 @@ List Session Resources
 
     - `Optional<Access> access`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `READ_WRITE("read_write")`
 
@@ -694,7 +694,7 @@ Get Session Resource
 
     - `Optional<Access> access`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `READ_WRITE("read_write")`
 
@@ -972,7 +972,7 @@ Update Session Resource
 
     - `Optional<Access> access`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `READ_WRITE("read_write")`
 
@@ -1301,7 +1301,7 @@ public final class Main {
 
   - `Optional<Access> access`
 
-    Access mode for an attached memory store.
+    Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
     - `READ_WRITE("read_write")`
 
@@ -1407,7 +1407,7 @@ public final class Main {
 
     - `Optional<Access> access`
 
-      Access mode for an attached memory store.
+      Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
       - `READ_WRITE("read_write")`
 

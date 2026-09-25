@@ -55,7 +55,7 @@ Send Events
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
-          Union type for image source variants.
+          The source of the image data.
 
           - `class BetaManagedAgentsBase64ImageSource`
 
@@ -107,7 +107,7 @@ Send Events
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
-          Union type for document source variants.
+          The source of the document data.
 
           - `class BetaManagedAgentsBase64DocumentSource`
 
@@ -199,7 +199,7 @@ Send Events
 
     - `result: :allow | :deny`
 
-      UserToolConfirmationResult enum
+      The confirmation result: 'allow' or 'deny'.
 
       - `:allow`
 
@@ -253,7 +253,7 @@ Send Events
 
         - `citations: BetaManagedAgentsSearchResultCitations`
 
-          Citation settings for a search result.
+          Citation settings for this search result.
 
           - `enabled: bool`
 
@@ -299,7 +299,7 @@ Send Events
 
     - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
 
-      Rubric for grading the quality of an outcome.
+      How to grade the outcome. Text or file reference.
 
       - `class BetaManagedAgentsFileRubricParams`
 
@@ -537,7 +537,7 @@ Send Events
 
           - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `class BetaManagedAgentsBase64ImageSource`
 
@@ -589,7 +589,7 @@ Send Events
 
           - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `class BetaManagedAgentsBase64DocumentSource`
 
@@ -665,7 +665,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the agent finished processing this message.
 
         format: date-time
 
@@ -681,7 +681,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the interrupt was processed.
 
         format: date-time
 
@@ -701,7 +701,7 @@ Send Events
 
       - `result: :allow | :deny`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `:allow`
 
@@ -719,7 +719,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the confirmation was processed.
 
         format: date-time
 
@@ -765,7 +765,7 @@ Send Events
 
           - `citations: BetaManagedAgentsSearchResultCitations`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `enabled: bool`
 
@@ -801,7 +801,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -835,13 +835,13 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the outcome was accepted.
 
         format: date-time
 
       - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
         - `class BetaManagedAgentsFileRubric`
 
@@ -903,7 +903,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -935,7 +935,7 @@ Send Events
 
       - `processed_at: Time`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this system message was processed.
 
         format: date-time
 

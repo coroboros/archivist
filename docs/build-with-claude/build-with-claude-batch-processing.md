@@ -452,7 +452,7 @@ When a batch is first created, the response has a processing status of `in_progr
 
 ### Tracking your batch
 
-The Message Batch's `processing_status` field indicates the stage of processing the batch is in. It starts as `in_progress`, then updates to `ended` once all the requests in the batch have finished processing, and results are ready. You can monitor the state of your batch by visiting the [Console](https://platform.claude.com/settings/workspaces/default/batches), or using the [retrieval endpoint](https://platform.claude.com/docs/en/api/retrieving-message-batches.md).
+The Message Batch's `processing_status` field indicates the stage of processing the batch is in. It starts as `in_progress`, then updates to `ended` once all the requests in the batch have finished processing, and results are ready. You can monitor the state of your batch by visiting the [Console](https://platform.claude.com/settings/workspaces/default/batches), or using the [retrieval endpoint](../api/api-messages-batches-retrieve.md).
 
 #### Polling for Message Batch completion
 
@@ -610,7 +610,7 @@ To poll a Message Batch, you'll need its `id`, which is provided in the response
 
 ### Listing all Message Batches
 
-You can list all Message Batches in your Workspace using the [list endpoint](https://platform.claude.com/docs/en/api/listing-message-batches.md). The API supports pagination, automatically fetching additional pages as needed:
+You can list all Message Batches in your Workspace using the [list endpoint](../api/api-messages-batches-list.md). The API supports pagination, automatically fetching additional pages as needed:
 
 <CodeGroup>
   ```bash cURL
@@ -956,7 +956,7 @@ If your result has an error, its `result.error` will be set to the standard [err
 
 ### Canceling a Message Batch
 
-You can cancel a Message Batch that is currently processing using the [cancel endpoint](https://platform.claude.com/docs/en/api/canceling-message-batches.md). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described earlier to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
+You can cancel a Message Batch that is currently processing using the [cancel endpoint](../api/api-messages-batches-cancel.md). Immediately after cancellation, a batch's `processing_status` will be `canceling`. You can use the same polling technique described earlier to wait until cancellation is finalized. Canceled batches end up with a status of `ended` and may contain partial results for requests that were processed before cancellation.
 
 <CodeGroup>
   ```bash cURL

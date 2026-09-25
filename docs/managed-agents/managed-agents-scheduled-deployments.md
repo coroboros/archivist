@@ -52,7 +52,7 @@ When creating a deployment, you pass the [session configurations](./managed-agen
   EOF
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply deployment.md
     ```
@@ -72,7 +72,9 @@ When creating a deployment, you pass the [session configurations](./managed-agen
       Run the weekly compliance scan.
       ```
     </File>
-  </MultiFileExample>
+
+    [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) prints the new deployment's ID and records it in `claude-lock.json`. To see the deployment object, run `ant beta:deployments retrieve`.
+  </CodeGroupItem>
 
   ```python Python
   deployment = client.beta.deployments.create(
@@ -229,10 +231,6 @@ When creating a deployment, you pass the [session configurations](./managed-agen
     }
   )
   ```
-
-  <ForLanguage tab="CLI">
-    [`ant apply`](../general/general-cli-sdks-libraries-cli-apply.md) prints the new deployment's ID and records it in `claude-lock.json`. To see the deployment object, run `ant beta:deployments retrieve`.
-  </ForLanguage>
 </CodeGroup>
 
 The response includes a deployment object with a populated `schedule.upcoming_runs_at` with the next upcoming fire times, to confirm your schedule was set correctly.

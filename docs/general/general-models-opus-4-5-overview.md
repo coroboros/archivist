@@ -99,7 +99,7 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $5 / MTo
 ## Reference
 
 <CardGroup cols={3}>
-  <Card title="System prompt" icon="text" href="https://platform.claude.com/docs/en/release-notes/system-prompts.md">
+  <Card title="System prompt" icon="text" href="../release-notes/release-notes-system-prompts-overview.md">
     The system prompt Claude Opus 4.5 uses on claude.ai and the Claude apps.
   </Card>
 

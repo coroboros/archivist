@@ -173,7 +173,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required BetaContainer? Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `required string ID`
 
@@ -201,13 +203,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `required string Version`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -368,8 +370,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Text`
 
-              minLength: 0
-
           - `class BetaThinkingBlock`
 
             - `JsonElement Type = "thinking"`
@@ -442,7 +442,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class BetaServerToolUseBlock`
 
@@ -882,7 +882,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `required string ToolName`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `required string ToolUseID`
 
@@ -925,8 +925,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
                 - `required string Text`
-
-                  minLength: 0
 
             - `required bool IsError`
 
@@ -1049,7 +1047,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+                          minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
                         - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -1313,12 +1311,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaBrowserToolsetConfigs? Configs`
 
-                          Per-member configuration for `browser_toolset_20260801`: one
-                          optional field per member tool, keyed by the member name — the same
-                          name the member's `tool_use` blocks carry. Every member is an
-                          accepted key, and a member's defaults apply wherever its key is
-                          absent. Unknown keys are rejected: the field set is this toolset
-                          version's complete member set.
+                          Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                           - `BetaBrowserTypeConfig? Type`
 
@@ -1939,12 +1932,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaComputerToolsetConfigs? Configs`
 
-                          Per-member configuration for `computer_toolset_20260801`: one
-                          optional field per member tool, keyed by the member name — the same
-                          name the member's `tool_use` blocks carry. Every member is an
-                          accepted key, and a member's defaults apply wherever its key is
-                          absent. Unknown keys are rejected: the field set is this toolset
-                          version's complete member set.
+                          Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                           - `BetaComputerTypeConfig? Type`
 
@@ -2298,7 +2286,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -2314,25 +2302,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             The city of the user.
 
-                            maxLength: 255, minLength: 1
+                            minLength: 1, maxLength: 255
 
                           - `string? Country`
 
                             The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-                            maxLength: 2, minLength: 2
+                            minLength: 2, maxLength: 2
 
                           - `string? Region`
 
                             The region of the user.
 
-                            maxLength: 255, minLength: 1
+                            minLength: 1, maxLength: 255
 
                           - `string? Timezone`
 
                             The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-                            maxLength: 255, minLength: 1
+                            minLength: 1, maxLength: 255
 
                       - `class BetaWebFetchTool20250910`
 
@@ -2380,13 +2368,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `long? MaxUses`
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -2394,12 +2382,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaWebFetchUrlSources? UrlSources`
 
-                          Which sources contribute to the set of URLs web fetch may fetch.
-
-                          Each key is a tagged variant: `user_input` is `all` or `none`; the
-                          two tool filters are `all`, `none`, `only` (only the named tools'
-                          results) or `except` (every result but the named tools'). A named tool
-                          must be declared in this request's `tools[]`.
+                          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                           - `ClientToolResults ClientToolResults`
 
@@ -2523,7 +2506,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -2577,13 +2560,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `long? MaxUses`
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -2591,12 +2574,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaWebFetchUrlSources? UrlSources`
 
-                          Which sources contribute to the set of URLs web fetch may fetch.
-
-                          Each key is a tagged variant: `user_input` is `all` or `none`; the
-                          two tool filters are `all`, `none`, `only` (only the named tools'
-                          results) or `except` (every result but the named tools'). A named tool
-                          must be declared in this request's `tools[]`.
+                          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                       - `class BetaWebFetchTool20260309`
 
@@ -2644,13 +2622,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `long? MaxUses`
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -2658,12 +2636,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaWebFetchUrlSources? UrlSources`
 
-                          Which sources contribute to the set of URLs web fetch may fetch.
-
-                          Each key is a tagged variant: `user_input` is `all` or `none`; the
-                          two tool filters are `all`, `none`, `only` (only the named tools'
-                          results) or `except` (every result but the named tools'). A named tool
-                          must be declared in this request's `tools[]`.
+                          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                         - `bool UseCache`
 
@@ -2709,7 +2682,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `ResponseInclusion ResponseInclusion`
 
@@ -2771,13 +2744,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `long? MaxUses`
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `ResponseInclusion ResponseInclusion`
 
@@ -2793,12 +2766,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `BetaWebFetchUrlSources? UrlSources`
 
-                          Which sources contribute to the set of URLs web fetch may fetch.
-
-                          Each key is a tagged variant: `user_input` is `all` or `none`; the
-                          two tool filters are `all`, `none`, `only` (only the named tools'
-                          results) or `except` (every result but the named tools'). A named tool
-                          must be declared in this request's `tools[]`.
+                          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                         - `bool UseCache`
 
@@ -2850,10 +2818,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             Powerful intelligence for long-running agents and coding
 
-                          - `ClaudeMythosPreview("claude-mythos-preview")`
-
-                            New class of intelligence, strongest in coding and cybersecurity
-
                           - `ClaudeOpus4_6("claude-opus-4-6")`
 
                             Powerful intelligence for long-running agents and coding
@@ -2885,6 +2849,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
 
                             High-performance model for agents and coding
+
+                          - `ClaudeMythosPreview("claude-mythos-preview")`
+
+                            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            New class of intelligence, strongest in coding and cybersecurity
 
                         - `JsonElement Name = "advisor"`
 
@@ -2924,7 +2894,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Maximum number of times the tool can be used in the API request.
 
-                          exclusiveMinimum: 0
+                          minimum: 1
 
                         - `bool Strict`
 
@@ -3015,7 +2985,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Name of the MCP server to configure tools for
 
-                          maxLength: 255, minLength: 1
+                          minLength: 1, maxLength: 255
 
                         - `BetaCacheControlEphemeral? CacheControl`
 
@@ -3124,7 +3094,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `required BetaFallbackRefusalTriggerCategory? Category`
 
-                The policy category that triggered a refusal.
+                The policy category that triggered the `from` model's refusal at this hop. `null` when the refusal doesn't map to a named category. Same vocabulary as `stop_details.category`.
 
                 - `Cyber("cyber")`
 
@@ -3213,8 +3183,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required BetaDiagnostics? Diagnostics`
 
-          Request-level diagnostics: why the prompt cache could not fully reuse
-          the prefix of the request named by `diagnostics.previous_message_id`.
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
           - `required BetaCacheMissReason? CacheMissReason`
 
@@ -3274,13 +3243,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `required BetaRefusalStopDetails? StopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `JsonElement Type = "refusal"`
 
           - `required Category? Category`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `Cyber("cyber")`
 
@@ -3438,6 +3411,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `required BetaFallbackCreditUsage? FallbackCredit`
 
             Outcome of the `fallback_credit_token` presented on this request.
+
+            Present on every response to a non-batch request that carried a
+            `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+            items accept and ignore the token and carry no outcome object).
 
             - `required Status Status`
 
@@ -3750,7 +3727,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `required Speed? Speed`
 
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+            The inference speed mode used for this request.
 
             - `Standard("standard")`
 

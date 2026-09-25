@@ -247,7 +247,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> documentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `long endCharIndex`
 
@@ -267,7 +267,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> documentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `long endPageNumber`
 
@@ -291,7 +291,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> documentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `long endBlockIndex`
 
@@ -315,7 +315,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `Optional<String> title`
 
-                maxLength: 512, minLength: 1
+                minLength: 1, maxLength: 512
 
               - `String url`
 
@@ -471,7 +471,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `Optional<String> title`
 
-            maxLength: 500, minLength: 1
+            minLength: 1, maxLength: 500
 
         - `class BetaSearchResultBlockParam`
 
@@ -535,7 +535,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `String name`
 
-            maxLength: 200, minLength: 1
+            minLength: 1, maxLength: 200
 
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -571,7 +571,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class BetaToolResultBlockParam`
 
@@ -607,7 +607,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String toolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -635,7 +635,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     The caller-assigned identifier for this tab, unique within the inventory.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `String title`
 
@@ -661,7 +661,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                  maxItems: 200, minItems: 1
+                  minItems: 1, maxItems: 200
 
                   - `class BetaBrowserStateChangeTabOpened`
 
@@ -679,7 +679,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `class BetaBrowserStateChangeDownloadStarted`
 
@@ -691,7 +691,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `String url`
 
@@ -712,7 +712,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `String url`
 
@@ -724,7 +724,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `Optional<Long> sizeBytes`
 
@@ -742,7 +742,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `String url`
 
@@ -754,7 +754,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The failure or cancellation detail, when known.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `Optional<Boolean> isError`
 
@@ -762,7 +762,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class BetaServerToolUseBlockParam`
 
@@ -1194,7 +1194,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `String toolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -1386,7 +1386,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+                        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
                       - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -1637,12 +1637,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaBrowserToolsetConfigs> configs`
 
-                        Per-member configuration for `browser_toolset_20260801`: one
-                        optional field per member tool, keyed by the member name — the same
-                        name the member's `tool_use` blocks carry. Every member is an
-                        accepted key, and a member's defaults apply wherever its key is
-                        absent. Unknown keys are rejected: the field set is this toolset
-                        version's complete member set.
+                        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                         - `Optional<BetaBrowserTypeConfig> type`
 
@@ -2263,12 +2258,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaComputerToolsetConfigs> configs`
 
-                        Per-member configuration for `computer_toolset_20260801`: one
-                        optional field per member tool, keyed by the member name — the same
-                        name the member's `tool_use` blocks carry. Every member is an
-                        accepted key, and a member's defaults apply wherever its key is
-                        absent. Unknown keys are rejected: the field set is this toolset
-                        version's complete member set.
+                        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                         - `Optional<BetaComputerTypeConfig> type`
 
@@ -2622,7 +2612,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -2638,25 +2628,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                           The city of the user.
 
-                          maxLength: 255, minLength: 1
+                          minLength: 1, maxLength: 255
 
                         - `Optional<String> country`
 
                           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-                          maxLength: 2, minLength: 2
+                          minLength: 2, maxLength: 2
 
                         - `Optional<String> region`
 
                           The region of the user.
 
-                          maxLength: 255, minLength: 1
+                          minLength: 1, maxLength: 255
 
                         - `Optional<String> timezone`
 
                           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-                          maxLength: 255, minLength: 1
+                          minLength: 1, maxLength: 255
 
                     - `class BetaWebFetchTool20250910`
 
@@ -2702,13 +2692,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Long> maxUses`
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -2716,12 +2706,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                        Which sources contribute to the set of URLs web fetch may fetch.
-
-                        Each key is a tagged variant: `user_input` is `all` or `none`; the
-                        two tool filters are `all`, `none`, `only` (only the named tools'
-                        results) or `except` (every result but the named tools'). A named tool
-                        must be declared in this request's `tools[]`.
+                        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                         - `Optional<ClientToolResults> clientToolResults`
 
@@ -2845,7 +2830,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -2899,13 +2884,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Long> maxUses`
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -2913,12 +2898,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                        Which sources contribute to the set of URLs web fetch may fetch.
-
-                        Each key is a tagged variant: `user_input` is `all` or `none`; the
-                        two tool filters are `all`, `none`, `only` (only the named tools'
-                        results) or `except` (every result but the named tools'). A named tool
-                        must be declared in this request's `tools[]`.
+                        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                     - `class BetaWebFetchTool20260309`
 
@@ -2966,13 +2946,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Long> maxUses`
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -2980,12 +2960,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                        Which sources contribute to the set of URLs web fetch may fetch.
-
-                        Each key is a tagged variant: `user_input` is `all` or `none`; the
-                        two tool filters are `all`, `none`, `only` (only the named tools'
-                        results) or `except` (every result but the named tools'). A named tool
-                        must be declared in this request's `tools[]`.
+                        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                       - `Optional<Boolean> useCache`
 
@@ -3031,7 +3006,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<ResponseInclusion> responseInclusion`
 
@@ -3093,13 +3068,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Long> maxUses`
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<ResponseInclusion> responseInclusion`
 
@@ -3115,12 +3090,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                        Which sources contribute to the set of URLs web fetch may fetch.
-
-                        Each key is a tagged variant: `user_input` is `all` or `none`; the
-                        two tool filters are `all`, `none`, `only` (only the named tools'
-                        results) or `except` (every result but the named tools'). A named tool
-                        must be declared in this request's `tools[]`.
+                        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                       - `Optional<Boolean> useCache`
 
@@ -3172,10 +3142,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                           Powerful intelligence for long-running agents and coding
 
-                        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-                          New class of intelligence, strongest in coding and cybersecurity
-
                         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
                           Powerful intelligence for long-running agents and coding
@@ -3207,6 +3173,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                         - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
                           High-performance model for agents and coding
+
+                        - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                          New class of intelligence, strongest in coding and cybersecurity
 
                       - `JsonValue name = "advisor"`
 
@@ -3246,7 +3218,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Maximum number of times the tool can be used in the API request.
 
-                        exclusiveMinimum: 0
+                        minimum: 1
 
                       - `Optional<Boolean> strict`
 
@@ -3337,7 +3309,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         Name of the MCP server to configure tools for
 
-                        maxLength: 255, minLength: 1
+                        minLength: 1, maxLength: 255
 
                       - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -3447,7 +3419,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             The name of the MCP server this listing came from, as `mcp_servers` declares it.
 
-            maxLength: 255, minLength: 1
+            minLength: 1, maxLength: 255
 
           - `List<BetaMcpToolParam> tools`
 
@@ -3529,7 +3501,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Optional<Effort> effort`
 
-        All possible effort levels.
+        How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+        Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
         - `LOW("low")`
 
@@ -3553,14 +3527,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaCompactionConfig> compaction`
 
-    Compact the whole conversation and return a signed `compaction` block,
-    alone, that a later request sends back first in `messages`, in place of
-    the messages it summarizes. There is no trigger and no pause flag: sending
-    the parameter compacts, and nothing is sampled after the block.
+    Compaction configuration.
 
-    The summarization prompt is the server's own unless `instructions` are
-    given, which then replace it for this request; a value that is empty or
-    only whitespace counts as absent.
+    When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
   - `Optional<Container> container`
 
@@ -3592,13 +3561,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `Optional<String> version`
 
           Skill version or 'latest' for most recent version
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `String`
 
@@ -3610,8 +3579,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaDiagnosticsParam> diagnostics`
 
-    Request-level diagnostics. Currently carries the previous response
-    id for prompt-cache divergence reporting.
+    Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
   - `Optional<FallbackCreditToken> fallbackCreditToken`
 
@@ -3652,7 +3620,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        maxLength: 2048, minLength: 1
+        minLength: 1, maxLength: 2048
 
       - `Optional<Mode> mode`
 
@@ -3710,7 +3678,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<Speed> speed`
 
-    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
     - `STANDARD("standard")`
 
@@ -3921,7 +3889,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `Optional<Long> topK`
 
@@ -3945,7 +3913,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Recommended for advanced use cases only.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
 ## Returns
 
@@ -3965,7 +3933,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaContainer> container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
     - `String id`
 
@@ -3993,13 +3963,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `String version`
 
         The resolved version: a skill version ID for custom skills.
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `List<BetaContentBlock> content`
 
@@ -4160,8 +4130,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String text`
 
-        minLength: 0
-
     - `class BetaThinkingBlock`
 
       - `JsonValue type = "thinking"`
@@ -4234,7 +4202,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class BetaServerToolUseBlock`
 
@@ -4674,7 +4642,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `String toolName`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `String toolUseId`
 
@@ -4717,8 +4685,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `String text`
-
-            minLength: 0
 
       - `boolean isError`
 
@@ -4841,7 +4807,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+                    minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
                   - `Optional<List<AllowedCaller>> allowedCallers`
 
@@ -5105,12 +5071,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaBrowserToolsetConfigs> configs`
 
-                    Per-member configuration for `browser_toolset_20260801`: one
-                    optional field per member tool, keyed by the member name — the same
-                    name the member's `tool_use` blocks carry. Every member is an
-                    accepted key, and a member's defaults apply wherever its key is
-                    absent. Unknown keys are rejected: the field set is this toolset
-                    version's complete member set.
+                    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                     - `Optional<BetaBrowserTypeConfig> type`
 
@@ -5731,12 +5692,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaComputerToolsetConfigs> configs`
 
-                    Per-member configuration for `computer_toolset_20260801`: one
-                    optional field per member tool, keyed by the member name — the same
-                    name the member's `tool_use` blocks carry. Every member is an
-                    accepted key, and a member's defaults apply wherever its key is
-                    absent. Unknown keys are rejected: the field set is this toolset
-                    version's complete member set.
+                    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
                     - `Optional<BetaComputerTypeConfig> type`
 
@@ -6090,7 +6046,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6106,25 +6062,25 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       The city of the user.
 
-                      maxLength: 255, minLength: 1
+                      minLength: 1, maxLength: 255
 
                     - `Optional<String> country`
 
                       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-                      maxLength: 2, minLength: 2
+                      minLength: 2, maxLength: 2
 
                     - `Optional<String> region`
 
                       The region of the user.
 
-                      maxLength: 255, minLength: 1
+                      minLength: 1, maxLength: 255
 
                     - `Optional<String> timezone`
 
                       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-                      maxLength: 255, minLength: 1
+                      minLength: 1, maxLength: 255
 
                 - `class BetaWebFetchTool20250910`
 
@@ -6172,13 +6128,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Long> maxUses`
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6186,12 +6142,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                    Which sources contribute to the set of URLs web fetch may fetch.
-
-                    Each key is a tagged variant: `user_input` is `all` or `none`; the
-                    two tool filters are `all`, `none`, `only` (only the named tools'
-                    results) or `except` (every result but the named tools'). A named tool
-                    must be declared in this request's `tools[]`.
+                    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                     - `Optional<ClientToolResults> clientToolResults`
 
@@ -6315,7 +6266,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6369,13 +6320,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Long> maxUses`
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6383,12 +6334,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                    Which sources contribute to the set of URLs web fetch may fetch.
-
-                    Each key is a tagged variant: `user_input` is `all` or `none`; the
-                    two tool filters are `all`, `none`, `only` (only the named tools'
-                    results) or `except` (every result but the named tools'). A named tool
-                    must be declared in this request's `tools[]`.
+                    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                 - `class BetaWebFetchTool20260309`
 
@@ -6436,13 +6382,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Long> maxUses`
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6450,12 +6396,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                    Which sources contribute to the set of URLs web fetch may fetch.
-
-                    Each key is a tagged variant: `user_input` is `all` or `none`; the
-                    two tool filters are `all`, `none`, `only` (only the named tools'
-                    results) or `except` (every result but the named tools'). A named tool
-                    must be declared in this request's `tools[]`.
+                    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                   - `Optional<Boolean> useCache`
 
@@ -6501,7 +6442,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<ResponseInclusion> responseInclusion`
 
@@ -6563,13 +6504,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Long> maxUses`
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<ResponseInclusion> responseInclusion`
 
@@ -6585,12 +6526,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `Optional<BetaWebFetchUrlSources> urlSources`
 
-                    Which sources contribute to the set of URLs web fetch may fetch.
-
-                    Each key is a tagged variant: `user_input` is `all` or `none`; the
-                    two tool filters are `all`, `none`, `only` (only the named tools'
-                    results) or `except` (every result but the named tools'). A named tool
-                    must be declared in this request's `tools[]`.
+                    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
                   - `Optional<Boolean> useCache`
 
@@ -6642,10 +6578,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       Powerful intelligence for long-running agents and coding
 
-                    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-                      New class of intelligence, strongest in coding and cybersecurity
-
                     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
                       Powerful intelligence for long-running agents and coding
@@ -6677,6 +6609,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                     - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
                       High-performance model for agents and coding
+
+                    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+                      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                      New class of intelligence, strongest in coding and cybersecurity
 
                   - `JsonValue name = "advisor"`
 
@@ -6716,7 +6654,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Maximum number of times the tool can be used in the API request.
 
-                    exclusiveMinimum: 0
+                    minimum: 1
 
                   - `Optional<Boolean> strict`
 
@@ -6807,7 +6745,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Name of the MCP server to configure tools for
 
-                    maxLength: 255, minLength: 1
+                    minLength: 1, maxLength: 255
 
                   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
@@ -6916,7 +6854,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `Optional<Category> category`
 
-          The policy category that triggered a refusal.
+          The policy category that triggered the `from` model's refusal at this hop. `null` when the refusal doesn't map to a named category. Same vocabulary as `stop_details.category`.
 
           - `CYBER("cyber")`
 
@@ -7005,8 +6943,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaDiagnostics> diagnostics`
 
-    Request-level diagnostics: why the prompt cache could not fully reuse
-    the prefix of the request named by `diagnostics.previous_message_id`.
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
     - `Optional<BetaCacheMissReason> cacheMissReason`
 
@@ -7066,13 +7003,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaRefusalStopDetails> stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
     - `JsonValue type = "refusal"`
 
     - `Optional<Category> category`
 
-      The policy category that triggered a refusal.
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
 
       - `CYBER("cyber")`
 
@@ -7230,6 +7171,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `Optional<BetaFallbackCreditUsage> fallbackCredit`
 
       Outcome of the `fallback_credit_token` presented on this request.
+
+      Present on every response to a non-batch request that carried a
+      `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+      items accept and ignore the token and carry no outcome object).
 
       - `Status status`
 
@@ -7542,7 +7487,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `Optional<Speed> speed`
 
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+      The inference speed mode used for this request.
 
       - `STANDARD("standard")`
 
@@ -7660,11 +7605,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Optional<BetaContainer> container`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
       - `Optional<BetaRefusalStopDetails> stopDetails`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
       - `Optional<BetaStopReason> stopReason`
 
@@ -7697,6 +7646,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Optional<BetaFallbackCreditUsage> fallbackCredit`
 
         Outcome of the `fallback_credit_token` presented on this request.
+
+        Present on every response to a non-batch request that carried a
+        `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+        items accept and ignore the token and carry no outcome object).
 
       - `Optional<Long> inputTokens`
 

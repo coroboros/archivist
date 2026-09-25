@@ -89,7 +89,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `TopK param.Field[int64] Optional`
 
@@ -113,7 +113,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     Recommended for advanced use cases only.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -249,6 +249,8 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `string`
+
     - `type Model string`
 
       The model that will complete your prompt.
@@ -291,10 +293,6 @@ Future models and features will not be compatible with Text Completions. See our
 
         Powerful intelligence for long-running agents and coding
 
-      - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -327,7 +325,11 @@ Future models and features will not be compatible with Text Completions. See our
 
         High-performance model for agents and coding
 
-    - `string`
+      - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `StopReason string`
 

@@ -57,19 +57,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `archived_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
   - `expires_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
     format: date-time
 
@@ -148,19 +148,19 @@ Fetches a tunnel certificate by ID.
 
   - `archived_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
   - `expires_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
     format: date-time
 
@@ -253,19 +253,19 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `archived_at: string`
 
-      A timestamp in RFC 3339 format
+      RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
       format: date-time
 
     - `created_at: string`
 
-      A timestamp in RFC 3339 format
+      RFC 3339 datetime string indicating when the certificate was registered.
 
       format: date-time
 
     - `expires_at: string`
 
-      A timestamp in RFC 3339 format
+      RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
       format: date-time
 
@@ -352,19 +352,19 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `archived_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
   - `expires_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
     format: date-time
 
@@ -415,19 +415,19 @@ ant beta:tunnels:certificates archive \
 
   - `archived_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
   - `expires_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
     format: date-time
 

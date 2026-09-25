@@ -145,7 +145,7 @@ Run Deployment Now
 
   - `required BetaManagedAgentsAgentReference Agent`
 
-    A resolved agent reference with a concrete version.
+    Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
     - `required Type Type`
 
@@ -157,7 +157,7 @@ Run Deployment Now
 
   - `required DateTimeOffset CreatedAt`
 
-    A timestamp in RFC 3339 format
+    Time this run record was persisted.
 
     format: date-time
 
@@ -167,7 +167,7 @@ Run Deployment Now
 
   - `required Error? Error`
 
-    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+    Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
     - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -335,7 +335,7 @@ Run Deployment Now
 
   - `required BetaManagedAgentsTriggerContext TriggerContext`
 
-    Describes what triggered a deployment run, with trigger-specific metadata.
+    What triggered this run and trigger-specific metadata.
 
     - `class BetaManagedAgentsScheduleTriggerContext`
 
@@ -345,7 +345,7 @@ Run Deployment Now
 
       - `required DateTimeOffset ScheduledAt`
 
-        A timestamp in RFC 3339 format
+        The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
         format: date-time
 

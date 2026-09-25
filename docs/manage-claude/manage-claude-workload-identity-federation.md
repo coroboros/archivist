@@ -85,7 +85,7 @@ The **Connect workload** wizard creates all three resources (the issuer, the ser
   </Step>
 </Steps>
 
-To manage these resources programmatically, see [Manage WIF with the Admin API](./manage-claude-wif-admin-api.md) for the curl walkthrough, or see the [Service accounts API reference](../api/api-admin-service_accounts.md), [Federation issuers API reference](https://platform.claude.com/docs/en/api/admin/federation_issuers.md), and [Federation rules API reference](../api/api-admin-federation_rules.md) for complete parameter details and response schemas.
+To manage these resources programmatically, see [Manage WIF with the Admin API](./manage-claude-wif-admin-api.md) for the curl walkthrough, or see the [Service accounts API reference](../api/api-beta-organization-service_accounts.md), [Federation issuers API reference](../api/api-beta-organization-federation-issuers.md), and [Federation rules API reference](../api/api-beta-organization-federation-rules.md) for complete parameter details and response schemas.
 
 ## Authenticate from your workload
 
@@ -408,4 +408,4 @@ Each guide covers where the JWT comes from on that platform, what its claims loo
 * [Manage WIF with the Admin API](./manage-claude-wif-admin-api.md): create issuers, service accounts, and rules from infrastructure as code
 * [WIF reference](./manage-claude-wif-reference.md): environment variables, profile file schema, validation rules, and error codes
 * [Authentication](./manage-claude-authentication.md): all authentication options across the Anthropic SDKs
-* [Admin API reference](../api/api-admin.md): generated request and response schemas for every Admin API endpoint
+* [Admin API reference](../api/api-beta-organization.md): generated request and response schemas for every Admin API endpoint

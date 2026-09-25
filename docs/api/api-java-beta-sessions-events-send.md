@@ -163,7 +163,7 @@ Send Events
 
           - `Source source`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `class BetaManagedAgentsBase64ImageSource`
 
@@ -215,7 +215,7 @@ Send Events
 
           - `Source source`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `class BetaManagedAgentsBase64DocumentSource`
 
@@ -307,7 +307,7 @@ Send Events
 
       - `Result result`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `ALLOW("allow")`
 
@@ -361,7 +361,7 @@ Send Events
 
           - `BetaManagedAgentsSearchResultCitations citations`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `boolean enabled`
 
@@ -407,7 +407,7 @@ Send Events
 
       - `Rubric rubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. Text or file reference.
 
         - `class BetaManagedAgentsFileRubricParams`
 
@@ -535,7 +535,7 @@ Send Events
 
           - `Source source`
 
-            Union type for image source variants.
+            The source of the image data.
 
             - `class BetaManagedAgentsBase64ImageSource`
 
@@ -587,7 +587,7 @@ Send Events
 
           - `Source source`
 
-            Union type for document source variants.
+            The source of the document data.
 
             - `class BetaManagedAgentsBase64DocumentSource`
 
@@ -663,7 +663,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the agent finished processing this message.
 
         format: date-time
 
@@ -679,7 +679,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the interrupt was processed.
 
         format: date-time
 
@@ -699,7 +699,7 @@ Send Events
 
       - `Result result`
 
-        UserToolConfirmationResult enum
+        The confirmation result: 'allow' or 'deny'.
 
         - `ALLOW("allow")`
 
@@ -717,7 +717,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the confirmation was processed.
 
         format: date-time
 
@@ -763,7 +763,7 @@ Send Events
 
           - `BetaManagedAgentsSearchResultCitations citations`
 
-            Citation settings for a search result.
+            Citation settings for this search result.
 
             - `boolean enabled`
 
@@ -799,7 +799,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -833,13 +833,13 @@ Send Events
 
       - `LocalDateTime processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when the outcome was accepted.
 
         format: date-time
 
       - `Rubric rubric`
 
-        Rubric for grading the quality of an outcome.
+        How to grade the outcome. File rubrics are currently resolved to their text content; clients should handle both variants.
 
         - `class BetaManagedAgentsFileRubric`
 
@@ -901,7 +901,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this result was processed.
 
         format: date-time
 
@@ -933,7 +933,7 @@ Send Events
 
       - `Optional<LocalDateTime> processedAt`
 
-        A timestamp in RFC 3339 format
+        Timestamp when this system message was processed.
 
         format: date-time
 
