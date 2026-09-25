@@ -7462,7 +7462,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Request-level diagnostics: why the prompt cache could not fully reuse
     the prefix of the request named by `diagnostics.previous_message_id`.
 
-    - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+    - `cache_miss_reason: BetaCacheMissReason or null`
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -15153,6 +15153,62 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `type: "previous_message_not_found"`
 
     default: previous_message_not_found
+
+### Beta Cache Miss Reason
+
+- `BetaCacheMissReason = BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more`
+
+  - `BetaCacheMissModelChanged object`
+
+    - `type: "model_changed"`
+
+      default: model_changed
+
+    - `cache_missed_input_tokens: number`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `BetaCacheMissSystemChanged object`
+
+    - `type: "system_changed"`
+
+      default: system_changed
+
+    - `cache_missed_input_tokens: number`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `BetaCacheMissToolsChanged object`
+
+    - `type: "tools_changed"`
+
+      default: tools_changed
+
+    - `cache_missed_input_tokens: number`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `BetaCacheMissMessagesChanged object`
+
+    - `type: "messages_changed"`
+
+      default: messages_changed
+
+    - `cache_missed_input_tokens: number`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `BetaCacheMissPreviousMessageNotFound object`
+
+    - `type: "previous_message_not_found"`
+
+      default: previous_message_not_found
+
+  - `BetaCacheMissUnavailable object`
+
+    - `type: "unavailable"`
+
+      default: unavailable
 
 ### Beta Cache Miss System Changed
 
@@ -28563,7 +28619,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   Request-level diagnostics: why the prompt cache could not fully reuse
   the prefix of the request named by `diagnostics.previous_message_id`.
 
-  - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+  - `cache_miss_reason: BetaCacheMissReason or null`
 
     Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -30942,7 +30998,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Optional line range for viewing specific lines
 
-      minItems: 2, maxItems: 2
+      maxItems: 2, minItems: 2
 
   - `BetaMemoryTool20250818CreateCommand object`
 
@@ -31144,7 +31200,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Optional line range for viewing specific lines
 
-    minItems: 2, maxItems: 2
+    maxItems: 2, minItems: 2
 
 ### Beta Message
 
@@ -34333,7 +34389,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Request-level diagnostics: why the prompt cache could not fully reuse
     the prefix of the request named by `diagnostics.previous_message_id`.
 
-    - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+    - `cache_miss_reason: BetaCacheMissReason or null`
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -46388,7 +46444,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Request-level diagnostics: why the prompt cache could not fully reuse
       the prefix of the request named by `diagnostics.previous_message_id`.
 
-      - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+      - `cache_miss_reason: BetaCacheMissReason or null`
 
         Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -50255,7 +50311,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Request-level diagnostics: why the prompt cache could not fully reuse
         the prefix of the request named by `diagnostics.previous_message_id`.
 
-        - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+        - `cache_miss_reason: BetaCacheMissReason or null`
 
           Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -79452,7 +79508,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Request-level diagnostics: why the prompt cache could not fully reuse
           the prefix of the request named by `diagnostics.previous_message_id`.
 
-          - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
+          - `cache_miss_reason: BetaCacheMissReason or null`
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 

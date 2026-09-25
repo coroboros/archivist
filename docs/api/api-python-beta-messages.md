@@ -7462,7 +7462,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Request-level diagnostics: why the prompt cache could not fully reuse
     the prefix of the request named by `diagnostics.previous_message_id`.
 
-    - `cache_miss_reason: Optional[CacheMissReason]`
+    - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -15165,6 +15165,62 @@ print(beta_message_tokens_count.context_management)
   - `type: Literal["previous_message_not_found"]`
 
     default: previous_message_not_found
+
+### Beta Cache Miss Reason
+
+- `type BetaCacheMissReason = ...`
+
+  - `class BetaCacheMissModelChanged`
+
+    - `type: Literal["model_changed"]`
+
+      default: model_changed
+
+    - `cache_missed_input_tokens: int`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissSystemChanged`
+
+    - `type: Literal["system_changed"]`
+
+      default: system_changed
+
+    - `cache_missed_input_tokens: int`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissToolsChanged`
+
+    - `type: Literal["tools_changed"]`
+
+      default: tools_changed
+
+    - `cache_missed_input_tokens: int`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissMessagesChanged`
+
+    - `type: Literal["messages_changed"]`
+
+      default: messages_changed
+
+    - `cache_missed_input_tokens: int`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissPreviousMessageNotFound`
+
+    - `type: Literal["previous_message_not_found"]`
+
+      default: previous_message_not_found
+
+  - `class BetaCacheMissUnavailable`
+
+    - `type: Literal["unavailable"]`
+
+      default: unavailable
 
 ### Beta Cache Miss System Changed
 
@@ -28657,7 +28713,7 @@ print(beta_message_tokens_count.context_management)
   Request-level diagnostics: why the prompt cache could not fully reuse
   the prefix of the request named by `diagnostics.previous_message_id`.
 
-  - `cache_miss_reason: Optional[CacheMissReason]`
+  - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
     Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -31200,7 +31256,7 @@ print(beta_message_tokens_count.context_management)
 
       Optional line range for viewing specific lines
 
-      minItems: 2, maxItems: 2
+      maxItems: 2, minItems: 2
 
   - `class BetaMemoryTool20250818CreateCommand`
 
@@ -31402,7 +31458,7 @@ print(beta_message_tokens_count.context_management)
 
     Optional line range for viewing specific lines
 
-    minItems: 2, maxItems: 2
+    maxItems: 2, minItems: 2
 
 ### Beta Message
 
@@ -34616,7 +34672,7 @@ print(beta_message_tokens_count.context_management)
     Request-level diagnostics: why the prompt cache could not fully reuse
     the prefix of the request named by `diagnostics.previous_message_id`.
 
-    - `cache_miss_reason: Optional[CacheMissReason]`
+    - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -46809,7 +46865,7 @@ print(beta_message_tokens_count.context_management)
       Request-level diagnostics: why the prompt cache could not fully reuse
       the prefix of the request named by `diagnostics.previous_message_id`.
 
-      - `cache_miss_reason: Optional[CacheMissReason]`
+      - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
         Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -50707,7 +50763,7 @@ print(beta_message_tokens_count.context_management)
         Request-level diagnostics: why the prompt cache could not fully reuse
         the prefix of the request named by `diagnostics.previous_message_id`.
 
-        - `cache_miss_reason: Optional[CacheMissReason]`
+        - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
           Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -80070,7 +80126,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Request-level diagnostics: why the prompt cache could not fully reuse
           the prefix of the request named by `diagnostics.previous_message_id`.
 
-          - `cache_miss_reason: Optional[CacheMissReason]`
+          - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 

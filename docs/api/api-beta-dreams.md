@@ -241,7 +241,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#create-a-dream
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -1126,7 +1128,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#track-progress
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -1531,7 +1535,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#cancel-a-dream
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -1937,7 +1943,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#archive-a-drea
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -2217,7 +2225,9 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 

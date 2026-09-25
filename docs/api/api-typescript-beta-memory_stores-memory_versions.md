@@ -263,53 +263,53 @@ List memory versions
 
   - `created_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `interface BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: "session_actor"`
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `interface BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: "api_actor"`
 
       - `api_key_id: string`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `interface BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: "user_actor"`
 
       - `user_id: string`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `interface BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: "service_account_actor"`
 
       - `service_account_id: string`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -325,7 +325,7 @@ List memory versions
 
   - `redacted_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -575,53 +575,53 @@ Retrieve a memory version
 
   - `created_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `interface BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: "session_actor"`
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `interface BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: "api_actor"`
 
       - `api_key_id: string`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `interface BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: "user_actor"`
 
       - `user_id: string`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `interface BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: "service_account_actor"`
 
       - `service_account_id: string`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -637,7 +637,7 @@ Retrieve a memory version
 
   - `redacted_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -870,53 +870,53 @@ Redact a memory version
 
   - `created_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `interface BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: "session_actor"`
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `interface BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: "api_actor"`
 
       - `api_key_id: string`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `interface BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: "user_actor"`
 
       - `user_id: string`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `interface BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: "service_account_actor"`
 
       - `service_account_id: string`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -932,7 +932,7 @@ Redact a memory version
 
   - `redacted_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -983,53 +983,53 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 - `type BetaManagedAgentsActor = BetaManagedAgentsSessionActor | BetaManagedAgentsAPIActor | BetaManagedAgentsUserActor | BetaManagedAgentsServiceAccountActor`
 
-  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+  Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
   - `interface BetaManagedAgentsSessionActor`
 
-    Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+    An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
     - `type: "session_actor"`
 
     - `session_id: string`
 
-      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+      ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
       minLength: 1
 
   - `interface BetaManagedAgentsAPIActor`
 
-    Attribution for a write made directly via the public API (outside of any session).
+    A direct caller of the public API, identified by the API key that authenticated the request.
 
     - `type: "api_actor"`
 
     - `api_key_id: string`
 
-      ID of the API key that performed the write. This identifies the key, not the secret.
+      ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
       minLength: 1
 
   - `interface BetaManagedAgentsUserActor`
 
-    Attribution for a write made by a human user through the Anthropic Console.
+    A human user, for example acting through the Anthropic Console.
 
     - `type: "user_actor"`
 
     - `user_id: string`
 
-      ID of the user who performed the write (a `user_...` value).
+      ID of the user (a `user_...` value).
 
       minLength: 1
 
   - `interface BetaManagedAgentsServiceAccountActor`
 
-    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+    A workload authenticated as a service account, for example via Workload Identity Federation.
 
     - `type: "service_account_actor"`
 
     - `service_account_id: string`
 
-      ID of the service account that performed the write (a `svac_...` value).
+      ID of the service account (a `svac_...` value).
 
       minLength: 1
 
@@ -1037,13 +1037,13 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 - `interface BetaManagedAgentsAPIActor`
 
-  Attribution for a write made directly via the public API (outside of any session).
+  A direct caller of the public API, identified by the API key that authenticated the request.
 
   - `type: "api_actor"`
 
   - `api_key_id: string`
 
-    ID of the API key that performed the write. This identifies the key, not the secret.
+    ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
     minLength: 1
 
@@ -1105,53 +1105,53 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
   - `created_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `interface BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: "session_actor"`
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `interface BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: "api_actor"`
 
       - `api_key_id: string`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `interface BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: "user_actor"`
 
       - `user_id: string`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `interface BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: "service_account_actor"`
 
       - `service_account_id: string`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -1167,7 +1167,7 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
   - `redacted_by?: BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Beta Managed Agents Memory Version Operation
 
@@ -1195,13 +1195,13 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 - `interface BetaManagedAgentsServiceAccountActor`
 
-  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+  A workload authenticated as a service account, for example via Workload Identity Federation.
 
   - `type: "service_account_actor"`
 
   - `service_account_id: string`
 
-    ID of the service account that performed the write (a `svac_...` value).
+    ID of the service account (a `svac_...` value).
 
     minLength: 1
 
@@ -1209,13 +1209,13 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 - `interface BetaManagedAgentsSessionActor`
 
-  Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+  An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
   - `type: "session_actor"`
 
   - `session_id: string`
 
-    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+    ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
     minLength: 1
 
@@ -1223,12 +1223,12 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 - `interface BetaManagedAgentsUserActor`
 
-  Attribution for a write made by a human user through the Anthropic Console.
+  A human user, for example acting through the Anthropic Console.
 
   - `type: "user_actor"`
 
   - `user_id: string`
 
-    ID of the user who performed the write (a `user_...` value).
+    ID of the user (a `user_...` value).
 
     minLength: 1

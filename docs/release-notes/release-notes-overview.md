@@ -17,6 +17,14 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### September 24, 2026
+
+* We're expanding which refusals are billed to include refusals that arrive before any output when `stop_details.category` is `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`, the categories where we measure low volumes of false positives. Mid-stream refusals were already billed. The newly billed refusals are charged like any other request, at the rates of the model that ran it. Refusals before any output in other categories are still not billed, and fallback credit is unchanged. This change applies on all platforms. See [How refusals are billed](../build-with-claude/build-with-claude-refusals-and-fallback.md#how-refusals-are-billed).
+
+### September 23, 2026
+
+* [Cache diagnostics](../build-with-claude/build-with-claude-cache-diagnostics.md) is out of beta on the Claude API and no longer requires the `cache-diagnosis-2026-04-07` beta header. Include the `diagnostics` object on a Messages request to opt in; requests that still send the header work as before. Responses from `POST /v1/messages` now always include the `diagnostics` field, which is `null` when the request did not include the `diagnostics` object.
+
 ### September 22, 2026
 
 * We've launched **Claude Opus 5.5** (`claude-opus-5-5`), a model for long-running agentic coding and knowledge work. It has a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default, 128k max output tokens, and always-on [adaptive thinking](../build-with-claude/build-with-claude-thinking.md), at $4 / $20 USD per MTok (Claude Opus 5 is $5 / $25). Claude Opus 5.5 is available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). See [What's new in Claude Opus 5.5](../general/general-models-opus-5-5-whats-new-opus-5-5.md) for capabilities, API changes, and migration guidance.
@@ -26,6 +34,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### September 18, 2026
 
+* For [cache diagnostics](../build-with-claude/build-with-claude-cache-diagnostics.md), a response to a request that sends the `cache-diagnosis-2026-04-07` beta header now always includes the `diagnostics` field. The field is `null` when the request did not include the `diagnostics` object. Previously the field was omitted in that case.
 * The [Compliance API](../manage-claude/manage-claude-compliance-api.md) local session endpoints now also return transcripts of Claude in Chrome sessions (`product_surface` value `claude_in_chrome`), in beta for Claude Enterprise organizations, with your existing Compliance Access Key and the `read:compliance_user_data` scope. See [Sessions on users' machines](../manage-claude/manage-claude-compliance-sessions.md#retrieve-local-sessions).
 
 ### September 14, 2026
@@ -37,6 +46,10 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 * Claude Managed Agents permission policies now include `auto`: the server evaluates each agent or MCP tool call and runs it, denies it, or pauses for your approval. `agent.tool_use` and `agent.mcp_tool_use` events report how each call was evaluated in an `evaluation` field alongside `evaluated_permission`. See [Let the server evaluate each call with `auto`](../managed-agents/managed-agents-permission-policies.md#let-the-server-evaluate-each-call-with-auto).
 * Version 1.32.0 of the `ant` CLI adds `ant beta:sessions connect`, which attaches your terminal to a Claude Managed Agents session. You can follow the session live, send messages, and allow or deny tool calls that are waiting for approval. Pass `--web` to serve the Claude Console's session viewer locally and open the session there instead. See [Connect to a Managed Agents session from your terminal](../general/general-cli-sdks-libraries-cli-sessions-connect.md).
+
+### September 9, 2026
+
+* For [cache diagnostics](../build-with-claude/build-with-claude-cache-diagnostics.md), the API now stores a request's fingerprint only when the request includes the `diagnostics` object. A request that sends only the `cache-diagnosis-2026-04-07` beta header is still accepted, but no fingerprint is stored. A later turn that points `previous_message_id` at it reports `previous_message_not_found`. Include `diagnostics` on every turn, with `"previous_message_id": null` on the first.
 
 ### September 3, 2026
 

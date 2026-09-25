@@ -8668,7 +8668,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Request-level diagnostics: why the prompt cache could not fully reuse
     the prefix of the request named by `diagnostics.previous_message_id`.
 
-    - `cache_miss_reason: Optional[CacheMissReason]`
+    - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -22670,7 +22670,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           Request-level diagnostics: why the prompt cache could not fully reuse
           the prefix of the request named by `diagnostics.previous_message_id`.
 
-          - `cache_miss_reason: Optional[CacheMissReason]`
+          - `cache_miss_reason: Optional[BetaCacheMissReason]`
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -70050,53 +70050,53 @@ List memory versions
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `class BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: Literal["session_actor"]`
 
       - `session_id: str`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `class BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: Literal["api_actor"]`
 
       - `api_key_id: str`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `class BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: Literal["user_actor"]`
 
       - `user_id: str`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: Literal["service_account_actor"]`
 
       - `service_account_id: str`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -70112,7 +70112,7 @@ List memory versions
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 #### Example
 
@@ -70361,53 +70361,53 @@ Retrieve a memory version
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `class BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: Literal["session_actor"]`
 
       - `session_id: str`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `class BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: Literal["api_actor"]`
 
       - `api_key_id: str`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `class BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: Literal["user_actor"]`
 
       - `user_id: str`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: Literal["service_account_actor"]`
 
       - `service_account_id: str`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -70423,7 +70423,7 @@ Retrieve a memory version
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 #### Example
 
@@ -70655,53 +70655,53 @@ Redact a memory version
 
   - `created_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
     - `class BetaManagedAgentsSessionActor`
 
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+      An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
       - `type: Literal["session_actor"]`
 
       - `session_id: str`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
         minLength: 1
 
     - `class BetaManagedAgentsAPIActor`
 
-      Attribution for a write made directly via the public API (outside of any session).
+      A direct caller of the public API, identified by the API key that authenticated the request.
 
       - `type: Literal["api_actor"]`
 
       - `api_key_id: str`
 
-        ID of the API key that performed the write. This identifies the key, not the secret.
+        ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
         minLength: 1
 
     - `class BetaManagedAgentsUserActor`
 
-      Attribution for a write made by a human user through the Anthropic Console.
+      A human user, for example acting through the Anthropic Console.
 
       - `type: Literal["user_actor"]`
 
       - `user_id: str`
 
-        ID of the user who performed the write (a `user_...` value).
+        ID of the user (a `user_...` value).
 
         minLength: 1
 
     - `class BetaManagedAgentsServiceAccountActor`
 
-      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+      A workload authenticated as a service account, for example via Workload Identity Federation.
 
       - `type: Literal["service_account_actor"]`
 
       - `service_account_id: str`
 
-        ID of the service account that performed the write (a `svac_...` value).
+        ID of the service account (a `svac_...` value).
 
         minLength: 1
 
@@ -70717,7 +70717,7 @@ Redact a memory version
 
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 #### Example
 
@@ -75483,7 +75483,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#create-a-dream
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -75960,7 +75962,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#list-dreams) f
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -76377,7 +76381,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#track-progress
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -76790,7 +76796,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#cancel-a-dream
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -77203,7 +77211,9 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#archive-a-drea
 
   An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
 
-  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
+
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   See the [Dreams guide](../managed-agents/managed-agents-dreams.md#how-it-works) for what a dream reads and produces.
 
@@ -88728,11 +88738,13 @@ print(beta_workspace.id)
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/rate_limits`
 
-List rate-limit overrides configured for a workspace.
+List a workspace's rate limits.
 
-Returns only the groups and limiter types that have a workspace-level
-override. Groups without overrides inherit the organization limits and
-are not listed; use `GET /v1/organizations/rate_limits` to see those.
+By default, returns only the groups and limiter types that have a
+workspace-level override. With `include_inherited=true`, returns every
+group with organization-level limits the workspace can see, listing for
+each the values it inherits from the organization as well as its own
+overrides. Each value's `source` says which it is.
 
 When `limit` is omitted, every matching entry is returned in a single
 page; when `limit` truncates the result, follow `next_page` to fetch
@@ -88759,6 +88771,12 @@ the remaining entries.
   - `"token_count"`
 
   - `"web_search"`
+
+- `include_inherited: Optional[bool]`
+
+  Also list the limiter values the workspace inherits from the organization, including groups with no workspace-level override.
+
+  default: false
 
 - `limit: Optional[int]`
 
@@ -88864,7 +88882,7 @@ the remaining entries.
 
   - `limits: List[BetaWorkspaceRateLimitValue]`
 
-    The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
+    The workspace's limiter values for this group. By default only the limiter types with a workspace-level override are listed. With `include_inherited` set to `true`, the limiter types the workspace inherits from the organization are listed too, each marked by `source`.
 
     - `type: str`
 
@@ -88874,9 +88892,29 @@ the remaining entries.
 
       The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
 
+    - `source: Source`
+
+      Where `value` comes from. `organization` values are listed only when `include_inherited` is `true`, and then `value` equals `org_limit`.
+
+      - `class BetaWorkspaceRateLimitWorkspaceSource`
+
+        - `type: Literal["workspace"]`
+
+          Always `workspace`: a workspace-level override is stored.
+
+          default: workspace
+
+      - `class BetaWorkspaceRateLimitOrganizationSource`
+
+        - `type: Literal["organization"]`
+
+          Always `organization`: no workspace-level override is stored, so the organization's value applies.
+
+          default: organization
+
     - `value: int`
 
-      The workspace-level override value for this limiter type.
+      The workspace's value for this limiter type: the workspace-level override when `source.type` is `workspace`, otherwise the organization's value.
 
   - `models: Optional[List[str]]`
 
@@ -88884,11 +88922,11 @@ the remaining entries.
 
   - `rate_limit_id: str`
 
-    The `id` of the organization's RateLimit entry this override applies to.
+    The `id` of the organization's RateLimit entry this entry applies to.
 
   - `workspace_id: str`
 
-    ID of the Workspace this override applies to.
+    ID of the Workspace this entry applies to.
 
   - `group_type: Literal["batch", "files", "model_group", 3 more]`
 
@@ -88941,6 +88979,9 @@ print(page.rate_limit_id)
       "limits": [
         {
           "org_limit": 0,
+          "source": {
+            "type": "workspace"
+          },
           "type": "type",
           "value": 0
         }

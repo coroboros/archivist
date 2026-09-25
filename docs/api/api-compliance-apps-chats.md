@@ -19,6 +19,11 @@ Lists chat metadata with filtering capabilities for targeted
 compliance review. Results are sorted chronologically (time ascending)
 by the `order_by` key, with ties broken by id.
 
+Incremental polling with `order_by=updated_at` returns a chat again
+after it receives a new message, is moved into or out of a project, or
+is deleted in claude.ai. A chat is not guaranteed to be returned again
+after other edits, such as a rename.
+
 **Deprecation notice:** Combining `user_ids[]` with any `updated_at.*`
 filter is deprecated and will be rejected with HTTP 400 after
 2026-09-22. For incremental polling by update time, omit `user_ids[]`
@@ -168,7 +173,7 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
   - `updated_at: string`
 
-    Last update timestamp
+    Last update timestamp. Updated when the chat receives a new message, is moved into or out of a project, or is deleted in claude.ai. Other edits, such as renaming the chat, are not guaranteed to change it.
 
     format: date-time
 
@@ -344,7 +349,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
 
   - `updated_at: string`
 
-    Last update timestamp
+    Last update timestamp. Updated when the chat receives a new message, is moved into or out of a project, or is deleted in claude.ai. Other edits, such as renaming the chat, are not guaranteed to change it.
 
     format: date-time
 
@@ -762,7 +767,7 @@ Retrieves message history and file metadata for a specific chat.
 
 - `updated_at: string`
 
-  Last update timestamp
+  Last update timestamp. Updated when the chat receives a new message, is moved into or out of a project, or is deleted in claude.ai. Other edits, such as renaming the chat, are not guaranteed to change it.
 
   format: date-time
 

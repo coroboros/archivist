@@ -1531,7 +1531,7 @@ To upgrade, update the tool type in your API requests:
 
 ## Data retention
 
-Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](../build-with-claude/build-with-claude-files.md) (retrievable with `client.files.download()`) persist until explicitly deleted.
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](../build-with-claude/build-with-claude-files.md) (retrievable with `client.files.download()` (csharp, go: `client.Files.Download()`; java: `client.files().download()`; php: `$client->files->download()`)) persist until explicitly deleted.
 
 For ZDR eligibility across all features, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 

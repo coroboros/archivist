@@ -23,20 +23,20 @@ Mid-conversation system messages close that gap. You append a `{"role": "system"
 
   This feature is available on Claude Fable 5.1, [Claude Mythos 5.1](https://anthropic.com/glasswing), Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 5.5, Claude Opus 4.8, and Claude Opus 5. No beta header is required for mid-conversation system messages. This feature is not available on Claude Sonnet 5. Use the top-level `system` field there instead.
 
-  [Mid-conversation tool changes](./build-with-claude-mid-conversation-system-messages.md#mid-conversation-tool-changes) are in beta and require the `mid-conversation-tool-changes-2026-07-01` beta header. They are available on the same models, on the Claude API, Amazon Bedrock, and Google Cloud. [Defining a tool inside a `tool_addition` block](./build-with-claude-mid-conversation-system-messages.md#define-tools-in-a-message-beta) uses the `inline-tools-2026-09-15` beta header in place of that one, and is available on the Claude API. [Adding an MCP server that way](./build-with-claude-mid-conversation-system-messages.md#add-an-mcp-server-mid-conversation-beta) also needs the `mcp-client-2026-09-15` beta header.
+  [Mid-conversation tool changes](./build-with-claude-mid-conversation-system-messages.md#mid-conversation-tool-changes) are in beta on the same models. On the Claude API, send the `inline-tools-2026-09-15` beta header, which also covers [defining a tool inside a `tool_addition` block](./build-with-claude-mid-conversation-system-messages.md#define-tools-in-a-message-beta). Defining a tool in a message is available on the Claude API only, and [adding an MCP server that way](./build-with-claude-mid-conversation-system-messages.md#add-an-mcp-server-mid-conversation-beta) needs the `mcp-client-2026-09-15` beta header as well. The older `mid-conversation-tool-changes-2026-07-01` header still works for changes that name a tool by reference, on the Claude API, Amazon Bedrock, and Google Cloud.
 
   [Turn-scoped system messages](./build-with-claude-mid-conversation-system-messages.md#turn-scoped-system-messages) (`clear_at`) are in beta and require the `mid-conversation-system-clear-at-2026-08-21` beta header, on the same models and platforms as mid-conversation system messages.
 </Note>
 
 ## Mid-conversation tool changes
 
-The `tools` array sits even earlier in the hashed request prefix than the top-level `system` field, so editing it invalidates the [prompt cache](./build-with-claude-prompt-caching.md) for the entire conversation. Mid-conversation tool changes are the tools counterpart to mid-conversation system messages. Instead of fixing the tool list for the lifetime of the conversation, you change which tools are offered to the model between turns: declare the full tool set in `tools` up front, then use `tool_addition` and `tool_removal` blocks to offer a tool to the model, or withdraw it, from a specific point in the conversation onward. The `tools` array itself never changes, so the cached prefix stays intact.
+The `tools` array sits even earlier in the hashed request prefix than the top-level `system` field, so editing it invalidates the [prompt cache](./build-with-claude-prompt-caching.md) for the entire conversation. Mid-conversation tool changes are the tools counterpart to mid-conversation system messages. Instead of fixing the tool list for the lifetime of the conversation, you change which tools are offered to the model between turns: declare the full tool set in `tools` up front, then use `tool_addition` and `tool_removal` blocks to offer a tool to the model, or withdraw it, from a specific point in the conversation onward. The `tools` array itself never changes, so the cached prefix stays intact. Mid-conversation tool changes are in beta and use the `inline-tools-2026-09-15` beta header on the Claude API. On Amazon Bedrock and Google Cloud, use the older `mid-conversation-tool-changes-2026-07-01` header, which covers changes that name a tool by reference.
 
-`tool_addition` and `tool_removal` are content blocks in the `content` array of a `role: "system"` message, and they can be mixed with `text` blocks in the same message. The message follows the placement rules for any mid-conversation system message, with one extra restriction after a paused turn (see [Limitations](./build-with-claude-mid-conversation-system-messages.md#limitations)), and the change applies from that point in the conversation onward. Each block's `tool` field references a tool rather than defining one: `{"type": "tool_reference", "name": "..."}` names a tool declared in the request's `tools` array, and [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md) tools can be referenced individually with `mcp_tool_reference` (`server_name` and `name`) or as a whole toolset with `mcp_toolset_reference` (`server_name`). Referencing a name that is not declared in `tools` returns a 400 error (on the Claude API, with `error.details.error_code` set to `tool_reference_unresolved`). With the `inline-tools-2026-09-15` beta header, a `tool_addition` block can instead [carry the tool's full definition](./build-with-claude-mid-conversation-system-messages.md#define-tools-in-a-message-beta).
+`tool_addition` and `tool_removal` are content blocks in the `content` array of a `role: "system"` message, and they can be mixed with `text` blocks in the same message. The message follows the placement rules for any mid-conversation system message, with one extra restriction after a paused turn (see [Limitations](./build-with-claude-mid-conversation-system-messages.md#limitations)), and the change applies from that point in the conversation onward. Each block's `tool` field references a tool rather than defining one: `{"type": "tool_reference", "name": "..."}` names a tool declared in the request's `tools` array, and [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md) tools can be referenced individually with `mcp_tool_reference` (`server_name` and `name`) or as a whole toolset with `mcp_toolset_reference` (`server_name`). Referencing a name that is not declared in `tools` returns a 400 error (on the Claude API, with `error.details.error_code` set to `tool_reference_unresolved`). A `tool_addition` block can instead [carry the tool's full definition](./build-with-claude-mid-conversation-system-messages.md#define-tools-in-a-message-beta), which the older `mid-conversation-tool-changes-2026-07-01` header doesn't support.
 
 Every tool declared in `tools` is offered to the model from the start of the conversation unless it is declared with `defer_loading: true`, which keeps it withheld until a `tool_addition` block surfaces it. `tool_addition` also re-offers a tool that an earlier `tool_removal` withdrew.
 
-The following request declares `get_weather` in `tools`, then withdraws it after the first user turn with a `tool_removal` block. Mid-conversation tool changes are in beta, so the request sends the `mid-conversation-tool-changes-2026-07-01` beta header.
+The following request declares `get_weather` in `tools`, then withdraws it after the first user turn with a `tool_removal` block. The request sends the `inline-tools-2026-09-15` beta header.
 
 <CodeGroup>
   ```bash cURL
@@ -44,7 +44,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: mid-conversation-tool-changes-2026-07-01" \
+    -H "anthropic-beta: inline-tools-2026-09-15" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -80,7 +80,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   ```
 
   ```bash CLI
-  ant beta:messages create --beta mid-conversation-tool-changes-2026-07-01 \
+  ant beta:messages create --beta inline-tools-2026-09-15 \
     --transform 'content.#(type=="text").text' --raw-output <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
@@ -113,7 +113,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   response = client.beta.messages.create(
       model="claude-opus-5-5",
       max_tokens=1024,
-      betas=["mid-conversation-tool-changes-2026-07-01"],
+      betas=["inline-tools-2026-09-15"],
       # The full tool set is declared up front and never changes, so the
       # cached prefix stays intact.
       tools=[
@@ -160,7 +160,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   const response = await client.beta.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 1024,
-    betas: ["mid-conversation-tool-changes-2026-07-01"],
+    betas: ["inline-tools-2026-09-15"],
     // The full tool set is declared up front and never changes, so the
     // cached prefix stays intact.
     tools: [
@@ -204,6 +204,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta;
   using Anthropic.Models.Beta.Messages;
   using Messages = Anthropic.Models.Messages;
 
@@ -213,7 +214,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Betas = ["mid-conversation-tool-changes-2026-07-01"],
+      Betas = [AnthropicBeta.InlineTools2026_09_15],
       // The full tool set is declared up front and never changes, so the
       // cached prefix stays intact.
       Tools =
@@ -267,7 +268,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
   	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
-  	Betas:     []anthropic.AnthropicBeta{"mid-conversation-tool-changes-2026-07-01"},
+  	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaInlineTools2026_09_15},
   	// The full tool set is declared up front and never changes, so the
   	// cached prefix stays intact.
   	Tools: []anthropic.BetaToolUnionParam{
@@ -312,6 +313,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   ```
 
   ```java Java
+  import com.anthropic.models.beta.AnthropicBeta;
   import com.anthropic.models.beta.messages.BetaContentBlockParam;
   import com.anthropic.models.beta.messages.BetaMessage;
   import com.anthropic.models.beta.messages.BetaMessageParam;
@@ -339,7 +341,7 @@ The following request declares `get_weather` in `tools`, then withdraws it after
       MessageCreateParams params = MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
-          .addBeta("mid-conversation-tool-changes-2026-07-01")
+          .addBeta(AnthropicBeta.INLINE_TOOLS_2026_09_15)
           .addTool(weatherTool)
           .addUserMessage("Say OK.")
           // Withdraw get_weather from this point onward. The block references
@@ -361,12 +363,15 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   ```
 
   ```php PHP
+  use Anthropic\Beta\AnthropicBeta;
+  // ...
+
   $client = new Client();
 
   $response = $client->beta->messages->create(
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       maxTokens: 1024,
-      betas: ['mid-conversation-tool-changes-2026-07-01'],
+      betas: [AnthropicBeta::INLINE_TOOLS_2026_09_15],
       // The full tool set is declared up front and never changes, so the
       // cached prefix stays intact.
       tools: [
@@ -413,9 +418,9 @@ The following request declares `get_weather` in `tools`, then withdraws it after
   client = Anthropic::Client.new
 
   response = client.beta.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
-    betas: ["mid-conversation-tool-changes-2026-07-01"],
+    betas: [Anthropic::AnthropicBeta::INLINE_TOOLS_2026_09_15],
     # The full tool set is declared up front and never changes, so the
     # cached prefix stays intact.
     tools: [

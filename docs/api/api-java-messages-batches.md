@@ -1219,6 +1219,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `String`
 
+      - `Optional<DiagnosticsParam> diagnostics`
+
+        Request-level diagnostics. Currently carries the previous response
+        id for prompt-cache divergence reporting.
+
+        - `Optional<String> previousMessageId`
+
+          The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+          maxLength: 256
+
       - `Optional<String> inferenceGeo`
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -4586,6 +4597,55 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String fileId`
 
+        - `Optional<Diagnostics> diagnostics`
+
+          Request-level diagnostics: why the prompt cache could not fully reuse
+          the prefix of the request named by `diagnostics.previous_message_id`.
+
+          - `Optional<CacheMissReason> cacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `JsonValue type = "model_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `JsonValue type = "system_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `JsonValue type = "tools_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `JsonValue type = "messages_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `JsonValue type = "previous_message_not_found"`
+
+            - `class CacheMissUnavailable`
+
+              - `JsonValue type = "unavailable"`
+
         - `Model model`
 
           The model that will complete your prompt.
@@ -5843,6 +5903,55 @@ public final class Main {
 
             - `String fileId`
 
+        - `Optional<Diagnostics> diagnostics`
+
+          Request-level diagnostics: why the prompt cache could not fully reuse
+          the prefix of the request named by `diagnostics.previous_message_id`.
+
+          - `Optional<CacheMissReason> cacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `JsonValue type = "model_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `JsonValue type = "system_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `JsonValue type = "tools_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `JsonValue type = "messages_changed"`
+
+              - `long cacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `JsonValue type = "previous_message_not_found"`
+
+            - `class CacheMissUnavailable`
+
+              - `JsonValue type = "unavailable"`
+
         - `Model model`
 
           The model that will complete your prompt.
@@ -6906,6 +7015,55 @@ public final class Main {
 
           - `String fileId`
 
+      - `Optional<Diagnostics> diagnostics`
+
+        Request-level diagnostics: why the prompt cache could not fully reuse
+        the prefix of the request named by `diagnostics.previous_message_id`.
+
+        - `Optional<CacheMissReason> cacheMissReason`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class CacheMissModelChanged`
+
+            - `JsonValue type = "model_changed"`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissSystemChanged`
+
+            - `JsonValue type = "system_changed"`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissToolsChanged`
+
+            - `JsonValue type = "tools_changed"`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissMessagesChanged`
+
+            - `JsonValue type = "messages_changed"`
+
+            - `long cacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissPreviousMessageNotFound`
+
+            - `JsonValue type = "previous_message_not_found"`
+
+          - `class CacheMissUnavailable`
+
+            - `JsonValue type = "unavailable"`
+
       - `Model model`
 
         The model that will complete your prompt.
@@ -7930,6 +8088,55 @@ public final class Main {
         - `JsonValue type = "container_upload"`
 
         - `String fileId`
+
+    - `Optional<Diagnostics> diagnostics`
+
+      Request-level diagnostics: why the prompt cache could not fully reuse
+      the prefix of the request named by `diagnostics.previous_message_id`.
+
+      - `Optional<CacheMissReason> cacheMissReason`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class CacheMissModelChanged`
+
+          - `JsonValue type = "model_changed"`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissSystemChanged`
+
+          - `JsonValue type = "system_changed"`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissToolsChanged`
+
+          - `JsonValue type = "tools_changed"`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissMessagesChanged`
+
+          - `JsonValue type = "messages_changed"`
+
+          - `long cacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissPreviousMessageNotFound`
+
+          - `JsonValue type = "previous_message_not_found"`
+
+        - `class CacheMissUnavailable`
+
+          - `JsonValue type = "unavailable"`
 
     - `Model model`
 

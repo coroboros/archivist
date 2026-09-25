@@ -117,7 +117,7 @@ List memory versions
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
   - `?string path`
 
@@ -129,7 +129,7 @@ List memory versions
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -262,7 +262,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
   - `?string path`
 
@@ -274,7 +274,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -394,7 +394,7 @@ Redact a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
   - `?string path`
 
@@ -406,7 +406,7 @@ Redact a memory version
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Example
 
@@ -469,7 +469,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
     - `string sessionID`
 
-      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+      ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
   - `class ManagedAgentsAPIActor`
 
@@ -477,7 +477,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
     - `string apiKeyID`
 
-      ID of the API key that performed the write. This identifies the key, not the secret.
+      ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
   - `class ManagedAgentsUserActor`
 
@@ -485,7 +485,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
     - `string userID`
 
-      ID of the user who performed the write (a `user_...` value).
+      ID of the user (a `user_...` value).
 
   - `class ManagedAgentsServiceAccountActor`
 
@@ -493,7 +493,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
     - `string serviceAccountID`
 
-      ID of the service account that performed the write (a `svac_...` value).
+      ID of the service account (a `svac_...` value).
 
 ### Beta Managed Agents API Actor
 
@@ -503,7 +503,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `string apiKeyID`
 
-    ID of the API key that performed the write. This identifies the key, not the secret.
+    ID of the API key (an `apikey_...` value). This identifies the key, not the secret.
 
 ### Beta Managed Agents Memory Version
 
@@ -545,7 +545,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
   - `?string path`
 
@@ -557,7 +557,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Identifies who performed an operation. Recorded when the operation happens and not updated afterwards, so the ID may refer to a user, service account, API key, or session that has since been deleted.
 
 ### Beta Managed Agents Memory Version Operation
 
@@ -583,7 +583,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `string serviceAccountID`
 
-    ID of the service account that performed the write (a `svac_...` value).
+    ID of the service account (a `svac_...` value).
 
 ### Beta Managed Agents Session Actor
 
@@ -593,7 +593,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `string sessionID`
 
-    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
+    ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](./api-beta-sessions-retrieve.md) for further provenance.
 
 ### Beta Managed Agents User Actor
 
@@ -603,4 +603,4 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `string userID`
 
-    ID of the user who performed the write (a `user_...` value).
+    ID of the user (a `user_...` value).
