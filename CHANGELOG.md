@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.5.194 - 26/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.193 - 26/09/2026
 
 File Changes:
