@@ -1,5 +1,115 @@
 # Changelog
 
+## 🤖 v1.5.193 - 26/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-anthropic-marketplaces.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-claude-projects.md`
+- Modified: `docs/code/code-cli-hints.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-components.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-create-marketplace.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop-scheduled-tasks.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-host-marketplace.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-install.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-manifest-reference.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-measure.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-org.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-platforms.md`
+- Modified: `docs/code/code-plugin-evals.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-prompt-library.md`
+- Modified: `docs/code/code-publish.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-analytics-api.md`
+
+
 ## 🤖 v1.5.192 - 25/09/2026
 
 File Changes:
