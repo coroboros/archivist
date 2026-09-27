@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.5.195 - 27/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+
+
 ## 🤖 v1.5.194 - 26/09/2026
 
 File Changes:
