@@ -1,5 +1,58 @@
 # Changelog
 
+## 🤖 v1.5.197 - 28/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-on-aws.md`
+- Modified: `docs/code/code-claude-apps-gateway-on-gcp.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-examples.md`
+- Modified: `docs/code/code-file-checkpointing.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-rollout.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-manifest-reference.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-streaming-output.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-user-input.md`
+
+
 ## 🤖 v1.5.196 - 27/09/2026
 
 File Changes:
