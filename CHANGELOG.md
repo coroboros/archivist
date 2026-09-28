@@ -1,5 +1,114 @@
 # Changelog
 
+## 🤖 v1.5.198 - 28/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-define-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-parallel-tool-use.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-client-sdks.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-service-tiers.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-background.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-keep-recent-turns.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-on-demand.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-thinking-blocks.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-threshold.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-windows.md`
+- Modified: `docs/build-with-claude/build-with-claude-effort.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-fallback-credit.md`
+- Modified: `docs/build-with-claude/build-with-claude-handling-stop-reasons.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-preserved-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/build-with-claude/build-with-claude-refusals-and-fallback.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-troubleshooting.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-working-with-messages.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-communications-kit.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-claude_api_primer.md`
+- Modified: `docs/general/general-cli-sdks-libraries-overview.md`
+- Modified: `docs/general/general-home.md`
+- Modified: `docs/general/general-intro.md`
+- Modified: `docs/general/general-models-fable-5-1-overview.md`
+- Modified: `docs/general/general-models-fable-5-overview.md`
+- Modified: `docs/general/general-models-haiku-4-5-overview.md`
+- Modified: `docs/general/general-models-mythos-5-1-overview.md`
+- Modified: `docs/general/general-models-mythos-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-6-overview.md`
+- Modified: `docs/general/general-models-opus-4-7-overview.md`
+- Modified: `docs/general/general-models-opus-4-8-overview.md`
+- Modified: `docs/general/general-models-opus-5-5-overview.md`
+- Modified: `docs/general/general-models-opus-5-overview.md`
+- Modified: `docs/general/general-models-opus-5-whats-new-opus-5.md`
+- Modified: `docs/general/general-models-overview.md`
+- Modified: `docs/general/general-models-sonnet-4-5-overview.md`
+- Modified: `docs/general/general-models-sonnet-4-6-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-whats-new-sonnet-5.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-access-transparency.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Modified: `docs/release-notes/release-notes-system-prompts-overview.md`
+- Added: `docs/manage-claude/manage-claude-access-transparency-log.md`
+- Added: `docs/release-notes/release-notes-system-prompts-claude-sonnet-5.md`
+
+
 ## 🤖 v1.5.197 - 28/09/2026
 
 File Changes:
