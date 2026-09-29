@@ -32,7 +32,7 @@ When triggered, the skill equips Claude with:
 * **Streaming patterns:** Implementation details for building chat UIs and handling incremental display
 * **Batch processing:** Offline batch processing at 50% cost
 * **Prompt caching:** Prefix-stability design, breakpoint placement, and silent-invalidator audit
-* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 5.5](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-5), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md#migrating-from-claude-sonnet-5), and [Claude Fable 5.1](../general/general-models-fable-5-1-migration-guide.md))
+* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 5.5](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-5), [Claude Sonnet 5.5](../general/general-models-sonnet-5-5-migration-guide.md#migrating-from-claude-sonnet-5), and [Claude Fable 5.1](../general/general-models-fable-5-1-migration-guide.md))
 * **Current model information:** Model IDs, context window sizes, and pricing
 * **Common pitfalls:** Detailed guidance on avoiding frequent mistakes when integrating with the API
 
@@ -134,7 +134,7 @@ The skill handles:
 
 As it edits, the skill explains each change and its motivation inline. On completion, it produces a checklist of items that require manual verification (typically integration tests, length-control prompt tuning, and cost/rate-limit re-baselining).
 
-For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5.5 from Claude Opus 5](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-5), [Migrating to Claude Opus 5.5 from Claude Opus 4.8](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-4-8), [Migrating to Claude Sonnet 5.5 from Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md#migrating-from-claude-sonnet-5), and [Migrating to Claude Fable 5.1](../general/general-models-fable-5-1-migration-guide.md).
+For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5.5 from Claude Opus 5](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-5), [Migrating to Claude Opus 5.5 from Claude Opus 4.8](../general/general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-4-8), [Migrating to Claude Sonnet 5.5 from Claude Sonnet 5](../general/general-models-sonnet-5-5-migration-guide.md#migrating-from-claude-sonnet-5), and [Migrating to Claude Fable 5.1](../general/general-models-fable-5-1-migration-guide.md).
 
 ## Setting up a Managed Agent
 

@@ -177,9 +177,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `stream?:optional bool`
 
-  Whether to incrementally stream the response using server-sent events.
+  Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-  See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+  In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
 - `system?:optional System`
 
@@ -733,7 +733,7 @@ var_dump($betaMessage);
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }

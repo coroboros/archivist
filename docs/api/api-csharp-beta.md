@@ -3969,6 +3969,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `ClaudeFable5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -3983,7 +3987,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         - `ClaudeSonnet5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `ClaudeFable5("claude-fable-5")`
 
@@ -7515,6 +7519,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `ClaudeFable5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -7529,7 +7537,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     - `ClaudeSonnet5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `ClaudeFable5("claude-fable-5")`
 
@@ -8963,7 +8971,7 @@ Console.WriteLine(betaMessage);
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -11964,6 +11972,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `ClaudeFable5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -11978,7 +11990,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         - `ClaudeSonnet5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `ClaudeFable5("claude-fable-5")`
 
@@ -15783,6 +15795,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                            - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                              Efficient model for coding and agents
+
                             - `ClaudeFable5_1("claude-fable-5-1")`
 
                               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -15797,7 +15813,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             - `ClaudeSonnet5("claude-sonnet-5")`
 
-                              High-performance model for coding and agents
+                              Efficient model for coding and agents
 
                             - `ClaudeFable5("claude-fable-5")`
 
@@ -16533,6 +16549,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `JsonElement Type = "disabled"`
 
+            - `class BetaThinkingConfigBetweenTools`
+
+              - `JsonElement Type = "between_tools"`
+
             - `class BetaThinkingConfigAdaptive`
 
               - `JsonElement Type = "adaptive"`
@@ -16621,9 +16641,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `bool Stream`
 
-        Whether to incrementally stream the response using server-sent events.
+        Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-        See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+        In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
       - `System System`
 
@@ -16658,6 +16678,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `class BetaThinkingConfigEnabled`
 
         - `class BetaThinkingConfigDisabled`
+
+        - `class BetaThinkingConfigBetweenTools`
 
         - `class BetaThinkingConfigAdaptive`
 
@@ -21047,6 +21069,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                            Efficient model for coding and agents
+
                           - `ClaudeFable5_1("claude-fable-5-1")`
 
                             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -21061,7 +21087,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `ClaudeSonnet5("claude-sonnet-5")`
 
-                            High-performance model for coding and agents
+                            Efficient model for coding and agents
 
                           - `ClaudeFable5("claude-fable-5")`
 
@@ -22199,6 +22225,10 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -22209,7 +22239,7 @@ Create Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -22269,6 +22299,10 @@ Create Agent
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -22279,7 +22313,7 @@ Create Agent
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -23063,6 +23097,10 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -23073,7 +23111,7 @@ Create Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -23874,6 +23912,10 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -23884,7 +23926,7 @@ List Agents
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -24672,6 +24714,10 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -24682,7 +24728,7 @@ Get Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -25348,6 +25394,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -25358,7 +25408,7 @@ Update Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -25418,6 +25468,10 @@ Update Agent
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -25428,7 +25482,7 @@ Update Agent
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -26190,6 +26244,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -26200,7 +26258,7 @@ Update Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -26978,6 +27036,10 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -26988,7 +27050,7 @@ Archive Agent
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -27778,6 +27840,10 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeOpus5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -27788,7 +27854,7 @@ List Agent Versions
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -32307,6 +32373,10 @@ Create Session
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -32317,7 +32387,7 @@ Create Session
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -32377,6 +32447,10 @@ Create Session
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+              Efficient model for coding and agents
+
             - `ClaudeOpus5_5("claude-opus-5-5")`
 
               Powerful intelligence for coding, knowledge work, and long-running agents
@@ -32387,7 +32461,7 @@ Create Session
 
             - `ClaudeSonnet5("claude-sonnet-5")`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `ClaudeFable5("claude-fable-5")`
 
@@ -33453,6 +33527,10 @@ Create Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -33463,7 +33541,7 @@ Create Session
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -34751,6 +34829,10 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -34761,7 +34843,7 @@ List Sessions
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -35971,6 +36053,10 @@ Get Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -35981,7 +36067,7 @@ Get Session
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -37210,6 +37296,10 @@ Update Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -37220,7 +37310,7 @@ Update Session
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -38577,6 +38667,10 @@ Archive Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeOpus5_5("claude-opus-5-5")`
 
           Powerful intelligence for coding, knowledge work, and long-running agents
@@ -38587,7 +38681,7 @@ Archive Session
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -39694,9 +39788,77 @@ List Events
 
     Query param: Opaque pagination cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<string> types`
+  - `IReadOnlyList<BetaManagedAgentsSessionEventType> types`
 
     Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
+
+    - `UserMessage("user.message")`
+
+    - `UserInterrupt("user.interrupt")`
+
+    - `UserToolConfirmation("user.tool_confirmation")`
+
+    - `UserCustomToolResult("user.custom_tool_result")`
+
+    - `AgentCustomToolUse("agent.custom_tool_use")`
+
+    - `AgentMessage("agent.message")`
+
+    - `AgentThinking("agent.thinking")`
+
+    - `AgentMcpToolUse("agent.mcp_tool_use")`
+
+    - `AgentMcpToolResult("agent.mcp_tool_result")`
+
+    - `AgentToolUse("agent.tool_use")`
+
+    - `AgentToolResult("agent.tool_result")`
+
+    - `AgentThreadMessageReceived("agent.thread_message_received")`
+
+    - `AgentThreadMessageSent("agent.thread_message_sent")`
+
+    - `AgentThreadContextCompacted("agent.thread_context_compacted")`
+
+    - `SessionError("session.error")`
+
+    - `SessionStatusRescheduled("session.status_rescheduled")`
+
+    - `SessionStatusRunning("session.status_running")`
+
+    - `SessionStatusIdle("session.status_idle")`
+
+    - `SessionStatusTerminated("session.status_terminated")`
+
+    - `SessionThreadCreated("session.thread_created")`
+
+    - `SpanOutcomeEvaluationStart("span.outcome_evaluation_start")`
+
+    - `SpanOutcomeEvaluationEnd("span.outcome_evaluation_end")`
+
+    - `SpanModelRequestStart("span.model_request_start")`
+
+    - `SpanModelRequestEnd("span.model_request_end")`
+
+    - `SpanOutcomeEvaluationOngoing("span.outcome_evaluation_ongoing")`
+
+    - `UserDefineOutcome("user.define_outcome")`
+
+    - `SessionThreadStatusRunning("session.thread_status_running")`
+
+    - `SessionThreadStatusIdle("session.thread_status_idle")`
+
+    - `SessionThreadStatusTerminated("session.thread_status_terminated")`
+
+    - `UserToolResult("user.tool_result")`
+
+    - `SessionThreadStatusRescheduled("session.thread_status_rescheduled")`
+
+    - `SessionUpdated("session.updated")`
+
+    - `SystemMessage("system.message")`
+
+    - `SessionUsage("session.usage")`
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -41326,6 +41488,10 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -41336,7 +41502,7 @@ List Events
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -44703,6 +44869,10 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -44713,7 +44883,7 @@ Stream Events
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -46834,6 +47004,10 @@ List Session Threads
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -46844,7 +47018,7 @@ List Session Threads
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -47747,6 +47921,10 @@ Get Session Thread
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -47757,7 +47935,7 @@ Get Session Thread
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -48654,6 +48832,10 @@ Archive Session Thread
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -48664,7 +48846,7 @@ Archive Session Thread
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -51051,6 +51233,10 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -51061,7 +51247,7 @@ List Session Thread Events
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -53444,6 +53630,10 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeOpus5_5("claude-opus-5-5")`
 
             Powerful intelligence for coding, knowledge work, and long-running agents
@@ -53454,7 +53644,7 @@ Stream Session Thread Events
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 

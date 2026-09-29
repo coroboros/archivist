@@ -1087,13 +1087,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type Model string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -1109,7 +1111,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -1168,6 +1170,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             New class of intelligence, strongest in coding and cybersecurity
+
+        - `string`
 
       - `CacheControl CacheControlEphemeral Optional`
 
@@ -1289,9 +1293,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `Stream bool Optional`
 
-        Whether to incrementally stream the response using server-sent events.
+        Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-        See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+        In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
       - `System []TextBlockParamResp Optional`
 
@@ -1346,6 +1350,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `type ThinkingConfigDisabled`
 
           - `Type Disabled`
+
+        - `type ThinkingConfigBetweenTools`
+
+          - `Type BetweenTools`
 
         - `type ThinkingConfigAdaptive`
 

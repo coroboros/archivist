@@ -2994,13 +2994,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                      - `str`
-
-                      - `Literal["claude-fable-5-1", "claude-opus-5-5", "claude-mythos-5-1", 15 more]`
+                      - `Literal["claude-sonnet-5-5", "claude-fable-5-1", "claude-opus-5-5", 16 more]`
 
                         The model that will complete your prompt.
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                        - `"claude-sonnet-5-5"`
+
+                          Efficient model for coding and agents
 
                         - `"claude-fable-5-1"`
 
@@ -3016,7 +3018,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         - `"claude-sonnet-5"`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `"claude-fable-5"`
 
@@ -3075,6 +3077,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                           **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                           New class of intelligence, strongest in coding and cybersecurity
+
+                      - `str`
 
                     - `name: Literal["advisor"]`
 
@@ -3752,6 +3756,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["disabled"]`
 
+      - `class BetaThinkingConfigBetweenTools`
+
+        - `type: Literal["between_tools"]`
+
       - `class BetaThinkingConfigAdaptive`
 
         - `type: Literal["adaptive"]`
@@ -3840,9 +3848,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `stream: Optional[Literal[false]]`
 
-  Whether to incrementally stream the response using server-sent events.
+  Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-  See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+  In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
 - `system: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
 
@@ -3877,6 +3885,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   - `class BetaThinkingConfigEnabled`
 
   - `class BetaThinkingConfigDisabled`
+
+  - `class BetaThinkingConfigBetweenTools`
 
   - `class BetaThinkingConfigAdaptive`
 
@@ -6922,13 +6932,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                    - `str`
-
-                    - `Literal["claude-fable-5-1", "claude-opus-5-5", "claude-mythos-5-1", 15 more]`
+                    - `Literal["claude-sonnet-5-5", "claude-fable-5-1", "claude-opus-5-5", 16 more]`
 
                       The model that will complete your prompt.
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                      - `"claude-sonnet-5-5"`
+
+                        Efficient model for coding and agents
 
                       - `"claude-fable-5-1"`
 
@@ -6944,7 +6956,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `"claude-sonnet-5"`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `"claude-fable-5"`
 
@@ -7003,6 +7015,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                         **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                         New class of intelligence, strongest in coding and cybersecurity
+
+                    - `str`
 
                   - `name: Literal["advisor"]`
 
@@ -8423,7 +8437,7 @@ print(beta_message.id)
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }

@@ -1615,11 +1615,15 @@ List Session Thread Events
 
           Model identifier and configuration.
 
-          - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+          - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `"claude-opus-5-5"`
 
@@ -1631,7 +1635,7 @@ List Session Thread Events
 
             - `"claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `"claude-fable-5"`
 
@@ -1759,7 +1763,7 @@ List Session Thread Events
 
                 Model identifier and configuration.
 
-                - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+                - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                   The model that will power your agent.
 
@@ -3981,11 +3985,15 @@ Stream Session Thread Events
 
         Model identifier and configuration.
 
-        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+        - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `"claude-opus-5-5"`
 
@@ -3997,7 +4005,7 @@ Stream Session Thread Events
 
           - `"claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `"claude-fable-5"`
 
@@ -4125,7 +4133,7 @@ Stream Session Thread Events
 
               Model identifier and configuration.
 
-              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+              - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                 The model that will power your agent.
 

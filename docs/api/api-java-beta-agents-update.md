@@ -169,6 +169,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -179,7 +183,7 @@ Update Agent
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -845,6 +849,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
 
         Powerful intelligence for coding, knowledge work, and long-running agents
@@ -855,7 +863,7 @@ Update Agent
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 

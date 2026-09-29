@@ -2998,6 +2998,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `ClaudeFable5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -3012,7 +3016,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         - `ClaudeSonnet5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `ClaudeFable5("claude-fable-5")`
 
@@ -6544,6 +6548,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `ClaudeFable5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -6558,7 +6566,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     - `ClaudeSonnet5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `ClaudeFable5("claude-fable-5")`
 
@@ -7992,7 +8000,7 @@ Console.WriteLine(betaMessage);
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -10993,6 +11001,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `ClaudeFable5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -11007,7 +11019,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         - `ClaudeSonnet5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `ClaudeFable5("claude-fable-5")`
 
@@ -11855,6 +11867,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -11869,7 +11885,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -11995,6 +12011,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -12009,7 +12029,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -17224,6 +17244,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                  Efficient model for coding and agents
+
                 - `ClaudeFable5_1("claude-fable-5-1")`
 
                   Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -17238,7 +17262,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                 - `ClaudeSonnet5("claude-sonnet-5")`
 
-                  High-performance model for coding and agents
+                  Efficient model for coding and agents
 
                 - `ClaudeFable5("claude-fable-5")`
 
@@ -19352,6 +19376,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                  Efficient model for coding and agents
+
                 - `ClaudeFable5_1("claude-fable-5-1")`
 
                   Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -19366,7 +19394,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                 - `ClaudeSonnet5("claude-sonnet-5")`
 
-                  High-performance model for coding and agents
+                  Efficient model for coding and agents
 
                 - `ClaudeFable5("claude-fable-5")`
 
@@ -23102,6 +23130,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                    Efficient model for coding and agents
+
                   - `ClaudeFable5_1("claude-fable-5-1")`
 
                     Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -23116,7 +23148,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                   - `ClaudeSonnet5("claude-sonnet-5")`
 
-                    High-performance model for coding and agents
+                    Efficient model for coding and agents
 
                   - `ClaudeFable5("claude-fable-5")`
 
@@ -26361,6 +26393,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                    Efficient model for coding and agents
+
                   - `ClaudeFable5_1("claude-fable-5-1")`
 
                     Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -26375,7 +26411,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                   - `ClaudeSonnet5("claude-sonnet-5")`
 
-                    High-performance model for coding and agents
+                    Efficient model for coding and agents
 
                   - `ClaudeFable5("claude-fable-5")`
 
@@ -27484,6 +27520,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27498,7 +27538,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -27622,6 +27662,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27636,7 +27680,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -27871,6 +27915,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27885,7 +27933,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -27957,6 +28005,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27971,7 +28023,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -28088,6 +28140,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28102,7 +28158,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -28185,6 +28241,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28199,7 +28259,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -28359,6 +28419,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `JsonElement Type = "disabled"`
 
+    - `class BetaThinkingConfigBetweenTools`
+
+      - `JsonElement Type = "between_tools"`
+
     - `class BetaThinkingConfigAdaptive`
 
       - `JsonElement Type = "adaptive"`
@@ -28423,6 +28487,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28437,7 +28505,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -28596,6 +28664,10 @@ Console.WriteLine(betaMessageTokensCount);
       - `class BetaThinkingConfigDisabled`
 
         - `JsonElement Type = "disabled"`
+
+      - `class BetaThinkingConfigBetweenTools`
+
+        - `JsonElement Type = "between_tools"`
 
       - `class BetaThinkingConfigAdaptive`
 
@@ -32100,6 +32172,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `ClaudeFable5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -32114,7 +32190,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                     - `ClaudeSonnet5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `ClaudeFable5("claude-fable-5")`
 
@@ -33297,6 +33373,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeFable5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -33311,7 +33391,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -33596,6 +33676,10 @@ Console.WriteLine(betaMessageTokensCount);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `ClaudeFable5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -33610,7 +33694,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `ClaudeSonnet5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `ClaudeFable5("claude-fable-5")`
 
@@ -36588,6 +36672,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                        Efficient model for coding and agents
+
                       - `ClaudeFable5_1("claude-fable-5-1")`
 
                         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -36602,7 +36690,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                       - `ClaudeSonnet5("claude-sonnet-5")`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `ClaudeFable5("claude-fable-5")`
 
@@ -39998,6 +40086,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `ClaudeFable5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -40012,7 +40104,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                     - `ClaudeSonnet5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `ClaudeFable5("claude-fable-5")`
 
@@ -40724,6 +40816,10 @@ Console.WriteLine(betaMessageTokensCount);
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `ClaudeFable5_1("claude-fable-5-1")`
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -40738,7 +40834,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `ClaudeSonnet5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `ClaudeFable5("claude-fable-5")`
 
@@ -43696,6 +43792,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                        Efficient model for coding and agents
+
                       - `ClaudeFable5_1("claude-fable-5-1")`
 
                         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -43710,7 +43810,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                       - `ClaudeSonnet5("claude-sonnet-5")`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `ClaudeFable5("claude-fable-5")`
 
@@ -47378,6 +47478,10 @@ Console.WriteLine(betaMessageTokensCount);
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `ClaudeFable5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -47392,7 +47496,7 @@ Console.WriteLine(betaMessageTokensCount);
 
                         - `ClaudeSonnet5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `ClaudeFable5("claude-fable-5")`
 
@@ -51109,6 +51213,10 @@ Console.WriteLine(betaMessageTokensCount);
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+              Efficient model for coding and agents
+
             - `ClaudeFable5_1("claude-fable-5-1")`
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -51123,7 +51231,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `ClaudeSonnet5("claude-sonnet-5")`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `ClaudeFable5("claude-fable-5")`
 
@@ -53300,6 +53408,10 @@ Console.WriteLine(betaMessageTokensCount);
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+              Efficient model for coding and agents
+
             - `ClaudeFable5_1("claude-fable-5-1")`
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -53314,7 +53426,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `ClaudeSonnet5("claude-sonnet-5")`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `ClaudeFable5("claude-fable-5")`
 
@@ -55406,6 +55518,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -55420,7 +55536,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -57002,6 +57118,12 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `Updates("updates")`
 
+### Beta Thinking Config Between Tools
+
+- `class BetaThinkingConfigBetweenTools`
+
+  - `JsonElement Type = "between_tools"`
+
 ### Beta Thinking Config Disabled
 
 - `class BetaThinkingConfigDisabled`
@@ -57095,6 +57217,10 @@ Console.WriteLine(betaMessageTokensCount);
   - `class BetaThinkingConfigDisabled`
 
     - `JsonElement Type = "disabled"`
+
+  - `class BetaThinkingConfigBetweenTools`
+
+    - `JsonElement Type = "between_tools"`
 
   - `class BetaThinkingConfigAdaptive`
 
@@ -59224,6 +59350,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeFable5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -59238,7 +59368,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -61240,6 +61370,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeFable5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -61254,7 +61388,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -64630,6 +64764,10 @@ Console.WriteLine(betaMessageTokensCount);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -64644,7 +64782,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `ClaudeSonnet5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `ClaudeFable5("claude-fable-5")`
 
@@ -65188,6 +65326,10 @@ Console.WriteLine(betaMessageTokensCount);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `ClaudeFable5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -65202,7 +65344,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `ClaudeSonnet5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `ClaudeFable5("claude-fable-5")`
 
@@ -70782,6 +70924,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                            - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                              Efficient model for coding and agents
+
                             - `ClaudeFable5_1("claude-fable-5-1")`
 
                               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -70796,7 +70942,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             - `ClaudeSonnet5("claude-sonnet-5")`
 
-                              High-performance model for coding and agents
+                              Efficient model for coding and agents
 
                             - `ClaudeFable5("claude-fable-5")`
 
@@ -71532,6 +71678,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `JsonElement Type = "disabled"`
 
+            - `class BetaThinkingConfigBetweenTools`
+
+              - `JsonElement Type = "between_tools"`
+
             - `class BetaThinkingConfigAdaptive`
 
               - `JsonElement Type = "adaptive"`
@@ -71620,9 +71770,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `bool Stream`
 
-        Whether to incrementally stream the response using server-sent events.
+        Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-        See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+        In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
       - `System System`
 
@@ -71657,6 +71807,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `class BetaThinkingConfigEnabled`
 
         - `class BetaThinkingConfigDisabled`
+
+        - `class BetaThinkingConfigBetweenTools`
 
         - `class BetaThinkingConfigAdaptive`
 
@@ -76046,6 +76198,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `ClaudeSonnet5_5("claude-sonnet-5-5")`
+
+                            Efficient model for coding and agents
+
                           - `ClaudeFable5_1("claude-fable-5-1")`
 
                             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -76060,7 +76216,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `ClaudeSonnet5("claude-sonnet-5")`
 
-                            High-performance model for coding and agents
+                            Efficient model for coding and agents
 
                           - `ClaudeFable5("claude-fable-5")`
 

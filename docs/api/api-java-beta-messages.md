@@ -3108,6 +3108,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -3122,7 +3126,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -6544,6 +6548,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -6558,7 +6566,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -7995,7 +8003,7 @@ public final class Main {
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -11106,6 +11114,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -11120,7 +11132,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -11861,6 +11873,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -11875,7 +11891,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -12001,6 +12017,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -12015,7 +12035,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -17230,6 +17250,10 @@ public final class Main {
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                  Efficient model for coding and agents
+
                 - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                   Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -17244,7 +17268,7 @@ public final class Main {
 
                 - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                  High-performance model for coding and agents
+                  Efficient model for coding and agents
 
                 - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -19358,6 +19382,10 @@ public final class Main {
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                  Efficient model for coding and agents
+
                 - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                   Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -19372,7 +19400,7 @@ public final class Main {
 
                 - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                  High-performance model for coding and agents
+                  Efficient model for coding and agents
 
                 - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -23108,6 +23136,10 @@ public final class Main {
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                    Efficient model for coding and agents
+
                   - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                     Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -23122,7 +23154,7 @@ public final class Main {
 
                   - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                    High-performance model for coding and agents
+                    Efficient model for coding and agents
 
                   - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -26367,6 +26399,10 @@ public final class Main {
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                    Efficient model for coding and agents
+
                   - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                     Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -26381,7 +26417,7 @@ public final class Main {
 
                   - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                    High-performance model for coding and agents
+                    Efficient model for coding and agents
 
                   - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -27490,6 +27526,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27504,7 +27544,7 @@ public final class Main {
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -27628,6 +27668,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27642,7 +27686,7 @@ public final class Main {
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -27877,6 +27921,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27891,7 +27939,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -27963,6 +28011,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -27977,7 +28029,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -28094,6 +28146,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28108,7 +28164,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -28191,6 +28247,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28205,7 +28265,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -28365,6 +28425,10 @@ public final class Main {
 
       - `JsonValue type = "disabled"`
 
+    - `class BetaThinkingConfigBetweenTools`
+
+      - `JsonValue type = "between_tools"`
+
     - `class BetaThinkingConfigAdaptive`
 
       - `JsonValue type = "adaptive"`
@@ -28429,6 +28493,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -28443,7 +28511,7 @@ public final class Main {
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -28602,6 +28670,10 @@ public final class Main {
       - `class BetaThinkingConfigDisabled`
 
         - `JsonValue type = "disabled"`
+
+      - `class BetaThinkingConfigBetweenTools`
+
+        - `JsonValue type = "between_tools"`
 
       - `class BetaThinkingConfigAdaptive`
 
@@ -32106,6 +32178,10 @@ public final class Main {
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -32120,7 +32196,7 @@ public final class Main {
 
                     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -33303,6 +33379,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -33317,7 +33397,7 @@ public final class Main {
 
         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -33602,6 +33682,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+      Efficient model for coding and agents
+
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -33616,7 +33700,7 @@ public final class Main {
 
     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-      High-performance model for coding and agents
+      Efficient model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -36594,6 +36678,10 @@ public final class Main {
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                        Efficient model for coding and agents
+
                       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -36608,7 +36696,7 @@ public final class Main {
 
                       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -40004,6 +40092,10 @@ public final class Main {
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                      Efficient model for coding and agents
+
                     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -40018,7 +40110,7 @@ public final class Main {
 
                     - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                      High-performance model for coding and agents
+                      Efficient model for coding and agents
 
                     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -40730,6 +40822,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+            Efficient model for coding and agents
+
           - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -40744,7 +40840,7 @@ public final class Main {
 
           - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -43702,6 +43798,10 @@ public final class Main {
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                        Efficient model for coding and agents
+
                       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -43716,7 +43816,7 @@ public final class Main {
 
                       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -47384,6 +47484,10 @@ public final class Main {
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -47398,7 +47502,7 @@ public final class Main {
 
                         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -51115,6 +51219,10 @@ public final class Main {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+              Efficient model for coding and agents
+
             - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -51129,7 +51237,7 @@ public final class Main {
 
             - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -53306,6 +53414,10 @@ public final class Main {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+              Efficient model for coding and agents
+
             - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -53320,7 +53432,7 @@ public final class Main {
 
             - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -55412,6 +55524,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -55426,7 +55542,7 @@ public final class Main {
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -57008,6 +57124,12 @@ public final class Main {
 
     - `UPDATES("updates")`
 
+### Beta Thinking Config Between Tools
+
+- `class BetaThinkingConfigBetweenTools`
+
+  - `JsonValue type = "between_tools"`
+
 ### Beta Thinking Config Disabled
 
 - `class BetaThinkingConfigDisabled`
@@ -57101,6 +57223,10 @@ public final class Main {
   - `class BetaThinkingConfigDisabled`
 
     - `JsonValue type = "disabled"`
+
+  - `class BetaThinkingConfigBetweenTools`
+
+    - `JsonValue type = "between_tools"`
 
   - `class BetaThinkingConfigAdaptive`
 
@@ -59230,6 +59356,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -59244,7 +59374,7 @@ public final class Main {
 
         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -61246,6 +61376,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -61260,7 +61394,7 @@ public final class Main {
 
         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -64636,6 +64770,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+        Efficient model for coding and agents
+
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -64650,7 +64788,7 @@ public final class Main {
 
       - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-        High-performance model for coding and agents
+        Efficient model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -65194,6 +65332,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+          Efficient model for coding and agents
+
         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -65208,7 +65350,7 @@ public final class Main {
 
         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -70898,6 +71040,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                            - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                              Efficient model for coding and agents
+
                             - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                               Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -70912,7 +71058,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                              High-performance model for coding and agents
+                              Efficient model for coding and agents
 
                             - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -71648,6 +71794,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `JsonValue type = "disabled"`
 
+            - `class BetaThinkingConfigBetweenTools`
+
+              - `JsonValue type = "between_tools"`
+
             - `class BetaThinkingConfigAdaptive`
 
               - `JsonValue type = "adaptive"`
@@ -71736,9 +71886,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `Optional<Boolean> stream`
 
-        Whether to incrementally stream the response using server-sent events.
+        Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-        See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
+        In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../build-with-claude/build-with-claude-streaming.md#streaming-with-sdks) for an example in each language.
 
       - `Optional<System> system`
 
@@ -71773,6 +71923,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `class BetaThinkingConfigEnabled`
 
         - `class BetaThinkingConfigDisabled`
+
+        - `class BetaThinkingConfigBetweenTools`
 
         - `class BetaThinkingConfigAdaptive`
 
@@ -75930,6 +76082,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                            Efficient model for coding and agents
+
                           - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -75944,7 +76100,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                            High-performance model for coding and agents
+                            Efficient model for coding and agents
 
                           - `CLAUDE_FABLE_5("claude-fable-5")`
 

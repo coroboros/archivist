@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "How it compares to the current lineup"
 source: "https://platform.claude.com/docs/en/models/sonnet-5/overview"
 category: "general"
 generated: true
@@ -7,34 +7,26 @@ generated: true
 ---
 title: Claude Sonnet 5
 url: https://platform.claude.com/docs/en/models/sonnet-5/overview
-description: "Claude Sonnet 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Sonnet 5.5 is the current Sonnet model."
+description: "Claude Sonnet 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Sonnet 5 is a legacy model; Claude Sonnet 5.5 is the current Sonnet model."
 ---
 
 **Legacy.** Released June 30, 2026.
 
-The best combination of speed and intelligence
-
-Although Claude Sonnet 5 is still available, you should consider migrating to Claude Sonnet 5.5 for improved performance. [See Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md) · [Migrate to Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md)
+Although Claude Sonnet 5 is still available, you should consider migrating to Claude Sonnet 5.5 for improved performance. [See Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) · [Migrate to Claude Sonnet 5.5](./general-models-sonnet-5-5-migration-guide.md#migrating-from-claude-sonnet-5)
 
 Model ID: `claude-sonnet-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok · Output pricing: $10 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-sonnet-5) · [What’s new](./general-models-sonnet-5-whats-new-sonnet-5.md)
+[Announcement](https://www.anthropic.com/news/claude-sonnet-5)
 
-## Overview
-
-Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is a drop-in upgrade for Claude Sonnet 4.6 with three behavior changes: [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) is on by default, manual extended thinking now returns a 400 error (it was deprecated on Claude Sonnet 4.6), and setting sampling parameters (`temperature`, `top_p`, `top_k`) to non-default values returns a 400 error. This page summarizes everything new at launch, including a new tokenizer.
-
-[What's new in Claude Sonnet 5](./general-models-sonnet-5-whats-new-sonnet-5.md)
-
-## How it compares
+## How it compares to the current lineup
 
 | Model                                                                               | Context | Max output | Price / MTok | Thinking             | Default effort | Knowledge cutoff |
 | :---------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------------------- | :------------- | :--------------- |
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md)   | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jun 2026         |
 | [Claude Opus 5.5](./general-models-opus-5-5-overview.md)     | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
-| [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jun 2026         |
+| [Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jun 2026         |
 | **Claude Sonnet 5** (this model)                                                    | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jan 2026         |
 | [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md)   | 200K    | 64K        | $1 / $5      | Extended             | —              | Feb 2025         |
 
@@ -95,17 +87,17 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 ## Good to know
 
 * On the [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md#extended-output-beta), Claude Sonnet 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
-* Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error. See [What's new in Claude Sonnet 5](./general-models-sonnet-5-whats-new-sonnet-5.md#sampling-parameters-not-accepted).
+* Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error.
 * Query limits and capabilities programmatically with the [Models API](../api/api-models-list.md).
 
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Sonnet 5.5" icon="arrows-left-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md">
+  <Card title="Migrate to Claude Sonnet 5.5" icon="arrows-left-right" href="./general-models-sonnet-5-5-migration-guide.md">
     What changes when moving from Claude Sonnet 5 to Claude Sonnet 5.5.
   </Card>
 
-  <Card title="Claude Sonnet 5.5" icon="arrow-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md">
+  <Card title="Claude Sonnet 5.5" icon="arrow-right" href="./general-models-sonnet-5-5-overview.md">
     The current Sonnet model: overview, specs, and resources.
   </Card>
 
@@ -129,6 +121,10 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 ## Reference
 
 <CardGroup cols={3}>
+  <Card title="System prompt" icon="text" href="../release-notes/release-notes-system-prompts-claude-sonnet-5.md">
+    The system prompt Claude Sonnet 5 uses on claude.ai and the Claude apps.
+  </Card>
+
   <Card title="System card" icon="file" href="https://www.anthropic.com/claude-sonnet-5-system-card">
     Safety evaluations and deployment decisions for Claude Sonnet 5.
   </Card>

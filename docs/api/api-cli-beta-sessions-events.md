@@ -63,7 +63,7 @@ List Events
 
   Query param: Opaque pagination cursor from a previous response's `next_page`.
 
-- `--type: optional array of string`
+- `--type: optional array of BetaManagedAgentsSessionEventType`
 
   Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
@@ -1643,11 +1643,15 @@ List Events
 
           Model identifier and configuration.
 
-          - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+          - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `"claude-opus-5-5"`
 
@@ -1659,7 +1663,7 @@ List Events
 
             - `"claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `"claude-fable-5"`
 
@@ -1787,7 +1791,7 @@ List Events
 
                 Model identifier and configuration.
 
-                - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+                - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                   The model that will power your agent.
 
@@ -4518,11 +4522,15 @@ Stream Events
 
         Model identifier and configuration.
 
-        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+        - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `"claude-opus-5-5"`
 
@@ -4534,7 +4542,7 @@ Stream Events
 
           - `"claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `"claude-fable-5"`
 
@@ -4662,7 +4670,7 @@ Stream Events
 
               Model identifier and configuration.
 
-              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+              - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                 The model that will power your agent.
 
@@ -9858,11 +9866,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+        - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `"claude-opus-5-5"`
 
@@ -9874,7 +9886,7 @@ ant beta:sessions:events stream \
 
           - `"claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `"claude-fable-5"`
 
@@ -10002,7 +10014,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+              - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                 The model that will power your agent.
 
@@ -10595,6 +10607,80 @@ ant beta:sessions:events stream \
       - `max_list_cost: object`
 
         Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
+
+### Beta Managed Agents Session Event Type
+
+- `beta_managed_agents_session_event_type: "user.message" or "user.interrupt" or "user.tool_confirmation" or 31 more`
+
+  The `type` of a session event.
+
+  - `"user.message"`
+
+  - `"user.interrupt"`
+
+  - `"user.tool_confirmation"`
+
+  - `"user.custom_tool_result"`
+
+  - `"agent.custom_tool_use"`
+
+  - `"agent.message"`
+
+  - `"agent.thinking"`
+
+  - `"agent.mcp_tool_use"`
+
+  - `"agent.mcp_tool_result"`
+
+  - `"agent.tool_use"`
+
+  - `"agent.tool_result"`
+
+  - `"agent.thread_message_received"`
+
+  - `"agent.thread_message_sent"`
+
+  - `"agent.thread_context_compacted"`
+
+  - `"session.error"`
+
+  - `"session.status_rescheduled"`
+
+  - `"session.status_running"`
+
+  - `"session.status_idle"`
+
+  - `"session.status_terminated"`
+
+  - `"session.thread_created"`
+
+  - `"span.outcome_evaluation_start"`
+
+  - `"span.outcome_evaluation_end"`
+
+  - `"span.model_request_start"`
+
+  - `"span.model_request_end"`
+
+  - `"span.outcome_evaluation_ongoing"`
+
+  - `"user.define_outcome"`
+
+  - `"session.thread_status_running"`
+
+  - `"session.thread_status_idle"`
+
+  - `"session.thread_status_terminated"`
+
+  - `"user.tool_result"`
+
+  - `"session.thread_status_rescheduled"`
+
+  - `"session.updated"`
+
+  - `"system.message"`
+
+  - `"session.usage"`
 
 ### Beta Managed Agents Session Requires Action
 
@@ -12764,11 +12850,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+        - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `"claude-opus-5-5"`
 
@@ -12780,7 +12870,7 @@ ant beta:sessions:events stream \
 
           - `"claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `"claude-fable-5"`
 
@@ -12908,7 +12998,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: string or "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more`
+              - `id: "claude-sonnet-5-5" or "claude-opus-5-5" or "claude-fable-5-1" or 13 more or string`
 
                 The model that will power your agent.
 

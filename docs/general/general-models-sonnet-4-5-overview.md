@@ -12,7 +12,7 @@ description: "Claude Sonnet 4.5 reference: lifecycle status, model IDs on every 
 
 **Legacy.** Released September 29, 2025.
 
-Although Claude Sonnet 4.5 is still available, you should consider migrating to Claude Sonnet 5.5 for improved performance. [See Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md) · [Migrate to Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md)
+Although Claude Sonnet 4.5 is still available, you should consider migrating to Claude Sonnet 5.5 for improved performance. [See Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) · [Migrate to Claude Sonnet 5.5](./general-models-sonnet-5-5-migration-guide.md#migrating-from-sonnet-45)
 
 Model ID: `claude-sonnet-4-5-20250929`
 
@@ -26,7 +26,7 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $3 / MTo
 | :---------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------------------- | :------------- | :--------------- |
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md)   | 1M      | 128K       | $10 / $50    | Adaptive (always on) | `high`         | Jun 2026         |
 | [Claude Opus 5.5](./general-models-opus-5-5-overview.md)     | 1M      | 128K       | $4 / $20     | Adaptive (always on) | `medium`       | Jun 2026         |
-| [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jun 2026         |
+| [Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) | 1M      | 128K       | $2 / $10     | Adaptive             | `high`         | Jun 2026         |
 | **Claude Sonnet 4.5** (this model)                                                  | 200K    | 64K        | $3 / $15     | Extended             | —              | Jan 2025         |
 | [Claude Haiku 4.5](./general-models-haiku-4-5-overview.md)   | 200K    | 64K        | $1 / $5      | Extended             | —              | Feb 2025         |
 
@@ -87,11 +87,11 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $3 / MTo
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Sonnet 5.5" icon="arrows-left-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide.md">
+  <Card title="Migrate to Claude Sonnet 5.5" icon="arrows-left-right" href="./general-models-sonnet-5-5-migration-guide.md">
     What changes when moving from Claude Sonnet 4.5 and earlier Sonnet models to Claude Sonnet 5.5.
   </Card>
 
-  <Card title="Claude Sonnet 5.5" icon="arrow-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview.md">
+  <Card title="Claude Sonnet 5.5" icon="arrow-right" href="./general-models-sonnet-5-5-overview.md">
     The current Sonnet model: overview, specs, and resources.
   </Card>
 </CardGroup>

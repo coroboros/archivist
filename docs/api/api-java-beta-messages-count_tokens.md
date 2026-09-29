@@ -3094,6 +3094,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
+
+                          Efficient model for coding and agents
+
                         - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
                           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -3108,7 +3112,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         - `CLAUDE_SONNET_5("claude-sonnet-5")`
 
-                          High-performance model for coding and agents
+                          Efficient model for coding and agents
 
                         - `CLAUDE_FABLE_5("claude-fable-5")`
 
