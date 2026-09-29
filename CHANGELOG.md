@@ -1,5 +1,44 @@
 # Changelog
 
+## 🤖 v1.5.200 - 29/09/2026
+
+File Changes:
+
+- Modified: `docs/code/code-2026-w13.md`
+- Modified: `docs/code/code-2026-w14.md`
+- Modified: `docs/code/code-2026-w16.md`
+- Modified: `docs/code/code-2026-w17.md`
+- Modified: `docs/code/code-2026-w18.md`
+- Modified: `docs/code/code-2026-w19.md`
+- Modified: `docs/code/code-2026-w20.md`
+- Modified: `docs/code/code-2026-w21.md`
+- Modified: `docs/code/code-2026-w22.md`
+- Modified: `docs/code/code-2026-w33.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-desktop-ios-simulator.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-evals.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-worktrees.md`
+
+
 ## 🤖 v1.5.199 - 29/09/2026
 
 File Changes:
