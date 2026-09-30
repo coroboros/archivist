@@ -447,7 +447,7 @@ Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/gl
 }
 ```
 
-Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](../build-with-claude/build-with-claude-structured-outputs.md#json-outputs) instead.
+Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](../build-with-claude/build-with-claude-structured-outputs.md#usage) instead.
 
 ### Thinking blocks cannot be modified
 

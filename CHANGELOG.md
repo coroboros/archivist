@@ -1,5 +1,95 @@
 # Changelog
 
+## 🤖 v1.5.201 - 30/09/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-runner.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-background.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-on-demand.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction-threshold.md`
+- Modified: `docs/build-with-claude/build-with-claude-preserved-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-sonnet-5-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-on-aws.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-communications-kit.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-create-marketplace.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-file-checkpointing.md`
+- Modified: `docs/code/code-github-actions.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-self-hosted-environments-quickstart.md`
+- Modified: `docs/code/code-self-hosted-environments-reference.md`
+- Modified: `docs/code/code-self-hosted-environments.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-quickstart.md`
+- Modified: `docs/general/general-models-fable-5-1-migration-guide.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+
+
 ## 🤖 v1.5.200 - 29/09/2026
 
 File Changes:

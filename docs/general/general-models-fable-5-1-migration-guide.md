@@ -578,7 +578,7 @@ model = "claude-mythos-5-1"  # After
      ```
    </CodeGroup>
 
-   See [Strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md) and [Forcing tool use](../agents-and-tools/agents-and-tools-tool-use-define-tools.md#forcing-tool-use). If you forced a tool only to get schema-conformant JSON, use [JSON outputs](../build-with-claude/build-with-claude-structured-outputs.md#json-outputs) (`output_config.format`) instead.
+   See [Strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md) and [Forcing tool use](../agents-and-tools/agents-and-tools-tool-use-define-tools.md#forcing-tool-use). If you forced a tool only to get schema-conformant JSON, use [JSON outputs](../build-with-claude/build-with-claude-structured-outputs.md#usage) (`output_config.format`) instead.
 
    If your application, rather than the user, requires a specific tool call on the current turn of a multi-turn conversation, append a [mid-conversation system message](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) after the latest `user` turn. Name the tool, say the call is required for this turn, and tell Claude to open its response with it. Because the message is appended rather than written into the top-level `system` prompt, earlier turns stay byte-identical and keep their [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md) hits:
 
