@@ -290,6 +290,9 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
     max_tokens: 16000,
     thinking: {
       type: "adaptive",
+      # A plain hash like this one takes display:. The typed ThinkingConfigAdaptive class
+      # spells it display_ (trailing underscore) to avoid shadowing Ruby's Kernel#display.
+      # The request still sends display.
       display: "summarized"
     },
     messages: [
@@ -516,8 +519,6 @@ Keep the following in mind when working with omitted thinking:
 <Note>
   The `signature` field is identical whichever `display` value you set. Switching `display` values between turns in a conversation is supported.
 </Note>
-
-In the Ruby SDK, plain hashes take `display:` as the examples show. The typed `ThinkingConfigAdaptive` class names the parameter `display_` (trailing underscore, to avoid shadowing Ruby's `Kernel#display`). Either way, the wire field is still `display`.
 
 ### Summarized thinking
 
@@ -785,6 +786,9 @@ The following examples stream a response with adaptive thinking, printing thinki
   stream = client.messages.stream(
     model: "claude-opus-4-8",
     max_tokens: 16000,
+    # A plain hash like this one takes display:. The typed ThinkingConfigAdaptive class
+    # spells it display_ (trailing underscore) to avoid shadowing Ruby's Kernel#display.
+    # The request still sends display.
     thinking: { type: "adaptive", display: "summarized" },
     messages: [
       { role: "user", content: "What is the greatest common divisor of 1071 and 462?" }
@@ -1223,7 +1227,7 @@ See the [models overview](../general/general-models-overview.md) for limits on l
 
 ### Long requests
 
-The SDKs require streaming when `max_tokens` is greater than 21,333, to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` (java: `.createStreaming()`; csharp: `.CreateStreaming()`; go: `.NewStreaming()`; php: `->createStream()`) with `.get_final_message()` (typescript: `.finalMessage()`; ruby: `.accumulated_message`; csharp: `.Aggregate()`; go: `message.Accumulate(event)`; java, php: `MessageAccumulator`) to get the complete `Message` object without assembling it from individual events yourself. See [Streaming Messages](./build-with-claude-streaming.md#get-the-final-message-without-handling-events). Expect longer response times when thinking is active, because generating thinking blocks adds processing time. For workloads that push thinking above roughly 32k tokens per request, use [batch processing](./build-with-claude-batch-processing.md) to avoid networking issues: such requests can run long enough to hit system timeouts and open connection limits.
+The SDK requires streaming when `max_tokens` is greater than 21,333, to avoid HTTP timeouts on long-running requests. This is a client-side validation, not an API restriction. If you don't need to process events incrementally, use `.stream()` (java: `.createStreaming()`; csharp: `.CreateStreaming()`; go: `.NewStreaming()`; php: `->createStream()`) with `.get_final_message()` (typescript: `.finalMessage()`; ruby: `.accumulated_message`; csharp: `.Aggregate()`; go: `message.Accumulate(event)`; java, php: `MessageAccumulator`) to get the complete `Message` object without assembling it from individual events yourself. See [Streaming Messages](./build-with-claude-streaming.md#get-the-final-message-without-handling-events). Expect longer response times when thinking is active, because generating thinking blocks adds processing time. For workloads that push thinking above roughly 32k tokens per request, use [batch processing](./build-with-claude-batch-processing.md) to avoid networking issues: such requests can run long enough to hit system timeouts and open connection limits.
 
 ## Next steps
 

@@ -808,13 +808,25 @@ Skill(review-pr *)
 Skill(deploy *)
 ```
 
-Permission syntax: `Skill(name)` for exact match, `Skill(name *)` for prefix match with any arguments. In an `allow` rule, a prefix outside the [namespace reserved for synced skills](#names-reserved-for-synced-skills) doesn't match the names inside it: `Skill(anthropic *)` doesn't cover `anthropic-skills:pdf`.
+Permission syntax: `Skill(name)` for exact match, `Skill(name *)` for prefix match with any arguments.
 
-If your `deny` rule names an alias or an unqualified name rather than the skill's own name, Claude Code still blocks the skill: with `Skill(review)` it blocks the bundled `/code-review` through its `/review` alias, and with `Skill(deploy)` it blocks a [nested skill](#where-skills-live) listed as `apps/web:deploy` through its unqualified name. Before v2.1.260, Claude Code didn't block a nested skill listed under its qualified name when the deny rule named only the unqualified name.
+The table shows what a `deny` rule blocks beyond the name you write, by the kind of name in the rule.
 
-Claude Code matches an `allow` rule only against the skill's own name and the name in Claude's invocation.
+| Your `deny` rule names | Example rule | Claude Code also blocks |
+| :- | :- | :- |
+| An alias | `Skill(review)` | The bundled `/code-review`, through its `/review` alias |
+| An unqualified name | `Skill(deploy)` | A [nested skill](#where-skills-live) listed as `apps/web:deploy` |
+| A [skill synced from claude.ai](#how-synced-skills-behave) | `Skill(anthropic-skills:deploy)` | That skill when Claude Desktop delivers it to a session as a plugin |
+| The plugin form of a synced skill | `Skill(deploy:deploy)` | The synced skill |
+| A skill in the [parameter form](/docs/en/permissions#match-by-input-parameter) | `Skill(skill:deploy)` | The skill whichever of its names Claude calls it by, including its alias and display name |
 
-To approve a [synced skill](#how-synced-skills-behave) without a prompt, name it inside its [reserved namespace](#names-reserved-for-synced-skills): `Skill(anthropic-skills:pdf)` approves the synced `pdf` skill, and `Skill(anthropic-skills *)` approves every synced skill.
+Before v2.1.260, Claude Code didn't block a nested skill listed under its qualified name when the deny rule named only the unqualified name.
+
+Claude Code matches an `allow` rule only against the skill's own name and the name in Claude's invocation. To approve a [synced skill](#how-synced-skills-behave) without a prompt, name it inside its [reserved namespace](#names-reserved-for-synced-skills):
+
+* `Skill(anthropic-skills:pdf)` approves the synced `pdf` skill
+* `Skill(anthropic-skills *)` approves every synced skill
+* `Skill(anthropic *)` doesn't cover `anthropic-skills:pdf`, because a prefix outside the namespace doesn't match the names inside it
 
 **Hide individual skills** by adding `disable-model-invocation: true` to their frontmatter. This removes the skill from Claude's context entirely.
 
@@ -868,9 +880,14 @@ The report covers the skills in your session other than bundled skills and enter
 
 Seeing a skill trigger tells you Claude found it, not that it did what you intended. To know a skill is working, measure separately whether Claude invokes it on the prompts it should, and whether the output matches what you expect when it does.
 
-The check for both is a baseline comparison. Collect a few realistic prompts, run each one in a fresh session with the skill available and again with it [disabled](#override-skill-visibility-from-settings), and compare the results. A fresh session matters because leftover context from authoring the skill will mask gaps in the written instructions.
+The check for both is a baseline comparison. Collect a few realistic prompts, run each one in a fresh session with the skill available and again with it turned off, and compare the results. A fresh session matters because leftover context from authoring the skill will mask gaps in the written instructions.
 
-Two tools automate that comparison. For a skill that ships in a [plugin](/docs/en/plugins/overview), [`claude plugin eval`](/docs/en/plugin-evals) runs each prompt in an isolated session with and without the plugin, scores it with graders you define or that it writes for you, and exits non-zero below a threshold so you can gate CI on it. For iterating on a single skill inside a Claude Code conversation, the skill-creator plugin below runs a similar loop with its own `evals/evals.json` format. The two formats aren't interchangeable.
+How you turn the skill off for the second run depends on where it comes from:
+
+* **Personal or project skill**: set it to `"off"` in [`skillOverrides`](#override-skill-visibility-from-settings).
+* **Skill that a plugin provides**: `skillOverrides` doesn't apply to plugin skills. Use [`claude plugin eval`](/docs/en/plugin-evals#the-no-plugin-baseline) instead, which repeats each run with no plugin loaded.
+
+Two tools automate the baseline comparison. For a skill that ships in a [plugin](/docs/en/plugins/overview), [`claude plugin eval`](/docs/en/plugin-evals) runs each prompt in an isolated session with and without the plugin, scores it with graders you define or that it writes for you, and exits non-zero below a threshold so you can gate CI on it. For iterating on a single skill inside a Claude Code conversation, the skill-creator plugin below runs a similar loop with its own `evals/evals.json` format. The two formats aren't interchangeable.
 
 ### Run evals with skill-creator
 

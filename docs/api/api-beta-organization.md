@@ -1550,103 +1550,101 @@ matched as the JWT's `iss` claim and is not fetched.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -1940,103 +1938,101 @@ Archived issuers are excluded unless `include_archived=true`.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -2241,103 +2237,101 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -2545,103 +2539,101 @@ session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -2927,103 +2919,101 @@ issuer cannot be changed), or recreate them against another issuer.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -3235,103 +3225,101 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -3650,103 +3638,101 @@ unless `include_archived=true`.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -3951,103 +3937,101 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -4270,103 +4254,101 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -4661,103 +4643,101 @@ other scopes require a Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -4976,103 +4956,101 @@ other scopes require a Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -5175,103 +5153,101 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -5364,103 +5340,101 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -5993,103 +5967,101 @@ accounts.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -6244,103 +6216,101 @@ archived service accounts.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -6457,103 +6427,101 @@ Retrieve a service account by its ID (`svac_...`).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -6671,103 +6639,101 @@ interactive credential (a user OAuth token or a Console session).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -6903,103 +6869,101 @@ those rules first or change their target to another service account.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -7122,103 +7086,101 @@ rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -7350,103 +7312,101 @@ page to recover.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -7550,103 +7510,101 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -8135,7 +8093,7 @@ List Workspaces
 
         - `"us"`
 
-      - `Unrestricted = "unrestricted"`
+      - `"unrestricted"`
 
     - `default_inference_geo: "global" or "us"`
 
@@ -8240,103 +8198,101 @@ Create Workspace
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -8360,7 +8316,7 @@ Create Workspace
 
       - `"us"`
 
-    - `Unrestricted = "unrestricted"`
+    - `"unrestricted"`
 
   - `default_inference_geo: optional "global" or "us" or null`
 
@@ -8454,7 +8410,7 @@ Create Workspace
 
         - `"us"`
 
-      - `Unrestricted = "unrestricted"`
+      - `"unrestricted"`
 
     - `default_inference_geo: "global" or "us"`
 
@@ -8604,7 +8560,7 @@ Get Workspace
 
         - `"us"`
 
-      - `Unrestricted = "unrestricted"`
+      - `"unrestricted"`
 
     - `default_inference_geo: "global" or "us"`
 
@@ -8702,7 +8658,7 @@ Update Workspace
 
       - `"us"`
 
-    - `Unrestricted = "unrestricted"`
+    - `"unrestricted"`
 
   - `default_inference_geo: optional "global" or "us" or null`
 
@@ -8798,7 +8754,7 @@ Update Workspace
 
         - `"us"`
 
-      - `Unrestricted = "unrestricted"`
+      - `"unrestricted"`
 
     - `default_inference_geo: "global" or "us"`
 
@@ -8945,7 +8901,7 @@ Archive Workspace
 
         - `"us"`
 
-      - `Unrestricted = "unrestricted"`
+      - `"unrestricted"`
 
     - `default_inference_geo: "global" or "us"`
 
@@ -9728,103 +9684,101 @@ omitted from the results.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -9925,103 +9879,101 @@ accounts cannot be added and are rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -10138,103 +10090,101 @@ account returns 404.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -10328,103 +10278,101 @@ rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -10535,103 +10483,101 @@ membership. Archived workspaces return 400.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -11166,103 +11112,101 @@ Get Messages Usage Report
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -11754,103 +11698,101 @@ Get Cost Report
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -12043,103 +11985,101 @@ archived tunnels are excluded unless `include_archived` is set.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -12239,103 +12179,101 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -12431,103 +12369,101 @@ tunnel returns the existing record unchanged.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -12624,103 +12560,101 @@ access logs.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -12789,103 +12723,101 @@ restarted after rotation must use the new value. An optional
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -12965,103 +12897,101 @@ holds at most two non-archived certificates.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -13187,103 +13117,101 @@ Archived certificates are excluded unless `include_archived` is set.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -13387,103 +13315,101 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -13582,103 +13508,101 @@ certificate is added.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
+  - `"message-batches-2024-09-24"`
 
-    - `"message-batches-2024-09-24"`
+  - `"prompt-caching-2024-07-31"`
 
-    - `"prompt-caching-2024-07-31"`
+  - `"computer-use-2024-10-22"`
 
-    - `"computer-use-2024-10-22"`
+  - `"computer-use-2025-01-24"`
 
-    - `"computer-use-2025-01-24"`
+  - `"pdfs-2024-09-25"`
 
-    - `"pdfs-2024-09-25"`
+  - `"token-counting-2024-11-01"`
 
-    - `"token-counting-2024-11-01"`
+  - `"token-efficient-tools-2025-02-19"`
 
-    - `"token-efficient-tools-2025-02-19"`
+  - `"output-128k-2025-02-19"`
 
-    - `"output-128k-2025-02-19"`
+  - `"files-api-2025-04-14"`
 
-    - `"files-api-2025-04-14"`
+  - `"mcp-client-2025-04-04"`
 
-    - `"mcp-client-2025-04-04"`
+  - `"mcp-client-2025-11-20"`
 
-    - `"mcp-client-2025-11-20"`
+  - `"dev-full-thinking-2025-05-14"`
 
-    - `"dev-full-thinking-2025-05-14"`
+  - `"interleaved-thinking-2025-05-14"`
 
-    - `"interleaved-thinking-2025-05-14"`
+  - `"code-execution-2025-05-22"`
 
-    - `"code-execution-2025-05-22"`
+  - `"extended-cache-ttl-2025-04-11"`
 
-    - `"extended-cache-ttl-2025-04-11"`
+  - `"context-1m-2025-08-07"`
 
-    - `"context-1m-2025-08-07"`
+  - `"context-management-2025-06-27"`
 
-    - `"context-management-2025-06-27"`
+  - `"model-context-window-exceeded-2025-08-26"`
 
-    - `"model-context-window-exceeded-2025-08-26"`
+  - `"skills-2025-10-02"`
 
-    - `"skills-2025-10-02"`
+  - `"fast-mode-2026-02-01"`
 
-    - `"fast-mode-2026-02-01"`
+  - `"output-300k-2026-03-24"`
 
-    - `"output-300k-2026-03-24"`
+  - `"user-profiles-2026-03-24"`
 
-    - `"user-profiles-2026-03-24"`
+  - `"user-profiles-2026-08-18"`
 
-    - `"user-profiles-2026-08-18"`
+  - `"user-profiles-2026-09-04"`
 
-    - `"user-profiles-2026-09-04"`
+  - `"advisor-tool-2026-03-01"`
 
-    - `"advisor-tool-2026-03-01"`
+  - `"managed-agents-2026-04-01"`
 
-    - `"managed-agents-2026-04-01"`
+  - `"cache-diagnosis-2026-04-07"`
 
-    - `"cache-diagnosis-2026-04-07"`
+  - `"dreaming-2026-04-21"`
 
-    - `"dreaming-2026-04-21"`
+  - `"thinking-token-count-2026-05-13"`
 
-    - `"thinking-token-count-2026-05-13"`
+  - `"server-side-fallback-2026-06-01"`
 
-    - `"server-side-fallback-2026-06-01"`
+  - `"server-side-fallback-2026-07-01"`
 
-    - `"server-side-fallback-2026-07-01"`
+  - `"fallback-credit-2026-06-01"`
 
-    - `"fallback-credit-2026-06-01"`
+  - `"fallback-credit-2026-07-01"`
 
-    - `"fallback-credit-2026-07-01"`
+  - `"agent-memory-2026-07-22"`
 
-    - `"agent-memory-2026-07-22"`
+  - `"mid-conversation-tool-changes-2026-07-01"`
 
-    - `"mid-conversation-tool-changes-2026-07-01"`
+  - `"compact-2026-01-12"`
 
-    - `"compact-2026-01-12"`
+  - `"computer-use-2025-11-24"`
 
-    - `"computer-use-2025-11-24"`
+  - `"mcp-tunnels-2026-06-22"`
 
-    - `"mcp-tunnels-2026-06-22"`
+  - `"structured-outputs-2025-11-13"`
 
-    - `"structured-outputs-2025-11-13"`
+  - `"task-budgets-2026-03-13"`
 
-    - `"task-budgets-2026-03-13"`
+  - `"thinking-display-updates-2026-08-18"`
 
-    - `"thinking-display-updates-2026-08-18"`
+  - `"ce-user-management-2026-07-13"`
 
-    - `"ce-user-management-2026-07-13"`
+  - `"mid-conversation-output-config-2026-07-01"`
 
-    - `"mid-conversation-output-config-2026-07-01"`
+  - `"thinking-binding-controls-2026-08-01"`
 
-    - `"thinking-binding-controls-2026-08-01"`
+  - `"mid-conversation-system-clear-at-2026-08-21"`
 
-    - `"mid-conversation-system-clear-at-2026-08-21"`
+  - `"compact-2026-09-04"`
 
-    - `"compact-2026-09-04"`
+  - `"inline-tools-2026-09-15"`
 
-    - `"inline-tools-2026-09-15"`
-
-    - `"mcp-client-2026-09-15"`
+  - `"mcp-client-2026-09-15"`
 
 #### Returns
 

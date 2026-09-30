@@ -100,7 +100,9 @@ Match the message you see to a section below.
 | `rejected the credential from its headersHelper` / `rejected the Authorization header in its config` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
 | `MCP server "<name>" needs additional permissions (scope: "<scope>") — run /mcp to re-authenticate` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
 | `MCP server "<name>" requires re-authorization (token expired)` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
+| `This server's URL is missing or not a valid URL, so sign-in can't start` | [Authentication](#mcp-server-url-is-missing-or-not-a-valid-url) |
 | `Issuer mismatch in authorization response (RFC 9207)` | [Authentication](#issuer-mismatch-in-authorization-response) |
+| `Refusing to send credentials to non-https token endpoint` / `<short-name> from the MCP SDK for <server-url>` | [Authentication](#refusing-to-send-credentials-to-non-https-token-endpoint) |
 | `Cloud gateway session expired — run /login to reconnect.` | [Authentication](#cloud-gateway-session-expired) |
 | `Cloud gateway <url> no longer accepts this session` | [Authentication](#cloud-gateway-session-expired) |
 | `Sign-in timed out while waiting for you to continue. Try again.` | [Authentication](#sign-in-timed-out-while-waiting-for-you-to-continue) |
@@ -163,6 +165,7 @@ Match the message you see to a section below.
 | `Claude Code ... is older than the minimum version required by your organization's policy` | [Request errors](#claude-code-does-not-support-this-model) |
 | `Model ... is restricted by your organization's settings` | [Request errors](#model-is-restricted-by-your-organizations-settings) |
 | `Model ... is not available. Your organization restricts model selection.` | [Request errors](#model-is-restricted-by-your-organizations-settings) |
+| `Can't switch to the default model` | [Request errors](#cant-switch-to-the-default-model) |
 | `Model switch ... blocked by a PreModelSwitch hook` | [Request errors](#model-switch-was-blocked-by-a-premodelswitch-hook) |
 | `couldn't save it as your default` / `couldn't confirm it was saved as your default` | [Request errors](#couldnt-save-it-as-your-default) |
 | `thinking.type.enabled is not supported for this model` | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model) |
@@ -206,6 +209,8 @@ Match the message you see to a section below.
 | `Cannot add MCP server to scope: managed` | [Command-line errors](#cannot-add-mcp-server-to-the-managed-scope) |
 | `is Anthropic-hosted and doesn't support local OAuth` | [Command-line errors](#anthropic-hosted-and-doesnt-support-local-oauth) |
 | `Can't read .mcp.json: it isn't a regular file or is larger than 2097152 bytes` | [Command-line errors](#cant-read-mcp-json) |
+| `MCP server "<name>" was not saved to` / `was not removed from` | [Command-line errors](#mcp-server-was-not-saved-or-removed) |
+| `MCP server "<name>" may not have been saved` / `may not have been removed` | [Command-line errors](#mcp-server-may-not-have-been-saved-or-removed) |
 | `Server rejected the Authorization header minted by the configured headersHelper` | [Command-line errors](#server-rejected-the-authorization-header-minted-by-the-configured-headershelper) |
 | `Error: MCP tool <name> (passed via --permission-prompt-tool) not found` | [Command-line errors](#mcp-permission-prompt-tool-not-found) |
 | `OAuth callback port <port> is already in use — another process may be holding it` | [Command-line errors](#oauth-callback-port-is-already-in-use) |
@@ -224,6 +229,7 @@ Match the message you see to a section below.
 | `Ultrareview clones <owner>/<repo> in the cloud with the GitHub account connected to your Claude account, and none is connected` | [Command-line errors](#no-github-account-is-connected-to-your-claude-account) |
 | `Your connected GitHub account can't see <owner>/<repo>` | [Command-line errors](#your-connected-github-account-cant-see-the-repository) |
 | `The GitHub App preflight failed transiently (network or service hiccup) — retry in a moment to start from GitHub instead` | [Command-line errors](#the-github-app-preflight-failed-transiently) |
+| `Not uploading this working tree` with `the upload cannot follow that setting` | [Command-line errors](#the-repository-upload-cant-follow-a-git-setting) |
 | `GitHub isn't connected to your Claude account, so this repository can't be cloned in the cloud` | [Command-line errors](#github-isnt-connected-to-your-claude-account) |
 | `Single sign-on authorization needed` | [Command-line errors](#single-sign-on-authorization-needed) |
 | `Failed to resume the conversation` | [Command-line errors](#failed-to-resume-the-conversation) |
@@ -703,7 +709,7 @@ Before v2.1.268, the message ended with `run /usage-credits to turn them on, or 
 
 ### The prompt to confirm went unanswered
 
-If your account requires the [Fable usage-credits consent](/docs/en/model-config#fable-and-usage-credits), Claude Code asks you to confirm before a Fable request bills usage credits. When nobody answers that consent prompt in a session that may have no one at its terminal, Claude Code closes the prompt and ends the turn with one of these messages:
+If your account requires the [Fable usage-credits consent](/docs/en/model-config#fable-and-usage-credits), Claude Code asks you to confirm before a Fable request bills usage credits. When the consent prompt closes with nobody answering it, Claude Code ends the turn with one of these messages:
 
 ```text theme={null}
 Fable limit reached · continuing on Fable 5.1 uses usage credits, and the prompt to confirm went unanswered — nothing was sent · answer it where this session is running, or /model to change
@@ -712,13 +718,13 @@ Fable 5.1 now uses usage credits · the prompt to confirm went unanswered — no
 
 The messages name the session's Fable model, so on Fable 5 they read `continuing on Fable 5` and `Fable 5 now uses usage credits`. Before v2.1.257, the first message began `Fable 5 limit reached`.
 
-This happens in [Remote Control](/docs/en/remote-control) sessions, [background sessions](/docs/en/agent-view), and [agent team](/docs/en/agent-teams) teammate sessions. Claude Code shows the consent prompt only in the session's own interactive view: the terminal where it runs, or, for a background session, the [agents view](/docs/en/agent-view) once you attach. A Remote Control client can't display it. Claude Code closes the prompt at the [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) deadline, five minutes by default, or as soon as a new prompt arrives while nobody has typed at that terminal, such as a prompt sent from a Remote Control client. Typing at the terminal where the session runs cancels the deadline, and Claude Code waits for your answer. In a background session's attached view, typing doesn't cancel the deadline, and a new prompt still closes the consent prompt, so answer before either happens. Claude Code sends nothing and keeps your model, so when you send your next prompt, Claude Code shows the consent prompt again.
+This happens in [Remote Control](/docs/en/remote-control) sessions, [background sessions](/docs/en/agent-view), [agent team](/docs/en/agent-teams) teammate sessions, and sessions that another application hosts through the Agent SDK. For when Claude Code closes the prompt, see [Fable and usage credits](/docs/en/model-config#fable-and-usage-credits).
 
 **What to do:**
 
-* At the terminal where the session runs, send another prompt and answer the consent prompt when it reappears. For a background session, attach to it from the [agents view](/docs/en/agent-view) first. Resending from a Remote Control client shows this message again, because the client can't display the prompt.
+* Where the session runs, at the terminal or in the application hosting it, send another prompt and answer the consent prompt when it reappears. For a background session, attach to it from the [agents view](/docs/en/agent-view) first. Resending from a Remote Control client shows this message again, because the client can't display the prompt.
 * Run `/model` to switch to a model that doesn't bill usage credits
-* To give yourself more time to reach that terminal, set [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) to a longer value or `"never"`
+* To give yourself more time, set [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) to a longer value or `"never"`
 
 Before v2.1.236, this message didn't appear: while a Remote Control client was connected, Claude Code waited 60 seconds for an answer and then continued the turn on your default model.
 
@@ -1423,6 +1429,18 @@ When the server's configuration sets neither [`oauth.scopes`](/docs/en/mcp#restr
 
 Before v2.1.274, this case showed the `needs you to sign in again` message, and before v2.1.273 it showed `requires re-authorization (token expired)` like the other cases.
 
+### MCP server URL is missing or not a valid URL
+
+Claude Code refused to start an OAuth sign-in for a remote MCP server because the server's configured `url` doesn't parse as a URL. Unless Claude Code has a more specific configuration problem to report for the server, running [`claude mcp login <name>`](/docs/en/mcp#authenticate-from-the-command-line) in your shell prints the refusal as:
+
+```text theme={null}
+Couldn't complete authentication for "<name>": This server's URL is missing or not a valid URL, so sign-in can't start. Fix the URL in its MCP config (or set the environment variable it uses) and try again.
+```
+
+**What to do:**
+
+* Set the entry's `url` to the server's real endpoint where the server is configured, or set the environment variable that its [`${VAR}` reference](/docs/en/mcp#environment-variable-expansion-in-mcp-json) names, then run the sign-in again.
+
 ### Issuer mismatch in authorization response
 
 During an [MCP OAuth sign-in](/docs/en/mcp#authenticate-with-remote-mcp-servers), the authorization server redirected back to Claude Code with an `iss` parameter that doesn't name the issuer that Claude Code expected from the server's OAuth metadata. A wrong issuer at this step is how an authorization server mix-up attack looks, so Claude Code fails the sign-in instead of exchanging the authorization code. Claude Code shows the error in the `/mcp` server menu after the browser sign-in:
@@ -1440,6 +1458,23 @@ Issuer mismatch in authorization response (RFC 9207): expected "https://auth.exa
 * To connect while the server is being fixed, start Claude Code with [`MCP_SDK_GENERATION=v1`](/docs/en/env-vars), whose [runtime](/docs/en/mcp#mcp-client-runtimes) doesn't run this check. This removes a protection against mix-up attacks, so prefer the server-side fix
 
 Before v2.1.232, Claude Code used the v2 runtime only in a gradual rollout or when you set `MCP_SDK_GENERATION=v2`.
+
+### Refusing to send credentials to non-https token endpoint
+
+On the [v2 runtime](/docs/en/mcp#mcp-client-runtimes), Claude Code sends an [MCP OAuth](/docs/en/mcp#authenticate-with-remote-mcp-servers) token request only to a token endpoint served over HTTPS or at `localhost`, `127.0.0.1`, or `::1`. This message means the server's token endpoint is neither, so Claude Code stopped before sending the request. That happens after the browser sign-in, so the browser step succeeds first, and again whenever Claude Code refreshes the server's token.
+
+In its full form, the message comes from the MCP SDK and quotes the token endpoint it refused. In the debug log, it follows `Error during auth completion:` for a sign-in or `Token refresh failed:` for a refresh. In your shell, `claude mcp login <name>` prints it after `Couldn't complete authentication for "<name>":`, and in a session, `/mcp` shows it under the server's menu:
+
+```text theme={null}
+Refusing to send credentials to non-https token endpoint 'http://192.168.1.50:8123/oauth/token'. OAuth token requests MUST use TLS (localhost / 127.0.0.1 / ::1 are exempt).
+```
+
+Claude Code treats a server URL that has a query string or a long random-looking path segment as possibly secret. For such a server, it redacts the sign-in errors the MCP SDK raises before it shows or logs them. This error then reads as a short name that can change between releases, such as `io`, followed by `from the MCP SDK for` and the redacted server URL. Other errors from the MCP SDK take the same shape there. The redacted message can be this error only when the server's token endpoint is plain `http://` at an address other than `localhost`, `127.0.0.1`, or `::1`.
+
+**What to do:**
+
+* Serve that token endpoint over HTTPS, for example by putting the server behind a reverse proxy or tunnel that terminates TLS and configuring the server to advertise the `https://` address
+* To connect without changing the server, start Claude Code with [`MCP_SDK_GENERATION=v1`](/docs/en/env-vars), whose [runtime](/docs/en/mcp#mcp-client-runtimes) doesn't apply this rule and sends the token request over plain HTTP. That choice lasts until you exit and applies to every server. The v1 runtime also skips the [issuer check](#issuer-mismatch-in-authorization-response), so prefer serving the endpoint over HTTPS
 
 ### AWS credentials expired or invalid
 
@@ -1823,7 +1858,7 @@ These steps change one of your own environments. An [organization-shared environ
 
 * Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment's name, such as **Default**, to open the selector. Hover over your environment and click the settings icon.
 * In the **Update cloud environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
-* Click **Save changes**. The next run uses the updated allowlist.
+* Click **Save changes**. The next run uses the updated allowlist. For a cloud session that's already open, see [when a network access change reaches existing sessions](/docs/en/cloud-environments#network-access).
 
 See [Network access](/docs/en/cloud-environments#network-access) for access levels and the default allowlist. Local CLI sessions are not affected by this policy.
 
@@ -2349,6 +2384,30 @@ Claude Code treats a model family alias, one of `opus`, `sonnet`, `haiku`, or `f
 * Run `/model` to pick from the models your organization allows. Restricted models are hidden from the picker.
 * If the restricted model was set in `--model`, `ANTHROPIC_MODEL`, the `model` field of a settings file, or the `model` frontmatter of a [subagent](/docs/en/sub-agents#choose-a-model), skill, or command, remove or update that value so the notice doesn't recur
 * If you need access to the restricted model, ask your organization admin to enable it. See [Organization model restrictions](/docs/en/model-config#organization-model-restrictions).
+
+<h3 id="cant-switch-to-the-default-model">
+  Can't switch to the default model
+</h3>
+
+You picked the Default model, for example by selecting the Default row in the `/model` picker or typing `/model default`. Claude Code refused the switch, so the session keeps its current model.
+
+```text theme={null}
+Can't switch to the default model: your organization's managed settings block it (claude-opus-4-6) in "deniedModels", and none of the models they allow can be used as the default instead. Ask your administrator to update "deniedModels" or "availableModels".
+```
+
+The wording after the colon names what blocked the switch:
+
+* **`your organization's managed settings block it ... in "deniedModels"`**: a managed deny list blocks the model the Default option resolves to
+* **`your organization allows only the models listed in "availableModels"`**: a managed [`availableModels`](/docs/en/model-config#restrict-model-selection) allowlist with [`availableModelsMatch`](/docs/en/settings-reference#availablemodelsmatch) set to `"exact"` leaves out the model the Default option resolves to
+* **`Claude Code couldn't read your organization's managed settings to check which models they allow`**: the [managed settings](/docs/en/managed-settings) couldn't be read, and Claude Code refuses the switch rather than apply it unchecked
+
+**What to do:**
+
+* For the [`deniedModels`](/docs/en/settings-reference#deniedmodels) and `availableModels` wordings, run `/model` and pick a model your organization allows by name
+* Ask your administrator to update the managed setting the message names
+* For the `couldn't read` wording, restart Claude Code; if it keeps happening, ask your administrator to check the managed settings
+
+If a session instead fails to start with a `Claude Code can't start` message under these managed settings, see [Managed settings block the default model](#managed-settings-block-the-default-model).
 
 ### Model switch was blocked by a PreModelSwitch hook
 
@@ -2920,6 +2979,43 @@ Before v2.1.257, a FIFO at `.mcp.json` left the command waiting forever with no 
 
 * Check what sits at `.mcp.json` in your current directory. Replace it with an ordinary JSON file in the [project-scope format](/docs/en/mcp#project-scope), or delete it, then run the command again.
 
+<h3 id="mcp-server-was-not-saved-or-removed">
+  MCP server was not saved or removed
+</h3>
+
+You ran `claude mcp add`, `claude mcp add-json`, or `claude mcp remove` for a server in the `user` or `local` [scope](/docs/en/mcp#mcp-installation-scopes). Both scopes are stored in `~/.claude.json`, and the change isn't in that file when Claude Code reads it back after writing. The command exits with this error instead of its success line.
+
+```text theme={null}
+MCP server "example" was not saved to /home/user/.claude.json. If that file is read-only or protected by a sandbox, make it writable or run the command outside the sandbox, then add the server again.
+```
+
+After a remove, the message reads `was not removed from` and ends with `then remove the server again`. For a `local`-scope server, the path is followed by the project directory the entry belongs to, as `(local scope for /path/to/project)`.
+
+Before v2.1.283, `claude mcp add`, `claude mcp add-json`, and `claude mcp remove` reported success even when the change didn't reach the file.
+
+**What to do:**
+
+* Make the file the message names writable, or run the command outside the sandbox, then run the same add or remove command again.
+
+<h3 id="mcp-server-may-not-have-been-saved-or-removed">
+  MCP server may not have been saved or removed
+</h3>
+
+You ran `claude mcp add`, `claude mcp add-json`, or `claude mcp remove` for a server in the `user` or `local` [scope](/docs/en/mcp#mcp-installation-scopes), and Claude Code couldn't read `~/.claude.json` back to confirm the change. The change may or may not be on disk. The text in parentheses is the error from that read.
+
+```text theme={null}
+MCP server "example" may not have been saved: /home/user/.claude.json could not be read to confirm the change (EACCES: permission denied, open '/home/user/.claude.json'). Run `claude mcp get example` to check, then add the server again if it is missing.
+```
+
+After a remove, the message reads `may not have been removed` and ends with `then remove the server again if it is still listed`.
+
+Before v2.1.283, the commands reported success even when the change couldn't be confirmed.
+
+**What to do:**
+
+* Run `claude mcp get <name>` to check whether the change is on disk. For a `local`-scope server, run it from the project directory the server belongs to, since local scope is per project.
+* If the server is missing after an add, or still listed after a remove, run the same add or remove command again.
+
 <h3 id="anthropic-hosted-and-doesnt-support-local-oauth">
   Server is Anthropic-hosted and doesn't support local OAuth
 </h3>
@@ -3213,6 +3309,24 @@ Could not upload repo bundle (<error>). The GitHub App preflight failed transien
 * If retries keep failing, the start of the message names what stopped the upload. When that cause is something you can fix, fix it so the session can start from your local repository instead
 
 Before v2.1.251, Claude Code ended the message with `Please set up GitHub on https://claude.ai/code` even when the GitHub check failed only transiently, and setup advice can't clear a transient failure.
+
+<h3 id="the-repository-upload-cant-follow-a-git-setting">
+  The repository upload can't follow a git setting
+</h3>
+
+You started a [cloud session that uploads your local repository](/docs/en/claude-code-on-the-web#send-local-repositories-without-github), or an [ultrareview](/docs/en/ultrareview) of a branch, and the upload can't follow one of the git settings that decide which attribute rules apply to your files. If the upload went ahead and missed a rule, a file that git transforms before storing it, such as one a clean filter encrypts, could reach the cloud as it is on disk. Claude Code refuses the upload instead, and nothing is uploaded:
+
+```text theme={null}
+Not uploading this working tree: core.ignoreCase (which decides whether .gitattributes patterns match file names regardless of letter case) is set in <file>, and the upload cannot follow that setting, so a file git would change before storing it (to encrypt it, for example) could be uploaded as it is on disk. Move the core.ignoreCase line into this repository’s .git/config or directly into your ~/.gitconfig, then retry.
+```
+
+The message names the setting and where it's set, and ends with the fix for the case you hit. The same refusal appears for `core.attributesFile` and `attr.tree`, each with its own fix.
+
+The message can name a config file that your git configuration pulls in through an `include` or `includeIf` directive, even when that directive's condition doesn't apply to this repository.
+
+**What to do:**
+
+* Apply the fix in the message's final sentence
 
 <h3 id="github-isnt-connected-to-your-claude-account">
   GitHub isn't connected to your Claude account

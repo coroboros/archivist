@@ -7,7 +7,7 @@ generated: true
 ---
 title: Claude API errors
 url: https://platform.claude.com/docs/en/api/errors
-description: Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
+description: Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDK's typed exceptions.
 ---
 
 ## HTTP errors
@@ -42,7 +42,7 @@ The API follows a predictable HTTP error code format:
     In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
   </Warning>
 
-The official SDKs automatically retry transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. The SDK client accepts `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to configure or disable this behavior.
+The official SDK automatically retries transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. The SDK client accepts `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to configure or disable this behavior.
 
 When receiving a [streaming](../build-with-claude/build-with-claude-streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](../build-with-claude/build-with-claude-streaming.md#error-events) for the shape of mid-stream errors.
 
@@ -78,7 +78,7 @@ In accordance with the [versioning](./api-versioning.md) policy, the values with
 
 ## SDK error types
 
-The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` (python; typescript: `Anthropic.NotFoundError`; ruby: `Anthropic::Errors::NotFoundError`; java: `com.anthropic.errors.NotFoundException`; csharp: `AnthropicNotFoundException`; php: `Anthropic\Core\Exceptions\NotFoundException`; go: `*anthropic.Error`). The Go SDK has one error type for every status, `*anthropic.Error`: branch on `StatusCode`. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
+The official SDK raises typed exceptions for these errors instead of returning raw JSON. For example, a 404 surfaces as `anthropic.NotFoundError` (python; typescript: `Anthropic.NotFoundError`; ruby: `Anthropic::Errors::NotFoundError`; java: `com.anthropic.errors.NotFoundException`; csharp: `AnthropicNotFoundException`; php: `Anthropic\Core\Exceptions\NotFoundException`; go: `*anthropic.Error`). The Go SDK has one error type for every status, `*anthropic.Error`: branch on `StatusCode`. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Your SDK's page documents the full exception hierarchy:
 
 * [Python](../general/general-cli-sdks-libraries-sdks-python.md#handling-errors) · [TypeScript](../general/general-cli-sdks-libraries-sdks-typescript.md#handling-errors) · [C#](../general/general-cli-sdks-libraries-sdks-csharp.md#error-handling) · [Go](../general/general-cli-sdks-libraries-sdks-go.md#error-handling) · [Java](../general/general-cli-sdks-libraries-sdks-java.md#error-handling) · [PHP](../general/general-cli-sdks-libraries-sdks-php.md#error-handling) · [Ruby](../general/general-cli-sdks-libraries-sdks-ruby.md#handling-errors)
 
@@ -273,7 +273,7 @@ If you are building a direct API integration, setting a [TCP socket keep-alive](
 
 The [SDKs](../general/general-cli-sdks-libraries-overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10-minute timeout. They also set a socket option for TCP keep-alive.
 
-If you don't need to process events incrementally, the SDKs can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
+If you don't need to process events incrementally, the SDK can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
 
 <CodeGroup>
   ```bash cURL

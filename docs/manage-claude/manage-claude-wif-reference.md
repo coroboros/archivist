@@ -14,7 +14,7 @@ This page collects the configuration surfaces, validation constraints, and error
 
 ## Token exchange request
 
-`POST /v1/oauth/token` accepts a JSON body using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) `jwt-bearer` grant. The SDKs build this request for you from the [environment variables](./manage-claude-wif-reference.md#environment-variables); the cURL examples on each provider guide show the raw body.
+`POST /v1/oauth/token` accepts a JSON body using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) `jwt-bearer` grant. The SDK builds this request for you from the [environment variables](./manage-claude-wif-reference.md#environment-variables); the cURL examples on each provider guide show the raw body.
 
 | Field                | Required    | Description                                                                                                                                                                                                                                                                   |
 | -------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -221,7 +221,7 @@ claims.sub.startsWith("repo:acme-corp/") && claims.ref in ["refs/heads/main", "r
 
 ### Token exchange errors
 
-`POST /v1/oauth/token` returns errors in the standard [API error shape](../api/api-errors.md). The SDK wraps exchange failures in a typed `FederationExchangeError` (or language equivalent) that exposes the HTTP status, the response body, and the `request_id`.
+`POST /v1/oauth/token` returns errors in the standard [API error shape](../api/api-errors.md). The SDK wraps exchange failures in a typed `WorkloadIdentityError` (python, typescript; ruby: `Anthropic::Credentials::WorkloadIdentityError`; go: `*config.FederationExchangeError`; java: `UnexpectedStatusCodeException`; csharp: `WorkloadIdentityException`; php: `OAuthException`) that exposes the HTTP status, the response body, and the `request_id`.
 
 | Status | Error                   | Cause                                                                                                                                                                   | Resolution                                                                                                                                                                                                                                                                                                                    |
 | ------ | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
