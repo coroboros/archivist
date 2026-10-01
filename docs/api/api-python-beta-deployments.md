@@ -523,6 +523,8 @@ Create Deployment
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1300,6 +1302,8 @@ List Deployments
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2029,6 +2033,8 @@ Get Deployment
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 
@@ -3156,6 +3162,8 @@ Update Deployment
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3881,6 +3889,8 @@ Archive Deployment
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 
@@ -4608,6 +4618,8 @@ Run Deployment Now
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4995,6 +5007,8 @@ Pause Deployment
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 
@@ -5721,6 +5735,8 @@ Unpause Deployment
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 

@@ -17,6 +17,10 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### September 30, 2026
+
+* We announced the deprecation of the Claude Sonnet 4.5 model (`claude-sonnet-4-5-20250929`), with retirement on the Claude API scheduled for November 30, 2026. We recommend migrating to [Claude Sonnet 5.5](../general/general-models-sonnet-5-5-migration-guide.md#migrating-from-sonnet-45). Read more in [Model deprecations](../about-claude/about-claude-model-deprecations.md).
+
 ### September 28, 2026
 
 * We've launched **Claude Sonnet 5.5** (`claude-sonnet-5-5`). It's available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). For its context window, output limits, and prices, see the [Claude Sonnet 5.5 model page](../general/general-models-sonnet-5-5-overview.md).

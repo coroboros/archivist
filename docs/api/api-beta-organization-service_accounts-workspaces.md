@@ -136,6 +136,8 @@ rejected.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Body parameters
 
 - `workspace_id: string`
@@ -362,6 +364,8 @@ page to recover.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Returns
 
 - `data: array of BetaServiceAccountWorkspaceMember`
@@ -559,6 +563,8 @@ to the implicit `workspace_user` membership. Archived workspaces return
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Returns
 

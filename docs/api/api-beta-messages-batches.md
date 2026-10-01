@@ -125,6 +125,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -4535,6 +4537,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4812,6 +4816,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -5100,6 +5106,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5369,6 +5377,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5529,6 +5539,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `"anthropic-workspace-id": optional string`
 

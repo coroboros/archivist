@@ -4181,6 +4181,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `user_profile_id: String`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.

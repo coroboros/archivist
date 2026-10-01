@@ -103,8 +103,6 @@ Create Session
 
   - `Status status`
 
-    SessionStatus enum
-
   - `?string title`
 
   - `\Datetime updatedAt`
@@ -468,8 +466,6 @@ List Sessions
 
   - `Status status`
 
-    SessionStatus enum
-
   - `?string title`
 
   - `\Datetime updatedAt`
@@ -779,8 +775,6 @@ Get Session
     Timing statistics for the session.
 
   - `Status status`
-
-    SessionStatus enum
 
   - `?string title`
 
@@ -1093,8 +1087,6 @@ Update Session
     Timing statistics for the session.
 
   - `Status status`
-
-    SessionStatus enum
 
   - `?string title`
 
@@ -1476,8 +1468,6 @@ Archive Session
     Timing statistics for the session.
 
   - `Status status`
-
-    SessionStatus enum
 
   - `?string title`
 
@@ -2060,8 +2050,6 @@ var_dump($betaManagedAgentsSession);
     Timing statistics for the session.
 
   - `Status status`
-
-    SessionStatus enum
 
   - `?string title`
 
@@ -2741,6 +2729,10 @@ List Events
 
       Timestamp of status change.
 
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
     - `StopReason stopReason`
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
@@ -2966,6 +2958,10 @@ List Events
     - `string sessionThreadID`
 
       Public sthr_ ID of the thread that went idle.
+
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
 
     - `StopReason stopReason`
 
@@ -3633,6 +3629,10 @@ Stream Events
 
       Timestamp of status change.
 
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
     - `StopReason stopReason`
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
@@ -3858,6 +3858,10 @@ Stream Events
     - `string sessionThreadID`
 
       Public sthr_ ID of the thread that went idle.
+
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
 
     - `StopReason stopReason`
 
@@ -5567,6 +5571,10 @@ List Session Thread Events
 
       Timestamp of status change.
 
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
     - `StopReason stopReason`
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
@@ -5792,6 +5800,10 @@ List Session Thread Events
     - `string sessionThreadID`
 
       Public sthr_ ID of the thread that went idle.
+
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
 
     - `StopReason stopReason`
 
@@ -6367,6 +6379,10 @@ Stream Session Thread Events
 
       Timestamp of status change.
 
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
     - `StopReason stopReason`
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
@@ -6592,6 +6608,10 @@ Stream Session Thread Events
     - `string sessionThreadID`
 
       Public sthr_ ID of the thread that went idle.
+
+    - `?ManagedAgentsSessionRefusalStopDetails stopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
 
     - `StopReason stopReason`
 

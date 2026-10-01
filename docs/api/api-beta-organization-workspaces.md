@@ -298,6 +298,8 @@ Create Workspace
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Body parameters
 
 - `name: string`
@@ -2030,6 +2032,8 @@ omitted from the results.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 #### Returns
 
 - `data: array of BetaServiceAccountWorkspaceMember`
@@ -2224,6 +2228,8 @@ accounts cannot be added and are rejected.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 #### Body parameters
 
@@ -2436,6 +2442,8 @@ account returns 404.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 #### Returns
 
 - `BetaServiceAccountWorkspaceMember object`
@@ -2623,6 +2631,8 @@ rejected.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 #### Body parameters
 
@@ -2828,6 +2838,8 @@ membership. Archived workspaces return 400.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 #### Returns
 

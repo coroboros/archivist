@@ -723,7 +723,10 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   )
   environment = client.beta.environments.create(
       name="weather-env",
-      config={"type": "cloud", "networking": {"type": "unrestricted"}},
+      config={
+          "type": "cloud",
+          "networking": {"type": "limited", "allow_package_managers": True},
+      },
   )
 
   session = client.beta.sessions.create(
@@ -795,7 +798,10 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   });
   const environment = await client.beta.environments.create({
     name: "weather-env",
-    config: { type: "cloud", networking: { type: "unrestricted" } }
+    config: {
+      type: "cloud",
+      networking: { type: "limited", allow_package_managers: true }
+    }
   });
 
   const session = await client.beta.sessions.create({
@@ -887,7 +893,7 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
       Name = "weather-env",
       Config = new BetaCloudConfigParams
       {
-          Networking = new BetaUnrestrictedNetwork(),
+          Networking = new BetaLimitedNetworkParams { AllowPackageManagers = true },
       },
   });
 
@@ -989,7 +995,9 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
   		OfCloud: &anthropic.BetaCloudConfigParams{
   			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-  				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+  				OfLimited: &anthropic.BetaLimitedNetworkParams{
+  					AllowPackageManagers: anthropic.Bool(true),
+  				},
   			},
   		},
   	},
@@ -1086,7 +1094,7 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   import com.anthropic.models.beta.agents.BetaManagedAgentsCustomToolParams;
   import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
   import com.anthropic.models.beta.environments.BetaCloudConfigParams;
-  import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
+  import com.anthropic.models.beta.environments.BetaLimitedNetworkParams;
   import com.anthropic.models.beta.environments.EnvironmentCreateParams;
   import com.anthropic.models.beta.sessions.BetaManagedAgentsAgentParams;
   import com.anthropic.models.beta.sessions.SessionCreateParams;
@@ -1116,7 +1124,9 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
       .name("weather-env")
       .config(BetaCloudConfigParams.builder()
-          .networking(BetaUnrestrictedNetwork.builder().build())
+          .networking(BetaLimitedNetworkParams.builder()
+              .allowPackageManagers(true)
+              .build())
           .build())
       .build());
 
@@ -1204,7 +1214,10 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   );
   $environment = $client->beta->environments->create(
       name: 'weather-env',
-      config: ['type' => 'cloud', 'networking' => ['type' => 'unrestricted']],
+      config: [
+          'type' => 'cloud',
+          'networking' => ['type' => 'limited', 'allow_package_managers' => true],
+      ],
   );
 
   $session = $client->beta->sessions->create(
@@ -1289,7 +1302,7 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   )
   environment = client.beta.environments.create(
     name: "weather-env",
-    config: {type: "cloud", networking: {type: "unrestricted"}}
+    config: {type: "cloud", networking: {type: "limited", allow_package_managers: true}}
   )
 
   session = client.beta.sessions.create(

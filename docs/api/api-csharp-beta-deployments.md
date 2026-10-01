@@ -495,6 +495,8 @@ Create Deployment
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1264,6 +1266,8 @@ List Deployments
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1989,6 +1993,8 @@ Get Deployment
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -3084,6 +3090,8 @@ Update Deployment
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3805,6 +3813,8 @@ Archive Deployment
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -4528,6 +4538,8 @@ Run Deployment Now
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4911,6 +4923,8 @@ Pause Deployment
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -5633,6 +5647,8 @@ Unpause Deployment
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 

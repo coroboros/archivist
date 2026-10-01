@@ -205,6 +205,8 @@ List Sessions
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1006,8 +1008,6 @@ List Sessions
       format: double
 
   - `status: "rescheduling" or "running" or "idle" or "terminated"`
-
-    SessionStatus enum
 
     - `"rescheduling"`
 

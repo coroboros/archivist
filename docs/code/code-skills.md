@@ -561,7 +561,7 @@ When Claude re-invokes a skill whose rendered content is identical to the copy a
 
 [Auto-compaction](/docs/en/how-claude-code-works#when-context-fills-up) carries invoked skills forward within a token budget. When the conversation is summarized to free context, Claude Code re-attaches the most recent invocation of each skill after the summary, keeping the first 5,000 tokens of each. Re-attached skills share a combined budget of 25,000 tokens. Claude Code fills this budget starting from the most recently invoked skill, so older skills can be dropped entirely after compaction if you have invoked many in one session.
 
-If a skill seems to stop influencing behavior after the first response, the content is usually still present and the model is choosing other tools or approaches. Strengthen the skill's `description` and instructions so the model keeps preferring it, or use [hooks](/docs/en/hooks) to enforce behavior deterministically. If the skill is large or you invoked several others after it, re-invoke it after compaction to restore the full content.
+If Claude stops following a skill partway through a session, see [Claude stops following a skill](#claude-stops-following-a-skill).
 
 ### Pre-approve tools for a skill
 
@@ -696,7 +696,7 @@ Either tool runs the commands the same way it runs Claude's own shell commands. 
 
 * **Working directory**: Claude Code runs each command in the session shell's current working directory. That directory moves when Claude runs `cd`. Use [`${CLAUDE_SKILL_DIR}` or `${CLAUDE_PROJECT_DIR}`](#available-string-substitutions) in paths that must resolve the same way every time.
 * **stderr**: with the default `bash` shell, Claude Code merges stderr into stdout. Anything the command writes to stderr appears in the injected text.
-* **Timeout**: each command runs under the Bash tool's default 2-minute [timeout](/docs/en/tools-reference#timeout-and-output-limits). When the Bash tool [moves a timed-out command to the background](/docs/en/tools-reference#background-commands), the skill still renders. The injected text reports the move and names the background task and the file collecting the command's output. When the command is one the Bash tool never auto-backgrounds, Claude Code kills it at the timeout. That failure [aborts the invocation](#when-an-injected-command-fails).
+* **Timeout**: each command runs under the Bash tool's default 2-minute [timeout](/docs/en/tools-reference#timeout-and-output-limits). When the Bash tool [moves a timed-out command to the background](/docs/en/tools-reference#foreground-commands-that-move-to-the-background), the skill still renders. The injected text reports the move and names the background task and the file collecting the command's output. When the command is one the Bash tool never auto-backgrounds, Claude Code kills it at the timeout. That failure [aborts the invocation](#when-an-injected-command-fails).
 * **Output size**: output past the Bash tool's inline ceiling arrives as a file path plus a short preview, not truncated text. [Output limits](/docs/en/tools-reference#output-limits) covers the ceiling and how to adjust each boundary.
 
 The PowerShell tool applies the same timeout, backgrounding, and output-ceiling behavior to the commands it runs. See the [PowerShell tool](/docs/en/tools-reference#powershell-tool) section for its specifics.
@@ -1136,6 +1136,14 @@ If Claude uses your skill when you don't want it:
 
 1. Make the description more specific
 2. Add `disable-model-invocation: true` if you only want manual invocation
+
+### Claude stops following a skill
+
+If Claude follows a skill in its first response and stops following it later, start with whichever of these cases matches:
+
+* **Claude skipped a rule that must hold every time**: move the rule into a [hook](/docs/en/hooks-guide). Claude Code runs a hook every time its event occurs, such as before each file edit, whether or not Claude is following the skill. To keep the rule with the skill, define the hook in the skill's [`hooks` frontmatter](/docs/en/hooks#hooks-in-skills-and-agents). That hook applies from the time the skill is invoked until the session ends.
+* **Claude skipped guidance it should apply with judgment**: word the guidance so it applies to the whole task, for example "Run the tests after every edit" rather than "Run the tests". Claude Code adds the skill's content to the conversation when the skill is invoked and [doesn't re-read the file](#skill-content-lifecycle) on later turns.
+* **The conversation was compacted**: invoke the skill again to restore its full content. After [compaction](/docs/en/how-claude-code-works#when-context-fills-up), Claude Code [can keep only the start of an invoked skill](#skill-content-lifecycle), so put the most important instructions near the top of `SKILL.md`.
 
 ### Skill descriptions are cut short
 

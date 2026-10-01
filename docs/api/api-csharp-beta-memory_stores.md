@@ -139,6 +139,8 @@ Create a memory store
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -352,6 +354,8 @@ List memory stores
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -549,6 +553,8 @@ Retrieve a memory store
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -760,6 +766,8 @@ Update a memory store
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -954,6 +962,8 @@ Delete a memory store
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1109,6 +1119,8 @@ Archive a memory store
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -1376,6 +1388,8 @@ Create a memory
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1603,6 +1617,8 @@ List memories
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -1832,6 +1848,8 @@ Retrieve a memory
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2057,6 +2075,8 @@ Update a memory
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2270,6 +2290,8 @@ Delete a memory
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2476,6 +2498,8 @@ List memory versions
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 
@@ -2775,6 +2799,8 @@ Retrieve a memory version
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3062,6 +3088,8 @@ Redact a memory version
     - `InlineTools2026_09_15("inline-tools-2026-09-15")`
 
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
   - `string workspaceID`
 

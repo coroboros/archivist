@@ -138,6 +138,8 @@ rejected.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ## Body parameters
 
 - `workspace_role: BetaNoBillingWorkspaceRole`

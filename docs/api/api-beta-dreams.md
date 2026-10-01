@@ -125,6 +125,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#create-a-dream
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -700,6 +702,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#list-dreams) f
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1108,6 +1112,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#track-progress
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1510,6 +1516,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#cancel-a-dream
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1914,6 +1922,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#archive-a-drea
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `"anthropic-workspace-id": optional string`
 

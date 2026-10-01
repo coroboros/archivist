@@ -67,7 +67,7 @@ If you're unsure which model to use, start with [Claude Opus 5.5](./general-mode
 
 See [Model IDs and versioning](../about-claude/about-claude-models-model-ids-and-versions.md) and [Pricing](../about-claude/about-claude-pricing.md).
 
-Legacy models (still available): [Claude Fable 5](./general-models-fable-5-overview.md), [Claude Opus 5](./general-models-opus-5-overview.md), [Claude Opus 4.8](./general-models-opus-4-8-overview.md), [Claude Opus 4.7](./general-models-opus-4-7-overview.md), [Claude Opus 4.6](./general-models-opus-4-6-overview.md), [Claude Opus 4.5](./general-models-opus-4-5-overview.md), [Claude Sonnet 5](./general-models-sonnet-5-overview.md), [Claude Sonnet 4.6](./general-models-sonnet-4-6-overview.md), [Claude Sonnet 4.5](./general-models-sonnet-4-5-overview.md).
+Legacy models (still available): [Claude Fable 5](./general-models-fable-5-overview.md), [Claude Opus 5](./general-models-opus-5-overview.md), [Claude Opus 4.8](./general-models-opus-4-8-overview.md), [Claude Opus 4.7](./general-models-opus-4-7-overview.md), [Claude Opus 4.6](./general-models-opus-4-6-overview.md), [Claude Opus 4.5](./general-models-opus-4-5-overview.md), [Claude Sonnet 5](./general-models-sonnet-5-overview.md), [Claude Sonnet 4.6](./general-models-sonnet-4-6-overview.md).
 
 Once you've picked a model, [learn how to make your first API call](../api/api-get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](../about-claude/about-claude-models-model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
 
