@@ -40,7 +40,7 @@ in `details`) but are not yet usable in claude.ai: do not retry the create (the
 retry would return `plugin_name_taken`); create a version on the stored Plugin
 instead, which completes it.
 
-For a worked example, see [Create a plugin](https://platform.claude.com/docs/en/manage-claude/plugins-api.md#create-a-plugin)
+For a worked example, see [Create a plugin](../manage-claude/manage-claude-plugins-api.md#create-a-plugin)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.
@@ -2194,7 +2194,7 @@ claude.ai) is refused with a 409: `error_code` `skill_name_taken`, with that nam
 `registration_pending` means the version was stored but is not yet usable; a later
 version create on the Plugin completes it.
 
-For a worked example, see [Create a version](https://platform.claude.com/docs/en/manage-claude/plugins-api.md#create-a-version)
+For a worked example, see [Create a version](../manage-claude/manage-claude-plugins-api.md#create-a-version)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.

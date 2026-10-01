@@ -277,6 +277,19 @@ Rows reflect the enforced state rather than the last-stored configuration: for e
 
 The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](./manage-claude-compliance-activity-feed.md); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
 
+## Read plugins and plugin marketplaces
+
+Your organization's plugins and plugin marketplaces are part of the [Admin API](./manage-claude-plugins-api.md) rather than the Compliance API, but a Compliance Access Key with `read:compliance_org_data` can call the Plugins API's read endpoints directly:
+
+* List plugins and retrieve a plugin
+* List a plugin's versions, retrieve a version, and download a version's files
+* List a plugin's installation settings and its shares
+* List plugin marketplaces and retrieve a marketplace
+
+Send the `anthropic-beta: ce-plugins-2026-09-01` header on every request; without it these endpoints return [404 Not Found](./manage-claude-plugins-api.md#error-responses). Each call reads one organization: a key that covers the parent organization reads the linked organization it was created in unless you pass the `organization_id` query parameter (a linked organization's UUID or its `org_`-prefixed ID) to [read a different one](./manage-claude-plugins-api.md#reading-another-organization-under-the-same-parent), and a key restricted to one organization reads only that organization. These calls count against the Admin API's [rate limits](./manage-claude-plugins-api.md#rate-limiting), not the Compliance API's.
+
+Creating or changing plugins, their installation settings, or a marketplace's settings requires an Admin API key with `write:plugins`. Of the read calls, only downloading the files of a plugin in a member's personal marketplace records an [Activity Feed](./manage-claude-compliance-activity-feed.md) event (`claude_plugin_archive_accessed`). See the [Plugins API guide](./manage-claude-plugins-api.md) for each endpoint, request examples, and the [events the API records](./manage-claude-plugins-api.md#activity-feed-events).
+
 ## Next steps
 
 <CardGroup cols={2}>

@@ -1,5 +1,72 @@
 # Changelog
 
+## 🤖 v1.5.204 - 01/10/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-console.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-helm.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-admin.md`
+- Modified: `docs/api/api-beta-organization-plugin_marketplaces-validate_archive.md`
+- Modified: `docs/api/api-beta-organization-plugin_marketplaces-validate_repository.md`
+- Modified: `docs/api/api-beta-organization-plugin_marketplaces.md`
+- Modified: `docs/api/api-beta-organization-plugins-create.md`
+- Modified: `docs/api/api-beta-organization-plugins-versions-create.md`
+- Modified: `docs/api/api-beta-organization-plugins-versions.md`
+- Modified: `docs/api/api-beta-organization-plugins.md`
+- Modified: `docs/api/api-beta-organization.md`
+- Modified: `docs/api/api-beta.md`
+- Modified: `docs/api/api-cli-beta.md`
+- Modified: `docs/api/api-csharp-beta.md`
+- Modified: `docs/api/api-go-beta.md`
+- Modified: `docs/api/api-java-beta.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/api/api-python-beta.md`
+- Modified: `docs/api/api-ruby-beta.md`
+- Modified: `docs/api/api-typescript-beta.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-components.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-manifest-reference.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-org.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-authentication.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api-access.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/manage-claude/manage-claude-wif-reference.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Added: `docs/code/code-admin.md`
+- Added: `docs/code/code-api.md`
+- Added: `docs/code/code-events.md`
+- Added: `docs/code/code-interface.md`
+- Added: `docs/code/code-reference.md`
+- Added: `docs/code/code-test.md`
+- Added: `docs/code/code-troubleshoot.md`
+- Added: `docs/manage-claude/manage-claude-plugins-api.md`
+
+
 ## 🤖 v1.5.203 - 01/10/2026
 
 File Changes:

@@ -1,6 +1,6 @@
 ---
-title: "Plugins overview"
-source: "https://code.claude.com/docs/en/plugins/overview"
+title: "Overview"
+source: "https://code.claude.com/docs/en/overview"
 category: "code"
 generated: true
 ---
@@ -8,128 +8,247 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Plugins overview
+# Overview
 
-> Understand what a Claude Code plugin is, when you need one instead of a standalone skill or MCP server, and which page to read to install or create one.
+> Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.
 
-A Claude Code plugin is a directory of skills, agents, hooks, MCP servers, or other components that Claude Code installs and loads as one unit. Most plugins come from a marketplace, which is a catalog that lists plugins and where to fetch each one. You can also load a plugin from a folder someone gives you, or [build your own](/docs/en/plugins/create).
+Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
-<Note>
-  Start on claude.com instead if either of these describes you:
+## Get started
 
-  * **You use claude.ai chat or Cowork and not Claude Code**: see [Plugins on claude.ai and in Cowork](https://claude.com/docs/plugins/overview)
-  * **You built an MCP server and want it in Anthropic's directory**: see [Publish to the directory](https://claude.com/docs/directory/publish)
-</Note>
+Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_pricing) or [Anthropic Console](https://platform.claude.com/) account. The Terminal CLI, VS Code, and JetBrains also support [third-party providers](/docs/en/third-party-integrations).
 
-To try a plugin now, run `/plugin` in a Claude Code terminal session and install one from the **Discover** tab, which lists the plugins from Anthropic's official marketplace and any marketplace you've added. From there:
+<Tabs>
+  <Tab title="Terminal">
+    The full-featured CLI for working with Claude Code directly in your terminal. Edit files, run commands, and manage your entire project from the command line.
 
-* [Install and manage plugins](/docs/en/plugins/install): the full install steps, scopes, and other surfaces
-* [Create a plugin](/docs/en/plugins/create): build your own
-* [Decide whether you need a plugin](#decide-whether-you-need-a-plugin): whether a plugin is the right tool for what you want
+    To install Claude Code, open a terminal and run the command for your system. If you haven't used a terminal before, the [terminal guide](/docs/en/terminal-guide) shows how to open one and paste the command.
 
-## Understand what a plugin is
+    <Tabs>
+      <Tab title="Native Install (Recommended)">
+        **macOS, Linux, WSL:**
 
-A plugin is a directory of components, usually with a manifest. The manifest, a JSON file at `.claude-plugin/plugin.json`, gives the plugin its name and can add a version, a description, and other [metadata](/docs/en/plugins/manifest-reference). The components are what the plugin adds to Claude Code, such as:
+        ```bash theme={null}
+        curl -fsSL https://claude.ai/install.sh | bash
+        ```
 
-* [**Skills**](/docs/en/plugins/components#skills): `SKILL.md` instructions Claude loads when relevant, and that you can also run as a command
-* [**Agents**](/docs/en/plugins/components#agents): subagent definitions Claude can delegate to
-* [**Hooks**](/docs/en/plugins/components#hooks): commands Claude Code runs at points in its lifecycle, such as after every edit
-* [**MCP servers**](/docs/en/plugins/components#mcp-servers): tool servers Claude Code connects to while the plugin is enabled
+        **Windows PowerShell:**
 
-This diagram shows a plugin named `my-plugin` that holds one of each of those components, and what you get from each file once the plugin loads.
+        ```powershell theme={null}
+        irm https://claude.ai/install.ps1 | iex
+        ```
 
-<img src="https://mintcdn.com/claude-code/2Q_GtOEovg5qaBem/images/plugin-directory.svg?fit=max&auto=format&n=2Q_GtOEovg5qaBem&q=85&s=f623b64e82713b830e48174f0a922888" className="dark:hidden" alt="Diagram in two columns joined by five straight arrows. Left, the directory of a plugin named my-plugin, holding a manifest at .claude-plugin/plugin.json, skills/review/SKILL.md, agents/reviewer.md, hooks/hooks.json, .mcp.json, and other components. Right, what each file gives you in your session: the manifest sets the plugin name, my-plugin; the skill runs as /my-plugin:review; the agent file is a subagent Claude can delegate to; the hooks file holds hooks that run on lifecycle events; and .mcp.json adds an MCP server that gives Claude tools." width="760" height="336" data-path="images/plugin-directory.svg" />
+        **Windows CMD:**
 
-<img src="https://mintcdn.com/claude-code/2Q_GtOEovg5qaBem/images/plugin-directory-dark.svg?fit=max&auto=format&n=2Q_GtOEovg5qaBem&q=85&s=17ee2bd45b63154fcc148ae1d1f736d8" className="hidden dark:block" alt="Diagram in two columns joined by five straight arrows. Left, the directory of a plugin named my-plugin, holding a manifest at .claude-plugin/plugin.json, skills/review/SKILL.md, agents/reviewer.md, hooks/hooks.json, .mcp.json, and other components. Right, what each file gives you in your session: the manifest sets the plugin name, my-plugin; the skill runs as /my-plugin:review; the agent file is a subagent Claude can delegate to; the hooks file holds hooks that run on lifecycle events; and .mcp.json adds an MCP server that gives Claude tools." width="760" height="336" data-path="images/plugin-directory-dark.svg" />
+        ```batch theme={null}
+        curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+        ```
 
-For every component type a plugin can hold, with an example of each, see [Plugin components](/docs/en/plugins/components). To see where each piece is located in a plugin's directory, use the [plugin explorer](/docs/en/plugins/components#explore-the-plugin-directory) on that page.
+        When the installer finishes, open a new terminal window and run `claude --version`. A working installation prints a version number. If your shell says `claude` isn't found or isn't recognized, the install directory isn't on your PATH yet: see [Fix your PATH](/docs/en/troubleshoot-install#command-not-found-claude-after-installation).
 
-### Decide whether you need a plugin
+        If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell. Your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
 
-Skills, subagents, hooks, and MCP servers all work on their own, without a plugin. A skill you save in `~/.claude/skills/`, for example, is available in every project on your machine. To set one up on its own, see [Skills](/docs/en/skills), [Subagents](/docs/en/sub-agents), [Hooks](/docs/en/hooks-guide), or [MCP](/docs/en/mcp).
+        If the install command fails with `syntax error near unexpected token '<'`, a `403`, or another curl error, see [Troubleshoot installation](/docs/en/troubleshoot-install#find-your-error) to match the error to a fix and for alternative install methods.
 
-Use a plugin when you want several skills, subagents, hooks, or MCP servers packaged as one unit. Install one to get a setup someone else built, with one command and updates from its marketplace. Make one to give your own setup to teammates, install it in many projects, or publish versioned releases.
+        [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
-### What an enabled plugin adds to your sessions
+        <Info>
+          Native installations automatically update in the background to keep you on the latest version.
+        </Info>
+      </Tab>
 
-An enabled plugin is part of every session, not only the sessions where you use it. That has a few consequences worth knowing before you install one:
+      <Tab title="Homebrew">
+        ```bash theme={null}
+        brew install --cask claude-code
+        ```
 
-* **Context and usage**: for each skill, agent, and command that [Claude can invoke on its own](/docs/en/skills#control-who-invokes-a-skill), the name and description are in Claude's context on every turn so that Claude knows it exists. Those tokens count toward your usage and leave less room in the [context window](/docs/en/context-window) even in sessions where nothing from the plugin runs. The full text of a skill or agent loads only when it's used. What the plugin's MCP servers add per turn follows [MCP tool search](/docs/en/mcp#scale-with-mcp-tool-search).
-* **Processes**: MCP servers the plugin defines run alongside each session where it's enabled, and its hooks fire at their events.
-* **Permissions**: what the plugin runs, it runs as you. See [Plugin security and trust](/docs/en/plugins/security) for what to review first.
+        Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
 
-You can check a plugin's footprint at each stage:
+        <Info>
+          Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
+        </Info>
+      </Tab>
 
-* **Before you install**: open the plugin from the **Marketplaces** tab in `/plugin`. Plugins in Anthropic's official marketplace show a **Context cost** estimate there.
-* **After you install**: [Measure what a plugin costs](/docs/en/plugins/measure#measure-what-a-plugin-costs) shows how to read a plugin's footprint, and the **Installed** tab's **Not used recently** group lists plugins you could turn off.
-* **To stop it without uninstalling**: disable the plugin with `/plugin` or, in your shell, `claude plugin disable`. See [Manage installed plugins](/docs/en/plugins/install#manage-installed-plugins).
+      <Tab title="WinGet">
+        ```powershell theme={null}
+        winget install Anthropic.ClaudeCode
+        ```
 
-## Get plugins from a marketplace
+        <Info>
+          WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
+        </Info>
+      </Tab>
+    </Tabs>
 
-A marketplace is a repository or directory with a `.claude-plugin/marketplace.json` file that lists plugins and where to fetch each one. It's a catalog, not a hosted store. You add a marketplace once, then install plugins from it by name, such as `commit-commands@claude-plugins-official`.
+    You can also install with [apt, dnf, or apk](/docs/en/setup#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
-<Note>
-  A plugin marketplace isn't [Claude Marketplace](https://claude.com/marketplace). Claude Marketplace is the website at claude.com/marketplace where you browse plugins, connectors, partner products, and service partners. It isn't a marketplace you add with `/plugin marketplace add`.
-</Note>
+    Then start Claude Code in any project. Replace `your-project` with the path to a project directory on your machine:
 
-Claude Code adds Anthropic's official marketplace the first time you start an interactive terminal session, unless a [managed policy](/docs/en/plugins/org#allow-the-official-marketplace-and-your-own) blocks it. Claude Code adds no other marketplace on its own, including Anthropic's community and demo marketplaces. To distinguish the three Anthropic marketplaces, read [Anthropic's marketplaces](/docs/en/plugins/anthropic-marketplaces). To see what the official one lists, open the **Discover** tab of `/plugin` in a session or browse [Claude Marketplace](https://claude.com/marketplace/plugins).
+    ```bash theme={null}
+    cd your-project
+    claude
+    ```
 
-This diagram shows the path from a marketplace to your session. A marketplace lists a plugin, you install that plugin, and Claude Code loads its components.
+    You'll be prompted to log in on first use. If you've set the `ANTHROPIC_API_KEY` environment variable, Claude Code skips the login prompt and asks you to approve the key instead. That's it! [Continue with the Quickstart →](/docs/en/quickstart)
 
-<img src="https://mintcdn.com/claude-code/2Q_GtOEovg5qaBem/images/plugins-model.svg?fit=max&auto=format&n=2Q_GtOEovg5qaBem&q=85&s=4196344954b7c2e27fc0bd6a9a1113a1" className="dark:hidden" alt="Diagram of the marketplace path in three boxes, left to right. A marketplace, a catalog of plugins, lists a plugin. The plugin is one directory installed as a unit, holding skills, agents, hooks, MCP servers, and other components. You install the plugin into Claude Code, which loads its components." width="760" height="252" data-path="images/plugins-model.svg" />
+    <Tip>
+      See [advanced setup](/docs/en/setup) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](/docs/en/troubleshoot-install) if you hit issues.
+    </Tip>
+  </Tab>
 
-<img src="https://mintcdn.com/claude-code/2Q_GtOEovg5qaBem/images/plugins-model-dark.svg?fit=max&auto=format&n=2Q_GtOEovg5qaBem&q=85&s=f6cdefe1fc05daf3b253d26e9f3f70f6" className="hidden dark:block" alt="Diagram of the marketplace path in three boxes, left to right. A marketplace, a catalog of plugins, lists a plugin. The plugin is one directory installed as a unit, holding skills, agents, hooks, MCP servers, and other components. You install the plugin into Claude Code, which loads its components." width="760" height="252" data-path="images/plugins-model-dark.svg" />
+  <Tab title="VS Code">
+    The VS Code extension provides inline diffs, @-mentions, plan review, and conversation history directly in your editor.
 
-[Install and manage plugins](/docs/en/plugins/install#install-a-plugin) has the install steps for each place you run Claude Code. While you're developing a plugin, you don't need a marketplace: load it straight from its folder with `--plugin-dir`, as [Develop without a marketplace](/docs/en/plugins/create#develop-without-a-marketplace) shows.
+    * [Install for VS Code](vscode:extension/anthropic.claude-code)
+    * [Install for Cursor](cursor:extension/anthropic.claude-code)
 
-### Make an installed plugin available in your session
+    Or search for "Claude Code" in the Extensions view (`Cmd+Shift+X` on Mac, `Ctrl+Shift+X` on Windows/Linux). After installing, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), type "Claude Code", and select **Open in New Tab**.
 
-Before a plugin you installed gives you a skill you can run, it has to be present at each of these layers:
+    [Get started with VS Code →](/docs/en/vs-code#get-started)
+  </Tab>
 
-* **Settings**: your settings list the marketplaces you've added and the plugins that are enabled.
-* **Disk**: `~/.claude/plugins/` holds what Claude Code has fetched and installed.
-* **Session**: plugins load at startup, or when you [reload plugins](/docs/en/plugins/loading#check-which-stage-a-plugin-reached).
+  <Tab title="Desktop app">
+    A standalone app for running Claude Code outside your IDE or terminal. Review diffs visually, run multiple sessions side by side, schedule recurring tasks, and start cloud sessions.
 
-Read [Plugin loading reference](/docs/en/plugins/loading) for the rules at each layer, including which settings file takes precedence and where the files are on disk.
+    Download and install:
 
-## Tell Anthropic's marketplaces from third-party ones
+    * [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) (Intel and Apple Silicon)
+    * [Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs) (x64)
+    * [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)
+    * On Ubuntu or Debian, where the app is in beta, install it with apt by following the [Linux install instructions](/docs/en/desktop-linux)
 
-A marketplace's name places it in one of three tiers. Claude Code accepts the official and community names only for marketplaces sourced from `github.com/anthropics/` repositories:
+    After installing, launch Claude, sign in, and click the **Code** tab to start coding. The app includes Claude Code, so you don't need to install the CLI separately. A [paid subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_desktop_pricing) is required.
 
-* **Official**: marketplaces with one of Anthropic's [official marketplace names](/docs/en/plugins/security#official-marketplace-names), including `claude-plugins-official` and the demo marketplace `claude-code-plugins`.
-* **Community**: marketplaces with one of Anthropic's community names, such as `claude-community`. [Identify Anthropic's marketplaces by name](/docs/en/plugins/security#marketplace-tiers) lists them.
-* **Third-party**: every other marketplace. A marketplace your coworker or your organization publishes is third-party.
+    [Learn more about the desktop app →](/docs/en/desktop-quickstart)
+  </Tab>
 
-Whatever the tier, a plugin you install can run code with your user privileges. Read [Plugin security and trust](/docs/en/plugins/security) for how to review a plugin before you install it.
+  <Tab title="Web">
+    Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they're done, work on repos you don't have locally, or run multiple tasks in parallel. For a longer body of work, create a [project](/docs/en/claude-projects) and let Claude coordinate the parallel sessions for you. Available on desktop browsers and [the Claude app for iOS and Android](/docs/en/mobile).
 
-Through [managed settings](/docs/en/settings#settings-files), an organization can allowlist or block marketplaces, force-install plugins, and turn off session-only loading. Read [Manage plugins for your organization](/docs/en/plugins/org) for those controls.
+    Start coding at [claude.ai/code](https://claude.ai/code).
 
-## Understand install scopes
+    [Get started →](/docs/en/web-quickstart)
+  </Tab>
 
-When you install a plugin, you pick a scope, and the scope decides who the plugin is enabled for:
+  <Tab title="JetBrains">
+    A plugin for IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs with interactive diff viewing and selection context sharing.
 
-* **User scope**: enabled for you in every project on this computer
-* **Project scope**: enabled for everyone who works in this repository, through the committed `.claude/settings.json`. Each collaborator still [installs it on their own machine](/docs/en/plugins/loading#enabled-in-project-settings-but-not-installed)
-* **Local scope**: enabled for you in this repository only
+    Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE. The plugin requires the Claude Code CLI, installed separately; see the [JetBrains setup steps](/docs/en/jetbrains#installation).
 
-A plugin you install at user scope in the terminal, the desktop app's local sessions, or the VS Code extension is available in the other two on that computer, because all three read the same settings files. See [Choose an install scope](/docs/en/plugins/install#choose-an-install-scope) for how to pick one.
+    [Get started with JetBrains →](/docs/en/jetbrains)
+  </Tab>
+</Tabs>
 
-A cloud session, including one in the browser at claude.ai/code, doesn't load the plugins in your local settings. For install steps in the terminal, VS Code, and the desktop app, and for what a cloud session loads, see [Install a plugin](/docs/en/plugins/install#install-a-plugin).
+## What you can do
 
-<Note>
-  The same plugin format also installs on claude.ai and in Cowork, where a different set of components loads. For those surfaces, see [Plugins on claude.ai and in Cowork](https://claude.com/docs/plugins/overview) on claude.com and its [component support table](https://claude.com/docs/plugins/platform-support#compare-component-support-by-app).
-</Note>
+Here are some of the ways you can use Claude Code:
+
+<AccordionGroup>
+  <Accordion title="Automate the work you keep putting off" icon="wand-magic-sparkles">
+    Claude Code handles the tedious tasks that eat up your day: writing tests for untested code, fixing lint errors across a project, resolving merge conflicts, updating dependencies, and writing release notes.
+
+    ```bash theme={null}
+    claude "write tests for the auth module, run them, and fix any failures"
+    ```
+  </Accordion>
+
+  <Accordion title="Build features and fix bugs" icon="hammer">
+    Describe what you want in plain language. Claude Code plans the approach, writes the code across multiple files, and verifies it works.
+
+    For bugs, paste an error message or describe the symptom. Claude Code traces the issue through your codebase, identifies the root cause, and implements a fix. See [common workflows](/docs/en/common-workflows) for more examples.
+  </Accordion>
+
+  <Accordion title="Create commits and pull requests" icon="code-branch">
+    Claude Code works directly with git. It stages changes, writes commit messages, creates branches, and opens pull requests.
+
+    ```bash theme={null}
+    claude "commit my changes with a descriptive message"
+    ```
+
+    In CI, you can automate code review and issue triage with [GitHub Actions](/docs/en/github-actions) or [GitLab CI/CD](/docs/en/gitlab-ci-cd).
+  </Accordion>
+
+  <Accordion title="Connect your tools with MCP" icon="plug">
+    The [Model Context Protocol (MCP)](/docs/en/mcp) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](/docs/en/mcp-quickstart) connects your first server end to end.
+  </Accordion>
+
+  <Accordion title="Customize with instructions, skills, and hooks" icon="sliders">
+    [`CLAUDE.md`](/docs/en/memory) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](/docs/en/memory#agents-md) on its own or alongside `CLAUDE.md`. Claude also builds [auto memory](/docs/en/memory#auto-memory) as it works, saving learnings across sessions without you writing anything.
+
+    Create [skills](/docs/en/skills) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.
+
+    [Hooks](/docs/en/hooks) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+  </Accordion>
+
+  <Accordion title="Run agents in parallel and build custom agents" icon="users">
+    Spawn [multiple Claude Code agents](/docs/en/sub-agents) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.
+
+    To run several full sessions in parallel and watch them from one screen, use [background agents](/docs/en/agent-view). For fully custom workflows, the [Agent SDK](/docs/en/agent-sdk/overview) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
+  </Accordion>
+
+  <Accordion title="Pipe, script, and automate with the CLI" icon="terminal">
+    Claude Code is composable and follows the Unix philosophy. Pipe logs into it, run it in CI, or chain it with other tools:
+
+    ```bash theme={null}
+    # Analyze recent log output
+    tail -200 app.log | claude -p "Slack me if you see any anomalies"
+
+    # Automate translations in CI
+    claude -p "translate new strings into French and raise a PR for review"
+
+    # Bulk operations across files
+    git diff main --name-only | claude -p "review these changed files for security issues"
+    ```
+
+    See the [CLI reference](/docs/en/cli-reference) for the full set of commands and flags.
+  </Accordion>
+
+  <Accordion title="Schedule recurring tasks" icon="clock">
+    Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
+
+    * [Routines](/docs/en/routines) run in the cloud, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+    * [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks) run on your machine, with direct access to your local files and tools
+    * [`/loop`](/docs/en/scheduled-tasks) repeats a prompt within a CLI session for quick polling
+  </Accordion>
+
+  <Accordion title="Work from anywhere" icon="globe">
+    Sessions aren't tied to a single surface. Move work between them as your context changes:
+
+    * Step away from your desk and keep working from your phone or any browser with [Remote Control](/docs/en/remote-control)
+    * Message [Dispatch](/docs/en/desktop#sessions-from-dispatch) a task from your phone and open the Desktop session it creates
+    * Start a long-running task on the [web](/docs/en/claude-code-on-the-web) or the [Claude mobile app](/docs/en/mobile), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
+    * Run `/desktop` to continue your current terminal session in the [Desktop app](/docs/en/desktop), where you can review diffs visually. The `/desktop` handoff requires a claude.ai subscription. Available on macOS and x64 Windows.
+    * Route tasks from team chat: mention `@Claude` in [Slack](/docs/en/slack) with a bug report and get a pull request back
+  </Accordion>
+</AccordionGroup>
+
+## Use Claude Code everywhere
+
+Each [surface](/docs/en/glossary#surface) connects to the same underlying Claude Code engine, so your repo's CLAUDE.md files, settings, and MCP servers work across all of them.
+
+Beyond the [Terminal](/docs/en/quickstart), [VS Code](/docs/en/vs-code), [JetBrains](/docs/en/jetbrains), [Desktop](/docs/en/desktop), and [Web](/docs/en/claude-code-on-the-web) surfaces above, Claude Code integrates with CI/CD, chat, and browser workflows:
+
+| What I want to do | Best option |
+| - | - |
+| Continue a local session from my phone or another device | [Remote Control](/docs/en/remote-control) |
+| Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](/docs/en/channels) |
+| Start a task locally, continue on mobile | [`claude --cloud`](/docs/en/claude-code-on-the-web#from-terminal-to-cloud), then the [Claude mobile app](/docs/en/mobile) |
+| Run Claude on a recurring schedule | [Routines](/docs/en/routines) or [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks) |
+| Automate PR reviews and issue triage | [GitHub Actions](/docs/en/github-actions) or [GitLab CI/CD](/docs/en/gitlab-ci-cd) |
+| Get automatic code review on every PR | [GitHub Code Review](/docs/en/code-review) |
+| Route bug reports from Slack to pull requests | [Slack](/docs/en/slack) |
+| Debug live web applications | [Chrome](/docs/en/chrome) |
+| Build custom agents for your own workflows | [Agent SDK](/docs/en/agent-sdk/overview) |
 
 ## Next steps
 
-Most people start by installing a plugin from Anthropic's official marketplace, which Claude Code adds the first time you start an interactive terminal session. Run `/plugin` in a terminal session to browse it, or follow [Install and manage plugins](/docs/en/plugins/install), which also covers the desktop app and VS Code. To see what's in that marketplace before you open Claude Code, browse [Claude Marketplace](https://claude.com/marketplace/plugins) on the web.
+Once you've installed Claude Code, these guides help you go deeper.
 
-To build your own, [Create a plugin](/docs/en/plugins/create) starts with an empty directory and ends with a working plugin.
-
-Once you've installed or built a plugin, these pages cover what comes next:
-
-* **Share what you built**: [Publish and distribute a plugin](/docs/en/plugins/publish), through your own marketplace or [Anthropic's directory](/docs/en/plugins/publish#submit-to-anthropics-directory)
-* **Check whether it works and is used**: [Test plugins with evals](/docs/en/plugin-evals) and [Measure plugin cost and usage](/docs/en/plugins/measure)
-* **Run a marketplace for your team**: [Create a marketplace](/docs/en/plugins/create-marketplace), then [Host and maintain a marketplace](/docs/en/plugins/host-marketplace)
-* **Set plugin policy for an organization**: [Manage plugins for your organization](/docs/en/plugins/org)
-* **Fix a problem**: [Troubleshoot plugins](/docs/en/plugins/troubleshooting)
+* [Quickstart](/docs/en/quickstart): walk through your first real task, from exploring a codebase to committing a fix
+* [Store instructions and memories](/docs/en/memory): give Claude persistent instructions with CLAUDE.md files and auto memory
+* [Common workflows](/docs/en/common-workflows) and [best practices](/docs/en/best-practices): patterns for getting the most out of Claude Code
+* [Claude Academy](https://academy.claude.com/): free self-paced courses, including [Claude Code 101](https://academy.claude.com/courses/claude-code-101) and [Claude Code in Action](https://academy.claude.com/courses/claude-code-in-action)
+* [A harness for every task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): how the Claude Code team uses [dynamic workflows](/docs/en/workflows) to orchestrate many subagents at once
+* [Settings](/docs/en/settings): customize Claude Code for your workflow
+* [Troubleshooting](/docs/en/troubleshooting): solutions for common issues
+* [code.claude.com](https://code.claude.com/): demos, pricing, and product details
