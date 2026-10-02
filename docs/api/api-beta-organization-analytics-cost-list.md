@@ -6,7 +6,7 @@ generated: true
 ---
 ---
 title: Get Cost Over Time
-url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost/list
+url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost_report/list
 ---
 
 # Get Cost Over Time
@@ -40,7 +40,7 @@ Requires an API key with the `read:analytics` scope.
 
   - `"1m"`
 
-- `claude_tag_categories: optional array of "dm" or "engaged" or "monitoring" or 2 more`
+- `claude_tag_categories: optional array of BetaAnalyticsClaudeTagCategory`
 
   Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -62,7 +62,7 @@ Requires an API key with the `read:analytics` scope.
 
   maxItems: 100
 
-- `context_windows: optional array of "0-200k" or "200k-1M"`
+- `context_windows: optional array of BetaAnalyticsContextWindow`
 
   Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -106,7 +106,7 @@ Requires an API key with the `read:analytics` scope.
 
   - `"token_type"`
 
-- `inference_geos: optional array of "global" or "not_available" or "us"`
+- `inference_geos: optional array of BetaAnalyticsInferenceGeoFilter`
 
   Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -134,7 +134,7 @@ Requires an API key with the `read:analytics` scope.
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `products: optional array of "chat" or "claude-tag" or "claude_code" or 4 more`
+- `products: optional array of BetaAnalyticsProductFilter`
 
   Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
@@ -184,145 +184,143 @@ Requires an API key with the `read:analytics` scope.
 
 ## Returns
 
-- `BetaCostBucket object`
+- `data: array of BetaAnalyticsCostReportTimeBucket`
 
-  - `data: array of object`
+  Time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no data (their `results` list is empty). A page holds at most `limit` buckets.
 
-    Time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no data (their `results` list is empty). A page holds at most `limit` buckets.
+  - `ending_at: string`
 
-    - `ending_at: string`
-
-      End of the time bucket (exclusive) in RFC 3339 format.
-
-      format: date-time
-
-    - `results: array of object`
-
-      Rows for this time bucket. Empty when the bucket has no data; otherwise a single combined row when `group_by[]` is omitted, or one row per group (subject to the per-bucket group cap described on the `group_by[]` parameter).
-
-      - `amount: string`
-
-        Amount (post-discount, pre-credit) in fractional cents.
-
-      - `claude_tag_category: "dm" or "engaged" or "monitoring" or 2 more or null`
-
-        Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude-tag`. New categories may be added over time.
-
-        - `"dm"`
-
-        - `"engaged"`
-
-        - `"monitoring"`
-
-        - `"proactive"`
-
-        - `"scheduled"`
-
-      - `claude_tag_user_id: string or null`
-
-        Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
-
-      - `context_window: "0-200k" or "200k-1M" or null`
-
-        Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
-
-        - `"0-200k"`
-
-        - `"200k-1M"`
-
-      - `cost_type: "code_execution" or "tokens" or "web_search" or null`
-
-        Cost component when `group_by[]=cost_type`; null otherwise (amount is the combined total).
-
-        - `"code_execution"`
-
-        - `"tokens"`
-
-        - `"web_search"`
-
-      - `currency: string`
-
-        Currency code for the cost amount. Currently always `"USD"`.
-
-        default: USD
-
-      - `inference_geo: "global" or "us" or null`
-
-        Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
-
-        - `"global"`
-
-        - `"us"`
-
-      - `list_amount: string`
-
-        List-price amount (pre-discount) in fractional cents.
-
-      - `model: string or null`
-
-        Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
-
-      - `product: string or null`
-
-        Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
-
-      - `rbac_group_id: string or null`
-
-        RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
-
-      - `requests: number or null`
-
-        Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
-
-      - `slack_channel_id: string or null`
-
-        Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
-
-      - `speed: "fast" or "standard" or null`
-
-        Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
-
-        - `"fast"`
-
-        - `"standard"`
-
-      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more or null`
-
-        Token type when `group_by[]=token_type` and `cost_type=tokens`; null otherwise.
-
-        - `"cache_creation.ephemeral_1h_input_tokens"`
-
-        - `"cache_creation.ephemeral_5m_input_tokens"`
-
-        - `"cache_read_input_tokens"`
-
-        - `"output_tokens"`
-
-        - `"uncached_input_tokens"`
-
-    - `starting_at: string`
-
-      Start of the time bucket (inclusive) in RFC 3339 format.
-
-      format: date-time
-
-  - `data_refreshed_at: string or null`
-
-    RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+    End of the time bucket (exclusive) in RFC 3339 format.
 
     format: date-time
 
-  - `has_more: boolean`
+  - `results: array of BetaAnalyticsCostBucketedResult`
 
-    Whether another page is available. When true, pass `next_page` as the `page` parameter to fetch it.
+    Rows for this time bucket. Empty when the bucket has no data; otherwise a single combined row when `group_by[]` is omitted, or one row per group (subject to the per-bucket group cap described on the `group_by[]` parameter).
 
-  - `next_page: string or null`
+    - `amount: string`
 
-    Opaque cursor for the next page, or null when `has_more` is false. Pass it as the `page` parameter, keeping the other parameters unchanged. A cursor can expire after the underlying data refreshes; the request then returns HTTP 410 and pagination must restart from the first page.
+      Amount (post-discount, pre-credit) in fractional cents.
 
-  - `organization_id: string`
+    - `claude_tag_category: BetaAnalyticsClaudeTagCategory or null`
 
-    ID of the Organization.
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude-tag`. New categories may be added over time.
+
+      - `"dm"`
+
+      - `"engaged"`
+
+      - `"monitoring"`
+
+      - `"proactive"`
+
+      - `"scheduled"`
+
+    - `claude_tag_user_id: string or null`
+
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
+
+    - `context_window: BetaAnalyticsContextWindow or null`
+
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `"0-200k"`
+
+      - `"200k-1M"`
+
+    - `cost_type: BetaAnalyticsCostType or null`
+
+      Cost component when `group_by[]=cost_type`; null otherwise (amount is the combined total).
+
+      - `"code_execution"`
+
+      - `"tokens"`
+
+      - `"web_search"`
+
+    - `currency: string`
+
+      Currency code for the cost amount. Currently always `"USD"`.
+
+      default: USD
+
+    - `inference_geo: "global" or "us" or null`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `"global"`
+
+      - `"us"`
+
+    - `list_amount: string`
+
+      List-price amount (pre-discount) in fractional cents.
+
+    - `model: string or null`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `product: string or null`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+
+    - `rbac_group_id: string or null`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `requests: number or null`
+
+      Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+    - `slack_channel_id: string or null`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `speed: "fast" or "standard" or null`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `"fast"`
+
+      - `"standard"`
+
+    - `token_type: BetaAnalyticsTokenType or null`
+
+      Token type when `group_by[]=token_type` and `cost_type=tokens`; null otherwise.
+
+      - `"cache_creation.ephemeral_1h_input_tokens"`
+
+      - `"cache_creation.ephemeral_5m_input_tokens"`
+
+      - `"cache_read_input_tokens"`
+
+      - `"output_tokens"`
+
+      - `"uncached_input_tokens"`
+
+  - `starting_at: string`
+
+    Start of the time bucket (inclusive) in RFC 3339 format.
+
+    format: date-time
+
+- `data_refreshed_at: string or null`
+
+  RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+  format: date-time
+
+- `has_more: boolean`
+
+  Whether another page is available. When true, pass `next_page` as the `page` parameter to fetch it.
+
+- `next_page: string or null`
+
+  Opaque cursor for the next page, or null when `has_more` is false. Pass it as the `page` parameter, keeping the other parameters unchanged. A cursor can expire after the underlying data refreshes; the request then returns HTTP 410 and pagination must restart from the first page.
+
+- `organization_id: string`
+
+  ID of the Organization.
 
 ## Example
 

@@ -150,6 +150,8 @@ omitted from the results.
 
   - `"ce-plugins-2026-09-01"`
 
+  - `"spend-limit-reads-2026-09-26"`
+
 ### Returns
 
 - `data: array of BetaServiceAccountWorkspaceMember`
@@ -346,6 +348,8 @@ accounts cannot be added and are rejected.
   - `"mcp-client-2026-09-15"`
 
   - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
 
 ### Body parameters
 
@@ -560,6 +564,8 @@ account returns 404.
 
   - `"ce-plugins-2026-09-01"`
 
+  - `"spend-limit-reads-2026-09-26"`
+
 ### Returns
 
 - `BetaServiceAccountWorkspaceMember object`
@@ -749,6 +755,8 @@ rejected.
   - `"mcp-client-2026-09-15"`
 
   - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
 
 ### Body parameters
 
@@ -956,6 +964,8 @@ membership. Archived workspaces return 400.
   - `"mcp-client-2026-09-15"`
 
   - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
 
 ### Returns
 

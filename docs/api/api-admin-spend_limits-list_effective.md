@@ -6,7 +6,7 @@ generated: true
 ---
 ---
 title: List Effective Spend Limits
-url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/list_effective
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/effective/list
 ---
 
 # List Effective Spend Limits
@@ -53,9 +53,9 @@ Paginates by member, so a member's periods never split across pages.
 
 - `data: array of BetaSpendSummary`
 
-  - `actor: UserActor or ScopedAPIKeyActor`
+  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
 
-    - `UserActor object`
+    - `BetaSpendLimitUserActor object`
 
       A user within the organization. `name` and `email_address` are
       null when the underlying account is unavailable or has been deleted;
@@ -85,7 +85,7 @@ Paginates by member, so a member's periods never split across pages.
 
         Tagged ID of the user.
 
-    - `ScopedAPIKeyActor object`
+    - `BetaSpendLimitScopedAPIKeyActor object`
 
       A scoped Admin API key acting on behalf of the organization.
 
@@ -117,69 +117,9 @@ Paginates by member, so a member's periods never split across pages.
 
     The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-  - `scope: User or SeatTier or RBACGroup or 3 more`
+  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
 
-    - `User object`
-
-      Scope selecting a single member of the organization.
-
-      - `type: "user"`
-
-        Scope type. Always `user` for this scope.
-
-        default: user
-
-      - `user_id: string`
-
-        Tagged ID of the member the spend limit applies to.
-
-    - `SeatTier object`
-
-      - `type: "seat_tier"`
-
-        default: seat_tier
-
-      - `seat_tier: string`
-
-    - `RBACGroup object`
-
-      - `type: "rbac_group"`
-
-        default: rbac_group
-
-      - `rbac_group_id: string`
-
-    - `OrganizationService object`
-
-      - `type: "organization_service"`
-
-        default: organization_service
-
-      - `service: string`
-
-    - `Organization object`
-
-      - `type: "organization"`
-
-        default: organization
-
-    - `Workspace object`
-
-      Scope selecting one workspace of a Claude Console organization.
-
-      - `type: "workspace"`
-
-        Scope type. Always `workspace` for this scope.
-
-        default: workspace
-
-      - `workspace_id: string`
-
-        Tagged ID of the workspace the spend limit applies to.
-
-  - `source: User or SeatTier or RBACGroup or 3 more`
-
-    - `User object`
+    - `BetaSpendLimitUserScope object`
 
       Scope selecting a single member of the organization.
 
@@ -193,7 +133,7 @@ Paginates by member, so a member's periods never split across pages.
 
         Tagged ID of the member the spend limit applies to.
 
-    - `SeatTier object`
+    - `BetaSpendLimitSeatTierScope object`
 
       - `type: "seat_tier"`
 
@@ -201,7 +141,7 @@ Paginates by member, so a member's periods never split across pages.
 
       - `seat_tier: string`
 
-    - `RBACGroup object`
+    - `BetaSpendLimitRBACGroupScope object`
 
       - `type: "rbac_group"`
 
@@ -209,7 +149,7 @@ Paginates by member, so a member's periods never split across pages.
 
       - `rbac_group_id: string`
 
-    - `OrganizationService object`
+    - `BetaSpendLimitOrganizationServiceScope object`
 
       - `type: "organization_service"`
 
@@ -217,13 +157,13 @@ Paginates by member, so a member's periods never split across pages.
 
       - `service: string`
 
-    - `Organization object`
+    - `BetaSpendLimitOrganizationScope object`
 
       - `type: "organization"`
 
         default: organization
 
-    - `Workspace object`
+    - `BetaSpendLimitWorkspaceScope object`
 
       Scope selecting one workspace of a Claude Console organization.
 
@@ -236,6 +176,24 @@ Paginates by member, so a member's periods never split across pages.
       - `workspace_id: string`
 
         Tagged ID of the workspace the spend limit applies to.
+
+  - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+
+    - `BetaSpendLimitUserScope object`
+
+      Scope selecting a single member of the organization.
+
+    - `BetaSpendLimitSeatTierScope object`
+
+    - `BetaSpendLimitRBACGroupScope object`
+
+    - `BetaSpendLimitOrganizationServiceScope object`
+
+    - `BetaSpendLimitOrganizationScope object`
+
+    - `BetaSpendLimitWorkspaceScope object`
+
+      Scope selecting one workspace of a Claude Console organization.
 
   - `spend_limit_id: string`
 

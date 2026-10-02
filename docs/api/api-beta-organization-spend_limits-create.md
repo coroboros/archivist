@@ -6,7 +6,7 @@ generated: true
 ---
 ---
 title: Set Spend Limit
-url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/create
+url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/set
 ---
 
 # Set Spend Limit
@@ -29,11 +29,11 @@ Anthropic account team.
 
   Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
-- `scope: User or Organization or Workspace`
+- `scope: BetaSpendLimitUserScope or BetaSpendLimitOrganizationScope or BetaSpendLimitWorkspaceScope`
 
   What the limit applies to. Claude Enterprise organizations set `user` limits. Claude Console organizations set `organization` and `workspace` limits. Any other combination returns 400. Setting `organization` and `workspace` limits through the API is in an early access preview. To request access, contact your Anthropic account team.
 
-  - `User object`
+  - `BetaSpendLimitUserScope object`
 
     Scope selecting a single member of the organization.
 
@@ -47,13 +47,13 @@ Anthropic account team.
 
       Tagged ID of the member the spend limit applies to.
 
-  - `Organization object`
+  - `BetaSpendLimitOrganizationScope object`
 
     - `type: "organization"`
 
       default: organization
 
-  - `Workspace object`
+  - `BetaSpendLimitWorkspaceScope object`
 
     Scope selecting one workspace of a Claude Console organization.
 
@@ -105,6 +105,10 @@ Anthropic account team.
 
     ISO 4217 code of the organization's billing currency; the unit for `amount`.
 
+  - `is_enabled: boolean`
+
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+
   - `period: BetaSpendLimitPeriod`
 
     Length of the window the limit resets over. `amount` caps spend within each period.
@@ -115,11 +119,11 @@ Anthropic account team.
 
     - `"weekly"`
 
-  - `scope: User or SeatTier or RBACGroup or 3 more`
+  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
-    - `User object`
+    - `BetaSpendLimitUserScope object`
 
       Scope selecting a single member of the organization.
 
@@ -133,7 +137,7 @@ Anthropic account team.
 
         Tagged ID of the member the spend limit applies to.
 
-    - `SeatTier object`
+    - `BetaSpendLimitSeatTierScope object`
 
       - `type: "seat_tier"`
 
@@ -141,7 +145,7 @@ Anthropic account team.
 
       - `seat_tier: string`
 
-    - `RBACGroup object`
+    - `BetaSpendLimitRBACGroupScope object`
 
       - `type: "rbac_group"`
 
@@ -149,7 +153,7 @@ Anthropic account team.
 
       - `rbac_group_id: string`
 
-    - `OrganizationService object`
+    - `BetaSpendLimitOrganizationServiceScope object`
 
       - `type: "organization_service"`
 
@@ -157,13 +161,13 @@ Anthropic account team.
 
       - `service: string`
 
-    - `Organization object`
+    - `BetaSpendLimitOrganizationScope object`
 
       - `type: "organization"`
 
         default: organization
 
-    - `Workspace object`
+    - `BetaSpendLimitWorkspaceScope object`
 
       Scope selecting one workspace of a Claude Console organization.
 
@@ -208,6 +212,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
   "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
   "currency": "USD",
+  "is_enabled": true,
   "period": "daily",
   "scope": {
     "type": "user",

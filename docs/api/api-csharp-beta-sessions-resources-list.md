@@ -137,6 +137,8 @@ List Session Resources
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -149,7 +151,7 @@ List Session Resources
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
     - `required string ID`
 
@@ -193,7 +195,7 @@ List Session Resources
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsFileResourceType Type`
 
     - `required string ID`
 
@@ -217,7 +219,7 @@ List Session Resources
 
     A memory store attached to an agent session.
 
-    - `required Type Type`
+    - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
     - `required string MemoryStoreID`
 

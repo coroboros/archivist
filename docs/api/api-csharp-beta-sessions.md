@@ -145,9 +145,13 @@ Create Session
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -219,9 +223,13 @@ Create Session
 
             - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+              **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
               High-performance model for agents and coding
 
             - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
               High-performance model for agents and coding
 
@@ -1199,6 +1207,8 @@ Create Session
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1301,9 +1311,13 @@ Create Session
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -1881,7 +1895,7 @@ Create Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -1925,7 +1939,7 @@ Create Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -1949,7 +1963,7 @@ Create Session
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -2501,6 +2515,8 @@ List Sessions
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2603,9 +2619,13 @@ List Sessions
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -3183,7 +3203,7 @@ List Sessions
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -3227,7 +3247,7 @@ List Sessions
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -3251,7 +3271,7 @@ List Sessions
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -3725,6 +3745,8 @@ Get Session
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3827,9 +3849,13 @@ Get Session
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -4407,7 +4433,7 @@ Get Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -4451,7 +4477,7 @@ Get Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -4475,7 +4501,7 @@ Get Session
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -4968,6 +4994,8 @@ Update Session
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5070,9 +5098,13 @@ Update Session
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -5650,7 +5682,7 @@ Update Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -5694,7 +5726,7 @@ Update Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -5718,7 +5750,7 @@ Update Session
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -6187,6 +6219,8 @@ Delete Session
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6341,6 +6375,8 @@ Archive Session
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6443,9 +6479,13 @@ Archive Session
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -7023,7 +7063,7 @@ Archive Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -7067,7 +7107,7 @@ Archive Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -7091,7 +7131,7 @@ Archive Session
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -7600,9 +7640,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         High-performance model for agents and coding
 
       - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         High-performance model for agents and coding
 
@@ -7674,9 +7718,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -8742,9 +8790,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -9322,7 +9374,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
       - `required string ID`
 
@@ -9366,7 +9418,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required Type Type`
+      - `required BetaManagedAgentsFileResourceType Type`
 
       - `required string ID`
 
@@ -9390,7 +9442,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A memory store attached to an agent session.
 
-      - `required Type Type`
+      - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
       - `required string MemoryStoreID`
 
@@ -9624,9 +9676,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         High-performance model for agents and coding
 
       - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         High-performance model for agents and coding
 
@@ -10684,9 +10740,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -11254,9 +11314,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           High-performance model for agents and coding
 
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           High-performance model for agents and coding
 
@@ -12499,6 +12563,8 @@ List Events
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
   - `string workspaceID`
 
@@ -14274,9 +14340,13 @@ List Events
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -15447,6 +15517,8 @@ Send Events
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -16072,6 +16144,8 @@ Stream Events
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
   - `string workspaceID`
 
@@ -17847,9 +17921,13 @@ Stream Events
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -18711,6 +18789,8 @@ Add Session Resource
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18721,7 +18801,7 @@ Add Session Resource
 
 - `class BetaManagedAgentsFileResource`
 
-  - `required Type Type`
+  - `required BetaManagedAgentsFileResourceType Type`
 
   - `required string ID`
 
@@ -18897,6 +18977,8 @@ List Session Resources
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18909,7 +18991,7 @@ List Session Resources
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
     - `required string ID`
 
@@ -18953,7 +19035,7 @@ List Session Resources
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsFileResourceType Type`
 
     - `required string ID`
 
@@ -18977,7 +19059,7 @@ List Session Resources
 
     A memory store attached to an agent session.
 
-    - `required Type Type`
+    - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
     - `required string MemoryStoreID`
 
@@ -19176,6 +19258,8 @@ Get Session Resource
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19190,7 +19274,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
     - `required string ID`
 
@@ -19234,7 +19318,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsFileResourceType Type`
 
     - `required string ID`
 
@@ -19258,7 +19342,7 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
-    - `required Type Type`
+    - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
     - `required string MemoryStoreID`
 
@@ -19449,6 +19533,8 @@ Update Session Resource
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19463,7 +19549,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
 
     - `required string ID`
 
@@ -19507,7 +19593,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required Type Type`
+    - `required BetaManagedAgentsFileResourceType Type`
 
     - `required string ID`
 
@@ -19531,7 +19617,7 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
-    - `required Type Type`
+    - `required BetaManagedAgentsMemoryStoreResourceType Type`
 
     - `required string MemoryStoreID`
 
@@ -19717,6 +19803,8 @@ Delete Session Resource
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19729,7 +19817,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `required Type Type`
+  - `required BetaManagedAgentsDeleteSessionResourceType Type`
 
   - `required string ID`
 
@@ -19886,6 +19974,8 @@ List Session Threads
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19994,9 +20084,13 @@ List Session Threads
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -20805,6 +20899,8 @@ Get Session Thread
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -20913,9 +21009,13 @@ Get Session Thread
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -21718,6 +21818,8 @@ Archive Session Thread
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -21826,9 +21928,13 @@ Archive Session Thread
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -22642,6 +22748,8 @@ List Session Thread Events
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
   - `string workspaceID`
 
@@ -24417,9 +24525,13 @@ List Session Thread Events
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
@@ -25229,6 +25341,8 @@ Stream Session Thread Events
     - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
   - `string workspaceID`
 
@@ -27004,9 +27118,13 @@ Stream Session Thread Events
 
           - `ClaudeSonnet4_5("claude-sonnet-4-5")`
 
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             High-performance model for agents and coding
 
           - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             High-performance model for agents and coding
 
