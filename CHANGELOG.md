@@ -1,5 +1,108 @@
 # Changelog
 
+## 🤖 v1.5.206 - 02/10/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-claude-platform-on-aws-iam-actions.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-api.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-intelligence.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-components.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-events.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-install.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-interface.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-evals.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-self-hosted-environments-identity.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-test.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-authentication.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/managed-agents/managed-agents-scheduled-deployments.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-security.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/managed-agents/managed-agents-self-hosted-sandboxes-custom-tools.md`
+- Added: `docs/managed-agents/managed-agents-self-hosted-sandboxes-memory.md`
+- Added: `docs/managed-agents/managed-agents-self-hosted-sandboxes-operations.md`
+- Added: `docs/managed-agents/managed-agents-self-hosted-sandboxes-reference.md`
+- Added: `docs/managed-agents/managed-agents-self-hosted-sandboxes-workers.md`
+
+
 ## 🤖 v1.5.205 - 02/10/2026
 
 File Changes:

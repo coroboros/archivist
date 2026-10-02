@@ -737,7 +737,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Thinking](./build-with-claude-thinking.md)
 * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
 * [Citations](./build-with-claude-citations.md)
-* [Structured outputs](./build-with-claude-structured-outputs.md)
+* [Structured outputs](./build-with-claude-structured-outputs.md), for the models in the Amazon Bedrock note under its [Compatibility](./build-with-claude-structured-outputs.md#compatibility) section
 
 ### Features not supported
 

@@ -206,8 +206,6 @@ The empty `matcher` fires on all notification types. To fire only on specific ev
 
 Claude Code times `permission_prompt` differently in a terminal and in Claude Desktop, the VS Code extension, and other hosts that answer permission requests through the Agent SDK. See [when each notification type fires](/docs/en/hooks#notification) for both timings.
 
-The `agent_needs_input` and `agent_completed` matchers require Claude Code v2.1.198 or later.
-
 The `quota_auto_resume_fired`, `quota_auto_resume_stale`, and `quota_auto_resume_disabled` matchers require Claude Code v2.1.234 or later.
 
 In terminal sessions, `permission_prompt` for a sandboxed command's network request requires Claude Code v2.1.246 or later.
@@ -976,7 +974,7 @@ Keep these constraints in mind when designing hooks:
 
 The reverse is not true: a hook returning `"allow"` doesn't bypass deny rules from settings, and it can't suppress the prompt for MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool) or for connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools) in sessions where that setting reaches Claude Code. Hooks in settings files and in a plugin's `hooks/hooks.json` can tighten restrictions but not loosen them past what permission rules allow.
 
-A [mod](/docs/en/plugins/mods/overview) you install that hooks `tool.check` can approve a call that your `PreToolUse` hook blocked, unless the hook is in managed settings. [Extend permissions with hooks](/docs/en/permissions#extend-permissions-with-hooks) lists which rules hold over a mod.
+A [mod](/docs/en/plugins/mods/overview) you install that handles `tool.check` can approve a call that your `PreToolUse` hook blocked, unless the hook is in managed settings. [Extend permissions with hooks](/docs/en/permissions#extend-permissions-with-hooks) lists which rules hold over a mod.
 
 ### Hook not firing
 

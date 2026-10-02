@@ -35,7 +35,7 @@ featureMetadata:
     Claude Platform on AWS: ga
     Amazon Bedrock:
       availability: ga
-      note: On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
+      note: On Amazon Bedrock, structured outputs are available on the legacy [Amazon Bedrock (Opus 4.6 and earlier)](./build-with-claude-claude-on-amazon-bedrock-legacy.md) integration for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5, and not on [Claude in Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md).
     Google Cloud: ga
     Microsoft Foundry: ga
 ---
