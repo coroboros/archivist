@@ -1,5 +1,22 @@
 # Changelog
 
+## 🤖 v1.5.208 - 03/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.207 - 03/10/2026
 
 File Changes:
