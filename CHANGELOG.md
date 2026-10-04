@@ -1,5 +1,31 @@
 # Changelog
 
+## 🤖 v1.5.209 - 04/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-desktop-scheduled-tasks.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-vs-code.md`
+
+
 ## 🤖 v1.5.208 - 03/10/2026
 
 File Changes:
