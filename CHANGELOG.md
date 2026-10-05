@@ -1,5 +1,34 @@
 # Changelog
 
+## 🤖 v1.5.211 - 05/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-host-marketplace.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-typescript.md`
+
+
 ## 🤖 v1.5.210 - 04/10/2026
 
 File Changes:
