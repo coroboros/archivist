@@ -39,7 +39,6 @@ The baseline settings shared by `claude-fable-5-1` and `claude-mythos-5-1`:
 Where the two models diverge:
 
 * **Availability:** Claude Fable 5.1 doesn't require access approval. Claude Mythos 5.1 is available only to approved customers in [Project Glasswing](https://anthropic.com/glasswing). Contact your Anthropic account team for access.
-* **Safety classifiers:** Claude Fable 5.1 runs safety classifiers covering the same `stop_details` categories as Claude Fable 5. A declined request returns `stop_reason: "refusal"` with a `stop_details.category`, and can fall back to another model with the `fallbacks` parameter or a client-side retry. See [Refusals and fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md).
 * **Priority Tier:** Neither model is supported on [Priority Tier](../api/api-service-tiers.md#supported-models). Claude Fable 5 is.
 
 ## Migrating to Claude Fable 5.1 from Claude Fable 5

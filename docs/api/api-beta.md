@@ -725,6 +725,20 @@ The Models API response can be used to determine which models are available for 
 
     A human-readable name for the model.
 
+  - `line: BetaModelLine or null`
+
+    The model line this model belongs to, such as `opus` for both Claude Opus 4.5 and Claude Opus 4.6. More lines may be added. `null` when the model belongs to no line; do not infer a line from the `id`.
+
+    - `"haiku"`
+
+    - `"sonnet"`
+
+    - `"opus"`
+
+    - `"fable"`
+
+    - `"mythos"`
+
   - `max_input_tokens: number or null`
 
     Maximum input context window size in tokens for this model.
@@ -832,6 +846,7 @@ curl https://api.anthropic.com/v1/models \
       },
       "created_at": "2026-07-24T00:00:00Z",
       "display_name": "Claude Opus 5",
+      "line": "haiku",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"
@@ -1113,6 +1128,20 @@ The Models API response can be used to determine information about a specific mo
 
     A human-readable name for the model.
 
+  - `line: BetaModelLine or null`
+
+    The model line this model belongs to, such as `opus` for both Claude Opus 4.5 and Claude Opus 4.6. More lines may be added. `null` when the model belongs to no line; do not infer a line from the `id`.
+
+    - `"haiku"`
+
+    - `"sonnet"`
+
+    - `"opus"`
+
+    - `"fable"`
+
+    - `"mythos"`
+
   - `max_input_tokens: number or null`
 
     Maximum input context window size in tokens for this model.
@@ -1206,6 +1235,7 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
   },
   "created_at": "2026-07-24T00:00:00Z",
   "display_name": "Claude Opus 5",
+  "line": "haiku",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"
@@ -23758,7 +23788,7 @@ Create Agent
 
 - `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
 
-  Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
+  Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
   - `BetaManagedAgentsAgentToolset20260401Params object`
 
@@ -26931,7 +26961,7 @@ Update Agent
 
 - `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams or null`
 
-  Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
+  Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
   - `BetaManagedAgentsAgentToolset20260401Params object`
 
@@ -54269,9 +54299,20 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events
       ],
       "type": "user.message",
       "processed_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "content": [
+        {
+          "text": "Let me look up order #1234 for you.",
+          "type": "text"
+        }
+      ],
+      "processed_at": "2026-03-15T10:00:00Z",
+      "type": "agent.message"
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -67978,19 +68019,17 @@ curl https://api.anthropic.com/v1/memory_stores \
 {
   "data": [
     {
-      "id": "id",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      },
-      "name": "name",
+      "id": "memstore_01Wf3kQ8tZxB2mVr7HcJ4aNd",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Per-user preferences and project context.",
+      "metadata": {},
+      "name": "User Preferences",
       "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      "updated_at": "2026-03-15T10:00:00Z"
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -69232,19 +69271,19 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories \
 {
   "data": [
     {
-      "id": "id",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_store_id": "memory_store_id",
-      "memory_version_id": "memory_version_id",
-      "path": "path",
+      "id": "mem_011CZkZ9X2dpNyB6YbtxvB6e",
+      "content_sha256": "ba7936d94c84d948a2232088f78228f175df6a8353b2d5bc9228eee5794a0024",
+      "content_size_bytes": 28,
+      "created_at": "2026-03-15T10:00:00Z",
+      "memory_store_id": "memstore_01Wf3kQ8tZxB2mVr7HcJ4aNd",
+      "memory_version_id": "memver_011CZkZBJq5dWxk9fVLNcPht",
+      "path": "/preferences/formatting.md",
       "type": "memory",
-      "updated_at": "2019-12-27T18:11:19.117Z",
-      "content": "content"
+      "updated_at": "2026-03-15T10:00:00Z",
+      "content": null
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -70220,28 +70259,28 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "memory_id": "memory_id",
-      "memory_store_id": "memory_store_id",
+      "id": "memver_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "memory_id": "mem_011CZkZ9X2dpNyB6YbtxvB6e",
+      "memory_store_id": "memstore_01Wf3kQ8tZxB2mVr7HcJ4aNd",
       "operation": "created",
       "type": "memory_version",
-      "content": "content",
-      "content_sha256": "content_sha256",
-      "content_size_bytes": 0,
+      "content": null,
+      "content_sha256": "ba7936d94c84d948a2232088f78228f175df6a8353b2d5bc9228eee5794a0024",
+      "content_size_bytes": 28,
       "created_by": {
-        "session_id": "x",
+        "session_id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
         "type": "session_actor"
       },
-      "path": "path",
-      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "path": "/preferences/formatting.md",
+      "redacted_at": null,
       "redacted_by": {
         "session_id": "x",
         "type": "session_actor"
       }
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -87347,6 +87386,12 @@ List Workspaces
 
   default: false
 
+- `include_default: optional boolean`
+
+  Whether to include the organization's default Workspace in the response
+
+  default: false
+
 - `limit: optional number`
 
   Number of items to return per page.
@@ -99382,15 +99427,21 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     format: date-time
 
-  - `name: string`
+  - `display_name: string`
 
-    Name of the RBAC Role.
+    Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
 
   - `updated_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+  - `name: string`
+
+    **Deprecated**: Use `display_name` instead; `name` always has the same value.
+
+    Deprecated: use `display_name` instead. Name of the RBAC Role; always the same value as `display_name`.
 
 - `has_more: boolean`
 
@@ -99417,6 +99468,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles \
     {
       "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
       "created_at": "2024-10-30T23:58:27.427722Z",
+      "display_name": "Project Editor",
       "name": "Project Editor",
       "type": "rbac_role",
       "updated_at": "2024-10-30T23:58:27.427722Z"
@@ -99463,15 +99515,21 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     format: date-time
 
-  - `name: string`
+  - `display_name: string`
 
-    Name of the RBAC Role.
+    Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
 
   - `updated_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+  - `name: string`
+
+    **Deprecated**: Use `display_name` instead; `name` always has the same value.
+
+    Deprecated: use `display_name` instead. Name of the RBAC Role; always the same value as `display_name`.
 
 #### Example
 
@@ -99487,6 +99545,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID \
 {
   "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
   "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Project Editor",
   "name": "Project Editor",
   "type": "rbac_role",
   "updated_at": "2024-10-30T23:58:27.427722Z"
