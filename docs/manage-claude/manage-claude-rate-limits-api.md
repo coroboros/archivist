@@ -26,7 +26,7 @@ Use this API to:
   **Admin API credentials required.** These endpoints are part of the Admin API. You can access them using an [Admin API key](./manage-claude-admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a workspace; workspace API keys don't work. See [Authentication](./manage-claude-admin-api.md#authentication) for details.
 </Check>
 
-The SDK and CLI examples on this page construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDKs expose these endpoints as `client.beta.organization.rate_limits` and `client.beta.organization.workspaces.rate_limits`; the Python, TypeScript, C#, Go, and Java list methods return an iterator that follows `next_page` for you, while the PHP, Ruby, and curl examples read one page.
+The SDK and CLI examples on this page construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDKs expose these endpoints as `client.organization.rate_limits` (typescript: `client.organization.rateLimits`; csharp, go: `client.Organization.RateLimits`; java: `client.organization().rateLimits()`; php: `$client->organization->rateLimits`) and `client.organization.workspaces.rate_limits` (typescript: `client.organization.workspaces.rateLimits`; csharp, go: `client.Organization.Workspaces.RateLimits`; java: `client.organization().workspaces().rateLimits()`; php: `$client->organization->workspaces->rateLimits`); the Python, TypeScript, C#, Go, and Java list methods return an iterator that follows `next_page` for you, while the PHP, Ruby, and curl examples read one page.
 
 ## Quick start
 
@@ -40,13 +40,13 @@ List the rate limits configured for your organization:
   ```
 
   ```bash CLI
-  ant beta:organization:rate-limits list
+  ant organization:rate-limits list
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.beta.organization.rate_limits.list()
+  rate_limits = client.organization.rate_limits.list()
 
   for entry in rate_limits:
       models = f" ({', '.join(entry.models)})" if entry.models else ""
@@ -58,7 +58,7 @@ List the rate limits configured for your organization:
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.beta.organization.rateLimits.list();
+  const rateLimits = await client.organization.rateLimits.list();
 
   for await (const entry of rateLimits) {
     const models = entry.models ? ` (${entry.models.join(", ")})` : "";
@@ -72,7 +72,7 @@ List the rate limits configured for your organization:
   ```csharp C#
   AnthropicClient client = new();
 
-  var rateLimits = await client.Beta.Organization.RateLimits.List();
+  var rateLimits = await client.Organization.RateLimits.List();
 
   await foreach (var entry in rateLimits.Paginate())
   {
@@ -88,7 +88,7 @@ List the rate limits configured for your organization:
   ```go Go
   client := anthropic.NewClient()
 
-  rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{})
+  rateLimits := client.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.OrganizationRateLimitListParams{})
 
   for rateLimits.Next() {
   	entry := rateLimits.Current()
@@ -109,7 +109,7 @@ List the rate limits configured for your organization:
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  var rateLimits = client.beta().organization().rateLimits().list();
+  var rateLimits = client.organization().rateLimits().list();
 
   for (var entry : rateLimits.autoPager()) {
       var models = entry.models()
@@ -125,7 +125,7 @@ List the rate limits configured for your organization:
   ```php PHP
   $client = new Client();
 
-  $rateLimits = $client->beta->organization->rateLimits->list();
+  $rateLimits = $client->organization->rateLimits->list();
 
   foreach ($rateLimits->data as $entry) {
       $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
@@ -139,7 +139,7 @@ List the rate limits configured for your organization:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  rate_limits = client.beta.organization.rate_limits.list
+  rate_limits = client.organization.rate_limits.list
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""
@@ -164,7 +164,7 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 * **`models` list:** For `model_group` entries, the `models` field lists every model ID and alias that counts against that group's limits. Use this list to look up which group any model string falls under. For other group types, `models` is `null`.
 * **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](../api/api-rate-limits.md) for how each limiter is measured and enforced.
 
-For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/api-beta-organization-rate_limits-list.md).
+For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/api-organization-rate_limits-list.md).
 
 ### List all organization rate limits
 
@@ -176,13 +176,13 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```
 
   ```bash CLI
-  ant beta:organization:rate-limits list
+  ant organization:rate-limits list
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.beta.organization.rate_limits.list()
+  rate_limits = client.organization.rate_limits.list()
 
   for entry in rate_limits:
       models = f" ({', '.join(entry.models)})" if entry.models else ""
@@ -194,7 +194,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.beta.organization.rateLimits.list();
+  const rateLimits = await client.organization.rateLimits.list();
 
   for await (const entry of rateLimits) {
     const models = entry.models ? ` (${entry.models.join(", ")})` : "";
@@ -208,7 +208,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```csharp C#
   AnthropicClient client = new();
 
-  var rateLimits = await client.Beta.Organization.RateLimits.List();
+  var rateLimits = await client.Organization.RateLimits.List();
 
   await foreach (var entry in rateLimits.Paginate())
   {
@@ -224,7 +224,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```go Go
   client := anthropic.NewClient()
 
-  rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{})
+  rateLimits := client.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.OrganizationRateLimitListParams{})
 
   for rateLimits.Next() {
   	entry := rateLimits.Current()
@@ -245,7 +245,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  var rateLimits = client.beta().organization().rateLimits().list();
+  var rateLimits = client.organization().rateLimits().list();
 
   for (var entry : rateLimits.autoPager()) {
       var models = entry.models()
@@ -261,7 +261,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```php PHP
   $client = new Client();
 
-  $rateLimits = $client->beta->organization->rateLimits->list();
+  $rateLimits = $client->organization->rateLimits->list();
 
   foreach ($rateLimits->data as $entry) {
       $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
@@ -275,7 +275,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  rate_limits = client.beta.organization.rate_limits.list
+  rate_limits = client.organization.rate_limits.list
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""
@@ -350,13 +350,13 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```
 
   ```bash CLI
-  ant beta:organization:rate-limits list --model claude-opus-5
+  ant organization:rate-limits list --model claude-opus-5
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.beta.organization.rate_limits.list(model="claude-opus-5")
+  rate_limits = client.organization.rate_limits.list(model="claude-opus-5")
 
   for entry in rate_limits:
       models = f" ({', '.join(entry.models)})" if entry.models else ""
@@ -368,7 +368,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.beta.organization.rateLimits.list({ model: "claude-opus-5" });
+  const rateLimits = await client.organization.rateLimits.list({ model: "claude-opus-5" });
 
   for await (const entry of rateLimits) {
     const models = entry.models ? ` (${entry.models.join(", ")})` : "";
@@ -382,7 +382,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```csharp C#
   AnthropicClient client = new();
 
-  var rateLimits = await client.Beta.Organization.RateLimits.List(new()
+  var rateLimits = await client.Organization.RateLimits.List(new()
   {
       Model = "claude-opus-5"
   });
@@ -401,7 +401,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```go Go
   client := anthropic.NewClient()
 
-  rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{
+  rateLimits := client.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.OrganizationRateLimitListParams{
   	Model: anthropic.String(anthropic.ModelClaudeOpus5),
   })
 
@@ -422,7 +422,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```
 
   ```java Java
-  import com.anthropic.models.beta.organization.ratelimits.RateLimitListParams;
+  import com.anthropic.models.organization.ratelimits.RateLimitListParams;
   import com.anthropic.models.messages.Model;
 
   void main() {
@@ -431,7 +431,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
       var params = RateLimitListParams.builder()
           .model(Model.CLAUDE_OPUS_5.asString())
           .build();
-      var rateLimits = client.beta().organization().rateLimits().list(params);
+      var rateLimits = client.organization().rateLimits().list(params);
 
       for (var entry : rateLimits.autoPager()) {
           var models = entry.models()
@@ -450,7 +450,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
 
   $client = new Client();
 
-  $rateLimits = $client->beta->organization->rateLimits->list(
+  $rateLimits = $client->organization->rateLimits->list(
       model: Model::CLAUDE_OPUS_5->value,
   );
 
@@ -466,7 +466,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  rate_limits = client.beta.organization.rate_limits.list(model: Anthropic::Model::CLAUDE_OPUS_5)
+  rate_limits = client.organization.rate_limits.list(model: Anthropic::Model::CLAUDE_OPUS_5)
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""
@@ -490,10 +490,10 @@ The response only includes overrides, so anything missing from it is inherited f
 * Within a group that is present, a limiter type that is absent from `limits[]` has no workspace override for that limiter. The workspace inherits the organization value for it.
 * For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
-For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](../api/api-beta-organization-workspaces-rate_limits-list.md).
+For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](../api/api-organization-workspaces-rate_limits-list.md).
 
 <Tip>
-  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-beta-organization-workspaces-list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-organization-workspaces-list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 </Tip>
 
 <CodeGroup>
@@ -504,14 +504,14 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```
 
   ```bash CLI
-  ant beta:organization:workspaces:rate-limits list \
+  ant organization:workspaces:rate-limits list \
     --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.beta.organization.workspaces.rate_limits.list(
+  rate_limits = client.organization.workspaces.rate_limits.list(
       "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   )
 
@@ -525,7 +525,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.beta.organization.workspaces.rateLimits.list(
+  const rateLimits = await client.organization.workspaces.rateLimits.list(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   );
 
@@ -541,7 +541,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```csharp C#
   AnthropicClient client = new();
 
-  var rateLimits = await client.Beta.Organization.Workspaces.RateLimits.List(
+  var rateLimits = await client.Organization.Workspaces.RateLimits.List(
       "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   );
 
@@ -559,10 +559,10 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```go Go
   client := anthropic.NewClient()
 
-  rateLimits := client.Beta.Organization.Workspaces.RateLimits.ListAutoPaging(
+  rateLimits := client.Organization.Workspaces.RateLimits.ListAutoPaging(
   	context.Background(),
   	"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-  	anthropic.BetaOrganizationWorkspaceRateLimitListParams{},
+  	anthropic.OrganizationWorkspaceRateLimitListParams{},
   )
 
   for rateLimits.Next() {
@@ -584,7 +584,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  var rateLimits = client.beta().organization().workspaces().rateLimits()
+  var rateLimits = client.organization().workspaces().rateLimits()
       .list("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ");
 
   for (var entry : rateLimits.autoPager()) {
@@ -601,7 +601,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   ```php PHP
   $client = new Client();
 
-  $rateLimits = $client->beta->organization->workspaces->rateLimits->list(
+  $rateLimits = $client->organization->workspaces->rateLimits->list(
       workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
   );
 
@@ -618,7 +618,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   client = Anthropic::Client.new
 
   workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-  rate_limits = client.beta.organization.workspaces.rate_limits.list(workspace_id)
+  rate_limits = client.organization.workspaces.rate_limits.list(workspace_id)
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""
@@ -684,13 +684,13 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```
 
   ```bash CLI
-  ant beta:organization:rate-limits list --group-type batch
+  ant organization:rate-limits list --group-type batch
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.beta.organization.rate_limits.list(group_type="batch")
+  rate_limits = client.organization.rate_limits.list(group_type="batch")
 
   for entry in rate_limits:
       models = f" ({', '.join(entry.models)})" if entry.models else ""
@@ -702,7 +702,7 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.beta.organization.rateLimits.list({ group_type: "batch" });
+  const rateLimits = await client.organization.rateLimits.list({ group_type: "batch" });
 
   for await (const entry of rateLimits) {
     const models = entry.models ? ` (${entry.models.join(", ")})` : "";
@@ -714,11 +714,11 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```
 
   ```csharp C#
-  using Anthropic.Models.Beta.Organization.RateLimits;
+  using Anthropic.Models.Organization.RateLimits;
 
   AnthropicClient client = new();
 
-  var rateLimits = await client.Beta.Organization.RateLimits.List(new()
+  var rateLimits = await client.Organization.RateLimits.List(new()
   {
       GroupType = GroupType.Batch
   });
@@ -737,8 +737,8 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```go Go
   client := anthropic.NewClient()
 
-  rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{
-  	GroupType: anthropic.BetaOrganizationRateLimitListParamsGroupTypeBatch,
+  rateLimits := client.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.OrganizationRateLimitListParams{
+  	GroupType: anthropic.OrganizationRateLimitListParamsGroupTypeBatch,
   })
 
   for rateLimits.Next() {
@@ -758,7 +758,7 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```
 
   ```java Java
-  import com.anthropic.models.beta.organization.ratelimits.RateLimitListParams;
+  import com.anthropic.models.organization.ratelimits.RateLimitListParams;
 
   void main() {
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -766,7 +766,7 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
       var params = RateLimitListParams.builder()
           .groupType(RateLimitListParams.GroupType.BATCH)
           .build();
-      var rateLimits = client.beta().organization().rateLimits().list(params);
+      var rateLimits = client.organization().rateLimits().list(params);
 
       for (var entry : rateLimits.autoPager()) {
           var models = entry.models()
@@ -781,12 +781,12 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```
 
   ```php PHP
-  use Anthropic\Beta\Organization\RateLimits\RateLimitListParams\GroupType;
+  use Anthropic\Organization\RateLimits\RateLimitListParams\GroupType;
   // ...
 
   $client = new Client();
 
-  $rateLimits = $client->beta->organization->rateLimits->list(
+  $rateLimits = $client->organization->rateLimits->list(
       groupType: GroupType::BATCH,
   );
 
@@ -802,7 +802,7 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  rate_limits = client.beta.organization.rate_limits.list(group_type: :batch)
+  rate_limits = client.organization.rate_limits.list(group_type: :batch)
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""
@@ -838,6 +838,6 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](htt
 
 * [Rate limits](../api/api-rate-limits.md)
 * [Admin API](./manage-claude-admin-api.md)
-* [Admin API reference](../api/api-beta-organization.md)
+* [Admin API reference](../api/api-organization.md)
 * [Workspaces](./manage-claude-workspaces.md)
 * [Usage and Cost API](./manage-claude-usage-cost-api.md)

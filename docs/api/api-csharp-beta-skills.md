@@ -25,19 +25,19 @@ Create Skill
 
   - `required IReadOnlyList<string> files`
 
-    Body param: Files to upload for the skill.
+    Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
   - `string? displayName`
 
-    Body param: Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
     Always set: derived from the SKILL.md frontmatter `name` when omitted at
     creation. Not unique.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -139,9 +139,9 @@ Create Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -257,32 +257,32 @@ List Skills
 
 - `SkillListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results to return per page.
+    Number of results to return per page.
 
     Ranges from `1` to `1000`. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Pagination token for fetching a specific page of results.
+    Pagination token for fetching a specific page of results.
 
     Pass the value from a previous response's `next_page` field to get the next page of results.
 
-  - `string? source`
+  - `string? source` (query parameter)
 
-    Query param: Filter skills by source.
+    Filter skills by source.
 
     If provided, only skills from the specified source will be returned:
 
     * `"custom"`: only return user-created skills
     * `"anthropic"`: only return Anthropic-created skills
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -384,9 +384,9 @@ List Skills
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -503,13 +503,13 @@ Get Skill
 
 - `SkillRetrieveParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -613,7 +613,7 @@ Get Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -725,13 +725,13 @@ Delete Skill
 
 - `SkillDeleteParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -835,7 +835,7 @@ Delete Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -999,21 +999,21 @@ Create Skill Version
 
 - `VersionCreateParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
   - `required IReadOnlyList<string> files`
 
-    Body param: Files to upload for the skill.
+    Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1115,9 +1115,9 @@ Create Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1203,27 +1203,27 @@ List Skill Versions
 
 - `VersionListParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
-    Query param: Number of results to return per page.
+    Number of results to return per page.
 
     Ranges from `1` to `1000`. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1325,9 +1325,9 @@ List Skill Versions
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1413,21 +1413,21 @@ Download a skill version's content as a zip archive.
 
 - `VersionDownloadParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version by its version ID.
+    Identifies the skill version by its version ID.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1529,9 +1529,9 @@ Download a skill version's content as a zip archive.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1561,21 +1561,21 @@ Get Skill Version
 
 - `VersionRetrieveParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
+    Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1677,9 +1677,9 @@ Get Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1762,21 +1762,21 @@ Delete Skill Version
 
 - `VersionDeleteParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version by its version ID.
+    Identifies the skill version by its version ID.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1878,9 +1878,9 @@ Delete Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 

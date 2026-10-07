@@ -19,11 +19,11 @@ Update Credential
 
 ## Parameters
 
-- `vault_id: String`
+- `vault_id: String` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: String`
+- `credential_id: String` (path parameter)
 
   Unique identifier of the credential to update.
 
@@ -157,7 +157,7 @@ Update Credential
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-- `betas: Array[AnthropicBeta]`
+- `betas: Array[AnthropicBeta]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -263,7 +263,7 @@ Update Credential
 
   - `:"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: String`
+- `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

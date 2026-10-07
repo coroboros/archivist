@@ -115,7 +115,7 @@ Create User Profile
 
   minLength: 1, maxLength: 255
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -221,7 +221,7 @@ Create User Profile
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -408,13 +408,13 @@ List User Profiles
 
 ### Parameters
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
   format: int32
 
-- `order: Optional[Literal["asc", "desc"]]`
+- `order: Optional[Literal["asc", "desc"]]` (query parameter)
 
   The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
@@ -426,7 +426,7 @@ List User Profiles
 
     Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
-- `order_by: Optional[Literal["created_at", "name"]]`
+- `order_by: Optional[Literal["created_at", "name"]]` (query parameter)
 
   The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
@@ -438,13 +438,13 @@ List User Profiles
 
     Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
-- `page: Optional[str]`
+- `page: Optional[str]` (query parameter)
 
   The cursor for the page to return, taken from `next_page` in a previous response.
 
   Leave it out to get the first page.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -550,7 +550,7 @@ List User Profiles
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -743,11 +743,11 @@ Get User Profile
 
 ### Parameters
 
-- `user_profile_id: str`
+- `user_profile_id: str` (path parameter)
 
   The ID of the user profile to get (`uprof_...`).
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -853,7 +853,7 @@ Get User Profile
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1042,7 +1042,7 @@ Update User Profile
 
 ### Parameters
 
-- `user_profile_id: str`
+- `user_profile_id: str` (path parameter)
 
   The ID of the user profile to update (`uprof_...`).
 
@@ -1140,7 +1140,7 @@ Update User Profile
 
   minLength: 1, maxLength: 255
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1246,7 +1246,7 @@ Update User Profile
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1435,11 +1435,11 @@ Create Enrollment URL
 
 ### Parameters
 
-- `user_profile_id: str`
+- `user_profile_id: str` (path parameter)
 
   The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1545,7 +1545,7 @@ Create Enrollment URL
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

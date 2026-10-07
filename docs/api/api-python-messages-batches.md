@@ -3061,11 +3061,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           When true, guarantees schema validation on tool names and inputs
 
-- `user_profile_id: Optional[str]`
+- `user_profile_id: Optional[str]` (header parameter)
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3247,11 +3247,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `message_batch_id: str`
+- `message_batch_id: str` (path parameter)
 
   ID of the Message Batch.
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3419,15 +3419,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `after_id: Optional[str]`
+- `after_id: Optional[str]` (query parameter)
 
   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-- `before_id: Optional[str]`
+- `before_id: Optional[str]` (query parameter)
 
   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   Number of items to return per page.
 
@@ -3435,7 +3435,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   default: 20, minimum: 1, maximum: 1000
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3611,11 +3611,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `message_batch_id: str`
+- `message_batch_id: str` (path parameter)
 
   ID of the Message Batch.
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3785,11 +3785,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `message_batch_id: str`
+- `message_batch_id: str` (path parameter)
 
   ID of the Message Batch.
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3851,11 +3851,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ### Parameters
 
-- `message_batch_id: str`
+- `message_batch_id: str` (path parameter)
 
   ID of the Message Batch.
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

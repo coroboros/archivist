@@ -476,6 +476,8 @@ Claude Sonnet 5.5 also has thinking on by default, and it rejects `thinking: {ty
 
 Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, and Claude Mythos Preview reject `thinking: {type: "disabled"}`. Thinking can't be turned off on these models.
 
+To check whether a model accepts `"disabled"` before you send a request, read its `capabilities.thinking.types.disabled.supported` value from the Models API. [Using the Models API](../general/general-models-overview.md#using-the-models-api) describes the field.
+
 If your model supports only extended thinking (see the [per-model configuration table](./build-with-claude-thinking-troubleshooting.md#supported-models)), configure it with `type: "enabled"` and a `budget_tokens` value instead. The [Extended thinking](./build-with-claude-extended-thinking.md) page covers that configuration. And if any thinking configuration comes back with a 400 error, [Troubleshooting thinking](./build-with-claude-thinking-troubleshooting.md) matches each error message to its fix.
 
 ## Reading thinking output

@@ -23,11 +23,11 @@ Create Credential
 
 - `CredentialCreateParams params`
 
-  - `Optional<String> vaultId`
+  - `Optional<String> vaultId` (path parameter)
 
     Identifier of the vault to create the credential in.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -131,7 +131,7 @@ Create Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -526,25 +526,25 @@ List Credentials
 
 - `CredentialListParams params`
 
-  - `Optional<String> vaultId`
+  - `Optional<String> vaultId` (path parameter)
 
     Identifier of the vault to list credentials for.
 
-  - `Optional<Boolean> includeArchived`
+  - `Optional<Boolean> includeArchived` (query parameter)
 
     Whether to include archived credentials in the results.
 
-  - `Optional<Long> limit`
+  - `Optional<Long> limit` (query parameter)
 
     Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `Optional<String> page`
+  - `Optional<String> page` (query parameter)
 
     Opaque pagination token from a previous `list_credentials` response.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -648,7 +648,7 @@ List Credentials
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -867,15 +867,15 @@ Get Credential
 
 - `CredentialRetrieveParams params`
 
-  - `String vaultId`
+  - `String vaultId` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Optional<String> credentialId`
+  - `Optional<String> credentialId` (path parameter)
 
     Unique identifier of the credential to retrieve.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -979,7 +979,7 @@ Get Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1197,15 +1197,15 @@ Update Credential
 
 - `CredentialUpdateParams params`
 
-  - `String vaultId`
+  - `String vaultId` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Optional<String> credentialId`
+  - `Optional<String> credentialId` (path parameter)
 
     Unique identifier of the credential to update.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1309,7 +1309,7 @@ Update Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1657,15 +1657,15 @@ Delete Credential
 
 - `CredentialDeleteParams params`
 
-  - `String vaultId`
+  - `String vaultId` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Optional<String> credentialId`
+  - `Optional<String> credentialId` (path parameter)
 
     Unique identifier of the credential to delete.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1769,7 +1769,7 @@ Delete Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1833,15 +1833,15 @@ Archive Credential
 
 - `CredentialArchiveParams params`
 
-  - `String vaultId`
+  - `String vaultId` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Optional<String> credentialId`
+  - `Optional<String> credentialId` (path parameter)
 
     Unique identifier of the credential to archive.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1945,7 +1945,7 @@ Archive Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2163,15 +2163,15 @@ Validate Credential
 
 - `CredentialMcpOAuthValidateParams params`
 
-  - `String vaultId`
+  - `String vaultId` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Optional<String> credentialId`
+  - `Optional<String> credentialId` (path parameter)
 
     Unique identifier of the credential to validate.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -2275,7 +2275,7 @@ Validate Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

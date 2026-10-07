@@ -21,7 +21,7 @@ Create Credential
 
 ### Parameters
 
-- `vaultID string`
+- `vaultID string` (path parameter)
 
   Identifier of the vault to create the credential in.
 
@@ -29,7 +29,7 @@ Create Credential
 
   - `Auth param.Field[BetaVaultCredentialNewParamsAuthUnion]`
 
-    Body param: Authentication configuration for the credential.
+    Authentication configuration for the credential.
 
     - `type BetaManagedAgentsMCPOAuthCreateParamsResp`
 
@@ -191,17 +191,17 @@ Create Credential
 
   - `DisplayName param.Field[string] Optional`
 
-    Body param: Human-readable name for the credential. Up to 255 characters.
+    Human-readable name for the credential. Up to 255 characters.
 
     maxLength: 255
 
   - `Metadata param.Field[map[string, string]] Optional`
 
-    Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -303,9 +303,9 @@ Create Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -531,29 +531,29 @@ List Credentials
 
 ### Parameters
 
-- `vaultID string`
+- `vaultID string` (path parameter)
 
   Identifier of the vault to list credentials for.
 
 - `params BetaVaultCredentialListParams`
 
-  - `IncludeArchived param.Field[bool] Optional`
+  - `IncludeArchived param.Field[bool] Optional` (query parameter)
 
-    Query param: Whether to include archived credentials in the results.
+    Whether to include archived credentials in the results.
 
-  - `Limit param.Field[int64] Optional`
+  - `Limit param.Field[int64] Optional` (query parameter)
 
-    Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+    Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional`
+  - `Page param.Field[string] Optional` (query parameter)
 
-    Query param: Opaque pagination token from a previous `list_credentials` response.
+    Opaque pagination token from a previous `list_credentials` response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -655,9 +655,9 @@ List Credentials
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -880,19 +880,19 @@ Get Credential
 
 ### Parameters
 
-- `credentialID string`
+- `credentialID string` (path parameter)
 
   Unique identifier of the credential to retrieve.
 
 - `params BetaVaultCredentialGetParams`
 
-  - `VaultID param.Field[string]`
+  - `VaultID param.Field[string]` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -994,9 +994,9 @@ Get Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1216,19 +1216,19 @@ Update Credential
 
 ### Parameters
 
-- `credentialID string`
+- `credentialID string` (path parameter)
 
   Unique identifier of the credential to update.
 
 - `params BetaVaultCredentialUpdateParams`
 
-  - `VaultID param.Field[string]`
+  - `VaultID param.Field[string]` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
   - `Auth param.Field[BetaVaultCredentialUpdateParamsAuthUnion] Optional`
 
-    Body param: Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+    Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
 
     - `type BetaManagedAgentsMCPOAuthUpdateParamsResp`
 
@@ -1348,17 +1348,17 @@ Update Credential
 
   - `DisplayName param.Field[string] Optional`
 
-    Body param: Updated human-readable name for the credential. 1-255 characters.
+    Updated human-readable name for the credential. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
   - `Metadata param.Field[map[string, string]] Optional`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -1460,9 +1460,9 @@ Update Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1682,19 +1682,19 @@ Delete Credential
 
 ### Parameters
 
-- `credentialID string`
+- `credentialID string` (path parameter)
 
   Unique identifier of the credential to delete.
 
 - `params BetaVaultCredentialDeleteParams`
 
-  - `VaultID param.Field[string]`
+  - `VaultID param.Field[string]` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -1796,9 +1796,9 @@ Delete Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1864,19 +1864,19 @@ Archive Credential
 
 ### Parameters
 
-- `credentialID string`
+- `credentialID string` (path parameter)
 
   Unique identifier of the credential to archive.
 
 - `params BetaVaultCredentialArchiveParams`
 
-  - `VaultID param.Field[string]`
+  - `VaultID param.Field[string]` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -1978,9 +1978,9 @@ Archive Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -2200,19 +2200,19 @@ Validate Credential
 
 ### Parameters
 
-- `credentialID string`
+- `credentialID string` (path parameter)
 
   Unique identifier of the credential to validate.
 
 - `params BetaVaultCredentialMCPOAuthValidateParams`
 
-  - `VaultID param.Field[string]`
+  - `VaultID param.Field[string]` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -2314,9 +2314,9 @@ Validate Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 

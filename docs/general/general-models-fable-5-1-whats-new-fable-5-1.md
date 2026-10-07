@@ -10,16 +10,16 @@ url: https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1
 description: Overview of new features, breaking changes, and capability improvements in Claude Fable 5.1 and Claude Mythos 5.1.
 ---
 
-Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../about-claude/about-claude-models-choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still fall short. Claude Mythos 5.1 offers the same capabilities to [Project Glasswing](https://anthropic.com/glasswing) participants only.
+Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../about-claude/about-claude-models-choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still fall short. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 
 If you already call Claude Fable 5, three changes are breaking: [forced tool use returns an error](./general-models-fable-5-1-whats-new-fable-5-1.md#forced-tool-use-is-not-supported), [earlier models can't read its thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them), and [editing earlier turns invalidates thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks). Five are additive: [per-message effort](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta), [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta), [readable progress updates between tool calls](./general-models-fable-5-1-whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta), a [lower cache read price](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing), and [content provenance](./general-models-fable-5-1-whats-new-fable-5-1.md#content-provenance).
 
 ## Models
 
-| Model             | Claude API ID     | Description                                                                                | Availability                                                           |
-| ----------------- | ----------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Claude Fable 5.1  | claude-fable-5-1  | Successor to Claude Fable 5, for long-running agentic coding, knowledge work, and research | All customers, on the Claude API and partner platforms                 |
-| Claude Mythos 5.1 | claude-mythos-5-1 | Same capabilities as Claude Fable 5.1. Successor to Claude Mythos 5.                       | [Project Glasswing](https://anthropic.com/glasswing) participants only |
+| Model             | Claude API ID     | Description                                                                                | Availability                                                                                                                                                |
+| ----------------- | ----------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Fable 5.1  | claude-fable-5-1  | Successor to Claude Fable 5, for long-running agentic coding, knowledge work, and research | All customers, on the Claude API and partner platforms                                                                                                      |
+| Claude Mythos 5.1 | claude-mythos-5-1 | Same capabilities as Claude Fable 5.1. Successor to Claude Mythos 5.                       | Organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842) |
 
 Claude Fable 5.1 and Claude Mythos 5.1 share specs and pricing:
 
@@ -432,7 +432,7 @@ Claude Fable 5.1 is available on:
 * **Google Cloud:** [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), as `claude-fable-5-1`.
 * **Microsoft Foundry:** [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), on Anthropic infrastructure.
 
-Claude Mythos 5.1 is offered only to approved customers in [Project Glasswing](https://anthropic.com/glasswing). For access, contact your Anthropic, AWS, or Google Cloud account team.
+Claude Mythos 5.1 is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). To request access, apply to the program that covers your use case, or contact your Anthropic, AWS, or Google Cloud account team.
 
 Claude Fable 5.1 and Claude Mythos 5.1 carry 30-day data retention and aren't available under zero data retention unless expressly authorized by Anthropic. Both are [Covered Models](https://support.claude.com/en/articles/15425695), like Claude Fable 5 and Claude Mythos 5. See [Model-specific data retention requirements](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
 

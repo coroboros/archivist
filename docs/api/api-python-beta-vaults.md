@@ -31,7 +31,7 @@ Create Vault
 
   Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -137,7 +137,7 @@ Create Vault
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -224,21 +224,21 @@ List Vaults
 
 ### Parameters
 
-- `include_archived: Optional[bool]`
+- `include_archived: Optional[bool]` (query parameter)
 
   Whether to include archived vaults in the results.
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
   format: int32
 
-- `page: Optional[str]`
+- `page: Optional[str]` (query parameter)
 
   Opaque pagination token from a previous `list_vaults` response.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -344,7 +344,7 @@ List Vaults
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -435,11 +435,11 @@ Get Vault
 
 ### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Unique identifier of the vault to retrieve.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -545,7 +545,7 @@ Get Vault
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -632,7 +632,7 @@ Update Vault
 
 ### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Unique identifier of the vault to update.
 
@@ -646,7 +646,7 @@ Update Vault
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -752,7 +752,7 @@ Update Vault
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -839,11 +839,11 @@ Delete Vault
 
 ### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Unique identifier of the vault to delete.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -949,7 +949,7 @@ Delete Vault
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1003,11 +1003,11 @@ Archive Vault
 
 ### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Unique identifier of the vault to archive.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1113,7 +1113,7 @@ Archive Vault
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1254,7 +1254,7 @@ Create Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault to create the credential in.
 
@@ -1430,7 +1430,7 @@ Create Credential
 
   Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1536,7 +1536,7 @@ Create Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1749,25 +1749,25 @@ List Credentials
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault to list credentials for.
 
-- `include_archived: Optional[bool]`
+- `include_archived: Optional[bool]` (query parameter)
 
   Whether to include archived credentials in the results.
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
   format: int32
 
-- `page: Optional[str]`
+- `page: Optional[str]` (query parameter)
 
   Opaque pagination token from a previous `list_credentials` response.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1873,7 +1873,7 @@ List Credentials
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2087,15 +2087,15 @@ Get Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: str`
+- `credential_id: str` (path parameter)
 
   Unique identifier of the credential to retrieve.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -2201,7 +2201,7 @@ Get Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2410,11 +2410,11 @@ Update Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: str`
+- `credential_id: str` (path parameter)
 
   Unique identifier of the credential to update.
 
@@ -2548,7 +2548,7 @@ Update Credential
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -2654,7 +2654,7 @@ Update Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2863,15 +2863,15 @@ Delete Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: str`
+- `credential_id: str` (path parameter)
 
   Unique identifier of the credential to delete.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -2977,7 +2977,7 @@ Delete Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3032,15 +3032,15 @@ Archive Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: str`
+- `credential_id: str` (path parameter)
 
   Unique identifier of the credential to archive.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -3146,7 +3146,7 @@ Archive Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3355,15 +3355,15 @@ Validate Credential
 
 #### Parameters
 
-- `vault_id: str`
+- `vault_id: str` (path parameter)
 
   Identifier of the vault containing the credential.
 
-- `credential_id: str`
+- `credential_id: str` (path parameter)
 
   Unique identifier of the credential to validate.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -3469,7 +3469,7 @@ Validate Credential
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

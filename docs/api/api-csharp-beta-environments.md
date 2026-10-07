@@ -25,13 +25,13 @@ Create a new environment with the specified configuration.
 
   - `required string name`
 
-    Body param: Human-readable name for the environment
+    Human-readable name for the environment
 
     minLength: 1, maxLength: 256
 
   - `Config? config`
 
-    Body param: Environment configuration
+    Environment configuration
 
     - `class BetaCloudConfigParams`
 
@@ -121,25 +121,25 @@ Create a new environment with the specified configuration.
 
   - `string? description`
 
-    Body param: Optional description of the environment
+    Optional description of the environment
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: User-provided metadata key-value pairs
+    User-provided metadata key-value pairs
 
   - `Scope? scope`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
+    The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
     - `Organization("organization")`
 
     - `Account("account")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -241,9 +241,9 @@ Create a new environment with the specified configuration.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -448,23 +448,23 @@ List environments with pagination support.
 
 - `EnvironmentListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Include archived environments in the response
+    Include archived environments in the response
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Maximum number of environments to return
+    Maximum number of environments to return
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+    Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -566,9 +566,9 @@ List environments with pagination support.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -780,9 +780,9 @@ Retrieve a specific environment by ID.
 
 - `EnvironmentRetrieveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -886,7 +886,7 @@ Retrieve a specific environment by ID.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1096,13 +1096,11 @@ Update an existing environment's configuration.
 
 - `EnvironmentUpdateParams parameters`
 
-  - `required string environmentID`
-
-    Path param
+  - `required string environmentID` (path parameter)
 
   - `Config? config`
 
-    Body param: Updated environment configuration
+    Updated environment configuration
 
     - `class BetaCloudConfigParams`
 
@@ -1192,31 +1190,31 @@ Update an existing environment's configuration.
 
   - `string? description`
 
-    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
+    Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+    User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
   - `string? name`
 
-    Body param: Updated name for the environment
+    Updated name for the environment
 
     minLength: 1, maxLength: 256
 
   - `Scope? scope`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+    The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
     - `Organization("organization")`
 
     - `Account("account")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -1318,9 +1316,9 @@ Update an existing environment's configuration.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -1528,9 +1526,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `EnvironmentDeleteParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1634,7 +1632,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1688,9 +1686,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `EnvironmentArchiveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1794,7 +1792,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2457,17 +2455,13 @@ Retrieve detailed information about a specific work item.
 
 - `WorkRetrieveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -2569,9 +2563,9 @@ Retrieve detailed information about a specific work item.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -2708,25 +2702,23 @@ Long poll for work items in the queue.
 
 - `WorkPollParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `long? blockMs` (query parameter)
 
-  - `long? blockMs`
-
-    Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+    How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
     minimum: 1
 
-  - `long? reclaimOlderThanMs`
+  - `long? reclaimOlderThanMs` (query parameter)
 
-    Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+    Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
     minimum: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -2828,9 +2820,9 @@ Long poll for work items in the queue.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string anthropicWorkerID`
+  - `string anthropicWorkerID` (header parameter)
 
-    Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+    Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 #### Returns
 
@@ -2964,17 +2956,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 - `WorkAckParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -3209,25 +3197,21 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `WorkHeartbeatParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `long? desiredTtlSeconds` (query parameter)
 
-    Path param
+    Desired TTL in seconds
 
-  - `long? desiredTtlSeconds`
+  - `string? expectedLastHeartbeat` (query parameter)
 
-    Query param: Desired TTL in seconds
+    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `string? expectedLastHeartbeat`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -3405,21 +3389,17 @@ Stop a work item, initiating graceful or forced shutdown.
 
 - `WorkStopParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
-
-  - `required string workID`
-
-    Path param
+  - `required string workID` (path parameter)
 
   - `bool force`
 
-    Body param: If true, immediately stop work without graceful shutdown
+    If true, immediately stop work without graceful shutdown
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -3521,9 +3501,9 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -3660,23 +3640,21 @@ List work items in an environment.
 
 - `WorkListParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `long limit` (query parameter)
 
-  - `long limit`
-
-    Query param: Maximum number of work items to return
+    Maximum number of work items to return
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from previous response for pagination
+    Opaque cursor from previous response for pagination
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -3917,21 +3895,17 @@ Update work item metadata with merge semantics.
 
 - `WorkUpdateParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
-
-  - `required string workID`
-
-    Path param
+  - `required string workID` (path parameter)
 
   - `required IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -4033,9 +4007,9 @@ Update work item metadata with merge semantics.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -4171,9 +4145,9 @@ Get statistics about the work queue for an environment.
 
 - `WorkStatsParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4277,7 +4251,7 @@ Get statistics about the work queue for an environment.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

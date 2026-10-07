@@ -454,7 +454,7 @@ The `max_uses` parameter limits the number of web fetches performed. Failed fetc
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](./agents-and-tools-tool-use-server-tools.md#domain-filtering).
 
-On [Claude Managed Agents](../managed-agents/managed-agents-overview.md), set these fields on the `web_fetch` entry of the agent toolset, where each listed domain must be a plain hostname with no path; see [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools.md#restrict-web-search-and-web-fetch-domains).
+On [Claude Managed Agents](../managed-agents/managed-agents-overview.md), set these fields on the `web_fetch` entry of the agent toolset, where each listed domain must be a plain hostname with no path; see [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools-web-restrictions.md).
 
 ### Content limits
 
@@ -464,7 +464,7 @@ The `max_content_tokens` parameter limits the amount of content included in the 
   The `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.
 </Note>
 
-On Claude Managed Agents, the `web_fetch` entry of the agent toolset also accepts `max_content_tokens`; see [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools.md#restrict-web-search-and-web-fetch-domains).
+On Claude Managed Agents, the `web_fetch` entry of the agent toolset also accepts `max_content_tokens`; see the [web tool settings](../managed-agents/managed-agents-tools-web-restrictions.md#settings).
 
 ### Cache bypass
 

@@ -801,7 +801,7 @@ Create Agent
 
       minLength: 1, maxLength: 128
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -907,7 +907,7 @@ Create Agent
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1604,33 +1604,33 @@ List Agents
 
 ### Parameters
 
-- `created_at_gte: Optional[Union[str, datetime]]`
+- `created_at_gte: Optional[Union[str, datetime]]` (query parameter)
 
   Return agents created at or after this time (inclusive).
 
   format: date-time
 
-- `created_at_lte: Optional[Union[str, datetime]]`
+- `created_at_lte: Optional[Union[str, datetime]]` (query parameter)
 
   Return agents created at or before this time (inclusive).
 
   format: date-time
 
-- `include_archived: Optional[bool]`
+- `include_archived: Optional[bool]` (query parameter)
 
   Include archived agents in results. Defaults to false.
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   Maximum results per page. Default 20, maximum 100.
 
   format: int32
 
-- `page: Optional[str]`
+- `page: Optional[str]` (query parameter)
 
   Opaque pagination cursor from a previous response.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -1736,7 +1736,7 @@ List Agents
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2436,17 +2436,17 @@ Get Agent
 
 ### Parameters
 
-- `agent_id: str`
+- `agent_id: str` (path parameter)
 
   Unique identifier of the agent to retrieve.
 
-- `version: Optional[int]`
+- `version: Optional[int]` (query parameter)
 
   Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
   format: int32
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -2552,7 +2552,7 @@ Get Agent
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3248,7 +3248,7 @@ Update Agent
 
 ### Parameters
 
-- `agent_id: str`
+- `agent_id: str` (path parameter)
 
   Unique identifier of the agent to update.
 
@@ -4038,7 +4038,7 @@ Update Agent
 
   format: int32
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -4144,7 +4144,7 @@ Update Agent
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4841,11 +4841,11 @@ Archive Agent
 
 ### Parameters
 
-- `agent_id: str`
+- `agent_id: str` (path parameter)
 
   Unique identifier of the agent to archive.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -4951,7 +4951,7 @@ Archive Agent
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -9841,21 +9841,21 @@ List Agent Versions
 
 #### Parameters
 
-- `agent_id: str`
+- `agent_id: str` (path parameter)
 
   Agent ID to list versions for.
 
-- `limit: Optional[int]`
+- `limit: Optional[int]` (query parameter)
 
   Maximum results per page. Default 20, maximum 100.
 
   format: int32
 
-- `page: Optional[str]`
+- `page: Optional[str]` (query parameter)
 
   Opaque pagination cursor.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -9961,7 +9961,7 @@ List Agent Versions
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

@@ -170,11 +170,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-- `userProfileID?:optional string`
+- `userProfileID?:optional string` (header parameter)
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

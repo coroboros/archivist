@@ -19,7 +19,7 @@ Add Session Resource
 
 ## Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
 - `fileID: string`
 
@@ -31,11 +31,11 @@ Add Session Resource
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

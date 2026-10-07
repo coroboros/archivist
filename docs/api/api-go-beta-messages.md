@@ -29,7 +29,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `MaxTokens param.Field[int64]`
 
-    Body param: The maximum number of tokens to generate before stopping.
+    The maximum number of tokens to generate before stopping.
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
@@ -41,7 +41,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Messages param.Field[[]BetaMessageParamResp]`
 
-    Body param: Input messages.
+    Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -3413,23 +3413,23 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Model param.Field[Model]`
 
-    Body param: The model that will complete your prompt.
+    The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `CacheControl param.Field[BetaCacheControlEphemeral] Optional`
 
-    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `Compaction param.Field[BetaCompactionConfig] Optional`
 
-    Body param: Compaction configuration.
+    Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
   - `Container param.Field[BetaMessageNewParamsContainerUnion] Optional`
 
-    Body param: Container identifier for reuse across requests.
+    Container identifier for reuse across requests.
 
     - `type BetaContainerParamsResp`
 
@@ -3469,17 +3469,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
 
-    Body param: Context management configuration.
+    Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
   - `Diagnostics param.Field[BetaDiagnosticsParamResp] Optional`
 
-    Body param: Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
+    Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
   - `FallbackCreditToken param.Field[BetaMessageNewParamsFallbackCreditTokenUnion] Optional`
 
-    Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+    The `fallback_credit_token` from a prior refusal's `stop_details`.
 
     When a preceding request was refused and returned a `fallback_credit_token`,
     pass that code here on the retry to have the retry's cache-creation tokens
@@ -3528,15 +3528,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Fallbacks param.Field[BetaFallbacksParamUnionResp] Optional`
 
-    Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
   - `InferenceGeo param.Field[string] Optional`
 
-    Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+    Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
   - `MCPServers param.Field[[]BetaRequestMCPServerURLDefinition] Optional`
 
-    Body param: MCP servers to be utilized in this request
+    MCP servers to be utilized in this request
 
     maxItems: 20
 
@@ -3556,15 +3556,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Metadata param.Field[BetaMetadata] Optional`
 
-    Body param: An object describing metadata about the request.
+    An object describing metadata about the request.
 
   - `OutputConfig param.Field[BetaOutputConfig] Optional`
 
-    Body param: Configuration options for the model's output, such as the output format.
+    Configuration options for the model's output, such as the output format.
 
   - `ServiceTier param.Field[BetaMessageNewParamsServiceTier] Optional`
 
-    Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
+    Determines whether to use priority capacity (if available) or standard capacity for this request.
 
     Anthropic offers different levels of service for your API requests. See [service-tiers](./api-service-tiers.md) for details.
 
@@ -3574,7 +3574,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Speed param.Field[BetaMessageNewParamsSpeed] Optional`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
     - `const BetaMessageNewParamsSpeedStandard BetaMessageNewParamsSpeed = "standard"`
 
@@ -3582,7 +3582,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `StopSequences param.Field[[]string] Optional`
 
-    Body param: Custom text sequences that will cause the model to stop generating.
+    Custom text sequences that will cause the model to stop generating.
 
     Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
@@ -3590,7 +3590,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `System param.Field[[]BetaTextBlockParamResp] Optional`
 
-    Body param: System prompt.
+    System prompt.
 
     A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#give-claude-a-role).
 
@@ -3610,7 +3610,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Thinking param.Field[BetaThinkingConfigParamUnionResp] Optional`
 
-    Body param: Configuration for enabling Claude's extended thinking.
+    Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
@@ -3618,11 +3618,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `ToolChoice param.Field[BetaToolChoiceUnion] Optional`
 
-    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `Tools param.Field[[]BetaToolUnion] Optional`
 
-    Body param: Definitions of tools that the model may use.
+    Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
@@ -3765,9 +3765,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -3869,13 +3869,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional`
+  - `UserProfileID param.Field[string] Optional` (header parameter)
 
-    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -3883,7 +3883,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     **Deprecated**
 
-    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -3891,7 +3891,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-    Body param: Amount of randomness injected into the response.
+    Amount of randomness injected into the response.
 
     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -3903,7 +3903,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-    Body param: Only sample from the top K options for each subsequent token.
+    Only sample from the top K options for each subsequent token.
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
@@ -3915,7 +3915,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-    Body param: Use nucleus sampling.
+    Use nucleus sampling.
 
     In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
@@ -8213,7 +8213,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Messages param.Field[[]BetaMessageParamResp]`
 
-    Body param: Input messages.
+    Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -11585,29 +11585,29 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Model param.Field[Model]`
 
-    Body param: The model that will complete your prompt.
+    The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `CacheControl param.Field[BetaCacheControlEphemeral] Optional`
 
-    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `Compaction param.Field[BetaCompactionConfig] Optional`
 
-    Body param: Compaction configuration.
+    Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
   - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
 
-    Body param: Context management configuration.
+    Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
   - `MCPServers param.Field[[]BetaRequestMCPServerURLDefinition] Optional`
 
-    Body param: MCP servers to be utilized in this request
+    MCP servers to be utilized in this request
 
     maxItems: 20
 
@@ -11627,11 +11627,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `OutputConfig param.Field[BetaOutputConfig] Optional`
 
-    Body param: Configuration options for the model's output, such as the output format.
+    Configuration options for the model's output, such as the output format.
 
   - `Speed param.Field[BetaMessageCountTokensParamsSpeed] Optional`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
     - `const BetaMessageCountTokensParamsSpeedStandard BetaMessageCountTokensParamsSpeed = "standard"`
 
@@ -11639,7 +11639,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `System param.Field[BetaMessageCountTokensParamsSystemUnion] Optional`
 
-    Body param: System prompt.
+    System prompt.
 
     A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#give-claude-a-role).
 
@@ -11661,7 +11661,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Thinking param.Field[BetaThinkingConfigParamUnionResp] Optional`
 
-    Body param: Configuration for enabling Claude's extended thinking.
+    Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
@@ -11669,11 +11669,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `ToolChoice param.Field[BetaToolChoiceUnion] Optional`
 
-    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `Tools param.Field[[]BetaMessageCountTokensParamsToolUnion] Optional`
 
-    Body param: Definitions of tools that the model may use.
+    Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
@@ -11816,9 +11816,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -11920,13 +11920,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional`
+  - `UserProfileID param.Field[string] Optional` (header parameter)
 
-    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -11934,7 +11934,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     **Deprecated**
 
-    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -69646,7 +69646,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `Requests param.Field[[]BetaMessageBatchNewParamsRequest]`
 
-    Body param: List of requests for prompt completion. Each is an individual request to create a Message.
+    List of requests for prompt completion. Each is an individual request to create a Message.
 
     minItems: 1, maxItems: 100000
 
@@ -73760,9 +73760,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         minimum: 0, maximum: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -73864,13 +73864,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional`
+  - `UserProfileID param.Field[string] Optional` (header parameter)
 
-    Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -74060,13 +74060,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Parameters
 
-- `messageBatchID string`
+- `messageBatchID string` (path parameter)
 
   ID of the Message Batch.
 
 - `query BetaMessageBatchGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74170,7 +74170,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74352,25 +74352,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `params BetaMessageBatchListParams`
 
-  - `AfterID param.Field[string] Optional`
+  - `AfterID param.Field[string] Optional` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional`
+  - `BeforeID param.Field[string] Optional` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Limit param.Field[int64] Optional`
+  - `Limit param.Field[int64] Optional` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
 
@@ -74472,9 +74472,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -74657,13 +74657,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Parameters
 
-- `messageBatchID string`
+- `messageBatchID string` (path parameter)
 
   ID of the Message Batch.
 
 - `body BetaMessageBatchCancelParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74767,7 +74767,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74949,13 +74949,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Parameters
 
-- `messageBatchID string`
+- `messageBatchID string` (path parameter)
 
   ID of the Message Batch.
 
 - `body BetaMessageBatchDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75059,7 +75059,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75133,13 +75133,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Parameters
 
-- `messageBatchID string`
+- `messageBatchID string` (path parameter)
 
   ID of the Message Batch.
 
 - `query BetaMessageBatchResultsParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional`
+  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75243,7 +75243,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Field[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

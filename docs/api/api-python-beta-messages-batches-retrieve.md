@@ -21,11 +21,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ## Parameters
 
-- `message_batch_id: str`
+- `message_batch_id: str` (path parameter)
 
   ID of the Message Batch.
 
-- `betas: Optional[List[AnthropicBetaParam]]`
+- `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -131,7 +131,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `"spend-limit-reads-2026-09-26"`
 
-- `workspace_id: Optional[str]`
+- `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

@@ -29,7 +29,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `required IReadOnlyList<Request> requests`
 
-    Body param: List of requests for prompt completion. Each is an individual request to create a Message.
+    List of requests for prompt completion. Each is an individual request to create a Message.
 
     minItems: 1, maxItems: 100000
 
@@ -4149,9 +4149,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         minimum: 0, maximum: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -4253,13 +4253,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string userProfileID`
+  - `string userProfileID` (header parameter)
 
-    Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -4594,11 +4594,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `BatchRetrieveParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4702,7 +4702,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4853,25 +4853,25 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `BatchListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -4973,9 +4973,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -5135,11 +5135,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `BatchCancelParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -5243,7 +5243,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -5396,11 +5396,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `BatchDeleteParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -5504,7 +5504,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -5559,11 +5559,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `BatchResultsParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -5667,7 +5667,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

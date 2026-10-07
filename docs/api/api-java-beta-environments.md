@@ -23,7 +23,7 @@ Create a new environment with the specified configuration.
 
 - `EnvironmentCreateParams params`
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -127,7 +127,7 @@ Create a new environment with the specified configuration.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -462,21 +462,21 @@ List environments with pagination support.
 
 - `EnvironmentListParams params`
 
-  - `Optional<Boolean> includeArchived`
+  - `Optional<Boolean> includeArchived` (query parameter)
 
     Include archived environments in the response
 
-  - `Optional<Long> limit`
+  - `Optional<Long> limit` (query parameter)
 
     Maximum number of environments to return
 
     minimum: 1, maximum: 1000
 
-  - `Optional<String> page`
+  - `Optional<String> page` (query parameter)
 
     Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -580,7 +580,7 @@ List environments with pagination support.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -803,9 +803,9 @@ Retrieve a specific environment by ID.
 
 - `EnvironmentRetrieveParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -909,7 +909,7 @@ Retrieve a specific environment by ID.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1127,9 +1127,9 @@ Update an existing environment's configuration.
 
 - `EnvironmentUpdateParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1233,7 +1233,7 @@ Update an existing environment's configuration.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1565,9 +1565,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `EnvironmentDeleteParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1671,7 +1671,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1733,9 +1733,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `EnvironmentArchiveParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -1839,7 +1839,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2510,11 +2510,11 @@ Retrieve detailed information about a specific work item.
 
 - `WorkRetrieveParams params`
 
-  - `String environmentId`
+  - `String environmentId` (path parameter)
 
-  - `Optional<String> workId`
+  - `Optional<String> workId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -2618,7 +2618,7 @@ Retrieve detailed information about a specific work item.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2768,21 +2768,21 @@ Long poll for work items in the queue.
 
 - `WorkPollParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<Long> blockMs`
+  - `Optional<Long> blockMs` (query parameter)
 
     How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
     minimum: 1
 
-  - `Optional<Long> reclaimOlderThanMs`
+  - `Optional<Long> reclaimOlderThanMs` (query parameter)
 
     Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
     minimum: 1
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -2886,7 +2886,7 @@ Long poll for work items in the queue.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> anthropicWorkerId`
+  - `Optional<String> anthropicWorkerId` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
@@ -3031,11 +3031,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 - `WorkAckParams params`
 
-  - `String environmentId`
+  - `String environmentId` (path parameter)
 
-  - `Optional<String> workId`
+  - `Optional<String> workId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -3283,19 +3283,19 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `WorkHeartbeatParams params`
 
-  - `String environmentId`
+  - `String environmentId` (path parameter)
 
-  - `Optional<String> workId`
+  - `Optional<String> workId` (path parameter)
 
-  - `Optional<Long> desiredTtlSeconds`
+  - `Optional<Long> desiredTtlSeconds` (query parameter)
 
     Desired TTL in seconds
 
-  - `Optional<String> expectedLastHeartbeat`
+  - `Optional<String> expectedLastHeartbeat` (query parameter)
 
     Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -3486,11 +3486,11 @@ Stop a work item, initiating graceful or forced shutdown.
 
 - `WorkStopParams params`
 
-  - `String environmentId`
+  - `String environmentId` (path parameter)
 
-  - `Optional<String> workId`
+  - `Optional<String> workId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -3594,7 +3594,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3750,19 +3750,19 @@ List work items in an environment.
 
 - `WorkListParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<Long> limit`
+  - `Optional<Long> limit` (query parameter)
 
     Maximum number of work items to return
 
     minimum: 1, maximum: 1000
 
-  - `Optional<String> page`
+  - `Optional<String> page` (query parameter)
 
     Opaque cursor from previous response for pagination
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4011,11 +4011,11 @@ Update work item metadata with merge semantics.
 
 - `WorkUpdateParams params`
 
-  - `String environmentId`
+  - `String environmentId` (path parameter)
 
-  - `Optional<String> workId`
+  - `Optional<String> workId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4119,7 +4119,7 @@ Update work item metadata with merge semantics.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4276,9 +4276,9 @@ Get statistics about the work queue for an environment.
 
 - `WorkStatsParams params`
 
-  - `Optional<String> environmentId`
+  - `Optional<String> environmentId` (path parameter)
 
-  - `Optional<List<AnthropicBeta>> betas`
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -4382,7 +4382,7 @@ Get statistics about the work queue for an environment.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `Optional<String> workspaceId`
+  - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

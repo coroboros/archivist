@@ -7,12 +7,12 @@ generated: true
 ---
 title: Claude Mythos 5.1
 url: https://platform.claude.com/docs/en/models/mythos-5-1/overview
-description: "Claude Mythos 5.1 at a glance: the same model as Claude Fable 5.1, offered by invitation only through Project Glasswing. Model IDs, specifications, pricing, and how to request access."
+description: "Claude Mythos 5.1 at a glance: the same model as Claude Fable 5.1, available only to organizations verified through Anthropic's verification programs. Model IDs, specifications, pricing, and how to request access."
 ---
 
-**Invite only.** Released September 1, 2026.
+**Verification required.** Released September 1, 2026.
 
-Claude Fable 5.1 for Project Glasswing participants
+Claude Fable 5.1 for verified organizations
 
 Model ID: `claude-mythos-5-1`
 
@@ -20,7 +20,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 [Announcement](https://www.anthropic.com/claude-fable-and-mythos-5-1) · [What’s new](./general-models-fable-5-1-whats-new-fable-5-1.md) · [Migration guide](./general-models-fable-5-1-migration-guide.md#migrating-from-claude-mythos-5-to-claude-mythos-5-1)
 
-Claude Mythos 5.1 is offered separately, by invitation only, as part of Project Glasswing. It shares Claude Fable 5.1’s specifications and pricing. For access, contact your Anthropic, AWS, or Google Cloud account team. [See Claude Fable 5.1](./general-models-fable-5-1-overview.md) · [Project Glasswing](https://anthropic.com/glasswing)
+Claude Mythos 5.1 is available only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It has the same specifications and pricing as Claude Fable 5.1. To request access, apply to the program that covers your use case. [See Claude Fable 5.1](./general-models-fable-5-1-overview.md) · [How refusals and fallback work](../build-with-claude/build-with-claude-refusals-and-fallback.md)
 
 ## How it compares
 
@@ -81,7 +81,7 @@ Claude Mythos 5.1 is offered separately, by invitation only, as part of Project 
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                           |
 | :---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../about-claude/about-claude-model-deprecations.md) | Active (invite only)                                                                                                                                                                                                                                                                                            |
+| [Status](../about-claude/about-claude-model-deprecations.md) | Active (verification required)                                                                                                                                                                                                                                                                                  |
 | Released                                                                      | September 1, 2026                                                                                                                                                                                                                                                                                               |
 | Retirement                                                                    | Not sooner than September 1, 2027                                                                                                                                                                                                                                                                               |
 | Platforms                                                                     | Claude API, [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) |

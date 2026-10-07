@@ -21,7 +21,7 @@ Add Session Resource
 
 ### Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
 - `fileID: string`
 
@@ -33,11 +33,11 @@ Add Session Resource
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -107,21 +107,21 @@ List Session Resources
 
 ### Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
-- `limit?:optional int`
+- `limit?:optional int` (query parameter)
 
   Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-- `page?:optional string`
+- `page?:optional string` (query parameter)
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -257,15 +257,15 @@ Get Session Resource
 
 ### Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
-- `resourceID: string`
+- `resourceID: string` (path parameter)
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -387,19 +387,19 @@ Update Session Resource
 
 ### Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
-- `resourceID: string`
+- `resourceID: string` (path parameter)
 
 - `authorizationToken: string`
 
   New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -522,15 +522,15 @@ Delete Session Resource
 
 ### Parameters
 
-- `sessionID: string`
+- `sessionID: string` (path parameter)
 
-- `resourceID: string`
+- `resourceID: string` (path parameter)
 
-- `betas?:optional list<AnthropicBeta>`
+- `betas?:optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `workspaceID?:optional string`
+- `workspaceID?:optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
