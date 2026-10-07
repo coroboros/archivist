@@ -25,7 +25,7 @@ Future models and features will not be compatible with Text Completions. See our
 
 - `params CompletionNewParams`
 
-  - `MaxTokensToSample param.Field[int64]`
+  - `MaxTokensToSample int64`
 
     The maximum number of tokens to generate before stopping.
 
@@ -33,13 +33,13 @@ Future models and features will not be compatible with Text Completions. See our
 
     minimum: 1
 
-  - `Model param.Field[Model]`
+  - `Model Model`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Prompt param.Field[string]`
+  - `Prompt string`
 
     The prompt that you want Claude to complete.
 
@@ -61,11 +61,11 @@ Future models and features will not be compatible with Text Completions. See our
 
     minLength: 1
 
-  - `Metadata param.Field[Metadata] Optional`
+  - `Metadata MetadataParam Optional`
 
     An object describing metadata about the request.
 
-  - `StopSequences param.Field[[]string] Optional`
+  - `StopSequences []string Optional`
 
     Sequences that will cause the model to stop generating.
 
@@ -73,13 +73,13 @@ Future models and features will not be compatible with Text Completions. See our
 
     Human:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
-  - `Temperature param.Field[float64] Optional`
+  - `Temperature param.Opt[float64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
@@ -91,7 +91,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     minimum: 0, maximum: 1
 
-  - `TopK param.Field[int64] Optional`
+  - `TopK param.Opt[int64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
@@ -103,7 +103,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     minimum: 0
 
-  - `TopP param.Field[float64] Optional`
+  - `TopP param.Opt[float64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
@@ -115,7 +115,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     minimum: 0, maximum: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     **Deprecated**: Deprecated. This parameter has no effect on this method and will be removed in a future release.
 

@@ -21,7 +21,7 @@ Create Agent
 
 - `params BetaAgentNewParams`
 
-  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp]`
+  - `Model BetaManagedAgentsModelConfigParams`
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
@@ -171,19 +171,19 @@ Create Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Human-readable name for the agent.
 
     minLength: 1, maxLength: 256
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description of what the agent does.
 
     maxLength: 2048
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
+  - `MCPServers []BetaManagedAgentsURLMCPServerParams Optional`
 
     MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
@@ -201,15 +201,15 @@ Create Agent
 
       maxLength: 2048
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
+  - `Multiagent BetaManagedAgentsMultiagentParams Optional`
 
     Multiagent orchestration configuration. Currently supports the `coordinator` topology with a roster of 1-20 agents.
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
+  - `Skills []BetaManagedAgentsSkillParamsUnion Optional`
 
     Skills available to the agent.
 
@@ -249,13 +249,13 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-  - `System param.Field[string] Optional`
+  - `System param.Opt[string] Optional`
 
     System prompt for the agent.
 
     maxLength: 100000
 
-  - `Tools param.Field[[]BetaAgentNewParamsToolUnion] Optional`
+  - `Tools []BetaAgentNewParamsToolUnion Optional`
 
     Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
@@ -685,7 +685,7 @@ Create Agent
 
         minLength: 1, maxLength: 128
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -789,7 +789,7 @@ Create Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

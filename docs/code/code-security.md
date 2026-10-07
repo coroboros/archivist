@@ -1,6 +1,6 @@
 ---
-title: "Plugin security and trust"
-source: "https://code.claude.com/docs/en/plugins/security"
+title: "Security"
+source: "https://code.claude.com/docs/en/security"
 category: "code"
 generated: true
 ---
@@ -8,166 +8,148 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Plugin security and trust
+# Security
 
-> Decide whether to trust a plugin before you install it, from what a plugin can do on your machine to how to review one and remove it.
+> Learn about Claude Code's security safeguards and best practices for safe usage.
 
-A Claude Code plugin you install can execute arbitrary code on your machine with your user privileges.
+## How we approach security
 
-You install a plugin from a marketplace, which is the catalog Claude Code fetches it from. Some marketplace names are [reserved for Anthropic's own marketplaces](#marketplace-tiers), and every other marketplace is third-party. A marketplace's name tells you who publishes the catalog, not what each plugin in it does, so [review a plugin before you install it](#review-a-plugin-before-you-install) whichever marketplace it comes from.
+### Security foundation
 
-Read this page if you're deciding whether to install a plugin, or if you review tools before your team can use them.
+Your code's security is paramount. Claude Code is built with security at its core, developed according to Anthropic's comprehensive security program. Learn more and access resources (SOC 2 Type 2 report, ISO 27001 certificate, etc.) at [Anthropic Trust Center](https://trust.anthropic.com).
 
-<Note>
-  These cases are covered on other pages:
+### Permission-based architecture
 
-  * **Claude Code's own security model**: see [Security](/docs/en/security)
-  * **Restricting or requiring plugins for an organization**: see [Manage plugins for your organization](/docs/en/plugins/org)
-  * **The `security-guidance` or `claude-security` plugins**: this page isn't about them. See [`security-guidance`](/docs/en/security-guidance) and [`claude-security`](/docs/en/claude-security)
-</Note>
+A session's permission mode sets which actions Claude can take without asking you first. Auto mode is the built-in starting permission mode for interactive terminal and VS Code sessions. [Which mode a session starts in](/docs/en/permission-modes#which-mode-a-session-starts-in) covers earlier versions, other surfaces, and the settings that change the starting permission mode.
 
-Start with [what a plugin can do](#understand-what-a-plugin-can-do) and [which marketplaces are Anthropic's](#marketplace-tiers), then [review the plugin before you install it](#review-a-plugin-before-you-install).
+* **Auto mode**: A separate classifier model reviews actions instead of you and blocks the ones it judges unsafe. [How the classifier evaluates actions](/docs/en/permission-modes#how-the-classifier-evaluates-actions) lists which actions Claude Code approves outright, which it sends to the classifier, and which Claude Code still asks you about. Your explicit ask and deny rules still apply, and your organization can [turn auto mode off](/docs/en/permission-modes#eliminate-prompts-with-auto-mode)
+* **Manual mode**: Claude Code starts with read-only permissions. When it needs to edit files, run tests, or execute commands, it asks you first, and you choose whether to approve the action once or allow it from then on. It runs a built-in set of [read-only commands](/docs/en/permissions#read-only-commands) such as `ls`, `cat`, and `git status` without asking
 
-## Understand what a plugin can do
+You and your organization configure these permissions directly. For detailed permission configuration, see [Permissions](/docs/en/permissions).
 
-A plugin can carry content that runs code on your machine with your user privileges and content that enters Claude's context as instructions, so [review a plugin before you install it](#review-a-plugin-before-you-install). Here's what an installed plugin can do:
+### Built-in protections
 
-* **Hooks**: a plugin's [hooks](/docs/en/hooks) run as shell commands at points in Claude Code's lifecycle, such as before or after a tool call.
-* **Mods**: a plugin's [mod](/docs/en/plugins/mods/overview) runs JavaScript inside Claude Code with your permissions. To list what a mod does before you install it, see [Decide whether to trust a mod](/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod).
-* **MCP and LSP servers**: Claude Code connects to the [MCP servers](/docs/en/mcp) an enabled plugin declares and gives Claude their tools. A stdio MCP server runs as a process that Claude Code starts on your machine. Claude Code also starts the language servers the plugin declares.
-* **`bin/` directory**: Claude Code adds each enabled plugin's `bin/` directory to the `PATH` of the Bash tool's shell, so Claude's Bash commands can run any executable there.
-* **Skills, commands, and agents**: these enter Claude's context as instructions, so they influence what Claude does with the tools it already has.
-* **Updates**: when auto-update is on for the marketplace you installed a plugin from, Claude Code updates that plugin in the background, so the files you reviewed can change on disk. [When auto-update runs](/docs/en/plugins/loading#when-auto-update-runs) has the timing. To turn auto-update on or off per marketplace, see [Keep plugins updated](/docs/en/plugins/install#keep-plugins-updated).
+To mitigate risks in agentic systems:
 
-Claude Code's [permission rules](/docs/en/permissions) and [sandbox](/docs/en/sandboxing) cover the tool calls Claude makes, not the code a plugin runs by itself:
+* **Sandboxed bash tool**: [Sandbox](/docs/en/sandboxing) bash commands with filesystem and network isolation, reducing permission prompts while maintaining security. Configure with `/sandbox` to define boundaries where Claude Code can work autonomously
+* **Working directory boundary**: In Manual mode, Claude Code asks you before its file tools read or write outside the folder where it was started and its subfolders. The boundary is a permission prompt, so a Bash command you approve can still write anywhere your user account can
+  * To read a folder without the prompt, add it as an [additional directory](/docs/en/permissions#working-directories)
+  * To restrict Bash commands at the operating system level, turn on [sandboxing](/docs/en/sandboxing#filesystem-isolation)
+* **Prompt fatigue mitigation**: Support for allowlisting frequently used safe commands per-user, per-codebase, or per-organization
+* **Accept Edits mode**: Auto-approves file edits and a fixed set of filesystem Bash commands like `mkdir`, `touch`, `rm`, `mv`, `cp`, and `sed` for paths in the working directory. Other Bash commands and out-of-scope paths still prompt
 
-* **Hooks and server processes**: command hooks execute shell commands with your full user permissions. Claude Code runs hooks, MCP servers, and the processes a [mod](/docs/en/plugins/mods/overview#what-a-mod-can-reach) starts outside the sandbox.
-* **Claude's tool calls**: a call to one of the plugin's MCP tools, and a Bash command that runs an executable from the plugin's `bin/`, are tool calls, so your permission rules apply to them. For what a mod can do to a tool call, see [Decide whether to trust a mod](/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod).
+### User responsibility
 
-Installing a plugin also enables it, unless its manifest or marketplace entry sets [`defaultEnabled: false`](/docs/en/plugins/install#choose-an-install-scope) and you haven't enabled it yourself.
+You're responsible for reviewing proposed code and commands for safety before approval.
 
-To remove a plugin you no longer trust, see [Remove a plugin you no longer trust](#remove-a-plugin-you-no-longer-trust).
+## Protect against prompt injection
 
-<h2 id="marketplace-tiers">
-  Identify Anthropic's marketplaces by name
-</h2>
+Prompt injection is a technique where an attacker attempts to override or manipulate an AI assistant's instructions by inserting malicious text. Claude Code includes several safeguards against these attacks:
 
-A marketplace's name places it in one of three tiers: official, community, or third-party. Claude Code accepts the official and community names only for marketplaces sourced from `github.com/anthropics/` repositories, so a third-party marketplace can't present itself as an Anthropic one. A marketplace that a coworker or your organization publishes is third-party.
+### Core protections
 
-The table lists which names fall in each tier:
+* **Permission system**: In Manual mode, sensitive operations require explicit approval
+* **Network command approval**: Commands that fetch content from the web such as `curl` and `wget` are not auto-approved by default. In Manual mode they prompt like any other non-read-only Bash command, so you can still approve once or add an explicit allow rule like `Bash(curl *)`. To stop Claude from running them, add them to [`permissions.deny`](/docs/en/permissions#tool-specific-permission-rules). A deny rule matches the command [as written](/docs/en/permissions#bash-rule-limits); for network enforcement that doesn't depend on the command text, see [sandbox network isolation](/docs/en/sandboxing#network-isolation)
 
-| Tier | Which marketplaces |
-| :- | :- |
-| Official | The [official marketplace names](#official-marketplace-names), such as `claude-plugins-official` |
-| Community | `claude-community`, `claude-plugins-community`, and `healthcare` |
-| Third-party | Every other marketplace |
+### Privacy safeguards
 
-Where the `claude-community` catalog pins a plugin to a commit SHA, which it does for nearly every entry, Claude Code refuses to install a different commit.
+We have implemented several safeguards to protect your data, including:
 
-### Official marketplace names
+* Limited retention periods for sensitive information (see the [Privacy Center](https://privacy.anthropic.com/en/articles/10023548-how-long-do-you-store-my-data) to learn more)
+* Restricted access to user session data
+* User control over data training preferences. Consumer users can change their [privacy settings](https://claude.ai/settings/privacy) at any time.
 
-These marketplace names make up the official tier:
+For full details, please review our [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms) (for Team, Enterprise, and API users) or [Consumer Terms](https://www.anthropic.com/legal/consumer-terms) (for Free, Pro, and Max users) and [Privacy Policy](https://www.anthropic.com/legal/privacy).
 
-* `claude-plugins-official`
-* `claude-code-marketplace`
-* `claude-code-plugins`
-* `anthropic-marketplace`
-* `anthropic-plugins`
-* `agent-skills`
-* `anthropic-agent-skills`
-* `life-sciences`
-* `knowledge-work-plugins`
-* `claude-for-legal`
-* `claude-for-financial-services`
-* `financial-services-plugins`
-* `first-party-plugins`
-* `claude-tag-plugins`
+### Additional safeguards
 
-For how the official, community, and demo marketplaces differ and where to browse what each one lists, see [Anthropic's marketplaces](/docs/en/plugins/anthropic-marketplaces).
+* **Network request approval**: In Manual mode, most tools that make network requests require user approval by default
+* **Web page summaries**: For most fetches, WebFetch runs a separate model call over the page, and Claude receives that call's answer instead of the raw page. See [WebFetch tool behavior](/docs/en/tools-reference#webfetch-tool-behavior)
+* **Trust verification**: In an interactive session, Claude Code shows the workspace trust dialog when you start it in a folder you haven't trusted. Servers in a project's `.mcp.json` have their own approval prompt, and [Project scope](/docs/en/mcp#project-scope) lists the sessions that skip it
+  * Note: A `-p` session shows neither prompt. [What runs before you trust a folder](/docs/en/permissions#what-runs-before-you-trust-a-folder) lists what a repository's files can run there
+  * Note: When you start Claude Code directly in your home directory, trust acceptance is held for the current session only and is not written to disk, so the prompt reappears on each launch. There is no setting to persist it. Start Claude Code from a project subdirectory instead, where trust acceptance is saved per directory
+* **Command injection detection**: In Manual mode, Claude Code asks before running a Bash command it can't fully analyze. An allow rule for part of a command, such as `Bash(git *)`, doesn't skip that prompt. [Sandboxed commands](/docs/en/permissions#how-permissions-interact-with-sandboxing) can run without it
+* **Fail-closed matching**: In Manual mode, unmatched commands require approval by default
+* **Secure credential storage**: API keys and tokens are stored in the macOS Keychain when available. On Linux they're stored in a file with mode `0600`, and on Windows in a file that inherits the access controls of your user profile directory. See [Credential Management](/docs/en/authentication#credential-management)
 
-## Review a plugin before you install
+<Warning>
+  **Windows WebDAV security risk**: When running Claude Code on Windows, we recommend against enabling WebDAV or allowing Claude Code to access paths such as `\\*` that may contain WebDAV subdirectories. [WebDAV has been deprecated by Microsoft](https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features#:~:text=The%20Webclient%20\(WebDAV\)%20service%20is%20deprecated) due to security risks. Enabling WebDAV may allow Claude Code to trigger network requests to remote hosts, bypassing the permission system.
+</Warning>
 
-Before you install a plugin, look at what it adds and where it comes from.
+**Best practices for working with untrusted content**:
 
-<Steps>
-  <Step title="Check the marketplace's source">
-    In your shell, run `claude plugin marketplace list` to print the source each marketplace was added from, such as a GitHub repository or a directory.
-  </Step>
+1. Review suggested commands before approval
+2. Avoid piping untrusted content directly to Claude
+3. Verify proposed changes to critical files
+4. Use virtual machines (VMs) to run scripts and make tool calls, especially when interacting with external web services
+5. Report suspicious behavior with `/feedback`
 
-  <Step title="Read the details pane">
-    In a Claude Code session, run `/plugin` and select the plugin. The details pane shows a **Will install** section listing the plugin's commands, agents, skills, hooks, and MCP and LSP servers. For a plugin Anthropic has no published component data for, the section shows what the marketplace entry declares, or a note: `Components will be discovered at installation` for a plugin stored inside the marketplace, or `Component summary not available for remote plugin` for one fetched from elsewhere.
-  </Step>
+<Warning>
+  While these protections significantly reduce risk, no system is completely
+  immune to all attacks. Always maintain good security practices when working
+  with any AI tool.
+</Warning>
 
-  <Step title="Read the plugin's source">
-    In the details pane, select **Open homepage** or **View on GitHub** below the install options. If the pane offers neither, open the marketplace repository you found in the first step. Find the plugin's directory there. The **Will install** section shows that a hook exists but not what it runs, so read these files in the plugin's directory:
+## MCP security
 
-    * **`hooks/hooks.json`**: the command each hook runs
-    * **`.mcp.json`**: each server's command or URL
-    * **`bin/`**: every file in the directory
-  </Step>
+You can connect Claude Code to Model Context Protocol (MCP) servers. Project-scoped servers are defined in `.mcp.json`, which you can check into source control. Servers at [other scopes](/docs/en/mcp#mcp-installation-scopes) and [claude.ai connectors](/docs/en/mcp#how-connectors-reach-claude-code) are configured outside the repository, and plugins can add servers too, so reviewing `.mcp.json` doesn't show every server a session can load. To restrict which servers run in your organization, see [Managed MCP configuration](/docs/en/managed-mcp).
 
-  <Step title="List what the plugin contains">
-    Clone the repository that holds the plugin's directory, then run `claude --plugin-dir <plugin directory> plugin details <plugin name>` in your shell to see what Claude Code finds in it. The command reads the plugin's files without starting a session and prints a `Component inventory` listing the plugin's skills and commands, agents, hooks with each hook's event, and MCP and LSP servers.
-  </Step>
-</Steps>
+We encourage either writing your own MCP servers or using MCP servers from providers that you trust. You are able to configure Claude Code permissions for MCP servers. Anthropic reviews connectors against its [listing criteria](https://claude.com/docs/connectors/building/review-criteria) before adding them to the [Anthropic Directory](https://claude.ai/directory), but does not security-audit or manage any MCP server.
 
-After you install a plugin, run `claude plugin details <plugin name>` in your shell to print the same `Component inventory` for the installed copy under `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`.
+## IDE security
 
-### Remove a plugin you no longer trust
+See [VS Code security and privacy](/docs/en/vs-code#security-and-privacy) for more information on running Claude Code in an IDE.
 
-In your shell, run [`claude plugin uninstall <plugin>`](/docs/en/plugins/cli-reference#plugin-uninstall) with the `--scope` you installed it at. Then check what the uninstall removed and what it left:
+## Cloud execution security
 
-* **Persistent data**: by default, when that was the last scope the plugin was installed at, uninstalling also deletes the plugin's persistent data directory. For `--keep-data` and the other cases where it stays, see [plugin uninstall](/docs/en/plugins/cli-reference#plugin-uninstall).
-* **Cached files**: the plugin's files stay on disk under `~/.claude/plugins/cache/` for 14 days before a [background sweep removes them](/docs/en/plugins/loading#cleanup-of-previous-versions). After you uninstall your last plugin, orphaned directories stay until you install another. To delete the files now, remove the plugin's directory under `~/.claude/plugins/cache/<marketplace>/<plugin>/` yourself.
-* **The marketplace**: if you don't trust the marketplace's owner either, [remove the marketplace](/docs/en/plugins/install#manage-marketplaces) too, which uninstalls every plugin you installed from it.
+When you use [cloud sessions](/docs/en/claude-code-on-the-web), additional security controls are in place. Sessions your organization routes to a [self-hosted environment](/docs/en/self-hosted-environments) run on your own infrastructure, where isolation, network egress, and git credentials are your deployment's responsibility. In Anthropic-hosted environments:
 
-## Recognize when Claude Code refuses or warns
+* **Isolated virtual machines**: Each cloud session runs in an isolated, Anthropic-managed VM
+* **Network access controls**: Network access is limited by default and can be configured to be disabled or allow only specific domains
+* **Credential protection**: GitHub credentials are stored encrypted on Anthropic's servers and never enter the session VM. The VM holds a short-lived credential scoped to that session, and GitHub traffic goes through an [Anthropic proxy](/docs/en/cloud-environments#github-proxy) that attaches the GitHub credential on the server side. See [GitHub authentication options](/docs/en/claude-code-on-the-web#github-authentication-options) for how you grant access
+* **Push restrictions**: The [GitHub proxy](/docs/en/cloud-environments#github-proxy) rejects branch deletions and pushes of anything other than a branch, such as a tag. GitHub decides which branches a session can update by applying your repository's branch protection rules and rulesets to the GitHub access you connected. A rule that access can bypass doesn't block a session's push
+* **Audit logging**: All operations in cloud sessions are logged for compliance and audit purposes
+* **Automatic cleanup**: Session VMs are reclaimed after a period of inactivity
+* **Deletion**: You can [delete a session](/docs/en/claude-code-on-the-web#delete-sessions) at any time. See [Cloud execution data flow](/docs/en/data-usage#cloud-execution-data-flow-and-dependencies) for what Anthropic stores for a cloud session
 
-The details pane you open from the **Discover** or **Marketplaces** tab in `/plugin` shows the same trust warning for each plugin. Claude Code refuses instead of warning in cases such as those under [Untrusted marketplace sources and failed integrity checks](#untrusted-marketplace-sources-and-failed-integrity-checks).
+For more details on cloud execution, see [Use Claude Code in the cloud](/docs/en/claude-code-on-the-web); to configure network access for cloud sessions, see [Configure cloud environments](/docs/en/cloud-environments#network-access).
 
-### Trust warning before you install
+[Remote Control](/docs/en/remote-control) sessions work differently: the web interface connects to a Claude Code process running on your local machine. All code execution and file access stays local, and session traffic travels through the Anthropic API over TLS; while connected, the session transcript is stored on Anthropic servers to sync the conversation across devices, as described in [Connection and security](/docs/en/remote-control#connection-and-security). No cloud VMs or sandboxing are involved. The connection uses multiple short-lived, narrowly scoped credentials, each limited to a specific purpose and expiring independently, to limit the blast radius of any single compromised credential.
 
-The warning reads the same whatever marketplace the plugin comes from:
+## Security best practices
 
-```text theme={null}
-Make sure you trust a plugin before installing, updating, or using it. Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they will work as intended or that they won't change. See each plugin's homepage for more information.
-```
+### Working with sensitive code
 
-If your organization sets `pluginTrustMessage` in [managed settings](/docs/en/plugins/org), Claude Code appends that text to the warning.
+* Review all suggested changes before approval
+* Use project-specific permission settings for sensitive repositories
+* For additional isolation, run the whole Claude Code (local mode) process inside the [sandbox runtime](/docs/en/sandbox-environments#sandbox-runtime) or a [dev container](/docs/en/devcontainer)
+* Regularly audit your permission settings with `/permissions`
 
-### Untrusted marketplace sources and failed integrity checks
+### Team security
 
-Claude Code refuses to load a marketplace or to install a plugin in these cases, each with its own error message:
+* Use [managed settings](/docs/en/settings#where-settings-live) to enforce organizational standards
+* Share approved permission configurations through version control
+* Train team members on security best practices
+* Monitor Claude Code usage through [OpenTelemetry metrics](/docs/en/monitoring-usage)
+* Audit or block settings changes during sessions with [`ConfigChange` hooks](/docs/en/hooks#configchange)
 
-* **Untrusted marketplace source**: when a marketplace uses an official or community name but its source is outside `github.com/anthropics/`, Claude Code stops loading the marketplace and the plugins you installed from it. The error is [Marketplace is registered from an untrusted source](/docs/en/errors#marketplace-is-registered-from-an-untrusted-source).
-* **Archive integrity**: when a marketplace entry pins an [`archive` source](/docs/en/plugins/marketplace-reference#archive-plugin-source) to a `sha256` digest and the downloaded file's digest doesn't match it, Claude Code refuses the install. The error is [Plugin archive integrity check failed](/docs/en/errors#plugin-archive-integrity-check-failed).
+### Reporting security issues
 
-The `sha256` pin is separate from the community catalog's commit SHA pin, which selects the git commit to check out.
+If you discover a security vulnerability in Claude Code:
 
-## Enforce plugin controls for your organization
+1. Do not disclose it publicly
+2. Report it through our [HackerOne program](https://hackerone.com/4f1f16ba-10d3-4d09-9ecc-c721aad90f24/embedded_submissions/new)
+3. Include detailed reproduction steps
+4. Allow time for us to address the issue before public disclosure
 
-With [managed settings](/docs/en/plugins/org), an administrator can enforce these plugin controls:
+## Related resources
 
-* Allowlist or blocklist marketplace sources
-* Force-enable plugins
-* Turn off the `--plugin-dir` and `--plugin-url` flags and the `CLAUDE_CODE_PLUGIN_DIRS` variable
-* Limit hooks to those from managed settings and force-enabled plugins
-* Stop plugins from members' claude.ai accounts from loading in Claude Code, with [`syncClaudeAiPlugins`](/docs/en/plugins/org#control-matrix)
-
-The [control matrix](/docs/en/plugins/org#control-matrix) says what each key does and doesn't cover.
-
-## Find plugins in telemetry
-
-If your organization exports Claude Code's [OpenTelemetry events](/docs/en/monitoring-usage) to its own backend, the [marketplace tiers](#marketplace-tiers) decide which plugin names appear there:
-
-* **[Plugin loaded event](/docs/en/monitoring-usage#plugin-loaded-event)**: the event reports official-tier plugin and marketplace names as they are. For the community and third-party tiers, `plugin.name` and `marketplace.name` are the literal string `third-party` unless you set `OTEL_LOG_TOOL_DETAILS=1`.
-* **Plugin scope**: the loaded event's `plugin.scope` still reports where the plugin came from, such as `org` for a plugin your managed settings enable or `user-local` for any other third-party plugin. The [plugin loaded event](/docs/en/monitoring-usage#plugin-loaded-event) lists every value.
-* **[Plugin installed event](/docs/en/monitoring-usage#plugin-installed-event)**: unless you set `OTEL_LOG_TOOL_DETAILS=1`, the event omits the name fields for non-official plugins instead of reporting `third-party`.
-* **[Claude Code Analytics API](https://platform.claude.com/docs/en/api/admin/analytics/plugins/list)**: Claude Code reports plugins from the official and community tiers by name and reports every other plugin as `third-party`.
-
-## Next steps
-
-* [Manage plugins for your organization](/docs/en/plugins/org): restrict which marketplaces users can install from and require the ones you trust
-* [Install and manage plugins](/docs/en/plugins/install): review a plugin's details pane before you choose a scope
-* [Anthropic's marketplaces](/docs/en/plugins/anthropic-marketplaces): which marketplace names are Anthropic's
-* [Security](/docs/en/security): Claude Code's own security model
+* [Security guidance plugin](/docs/en/security-guidance): have Claude review and fix vulnerabilities in its own code changes during the session
+* [`/security-review`](/docs/en/commands#all-commands): run an on-demand security pass over the changes on your current branch
+* [Sandbox environments](/docs/en/sandbox-environments): compare isolation approaches and choose one for your threat model
+* [Sandboxing](/docs/en/sandboxing): filesystem and network isolation for Bash commands
+* [Permissions](/docs/en/permissions): configure permissions and access controls
+* [Monitoring usage](/docs/en/monitoring-usage): track and audit Claude Code activity
+* [Development containers](/docs/en/devcontainer): secure, isolated environments
+* [Anthropic Trust Center](https://trust.anthropic.com): security certifications and compliance
+* [CISO's guide to agentic AI](https://claude.com/blog/ciso-guide-to-agentic-ai): a security leader's framework for assessing agentic AI deployments

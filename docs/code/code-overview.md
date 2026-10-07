@@ -1,6 +1,6 @@
 ---
-title: "Mods overview"
-source: "https://code.claude.com/docs/en/plugins/mods/overview"
+title: "Overview"
+source: "https://code.claude.com/docs/en/overview"
 category: "code"
 generated: true
 ---
@@ -8,257 +8,249 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Mods overview
+# Overview
 
-> Add panes, commands, and tool call rules to Claude Code with a mod. See what a mod can do, how to make or install one, and where mods run.
+> Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.
 
-A mod is a [plugin](/docs/en/plugins/overview) that changes how Claude Code looks and behaves. It's made of JavaScript or TypeScript event handlers: Claude Code calls one when an event happens, such as a tool call, a submitted prompt, or a part of the interface being drawn, and the handler can watch the event, change it, or take it over. Use a mod to add a feature of your own to Claude Code, such as a pane that charts how full your context is after each request. For the files in a mod and a complete example, see [How a mod works](#how-a-mod-works).
+Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
-<Note>
-  Claude Code's existing [hooks](/docs/en/hooks) also run on events, as a shell command, HTTP request, or prompt you configure in a settings file. A mod's handlers are functions that run inside Claude Code instead. Claude Code calls both kinds hooks: on these pages, "hook" means a mod's handler, and the settings-file kind is a "settings hook".
-</Note>
+## Get started
 
-## What a mod can do
+Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_pricing) or [Anthropic Console](https://platform.claude.com/) account. The Terminal CLI, VS Code, and JetBrains also support [third-party providers](/docs/en/third-party-integrations).
 
-Settings hooks, skills, status lines, and MCP servers work from outside Claude Code: each one runs a script, or gives Claude text or tools. A mod runs inside Claude Code, so it can do things they can't:
+<Tabs>
+  <Tab title="Terminal">
+    The full-featured CLI for working with Claude Code directly in your terminal. Edit files, run commands, and manage your entire project from the command line.
 
-* **Draw an interface you can use**: a pane beside the transcript or a band above the prompt, with tabs, buttons, and text fields. See [Draw in the interface](/docs/en/plugins/mods/interface).
-* **Redraw Claude Code's own interface**: replace or restyle parts Claude Code draws itself, such as a tool call's row, the spinner, or the dialog Claude asks questions in. See [Change what Claude Code already draws](/docs/en/plugins/mods/interface#change-what-claude-code-already-draws).
-* **Step into a tool call or a request**: for example, hold a tool call while you ask the user a question, answer it without running the tool, or send one request to a different model. See [Guard or change a tool call](/docs/en/plugins/mods/events#guard-or-change-a-tool-call) and [Follow a turn](/docs/en/plugins/mods/events#follow-a-turn).
-* **Run your own code on a command**: a `/command` that runs your function at once, with no Claude turn, even while Claude is working. See [Add a command or a tool](/docs/en/plugins/mods/api#add-a-command-or-a-tool).
-* **Share data between hooks**: a mod's hooks share the variables in its file, so what one hook records, another can show. For example, one hook can count tool calls while another shows the count beside the spinner, or one can read each request's token usage while another charts it in a pane. See [React to events](/docs/en/plugins/mods/events).
+    To install Claude Code, open a terminal and run the command for your system. If you haven't used a terminal before, the [terminal guide](/docs/en/terminal-guide) shows how to open one and paste the command.
 
-Mods work in the Claude Code CLI and in the Code tab of the Claude Desktop app. See [Where mods run](#where-mods-run) to understand how they behave elsewhere, such as in the VS Code extension, `claude -p`, and cloud sessions. If a settings hook, a skill, or an MCP server already does what you need, [compare them](#compare-mods-settings-hooks-skills-and-mcp-servers) before you write a mod. To manage mods for an organization, see [Manage mods for your organization](/docs/en/plugins/mods/admin).
+    <Tabs>
+      <Tab title="Native Install (Recommended)">
+        **macOS, Linux, WSL:**
 
-## Get a mod
+        ```bash theme={null}
+        curl -fsSL https://claude.ai/install.sh | bash
+        ```
 
-To start with a mod:
+        On Windows, your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
 
-* **Use one you already have**: some of Claude Code's own features are mods, such as `/diff`. See [Mods built into Claude Code](#mods-built-into-claude-code).
-* **Make one**: describe what you want in a Claude Code session, and Claude writes the mod. See [Ask Claude for a mod](/docs/en/plugins/mods/create#ask-claude-for-a-mod). To learn how a mod's code works, [write one yourself](/docs/en/plugins/mods/create#write-a-mod-yourself).
-* **Install one**: see [Install or update a mod](#install-or-update-a-mod), or [try a sample mod](#try-a-sample-mod)
+        **Windows PowerShell:**
 
-### Install or update a mod
+        ```powershell theme={null}
+        irm https://claude.ai/install.ps1 | iex
+        ```
 
-<Warning>
-  A mod is code that runs with your permissions. It can read and write your files, start processes, and make network requests. Install mods only from authors and marketplaces you trust. See [Decide whether to trust a mod](#decide-whether-to-trust-a-mod).
-</Warning>
+        **Windows CMD:**
 
-A mod installs as a plugin, from a marketplace. Give the plugin's name, an `@`, and the marketplace's name. These examples install a plugin named `token-chart` from a marketplace named `your-org`:
+        ```batch theme={null}
+        curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+        ```
 
-* In a Claude Code session, run `/plugin install token-chart@your-org`.
-* In your shell, run `claude plugin install token-chart@your-org`.
+        When the installer finishes, open a new terminal window and run `claude --version`. A working installation prints a version number. If your shell says `claude` isn't found or isn't recognized, the install directory isn't on your PATH yet: see [Fix your PATH](/docs/en/troubleshoot-install#command-not-found-claude-after-installation).
 
-[Install plugins](/docs/en/plugins/install) covers marketplaces, scopes, the VS Code extension and the Desktop app, and [keeping plugins updated](/docs/en/plugins/install#keep-plugins-updated), all of which apply to a plugin that contains a mod without changes.
+        If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell.
 
-If you install or update a mod from your shell while a session is open, run `/reload-plugins` in that session to load it. Otherwise it loads the next time you start Claude Code.
+        If the install command fails with `syntax error near unexpected token '<'`, a `403`, or any other error, see [Troubleshoot installation](/docs/en/troubleshoot-install#find-your-error) to match the error to a fix and for alternative install methods.
 
-### Try a sample mod
+        [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
-Anthropic shares sample mods in the [`claude-code/mods` directory of the `claude-code-playground` repository](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods). Each one is a complete plugin, and its README says how it was built. The repository shares them as they are, without support.
+        <Info>
+          Native installations automatically update in the background to keep you on the latest version.
+        </Info>
+      </Tab>
 
-* [`token-weather`](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather): draws a forecast of your context window above the prompt
-* [`blast-radius`](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius): holds a risky shell command, such as `rm -rf` or a force push, and shows what it would change, with buttons to proceed or cancel
-* [`replay-theater`](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/replay-theater): adds a `/replay` command that steps through the file edits Claude made in the last turn
+      <Tab title="Homebrew">
+        ```bash theme={null}
+        brew install --cask claude-code
+        ```
 
-A sample mod runs with your permissions. To see what one does before you load it, [list its hooks and calls](#list-what-a-mod-does-before-you-install-one).
+        Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
 
-To try one, clone the repository and [load the mod's directory for one session](/docs/en/plugins/create#load-a-directory-or-archive-for-one-session) with `--plugin-dir`. To confirm the mod loaded, [check which mods the session loaded](#see-which-mods-a-session-loaded).
+        <Info>
+          Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
+        </Info>
+      </Tab>
 
-To keep one, [add the clone's `claude-code/mods` directory as a marketplace](/docs/en/plugins/install#add-a-marketplace), then install the mod from `claude-code-playground-mods`. The marketplace points at your clone, so the mod stops loading if you move or delete it.
+      <Tab title="WinGet">
+        ```powershell theme={null}
+        winget install Anthropic.ClaudeCode
+        ```
 
-## Decide whether to trust a mod
+        <Info>
+          WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
+        </Info>
+      </Tab>
+    </Tabs>
 
-A mod is code that runs with your permissions, inside Claude Code. Install mods only from authors and [marketplaces you trust](/docs/en/plugins/security).
+    You can also install with [apt, dnf, or apk](/docs/en/setup#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
-### What a mod can reach
+    Then start Claude Code in any project. Replace `your-project` with the path to a project directory on your machine:
 
-A mod runs with your permissions, so before you install one, know what it has access to. Once it loads, a mod can:
+    ```bash theme={null}
+    cd your-project
+    claude
+    ```
 
-* **Act on your machine as you**: read and write files anywhere your user account can, start programs, and make network requests
-* **Read your secrets**: environment variables and settings files, including an API key you keep in either
-* **See your session**: every prompt you send and every tool call Claude makes
-* **Change your session**: rewrite a prompt or a tool call, submit a prompt as if you had typed it, or send a message to another of your sessions
-* **Act without asking you**: approve a tool call before you're asked
-* **Spend your usage**: call a model on your plan or API key
+    Claude Code prompts you to log in on first use. If you've set the `ANTHROPIC_API_KEY` environment variable and you approve the key when Claude Code asks whether to use it, Claude Code skips the login prompt. [Continue with the Quickstart →](/docs/en/quickstart)
 
-Mods aren't sandboxed. If you turn on [sandboxing](/docs/en/sandboxing), the sandbox isolates the Bash commands Claude runs, and a process that a mod starts runs outside it.
+    <Tip>
+      See [advanced setup](/docs/en/setup) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](/docs/en/troubleshoot-install) if you hit issues.
+    </Tip>
+  </Tab>
 
-A mod that approves tool calls can approve one that an `ask` rule would prompt for, or that one of your own `PreToolUse` hooks blocked. [Extend permissions with hooks](/docs/en/permissions#extend-permissions-with-hooks) lists what such a mod can approve, including when it can approve a call that a `deny` rule refuses.
+  <Tab title="VS Code">
+    The VS Code extension provides inline diffs, @-mentions, plan review, and conversation history directly in your editor.
 
-A mod can restyle much of Claude Code's interface, but not the permission prompt. It can't change what a prompt shows you.
+    * [Install for VS Code](vscode:extension/anthropic.claude-code)
+    * [Install for Cursor](cursor:extension/anthropic.claude-code)
 
-### List what a mod does before you install one
+    Or search for "Claude Code" in the Extensions view (`Cmd+Shift+X` on Mac, `Ctrl+Shift+X` on Windows/Linux). After installing, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), type "Claude Code", and select **Open in New Tab**.
 
-Before you install a mod, you can list which events it handles and what it asks Claude Code to do, such as read a file or make a network request, without running it. Get the plugin's files first, for example by cloning its repository. Then, in your shell, run `claude plugin validate` on the plugin's directory:
+    [Get started with VS Code →](/docs/en/vs-code#get-started)
+  </Tab>
 
-```bash theme={null}
-claude plugin validate ./some-mod
-```
+  <Tab title="Desktop app">
+    A standalone app for running Claude Code outside your IDE or terminal. Review diffs visually, run multiple sessions side by side, schedule recurring tasks, and start cloud sessions.
 
-The `hooks:` and `calls:` lines in the output list the events the mod handles and what it asks Claude Code to do. [Review what a mod can do](/docs/en/plugins/mods/admin#review-what-a-mod-can-do) shows the output and which calls to look for.
+    Download and install:
 
-## Turn mods on or off
+    * [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) (Intel and Apple Silicon)
+    * [Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs) (x64)
+    * [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)
+    * On Ubuntu or Debian, where the app is in beta, install it with apt by following the [Linux install instructions](/docs/en/desktop-linux)
 
-Mods are on by default. In the terminal, use Claude Code v2.1.287 or later. The Desktop app includes its own copy of Claude Code, and mods work there from v2.1.286. Check the version in the place you use mods:
+    After installing, launch Claude, sign in, and click the **Code** tab to start coding. The app includes Claude Code, so you don't need to install the CLI separately. A [paid subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_desktop_pricing) is required.
 
-* **Terminal**: in your shell, run `claude --version`. If yours is older, [update Claude Code](/docs/en/setup#update-claude-code).
-* **Desktop app**: in a local session in the Code tab, enter `/status` and read the **Claude Code** row, which shows a version such as `2.1.286`. If yours is older, update the Desktop app.
+    [Learn more about the desktop app →](/docs/en/desktop-quickstart)
+  </Tab>
 
-To turn mods off, choose how many to stop, and for how long. To turn them back on, undo the same change:
+  <Tab title="Web">
+    Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they're done, work on repos you don't have locally, or run multiple tasks in parallel. For a longer body of work, create a [project](/docs/en/claude-projects) and let Claude coordinate the parallel sessions for you. Available on desktop browsers and [the Claude app for iOS and Android](/docs/en/mobile).
 
-* **One mod**: disable or uninstall its plugin from the [**Installed** tab in `/plugin`](/docs/en/plugins/install#manage-installed-plugins)
-* **Every installed mod, for one session**: start Claude Code with [`--safe-mode`](/docs/en/cli-reference#cli-flags), which also disables your other customizations
-* **Every mod you installed, in every session**: set [`"disableAllHooks": true`](/docs/en/settings-reference#disableallhooks) in `~/.claude/settings.json`. Your settings hooks and custom status line stop too. What your organization manages keeps running.
+    Start coding at [claude.ai/code](https://claude.ai/code).
 
-If you use Claude Code through an organization, an administrator can also limit which mods load. Administrators start at [Stop user-installed mods from loading](/docs/en/plugins/mods/admin#stop-user-installed-mods-from-loading).
+    [Get started →](/docs/en/web-quickstart)
+  </Tab>
 
-`disableAllHooks` and your organization's `allowManagedModsOnly` stop a mod and leave the rest of its plugin in place: the plugin stays installed, and its skills, commands, agents, and MCP servers load. Other settings and flags reach further. [`disableAllHooks`](/docs/en/settings-reference#disableallhooks) and [What runs under `allowManagedHooksOnly`](/docs/en/settings-reference#what-runs-under-allowmanagedhooksonly) list what each one does to a plugin and its settings hooks.
+  <Tab title="JetBrains">
+    A plugin for IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs with interactive diff viewing and selection context sharing.
 
-To find out whether mods can load for you, see [Check whether mods can load](/docs/en/plugins/mods/troubleshoot#check-whether-mods-can-load).
+    Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE. The plugin requires the Claude Code CLI, installed separately; see the [JetBrains setup steps](/docs/en/jetbrains#installation).
 
-<Note>
-  If you set `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` during early access, remove it. Claude Code v2.1.287 and later ignores it, so setting it to `0` doesn't keep mods off.
-</Note>
+    [Get started with JetBrains →](/docs/en/jetbrains)
+  </Tab>
+</Tabs>
 
-### See which mods a session loaded
+## What you can do
 
-To see which mods a terminal session loaded, run `/plugin` at the Claude Code prompt. A dim line under the tabs gives the count and the names, such as `1 mod active · first-mod`. If a mod you installed isn't named there, see [Find out why a mod does nothing](/docs/en/plugins/mods/troubleshoot#find-out-why-a-mod-does-nothing).
+Here are some of the ways you can use Claude Code:
 
-## How a mod works
+<AccordionGroup>
+  <Accordion title="Automate the work you keep putting off" icon="wand-magic-sparkles">
+    Claude Code handles the tedious tasks that eat up your day: writing tests for untested code, fixing lint errors across a project, resolving merge conflicts, updating dependencies, and writing release notes.
 
-A mod is a [plugin](/docs/en/plugins/overview) whose code registers event handlers, called hooks. Claude Code runs a hook when its event happens, such as when Claude calls a tool or when the spinner is drawn. A small mod has three files:
+    ```bash theme={null}
+    claude "write tests for the auth module, run them, and fix any failures"
+    ```
+  </Accordion>
 
-```text theme={null}
-first-mod/
-├── .claude-plugin/
-│   └── plugin.json
-└── hooks/
-    ├── hooks.json
-    └── register.js
-```
+  <Accordion title="Build features and fix bugs" icon="hammer">
+    Describe what you want in plain language. Claude Code plans the approach, writes the code across multiple files, and verifies it works.
 
-* **`plugin.json`**: the plugin's [manifest](/docs/en/plugins/manifest-reference)
-* **`hooks.json`**: [points to your code file](/docs/en/plugins/mods/reference#files)
-* **`register.js`**: [your code](/docs/en/plugins/mods/create#write-a-mod-yourself), called the hooks module. It tells Claude Code which events to run your functions on.
+    For bugs, paste an error message or describe the symptom. Claude Code traces the issue through your codebase, identifies the root cause, and implements a fix. See [common workflows](/docs/en/common-workflows) for more examples.
+  </Accordion>
 
-This is a complete `register.js`. It counts the tool calls Claude makes and shows the count beside the spinner while Claude works, as in `Thinking · tool calls: 3…`.
+  <Accordion title="Create commits and pull requests" icon="code-branch">
+    Claude Code works directly with git. It stages changes, writes commit messages, creates branches, and opens pull requests.
 
-```javascript hooks/register.js theme={null}
-// The count, shared by the two hooks below
-let calls = 0
+    ```bash theme={null}
+    claude "commit my changes with a descriptive message"
+    ```
 
-// Claude Code calls this once when the mod loads
-export function register(on) {
-  // Runs each time Claude is about to use a tool
-  on('tool.call', async ($, e, next) => {
-    calls += 1
-    // Ask Claude Code to draw the interface again, so the new count shows
-    $.ui.invalidate('ui.render')
-    // Let the tool run as usual
-    return next(e)
-  })
+    In CI, you can automate code review and issue triage with [GitHub Actions](/docs/en/github-actions) or [GitLab CI/CD](/docs/en/gitlab-ci-cd).
+  </Accordion>
 
-  // Runs each time Claude Code draws the spinner
-  on('ui.render', { component: 'Spinner' }, async ($, e, next) => {
-    // Keep Claude Code's spinner, with the count added after its word
-    return next({ ...e, props: { ...e.props, suffix: ' · tool calls: ' + calls + '…' } })
-  })
-}
-```
+  <Accordion title="Connect your tools with MCP" icon="plug">
+    The [Model Context Protocol (MCP)](/docs/en/mcp) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](/docs/en/mcp-quickstart) connects your first server end to end.
+  </Accordion>
 
-The file registers two hooks, and both use the `calls` variable at the top:
+  <Accordion title="Customize with instructions, skills, and hooks" icon="sliders">
+    [`CLAUDE.md`](/docs/en/memory) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](/docs/en/memory#agents-md) in place of a `CLAUDE.md`. Claude also builds [auto memory](/docs/en/memory#auto-memory) as it works, saving learnings across sessions without you writing anything.
 
-* **The [`tool.call`](/docs/en/plugins/mods/reference#tools) hook** runs each time Claude is about to use a tool. It adds one to `calls`, asks Claude Code to draw the interface again, and lets the tool run as usual.
-* **The [`ui.render`](/docs/en/plugins/mods/reference#interface) hook** runs each time Claude Code draws the spinner. It keeps Claude Code's own spinner and adds the count after the word.
+    Create [skills](/docs/en/skills) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.
 
-This recording shows the mod at work. Watch the spinner line above the prompt box: while Claude lists a directory and reads two files, it reads `Thinking · tool calls: 1…`, then `2…`, then `3…`.
+    [Hooks](/docs/en/hooks) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+  </Accordion>
 
-<Frame>
-  <video autoPlay muted loop playsInline controls className="w-full dark:hidden" src="https://mintcdn.com/claude-code/dgiVO_Od1X1faduV/images/mods-overview-light.mp4?fit=max&auto=format&n=dgiVO_Od1X1faduV&q=85&s=00a18aa0743b59a700f0275ce226e6d1" aria-label="In a Claude Code session, the prompt 'list the files here and read the README' is typed and sent. While Claude works, the spinner reads 'Thinking · tool calls: 1', then 2, then 3, as Claude lists the files and reads two of them." data-path="images/mods-overview-light.mp4" />
+  <Accordion title="Run agents in parallel and build custom agents" icon="users">
+    Spawn [multiple Claude Code agents](/docs/en/sub-agents) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.
 
-  <video autoPlay muted loop playsInline controls className="w-full hidden dark:block" src="https://mintcdn.com/claude-code/dgiVO_Od1X1faduV/images/mods-overview-dark.mp4?fit=max&auto=format&n=dgiVO_Od1X1faduV&q=85&s=d5223da2fef16ceaaa214a36d72c0536" aria-label="In a Claude Code session, the prompt 'list the files here and read the README' is typed and sent. While Claude works, the spinner reads 'Thinking · tool calls: 1', then 2, then 3, as Claude lists the files and reads two of them." data-path="images/mods-overview-dark.mp4" />
-</Frame>
+    To run several full sessions in parallel and watch them from one screen, use [background agents](/docs/en/agent-view). For fully custom workflows, the [Agent SDK](/docs/en/agent-sdk/overview) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
+  </Accordion>
 
-### What a hook can do with an event
+  <Accordion title="Pipe, script, and automate with the CLI" icon="terminal">
+    Claude Code is composable and follows the Unix philosophy. Pipe logs into it, run it in CI, or chain it with other tools:
 
-Claude Code runs your hook before it acts on the event, so the hook decides what happens next. It can:
+    ```bash theme={null}
+    # Analyze recent log output
+    tail -200 app.log | claude -p "Slack me if you see any anomalies"
 
-* **Observe**: note what's happening and let it continue unchanged, as the `tool.call` hook in the example does
-* **Rewrite**: change the event before it continues, as the `ui.render` hook does when it adds the count to the spinner
-* **Answer**: handle the event itself, so the usual behavior doesn't run, such as refusing a command
+    # Automate translations in CI
+    claude -p "translate new strings into French and raise a PR for review"
 
-To do anything outside its own code, such as draw, add a command, call a model, read a file, start a process, or make a network request, a hook calls the mods API. A hook has no other way to do those things, which is why Claude Code can [list what a mod does](#list-what-a-mod-does-before-you-install-one) before you install it.
+    # Bulk operations across files
+    git diff main --name-only | claude -p "review these changed files for security issues"
+    ```
 
-For the code behind each choice, see [React to events](/docs/en/plugins/mods/events#how-a-hook-handles-an-event). For what a hook can call, see [Use the mods API](/docs/en/plugins/mods/api).
+    See the [CLI reference](/docs/en/cli-reference) for the full set of commands and flags.
+  </Accordion>
 
-### Where mods run
+  <Accordion title="Schedule recurring tasks" icon="clock">
+    Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
 
-A mod's hooks run in every kind of session that loads the plugin. Drawing is narrower: only the terminal and the Desktop app show a mod's panes, bands, and replaced rows. This table lists each place you might run Claude Code:
+    * [Routines](/docs/en/routines) run in the cloud, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+    * [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks) run on your machine, with direct access to your local files and tools
+    * [`/loop`](/docs/en/scheduled-tasks) repeats a prompt within a CLI session for quick polling
+  </Accordion>
 
-| Where you run Claude Code | Hooks run | What the mod draws appears |
-| :- | :- | :- |
-| `claude` in a terminal, including an editor's integrated terminal and the JetBrains plugin | Yes | Yes |
-| The Code tab of the Desktop app, except in a WSL session | Yes | Yes, except elements the [elements table](/docs/en/plugins/mods/reference#elements) marks terminal-only |
-| A [WSL session](/docs/en/desktop-wsl) in the Desktop app | No, because plugins aren't available in WSL sessions | No |
-| The VS Code extension's chat panel | Yes | No |
-| `claude -p` and the [Agent SDK](/docs/en/agent-sdk/overview) | Yes | No |
-| [Remote Control](/docs/en/remote-control) from claude.ai or the mobile app | Yes, in the session on your machine | In the terminal on your machine |
-| A [cloud session](/docs/en/claude-code-on-the-web) | Yes, for a plugin that [reaches the cloud session](/docs/en/cloud-environments#what-carries-over-from-your-setup) | No |
+  <Accordion title="Work from anywhere" icon="globe">
+    Sessions aren't tied to a single surface. Move work between them as your context changes:
 
-A mod that draws can check which app it's running in, and fall back to a line in the transcript or a command's text reply where nothing draws.
+    * Step away from your desk and keep working from your phone or any browser with [Remote Control](/docs/en/remote-control)
+    * Message [Dispatch](/docs/en/desktop#sessions-from-dispatch) a task from your phone and open the Desktop session it creates
+    * Start a long-running task on the [web](/docs/en/claude-code-on-the-web) or the [Claude mobile app](/docs/en/mobile), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
+    * Run `/desktop` to continue your current terminal session in the [Desktop app](/docs/en/desktop), where you can review diffs visually. The `/desktop` handoff requires a claude.ai subscription. Available on macOS and x64 Windows.
+    * Route tasks from team chat: mention `@Claude` in [Slack](/docs/en/slack) with a bug report and get a pull request back
+  </Accordion>
+</AccordionGroup>
 
-## Control mods for your organization
+## Use Claude Code everywhere
 
-Administrators decide whether mods run and which ones, through [managed settings](/docs/en/managed-settings). [Manage mods for your organization](/docs/en/plugins/mods/admin) covers what happens by default, how to review a mod, and how to enforce a policy with a mod of your own.
+Each [surface](/docs/en/glossary#surface) connects to the same underlying Claude Code engine, so your repo's CLAUDE.md files, settings, and MCP servers work across all of them.
 
-## Compare mods, settings hooks, skills, and MCP servers
+Beyond the [Terminal](/docs/en/quickstart), [VS Code](/docs/en/vs-code), [JetBrains](/docs/en/jetbrains), [Desktop](/docs/en/desktop), and [Web](/docs/en/claude-code-on-the-web) surfaces above, Claude Code integrates with CI/CD, chat, and browser workflows:
 
-Mods, settings hooks, skills, and MCP servers overlap. This table shows what each one is and when to pick it.
-
-| | Mod | Settings hook | Skill | MCP server |
-| :- | :- | :- | :- | :- |
-| What it is | Functions in a plugin that Claude Code calls in its own process | A shell command, HTTP request, or prompt that Claude Code runs on a lifecycle event | A `SKILL.md` file of instructions Claude reads | An external process or service that gives Claude tools |
-| What it can change | Tool calls, prompts, commands, turns, and what the interface draws | Whether a tool call or prompt goes ahead, a tool call's arguments and result, and context added for Claude | What Claude knows and does | Which tools Claude has |
-| Can it draw in the interface | Yes | No | No | No |
-| What you write | JavaScript or TypeScript | A script and a `settings.json` entry | Markdown | A server in any language |
-| Pick it when | You want a pane, a band above the prompt, a custom command, or to rewrite an event | You want to block, allow, or log an event with a script you already have | You keep pasting the same instructions into chat | Claude needs to reach an external system |
-
-Each of the others has its own page: [Hooks](/docs/en/hooks), [Skills](/docs/en/skills), and [MCP](/docs/en/mcp). A plugin can hold all of them, so a mod can ship in the same plugin as a skill and an MCP server.
-
-## Mods built into Claude Code
-
-Some of Claude Code's own features are mods. To see the ones your session has, run `/plugin` at the Claude Code prompt and go to the **Installed** tab, which lists them under **Built-in**. You can't update or uninstall a built-in mod, and the table's last column says how to turn each one off. The [`mods active` line](#see-which-mods-a-session-loaded) omits built-in mods.
-
-This table lists each entry by the name `/plugin` shows:
-
-| Name in `/plugin` | What it does | Where it's on | How to turn it off |
-| :- | :- | :- | :- |
-| `cc-plugin-agents-md` | Loads `AGENTS.md` as project instructions | Every session, apart from [the ones that can't read `AGENTS.md`](/docs/en/memory#when-agents-md-support-is-unavailable) | Disable it in `/plugin`, or [choose which instruction files load](/docs/en/memory#choose-which-instruction-files-load) |
-| `cc-plugin-diff` | Takes over [`/diff`](/docs/en/interactive-mode#review-changes-with-%2Fdiff) and draws its pane | Interactive terminal sessions | Disable it in `/plugin`. `/diff` stays, and Claude Code's built-in version of the command answers it. |
-| `cc-plugin-plugin-authoring` | Gives Claude the [`plugin-authoring` skill](/docs/en/plugins/mods/create#ask-claude-for-a-mod) for writing mods. It holds a skill and no mod code. | Unless Anthropic has turned installed mods off remotely | Disable it in `/plugin` |
-| `cc-plugin-sec-default` | Guards what your organization manages from the mods a user installs | [Where the guard loads](/docs/en/plugins/mods/admin#know-what-happens-by-default) | You can't. An administrator [sets the order](/docs/en/plugins/mods/admin#install-your-organizations-mods) in managed settings |
-| `cc-plugin-telemetry` | Sends the analytics records that Claude Code and its built-in mods log | Wherever Claude Code's own analytics are on | Disable it in `/plugin`, or turn analytics off, for example with [`DISABLE_TELEMETRY`](/docs/en/env-vars) |
-| `cc-plugin-you-should-know` | Runs a side agent that watches your back while Claude works on longer tasks. When it finds something worth knowing that you might miss, it shows you a note above the prompt. | Disabled by default. Listed in `/plugin` -> **Installed** -> **Show disabled** if available for your org. Enable with [`/plugin enable cc-plugin-you-should-know@builtin`](/docs/en/plugins/cli-reference#plugin-in-a-session). | Disable it in `/plugin` |
-
-The settings and flags that stop installed mods, such as `disableAllHooks`, `--bare`, and `--safe-mode`, don't stop built-in mods.
-
-### Read the source of built-in mods
-
-The source of some of these mods is public in the [`mods` directory of the Claude Code repository](https://github.com/anthropics/claude-code/tree/main/mods). Each one is a complete plugin with its hooks module and tests:
-
-* [`diff`](https://github.com/anthropics/claude-code/tree/main/mods/diff): the `/diff` pane, with buttons bound to keyboard actions and scrolling the mod handles itself
-* [`agents-md`](https://github.com/anthropics/claude-code/tree/main/mods/agents-md): loads `AGENTS.md` as project instructions, with a [`userConfig`](/docs/en/plugins/components#user-configuration) option
-* [`sec-default`](https://github.com/anthropics/claude-code/tree/main/mods/sec-default): the guard described in [Know what happens by default](/docs/en/plugins/mods/admin#know-what-happens-by-default), a model for a mod that enforces policy
-* [`telemetry`](https://github.com/anthropics/claude-code/tree/main/mods/telemetry): adds methods that other mods can call, and ships their types
+| What I want to do | Best option |
+| - | - |
+| Continue a local session from my phone or another device | [Remote Control](/docs/en/remote-control) |
+| Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](/docs/en/channels) |
+| Start a task locally, continue on mobile | [`claude --cloud`](/docs/en/claude-code-on-the-web#from-terminal-to-cloud), then the [Claude mobile app](/docs/en/mobile) |
+| Run Claude on a recurring schedule | [Routines](/docs/en/routines) or [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks) |
+| Automate PR reviews and issue triage | [GitHub Actions](/docs/en/github-actions) or [GitLab CI/CD](/docs/en/gitlab-ci-cd) |
+| Get automatic code review on every PR | [GitHub Code Review](/docs/en/code-review) |
+| Route bug reports from Slack to pull requests | [Slack](/docs/en/slack) |
+| Debug live web applications | [Chrome](/docs/en/chrome) |
+| Build custom agents for your own workflows | [Agent SDK](/docs/en/agent-sdk/overview) |
 
 ## Next steps
 
-* [Create a mod](/docs/en/plugins/mods/create): build one that counts tool calls, shows the count beside the spinner, and adds a command, and learn the edit and reload loop
-* [Draw in the interface](/docs/en/plugins/mods/interface): panes, the band above the prompt, buttons, text fields, and state
-* [React to events](/docs/en/plugins/mods/events): tool calls, prompts, turns, and the order mods run in
-* [Use the mods API](/docs/en/plugins/mods/api): commands, tools, model calls, timers, and files
-* [Test a mod](/docs/en/plugins/mods/test): automated tests that run without a session
-* [Troubleshoot a mod](/docs/en/plugins/mods/troubleshoot): the reasons a mod does nothing, and the debug log
-* [Manage mods for your organization](/docs/en/plugins/mods/admin): defaults, managed settings, reviewing a mod, and policy mods
-* [Mods reference](/docs/en/plugins/mods/reference): events, methods, elements, and limits
+Once you've installed Claude Code, these guides help you go deeper.
+
+* [Quickstart](/docs/en/quickstart): walk through your first real task, from exploring a codebase to committing a fix
+* [Store instructions and memories](/docs/en/memory): give Claude persistent instructions with CLAUDE.md files and auto memory
+* [Common workflows](/docs/en/common-workflows) and [best practices](/docs/en/best-practices): patterns for getting the most out of Claude Code
+* [Claude Academy](https://academy.claude.com/): free self-paced courses, including [Claude Code 101](https://academy.claude.com/courses/claude-code-101) and [Claude Code in Action](https://academy.claude.com/courses/claude-code-in-action)
+* [A harness for every task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): how the Claude Code team uses [dynamic workflows](/docs/en/workflows) to orchestrate many subagents at once
+* [Settings](/docs/en/settings): customize Claude Code for your workflow
+* [Troubleshooting](/docs/en/troubleshooting): solutions for common issues
+* [code.claude.com](https://code.claude.com/): demos, pricing, and product details

@@ -17,6 +17,36 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### October 8, 2026
+
+* The [Compliance API](../manage-claude/manage-claude-compliance-api.md) chat endpoints now also return chats from the unified Claude experience, in beta for Claude Enterprise organizations, with your existing Compliance Access Key. See [Retrieve and delete chats, files, and projects](../manage-claude/manage-claude-compliance-content-data.md).
+
+### October 7, 2026
+
+* We've lowered the price of prompt cache reads on Claude Sonnet 5.5 from $0.20 USD to $0.10 USD per million tokens: 0.05x the base input price instead of 0.1x. Cache writes and all other prices are unchanged. See [Prompt caching pricing](../about-claude/about-claude-pricing.md#prompt-caching).
+
+### October 7, 2026
+
+* We've launched **Claude Haiku 5.5** (`claude-haiku-5-5`), our most capable model tuned for high-volume and latency-sensitive work. It has a [1M token context window](../build-with-claude/build-with-claude-context-windows.md), 128k max output tokens, and [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) with the [effort parameter](../build-with-claude/build-with-claude-effort.md). It's available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). See [What's new in Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/whats-new-haiku-5-5.md).
+* Code written for Claude Haiku 4.5 can break on Claude Haiku 5.5. Manual extended thinking (`budget_tokens`) returns a 400 error, and adaptive thinking is on by default, so a response can begin with `thinking` blocks. The same text also counts as more tokens. See the [migration guide](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide.md). For model-specific prompting patterns, see [Prompting Claude Haiku 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md).
+
+### October 7, 2026
+
+* The Python and TypeScript SDKs now include classes, in beta, for the [browser use tool](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md) and the [computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md). You subclass one and write one method per tool against your own browser or desktop automation. The SDK runs the tool loop, the URL and file policies you set for the browser, and your approval callback. See [Browser and computer use with the SDK toolsets](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md).
+
+### October 7, 2026
+
+* Claude Max and Team plans now include monthly API credits. To learn how to claim them, see [API credits for Max and Team plans](https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers.md).
+
+### October 7, 2026
+
+* In Claude Managed Agents, a cloud environment with `limited` networking now also applies its `allowed_hosts` to the `web_search` and `web_fetch` tools. A `web_fetch` call for a URL on a host that `allowed_hosts` does not match returns a `url_not_allowed` error result to the agent. `web_search` omits results from such hosts. When `allowed_hosts` lists no hosts, neither tool returns a page or a search result. `allow_package_managers` and `allow_mcp_servers` add no hosts for these tools. To let the tools reach a host, add it to `allowed_hosts`, which also opens it to the sandbox. `unrestricted` networking and self-hosted environments do not limit these tools. See [Environment networking](../managed-agents/managed-agents-environments.md#networking).
+* With `limited` networking, creating a session fails with a 400 error when an enabled web tool's `allowed_domains` has an entry not within `allowed_hosts`. So does a session update that adds such an entry. An `allowed_hosts` entry matches one exact host unless it starts with `*.`, so `docs.example.com` is not within `["example.com"]`. To fix the error, add the host to `allowed_hosts` or remove the entry from `allowed_domains`. See [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools-web-restrictions.md).
+
+### October 6, 2026
+
+* We've added `capabilities.server_tools` to the [Models API](../api/api-models-list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now report whether each model accepts the web search and code execution tools. To check whether a model accepts the code execution tool, read `capabilities.server_tools.code_execution`. The top-level `capabilities.code_execution` reports whether code can call your request's other tools. See [Using the Models API](../general/general-models-overview.md#using-the-models-api).
+
 ### October 5, 2026
 
 * We've added `capabilities.thinking.types.disabled` to the [Models API](../api/api-models-list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now report whether each model accepts `thinking: {type: "disabled"}`, which turns thinking off. See [Using the Models API](../general/general-models-overview.md#using-the-models-api).

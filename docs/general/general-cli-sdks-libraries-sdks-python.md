@@ -278,6 +278,8 @@ for message in runner:
 
 On every iteration, an API request is made. If the response includes a call to one of the given tools, the tool is automatically called, and the result is returned directly to the model in the next iteration.
 
+To run the browser use tool or the computer use tool with this SDK, see [Browser and computer use with the SDK toolsets](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md).
+
 ## Message batches
 
 This SDK provides support for [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) under `client.messages.batches`.

@@ -209,7 +209,7 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 
 ### Thinking support
 
-You can enable [thinking](../build-with-claude/build-with-claude-thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's thinking. For full thinking features, including [summarized thinking](../build-with-claude/build-with-claude-thinking.md#summarized-thinking), use the native Claude API.
+You can enable [thinking](../build-with-claude/build-with-claude-thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude determining when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's thinking. For full thinking features, including [summarized thinking](../build-with-claude/build-with-claude-thinking.md#summarized-thinking), use the native Claude API.
 
 <CodeGroup exclude="shell">
   ```python Python

@@ -34,7 +34,7 @@ Both offerings let you use Claude through AWS, but they differ in architecture, 
 | **API surface**              | Claude API (`/v1/{endpoint}`)                                                                                                                                                                           | Messages API at `/anthropic/v1/messages`                                                                   | Bedrock Converse / InvokeModel                                                                                                 |
 | **Feature availability**     | Typically same-day as Claude API (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))                                       | Per Amazon Bedrock release schedule                                                                        | Per Amazon Bedrock release schedule                                                                                            |
 | **Agent Skills**             | Available                                                                                                                                                                                               | Not available (requires code execution)                                                                    | Not available                                                                                                                  |
-| **Beta features**            | Pass through with `anthropic-beta` headers (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))                             | `anthropic-beta` header not supported                                                                      | `anthropic-beta` header not supported                                                                                          |
+| **Beta features**            | Pass through with `anthropic-beta` headers (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))                             | The beta features Amazon Bedrock supports, through the `anthropic-beta` header                             | The beta features Amazon Bedrock supports, through the `anthropic_beta` field of the InvokeModel request body                  |
 | **Authentication**           | AWS IAM / SigV4 or API key                                                                                                                                                                              | AWS IAM / SigV4                                                                                            | AWS IAM / SigV4 or bearer token                                                                                                |
 | **Billing**                  | AWS Marketplace                                                                                                                                                                                         | AWS (native service)                                                                                       | AWS (native service)                                                                                                           |
 | **Base URL**                 | `aws-external-anthropic.{region}.api.aws`                                                                                                                                                               | `bedrock-mantle.{region}.api.aws`                                                                          | `bedrock-runtime.{region}.amazonaws.com`                                                                                       |
@@ -364,6 +364,7 @@ The following models are available on Claude Platform on AWS:
 | Claude Sonnet 5                                                                                       | `claude-sonnet-5`   |
 | Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6` |
 | Claude Sonnet 4.5 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | `claude-sonnet-4-5` |
+| Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`  |
 | Claude Haiku 4.5                                                                                      | `claude-haiku-4-5`  |
 
 Model IDs are identical to the first-party Claude API. There are no Bedrock-style ARNs or `anthropic.` prefixes.
@@ -600,7 +601,7 @@ Claude Platform on AWS supports the following inference geographies:
 Set the inference geography per request with the `inference_geo` parameter:
 
 <Note>
-  The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, or Claude Haiku 4.5 return a 400 error. See [Data residency](../manage-claude/manage-claude-data-residency.md) for model availability details.
+  The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5 (deprecated), or Claude Haiku 4.5 return a 400 error. See [Data residency](../manage-claude/manage-claude-data-residency.md) for model availability details.
 </Note>
 
 <CodeGroup>
@@ -1069,7 +1070,7 @@ If you're on the current Bedrock integration, the request body format is already
 * Typically same-day access to new models and features (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))
 * Agent Skills for document generation (PowerPoint, Excel, Word, PDF)
 * Code execution in Anthropic's managed sandbox
-* Beta features through the `anthropic-beta` header (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))
+* Claude API beta features that Amazon Bedrock doesn't offer, through the `anthropic-beta` header (see [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported))
 * Claude Console for quota visibility and usage analytics
 * Direct Anthropic support
 * API key authentication as an alternative to SigV4 (see [API key authentication](./build-with-claude-claude-platform-on-aws.md#api-key-authentication))

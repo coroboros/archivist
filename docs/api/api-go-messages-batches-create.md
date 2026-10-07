@@ -25,7 +25,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `params MessageBatchNewParams`
 
-  - `Requests param.Field[[]MessageBatchNewParamsRequest]`
+  - `Requests []MessageBatchNewParamsRequest`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
 
@@ -3089,11 +3089,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         minimum: 0, maximum: 1
 
-  - `UserProfileID param.Field[string] Optional` (header parameter)
+  - `UserProfileID param.Opt[string] Optional` (header parameter)
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

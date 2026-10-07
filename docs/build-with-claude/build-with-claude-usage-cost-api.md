@@ -159,9 +159,9 @@ bucket_width=1d" \
 ```
 
 <Tip>
-  To retrieve your organization's API key IDs, use the [List API Keys](../api/api-beta-organization-api_keys-list.md) endpoint.
+  To retrieve your organization's API key IDs, use the [List API Keys](../api/api-organization-api_keys-list.md) endpoint.
 
-  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-beta-organization-workspaces-list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](../api/api-organization-workspaces-list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
 </Tip>
 
 #### Data residency

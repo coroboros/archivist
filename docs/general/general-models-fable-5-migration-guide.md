@@ -5,9 +5,9 @@ category: "general"
 generated: true
 ---
 ---
-title: Migrating to Claude Mythos 5 and Claude Fable 5
+title: Claude Mythos 5 and Claude Fable 5 migration guide
 url: https://platform.claude.com/docs/en/models/fable-5/migration-guide
-description: "Migrate to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview, Claude Opus 5, or Claude Opus 4.8: model IDs, API changes, and migration checklists."
+description: Switch to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview, Claude Opus 5, or Claude Opus 4.8 with this migration guide. The guidance to enable Claude Mythos 5 and Claude Fable 5 includes model IDs, API changes, and migration checklists.
 ---
 
 <Note>
@@ -368,7 +368,7 @@ model = "claude-mythos-5"  # After
 ## Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8
 
 <Note>
-  If your code is on Claude Opus 4.7 or earlier, first apply the relevant [Migrating to Claude Opus 5.5](./general-models-opus-5-5-migration-guide.md) from-section for the API-level changes from your current model, then the remaining delta in this section.
+  If your code is on Claude Opus 4.7 or earlier, first apply the relevant [Claude Opus 5.5 migration guide](./general-models-opus-5-5-migration-guide.md) from-section for the API-level changes from your current model, then the remaining delta in this section.
 </Note>
 
 Migration is mostly drop-in. Claude Fable 5 and Claude Mythos 5 use the same [Messages API](../build-with-claude/build-with-claude-working-with-messages.md) and the same [tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md) patterns as Claude Opus 4.8, with the same [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default and the same [128k max output tokens](./general-models-overview.md). Token counts are roughly unchanged because the models use the same tokenizer. The key changes to check are always-on [adaptive thinking](../build-with-claude/build-with-claude-thinking.md), thinking output, safety classifier refusals, and pricing.

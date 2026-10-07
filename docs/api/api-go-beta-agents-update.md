@@ -25,13 +25,13 @@ Update Agent
 
 - `params BetaAgentUpdateParams`
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
+  - `MCPServers []BetaManagedAgentsURLMCPServerParams Optional`
 
     MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
@@ -49,11 +49,11 @@ Update Agent
 
       maxLength: 2048
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp] Optional`
+  - `Model BetaManagedAgentsModelConfigParams Optional`
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
@@ -203,17 +203,17 @@ Update Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
+  - `Multiagent BetaManagedAgentsMultiagentParams Optional`
 
     Multiagent orchestration configuration. Full replacement. Omit to preserve; send null to clear.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
     maxLength: 256
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
+  - `Skills []BetaManagedAgentsSkillParamsUnion Optional`
 
     Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -253,13 +253,13 @@ Update Agent
 
         minLength: 1, maxLength: 64
 
-  - `System param.Field[string] Optional`
+  - `System param.Opt[string] Optional`
 
     System prompt. Omit to preserve; send empty string or null to clear.
 
     maxLength: 100000
 
-  - `Tools param.Field[[]BetaAgentUpdateParamsToolUnion] Optional`
+  - `Tools []BetaAgentUpdateParamsToolUnion Optional`
 
     Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
@@ -689,13 +689,13 @@ Update Agent
 
         minLength: 1, maxLength: 128
 
-  - `Version param.Field[int64] Optional`
+  - `Version param.Opt[int64] Optional`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
     format: int32
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -799,7 +799,7 @@ Update Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

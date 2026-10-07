@@ -380,7 +380,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
   </Step>
 
   <Step title="Create an environment">
-    An environment defines the sandbox where your agent runs. This one uses `limited` [networking](./managed-agents-environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](./managed-agents-environments.md#package-manager-hosts) and no other sites. Web search and web fetch run outside the sandbox and are not affected.
+    An environment defines the sandbox where your agent runs. This one uses `limited` [networking](./managed-agents-environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](./managed-agents-environments.md#package-manager-hosts). Web search and web fetch run outside the sandbox, and this quickstart does not need them. With `limited` networking, the [`allowed_hosts` list](./managed-agents-environments.md#networking) applies to them too. They return no pages or search results in this environment, because it lists no hosts. For your own agent, list the hosts it needs in `allowed_hosts`.
 
     <CodeGroup defaultLanguage="CLI">
       <CodeGroupItem>

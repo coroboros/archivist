@@ -140,6 +140,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](../abo
 | Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6`          |
 | Claude Sonnet 4.5 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | `claude-sonnet-4-5@20250929` |
 | Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md))   | `claude-sonnet-4@20250514`   |
+| Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`           |
 | Claude Haiku 4.5                                                                                      | `claude-haiku-4-5@20251001`  |
 | Claude Haiku 3.5 ([deprecated](../about-claude/about-claude-model-deprecations.md))  | `claude-3-5-haiku@20241022`  |
 
@@ -375,7 +376,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 
 ### Context window
 
-Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](./build-with-claude-context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Haiku 5.5 have a [1M-token context window](./build-with-claude-context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 (deprecated) and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you might reach this limit before the token limit.
 
@@ -390,7 +391,7 @@ Agent Platform offers three endpoint types:
 Regional and multi-region endpoints include a 10% pricing premium over global endpoints.
 
 <Note>
-  This applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
+  This applies to Claude Sonnet 4.5 (deprecated) and future models only. Older models (Claude Sonnet 4 (deprecated), Opus 4 (deprecated), and earlier) maintain their existing pricing structures.
 </Note>
 
 ### When to use each option
