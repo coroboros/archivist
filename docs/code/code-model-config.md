@@ -522,13 +522,15 @@ Claude Code also applies the chain to [subagents](/docs/en/sub-agents). When a s
 
 This section covers content-based fallback from Fable models, Opus 5.5, Sonnet 5.5, and Opus 5. For availability-based fallback when a model is overloaded or unavailable, see [Fallback model chains](#fallback-model-chains).
 
-Fable models, Opus 5.5, Sonnet 5.5, and Opus 5 run with safety classifiers, which most often flag cybersecurity and biology content. When a classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and shows a notice in the transcript. For those two categories, the fallback model depends on which model refused:
+Fable models, Opus 5.5, Sonnet 5.5, and Opus 5 run with safety classifiers, which most often flag cybersecurity and biology content. For those two categories, the fallback model depends on which model refused:
 
 * **Fable 5.1, Fable 5, and Opus 5.5**: biology-flagged requests re-run on Opus 5, and cybersecurity-flagged requests re-run on Opus 4.8.
 * **Sonnet 5.5**: cybersecurity-flagged requests re-run on Sonnet 5. Biology-flagged requests end with a refusal instead, because Sonnet 5.5 has no biology fallback model.
 * **Opus 5**: cybersecurity-flagged requests re-run on Opus 4.8. Biology-flagged requests end with a refusal instead, because Opus 5 runs its own biology classifiers with no fallback model.
 
 On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, Claude Code resolves these targets through your deployment's model IDs instead. See [Enable fallback on Bedrock, Agent Platform, and Foundry](#enable-fallback-on-bedrock-agent-platform-and-foundry).
+
+When Claude Code switches a flagged request to the fallback model for its category, it re-runs the request on that model. In your main conversation, it shows a notice in the transcript. To be asked first, see [Ask before switching](#ask-before-switching).
 
 After a fallback, the session continues on the fallback model. To return to your original model, run [`/model`](#setting-your-model).
 
@@ -555,14 +557,19 @@ To check whether customizations are the trigger, start a session with `claude --
 
 #### Ask before switching
 
-To decide what happens each time a request is flagged, rather than switching automatically, run `/config` and turn off **Switch models when a message is flagged**, or set [`switchModelsOnFlag`](/docs/en/settings-reference#switchmodelsonflag) to `false` in your settings file. A flagged request then pauses the session with two options: switch to the fallback model, or edit the prompt and retry on the current model.
+To decide what happens each time a request is flagged, run `/config`, select **Switch models when a message is flagged**, and choose **Ask each time**. You can also set [`switchModelsOnFlag`](/docs/en/settings-reference#switchmodelsonflag) to `false` in your settings file. Claude Code then pauses at a flagged request that would switch models and gives you two options: switch to the fallback model, or edit the prompt and retry.
 
-Some cases behave differently:
+The first time a flagged request would switch models in an interactive session, Claude Code may ask whether to switch automatically from then on. It asks only if you haven't set `switchModelsOnFlag`, and it saves your choice as that key in your user settings.
+
+If you choose to stay on the current model instead, the saved value is `false`, the same as **Ask each time**. If you dismiss the question, Claude Code saves nothing and asks again the next time a flagged request would switch models.
+
+When you've chosen **Ask each time**, some cases behave differently:
 
 * When the flagged category has no fallback model, such as a biology flag on Opus 5 or Sonnet 5.5, Claude Code doesn't show the prompt and the request ends with the refusal.
 * If both models flag the same request, you can edit the prompt and retry, or start a new session.
 * In [cloud sessions](/docs/en/claude-code-on-the-web) on the mobile app, editing and retrying is not supported. Switch models, or continue the session from a desktop browser or the desktop app.
 * In [non-interactive mode](/docs/en/cli-reference#cli-flags) and SDK integrations that can't show the prompt, a flagged request ends the turn with a refusal instead.
+* In a [subagent](/docs/en/sub-agents), Claude Code doesn't show the prompt, and a flagged request that would switch models re-runs on the fallback model.
 * When the fallback target is blocked by [`availableModels`](#restrict-model-selection), Claude Code doesn't show the prompt. The flagged request ends with the refusal, the same as automatic fallback when the target is blocked.
 
 #### Enable fallback on Bedrock, Agent Platform, and Foundry
@@ -581,7 +588,7 @@ If either model can't be identified, Claude Code doesn't switch. The flagged req
 
 #### Security research and biology workloads
 
-Workloads in offensive security or biology, including penetration testing, Capture the Flag (CTF) exercises, and biology-adjacent codebases, trigger fallback frequently, often on the first request. For substantive biology work on Fable 5.1, Fable 5, or Opus 5.5, Claude Code moves the session to Opus 5 at the first flagged request, and later biology-flagged requests end in refusals there, because Opus 5 has no biology fallback. On Opus 5 and Sonnet 5.5, you get those refusals from the first flagged request.
+Workloads in offensive security or biology, including penetration testing, Capture the Flag (CTF) exercises, and biology-adjacent codebases, trigger fallback frequently, often on the first request. For substantive biology work on Fable 5.1, Fable 5, or Opus 5.5, the first flagged request that switches models moves the session to Opus 5, and later biology-flagged requests end in refusals there, because Opus 5 has no biology fallback. On Opus 5 and Sonnet 5.5, you get those refusals from the first flagged request.
 
 This is expected routing for these domains, not an account flag. If your organization needs Fable-class capability for this work, ask your Anthropic account team about trusted access programs.
 
