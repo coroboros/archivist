@@ -17,6 +17,8 @@ url: https://platform.claude.com/docs/en/api/go/completions
 
 **POST** `/v1/complete`
 
+**Deprecated**: Use the [Messages API](./api-messages-create.md) instead.
+
 [Legacy] Create a Text Completion.
 
 The Text Completions API is a legacy API. We recommend using the [Messages API](./api-messages.md) going forward.
@@ -251,6 +253,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -361,7 +367,7 @@ func main() {
 	)
 	completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
 		MaxTokensToSample: 256,
-		Model:             anthropic.ModelClaudeSonnet5_5,
+		Model:             anthropic.ModelClaudeHaiku5_5,
 		Prompt:            "\n\nHuman: Hello, world!\n\nAssistant:",
 	})
 	if err != nil {
@@ -412,6 +418,10 @@ func main() {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 

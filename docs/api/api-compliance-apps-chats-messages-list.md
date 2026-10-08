@@ -361,7 +361,7 @@ Retrieves message history and file metadata for a specific chat.
 
 - `name: string`
 
-  Chat name
+  Chat name. Empty when `deleted_at` is set.
 
 - `organization_uuid: string`
 

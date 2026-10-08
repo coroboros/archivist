@@ -170,7 +170,7 @@ func main() {
 	)
 	betaManagedAgentsDeletedCredential, err := client.Beta.Vaults.Credentials.Delete(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialDeleteParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -186,7 +186,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "type": "vault_credential_deleted"
 }
 ```

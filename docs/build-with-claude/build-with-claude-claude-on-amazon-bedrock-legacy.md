@@ -60,20 +60,20 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.68.0")
-      implementation("com.anthropic:anthropic-java-bedrock:2.68.0")
+      implementation("com.anthropic:anthropic-java:2.69.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.69.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.68.0</version>
+          <version>2.69.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.68.0</version>
+          <version>2.69.0</version>
       </dependency>
       ```
 
@@ -159,7 +159,6 @@ To invoke these models, pass an inference profile instead of the base model ID. 
 | Claude Sonnet 4.5 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | `anthropic.claude-sonnet-4-5-20250929-v1:0` | Yes      | Yes  | Yes  | Yes  | No     |
 | Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md))   | `anthropic.claude-sonnet-4-20250514-v1:0`   | Yes      | Yes  | Yes  | No   | Yes    |
 | Claude Haiku 4.5                                                                                      | `anthropic.claude-haiku-4-5-20251001-v1:0`  | Yes      | Yes  | Yes  | No   | No     |
-| Claude Haiku 3.5 ([deprecated](../about-claude/about-claude-model-deprecations.md))  | `anthropic.claude-3-5-haiku-20241022-v1:0`  | No       | Yes  | No   | No   | No     |
 
 ### List available models
 

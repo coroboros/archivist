@@ -1,5 +1,5 @@
 ---
-title: "How it compares"
+title: "How it compares to the current lineup"
 source: "https://platform.claude.com/docs/en/models/haiku-4-5/overview"
 category: "general"
 generated: true
@@ -7,14 +7,12 @@ generated: true
 ---
 title: Claude Haiku 4.5
 url: https://platform.claude.com/docs/en/models/haiku-4-5/overview
-description: "Claude Haiku 4.5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Haiku 5.5 is the current Haiku model."
+description: "Claude Haiku 4.5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Haiku 4.5 is a legacy model; Claude Haiku 5.5 is the current Haiku model."
 ---
 
 **Legacy.** Released October 15, 2025.
 
-The fastest model with near-frontier intelligence
-
-Although Claude Haiku 4.5 is still available, you should consider migrating to Claude Haiku 5.5 for improved performance. [See Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview.md) · [Migrate to Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide.md)
+Although Claude Haiku 4.5 is still available, you should consider migrating to Claude Haiku 5.5 for improved performance. [See Claude Haiku 5.5](./general-models-haiku-5-5-overview.md) · [Migrate to Claude Haiku 5.5](./general-models-haiku-5-5-migration-guide.md)
 
 Model ID: `claude-haiku-4-5-20251001`
 
@@ -22,19 +20,19 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 
 [Announcement](https://www.anthropic.com/news/claude-haiku-4-5)
 
-## How it compares
+## How it compares to the current lineup
 
 | Model                                                                               | Context | Max output | Price / MTok       | Thinking             | Default effort | Knowledge cutoff |
 | :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------------------- | :------------- | :--------------- |
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md)   | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jun 2026         |
 | [Claude Opus 5.5](./general-models-opus-5-5-overview.md)     | 1M      | 128K       | $4 / $20           | Adaptive (always on) | `medium`       | Jun 2026         |
 | [Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) | 1M      | 128K       | $2 / $10           | Adaptive             | `high`         | Jun 2026         |
-| [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
+| [Claude Haiku 5.5](./general-models-haiku-5-5-overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
 | **Claude Haiku 4.5** (this model)                                                   | 200K    | 64K        | $1 / $5            | Extended             | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
-* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5). See Pricing for the full list.
+* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
 * **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
 * **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
 * **Knowledge cutoff:** Reliable knowledge cutoff: the date through which the model’s knowledge is most extensive and reliable.
@@ -96,11 +94,11 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 ## Resources
 
 <CardGroup cols={3}>
-  <Card title="Migrate to Claude Haiku 5.5" icon="arrows-left-right" href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide.md">
+  <Card title="Migrate to Claude Haiku 5.5" icon="arrows-left-right" href="./general-models-haiku-5-5-migration-guide.md">
     What changes when moving from Claude Haiku 4.5 to Claude Haiku 5.5.
   </Card>
 
-  <Card title="Claude Haiku 5.5" icon="arrow-right" href="https://platform.claude.com/docs/en/models/haiku-5-5/overview.md">
+  <Card title="Claude Haiku 5.5" icon="arrow-right" href="./general-models-haiku-5-5-overview.md">
     The current Haiku model: overview, specs, and resources.
   </Card>
 

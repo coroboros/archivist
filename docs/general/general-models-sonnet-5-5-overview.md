@@ -41,11 +41,11 @@ One more change alters the response shape without failing any request: [text bet
 | [Claude Fable 5.1](./general-models-fable-5-1-overview.md) | 1M      | 128K       | $10 / $50          | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
 | [Claude Opus 5.5](./general-models-opus-5-5-overview.md)   | 1M      | 128K       | $4 / $20           | Moderate | Adaptive (always on) | `medium`       | Jun 2026         |
 | **Claude Sonnet 5.5** (this model)                                                | 1M      | 128K       | $2 / $10           | Fast     | Adaptive             | `high`         | Jun 2026         |
-| [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview.md) | 1M      | 128K       | From $0.10 / $0.50 | Fastest  | Adaptive             | `medium`       | Jun 2026         |
+| [Claude Haiku 5.5](./general-models-haiku-5-5-overview.md) | 1M      | 128K       | From $0.10 / $0.50 | Fastest  | Adaptive             | `medium`       | Jun 2026         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
-* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5). See Pricing for the full list.
+* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
 * **Latency:** Comparative latency, relative to the current lineup, as published in the models overview. Actual latency depends on prompt length, output length, and thinking effort.
 * **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
 * **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
@@ -71,7 +71,7 @@ One more change alters the response shape without failing any request: [text bet
 | Output                                                                                 | $10 / MTok                       |
 | [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $2.50 / MTok                     |
 | [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $4 / MTok                        |
-| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $0.20 / MTok                     |
+| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $0.10 / MTok                     |
 | [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output |
 
 [Full price list](../about-claude/about-claude-pricing.md)

@@ -247,7 +247,7 @@ require "anthropic"
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_managed_agents_credential_validation = anthropic.beta.vaults.credentials.mcp_oauth_validate(
-  "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
 )
 
@@ -258,7 +258,7 @@ puts(beta_managed_agents_credential_validation)
 
 ```json
 {
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
   "mcp_probe": {
     "http_response": {

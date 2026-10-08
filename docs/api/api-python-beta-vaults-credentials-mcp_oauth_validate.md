@@ -252,7 +252,7 @@ client = Anthropic(
 )
 beta_managed_agents_credential_validation = (
     client.beta.vaults.credentials.mcp_oauth_validate(
-        credential_id="vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        credential_id="vcrd_011CZkZEMt8gZan2iYPQfSkw",
         vault_id="vlt_011CZkZDLs7fYzm1hXNPeRjv",
     )
 )
@@ -263,7 +263,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
 ```json
 {
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
   "mcp_probe": {
     "http_response": {

@@ -163,7 +163,7 @@ const client = new Anthropic({
 });
 
 const betaManagedAgentsDeletedCredential = await client.beta.vaults.credentials.delete(
-  "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   { vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv" }
 );
 
@@ -174,7 +174,7 @@ console.log(betaManagedAgentsDeletedCredential.id);
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "type": "vault_credential_deleted"
 }
 ```

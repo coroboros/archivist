@@ -15,6 +15,8 @@ url: https://platform.claude.com/docs/en/api/csharp/completions
 
 **POST** `/v1/complete`
 
+**Deprecated**: Use the [Messages API](./api-messages-create.md) instead.
+
 [Legacy] Create a Text Completion.
 
 The Text Completions API is a legacy API. We recommend using the [Messages API](./api-messages.md) going forward.
@@ -152,6 +154,10 @@ Future models and features will not be compatible with Text Completions. See our
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
 
   - `"claude-sonnet-5-5"`
 
@@ -349,6 +355,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `"claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -501,6 +511,10 @@ curl https://api.anthropic.com/v1/complete \
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 

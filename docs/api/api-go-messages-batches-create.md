@@ -1087,6 +1087,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
+
         - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
           Efficient model for coding and agents

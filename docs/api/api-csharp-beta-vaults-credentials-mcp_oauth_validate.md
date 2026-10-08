@@ -245,7 +245,7 @@ Validate Credential
 CredentialMcpOAuthValidateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
-    CredentialID = "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+    CredentialID = "vcrd_011CZkZEMt8gZan2iYPQfSkw",
 };
 
 var betaManagedAgentsCredentialValidation = await client.Beta.Vaults.Credentials.McpOAuthValidate(parameters);
@@ -257,7 +257,7 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
 ```json
 {
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
   "mcp_probe": {
     "http_response": {

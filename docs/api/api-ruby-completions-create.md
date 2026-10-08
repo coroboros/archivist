@@ -15,6 +15,8 @@ url: https://platform.claude.com/docs/en/api/ruby/completions/create
 
 **POST** `/v1/complete`
 
+**Deprecated**: Use the [Messages API](./api-messages-create.md) instead.
+
 [Legacy] Create a Text Completion.
 
 The Text Completions API is a legacy API. We recommend using the [Messages API](./api-messages.md) going forward.
@@ -36,6 +38,10 @@ Future models and features will not be compatible with Text Completions. See our
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `:"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
 
   - `:"claude-sonnet-5-5"`
 
@@ -345,6 +351,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `:"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `:"claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -447,7 +457,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 completion = anthropic.completions.create(
   max_tokens_to_sample: 256,
-  model: Anthropic::Model::CLAUDE_SONNET_5_5,
+  model: Anthropic::Model::CLAUDE_HAIKU_5_5,
   prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
 )
 

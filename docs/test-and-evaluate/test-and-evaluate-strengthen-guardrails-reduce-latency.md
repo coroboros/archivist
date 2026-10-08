@@ -35,7 +35,7 @@ For a more in-depth understanding of these terms, check out the [glossary](../ab
 
 One of the most direct ways to reduce latency is to select the appropriate model for your use case. Anthropic offers a [range of models](../general/general-models-overview.md) with different capabilities and performance characteristics. Consider your specific requirements and choose the model that best fits your needs in terms of speed and output quality.
 
-For speed-critical applications, **Claude Haiku 5.5** offers the fastest response times while maintaining high intelligence. [Effort](../build-with-claude/build-with-claude-effort.md) is its main control for speed and cost. See [Use effort to control thinking](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md#use-effort-to-control-thinking). The following example runs it at `low`, the cheapest and fastest level, and leaves room in `max_tokens` for thinking:
+For speed-critical applications, **Claude Haiku 5.5** offers the fastest response times while maintaining high intelligence. [Effort](../build-with-claude/build-with-claude-effort.md) is its main control for speed and cost. See [Use effort to control thinking](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-haiku-5-5.md#use-effort-to-control-thinking). The following example runs it at `low`, the cheapest and fastest level, and leaves room in `max_tokens` for thinking:
 
 <CodeGroup>
   ```bash cURL

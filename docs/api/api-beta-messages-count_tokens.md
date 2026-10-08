@@ -3098,6 +3098,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `"claude-haiku-5-5"`
+
+                        Fastest model for high-volume, real-time tasks
+
                       - `"claude-sonnet-5-5"`
 
                         Efficient model for coding and agents

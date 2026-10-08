@@ -311,20 +311,20 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java:2.68.0")
-    implementation("com.anthropic:anthropic-java-aws:2.68.0")
+    implementation("com.anthropic:anthropic-java:2.69.0")
+    implementation("com.anthropic:anthropic-java-aws:2.69.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>2.68.0</version>
+      <version>2.69.0</version>
     </dependency>
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.68.0</version>
+      <version>2.69.0</version>
     </dependency>
     ```
   </Tab>

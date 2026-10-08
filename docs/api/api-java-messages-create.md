@@ -3574,6 +3574,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
+
+      Fastest model for high-volume, real-time tasks
+
     - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
 
       Efficient model for coding and agents

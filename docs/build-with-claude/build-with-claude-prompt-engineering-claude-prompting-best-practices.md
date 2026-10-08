@@ -17,7 +17,7 @@ This is the reference for prompt engineering with current Claude models, includi
 * **Migration considerations** last, for prompts moving from earlier generations.
 
 <Tip>
-  For an overview of model capabilities, see the [models overview](../general/general-models-overview.md). For Claude Fable 5.1 capabilities and API changes, see [What's new in Claude Fable 5.1](../general/general-models-fable-5-1-whats-new-fable-5-1.md). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](../general/general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md). For migration guidance, see the [Migration guide](../about-claude/about-claude-models-migration-guide.md). For Claude Opus 5.5, see [What's new in Claude Opus 5.5](../general/general-models-opus-5-5-whats-new-opus-5-5.md). For Claude Sonnet 5.5, see [What's new in Claude Sonnet 5.5](../general/general-models-sonnet-5-5-whats-new-sonnet-5-5.md). For Claude Haiku 5.5, see [What's new in Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/whats-new-haiku-5-5.md).
+  For an overview of model capabilities, see the [models overview](../general/general-models-overview.md). For Claude Fable 5.1 capabilities and API changes, see [What's new in Claude Fable 5.1](../general/general-models-fable-5-1-whats-new-fable-5-1.md). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](../general/general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md). For migration guidance, see the [Migration guide](../about-claude/about-claude-models-migration-guide.md). For Claude Opus 5.5, see [What's new in Claude Opus 5.5](../general/general-models-opus-5-5-whats-new-opus-5-5.md). For Claude Sonnet 5.5, see [What's new in Claude Sonnet 5.5](../general/general-models-sonnet-5-5-whats-new-sonnet-5-5.md). For Claude Haiku 5.5, see [What's new in Claude Haiku 5.5](../general/general-models-haiku-5-5-whats-new-haiku-5-5.md).
 </Tip>
 
 ## Model-specific guidance
@@ -33,7 +33,7 @@ Each of these models has its own prompting page. Read the one for your model fir
 | Claude Opus 5.5                        | [Prompting Claude Opus 5.5](./build-with-claude-prompt-engineering-prompting-claude-opus-5-5.md)     | Differences from Claude Opus 5: effort calibration, prompts written for thinking disabled, user-facing progress updates, safeguard refusals, and tools for complex visual inputs.                                                                                                                                       |
 | Claude Opus 5                          | [Prompting Claude Opus 5](./build-with-claude-prompt-engineering-prompting-claude-opus-5.md)         | Differences from prior Opus models: response length and verbosity, user-facing progress updates, written deliverable length, task scope and over-verification, subagent control, and self-correction.                                                                                                                   |
 | Claude Opus 4.8                        | [Prompting Claude Opus 4.8](./build-with-claude-prompt-engineering-prompting-claude-opus-4-8.md)     | Response length, effort and thinking-depth calibration, tool use triggering, literal instruction following, subagent control, and design and frontend defaults.                                                                                                                                                         |
-| Claude Haiku 5.5                       | [Prompting Claude Haiku 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md)   | Differences from Claude Haiku 4.5: effort levels, search, JSON output with your own tools, early stopping in long agent prompts, verification on coding tasks, mid-turn user messages, system prompt adherence in chatbots, and safeguard refusals.                                                                     |
+| Claude Haiku 5.5                       | [Prompting Claude Haiku 5.5](./build-with-claude-prompt-engineering-prompting-claude-haiku-5-5.md)   | Differences from Claude Haiku 4.5: effort levels, search, JSON output with your own tools, early stopping in long agent prompts, verification on coding tasks, mid-turn user messages, system prompt adherence in chatbots, and safeguard refusals.                                                                     |
 
 ## General principles
 
@@ -1124,7 +1124,7 @@ See the [Claude Sonnet 5.5 migration guide](../general/general-models-sonnet-5-5
     Behavioral differences and prompting patterns for Claude Opus 5, covering response verbosity, agentic narration, task scoping, subagent delegation, and self-correction.
   </Card>
 
-  <Card title="Prompting Claude Haiku 5.5" icon="terminal" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md">
+  <Card title="Prompting Claude Haiku 5.5" icon="terminal" href="./build-with-claude-prompt-engineering-prompting-claude-haiku-5-5.md">
     Behavioral differences and prompting patterns for Claude Haiku 5.5, covering effort, search, JSON output with your own tools, early stopping, coding verification, mid-turn user messages, system prompt adherence in chatbots, and safeguard refusals.
   </Card>
 

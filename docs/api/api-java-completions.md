@@ -17,6 +17,8 @@ url: https://platform.claude.com/docs/en/api/java/completions
 
 **POST** `/v1/complete`
 
+**Deprecated**: Use the [Messages API](./api-messages-create.md) instead.
+
 [Legacy] Create a Text Completion.
 
 The Text Completions API is a legacy API. We recommend using the [Messages API](./api-messages.md) going forward.
@@ -249,6 +251,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
+
+      Fastest model for high-volume, real-time tasks
+
     - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
 
       Efficient model for coding and agents
@@ -359,7 +365,7 @@ public final class Main {
 
         CompletionCreateParams params = CompletionCreateParams.builder()
             .maxTokensToSample(256L)
-            .model(Model.CLAUDE_SONNET_5_5)
+            .model(Model.CLAUDE_HAIKU_5_5)
             .prompt("\n\nHuman: Hello, world!\n\nAssistant:")
             .build();
         Completion completion = client.completions().create(params);
@@ -406,6 +412,10 @@ public final class Main {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
+
+      Fastest model for high-volume, real-time tasks
 
     - `CLAUDE_SONNET_5_5("claude-sonnet-5-5")`
 
