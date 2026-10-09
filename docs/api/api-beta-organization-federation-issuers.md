@@ -31,6 +31,12 @@ matched as the JWT's `iss` claim and is not fetched.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -423,6 +429,12 @@ Archived issuers are excluded unless `include_archived=true`.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -725,6 +737,12 @@ Retrieve a federation issuer by its ID (`fdis_...`).
   ID of the federation issuer.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1031,6 +1049,12 @@ session.
   ID of the federation issuer to update.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1415,6 +1439,12 @@ issuer cannot be changed), or recreate them against another issuer.
   ID of the federation issuer to archive.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -23,6 +23,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#create-a-dream
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -602,6 +604,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#list-dreams) f
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -1014,6 +1018,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#track-progress
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -1420,6 +1426,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#cancel-a-dream
   The ID of the dream to cancel (`drm_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1828,6 +1836,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#archive-a-drea
   The ID of the dream to archive (`drm_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

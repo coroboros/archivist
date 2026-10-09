@@ -31,8 +31,6 @@ featureMetadata:
   supportedPlatforms:
     Claude API: ga
     Claude Platform on AWS: ga
-    Amazon Bedrock: not available
-    Google Cloud: not available
     Microsoft Foundry:
       availability: ga
       note: On [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), code execution requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).

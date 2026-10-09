@@ -27,6 +27,12 @@ download the bytes.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -107,6 +113,12 @@ operation that cannot be undone.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -152,6 +164,12 @@ Downloads the binary content of a file referenced in chat messages.
   The file ID (tagged ID, e.g., claude_file_abc123)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 

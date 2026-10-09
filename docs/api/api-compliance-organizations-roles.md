@@ -37,6 +37,12 @@ List Compliance Roles
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -120,6 +126,12 @@ Get Compliance Role
   The role ID (tagged ID, e.g., rbac_role_abc123)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -262,6 +274,12 @@ List Compliance Role Permissions
   Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 

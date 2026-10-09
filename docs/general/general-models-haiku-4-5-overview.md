@@ -105,14 +105,6 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
   <Card title="Extended thinking" icon="brain" href="../build-with-claude/build-with-claude-extended-thinking.md">
     Claude Haiku 4.5 supports manual extended thinking with `budget_tokens`.
   </Card>
-
-  <Card title="Choosing a model" icon="scales" href="../about-claude/about-claude-models-choosing-a-model.md">
-    When to start efficiency-first with Haiku and when to reach for a larger model.
-  </Card>
-
-  <Card title="Reduce latency" icon="gauge" href="../test-and-evaluate/test-and-evaluate-strengthen-guardrails-reduce-latency.md">
-    Techniques that pair well with a fast, low-cost model.
-  </Card>
 </CardGroup>
 
 ## Reference

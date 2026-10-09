@@ -15,10 +15,6 @@ featureMetadata:
     note: Excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
   supportedPlatforms:
     Claude API: ga
-    Claude Platform on AWS: not available
-    Amazon Bedrock: not available
-    Google Cloud: not available
-    Microsoft Foundry: not available
 ---
 
 [Prompt caching](./build-with-claude-prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.

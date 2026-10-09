@@ -148,7 +148,7 @@ If your conversations regularly approach context window limits, use [server-side
 For more specialized needs, [context editing](./build-with-claude-context-editing.md) offers additional strategies:
 
 * **Tool result clearing:** Clear old tool results in agentic workflows
-* **Thinking block clearing:** Manage thinking blocks when you use extended thinking
+* **Thinking block clearing:** Manage thinking blocks from earlier turns
 
 Cached prompt prefixes still occupy the context window: [prompt caching](./build-with-claude-prompt-caching.md) changes what you pay for those tokens, not whether they count.
 

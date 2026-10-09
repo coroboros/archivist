@@ -31,6 +31,14 @@ identity claims (e.g. `claims.repository_owner`). OAuth callers may only
 manage rules whose `oauth_scope` is `workspace:developer` or
 `workspace:inference`; other scopes require a Console session.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Body parameters
 
 - `issuer_id: string`

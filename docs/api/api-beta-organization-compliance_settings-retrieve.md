@@ -20,6 +20,14 @@ organization, addressed without an identifier. The `state` field reflects
 whether the Compliance API is enabled. An organization with a parent
 organization reads the state inherited from the parent's configuration.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Returns
 
 - `BetaComplianceSettings object`

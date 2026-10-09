@@ -57,6 +57,14 @@ can be broken out per product, per member, or per RBAC group via
 
   Opaque cursor from a previous response's `next_page` field. Only valid with `group_by[]` — the ungrouped cube is never paginated.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Returns
 
 - `data: array of BetaAnalyticsArtifactActivity`

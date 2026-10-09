@@ -46,6 +46,12 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns

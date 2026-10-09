@@ -27,6 +27,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -231,6 +233,8 @@ Fetches a tunnel certificate by ID.
   ID of the certificate (`tcrt_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -437,6 +441,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -638,6 +644,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
   ID of the certificate to archive (`tcrt_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

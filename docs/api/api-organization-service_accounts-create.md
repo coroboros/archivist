@@ -25,6 +25,14 @@ account requires an interactive credential (a user OAuth token or a
 Console session) — a workload may only create `developer`-role service
 accounts.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Body parameters
 
 - `name: string`

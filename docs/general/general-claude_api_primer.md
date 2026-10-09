@@ -245,14 +245,14 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
 ## Thinking
 
-Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) (`thinking: {"type": "adaptive"}`): Claude determines when and how much to think, and you steer thinking depth with the [`effort`](../build-with-claude/build-with-claude-effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
+Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) (`thinking: {"type": "adaptive"}`): Claude determines when and how much to think, and you steer thinking depth with the [`effort`](../build-with-claude/build-with-claude-effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 and later models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
 Temperature must be set to 1 (or left unset) whenever thinking is enabled, on all models. On Claude 4.7 and later models and Claude Mythos Preview, `temperature` is deprecated and only its default value is accepted, even when thinking is off.
 
 Thinking is supported in the following models:
 
 * Claude Opus 5.5 (`claude-opus-5-5`, adaptive thinking only, always on)
-* Claude Sonnet 5.5 (`claude-sonnet-5-5`, adaptive thinking only, on by default)
+* Claude Sonnet 5.5 (`claude-sonnet-5-5`, adaptive thinking only, on by default; `thinking: {"type": "disabled"}` returns a 400 error, so send `thinking: {"type": "between_tools"}` to turn off up-front thinking)
 * Claude Haiku 5.5 (`claude-haiku-5-5`, adaptive thinking only, on by default)
 * Claude Opus 5 (claude-opus-5, adaptive thinking only, on by default)
 * Claude Sonnet 5 (`claude-sonnet-5`, adaptive thinking only, on by default)
@@ -321,7 +321,7 @@ Thinking can be used alongside tool use, allowing Claude to reason through tool 
 
 Important limitations:
 
-1. **Tool choice limitation:** Only supports `tool_choice: {"type": "auto"}` (default) or `tool_choice: {"type": "none"}`.
+1. **Tool choice limitation:** With manual extended thinking (`thinking: {"type": "enabled"}`), only `tool_choice: {"type": "auto"}` (default) or `tool_choice: {"type": "none"}` is supported. Adaptive thinking accepts forced tool use, except on the models listed under [Forcing tool use](./general-claude_api_primer.md#forcing-tool-use). Where it's accepted, a forced tool call skips thinking: the response starts with the tool call and has no `thinking` block.
 2. **Preserving thinking blocks:** During tool use, you must pass `thinking` blocks back to the API for the last assistant message.
 
 ### Preserving thinking blocks

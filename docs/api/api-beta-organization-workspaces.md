@@ -47,6 +47,14 @@ List Workspaces
 
   default: 20, minimum: 1, maximum: 1000
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `data: array of BetaWorkspace`
@@ -201,6 +209,12 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
 Create Workspace
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -518,6 +532,14 @@ Get Workspace
 
   ID of the Workspace.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `BetaWorkspace object`
@@ -655,6 +677,14 @@ Update Workspace
 ### Path parameters
 
 - `workspace_id: string`
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Body parameters
 
@@ -858,6 +888,14 @@ Archive Workspace
 ### Path parameters
 
 - `workspace_id: string`
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Returns
 
@@ -1294,6 +1332,14 @@ the remaining entries.
 
   Opaque cursor from a previous response's `next_page`.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaWorkspaceRateLimit`
@@ -1530,6 +1576,14 @@ List Workspace Members
 
   default: 20, minimum: 1, maximum: 1000
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaWorkspaceMember`
@@ -1613,6 +1667,14 @@ Create Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -1706,6 +1768,14 @@ Get Workspace Member
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaWorkspaceMember object`
@@ -1774,6 +1844,14 @@ Update Workspace Member
 - `user_id: string`
 
   ID of the User.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -1864,6 +1942,14 @@ Delete Workspace Member
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "workspace_member_deleted"`
@@ -1937,6 +2023,12 @@ omitted from the results.
   Opaque cursor from a previous response's `next_page`.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2136,6 +2228,12 @@ accounts cannot be added and are rejected.
   ID of the workspace.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2352,6 +2450,12 @@ account returns 404.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2543,6 +2647,12 @@ rejected.
   ID of the service account.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2752,6 +2862,12 @@ membership. Archived workspaces return 400.
   ID of the service account.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -47,6 +47,14 @@ List the organization's members.
 
   Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `data: array of OrganizationUser`
@@ -151,6 +159,14 @@ Retrieve a member of the organization by user ID.
 
   ID of the User.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `OrganizationUser object`
@@ -235,6 +251,14 @@ Update a member's organization role.
 - `user_id: string`
 
   ID of the User.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Body parameters
 
@@ -342,6 +366,14 @@ Remove a member from the organization.
 - `user_id: string`
 
   ID of the User.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Returns
 

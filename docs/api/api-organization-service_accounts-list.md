@@ -39,6 +39,14 @@ archived service accounts.
 
   Opaque cursor from a previous response's `next_page`.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Returns
 
 - `data: array of ServiceAccount`

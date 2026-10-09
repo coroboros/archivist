@@ -19,6 +19,14 @@ Invite a user to join the organization by email.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Body parameters
 
 - `email: string`
@@ -202,6 +210,14 @@ List the organization's invites.
 
   - `"pending"`
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `data: array of BetaOrganizationInvite`
@@ -335,6 +351,14 @@ Retrieve an invite by ID.
 
   ID of the Invite.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `BetaOrganizationInvite object`
@@ -448,6 +472,14 @@ Delete a pending invite.
 - `invite_id: string`
 
   ID of the Invite.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Returns
 

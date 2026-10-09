@@ -75,6 +75,8 @@ List Deployment Runs
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -467,6 +469,8 @@ Get Deployment Run
   Unique identifier of the deployment run.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

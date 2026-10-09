@@ -25,6 +25,12 @@ Get detailed information for a specific project document.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -100,6 +106,12 @@ consumer can dedupe or match hashes without downloading every document.
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -190,6 +202,12 @@ Hard-deletes the project document permanently.
   The document ID (tagged ID, e.g., claude_proj_doc_abc123)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"x-api-key": optional string`
 

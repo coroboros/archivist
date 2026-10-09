@@ -15,6 +15,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/cre
 
 Create an external key config owned by the caller's organization.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Body parameters
 
 - `provider_config: BetaAWSExternalKeyConfig or BetaGCPExternalKeyConfig or BetaAzureExternalKeyConfigParam`

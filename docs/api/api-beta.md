@@ -483,6 +483,12 @@ The Models API response can be used to determine which models are available for 
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -949,6 +955,12 @@ The Models API response can be used to determine information about a specific mo
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -1393,6 +1405,12 @@ The Messages API can be used for either single queries or stateless multi-turn c
 Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -9922,6 +9940,12 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -14007,6 +14031,12 @@ The Message Batches API can be used to process multiple Messages API requests at
 Learn more about the Message Batches API in our [user guide](../build-with-claude/build-with-claude-batch-processing.md)
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -18430,6 +18460,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -18711,6 +18747,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   default: 20, minimum: 1, maximum: 1000
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -19003,6 +19045,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -19276,6 +19324,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -19440,6 +19494,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -23546,6 +23606,8 @@ Create Agent
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -25286,6 +25348,8 @@ List Agents
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -26181,6 +26245,8 @@ Get Agent
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -27058,6 +27124,8 @@ Update Agent
   Unique identifier of the agent to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -28774,6 +28842,8 @@ Archive Agent
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -29667,6 +29737,8 @@ List Agent Versions
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -30550,6 +30622,12 @@ Create a new environment with the specified configuration.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -31019,6 +31097,12 @@ List environments with pagination support.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -31344,6 +31428,12 @@ Retrieve a specific environment by ID.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -31659,6 +31749,12 @@ Update an existing environment's configuration.
 - `environment_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -32098,6 +32194,12 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -32256,6 +32358,12 @@ Archive an environment by ID. Archived environments cannot be used to create new
 - `environment_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -32580,6 +32688,12 @@ Retrieve detailed information about a specific work item.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -32836,6 +32950,12 @@ Long poll for work items in the queue.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -33077,6 +33197,12 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 - `work_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -33327,6 +33453,12 @@ Record a heartbeat for a work item to maintain the lease.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -33508,6 +33640,12 @@ Stop a work item, initiating graceful or forced shutdown.
 - `work_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -33773,6 +33911,12 @@ List work items in an environment.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -34019,6 +34163,12 @@ Update work item metadata with merge semantics.
 - `work_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -34272,6 +34422,12 @@ Get statistics about the work queue for an environment.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -34446,6 +34602,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 Create Session
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -36977,6 +37135,8 @@ List Sessions
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -38294,6 +38454,8 @@ Get Session
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -39596,6 +39758,8 @@ Update Session
 - `session_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -41486,6 +41650,8 @@ Delete Session
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -41638,6 +41804,8 @@ Archive Session
 - `session_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -43058,6 +43226,8 @@ List Events
   - `"session.usage"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -45728,6 +45898,8 @@ Send Events
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -46714,6 +46886,8 @@ Stream Events
   - `"agent.thinking"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -49416,6 +49590,8 @@ Add Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -49619,6 +49795,8 @@ List Session Resources
   Opaque cursor from a previous response's `next_page` field.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -49897,6 +50075,8 @@ Get Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -50152,6 +50332,8 @@ Update Session Resource
 - `resource_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -50421,6 +50603,8 @@ Delete Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -50587,6 +50771,8 @@ List Session Threads
   Opaque pagination cursor from a previous response's `next_page`. Forward-only.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -51589,6 +51775,8 @@ Get Session Thread
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -52580,6 +52768,8 @@ Archive Session Thread
 - `thread_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -53583,6 +53773,8 @@ List Session Thread Events
 - `page: optional string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -56264,6 +56456,8 @@ Stream Session Thread Events
   - `"agent.thinking"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -58962,6 +59156,8 @@ Create Deployment
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -60146,6 +60342,8 @@ List Deployments
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -60877,6 +61075,8 @@ Get Deployment
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -61598,6 +61798,8 @@ Update Deployment
   Unique identifier of the deployment to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -62731,6 +62933,8 @@ Archive Deployment
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -63454,6 +63658,8 @@ Run Deployment Now
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -63838,6 +64044,8 @@ Pause Deployment
   Unique identifier of the deployment to pause.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -64561,6 +64769,8 @@ Unpause Deployment
   Unique identifier of the deployment to unpause.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -65337,6 +65547,8 @@ List Deployment Runs
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -65730,6 +65942,8 @@ Get Deployment Run
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -66110,6 +66324,8 @@ Create Vault
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -66328,6 +66544,8 @@ List Vaults
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -66526,6 +66744,8 @@ Get Vault
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -66714,6 +66934,8 @@ Update Vault
   Unique identifier of the vault to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -66923,6 +67145,8 @@ Delete Vault
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -67079,6 +67303,8 @@ Archive Vault
   Unique identifier of the vault to archive.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -67271,6 +67497,8 @@ Create Credential
   Identifier of the vault to create the credential in.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -67784,6 +68012,8 @@ List Credentials
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -68107,6 +68337,8 @@ Get Credential
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -68420,6 +68652,8 @@ Update Credential
   Unique identifier of the credential to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -68874,6 +69108,8 @@ Delete Credential
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -69034,6 +69270,8 @@ Archive Credential
   Unique identifier of the credential to archive.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -69350,6 +69588,8 @@ Validate Credential
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -69613,6 +69853,8 @@ Create a memory store
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -69851,6 +70093,8 @@ List memory stores
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -70052,6 +70296,8 @@ Retrieve a memory store
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -70245,6 +70491,8 @@ Update a memory store
   ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -70460,6 +70708,8 @@ Delete a memory store
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -70616,6 +70866,8 @@ Archive a memory store
   ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -70827,6 +71079,8 @@ Create a memory
     Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -71081,6 +71335,8 @@ List memories
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -71324,6 +71580,8 @@ Retrieve a memory
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -71543,6 +71801,8 @@ Update a memory
     Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -71782,6 +72042,8 @@ Delete a memory
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -72010,6 +72272,8 @@ List memory versions
     Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -72321,6 +72585,8 @@ Retrieve a memory version
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -72608,6 +72874,8 @@ Redact a memory version
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -72888,6 +73156,12 @@ Upload File
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -73137,6 +73411,12 @@ List Files
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -73365,6 +73645,12 @@ Download File
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -73498,6 +73784,12 @@ Get File Metadata
   ID of the File.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -73716,6 +74008,12 @@ Delete File
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -73871,6 +74169,12 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 Create Skill
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -74127,6 +74431,12 @@ List Skills
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -74362,6 +74672,12 @@ Get Skill
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -74584,6 +74900,12 @@ Delete Skill
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -74749,6 +75071,12 @@ Create Skill Version
   The format and length of IDs may change over time.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -74965,6 +75293,12 @@ List Skill Versions
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -75175,6 +75509,12 @@ Download a skill version's content as a zip archive.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -75316,6 +75656,12 @@ Get Skill Version
   Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -75514,6 +75860,12 @@ Delete Skill Version
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -75670,6 +76022,8 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
 Create User Profile
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -76096,6 +76450,8 @@ List User Profiles
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -76394,6 +76750,8 @@ Get User Profile
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -76684,6 +77042,8 @@ Update User Profile
   The ID of the user profile to update (`uprof_...`).
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -77076,6 +77436,8 @@ Create Enrollment URL
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -77241,6 +77603,8 @@ By default the dream writes its result to a new memory store and doesn't change 
 See the [Dreams guide](../managed-agents/managed-agents-dreams.md#create-a-dream) to learn more about creating dreams.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -77821,6 +78185,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#list-dreams) f
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -78233,6 +78599,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#track-progress
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -78639,6 +79007,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#cancel-a-dream
   The ID of the dream to cancel (`drm_...`).
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -79048,6 +79418,8 @@ See the [Dreams guide](../managed-agents/managed-agents-dreams.md#archive-a-drea
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -79450,6 +79822,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -79641,6 +80015,8 @@ Fetches a tunnel by ID.
   ID of the tunnel (`tnl_...`).
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -79834,6 +80210,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -80025,6 +80403,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -80208,6 +80588,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -80371,6 +80753,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
   ID of the tunnel (`tnl_...`).
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -80546,6 +80930,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
   ID of the tunnel (`tnl_...`).
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -80752,6 +81138,8 @@ Fetches a tunnel certificate by ID.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -80957,6 +81345,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -81159,6 +81549,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -81341,6 +81733,14 @@ curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_I
 
 Retrieve information about the organization associated with the authenticated API key.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaOrganization object`
@@ -81426,6 +81826,14 @@ List API Keys
 - `workspace_id: optional string`
 
   Filter by Workspace ID.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -81617,6 +82025,14 @@ Retrieve information about a single API key in your organization, looked up by i
 
   ID of the API key.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaAPIKey object`
@@ -81787,6 +82203,14 @@ Update API Key
 - `api_key_id: string`
 
   ID of the API key.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -81974,6 +82398,14 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
 **POST** `/v1/organizations/external_keys`
 
 Create an external key config owned by the caller's organization.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -82201,6 +82633,14 @@ Results are ordered by creation time (newest first). Use the
 
   Opaque cursor from a previous response's `next_page`.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaExternalKey`
@@ -82349,6 +82789,14 @@ Retrieve a single external key config in the caller's organization by ID.
   ID of the External Key.
 
   maxLength: 2048
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -82499,6 +82947,14 @@ encrypted data requires the original key identity to decrypt.
   ID of the External Key.
 
   maxLength: 2048
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -82716,6 +83172,14 @@ The request is rejected if any workspace still references this config.
 
   maxLength: 2048
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "external_key_deleted"`
@@ -82762,6 +83226,14 @@ message if it failed or timed out.
   ID of the External Key.
 
   maxLength: 2048
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -82821,6 +83293,12 @@ document; for `explicit_url` and `inline` modes the issuer URL is only
 matched as the JWT's `iss` claim and is not fetched.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -83214,6 +83692,12 @@ Archived issuers are excluded unless `include_archived=true`.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -83516,6 +84000,12 @@ Retrieve a federation issuer by its ID (`fdis_...`).
   ID of the federation issuer.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -83822,6 +84312,12 @@ session.
   ID of the federation issuer to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -84207,6 +84703,12 @@ issuer cannot be changed), or recreate them against another issuer.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -84516,6 +85018,12 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 `workspace:inference`; other scopes require a Console session.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -84934,6 +85442,12 @@ unless `include_archived=true`.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -85236,6 +85750,12 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   ID of the federation rule.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -85557,6 +86077,12 @@ Console session.
   ID of the federation rule to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -85951,6 +86477,12 @@ other scopes require a Console session.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -86268,6 +86800,12 @@ other scopes require a Console session.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -86469,6 +87007,12 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -86660,6 +87204,12 @@ Console session.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -86808,6 +87358,14 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 Invite a user to join the organization by email.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -86992,6 +87550,14 @@ List the organization's invites.
 
   - `"pending"`
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaOrganizationInvite`
@@ -87125,6 +87691,14 @@ Retrieve an invite by ID.
 
   ID of the Invite.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaOrganizationInvite object`
@@ -87239,6 +87813,14 @@ Delete a pending invite.
 
   ID of the Invite.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "invite_deleted"`
@@ -87290,6 +87872,12 @@ Console session) — a workload may only create `developer`-role service
 accounts.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -87544,6 +88132,12 @@ archived service accounts.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -87758,6 +88352,12 @@ Retrieve a service account by its ID (`svac_...`).
   ID of the service account.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -87974,6 +88574,12 @@ interactive credential (a user OAuth token or a Console session).
   ID of the service account to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -88209,6 +88815,12 @@ those rules first or change their target to another service account.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -88429,6 +89041,12 @@ rejected.
   ID of the service account.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -88660,6 +89278,12 @@ page to recover.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -88862,6 +89486,12 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -89039,6 +89669,14 @@ List the organization's members.
 
   Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaOrganizationUser`
@@ -89143,6 +89781,14 @@ Retrieve a member of the organization by user ID.
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaOrganizationUser object`
@@ -89227,6 +89873,14 @@ Update a member's organization role.
 - `user_id: string`
 
   ID of the User.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -89335,6 +89989,14 @@ Remove a member from the organization.
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "user_deleted"`
@@ -89404,6 +90066,14 @@ List Workspaces
   Defaults to `20`. Ranges from `1` to `1000`.
 
   default: 20, minimum: 1, maximum: 1000
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -89559,6 +90229,12 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
 Create Workspace
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -89876,6 +90552,14 @@ Get Workspace
 
   ID of the Workspace.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaWorkspace object`
@@ -90013,6 +90697,14 @@ Update Workspace
 #### Path parameters
 
 - `workspace_id: string`
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -90217,6 +90909,14 @@ Archive Workspace
 
 - `workspace_id: string`
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaWorkspace object`
@@ -90405,6 +91105,14 @@ the remaining entries.
 - `page: optional string`
 
   Opaque cursor from a previous response's `next_page`.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -90642,6 +91350,14 @@ List Workspace Members
 
   default: 20, minimum: 1, maximum: 1000
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaWorkspaceMember`
@@ -90725,6 +91441,14 @@ Create Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -90818,6 +91542,14 @@ Get Workspace Member
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaWorkspaceMember object`
@@ -90886,6 +91618,14 @@ Update Workspace Member
 - `user_id: string`
 
   ID of the User.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -90976,6 +91716,14 @@ Delete Workspace Member
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "workspace_member_deleted"`
@@ -91049,6 +91797,12 @@ omitted from the results.
   Opaque cursor from a previous response's `next_page`.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -91248,6 +92002,12 @@ accounts cannot be added and are rejected.
   ID of the workspace.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -91464,6 +92224,12 @@ account returns 404.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -91655,6 +92421,12 @@ rejected.
   ID of the service account.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -91865,6 +92637,12 @@ membership. Archived workspaces return 400.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -92054,6 +92832,14 @@ the remaining entries.
 
   Opaque cursor from a previous response's `next_page`.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaOrganizationRateLimit`
@@ -92238,6 +93024,14 @@ organization, addressed without an identifier. The `state` field reflects
 whether the Compliance API is enabled. An organization with a parent
 organization reads the state inherited from the parent's configuration.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaComplianceSettings object`
@@ -92299,6 +93093,14 @@ the Compliance API, which serves its activity events, so such
 provisioning (including re-runs) re-enables the Compliance API even
 after a `disabled` request. Automated provisioning never disables
 compliance settings.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -92497,6 +93299,12 @@ Get Messages Usage Report
   Restrict usage returned to the specified workspace ID(s).
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -92797,6 +93605,14 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
   Opaque cursor token from previous response's `next_page` field.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaClaudeCodeUsageReport object`
@@ -93087,6 +93903,12 @@ Get Cost Report
   Optionally set to the `next_page` token from the previous response.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -93379,6 +94201,12 @@ archived tunnels are excluded unless `include_archived` is set.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": array of AnthropicBeta`
 
   This endpoint is in beta: requests must send `mcp-tunnels-2026-05-19` in this header.
@@ -93577,6 +94405,12 @@ Retrieve a single tunnel in the caller's organization by ID.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": array of AnthropicBeta`
 
   This endpoint is in beta: requests must send `mcp-tunnels-2026-05-19` in this header.
@@ -93770,6 +94604,12 @@ tunnel returns the existing record unchanged.
   ID of the Tunnel.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -93966,6 +94806,12 @@ access logs.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": array of AnthropicBeta`
 
   This endpoint is in beta: requests must send `mcp-tunnels-2026-05-19` in this header.
@@ -94132,6 +94978,12 @@ restarted after rotation must use the new value. An optional
   ID of the Tunnel.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -94310,6 +95162,12 @@ holds at most two non-archived certificates.
   ID of the Tunnel.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -94535,6 +95393,12 @@ Archived certificates are excluded unless `include_archived` is set.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": array of AnthropicBeta`
 
   This endpoint is in beta: requests must send `mcp-tunnels-2026-05-19` in this header.
@@ -94737,6 +95601,12 @@ Retrieve a single certificate registered on a tunnel by ID.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": array of AnthropicBeta`
 
   This endpoint is in beta: requests must send `mcp-tunnels-2026-05-19` in this header.
@@ -94933,6 +95803,12 @@ certificate is added.
   ID of the Tunnel Certificate.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -95154,6 +96030,14 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 - `page: optional string`
 
   Opaque cursor from a previous response's `next_page` field. `next_page` is currently always null, so there is never a cursor to send.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -95590,6 +96474,14 @@ the `read:analytics` scope.
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -96292,6 +97184,14 @@ plan. Requires an API key with the `read:analytics` scope.
 
   format: date
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsProjectActivity`
@@ -96471,6 +97371,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -96741,6 +97649,14 @@ range-rollup mode like `/skills`.
 
   format: date
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsPluginActivity`
@@ -96921,6 +97837,14 @@ on a Claude Enterprise plan. Requires an API key with the
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -97172,6 +98096,14 @@ can be broken out per product, per member, or per RBAC group via
 
   Opaque cursor from a previous response's `next_page` field. Only valid with `group_by[]` — the ungrouped cube is never paginated.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsArtifactActivity`
@@ -97417,6 +98349,14 @@ key with the `read:analytics` scope.
   Filter to specific users by tagged user ID.
 
   maxItems: 100
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -97808,6 +98748,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   Filter to specific users by tagged user ID.
 
   maxItems: 100
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -98208,6 +99156,14 @@ Requires an API key with the `read:analytics` scope.
 
   maxItems: 100
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsCostReportTimeBucket`
@@ -98596,6 +99552,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   maxItems: 100
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsCostUsersItem`
@@ -98827,6 +99791,12 @@ limits is in an early access preview. To request access, contact your
 Anthropic account team.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -99146,6 +100116,14 @@ Retrieve a spend limit by ID.
 
   ID of the Spend Limit.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaSpendLimit object`
@@ -99303,6 +100281,14 @@ workspace limits. Deleting them through the API is in an early access preview.
 
   ID of the Spend Limit.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "spend_limit_deleted"`
@@ -99373,6 +100359,12 @@ preview. To request access, contact your Anthropic account team.
   - `"workspace"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -99669,6 +100661,14 @@ contact your Anthropic account team.
 
   maxItems: 100
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaSpendSummary`
@@ -99893,6 +100893,14 @@ Requests whose requester is no longer a member are excluded.
   - `"denied"`
 
   - `"pending"`
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -100173,6 +101181,14 @@ requester at the request's period.
 
   ID of the spend limit increase request.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaSpendLimitIncreaseRequest object`
@@ -100446,6 +101462,14 @@ the member was blocked on. Anthropic emails the requester unless
 - `spend_limit_increase_request_id: string`
 
   ID of the spend limit increase request.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -100814,6 +101838,14 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   ID of the spend limit increase request.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Body parameters
 
 - `suppress_notification: optional boolean`
@@ -101087,6 +102119,14 @@ Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Body parameters
 
 - `name: string`
@@ -101198,6 +102238,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   Optionally set to the `next_page` token from the previous response.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `data: array of BetaRBACGroup`
@@ -101303,6 +102351,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   ID of the RBAC Group.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaRBACGroup object`
@@ -101393,6 +102449,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 - `rbac_group_id: string`
 
   ID of the RBAC Group.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Body parameters
 
@@ -101497,6 +102561,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   ID of the RBAC Group.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "rbac_group_deleted"`
@@ -101558,6 +102630,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -101644,6 +102724,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   ID of the RBAC Group.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Body parameters
 
 - `user_id: string`
@@ -101729,6 +102817,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   ID of the User.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `type: "rbac_group_member_deleted"`
@@ -101794,6 +102890,14 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 
@@ -101883,6 +102987,14 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   ID of the RBAC Role.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 #### Returns
 
 - `BetaRBACRole object`
@@ -101971,6 +103083,14 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 #### Returns
 

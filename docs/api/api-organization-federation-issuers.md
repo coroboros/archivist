@@ -29,6 +29,14 @@ publicly reachable over HTTPS so Anthropic can fetch the discovery
 document; for `explicit_url` and `inline` modes the issuer URL is only
 matched as the JWT's `iss` claim and is not fetched.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Body parameters
 
 - `issuer_url: string`
@@ -313,6 +321,14 @@ Archived issuers are excluded unless `include_archived=true`.
 
   Opaque cursor from a previous response's `next_page`.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ### Returns
 
 - `data: array of FederationIssuer`
@@ -507,6 +523,14 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 - `federation_issuer_id: string`
 
   ID of the federation issuer.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Returns
 
@@ -705,6 +729,14 @@ session.
 - `federation_issuer_id: string`
 
   ID of the federation issuer to update.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Body parameters
 
@@ -981,6 +1013,14 @@ issuer cannot be changed), or recreate them against another issuer.
 - `federation_issuer_id: string`
 
   ID of the federation issuer to archive.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 ### Returns
 

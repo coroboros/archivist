@@ -19,6 +19,8 @@ Create Vault
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -237,6 +239,8 @@ List Vaults
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -435,6 +439,8 @@ Get Vault
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -623,6 +629,8 @@ Update Vault
   Unique identifier of the vault to update.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -832,6 +840,8 @@ Delete Vault
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -988,6 +998,8 @@ Archive Vault
   Unique identifier of the vault to archive.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1232,6 +1244,8 @@ Create Credential
   Identifier of the vault to create the credential in.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1745,6 +1759,8 @@ List Credentials
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2068,6 +2084,8 @@ Get Credential
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2381,6 +2399,8 @@ Update Credential
   Unique identifier of the credential to update.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2835,6 +2855,8 @@ Delete Credential
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2995,6 +3017,8 @@ Archive Credential
   Unique identifier of the credential to archive.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3310,6 +3334,8 @@ Validate Credential
   Unique identifier of the credential to validate.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

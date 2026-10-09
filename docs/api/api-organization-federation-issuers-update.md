@@ -30,6 +30,14 @@ session.
 
   ID of the federation issuer to update.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Body parameters
 
 - `check_jti: optional boolean or null`

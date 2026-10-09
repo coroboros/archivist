@@ -15,6 +15,14 @@ url: https://platform.claude.com/docs/en/api/organization/retrieve
 
 Retrieve information about the organization associated with the authenticated API key.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 ## Returns
 
 - `OrganizationInfo object`

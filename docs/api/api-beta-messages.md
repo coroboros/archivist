@@ -23,6 +23,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -8550,6 +8556,12 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 Learn more about token counting in our [user guide](../build-with-claude/build-with-claude-token-counting.md)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -77945,6 +77957,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -82367,6 +82385,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -82648,6 +82672,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   default: 20, minimum: 1, maximum: 1000
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -82940,6 +82970,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -83213,6 +83249,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -83377,6 +83419,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

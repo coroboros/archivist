@@ -19,6 +19,8 @@ Create Session
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2549,6 +2551,8 @@ List Sessions
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -3866,6 +3870,8 @@ Get Session
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -5168,6 +5174,8 @@ Update Session
 - `session_id: string`
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -7058,6 +7066,8 @@ Delete Session
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -7210,6 +7220,8 @@ Archive Session
 - `session_id: string`
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -13931,6 +13943,8 @@ List Events
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -16600,6 +16614,8 @@ Send Events
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -17586,6 +17602,8 @@ Stream Events
   - `"agent.thinking"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -20288,6 +20306,8 @@ Add Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -20491,6 +20511,8 @@ List Session Resources
   Opaque cursor from a previous response's `next_page` field.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -20769,6 +20791,8 @@ Get Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -21024,6 +21048,8 @@ Update Session Resource
 - `resource_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -21293,6 +21319,8 @@ Delete Session Resource
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -21459,6 +21487,8 @@ List Session Threads
   Opaque pagination cursor from a previous response's `next_page`. Forward-only.
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -22461,6 +22491,8 @@ Get Session Thread
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -23452,6 +23484,8 @@ Archive Session Thread
 - `thread_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -24455,6 +24489,8 @@ List Session Thread Events
 - `page: optional string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27136,6 +27172,8 @@ Stream Session Thread Events
   - `"agent.thinking"`
 
 #### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

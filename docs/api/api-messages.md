@@ -23,6 +23,12 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -4533,6 +4539,12 @@ The Token Count API can be used to count the number of tokens in a Message, incl
 Learn more about token counting in our [user guide](../build-with-claude/build-with-claude-token-counting.md)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -36213,6 +36225,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -39476,6 +39494,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39650,6 +39674,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   default: 20, minimum: 1, maximum: 1000
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -39835,6 +39865,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -40001,6 +40037,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -40058,6 +40100,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](./api-versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 
