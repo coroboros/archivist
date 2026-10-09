@@ -231,6 +231,8 @@ on('prompt.submit', async ($, e, next) => {
 
 When you send a prompt such as `open a PR for this change`, your message looks the same in the transcript, and Claude also reads a line such as `Current branch: feature/auth` after it. A prompt that doesn't mention a pull request goes through unchanged, and `git` doesn't run.
 
+To stop a prompt, return `{ drop: 'the reason' }` without calling `next`. If your hook returns a `drop` after its `next(e)` call let the prompt through, the turn still runs, and the hook [fails](#handle-a-hook-that-fails) with a message that includes `a drop after its next() was answered`.
+
 [Other events](/docs/en/plugins/mods/reference#prompts-and-what-claude-reads) cover the rest of what Claude reads: `prompt.section` for each section of the system prompt, `prompt.context` for the context sent with the first message, and `skill.prompt` for a skill's text. Text from these hooks that changes between requests [invalidates the prompt cache](/docs/en/prompt-caching).
 
 ### Follow a turn
@@ -262,6 +264,8 @@ on('turn.step', async function* ($, e, next) {
 Claude's response streams to the screen as it does without the mod. After each request finishes, a dim line in the transcript gives the number of tokens read from the cache and the number written to it. A turn with tool calls has several requests, so it adds several lines.
 
 `result.usage` holds the token counts the Claude API reports for a request, plus the `model` that answered: `input_tokens`, `output_tokens`, `cache_read_input_tokens`, and `cache_creation_input_tokens`. The hook runs for subagents' requests too, so check `e.agentId` when you want only the main conversation.
+
+To see the tool calls that the API ran itself during the request, such as calls to the [advisor tool](/docs/en/advisor), read `result.serverToolUses`. Claude Code doesn't run these calls, so no `tool.call` or `tool.check` hook fires for them. The field is absent when the response has no such calls, and it requires Claude Code v2.1.290 or later.
 
 <h3 id="hook-the-settings-hook-events">
   Handle the settings hook events
@@ -324,14 +328,14 @@ To make a hook that blocks calls fail closed, add a `.catch` error handler that 
 on('tool.call', { tool: 'Bash' }, guard).catch(async ($, e, next) => {
   // guard had already called next, so return what came back
   if (next.called) return next(e)
-  // next.error.kind is 'throw' or 'timeout', which says how guard failed
+  // next.error.kind says why the handler was asked, such as 'throw' or 'timeout'
   return { deny: 'The command guard failed, so this command was not run: ' + next.error.kind }
 })
 ```
 
-While `guard` works, the handler never runs. When `guard` throws or times out on a Bash call, Claude Code calls the handler with the same event:
+When `guard` throws or times out on a Bash call, Claude Code calls the handler with the same event:
 
-* **`guard` failed before it called `next`**: the command doesn't run, and Claude reads the `deny` text with `throw` or `timeout` at the end
+* **`guard` failed before it called `next`**: the command doesn't run, and Claude reads the `deny` text with the kind at the end
 * **`guard` failed after it called `next`**: the handler's `next(e)` resolves to the result that `guard`'s call produced without running the command again, and Claude reads that result
 
 The handler has a shorter [time limit](/docs/en/plugins/mods/reference#limits) of its own. If the handler itself throws or times out, Claude Code skips the hook as if it had no handler. When `guard` hadn't called `next`, the command then goes on as it would without the mod.

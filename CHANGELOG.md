@@ -1,5 +1,74 @@
 # Changelog
 
+## 🤖 v1.5.218 - 09/10/2026
+
+File Changes:
+
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-api.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-on-aws.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-projects.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-events.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-install.md`
+- Modified: `docs/code/code-interface.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-publish.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-test.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+
+
 ## 🤖 v1.5.217 - 08/10/2026
 
 File Changes:

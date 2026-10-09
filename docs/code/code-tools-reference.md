@@ -189,7 +189,9 @@ For long-running processes such as dev servers or watch builds, Claude can set `
 
 #### When a background command stops
 
-A command that a [foreground subagent](/docs/en/sub-agents#run-subagents-in-foreground-or-background) started stops when that subagent's run ends, whether it finished, failed, or was interrupted. A command that the main conversation or a background subagent started keeps running after a final response, until it exits, is stopped, or reaches its [time limit](#time-limit-for-background-commands). In non-interactive mode with the `-p` flag, [background commands end shortly after the run's final result](/docs/en/headless#background-tasks-at-exit).
+A command that a [foreground subagent](/docs/en/sub-agents#run-subagents-in-foreground-or-background) started stops when that subagent's run ends, whether it finished, failed, or was interrupted. A command that the main conversation or a background subagent started keeps running after a final response, until it exits, is stopped, or reaches its [time limit](#time-limit-for-background-commands).
+
+While a command that the main conversation started is still running, a run in non-interactive mode with the `-p` flag [stays open after its result](/docs/en/headless#background-tasks-at-exit) until that command exits or reaches its time limit. A command that a background subagent started is stopped when the run exits.
 
 #### Time limit for background commands
 
@@ -202,13 +204,15 @@ The time limit counts from the moment the command enters the background:
 * A command that Claude starts in the background gets 30 minutes, or the `timeout` Claude passes with `run_in_background`, up to a maximum of 2 hours
 * A command that starts in the foreground and then moves to the background, for example at its timeout, gets 30 minutes from the move
 
+In a run with the `-p` flag whose prompt you pass as text rather than with `--input-format stream-json`, both defaults are 10 minutes instead of 30, because the run [waits for background commands after its result](/docs/en/headless#background-tasks-at-exit).
+
 When a background command reaches its time limit, Claude Code stops it and tells Claude why, and Claude can start the command again with a longer `timeout` if the work still needs it. The stop notice reads `Background command "<description>" was stopped after reaching its background time limit`.
 
 #### Raise the time limit for background commands
 
-Two [environment variables](/docs/en/env-vars) raise these limits, for Bash and PowerShell commands alike. Both take milliseconds, and neither can shorten a limit: a lower value leaves the 30-minute default and the 2-hour maximum in place.
+Two [environment variables](/docs/en/env-vars) raise these limits, for Bash and PowerShell commands alike. Both take milliseconds, and neither can shorten a limit: a lower value leaves the defaults and the 2-hour maximum in place.
 
-* Set `BASH_DEFAULT_TIMEOUT_MS` above `1800000` to replace the 30-minute default with that value, both for commands Claude starts without a `timeout` and for moved commands
+* Set `BASH_DEFAULT_TIMEOUT_MS` above `1800000` to replace the 30-minute default with that value, both for commands Claude starts without a `timeout` and for moved commands. In a `-p` run whose prompt you pass as text, any value above `600000` replaces its 10-minute default
 * Set `BASH_MAX_TIMEOUT_MS` above `7200000` to raise the 2-hour maximum to that value. Setting `BASH_DEFAULT_TIMEOUT_MS` above `7200000` raises the maximum the same way
 
 #### Foreground commands that move to the background
@@ -261,7 +265,7 @@ A file that changed on disk after Claude last read it can still be edited when `
 
 Viewing a file with Bash also satisfies the read-before-edit requirement when the command is `cat`, `nl`, `bat`, `batcat`, `head`, `tail`, `sed -n 'X,Yp'`, `grep`, `egrep`, `fgrep`, or `rg` on a single file with no pipes or redirects. Piped output and other Bash commands don't count toward the read-before-edit check.
 
-Viewing a file with Bash affects edit eligibility only, not permissions. See [Read and Edit permission rules](/docs/en/permissions#read-and-edit) for which Bash commands your `Read` and `Edit` deny rules cover.
+When Claude views a file this way, Claude Code also loads any [subdirectory `CLAUDE.md`](/docs/en/memory#how-claude-md-files-load) and [path-scoped rules](/docs/en/memory#path-specific-rules) that apply to that file. See [Read and Edit permission rules](/docs/en/permissions#read-and-edit) for which Bash commands your `Read` and `Edit` deny rules cover.
 
 ## EndConversation tool behavior
 
@@ -592,7 +596,7 @@ A few behaviors shape the response Claude receives:
 
 * WebFetch refuses `localhost` and any other hostname without a dot, such as a bare intranet name, before making a request. The [error it returns](/docs/en/errors#webfetch-cannot-fetch-localhost) tells Claude to reach local servers with `curl` through Bash instead.
 * HTTP URLs are automatically upgraded to HTTPS.
-* Large pages are truncated to a fixed character limit before processing.
+* WebFetch reads up to 100,000 characters of a page's content per call. On Claude Code v2.1.290 or later, the result for a longer page tells Claude how much went unread, so Claude can fetch the next part.
 * WebFetch caches each response for 15 minutes by default, so repeated fetches of the same URL return quickly. On Claude Code v2.1.233 or later, set [`CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS`](/docs/en/env-vars#variables) to change how long WebFetch keeps each response.
 * A page that hasn't finished downloading within five minutes, including any redirects WebFetch follows, fails with a deadline error. On Claude Code v2.1.268 or later, set [`CLAUDE_CODE_WEBFETCH_DEADLINE_MS`](/docs/en/env-vars#variables) to change the limit, or to `0` to remove it.
 * When a URL redirects to a different host, WebFetch returns a text result that names the original URL and the redirect target instead of following it. Claude then fetches the new URL with a second WebFetch call.

@@ -137,6 +137,14 @@ The line starts with the mod's name, as in `first-mod was unloaded: it crashed t
 
 Fix the hook.
 
+### `its session.start ran again in a fresh copy`
+
+The line starts with the mod's name and names a `$.prompt.submit`, `$.command.run`, or `$.agent.spawn` call, as in `first-mod: its session.start ran again in a fresh copy; the $.prompt.submit call it had already made was not made again`. Claude Code loaded the mod's module again, for example after the hooks worker crashed and was replaced, and the fresh copy's [`session.start`](/docs/en/plugins/mods/reference#session) hook ran. The call the line names resolved with the result of its first run instead of running again, so your mod doesn't submit the prompt, run the command, or start the subagent twice. The rest of the hook ran as usual.
+
+There's nothing to fix.
+
+Before v2.1.292, the call ran a second time, so the prompt was submitted, the command run, or the subagent started twice.
+
 ### `mods that run in the hooks worker are off for this session`
 
 The line reads `hooks: mods that run in the hooks worker are off for this session: it crashed 3 times`. The worker stopped three times and Claude Code couldn't trace the stops to one mod, so it unloaded every mod that isn't built in, including mods your organization installs. This line reaches the transcript in every interactive session.
@@ -161,7 +169,7 @@ Look them up in [Messages from the built-in guard](#messages-from-the-built-in-g
 
 ## A drawing doesn't appear or respond
 
-The mod loaded, and its pane, band, or controls don't behave as you expect.
+The mod loaded, and its pane, band, toast, or controls don't behave as you expect.
 
 ### A pane or band is empty or shows Claude Code's usual content
 
@@ -169,11 +177,39 @@ The [tree](/docs/en/plugins/mods/interface#build-a-tree-from-elements) your hook
 
 Read the reason on that line. Common causes are a prop the element doesn't take and an element the app doesn't have.
 
+### A `ui.render` line says `threw while drawn`
+
+The line names the [render site](/docs/en/plugins/mods/reference#render-sites), then says `threw while drawn:` and the error, as in `first-mod: ui.render (ToolUse) threw while drawn: <error>; the engine drew its own`. Claude Code hit that error while drawing the tree your [`ui.render`](/docs/en/plugins/mods/reference#interface) hook returned, or while drawing the site from the [`props` your hook passed to `next`](/docs/en/plugins/mods/interface#change-what-claude-code-already-draws). The ending `the engine drew its own` means the site shows Claude Code's usual content.
+
+Read the error and fix the value in your hook that caused it.
+
+Before v2.1.289, this error in a transcript row ended the session with [`Claude Code exited after an unrecoverable interface error`](/docs/en/errors#exited-after-an-unrecoverable-interface-error).
+
+### `the module failed without a message`
+
+A [`Client`](/docs/en/plugins/mods/interface#when-a-client-fails) failed with an error that has no message, such as `throw new Error()`. The line in its place reads like `my-mod: Client client/spinner.js: the module failed without a message`.
+
+Find the throw in your `Client`'s code and give the error a message. The line then shows that message.
+
+Before v2.1.289, the line showed `Error` as the reason instead.
+
 ### `$.ui.open` runs and no pane appears
 
 The call didn't come from something the user did, and the terminal is narrower than [the width that pane needs](/docs/en/plugins/mods/interface#when-a-pane-waits-for-a-wider-terminal).
 
 Open the pane from a command or a button, or check the call's `isPlaced` result. See [Open a pane at the right time](/docs/en/plugins/mods/interface#open-a-pane-at-the-right-time).
+
+### A toast doesn't appear
+
+Your mod calls [`$.ui.toast`](/docs/en/plugins/mods/api#show-something-without-starting-a-turn) in an interactive terminal session and you don't see the toast. To confirm that the call ran, look in the [debug log](#read-the-debug-log) for a line with your mod's name and the toast's text, as in `$.ui.toast (first-mod): build finished`. Then check for causes such as these:
+
+* **The line for the call is missing**: look for one that says why Claude Code refused the call, as in `first-mod: $.ui.toast dropped: timeoutMs is a whole number of ms, 1 to 60000`.
+* **A pane is holding toasts**: your mod or another one passed [`holdToasts`](/docs/en/plugins/mods/interface#hold-toasts-behind-a-dialog) when it opened the pane that's showing. Close the pane to end the hold. If the pane is yours and is meant to stay open, remove `holdToasts` from its `$.ui.open` call and open the pane again.
+* **The toast is under the prompt**: in the [classic renderer](/docs/en/fullscreen#enable-fullscreen-rendering), look at the right under the prompt. A toast there is one line that starts with the mod's name, rather than a box at the top right.
+* **Your mod raised a newer toast**: in the classic renderer, a newer toast from your mod can take the place of one that's showing or waiting to show. The debug log has another line for the older toast, which ends with `gave way, cut short` when it was showing, or `gave way, unseen` when it never appeared. To show both messages, put them in one toast.
+* **The toast ran out of time undrawn**: in fullscreen rendering, Claude Code draws at most three toasts at a time, so a toast can run out of time before it's drawn. The debug log has another line for that toast, which ends with `left the stack, never drawn`. When your mod raises several at once, put the messages in one toast.
+
+Before v2.1.290, Claude Code dropped a toast raised within two seconds of the last one it showed for your mod, and the debug log line for the dropped toast said `within 2000ms of the last; dropped`.
 
 ### Hotkeys do nothing
 
@@ -231,7 +267,7 @@ hooks module first-mod@inline loaded (worker, environment 2, tier user); events:
 
 A drawing that didn't validate counts as a refused result and gets a line too. To write your own lines in the log, call [`$.ui.log`](/docs/en/plugins/mods/api#show-something-without-starting-a-turn) with a second argument, as in `$.ui.log('message', { to: 'debug' })`. Without the second argument, `$.ui.log` adds a dim line to the transcript.
 
-While you edit a mod loaded with `--plugin-dir`, the transcript shows a line for each reload that names the mod and lists its hooks. If a save breaks the module, the line says `reload failed, the previous version stays loaded:` with the reason, and the last working version keeps running.
+While you edit a mod loaded with `--plugin-dir`, the transcript shows a line for each reload that names the mod and lists its hooks. If a save breaks the module, the line says `reload failed, the previous version stays loaded:` with the reason, and the last working version keeps running until Claude Code next reloads plugins, such as when you run `/reload-plugins`.
 
 ## Next steps
 

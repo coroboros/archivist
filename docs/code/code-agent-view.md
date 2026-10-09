@@ -283,6 +283,7 @@ After about ten seconds, Claude Code backgrounds the session without waiting any
 * **Foreground subagents are still running**: Claude Code keeps waiting so the work of the [foreground subagents](/docs/en/sub-agents#run-subagents-in-foreground-or-background) Claude started carries over, and shows `Still backgrounding after the current tool`. Press `←` again to background without waiting, which restarts those subagents from the beginning.
 * **A permission prompt or question is waiting for your answer**: while a permission prompt or a question Claude asked waits, Claude Code keeps waiting and shows `Still backgrounding after the current tool — a question is waiting for your answer.`
 * **You type into the prompt input**: Claude Code cancels the switch, because unsent text stays in your terminal's input box and wouldn't move to the background session. It shows `Backgrounding cancelled — you have unsent text in the input. Send it or clear it, then press ← again.`
+* **A queued message can't move**: messages you [queued while Claude was working](/docs/en/interactive-mode#queue-messages-while-claude-works) move to the background session with the conversation. When one of them can't, the session stays in the foreground and Claude Code shows a notice such as `Cannot open agents — 1 queued message can't move to the background. Press ← again once Claude has read it.`
 
 Pressing `←` creates the session's row even when the conversation has no messages yet, so `→` still returns to it.
 
@@ -564,7 +565,7 @@ To turn off worktree isolation for a repository where git worktrees are impracti
 
 Outside a git repository, sessions write to the working directory directly and aren't isolated from each other, so avoid dispatching parallel sessions that edit the same files. If you use a different version control system, configure a [`WorktreeCreate` hook](/docs/en/worktrees#non-git-version-control) and Claude isolates edits the same way it does for git.
 
-When the hook fails in a directory that isn't a git repository, Claude skips isolation for that directory and edits the working directory in place. Inside a git repository, a session that Claude moves into a worktree before editing can't edit files in the shared checkout until that move happens.
+When the hook fails in a directory that isn't a git repository, Claude skips isolation for that directory and edits the working directory in place. Inside a git repository, a session that Claude moves into a worktree before editing can't use the `Edit`, `Write`, or `NotebookEdit` tools on the shared checkout until that move happens.
 
 To find a session's worktree path, attach and check its working directory.
 
