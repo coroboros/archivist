@@ -1202,7 +1202,7 @@ Prefer the well-typed constants (for example, `Model.CLAUDE_OPUS_5`) so you get 
 
 ## Beta features
 
-Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](../build-with-claude/build-with-claude-overview.md).
+Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [Features overview](../build-with-claude/build-with-claude-overview.md).
 
 You can access most beta API features through the `beta()` method on the client. To enable a particular beta feature, add the appropriate [beta header](../api/api-beta-headers.md) with `.addBeta()` when building the message params.
 

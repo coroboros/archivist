@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/sessions/threads/list
 
 # List Session Threads
 
-`$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsSessionThread>`
+`$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<ManagedAgentsSessionThreadStatus> statuses, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsSessionThread>`
 
 **GET** `/v1/sessions/{session_id}/threads`
 
@@ -28,6 +28,12 @@ List Session Threads
 - `page?:optional string` (query parameter)
 
   Opaque pagination cursor from a previous response's `next_page`. Forward-only.
+
+- `statuses?:optional list<ManagedAgentsSessionThreadStatus>` (query parameter)
+
+  Return only threads that have one of these statuses.
+
+  Repeat the parameter to give more than one status. Leave it out to return threads of every status.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -85,6 +91,10 @@ List Session Threads
 
     Cumulative token usage for this thread. Null until the thread's first idle transition.
 
+  - `?string workflowRunID`
+
+    Identifier of the workflow run that created the thread, or `null` for any other thread.
+
 ## Example
 
 ```php
@@ -98,6 +108,7 @@ $page = $client->beta->sessions->threads->list(
   'sesn_011CZkZAtmR3yMPDzynEDxu7',
   limit: 0,
   page: 'page',
+  statuses: [ManagedAgentsSessionThreadStatus::RUNNING],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
@@ -192,7 +203,8 @@ var_dump($page);
           "web_fetch_requests": 0,
           "web_search_requests": 3
         }
-      }
+      },
+      "workflow_run_id": null
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

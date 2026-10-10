@@ -746,7 +746,7 @@ A `session.status_idle` event means the agent has stopped and is waiting for inp
 | `requires_action`  | One or more tool calls need an answer from you, such as a custom tool call or a confirmation request.                                              | [Answer each blocking tool call](./managed-agents-events-and-streaming.md#answer-tool-calls-that-pause-the-session).            |
 | `budget_reached`   | The session's tracked list cost reached its [budget](./managed-agents-budgets.md).                                  | [Change or remove the budget](./managed-agents-budgets.md#resume-a-session-at-its-budget).                                      |
 
-No event you send resumes a session paused at its budget. The paused work resumes automatically when you change the budget to a value above the consumed list cost, or remove it. When the work resumes, the session emits a `workflow_run.status_running` event for each [workflow run that the budget paused](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#budgets-and-limits). See [When a session reaches its budget](./managed-agents-budgets.md#when-a-session-reaches-its-budget) for the events that mark the pause and the events the session still accepts.
+No event you send resumes a session paused at its budget. The work that the budget paused resumes automatically when you change the budget to a value above the consumed list cost, or remove it. When the work resumes, the session emits a `workflow_run.status_running` event for each [workflow run that the budget paused](./managed-agents-workflow-runs.md#budgets-and-limits). A run that an interrupt paused stays paused; see [Resume a session at its budget](./managed-agents-budgets.md#resume-a-session-at-its-budget). See [When a session reaches its budget](./managed-agents-budgets.md#when-a-session-reaches-its-budget) for the events that mark the pause and the events the session still accepts.
 
 ## Answer tool calls that pause the session
 
@@ -757,11 +757,11 @@ A session pauses when the agent invokes a [custom tool](./managed-agents-tools.m
 3. For each blocking event ID, send a [`user.custom_tool_result`](./managed-agents-events-and-streaming.md#return-a-custom-tool-result) or a [`user.tool_confirmation`](./managed-agents-events-and-streaming.md#confirm-a-tool-call) event. A custom tool result doesn't have to wait for step 2.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-In a multiagent session, a subagent's blocking events are cross-posted to the primary thread. See [Tool permissions and custom tools](https://platform.claude.com/docs/en/managed-agents/session-threads.md#tool-permissions-and-custom-tools).
+In a multiagent session, a subagent's blocking events are cross-posted to the primary thread. See [Tool permissions and custom tools](./managed-agents-session-threads.md#tool-permissions-and-custom-tools).
 
 ### Return a custom tool result
 
-The `agent.custom_tool_use` event contains the tool name and input. Execute the tool in your system. Then send a `user.custom_tool_result` event, passing the event ID in the `custom_tool_use_id` parameter along with the result content.
+The `agent.custom_tool_use` event contains the tool name and input. Run the tool in your system. Then send a `user.custom_tool_result` event, passing the event ID in the `custom_tool_use_id` parameter along with the result content.
 
 You can send the result as soon as the `agent.custom_tool_use` event arrives, without waiting for `session.status_idle`. The session still emits `session.status_idle` with a `requires_action` stop reason for the call, and your client can ignore it. A second result for the same call is accepted and has no effect.
 
@@ -1023,7 +1023,7 @@ The following example answers each call as it arrives:
   ```
 </CodeGroup>
 
-If the agent has [workflow runs](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md) open, a custom tool call can arrive while the session stays `running`. The `requires_action` idle event arrives only when none of the [session's threads](https://platform.claude.com/docs/en/managed-agents/session-threads.md) is working. Don't wait for it: answer each call when its `agent.custom_tool_use` event arrives. The sample in [Follow a run](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#follow-a-run) shows how.
+If the agent has [workflow runs](./managed-agents-workflow-runs.md) open, a custom tool call can arrive while the session stays `running`. The `requires_action` idle event arrives only when none of the [session's threads](./managed-agents-session-threads.md) is working. Don't wait for it: answer each call when its `agent.custom_tool_use` event arrives. The sample in [Follow a run](./managed-agents-workflow-runs.md#follow-a-run) shows how.
 
 ### Confirm a tool call
 
@@ -1257,7 +1257,7 @@ The following example approves every pending call:
   ```
 </CodeGroup>
 
-The previous example approves each call after the session goes idle. If the agent has [workflow runs](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md) open, a tool call can wait for your confirmation while the session stays `running`. Don't wait for the idle event: when an `agent.tool_use` or `agent.mcp_tool_use` event arrives whose [`evaluated_permission`](./managed-agents-permission-policies.md#see-how-each-call-was-evaluated) is `ask`, answer it. The sample in [Follow a run](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#follow-a-run) answers custom tool calls this way, and its introduction says how to add confirmations.
+The previous example approves each call after the session goes idle. If the agent has [workflow runs](./managed-agents-workflow-runs.md) open, a tool call can wait for your confirmation while the session stays `running`. Don't wait for the idle event: when an `agent.tool_use` or `agent.mcp_tool_use` event arrives whose [`evaluated_permission`](./managed-agents-permission-policies.md#see-how-each-call-was-evaluated) is `ask`, answer it. The sample in [Follow a run](./managed-agents-workflow-runs.md#follow-a-run) answers custom tool calls this way, and its introduction says how to add confirmations.
 
 ## Resume an idle session
 
@@ -1625,7 +1625,7 @@ The call returns as soon as the events are queued. The interrupt then takes effe
 2. The `user.interrupt` event appears on the stream, and the interrupted turn ends with a `session.status_idle` event.
 3. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
-The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that finishes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#interrupt-a-session-with-runs-open).
+The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that finishes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](./managed-agents-workflow-runs.md#interrupt-a-session-with-runs-open).
 
 ## List past events
 

@@ -3841,11 +3841,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `"claude-haiku-4-5"`
 
-                            Fastest model with near-frontier intelligence
-
                           - `"claude-haiku-4-5-20251001"`
-
-                            Fastest model with near-frontier intelligence
 
                           - `"claude-opus-4-5"`
 
@@ -4218,11 +4214,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -4463,11 +4455,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `"claude-haiku-4-5"`
 
-            Fastest model with near-frontier intelligence
-
           - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 
@@ -4756,7 +4744,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-            - Determine which iterations exceeded long context thresholds (>=200k tokens)
             - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
 
@@ -4864,11 +4851,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -5052,11 +5035,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -5199,11 +5178,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -8748,11 +8723,7 @@ ant beta:messages:batches results \
 
                           - `"claude-haiku-4-5"`
 
-                            Fastest model with near-frontier intelligence
-
                           - `"claude-haiku-4-5-20251001"`
-
-                            Fastest model with near-frontier intelligence
 
                           - `"claude-opus-4-5"`
 
@@ -9125,11 +9096,7 @@ ant beta:messages:batches results \
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -9370,11 +9337,7 @@ ant beta:messages:batches results \
 
           - `"claude-haiku-4-5"`
 
-            Fastest model with near-frontier intelligence
-
           - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 
@@ -9663,7 +9626,6 @@ ant beta:messages:batches results \
 
             Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-            - Determine which iterations exceeded long context thresholds (>=200k tokens)
             - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
 
@@ -9771,11 +9733,7 @@ ant beta:messages:batches results \
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -9959,11 +9917,7 @@ ant beta:messages:batches results \
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -10106,11 +10060,7 @@ ant beta:messages:batches results \
 
                 - `"claude-haiku-4-5"`
 
-                  Fastest model with near-frontier intelligence
-
                 - `"claude-haiku-4-5-20251001"`
-
-                  Fastest model with near-frontier intelligence
 
                 - `"claude-opus-4-5"`
 
@@ -13475,11 +13425,7 @@ ant beta:messages:batches results \
 
                         - `"claude-haiku-4-5"`
 
-                          Fastest model with near-frontier intelligence
-
                         - `"claude-haiku-4-5-20251001"`
-
-                          Fastest model with near-frontier intelligence
 
                         - `"claude-opus-4-5"`
 
@@ -13852,11 +13798,7 @@ ant beta:messages:batches results \
 
               - `"claude-haiku-4-5"`
 
-                Fastest model with near-frontier intelligence
-
               - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
 
               - `"claude-opus-4-5"`
 
@@ -14097,11 +14039,7 @@ ant beta:messages:batches results \
 
         - `"claude-haiku-4-5"`
 
-          Fastest model with near-frontier intelligence
-
         - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
 
         - `"claude-opus-4-5"`
 
@@ -14390,7 +14328,6 @@ ant beta:messages:batches results \
 
           Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-          - Determine which iterations exceeded long context thresholds (>=200k tokens)
           - Calculate the context window size from the last `message` entry
           - Understand token accumulation across server-side tool use loops
 
@@ -14498,11 +14435,7 @@ ant beta:messages:batches results \
 
               - `"claude-haiku-4-5"`
 
-                Fastest model with near-frontier intelligence
-
               - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
 
               - `"claude-opus-4-5"`
 
@@ -14686,11 +14619,7 @@ ant beta:messages:batches results \
 
               - `"claude-haiku-4-5"`
 
-                Fastest model with near-frontier intelligence
-
               - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
 
               - `"claude-opus-4-5"`
 
@@ -14833,11 +14762,7 @@ ant beta:messages:batches results \
 
               - `"claude-haiku-4-5"`
 
-                Fastest model with near-frontier intelligence
-
               - `"claude-haiku-4-5-20251001"`
-
-                Fastest model with near-frontier intelligence
 
               - `"claude-opus-4-5"`
 
@@ -18164,11 +18089,7 @@ ant beta:messages:batches results \
 
                       - `"claude-haiku-4-5"`
 
-                        Fastest model with near-frontier intelligence
-
                       - `"claude-haiku-4-5-20251001"`
-
-                        Fastest model with near-frontier intelligence
 
                       - `"claude-opus-4-5"`
 
@@ -18541,11 +18462,7 @@ ant beta:messages:batches results \
 
             - `"claude-haiku-4-5"`
 
-              Fastest model with near-frontier intelligence
-
             - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 
@@ -18786,11 +18703,7 @@ ant beta:messages:batches results \
 
       - `"claude-haiku-4-5"`
 
-        Fastest model with near-frontier intelligence
-
       - `"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
@@ -19079,7 +18992,6 @@ ant beta:messages:batches results \
 
         Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-        - Determine which iterations exceeded long context thresholds (>=200k tokens)
         - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
 
@@ -19187,11 +19099,7 @@ ant beta:messages:batches results \
 
             - `"claude-haiku-4-5"`
 
-              Fastest model with near-frontier intelligence
-
             - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 
@@ -19375,11 +19283,7 @@ ant beta:messages:batches results \
 
             - `"claude-haiku-4-5"`
 
-              Fastest model with near-frontier intelligence
-
             - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 
@@ -19522,11 +19426,7 @@ ant beta:messages:batches results \
 
             - `"claude-haiku-4-5"`
 
-              Fastest model with near-frontier intelligence
-
             - `"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
 
             - `"claude-opus-4-5"`
 

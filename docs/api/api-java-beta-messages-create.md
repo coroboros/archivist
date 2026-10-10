@@ -159,7 +159,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-    If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+    If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response. This is called prefill. On models that don't support prefill, creating a message that ends with a partial `assistant` response returns a 400 error. See [Prefill not supported](./api-errors.md#prefill-not-supported).
 
     Example with a single `user` message:
 
@@ -177,7 +177,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     ]
     ```
 
-    Example with a partially-filled response from Claude:
+    Example with a partially-filled response from Claude, for models that support prefill:
 
     ```json
     [
@@ -3164,11 +3164,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
 
-                          Fastest model with near-frontier intelligence
-
                         - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                          Fastest model with near-frontier intelligence
 
                         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
@@ -3648,7 +3644,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaFallbacksParam> fallbacks`
 
-    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. Some models don't support fallbacks; on those models, a list of fallback models returns a 400 error. See [Server-side fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md#server-side-fallback). The string "default" requests the requested model's server-defined default fallback configuration. On a model that doesn't support fallbacks, the request runs on the requested model alone, so a declined request stays declined.
 
   - `Optional<String> inferenceGeo`
 
@@ -3732,11 +3728,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<BetaThinkingConfigParam> thinking`
 
-    Configuration for enabling Claude's extended thinking.
+    Configuration for Claude's thinking.
 
-    When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+    With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
-    See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+    Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../build-with-claude/build-with-claude-thinking.md#configuring-thinking) for each model's behavior.
 
   - `Optional<BetaToolChoice> toolChoice`
 
@@ -6612,11 +6608,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
 
-                      Fastest model with near-frontier intelligence
-
                     - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-                      Fastest model with near-frontier intelligence
 
                     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
@@ -7284,7 +7276,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-      - Determine which iterations exceeded long context thresholds (>=200k tokens)
       - Calculate the context window size from the last `message` entry
       - Understand token accumulation across server-side tool use loops
 
@@ -7691,7 +7682,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-        - Determine which iterations exceeded long context thresholds (>=200k tokens)
         - Calculate the context window size from the last `message` entry
         - Understand token accumulation across server-side tool use loops
 

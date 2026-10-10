@@ -147,7 +147,7 @@ Archive Session Thread
 
     Unique identifier for this thread.
 
-  - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor`
+  - `agent: BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor | BetaManagedAgentsInlineAgent`
 
     Resolved agent definition for this thread. Snapshot of the agent at thread creation time.
 
@@ -225,11 +225,7 @@ Archive Session Thread
 
           - `:"claude-haiku-4-5"`
 
-            Fastest model with near-frontier intelligence
-
           - `:"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
 
           - `:"claude-opus-4-5"`
 
@@ -771,6 +767,52 @@ Archive Session Thread
 
         The advisor model id.
 
+    - `class BetaManagedAgentsInlineAgent`
+
+      An agent that has no Agent resource, and so no `id` or `version`. It is defined inline, in a workflow run's plan or when a session thread is spawned, and is not saved.
+
+      - `type: :inline`
+
+      - `description: String`
+
+      - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
+
+        - `type: :url`
+
+        - `name: String`
+
+        - `url: String`
+
+      - `model: BetaManagedAgentsModelConfig`
+
+        Model identifier and configuration.
+
+      - `name: String`
+
+        The name that the agent's definition gave, or one that the server assigned.
+
+      - `skills: Array[BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill]`
+
+        - `class BetaManagedAgentsAnthropicSkill`
+
+          A resolved Anthropic-managed skill.
+
+        - `class BetaManagedAgentsCustomSkill`
+
+          A resolved user-created custom skill.
+
+      - `system_: String`
+
+      - `tools: Array[BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool]`
+
+        - `class BetaManagedAgentsAgentToolset20260401`
+
+        - `class BetaManagedAgentsMCPToolset`
+
+        - `class BetaManagedAgentsCustomTool`
+
+          A custom tool as returned in API responses.
+
   - `archived_at: Time`
 
     When the thread was archived. Null if not archived.
@@ -903,6 +945,10 @@ Archive Session Thread
 
         format: int32
 
+  - `workflow_run_id: String`
+
+    Identifier of the workflow run that created the thread, or `null` for any other thread.
+
 ## Example
 
 ```ruby
@@ -1003,6 +1049,7 @@ puts(beta_managed_agents_session_thread)
       "web_fetch_requests": 0,
       "web_search_requests": 3
     }
-  }
+  },
+  "workflow_run_id": null
 }
 ```

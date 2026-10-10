@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-A session budget is an optional hard spend ceiling you set when you [create a session](./managed-agents-sessions.md). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](./managed-agents-budgets.md#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](./managed-agents-session-operations.md#session-statuses) rather than terminating; changing or removing the budget resumes its work automatically. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](./managed-agents-budgets.md#budgets-on-deployments).
+A session budget is an optional hard spend ceiling you set when you [create a session](./managed-agents-sessions.md). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](./managed-agents-budgets.md#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](./managed-agents-session-operations.md#session-statuses) rather than terminating; changing or removing the budget resumes the work that the budget paused. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](./managed-agents-budgets.md#budgets-on-deployments).
 
 ## Set a budget at session creation
 
@@ -159,8 +159,8 @@ A budget can only be attached when the session is created. Adding a budget to an
 The platform prices what the session consumes, continuously, at public list rates:
 
 * **Model tokens**, at each served model's list price
-* **Web searches**, at $10 per 1,000 searches
-* **Session running time**, at $0.08 per hour
+* **Web searches**, at $10 USD per 1,000 searches
+* **Session running time**, at $0.08 USD per hour
 
 This running dollar total is the session's **list cost**, and it is what the budget compares against. List cost is not your contracted price: if your organization has negotiated discounts, the session reaches its cap when the list-price total does, and your billed spend might be lower than the cap.
 
@@ -176,7 +176,7 @@ A session that reaches its budget goes idle with a `stop_reason` of `budget_reac
 2. A [`session.usage`](./managed-agents-budgets.md#monitor-spend) event with the session's cumulative usage and list cost.
 3. A `session.status_idle` event with a `stop_reason` of `budget_reached`. The usage event always immediately precedes this idle event.
 
-If [workflow runs](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#budgets-and-limits) are open, each one that isn't already idle also gets a `workflow_run.status_idle` event.
+If [workflow runs](./managed-agents-workflow-runs.md#budgets-and-limits) are open, each one that isn't already idle also gets a `workflow_run.status_idle` event.
 
 A thread whose final request both crosses the cap and completes its turn reports `end_turn` on its own `session.thread_status_idle` event while the session still reports `budget_reached`; treat the session-level `stop_reason` as the signal that the session paused at its budget.
 
@@ -191,11 +191,15 @@ While the session is at or over its budget, it accepts only events that settle w
 
 Any event that would start new work, such as `user.message`, is rejected with a 400 error naming this list. Settled results are recorded without triggering a new model request; the session stays paused at its budget.
 
-A `user.interrupt` sent while the session is paused at its budget (all threads paused at the cap) is accepted and ignored: it does not appear in the event list and changes nothing. Change or remove the budget to continue. It sends no [workflow run](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#budgets-and-limits) event either: the budget has already paused every open run.
+A `user.interrupt` sent while the session is paused at its budget (all threads paused at the cap) is accepted, and it does not appear in the event list. It stops no thread, because every thread is already paused. Change or remove the budget to continue.
+
+If the session has open [workflow runs](./managed-agents-workflow-runs.md#interrupt-a-session-with-runs-open), the interrupt can pause them, as an interrupt at any other time can. A run that an interrupt paused doesn't resume when you change or remove the budget. To continue it, change or remove the budget, then send a `user.message` asking the agent to continue its runs.
 
 ## Resume a session at its budget
 
-Change or remove the budget with a session update. An accepted update resumes the session's paused work automatically; no further client action is needed. Each [workflow run](https://platform.claude.com/docs/en/managed-agents/workflow-runs.md#budgets-and-limits) that the budget paused also gets a `workflow_run.status_running` event.
+Change or remove the budget with a session update. An accepted update automatically resumes the work that the budget paused; no further client action is needed.
+
+Each [workflow run](./managed-agents-workflow-runs.md#budgets-and-limits) that the budget paused also gets a `workflow_run.status_running` event. A run that an interrupt paused, even an interrupt sent while the session was at its budget, stays paused and gets no `workflow_run.status_running` event from the update. To continue it, send a `user.message` asking the agent to continue its runs. See [Interrupt a session with runs open](./managed-agents-workflow-runs.md#interrupt-a-session-with-runs-open).
 
 ### Change the budget
 
@@ -309,7 +313,7 @@ Update the session with a new `max_list_cost`. The new value can be higher or lo
 
 ### Remove the budget
 
-Set `budget` to `null` to remove the cap entirely. The session's paused work resumes, and the resulting `session.updated` event carries `budget` set to `null`.
+Set `budget` to `null` to remove the cap entirely. The work that the budget paused resumes, and the resulting `session.updated` event carries `budget` set to `null`.
 
 <CodeGroup>
   ```bash cURL
