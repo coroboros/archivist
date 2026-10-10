@@ -1,135 +1,132 @@
 ---
-title: "Models"
+title: "Fable vs. Mythos"
 source: "https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5"
 category: "general"
 generated: true
 ---
 ---
-title: Introducing Claude Fable 5 and Claude Mythos 5
-url: https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5
-description: Claude Fable 5 and Claude Mythos 5 capabilities, API changes, and availability.
+title: Claude Fable 5
+url: https://platform.claude.com/docs/en/models/fable-5/overview
+description: "Claude Fable 5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Fable 5 is a legacy model, and Claude Fable 5.1 is the current Fable model."
 ---
 
-<Note>
-  Claude Fable 5.1 and Claude Mythos 5.1 build on these models. See [What's new in Claude Fable 5.1](./general-models-fable-5-1-whats-new-fable-5-1.md).
-</Note>
+**Legacy.** Released June 9, 2026.
 
-<Tip>
-  Access to Claude Fable 5 and Claude Mythos 5 has been restored. See [our statement](https://www.anthropic.com/news/redeploying-fable-5) for more information.
-</Tip>
+Although Claude Fable 5 is still available, you should consider migrating to Claude Fable 5.1. [See Claude Fable 5.1](./general-models-fable-5-1-overview.md) · [Migrate to Claude Fable 5.1](./general-models-fable-5-1-migration-guide.md#migrating-from-claude-fable-5-to-claude-fable-5-1)
 
-Claude Fable 5 is built for demanding reasoning and long-horizon agentic work. Claude Mythos 5 shares the same capabilities and is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
+Model ID: `claude-fable-5`
 
-The headline change for integrations: Claude Fable 5 includes safety classifiers that can decline requests. If your integration calls Claude Fable 5, plan for three changes: new response handling for refusals, fallback options for retrying on another Claude model, and new billing rules. [Refusals, fallback, and billing on Claude Fable 5](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md#refusals-fallback-and-billing-on-claude-fable-5) summarizes all three.
+Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTok · Output pricing: $50 / MTok
 
-## Models
+[Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5)
 
-| Model           | API model ID      | Description                                                                                                                                                                                                                                              |
-| --------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Fable 5  | `claude-fable-5`  | Built for demanding reasoning and long-horizon agentic work                                                                                                                                                                                              |
-| Claude Mythos 5 | `claude-mythos-5` | Shares Claude Fable 5's capabilities. Available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Successor to Claude Mythos Preview. |
+## Fable vs. Mythos
 
-Claude Fable 5 and Claude Mythos 5 share the same specs and pricing:
+[Claude Mythos 5](./general-models-mythos-5-overview.md) is offered separately for defensive cybersecurity workflows and is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It shares Claude Fable 5's specifications and pricing.
 
-* **Context window and output:** a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default, and up to 128k output tokens per request.
-* **Pricing:** $10 USD per million input tokens and $50 USD per million output tokens.
+## How it compares to the current lineup
 
-For specs across all current models, see the [models overview](./general-models-overview.md).
+| Model                                                                               | Context | Max output | Price / MTok       | Thinking             | Default effort | Knowledge cutoff |
+| :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------------------- | :------------- | :--------------- |
+| [Claude Fable 5.1](./general-models-fable-5-1-overview.md)   | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jun 2026         |
+| **Claude Fable 5** (this model)                                                     | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jan 2026         |
+| [Claude Opus 5.5](./general-models-opus-5-5-overview.md)     | 1M      | 128K       | $4 / $20           | Adaptive (always on) | `medium`       | Jun 2026         |
+| [Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) | 1M      | 128K       | $2 / $10           | Adaptive             | `high`         | Jun 2026         |
+| [Claude Haiku 5.5](./general-models-haiku-5-5-overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
 
-## Refusals, fallback, and billing on Claude Fable 5
+* **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
+* **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
+* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
+* **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
+* **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
+* **Knowledge cutoff:** Reliable knowledge cutoff: the date through which the model’s knowledge is most extensive and reliable.
 
-Claude Fable 5 includes safety classifiers that can decline certain requests. The following sections summarize what refusals mean for your integration. Each links to the full guide.
+## Specifications
 
-### Refusals
+### Model IDs
 
-When Claude Fable 5 declines a request, the Messages API returns `stop_reason: "refusal"` as a successful HTTP 200 response, not an error. The response also reports which classifier declined the request. See [Refusals and fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md) for response shapes and handling guidance.
+| Platform                                                                                               | Model ID                   |
+| :----------------------------------------------------------------------------------------------------- | :------------------------- |
+| Claude API                                                                                             | `claude-fable-5`           |
+| [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)       | `anthropic.claude-fable-5` |
+| [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)              | `claude-fable-5`           |
+| [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) | `claude-fable-5`           |
+| [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) | `claude-fable-5`           |
 
-### Fallback
+### Pricing
 
-A request that Claude Fable 5 refuses can usually be served by another Claude model. There are three ways to retry:
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $10 / MTok                       |
+| Output                                                                                 | $50 / MTok                       |
+| [5m cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $12.50 / MTok                    |
+| [1h cache write](../build-with-claude/build-with-claude-prompt-caching.md) | $20 / MTok                       |
+| [Cache read](../build-with-claude/build-with-claude-prompt-caching.md)     | $1 / MTok                        |
+| [Batch API](../build-with-claude/build-with-claude-batch-processing.md)    | 50% discount on input and output |
 
-* **Server-side:** Pass the `fallbacks` parameter to have the API retry for you, using its `"default"` mode for Anthropic's recommended models or naming your own (in beta on the Claude API). See [Server-side fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md#server-side-fallback).
-* **Client-side:** Use the [SDK middleware](./general-cli-sdks-libraries-middleware.md) to retry from the client on any platform. See [Client-side fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md#client-side-fallback).
-* **Manual:** Build the retry yourself, on any platform and in any language. See [Fallback credit](../build-with-claude/build-with-claude-fallback-credit.md).
+[Full price list](../about-claude/about-claude-pricing.md)
 
-### Billing
+### Capabilities
 
-A refusal that arrives before any output is billed when it is in a category with low volumes of false positives, to disrupt attempts to circumvent Anthropic's safeguards at scale. Before September 24, 2026, these refusals were not billed. A mid-stream refusal bills the input tokens and the output already streamed at normal rates. For the billed categories, see [How refusals are billed](../build-with-claude/build-with-claude-refusals-and-fallback.md#how-refusals-are-billed). When you retry on another model, [fallback credit](../build-with-claude/build-with-claude-fallback-credit.md) refunds the prompt-cache cost of switching, so you avoid paying that cost twice.
+| Feature                                                                                 | Value                  |
+| :-------------------------------------------------------------------------------------- | :--------------------- |
+| [Context window](../build-with-claude/build-with-claude-context-windows.md) | 1M tokens              |
+| Max output                                                                              | 128K tokens            |
+| [Thinking](../build-with-claude/build-with-claude-thinking.md)              | Adaptive (always on)   |
+| [Default effort](../build-with-claude/build-with-claude-effort.md)          | `high`                 |
+| Input → output                                                                          | Text and images → text |
+| Reliable knowledge cutoff                                                               | Jan 2026               |
+| Training data cutoff                                                                    | Jan 2026               |
 
-## Availability
+### Availability
 
-* **Claude Fable 5** is available on the Claude API, [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md).
-* **Claude Mythos 5** is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Customers without access to Claude Mythos 5 can use Claude Fable 5, which does not require access approval and offers the same capabilities.
+| Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Status](../about-claude/about-claude-model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Released                                                                      | June 9, 2026                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Retirement                                                                    | Not sooner than June 9, 2027                                                                                                                                                                                                                                                                                                                                                                                            |
+| Platforms                                                                     | Claude API, [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) |
 
-Claude Fable 5 and Claude Mythos 5 carry 30-day data retention and are not available under zero data retention unless expressly authorized by Anthropic. Both are designated [Covered Models](https://support.claude.com/en/articles/15425695). See [Model-specific data retention requirements](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
+## Resources
 
-## Prompting
-
-Claude Fable 5 responds to the same prompting techniques as other Claude models, with a few differences in how to structure long-context prompts and reasoning instructions. See [Prompting Claude Fable 5](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md).
-
-## Messages API on Claude Fable 5 and Claude Mythos 5
-
-### Adaptive thinking is always on
-
-Claude Fable 5 and Claude Mythos 5 always have thinking enabled. Passing `thinking: {"type": "disabled"}` is not supported. To reduce or otherwise control thinking depth, use the [effort](../build-with-claude/build-with-claude-effort.md) parameter.
-
-### Raw thinking content is never returned
-
-The raw chain of thought is never returned on Claude Fable 5 and Claude Mythos 5. The `thinking.display` setting controls what thinking blocks contain instead:
-
-* `"summarized"` returns thinking blocks with a readable summary of the reasoning.
-* `"omitted"` (the default) returns thinking blocks with an empty `thinking` field.
-
-Pass thinking blocks back unchanged in multi-turn conversations on the same model. See [thinking output on Claude Fable 5 and Claude Mythos 5](../build-with-claude/build-with-claude-thinking.md#thinking-output-on-claude-fable-5-and-claude-mythos-5) for cross-model handling.
-
-## Supported features
-
-Claude Fable 5 and Claude Mythos 5 support:
-
-* [Effort](../build-with-claude/build-with-claude-effort.md)
-* [Task budgets](../build-with-claude/build-with-claude-task-budgets.md) (beta: set the `task-budgets-2026-03-13` header)
-* The [memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md)
-* [Code execution](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md)
-* [Programmatic tool calling](../agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md)
-* Tool result clearing through [context editing](../build-with-claude/build-with-claude-context-editing.md) (beta: set the `context-management-2025-06-27` header)
-* [Compaction](../build-with-claude/build-with-claude-compaction.md)
-* [Vision](../build-with-claude/build-with-claude-vision.md)
-
-## Migrating from earlier models
-
-Step-by-step instructions live in the migration guide:
-
-* From Claude Mythos Preview: see [Migrating from Claude Mythos Preview to Claude Mythos 5](./general-models-fable-5-migration-guide.md#migrating-from-claude-mythos-preview).
-* From Claude Opus 4.8: see [Migrating from Claude Opus 4.8 to Claude Fable 5](./general-models-fable-5-migration-guide.md#migrating-from-claude-opus-48).
-
-## Next steps
-
-<CardGroup>
-  <Card title="Models overview" icon="settings" href="./general-models-overview.md">
-    Specs and comparison for all current Claude models.
+<CardGroup cols={3}>
+  <Card title="Migrate to Claude Fable 5.1" icon="arrows-left-right" href="./general-models-fable-5-1-migration-guide.md">
+    What changes when moving from Claude Fable 5 to Claude Fable 5.1.
   </Card>
 
-  <Card title="Adaptive thinking" icon="brain" href="../build-with-claude/build-with-claude-thinking.md">
-    The only thinking mode on Claude Fable 5 and Claude Mythos 5.
+  <Card title="Claude Fable 5.1" icon="arrow-right" href="./general-models-fable-5-1-overview.md">
+    The current Fable model: overview, specs, and resources.
+  </Card>
+
+  <Card title="Prompting Claude Fable 5" icon="lightbulb" href="../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md">
+    Model-specific prompting guidance for long-horizon and agentic work.
   </Card>
 
   <Card title="Refusals and fallback" icon="shield" href="../build-with-claude/build-with-claude-refusals-and-fallback.md">
-    How Claude Fable 5 declines requests, and how to retry on another model.
+    Handle classifier refusals and retry on another Claude model with the `fallbacks` parameter.
+  </Card>
+</CardGroup>
+
+## Reference
+
+<CardGroup cols={3}>
+  <Card title="System prompt" icon="text" href="../release-notes/release-notes-system-prompts-overview.md">
+    The system prompt Claude Fable 5 uses on claude.ai and the Claude apps.
   </Card>
 
-  <Card title="Fallback credit" icon="coins" href="../build-with-claude/build-with-claude-fallback-credit.md">
-    Avoid paying the prompt-cache cost twice on a retry.
+  <Card title="System card" icon="file" href="https://www.anthropic.com/claude-fable-5-mythos-5-system-card">
+    Safety evaluations and deployment decisions for Claude Fable 5 and Claude Mythos 5.
   </Card>
 
-  <Card title="Fallback and billing cookbook" icon="book-open" href="https://platform.claude.com/cookbook/fable-5-fallback-billing-guide">
-    A worked end-to-end example of refusal handling, fallback, and billing.
+  <Card title="Pricing" icon="coins" href="../about-claude/about-claude-pricing.md">
+    Full price list, including batch discounts and prompt caching rates.
   </Card>
 
-  <Card title="Effort" icon="sliders" href="../build-with-claude/build-with-claude-effort.md">
-    Control thinking depth and cost on Claude Fable 5 and Claude Mythos 5.
+  <Card title="Model IDs and versioning" icon="fingerprint" href="../about-claude/about-claude-models-model-ids-and-versions.md">
+    How model IDs, aliases, and pinned snapshots work.
   </Card>
 
-  <Card title="Prompting Claude Fable 5" icon="terminal" href="../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md">
-    Fable-specific prompting techniques.
+  <Card title="Model deprecations" icon="clock" href="../about-claude/about-claude-model-deprecations.md">
+    Lifecycle status and retirement commitments for every Claude model.
   </Card>
 </CardGroup>

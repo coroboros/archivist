@@ -12,7 +12,7 @@ description: "Claude Opus 4.6 reference: lifecycle status, model IDs on every pl
 
 **Legacy.** Released February 5, 2026.
 
-Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5.5 for improved performance. [See Claude Opus 5.5](./general-models-opus-5-5-overview.md) · [Migrate to Claude Opus 5.5](./general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-46)
+Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5.5. [See Claude Opus 5.5](./general-models-opus-5-5-overview.md) · [Migrate to Claude Opus 5.5](./general-models-opus-5-5-migration-guide.md#migrating-from-claude-opus-46)
 
 Model ID: `claude-opus-4-6`
 

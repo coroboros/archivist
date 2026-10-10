@@ -375,6 +375,16 @@ When enabled plugins from different origins share a manifest name, this order de
 
 Because the order compares manifest names, a `--plugin-dir` plugin named `hello-plugin` replaces `hello@example-marketplace` when that plugin's manifest also says `"name": "hello-plugin"`.
 
+<h3 id="hooks-when-two-enabled-plugins-share-a-name">
+  Hooks when two enabled plugins share a name
+</h3>
+
+When you install and enable two plugins with the same manifest name from different marketplaces, both appear as enabled in `/plugin`, but the hooks of one of them are left out. One plugin per name registers the hooks in its `hooks/hooks.json`, and one plugin per name loads a [hooks module](/docs/en/plugins/mods/overview). When your organization's managed settings turn on one of the copies, that copy holds the name. Otherwise the copy Claude Code loads first holds it.
+
+To see which copy holds the name, run `/plugin` in your session and open the **Errors** tab. A note there for the copy whose hooks were left out names the copy that holds the name, and the left-out copy's details show the same note. For `hooks/hooks.json` hooks the note begins `Its hooks.json hooks do not run`, and for a hooks module it begins `Its hooks module does not load`. The note requires Claude Code v2.1.296 or later.
+
+To run the left-out copy's hooks instead, disable or uninstall the copy that holds the name, then run `/reload-plugins` in your session. The reload registers the remaining copy's hooks and clears the note. When the copy that holds the name is one your managed settings turn on, you can't disable it, and the other copy's hooks stay off while both are installed.
+
 ### Keep a session-only plugin from loading
 
 To keep a `--plugin-dir` plugin from shadowing anything, or to turn one off when a parent process passes the flag for you, set its id to `false` in any settings file. For a plugin whose manifest name is `hello-plugin`, the entry is `"enabledPlugins": {"hello-plugin@inline": false}`. A disabled session-only plugin doesn't shadow, so the marketplace or skills-directory copy loads instead.

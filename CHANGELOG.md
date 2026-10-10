@@ -1,5 +1,82 @@
 # Changelog
 
+## 🤖 v1.5.221 - 10/10/2026
+
+File Changes:
+
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-5-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-sonnet-5-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-api.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-components.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-host-marketplace.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-models-fable-5-1-migration-guide.md`
+- Modified: `docs/general/general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md`
+- Modified: `docs/general/general-models-fable-5-migration-guide.md`
+- Modified: `docs/general/general-models-fable-5-overview.md`
+- Modified: `docs/general/general-models-haiku-4-5-overview.md`
+- Modified: `docs/general/general-models-mythos-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-5-overview.md`
+- Modified: `docs/general/general-models-opus-4-6-overview.md`
+- Modified: `docs/general/general-models-opus-4-7-overview.md`
+- Modified: `docs/general/general-models-opus-4-8-overview.md`
+- Modified: `docs/general/general-models-opus-5-overview.md`
+- Modified: `docs/general/general-models-opus-5-whats-new-opus-5.md`
+- Modified: `docs/general/general-models-sonnet-4-6-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-overview.md`
+- Modified: `docs/general/general-models-sonnet-5-whats-new-sonnet-5.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-session-threads.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.220 - 10/10/2026
 
 File Changes:

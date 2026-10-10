@@ -12,7 +12,7 @@ description: "Claude Sonnet 4.6 reference: lifecycle status, model IDs on every 
 
 **Legacy.** Released February 17, 2026.
 
-Although Claude Sonnet 4.6 is still available, you should consider migrating to Claude Sonnet 5.5 for improved performance. [See Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) · [Migrate to Claude Sonnet 5.5](./general-models-sonnet-5-5-migration-guide.md#migrating-from-claude-sonnet-4-6)
+Although Claude Sonnet 4.6 is still available, you should consider migrating to Claude Sonnet 5.5. [See Claude Sonnet 5.5](./general-models-sonnet-5-5-overview.md) · [Migrate to Claude Sonnet 5.5](./general-models-sonnet-5-5-migration-guide.md#migrating-from-claude-sonnet-4-6)
 
 Model ID: `claude-sonnet-4-6`
 
