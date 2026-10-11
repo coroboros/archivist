@@ -3566,7 +3566,7 @@ You passed a session ID to `claude --resume <session-id>` and no saved transcrip
 No conversation found with session ID: <session-id>
 ```
 
-Claude Code exits with code 1 after showing the message. Claude Code [searches the current project first, then every other project on this machine](/docs/en/sessions#resume-a-session) for the ID. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so resume from the directory the session last worked in.
+Claude Code exits with code 1 after showing the message. Claude Code [searches the current project first, then every other project on this machine](/docs/en/sessions#where-the-session-picker-looks) for the ID. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so resume from the directory the session last worked in.
 
 Common causes:
 

@@ -1,5 +1,59 @@
 # Changelog
 
+## 🤖 v1.5.222 - 11/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-analytics.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-corporate-launcher.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-dependencies.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-host-marketplace.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-loading.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-session-storage.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Added: `docs/code/code-auto-mode-classifier-billing.md`
+
+
 ## 🤖 v1.5.221 - 10/10/2026
 
 File Changes:
