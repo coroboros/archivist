@@ -27,7 +27,7 @@ Create Agent
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModelConfigParamsResp`
+    - `type BetaManagedAgentsModelConfigParams`
 
       An object that defines additional configuration control over model use
 
@@ -105,11 +105,13 @@ Create Agent
 
           High-performance model for agents and coding
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-        - `string`
+        - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -215,7 +217,7 @@ Create Agent
 
     Skills available to the agent.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp`
+    - `type BetaManagedAgentsAnthropicSkillParams`
 
       An Anthropic-managed skill.
 
@@ -233,7 +235,7 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp`
+    - `type BetaManagedAgentsCustomSkillParams`
 
       A user-created custom skill.
 
@@ -261,17 +263,17 @@ Create Agent
 
     Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+    - `type BetaManagedAgentsAgentToolset20260401Params`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp`
+        - `type BetaManagedAgentsBashToolConfigParams`
 
           Configuration override for the bash tool.
 
@@ -285,7 +287,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -307,7 +309,7 @@ Create Agent
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp`
+        - `type BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
 
@@ -321,7 +323,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -337,7 +339,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp`
+        - `type BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
 
@@ -351,7 +353,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -367,7 +369,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp`
+        - `type BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
 
@@ -381,7 +383,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -397,7 +399,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp`
+        - `type BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
 
@@ -411,7 +413,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -427,7 +429,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp`
+        - `type BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
 
@@ -441,7 +443,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -457,7 +459,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
 
@@ -485,7 +487,7 @@ Create Agent
 
             format: int32
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -501,11 +503,11 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -573,11 +575,11 @@ Create Agent
 
                       minLength: 1, maxLength: 128
 
-            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -597,7 +599,7 @@ Create Agent
 
                   This source contributes no URLs that may be fetched.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
 
@@ -619,7 +621,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -635,7 +637,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `UserLocation BetaManagedAgentsUserLocation Optional`
+          - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
             Approximate user location for search result localization.
 
@@ -665,7 +667,7 @@ Create Agent
 
               minLength: 1, maxLength: 255
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
         Default configuration applied to all tools in this set.
 
@@ -673,7 +675,7 @@ Create Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -689,7 +691,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp`
+    - `type BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -701,7 +703,7 @@ Create Agent
 
         minLength: 1, maxLength: 255
 
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+      - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
         Per-tool configuration overrides.
 
@@ -715,7 +717,7 @@ Create Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -731,7 +733,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
         Default configuration for all tools from this server.
 
@@ -739,7 +741,7 @@ Create Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools from this server.
 
@@ -755,7 +757,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp`
+    - `type BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -767,7 +769,7 @@ Create Agent
 
         minLength: 1
 
-      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+      - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 
@@ -3905,7 +3907,7 @@ Update Agent
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-    - `type BetaManagedAgentsModelConfigParamsResp`
+    - `type BetaManagedAgentsModelConfigParams`
 
       An object that defines additional configuration control over model use
 
@@ -3983,11 +3985,13 @@ Update Agent
 
           High-performance model for agents and coding
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-        - `string`
+        - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -4065,7 +4069,7 @@ Update Agent
 
     Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp`
+    - `type BetaManagedAgentsAnthropicSkillParams`
 
       An Anthropic-managed skill.
 
@@ -4083,7 +4087,7 @@ Update Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp`
+    - `type BetaManagedAgentsCustomSkillParams`
 
       A user-created custom skill.
 
@@ -4111,17 +4115,17 @@ Update Agent
 
     Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+    - `type BetaManagedAgentsAgentToolset20260401Params`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp`
+        - `type BetaManagedAgentsBashToolConfigParams`
 
           Configuration override for the bash tool.
 
@@ -4135,7 +4139,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4157,7 +4161,7 @@ Update Agent
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp`
+        - `type BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
 
@@ -4171,7 +4175,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4187,7 +4191,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp`
+        - `type BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
 
@@ -4201,7 +4205,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4217,7 +4221,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp`
+        - `type BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
 
@@ -4231,7 +4235,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4247,7 +4251,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp`
+        - `type BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
 
@@ -4261,7 +4265,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4277,7 +4281,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp`
+        - `type BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
 
@@ -4291,7 +4295,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4307,7 +4311,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
 
@@ -4335,7 +4339,7 @@ Update Agent
 
             format: int32
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4351,11 +4355,11 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -4423,11 +4427,11 @@ Update Agent
 
                       minLength: 1, maxLength: 128
 
-            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -4447,7 +4451,7 @@ Update Agent
 
                   This source contributes no URLs that may be fetched.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
 
@@ -4469,7 +4473,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4485,7 +4489,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `UserLocation BetaManagedAgentsUserLocation Optional`
+          - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
             Approximate user location for search result localization.
 
@@ -4515,7 +4519,7 @@ Update Agent
 
               minLength: 1, maxLength: 255
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
         Default configuration applied to all tools in this set.
 
@@ -4523,7 +4527,7 @@ Update Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -4539,7 +4543,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp`
+    - `type BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -4551,7 +4555,7 @@ Update Agent
 
         minLength: 1, maxLength: 255
 
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+      - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
         Per-tool configuration overrides.
 
@@ -4565,7 +4569,7 @@ Update Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -4581,7 +4585,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
         Default configuration for all tools from this server.
 
@@ -4589,7 +4593,7 @@ Update Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools from this server.
 
@@ -4605,7 +4609,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp`
+    - `type BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -4617,7 +4621,7 @@ Update Agent
 
         minLength: 1
 
-      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+      - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 
@@ -7799,11 +7803,11 @@ func main() {
 
 ### Beta Managed Agents Agent Tool Config Params
 
-- `type BetaManagedAgentsAgentToolConfigParamsUnionResp interface{…}`
+- `type BetaManagedAgentsAgentToolConfigParamsUnion interface{…}`
 
   Configuration override for a specific tool within a toolset.
 
-  - `type BetaManagedAgentsBashToolConfigParamsResp`
+  - `type BetaManagedAgentsBashToolConfigParams`
 
     Configuration override for the bash tool.
 
@@ -7817,7 +7821,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7839,7 +7843,7 @@ func main() {
 
         - `Type Auto`
 
-  - `type BetaManagedAgentsEditToolConfigParamsResp`
+  - `type BetaManagedAgentsEditToolConfigParams`
 
     Configuration override for the edit tool.
 
@@ -7853,7 +7857,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7869,7 +7873,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-  - `type BetaManagedAgentsReadToolConfigParamsResp`
+  - `type BetaManagedAgentsReadToolConfigParams`
 
     Configuration override for the read tool.
 
@@ -7883,7 +7887,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7899,7 +7903,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-  - `type BetaManagedAgentsWriteToolConfigParamsResp`
+  - `type BetaManagedAgentsWriteToolConfigParams`
 
     Configuration override for the write tool.
 
@@ -7913,7 +7917,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7929,7 +7933,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-  - `type BetaManagedAgentsGlobToolConfigParamsResp`
+  - `type BetaManagedAgentsGlobToolConfigParams`
 
     Configuration override for the glob tool.
 
@@ -7943,7 +7947,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7959,7 +7963,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-  - `type BetaManagedAgentsGrepToolConfigParamsResp`
+  - `type BetaManagedAgentsGrepToolConfigParams`
 
     Configuration override for the grep tool.
 
@@ -7973,7 +7977,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -7989,7 +7993,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-  - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+  - `type BetaManagedAgentsWebFetchToolConfigParams`
 
     Configuration override for the web_fetch tool.
 
@@ -8017,7 +8021,7 @@ func main() {
 
       format: int32
 
-    - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8033,11 +8037,11 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+    - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
       Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
         Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -8105,11 +8109,11 @@ func main() {
 
                 minLength: 1, maxLength: 128
 
-      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
         Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
         Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -8129,7 +8133,7 @@ func main() {
 
             This source contributes no URLs that may be fetched.
 
-  - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+  - `type BetaManagedAgentsWebSearchToolConfigParams`
 
     Configuration override for the web_search tool.
 
@@ -8151,7 +8155,7 @@ func main() {
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8167,7 +8171,7 @@ func main() {
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `UserLocation BetaManagedAgentsUserLocation Optional`
+    - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
       Approximate user location for search result localization.
 
@@ -8229,7 +8233,7 @@ func main() {
 
 ### Beta Managed Agents Agent Toolset Default Config Params
 
-- `type BetaManagedAgentsAgentToolsetDefaultConfigParamsResp`
+- `type BetaManagedAgentsAgentToolsetDefaultConfigParams`
 
   Default configuration for all tools in a toolset.
 
@@ -8237,7 +8241,7 @@ func main() {
 
     Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-  - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
     Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8708,17 +8712,17 @@ func main() {
 
 ### Beta Managed Agents Agent Toolset20260401 Params
 
-- `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+- `type BetaManagedAgentsAgentToolset20260401Params`
 
   Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
   - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-  - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+  - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
     Per-tool configuration overrides.
 
-    - `type BetaManagedAgentsBashToolConfigParamsResp`
+    - `type BetaManagedAgentsBashToolConfigParams`
 
       Configuration override for the bash tool.
 
@@ -8732,7 +8736,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8754,7 +8758,7 @@ func main() {
 
           - `Type Auto`
 
-    - `type BetaManagedAgentsEditToolConfigParamsResp`
+    - `type BetaManagedAgentsEditToolConfigParams`
 
       Configuration override for the edit tool.
 
@@ -8768,7 +8772,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8784,7 +8788,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsReadToolConfigParamsResp`
+    - `type BetaManagedAgentsReadToolConfigParams`
 
       Configuration override for the read tool.
 
@@ -8798,7 +8802,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8814,7 +8818,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsWriteToolConfigParamsResp`
+    - `type BetaManagedAgentsWriteToolConfigParams`
 
       Configuration override for the write tool.
 
@@ -8828,7 +8832,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8844,7 +8848,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsGlobToolConfigParamsResp`
+    - `type BetaManagedAgentsGlobToolConfigParams`
 
       Configuration override for the glob tool.
 
@@ -8858,7 +8862,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8874,7 +8878,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsGrepToolConfigParamsResp`
+    - `type BetaManagedAgentsGrepToolConfigParams`
 
       Configuration override for the grep tool.
 
@@ -8888,7 +8892,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8904,7 +8908,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+    - `type BetaManagedAgentsWebFetchToolConfigParams`
 
       Configuration override for the web_fetch tool.
 
@@ -8932,7 +8936,7 @@ func main() {
 
         format: int32
 
-      - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -8948,11 +8952,11 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+      - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
         Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-        - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+        - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
           Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -9020,11 +9024,11 @@ func main() {
 
                   minLength: 1, maxLength: 128
 
-        - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+        - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
           Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-        - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+        - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
           Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -9044,7 +9048,7 @@ func main() {
 
               This source contributes no URLs that may be fetched.
 
-    - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+    - `type BetaManagedAgentsWebSearchToolConfigParams`
 
       Configuration override for the web_search tool.
 
@@ -9066,7 +9070,7 @@ func main() {
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+      - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
         Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9082,7 +9086,7 @@ func main() {
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `UserLocation BetaManagedAgentsUserLocation Optional`
+      - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
         Approximate user location for search result localization.
 
@@ -9112,7 +9116,7 @@ func main() {
 
           minLength: 1, maxLength: 255
 
-  - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+  - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
     Default configuration applied to all tools in this set.
 
@@ -9120,7 +9124,7 @@ func main() {
 
       Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-    - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
       Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9201,7 +9205,7 @@ func main() {
 
 ### Beta Managed Agents Anthropic Skill Params
 
-- `type BetaManagedAgentsAnthropicSkillParamsResp`
+- `type BetaManagedAgentsAnthropicSkillParams`
 
   An Anthropic-managed skill.
 
@@ -9263,7 +9267,7 @@ func main() {
 
 ### Beta Managed Agents Bash Tool Config Params
 
-- `type BetaManagedAgentsBashToolConfigParamsResp`
+- `type BetaManagedAgentsBashToolConfigParams`
 
   Configuration override for the bash tool.
 
@@ -9277,7 +9281,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9313,7 +9317,7 @@ func main() {
 
 ### Beta Managed Agents Custom Skill Params
 
-- `type BetaManagedAgentsCustomSkillParamsResp`
+- `type BetaManagedAgentsCustomSkillParams`
 
   A user-created custom skill.
 
@@ -9367,7 +9371,7 @@ func main() {
 
 ### Beta Managed Agents Custom Tool Params
 
-- `type BetaManagedAgentsCustomToolParamsResp`
+- `type BetaManagedAgentsCustomToolParams`
 
   A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -9379,7 +9383,7 @@ func main() {
 
     minLength: 1
 
-  - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+  - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
     JSON Schema defining the expected input parameters for the tool.
 
@@ -9431,7 +9435,7 @@ func main() {
 
 ### Beta Managed Agents Edit Tool Config Params
 
-- `type BetaManagedAgentsEditToolConfigParamsResp`
+- `type BetaManagedAgentsEditToolConfigParams`
 
   Configuration override for the edit tool.
 
@@ -9445,7 +9449,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9543,7 +9547,7 @@ func main() {
 
 ### Beta Managed Agents Glob Tool Config Params
 
-- `type BetaManagedAgentsGlobToolConfigParamsResp`
+- `type BetaManagedAgentsGlobToolConfigParams`
 
   Configuration override for the glob tool.
 
@@ -9557,7 +9561,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9615,7 +9619,7 @@ func main() {
 
 ### Beta Managed Agents Grep Tool Config Params
 
-- `type BetaManagedAgentsGrepToolConfigParamsResp`
+- `type BetaManagedAgentsGrepToolConfigParams`
 
   Configuration override for the grep tool.
 
@@ -9629,7 +9633,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -9697,7 +9701,7 @@ func main() {
 
 ### Beta Managed Agents MCP Tool Config Params
 
-- `type BetaManagedAgentsMCPToolConfigParamsResp`
+- `type BetaManagedAgentsMCPToolConfigParams`
 
   Configuration override for a specific MCP tool.
 
@@ -9711,7 +9715,7 @@ func main() {
 
     Whether this tool is enabled. Overrides the `default_config` setting.
 
-  - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -9823,7 +9827,7 @@ func main() {
 
 ### Beta Managed Agents MCP Toolset Default Config Params
 
-- `type BetaManagedAgentsMCPToolsetDefaultConfigParamsResp`
+- `type BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
   Default configuration for all tools from an MCP server.
 
@@ -9831,7 +9835,7 @@ func main() {
 
     Whether tools are enabled by default. Defaults to true if not specified.
 
-  - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
     Default permission policy for tools from this server.
 
@@ -9855,7 +9859,7 @@ func main() {
 
 ### Beta Managed Agents MCP Toolset Params
 
-- `type BetaManagedAgentsMCPToolsetParamsResp`
+- `type BetaManagedAgentsMCPToolsetParams`
 
   Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -9867,7 +9871,7 @@ func main() {
 
     minLength: 1, maxLength: 255
 
-  - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+  - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
     Per-tool configuration overrides.
 
@@ -9881,7 +9885,7 @@ func main() {
 
       Whether this tool is enabled. Overrides the `default_config` setting.
 
-    - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
       Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -9903,7 +9907,7 @@ func main() {
 
         - `Type Auto`
 
-  - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+  - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
     Default configuration for all tools from this server.
 
@@ -9911,7 +9915,7 @@ func main() {
 
       Whether tools are enabled by default. Defaults to true if not specified.
 
-    - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+    - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
       Default permission policy for tools from this server.
 
@@ -10131,7 +10135,7 @@ func main() {
 
 ### Beta Managed Agents Model Config Params
 
-- `type BetaManagedAgentsModelConfigParamsResp`
+- `type BetaManagedAgentsModelConfigParams`
 
   An object that defines additional configuration control over model use
 
@@ -10209,11 +10213,13 @@ func main() {
 
       High-performance model for agents and coding
 
-  - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+  - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
     How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-    - `string`
+    - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+      How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -10309,7 +10315,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Advisor Disabled Params
 
-- `type BetaManagedAgentsMultiagentAdvisorDisabledParamsResp`
+- `type BetaManagedAgentsMultiagentAdvisorDisabledParams`
 
   The agent has no advisor.
 
@@ -10329,7 +10335,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Advisor Enabled Params
 
-- `type BetaManagedAgentsMultiagentAdvisorEnabledParamsResp`
+- `type BetaManagedAgentsMultiagentAdvisorEnabledParams`
 
   The session's primary thread can consult `model` mid-turn.
 
@@ -10343,11 +10349,11 @@ func main() {
 
 ### Beta Managed Agents Multiagent Advisor Params
 
-- `type BetaManagedAgentsMultiagentAdvisorParamsUnionResp interface{…}`
+- `type BetaManagedAgentsMultiagentAdvisorParamsUnion interface{…}`
 
   Whether the session's primary thread can consult an advisor model.
 
-  - `type BetaManagedAgentsMultiagentAdvisorEnabledParamsResp`
+  - `type BetaManagedAgentsMultiagentAdvisorEnabledParams`
 
     The session's primary thread can consult `model` mid-turn.
 
@@ -10359,7 +10365,7 @@ func main() {
 
       minLength: 1, maxLength: 256
 
-  - `type BetaManagedAgentsMultiagentAdvisorDisabledParamsResp`
+  - `type BetaManagedAgentsMultiagentAdvisorDisabledParams`
 
     The agent has no advisor.
 
@@ -10401,19 +10407,19 @@ func main() {
 
 ### Beta Managed Agents Multiagent Coordinator Params
 
-- `type BetaManagedAgentsMultiagentCoordinatorParamsResp`
+- `type BetaManagedAgentsMultiagentCoordinatorParams`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
   - `Type BetaManagedAgentsMultiagentCoordinatorParamsType`
 
-  - `Agents []BetaManagedAgentsMultiagentRosterEntryParamsUnionResp`
+  - `Agents []BetaManagedAgentsMultiagentRosterEntryParamsUnion`
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10431,13 +10437,13 @@ func main() {
 
         format: int32
 
-    - `type BetaManagedAgentsMultiagentSelfParamsResp`
+    - `type BetaManagedAgentsMultiagentSelfParams`
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
       - `Type BetaManagedAgentsMultiagentSelfParamsType`
 
-    - `type BetaManagedAgentsAdvisorParamsResp`
+    - `type BetaManagedAgentsAdvisorParams`
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
@@ -10477,7 +10483,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Inline Agents Disabled Params
 
-- `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+- `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
   The agent cannot define inline agents.
 
@@ -10493,7 +10499,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Inline Agents Enabled Params
 
-- `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+- `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
   The agent can define inline agents.
 
@@ -10501,17 +10507,17 @@ func main() {
 
 ### Beta Managed Agents Multiagent Inline Agents Params
 
-- `type BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp interface{…}`
+- `type BetaManagedAgentsMultiagentInlineAgentsParamsUnion interface{…}`
 
   Whether the agent can define inline agents. The agent defines an inline agent itself, in a workflow run's plan or when it spawns a session thread, and the inline agent is not saved.
 
-  - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+  - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
     The agent can define inline agents.
 
     - `Type Enabled`
 
-  - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+  - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
     The agent cannot define inline agents.
 
@@ -10519,13 +10525,13 @@ func main() {
 
 ### Beta Managed Agents Multiagent Predefined Agent Params
 
-- `type BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp interface{…}`
+- `type BetaManagedAgentsMultiagentPredefinedAgentParamsUnion interface{…}`
 
   One agent in a `predefined_agents` list. It is an agent ID string, an `agent` reference with an optional `version`, or `self` for the agent that owns this configuration.
 
   - `string`
 
-  - `type BetaManagedAgentsAgentParamsResp`
+  - `type BetaManagedAgentsAgentParams`
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10543,7 +10549,7 @@ func main() {
 
       format: int32
 
-  - `type BetaManagedAgentsMultiagentSelfParamsResp`
+  - `type BetaManagedAgentsMultiagentSelfParams`
 
     Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -10551,7 +10557,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Self Params
 
-- `type BetaManagedAgentsMultiagentSelfParamsResp`
+- `type BetaManagedAgentsMultiagentSelfParams`
 
   Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -10613,7 +10619,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Subagents Disabled Params
 
-- `type BetaManagedAgentsMultiagentSubagentsDisabledParamsResp`
+- `type BetaManagedAgentsMultiagentSubagentsDisabledParams`
 
   The agent cannot spawn session threads.
 
@@ -10657,35 +10663,35 @@ func main() {
 
 ### Beta Managed Agents Multiagent Subagents Enabled Params
 
-- `type BetaManagedAgentsMultiagentSubagentsEnabledParamsResp`
+- `type BetaManagedAgentsMultiagentSubagentsEnabledParams`
 
   The agent can spawn session threads. Each thread runs a predefined agent, which is a saved agent in `predefined_agents`, or an inline agent, which the agent defines when it spawns the thread and which is not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
   - `Type Enabled`
 
-  - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+  - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
     Whether the agent can define inline agents when it spawns session threads. Defaults to enabled.
 
-    - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+    - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
       The agent can define inline agents.
 
       - `Type Enabled`
 
-    - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+    - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
       The agent cannot define inline agents.
 
       - `Type Disabled`
 
-  - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+  - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
     Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10703,7 +10709,7 @@ func main() {
 
         format: int32
 
-    - `type BetaManagedAgentsMultiagentSelfParamsResp`
+    - `type BetaManagedAgentsMultiagentSelfParams`
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -10711,39 +10717,39 @@ func main() {
 
 ### Beta Managed Agents Multiagent Subagents Params
 
-- `type BetaManagedAgentsMultiagentSubagentsParamsUnionResp interface{…}`
+- `type BetaManagedAgentsMultiagentSubagentsParamsUnion interface{…}`
 
   Whether the agent can spawn session threads.
 
-  - `type BetaManagedAgentsMultiagentSubagentsEnabledParamsResp`
+  - `type BetaManagedAgentsMultiagentSubagentsEnabledParams`
 
     The agent can spawn session threads. Each thread runs a predefined agent, which is a saved agent in `predefined_agents`, or an inline agent, which the agent defines when it spawns the thread and which is not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
     - `Type Enabled`
 
-    - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+    - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
       Whether the agent can define inline agents when it spawns session threads. Defaults to enabled.
 
-      - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+      - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
         The agent can define inline agents.
 
         - `Type Enabled`
 
-      - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+      - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
         The agent cannot define inline agents.
 
         - `Type Disabled`
 
-    - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+    - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
       Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
       - `string`
 
-      - `type BetaManagedAgentsAgentParamsResp`
+      - `type BetaManagedAgentsAgentParams`
 
         Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10761,13 +10767,13 @@ func main() {
 
           format: int32
 
-      - `type BetaManagedAgentsMultiagentSelfParamsResp`
+      - `type BetaManagedAgentsMultiagentSelfParams`
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
         - `Type BetaManagedAgentsMultiagentSelfParamsType`
 
-  - `type BetaManagedAgentsMultiagentSubagentsDisabledParamsResp`
+  - `type BetaManagedAgentsMultiagentSubagentsDisabledParams`
 
     The agent cannot spawn session threads.
 
@@ -10829,7 +10835,7 @@ func main() {
 
 ### Beta Managed Agents Multiagent Workflows Disabled Params
 
-- `type BetaManagedAgentsMultiagentWorkflowsDisabledParamsResp`
+- `type BetaManagedAgentsMultiagentWorkflowsDisabledParams`
 
   The agent cannot start workflow runs.
 
@@ -10873,35 +10879,35 @@ func main() {
 
 ### Beta Managed Agents Multiagent Workflows Enabled Params
 
-- `type BetaManagedAgentsMultiagentWorkflowsEnabledParamsResp`
+- `type BetaManagedAgentsMultiagentWorkflowsEnabledParams`
 
   The agent can start workflow runs. Each run follows a plan, a program that the agent writes. A plan can use predefined agents, which are the saved agents in `predefined_agents`, and inline agents, which it defines itself and which are not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
   - `Type Enabled`
 
-  - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+  - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
     Whether a run's plan can define inline agents. Defaults to enabled.
 
-    - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+    - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
       The agent can define inline agents.
 
       - `Type Enabled`
 
-    - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+    - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
       The agent cannot define inline agents.
 
       - `Type Disabled`
 
-  - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+  - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
     Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10919,7 +10925,7 @@ func main() {
 
         format: int32
 
-    - `type BetaManagedAgentsMultiagentSelfParamsResp`
+    - `type BetaManagedAgentsMultiagentSelfParams`
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -10927,39 +10933,39 @@ func main() {
 
 ### Beta Managed Agents Multiagent Workflows Params
 
-- `type BetaManagedAgentsMultiagentWorkflowsParamsUnionResp interface{…}`
+- `type BetaManagedAgentsMultiagentWorkflowsParamsUnion interface{…}`
 
   Whether the agent can start workflow runs.
 
-  - `type BetaManagedAgentsMultiagentWorkflowsEnabledParamsResp`
+  - `type BetaManagedAgentsMultiagentWorkflowsEnabledParams`
 
     The agent can start workflow runs. Each run follows a plan, a program that the agent writes. A plan can use predefined agents, which are the saved agents in `predefined_agents`, and inline agents, which it defines itself and which are not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
     - `Type Enabled`
 
-    - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+    - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
       Whether a run's plan can define inline agents. Defaults to enabled.
 
-      - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+      - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
         The agent can define inline agents.
 
         - `Type Enabled`
 
-      - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+      - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
         The agent cannot define inline agents.
 
         - `Type Disabled`
 
-    - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+    - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
       Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
       - `string`
 
-      - `type BetaManagedAgentsAgentParamsResp`
+      - `type BetaManagedAgentsAgentParams`
 
         Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -10977,13 +10983,13 @@ func main() {
 
           format: int32
 
-      - `type BetaManagedAgentsMultiagentSelfParamsResp`
+      - `type BetaManagedAgentsMultiagentSelfParams`
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
         - `Type BetaManagedAgentsMultiagentSelfParamsType`
 
-  - `type BetaManagedAgentsMultiagentWorkflowsDisabledParamsResp`
+  - `type BetaManagedAgentsMultiagentWorkflowsDisabledParams`
 
     The agent cannot start workflow runs.
 
@@ -11095,17 +11101,17 @@ func main() {
 
 ### Beta Managed Agents Multiagent20261001 Params
 
-- `type BetaManagedAgentsMultiagent20261001ParamsResp`
+- `type BetaManagedAgentsMultiagent20261001Params`
 
   Multiagent configuration with three members, each enabled or disabled on its own. On an update, if the agent's stored `multiagent` also has type `multiagent_20261001`, this configuration is merged into the stored one, level by level, instead of replacing it. A key that the update omits keeps its stored value. A key sent as null takes its default, on create as well, so `"workflows": null` enables workflows. An object sent with a `type` other than the stored one replaces the stored object, and the keys that it omits take their defaults. A `predefined_agents` list that is sent replaces the stored list. Every object that is sent needs its `type`, and an enabled `advisor` needs its `model`. Other validation applies to the merged result.
 
   - `Type Multiagent20261001`
 
-  - `Advisor BetaManagedAgentsMultiagentAdvisorParamsUnionResp Optional`
+  - `Advisor BetaManagedAgentsMultiagentAdvisorParamsUnion Optional`
 
     Whether the session's primary thread can consult an advisor model. Defaults to disabled.
 
-    - `type BetaManagedAgentsMultiagentAdvisorEnabledParamsResp`
+    - `type BetaManagedAgentsMultiagentAdvisorEnabledParams`
 
       The session's primary thread can consult `model` mid-turn.
 
@@ -11117,45 +11123,45 @@ func main() {
 
         minLength: 1, maxLength: 256
 
-    - `type BetaManagedAgentsMultiagentAdvisorDisabledParamsResp`
+    - `type BetaManagedAgentsMultiagentAdvisorDisabledParams`
 
       The agent has no advisor.
 
       - `Type Disabled`
 
-  - `Subagents BetaManagedAgentsMultiagentSubagentsParamsUnionResp Optional`
+  - `Subagents BetaManagedAgentsMultiagentSubagentsParamsUnion Optional`
 
     Whether the agent can spawn session threads. Defaults to enabled.
 
-    - `type BetaManagedAgentsMultiagentSubagentsEnabledParamsResp`
+    - `type BetaManagedAgentsMultiagentSubagentsEnabledParams`
 
       The agent can spawn session threads. Each thread runs a predefined agent, which is a saved agent in `predefined_agents`, or an inline agent, which the agent defines when it spawns the thread and which is not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
       - `Type Enabled`
 
-      - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+      - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
         Whether the agent can define inline agents when it spawns session threads. Defaults to enabled.
 
-        - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParamsResp`
+        - `type BetaManagedAgentsMultiagentInlineAgentsEnabledParams`
 
           The agent can define inline agents.
 
           - `Type Enabled`
 
-        - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParamsResp`
+        - `type BetaManagedAgentsMultiagentInlineAgentsDisabledParams`
 
           The agent cannot define inline agents.
 
           - `Type Disabled`
 
-      - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+      - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
         Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
         - `string`
 
-        - `type BetaManagedAgentsAgentParamsResp`
+        - `type BetaManagedAgentsAgentParams`
 
           Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -11173,47 +11179,47 @@ func main() {
 
             format: int32
 
-        - `type BetaManagedAgentsMultiagentSelfParamsResp`
+        - `type BetaManagedAgentsMultiagentSelfParams`
 
           Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
           - `Type BetaManagedAgentsMultiagentSelfParamsType`
 
-    - `type BetaManagedAgentsMultiagentSubagentsDisabledParamsResp`
+    - `type BetaManagedAgentsMultiagentSubagentsDisabledParams`
 
       The agent cannot spawn session threads.
 
       - `Type Disabled`
 
-  - `Workflows BetaManagedAgentsMultiagentWorkflowsParamsUnionResp Optional`
+  - `Workflows BetaManagedAgentsMultiagentWorkflowsParamsUnion Optional`
 
     Whether the agent can start workflow runs. Defaults to enabled.
 
-    - `type BetaManagedAgentsMultiagentWorkflowsEnabledParamsResp`
+    - `type BetaManagedAgentsMultiagentWorkflowsEnabledParams`
 
       The agent can start workflow runs. Each run follows a plan, a program that the agent writes. A plan can use predefined agents, which are the saved agents in `predefined_agents`, and inline agents, which it defines itself and which are not saved. If `inline_agents` is disabled, `predefined_agents` must name at least one agent.
 
       - `Type Enabled`
 
-      - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnionResp Optional`
+      - `InlineAgents BetaManagedAgentsMultiagentInlineAgentsParamsUnion Optional`
 
         Whether a run's plan can define inline agents. Defaults to enabled.
 
-      - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnionResp Optional`
+      - `PredefinedAgents []BetaManagedAgentsMultiagentPredefinedAgentParamsUnion Optional`
 
         Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
         - `string`
 
-        - `type BetaManagedAgentsAgentParamsResp`
+        - `type BetaManagedAgentsAgentParams`
 
           Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-        - `type BetaManagedAgentsMultiagentSelfParamsResp`
+        - `type BetaManagedAgentsMultiagentSelfParams`
 
           Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-    - `type BetaManagedAgentsMultiagentWorkflowsDisabledParamsResp`
+    - `type BetaManagedAgentsMultiagentWorkflowsDisabledParams`
 
       The agent cannot start workflow runs.
 
@@ -11255,7 +11261,7 @@ func main() {
 
 ### Beta Managed Agents Read Tool Config Params
 
-- `type BetaManagedAgentsReadToolConfigParamsResp`
+- `type BetaManagedAgentsReadToolConfigParams`
 
   Configuration override for the read tool.
 
@@ -11269,7 +11275,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -11899,11 +11905,11 @@ func main() {
 
 ### Beta Managed Agents Skill Params
 
-- `type BetaManagedAgentsSkillParamsUnionResp interface{…}`
+- `type BetaManagedAgentsSkillParamsUnion interface{…}`
 
   Skill to load in the session container.
 
-  - `type BetaManagedAgentsAnthropicSkillParamsResp`
+  - `type BetaManagedAgentsAnthropicSkillParams`
 
     An Anthropic-managed skill.
 
@@ -11921,7 +11927,7 @@ func main() {
 
       minLength: 1, maxLength: 64
 
-  - `type BetaManagedAgentsCustomSkillParamsResp`
+  - `type BetaManagedAgentsCustomSkillParams`
 
     A user-created custom skill.
 
@@ -11941,7 +11947,7 @@ func main() {
 
 ### Beta Managed Agents URL MCP Server Params
 
-- `type BetaManagedAgentsURLMCPServerParamsResp`
+- `type BetaManagedAgentsURLMCPServerParams`
 
   URL-based MCP server connection.
 
@@ -12111,7 +12117,7 @@ func main() {
 
 ### Beta Managed Agents Web Fetch Tool Config Params
 
-- `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+- `type BetaManagedAgentsWebFetchToolConfigParams`
 
   Configuration override for the web_fetch tool.
 
@@ -12139,7 +12145,7 @@ func main() {
 
     format: int32
 
-  - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -12161,11 +12167,11 @@ func main() {
 
       - `Type Auto`
 
-  - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+  - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
     Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
       Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -12233,11 +12239,11 @@ func main() {
 
               minLength: 1, maxLength: 128
 
-    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
       Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
       Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -12387,7 +12393,7 @@ func main() {
 
 ### Beta Managed Agents Web Fetch URL Source Tool Filter Params
 
-- `type BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp interface{…}`
+- `type BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion interface{…}`
 
   Which tools' results contribute URLs that may be fetched. Accepts the string "all" or "none", or an object whose type is "all", "none", "only" or "except". Responses use the object form.
 
@@ -12491,7 +12497,7 @@ func main() {
 
 ### Beta Managed Agents Web Fetch URL Source User Input Params
 
-- `type BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp interface{…}`
+- `type BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion interface{…}`
 
   Whether URLs in the text of user messages may be fetched. Accepts the string "all" or "none", or the object {"type": "all"} or {"type": "none"}. Responses use the object form.
 
@@ -12599,11 +12605,11 @@ func main() {
 
 ### Beta Managed Agents Web Fetch URL Sources Params
 
-- `type BetaManagedAgentsWebFetchURLSourcesParamsResp`
+- `type BetaManagedAgentsWebFetchURLSourcesParams`
 
   Which sources contribute URLs the web_fetch tool may fetch. When web_fetch is limited to URLs the conversation has already shown the model (in a user message, a custom tool's result, or an earlier web_search or web_fetch result), each key narrows one of those sources and defaults to "all". Setting all three keys to "none" is rejected.
 
-  - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+  - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
     Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -12671,11 +12677,11 @@ func main() {
 
             minLength: 1, maxLength: 128
 
-  - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+  - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
     Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-  - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+  - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
     Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -12765,7 +12771,7 @@ func main() {
 
 ### Beta Managed Agents Web Search Tool Config Params
 
-- `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+- `type BetaManagedAgentsWebSearchToolConfigParams`
 
   Configuration override for the web_search tool.
 
@@ -12787,7 +12793,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -12809,7 +12815,7 @@ func main() {
 
       - `Type Auto`
 
-  - `UserLocation BetaManagedAgentsUserLocation Optional`
+  - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
     Approximate user location for search result localization.
 
@@ -12875,7 +12881,7 @@ func main() {
 
 ### Beta Managed Agents Write Tool Config Params
 
-- `type BetaManagedAgentsWriteToolConfigParamsResp`
+- `type BetaManagedAgentsWriteToolConfigParams`
 
   Configuration override for the write tool.
 
@@ -12889,7 +12895,7 @@ func main() {
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+  - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
     Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 

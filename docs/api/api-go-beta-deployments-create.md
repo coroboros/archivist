@@ -27,7 +27,7 @@ Create Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -61,7 +61,7 @@ Create Deployment
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -205,7 +205,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -221,7 +221,7 @@ Create Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -253,13 +253,13 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -295,7 +295,7 @@ Create Deployment
 
     Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -313,7 +313,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -343,7 +343,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -361,7 +361,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -701,7 +701,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 

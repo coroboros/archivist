@@ -33,7 +33,7 @@ Create a new environment with the specified configuration.
 
     Environment configuration
 
-    - `type BetaCloudConfigParamsResp`
+    - `type BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -44,7 +44,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+      - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -56,7 +56,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp`
+        - `type BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -79,7 +79,7 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp Optional`
+      - `Packages BetaPackagesParams Optional`
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -113,7 +113,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp`
+    - `type BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -1162,7 +1162,7 @@ Update an existing environment's configuration.
 
     Updated environment configuration
 
-    - `type BetaCloudConfigParamsResp`
+    - `type BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -1173,7 +1173,7 @@ Update an existing environment's configuration.
 
         Environment type
 
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+      - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -1185,7 +1185,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp`
+        - `type BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -1208,7 +1208,7 @@ Update an existing environment's configuration.
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp Optional`
+      - `Packages BetaPackagesParams Optional`
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -1242,7 +1242,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp`
+    - `type BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -2190,7 +2190,7 @@ func main() {
 
 ### Beta Cloud Config Params
 
-- `type BetaCloudConfigParamsResp`
+- `type BetaCloudConfigParams`
 
   Request params for `cloud` environment configuration.
 
@@ -2201,7 +2201,7 @@ func main() {
 
     Environment type
 
-  - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+  - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
     Network configuration policy. Omit on update to preserve the existing value.
 
@@ -2213,7 +2213,7 @@ func main() {
 
         Network policy type
 
-    - `type BetaLimitedNetworkParamsResp`
+    - `type BetaLimitedNetworkParams`
 
       Limited network request params.
 
@@ -2236,7 +2236,7 @@ func main() {
 
         Specifies domains the container can reach.
 
-  - `Packages BetaPackagesParamsResp Optional`
+  - `Packages BetaPackagesParams Optional`
 
     Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -2444,7 +2444,7 @@ func main() {
 
 ### Beta Limited Network Params
 
-- `type BetaLimitedNetworkParamsResp`
+- `type BetaLimitedNetworkParams`
 
   Limited network request params.
 
@@ -2505,7 +2505,7 @@ func main() {
 
 ### Beta Packages Params
 
-- `type BetaPackagesParamsResp`
+- `type BetaPackagesParams`
 
   Specify packages (and optionally their versions) available in this environment.
 
@@ -2555,7 +2555,7 @@ func main() {
 
 ### Beta Self Hosted Config Params
 
-- `type BetaSelfHostedConfigParamsResp`
+- `type BetaSelfHostedConfigParams`
 
   Request params for `self_hosted` environment configuration.
 

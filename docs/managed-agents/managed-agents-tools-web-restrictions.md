@@ -16,20 +16,20 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-To control which sites the agent's web tools can reach, set a domain list on the `web_search` and `web_fetch` entries of the [agent toolset](./managed-agents-tools.md#configuring-the-toolset). Each of these `configs` entries takes one of two lists:
+To control which sites the agent's web tools can reach, set a domain list on the `web_search` and `web_fetch` entries of the [agent toolset](./managed-agents-tools.md#configuring-the-toolset). Each of these `configs` (java, php; csharp, go: `Configs`) entries takes one of two lists:
 
-* **`allowed_domains`:** The tool can reach only these hosts.
-* **`blocked_domains`:** The tool can never reach these hosts.
+* **`allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`):** The tool can reach only these hosts.
+* **`blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`):** The tool can never reach these hosts.
 
 Each tool carries its own list, so `web_search` and `web_fetch` can have different restrictions.
 
 <Note>
-  `web_search` and `web_fetch` run on Anthropic's servers, not in the sandbox. A cloud environment with `limited` [networking](./managed-agents-environments.md#networking) also applies its `allowed_hosts` to them; see [Set domain lists on an agent](./managed-agents-tools-web-restrictions.md#set-domain-lists-on-an-agent). `unrestricted` networking and self-hosted environments do not limit them. The per-tool lists restrict these tools further. Organization-level web search and web fetch settings in the Claude Console apply to the Messages API. They do not apply to Managed Agents sessions.
+  `web_search` and `web_fetch` run on Anthropic's servers, not in the sandbox. A cloud environment with `limited` [networking](./managed-agents-environments.md#networking) also applies its `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) to them; see [Set domain lists on an agent](./managed-agents-tools-web-restrictions.md#set-domain-lists-on-an-agent). `unrestricted` networking and self-hosted environments do not limit them. The per-tool lists restrict these tools further. Organization-level web search and web fetch settings in the Claude Console apply to the Messages API. They do not apply to Managed Agents sessions.
 </Note>
 
 ## Set domain lists on an agent
 
-The following example creates an agent that limits `web_search` to two sites and blocks one host for `web_fetch`. It also sets `user_location` and `max_content_tokens`, which [Settings](./managed-agents-tools-web-restrictions.md#settings) describes. The example then prints the `configs` array from the response.
+The following example creates an agent that limits `web_search` to two sites and blocks one host for `web_fetch`. It also sets `user_location` (java, php: `userLocation`; csharp, go: `UserLocation`) and `max_content_tokens` (java, php: `maxContentTokens`; csharp, go: `MaxContentTokens`), which [Settings](./managed-agents-tools-web-restrictions.md#settings) describes. The example then prints the `configs` (java, php; csharp, go: `Configs`) array from the response.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -376,20 +376,20 @@ The following example creates an agent that limits `web_search` to two sites and
   ```
 </CodeGroup>
 
-In a cloud environment with `limited` [networking](./managed-agents-environments.md#networking), the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`. Creating a session fails with a 400 error when an enabled web tool's `allowed_domains` has an entry that is not within `allowed_hosts`. So does a session update that adds such an entry. To fix it, add the host to `allowed_hosts` or remove the entry from `allowed_domains`. At runtime, a `web_fetch` call for a URL on a host that `allowed_hosts` does not match returns a `url_not_allowed` error result. `web_search` omits results from such hosts. The two lists match differently: a tool's entry covers its subdomains, but an `allowed_hosts` entry matches one exact host unless it starts with `*.`. For example, the tool entry `docs.example.com` is not within an `allowed_hosts` of `["example.com"]`, but it is within `["docs.example.com"]` or `["*.example.com"]`.
+In a cloud environment with `limited` [networking](./managed-agents-environments.md#networking), the environment's `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) also applies to `web_search` and `web_fetch`. Creating a session fails with a 400 error when an enabled web tool's `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) has an entry that is not within `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). So does a session update that adds such an entry. To fix it, add the host to `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) or remove the entry from `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`). At runtime, a `web_fetch` call for a URL on a host that `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) does not match returns a `url_not_allowed` error result. `web_search` omits results from such hosts. The two lists match differently: a tool's entry covers its subdomains, but an `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) entry matches one exact host unless it starts with `*.`. For example, the tool entry `docs.example.com` is not within an `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) of `["example.com"]`, but it is within `["docs.example.com"]` or `["*.example.com"]`.
 
 In the Claude Console, set allowed or blocked domains from the `web_search` and `web_fetch` rows of the **Built-in tools** card on the agent form. Set `max_content_tokens` and `user_location` in the **Raw** view of the agent's configuration.
 
 ## Settings
 
-In addition to `enabled` and `permission_policy`, the web tool entries accept the following settings:
+In addition to `enabled` (java, php; csharp, go: `Enabled`) and `permission_policy` (java, php: `permissionPolicy`; csharp, go: `PermissionPolicy`), the web tool entries accept the following settings:
 
-| Setting              | Applies to                | Description                                                                                                                                                                                                     |
-| -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowed_domains`    | `web_search`, `web_fetch` | The only hosts the tool can reach. See [Domain list rules](./managed-agents-tools-web-restrictions.md#domain-list-rules).                                                        |
-| `blocked_domains`    | `web_search`, `web_fetch` | Hosts the tool cannot reach. See [Domain list rules](./managed-agents-tools-web-restrictions.md#domain-list-rules).                                                              |
-| `max_content_tokens` | `web_fetch`               | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md#content-limits). |
-| `user_location`      | `web_search`              | Localizes search results. An object with the same fields as the Messages API [`user_location`](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md#localization) parameter.           |
+| Setting                                                                              | Applies to                | Description                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`)        | `web_search`, `web_fetch` | The only hosts the tool can reach. See [Domain list rules](./managed-agents-tools-web-restrictions.md#domain-list-rules).                                                        |
+| `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`)        | `web_search`, `web_fetch` | Hosts the tool cannot reach. See [Domain list rules](./managed-agents-tools-web-restrictions.md#domain-list-rules).                                                              |
+| `max_content_tokens` (java, php: `maxContentTokens`; csharp, go: `MaxContentTokens`) | `web_fetch`               | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md#content-limits). |
+| `user_location` (java, php: `userLocation`; csharp, go: `UserLocation`)              | `web_search`              | Localizes search results. An object with the same fields as the Messages API [`user_location`](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md#localization) parameter.           |
 
 For how the SDKs type these entries, see [Config entry types in the SDKs](./managed-agents-tools.md#config-entry-types-in-the-sdks).
 
@@ -399,9 +399,9 @@ For how the SDKs type these entries, see [Config entry types in the SDKs](./mana
 
 ## Domain list rules
 
-These rules apply to `allowed_domains` and `blocked_domains` alike. A request that breaks one is rejected, as [Validation errors](./managed-agents-tools-web-restrictions.md#validation-errors) describes.
+These rules apply to `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) alike. A request that breaks one is rejected, as [Validation errors](./managed-agents-tools-web-restrictions.md#validation-errors) describes.
 
-* **One list per entry:** Set either `allowed_domains` or `blocked_domains` on an entry, not both.
+* **One list per entry:** Set either `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) or `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) on an entry, not both.
 * **List size:** Each list holds 1 to 64 domains, each 1 to 255 characters.
 * **No empty lists:** To apply no restriction, omit the field or send `null`.
 * **No duplicates:** A domain can appear only once in a list. `www.example.com` and `example.com` count as different domains.
@@ -439,7 +439,7 @@ Prefer plain hostnames for `web_search` too. The search provider matches path su
 
 ## Validation errors
 
-The API validates these settings when you [create an agent](./managed-agents-agent-setup.md#create-an-agent) or [update an agent](./managed-agents-agent-setup.md#update-an-agent). It also validates them when you create or update a session that supplies `tools`.
+The API validates these settings when you [create an agent](./managed-agents-agent-setup.md#create-an-agent) or [update an agent](./managed-agents-agent-setup.md#update-an-agent). It also validates them when you create or update a session that supplies `tools` (java, php; csharp, go: `Tools`).
 
 Format and limit violations are rejected with a 400 `invalid_request_error`:
 
@@ -451,11 +451,11 @@ Format and limit violations are rejected with a 400 `invalid_request_error`:
 
 On the same requests, the API also rejects three settings that depend on the search and fetch providers:
 
-* A domain in `allowed_domains` that Anthropic's crawler is not permitted to access.
+* A domain in `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) that Anthropic's crawler is not permitted to access.
 * A `user_location.country` that the search provider does not support. The message ends in `user_location.country: not a country the search provider supports`.
 * A `user_location.timezone` that is not a valid IANA name.
 
-In a cloud environment with `limited` [networking](./managed-agents-environments.md#networking), session create and update also check `allowed_domains` against the environment's `allowed_hosts`. See the rule in [Set domain lists on an agent](./managed-agents-tools-web-restrictions.md#set-domain-lists-on-an-agent).
+In a cloud environment with `limited` [networking](./managed-agents-environments.md#networking), session create and update also check `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) against the environment's `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). See the rule in [Set domain lists on an agent](./managed-agents-tools-web-restrictions.md#set-domain-lists-on-an-agent).
 
 ### When an accepted setting is no longer valid
 
@@ -469,7 +469,7 @@ To continue the session:
 
 ## Multiagent and outcome-driven sessions
 
-In a [multiagent session](./managed-agents-multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time. An agent listed in `subagents.predefined_agents` is bound by three sets of lists:
+In a [multiagent session](./managed-agents-multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time. An agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`) is bound by three sets of lists:
 
 * Its own `allowed_domains` and `blocked_domains`
 * Those of any agent that called it
@@ -488,7 +488,7 @@ A listed agent can therefore narrow what a tool reaches but never widen it:
 * A listed agent that sets `blocked_domains` keeps the `allowed_domains` of the session's agent and blocks those hosts within it.
 * A listed agent that sets its own `allowed_domains` can reach only the hosts that both its list and the list of the session's agent cover.
 
-A `{"type": "self"}` entry in `subagents.predefined_agents` has no web settings of its own and follows the current settings of the session's agent.
+A `{"type": "self"}` entry in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`) has no web settings of its own and follows the current settings of the session's agent.
 
 If the combined `allowed_domains` lists have no domain in common, the tool stays available to that agent but every call fails. Each call returns a `url_not_allowed` error stating that no domain is permitted. The tool description tells the model the same. To avoid this, keep each listed agent's `allowed_domains` inside the `allowed_domains` of the session's agent.
 
@@ -498,16 +498,16 @@ The grader in [outcome-driven sessions](./managed-agents-define-outcomes.md) run
 
 You can change the lists on an idle session by [updating its tools](./managed-agents-session-operations.md#updating-the-agent-configuration). The new lists apply to the rest of the session.
 
-In a multiagent session, every thread applies the new lists from its next turn. For an agent listed in `subagents.predefined_agents`, the update does not change the agent's own lists. Those stay as the agent's definition set them when the session was created.
+In a multiagent session, every thread applies the new lists from its next turn. For an agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`), the update does not change the agent's own lists. Those stay as the agent's definition set them when the session was created.
 
 ## Differences from the Messages API tools
 
-These settings use the same `allowed_domains` and `blocked_domains` fields as [domain filtering](../agents-and-tools/agents-and-tools-tool-use-server-tools.md#domain-filtering) on the Messages API server tools. Managed Agents differs in four ways:
+These settings use the same `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) fields as [domain filtering](../agents-and-tools/agents-and-tools-tool-use-server-tools.md#domain-filtering) on the Messages API server tools. Managed Agents differs in four ways:
 
 * Each list is [capped at 64 domains](./managed-agents-tools-web-restrictions.md#domain-list-rules).
 * Domains listed for `web_fetch` [cannot include a path](./managed-agents-tools-web-restrictions.md#domain-format).
 * Domains [must be ASCII](./managed-agents-tools-web-restrictions.md#domain-format). The Messages API accepts Unicode entries, though it recommends against them.
-* `max_uses`, `citations`, and `cache_control` are not available on the toolset.
+* `max_uses` (java, php: `maxUses`; csharp, go: `MaxUses`), `citations` (java, php; csharp, go: `Citations`), and `cache_control` (java, php: `cacheControl`; csharp, go: `CacheControl`) are not available on the toolset.
 
 ## Next steps
 

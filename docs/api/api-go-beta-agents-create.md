@@ -25,7 +25,7 @@ Create Agent
 
     Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModelConfigParamsResp`
+    - `type BetaManagedAgentsModelConfigParams`
 
       An object that defines additional configuration control over model use
 
@@ -103,11 +103,13 @@ Create Agent
 
           High-performance model for agents and coding
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-        - `string`
+        - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -213,7 +215,7 @@ Create Agent
 
     Skills available to the agent.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp`
+    - `type BetaManagedAgentsAnthropicSkillParams`
 
       An Anthropic-managed skill.
 
@@ -231,7 +233,7 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp`
+    - `type BetaManagedAgentsCustomSkillParams`
 
       A user-created custom skill.
 
@@ -259,17 +261,17 @@ Create Agent
 
     Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+    - `type BetaManagedAgentsAgentToolset20260401Params`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp`
+        - `type BetaManagedAgentsBashToolConfigParams`
 
           Configuration override for the bash tool.
 
@@ -283,7 +285,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -305,7 +307,7 @@ Create Agent
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp`
+        - `type BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
 
@@ -319,7 +321,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -335,7 +337,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp`
+        - `type BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
 
@@ -349,7 +351,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -365,7 +367,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp`
+        - `type BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
 
@@ -379,7 +381,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -395,7 +397,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp`
+        - `type BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
 
@@ -409,7 +411,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -425,7 +427,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp`
+        - `type BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
 
@@ -439,7 +441,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -455,7 +457,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
 
@@ -483,7 +485,7 @@ Create Agent
 
             format: int32
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -499,11 +501,11 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -571,11 +573,11 @@ Create Agent
 
                       minLength: 1, maxLength: 128
 
-            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -595,7 +597,7 @@ Create Agent
 
                   This source contributes no URLs that may be fetched.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
 
@@ -617,7 +619,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -633,7 +635,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `UserLocation BetaManagedAgentsUserLocation Optional`
+          - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
             Approximate user location for search result localization.
 
@@ -663,7 +665,7 @@ Create Agent
 
               minLength: 1, maxLength: 255
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
         Default configuration applied to all tools in this set.
 
@@ -671,7 +673,7 @@ Create Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -687,7 +689,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp`
+    - `type BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -699,7 +701,7 @@ Create Agent
 
         minLength: 1, maxLength: 255
 
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+      - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
         Per-tool configuration overrides.
 
@@ -713,7 +715,7 @@ Create Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -729,7 +731,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
         Default configuration for all tools from this server.
 
@@ -737,7 +739,7 @@ Create Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools from this server.
 
@@ -753,7 +755,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp`
+    - `type BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -765,7 +767,7 @@ Create Agent
 
         minLength: 1
 
-      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+      - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 

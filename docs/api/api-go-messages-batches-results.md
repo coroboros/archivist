@@ -452,7 +452,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
-              - `type WebSearchToolResultBlockContentArray []WebSearchResultBlock`
+              - `[]WebSearchResultBlock`
 
                 - `Type WebSearchResult`
 

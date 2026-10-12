@@ -333,7 +333,7 @@ Pause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 

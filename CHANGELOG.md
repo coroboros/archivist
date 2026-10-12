@@ -1,5 +1,109 @@
 # Changelog
 
+## 🤖 v1.5.224 - 12/10/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-go-beta-agents-create.md`
+- Modified: `docs/api/api-go-beta-agents-update.md`
+- Modified: `docs/api/api-go-beta-agents.md`
+- Modified: `docs/api/api-go-beta-deployments-archive.md`
+- Modified: `docs/api/api-go-beta-deployments-create.md`
+- Modified: `docs/api/api-go-beta-deployments-list.md`
+- Modified: `docs/api/api-go-beta-deployments-pause.md`
+- Modified: `docs/api/api-go-beta-deployments-retrieve.md`
+- Modified: `docs/api/api-go-beta-deployments-unpause.md`
+- Modified: `docs/api/api-go-beta-deployments.md`
+- Modified: `docs/api/api-go-beta-environments-create.md`
+- Modified: `docs/api/api-go-beta-environments-update.md`
+- Modified: `docs/api/api-go-beta-environments.md`
+- Modified: `docs/api/api-go-beta-memory_stores-memories.md`
+- Modified: `docs/api/api-go-beta-messages-batches-create.md`
+- Modified: `docs/api/api-go-beta-messages-batches-results.md`
+- Modified: `docs/api/api-go-beta-messages-batches.md`
+- Modified: `docs/api/api-go-beta-messages-count_tokens.md`
+- Modified: `docs/api/api-go-beta-messages-create.md`
+- Modified: `docs/api/api-go-beta-messages.md`
+- Modified: `docs/api/api-go-beta-sessions-events-list.md`
+- Modified: `docs/api/api-go-beta-sessions-events-send.md`
+- Modified: `docs/api/api-go-beta-sessions-events-stream.md`
+- Modified: `docs/api/api-go-beta-sessions-events.md`
+- Modified: `docs/api/api-go-beta-sessions-threads-events-list.md`
+- Modified: `docs/api/api-go-beta-sessions-threads-events-stream.md`
+- Modified: `docs/api/api-go-beta-sessions-threads-events.md`
+- Modified: `docs/api/api-go-beta-sessions.md`
+- Modified: `docs/api/api-go-beta-user_profiles.md`
+- Modified: `docs/api/api-go-beta-vaults-credentials-update.md`
+- Modified: `docs/api/api-go-beta-vaults-credentials.md`
+- Modified: `docs/api/api-go-beta-vaults.md`
+- Modified: `docs/api/api-go-beta.md`
+- Modified: `docs/api/api-go-messages-batches-create.md`
+- Modified: `docs/api/api-go-messages-batches-results.md`
+- Modified: `docs/api/api-go-messages-batches.md`
+- Modified: `docs/api/api-go-messages-count_tokens.md`
+- Modified: `docs/api/api-go-messages-create.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-marketplace-reference.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-budgets.md`
+- Modified: `docs/managed-agents/managed-agents-define-outcomes.md`
+- Modified: `docs/managed-agents/managed-agents-dreams.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-event-deltas.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multiagent-orchestration.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/managed-agents/managed-agents-scheduled-deployments.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-memory.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-operations.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-reference.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-security.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-workers.md`
+- Modified: `docs/managed-agents/managed-agents-session-observability.md`
+- Modified: `docs/managed-agents/managed-agents-session-operations.md`
+- Modified: `docs/managed-agents/managed-agents-session-threads.md`
+- Modified: `docs/managed-agents/managed-agents-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-tools-web-restrictions.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Modified: `docs/managed-agents/managed-agents-webhooks.md`
+- Modified: `docs/managed-agents/managed-agents-workflow-runs.md`
+
+
 ## 🤖 v1.5.223 - 11/10/2026
 
 File Changes:

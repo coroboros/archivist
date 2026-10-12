@@ -540,7 +540,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `const BetaWebSearchToolResultErrorCodeRequestTooLarge BetaWebSearchToolResultErrorCode = "request_too_large"`
 
-              - `type BetaWebSearchToolResultBlockContentArray []BetaWebSearchResultBlock`
+              - `[]BetaWebSearchResultBlock`
 
                 - `Type WebSearchResult`
 
@@ -1008,7 +1008,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `string`
 
-              - `type BetaMCPToolResultBlockContentBetaMCPToolResultBlockContent []BetaTextBlock`
+              - `[]BetaTextBlock`
 
                 - `Type Text`
 

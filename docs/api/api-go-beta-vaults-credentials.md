@@ -31,7 +31,7 @@ Create Credential
 
     Authentication configuration for the credential.
 
-    - `type BetaManagedAgentsMCPOAuthCreateParamsResp`
+    - `type BetaManagedAgentsMCPOAuthCreateParams`
 
       Parameters for creating an MCP OAuth credential.
 
@@ -55,7 +55,7 @@ Create Credential
 
         format: date-time
 
-      - `Refresh BetaManagedAgentsMCPOAuthRefreshParamsResp Optional`
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshParams Optional`
 
         Refresh token configuration, if the credential supports token refresh.
 
@@ -77,15 +77,15 @@ Create Credential
 
           minLength: 1, maxLength: 2047
 
-        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneParam`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneParamType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicParam`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -97,7 +97,7 @@ Create Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthPostParam`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -121,7 +121,7 @@ Create Credential
 
           minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsStaticBearerCreateParamsResp`
+    - `type BetaManagedAgentsStaticBearerCreateParams`
 
       Parameters for creating a static bearer token credential.
 
@@ -139,23 +139,23 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-    - `type BetaManagedAgentsEnvironmentVariableCreateParamsResp`
+    - `type BetaManagedAgentsEnvironmentVariableCreateParams`
 
       Parameters for creating an environment variable credential.
 
       - `Type BetaManagedAgentsEnvironmentVariableCreateParamsType`
 
-      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp`
+      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion`
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -177,7 +177,7 @@ Create Credential
 
         minLength: 1, maxLength: 4096
 
-      - `InjectionLocation BetaManagedAgentsInjectionLocationParamsResp Optional`
+      - `InjectionLocation BetaManagedAgentsInjectionLocationParams Optional`
 
         Where in the outbound request the secret value may be substituted.
 
@@ -1230,7 +1230,7 @@ Update Credential
 
     Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
 
-    - `type BetaManagedAgentsMCPOAuthUpdateParamsResp`
+    - `type BetaManagedAgentsMCPOAuthUpdateParams`
 
       Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -1248,7 +1248,7 @@ Update Credential
 
         format: date-time
 
-      - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp Optional`
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParams Optional`
 
         Updated refresh token configuration.
 
@@ -1264,9 +1264,9 @@ Update Credential
 
           maxLength: 8192
 
-        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnion Optional`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -1278,7 +1278,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
             Updated POST body authentication parameters for the token endpoint.
 
@@ -1290,7 +1290,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-    - `type BetaManagedAgentsStaticBearerUpdateParamsResp`
+    - `type BetaManagedAgentsStaticBearerUpdateParams`
 
       Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -1302,13 +1302,13 @@ Update Credential
 
         minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp`
+    - `type BetaManagedAgentsEnvironmentVariableUpdateParams`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
       - `Type BetaManagedAgentsEnvironmentVariableUpdateParamsType`
 
-      - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParamsResp Optional`
+      - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParams Optional`
 
         Updated injection location.
 
@@ -1320,17 +1320,17 @@ Update Credential
 
           Substitute when the placeholder appears in a request header value.
 
-      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp Optional`
+      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion Optional`
 
         Updated networking scope. Full replacement.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -2640,15 +2640,15 @@ func main() {
 
 ### Beta Managed Agents Credential Networking Params
 
-- `type BetaManagedAgentsCredentialNetworkingParamsUnionResp interface{…}`
+- `type BetaManagedAgentsCredentialNetworkingParamsUnion interface{…}`
 
-  - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+  - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
     Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
     - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-  - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+  - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
     Substitute the secret only on requests to the listed hosts.
 
@@ -2834,23 +2834,23 @@ func main() {
 
 ### Beta Managed Agents Environment Variable Create Params
 
-- `type BetaManagedAgentsEnvironmentVariableCreateParamsResp`
+- `type BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Parameters for creating an environment variable credential.
 
   - `Type BetaManagedAgentsEnvironmentVariableCreateParamsType`
 
-  - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp`
+  - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion`
 
     Outbound hosts the secret value is substituted on.
 
-    - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+    - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-    - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+    - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2872,7 +2872,7 @@ func main() {
 
     minLength: 1, maxLength: 4096
 
-  - `InjectionLocation BetaManagedAgentsInjectionLocationParamsResp Optional`
+  - `InjectionLocation BetaManagedAgentsInjectionLocationParams Optional`
 
     Where in the outbound request the secret value may be substituted.
 
@@ -2886,13 +2886,13 @@ func main() {
 
 ### Beta Managed Agents Environment Variable Update Params
 
-- `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp`
+- `type BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Parameters for updating an environment variable credential. `secret_name` is immutable.
 
   - `Type BetaManagedAgentsEnvironmentVariableUpdateParamsType`
 
-  - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParamsResp Optional`
+  - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParams Optional`
 
     Updated injection location.
 
@@ -2904,17 +2904,17 @@ func main() {
 
       Substitute when the placeholder appears in a request header value.
 
-  - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp Optional`
+  - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion Optional`
 
     Updated networking scope. Full replacement.
 
-    - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+    - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-    - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+    - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2932,7 +2932,7 @@ func main() {
 
 ### Beta Managed Agents Injection Location Params
 
-- `type BetaManagedAgentsInjectionLocationParamsResp`
+- `type BetaManagedAgentsInjectionLocationParams`
 
   Where in the outbound request the secret value may be substituted.
 
@@ -2960,7 +2960,7 @@ func main() {
 
 ### Beta Managed Agents Injection Location Update Params
 
-- `type BetaManagedAgentsInjectionLocationUpdateParamsResp`
+- `type BetaManagedAgentsInjectionLocationUpdateParams`
 
   Updated injection location.
 
@@ -2974,7 +2974,7 @@ func main() {
 
 ### Beta Managed Agents Limited Credential Networking Params
 
-- `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+- `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
   Substitute the secret only on requests to the listed hosts.
 
@@ -3056,7 +3056,7 @@ func main() {
 
 ### Beta Managed Agents MCP OAuth Create Params
 
-- `type BetaManagedAgentsMCPOAuthCreateParamsResp`
+- `type BetaManagedAgentsMCPOAuthCreateParams`
 
   Parameters for creating an MCP OAuth credential.
 
@@ -3080,7 +3080,7 @@ func main() {
 
     format: date-time
 
-  - `Refresh BetaManagedAgentsMCPOAuthRefreshParamsResp Optional`
+  - `Refresh BetaManagedAgentsMCPOAuthRefreshParams Optional`
 
     Refresh token configuration, if the credential supports token refresh.
 
@@ -3102,15 +3102,15 @@ func main() {
 
       minLength: 1, maxLength: 2047
 
-    - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
+    - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion`
 
-      - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
+      - `type BetaManagedAgentsTokenEndpointAuthNoneParam`
 
         Token endpoint requires no client authentication.
 
         - `Type BetaManagedAgentsTokenEndpointAuthNoneParamType`
 
-      - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
+      - `type BetaManagedAgentsTokenEndpointAuthBasicParam`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3122,7 +3122,7 @@ func main() {
 
           minLength: 1, maxLength: 512
 
-      - `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
+      - `type BetaManagedAgentsTokenEndpointAuthPostParam`
 
         Token endpoint uses POST body authentication with client credentials.
 
@@ -3148,7 +3148,7 @@ func main() {
 
 ### Beta Managed Agents MCP OAuth Refresh Params
 
-- `type BetaManagedAgentsMCPOAuthRefreshParamsResp`
+- `type BetaManagedAgentsMCPOAuthRefreshParams`
 
   OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -3170,15 +3170,15 @@ func main() {
 
     minLength: 1, maxLength: 2047
 
-  - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
+  - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion`
 
-    - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
+    - `type BetaManagedAgentsTokenEndpointAuthNoneParam`
 
       Token endpoint requires no client authentication.
 
       - `Type BetaManagedAgentsTokenEndpointAuthNoneParamType`
 
-    - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
+    - `type BetaManagedAgentsTokenEndpointAuthBasicParam`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3190,7 +3190,7 @@ func main() {
 
         minLength: 1, maxLength: 512
 
-    - `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
+    - `type BetaManagedAgentsTokenEndpointAuthPostParam`
 
       Token endpoint uses POST body authentication with client credentials.
 
@@ -3258,7 +3258,7 @@ func main() {
 
 ### Beta Managed Agents MCP OAuth Refresh Update Params
 
-- `type BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp`
+- `type BetaManagedAgentsMCPOAuthRefreshUpdateParams`
 
   Parameters for updating OAuth refresh token configuration.
 
@@ -3274,9 +3274,9 @@ func main() {
 
     maxLength: 8192
 
-  - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
+  - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnion Optional`
 
-    - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
+    - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
       Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3288,7 +3288,7 @@ func main() {
 
         minLength: 1, maxLength: 512
 
-    - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
+    - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
       Updated POST body authentication parameters for the token endpoint.
 
@@ -3302,7 +3302,7 @@ func main() {
 
 ### Beta Managed Agents MCP OAuth Update Params
 
-- `type BetaManagedAgentsMCPOAuthUpdateParamsResp`
+- `type BetaManagedAgentsMCPOAuthUpdateParams`
 
   Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -3320,7 +3320,7 @@ func main() {
 
     format: date-time
 
-  - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp Optional`
+  - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParams Optional`
 
     Updated refresh token configuration.
 
@@ -3336,9 +3336,9 @@ func main() {
 
       maxLength: 8192
 
-    - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
+    - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnion Optional`
 
-      - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
+      - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
         Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3350,7 +3350,7 @@ func main() {
 
           minLength: 1, maxLength: 512
 
-      - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
+      - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
         Updated POST body authentication parameters for the token endpoint.
 
@@ -3480,7 +3480,7 @@ func main() {
 
 ### Beta Managed Agents Static Bearer Create Params
 
-- `type BetaManagedAgentsStaticBearerCreateParamsResp`
+- `type BetaManagedAgentsStaticBearerCreateParams`
 
   Parameters for creating a static bearer token credential.
 
@@ -3500,7 +3500,7 @@ func main() {
 
 ### Beta Managed Agents Static Bearer Update Params
 
-- `type BetaManagedAgentsStaticBearerUpdateParamsResp`
+- `type BetaManagedAgentsStaticBearerUpdateParams`
 
   Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -3514,7 +3514,7 @@ func main() {
 
 ### Beta Managed Agents Token Endpoint Auth Basic Param
 
-- `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
+- `type BetaManagedAgentsTokenEndpointAuthBasicParam`
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3536,7 +3536,7 @@ func main() {
 
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
-- `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
+- `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
   Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3550,7 +3550,7 @@ func main() {
 
 ### Beta Managed Agents Token Endpoint Auth None Param
 
-- `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
+- `type BetaManagedAgentsTokenEndpointAuthNoneParam`
 
   Token endpoint requires no client authentication.
 
@@ -3566,7 +3566,7 @@ func main() {
 
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
-- `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
+- `type BetaManagedAgentsTokenEndpointAuthPostParam`
 
   Token endpoint uses POST body authentication with client credentials.
 
@@ -3588,7 +3588,7 @@ func main() {
 
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
-- `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
+- `type BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
   Updated POST body authentication parameters for the token endpoint.
 
@@ -3602,7 +3602,7 @@ func main() {
 
 ### Beta Managed Agents Unrestricted Credential Networking Params
 
-- `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+- `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
   Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
