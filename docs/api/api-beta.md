@@ -839,7 +839,7 @@ curl https://api.anthropic.com/v1/models \
 {
   "data": [
     {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -922,9 +922,9 @@ curl https://api.anthropic.com/v1/models \
           }
         }
       },
-      "created_at": "2026-07-24T00:00:00Z",
+      "created_at": "2026-09-21T00:00:00Z",
       "deprecated_at": "2019-12-27T18:11:19.117Z",
-      "display_name": "Claude Opus 5",
+      "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,
@@ -1297,7 +1297,7 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 
 ```json
 {
-  "id": "claude-opus-5",
+  "id": "claude-opus-5-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -1380,9 +1380,9 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
       }
     }
   },
-  "created_at": "2026-07-24T00:00:00Z",
+  "created_at": "2026-09-21T00:00:00Z",
   "deprecated_at": "2019-12-27T18:11:19.117Z",
-  "display_name": "Claude Opus 5",
+  "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
   "line": "haiku",
   "max_input_tokens": 0,
@@ -9776,7 +9776,7 @@ curl https://api.anthropic.com/v1/messages \
               "role": "user"
             }
           ],
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "stream": false,
           "system": [
             {
@@ -9856,7 +9856,7 @@ curl https://api.anthropic.com/v1/messages \
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -13965,7 +13965,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "system": [
             {
               "text": "Today'\''s date is 2024-06-01.",
@@ -18396,7 +18396,7 @@ curl https://api.anthropic.com/v1/messages/batches \
                     "role": "user"
                   }
                 ],
-                "model": "claude-opus-5"
+                "model": "claude-opus-5-5"
               }
             }
           ]
@@ -23701,7 +23701,7 @@ Create Agent
 
 - `model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
   - `BetaManagedAgentsModel = "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
 
@@ -25398,7 +25398,7 @@ curl https://api.anthropic.com/v1/agents \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "name": "My First Agent",
           "description": "A general-purpose starter agent.",
           "metadata": {
@@ -25432,7 +25432,7 @@ curl https://api.anthropic.com/v1/agents \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -26464,7 +26464,7 @@ curl https://api.anthropic.com/v1/agents \
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -27479,7 +27479,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -27719,7 +27719,7 @@ Update Agent
 
 - `model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `BetaManagedAgentsModel = "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
 
@@ -29419,7 +29419,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -30424,7 +30424,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -31448,7 +31448,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -35694,7 +35694,7 @@ Create Session
 
     - `model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-      Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+      Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
       - `BetaManagedAgentsModel = "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
 
@@ -37912,7 +37912,7 @@ curl https://api.anthropic.com/v1/sessions \
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -37932,7 +37932,7 @@ curl https://api.anthropic.com/v1/sessions \
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -39443,7 +39443,7 @@ curl https://api.anthropic.com/v1/sessions \
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -39463,7 +39463,7 @@ curl https://api.anthropic.com/v1/sessions \
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -40886,7 +40886,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -40906,7 +40906,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -42911,7 +42911,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -42931,7 +42931,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -44506,7 +44506,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -44526,7 +44526,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -54132,7 +54132,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads \
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -55176,7 +55176,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID \
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -56218,7 +56218,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -96891,7 +96891,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
           "cache_read_input_tokens": 200,
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "output_tokens": 500,
           "server_tool_use": {
             "web_search_requests": 10
@@ -97135,7 +97135,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -97148,7 +97148,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 42,
             "currency": "USD"
           },
-          "model": "claude-sonnet-5",
+          "model": "claude-sonnet-5-5",
           "tokens": {
             "cache_creation": 890,
             "cache_read": 3420,
@@ -97472,9 +97472,9 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
           "context_window": "0-200k",
           "cost_type": "tokens",
           "currency": "USD",
-          "description": "Claude Opus 5 Usage - Input Tokens",
+          "description": "Claude Opus 5.5 Usage - Input Tokens",
           "inference_geo": "global",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "service_tier": "standard",
           "token_type": "cache_creation.ephemeral_1h_input_tokens",
           "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -101760,7 +101760,7 @@ key with the `read:analytics` scope.
 
     - `model: string or null`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `output_tokens: number`
 
@@ -101852,7 +101852,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/usage_report \
           "claude_tag_user_id": "U0123ABCDEF",
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "output_tokens": 0,
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -102185,7 +102185,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `model: string or null`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `output_tokens: number`
 
@@ -102287,7 +102287,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -102570,7 +102570,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `model: string or null`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `product: string or null`
 
@@ -102659,7 +102659,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
           "currency": "USD",
           "inference_geo": "global",
           "list_amount": "list_amount",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
@@ -102992,7 +102992,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `model: string or null`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `product: string or null`
 
@@ -103087,7 +103087,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
       "list_amount": "51600.000000",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
@@ -103318,7 +103318,7 @@ Anthropic account team.
 
   - `is_enabled: boolean`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -103486,7 +103486,7 @@ Retrieve a spend limit by ID.
 
   - `is_enabled: boolean`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -103651,12 +103651,10 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 List the organization's spend limits.
 
-A Claude Console organization's limits come in an order that is stable across
-pages. A Claude Enterprise organization's are grouped by scope type,
-in the order `organization`, `seat_tier`, `rbac_group`,
-`organization_service`, `user`; within a type they come in a fixed order that
-is not creation order. Listing Claude Console limits is in an early access
-preview. To request access, contact your Anthropic account team.
+Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+`rbac_group`, `organization_service`, `user`; within a type they come in a
+fixed order that is not creation order. Supported for Claude Enterprise
+organizations only, not for Claude Console organizations.
 
 #### Query parameters
 
@@ -103672,7 +103670,7 @@ preview. To request access, contact your Anthropic account team.
 
 - `scope_type: optional array of "organization" or "organization_service" or "rbac_group" or 3 more`
 
-  Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
+  Return only limits with these scope types. Omit for all.
 
   maxItems: 100
 
@@ -103832,7 +103830,7 @@ preview. To request access, contact your Anthropic account team.
 
   - `is_enabled: boolean`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -103957,9 +103955,9 @@ List each member's effective spend limit and period-to-date spend.
 
 Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
-Paginates by member, so a member's periods never split across pages. Listing
-Claude Console limits is in an early access preview. To request access,
-contact your Anthropic account team.
+Paginates by member, so a member's periods never split across pages.
+Supported for Claude Enterprise organizations only, not for Claude Console
+organizations.
 
 #### Query parameters
 
@@ -104925,7 +104923,7 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `is_enabled: boolean`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 

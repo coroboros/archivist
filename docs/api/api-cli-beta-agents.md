@@ -23,7 +23,7 @@ Create Agent
 
 - `--model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
 - `--name: string`
 
@@ -872,7 +872,7 @@ Create Agent
 ```bash
 ant beta:agents create \
   --api-key my-anthropic-api-key \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --name 'My First Agent'
 ```
 
@@ -895,7 +895,7 @@ ant beta:agents create \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -1851,7 +1851,7 @@ ant beta:agents list \
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -2785,7 +2785,7 @@ ant beta:agents retrieve \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -2895,7 +2895,7 @@ Update Agent
 
 - `--model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
 - `--multiagent: optional BetaManagedAgentsMultiagentCoordinatorParams or BetaManagedAgentsMultiagent20261001Params`
 
@@ -3758,7 +3758,7 @@ ant beta:agents update \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -4683,7 +4683,7 @@ ant beta:agents archive \
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -12010,7 +12010,7 @@ ant beta:agents:versions list \
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },

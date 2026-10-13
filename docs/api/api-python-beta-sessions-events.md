@@ -3425,7 +3425,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -3537,7 +3537,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -3567,7 +3567,7 @@ Send Events
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 
@@ -4187,7 +4187,7 @@ print(beta_managed_agents_send_session_events.data)
 
 ## Stream Events
 
-`beta.sessions.events.stream(session_id, **kwargs)  -> BetaManagedAgentsStreamSessionEvents`
+`beta.sessions.events.stream(session_id, **kwargs)  -> Stream[BetaManagedAgentsStreamSessionEvents]`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -8968,7 +8968,7 @@ for event in client.beta.sessions.events.stream(
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -9080,7 +9080,7 @@ for event in client.beta.sessions.events.stream(
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -9110,7 +9110,7 @@ for event in client.beta.sessions.events.stream(
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 
@@ -17252,7 +17252,7 @@ for event in client.beta.sessions.events.stream(
 
   - `type: Literal["system.message"]`
 
-  - `content: List[BetaManagedAgentsSystemContentBlock]`
+  - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
     System content blocks to append. Text-only.
 
@@ -17628,7 +17628,7 @@ for event in client.beta.sessions.events.stream(
 
     minLength: 1, maxLength: 128
 
-  - `content: Optional[List[Content]]`
+  - `content: Optional[Iterable[Content]]`
 
     The result content returned by the tool.
 
@@ -18356,7 +18356,7 @@ for event in client.beta.sessions.events.stream(
 
     minLength: 1, maxLength: 128
 
-  - `content: Optional[List[Content]]`
+  - `content: Optional[Iterable[Content]]`
 
     The result content returned by the tool.
 

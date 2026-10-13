@@ -5772,7 +5772,7 @@ ant beta:messages create \
   --api-key my-anthropic-api-key \
   --max-tokens 1024 \
   --message '{content: [{text: x, type: text}], role: user}' \
-  --model claude-opus-5
+  --model claude-opus-5-5
 ```
 
 ### Response (200)
@@ -5823,7 +5823,7 @@ ant beta:messages create \
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",

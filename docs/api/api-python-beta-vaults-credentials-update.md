@@ -43,7 +43,7 @@ Update Credential
 
       minLength: 1, maxLength: 8192
 
-    - `expires_at: Optional[datetime]`
+    - `expires_at: Optional[Union[str, datetime, null]]`
 
       A timestamp in RFC 3339 format
 
@@ -137,7 +137,7 @@ Update Credential
 
         - `type: Literal["limited"]`
 
-        - `allowed_hosts: List[str]`
+        - `allowed_hosts: Sequence[str]`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 

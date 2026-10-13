@@ -176,7 +176,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -196,7 +196,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -532,7 +532,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -552,7 +552,7 @@ var_dump($page);
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -828,7 +828,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -848,7 +848,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -1172,7 +1172,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -1192,7 +1192,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -1521,7 +1521,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -1541,7 +1541,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -1761,7 +1761,7 @@ var_dump($betaManagedAgentsSession);
 
   - `?Model model`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
   - `?list<BetaManagedAgentsSkillParams> skills`
 
@@ -3533,7 +3533,7 @@ var_dump($betaManagedAgentsSendSessionEvents);
 
 ### Stream Events
 
-`$client->beta->sessions->events->stream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsStreamSessionEvents`
+`$client->beta->sessions->events->streamStream(string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas, ?string workspaceID): BaseStream<ManagedAgentsStreamSessionEvents>`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -5196,7 +5196,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -5382,7 +5382,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -5565,7 +5565,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -6610,7 +6610,7 @@ var_dump($page);
 
 ### Stream Session Thread Events
 
-`$client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsStreamSessionThreadEvents`
+`$client->beta->sessions->threads->events->streamStream(string threadID, string sessionID, ?list<BetaManagedAgentsDeltaType> eventDeltas, ?list<AnthropicBeta> betas, ?string workspaceID): BaseStream<ManagedAgentsStreamSessionThreadEvents>`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

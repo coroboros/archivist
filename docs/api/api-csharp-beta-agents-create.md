@@ -23,7 +23,7 @@ Create Agent
 
   - `required Model model`
 
-    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel`
 
@@ -1738,7 +1738,7 @@ Create Agent
 ```csharp
 AgentCreateParams parameters = new()
 {
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Name = "My First Agent",
 };
 
@@ -1766,7 +1766,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },

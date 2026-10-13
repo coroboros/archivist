@@ -25,7 +25,7 @@ Create Agent
 
   - `required Model model`
 
-    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel`
 
@@ -1740,7 +1740,7 @@ Create Agent
 ```csharp
 AgentCreateParams parameters = new()
 {
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Name = "My First Agent",
 };
 
@@ -1768,7 +1768,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -2795,7 +2795,7 @@ await foreach (var item in page.Paginate())
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -3808,7 +3808,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -3934,7 +3934,7 @@ Update Agent
 
   - `Model model`
 
-    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `enum BetaManagedAgentsModel`
 
@@ -5654,7 +5654,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -6658,7 +6658,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -13850,7 +13850,7 @@ await foreach (var item in page.Paginate())
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },

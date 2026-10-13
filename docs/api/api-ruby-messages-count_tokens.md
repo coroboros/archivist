@@ -2964,7 +2964,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 message_tokens_count = anthropic.messages.count_tokens(
   messages: [{content: "Hello, world", role: :user}],
-  model: Anthropic::Model::CLAUDE_OPUS_5
+  model: Anthropic::Model::CLAUDE_OPUS_5_5
 )
 
 puts(message_tokens_count)

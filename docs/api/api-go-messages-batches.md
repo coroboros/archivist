@@ -3241,7 +3241,7 @@ func main() {
 					}},
 					Role: anthropic.MessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus5,
+				Model: anthropic.ModelClaudeOpus5_5,
 			},
 		}},
 	})
@@ -3932,7 +3932,7 @@ func main() {
 
 ## Retrieve Message Batch results
 
-`client.Messages.Batches.Results(ctx, messageBatchID, query) (*MessageBatchIndividualResponse, error)`
+`client.Messages.Batches.ResultsStreaming(ctx, messageBatchID, query) *jsonl.Stream[MessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 

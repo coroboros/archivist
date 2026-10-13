@@ -3085,7 +3085,7 @@ await foreach (var item in page.Paginate())
 
 ## Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaManagedAgentsStreamSessionThreadEvents> Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

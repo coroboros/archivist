@@ -3233,7 +3233,7 @@ const messageBatch = await client.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: "Hello, world", role: "user" }],
-        model: "claude-opus-5"
+        model: "claude-opus-5-5"
       }
     }
   ]

@@ -836,7 +836,7 @@ func main() {
 {
   "data": [
     {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -919,9 +919,9 @@ func main() {
           }
         }
       },
-      "created_at": "2026-07-24T00:00:00Z",
+      "created_at": "2026-09-21T00:00:00Z",
       "deprecated_at": "2019-12-27T18:11:19.117Z",
-      "display_name": "Claude Opus 5",
+      "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,
@@ -1309,7 +1309,7 @@ func main() {
 
 ```json
 {
-  "id": "claude-opus-5",
+  "id": "claude-opus-5-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -1392,9 +1392,9 @@ func main() {
       }
     }
   },
-  "created_at": "2026-07-24T00:00:00Z",
+  "created_at": "2026-09-21T00:00:00Z",
   "deprecated_at": "2019-12-27T18:11:19.117Z",
-  "display_name": "Claude Opus 5",
+  "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
   "line": "haiku",
   "max_input_tokens": 0,
@@ -9469,7 +9469,7 @@ func main() {
 			}},
 			Role: anthropic.BetaMessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus5,
+		Model: anthropic.ModelClaudeOpus5_5,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -9526,7 +9526,7 @@ func main() {
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -13373,7 +13373,7 @@ func main() {
 			}},
 			Role: anthropic.BetaMessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus5,
+		Model: anthropic.ModelClaudeOpus5_5,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -17781,7 +17781,7 @@ func main() {
 					}},
 					Role: anthropic.BetaMessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus5,
+				Model: anthropic.ModelClaudeOpus5_5,
 			},
 		}},
 	})
@@ -18888,7 +18888,7 @@ func main() {
 
 ### Retrieve Message Batch results
 
-`client.Beta.Messages.Batches.Results(ctx, messageBatchID, query) (*BetaMessageBatchIndividualResponse, error)`
+`client.Beta.Messages.Batches.ResultsStreaming(ctx, messageBatchID, query) *jsonl.Stream[BetaMessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -23031,7 +23031,7 @@ Create Agent
 
   - `Model BetaManagedAgentsModelConfigParams`
 
-    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
     - `type BetaManagedAgentsModelConfigParams`
 
@@ -24686,7 +24686,7 @@ func main() {
 	)
 	betaManagedAgentsAgent, err := client.Beta.Agents.New(context.TODO(), anthropic.BetaAgentNewParams{
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 		},
 		Name: "My First Agent",
 	})
@@ -24716,7 +24716,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -25756,7 +25756,7 @@ func main() {
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -26785,7 +26785,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -26911,7 +26911,7 @@ Update Agent
 
   - `Model BetaManagedAgentsModelConfigParams Optional`
 
-    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `type BetaManagedAgentsModelConfigParams`
 
@@ -28575,7 +28575,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -29595,7 +29595,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -30629,7 +30629,7 @@ func main() {
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -34908,7 +34908,7 @@ Create Session
 
       - `Model BetaManagedAgentsModelConfigParams Optional`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `type BetaManagedAgentsModelConfigParams`
 
@@ -37231,7 +37231,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -37251,7 +37251,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -38766,7 +38766,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -38786,7 +38786,7 @@ func main() {
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -40225,7 +40225,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -40245,7 +40245,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -41702,7 +41702,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -41722,7 +41722,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -43329,7 +43329,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -43349,7 +43349,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -47707,7 +47707,7 @@ func main() {
 
 ### Stream Events
 
-`client.Beta.Sessions.Events.Stream(ctx, sessionID, params) (*BetaManagedAgentsStreamSessionEventsUnion, error)`
+`client.Beta.Sessions.Events.StreamEvents(ctx, sessionID, params) *ssestream.Stream[BetaManagedAgentsStreamSessionEventsUnion]`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -53083,7 +53083,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -54145,7 +54145,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -55204,7 +55204,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -58369,7 +58369,7 @@ func main() {
 
 ### Stream Session Thread Events
 
-`client.Beta.Sessions.Threads.Events.Stream(ctx, threadID, params) (*BetaManagedAgentsStreamSessionThreadEventsUnion, error)`
+`client.Beta.Sessions.Threads.Events.StreamEvents(ctx, threadID, params) *ssestream.Stream[BetaManagedAgentsStreamSessionThreadEventsUnion]`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
@@ -99159,7 +99159,7 @@ key with the `read:analytics` scope.
 
     - `Model string`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `OutputTokens int64`
 
@@ -99253,7 +99253,7 @@ func main() {
           "claude_tag_user_id": "U0123ABCDEF",
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "output_tokens": 0,
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -99568,7 +99568,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Model string`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `OutputTokens int64`
 
@@ -99672,7 +99672,7 @@ func main() {
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -99947,7 +99947,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `Model string`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `Product string`
 
@@ -100038,7 +100038,7 @@ func main() {
           "currency": "USD",
           "inference_geo": "global",
           "list_amount": "list_amount",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
@@ -100353,7 +100353,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Model string`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `Product string`
 
@@ -100450,7 +100450,7 @@ func main() {
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
       "list_amount": "51600.000000",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
@@ -100669,7 +100669,7 @@ Anthropic account team.
 
   - `IsEnabled bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `Period BetaSpendLimitPeriod`
 
@@ -100846,7 +100846,7 @@ Retrieve a spend limit by ID.
 
   - `IsEnabled bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `Period BetaSpendLimitPeriod`
 
@@ -101042,12 +101042,10 @@ func main() {
 
 List the organization's spend limits.
 
-A Claude Console organization's limits come in an order that is stable across
-pages. A Claude Enterprise organization's are grouped by scope type,
-in the order `organization`, `seat_tier`, `rbac_group`,
-`organization_service`, `user`; within a type they come in a fixed order that
-is not creation order. Listing Claude Console limits is in an early access
-preview. To request access, contact your Anthropic account team.
+Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+`rbac_group`, `organization_service`, `user`; within a type they come in a
+fixed order that is not creation order. Supported for Claude Enterprise
+organizations only, not for Claude Console organizations.
 
 #### Parameters
 
@@ -101065,7 +101063,7 @@ preview. To request access, contact your Anthropic account team.
 
   - `ScopeType []string Optional` (query parameter)
 
-    Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
+    Return only limits with these scope types. Omit for all.
 
     maxItems: 100
 
@@ -101217,7 +101215,7 @@ preview. To request access, contact your Anthropic account team.
 
   - `IsEnabled bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `Period BetaSpendLimitPeriod`
 
@@ -101358,9 +101356,9 @@ List each member's effective spend limit and period-to-date spend.
 
 Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
-Paginates by member, so a member's periods never split across pages. Listing
-Claude Console limits is in an early access preview. To request access,
-contact your Anthropic account team.
+Paginates by member, so a member's periods never split across pages.
+Supported for Claude Enterprise organizations only, not for Claude Console
+organizations.
 
 #### Parameters
 
@@ -102349,7 +102347,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     - `IsEnabled bool`
 
-      Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+      Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
     - `Period BetaSpendLimitPeriod`
 

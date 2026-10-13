@@ -15,7 +15,7 @@ url: https://platform.claude.com/docs/en/api/python/beta
 
 ### Anthropic Beta
 
-- `type AnthropicBeta = Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 47 more]]`
+- `type AnthropicBetaParam = Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 47 more]]`
 
   - `str`
 
@@ -829,7 +829,7 @@ print(page.id)
 {
   "data": [
     {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -912,9 +912,9 @@ print(page.id)
           }
         }
       },
-      "created_at": "2026-07-24T00:00:00Z",
+      "created_at": "2026-09-21T00:00:00Z",
       "deprecated_at": "2019-12-27T18:11:19.117Z",
-      "display_name": "Claude Opus 5",
+      "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,
@@ -1290,7 +1290,7 @@ print(beta_model_info.id)
 
 ```json
 {
-  "id": "claude-opus-5",
+  "id": "claude-opus-5-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -1373,9 +1373,9 @@ print(beta_model_info.id)
       }
     }
   },
-  "created_at": "2026-07-24T00:00:00Z",
+  "created_at": "2026-09-21T00:00:00Z",
   "deprecated_at": "2019-12-27T18:11:19.117Z",
-  "display_name": "Claude Opus 5",
+  "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
   "line": "haiku",
   "max_input_tokens": 0,
@@ -1464,11 +1464,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   There is a limit of 100,000 messages in a single request.
 
-  - `content: Union[str, List[BetaContentBlockParam]]`
+  - `content: Union[str, Iterable[BetaContentBlockParam]]`
 
     - `str`
 
-    - `List[BetaContentBlockParam]`
+    - `Iterable[BetaContentBlockParam]`
 
       - `class BetaTextBlockParam`
 
@@ -1478,7 +1478,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minLength: 1
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -1499,7 +1499,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"1h"`
 
-        - `citations: Optional[List[BetaTextCitationParam]]`
+        - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
           - `class BetaCitationCharLocationParam`
 
@@ -1627,11 +1627,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `source: Source`
 
-          - `class BetaBase64ImageSource`
+          - `class BetaBase64ImageSourceParam`
 
             - `type: Literal["base64"]`
 
-            - `data: str`
+            - `data: Union[str, Base64FileInput]`
 
               format: byte
 
@@ -1645,19 +1645,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"image/webp"`
 
-          - `class BetaURLImageSource`
+          - `class BetaURLImageSourceParam`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class BetaFileImageSource`
+          - `class BetaFileImageSourceParam`
 
             - `type: Literal["file"]`
 
             - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -1673,7 +1673,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"error"`
 
-      - `class BetaRequestDocumentBlock`
+      - `class BetaRequestDocumentBlockParam`
 
         - `type: Literal["document"]`
 
@@ -1697,37 +1697,37 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `media_type: Literal["text/plain"]`
 
-          - `class BetaContentBlockSource`
+          - `class BetaContentBlockSourceParam`
 
             - `type: Literal["content"]`
 
-            - `content: Union[str, List[BetaContentBlockSourceContent]]`
+            - `content: Union[str, Iterable[BetaContentBlockSourceContentParam]]`
 
               - `str`
 
-              - `List[BetaContentBlockSourceContent]`
+              - `Iterable[BetaContentBlockSourceContentParam]`
 
                 - `class BetaTextBlockParam`
 
                 - `class BetaImageBlockParam`
 
-          - `class BetaURLPDFSource`
+          - `class BetaURLPDFSourceParam`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class BetaFileDocumentSource`
+          - `class BetaFileDocumentSourceParam`
 
             - `type: Literal["file"]`
 
             - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `citations: Optional[BetaCitationsConfigParam]`
+        - `citations: Optional[BetaCitationsConfigParamParam]`
 
           - `enabled: Optional[bool]`
 
@@ -1743,7 +1743,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["search_result"]`
 
-        - `content: List[BetaTextBlockParam]`
+        - `content: Iterable[BetaTextBlockParam]`
 
           - `type: Literal["text"]`
 
@@ -1751,21 +1751,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minLength: 1
 
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
+          - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
             Create a cache control breakpoint at this content block.
 
-          - `citations: Optional[List[BetaTextCitationParam]]`
+          - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
         - `source: str`
 
         - `title: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `citations: Optional[BetaCitationsConfigParam]`
+        - `citations: Optional[BetaCitationsConfigParamParam]`
 
       - `class BetaThinkingBlockParam`
 
@@ -1803,7 +1803,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minLength: 1, maxLength: 200
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -1847,15 +1847,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `content: Optional[Union[str, List[Content], null]]`
+        - `content: Optional[Union[str, Iterable[Content]]]`
 
           - `str`
 
-          - `List[Content]`
+          - `Iterable[Content]`
 
             - `class BetaTextBlockParam`
 
@@ -1863,7 +1863,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `class BetaSearchResultBlockParam`
 
-            - `class BetaRequestDocumentBlock`
+            - `class BetaRequestDocumentBlockParam`
 
             - `class BetaToolReferenceBlockParam`
 
@@ -1875,7 +1875,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
@@ -1891,7 +1891,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `type: Literal["browser_state"]`
 
-              - `tabs: List[BetaBrowserStateTabEntry]`
+              - `tabs: Iterable[BetaBrowserStateTabEntryParam]`
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -1919,17 +1919,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
-              - `state_changes: Optional[List[BetaBrowserStateChange]]`
+              - `state_changes: Optional[Iterable[BetaBrowserStateChangeParam]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                 minItems: 1, maxItems: 200
 
-                - `class BetaBrowserStateChangeTabOpened`
+                - `class BetaBrowserStateChangeTabOpenedParam`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -1947,7 +1947,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BetaBrowserStateChangeDownloadStarted`
+                - `class BetaBrowserStateChangeDownloadStartedParam`
 
                   A file download that started during this call.
 
@@ -1965,7 +1965,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BetaBrowserStateChangeDownloadCompleted`
+                - `class BetaBrowserStateChangeDownloadCompletedParam`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -1998,7 +1998,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     minimum: 0
 
-                - `class BetaBrowserStateChangeDownloadFailed`
+                - `class BetaBrowserStateChangeDownloadFailedParam`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -2058,7 +2058,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"tool_search_tool_bm25"`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2078,9 +2078,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["web_search_tool_result"]`
 
-        - `content: BetaWebSearchToolResultBlockParamContent`
+        - `content: BetaWebSearchToolResultBlockParamContentParam`
 
-          - `List[BetaWebSearchResultBlockParam]`
+          - `Iterable[BetaWebSearchResultBlockParam]`
 
             - `type: Literal["web_search_result"]`
 
@@ -2092,7 +2092,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `page_age: Optional[str]`
 
-          - `class BetaWebSearchToolRequestError`
+          - `class BetaWebSearchToolRequestErrorParam`
 
             - `type: Literal["web_search_tool_result_error"]`
 
@@ -2114,7 +2114,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2166,7 +2166,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["web_fetch_result"]`
 
-            - `content: BetaRequestDocumentBlock`
+            - `content: BetaRequestDocumentBlockParam`
 
             - `url: str`
 
@@ -2180,7 +2180,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2244,7 +2244,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2252,7 +2252,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["code_execution_tool_result"]`
 
-        - `content: BetaCodeExecutionToolResultBlockParamContent`
+        - `content: BetaCodeExecutionToolResultBlockParamContentParam`
 
           - `class BetaCodeExecutionToolResultErrorParam`
 
@@ -2272,7 +2272,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["code_execution_result"]`
 
-            - `content: List[BetaCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
               - `type: Literal["code_execution_output"]`
 
@@ -2290,7 +2290,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-            - `content: List[BetaCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
               - `type: Literal["code_execution_output"]`
 
@@ -2306,7 +2306,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2336,7 +2336,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["bash_code_execution_result"]`
 
-            - `content: List[BetaBashCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaBashCodeExecutionOutputBlockParam]`
 
               - `type: Literal["bash_code_execution_output"]`
 
@@ -2352,7 +2352,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2410,7 +2410,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-            - `lines: Optional[List[str]]`
+            - `lines: Optional[Sequence[str]]`
 
             - `new_lines: Optional[int]`
 
@@ -2424,7 +2424,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2454,7 +2454,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-            - `tool_references: List[BetaToolReferenceBlockParam]`
+            - `tool_references: Iterable[BetaToolReferenceBlockParam]`
 
               - `type: Literal["tool_reference"]`
 
@@ -2462,7 +2462,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
@@ -2470,7 +2470,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2490,7 +2490,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The name of the MCP server
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2502,15 +2502,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
+        - `content: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
 
           - `str`
 
-          - `List[BetaTextBlockParam]`
+          - `Iterable[BetaTextBlockParam]`
 
             - `type: Literal["text"]`
 
@@ -2518,11 +2518,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               minLength: 1
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `citations: Optional[List[BetaTextCitationParam]]`
+            - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
         - `is_error: Optional[bool]`
 
@@ -2535,7 +2535,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2551,7 +2551,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["compaction"]`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -2567,11 +2567,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The block's signature as returned, to be sent back verbatim
 
-        - `tool_changes: Optional[List[ToolChange]]`
+        - `tool_changes: Optional[Iterable[ToolChange]]`
 
           The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-          - `class BetaRequestToolAdditionBlock`
+          - `class BetaRequestToolAdditionBlockParam`
 
             Mid-conversation directive to make a tool available.
 
@@ -2587,7 +2587,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool: Tool`
 
-              - `class BetaToolChangeToolReference`
+              - `class BetaToolChangeToolReferenceParam`
 
                 Reference to a single tool, by the name the model uses to call it: a
                 tool declared in `tools` or defined by an earlier `tool_addition`
@@ -2601,7 +2601,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-              - `class BetaToolChangeMCPToolReference`
+              - `class BetaToolChangeMCPToolReferenceParam`
 
                 Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -2612,7 +2612,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `server_name: str`
 
-              - `class BetaToolChangeMCPToolsetReference`
+              - `class BetaToolChangeMCPToolsetReferenceParam`
 
                 Reference to every tool in the named MCP server's toolset.
 
@@ -2628,9 +2628,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `type: Literal["tool_definition"]`
 
-                - `definition: BetaToolUnion`
+                - `definition: BetaToolUnionParam`
 
-                  - `class BetaTool`
+                  - `class BetaToolParam`
 
                     - `type: Optional[Literal["custom"]]`
 
@@ -2644,7 +2644,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `properties: Optional[Dict[str, object]]`
 
-                      - `required: Optional[List[str]]`
+                      - `required: Optional[Sequence[str]]`
 
                     - `name: str`
 
@@ -2664,7 +2664,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       - `"code_execution_20260521"`
 
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
+                    - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                       Create a cache control breakpoint at this content block.
 
@@ -2682,7 +2682,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                    - `input_examples: Optional[List[Dict[str, object]]]`
+                    - `input_examples: Optional[Iterable[Dict[str, object]]]`
 
                     - `strict: Optional[bool]`
 
@@ -4625,11 +4625,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                         The tool's description as the MCP server lists it.
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-          - `class BetaRequestToolRemovalBlock`
+          - `class BetaRequestToolRemovalBlockParam`
 
             Mid-conversation directive to withdraw a tool.
 
@@ -4641,7 +4641,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `tool: Tool`
 
-              - `class BetaToolChangeToolReference`
+              - `class BetaToolChangeToolReferenceParam`
 
                 Reference to a single tool, by the name the model uses to call it: a
                 tool declared in `tools` or defined by an earlier `tool_addition`
@@ -4649,20 +4649,20 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
                 assigns to MCP-resolved tools; use `mcp_tool_reference` or
                 `mcp_toolset_reference` for those.
 
-              - `class BetaToolChangeMCPToolReference`
+              - `class BetaToolChangeMCPToolReferenceParam`
 
                 Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
-              - `class BetaToolChangeMCPToolsetReference`
+              - `class BetaToolChangeMCPToolsetReferenceParam`
 
                 Reference to every tool in the named MCP server's toolset.
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-      - `class BetaRequestToolAdditionBlock`
+      - `class BetaRequestToolAdditionBlockParam`
 
         Mid-conversation directive to make a tool available.
 
@@ -4674,7 +4674,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         definition also requires the `mcp-client-2026-09-15` beta. The tool is
         offered to the model from this point in the conversation onward.
 
-      - `class BetaRequestToolRemovalBlock`
+      - `class BetaRequestToolRemovalBlockParam`
 
         Mid-conversation directive to withdraw a tool.
 
@@ -4697,7 +4697,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minLength: 1, maxLength: 255
 
-        - `tools: List[BetaMCPToolParam]`
+        - `tools: Iterable[BetaMCPToolParamParam]`
 
           The server's tools, exactly as the response listed them.
 
@@ -4733,11 +4733,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `type: Literal["fallback"]`
 
-        - `from_: BetaFallbackInfoParam`
+        - `from: BetaFallbackInfoParam`
 
           Identifies one hop of a fallback transition.
 
-          - `model: Model`
+          - `model: ModelParam`
 
             The model that will complete your prompt.
 
@@ -4767,7 +4767,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"never"`
 
-  - `output_config: Optional[BetaSystemMessageOutputConfig]`
+  - `output_config: Optional[BetaSystemMessageOutputConfigParam]`
 
     Per-message output configuration on a role:"system" input message.
 
@@ -4827,7 +4827,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Container id
 
-    - `skills: Optional[List[BetaSkillParams]]`
+    - `skills: Optional[Iterable[BetaSkillParams]]`
 
       List of skills to load in the container
 
@@ -4861,15 +4861,15 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-  - `edits: Optional[List[Edit]]`
+  - `edits: Optional[Iterable[Edit]]`
 
     List of context management edits to apply
 
-    - `class BetaClearToolUses20250919Edit`
+    - `class BetaClearToolUses20250919EditParam`
 
       - `type: Literal["clear_tool_uses_20250919"]`
 
-      - `clear_at_least: Optional[BetaInputTokensClearAtLeast]`
+      - `clear_at_least: Optional[BetaInputTokensClearAtLeastParam]`
 
         Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -4879,19 +4879,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 0
 
-      - `clear_tool_inputs: Optional[Union[bool, List[str], null]]`
+      - `clear_tool_inputs: Optional[Union[bool, Sequence[str], null]]`
 
         Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
         - `bool`
 
-        - `List[str]`
+        - `Sequence[str]`
 
-      - `exclude_tools: Optional[List[str]]`
+      - `exclude_tools: Optional[Sequence[str]]`
 
         Tool names whose uses are preserved from clearing
 
-      - `keep: Optional[BetaToolUsesKeep]`
+      - `keep: Optional[BetaToolUsesKeepParam]`
 
         Number of tool uses to retain in the conversation
 
@@ -4905,7 +4905,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Condition that triggers the context management strategy
 
-        - `class BetaInputTokensTrigger`
+        - `class BetaInputTokensTriggerParam`
 
           - `type: Literal["input_tokens"]`
 
@@ -4913,7 +4913,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-        - `class BetaToolUsesTrigger`
+        - `class BetaToolUsesTriggerParam`
 
           - `type: Literal["tool_uses"]`
 
@@ -4921,7 +4921,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-    - `class BetaClearThinking20251015Edit`
+    - `class BetaClearThinking20251015EditParam`
 
       - `type: Literal["clear_thinking_20251015"]`
 
@@ -4929,7 +4929,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-        - `class BetaThinkingTurns`
+        - `class BetaThinkingTurnsParam`
 
           - `type: Literal["thinking_turns"]`
 
@@ -4937,13 +4937,13 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             minimum: 1
 
-        - `class BetaAllThinkingTurns`
+        - `class BetaAllThinkingTurnsParam`
 
           - `type: Literal["all"]`
 
         - `"all"`
 
-    - `class BetaCompact20260112Edit`
+    - `class BetaCompact20260112EditParam`
 
       Automatically compact older context when reaching the configured trigger threshold.
 
@@ -4957,7 +4957,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         Whether to pause after compaction and return the compaction block to the user.
 
-      - `trigger: Optional[BetaInputTokensTrigger]`
+      - `trigger: Optional[BetaInputTokensTriggerParam]`
 
         When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -5024,9 +5024,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. Some models don't support fallbacks; on those models, a list of fallback models returns a 400 error. See [Server-side fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md#server-side-fallback). The string "default" requests the requested model's server-defined default fallback configuration. On a model that doesn't support fallbacks, the request runs on the requested model alone, so a declined request stays declined.
 
-  - `List[BetaFallbackParam]`
+  - `Iterable[BetaFallbackParam]`
 
-    - `model: Model`
+    - `model: ModelParam`
 
       The model that will complete your prompt.
 
@@ -5034,7 +5034,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `max_tokens: Optional[int]`
 
-    - `output_config: Optional[BetaOutputConfig]`
+    - `output_config: Optional[BetaOutputConfigParam]`
 
       - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
 
@@ -5052,7 +5052,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         - `"max"`
 
-      - `format: Optional[BetaJSONOutputFormat]`
+      - `format: Optional[BetaJSONOutputFormatParam]`
 
         A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
@@ -5062,7 +5062,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           The JSON schema of the format
 
-      - `task_budget: Optional[BetaTokenTaskBudget]`
+      - `task_budget: Optional[BetaTokenTaskBudgetParam]`
 
         Configuration for token budget tracking across contexts.
 
@@ -5092,7 +5092,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `thinking: Optional[Thinking]`
 
-      - `class BetaThinkingConfigEnabled`
+      - `class BetaThinkingConfigEnabledParam`
 
         - `type: Literal["enabled"]`
 
@@ -5106,7 +5106,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           minimum: 1024
 
-        - `block_binding: Optional[BetaThinkingBlockBinding]`
+        - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
           Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -5128,19 +5128,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"updates"`
 
-      - `class BetaThinkingConfigDisabled`
+      - `class BetaThinkingConfigDisabledParam`
 
         - `type: Literal["disabled"]`
 
-      - `class BetaThinkingConfigBetweenTools`
+      - `class BetaThinkingConfigBetweenToolsParam`
 
         - `type: Literal["between_tools"]`
 
-      - `class BetaThinkingConfigAdaptive`
+      - `class BetaThinkingConfigAdaptiveParam`
 
         - `type: Literal["adaptive"]`
 
-        - `block_binding: Optional[BetaThinkingBlockBinding]`
+        - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
           Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -5174,9 +5174,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `authorization_token: Optional[str]`
 
-  - `tool_configuration: Optional[BetaRequestMCPServerToolConfiguration]`
+  - `tool_configuration: Optional[BetaRequestMCPServerToolConfigurationParam]`
 
-    - `allowed_tools: Optional[List[str]]`
+    - `allowed_tools: Optional[Sequence[str]]`
 
     - `enabled: Optional[bool]`
 
@@ -5244,11 +5244,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       minLength: 1
 
-    - `cache_control: Optional[BetaCacheControlEphemeral]`
+    - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
       Create a cache control breakpoint at this content block.
 
-    - `citations: Optional[List[BetaTextCitationParam]]`
+    - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
 - `thinking: Optional[BetaThinkingConfigParam]`
 
@@ -5258,19 +5258,19 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../build-with-claude/build-with-claude-thinking.md#configuring-thinking) for each model's behavior.
 
-  - `class BetaThinkingConfigEnabled`
+  - `class BetaThinkingConfigEnabledParam`
 
-  - `class BetaThinkingConfigDisabled`
+  - `class BetaThinkingConfigDisabledParam`
 
-  - `class BetaThinkingConfigBetweenTools`
+  - `class BetaThinkingConfigBetweenToolsParam`
 
-  - `class BetaThinkingConfigAdaptive`
+  - `class BetaThinkingConfigAdaptiveParam`
 
 - `tool_choice: Optional[BetaToolChoiceParam]`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `class BetaToolChoiceAuto`
+  - `class BetaToolChoiceAutoParam`
 
     The model will automatically decide whether to use tools.
 
@@ -5282,7 +5282,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `class BetaToolChoiceAny`
+  - `class BetaToolChoiceAnyParam`
 
     The model will use any available tools.
 
@@ -5294,7 +5294,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class BetaToolChoiceTool`
+  - `class BetaToolChoiceToolParam`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -5310,7 +5310,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class BetaToolChoiceNone`
+  - `class BetaToolChoiceNoneParam`
 
     The model will not be allowed to use tools.
 
@@ -5380,7 +5380,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-  - `class BetaTool`
+  - `class BetaToolParam`
 
   - `class BetaToolBash20241022`
 
@@ -9722,7 +9722,7 @@ beta_message = client.beta.messages.create(
             "role": "user",
         }
     ],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
 )
 print(beta_message.id)
 ```
@@ -9775,7 +9775,7 @@ print(beta_message.id)
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -9902,11 +9902,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   There is a limit of 100,000 messages in a single request.
 
-  - `content: Union[str, List[BetaContentBlockParam]]`
+  - `content: Union[str, Iterable[BetaContentBlockParam]]`
 
     - `str`
 
-    - `List[BetaContentBlockParam]`
+    - `Iterable[BetaContentBlockParam]`
 
       - `class BetaTextBlockParam`
 
@@ -9916,7 +9916,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           minLength: 1
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -9937,7 +9937,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `"1h"`
 
-        - `citations: Optional[List[BetaTextCitationParam]]`
+        - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
           - `class BetaCitationCharLocationParam`
 
@@ -10065,11 +10065,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `source: Source`
 
-          - `class BetaBase64ImageSource`
+          - `class BetaBase64ImageSourceParam`
 
             - `type: Literal["base64"]`
 
-            - `data: str`
+            - `data: Union[str, Base64FileInput]`
 
               format: byte
 
@@ -10083,19 +10083,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"image/webp"`
 
-          - `class BetaURLImageSource`
+          - `class BetaURLImageSourceParam`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class BetaFileImageSource`
+          - `class BetaFileImageSourceParam`
 
             - `type: Literal["file"]`
 
             - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10111,7 +10111,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `"error"`
 
-      - `class BetaRequestDocumentBlock`
+      - `class BetaRequestDocumentBlockParam`
 
         - `type: Literal["document"]`
 
@@ -10135,37 +10135,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `media_type: Literal["text/plain"]`
 
-          - `class BetaContentBlockSource`
+          - `class BetaContentBlockSourceParam`
 
             - `type: Literal["content"]`
 
-            - `content: Union[str, List[BetaContentBlockSourceContent]]`
+            - `content: Union[str, Iterable[BetaContentBlockSourceContentParam]]`
 
               - `str`
 
-              - `List[BetaContentBlockSourceContent]`
+              - `Iterable[BetaContentBlockSourceContentParam]`
 
                 - `class BetaTextBlockParam`
 
                 - `class BetaImageBlockParam`
 
-          - `class BetaURLPDFSource`
+          - `class BetaURLPDFSourceParam`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class BetaFileDocumentSource`
+          - `class BetaFileDocumentSourceParam`
 
             - `type: Literal["file"]`
 
             - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `citations: Optional[BetaCitationsConfigParam]`
+        - `citations: Optional[BetaCitationsConfigParamParam]`
 
           - `enabled: Optional[bool]`
 
@@ -10181,7 +10181,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["search_result"]`
 
-        - `content: List[BetaTextBlockParam]`
+        - `content: Iterable[BetaTextBlockParam]`
 
           - `type: Literal["text"]`
 
@@ -10189,21 +10189,21 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             minLength: 1
 
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
+          - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
             Create a cache control breakpoint at this content block.
 
-          - `citations: Optional[List[BetaTextCitationParam]]`
+          - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
         - `source: str`
 
         - `title: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `citations: Optional[BetaCitationsConfigParam]`
+        - `citations: Optional[BetaCitationsConfigParamParam]`
 
       - `class BetaThinkingBlockParam`
 
@@ -10241,7 +10241,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           minLength: 1, maxLength: 200
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10285,15 +10285,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `content: Optional[Union[str, List[Content], null]]`
+        - `content: Optional[Union[str, Iterable[Content]]]`
 
           - `str`
 
-          - `List[Content]`
+          - `Iterable[Content]`
 
             - `class BetaTextBlockParam`
 
@@ -10301,7 +10301,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `class BetaSearchResultBlockParam`
 
-            - `class BetaRequestDocumentBlock`
+            - `class BetaRequestDocumentBlockParam`
 
             - `class BetaToolReferenceBlockParam`
 
@@ -10313,7 +10313,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
@@ -10329,7 +10329,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `type: Literal["browser_state"]`
 
-              - `tabs: List[BetaBrowserStateTabEntry]`
+              - `tabs: Iterable[BetaBrowserStateTabEntryParam]`
 
                 All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -10357,17 +10357,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
-              - `state_changes: Optional[List[BetaBrowserStateChange]]`
+              - `state_changes: Optional[Iterable[BetaBrowserStateChangeParam]]`
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                 minItems: 1, maxItems: 200
 
-                - `class BetaBrowserStateChangeTabOpened`
+                - `class BetaBrowserStateChangeTabOpenedParam`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -10385,7 +10385,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BetaBrowserStateChangeDownloadStarted`
+                - `class BetaBrowserStateChangeDownloadStartedParam`
 
                   A file download that started during this call.
 
@@ -10403,7 +10403,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BetaBrowserStateChangeDownloadCompleted`
+                - `class BetaBrowserStateChangeDownloadCompletedParam`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -10436,7 +10436,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                     minimum: 0
 
-                - `class BetaBrowserStateChangeDownloadFailed`
+                - `class BetaBrowserStateChangeDownloadFailedParam`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -10496,7 +10496,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           - `"tool_search_tool_bm25"`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10516,9 +10516,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["web_search_tool_result"]`
 
-        - `content: BetaWebSearchToolResultBlockParamContent`
+        - `content: BetaWebSearchToolResultBlockParamContentParam`
 
-          - `List[BetaWebSearchResultBlockParam]`
+          - `Iterable[BetaWebSearchResultBlockParam]`
 
             - `type: Literal["web_search_result"]`
 
@@ -10530,7 +10530,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `page_age: Optional[str]`
 
-          - `class BetaWebSearchToolRequestError`
+          - `class BetaWebSearchToolRequestErrorParam`
 
             - `type: Literal["web_search_tool_result_error"]`
 
@@ -10552,7 +10552,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10604,7 +10604,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["web_fetch_result"]`
 
-            - `content: BetaRequestDocumentBlock`
+            - `content: BetaRequestDocumentBlockParam`
 
             - `url: str`
 
@@ -10618,7 +10618,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10682,7 +10682,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10690,7 +10690,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["code_execution_tool_result"]`
 
-        - `content: BetaCodeExecutionToolResultBlockParamContent`
+        - `content: BetaCodeExecutionToolResultBlockParamContentParam`
 
           - `class BetaCodeExecutionToolResultErrorParam`
 
@@ -10710,7 +10710,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["code_execution_result"]`
 
-            - `content: List[BetaCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
               - `type: Literal["code_execution_output"]`
 
@@ -10728,7 +10728,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["encrypted_code_execution_result"]`
 
-            - `content: List[BetaCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
               - `type: Literal["code_execution_output"]`
 
@@ -10744,7 +10744,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10774,7 +10774,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["bash_code_execution_result"]`
 
-            - `content: List[BetaBashCodeExecutionOutputBlockParam]`
+            - `content: Iterable[BetaBashCodeExecutionOutputBlockParam]`
 
               - `type: Literal["bash_code_execution_output"]`
 
@@ -10790,7 +10790,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10848,7 +10848,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-            - `lines: Optional[List[str]]`
+            - `lines: Optional[Sequence[str]]`
 
             - `new_lines: Optional[int]`
 
@@ -10862,7 +10862,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10892,7 +10892,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `type: Literal["tool_search_tool_search_result"]`
 
-            - `tool_references: List[BetaToolReferenceBlockParam]`
+            - `tool_references: Iterable[BetaToolReferenceBlockParam]`
 
               - `type: Literal["tool_reference"]`
 
@@ -10900,7 +10900,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
@@ -10908,7 +10908,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10928,7 +10928,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           The name of the MCP server
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10940,15 +10940,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
+        - `content: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
 
           - `str`
 
-          - `List[BetaTextBlockParam]`
+          - `Iterable[BetaTextBlockParam]`
 
             - `type: Literal["text"]`
 
@@ -10956,11 +10956,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               minLength: 1
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `citations: Optional[List[BetaTextCitationParam]]`
+            - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
         - `is_error: Optional[bool]`
 
@@ -10973,7 +10973,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `file_id: str`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -10989,7 +10989,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["compaction"]`
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
@@ -11005,11 +11005,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           The block's signature as returned, to be sent back verbatim
 
-        - `tool_changes: Optional[List[ToolChange]]`
+        - `tool_changes: Optional[Iterable[ToolChange]]`
 
           The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-          - `class BetaRequestToolAdditionBlock`
+          - `class BetaRequestToolAdditionBlockParam`
 
             Mid-conversation directive to make a tool available.
 
@@ -11025,7 +11025,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `tool: Tool`
 
-              - `class BetaToolChangeToolReference`
+              - `class BetaToolChangeToolReferenceParam`
 
                 Reference to a single tool, by the name the model uses to call it: a
                 tool declared in `tools` or defined by an earlier `tool_addition`
@@ -11039,7 +11039,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-              - `class BetaToolChangeMCPToolReference`
+              - `class BetaToolChangeMCPToolReferenceParam`
 
                 Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -11050,7 +11050,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `server_name: str`
 
-              - `class BetaToolChangeMCPToolsetReference`
+              - `class BetaToolChangeMCPToolsetReferenceParam`
 
                 Reference to every tool in the named MCP server's toolset.
 
@@ -11066,9 +11066,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `type: Literal["tool_definition"]`
 
-                - `definition: BetaToolUnion`
+                - `definition: BetaToolUnionParam`
 
-                  - `class BetaTool`
+                  - `class BetaToolParam`
 
                     - `type: Optional[Literal["custom"]]`
 
@@ -11082,7 +11082,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       - `properties: Optional[Dict[str, object]]`
 
-                      - `required: Optional[List[str]]`
+                      - `required: Optional[Sequence[str]]`
 
                     - `name: str`
 
@@ -11102,7 +11102,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       - `"code_execution_20260521"`
 
-                    - `cache_control: Optional[BetaCacheControlEphemeral]`
+                    - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                       Create a cache control breakpoint at this content block.
 
@@ -11120,7 +11120,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                    - `input_examples: Optional[List[Dict[str, object]]]`
+                    - `input_examples: Optional[Iterable[Dict[str, object]]]`
 
                     - `strict: Optional[bool]`
 
@@ -13063,11 +13063,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                         The tool's description as the MCP server lists it.
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-          - `class BetaRequestToolRemovalBlock`
+          - `class BetaRequestToolRemovalBlockParam`
 
             Mid-conversation directive to withdraw a tool.
 
@@ -13079,7 +13079,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             - `tool: Tool`
 
-              - `class BetaToolChangeToolReference`
+              - `class BetaToolChangeToolReferenceParam`
 
                 Reference to a single tool, by the name the model uses to call it: a
                 tool declared in `tools` or defined by an earlier `tool_addition`
@@ -13087,20 +13087,20 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
                 assigns to MCP-resolved tools; use `mcp_tool_reference` or
                 `mcp_toolset_reference` for those.
 
-              - `class BetaToolChangeMCPToolReference`
+              - `class BetaToolChangeMCPToolReferenceParam`
 
                 Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
-              - `class BetaToolChangeMCPToolsetReference`
+              - `class BetaToolChangeMCPToolsetReferenceParam`
 
                 Reference to every tool in the named MCP server's toolset.
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-      - `class BetaRequestToolAdditionBlock`
+      - `class BetaRequestToolAdditionBlockParam`
 
         Mid-conversation directive to make a tool available.
 
@@ -13112,7 +13112,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         definition also requires the `mcp-client-2026-09-15` beta. The tool is
         offered to the model from this point in the conversation onward.
 
-      - `class BetaRequestToolRemovalBlock`
+      - `class BetaRequestToolRemovalBlockParam`
 
         Mid-conversation directive to withdraw a tool.
 
@@ -13135,7 +13135,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           minLength: 1, maxLength: 255
 
-        - `tools: List[BetaMCPToolParam]`
+        - `tools: Iterable[BetaMCPToolParamParam]`
 
           The server's tools, exactly as the response listed them.
 
@@ -13171,11 +13171,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `type: Literal["fallback"]`
 
-        - `from_: BetaFallbackInfoParam`
+        - `from: BetaFallbackInfoParam`
 
           Identifies one hop of a fallback transition.
 
-          - `model: Model`
+          - `model: ModelParam`
 
             The model that will complete your prompt.
 
@@ -13205,7 +13205,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `"never"`
 
-  - `output_config: Optional[BetaSystemMessageOutputConfig]`
+  - `output_config: Optional[BetaSystemMessageOutputConfigParam]`
 
     Per-message output configuration on a role:"system" input message.
 
@@ -13259,15 +13259,15 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-  - `edits: Optional[List[Edit]]`
+  - `edits: Optional[Iterable[Edit]]`
 
     List of context management edits to apply
 
-    - `class BetaClearToolUses20250919Edit`
+    - `class BetaClearToolUses20250919EditParam`
 
       - `type: Literal["clear_tool_uses_20250919"]`
 
-      - `clear_at_least: Optional[BetaInputTokensClearAtLeast]`
+      - `clear_at_least: Optional[BetaInputTokensClearAtLeastParam]`
 
         Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -13277,19 +13277,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
           minimum: 0
 
-      - `clear_tool_inputs: Optional[Union[bool, List[str], null]]`
+      - `clear_tool_inputs: Optional[Union[bool, Sequence[str], null]]`
 
         Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
         - `bool`
 
-        - `List[str]`
+        - `Sequence[str]`
 
-      - `exclude_tools: Optional[List[str]]`
+      - `exclude_tools: Optional[Sequence[str]]`
 
         Tool names whose uses are preserved from clearing
 
-      - `keep: Optional[BetaToolUsesKeep]`
+      - `keep: Optional[BetaToolUsesKeepParam]`
 
         Number of tool uses to retain in the conversation
 
@@ -13303,7 +13303,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Condition that triggers the context management strategy
 
-        - `class BetaInputTokensTrigger`
+        - `class BetaInputTokensTriggerParam`
 
           - `type: Literal["input_tokens"]`
 
@@ -13311,7 +13311,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             minimum: 1
 
-        - `class BetaToolUsesTrigger`
+        - `class BetaToolUsesTriggerParam`
 
           - `type: Literal["tool_uses"]`
 
@@ -13319,7 +13319,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             minimum: 1
 
-    - `class BetaClearThinking20251015Edit`
+    - `class BetaClearThinking20251015EditParam`
 
       - `type: Literal["clear_thinking_20251015"]`
 
@@ -13327,7 +13327,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-        - `class BetaThinkingTurns`
+        - `class BetaThinkingTurnsParam`
 
           - `type: Literal["thinking_turns"]`
 
@@ -13335,13 +13335,13 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             minimum: 1
 
-        - `class BetaAllThinkingTurns`
+        - `class BetaAllThinkingTurnsParam`
 
           - `type: Literal["all"]`
 
         - `"all"`
 
-    - `class BetaCompact20260112Edit`
+    - `class BetaCompact20260112EditParam`
 
       Automatically compact older context when reaching the configured trigger threshold.
 
@@ -13355,7 +13355,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         Whether to pause after compaction and return the compaction block to the user.
 
-      - `trigger: Optional[BetaInputTokensTrigger]`
+      - `trigger: Optional[BetaInputTokensTriggerParam]`
 
         When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -13373,9 +13373,9 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `authorization_token: Optional[str]`
 
-  - `tool_configuration: Optional[BetaRequestMCPServerToolConfiguration]`
+  - `tool_configuration: Optional[BetaRequestMCPServerToolConfigurationParam]`
 
-    - `allowed_tools: Optional[List[str]]`
+    - `allowed_tools: Optional[Sequence[str]]`
 
     - `enabled: Optional[bool]`
 
@@ -13399,7 +13399,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `"max"`
 
-  - `format: Optional[BetaJSONOutputFormat]`
+  - `format: Optional[BetaJSONOutputFormatParam]`
 
     A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
@@ -13409,7 +13409,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       The JSON schema of the format
 
-  - `task_budget: Optional[BetaTokenTaskBudget]`
+  - `task_budget: Optional[BetaTokenTaskBudgetParam]`
 
     Configuration for token budget tracking across contexts.
 
@@ -13453,11 +13453,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       minLength: 1
 
-    - `cache_control: Optional[BetaCacheControlEphemeral]`
+    - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
       Create a cache control breakpoint at this content block.
 
-    - `citations: Optional[List[BetaTextCitationParam]]`
+    - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
 - `thinking: Optional[BetaThinkingConfigParam]`
 
@@ -13467,7 +13467,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../build-with-claude/build-with-claude-thinking.md#configuring-thinking) for each model's behavior.
 
-  - `class BetaThinkingConfigEnabled`
+  - `class BetaThinkingConfigEnabledParam`
 
     - `type: Literal["enabled"]`
 
@@ -13481,7 +13481,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       minimum: 1024
 
-    - `block_binding: Optional[BetaThinkingBlockBinding]`
+    - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
       Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -13503,19 +13503,19 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `"updates"`
 
-  - `class BetaThinkingConfigDisabled`
+  - `class BetaThinkingConfigDisabledParam`
 
     - `type: Literal["disabled"]`
 
-  - `class BetaThinkingConfigBetweenTools`
+  - `class BetaThinkingConfigBetweenToolsParam`
 
     - `type: Literal["between_tools"]`
 
-  - `class BetaThinkingConfigAdaptive`
+  - `class BetaThinkingConfigAdaptiveParam`
 
     - `type: Literal["adaptive"]`
 
-    - `block_binding: Optional[BetaThinkingBlockBinding]`
+    - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
       Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -13533,7 +13533,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `class BetaToolChoiceAuto`
+  - `class BetaToolChoiceAutoParam`
 
     The model will automatically decide whether to use tools.
 
@@ -13545,7 +13545,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `class BetaToolChoiceAny`
+  - `class BetaToolChoiceAnyParam`
 
     The model will use any available tools.
 
@@ -13557,7 +13557,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class BetaToolChoiceTool`
+  - `class BetaToolChoiceToolParam`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -13573,7 +13573,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class BetaToolChoiceNone`
+  - `class BetaToolChoiceNoneParam`
 
     The model will not be allowed to use tools.
 
@@ -13643,7 +13643,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-  - `class BetaTool`
+  - `class BetaToolParam`
 
   - `class BetaToolBash20241022`
 
@@ -13874,7 +13874,7 @@ beta_message_tokens_count = client.beta.messages.count_tokens(
             "role": "user",
         }
     ],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
 )
 print(beta_message_tokens_count.context_management)
 ```
@@ -13989,11 +13989,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       There is a limit of 100,000 messages in a single request.
 
-      - `content: Union[str, List[BetaContentBlockParam]]`
+      - `content: Union[str, Iterable[BetaContentBlockParam]]`
 
         - `str`
 
-        - `List[BetaContentBlockParam]`
+        - `Iterable[BetaContentBlockParam]`
 
           - `class BetaTextBlockParam`
 
@@ -14003,7 +14003,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minLength: 1
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14024,7 +14024,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"1h"`
 
-            - `citations: Optional[List[BetaTextCitationParam]]`
+            - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
               - `class BetaCitationCharLocationParam`
 
@@ -14152,11 +14152,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `source: Source`
 
-              - `class BetaBase64ImageSource`
+              - `class BetaBase64ImageSourceParam`
 
                 - `type: Literal["base64"]`
 
-                - `data: str`
+                - `data: Union[str, Base64FileInput]`
 
                   format: byte
 
@@ -14170,19 +14170,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"image/webp"`
 
-              - `class BetaURLImageSource`
+              - `class BetaURLImageSourceParam`
 
                 - `type: Literal["url"]`
 
                 - `url: str`
 
-              - `class BetaFileImageSource`
+              - `class BetaFileImageSourceParam`
 
                 - `type: Literal["file"]`
 
                 - `file_id: str`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14198,7 +14198,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"error"`
 
-          - `class BetaRequestDocumentBlock`
+          - `class BetaRequestDocumentBlockParam`
 
             - `type: Literal["document"]`
 
@@ -14222,37 +14222,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `media_type: Literal["text/plain"]`
 
-              - `class BetaContentBlockSource`
+              - `class BetaContentBlockSourceParam`
 
                 - `type: Literal["content"]`
 
-                - `content: Union[str, List[BetaContentBlockSourceContent]]`
+                - `content: Union[str, Iterable[BetaContentBlockSourceContentParam]]`
 
                   - `str`
 
-                  - `List[BetaContentBlockSourceContent]`
+                  - `Iterable[BetaContentBlockSourceContentParam]`
 
                     - `class BetaTextBlockParam`
 
                     - `class BetaImageBlockParam`
 
-              - `class BetaURLPDFSource`
+              - `class BetaURLPDFSourceParam`
 
                 - `type: Literal["url"]`
 
                 - `url: str`
 
-              - `class BetaFileDocumentSource`
+              - `class BetaFileDocumentSourceParam`
 
                 - `type: Literal["file"]`
 
                 - `file_id: str`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `citations: Optional[BetaCitationsConfigParam]`
+            - `citations: Optional[BetaCitationsConfigParamParam]`
 
               - `enabled: Optional[bool]`
 
@@ -14268,7 +14268,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["search_result"]`
 
-            - `content: List[BetaTextBlockParam]`
+            - `content: Iterable[BetaTextBlockParam]`
 
               - `type: Literal["text"]`
 
@@ -14276,21 +14276,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minLength: 1
 
-              - `cache_control: Optional[BetaCacheControlEphemeral]`
+              - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                 Create a cache control breakpoint at this content block.
 
-              - `citations: Optional[List[BetaTextCitationParam]]`
+              - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
             - `source: str`
 
             - `title: str`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `citations: Optional[BetaCitationsConfigParam]`
+            - `citations: Optional[BetaCitationsConfigParamParam]`
 
           - `class BetaThinkingBlockParam`
 
@@ -14328,7 +14328,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minLength: 1, maxLength: 200
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14372,15 +14372,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `content: Optional[Union[str, List[Content], null]]`
+            - `content: Optional[Union[str, Iterable[Content]]]`
 
               - `str`
 
-              - `List[Content]`
+              - `Iterable[Content]`
 
                 - `class BetaTextBlockParam`
 
@@ -14388,7 +14388,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `class BetaSearchResultBlockParam`
 
-                - `class BetaRequestDocumentBlock`
+                - `class BetaRequestDocumentBlockParam`
 
                 - `class BetaToolReferenceBlockParam`
 
@@ -14400,7 +14400,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+                  - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                     Create a cache control breakpoint at this content block.
 
@@ -14416,7 +14416,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `type: Literal["browser_state"]`
 
-                  - `tabs: List[BetaBrowserStateTabEntry]`
+                  - `tabs: Iterable[BetaBrowserStateTabEntryParam]`
 
                     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -14444,17 +14444,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+                  - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                     Create a cache control breakpoint at this content block.
 
-                  - `state_changes: Optional[List[BetaBrowserStateChange]]`
+                  - `state_changes: Optional[Iterable[BetaBrowserStateChangeParam]]`
 
                     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                     minItems: 1, maxItems: 200
 
-                    - `class BetaBrowserStateChangeTabOpened`
+                    - `class BetaBrowserStateChangeTabOpenedParam`
 
                       A tab this call's execution opened that remains open at its end —
                       the creation delta of the `tabs` inventory, not an event log.
@@ -14472,7 +14472,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `class BetaBrowserStateChangeDownloadStarted`
+                    - `class BetaBrowserStateChangeDownloadStartedParam`
 
                       A file download that started during this call.
 
@@ -14490,7 +14490,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `class BetaBrowserStateChangeDownloadCompleted`
+                    - `class BetaBrowserStateChangeDownloadCompletedParam`
 
                       A file download that finished during this call, reported with the
                       same `download_id` as its `download_started` — or without a prior
@@ -14523,7 +14523,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         minimum: 0
 
-                    - `class BetaBrowserStateChangeDownloadFailed`
+                    - `class BetaBrowserStateChangeDownloadFailedParam`
 
                       A file download that failed — or was cancelled — during this call.
 
@@ -14583,7 +14583,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"tool_search_tool_bm25"`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14603,9 +14603,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["web_search_tool_result"]`
 
-            - `content: BetaWebSearchToolResultBlockParamContent`
+            - `content: BetaWebSearchToolResultBlockParamContentParam`
 
-              - `List[BetaWebSearchResultBlockParam]`
+              - `Iterable[BetaWebSearchResultBlockParam]`
 
                 - `type: Literal["web_search_result"]`
 
@@ -14617,7 +14617,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `page_age: Optional[str]`
 
-              - `class BetaWebSearchToolRequestError`
+              - `class BetaWebSearchToolRequestErrorParam`
 
                 - `type: Literal["web_search_tool_result_error"]`
 
@@ -14639,7 +14639,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14691,7 +14691,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["web_fetch_result"]`
 
-                - `content: BetaRequestDocumentBlock`
+                - `content: BetaRequestDocumentBlockParam`
 
                 - `url: str`
 
@@ -14705,7 +14705,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14769,7 +14769,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14777,7 +14777,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["code_execution_tool_result"]`
 
-            - `content: BetaCodeExecutionToolResultBlockParamContent`
+            - `content: BetaCodeExecutionToolResultBlockParamContentParam`
 
               - `class BetaCodeExecutionToolResultErrorParam`
 
@@ -14797,7 +14797,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["code_execution_result"]`
 
-                - `content: List[BetaCodeExecutionOutputBlockParam]`
+                - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
                   - `type: Literal["code_execution_output"]`
 
@@ -14815,7 +14815,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["encrypted_code_execution_result"]`
 
-                - `content: List[BetaCodeExecutionOutputBlockParam]`
+                - `content: Iterable[BetaCodeExecutionOutputBlockParam]`
 
                   - `type: Literal["code_execution_output"]`
 
@@ -14831,7 +14831,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14861,7 +14861,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["bash_code_execution_result"]`
 
-                - `content: List[BetaBashCodeExecutionOutputBlockParam]`
+                - `content: Iterable[BetaBashCodeExecutionOutputBlockParam]`
 
                   - `type: Literal["bash_code_execution_output"]`
 
@@ -14877,7 +14877,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14935,7 +14935,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
-                - `lines: Optional[List[str]]`
+                - `lines: Optional[Sequence[str]]`
 
                 - `new_lines: Optional[int]`
 
@@ -14949,7 +14949,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -14979,7 +14979,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `type: Literal["tool_search_tool_search_result"]`
 
-                - `tool_references: List[BetaToolReferenceBlockParam]`
+                - `tool_references: Iterable[BetaToolReferenceBlockParam]`
 
                   - `type: Literal["tool_reference"]`
 
@@ -14987,7 +14987,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `cache_control: Optional[BetaCacheControlEphemeral]`
+                  - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                     Create a cache control breakpoint at this content block.
 
@@ -14995,7 +14995,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -15015,7 +15015,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The name of the MCP server
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -15027,15 +15027,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
-            - `content: Optional[Union[str, List[BetaTextBlockParam], null]]`
+            - `content: Optional[Union[str, Iterable[BetaTextBlockParam]]]`
 
               - `str`
 
-              - `List[BetaTextBlockParam]`
+              - `Iterable[BetaTextBlockParam]`
 
                 - `type: Literal["text"]`
 
@@ -15043,11 +15043,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   minLength: 1
 
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
+                - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                   Create a cache control breakpoint at this content block.
 
-                - `citations: Optional[List[BetaTextCitationParam]]`
+                - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
             - `is_error: Optional[bool]`
 
@@ -15060,7 +15060,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `file_id: str`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -15076,7 +15076,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["compaction"]`
 
-            - `cache_control: Optional[BetaCacheControlEphemeral]`
+            - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
               Create a cache control breakpoint at this content block.
 
@@ -15092,11 +15092,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The block's signature as returned, to be sent back verbatim
 
-            - `tool_changes: Optional[List[ToolChange]]`
+            - `tool_changes: Optional[Iterable[ToolChange]]`
 
               The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-              - `class BetaRequestToolAdditionBlock`
+              - `class BetaRequestToolAdditionBlockParam`
 
                 Mid-conversation directive to make a tool available.
 
@@ -15112,7 +15112,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `tool: Tool`
 
-                  - `class BetaToolChangeToolReference`
+                  - `class BetaToolChangeToolReferenceParam`
 
                     Reference to a single tool, by the name the model uses to call it: a
                     tool declared in `tools` or defined by an earlier `tool_addition`
@@ -15126,7 +15126,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                  - `class BetaToolChangeMCPToolReference`
+                  - `class BetaToolChangeMCPToolReferenceParam`
 
                     Reference to a single MCP tool by its server and remote name; the
                     same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -15137,7 +15137,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `server_name: str`
 
-                  - `class BetaToolChangeMCPToolsetReference`
+                  - `class BetaToolChangeMCPToolsetReferenceParam`
 
                     Reference to every tool in the named MCP server's toolset.
 
@@ -15153,9 +15153,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `type: Literal["tool_definition"]`
 
-                    - `definition: BetaToolUnion`
+                    - `definition: BetaToolUnionParam`
 
-                      - `class BetaTool`
+                      - `class BetaToolParam`
 
                         - `type: Optional[Literal["custom"]]`
 
@@ -15169,7 +15169,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `properties: Optional[Dict[str, object]]`
 
-                          - `required: Optional[List[str]]`
+                          - `required: Optional[Sequence[str]]`
 
                         - `name: str`
 
@@ -15189,7 +15189,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           - `"code_execution_20260521"`
 
-                        - `cache_control: Optional[BetaCacheControlEphemeral]`
+                        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                           Create a cache control breakpoint at this content block.
 
@@ -15207,7 +15207,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `input_examples: Optional[List[Dict[str, object]]]`
+                        - `input_examples: Optional[Iterable[Dict[str, object]]]`
 
                         - `strict: Optional[bool]`
 
@@ -17150,11 +17150,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                             The tool's description as the MCP server lists it.
 
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
+                - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                   Create a cache control breakpoint at this content block.
 
-              - `class BetaRequestToolRemovalBlock`
+              - `class BetaRequestToolRemovalBlockParam`
 
                 Mid-conversation directive to withdraw a tool.
 
@@ -17166,7 +17166,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `tool: Tool`
 
-                  - `class BetaToolChangeToolReference`
+                  - `class BetaToolChangeToolReferenceParam`
 
                     Reference to a single tool, by the name the model uses to call it: a
                     tool declared in `tools` or defined by an earlier `tool_addition`
@@ -17174,20 +17174,20 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                     assigns to MCP-resolved tools; use `mcp_tool_reference` or
                     `mcp_toolset_reference` for those.
 
-                  - `class BetaToolChangeMCPToolReference`
+                  - `class BetaToolChangeMCPToolReferenceParam`
 
                     Reference to a single MCP tool by its server and remote name; the
                     same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                  - `class BetaToolChangeMCPToolsetReference`
+                  - `class BetaToolChangeMCPToolsetReferenceParam`
 
                     Reference to every tool in the named MCP server's toolset.
 
-                - `cache_control: Optional[BetaCacheControlEphemeral]`
+                - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
                   Create a cache control breakpoint at this content block.
 
-          - `class BetaRequestToolAdditionBlock`
+          - `class BetaRequestToolAdditionBlockParam`
 
             Mid-conversation directive to make a tool available.
 
@@ -17199,7 +17199,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             definition also requires the `mcp-client-2026-09-15` beta. The tool is
             offered to the model from this point in the conversation onward.
 
-          - `class BetaRequestToolRemovalBlock`
+          - `class BetaRequestToolRemovalBlockParam`
 
             Mid-conversation directive to withdraw a tool.
 
@@ -17222,7 +17222,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minLength: 1, maxLength: 255
 
-            - `tools: List[BetaMCPToolParam]`
+            - `tools: Iterable[BetaMCPToolParamParam]`
 
               The server's tools, exactly as the response listed them.
 
@@ -17258,11 +17258,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type: Literal["fallback"]`
 
-            - `from_: BetaFallbackInfoParam`
+            - `from: BetaFallbackInfoParam`
 
               Identifies one hop of a fallback transition.
 
-              - `model: Model`
+              - `model: ModelParam`
 
                 The model that will complete your prompt.
 
@@ -17292,7 +17292,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `"never"`
 
-      - `output_config: Optional[BetaSystemMessageOutputConfig]`
+      - `output_config: Optional[BetaSystemMessageOutputConfigParam]`
 
         Per-message output configuration on a role:"system" input message.
 
@@ -17352,7 +17352,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Container id
 
-        - `skills: Optional[List[BetaSkillParams]]`
+        - `skills: Optional[Iterable[BetaSkillParams]]`
 
           List of skills to load in the container
 
@@ -17386,15 +17386,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-      - `edits: Optional[List[Edit]]`
+      - `edits: Optional[Iterable[Edit]]`
 
         List of context management edits to apply
 
-        - `class BetaClearToolUses20250919Edit`
+        - `class BetaClearToolUses20250919EditParam`
 
           - `type: Literal["clear_tool_uses_20250919"]`
 
-          - `clear_at_least: Optional[BetaInputTokensClearAtLeast]`
+          - `clear_at_least: Optional[BetaInputTokensClearAtLeastParam]`
 
             Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -17404,19 +17404,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minimum: 0
 
-          - `clear_tool_inputs: Optional[Union[bool, List[str], null]]`
+          - `clear_tool_inputs: Optional[Union[bool, Sequence[str], null]]`
 
             Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
             - `bool`
 
-            - `List[str]`
+            - `Sequence[str]`
 
-          - `exclude_tools: Optional[List[str]]`
+          - `exclude_tools: Optional[Sequence[str]]`
 
             Tool names whose uses are preserved from clearing
 
-          - `keep: Optional[BetaToolUsesKeep]`
+          - `keep: Optional[BetaToolUsesKeepParam]`
 
             Number of tool uses to retain in the conversation
 
@@ -17430,7 +17430,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Condition that triggers the context management strategy
 
-            - `class BetaInputTokensTrigger`
+            - `class BetaInputTokensTriggerParam`
 
               - `type: Literal["input_tokens"]`
 
@@ -17438,7 +17438,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 1
 
-            - `class BetaToolUsesTrigger`
+            - `class BetaToolUsesTriggerParam`
 
               - `type: Literal["tool_uses"]`
 
@@ -17446,7 +17446,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 1
 
-        - `class BetaClearThinking20251015Edit`
+        - `class BetaClearThinking20251015EditParam`
 
           - `type: Literal["clear_thinking_20251015"]`
 
@@ -17454,7 +17454,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-            - `class BetaThinkingTurns`
+            - `class BetaThinkingTurnsParam`
 
               - `type: Literal["thinking_turns"]`
 
@@ -17462,13 +17462,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 minimum: 1
 
-            - `class BetaAllThinkingTurns`
+            - `class BetaAllThinkingTurnsParam`
 
               - `type: Literal["all"]`
 
             - `"all"`
 
-        - `class BetaCompact20260112Edit`
+        - `class BetaCompact20260112EditParam`
 
           Automatically compact older context when reaching the configured trigger threshold.
 
@@ -17482,7 +17482,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Whether to pause after compaction and return the compaction block to the user.
 
-          - `trigger: Optional[BetaInputTokensTrigger]`
+          - `trigger: Optional[BetaInputTokensTriggerParam]`
 
             When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -17549,9 +17549,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. Some models don't support fallbacks; on those models, a list of fallback models returns a 400 error. See [Server-side fallback](../build-with-claude/build-with-claude-refusals-and-fallback.md#server-side-fallback). The string "default" requests the requested model's server-defined default fallback configuration. On a model that doesn't support fallbacks, the request runs on the requested model alone, so a declined request stays declined.
 
-      - `List[BetaFallbackParam]`
+      - `Iterable[BetaFallbackParam]`
 
-        - `model: Model`
+        - `model: ModelParam`
 
           The model that will complete your prompt.
 
@@ -17559,7 +17559,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `max_tokens: Optional[int]`
 
-        - `output_config: Optional[BetaOutputConfig]`
+        - `output_config: Optional[BetaOutputConfigParam]`
 
           - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
 
@@ -17577,7 +17577,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"max"`
 
-          - `format: Optional[BetaJSONOutputFormat]`
+          - `format: Optional[BetaJSONOutputFormatParam]`
 
             A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
@@ -17587,7 +17587,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The JSON schema of the format
 
-          - `task_budget: Optional[BetaTokenTaskBudget]`
+          - `task_budget: Optional[BetaTokenTaskBudgetParam]`
 
             Configuration for token budget tracking across contexts.
 
@@ -17617,7 +17617,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `thinking: Optional[Thinking]`
 
-          - `class BetaThinkingConfigEnabled`
+          - `class BetaThinkingConfigEnabledParam`
 
             - `type: Literal["enabled"]`
 
@@ -17631,7 +17631,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               minimum: 1024
 
-            - `block_binding: Optional[BetaThinkingBlockBinding]`
+            - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
               Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -17653,19 +17653,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"updates"`
 
-          - `class BetaThinkingConfigDisabled`
+          - `class BetaThinkingConfigDisabledParam`
 
             - `type: Literal["disabled"]`
 
-          - `class BetaThinkingConfigBetweenTools`
+          - `class BetaThinkingConfigBetweenToolsParam`
 
             - `type: Literal["between_tools"]`
 
-          - `class BetaThinkingConfigAdaptive`
+          - `class BetaThinkingConfigAdaptiveParam`
 
             - `type: Literal["adaptive"]`
 
-            - `block_binding: Optional[BetaThinkingBlockBinding]`
+            - `block_binding: Optional[BetaThinkingBlockBindingParam]`
 
               Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -17699,9 +17699,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `authorization_token: Optional[str]`
 
-      - `tool_configuration: Optional[BetaRequestMCPServerToolConfiguration]`
+      - `tool_configuration: Optional[BetaRequestMCPServerToolConfigurationParam]`
 
-        - `allowed_tools: Optional[List[str]]`
+        - `allowed_tools: Optional[Sequence[str]]`
 
         - `enabled: Optional[bool]`
 
@@ -17769,11 +17769,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           minLength: 1
 
-        - `cache_control: Optional[BetaCacheControlEphemeral]`
+        - `cache_control: Optional[BetaCacheControlEphemeralParam]`
 
           Create a cache control breakpoint at this content block.
 
-        - `citations: Optional[List[BetaTextCitationParam]]`
+        - `citations: Optional[Iterable[BetaTextCitationParam]]`
 
     - `thinking: Optional[BetaThinkingConfigParam]`
 
@@ -17783,19 +17783,19 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../build-with-claude/build-with-claude-thinking.md#configuring-thinking) for each model's behavior.
 
-      - `class BetaThinkingConfigEnabled`
+      - `class BetaThinkingConfigEnabledParam`
 
-      - `class BetaThinkingConfigDisabled`
+      - `class BetaThinkingConfigDisabledParam`
 
-      - `class BetaThinkingConfigBetweenTools`
+      - `class BetaThinkingConfigBetweenToolsParam`
 
-      - `class BetaThinkingConfigAdaptive`
+      - `class BetaThinkingConfigAdaptiveParam`
 
     - `tool_choice: Optional[BetaToolChoiceParam]`
 
       How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-      - `class BetaToolChoiceAuto`
+      - `class BetaToolChoiceAutoParam`
 
         The model will automatically decide whether to use tools.
 
@@ -17807,7 +17807,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-      - `class BetaToolChoiceAny`
+      - `class BetaToolChoiceAnyParam`
 
         The model will use any available tools.
 
@@ -17819,7 +17819,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `class BetaToolChoiceTool`
+      - `class BetaToolChoiceToolParam`
 
         The model will use the specified tool with `tool_choice.name`.
 
@@ -17835,7 +17835,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-      - `class BetaToolChoiceNone`
+      - `class BetaToolChoiceNoneParam`
 
         The model will not be allowed to use tools.
 
@@ -17905,7 +17905,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       See our [guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for more details.
 
-      - `class BetaTool`
+      - `class BetaToolParam`
 
       - `class BetaToolBash20241022`
 
@@ -18235,7 +18235,7 @@ beta_message_batch = client.beta.messages.batches.create(
                         "role": "user",
                     }
                 ],
-                "model": "claude-opus-5",
+                "model": "claude-opus-5-5",
             },
         }
     ],
@@ -19294,7 +19294,7 @@ print(beta_deleted_message_batch.id)
 
 ### Retrieve Message Batch results
 
-`beta.messages.batches.results(message_batch_id, **kwargs)  -> BetaMessageBatchIndividualResponse`
+`beta.messages.batches.results(message_batch_id, **kwargs)  -> JSONLDecoder[BetaMessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -23422,7 +23422,7 @@ Create Agent
 
 - `model: Model`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
   - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
 
@@ -23500,7 +23500,7 @@ Create Agent
 
     An object that defines additional configuration control over model use
 
-    - `id: BetaManagedAgentsModel`
+    - `id: BetaManagedAgentsModelParam`
 
       The model that will power your agent.
 
@@ -23686,7 +23686,7 @@ Create Agent
 
     - `type: Literal["coordinator"]`
 
-    - `agents: List[BetaManagedAgentsMultiagentRosterEntryParams]`
+    - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
 
       Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -23782,7 +23782,7 @@ Create Agent
 
             - `type: Literal["disabled"]`
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -23816,7 +23816,7 @@ Create Agent
 
           Whether a run's plan can define inline agents. Defaults to enabled.
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -23892,7 +23892,7 @@ Create Agent
 
     - `type: Literal["agent_toolset_20260401"]`
 
-    - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -24092,11 +24092,11 @@ Create Agent
 
           Must be "web_fetch".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -24130,7 +24130,7 @@ Create Agent
 
           Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-          - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -24196,11 +24196,11 @@ Create Agent
 
                     minLength: 1, maxLength: 128
 
-          - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-          - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+          - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -24232,11 +24232,11 @@ Create Agent
 
           Must be "web_search".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -24260,7 +24260,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `user_location: Optional[BetaManagedAgentsUserLocation]`
+        - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
           Approximate user location for search result localization.
 
@@ -24326,7 +24326,7 @@ Create Agent
 
       minLength: 1, maxLength: 255
 
-    - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -24392,7 +24392,7 @@ Create Agent
 
       minLength: 1
 
-    - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+    - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
       JSON Schema defining the expected input parameters for the tool.
 
@@ -25300,7 +25300,7 @@ client = Anthropic(
     ),  # This is the default and can be omitted
 )
 beta_managed_agents_agent = client.beta.agents.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     name="My First Agent",
 )
 print(beta_managed_agents_agent.id)
@@ -25325,7 +25325,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -26358,7 +26358,7 @@ print(page.id)
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -27377,7 +27377,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -27501,7 +27501,7 @@ Update Agent
 
 - `model: Optional[Model]`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
 
@@ -27579,7 +27579,7 @@ Update Agent
 
     An object that defines additional configuration control over model use
 
-    - `id: BetaManagedAgentsModel`
+    - `id: BetaManagedAgentsModelParam`
 
       The model that will power your agent.
 
@@ -27731,7 +27731,7 @@ Update Agent
 
     - `type: Literal["coordinator"]`
 
-    - `agents: List[BetaManagedAgentsMultiagentRosterEntryParams]`
+    - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
 
       Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -27827,7 +27827,7 @@ Update Agent
 
             - `type: Literal["disabled"]`
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -27861,7 +27861,7 @@ Update Agent
 
           Whether a run's plan can define inline agents. Defaults to enabled.
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -27943,7 +27943,7 @@ Update Agent
 
     - `type: Literal["agent_toolset_20260401"]`
 
-    - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -28143,11 +28143,11 @@ Update Agent
 
           Must be "web_fetch".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -28181,7 +28181,7 @@ Update Agent
 
           Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-          - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -28247,11 +28247,11 @@ Update Agent
 
                     minLength: 1, maxLength: 128
 
-          - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-          - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+          - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -28283,11 +28283,11 @@ Update Agent
 
           Must be "web_search".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -28311,7 +28311,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `user_location: Optional[BetaManagedAgentsUserLocation]`
+        - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
           Approximate user location for search result localization.
 
@@ -28377,7 +28377,7 @@ Update Agent
 
       minLength: 1, maxLength: 255
 
-    - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -28443,7 +28443,7 @@ Update Agent
 
       minLength: 1
 
-    - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+    - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
       JSON Schema defining the expected input parameters for the tool.
 
@@ -29382,7 +29382,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -30392,7 +30392,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -31417,7 +31417,7 @@ print(page.id)
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -31564,7 +31564,7 @@ Create a new environment with the specified configuration.
 
           Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-        - `allowed_hosts: Optional[List[str]]`
+        - `allowed_hosts: Optional[Sequence[str]]`
 
           Specifies domains the container can reach.
 
@@ -31578,27 +31578,27 @@ Create a new environment with the specified configuration.
 
         default: packages
 
-      - `apt: Optional[List[str]]`
+      - `apt: Optional[Sequence[str]]`
 
         Ubuntu/Debian packages to install
 
-      - `cargo: Optional[List[str]]`
+      - `cargo: Optional[Sequence[str]]`
 
         Rust packages to install
 
-      - `gem: Optional[List[str]]`
+      - `gem: Optional[Sequence[str]]`
 
         Ruby packages to install
 
-      - `go: Optional[List[str]]`
+      - `go: Optional[Sequence[str]]`
 
         Go packages to install
 
-      - `npm: Optional[List[str]]`
+      - `npm: Optional[Sequence[str]]`
 
         Node.js packages to install
 
-      - `pip: Optional[List[str]]`
+      - `pip: Optional[Sequence[str]]`
 
         Python packages to install
 
@@ -32664,7 +32664,7 @@ Update an existing environment's configuration.
 
           Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must be `true` when `packages` are specified.
 
-        - `allowed_hosts: Optional[List[str]]`
+        - `allowed_hosts: Optional[Sequence[str]]`
 
           Specifies domains the container can reach.
 
@@ -32678,27 +32678,27 @@ Update an existing environment's configuration.
 
         default: packages
 
-      - `apt: Optional[List[str]]`
+      - `apt: Optional[Sequence[str]]`
 
         Ubuntu/Debian packages to install
 
-      - `cargo: Optional[List[str]]`
+      - `cargo: Optional[Sequence[str]]`
 
         Rust packages to install
 
-      - `gem: Optional[List[str]]`
+      - `gem: Optional[Sequence[str]]`
 
         Ruby packages to install
 
-      - `go: Optional[List[str]]`
+      - `go: Optional[Sequence[str]]`
 
         Go packages to install
 
-      - `npm: Optional[List[str]]`
+      - `npm: Optional[Sequence[str]]`
 
         Node.js packages to install
 
-      - `pip: Optional[List[str]]`
+      - `pip: Optional[Sequence[str]]`
 
         Python packages to install
 
@@ -35506,7 +35506,7 @@ Create Session
 
       minLength: 1, maxLength: 128
 
-    - `mcp_servers: Optional[List[BetaManagedAgentsURLMCPServerParams]]`
+    - `mcp_servers: Optional[Iterable[BetaManagedAgentsURLMCPServerParams]]`
 
       Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
 
@@ -35526,7 +35526,7 @@ Create Session
 
     - `model: Optional[Model]`
 
-      Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+      Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
       - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
 
@@ -35604,7 +35604,7 @@ Create Session
 
         An object that defines additional configuration control over model use
 
-        - `id: BetaManagedAgentsModel`
+        - `id: BetaManagedAgentsModelParam`
 
           The model that will power your agent.
 
@@ -35746,7 +35746,7 @@ Create Session
 
           - `"fast"`
 
-    - `skills: Optional[List[BetaManagedAgentsSkillParams]]`
+    - `skills: Optional[Iterable[BetaManagedAgentsSkillParams]]`
 
       Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
 
@@ -35792,7 +35792,7 @@ Create Session
 
       maxLength: 100000
 
-    - `tools: Optional[List[Tool]]`
+    - `tools: Optional[Iterable[Tool]]`
 
       Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
 
@@ -35802,7 +35802,7 @@ Create Session
 
         - `type: Literal["agent_toolset_20260401"]`
 
-        - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+        - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
           Per-tool configuration overrides.
 
@@ -36002,11 +36002,11 @@ Create Session
 
               Must be "web_fetch".
 
-            - `allowed_domains: Optional[List[str]]`
+            - `allowed_domains: Optional[Sequence[str]]`
 
               Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-            - `blocked_domains: Optional[List[str]]`
+            - `blocked_domains: Optional[Sequence[str]]`
 
               Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -36040,7 +36040,7 @@ Create Session
 
               Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-              - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+              - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
                 Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -36106,11 +36106,11 @@ Create Session
 
                         minLength: 1, maxLength: 128
 
-              - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+              - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
                 Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-              - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+              - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
                 Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -36142,11 +36142,11 @@ Create Session
 
               Must be "web_search".
 
-            - `allowed_domains: Optional[List[str]]`
+            - `allowed_domains: Optional[Sequence[str]]`
 
               Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-            - `blocked_domains: Optional[List[str]]`
+            - `blocked_domains: Optional[Sequence[str]]`
 
               Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -36170,7 +36170,7 @@ Create Session
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `user_location: Optional[BetaManagedAgentsUserLocation]`
+            - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
               Approximate user location for search result localization.
 
@@ -36236,7 +36236,7 @@ Create Session
 
           minLength: 1, maxLength: 255
 
-        - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+        - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
           Per-tool configuration overrides.
 
@@ -36302,7 +36302,7 @@ Create Session
 
           minLength: 1
 
-        - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+        - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
           JSON Schema defining the expected input parameters for the tool.
 
@@ -37925,7 +37925,7 @@ print(beta_managed_agents_session.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -37945,7 +37945,7 @@ print(beta_managed_agents_session.id)
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -39453,7 +39453,7 @@ print(page.id)
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -39473,7 +39473,7 @@ print(page.id)
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -40902,7 +40902,7 @@ print(beta_managed_agents_session.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -40922,7 +40922,7 @@ print(beta_managed_agents_session.id)
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -41096,7 +41096,7 @@ Update Session
 
   Agent configuration update. Only `tools` and `mcp_servers` are updatable mid-session. Only valid for sessions created from an agent or deployment reference. The session must not be running.
 
-  - `mcp_servers: Optional[List[BetaManagedAgentsURLMCPServerParams]]`
+  - `mcp_servers: Optional[Iterable[BetaManagedAgentsURLMCPServerParams]]`
 
     Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
@@ -41114,7 +41114,7 @@ Update Session
 
       maxLength: 2048
 
-  - `tools: Optional[List[Tool]]`
+  - `tools: Optional[Iterable[Tool]]`
 
     Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
@@ -41124,7 +41124,7 @@ Update Session
 
       - `type: Literal["agent_toolset_20260401"]`
 
-      - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+      - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
         Per-tool configuration overrides.
 
@@ -41324,11 +41324,11 @@ Update Session
 
             Must be "web_fetch".
 
-          - `allowed_domains: Optional[List[str]]`
+          - `allowed_domains: Optional[Sequence[str]]`
 
             Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `blocked_domains: Optional[List[str]]`
+          - `blocked_domains: Optional[Sequence[str]]`
 
             Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -41362,7 +41362,7 @@ Update Session
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+            - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -41428,11 +41428,11 @@ Update Session
 
                       minLength: 1, maxLength: 128
 
-            - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+            - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+            - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -41464,11 +41464,11 @@ Update Session
 
             Must be "web_search".
 
-          - `allowed_domains: Optional[List[str]]`
+          - `allowed_domains: Optional[Sequence[str]]`
 
             Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-          - `blocked_domains: Optional[List[str]]`
+          - `blocked_domains: Optional[Sequence[str]]`
 
             Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -41492,7 +41492,7 @@ Update Session
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `user_location: Optional[BetaManagedAgentsUserLocation]`
+          - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
             Approximate user location for search result localization.
 
@@ -41558,7 +41558,7 @@ Update Session
 
         minLength: 1, maxLength: 255
 
-      - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+      - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
         Per-tool configuration overrides.
 
@@ -41624,7 +41624,7 @@ Update Session
 
         minLength: 1
 
-      - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+      - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 
@@ -42927,7 +42927,7 @@ print(beta_managed_agents_session.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -42947,7 +42947,7 @@ print(beta_managed_agents_session.id)
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -44532,7 +44532,7 @@ print(beta_managed_agents_session.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -44552,7 +44552,7 @@ print(beta_managed_agents_session.id)
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -48126,7 +48126,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -48238,7 +48238,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Optional[List[Content]]`
+    - `content: Optional[Iterable[Content]]`
 
       The result content returned by the tool.
 
@@ -48268,7 +48268,7 @@ Send Events
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 
@@ -48888,7 +48888,7 @@ print(beta_managed_agents_send_session_events.data)
 
 ### Stream Events
 
-`beta.sessions.events.stream(session_id, **kwargs)  -> BetaManagedAgentsStreamSessionEvents`
+`beta.sessions.events.stream(session_id, **kwargs)  -> Stream[BetaManagedAgentsStreamSessionEvents]`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -54187,7 +54187,7 @@ print(page.id)
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -55238,7 +55238,7 @@ print(beta_managed_agents_session_thread.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -56286,7 +56286,7 @@ print(beta_managed_agents_session_thread.id)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -59441,7 +59441,7 @@ print(page)
 
 ### Stream Session Thread Events
 
-`beta.sessions.threads.events.stream(thread_id, **kwargs)  -> BetaManagedAgentsStreamSessionThreadEvents`
+`beta.sessions.threads.events.stream(thread_id, **kwargs)  -> Stream[BetaManagedAgentsStreamSessionThreadEvents]`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
@@ -62801,7 +62801,7 @@ Create Deployment
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 
@@ -65470,7 +65470,7 @@ Update Deployment
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 
@@ -70965,7 +70965,7 @@ Create Credential
 
       minLength: 1, maxLength: 2047
 
-    - `expires_at: Optional[datetime]`
+    - `expires_at: Optional[Union[str, datetime, null]]`
 
       A timestamp in RFC 3339 format
 
@@ -71077,7 +71077,7 @@ Create Credential
 
         - `type: Literal["limited"]`
 
-        - `allowed_hosts: List[str]`
+        - `allowed_hosts: Sequence[str]`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
@@ -72119,7 +72119,7 @@ Update Credential
 
       minLength: 1, maxLength: 8192
 
-    - `expires_at: Optional[datetime]`
+    - `expires_at: Optional[Union[str, datetime, null]]`
 
       A timestamp in RFC 3339 format
 
@@ -72213,7 +72213,7 @@ Update Credential
 
         - `type: Literal["limited"]`
 
-        - `allowed_hosts: List[str]`
+        - `allowed_hosts: Sequence[str]`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
 
@@ -79624,7 +79624,7 @@ Create User Profile
 
     minLength: 1, maxLength: 255
 
-  - `onboarded_at: Optional[datetime]`
+  - `onboarded_at: Optional[Union[str, datetime]]`
 
     When the entity opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future.
 
@@ -80649,7 +80649,7 @@ Update User Profile
 
     minLength: 1, maxLength: 255
 
-  - `onboarded_at: Optional[datetime]`
+  - `onboarded_at: Optional[Union[str, datetime]]`
 
     When the entity opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future.
 
@@ -99098,7 +99098,7 @@ key with the `read:analytics` scope.
 
     - `model: Optional[str]`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `output_tokens: int`
 
@@ -99183,7 +99183,7 @@ print(page.ending_at)
           "claude_tag_user_id": "U0123ABCDEF",
           "context_window": "0-200k",
           "inference_geo": "global",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "output_tokens": 0,
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -99502,7 +99502,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `model: Optional[str]`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `output_tokens: int`
 
@@ -99597,7 +99597,7 @@ print(page.claude_tag_user_id)
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
@@ -99872,7 +99872,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `model: Optional[str]`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `product: Optional[str]`
 
@@ -99954,7 +99954,7 @@ print(page.ending_at)
           "currency": "USD",
           "inference_geo": "global",
           "list_amount": "list_amount",
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "product": "chat",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
@@ -100273,7 +100273,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `model: Optional[str]`
 
-    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+    Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
   - `product: Optional[str]`
 
@@ -100361,7 +100361,7 @@ print(page.claude_tag_user_id)
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
       "list_amount": "51600.000000",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
@@ -100586,7 +100586,7 @@ Anthropic account team.
 
   - `is_enabled: bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -100752,7 +100752,7 @@ Retrieve a spend limit by ID.
 
   - `is_enabled: bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -100932,12 +100932,10 @@ print(spend_limit.id)
 
 List the organization's spend limits.
 
-A Claude Console organization's limits come in an order that is stable across
-pages. A Claude Enterprise organization's are grouped by scope type,
-in the order `organization`, `seat_tier`, `rbac_group`,
-`organization_service`, `user`; within a type they come in a fixed order that
-is not creation order. Listing Claude Console limits is in an early access
-preview. To request access, contact your Anthropic account team.
+Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+`rbac_group`, `organization_service`, `user`; within a type they come in a
+fixed order that is not creation order. Supported for Claude Enterprise
+organizations only, not for Claude Console organizations.
 
 #### Parameters
 
@@ -100953,7 +100951,7 @@ preview. To request access, contact your Anthropic account team.
 
 - `scope_type: Optional[List[Literal["organization", "organization_service", "rbac_group", 3 more]]]` (query parameter)
 
-  Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
+  Return only limits with these scope types. Omit for all.
 
   maxItems: 100
 
@@ -101107,7 +101105,7 @@ preview. To request access, contact your Anthropic account team.
 
   - `is_enabled: bool`
 
-    Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+    Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
   - `period: BetaSpendLimitPeriod`
 
@@ -101239,9 +101237,9 @@ List each member's effective spend limit and period-to-date spend.
 
 Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
-Paginates by member, so a member's periods never split across pages. Listing
-Claude Console limits is in an early access preview. To request access,
-contact your Anthropic account team.
+Paginates by member, so a member's periods never split across pages.
+Supported for Claude Enterprise organizations only, not for Claude Console
+organizations.
 
 #### Parameters
 
@@ -102206,7 +102204,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     - `is_enabled: bool`
 
-      Read-only. `false` when extra usage is switched off for this organization (`organization` limit) or for this member (`user` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
+      Read-only. `false` when extra usage is switched off for this organization (`organization` limit); `amount` is kept and applies again when it's switched back on. Always `true` for other limits.
 
     - `period: BetaSpendLimitPeriod`
 

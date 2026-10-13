@@ -4049,7 +4049,7 @@ const client = new Anthropic({
 
 const betaMessageTokensCount = await client.beta.messages.countTokens({
   messages: [{ content: "Hello, world", role: "user" }],
-  model: "claude-opus-5"
+  model: "claude-opus-5-5"
 });
 
 console.log(betaMessageTokensCount.context_management);

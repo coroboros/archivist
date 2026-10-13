@@ -3239,7 +3239,7 @@ func main() {
 					}},
 					Role: anthropic.MessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus5,
+				Model: anthropic.ModelClaudeOpus5_5,
 			},
 		}},
 	})

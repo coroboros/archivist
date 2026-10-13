@@ -189,7 +189,7 @@ Create Session
 
       - `Optional<Model> model`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `enum BetaManagedAgentsModel`
 
@@ -2392,7 +2392,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -2412,7 +2412,7 @@ public final class Main {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -3923,7 +3923,7 @@ public final class Main {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -3943,7 +3943,7 @@ public final class Main {
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -5374,7 +5374,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -5394,7 +5394,7 @@ public final class Main {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -6843,7 +6843,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -6863,7 +6863,7 @@ public final class Main {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8454,7 +8454,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -8474,7 +8474,7 @@ public final class Main {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8722,7 +8722,7 @@ public final class Main {
 
   - `Optional<Model> model`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `enum BetaManagedAgentsModel`
 
@@ -22728,7 +22728,7 @@ public final class Main {
 
 ### Stream Events
 
-`BetaManagedAgentsStreamSessionEvents beta().sessions().events().streamStreaming(params = EventStreamParams.none(), requestOptions = RequestOptions.none())`
+`StreamResponse<BetaManagedAgentsStreamSessionEvents> beta().sessions().events().streamStreaming(params = EventStreamParams.none(), requestOptions = RequestOptions.none())`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -28055,7 +28055,7 @@ public final class Main {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -29111,7 +29111,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -30164,7 +30164,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -33323,7 +33323,7 @@ public final class Main {
 
 ### Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents beta().sessions().threads().events().streamStreaming(params, requestOptions = RequestOptions.none())`
+`StreamResponse<BetaManagedAgentsStreamSessionThreadEvents> beta().sessions().threads().events().streamStreaming(params, requestOptions = RequestOptions.none())`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

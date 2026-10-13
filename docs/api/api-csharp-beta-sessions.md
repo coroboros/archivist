@@ -79,7 +79,7 @@ Create Session
 
       - `Model Model`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `enum BetaManagedAgentsModel`
 
@@ -2449,7 +2449,7 @@ Console.WriteLine(betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -2469,7 +2469,7 @@ Console.WriteLine(betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -3971,7 +3971,7 @@ await foreach (var item in page.Paginate())
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -3991,7 +3991,7 @@ await foreach (var item in page.Paginate())
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -5414,7 +5414,7 @@ Console.WriteLine(betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -5434,7 +5434,7 @@ Console.WriteLine(betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -6875,7 +6875,7 @@ Console.WriteLine(betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -6895,7 +6895,7 @@ Console.WriteLine(betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8470,7 +8470,7 @@ Console.WriteLine(betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -8490,7 +8490,7 @@ Console.WriteLine(betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8738,7 +8738,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   - `Model Model`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `enum BetaManagedAgentsModel`
 
@@ -22803,7 +22803,7 @@ Console.WriteLine(betaManagedAgentsSendSessionEvents);
 
 ### Stream Events
 
-`BetaManagedAgentsStreamSessionEvents Beta.Sessions.Events.StreamStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaManagedAgentsStreamSessionEvents> Beta.Sessions.Events.StreamStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -28075,7 +28075,7 @@ await foreach (var item in page.Paginate())
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -29120,7 +29120,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -30162,7 +30162,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -33312,7 +33312,7 @@ await foreach (var item in page.Paginate())
 
 ### Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaManagedAgentsStreamSessionThreadEvents> Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

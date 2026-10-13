@@ -3827,7 +3827,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
   {
       if ($name === 'create_calendar_event') {
           if (count($input['attendees'] ?? []) > 10) {
-              throw new InvalidArgumentException('Too many attendees (max 10)');
+              throw new \InvalidArgumentException('Too many attendees (max 10)');
           }
 
           return json_encode([
@@ -3842,7 +3842,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
           ]);
       }
 
-      throw new InvalidArgumentException("Unknown tool: {$name}");
+      throw new \InvalidArgumentException("Unknown tool: {$name}");
   }
 
   // Build a request that exceeds the tool's attendee limit so the error path runs.
@@ -3871,7 +3871,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
                       'tool_use_id' => $block->id,
                       'content' => runTool($block->name, $block->input),
                   ];
-              } catch (Exception $e) {
+              } catch (\Exception $e) {
                   // Signal failure so Claude can retry or ask for clarification.
                   $toolResults[] = [
                       'type' => 'tool_result',
@@ -4523,7 +4523,7 @@ Each SDK provides a helper that turns an ordinary function into a runnable tool 
       ],
       run: function (array $input): string {
           if (count($input['attendees'] ?? []) > 10) {
-              throw new InvalidArgumentException('Too many attendees (max 10)');
+              throw new \InvalidArgumentException('Too many attendees (max 10)');
           }
 
           return json_encode([

@@ -4397,7 +4397,7 @@ func main() {
 					}},
 					Role: anthropic.BetaMessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus5,
+				Model: anthropic.ModelClaudeOpus5_5,
 			},
 		}},
 	})
@@ -5504,7 +5504,7 @@ func main() {
 
 ## Retrieve Message Batch results
 
-`client.Beta.Messages.Batches.Results(ctx, messageBatchID, query) (*BetaMessageBatchIndividualResponse, error)`
+`client.Beta.Messages.Batches.ResultsStreaming(ctx, messageBatchID, query) *jsonl.Stream[BetaMessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 

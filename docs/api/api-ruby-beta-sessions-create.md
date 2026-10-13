@@ -75,7 +75,7 @@ Create Session
 
     - `model: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-      Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+      Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
       - `type BetaManagedAgentsModel = :"claude-haiku-5-5" | :"claude-sonnet-5-5" | :"claude-opus-5-5" | 14 more | String`
 
@@ -2398,7 +2398,7 @@ puts(beta_managed_agents_session)
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -2418,7 +2418,7 @@ puts(beta_managed_agents_session)
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
