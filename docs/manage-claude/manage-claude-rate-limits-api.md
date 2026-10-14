@@ -345,19 +345,19 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
 
 <CodeGroup>
   ```bash cURL
-  curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-5" \
+  curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-5-5" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant organization:rate-limits list --model claude-opus-5
+  ant organization:rate-limits list --model claude-opus-5-5
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  rate_limits = client.organization.rate_limits.list(model="claude-opus-5")
+  rate_limits = client.organization.rate_limits.list(model="claude-opus-5-5")
 
   for entry in rate_limits:
       models = f" ({', '.join(entry.models)})" if entry.models else ""
@@ -369,7 +369,9 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const rateLimits = await client.organization.rateLimits.list({ model: "claude-opus-5" });
+  const rateLimits = await client.organization.rateLimits.list({
+    model: "claude-opus-5-5"
+  });
 
   for await (const entry of rateLimits) {
     const models = entry.models ? ` (${entry.models.join(", ")})` : "";
@@ -385,7 +387,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
 
   var rateLimits = await client.Organization.RateLimits.List(new()
   {
-      Model = "claude-opus-5"
+      Model = "claude-opus-5-5"
   });
 
   await foreach (var entry in rateLimits.Paginate())
@@ -403,7 +405,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   client := anthropic.NewClient()
 
   rateLimits := client.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.OrganizationRateLimitListParams{
-  	Model: anthropic.String(anthropic.ModelClaudeOpus5),
+  	Model: anthropic.String(anthropic.ModelClaudeOpus5_5),
   })
 
   for rateLimits.Next() {
@@ -430,7 +432,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       var params = RateLimitListParams.builder()
-          .model(Model.CLAUDE_OPUS_5.asString())
+          .model(Model.CLAUDE_OPUS_5_5.asString())
           .build();
       var rateLimits = client.organization().rateLimits().list(params);
 
@@ -452,7 +454,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   $client = new Client();
 
   $rateLimits = $client->organization->rateLimits->list(
-      model: Model::CLAUDE_OPUS_5->value,
+      model: Model::CLAUDE_OPUS_5_5->value,
   );
 
   foreach ($rateLimits->data as $entry) {
@@ -467,7 +469,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  rate_limits = client.organization.rate_limits.list(model: Anthropic::Model::CLAUDE_OPUS_5)
+  rate_limits = client.organization.rate_limits.list(model: Anthropic::Model::CLAUDE_OPUS_5_5)
 
   rate_limits.data.each do |entry|
     models = entry.models ? " (#{entry.models.join(", ")})" : ""

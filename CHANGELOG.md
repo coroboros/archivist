@@ -1,5 +1,93 @@
 # Changelog
 
+## 🤖 v1.5.228 - 14/10/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-server-tools.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-tool-workflows.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking-troubleshooting.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-usage-cost-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-corporate-launcher.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-dependencies.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hipaa-setup.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-evals.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-analytics-api.md`
+- Modified: `docs/manage-claude/manage-claude-rate-limits-api.md`
+- Modified: `docs/manage-claude/manage-claude-usage-cost-api.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-budgets.md`
+- Modified: `docs/managed-agents/managed-agents-dreams.md`
+- Modified: `docs/managed-agents/managed-agents-multiagent-orchestration.md`
+- Added: `docs/managed-agents/managed-agents-secure-deployment-monitoring.md`
+- Added: `docs/managed-agents/managed-agents-secure-deployment-risks.md`
+- Added: `docs/managed-agents/managed-agents-secure-deployment.md`
+
+
 ## 🤖 v1.5.227 - 13/10/2026
 
 File Changes:

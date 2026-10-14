@@ -48,7 +48,7 @@ The dream produces another **output memory store**, separate from the input. The
       { "type": "memory_store", "memory_store_id": "$store_id" },
       { "type": "sessions", "session_ids": ["$session_a", "$session_b"] }
     ],
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5-5",
     "instructions": "Focus on coding-style preferences; ignore one-off debugging notes."
   }
   EOF
@@ -61,7 +61,7 @@ The dream produces another **output memory store**, separate from the input. The
       memory_store_id: $store_id
     - type: sessions
       session_ids: [$session_a, $session_b]
-  model: claude-opus-4-8
+  model: claude-opus-5-5
   instructions: Focus on coding-style preferences; ignore one-off debugging notes.
   YAML
   ```
@@ -72,7 +72,7 @@ The dream produces another **output memory store**, separate from the input. The
           {"type": "memory_store", "memory_store_id": store_id},
           {"type": "sessions", "session_ids": [session_a, session_b]},
       ],
-      model="claude-opus-4-8",
+      model="claude-opus-5-5",
       instructions="Focus on coding-style preferences; ignore one-off debugging notes.",
   )
   print(dream.id)  # drm_01...
@@ -84,7 +84,7 @@ The dream produces another **output memory store**, separate from the input. The
       { type: "memory_store", memory_store_id: storeId },
       { type: "sessions", session_ids: [sessionA, sessionB] },
     ],
-    model: "claude-opus-4-8",
+    model: "claude-opus-5-5",
     instructions: "Focus on coding-style preferences; ignore one-off debugging notes.",
   });
   console.log(dream.id); // drm_01...
@@ -106,7 +106,7 @@ The dream produces another **output memory store**, separate from the input. The
               SessionIds = [sessionA, sessionB],
           },
       ],
-      Model = "claude-opus-4-8",
+      Model = "claude-opus-5-5",
       Instructions = "Focus on coding-style preferences; ignore one-off debugging notes.",
   });
   Console.WriteLine(dream.ID);  // drm_01...
@@ -119,7 +119,7 @@ The dream produces another **output memory store**, separate from the input. The
   		anthropic.BetaDreamInputParamOfSessions([]string{sessionA, sessionB}),
   	},
   	Model: anthropic.BetaDreamModelParamsUnion{
-  		OfString: anthropic.String("claude-opus-4-8"),
+  		OfString: anthropic.String("claude-opus-5-5"),
   	},
   	Instructions: anthropic.String("Focus on coding-style preferences; ignore one-off debugging notes."),
   })
@@ -134,7 +134,7 @@ The dream produces another **output memory store**, separate from the input. The
       DreamCreateParams.builder()
           .addMemoryStoreInput(storeId)
           .addSessionsInput(List.of(sessionA, sessionB))
-          .model("claude-opus-4-8")
+          .model("claude-opus-5-5")
           .instructions("Focus on coding-style preferences; ignore one-off debugging notes.")
           .build()
   );
@@ -147,7 +147,7 @@ The dream produces another **output memory store**, separate from the input. The
           ['type' => 'memory_store', 'memory_store_id' => $storeId],
           ['type' => 'sessions', 'session_ids' => [$sessionA, $sessionB]],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5-5',
       instructions: 'Focus on coding-style preferences; ignore one-off debugging notes.',
   );
   echo "{$dream->id}\n"; // drm_01...
@@ -159,7 +159,7 @@ The dream produces another **output memory store**, separate from the input. The
       {type: "memory_store", memory_store_id: store_id},
       {type: "sessions", session_ids: [session_a, session_b]}
     ],
-    model: "claude-opus-4-8",
+    model: "claude-opus-5-5",
     instructions: "Focus on coding-style preferences; ignore one-off debugging notes."
   )
   puts dream.id # drm_01...
@@ -180,7 +180,7 @@ The response is the full `dream` resource with `status: "pending"`:
     { "type": "sessions", "session_ids": ["sesn_01...", "sesn_02..."] }
   ],
   "outputs": [],
-  "model": { "id": "claude-opus-4-8" },
+  "model": { "id": "claude-opus-5-5" },
   "instructions": "Focus on coding-style preferences; ignore one-off debugging notes.",
   "session_id": null,
   "created_at": "2026-04-29T17:04:10Z",
