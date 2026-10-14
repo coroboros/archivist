@@ -77,7 +77,7 @@ The example below checks CI and review comments, with Claude waiting longer betw
 
 In a session where the [Monitor tool is available](/docs/en/tools-reference#monitor-tool), Claude may use it directly when you ask for a dynamic `/loop` schedule. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.
 
-A dynamically scheduled loop appears in your [scheduled task list](#manage-scheduled-tasks) like any other task, so you can list or cancel it the same way. The [jitter rules](#jitter) don't apply to it, but the [seven-day expiry](#seven-day-expiry) does.
+A dynamically scheduled loop appears in your [scheduled task list](#manage-scheduled-tasks) like any other task, so you can list or cancel it the same way. The list shows its pending wakeup as a one-shot task, so a wakeup scheduled for `:00` or `:30` can [run a little early](#when-a-one-shot-task-runs-early). The [seven-day expiry](#seven-day-expiry) applies to the loop too.
 
 <span id="loop-provider-differences" />
 

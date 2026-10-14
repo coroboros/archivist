@@ -39,7 +39,7 @@ When a tool output exceeds 100,000 characters (about 25,000 tokens), it is autom
 
 ## Configuring the toolset
 
-Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` (java, php; csharp, go: `Configs`) array to disable specific tools or override their settings. Each entry is identified by its `name` (java, php; csharp, go: `Name`), which takes a value from the Name column in [Available tools](./managed-agents-tools.md#available-tools). An entry also accepts an optional `type` (java, php; csharp, go: `Type`) field with the same value.
+Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` (csharp, go: `Configs`) array to disable specific tools or override their settings. Each entry is identified by its `name` (csharp, go: `Name`), which takes a value from the Name column in [Available tools](./managed-agents-tools.md#available-tools). An entry also accepts an optional `type` (csharp, go: `Type`) field with the same value.
 
 Each config entry can also set a `permission_policy` (java, php: `permissionPolicy`; csharp, go: `PermissionPolicy`). The policy controls whether the tool's calls run without confirmation, require confirmation, or are evaluated individually by the server. See [Permission policies](./managed-agents-permission-policies.md) for the available policy types.
 
@@ -246,11 +246,11 @@ The `web_search` and `web_fetch` entries also accept domain lists, a cap on fetc
 
 ### Config entry types in the SDKs
 
-The Python, TypeScript, Go, Java, C#, Ruby, and PHP SDKs type each `configs` (java, php; csharp, go: `Configs`) entry per tool. The type is a union with one member per built-in tool, discriminated by `type` (java, php; csharp, go: `Type`).
+The Python, TypeScript, Go, Java, C#, Ruby, and PHP SDKs type each `configs` (csharp, go: `Configs`) entry per tool. The type is a union with one member per built-in tool, discriminated by `type` (csharp, go: `Type`).
 
-In Go, Java, C#, and PHP, you construct entries from typed values rather than plain dictionaries or hashes. In those SDKs, the element type of `configs` (java, php; csharp, go: `Configs`) is the union itself, so build each entry from its per-tool member type.
+In Go, Java, C#, and PHP, you construct entries from typed values rather than plain dictionaries or hashes. In those SDKs, the element type of `configs` (csharp, go: `Configs`) is the union itself, so build each entry from its per-tool member type.
 
-You can omit `type` (java, php; csharp, go: `Type`) when you construct an entry, because the server infers it from `name` (java, php; csharp, go: `Name`). Responses always include it. This typing does not change the JSON that an entry serializes to. A request whose entries set only `name`, `enabled`, and `permission_policy` is valid with or without `type`.
+You can omit `type` (csharp, go: `Type`) when you construct an entry, because the server infers it from `name` (csharp, go: `Name`). Responses always include it. This typing does not change the JSON that an entry serializes to. A request whose entries set only `name`, `enabled`, and `permission_policy` is valid with or without `type`.
 
 ## Custom tools
 
@@ -504,7 +504,7 @@ The following example creates an agent with the built-in toolset and one custom 
   ```
 </CodeGroup>
 
-A custom tool's name can't start with `mcp__` or `ant__`, or match the name of a built-in agent tool. A request that breaks this rule returns a 400 error. An agent that already has a custom tool whose name starts with `ant__` accepts an update only if the update sends `tools` (java, php; csharp, go: `Tools`) without that name, so rename or remove the tool in your next update. A new session is refused with a 400 error if such a tool is on its agent (after any [overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session)), on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`), or on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (java, php; csharp, go: `Workflows`). Sessions that already exist aren't affected.
+A custom tool's name can't start with `mcp__` or `ant__`, or match the name of a built-in agent tool. A request that breaks this rule returns a 400 error. An agent that already has a custom tool whose name starts with `ant__` accepts an update only if the update sends `tools` (csharp, go: `Tools`) without that name, so rename or remove the tool in your next update. A new session is refused with a 400 error if such a tool is on its agent (after any [overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session)), on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`), or on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`). Sessions that already exist aren't affected.
 
 The agent calls its custom tools during a session. To receive the calls and return results, see [Session event stream](./managed-agents-events-and-streaming.md#handling-custom-tool-calls).
 

@@ -1,5 +1,93 @@
 # Changelog
 
+## 🤖 v1.5.229 - 14/10/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-claude-platform-on-aws-iam-actions.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-sdks-csharp.md`
+- Modified: `docs/api/api-sdks-go.md`
+- Modified: `docs/api/api-sdks-ruby.md`
+- Modified: `docs/api/api-sdks-typescript.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-preserved-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-streaming.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-events.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugin-evals.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-claude_api_primer.md`
+- Modified: `docs/general/general-cli-sdks-libraries-middleware.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-csharp.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-go.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-java.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-ruby.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-typescript.md`
+- Modified: `docs/general/general-models-opus-5-5-migration-guide.md`
+- Modified: `docs/general/general-models-opus-5-migration-guide.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api-keys.md`
+- Modified: `docs/manage-claude/manage-claude-user-management.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-kubernetes.md`
+- Modified: `docs/manage-claude/manage-claude-wif-reference.md`
+- Modified: `docs/manage-claude/manage-claude-workload-identity-federation.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-budgets.md`
+- Modified: `docs/managed-agents/managed-agents-define-outcomes.md`
+- Modified: `docs/managed-agents/managed-agents-dreams.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-event-deltas.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multiagent-orchestration.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/managed-agents/managed-agents-scheduled-deployments.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-custom-tools.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-memory.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-operations.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-reference.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-security.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-workers.md`
+- Modified: `docs/managed-agents/managed-agents-session-observability.md`
+- Modified: `docs/managed-agents/managed-agents-session-operations.md`
+- Modified: `docs/managed-agents/managed-agents-session-threads.md`
+- Modified: `docs/managed-agents/managed-agents-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-tools-web-restrictions.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Modified: `docs/managed-agents/managed-agents-workflow-runs.md`
+
+
 ## 🤖 v1.5.228 - 14/10/2026
 
 File Changes:
