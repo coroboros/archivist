@@ -305,6 +305,8 @@ Create Credential
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -645,6 +647,8 @@ List Credentials
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -973,6 +977,8 @@ Get Credential
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -1428,6 +1434,8 @@ Update Credential
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1752,6 +1760,8 @@ Delete Credential
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1921,6 +1931,8 @@ Archive Credential
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -2245,6 +2257,8 @@ Validate Credential
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 

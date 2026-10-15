@@ -143,6 +143,8 @@ Create a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -377,6 +379,8 @@ List memory stores
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -589,6 +593,8 @@ Retrieve a memory store
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -820,6 +826,8 @@ Update a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1034,6 +1042,8 @@ Delete a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1209,6 +1219,8 @@ Archive a memory store
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -1496,6 +1508,8 @@ Create a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1744,6 +1758,8 @@ List memories
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -1994,6 +2010,8 @@ Retrieve a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2240,6 +2258,8 @@ Update a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2474,6 +2494,8 @@ Delete a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2701,6 +2723,8 @@ List memory versions
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -3018,6 +3042,8 @@ Retrieve a memory version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3326,6 +3352,8 @@ Redact a memory version
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 

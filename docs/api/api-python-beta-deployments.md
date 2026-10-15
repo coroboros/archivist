@@ -527,6 +527,8 @@ Create Deployment
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1308,6 +1310,8 @@ List Deployments
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2041,6 +2045,8 @@ Get Deployment
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -3172,6 +3178,8 @@ Update Deployment
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3901,6 +3909,8 @@ Archive Deployment
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -4632,6 +4642,8 @@ Run Deployment Now
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5023,6 +5035,8 @@ Pause Deployment
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -5753,6 +5767,8 @@ Unpause Deployment
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `workspace_id: Optional[str]` (header parameter)
 

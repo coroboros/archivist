@@ -77,7 +77,7 @@ The token issued for this pod carries `sub: "system:serviceaccount:inference:inf
 
 ## Configure Anthropic
 
-In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Kubernetes** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+In the Claude Console, go to the [Workload identity](https://platform.claude.com/settings/workload-identity-federation) page (`platform.claude.com/settings/workload-identity-federation`), click **Connect workload**, and select the **Kubernetes** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
 The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](./manage-claude-wif-admin-api.md):
 
@@ -297,7 +297,7 @@ The pod spec in [Configure Kubernetes](./manage-claude-wif-providers-kubernetes.
 
 ## Verify the setup
 
-A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](./manage-claude-wif-reference.md#troubleshoot-a-failed-exchange); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
+A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](./manage-claude-wif-reference.md#troubleshoot-a-failed-exchange); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
 ## Scope your rule
 

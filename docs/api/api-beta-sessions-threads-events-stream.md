@@ -141,6 +141,8 @@ Stream Session Thread Events
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1843,6 +1845,26 @@ Stream Session Thread Events
 
       - `description: string or null`
 
+      - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `BetaManagedAgentsAWSRoleExecutionIdentity object`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `type: "aws_role"`
+
+          - `role_arn: string`
+
+            The IAM role's ARN.
+
+        - `BetaManagedAgentsServiceAccountExecutionIdentity object`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `type: "service_account"`
+
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
         - `type: "url"`
@@ -2000,6 +2022,10 @@ Stream Session Thread Events
               - `id: string`
 
               - `description: string or null`
+
+              - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -2547,6 +2573,10 @@ Stream Session Thread Events
 
                 - `description: string or null`
 
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
                 - `model: BetaManagedAgentsModelConfig`
@@ -2594,6 +2624,10 @@ Stream Session Thread Events
                 - `id: string`
 
                 - `description: string or null`
+
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 

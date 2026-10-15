@@ -26,7 +26,7 @@ The API enforces service-configured limits at the organization level, but you ma
 * Limits are designed to prevent API abuse, while minimizing impact on common customer usage patterns.
 * Limits are defined by **usage tier**. Organizations are placed on a tier automatically based on usage history and account standing and can move to a higher tier over time as they use the API.
 * New organizations and organizations with limited usage history may start in the Evaluation tier, with limits below the standard limits shown on this page while account history is established. These starting limits are part of how Anthropic prevents fraud and abuse, and they increase automatically as your organization builds usage history.
-* Limits are set at the organization level. You can see your organization's tier and current limits on the [Rate limits](https://platform.claude.com/usage/limits) page in the [Claude Console](https://platform.claude.com/).
+* Limits are set at the organization level. You can see your organization's tier and current limits on the [Rate limits](https://platform.claude.com/usage/limits) page (`platform.claude.com/usage/limits`) in the [Claude Console](https://platform.claude.com/).
 * You might hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) might be enforced as 1 request per second. Short bursts of requests can exceed the limit and trigger rate limit errors.
 * The following limits are the standard limits for each tier. If you need higher limits, see [Requesting higher limits](./api-rate-limits.md#requesting-higher-limits).
 * The API uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to do rate limiting. This means that your capacity is continuously replenished up to your maximum limit, rather than being reset at fixed intervals.
@@ -38,7 +38,7 @@ The API enforces service-configured limits at the organization level, but you ma
   **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The same monthly spend caps apply, and requests stop at the cap in the same way. Billing and tier increases work differently; see [Spend limits on Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#spend-limits).
 </Note>
 
-Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. You can view your organization's monthly spend cap and set your own limit on the [Billing](https://platform.claude.com/settings/billing) page.
+Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. You can view your organization's monthly spend cap and set your own limit on the [Billing](https://platform.claude.com/settings/billing) page in the Claude Console.
 
 | Usage tier | Monthly spend cap |
 | ---------- | ----------------- |
@@ -74,7 +74,7 @@ You can also set your own spend limit below your tier's cap to control costs:
 
 <Steps>
   <Step title="Navigate to the Billing page">
-    Go to [Settings > Billing](https://platform.claude.com/settings/billing) in the Claude Console.
+    In the Claude Console, go to the [Billing](https://platform.claude.com/settings/billing) page (`platform.claude.com/settings/billing`).
   </Step>
 
   <Step title="Open the spend limit editor">
@@ -130,7 +130,7 @@ Here's what counts toward ITPM:
   For all other models, cached input tokens do not count toward rate limits and are billed at the [cache read rate](../build-with-claude/build-with-claude-prompt-caching.md#pricing), a fraction of the base input price. This means you can achieve significantly higher effective throughput by using [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md).
 </Note>
 
-To make the most of your rate limits, cache repeated content such as system instructions and prompts, large context documents, tool definitions, and conversation history; see [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) for guidance. With effective caching, you can substantially increase your actual throughput without raising your rate limits. Monitor your cache hit rate on the [Usage page](https://platform.claude.com/usage) to tune your caching strategy.
+To make the most of your rate limits, cache repeated content such as system instructions and prompts, large context documents, tool definitions, and conversation history; see [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) for guidance. With effective caching, you can substantially increase your actual throughput without raising your rate limits. Monitor your cache hit rate on the [Usage page](https://platform.claude.com/usage) in the Claude Console to tune your caching strategy.
 
 OTPM rate limits are evaluated in real time as output tokens are produced, counting only the actual tokens generated. The `max_tokens` parameter does not factor into OTPM rate limit calculations, so there is no rate limit downside to setting a higher `max_tokens` value.
 
@@ -265,7 +265,7 @@ In addition to providing token and request charts, the Usage page provides two s
 
 ## Requesting higher limits
 
-To request higher rate limits or a higher monthly spend cap, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page. Anthropic support can also raise limits; for urgent needs, contact [Anthropic support](https://support.claude.com).
+To request higher rate limits or a higher monthly spend cap, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console. Anthropic support can also raise limits; for urgent needs, contact [Anthropic support](https://support.claude.com).
 
 <Note>
   **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The **Request tier increase** flow is not available. Contact your Anthropic account representative or [Anthropic support](https://support.claude.com), and include the models you need raised, your peak input and output tokens per minute for each model, and roughly what share of your input is cached or repeated context. See [Rate limits and quotas on Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas).

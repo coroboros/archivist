@@ -3873,6 +3873,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string userProfileID` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.

@@ -133,6 +133,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.

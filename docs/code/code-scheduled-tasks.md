@@ -162,7 +162,7 @@ These are the underlying tools Claude uses:
 | Tool | Purpose |
 | :- | :- |
 | `CronCreate` | Schedule a new task. Accepts a 5-field cron expression, the prompt to run, and whether it recurs or fires once. |
-| `CronList` | List all scheduled tasks with their IDs, schedules, and prompts. |
+| `CronList` | List scheduled tasks with their IDs, schedules, [next run times](#jitter), and prompts. |
 | `CronDelete` | Cancel a task by ID. |
 
 Each scheduled task has an 8-character ID you can pass to `CronDelete`. A session can hold up to 50 scheduled tasks at once.
@@ -176,6 +176,8 @@ All times are interpreted in your local timezone. A cron expression like `0 9 * 
 ### Jitter
 
 A scheduled task can run at a different time than its schedule says. If every session's tasks ran exactly on schedule, many of them would call the API at the same moment, so Claude Code shifts each task's run time. Recurring tasks run late, except a task that runs every five minutes, written `*/5 * * * *`. One-shot tasks scheduled on the hour or half hour run a little early.
+
+To see when a task is next due, read the row under Claude's `CronCreate` call in your terminal. The row shows that time after the schedule, for example `next run 10:21 AM`. To check again later, [ask Claude to list your tasks](#manage-scheduled-tasks) and look for `next run` in the rows under the `CronList` call. Next run times in these rows require Claude Code v2.1.299 or later.
 
 #### How late a recurring task runs
 

@@ -255,6 +255,8 @@ List Events
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1957,6 +1959,26 @@ List Events
 
       - `description: Optional[str]`
 
+      - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAWSRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `type: Literal["aws_role"]`
+
+          - `role_arn: str`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `type: Literal["service_account"]`
+
       - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
         - `type: Literal["url"]`
@@ -2114,6 +2136,10 @@ List Events
               - `id: str`
 
               - `description: Optional[str]`
+
+              - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -2661,6 +2687,10 @@ List Events
 
                 - `description: Optional[str]`
 
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
                 - `model: BetaManagedAgentsModelConfig`
@@ -2708,6 +2738,10 @@ List Events
                 - `id: str`
 
                 - `description: Optional[str]`
+
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -3685,6 +3719,8 @@ Send Events
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4310,6 +4346,8 @@ Stream Events
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -6013,6 +6051,26 @@ Stream Events
 
       - `description: Optional[str]`
 
+      - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAWSRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `type: Literal["aws_role"]`
+
+          - `role_arn: str`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `type: Literal["service_account"]`
+
       - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
         - `type: Literal["url"]`
@@ -6170,6 +6228,10 @@ Stream Events
               - `id: str`
 
               - `description: Optional[str]`
+
+              - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -6717,6 +6779,10 @@ Stream Events
 
                 - `description: Optional[str]`
 
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
                 - `model: BetaManagedAgentsModelConfig`
@@ -6764,6 +6830,10 @@ Stream Events
                 - `id: str`
 
                 - `description: Optional[str]`
+
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -12310,6 +12380,26 @@ for event in client.beta.sessions.events.stream(
 
       - `description: Optional[str]`
 
+      - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAWSRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `type: Literal["aws_role"]`
+
+          - `role_arn: str`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `type: Literal["service_account"]`
+
       - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
         - `type: Literal["url"]`
@@ -12467,6 +12557,10 @@ for event in client.beta.sessions.events.stream(
               - `id: str`
 
               - `description: Optional[str]`
+
+              - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -13014,6 +13108,10 @@ for event in client.beta.sessions.events.stream(
 
                 - `description: Optional[str]`
 
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
                 - `model: BetaManagedAgentsModelConfig`
@@ -13061,6 +13159,10 @@ for event in client.beta.sessions.events.stream(
                 - `id: str`
 
                 - `description: Optional[str]`
+
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -15996,6 +16098,26 @@ for event in client.beta.sessions.events.stream(
 
       - `description: Optional[str]`
 
+      - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAWSRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `type: Literal["aws_role"]`
+
+          - `role_arn: str`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `type: Literal["service_account"]`
+
       - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
         - `type: Literal["url"]`
@@ -16153,6 +16275,10 @@ for event in client.beta.sessions.events.stream(
               - `id: str`
 
               - `description: Optional[str]`
+
+              - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
@@ -16700,6 +16826,10 @@ for event in client.beta.sessions.events.stream(
 
                 - `description: Optional[str]`
 
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 
                 - `model: BetaManagedAgentsModelConfig`
@@ -16747,6 +16877,10 @@ for event in client.beta.sessions.events.stream(
                 - `id: str`
 
                 - `description: Optional[str]`
+
+                - `execution_identity: BetaManagedAgentsExecutionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `mcp_servers: List[BetaManagedAgentsMCPServerURLDefinition]`
 

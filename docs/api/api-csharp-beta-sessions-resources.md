@@ -145,6 +145,8 @@ Add Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -330,6 +332,8 @@ List Session Resources
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `string workspaceID` (header parameter)
 
@@ -608,6 +612,8 @@ Get Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -879,6 +885,8 @@ Update Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1144,6 +1152,8 @@ Delete Session Resource
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `string workspaceID` (header parameter)
 

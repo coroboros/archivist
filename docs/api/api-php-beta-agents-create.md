@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/agents/create
 
 # Create Agent
 
-`$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
+`$client->beta->agents->create(Model model, string name, ?string description, ?BetaManagedAgentsExecutionIdentityParams executionIdentity, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsAgent`
 
 **POST** `/v1/agents`
 
@@ -30,6 +30,10 @@ Create Agent
 - `description?:optional string`
 
   Description of what the agent does.
+
+- `executionIdentity?:optional BetaManagedAgentsExecutionIdentityParams`
+
+  Execution principal for runs of this agent. Omitting it, sending null, or sending `{"type": "service_account"}` stores the default.
 
 - `mcpServers?:optional list<BetaManagedAgentsURLMCPServerParams>`
 
@@ -83,6 +87,10 @@ Create Agent
 
   - `?string description`
 
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
   - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
 
   - `array<string,string> metadata`
@@ -124,6 +132,7 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
   model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
+  executionIdentity: ['roleARN' => 'role_arn', 'type' => 'aws_role'],
   mcpServers: [
     [
       'name' => 'example-mcp',
@@ -169,6 +178,9 @@ var_dump($betaManagedAgentsAgent);
   "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
+  "execution_identity": {
+    "type": "service_account"
+  },
   "mcp_servers": [
     {
       "name": "example-mcp",

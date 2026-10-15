@@ -11,7 +11,7 @@ description: Manage organization members, workspaces, invites, and API keys prog
 ---
 
 <Tip>
-  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
+  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 </Tip>
 
 The [Admin API](../api/api-organization.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
@@ -31,7 +31,7 @@ The [Admin API](../api/api-organization.md) lets you manage your organization's 
 </Note>
 
 <Note>
-  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) and the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](../manage-claude/manage-claude-cmek-aws-kms.md#claude-platform-on-aws); there is no validate endpoint, because keys are validated when attached to a workspace) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
+  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](../manage-claude/manage-claude-cmek-aws-kms.md#claude-platform-on-aws); there is no validate endpoint, because keys are validated when attached to a workspace), and the [telemetry destination endpoints](../api/api-claude-platform-on-aws-iam-actions.md#telemetry-destinations) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
 </Note>
 
 ## Authentication
