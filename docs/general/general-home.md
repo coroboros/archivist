@@ -101,7 +101,7 @@ with Claude"
 
     var msg = client.messages().create(
       MessageCreateParams.builder()
-        .model("claude-opus-5-5")
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Hello, Claude")
         .build()
@@ -155,7 +155,7 @@ with Claude"
 
     var msg = await client.Messages
       .Create(new() {
-        Model = "claude-opus-5-5",
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() {
           Role = Role.User,

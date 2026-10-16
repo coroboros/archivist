@@ -19,7 +19,7 @@ featureMetadata:
   OpenTelemetry export is in beta. It's provided under your agreement with Anthropic, including the Beta Services section of the [Service Specific Terms](https://www.anthropic.com/legal/service-specific-terms). Span names and attributes can change during the beta.
 </Note>
 
-To set up export, see [Use OpenTelemetry with the Claude SDK](../manage-claude/manage-claude-opentelemetry-sdk.md) and [Use OpenTelemetry with the Claude API](../manage-claude/manage-claude-opentelemetry-api.md).
+To get spans, see [Set up OpenTelemetry with the Claude SDK](../manage-claude/manage-claude-opentelemetry-sdk.md) and [Set up OpenTelemetry with the Claude API](../manage-claude/manage-claude-opentelemetry-api.md).
 
 ## Span names and kinds
 

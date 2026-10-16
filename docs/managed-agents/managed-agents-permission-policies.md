@@ -134,7 +134,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5-5",
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -354,7 +354,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Dev Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5-5",
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -862,7 +862,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Ops Agent",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5-5",
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,

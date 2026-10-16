@@ -1020,7 +1020,10 @@ This driver implements five of the 17 tools listed under [Available actions](./a
   } from "@anthropic-ai/sdk/resources/beta";
 
   class MyDesktop extends BetaAbstractComputerToolset20260801 {
-    constructor(private display: Display, options: BetaComputerToolsetOptions = {}) {
+    constructor(
+      private display: Display,
+      options: BetaComputerToolsetOptions = {}
+    ) {
       super(options);
     }
 

@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | General). It is updated automatically._
 
-**Last updated:** Fri, 16 Oct 2026 03:11:48 GMT
+**Last updated:** Fri, 16 Oct 2026 16:06:22 GMT
 
 ---
 
@@ -12,23 +12,23 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Cli Sdks Libraries
 
-- [Cli | Sessions Connect](./general-cli-sdks-libraries-cli-sessions-connect.md)
 - [Middleware](./general-cli-sdks-libraries-middleware.md)
-- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
 - [Overview](./general-cli-sdks-libraries-overview.md)
-- [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
-- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
-- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
-- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
-- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
-- [Cli | Apply](./general-cli-sdks-libraries-cli-apply.md)
-- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
-- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
-- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
-- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
-- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
 - [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
+- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
+- [Cli | Apply](./general-cli-sdks-libraries-cli-apply.md)
+- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
+- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
+- [Cli | Sessions Connect](./general-cli-sdks-libraries-cli-sessions-connect.md)
+- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
+- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
+- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
+- [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
 - [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
+- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
+- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
+- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
+- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
 
 ## Get Api Key
 
@@ -44,38 +44,38 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Models
 
-- [Haiku 4 5 | Overview](./general-models-haiku-4-5-overview.md)
-- [Haiku 5 5 | Migration Guide](./general-models-haiku-5-5-migration-guide.md)
-- [Haiku 5 5 | Whats New Haiku 5 5](./general-models-haiku-5-5-whats-new-haiku-5-5.md)
-- [Opus 5 5 | Whats New Opus 5 5](./general-models-opus-5-5-whats-new-opus-5-5.md)
-- [Haiku 5 5 | Overview](./general-models-haiku-5-5-overview.md)
 - [Sonnet 5 5 | Migration Guide](./general-models-sonnet-5-5-migration-guide.md)
-- [Fable 5 1 | Overview](./general-models-fable-5-1-overview.md)
-- [Sonnet 5 | Overview](./general-models-sonnet-5-overview.md)
-- [Opus 4 6 | Overview](./general-models-opus-4-6-overview.md)
-- [Mythos 5 1 | Overview](./general-models-mythos-5-1-overview.md)
 - [Overview](./general-models-overview.md)
+- [Haiku 5 5 | Whats New Haiku 5 5](./general-models-haiku-5-5-whats-new-haiku-5-5.md)
+- [Haiku 5 5 | Migration Guide](./general-models-haiku-5-5-migration-guide.md)
+- [Opus 4 6 | Overview](./general-models-opus-4-6-overview.md)
+- [Opus 5 5 | Whats New Opus 5 5](./general-models-opus-5-5-whats-new-opus-5-5.md)
 - [Fable 5 1 | Whats New Fable 5 1](./general-models-fable-5-1-whats-new-fable-5-1.md)
-- [Sonnet 5 5 | Overview](./general-models-sonnet-5-5-overview.md)
-- [Mythos 5 | Overview](./general-models-mythos-5-overview.md)
-- [Opus 4 8 | Overview](./general-models-opus-4-8-overview.md)
-- [Opus 5 5 | Overview](./general-models-opus-5-5-overview.md)
-- [Fable 5 | Overview](./general-models-fable-5-overview.md)
-- [Opus 5 5 | Migration Guide](./general-models-opus-5-5-migration-guide.md)
+- [Fable 5 1 | Overview](./general-models-fable-5-1-overview.md)
 - [Opus 4 7 | Overview](./general-models-opus-4-7-overview.md)
-- [Sonnet 4 5 | Overview](./general-models-sonnet-4-5-overview.md)
-- [Opus 5 | Overview](./general-models-opus-5-overview.md)
+- [Mythos 5 1 | Overview](./general-models-mythos-5-1-overview.md)
 - [Fable 5 1 | Migration Guide](./general-models-fable-5-1-migration-guide.md)
+- [Sonnet 4 5 | Overview](./general-models-sonnet-4-5-overview.md)
+- [Opus 5 5 | Migration Guide](./general-models-opus-5-5-migration-guide.md)
+- [Sonnet 5 5 | Overview](./general-models-sonnet-5-5-overview.md)
+- [Haiku 4 5 | Overview](./general-models-haiku-4-5-overview.md)
+- [Opus 5 5 | Overview](./general-models-opus-5-5-overview.md)
+- [Opus 4 8 | Overview](./general-models-opus-4-8-overview.md)
+- [Sonnet 5 | Overview](./general-models-sonnet-5-overview.md)
+- [Mythos 5 | Overview](./general-models-mythos-5-overview.md)
 - [Sonnet 4 6 | Overview](./general-models-sonnet-4-6-overview.md)
+- [Fable 5 | Overview](./general-models-fable-5-overview.md)
+- [Opus 5 | Overview](./general-models-opus-5-overview.md)
+- [Haiku 5 5 | Overview](./general-models-haiku-5-5-overview.md)
 - [Opus 4 5 | Overview](./general-models-opus-4-5-overview.md)
 - [Sonnet 5 5 | Whats New Sonnet 5 5](./general-models-sonnet-5-5-whats-new-sonnet-5-5.md)
 - [Sonnet 5 | Migration Guide](./general-models-sonnet-5-migration-guide.md)
+- [Fable 5 | Introducing Claude Fable 5 And Claude Mythos 5](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md)
 - [Opus 5 | Whats New Opus 5](./general-models-opus-5-whats-new-opus-5.md)
-- [Sonnet 5 | Whats New Sonnet 5](./general-models-sonnet-5-whats-new-sonnet-5.md)
+- [Opus 5 | Migration Guide](./general-models-opus-5-migration-guide.md)
 - [Haiku 4 5 | Migration Guide](./general-models-haiku-4-5-migration-guide.md)
 - [Fable 5 | Migration Guide](./general-models-fable-5-migration-guide.md)
-- [Fable 5 | Introducing Claude Fable 5 And Claude Mythos 5](./general-models-fable-5-introducing-claude-fable-5-and-claude-mythos-5.md)
-- [Opus 5 | Migration Guide](./general-models-opus-5-migration-guide.md)
+- [Sonnet 5 | Whats New Sonnet 5](./general-models-sonnet-5-whats-new-sonnet-5.md)
 
 ## Resources
 

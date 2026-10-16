@@ -1289,7 +1289,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-opus-4-6",
+         Model = Model.ClaudeOpus4_6,
          MaxTokens = 16000,
          Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
          Messages = [new() { Role = Role.User, Content = "..." }]
@@ -1303,7 +1303,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-opus-4-6",
+     	Model:     anthropic.ModelClaudeOpus4_6,
      	MaxTokens: 16000,
      	Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
      	Messages: []anthropic.MessageParam{
@@ -1320,7 +1320,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
      MessageCreateParams params = MessageCreateParams.builder()
-         .model("claude-opus-4-6")
+         .model(Model.CLAUDE_OPUS_4_6)
          .maxTokens(16000L)
          .enabledThinking(10000L)
          .addUserMessage("...")
@@ -1426,7 +1426,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-opus-5-5",
+         Model = Model.ClaudeOpus5_5,
          MaxTokens = 16000,
          Thinking = new ThinkingConfigAdaptive(),
          OutputConfig = new OutputConfig { Effort = Effort.High }, // or Max, Xhigh, Medium, Low
@@ -1441,7 +1441,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-opus-5-5",
+     	Model:     anthropic.ModelClaudeOpus5_5,
      	MaxTokens: 16000,
      	Thinking: anthropic.ThinkingConfigParamUnion{
      		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -1463,7 +1463,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
      MessageCreateParams params = MessageCreateParams.builder()
-         .model("claude-opus-5-5")
+         .model(Model.CLAUDE_OPUS_5_5)
          .maxTokens(16000L)
          .thinking(ThinkingConfigAdaptive.builder().build())
          .outputConfig(OutputConfig.builder()

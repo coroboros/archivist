@@ -428,7 +428,7 @@ model = "claude-mythos-5-1"  # After
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-fable-5-1",
+         Model = Model.ClaudeFable5_1,
          MaxTokens = 16000,
          Tools = [
              new ToolUnion(new Tool()
@@ -461,7 +461,7 @@ model = "claude-mythos-5-1"  # After
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-fable-5-1",
+     	Model:     anthropic.ModelClaudeFable5_1,
      	MaxTokens: 16000,
      	Tools: []anthropic.ToolUnionParam{
      		{OfTool: &anthropic.ToolParam{
@@ -496,7 +496,7 @@ model = "claude-mythos-5-1"  # After
          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
          MessageCreateParams params = MessageCreateParams.builder()
-             .model("claude-fable-5-1")
+             .model(Model.CLAUDE_FABLE_5_1)
              .maxTokens(16000L)
              .addTool(Tool.builder()
                  .name("record_summary")
@@ -731,7 +731,7 @@ model = "claude-mythos-5-1"  # After
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-fable-5-1",
+         Model = Model.ClaudeFable5_1,
          MaxTokens = 16000,
          System = "You are a customer support assistant for an online electronics store.",
          Tools = [
@@ -774,7 +774,7 @@ model = "claude-mythos-5-1"  # After
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-fable-5-1",
+     	Model:     anthropic.ModelClaudeFable5_1,
      	MaxTokens: 16000,
      	System: []anthropic.TextBlockParam{
      		{Text: "You are a customer support assistant for an online electronics store."},
@@ -822,7 +822,7 @@ model = "claude-mythos-5-1"  # After
          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
          MessageCreateParams params = MessageCreateParams.builder()
-             .model("claude-fable-5-1")
+             .model(Model.CLAUDE_FABLE_5_1)
              .maxTokens(16000L)
              .system("You are a customer support assistant for an online electronics store.")
              .addTool(Tool.builder()
@@ -1036,13 +1036,14 @@ model = "claude-mythos-5-1"  # After
      ```csharp C#
      using Anthropic.Models.Beta;
      using Anthropic.Models.Beta.Messages;
+     using Model = Anthropic.Models.Messages.Model;
 
      AnthropicClient client = new();
 
      var response = await client.Beta.Messages.Create(
          new()
          {
-             Model = "claude-fable-5-1",
+             Model = Model.ClaudeFable5_1,
              MaxTokens = 16000,
              Thinking = new BetaThinkingConfigAdaptive
              {
@@ -1078,7 +1079,7 @@ model = "claude-mythos-5-1"  # After
      client := anthropic.NewClient()
 
      response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-     	Model:     "claude-fable-5-1",
+     	Model:     anthropic.ModelClaudeFable5_1,
      	MaxTokens: 16000,
      	Thinking: anthropic.BetaThinkingConfigParamUnion{
      		OfAdaptive: &anthropic.BetaThinkingConfigAdaptiveParam{
@@ -1111,12 +1112,13 @@ model = "claude-mythos-5-1"  # After
      import com.anthropic.models.beta.messages.BetaThinkingConfigAdaptive;
      import com.anthropic.models.beta.messages.BetaThinkingPrefixMismatchBehavior;
      import com.anthropic.models.beta.messages.MessageCreateParams;
+     import com.anthropic.models.messages.Model;
 
      void main() {
          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
          MessageCreateParams params = MessageCreateParams.builder()
-             .model("claude-fable-5-1")
+             .model(Model.CLAUDE_FABLE_5_1)
              .maxTokens(16000L)
              .addBeta(AnthropicBeta.THINKING_BINDING_CONTROLS_2026_08_01)
              .thinking(BetaThinkingConfigAdaptive.builder()
@@ -1342,12 +1344,13 @@ These changes aren't required, but each one lowers cost or latency or removes a 
      ```csharp C#
      using Anthropic.Models.Beta;
      using Anthropic.Models.Beta.Messages;
+     using Model = Anthropic.Models.Messages.Model;
 
      AnthropicClient client = new();
 
      var response = await client.Beta.Messages.Create(new MessageCreateParams
      {
-         Model = "claude-fable-5-1",
+         Model = Model.ClaudeFable5_1,
          MaxTokens = 4096,
          OutputConfig = new() { Effort = Effort.High },
          Messages =
@@ -1379,7 +1382,7 @@ These changes aren't required, but each one lowers cost or latency or removes a 
      client := anthropic.NewClient()
 
      response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMessageNewParams{
-     	Model:     "claude-fable-5-1",
+     	Model:     anthropic.ModelClaudeFable5_1,
      	MaxTokens: 4096,
      	OutputConfig: anthropic.BetaOutputConfigParam{
      		Effort: anthropic.BetaOutputConfigEffortHigh,
@@ -1416,12 +1419,13 @@ These changes aren't required, but each one lowers cost or latency or removes a 
      import com.anthropic.models.beta.messages.BetaOutputConfig;
      import com.anthropic.models.beta.messages.BetaSystemMessageOutputConfig;
      import com.anthropic.models.beta.messages.MessageCreateParams;
+     import com.anthropic.models.messages.Model;
 
      void main() {
          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
          MessageCreateParams params = MessageCreateParams.builder()
-             .model("claude-fable-5-1")
+             .model(Model.CLAUDE_FABLE_5_1)
              .maxTokens(4096L)
              .addBeta(AnthropicBeta.MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01)
              .outputConfig(BetaOutputConfig.builder()

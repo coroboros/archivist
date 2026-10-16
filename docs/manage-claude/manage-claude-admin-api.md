@@ -31,7 +31,7 @@ The [Admin API](../api/api-organization.md) lets you manage your organization's 
 </Note>
 
 <Note>
-  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](./manage-claude-cmek-aws-kms.md#claude-platform-on-aws); there is no validate endpoint, because keys are validated when attached to a workspace), and the [telemetry destination endpoints](../api/api-claude-platform-on-aws-iam-actions.md#telemetry-destinations) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md).
+  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](./manage-claude-cmek-claude-platform-on-aws.md); there is no validate endpoint, because keys are validated when attached to a workspace), and the [telemetry destination endpoints](../api/api-claude-platform-on-aws-iam-actions.md#telemetry-destinations) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md).
 </Note>
 
 ## Authentication
