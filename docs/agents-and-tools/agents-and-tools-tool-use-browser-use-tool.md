@@ -30,7 +30,7 @@ featureMetadata:
 ---
 
 <Note>
-  **Start with the SDK toolsets:** The Python and TypeScript SDKs have a browser toolset class, in beta. Start from [a partner's integration](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md#partner-integrations), or see [Browser and computer use with the SDK toolsets](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md). Use this page as the tool reference, or when you handle the tool calls yourself.
+  **Start with the SDK toolsets:** The Python and TypeScript SDKs have a browser toolset class, in beta. Start from [a partner's integration](./agents-and-tools-tool-use-browser-use-sdk.md#partner-integrations), or see [Browser and computer use with the SDK toolsets](./agents-and-tools-tool-use-browser-use-sdk.md). Use this page as the tool reference, or when you handle the tool calls yourself.
 </Note>
 
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
@@ -1591,7 +1591,7 @@ The browser session, downloads, and uploaded files stay in your environment; the
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Browser and computer use with the SDK toolsets" icon="code" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md">
+  <Card title="Browser and computer use with the SDK toolsets" icon="code" href="./agents-and-tools-tool-use-browser-use-sdk.md">
     Start from a partner's driver, or write your own in Python or TypeScript. The SDK runs the loop and the checks you configure.
   </Card>
 

@@ -1064,6 +1064,14 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `:batch`
 
+          - `speed: :standard | :fast`
+
+            The inference speed mode used for this request.
+
+            - `:standard`
+
+            - `:fast`
+
     - `class MessageBatchErroredResult`
 
       - `type: :errored`

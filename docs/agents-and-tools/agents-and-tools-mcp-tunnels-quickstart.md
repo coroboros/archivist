@@ -113,7 +113,7 @@ A two-container [tunnel stack](./agents-and-tools-mcp-tunnels-concepts.md#compon
       </Tab>
     </Tabs>
 
-    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The tunnel status flips to **Active**.
+    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The **Needs certificate** badge next to the tunnel's name goes away.
   </Step>
 
   <Step title="Write the sample MCP server">

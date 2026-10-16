@@ -62,7 +62,7 @@ Claude Managed Agents is built around four concepts:
   </Step>
 
   <Step title="Create an environment">
-    Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](./managed-agents-self-hosted-sandboxes.md) on your own infrastructure.
+    [Configure where the agent runs](./managed-agents-choosing-an-environment.md): a cloud sandbox, or a [self-hosted sandbox](./managed-agents-self-hosted-sandboxes.md) on your own infrastructure.
   </Step>
 
   <Step title="Start a session">

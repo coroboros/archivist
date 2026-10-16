@@ -1285,6 +1285,16 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `StandardOnly("standard_only")`
 
+      - `Speed? Speed`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
+        - `Standard("standard")`
+
+        - `Fast("fast")`
+
       - `IReadOnlyList<string> StopSequences`
 
         Custom text sequences that will cause the model to stop generating.
@@ -3262,6 +3272,7 @@ BatchCreateParams parameters = new()
                     },
                 },
                 ServiceTier = ServiceTier.Auto,
+                Speed = Speed.Standard,
                 StopSequences =
                 [
                     "string"
@@ -4970,6 +4981,14 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Batch("batch")`
 
+          - `required Speed? Speed`
+
+            The inference speed mode used for this request.
+
+            - `Standard("standard")`
+
+            - `Fast("fast")`
+
     - `class MessageBatchErroredResult`
 
       - `JsonElement Type = "errored"`
@@ -6278,6 +6297,14 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `Batch("batch")`
 
+          - `required Speed? Speed`
+
+            The inference speed mode used for this request.
+
+            - `Standard("standard")`
+
+            - `Fast("fast")`
+
     - `class MessageBatchErroredResult`
 
       - `JsonElement Type = "errored"`
@@ -7403,6 +7430,14 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `Batch("batch")`
 
+        - `required Speed? Speed`
+
+          The inference speed mode used for this request.
+
+          - `Standard("standard")`
+
+          - `Fast("fast")`
+
   - `class MessageBatchErroredResult`
 
     - `JsonElement Type = "errored"`
@@ -8489,3 +8524,11 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
         - `Priority("priority")`
 
         - `Batch("batch")`
+
+      - `required Speed? Speed`
+
+        The inference speed mode used for this request.
+
+        - `Standard("standard")`
+
+        - `Fast("fast")`

@@ -31,7 +31,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -221,7 +221,7 @@ Fetches a tunnel by ID.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -423,7 +423,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -619,7 +619,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -811,7 +811,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -990,7 +990,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -1221,7 +1221,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -1425,7 +1425,7 @@ Fetches a tunnel certificate by ID.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -1639,7 +1639,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 
@@ -1848,7 +1848,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
   - `str`
 

@@ -294,7 +294,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cat data/ca.crt
         ```
 
-        The tunnel's status flips to **Active** once a certificate is registered. See [Add a CA certificate](./agents-and-tools-mcp-tunnels-console.md#add-a-ca-certificate).
+        The **Needs certificate** badge next to the tunnel's name goes away once a certificate is registered. See [Add a CA certificate](./agents-and-tools-mcp-tunnels-console.md#add-a-ca-certificate).
       </Step>
 
       <Step title="Write the proxy config">

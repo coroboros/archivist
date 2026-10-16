@@ -39,7 +39,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
 ### Quick start example
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell, php">
   ```python Python
   import os
 
@@ -159,12 +159,9 @@ To use the OpenAI SDK compatibility feature, you'll need to:
   }
   ```
 
-  ```php PHP
-  <?php
-  // There is no official OpenAI PHP SDK, so no example is shown here.
-  // To use Claude from PHP, use the native Claude API instead:
-  // https://platform.claude.com/docs/en/cli-sdks-libraries/overview
-  ```
+  <CodeGroupItem language="PHP">
+    OpenAI has no official PHP SDK. To use Claude from PHP, use the [Claude SDK for PHP](../general/general-cli-sdks-libraries-sdks-php.md) instead.
+  </CodeGroupItem>
 
   ```ruby Ruby
   require "openai"
@@ -211,7 +208,7 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 
 You can enable [thinking](../build-with-claude/build-with-claude-thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude determining when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's thinking. For full thinking features, including [summarized thinking](../build-with-claude/build-with-claude-thinking.md#summarized-thinking), use the native Claude API.
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell, php">
   ```python Python
   response = client.chat.completions.create(
       model="claude-sonnet-4-6",
@@ -269,12 +266,9 @@ You can enable [thinking](../build-with-claude/build-with-claude-thinking.md) by
   ChatCompletion completion = client.chat().completions().create(params);
   ```
 
-  ```php PHP
-  <?php
-  // There is no official OpenAI PHP SDK, so no example is shown here.
-  // To use Claude from PHP, use the native Claude API instead:
-  // https://platform.claude.com/docs/en/cli-sdks-libraries/overview
-  ```
+  <CodeGroupItem language="PHP">
+    OpenAI has no official PHP SDK. To use Claude from PHP, use the [Claude SDK for PHP](../general/general-cli-sdks-libraries-sdks-php.md) instead.
+  </CodeGroupItem>
 
   ```ruby Ruby
   response = openai.chat.completions.create(

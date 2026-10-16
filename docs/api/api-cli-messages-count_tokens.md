@@ -88,6 +88,12 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   Configuration options for the model's output, such as the output format.
 
+- `--speed: optional "standard" or "fast"`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
 - `--system: optional string or array of TextBlockParam`
 
   System prompt.

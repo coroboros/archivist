@@ -39,7 +39,7 @@ Add Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -118,7 +118,7 @@ List Session Resources
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -296,7 +296,7 @@ Get Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -460,7 +460,7 @@ Update Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -619,7 +619,7 @@ Delete Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 

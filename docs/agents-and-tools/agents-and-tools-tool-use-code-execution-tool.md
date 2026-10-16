@@ -564,18 +564,14 @@ The Python environment can process various file types uploaded through the Files
 
 When Claude saves files to its output directory during code execution (see [How generated files are captured](./agents-and-tools-tool-use-code-execution-tool.md#how-generated-files-are-captured)), each file's ID appears in the code execution tool result, and you can download it with the [Files API](../build-with-claude/build-with-claude-files.md):
 
-<CodeGroup>
-  ```bash cURL
-  # Downloading every generated file means looping over the file IDs in the tool
-  # result, which doesn't translate to a one-off shell command. Use one of the
-  # SDK examples instead.
-  ```
+<CodeGroup exclude="shell">
+  <CodeGroupItem language="cURL">
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../general/general-cli-sdks-libraries-overview.md) for this.
+  </CodeGroupItem>
 
-  ```bash CLI
-  # Extracting every file ID from the tool results and downloading each one
-  # requires a loop, which doesn't translate well to a one-off CLI command.
-  # Use one of the SDK examples instead.
-  ```
+  <CodeGroupItem language="CLI">
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../general/general-cli-sdks-libraries-overview.md) for this.
+  </CodeGroupItem>
 
   ```python Python
   client = Anthropic()

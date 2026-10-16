@@ -3836,6 +3836,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
     - `"standard"`
 
     - `"fast"`
@@ -12100,6 +12102,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
   - `speed?: "standard" | "fast" | null`
 
     The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
 
     - `"standard"`
 
@@ -81592,6 +81596,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `speed?: "standard" | "fast" | null`
 
         The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
 
         - `"standard"`
 

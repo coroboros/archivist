@@ -38,7 +38,7 @@ featureMetadata:
 ---
 
 <Note>
-  **Start with the SDK toolsets:** For `computer_toolset_20260801`, the Python and TypeScript SDKs have a computer toolset class, in beta. Start from [a partner's integration](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md#partner-integrations), or see the [computer toolset](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md#computer-toolset) section of the SDK toolsets page. Use this page as the tool reference, or when you handle the tool calls yourself.
+  **Start with the SDK toolsets:** For `computer_toolset_20260801`, the Python and TypeScript SDKs have a computer toolset class, in beta. Start from [a partner's integration](./agents-and-tools-tool-use-browser-use-sdk.md#partner-integrations), or see the [computer toolset](./agents-and-tools-tool-use-browser-use-sdk.md#computer-toolset) section of the SDK toolsets page. Use this page as the tool reference, or when you handle the tool calls yourself.
 </Note>
 
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
@@ -2236,7 +2236,7 @@ Computer use follows the standard [tool use pricing](./agents-and-tools-tool-use
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Computer toolset in the SDKs" icon="code" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk.md">
+  <Card title="Computer toolset in the SDKs" icon="code" href="./agents-and-tools-tool-use-browser-use-sdk.md">
     Start from a partner's driver, or write your own in Python or TypeScript. The SDK runs the loop and the approval callback you pass.
   </Card>
 

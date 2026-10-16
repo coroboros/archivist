@@ -1267,6 +1267,16 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"standard_only"`
 
+  - `speed?: "standard" | "fast" | null`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
+    - `"standard"`
+
+    - `"fast"`
+
   - `stop_sequences?: Array<string>`
 
     Custom text sequences that will cause the model to stop generating.
@@ -4202,6 +4212,14 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `"batch"`
 
+    - `speed: "standard" | "fast" | null`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 - When `stream` is `true`: `Stream<RawMessageStreamEvent>`
 
   - `interface RawMessageStartEvent`
@@ -4481,7 +4499,8 @@ console.log(message.id);
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -5653,6 +5672,16 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `schema: Record<string, unknown>`
 
         The JSON schema of the format
+
+  - `speed?: "standard" | "fast" | null`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
+    - `"standard"`
+
+    - `"fast"`
 
   - `system?: string | Array<TextBlockParam>`
 
@@ -20977,6 +21006,14 @@ console.log(messageTokensCount.input_tokens);
 
       - `"batch"`
 
+    - `speed: "standard" | "fast" | null`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 ### Message Count Tokens Tool
 
 - `type MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
@@ -26201,6 +26238,14 @@ console.log(messageTokensCount.input_tokens);
 
         - `"batch"`
 
+      - `speed: "standard" | "fast" | null`
+
+        The inference speed mode used for this request.
+
+        - `"standard"`
+
+        - `"fast"`
+
 ### Raw Message Stop Event
 
 - `interface RawMessageStopEvent`
@@ -27329,6 +27374,14 @@ console.log(messageTokensCount.input_tokens);
           - `"priority"`
 
           - `"batch"`
+
+        - `speed: "standard" | "fast" | null`
+
+          The inference speed mode used for this request.
+
+          - `"standard"`
+
+          - `"fast"`
 
   - `interface RawMessageDeltaEvent`
 
@@ -33768,6 +33821,14 @@ console.log(messageTokensCount.input_tokens);
 
     - `"batch"`
 
+  - `speed: "standard" | "fast" | null`
+
+    The inference speed mode used for this request.
+
+    - `"standard"`
+
+    - `"fast"`
+
 ### User Location
 
 - `interface UserLocation`
@@ -37397,6 +37458,16 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         - `"auto"`
 
         - `"standard_only"`
+
+      - `speed?: "standard" | "fast" | null`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
+        - `"standard"`
+
+        - `"fast"`
 
       - `stop_sequences?: Array<string>`
 
@@ -41138,6 +41209,14 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `"priority"`
 
             - `"batch"`
+
+          - `speed: "standard" | "fast" | null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
 
     - `interface MessageBatchErroredResult`
 

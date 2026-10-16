@@ -1170,6 +1170,14 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"batch"`
 
+          - `speed: "standard" | "fast" | null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `interface MessageBatchErroredResult`
 
       - `type: "errored"`

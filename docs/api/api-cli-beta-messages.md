@@ -179,6 +179,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
+
 - `--stop-sequence: optional array of string`
 
   Custom text sequences that will cause the model to stop generating.
@@ -5993,6 +5995,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 - `--speed: optional "standard" or "fast"`
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for which models.
 
 - `--system: optional string or array of BetaTextBlockParam`
 
