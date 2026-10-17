@@ -1,5 +1,55 @@
 # Changelog
 
+## 🤖 v1.5.234 - 17/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-auto-mode-classifier-billing.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-review-local.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-events.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-gallery.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interface.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-reference.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security-guidance.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-zero-data-retention.md`
+
+
 ## 🤖 v1.5.233 - 16/10/2026
 
 File Changes:
