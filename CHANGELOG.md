@@ -1,5 +1,14 @@
 # Changelog
 
+## 🤖 v1.5.236 - 18/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-overview.md`
+
+
 ## 🤖 v1.5.235 - 17/10/2026
 
 File Changes:
