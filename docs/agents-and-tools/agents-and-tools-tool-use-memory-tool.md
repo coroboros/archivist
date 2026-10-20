@@ -348,6 +348,7 @@ Four SDKs provide memory tool helpers that handle the tool interface and the loo
   using Anthropic;
   using Anthropic.Helpers.Beta;
   using Anthropic.Models.Beta.Messages;
+  using Model = Anthropic.Models.Messages.Model;
 
   var client = new AnthropicClient();
 
@@ -357,7 +358,7 @@ Four SDKs provide memory tool helpers that handle the tool interface and the loo
   var runner = client.Beta.Messages.ToolRunner(
       new MessageCreateParams
       {
-          Model = Anthropic.Models.Messages.Model.ClaudeOpus5_5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages =
           [

@@ -485,9 +485,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```bash cURL
   #!/bin/sh
 
-  IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
-  IMAGE_MEDIA_TYPE="image/jpeg"
-  IMAGE_BASE64=$(curl -s "$IMAGE_URL" | base64 | tr -d '\n')
+  IMAGE_BASE64=$(curl -s "https://platform.claude.com/docs/images/vision-example.jpg" | base64 | tr -d '\n')
 
   curl https://api.anthropic.com/v1/messages/count_tokens \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -500,7 +498,7 @@ All [active models](../general/general-models-overview.md) support token countin
       {"role": "user", "content": [
         {"type": "image", "source": {
           "type": "base64",
-          "media_type": "$IMAGE_MEDIA_TYPE",
+          "media_type": "image/jpeg",
           "data": "$IMAGE_BASE64"
         }},
         {"type": "text", "text": "Describe this image"}
@@ -511,8 +509,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 
   ```bash CLI
-  IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
-  curl -s "$IMAGE_URL" -o ./vision-example.jpg
+  curl -s "https://platform.claude.com/docs/images/vision-example.jpg" -o ./vision-example.jpg
 
   ant messages count-tokens <<'YAML'
   model: claude-opus-5-5
@@ -1415,7 +1412,7 @@ Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 share t
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/api-rate-limits.md#rate-limits). If you need higher limits, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page.
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/api-rate-limits.md#rate-limits). If you need higher limits, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console.
 
 | Usage tier | Requests per minute (RPM) |
 | ---------- | ------------------------- |

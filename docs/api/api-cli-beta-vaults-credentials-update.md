@@ -1,21 +1,21 @@
 ---
-title: "Update Credential"
+title: "Update a Credential"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/update"
 category: "api"
 generated: true
 ---
 ---
-title: Update Credential
+title: Update a Credential
 url: https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/update
 ---
 
-# Update Credential
+# Update a Credential
 
 `$ ant beta:vaults:credentials update`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 ## Parameters
 
@@ -29,7 +29,7 @@ Update Credential
 
 - `--auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
-  Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+  New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
 - `--display-name: optional string`
 
@@ -61,7 +61,7 @@ Update Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string`
 
@@ -85,7 +85,7 @@ Update Credential
 
       - `expires_at: optional string`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -95,7 +95,7 @@ Update Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -175,7 +175,9 @@ Update Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 

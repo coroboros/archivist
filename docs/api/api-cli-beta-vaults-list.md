@@ -21,7 +21,7 @@ List Vaults
 
 - `--include-archived: optional boolean` (query parameter)
 
-  Whether to include archived vaults in the results.
+  Whether to include archived vaults in the results. Defaults to `false`.
 
 - `--limit: optional number` (query parameter)
 
@@ -31,7 +31,7 @@ List Vaults
 
 - `--page: optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_vaults` response.
+  The `next_page` value from a previous [List Vaults](./api-beta-vaults-list.md) response, to get the next page. Leave it out to get the first page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -51,13 +51,13 @@ List Vaults
 
   - `data: optional array of BetaManagedAgentsVault`
 
-    List of vaults.
+    The vaults on this page, newest first.
 
     - `type: "vault"`
 
     - `id: string`
 
-      Unique identifier for the vault.
+      The unique ID of the vault (`vlt_...`).
 
     - `archived_at: string`
 

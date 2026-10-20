@@ -1,21 +1,21 @@
 ---
-title: "Delete Vault"
+title: "Delete a Vault"
 source: "https://platform.claude.com/docs/en/api/php/beta/vaults/delete"
 category: "api"
 generated: true
 ---
 ---
-title: Delete Vault
+title: Delete a Vault
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/delete
 ---
 
-# Delete Vault
+# Delete a Vault
 
 `$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeletedVault`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 ## Parameters
 
@@ -41,7 +41,7 @@ Delete Vault
 
   - `string id`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ## Example
 

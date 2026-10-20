@@ -107,9 +107,7 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
     --model claude-opus-5-5 \
     --max-tokens 16000 \
     --thinking '{type: adaptive, display: summarized}' \
-    --message '{role: user, content: "What is the greatest common divisor of 1071 and 462?"}' \
-    --transform content \
-    --format yaml
+    --message '{role: user, content: "What is the greatest common divisor of 1071 and 462?"}'
   ```
 
   ```python Python
@@ -315,7 +313,7 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   ```
 </CodeGroup>
 
-Running the example prints the summarized thinking, then the answer:
+The response carries the summarized thinking, then the answer:
 
 ```text Output wrap
 Thinking: Use Euclidean algorithm.
@@ -479,7 +477,7 @@ Claude Haiku 5.5 also has thinking on by default and accepts `thinking: {type: "
 
 Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, and Claude Mythos Preview reject `thinking: {type: "disabled"}`. Thinking can't be turned off on these models.
 
-To check whether a model accepts `"disabled"` before you send a request, read its `capabilities.thinking.types.disabled.supported` value from the Models API. [Using the Models API](../general/general-models-overview.md#using-the-models-api) describes the field.
+To check whether a model accepts `"disabled"` or `"between_tools"` before you send a request, read its `capabilities.thinking.types.disabled.supported` or `capabilities.thinking.types.between_tools.supported` value from the Models API. [Using the Models API](../general/general-models-overview.md#using-the-models-api) describes both fields.
 
 If your model supports only extended thinking (see the [per-model configuration table](./build-with-claude-thinking-troubleshooting.md#supported-models)), configure it with `type: "enabled"` and a `budget_tokens` value instead. The [Extended thinking](./build-with-claude-extended-thinking.md) page covers that configuration. And if any thinking configuration comes back with a 400 error, [Troubleshooting thinking](./build-with-claude-thinking-troubleshooting.md) matches each error message to its fix.
 

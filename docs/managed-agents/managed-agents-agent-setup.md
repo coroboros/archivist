@@ -44,7 +44,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+  curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -54,10 +54,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
       "model": "claude-opus-5-5",
       "system": "You are a helpful coding agent.",
       "tools": [{"type": "agent_toolset_20260401"}]
-    }')
-
-  AGENT_ID=$(jq -r '.id' <<< "$agent")
-  AGENT_VERSION=$(jq -r '.version' <<< "$agent")
+    }'
   ```
 
   <CodeGroupItem>
@@ -97,7 +94,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
     name: "Coding Assistant",
     model: "claude-opus-5-5",
     system: "You are a helpful coding agent.",
-    tools: [{ type: "agent_toolset_20260401" }],
+    tools: [{ type: "agent_toolset_20260401" }]
   });
   ```
 
@@ -220,11 +217,11 @@ The `default_config` on the toolset shows its default [permission policy](./mana
 
 Like `speed` (csharp, go: `Speed`) and `effort` (csharp, go: `Effort`), `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) is set through the object form of `model` (csharp, go: `Model`): pass `model` (csharp, go: `Model`) as an object and set `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) alongside `id` (csharp, go: `ID`). The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](../manage-claude/manage-claude-data-residency.md) for the workspace-level geo controls and pricing.
 
-The following example pins an agent to US inference and prints the `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) value from the agent's `model` (csharp, go: `Model`) object:
+The following example pins an agent to US inference. The response carries the `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) value in the agent's `model` (csharp, go: `Model`) object:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+  curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -233,9 +230,7 @@ The following example pins an agent to US inference and prints the `inference_ge
       "name": "Geo-pinned assistant",
       "model": {"id": "claude-opus-5-5", "inference_geo": "us"},
       "system": "You are a helpful assistant."
-    }')
-
-  echo "Inference geo: $(jq -r '.model.inference_geo' <<< "$agent")"
+    }'
   ```
 
   <CodeGroupItem>
@@ -274,7 +269,7 @@ The following example pins an agent to US inference and prints the `inference_ge
   const agent = await client.beta.agents.create({
     name: "Geo-pinned assistant",
     model: { id: "claude-opus-5-5", inference_geo: "us" },
-    system: "You are a helpful assistant.",
+    system: "You are a helpful assistant."
   });
 
   console.log(`Inference geo: ${agent.model.inference_geo}`);
@@ -364,7 +359,7 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
+  curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -373,9 +368,6 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
       "version": '"$AGENT_VERSION"',
       "system": "You are a helpful coding agent. Always write tests."
     }'
-  )
-
-  echo "New version: $(jq -r '.version' <<< "$updated_agent")"
   ```
 
   <CodeGroupItem>
@@ -410,7 +402,7 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
   ```typescript TypeScript
   const updatedAgent = await client.beta.agents.update(agent.id, {
     version: agent.version,
-    system: "You are a helpful coding agent. Always write tests.",
+    system: "You are a helpful coding agent. Always write tests."
   });
 
   console.log(`New version: ${updatedAgent.version}`);
@@ -475,16 +467,14 @@ The preceding example supplies `version` from the create response, so the update
 
 <CodeGroup>
   ```bash cURL
-  updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
+  curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
       "description": "Writes and reviews code."
-    }')
-
-  echo "New version: $(jq -r '.version' <<< "$updated_agent")"
+    }'
   ```
 
   ```bash CLI
@@ -504,7 +494,7 @@ The preceding example supplies `version` from the create response, so the update
 
   ```typescript TypeScript
   const unconditionalAgent = await client.beta.agents.update(agent.id, {
-    description: "Writes and reviews code.",
+    description: "Writes and reviews code."
   });
 
   console.log(`New version: ${unconditionalAgent.version}`);
@@ -582,7 +572,7 @@ The following update clears the description, deletes the `team` key from `metada
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  cleared_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
+  curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -591,9 +581,7 @@ The following update clears the description, deletes the `team` key from `metada
       "description": null,
       "metadata": {"team": null},
       "multiagent": {"type": "multiagent_20261001", "workflows": null}
-    }')
-
-  echo "Description: $(jq -r '.description' <<< "$cleared_agent")"
+    }'
   ```
 
   <CodeGroupItem>
@@ -637,7 +625,7 @@ The following update clears the description, deletes the `team` key from `metada
   const clearedAgent = await client.beta.agents.update(agent.id, {
     description: null,
     metadata: { team: null },
-    multiagent: { type: "multiagent_20261001", workflows: null },
+    multiagent: { type: "multiagent_20261001", workflows: null }
   });
 
   console.log(`Description: ${clearedAgent.description}`);
@@ -737,8 +725,7 @@ Fetch the full version history to track how an agent has changed over time. Resu
   curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID/versions" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    | jq -r '.data[] | "Version \(.version): \(.updated_at)"'
+    -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
   ```bash CLI
@@ -800,12 +787,10 @@ Archiving makes the agent read-only and cannot be undone. Existing sessions cont
 
 <CodeGroup>
   ```bash cURL
-  archived=$(curl -fsSL -X POST "https://api.anthropic.com/v1/agents/$AGENT_ID/archive" \
+  curl -fsSL -X POST "https://api.anthropic.com/v1/agents/$AGENT_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01")
-
-  echo "Archived at: $(jq -r '.archived_at' <<< "$archived")"
+    -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
   ```bash CLI

@@ -1,21 +1,21 @@
 ---
-title: "Update Vault"
+title: "Update a Vault"
 source: "https://platform.claude.com/docs/en/api/php/beta/vaults/update"
 category: "api"
 generated: true
 ---
 ---
-title: Update Vault
+title: Update a Vault
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/update
 ---
 
-# Update Vault
+# Update a Vault
 
 `$client->beta->vaults->update(string vaultID, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ## Parameters
 
@@ -49,7 +49,7 @@ Update Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 

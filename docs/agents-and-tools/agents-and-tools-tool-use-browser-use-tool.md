@@ -347,7 +347,11 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
       return [
           {
               "type": "image",
-              "source": {"type": "base64", "media_type": "image/png", "data": PLACEHOLDER_PNG},
+              "source": {
+                  "type": "base64",
+                  "media_type": "image/png",
+                  "data": PLACEHOLDER_PNG,
+              },
           }
       ]
 
@@ -369,7 +373,8 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
 
   ```typescript TypeScript
   // Placeholder image data; a real executor captures the viewport as PNG bytes
-  const PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+  const PLACEHOLDER_PNG =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
   function navigate(url: string): string {
     return `navigated to ${url}`;
@@ -399,18 +404,17 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
         source: {
           type: "base64",
           media_type: "image/png",
-          data: PLACEHOLDER_PNG,
-        },
-      },
+          data: PLACEHOLDER_PNG
+        }
+      }
     ];
   }
 
   function handleBrowserAction(
     action: string,
-    input: unknown,
+    input: unknown
   ): string | Anthropic.ImageBlockParam[] {
-    const params: object =
-      typeof input === "object" && input !== null ? input : {};
+    const params: object = typeof input === "object" && input !== null ? input : {};
     if (action === "navigate" && "url" in params) {
       return navigate(String(params.url));
     } else if (action === "read_page") {
@@ -418,9 +422,7 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
     } else if (action === "left_click" && "target" in params) {
       // target is an element reference from read_page or a viewport coordinate
       const target: object =
-        typeof params.target === "object" && params.target !== null
-          ? params.target
-          : {};
+        typeof params.target === "object" && params.target !== null ? params.target : {};
       if ("type" in target && target.type === "ref" && "ref" in target) {
         return clickElement(String(target.ref));
       } else if ("x" in target && "y" in target) {
@@ -562,7 +564,6 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
   	// Reached when a member's input is missing a field or a field has the wrong type
   	return nil, fmt.Errorf("invalid input for %s", action)
   }
-
   ```
 
   ```java Java
@@ -787,20 +788,18 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   function browserResult(
     toolUseId: string,
     content: string | Anthropic.ImageBlockParam[],
-    isError?: boolean,
+    isError?: boolean
   ): Anthropic.ToolResultBlockParam {
     return {
       type: "tool_result",
       tool_use_id: toolUseId,
       toolset_name: "browser",
       content,
-      is_error: isError,
+      is_error: isError
     };
   }
 
-  function processToolCalls(
-    response: Anthropic.Message,
-  ): Anthropic.ToolResultBlockParam[] {
+  function processToolCalls(response: Anthropic.Message): Anthropic.ToolResultBlockParam[] {
     const toolResults: Anthropic.ToolResultBlockParam[] = [];
     let failed = false;
     for (const block of response.content) {
@@ -943,7 +942,6 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   	}
   	return toolResults
   }
-
   ```
 
   ```java Java

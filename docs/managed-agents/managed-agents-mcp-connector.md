@@ -33,7 +33,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` (c
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
+  curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -53,8 +53,6 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` (c
         {"type": "mcp_toolset", "mcp_server_name": "github"}
       ]
     }'
-  )
-  agent_id=$(jq -r '.id' <<<"$agent_response")
   ```
 
   <CodeGroupItem>
@@ -106,13 +104,13 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` (c
       {
         type: "url",
         name: "github",
-        url: "https://api.githubcopilot.com/mcp/",
-      },
+        url: "https://api.githubcopilot.com/mcp/"
+      }
     ],
     tools: [
       { type: "agent_toolset_20260401" },
-      { type: "mcp_toolset", mcp_server_name: "github" },
-    ],
+      { type: "mcp_toolset", mcp_server_name: "github" }
+    ]
   });
   ```
 
@@ -299,7 +297,7 @@ With a `limited` [environment](./managed-agents-environments.md#networking), ses
 
 <CodeGroup>
   ```bash cURL
-  session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+  curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -309,16 +307,13 @@ With a `limited` [environment](./managed-agents-environments.md#networking), ses
       "environment_id": "'"$environment_id"'",
       "vault_ids": ["'"$vault_id"'"]
     }'
-  )
-  session_id=$(jq -r '.id' <<<"$session_response")
   ```
 
   ```bash CLI
-  SESSION_ID=$(ant beta:sessions create \
+  ant beta:sessions create \
     --agent "$AGENT_ID" \
     --environment-id "$ENVIRONMENT_ID" \
-    --vault-id "$VAULT_ID" \
-    --transform id --raw-output)
+    --vault-id "$VAULT_ID"
   ```
 
   ```python Python
@@ -333,7 +328,7 @@ With a `limited` [environment](./managed-agents-environments.md#networking), ses
   const session = await client.beta.sessions.create({
     agent: agent.id,
     environment_id: environment.id,
-    vault_ids: [vault.id],
+    vault_ids: [vault.id]
   });
   ```
 

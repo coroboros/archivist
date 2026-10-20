@@ -150,7 +150,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       ```
 
       ```php PHP
-      $client = new \Anthropic\Client();
+      $client = new Client();
 
       $environment = $client->beta->environments->create(
           name: 'self-hosted',
@@ -308,7 +308,8 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 
     <CodeGroup>
       ```bash cURL
-      SESSION_ID=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+      # Create a session
+      curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -316,9 +317,9 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         -d '{
           "agent": "'"$AGENT_ID"'",
           "environment_id": "'"$ANTHROPIC_ENVIRONMENT_ID"'"
-        }' | jq -er '.id'
-      )
+        }'
 
+      # Send it a task: SESSION_ID is the id from the create response
       curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -340,11 +341,12 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       ```
 
       ```bash CLI
-      SESSION_ID=$(ant beta:sessions create \
+      # Create a session
+      ant beta:sessions create \
         --agent "$AGENT_ID" \
-        --environment-id "$ANTHROPIC_ENVIRONMENT_ID" \
-        --transform id --raw-output)
+        --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
 
+      # Send it a task: SESSION_ID is the id from the create response
       ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
       events:
         - type: user.message

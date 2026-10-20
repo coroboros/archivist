@@ -75,8 +75,8 @@ This page covers `type: cloud` environments. To run sandboxes on your own infras
     name: "python-dev",
     config: {
       type: "cloud",
-      networking: { type: "limited", allow_package_managers: true },
-    },
+      networking: { type: "limited", allow_package_managers: true }
+    }
   });
 
   console.log(`Environment ID: ${environment.id}`);
@@ -187,7 +187,7 @@ Pass the environment ID as a string when [creating a session](./managed-agents-s
   ```typescript TypeScript
   const session = await client.beta.sessions.create({
     agent: agent.id,
-    environment_id: environment.id,
+    environment_id: environment.id
   });
   ```
 

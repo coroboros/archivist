@@ -108,7 +108,7 @@ See [Tools](./managed-agents-tools.md) for the full list and configuration optio
 
 To get started, you need:
 
-1. A [Claude API key](https://platform.claude.com/settings/keys)
+1. A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 

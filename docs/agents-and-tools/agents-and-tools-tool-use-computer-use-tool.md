@@ -516,7 +516,7 @@ The core of computer use is the "agent loop": a cycle where Claude requests tool
   async function samplingLoop(
     model: string,
     messages: Anthropic.MessageParam[],
-    maxIterations = 10,
+    maxIterations = 10
   ): Promise<Anthropic.MessageParam[]> {
     // Run the computer-use agent loop until Claude stops requesting tools
     // or the iteration limit is reached.
@@ -525,7 +525,7 @@ The core of computer use is the "agent loop": a cycle where Claude requests tool
         model,
         max_tokens: 4096,
         messages,
-        tools,
+        tools
       });
 
       // Add Claude's response to the conversation history
@@ -621,7 +621,6 @@ The core of computer use is the "agent loop": a cycle where Claude requests tool
   	}
   	return messages, nil
   }
-
   ```
 
   ```java Java
@@ -942,7 +941,11 @@ The computer use tool is implemented as a schema-less tool. When using this tool
           return [
               {
                   "type": "image",
-                  "source": {"type": "base64", "media_type": "image/png", "data": PLACEHOLDER_PNG},
+                  "source": {
+                      "type": "base64",
+                      "media_type": "image/png",
+                      "data": PLACEHOLDER_PNG,
+                  },
               }
           ]
 
@@ -973,7 +976,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
       ```typescript TypeScript
       // Placeholder image data; a real executor captures the screen as PNG bytes
-      const PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+      const PLACEHOLDER_PNG =
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
       function captureScreenshot(): Anthropic.ImageBlockParam[] {
         // screenshot answers with an image block rather than text
@@ -983,9 +987,9 @@ The computer use tool is implemented as a schema-less tool. When using this tool
             source: {
               type: "base64",
               media_type: "image/png",
-              data: PLACEHOLDER_PNG,
-            },
-          },
+              data: PLACEHOLDER_PNG
+            }
+          }
         ];
       }
 
@@ -1003,10 +1007,9 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
       function handleComputerAction(
         action: string,
-        input: unknown,
+        input: unknown
       ): string | Anthropic.ImageBlockParam[] {
-        const params: object =
-          typeof input === "object" && input !== null ? input : {};
+        const params: object = typeof input === "object" && input !== null ? input : {};
         switch (action) {
           case "screenshot":
             return captureScreenshot();
@@ -1131,7 +1134,6 @@ The computer use tool is implemented as a schema-less tool. When using this tool
       	// Reached when a member's input is missing a field or a field has the wrong type
       	return nil, fmt.Errorf("invalid input for %s", action)
       }
-
       ```
 
       ```java Java
@@ -1312,26 +1314,23 @@ The computer use tool is implemented as a schema-less tool. When using this tool
       ```
 
       ```typescript TypeScript
-      const HALT_TEXT =
-        "Not executed: an earlier computer action in this turn failed.";
+      const HALT_TEXT = "Not executed: an earlier computer action in this turn failed.";
 
       function computerResult(
         toolUseId: string,
         content: string | Anthropic.ImageBlockParam[],
-        isError?: boolean,
+        isError?: boolean
       ): Anthropic.ToolResultBlockParam {
         return {
           type: "tool_result",
           tool_use_id: toolUseId,
           toolset_name: "computer",
           content,
-          is_error: isError,
+          is_error: isError
         };
       }
 
-      function processToolCalls(
-        response: Anthropic.Message,
-      ): Anthropic.ToolResultBlockParam[] {
+      function processToolCalls(response: Anthropic.Message): Anthropic.ToolResultBlockParam[] {
         const toolResults: Anthropic.ToolResultBlockParam[] = [];
         let failed = false;
         for (const block of response.content) {
@@ -1472,7 +1471,6 @@ The computer use tool is implemented as a schema-less tool. When using this tool
       	}
       	return toolResults
       }
-
       ```
 
       ```java Java

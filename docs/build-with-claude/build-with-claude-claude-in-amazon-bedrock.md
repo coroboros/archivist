@@ -357,7 +357,15 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 Use the latest version of Claude Code with Claude in Amazon Bedrock; run `claude update` to upgrade.
 
 <Tip>
-  Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](../agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md#migrating-to-a-newer-claude-model).
+  Upgrading to a newer Claude model? The [Claude API skill](../agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md#migrating-to-a-newer-claude-model) in Claude Code applies model ID swaps and breaking parameter changes across your code base:
+
+  Let Claude Code migrate your code for you
+
+  ```text
+  /claude-api migrate this project to the latest Claude Opus model
+  ```
+
+  The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform.
 </Tip>
 
 ## Feature support
@@ -371,10 +379,10 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Thinking](./build-with-claude-thinking.md)
 * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
 * [Citations](./build-with-claude-citations.md)
+* [Structured outputs](./build-with-claude-structured-outputs.md)
 
 ### Features not supported
 
-* [Structured outputs](./build-with-claude-structured-outputs.md)
 * Input sources (URL sources for images and documents, Files API)
 * Server-side tools (code execution, web search, web fetch, advisor)
 * Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)

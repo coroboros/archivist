@@ -1,21 +1,21 @@
 ---
-title: "Delete Credential"
+title: "Delete a Credential"
 source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/delete"
 category: "api"
 generated: true
 ---
 ---
-title: Delete Credential
+title: Delete a Credential
 url: https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/delete
 ---
 
-# Delete Credential
+# Delete a Credential
 
 `BetaManagedAgentsDeletedCredential beta().vaults().credentials().delete(params, requestOptions = RequestOptions.none())`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 ## Parameters
 
@@ -151,7 +151,7 @@ Delete Credential
 
   - `String id`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 ## Example
 

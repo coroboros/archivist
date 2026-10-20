@@ -1,21 +1,21 @@
 ---
-title: "Update Vault"
+title: "Update a Vault"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/update"
 category: "api"
 generated: true
 ---
 ---
-title: Update Vault
+title: Update a Vault
 url: https://platform.claude.com/docs/en/api/cli/beta/vaults/update
 ---
 
-# Update Vault
+# Update a Vault
 
 `$ ant beta:vaults update`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ## Parameters
 
@@ -53,7 +53,7 @@ Update Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 

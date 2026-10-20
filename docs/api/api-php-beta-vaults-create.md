@@ -1,21 +1,21 @@
 ---
-title: "Create Vault"
+title: "Create a Vault"
 source: "https://platform.claude.com/docs/en/api/php/beta/vaults/create"
 category: "api"
 generated: true
 ---
 ---
-title: Create Vault
+title: Create a Vault
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/create
 ---
 
-# Create Vault
+# Create a Vault
 
 `$client->beta->vaults->create(string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 ## Parameters
 
@@ -45,7 +45,7 @@ Create Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 

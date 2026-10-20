@@ -1,21 +1,21 @@
 ---
-title: "Update Vault"
+title: "Update a Vault"
 source: "https://platform.claude.com/docs/en/api/java/beta/vaults/update"
 category: "api"
 generated: true
 ---
 ---
-title: Update Vault
+title: Update a Vault
 url: https://platform.claude.com/docs/en/api/java/beta/vaults/update
 ---
 
-# Update Vault
+# Update a Vault
 
 `BetaManagedAgentsVault beta().vaults().update(params = VaultUpdateParams.none(), requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ## Parameters
 
@@ -157,7 +157,7 @@ Update Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 

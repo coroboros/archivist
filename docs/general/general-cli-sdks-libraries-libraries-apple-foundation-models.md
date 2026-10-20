@@ -153,7 +153,7 @@ ClaudeLanguageModel(
 )
 ```
 
-Your proxy receives standard [Messages API](../api/api-messages-create.md) requests, attaches the `x-api-key` header, and forwards them to `https://api.anthropic.com`.
+Your proxy receives standard [Messages API](../api/api-messages-create.md) requests, attaches your API key as `Authorization: Bearer <key>`, and forwards them to `https://api.anthropic.com`.
 
 ### API key (development)
 

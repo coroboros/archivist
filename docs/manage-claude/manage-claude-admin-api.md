@@ -1,5 +1,5 @@
 ---
-title: "Authentication"
+title: "Availability"
 source: "https://platform.claude.com/docs/en/manage-claude/admin-api"
 category: "manage-claude"
 generated: true
@@ -10,33 +10,31 @@ url: https://platform.claude.com/docs/en/manage-claude/admin-api
 description: Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key, an `org:admin` OAuth token, or a personal or service account key.
 ---
 
-<Tip>
-  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
-</Tip>
-
 The [Admin API](../api/api-organization.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
 
-<Check>
-  **The Admin API requires special access**
+## Availability
 
-  The Admin API accepts three credentials:
+The Admin API is unavailable for individual accounts. To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 
-  * An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](./manage-claude-admin-api-keys.md).
-  * An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](./manage-claude-admin-api.md#oauth-bearer-token).
-  * A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](./manage-claude-authentication.md#key-types).
-</Check>
+Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](./manage-claude-spend-limits-api.md). The [Plugins API](./manage-claude-plugins-api.md), also Enterprise-only, is in beta. See [User management](./manage-claude-user-management.md).
 
-<Note>
-  **Claude Enterprise:** Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](./manage-claude-spend-limits-api.md). See [User management](./manage-claude-user-management.md).
-</Note>
+On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), only these Admin API endpoints are available:
 
-<Note>
-  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](./manage-claude-cmek-claude-platform-on-aws.md); there is no validate endpoint, because keys are validated when attached to a workspace), and the [telemetry destination endpoints](../api/api-claude-platform-on-aws-iam-actions.md#telemetry-destinations) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md).
-</Note>
+* The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
+* The external key endpoints, for [CMEK](./manage-claude-cmek-claude-platform-on-aws.md): register, get, list, update, and delete on `/v1/organizations/external_keys`. There is no validate endpoint, because keys are validated when attached to a workspace.
+* The [telemetry destination endpoints](../api/api-claude-platform-on-aws-iam-actions.md#telemetry-destinations).
+
+Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't available on Claude Platform on AWS.
 
 ## Authentication
 
-Authenticate with any of the three credentials. An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](./manage-claude-admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
+The Admin API accepts any of these three credentials:
+
+* An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](./manage-claude-admin-api-keys.md).
+* An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](./manage-claude-admin-api.md#oauth-bearer-token).
+* A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](./manage-claude-authentication.md#key-types).
+
+An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](./manage-claude-admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
 
 The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/api-organization.md).
 

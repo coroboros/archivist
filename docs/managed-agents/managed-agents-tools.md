@@ -47,7 +47,7 @@ The following example enables the toolset and disables `web_fetch`:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+  curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -64,7 +64,6 @@ The following example enables the toolset and disables `web_fetch`:
         }
       ]
     }'
-  )
   ```
 
   <CodeGroupItem>
@@ -260,7 +259,7 @@ The following example creates an agent with the built-in toolset and one custom 
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+  curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -286,7 +285,6 @@ The following example creates an agent with the built-in toolset and one custom 
         }
       ]
     }'
-  )
   ```
 
   <CodeGroupItem>

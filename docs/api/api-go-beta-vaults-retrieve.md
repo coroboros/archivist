@@ -1,21 +1,21 @@
 ---
-title: "Get Vault"
+title: "Retrieve a Vault"
 source: "https://platform.claude.com/docs/en/api/go/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
 ---
-title: Get Vault
+title: Retrieve a Vault
 url: https://platform.claude.com/docs/en/api/go/beta/vaults/retrieve
 ---
 
-# Get Vault
+# Retrieve a Vault
 
 `client.Beta.Vaults.Get(ctx, vaultID, query) (*BetaManagedAgentsVault, error)`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 ## Parameters
 
@@ -147,7 +147,7 @@ Get Vault
 
   - `ID string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `ArchivedAt Time`
 

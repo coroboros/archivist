@@ -1,21 +1,21 @@
 ---
-title: "Get Vault"
+title: "Retrieve a Vault"
 source: "https://platform.claude.com/docs/en/api/java/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
 ---
-title: Get Vault
+title: Retrieve a Vault
 url: https://platform.claude.com/docs/en/api/java/beta/vaults/retrieve
 ---
 
-# Get Vault
+# Retrieve a Vault
 
 `BetaManagedAgentsVault beta().vaults().retrieve(params = VaultRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 ## Parameters
 
@@ -147,7 +147,7 @@ Get Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 

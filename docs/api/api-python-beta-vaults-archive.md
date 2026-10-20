@@ -1,21 +1,21 @@
 ---
-title: "Archive Vault"
+title: "Archive a Vault"
 source: "https://platform.claude.com/docs/en/api/python/beta/vaults/archive"
 category: "api"
 generated: true
 ---
 ---
-title: Archive Vault
+title: Archive a Vault
 url: https://platform.claude.com/docs/en/api/python/beta/vaults/archive
 ---
 
-# Archive Vault
+# Archive a Vault
 
 `beta.vaults.archive(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 ## Parameters
 
@@ -147,7 +147,7 @@ Archive Vault
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 

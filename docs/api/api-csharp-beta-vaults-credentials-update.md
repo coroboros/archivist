@@ -1,21 +1,21 @@
 ---
-title: "Update Credential"
+title: "Update a Credential"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/update"
 category: "api"
 generated: true
 ---
 ---
-title: Update Credential
+title: Update a Credential
 url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/update
 ---
 
-# Update Credential
+# Update a Credential
 
 `BetaManagedAgentsCredential Beta.Vaults.Credentials.Update(parameters, cancellationToken = default)`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 ## Parameters
 
@@ -31,7 +31,7 @@ Update Credential
 
   - `Auth auth`
 
-    Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+    New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
     - `class BetaManagedAgentsMcpOAuthUpdateParams`
 
@@ -41,13 +41,17 @@ Update Credential
 
       - `string? AccessToken`
 
-        Updated OAuth access token.
+        The new OAuth access token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
       - `DateTimeOffset? ExpiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
+
+        If you send a new `access_token`, send its `expires_at` too, or the new token keeps the old expiry.
+
+        Must be in the future.
 
         format: date-time
 
@@ -57,13 +61,13 @@ Update Credential
 
         - `string? RefreshToken`
 
-          Updated OAuth refresh token.
+          The new OAuth refresh token to replace the stored one.
 
           minLength: 1, maxLength: 8192
 
         - `string? Scope`
 
-          Updated OAuth scope for the refresh request.
+          The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
           maxLength: 8192
 
@@ -77,7 +81,9 @@ Update Credential
 
             - `string? ClientSecret`
 
-              Updated OAuth client secret.
+              A new OAuth client secret to replace the stored one.
+
+              The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
               minLength: 1, maxLength: 512
 
@@ -89,7 +95,9 @@ Update Credential
 
             - `string? ClientSecret`
 
-              Updated OAuth client secret.
+              A new OAuth client secret to replace the stored one.
+
+              The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
               minLength: 1, maxLength: 512
 
@@ -101,7 +109,7 @@ Update Credential
 
       - `string? Token`
 
-        Updated static bearer token value.
+        The new static bearer token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
@@ -125,7 +133,7 @@ Update Credential
 
       - `BetaManagedAgentsCredentialNetworkingParams? Networking`
 
-        Updated networking scope. Full replacement.
+        The new networking scope, which replaces the stored one as a whole.
 
         - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
@@ -141,11 +149,13 @@ Update Credential
 
           - `required IReadOnlyList<string> AllowedHosts`
 
-            Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
       - `string? SecretValue`
 
-        Updated secret value.
+        The new secret value to replace the stored one.
 
         minLength: 1, maxLength: 4096
 
@@ -281,7 +291,7 @@ Update Credential
 
   - `required string ID`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -305,7 +315,7 @@ Update Credential
 
       - `DateTimeOffset? ExpiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -315,7 +325,7 @@ Update Credential
 
         - `required string ClientID`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `required string TokenEndpoint`
 
@@ -395,7 +405,9 @@ Update Credential
 
           - `required IReadOnlyList<string> AllowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `required string SecretName`
 

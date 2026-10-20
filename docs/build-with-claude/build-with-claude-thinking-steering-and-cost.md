@@ -577,7 +577,7 @@ The following example demonstrates the invalidation with a multi-turn script you
               ))
               .addAssistantMessageOfBlockParams(response1.content().stream()
                   .map(block -> block.toParam())
-                  .collect(java.util.stream.Collectors.toList()))
+                  .collect(Collectors.toList()))
               .addUserMessage("Analyze the characters in this passage.")
               .build();
 
@@ -604,11 +604,11 @@ The following example demonstrates the invalidation with a multi-turn script you
               ))
               .addAssistantMessageOfBlockParams(response1.content().stream()
                   .map(block -> block.toParam())
-                  .collect(java.util.stream.Collectors.toList()))
+                  .collect(Collectors.toList()))
               .addUserMessage("Analyze the characters in this passage.")
               .addAssistantMessageOfBlockParams(response2.content().stream()
                   .map(block -> block.toParam())
-                  .collect(java.util.stream.Collectors.toList()))
+                  .collect(Collectors.toList()))
               .addUserMessage("Analyze the setting in this passage.")
               .build();
 

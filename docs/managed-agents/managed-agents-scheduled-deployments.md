@@ -109,14 +109,14 @@ When creating a deployment, you pass the [session configurations](./managed-agen
     initial_events: [
       {
         type: "user.message",
-        content: [{ type: "text", text: "Run the weekly compliance scan." }],
-      },
+        content: [{ type: "text", text: "Run the weekly compliance scan." }]
+      }
     ],
     schedule: {
       type: "cron",
       expression: "0 20 * * 5",
-      timezone: "America/New_York",
-    },
+      timezone: "America/New_York"
+    }
   });
   ```
 
@@ -341,8 +341,8 @@ The following example sets a budget on an existing deployment:
   const updatedDeployment = await client.beta.deployments.update(deployment.id, {
     budget: {
       type: "limit",
-      max_list_cost: { amount: "2000", currency: "USD" },
-    },
+      max_list_cost: { amount: "2000", currency: "USD" }
+    }
   });
   console.log(updatedDeployment.budget?.max_list_cost.amount); // 2000
   ```
@@ -443,7 +443,7 @@ List all deployment runs for a deployment as follows:
 
   ```typescript TypeScript
   for await (const run of client.beta.deploymentRuns.list({
-    deployment_id: deployment.id,
+    deployment_id: deployment.id
   })) {
     console.log(run.created_at, run.session_id ?? run.error?.type);
   }
@@ -534,7 +534,7 @@ You can additionally filter on deployment runs with errors:
   ```typescript TypeScript
   for await (const run of client.beta.deploymentRuns.list({
     deployment_id: deployment.id,
-    has_error: true,
+    has_error: true
   })) {
     console.log(run.created_at, run.error?.type, run.error?.message);
   }

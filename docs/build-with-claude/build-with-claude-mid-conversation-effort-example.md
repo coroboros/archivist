@@ -46,7 +46,9 @@ The example is a single file. The constants control the effort level, the fan-ou
   MODEL = "claude-opus-5-5"
   EFFORT = "xhigh"
 
-  SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
+  SYSTEM_PROMPT = (
+      "You are a helpful general-purpose agent. Answer the user's request directly."
+  )
 
   REQUEST_TIMEOUT_SECONDS = 600
   BASH_TIMEOUT_SECONDS = 60
@@ -168,7 +170,6 @@ The example is a single file. The constants control the effort level, the fan-ou
   	}
   	return normal
   }
-
   ```
 
   ```java Java
@@ -289,9 +290,7 @@ The reminders are short on purpose. They flip the mode and point at the tool des
       "description for standing consent, granularity guidance, and quality patterns. Work solo "
       "only on conversational or trivial turns."
   )
-  MODE_REFRESH = (
-      "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
-  )
+  MODE_REFRESH = "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
   MODE_EXIT = (
       "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again."
   )
@@ -333,7 +332,6 @@ The reminders are short on purpose. They flip the mode and point at the tool des
   	modeRefresh = "Orchestration mode is still on. Use the Workflow tool; see its standing consent section."
   	modeExit    = "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again."
   )
-
   ```
 
   ```java Java
@@ -428,18 +426,27 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
       "input_schema": {
           "type": "object",
           "properties": {
-              "summary": {"type": "string", "description": "Two or three sentences of synthesis"},
+              "summary": {
+                  "type": "string",
+                  "description": "Two or three sentences of synthesis",
+              },
               "findings": {
                   "type": "array",
                   "items": {
                       "type": "object",
                       "properties": {
-                          "claim": {"type": "string", "description": "The finding, one sentence"},
+                          "claim": {
+                              "type": "string",
+                              "description": "The finding, one sentence",
+                          },
                           "evidence": {
                               "type": "string",
                               "description": "How it was verified (file, line, or command output)",
                           },
-                          "severity": {"type": "string", "enum": ["high", "medium", "low", "info"]},
+                          "severity": {
+                              "type": "string",
+                              "enum": ["high", "medium", "low", "info"],
+                          },
                       },
                       "required": ["claim", "evidence", "severity"],
                   },
@@ -471,7 +478,7 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
         "opt-in is standing. Author and run a workflow for every substantive task by default, " +
         "and lean toward verifying findings adversarially. Work solo only on conversational " +
         "turns or trivial mechanical edits. When a system message says the mode is off, " +
-        "revert to the opt-in rule above.",
+        "revert to the opt-in rule above."
     ].join("\n\n"),
     input_schema: {
       type: "object",
@@ -479,11 +486,11 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
         subtasks: {
           type: "array",
           items: { type: "string" },
-          description: "Independent subtask prompts to run as parallel agents",
-        },
+          description: "Independent subtask prompts to run as parallel agents"
+        }
       },
-      required: ["subtasks"],
-    },
+      required: ["subtasks"]
+    }
   };
 
   const BASH_TOOL: Anthropic.ToolBash20250124 = { type: "bash_20250124", name: "bash" };
@@ -505,16 +512,16 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
               claim: { type: "string", description: "The finding, one sentence" },
               evidence: {
                 type: "string",
-                description: "How it was verified (file, line, or command output)",
+                description: "How it was verified (file, line, or command output)"
               },
-              severity: { type: "string", enum: ["high", "medium", "low", "info"] },
+              severity: { type: "string", enum: ["high", "medium", "low", "info"] }
             },
-            required: ["claim", "evidence", "severity"],
-          },
-        },
+            required: ["claim", "evidence", "severity"]
+          }
+        }
       },
-      required: ["summary", "findings"],
-    },
+      required: ["summary", "findings"]
+    }
   };
   ```
 
@@ -657,7 +664,6 @@ The Workflow tool carries the real behavioral contract: the opt-in rule, the sta
   		},
   	},
   }
-
   ```
 
   ```java Java
@@ -902,7 +908,10 @@ The bash handler runs the requested command with a timeout, captures combined st
           return f"command timed out after {BASH_TIMEOUT_SECONDS}s", True
       output = (proc.stdout + proc.stderr).strip() or "(no output)"
       if len(output) > TOOL_RESULT_MAX_CHARS:
-          output = output[:TOOL_RESULT_MAX_CHARS] + f"\n(truncated at {TOOL_RESULT_MAX_CHARS} chars)"
+          output = (
+              output[:TOOL_RESULT_MAX_CHARS]
+              + f"\n(truncated at {TOOL_RESULT_MAX_CHARS} chars)"
+          )
       if proc.returncode != 0:
           output = f"(exit code {proc.returncode})\n{output}"
       return output, proc.returncode != 0
@@ -933,7 +942,7 @@ The bash handler runs the requested command with a timeout, captures combined st
       return n if n < 2 else fib(n - 1) + fib(n - 2)
 
   print(fib(10))
-  `,
+  `
     );
   }
 
@@ -944,7 +953,7 @@ The bash handler runs the requested command with a timeout, captures combined st
       shell: "/bin/bash",
       cwd: WORK_DIR,
       timeout: BASH_TIMEOUT_SECONDS * 1000,
-      maxBuffer: 16 * 1024 * 1024,
+      maxBuffer: 16 * 1024 * 1024
     };
     return new Promise((resolve) => {
       exec(command, options, (error, stdout, stderr) => {
@@ -1138,7 +1147,6 @@ The bash handler runs the requested command with a timeout, captures combined st
   	}
   	return runBash(ctx, input.Command)
   }
-
   ```
 
   ```java Java
@@ -1432,7 +1440,9 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
           if response.stop_reason == "pause_turn":
               continue
           if response.stop_reason != "tool_use":
-              text = "".join(block.text for block in response.content if block.type == "text")
+              text = "".join(
+                  block.text for block in response.content if block.type == "text"
+              )
               if response.stop_reason == "max_tokens":
                   text += "\n\n(warning: subagent response was truncated at max_tokens)"
               return text
@@ -1481,9 +1491,9 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
             system: subagentSystem,
             output_config: { effort: EFFORT },
             tools: [BASH_TOOL, REPORT_TOOL],
-            messages,
+            messages
           },
-          { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) },
+          { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) }
         )
         .finalMessage();
       messages.push({ role: "assistant", content: response.content });
@@ -1521,7 +1531,7 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
           type: "tool_result",
           tool_use_id: block.id,
           content: outcome.output,
-          is_error: outcome.isError,
+          is_error: outcome.isError
         });
       }
       if (report !== null) {
@@ -1698,7 +1708,6 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
   	}
   	return "(subagent hit the turn limit before finishing)", nil
   }
-
   ```
 
   ```java Java
@@ -1982,7 +1991,8 @@ A fan-out that spawns dozens of subagents is expensive to restart from scratch. 
               with open(temp, "w") as file:
                   json.dump(journal, file)
               os.replace(temp, JOURNAL_PATH)  # atomic on POSIX and Windows
-      except OSError as error:  # the journal is best-effort; never discard a computed result
+      # A failed journal write must not lose the computed result
+      except OSError as error:
           print(f"[journal] write failed: {error}", file=sys.stderr)
       return result
   ```
@@ -2119,7 +2129,6 @@ A fan-out that spawns dozens of subagents is expensive to restart from scratch. 
   	}
   	return result, nil
   }
-
   ```
 
   ```java Java
@@ -2285,13 +2294,16 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
       def run_one(prompt: str) -> str:
           try:
               return journaled(prompt, lambda: run_subagent(model, prompt))
-          except Exception as error:  # isolation boundary: one bad subagent should not end the run
+          # One failed subagent must not end the run
+          except Exception as error:
               return f"(subagent failed: {type(error).__name__}: {error})"
 
       with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_CONCURRENT) as pool:
           results = list(pool.map(run_one, subtasks))
           print(f"[workflow] verifying {len(results)} results", file=sys.stderr)
-          verify_prompts = [verify_prompt_for(task, result) for task, result in zip(subtasks, results)]
+          verify_prompts = [
+              verify_prompt_for(task, result) for task, result in zip(subtasks, results)
+          ]
           verdicts = list(pool.map(run_one, verify_prompts))
 
       joined = "\n\n".join(
@@ -2300,7 +2312,9 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
 
   [verify {index + 1}]
   {verdict}"""
-          for index, (task, result, verdict) in enumerate(zip(subtasks, results, verdicts))
+          for index, (task, result, verdict) in enumerate(
+              zip(subtasks, results, verdicts)
+          )
       )
       if dropped > 0:
           joined = (
@@ -2326,7 +2340,7 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
       return [];
     }
     return value
-      .filter((task): task is string => typeof task === "string")
+      .filter((task) => typeof task === "string")
       .map((task) => task.trim())
       .filter((task) => task.length > 0);
   }
@@ -2350,7 +2364,7 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
   async function mapWithLimit<In, Out>(
     items: readonly In[],
     limit: number,
-    task: (item: In) => Promise<Out>,
+    task: (item: In) => Promise<Out>
   ): Promise<Out[]> {
     const results = new Array<Out>(items.length);
     let cursor = 0;
@@ -2381,7 +2395,8 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
         return await journaled(prompt, () => runSubagent(model, prompt));
       } catch (error) {
         // Isolation boundary: one bad subagent should not end the run.
-        const reason = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+        const reason =
+          error instanceof Error ? `${error.name}: ${error.message}` : String(error);
         return `(subagent failed: ${reason})`;
       }
     };
@@ -2397,7 +2412,7 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
   ${results[index]}
 
   [verify ${index + 1}]
-  ${verdicts[index]}`,
+  ${verdicts[index]}`
       )
       .join("\n\n");
     const droppedNote =
@@ -2598,7 +2613,6 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
   	}
   	return joined, false
   }
-
   ```
 
   ```java Java
@@ -3027,7 +3041,9 @@ The agent appends the user's message first, then any system messages that are du
               if response.stop_reason == "pause_turn":
                   continue
               if response.stop_reason != "tool_use":
-                  text = "".join(block.text for block in response.content if block.type == "text")
+                  text = "".join(
+                      block.text for block in response.content if block.type == "text"
+                  )
                   if response.stop_reason == "max_tokens":
                       # Drop the truncated assistant message so later turns do not build on it.
                       self.messages.pop()
@@ -3040,7 +3056,9 @@ The agent appends the user's message first, then any system messages that are du
                       continue
                   match block.name:
                       case "Workflow":
-                          output, is_error = run_workflow(self.model, block.input.get("subtasks", []))
+                          output, is_error = run_workflow(
+                              self.model, block.input.get("subtasks", [])
+                          )
                       case "bash":
                           output, is_error = handle_bash_block(block)
                       case _:
@@ -3119,9 +3137,9 @@ The agent appends the user's message first, then any system messages that are du
               system: SYSTEM_PROMPT, // static for the whole session
               output_config: { effort: EFFORT },
               tools: [WORKFLOW_TOOL, BASH_TOOL],
-              messages: this.#messages,
+              messages: this.#messages
             },
-            { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) },
+            { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) }
           )
           .finalMessage();
         this.#messages.push({ role: "assistant", content: response.content });
@@ -3163,7 +3181,7 @@ The agent appends the user's message first, then any system messages that are du
             type: "tool_result",
             tool_use_id: block.id,
             content: outcome.output,
-            is_error: outcome.isError,
+            is_error: outcome.isError
           });
         }
         this.#messages.push({ role: "user", content: toolResults });
@@ -3410,7 +3428,6 @@ The agent appends the user's message first, then any system messages that are du
   	}
   	return "(hit the main loop turn limit before finishing)", nil
   }
-
   ```
 
   ```java Java
@@ -3843,7 +3860,6 @@ The agent appends the user's message first, then any system messages that are du
   	fmt.Println(summary)
   	return nil
   }
-
   ```
 
   ```java Java

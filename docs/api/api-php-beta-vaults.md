@@ -11,13 +11,13 @@ url: https://platform.claude.com/docs/en/api/php/beta/vaults
 
 # Vaults
 
-## Create Vault
+## Create a Vault
 
 `$client->beta->vaults->create(string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 ### Parameters
 
@@ -47,7 +47,7 @@ Create Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -116,7 +116,7 @@ List Vaults
 
 - `includeArchived?:optional bool` (query parameter)
 
-  Whether to include archived vaults in the results.
+  Whether to include archived vaults in the results. Defaults to `false`.
 
 - `limit?:optional int` (query parameter)
 
@@ -124,7 +124,7 @@ List Vaults
 
 - `page?:optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_vaults` response.
+  The `next_page` value from a previous [List Vaults](./api-beta-vaults-list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -144,7 +144,7 @@ List Vaults
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -207,13 +207,13 @@ var_dump($page);
 }
 ```
 
-## Get Vault
+## Retrieve a Vault
 
 `$client->beta->vaults->retrieve(string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 ### Parameters
 
@@ -239,7 +239,7 @@ Get Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -295,13 +295,13 @@ var_dump($betaManagedAgentsVault);
 }
 ```
 
-## Update Vault
+## Update a Vault
 
 `$client->beta->vaults->update(string vaultID, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ### Parameters
 
@@ -335,7 +335,7 @@ Update Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -393,13 +393,13 @@ var_dump($betaManagedAgentsVault);
 }
 ```
 
-## Delete Vault
+## Delete a Vault
 
 `$client->beta->vaults->delete(string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeletedVault`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 ### Parameters
 
@@ -425,7 +425,7 @@ Delete Vault
 
   - `string id`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ### Example
 
@@ -454,13 +454,13 @@ var_dump($betaManagedAgentsDeletedVault);
 }
 ```
 
-## Archive Vault
+## Archive a Vault
 
 `$client->beta->vaults->archive(string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 ### Parameters
 
@@ -486,7 +486,7 @@ Archive Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -552,7 +552,7 @@ var_dump($betaManagedAgentsVault);
 
   - `string id`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ### Beta Managed Agents Vault
 
@@ -562,7 +562,7 @@ var_dump($betaManagedAgentsVault);
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 
@@ -586,13 +586,13 @@ var_dump($betaManagedAgentsVault);
 
 ## Vaults › Credentials
 
-### Create Credential
+### Create a Credential
 
 `$client->beta->vaults->credentials->create(string vaultID, Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 #### Parameters
 
@@ -630,7 +630,7 @@ Create Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 
@@ -722,7 +722,7 @@ List Credentials
 
 - `includeArchived?:optional bool` (query parameter)
 
-  Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results. Defaults to `false`.
 
 - `limit?:optional int` (query parameter)
 
@@ -730,7 +730,7 @@ List Credentials
 
 - `page?:optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_credentials` response.
+  The `next_page` value from a previous [List Credentials](./api-beta-vaults-credentials-list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -750,7 +750,7 @@ List Credentials
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 
@@ -827,13 +827,13 @@ var_dump($page);
 }
 ```
 
-### Get Credential
+### Retrieve a Credential
 
 `$client->beta->vaults->credentials->retrieve(string credentialID, string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 #### Parameters
 
@@ -863,7 +863,7 @@ Get Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 
@@ -933,13 +933,13 @@ var_dump($betaManagedAgentsCredential);
 }
 ```
 
-### Update Credential
+### Update a Credential
 
 `$client->beta->vaults->credentials->update(string credentialID, string vaultID, ?Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 #### Parameters
 
@@ -953,7 +953,7 @@ Update Credential
 
 - `auth?:optional Auth`
 
-  Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+  New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
 - `displayName?:optional string`
 
@@ -981,7 +981,7 @@ Update Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 
@@ -1065,13 +1065,13 @@ var_dump($betaManagedAgentsCredential);
 }
 ```
 
-### Delete Credential
+### Delete a Credential
 
 `$client->beta->vaults->credentials->delete(string credentialID, string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsDeletedCredential`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 #### Parameters
 
@@ -1101,7 +1101,7 @@ Delete Credential
 
   - `string id`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 #### Example
 
@@ -1135,13 +1135,13 @@ var_dump($betaManagedAgentsDeletedCredential);
 }
 ```
 
-### Archive Credential
+### Archive a Credential
 
 `$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 #### Parameters
 
@@ -1171,7 +1171,7 @@ Archive Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 
@@ -1241,13 +1241,13 @@ var_dump($betaManagedAgentsCredential);
 }
 ```
 
-### Validate Credential
+### Validate an MCP OAuth Credential
 
 `$client->beta->vaults->credentials->mcpOAuthValidate(string credentialID, string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredentialValidation`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-Validate Credential
+Validate an MCP OAuth Credential
 
 #### Parameters
 
@@ -1285,7 +1285,7 @@ Validate Credential
 
   - `?ManagedAgentsMCPProbe mcpProbe`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
   - `?ManagedAgentsRefreshObject refresh`
 

@@ -224,7 +224,7 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -sS https://api.anthropic.com/v1/agents \
+  curl -sS https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -237,7 +237,6 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
         {"type": "custom", "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv", "version": "latest"}
       ]
     }'
-  )
   ```
 
   <CodeGroupItem>
@@ -437,12 +436,12 @@ To load skills from a repository, create a session that mounts it. This is the s
 
 <CodeGroup>
   ```bash cURL
-  session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
+  curl -fsS https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    --data @- <<JSON | jq -r '.id'
+    -d @- <<JSON
   {
     "agent": "$agent_id",
     "environment_id": "$environment_id",
@@ -456,21 +455,18 @@ To load skills from a repository, create a session that mounts it. This is the s
     ]
   }
   JSON
-  )
   ```
 
   ```bash CLI
-  SESSION_ID=$(ant beta:sessions create \
+  ant beta:sessions create \
     --agent "$AGENT_ID" \
-    --environment-id "$ENVIRONMENT_ID" \
-    --transform id --raw-output <<'EOF'
+    --environment-id "$ENVIRONMENT_ID" <<'EOF'
   resources:
     - type: github_repository
       url: https://github.com/org/repo
       mount_path: /workspace/repo
       authorization_token: ghp_your_github_token
   EOF
-  )
   ```
 
   ```python Python
@@ -497,9 +493,9 @@ To load skills from a repository, create a session that mounts it. This is the s
         type: "github_repository",
         url: "https://github.com/org/repo",
         mount_path: "/workspace/repo",
-        authorization_token: "ghp_your_github_token",
-      },
-    ],
+        authorization_token: "ghp_your_github_token"
+      }
+    ]
   });
   ```
 

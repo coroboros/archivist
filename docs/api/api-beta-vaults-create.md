@@ -1,19 +1,19 @@
 ---
-title: "Create Vault"
+title: "Create a Vault"
 source: "https://platform.claude.com/docs/en/api/beta/vaults/create"
 category: "api"
 generated: true
 ---
 ---
-title: Create Vault
+title: Create a Vault
 url: https://platform.claude.com/docs/en/api/beta/vaults/create
 ---
 
-# Create Vault
+# Create a Vault
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 ## Headers
 
@@ -159,7 +159,7 @@ Create Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string or null`
 
