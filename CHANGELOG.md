@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.241 - 20/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-security.md`
+
+
 ## 🤖 v1.5.240 - 20/10/2026
 
 File Changes:
