@@ -29,7 +29,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `Optional<String> userProfileId` (header parameter)
 
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -3542,6 +3542,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class CacheMissModelChanged`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "model_changed"`
 
         - `long cacheMissedInputTokens`
@@ -3549,6 +3553,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class CacheMissSystemChanged`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "system_changed"`
 
@@ -3558,6 +3566,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class CacheMissToolsChanged`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "tools_changed"`
 
         - `long cacheMissedInputTokens`
@@ -3565,6 +3577,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class CacheMissMessagesChanged`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "messages_changed"`
 
@@ -3574,9 +3590,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `class CacheMissPreviousMessageNotFound`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "previous_message_not_found"`
 
       - `class CacheMissUnavailable`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "unavailable"`
 
@@ -4152,7 +4180,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Optional<String> userProfileId` (header parameter)
 
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -12777,6 +12805,10 @@ public final class Main {
 
 - `class CacheMissMessagesChanged`
 
+  A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
   - `JsonValue type = "messages_changed"`
 
   - `long cacheMissedInputTokens`
@@ -12786,6 +12818,10 @@ public final class Main {
 ### Cache Miss Model Changed
 
 - `class CacheMissModelChanged`
+
+  A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
   - `JsonValue type = "model_changed"`
 
@@ -12797,6 +12833,12 @@ public final class Main {
 
 - `class CacheMissPreviousMessageNotFound`
 
+  A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+  This doesn't mean that this request changed.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
   - `JsonValue type = "previous_message_not_found"`
 
 ### Cache Miss Reason
@@ -12804,6 +12846,10 @@ public final class Main {
 - `class CacheMissReason: union`
 
   - `class CacheMissModelChanged`
+
+    A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
     - `JsonValue type = "model_changed"`
 
@@ -12813,6 +12859,10 @@ public final class Main {
 
   - `class CacheMissSystemChanged`
 
+    A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
     - `JsonValue type = "system_changed"`
 
     - `long cacheMissedInputTokens`
@@ -12820,6 +12870,10 @@ public final class Main {
       Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
   - `class CacheMissToolsChanged`
+
+    A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
     - `JsonValue type = "tools_changed"`
 
@@ -12829,6 +12883,10 @@ public final class Main {
 
   - `class CacheMissMessagesChanged`
 
+    A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
     - `JsonValue type = "messages_changed"`
 
     - `long cacheMissedInputTokens`
@@ -12837,15 +12895,31 @@ public final class Main {
 
   - `class CacheMissPreviousMessageNotFound`
 
+    A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+    This doesn't mean that this request changed.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
     - `JsonValue type = "previous_message_not_found"`
 
   - `class CacheMissUnavailable`
+
+    A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+    This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+    See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
     - `JsonValue type = "unavailable"`
 
 ### Cache Miss System Changed
 
 - `class CacheMissSystemChanged`
+
+  A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
   - `JsonValue type = "system_changed"`
 
@@ -12857,6 +12931,10 @@ public final class Main {
 
 - `class CacheMissToolsChanged`
 
+  A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
   - `JsonValue type = "tools_changed"`
 
   - `long cacheMissedInputTokens`
@@ -12866,6 +12944,12 @@ public final class Main {
 ### Cache Miss Unavailable
 
 - `class CacheMissUnavailable`
+
+  A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+  This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+  See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
   - `JsonValue type = "unavailable"`
 
@@ -18365,6 +18449,10 @@ public final class Main {
 
     - `class CacheMissModelChanged`
 
+      A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
       - `JsonValue type = "model_changed"`
 
       - `long cacheMissedInputTokens`
@@ -18372,6 +18460,10 @@ public final class Main {
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
     - `class CacheMissSystemChanged`
+
+      A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
       - `JsonValue type = "system_changed"`
 
@@ -18381,6 +18473,10 @@ public final class Main {
 
     - `class CacheMissToolsChanged`
 
+      A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
       - `JsonValue type = "tools_changed"`
 
       - `long cacheMissedInputTokens`
@@ -18388,6 +18484,10 @@ public final class Main {
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
     - `class CacheMissMessagesChanged`
+
+      A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
       - `JsonValue type = "messages_changed"`
 
@@ -18397,9 +18497,21 @@ public final class Main {
 
     - `class CacheMissPreviousMessageNotFound`
 
+      A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+      This doesn't mean that this request changed.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
       - `JsonValue type = "previous_message_not_found"`
 
     - `class CacheMissUnavailable`
+
+      A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+      This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+      See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
       - `JsonValue type = "unavailable"`
 
@@ -19636,6 +19748,10 @@ public final class Main {
 
       - `class CacheMissModelChanged`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "model_changed"`
 
         - `long cacheMissedInputTokens`
@@ -19643,6 +19759,10 @@ public final class Main {
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class CacheMissSystemChanged`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "system_changed"`
 
@@ -19652,6 +19772,10 @@ public final class Main {
 
       - `class CacheMissToolsChanged`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "tools_changed"`
 
         - `long cacheMissedInputTokens`
@@ -19659,6 +19783,10 @@ public final class Main {
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class CacheMissMessagesChanged`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "messages_changed"`
 
@@ -19668,9 +19796,21 @@ public final class Main {
 
       - `class CacheMissPreviousMessageNotFound`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "previous_message_not_found"`
 
       - `class CacheMissUnavailable`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "unavailable"`
 
@@ -24626,6 +24766,10 @@ public final class Main {
 
         - `class CacheMissModelChanged`
 
+          A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonValue type = "model_changed"`
 
           - `long cacheMissedInputTokens`
@@ -24633,6 +24777,10 @@ public final class Main {
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `class CacheMissSystemChanged`
+
+          A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonValue type = "system_changed"`
 
@@ -24642,6 +24790,10 @@ public final class Main {
 
         - `class CacheMissToolsChanged`
 
+          A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonValue type = "tools_changed"`
 
           - `long cacheMissedInputTokens`
@@ -24649,6 +24801,10 @@ public final class Main {
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `class CacheMissMessagesChanged`
+
+          A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonValue type = "messages_changed"`
 
@@ -24658,9 +24814,21 @@ public final class Main {
 
         - `class CacheMissPreviousMessageNotFound`
 
+          A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+          This doesn't mean that this request changed.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonValue type = "previous_message_not_found"`
 
         - `class CacheMissUnavailable`
+
+          A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+          This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonValue type = "unavailable"`
 
@@ -25655,6 +25823,10 @@ public final class Main {
 
           - `class CacheMissModelChanged`
 
+            A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonValue type = "model_changed"`
 
             - `long cacheMissedInputTokens`
@@ -25662,6 +25834,10 @@ public final class Main {
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `class CacheMissSystemChanged`
+
+            A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonValue type = "system_changed"`
 
@@ -25671,6 +25847,10 @@ public final class Main {
 
           - `class CacheMissToolsChanged`
 
+            A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonValue type = "tools_changed"`
 
             - `long cacheMissedInputTokens`
@@ -25678,6 +25858,10 @@ public final class Main {
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `class CacheMissMessagesChanged`
+
+            A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonValue type = "messages_changed"`
 
@@ -25687,9 +25871,21 @@ public final class Main {
 
           - `class CacheMissPreviousMessageNotFound`
 
+            A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+            This doesn't mean that this request changed.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonValue type = "previous_message_not_found"`
 
           - `class CacheMissUnavailable`
+
+            A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+            This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonValue type = "unavailable"`
 
@@ -34561,7 +34757,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `Optional<String> userProfileId` (header parameter)
 
-    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -39134,6 +39330,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonValue type = "model_changed"`
 
               - `long cacheMissedInputTokens`
@@ -39141,6 +39341,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonValue type = "system_changed"`
 
@@ -39150,6 +39354,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonValue type = "tools_changed"`
 
               - `long cacheMissedInputTokens`
@@ -39157,6 +39365,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonValue type = "messages_changed"`
 
@@ -39166,9 +39378,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonValue type = "previous_message_not_found"`
 
             - `class CacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonValue type = "unavailable"`
 

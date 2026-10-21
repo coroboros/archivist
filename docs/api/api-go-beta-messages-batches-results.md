@@ -135,6 +135,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3325,6 +3327,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type BetaCacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `Type ModelChanged`
 
                 default: model_changed
@@ -3334,6 +3340,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `type BetaCacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `Type SystemChanged`
 
@@ -3345,6 +3355,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type BetaCacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `Type ToolsChanged`
 
                 default: tools_changed
@@ -3354,6 +3368,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `type BetaCacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `Type MessagesChanged`
 
@@ -3365,11 +3383,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `type BetaCacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `Type PreviousMessageNotFound`
 
                 default: previous_message_not_found
 
             - `type BetaCacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `Type Unavailable`
 

@@ -956,6 +956,10 @@ List Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\Events\ManagedAgentsSessionEventType;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->events->list(
@@ -1047,6 +1051,9 @@ Send Events
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -2023,6 +2030,10 @@ Stream Events
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\BetaManagedAgentsDeltaType;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

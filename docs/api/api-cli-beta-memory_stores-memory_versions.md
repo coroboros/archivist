@@ -11,13 +11,13 @@ url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memory_versi
 
 # Memory Versions
 
-## List memory versions
+## List Memory Versions
 
 `$ ant beta:memory-stores:memory-versions list`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-List memory versions
+List Memory Versions
 
 ### Parameters
 
@@ -43,7 +43,9 @@ List memory versions
 
 - `--limit: optional number` (query parameter)
 
-  The maximum number of versions to return per page. Defaults to 20.
+  The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
+
+  With `view=full`, a page holds at most 20 versions.
 
   format: int32
 
@@ -51,7 +53,7 @@ List memory versions
 
   Return only versions of the memory with this ID (`mem_...`).
 
-  The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
+  The filter still works after the memory is deleted. While that memory's versions are retained, the results include the version whose `operation` is `deleted`.
 
 - `--operation: optional "created" or "modified" or "deleted"` (query parameter)
 
@@ -71,7 +73,9 @@ List memory versions
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -87,7 +91,7 @@ List memory versions
 
 - `BetaManagedAgentsListMemoryVersionsResult: object`
 
-  Response payload for [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+  A page of results from [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `data: optional array of BetaManagedAgentsMemoryVersion`
 
@@ -107,7 +111,9 @@ List memory versions
 
     - `memory_id: string`
 
-      ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+      The ID of the memory that this version belongs to (`mem_...`).
+
+      The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
     - `memory_store_id: string`
 
@@ -145,7 +151,11 @@ List memory versions
 
     - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-      Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+      Who made this change to the memory, or `null` if the author wasn't recorded.
+
+      Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+      You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
       - `beta_managed_agents_session_actor: object`
 
@@ -201,7 +211,11 @@ List memory versions
 
     - `redacted_at: optional string`
 
-      When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+      When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+      When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+      See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
       format: date-time
 
@@ -227,7 +241,7 @@ List memory versions
 
   - `next_page: optional string`
 
-    Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
+    The value to pass as `page` to get the next page, or `null` if there are no more results.
 
 ### Example
 
@@ -268,13 +282,13 @@ ant beta:memory-stores:memory-versions list \
 }
 ```
 
-## Retrieve a memory version
+## Retrieve a Memory Version
 
 `$ ant beta:memory-stores:memory-versions retrieve`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-Retrieve a memory version
+Retrieve a Memory Version
 
 ### Parameters
 
@@ -288,7 +302,9 @@ Retrieve a memory version
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -304,7 +320,13 @@ Retrieve a memory version
 
 - `beta_managed_agents_memory_version: object`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `type: "memory_version"`
 
@@ -320,7 +342,9 @@ Retrieve a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -358,7 +382,11 @@ Retrieve a memory version
 
   - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
     - `beta_managed_agents_session_actor: object`
 
@@ -414,7 +442,11 @@ Retrieve a memory version
 
   - `redacted_at: optional string`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -473,13 +505,13 @@ ant beta:memory-stores:memory-versions retrieve \
 }
 ```
 
-## Redact a memory version
+## Redact a Memory Version
 
 `$ ant beta:memory-stores:memory-versions redact`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
-Redact a memory version
+Redact a Memory Version
 
 ### Parameters
 
@@ -505,7 +537,13 @@ Redact a memory version
 
 - `beta_managed_agents_memory_version: object`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `type: "memory_version"`
 
@@ -521,7 +559,9 @@ Redact a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -559,7 +599,11 @@ Redact a memory version
 
   - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
     - `beta_managed_agents_session_actor: object`
 
@@ -615,7 +659,11 @@ Redact a memory version
 
   - `redacted_at: optional string`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -748,7 +796,13 @@ ant beta:memory-stores:memory-versions redact \
 
 - `beta_managed_agents_memory_version: object`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `type: "memory_version"`
 
@@ -764,7 +818,9 @@ ant beta:memory-stores:memory-versions redact \
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -802,7 +858,11 @@ ant beta:memory-stores:memory-versions redact \
 
   - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
     - `beta_managed_agents_session_actor: object`
 
@@ -858,7 +918,11 @@ ant beta:memory-stores:memory-versions redact \
 
   - `redacted_at: optional string`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -886,7 +950,9 @@ ant beta:memory-stores:memory-versions redact \
 
 - `beta_managed_agents_memory_version_operation: "created" or "modified" or "deleted"`
 
-  The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
+  The kind of change that a memory version records.
+
+  Every change to a memory adds one version. If you update a memory and nothing changes, the memory doesn't get a new version.
 
   - `"created"`
 

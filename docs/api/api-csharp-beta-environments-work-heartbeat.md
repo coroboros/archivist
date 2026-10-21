@@ -141,6 +141,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 ## Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -180,6 +182,9 @@ Record a heartbeat for a work item to maintain the lease.
 ## Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkHeartbeatParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",

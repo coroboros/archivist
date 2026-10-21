@@ -17,6 +17,12 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### October 20, 2026
+
+* [Inference hooks](../manage-claude/manage-claude-inference-hooks.md) are out of beta for Claude Enterprise organizations.
+* We've launched [user profiles](../manage-claude/manage-claude-user-profiles.md), so you can tell Anthropic which of your end customers each API request is for. If you operate a platform or gateway, or resell API access, a safety enforcement action can then apply to one end customer instead of your whole organization. The SDK and the `ant` CLI support the new [`/v1/user_profiles` endpoints](../api/api-user_profiles.md).
+* We've added [organization webhooks](../manage-claude/manage-claude-organization-webhooks.md) to the [Admin API](../manage-claude/manage-claude-admin-api.md), in beta with the `webhooks-2026-10-07` beta header. Its [`/v1/organizations/webhooks` endpoints](../api/api-beta-organization-webhooks.md) register webhook endpoints for two event types: one for when Anthropic restricts or bans one of your organization's user profiles, and one for when the restriction or ban ends. To request access, contact your Anthropic account team.
+
 ### October 15, 2026
 
 * We've added `capabilities.thinking.types.between_tools` to the [Models API](../api/api-models-list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now report whether each model accepts `thinking: {type: "between_tools"}`, which turns off up-front thinking. See [Using the Models API](../general/general-models-overview.md#using-the-models-api).

@@ -827,9 +827,37 @@ url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks
 
       - `workspace_id: String`
 
+    - `class BetaWebhookUserProfileEnforcementActionOpenedEventData`
+
+      - `type: :"user_profile.enforcement_action_opened"`
+
+      - `id: String`
+
+        ID of the user profile the enforcement action is on.
+
+      - `enforcement_action_id: String`
+
+        ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `organization_id: String`
+
+    - `class BetaWebhookUserProfileEnforcementActionResolvedEventData`
+
+      - `type: :"user_profile.enforcement_action_resolved"`
+
+      - `id: String`
+
+        ID of the user profile the enforcement action is on.
+
+      - `enforcement_action_id: String`
+
+        ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `organization_id: String`
+
 ### Beta Webhook Event Data
 
-- `type BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 41 more`
+- `type BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 43 more`
 
   - `class BetaWebhookSessionCreatedEventData`
 
@@ -1387,6 +1415,34 @@ url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks
 
     - `workspace_id: String`
 
+  - `class BetaWebhookUserProfileEnforcementActionOpenedEventData`
+
+    - `type: :"user_profile.enforcement_action_opened"`
+
+    - `id: String`
+
+      ID of the user profile the enforcement action is on.
+
+    - `enforcement_action_id: String`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `organization_id: String`
+
+  - `class BetaWebhookUserProfileEnforcementActionResolvedEventData`
+
+    - `type: :"user_profile.enforcement_action_resolved"`
+
+    - `id: String`
+
+      ID of the user profile the enforcement action is on.
+
+    - `enforcement_action_id: String`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `organization_id: String`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -1678,6 +1734,38 @@ url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks
   - `organization_id: String`
 
   - `workspace_id: String`
+
+### Beta Webhook User Profile Enforcement Action Opened Event Data
+
+- `class BetaWebhookUserProfileEnforcementActionOpenedEventData`
+
+  - `type: :"user_profile.enforcement_action_opened"`
+
+  - `id: String`
+
+    ID of the user profile the enforcement action is on.
+
+  - `enforcement_action_id: String`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `organization_id: String`
+
+### Beta Webhook User Profile Enforcement Action Resolved Event Data
+
+- `class BetaWebhookUserProfileEnforcementActionResolvedEventData`
+
+  - `type: :"user_profile.enforcement_action_resolved"`
+
+  - `id: String`
+
+    ID of the user profile the enforcement action is on.
+
+  - `enforcement_action_id: String`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `organization_id: String`
 
 ### Beta Webhook Vault Archived Event Data
 

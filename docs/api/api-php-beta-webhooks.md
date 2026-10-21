@@ -829,6 +829,34 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
 
     - `string workspaceID`
 
+  - `class BetaWebhookUserProfileEnforcementActionOpenedEventData`
+
+    - `"user_profile.enforcement_action_opened" type`
+
+    - `string id`
+
+      ID of the user profile the enforcement action is on.
+
+    - `string enforcementActionID`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `string organizationID`
+
+  - `class BetaWebhookUserProfileEnforcementActionResolvedEventData`
+
+    - `"user_profile.enforcement_action_resolved" type`
+
+    - `string id`
+
+      ID of the user profile the enforcement action is on.
+
+    - `string enforcementActionID`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `string organizationID`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -1120,6 +1148,38 @@ url: https://platform.claude.com/docs/en/api/php/beta/webhooks
   - `string organizationID`
 
   - `string workspaceID`
+
+### Beta Webhook User Profile Enforcement Action Opened Event Data
+
+- `class BetaWebhookUserProfileEnforcementActionOpenedEventData`
+
+  - `"user_profile.enforcement_action_opened" type`
+
+  - `string id`
+
+    ID of the user profile the enforcement action is on.
+
+  - `string enforcementActionID`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `string organizationID`
+
+### Beta Webhook User Profile Enforcement Action Resolved Event Data
+
+- `class BetaWebhookUserProfileEnforcementActionResolvedEventData`
+
+  - `"user_profile.enforcement_action_resolved" type`
+
+  - `string id`
+
+    ID of the user profile the enforcement action is on.
+
+  - `string enforcementActionID`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `string organizationID`
 
 ### Beta Webhook Vault Archived Event Data
 

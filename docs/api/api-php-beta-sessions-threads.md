@@ -104,6 +104,10 @@ List Session Threads
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\Threads\ManagedAgentsSessionThreadStatus;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->threads->list(
@@ -297,6 +301,9 @@ Get Session Thread
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsSessionThread = $client->beta->sessions->threads->retrieve(
@@ -482,6 +489,9 @@ Archive Session Thread
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -2557,6 +2567,9 @@ List Session Thread Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->threads->events->list(
@@ -3543,6 +3556,10 @@ Stream Session Thread Events
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\BetaManagedAgentsDeltaType;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

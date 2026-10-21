@@ -100,7 +100,7 @@ description: Make your first API call to Claude and build a simple web search as
         ant auth status
         ```
 
-        On a remote host without a browser, pass `--no-browser` to get a URL you can open on another device, then paste the returned code back into the terminal. If `ANTHROPIC_API_KEY` is set in your environment, it takes precedence over the login credentials. For non-interactive environments such as CI, see [CLI authentication options](../general/general-cli-sdks-libraries-cli-authentication.md).
+        On a remote host without a browser, pass `--no-browser` to get a URL you can open on another device, then paste the returned code back into the terminal. For non-interactive environments such as CI, see [CLI authentication options](../general/general-cli-sdks-libraries-cli-authentication.md).
       </Step>
 
       <Step title="Make your first API call">
@@ -442,7 +442,7 @@ description: Make your first API call to Claude and build a simple web search as
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.73.0")
+                implementation("com.anthropic:anthropic-java:2.75.0")
             }
 
             application {
@@ -468,7 +468,7 @@ description: Make your first API call to Claude and build a simple web search as
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.73.0</version>
+                  <version>2.75.0</version>
                 </dependency>
               </dependencies>
             </project>

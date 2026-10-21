@@ -969,6 +969,8 @@ Create Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1764,6 +1766,9 @@ Create Agent
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentCreateParams parameters = new()
 {
     Model = BetaManagedAgentsModel.ClaudeOpus5_5,
@@ -2021,6 +2026,8 @@ List Agents
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2816,6 +2823,9 @@ List Agents
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentListParams parameters = new();
 
 var page = await client.Beta.Agents.List(parameters);
@@ -3060,6 +3070,8 @@ Get Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3855,6 +3867,9 @@ Get Agent
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentRetrieveParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -4935,6 +4950,8 @@ Update Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5730,6 +5747,9 @@ Update Agent
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentUpdateParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -5964,6 +5984,8 @@ Archive Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6759,6 +6781,9 @@ Archive Agent
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentArchiveParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -13305,6 +13330,8 @@ List Agent Versions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -14100,6 +14127,9 @@ List Agent Versions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents.Versions;
+
 VersionListParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"

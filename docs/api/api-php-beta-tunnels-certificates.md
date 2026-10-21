@@ -78,6 +78,9 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelCertificate = $client->beta->tunnels->certificates->create(
@@ -170,6 +173,9 @@ Fetches a tunnel certificate by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -272,6 +278,9 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->tunnels->certificates->list(
@@ -371,6 +380,9 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

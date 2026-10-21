@@ -131,6 +131,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -332,6 +334,8 @@ Fetches a tunnel by ID.
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -539,6 +543,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -740,6 +746,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -936,6 +944,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1112,6 +1122,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1348,6 +1360,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1564,6 +1578,8 @@ Fetches a tunnel certificate by ID.
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1786,6 +1802,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1997,6 +2015,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 

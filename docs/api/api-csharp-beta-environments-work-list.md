@@ -141,6 +141,8 @@ List work items in an environment.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 ## Returns
 
 - `class BetaSelfHostedWork`
@@ -224,6 +226,9 @@ List work items in an environment.
 ## Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkListParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"

@@ -243,6 +243,8 @@ Create a new environment with the specified configuration.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -382,6 +384,9 @@ Create a new environment with the specified configuration.
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentCreateParams parameters = new() { Name = "python-data-analysis" };
 
 var betaEnvironment = await client.Beta.Environments.Create(parameters);
@@ -570,6 +575,8 @@ List environments with pagination support.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -709,6 +716,9 @@ List environments with pagination support.
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentListParams parameters = new();
 
 var page = await client.Beta.Environments.List(parameters);
@@ -892,6 +902,8 @@ Retrieve a specific environment by ID.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1031,6 +1043,9 @@ Retrieve a specific environment by ID.
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentRetrieveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -1324,6 +1339,8 @@ Update an existing environment's configuration.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1463,6 +1480,9 @@ Update an existing environment's configuration.
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentUpdateParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -1642,6 +1662,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1665,6 +1687,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentDeleteParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -1803,6 +1828,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -1943,6 +1970,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentArchiveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -2577,6 +2607,8 @@ Retrieve detailed information about a specific work item.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2666,6 +2698,9 @@ Retrieve detailed information about a specific work item.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkRetrieveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -2836,6 +2871,8 @@ Long poll for work items in the queue.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string anthropicWorkerID` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -2923,6 +2960,9 @@ Long poll for work items in the queue.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkPollParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -3082,6 +3122,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -3165,6 +3207,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkAckParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -3333,6 +3378,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -3372,6 +3419,9 @@ Record a heartbeat for a work item to maintain the lease.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkHeartbeatParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -3523,6 +3573,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3612,6 +3664,9 @@ Stop a work item, initiating graceful or forced shutdown.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkStopParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -3780,6 +3835,8 @@ List work items in an environment.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -3863,6 +3920,9 @@ List work items in an environment.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkListParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -4033,6 +4093,8 @@ Update work item metadata with merge semantics.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4122,6 +4184,10 @@ Update work item metadata with merge semantics.
 #### Example
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkUpdateParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -4279,6 +4345,8 @@ Get statistics about the work queue for an environment.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4316,6 +4384,9 @@ Get statistics about the work queue for an environment.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkStatsParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"

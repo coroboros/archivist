@@ -52,6 +52,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ## Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var deletedMessageBatch = await client.Messages.Batches.Delete(parameters);

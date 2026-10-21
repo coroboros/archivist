@@ -91,7 +91,7 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
 
 ### Inference hooks
 
-[Inference hooks](./manage-claude-inference-hooks.md) (beta) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
+[Inference hooks](./manage-claude-inference-hooks.md) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
 
 ***
 

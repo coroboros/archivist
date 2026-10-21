@@ -54,6 +54,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $deletedMessageBatch = $client->messages->batches->delete(

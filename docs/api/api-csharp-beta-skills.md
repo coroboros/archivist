@@ -141,6 +141,8 @@ Create Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -218,6 +220,10 @@ Create Skill
 ### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Skills;
+
 SkillCreateParams parameters = new()
 {
     Files =
@@ -388,6 +394,8 @@ List Skills
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -465,6 +473,9 @@ List Skills
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillListParams parameters = new();
 
 var page = await client.Beta.Skills.List(parameters);
@@ -619,6 +630,8 @@ Get Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -696,6 +709,9 @@ Get Skill
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillRetrieveParams parameters = new() { SkillID = "skill_id" };
 
 var betaSkill = await client.Beta.Skills.Retrieve(parameters);
@@ -843,6 +859,8 @@ Delete Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -868,6 +886,9 @@ Delete Skill
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillDeleteParams parameters = new() { SkillID = "skill_id" };
 
 var betaDeletedSkill = await client.Beta.Skills.Delete(parameters);
@@ -1125,6 +1146,8 @@ Create Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1174,6 +1197,10 @@ Create Skill Version
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionCreateParams parameters = new()
 {
     SkillID = "skill_id",
@@ -1337,6 +1364,8 @@ List Skill Versions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1386,6 +1415,9 @@ List Skill Versions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionListParams parameters = new() { SkillID = "skill_id" };
 
 var page = await client.Beta.Skills.Versions.List(parameters);
@@ -1543,6 +1575,8 @@ Download a skill version's content as a zip archive.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1552,6 +1586,9 @@ Download a skill version's content as a zip archive.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionDownloadParams parameters = new()
 {
     SkillID = "skill_id",
@@ -1693,6 +1730,8 @@ Get Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1742,6 +1781,9 @@ Get Skill Version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionRetrieveParams parameters = new()
 {
     SkillID = "skill_id",
@@ -1896,6 +1938,8 @@ Delete Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1920,6 +1964,9 @@ Delete Skill Version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionDeleteParams parameters = new()
 {
     SkillID = "skill_id",

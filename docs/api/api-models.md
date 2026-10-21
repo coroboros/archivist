@@ -173,6 +173,8 @@ The Models API response can be used to determine which models are available for 
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of ModelInfo`
@@ -630,6 +632,8 @@ The Models API response can be used to determine information about a specific mo
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 

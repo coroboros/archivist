@@ -1391,7 +1391,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `--user-profile-id: optional string` (header parameter)
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -5012,6 +5012,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `beta_cache_miss_model_changed: object`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "model_changed"`
 
         - `cache_missed_input_tokens: number`
@@ -5019,6 +5023,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `beta_cache_miss_system_changed: object`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "system_changed"`
 
@@ -5028,6 +5036,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `beta_cache_miss_tools_changed: object`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "tools_changed"`
 
         - `cache_missed_input_tokens: number`
@@ -5035,6 +5047,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `beta_cache_miss_messages_changed: object`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "messages_changed"`
 
@@ -5044,9 +5060,21 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `beta_cache_miss_previous_message_not_found: object`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "previous_message_not_found"`
 
       - `beta_cache_miss_unavailable: object`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "unavailable"`
 
@@ -7200,7 +7228,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 - `--user-profile-id: optional string` (header parameter)
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -7272,7 +7300,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 - `--user-profile-id: optional string` (header parameter)
 
-  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -11592,6 +11620,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `beta_cache_miss_model_changed: object`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "model_changed"`
 
               - `cache_missed_input_tokens: number`
@@ -11599,6 +11631,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `beta_cache_miss_system_changed: object`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "system_changed"`
 
@@ -11608,6 +11644,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `beta_cache_miss_tools_changed: object`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "tools_changed"`
 
               - `cache_missed_input_tokens: number`
@@ -11615,6 +11655,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `beta_cache_miss_messages_changed: object`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "messages_changed"`
 
@@ -11624,9 +11668,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `beta_cache_miss_previous_message_not_found: object`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "previous_message_not_found"`
 
             - `beta_cache_miss_unavailable: object`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "unavailable"`
 
@@ -52207,31 +52263,37 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
 ## Beta › Memory Stores
 
-### Create a memory store
+### Create a Memory Store
 
 `$ ant beta:memory-stores create`
 
 **POST** `/v1/memory_stores`
 
-Create a memory store
+Create a Memory Store
 
 #### Parameters
 
 - `--name: string`
 
-  Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
+  The name of the memory store, 1 to 255 characters long, without control characters. Names don't have to be unique in a workspace.
+
+  In a session, the store's directory under `/mnt/memory/` is based on this name. The name is lowercased and every run of characters other than ASCII letters and digits becomes one hyphen. The session's memory store resource gives the exact path in `mount_path`.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#how-the-agent-accesses-memory) to learn more about how agents access memory stores.
 
   minLength: 1, maxLength: 255
 
 - `--description: optional string`
 
-  Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
+  Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
   maxLength: 1024
 
 - `--metadata: optional map[string]`
 
-  Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
+  Key-value pairs for your own use, such as the end user that the store belongs to. The agent doesn't see them.
+
+  A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52253,27 +52315,33 @@ Create a memory store
 
   - `id: string`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `archived_at: string`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `created_at: string`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `description: string`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `metadata: map[string]`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `name: string`
 
@@ -52281,7 +52349,9 @@ Create a memory store
 
   - `updated_at: string`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
@@ -52310,25 +52380,25 @@ ant beta:memory-stores create \
 }
 ```
 
-### List memory stores
+### List Memory Stores
 
 `$ ant beta:memory-stores list`
 
 **GET** `/v1/memory_stores`
 
-List memory stores
+List Memory Stores
 
 #### Parameters
 
 - `--created-at-gte: optional string` (query parameter)
 
-  Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+  Return only memory stores created at or after this time (inclusive).
 
   format: date-time
 
 - `--created-at-lte: optional string` (query parameter)
 
-  Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+  Return only memory stores created at or before this time (inclusive).
 
   format: date-time
 
@@ -52344,7 +52414,7 @@ List memory stores
 
 - `--page: optional string` (query parameter)
 
-  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52370,27 +52440,33 @@ List memory stores
 
     - `id: string`
 
-      Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+      The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
     - `archived_at: string`
 
-      Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+      When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+      Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+      See the [memory guide](../managed-agents/managed-agents-memory.md#archive-a-store) to learn more about archiving.
 
       format: date-time
 
     - `created_at: string`
 
-      Timestamp when the store was created.
+      When the memory store was created, in RFC 3339.
 
       format: date-time
 
     - `description: string`
 
-      Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+      Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
     - `metadata: map[string]`
 
-      Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+      Key-value pairs for your own use, such as the end user that the store belongs to.
+
+      A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
     - `name: string`
 
@@ -52398,13 +52474,15 @@ List memory stores
 
     - `updated_at: string`
 
-      Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+      When the memory store was last changed, in RFC 3339.
+
+      Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
       format: date-time
 
   - `next_page: optional string`
 
-    Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next request. `null` when there are no more results.
+    The value to pass as `page` to get the next page, or `null` if there are no more results.
 
 #### Example
 
@@ -52433,19 +52511,19 @@ ant beta:memory-stores list \
 }
 ```
 
-### Retrieve a memory store
+### Retrieve a Memory Store
 
 `$ ant beta:memory-stores retrieve`
 
 **GET** `/v1/memory_stores/{memory_store_id}`
 
-Retrieve a memory store
+Retrieve a Memory Store
 
 #### Parameters
 
 - `--memory-store-id: string` (path parameter)
 
-  ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
+  The ID of the memory store to retrieve (`memstore_...`).
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52467,27 +52545,33 @@ Retrieve a memory store
 
   - `id: string`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `archived_at: string`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `created_at: string`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `description: string`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `metadata: map[string]`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `name: string`
 
@@ -52495,7 +52579,9 @@ Retrieve a memory store
 
   - `updated_at: string`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
@@ -52524,33 +52610,39 @@ ant beta:memory-stores retrieve \
 }
 ```
 
-### Update a memory store
+### Update a Memory Store
 
 `$ ant beta:memory-stores update`
 
 **POST** `/v1/memory_stores/{memory_store_id}`
 
-Update a memory store
+Update a Memory Store
 
 #### Parameters
 
 - `--memory-store-id: string` (path parameter)
 
-  ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
+  The ID of the memory store to update (`memstore_...`).
+
+  The request fails with HTTP status 400 if the store is archived.
 
 - `--description: optional string`
 
-  New description for the store, up to 1024 characters. Pass an empty string to clear it.
+  New description for the store, up to 1,024 characters. Pass an empty string to clear it.
 
   maxLength: 1024
 
 - `--metadata: optional map[string]`
 
-  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+  Changes to apply to the memory store's metadata. Keys you leave out keep their values.
+
+  Set a key to a string to add or replace it, or to `null` to remove it. After the change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
 - `--name: optional string`
 
-  New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
+  The new name of the memory store, 1 to 255 characters long, without control characters.
+
+  Sessions created after the change use the new name for the store's directory under `/mnt/memory/`.
 
   minLength: 1, maxLength: 255
 
@@ -52574,27 +52666,33 @@ Update a memory store
 
   - `id: string`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `archived_at: string`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `created_at: string`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `description: string`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `metadata: map[string]`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `name: string`
 
@@ -52602,7 +52700,9 @@ Update a memory store
 
   - `updated_at: string`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
@@ -52631,19 +52731,21 @@ ant beta:memory-stores update \
 }
 ```
 
-### Delete a memory store
+### Delete a Memory Store
 
 `$ ant beta:memory-stores delete`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}`
 
-Delete a memory store
+Delete a Memory Store
 
 #### Parameters
 
 - `--memory-store-id: string` (path parameter)
 
-  ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
+  The ID of the memory store to delete (`memstore_...`).
+
+  Deleting a store also deletes all its memories and memory versions. It can't be undone.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52684,19 +52786,21 @@ ant beta:memory-stores delete \
 }
 ```
 
-### Archive a memory store
+### Archive a Memory Store
 
 `$ ant beta:memory-stores archive`
 
 **POST** `/v1/memory_stores/{memory_store_id}/archive`
 
-Archive a memory store
+Archive a Memory Store
 
 #### Parameters
 
 - `--memory-store-id: string` (path parameter)
 
-  ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
+  The ID of the memory store to archive (`memstore_...`).
+
+  Archiving can't be undone. Archiving a store that is already archived returns it unchanged.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52718,27 +52822,33 @@ Archive a memory store
 
   - `id: string`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `archived_at: string`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `created_at: string`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `description: string`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `metadata: map[string]`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `name: string`
 
@@ -52746,7 +52856,9 @@ Archive a memory store
 
   - `updated_at: string`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
@@ -52777,13 +52889,13 @@ ant beta:memory-stores archive \
 
 ## Beta › Memory Stores › Memories
 
-### Create a memory
+### Create a Memory
 
 `$ ant beta:memory-stores:memories create`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
-Create a memory
+Create a Memory
 
 #### Parameters
 
@@ -52793,17 +52905,23 @@ Create a memory
 
 - `--content: string`
 
-  UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+  The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+
+  The maximum size is 100 kB (102,400 bytes).
 
 - `--path: string`
 
-  Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
+  The path of the new memory, such as `/projects/foo/notes.md`. Paths are case-sensitive.
+
+  A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
   minLength: 2, maxLength: 1024
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52819,13 +52937,19 @@ Create a memory
 
 - `beta_managed_agents_memory: object`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
   - `id: string`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `content_sha256: string`
 
@@ -52833,7 +52957,7 @@ Create a memory
 
   - `content_size_bytes: number`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -52849,7 +52973,11 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -52857,13 +52985,17 @@ Create a memory
 
   - `updated_at: string`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `content: optional string`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -52892,13 +53024,13 @@ ant beta:memory-stores:memories create \
 }
 ```
 
-### List memories
+### List Memories
 
 `$ ant beta:memory-stores:memories list`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
-List memories
+List Memories
 
 #### Parameters
 
@@ -52908,27 +53040,35 @@ List memories
 
 - `--depth: optional number` (query parameter)
 
-  `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+  How far below `path_prefix` to list. Defaults to `0`, which lists every memory below the prefix.
+
+  Pass `1` to list only the direct children. Deeper memories are then grouped into `memory_prefix` items.
 
   format: int32
 
 - `--limit: optional number` (query parameter)
 
-  Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+  The maximum number of items to return per page, from 1 to 100. Defaults to 20.
+
+  With `view=full`, a page holds at most 20 items. `memory` and `memory_prefix` items both count toward the limit.
 
   format: int32
 
 - `--page: optional string` (query parameter)
 
-  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
 - `--path-prefix: optional string` (query parameter)
 
-  Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  Return only memories whose path starts with this prefix, such as `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+  Omit it to list the whole store. The prefix must end with `/` and matches whole segments, so `/notes/` matches `/notes/todo.md` but not `/notes-archive/todo.md`.
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+  Whether each memory in the response includes `content`. Defaults to `basic`, which sets it to `null`.
+
+  With `full`, a page holds at most 20 items.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -52944,7 +53084,7 @@ List memories
 
 - `BetaManagedAgentsListMemoriesResult: object`
 
-  Response payload for [List memories](./api-beta-memory_stores-memories-list.md).
+  A page of results from [List Memories](./api-beta-memory_stores-memories-list.md).
 
   - `data: optional array of BetaManagedAgentsMemoryListItem`
 
@@ -52952,13 +53092,19 @@ List memories
 
     - `beta_managed_agents_memory: object`
 
-      A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+      A text document at a path inside a memory store.
+
+      `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+      See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
       - `type: "memory"`
 
       - `id: string`
 
-        Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+        The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+        To retrieve, update, or delete the memory, pass this ID.
 
       - `content_sha256: string`
 
@@ -52966,7 +53112,7 @@ List memories
 
       - `content_size_bytes: number`
 
-        Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+        The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
         format: int32
 
@@ -52982,7 +53128,11 @@ List memories
 
       - `memory_version_id: string`
 
-        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+        The ID of the memory version that holds the memory's current content (`memver_...`).
+
+        Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+        See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
       - `path: string`
 
@@ -52990,17 +53140,23 @@ List memories
 
       - `updated_at: string`
 
-        When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+        When the memory was last changed, in RFC 3339.
+
+        To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
         format: date-time
 
       - `content: optional string`
 
-        The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+        The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+        The maximum size is 100 kB (102,400 bytes).
 
     - `beta_managed_agents_memory_prefix: object`
 
-      A rolled-up directory marker returned by [List memories](./api-beta-memory_stores-memories-list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+      A directory marker that [List Memories](./api-beta-memory_stores-memories-list.md) returns instead of the memories below the requested `depth`.
+
+      It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
       - `type: "memory_prefix"`
 
@@ -53010,7 +53166,7 @@ List memories
 
   - `next_page: optional string`
 
-    Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
+    The value to pass as `page` to get the next page, or `null` if there are no more results.
 
 #### Example
 
@@ -53042,13 +53198,13 @@ ant beta:memory-stores:memories list \
 }
 ```
 
-### Retrieve a memory
+### Retrieve a Memory
 
 `$ ant beta:memory-stores:memories retrieve`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Retrieve a memory
+Retrieve a Memory
 
 #### Parameters
 
@@ -53062,7 +53218,9 @@ Retrieve a memory
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -53078,13 +53236,19 @@ Retrieve a memory
 
 - `beta_managed_agents_memory: object`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
   - `id: string`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `content_sha256: string`
 
@@ -53092,7 +53256,7 @@ Retrieve a memory
 
   - `content_size_bytes: number`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -53108,7 +53272,11 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -53116,13 +53284,17 @@ Retrieve a memory
 
   - `updated_at: string`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `content: optional string`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -53150,13 +53322,13 @@ ant beta:memory-stores:memories retrieve \
 }
 ```
 
-### Update a memory
+### Update a Memory
 
 `$ ant beta:memory-stores:memories update`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Update a memory
+Update a Memory
 
 #### Parameters
 
@@ -53170,7 +53342,9 @@ Update a memory
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--content: optional string`
 
@@ -53178,13 +53352,17 @@ Update a memory
 
 - `--path: optional string`
 
-  New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
+  The new path of the memory, which renames it. Omit it to keep the current path.
+
+  The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
   minLength: 2, maxLength: 1024
 
 - `--precondition: optional object`
 
-  Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
+  The condition that the memory must meet for the update to apply. Omit it to update unconditionally.
+
+  If the condition fails, the request fails with HTTP status 409.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -53200,13 +53378,19 @@ Update a memory
 
 - `beta_managed_agents_memory: object`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
   - `id: string`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `content_sha256: string`
 
@@ -53214,7 +53398,7 @@ Update a memory
 
   - `content_size_bytes: number`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -53230,7 +53414,11 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -53238,13 +53426,17 @@ Update a memory
 
   - `updated_at: string`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `content: optional string`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -53272,13 +53464,13 @@ ant beta:memory-stores:memories update \
 }
 ```
 
-### Delete a memory
+### Delete a Memory
 
 `$ ant beta:memory-stores:memories delete`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Delete a memory
+Delete a Memory
 
 #### Parameters
 
@@ -53310,7 +53502,11 @@ Delete a memory
 
 - `beta_managed_agents_deleted_memory: object`
 
-  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+  The confirmation that [Delete a Memory](./api-beta-memory_stores-memories-delete.md) returns.
+
+  Deleting a memory doesn't delete its versions. [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
   - `type: "memory_deleted"`
 
@@ -53338,13 +53534,13 @@ ant beta:memory-stores:memories delete \
 
 ## Beta › Memory Stores › Memory Versions
 
-### List memory versions
+### List Memory Versions
 
 `$ ant beta:memory-stores:memory-versions list`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-List memory versions
+List Memory Versions
 
 #### Parameters
 
@@ -53370,7 +53566,9 @@ List memory versions
 
 - `--limit: optional number` (query parameter)
 
-  The maximum number of versions to return per page. Defaults to 20.
+  The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
+
+  With `view=full`, a page holds at most 20 versions.
 
   format: int32
 
@@ -53378,7 +53576,7 @@ List memory versions
 
   Return only versions of the memory with this ID (`mem_...`).
 
-  The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
+  The filter still works after the memory is deleted. While that memory's versions are retained, the results include the version whose `operation` is `deleted`.
 
 - `--operation: optional "created" or "modified" or "deleted"` (query parameter)
 
@@ -53398,7 +53596,9 @@ List memory versions
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -53414,7 +53614,7 @@ List memory versions
 
 - `BetaManagedAgentsListMemoryVersionsResult: object`
 
-  Response payload for [List memory versions](./api-beta-memory_stores-memory_versions-list.md).
+  A page of results from [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md).
 
   - `data: optional array of BetaManagedAgentsMemoryVersion`
 
@@ -53434,7 +53634,9 @@ List memory versions
 
     - `memory_id: string`
 
-      ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+      The ID of the memory that this version belongs to (`mem_...`).
+
+      The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
     - `memory_store_id: string`
 
@@ -53472,7 +53674,11 @@ List memory versions
 
     - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-      Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+      Who made this change to the memory, or `null` if the author wasn't recorded.
+
+      Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+      You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
       - `beta_managed_agents_session_actor: object`
 
@@ -53528,7 +53734,11 @@ List memory versions
 
     - `redacted_at: optional string`
 
-      When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+      When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+      When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+      See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
       format: date-time
 
@@ -53554,7 +53764,7 @@ List memory versions
 
   - `next_page: optional string`
 
-    Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
+    The value to pass as `page` to get the next page, or `null` if there are no more results.
 
 #### Example
 
@@ -53595,13 +53805,13 @@ ant beta:memory-stores:memory-versions list \
 }
 ```
 
-### Retrieve a memory version
+### Retrieve a Memory Version
 
 `$ ant beta:memory-stores:memory-versions retrieve`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-Retrieve a memory version
+Retrieve a Memory Version
 
 #### Parameters
 
@@ -53615,7 +53825,9 @@ Retrieve a memory version
 
 - `--view: optional "basic" or "full"` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -53631,7 +53843,13 @@ Retrieve a memory version
 
 - `beta_managed_agents_memory_version: object`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `type: "memory_version"`
 
@@ -53647,7 +53865,9 @@ Retrieve a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -53685,7 +53905,11 @@ Retrieve a memory version
 
   - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
     - `beta_managed_agents_session_actor: object`
 
@@ -53741,7 +53965,11 @@ Retrieve a memory version
 
   - `redacted_at: optional string`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -53800,13 +54028,13 @@ ant beta:memory-stores:memory-versions retrieve \
 }
 ```
 
-### Redact a memory version
+### Redact a Memory Version
 
 `$ ant beta:memory-stores:memory-versions redact`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
-Redact a memory version
+Redact a Memory Version
 
 #### Parameters
 
@@ -53832,7 +54060,13 @@ Redact a memory version
 
 - `beta_managed_agents_memory_version: object`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `type: "memory_version"`
 
@@ -53848,7 +54082,9 @@ Redact a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](./api-beta-memory_stores-memory_versions-list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -53886,7 +54122,11 @@ Redact a memory version
 
   - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor or BetaManagedAgentsServiceAccountActor`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](./api-beta-sessions-retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](./api-beta-sessions-retrieve.md) to learn more about where the change came from.
 
     - `beta_managed_agents_session_actor: object`
 
@@ -53942,7 +54182,11 @@ Redact a memory version
 
   - `redacted_at: optional string`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](./api-beta-memory_stores-memory_versions-redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../managed-agents/managed-agents-memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -55353,17 +55597,17 @@ Create User Profile
 
 - `--external-id: optional string`
 
-  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
   minLength: 1, maxLength: 255
 
 - `--external-user-details: optional object`
 
-  Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
+  Details about the entity this profile represents, as the platform states them. Every field is optional. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which take the top-level `external_id` (and, under `user-profiles-2026-08-18`, `external_user_onboarded_at`) instead.
 
 - `--external-user-onboarded-at: optional string`
 
-  When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+  When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
   format: date-time
 
@@ -55379,7 +55623,7 @@ Create User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55413,6 +55657,10 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `name: string`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -55429,13 +55677,13 @@ Create User Profile
 
   - `updated_at: string`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `"application"`
 
@@ -55447,11 +55695,11 @@ Create User Profile
 
   - `external_id: optional string`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `external_user_details: optional object`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `account_status: "active" or "suspended" or "blocked"`
 
@@ -55505,13 +55753,9 @@ Create User Profile
 
   - `external_user_onboarded_at: optional string`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `name: optional string`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
@@ -55527,6 +55771,7 @@ ant beta:user-profiles create \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -55538,15 +55783,14 @@ ant beta:user-profiles create \
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -55582,7 +55826,7 @@ List User Profiles
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55618,6 +55862,10 @@ List User Profiles
 
       Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+    - `name: string`
+
+      Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
     - `trust_grants: map[BetaUserProfileTrustGrant]`
 
       Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -55634,13 +55882,13 @@ List User Profiles
 
     - `updated_at: string`
 
-      When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+      When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
       format: date-time
 
     - `access_type: optional "application" or "passthrough"`
 
-      How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+      How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
       - `"application"`
 
@@ -55652,11 +55900,11 @@ List User Profiles
 
     - `external_id: optional string`
 
-      Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+      Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
     - `external_user_details: optional object`
 
-      Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+      Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
       - `account_status: "active" or "suspended" or "blocked"`
 
@@ -55710,13 +55958,9 @@ List User Profiles
 
     - `external_user_onboarded_at: optional string`
 
-      When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+      When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
       format: date-time
-
-    - `name: optional string`
-
-      Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
   - `next_page: string`
 
@@ -55738,6 +55982,7 @@ ant beta:user-profiles list \
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
+      "name": "Example User",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -55749,15 +55994,14 @@ ant beta:user-profiles list \
       "external_id": "user_12345",
       "external_user_details": {
         "account_status": "active",
-        "country": "country",
-        "email_hash": "email_hash",
-        "entity_type": "individual",
-        "name_hash": "name_hash",
-        "onboarded_at": "2019-12-27T18:11:19.117Z",
-        "reference_id": "reference_id"
+        "country": "US",
+        "email_hash": null,
+        "entity_type": "business",
+        "name_hash": null,
+        "onboarded_at": "2024-11-02T08:15:00Z",
+        "reference_id": "user_12345"
       },
-      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-      "name": "Example User"
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -55780,7 +56024,7 @@ Get User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55814,6 +56058,10 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `name: string`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -55830,13 +56078,13 @@ Get User Profile
 
   - `updated_at: string`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `"application"`
 
@@ -55848,11 +56096,11 @@ Get User Profile
 
   - `external_id: optional string`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `external_user_details: optional object`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `account_status: "active" or "suspended" or "blocked"`
 
@@ -55906,13 +56154,9 @@ Get User Profile
 
   - `external_user_onboarded_at: optional string`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `name: optional string`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
@@ -55929,6 +56173,7 @@ ant beta:user-profiles retrieve \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -55940,15 +56185,14 @@ ant beta:user-profiles retrieve \
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -55972,17 +56216,17 @@ Update User Profile
 
 - `--external-id: optional string`
 
-  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
   minLength: 1, maxLength: 255
 
 - `--external-user-details: optional object`
 
-  Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
+  Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers.
 
 - `--external-user-onboarded-at: optional string`
 
-  If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+  If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
   format: date-time
 
@@ -55998,7 +56242,7 @@ Update User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56032,6 +56276,10 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `name: string`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -56048,13 +56296,13 @@ Update User Profile
 
   - `updated_at: string`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `"application"`
 
@@ -56066,11 +56314,11 @@ Update User Profile
 
   - `external_id: optional string`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `external_user_details: optional object`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `account_status: "active" or "suspended" or "blocked"`
 
@@ -56124,13 +56372,9 @@ Update User Profile
 
   - `external_user_onboarded_at: optional string`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `name: optional string`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
@@ -56147,6 +56391,7 @@ ant beta:user-profiles update \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -56158,15 +56403,67 @@ ant beta:user-profiles update \
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
+}
+```
+
+### Delete User Profile
+
+`$ ant beta:user-profiles delete`
+
+**DELETE** `/v1/user_profiles/{user_profile_id}`
+
+Delete User Profile
+
+#### Parameters
+
+- `--user-profile-id: string` (path parameter)
+
+  The ID of the user profile to delete (`uprof_...`).
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `--workspace-id: optional string` (header parameter)
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `beta_deleted_user_profile: object`
+
+  - `type: "user_profile_deleted"`
+
+    Object type. Always `user_profile_deleted`.
+
+  - `id: string`
+
+    Identifier of the deleted user profile, prefixed `uprof_`.
+
+#### Example
+
+```bash
+ant beta:user-profiles delete \
+  --api-key my-anthropic-api-key \
+  --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "type": "user_profile_deleted"
 }
 ```
 
@@ -56186,7 +56483,7 @@ Create Enrollment URL
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56198,7 +56495,7 @@ Create Enrollment URL
 
 - `beta_user_profile_enrollment_url: object`
 
-  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+  A URL to give to the entity that a user profile represents, so that the entity can enroll in a program.
 
   - `type: "enrollment_url"`
 
@@ -56228,6 +56525,75 @@ ant beta:user-profiles create-enrollment-url \
 {
   "expires_at": "2026-03-15T10:15:00Z",
   "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
+```
+
+## Beta › User Profiles › Action URLs
+
+### Create Action URL
+
+`$ ant beta:user-profiles:action-urls create`
+
+**POST** `/v1/user_profiles/{user_profile_id}/action_urls`
+
+Create Action URL
+
+#### Parameters
+
+- `--user-profile-id: string` (path parameter)
+
+  The ID of the user profile the action is for (`uprof_...`).
+
+- `--action: object`
+
+  The action that the person who opens the URL takes.
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `--workspace-id: optional string` (header parameter)
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `beta_user_profile_action_url: object`
+
+  A URL to give to the person who takes the requested action.
+
+  - `type: "user_profile_action_url"`
+
+    Object type. Always `user_profile_action_url`.
+
+  - `expires_at: string`
+
+    When the URL stops working, in RFC 3339 format.
+
+    format: date-time
+
+  - `url: string`
+
+    The URL to give to the person who takes the action. Anyone who holds it can open it until `expires_at`.
+
+#### Example
+
+```bash
+ant beta:user-profiles:action-urls create \
+  --api-key my-anthropic-api-key \
+  --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9 \
+  --action '{type: enroll_end_user}'
+```
+
+##### Response (200)
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "user_profile_action_url",
   "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
@@ -65159,6 +65525,217 @@ ant beta:organization:workspaces:rate-limits list \
 }
 ```
 
+### Set Workspace Rate Limits
+
+`$ ant beta:organization:workspaces:rate-limits update`
+
+**POST** `/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}`
+
+Set or clear rate-limit overrides for one rate-limit group in a workspace.
+
+Only the limiter types named in `limits` change: an integer `value` sets
+that type's override and `null` clears it. Types not named keep their
+current value. A value above the organization's own limit is stored, but
+the organization limit still applies, so the lower of the two is
+enforced.
+
+Returns the targeted group's entry with this request applied, in the shape
+`GET /v1/organizations/workspaces/{workspace_id}/rate_limits` returns.
+Changes take effect within about an hour.
+
+#### Parameters
+
+- `--workspace-id: string` (path parameter)
+
+  The ID of the workspace.
+
+- `--rate-limit-id: string` (path parameter)
+
+  The `id` of the organization's rate-limit entry to set overrides for.
+
+- `--limit: array of BetaWorkspaceRateLimitUpdateValue`
+
+  Limits to set or clear. Unspecified limit types are unchanged.
+
+  minItems: 1, maxItems: 16
+
+#### Returns
+
+- `beta_workspace_rate_limit: object`
+
+  - `type: "workspace_rate_limit"`
+
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+  - `group: BetaOrganizationRateLimitModelGroup or BetaOrganizationRateLimitBatchGroup or BetaOrganizationRateLimitTokenCountGroup or 3 more`
+
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
+
+    - `beta_organization_rate_limit_model_group: object`
+
+      - `type: "model_group"`
+
+        Always `model_group`: a family of models.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+      - `display_name: string`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `beta_organization_rate_limit_batch_group: object`
+
+      - `type: "batch"`
+
+        Always `batch`: the Message Batches API.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `beta_organization_rate_limit_token_count_group: object`
+
+      - `type: "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `beta_organization_rate_limit_files_group: object`
+
+      - `type: "files"`
+
+        Always `files`: the Files API.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `beta_organization_rate_limit_skills_group: object`
+
+      - `type: "skills"`
+
+        Always `skills`: the Skills API.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `beta_organization_rate_limit_web_search_group: object`
+
+      - `type: "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+  - `limits: array of BetaWorkspaceRateLimitValue`
+
+    The workspace's limiter values for this group. By default only the limiter types with a workspace-level override are listed. With `include_inherited` set to `true`, the limiter types the workspace inherits from the organization are listed too, each marked by `source`.
+
+    - `type: string`
+
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+    - `org_limit: number`
+
+      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+
+    - `source: BetaWorkspaceRateLimitWorkspaceSource or BetaWorkspaceRateLimitOrganizationSource`
+
+      Where `value` comes from. `organization` values are listed only when `include_inherited` is `true`, and then `value` equals `org_limit`.
+
+      - `beta_workspace_rate_limit_workspace_source: object`
+
+        - `type: "workspace"`
+
+          Always `workspace`: a workspace-level override is stored.
+
+      - `beta_workspace_rate_limit_organization_source: object`
+
+        - `type: "organization"`
+
+          Always `organization`: no workspace-level override is stored, so the organization's value applies.
+
+    - `value: number`
+
+      The workspace's value for this limiter type: the workspace-level override when `source.type` is `workspace`, otherwise the organization's value.
+
+  - `models: array of string`
+
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `rate_limit_id: string`
+
+    The `id` of the organization's RateLimit entry this entry applies to.
+
+  - `workspace_id: string`
+
+    ID of the Workspace this entry applies to.
+
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `"batch"`
+
+    - `"files"`
+
+    - `"model_group"`
+
+    - `"skills"`
+
+    - `"token_count"`
+
+    - `"web_search"`
+
+#### Example
+
+```bash
+ant beta:organization:workspaces:rate-limits update \
+  --api-key my-anthropic-api-key \
+  --workspace-id workspace_id \
+  --rate-limit-id rate_limit_id \
+  --limit '{type: fast_itpmca, value: 0}'
+```
+
+##### Response (200)
+
+```json
+{
+  "group": {
+    "id": "id",
+    "display_name": "display_name",
+    "type": "model_group"
+  },
+  "group_type": "batch",
+  "limits": [
+    {
+      "org_limit": 0,
+      "source": {
+        "type": "workspace"
+      },
+      "type": "type",
+      "value": 0
+    }
+  ],
+  "models": [
+    "string"
+  ],
+  "rate_limit_id": "rate_limit_id",
+  "type": "workspace_rate_limit",
+  "workspace_id": "workspace_id"
+}
+```
+
 ## Beta › Organization › Workspaces › Members
 
 ### List Workspace Members
@@ -66041,7 +66618,7 @@ the remaining entries.
 
     - `id: string`
 
-      Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
+      Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`. Pass it as `rate_limit_id` to set a workspace's overrides for this group.
 
     - `group: BetaOrganizationRateLimitModelGroup or BetaOrganizationRateLimitBatchGroup or BetaOrganizationRateLimitTokenCountGroup or 3 more`
 
@@ -77332,5 +77909,602 @@ ant beta:organization:telemetry-destinations:workspaces remove \
   "telemetry_destination_id": "telemetry_destination_id",
   "type": "telemetry_destination_workspace_deleted",
   "workspace_id": "workspace_id"
+}
+```
+
+## Beta › Organization › Webhooks
+
+### Create Organization Webhook Endpoint
+
+`$ ant beta:organization:webhooks create`
+
+**POST** `/v1/organizations/webhooks`
+
+Create an organization webhook endpoint.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. An organization can have at most 32 organization
+webhook endpoints, enabled or disabled.
+
+The response includes the endpoint's signing secret. No read returns it, so store
+it when you receive it.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--enabled-event: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+  The event types to deliver to the endpoint. Must list at least one.
+
+- `--url: string`
+
+  The HTTPS URL that deliveries are sent to.
+
+  minLength: 1
+
+- `--description: optional string`
+
+  Notes about the endpoint.
+
+- `--name: optional string`
+
+  A short label for the endpoint.
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `beta_new_organization_webhook_endpoint: object`
+
+  A new organization webhook endpoint, with its signing secret.
+
+  - `id: string`
+
+    ID of the webhook endpoint.
+
+  - `created_at: string`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `description: string`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `disabled_reason: string`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+    The event types delivered to the endpoint.
+
+    - `"user_profile.enforcement_action_opened"`
+
+    - `"user_profile.enforcement_action_resolved"`
+
+  - `name: string`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `signing_secret: string`
+
+    The secret Anthropic signs deliveries to the endpoint with (prefix `whsec_`). No other response returns it, so store it now. To replace it, regenerate the signing secret.
+
+  - `state: "disabled" or "enabled"`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `"disabled"`
+
+    - `"enabled"`
+
+  - `updated_at: string`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `url: string`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks create \
+  --api-key my-anthropic-api-key \
+  --enabled-event user_profile.enforcement_action_opened \
+  --url x
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "signing_secret": "signing_secret",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### List Organization Webhook Endpoints
+
+`$ ant beta:organization:webhooks list`
+
+**GET** `/v1/organizations/webhooks`
+
+List the organization's webhook endpoints.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. The list does not include webhook endpoints that
+belong to a workspace.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--after-id: optional string` (query parameter)
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `--before-id: optional string` (query parameter)
+
+  ID of a webhook endpoint to use as a cursor. Returns the first `limit` endpoints that come before it in list order, not the `limit` endpoints just before it.
+
+- `--limit: optional number` (query parameter)
+
+  Number of items to return per page, up to `100`. The default, `0`, means `20`.
+
+  minimum: 0, maximum: 100
+
+- `--order: optional "asc" or "desc"` (query parameter)
+
+  Sort order by `created_at`. Defaults to `desc`, newest first.
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `BetaOrganizationWebhookEndpointList: object`
+
+  A page of organization webhook endpoints.
+
+  - `data: array of BetaOrganizationWebhookEndpoint`
+
+    The organization webhook endpoints on this page.
+
+    - `id: string`
+
+      ID of the webhook endpoint.
+
+    - `created_at: string`
+
+      When the endpoint was created, in RFC 3339 format.
+
+      format: date-time
+
+    - `description: string`
+
+      Notes about the endpoint. An empty string when none were given.
+
+    - `disabled_reason: string`
+
+      Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+    - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+      The event types delivered to the endpoint.
+
+      - `"user_profile.enforcement_action_opened"`
+
+      - `"user_profile.enforcement_action_resolved"`
+
+    - `name: string`
+
+      A short label for the endpoint. An empty string when none was given.
+
+    - `state: "disabled" or "enabled"`
+
+      Whether deliveries are sent to the endpoint.
+
+      - `"disabled"`
+
+      - `"enabled"`
+
+    - `updated_at: string`
+
+      When the endpoint was last changed, in RFC 3339 format.
+
+      format: date-time
+
+    - `url: string`
+
+      The HTTPS URL that deliveries are sent to.
+
+  - `has_more: boolean`
+
+    Whether more endpoints follow this page in list order. With `before_id`, only endpoints before the cursor count.
+
+  - `first_id: optional string`
+
+    First ID in the `data` list.
+
+  - `last_id: optional string`
+
+    Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks list \
+  --api-key my-anthropic-api-key
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "disabled_reason": "disabled_reason",
+      "enabled_events": [
+        "user_profile.enforcement_action_opened"
+      ],
+      "name": "name",
+      "state": "disabled",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "url": "url"
+    }
+  ],
+  "has_more": true,
+  "first_id": "first_id",
+  "last_id": "last_id"
+}
+```
+
+### Get Organization Webhook Endpoint
+
+`$ ant beta:organization:webhooks retrieve`
+
+**GET** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Retrieve an organization webhook endpoint by ID.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--webhook-endpoint-id: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+  maxLength: 2048
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `beta_organization_webhook_endpoint: object`
+
+  A webhook endpoint that belongs to the organization rather than to one of
+  its workspaces.
+
+  - `id: string`
+
+    ID of the webhook endpoint.
+
+  - `created_at: string`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `description: string`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `disabled_reason: string`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+    The event types delivered to the endpoint.
+
+    - `"user_profile.enforcement_action_opened"`
+
+    - `"user_profile.enforcement_action_resolved"`
+
+  - `name: string`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `state: "disabled" or "enabled"`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `"disabled"`
+
+    - `"enabled"`
+
+  - `updated_at: string`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `url: string`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks retrieve \
+  --api-key my-anthropic-api-key \
+  --webhook-endpoint-id webhook_endpoint_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Update Organization Webhook Endpoint
+
+`$ ant beta:organization:webhooks update`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Update an organization webhook endpoint. Only the fields you send are changed.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--webhook-endpoint-id: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+  maxLength: 2048
+
+- `--description: optional string`
+
+  Notes about the endpoint.
+
+- `--enabled-event: optional array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+  The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
+
+- `--name: optional string`
+
+  A short label for the endpoint.
+
+- `--state: optional "disabled" or "enabled"`
+
+  `disabled` stops deliveries. `enabled` resumes them and clears `disabled_reason`. Events that happen while the endpoint is disabled are never delivered.
+
+- `--url: optional string`
+
+  The HTTPS URL that deliveries are sent to.
+
+  minLength: 1
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `beta_organization_webhook_endpoint: object`
+
+  A webhook endpoint that belongs to the organization rather than to one of
+  its workspaces.
+
+  - `id: string`
+
+    ID of the webhook endpoint.
+
+  - `created_at: string`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `description: string`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `disabled_reason: string`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
+
+    The event types delivered to the endpoint.
+
+    - `"user_profile.enforcement_action_opened"`
+
+    - `"user_profile.enforcement_action_resolved"`
+
+  - `name: string`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `state: "disabled" or "enabled"`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `"disabled"`
+
+    - `"enabled"`
+
+  - `updated_at: string`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `url: string`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks update \
+  --api-key my-anthropic-api-key \
+  --webhook-endpoint-id webhook_endpoint_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Delete Organization Webhook Endpoint
+
+`$ ant beta:organization:webhooks delete`
+
+**DELETE** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Delete an organization webhook endpoint.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--webhook-endpoint-id: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+  maxLength: 2048
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `beta_deleted_organization_webhook_endpoint: object`
+
+  A deleted organization webhook endpoint.
+
+  - `type: "webhook_endpoint_deleted"`
+
+    Always `webhook_endpoint_deleted`.
+
+  - `id: string`
+
+    ID of the deleted webhook endpoint.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks delete \
+  --api-key my-anthropic-api-key \
+  --webhook-endpoint-id webhook_endpoint_id
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "webhook_endpoint_deleted"
+}
+```
+
+### Regenerate Organization Webhook Endpoint Signing Secret
+
+`$ ant beta:organization:webhooks regenerate-signing-secret`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`
+
+Replace an organization webhook endpoint's signing secret. The old secret stops
+working immediately. The new secret is returned only in this response.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `--webhook-endpoint-id: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+  maxLength: 2048
+
+- `--beta: optional array of AnthropicBeta` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `beta_organization_webhook_endpoint_signing_secret: object`
+
+  An organization webhook endpoint's new signing secret.
+
+  - `signing_secret: string`
+
+    The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Example
+
+```bash
+ant beta:organization:webhooks regenerate-signing-secret \
+  --api-key my-anthropic-api-key \
+  --webhook-endpoint-id webhook_endpoint_id
+```
+
+##### Response (200)
+
+```json
+{
+  "signing_secret": "signing_secret"
 }
 ```

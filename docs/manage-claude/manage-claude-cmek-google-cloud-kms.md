@@ -19,7 +19,7 @@ Let Claude Code set up this feature for you
 This guide shows how to use a Google Cloud KMS key as a [customer-managed encryption key (CMEK)](./manage-claude-cmek.md) for your Anthropic organization.
 
 <Warning>
-  Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](./manage-claude-cmek.md) before you begin.
+  Enabling CMEK is permanent. If your key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](./manage-claude-cmek.md) before you start.
 </Warning>
 
 ## Prerequisites

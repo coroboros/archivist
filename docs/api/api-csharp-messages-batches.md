@@ -3109,7 +3109,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string userProfileID` (header parameter)
 
-    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
   - `string workspaceID` (header parameter)
 
@@ -3218,6 +3218,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using Messages = Anthropic.Models.Messages;
+using Anthropic.Models.Messages.Batches;
+
 BatchCreateParams parameters = new()
 {
     Requests =
@@ -3233,12 +3239,12 @@ BatchCreateParams parameters = new()
                     new()
                     {
                         Content = "Hello, world",
-                        Role = Role.User,
+                        Role = Messages::Role.User,
                     },
                 ],
-                Model = Model.ClaudeOpus5_5,
-                CacheControl = new() { Ttl = Ttl.Ttl5m },
-                Container = new ContainerParams()
+                Model = Messages::Model.ClaudeOpus5_5,
+                CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
+                Container = new Messages::ContainerParams()
                 {
                     ID = "id",
                     Skills =
@@ -3246,7 +3252,7 @@ BatchCreateParams parameters = new()
                         new()
                         {
                             SkillID = "pdf",
-                            Type = SkillParamsType.Anthropic,
+                            Type = Messages::SkillParamsType.Anthropic,
                             Version = "latest",
                         },
                     ],
@@ -3262,7 +3268,7 @@ BatchCreateParams parameters = new()
                 },
                 OutputConfig = new()
                 {
-                    Effort = Effort.Low,
+                    Effort = Messages::Effort.Low,
                     Format = new()
                     {
                         Schema = new Dictionary<string, JsonElement>()
@@ -3281,13 +3287,13 @@ BatchCreateParams parameters = new()
                 System = new(
 
                     [
-                        new TextBlockParam()
+                        new Messages::TextBlockParam()
                         {
                             Text = "Today's date is 2024-06-01.",
-                            CacheControl = new() { Ttl = Ttl.Ttl5m },
+                            CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
                             Citations =
                             [
-                                new CitationCharLocationParam()
+                                new Messages::CitationCharLocationParam()
                                 {
                                     CitedText = "The grass is green. The sky is blue.",
                                     DocumentIndex = 0,
@@ -3300,17 +3306,17 @@ BatchCreateParams parameters = new()
                     ]
                 ),
                 Temperature = 1,
-                Thinking = new ThinkingConfigAdaptive()
+                Thinking = new Messages::ThinkingConfigAdaptive()
                 {
-                    Display = Display.Summarized
+                    Display = Messages::Display.Summarized
                 },
-                ToolChoice = new ToolChoiceAuto()
+                ToolChoice = new Messages::ToolChoiceAuto()
                 {
                     DisableParallelToolUse = true
                 },
                 Tools =
                 [
-                    new Tool()
+                    new Messages::Tool()
                     {
                         InputSchema = new()
                         {
@@ -3327,9 +3333,9 @@ BatchCreateParams parameters = new()
                         Name = "name",
                         AllowedCallers =
                         [
-                            AllowedCaller.Direct
+                            Messages::ToolAllowedCaller.Direct
                         ],
-                        CacheControl = new() { Ttl = Ttl.Ttl5m },
+                        CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
                         DeferLoading = true,
                         Description = "Get the current weather in a given location",
                         EagerInputStreaming = true,
@@ -3341,7 +3347,7 @@ BatchCreateParams parameters = new()
                             },
                         ],
                         Strict = true,
-                        Type = Type.Custom,
+                        Type = Messages::Type.Custom,
                     },
                 ],
                 TopK = 5,
@@ -3504,6 +3510,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchRetrieveParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var messageBatch = await client.Messages.Batches.Retrieve(parameters);
@@ -3671,6 +3680,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchListParams parameters = new();
 
 var page = await client.Messages.Batches.List(parameters);
@@ -3837,6 +3849,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchCancelParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var messageBatch = await client.Messages.Batches.Cancel(parameters);
@@ -3910,6 +3925,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var deletedMessageBatch = await client.Messages.Batches.Delete(parameters);
@@ -4669,6 +4687,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "model_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -4676,6 +4698,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "system_changed"`
 
@@ -4685,6 +4711,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "tools_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -4692,6 +4722,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "messages_changed"`
 
@@ -4701,9 +4735,21 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `class CacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "previous_message_not_found"`
 
             - `class CacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "unavailable"`
 
@@ -5066,6 +5112,9 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchResultsParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 await foreach (var messageBatchIndividualResponse in client.Messages.Batches.ResultsStreaming(parameters))
@@ -5985,6 +6034,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `class CacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "model_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -5992,6 +6045,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "system_changed"`
 
@@ -6001,6 +6058,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `class CacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "tools_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -6008,6 +6069,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class CacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "messages_changed"`
 
@@ -6017,9 +6082,21 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `class CacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "previous_message_not_found"`
 
             - `class CacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "unavailable"`
 
@@ -7118,6 +7195,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `class CacheMissModelChanged`
 
+            A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonElement Type = "model_changed"`
 
             - `required long CacheMissedInputTokens`
@@ -7125,6 +7206,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `class CacheMissSystemChanged`
+
+            A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonElement Type = "system_changed"`
 
@@ -7134,6 +7219,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `class CacheMissToolsChanged`
 
+            A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonElement Type = "tools_changed"`
 
             - `required long CacheMissedInputTokens`
@@ -7141,6 +7230,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
           - `class CacheMissMessagesChanged`
+
+            A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonElement Type = "messages_changed"`
 
@@ -7150,9 +7243,21 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `class CacheMissPreviousMessageNotFound`
 
+            A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+            This doesn't mean that this request changed.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
             - `JsonElement Type = "previous_message_not_found"`
 
           - `class CacheMissUnavailable`
+
+            A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+            This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+            See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
             - `JsonElement Type = "unavailable"`
 
@@ -8213,6 +8318,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `class CacheMissModelChanged`
 
+          A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonElement Type = "model_changed"`
 
           - `required long CacheMissedInputTokens`
@@ -8220,6 +8329,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `class CacheMissSystemChanged`
+
+          A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonElement Type = "system_changed"`
 
@@ -8229,6 +8342,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `class CacheMissToolsChanged`
 
+          A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonElement Type = "tools_changed"`
 
           - `required long CacheMissedInputTokens`
@@ -8236,6 +8353,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
         - `class CacheMissMessagesChanged`
+
+          A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonElement Type = "messages_changed"`
 
@@ -8245,9 +8366,21 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `class CacheMissPreviousMessageNotFound`
 
+          A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+          This doesn't mean that this request changed.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
           - `JsonElement Type = "previous_message_not_found"`
 
         - `class CacheMissUnavailable`
+
+          A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+          This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+          See the [cache diagnostics guide](../build-with-claude/build-with-claude-cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
           - `JsonElement Type = "unavailable"`
 

@@ -25,7 +25,7 @@ Create Enrollment URL
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -55,6 +55,9 @@ Create Enrollment URL
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

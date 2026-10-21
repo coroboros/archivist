@@ -271,7 +271,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `userProfileID?:optional string` (header parameter)
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -540,6 +540,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Messages\BetaThinkingPrefixMismatchBehavior;
+use Anthropic\Messages\Model;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
