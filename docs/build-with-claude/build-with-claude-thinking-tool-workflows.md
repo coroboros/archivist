@@ -159,7 +159,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           MaxTokens = 16000,
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
-          Messages = [new() { Role = Role.User, Content = "What's the weather in Paris?" }]
+          Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }]
       };
 
       var message = await client.Messages.Create(parameters);
@@ -465,9 +465,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           MaxTokens = 16000,
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
-          Messages = [
-              new() { Role = Role.User, Content = "What's the weather in Paris?" }
-          ]
+          Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }]
       };
 
       var response = await client.Messages.Create(parameters);
@@ -493,17 +491,17 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
           Messages = [
-              new() { Role = Role.User, Content = "What's the weather in Paris?" },
+              new UserMessageParam { Content = "What's the weather in Paris?" },
               // response.Content includes the thinking blocks; passing them back is required
-              new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-              new() { Role = Role.User, Content = new MessageParamContent(new List<ContentBlockParam>
+              new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+              new UserMessageParam { Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ToolResultBlockParam()
                   {
                       ToolUseID = toolUseBlock?.ID ?? "",
                       Content = $"Current temperature: {weatherData.temperature}°F"
                   })
-              })}
+              }}
           ]
       };
 
@@ -623,7 +621,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
               .addTool(weatherTool)
               .addUserMessage("What's the weather in Paris?")
               .addMessage(response)
-              .addUserMessageOfBlockParams(List.of(
+              .addUserMessageOfContentBlockParams(List.of(
                   ContentBlockParam.ofToolResult(
                       ToolResultBlockParam.builder()
                           .toolUseId(toolUseBlock.id())

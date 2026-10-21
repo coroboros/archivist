@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/manage-claude/user-profiles
 description: Attribute API requests to the end customers your platform serves, so a safety enforcement action can apply to one profile instead of your whole organization.
 ---
 
-User profiles ("profiles") tell Anthropic which of your end customers each API request is for. A safety enforcement action, such as a hold or a block, can then apply to one end customer instead of your whole organization. When it does, the rest of your traffic is unaffected.
+User profiles ("profiles") tell Anthropic which of your end customers each API request is for. A safety enforcement action, such as a restriction or a ban, can then apply to one end customer instead of your whole organization. When it does, the rest of your traffic is unaffected.
 
 If you operate a platform or gateway, or resell API access, the requests you send for your end customers arrive under your organization. Anthropic runs automated safety classifiers over API traffic. Without a profile on the request, one end customer can trigger an enforcement action that applies to your whole organization.
 
@@ -156,6 +156,7 @@ The following example registers a company that buys API access through a gateway
       var profile = client.userProfiles().create(params);
 
       IO.println(profile.id());
+  // ...
   }
   ```
 
@@ -230,14 +231,14 @@ Follow these rules when you set the fields:
 
 ## Attribute each request
 
-Send the profile ID in the `anthropic-user-profile-id` header on every request you make on the end customer's behalf. The SDKs and the CLI have an argument that sends the header for you: `user_profile_id` (java: `userProfileId`; php: `userProfileID`; csharp, go: `UserProfileID`; cli: `--user-profile-id`).
+Send the profile ID in the `anthropic-user-profile-id` header on every request you make on the end customer's behalf. The SDK and the CLI have an argument that sends the header for you: `user_profile_id` (java: `userProfileId`; php: `userProfileID`; csharp, go: `UserProfileID`; cli: `--user-profile-id`).
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-user-profile-id: uprof_011CZkZCu8hGbp5mYRQgUmz9" \
+    -H "anthropic-user-profile-id: $PROFILE_ID" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -253,7 +254,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
     --model claude-opus-5-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}' \
-    --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
+    --user-profile-id "$PROFILE_ID"
   ```
 
   ```python Python
@@ -263,7 +264,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
       model="claude-opus-5-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
-      user_profile_id="uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      user_profile_id=profile_id,
   )
 
   print(message)
@@ -276,7 +277,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
     model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    user_profile_id: "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+    user_profile_id: profileId
   });
 
   console.log(message);
@@ -289,8 +290,8 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
-      UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
+      UserProfileID = profileId
   };
   var message = await client.Messages.Create(parameters);
 
@@ -306,7 +307,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
   	},
-  	UserProfileID: anthropic.String("uprof_011CZkZCu8hGbp5mYRQgUmz9"),
+  	UserProfileID: anthropic.String(profileID),
   })
   if err != nil {
   	log.Fatal(err)
@@ -326,7 +327,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
           .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024L)
           .addUserMessage("Hello, Claude")
-          .userProfileId("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+          .userProfileId(profileId)
           .build();
       var message = client.messages().create(params);
 
@@ -341,7 +342,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
       model: Model::CLAUDE_OPUS_5_5,
-      userProfileID: 'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+      userProfileID: $profileId,
   );
 
   echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -354,7 +355,7 @@ Send the profile ID in the `anthropic-user-profile-id` header on every request y
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    user_profile_id: "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+    user_profile_id: profile_id
   )
 
   puts message
@@ -396,7 +397,7 @@ Link each AWS account that sends requests to Claude in Amazon Bedrock, and each 
 2. Someone who can manage IAM in the AWS account or Google Cloud project runs a command that the portal provides.
 3. The admin or owner completes the verification in the portal.
 
-Programs that apply to a profile apply to an account's requests only after the account is linked and the portal shows it as **Linked**. Those programs include the ones an end customer's organization is approved for after the end customer [links the profile to that organization](./manage-claude-user-profiles-verification-portal.md).
+Programs that apply to a profile apply to an account's requests only after the account is linked and the portal shows it as **Linked**. Those programs include the ones an end customer's organization is approved for after the end customer [links the profile to that organization](./manage-claude-user-profiles-verification-portal.md) and, for Cyber Verification Program access levels, turns them on for the profile in the portal.
 
 Claude in Amazon Bedrock and Google Cloud check the format of the ID but don't look the profile up. They reject a malformed ID with a `400`. They accept any well-formed ID, so a successful response doesn't confirm that the ID matches a profile. A request with no ID goes through unattributed, and if it triggers an enforcement action, the action applies to your whole organization.
 
@@ -420,7 +421,7 @@ The following example marks the account as suspended and removes a `trial_cohort
 
 <CodeGroup>
   ```bash cURL
-  curl https://api.anthropic.com/v1/user_profiles/uprof_011CZkZCu8hGbp5mYRQgUmz9 \
+  curl "https://api.anthropic.com/v1/user_profiles/$PROFILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -432,7 +433,7 @@ The following example marks the account as suspended and removes a `trial_cohort
 
   ```bash CLI
   ant user-profiles update \
-    --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9 \
+    --user-profile-id "$PROFILE_ID" \
     --external-user-details '{account_status: suspended}' \
     --metadata '{trial_cohort: ""}'
   ```
@@ -441,7 +442,7 @@ The following example marks the account as suspended and removes a `trial_cohort
   client = anthropic.Anthropic()
 
   profile = client.user_profiles.update(
-      "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      profile_id,
       external_user_details={"account_status": "suspended"},
       metadata={"trial_cohort": ""},
   )
@@ -452,7 +453,7 @@ The following example marks the account as suspended and removes a `trial_cohort
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const profile = await client.userProfiles.update("uprof_011CZkZCu8hGbp5mYRQgUmz9", {
+  const profile = await client.userProfiles.update(profileId, {
     external_user_details: { account_status: "suspended" },
     metadata: { trial_cohort: "" }
   });
@@ -463,7 +464,7 @@ The following example marks the account as suspended and removes a `trial_cohort
   ```csharp C#
   AnthropicClient client = new();
 
-  var profile = await client.UserProfiles.Update("uprof_011CZkZCu8hGbp5mYRQgUmz9", new()
+  var profile = await client.UserProfiles.Update(profileId, new()
   {
       ExternalUserDetails = new()
       {
@@ -480,7 +481,7 @@ The following example marks the account as suspended and removes a `trial_cohort
 
   profile, err := client.UserProfiles.Update(
   	context.Background(),
-  	"uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  	profileID,
   	anthropic.UserProfileUpdateParams{
   		ExternalUserDetails: anthropic.UserProfileExternalUserDetailsParams{
   			AccountStatus: anthropic.UserProfileExternalUserAccountStatusSuspended,
@@ -505,7 +506,7 @@ The following example marks the account as suspended and removes a `trial_cohort
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       var params = UserProfileUpdateParams.builder()
-          .userProfileId("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+          .userProfileId(profileId)
           .externalUserDetails(UserProfileExternalUserDetailsParams.builder()
               .accountStatus(UserProfileExternalUserAccountStatus.SUSPENDED)
               .build())
@@ -523,7 +524,7 @@ The following example marks the account as suspended and removes a `trial_cohort
   $client = new Client();
 
   $profile = $client->userProfiles->update(
-      'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+      $profileId,
       externalUserDetails: ['accountStatus' => 'suspended'],
       metadata: ['trial_cohort' => ''],
   );
@@ -535,7 +536,7 @@ The following example marks the account as suspended and removes a `trial_cohort
   client = Anthropic::Client.new
 
   profile = client.user_profiles.update(
-    "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+    profile_id,
     external_user_details: { account_status: :suspended },
     metadata: { trial_cohort: "" }
   )
@@ -546,25 +547,25 @@ The following example marks the account as suspended and removes a `trial_cohort
 
 ### Delete a profile
 
-`DELETE /v1/user_profiles/{id}` permanently deletes a profile and everything you supplied for it, including `name`, `external_user_details`, and `metadata`. It doesn't remove the trust and safety records that Anthropic keeps about that profile ID.
+[`DELETE /v1/user_profiles/{id}`](../api/api-user_profiles-delete.md) permanently deletes a profile and everything you supplied for it, including `name`, `external_user_details`, and `metadata`. It doesn't remove the trust and safety records that Anthropic keeps about that profile ID.
 
 Delete a profile when an end customer closes their account or asks you to erase their data. Before you delete a profile, stop sending its ID on that end customer's requests. If the end customer stays with you after an erasure request, create a new profile and switch to its ID. Then delete the old one.
 
 <CodeGroup>
   ```bash cURL
-  curl -X DELETE https://api.anthropic.com/v1/user_profiles/uprof_011CZkZCu8hGbp5mYRQgUmz9 \
+  curl -X DELETE "https://api.anthropic.com/v1/user_profiles/$PROFILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant user-profiles delete --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
+  ant user-profiles delete --user-profile-id "$PROFILE_ID"
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  deleted = client.user_profiles.delete("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+  deleted = client.user_profiles.delete(profile_id)
 
   print(deleted.id)
   ```
@@ -572,7 +573,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const deleted = await client.userProfiles.delete("uprof_011CZkZCu8hGbp5mYRQgUmz9");
+  const deleted = await client.userProfiles.delete(profileId);
 
   console.log(deleted.id);
   ```
@@ -580,7 +581,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
   ```csharp C#
   AnthropicClient client = new();
 
-  var deleted = await client.UserProfiles.Delete("uprof_011CZkZCu8hGbp5mYRQgUmz9");
+  var deleted = await client.UserProfiles.Delete(profileId);
 
   Console.WriteLine(deleted.ID);
   ```
@@ -590,7 +591,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
 
   deleted, err := client.UserProfiles.Delete(
   	context.Background(),
-  	"uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  	profileID,
   	anthropic.UserProfileDeleteParams{},
   )
   if err != nil {
@@ -604,7 +605,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
   void main() {
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-      var deleted = client.userProfiles().delete("uprof_011CZkZCu8hGbp5mYRQgUmz9");
+      var deleted = client.userProfiles().delete(profileId);
 
       IO.println(deleted.id());
   }
@@ -613,7 +614,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
   ```php PHP
   $client = new Client();
 
-  $deleted = $client->userProfiles->delete('uprof_011CZkZCu8hGbp5mYRQgUmz9');
+  $deleted = $client->userProfiles->delete($profileId);
 
   echo $deleted->id, PHP_EOL;
   ```
@@ -621,7 +622,7 @@ Delete a profile when an end customer closes their account or asks you to erase 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  deleted = client.user_profiles.delete("uprof_011CZkZCu8hGbp5mYRQgUmz9")
+  deleted = client.user_profiles.delete(profile_id)
 
   puts deleted.id
   ```
@@ -633,7 +634,7 @@ After a delete, the profile endpoints return a `404` for that ID. For up to abou
 
 ## Next steps
 
-The API reference has each endpoint's fields, types, and limits: [Create a profile](../api/api-user_profiles-create.md), [Retrieve a profile](../api/api-user_profiles-retrieve.md), [Update a profile](../api/api-user_profiles-update.md), and [List profiles](../api/api-user_profiles-list.md).
+The API reference has each endpoint's fields, types, and limits: [Create a profile](../api/api-user_profiles-create.md), [Retrieve a profile](../api/api-user_profiles-retrieve.md), [Update a profile](../api/api-user_profiles-update.md), [Delete a profile](../api/api-user_profiles-delete.md), and [List profiles](../api/api-user_profiles-list.md).
 
 If an end customer's program approvals should apply when they use Claude through your platform, see [Send an end customer a link to the Verification Portal](./manage-claude-user-profiles-verification-portal.md).
 

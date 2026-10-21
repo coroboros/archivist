@@ -137,9 +137,8 @@ Here is an example of using extended thinking in the Messages API:
       Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
               Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?",
           },
       ],

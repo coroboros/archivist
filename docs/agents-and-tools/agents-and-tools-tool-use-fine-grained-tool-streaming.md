@@ -218,9 +218,8 @@ The following example turns on fine-grained streaming for a `make_file` tool and
       ],
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
               Content = "Can you write a long poem and make a file called poem.txt?",
           },
       ],
@@ -628,7 +627,7 @@ The type mismatch between the initial `input: {}` (object) and `partial_json` (s
               },
           },
       ],
-      Messages = [new() { Role = Role.User, Content = "Weather in Paris?" }],
+      Messages = [new UserMessageParam { Content = "Weather in Paris?" }],
   };
 
   // Block index -> accumulated JSON fragments

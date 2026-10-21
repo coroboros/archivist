@@ -156,7 +156,7 @@ The following examples use `web_search_20260318`:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
-      Messages = [new() { Role = Role.User, Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
+      Messages = [new UserMessageParam { Content = "Search for the current prices of AAPL and GOOGL, then calculate which has a better P/E ratio." }],
       Tools = [new ToolUnion(new WebSearchTool20260318())]
   };
 
@@ -242,10 +242,10 @@ The following examples use `web_search_20260318`:
 ## How to use web search
 
 <Note>
-  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/capabilities), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](./agents-and-tools-tool-use-web-search-tool.md#errors) inside a search result.
+  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/capabilities), where they can also restrict which domains it searches. If it's disabled, a Messages API request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](./agents-and-tools-tool-use-web-search-tool.md#errors) inside a search result. With web search off, `web_search` calls in a [Claude Managed Agents](../managed-agents/managed-agents-overview.md) session return an error result to the agent, and the session continues.
 </Note>
 
-These organization-level settings in the Claude Console apply to Messages API requests only. [Claude Managed Agents](../managed-agents/managed-agents-overview.md) sessions use the per-tool `allowed_domains` and `blocked_domains` lists on the agent toolset instead; see [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools-web-restrictions.md). For a session in a cloud environment with `limited` networking, the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`; see [Networking](../managed-agents/managed-agents-environments.md#networking). The per-tool lists restrict these tools further, within the hosts that `allowed_hosts` allows.
+Your organization's web search settings in the Claude Console apply to Messages API requests and to Managed Agents sessions. In a session, the agent receives only the search results that both the organization's domain restrictions and the agent's per-tool lists allow; see [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools-web-restrictions.md). For a session in a cloud environment with `limited` networking, the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`; see [Networking](../managed-agents/managed-agents-environments.md#networking). The per-tool lists restrict these tools further, within the hosts that `allowed_hosts` allows.
 
 Provide the web search tool in your API request:
 
@@ -323,7 +323,7 @@ Provide the web search tool in your API request:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "What's the weather in NYC?" }],
+      Messages = [new UserMessageParam { Content = "What's the weather in NYC?" }],
       Tools = [new ToolUnion(new WebSearchTool20250305() { MaxUses = 5 })]
   };
 

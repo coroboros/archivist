@@ -243,7 +243,7 @@ The pod spec in [Configure Kubernetes](./manage-claude-wif-providers-kubernetes.
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
   });
   foreach (var block in message.Content)
   {

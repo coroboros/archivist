@@ -148,14 +148,7 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
   ```csharp C#
   await client.Beta.Sessions.Events.Send(session.ID, new()
   {
-      Events =
-      [
-          new BetaManagedAgentsUserInterruptEventParams
-          {
-              Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-              SessionThreadID = thread.ID,
-          },
-      ],
+      Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
   });
   ```
 
@@ -177,7 +170,6 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-              .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
               .sessionThreadId(thread.id())
               .build())
           .build());
@@ -317,14 +309,7 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
   ```csharp C#
   await client.Beta.Sessions.Events.Send(session.ID, new()
   {
-      Events =
-      [
-          new BetaManagedAgentsUserInterruptEventParams
-          {
-              Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-              SessionThreadID = thread.ID,
-          },
-      ],
+      Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
   });
   archived = await client.Beta.Sessions.Threads.Archive(thread.ID, new() { SessionID = session.ID });
   Console.WriteLine($"{archived.Status} {archived.ArchivedAt}");
@@ -356,7 +341,6 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-              .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
               .sessionThreadId(thread.id())
               .build())
           .build());
@@ -734,7 +718,6 @@ The following example goes inside the event loop of the [tool confirmation handl
           [
               new BetaManagedAgentsUserToolConfirmationEventParams
               {
-                  Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
                   ToolUseID = eventId,
                   Result = BetaManagedAgentsUserToolConfirmationEventParamsResult.Allow,
               },
@@ -764,7 +747,6 @@ The following example goes inside the event loop of the [tool confirmation handl
           session.id(),
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                  .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                   .toolUseId(eventId)
                   .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                   .build())

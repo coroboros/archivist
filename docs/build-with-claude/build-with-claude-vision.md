@@ -164,10 +164,9 @@ On the API, provide images to Claude as `image` content blocks using one of thre
       MaxTokens = 1024,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new Base64ImageSource()
@@ -177,7 +176,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("Describe this image.")),
-              }),
+              },
           }
       ]
   });
@@ -231,7 +230,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
       MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
-        .addUserMessageOfBlockParams(contentBlockParams)
+        .addUserMessageOfContentBlockParams(contentBlockParams)
         .build()
     );
 
@@ -411,10 +410,9 @@ On the API, provide images to Claude as `image` content blocks using one of thre
       MaxTokens = 1024,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new UrlImageSource()
@@ -423,7 +421,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("Describe this image.")),
-              }),
+              },
           }
       ]
   });
@@ -474,7 +472,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
       MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
-        .addUserMessageOfBlockParams(contentBlockParams)
+        .addUserMessageOfContentBlockParams(contentBlockParams)
         .build()
     );
   System.out.println(message);
@@ -697,16 +695,15 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
       MaxTokens = 1024,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new FileImageSource(fileUpload.ID))
                   )),
                   new ContentBlockParam(new TextBlockParam("Describe this image.")),
-              }),
+              },
           }
       ]
   });
@@ -779,7 +776,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
       MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
-        .addUserMessageOfBlockParams(
+        .addUserMessageOfContentBlockParams(
           List.of(
             ContentBlockParam.ofImage(imageParam),
             ContentBlockParam.ofText(
@@ -1037,10 +1034,9 @@ You can include multiple images in a single request, and Claude analyzes them jo
       MaxTokens = 1024,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new TextBlockParam("Image 1:")),
                   new ContentBlockParam(new ImageBlockParam(
@@ -1059,7 +1055,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("How are these images different?")),
-              }),
+              },
           }
       ]
   });
@@ -1133,7 +1129,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
           MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024)
-              .addUserMessageOfBlockParams(contentBlockParams)
+              .addUserMessageOfContentBlockParams(contentBlockParams)
               .build()
       );
 

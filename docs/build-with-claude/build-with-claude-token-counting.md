@@ -115,7 +115,7 @@ All [active models](../general/general-models-overview.md) support token countin
   {
       Model = Model.ClaudeOpus5_5,
       System = "You are a scientist",
-      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }]
   };
 
   var response = await client.Messages.CountTokens(parameters);
@@ -338,7 +338,7 @@ All [active models](../general/general-models-overview.md) support token countin
               },
           }),
       ],
-      Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }]
+      Messages = [new UserMessageParam { Content = "What's the weather like in San Francisco?" }]
   };
 
   var count = await client.Messages.CountTokens(parameters);
@@ -612,10 +612,9 @@ All [active models](../general/general-models-overview.md) support token countin
       Model = Model.ClaudeOpus5_5,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new Base64ImageSource()
@@ -625,7 +624,7 @@ All [active models](../general/general-models-overview.md) support token countin
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("Describe this image")),
-              }),
+              },
           }
       ]
   };
@@ -709,7 +708,7 @@ All [active models](../general/general-models-overview.md) support token countin
 
       MessageCountTokensParams params = MessageCountTokensParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .addUserMessageOfBlockParams(List.of(imageBlock, textBlock))
+        .addUserMessageOfContentBlockParams(List.of(imageBlock, textBlock))
         .build();
 
       MessageTokensCount count = client.messages().countTokens(params);
@@ -939,15 +938,13 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
       Thinking = new ThinkingConfigAdaptive(),
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
               Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?"
           },
-          new()
+          new AssistantMessageParam
           {
-              Role = Role.Assistant,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new ThinkingBlockParam()
                   {
@@ -955,13 +952,9 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
                       Signature = "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV...",
                   }),
                   new ContentBlockParam(new TextBlockParam("Yes, there are infinitely many prime numbers p such that p mod 4 = 3...")),
-              }),
+              },
           },
-          new()
-          {
-              Role = Role.User,
-              Content = "Can you write a formal proof?"
-          }
+          new UserMessageParam { Content = "Can you write a formal proof?" }
       ]
   };
 
@@ -1030,7 +1023,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
         .model(Model.CLAUDE_OPUS_5_5)
         .thinking(ThinkingConfigAdaptive.builder().build())
         .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
-        .addAssistantMessageOfBlockParams(assistantBlocks)
+        .addAssistantMessageOfContentBlockParams(assistantBlocks)
         .addUserMessage("Can you write a formal proof?")
         .build();
 
@@ -1250,10 +1243,9 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
       Model = Model.ClaudeOpus5_5,
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
-              Content = new MessageParamContent(new List<ContentBlockParam>
+              Content = new List<ContentBlockParam>
               {
                   new ContentBlockParam(new DocumentBlockParam(
                       new DocumentBlockParamSource(new Base64PdfSource()
@@ -1262,7 +1254,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("Please summarize this document.")),
-              }),
+              },
           }
       ]
   };
@@ -1322,7 +1314,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 
       MessageCountTokensParams params = MessageCountTokensParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .addUserMessageOfBlockParams(List.of(documentBlock, textBlock))
+        .addUserMessageOfContentBlockParams(List.of(documentBlock, textBlock))
         .build();
 
       MessageTokensCount count = client.messages().countTokens(params);

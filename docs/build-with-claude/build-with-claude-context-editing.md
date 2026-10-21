@@ -182,9 +182,7 @@ The simplest way to enable tool result clearing is to specify only the strategy 
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 4096,
-      Messages = [
-          new() { Role = Role.User, Content = "Search for recent developments in AI" }
-      ],
+      Messages = [new BetaUserMessageParam { Content = "Search for recent developments in AI" }],
       Tools = [
           new BetaWebSearchTool20250305()
       ],
@@ -487,7 +485,7 @@ You can customize the tool result clearing behavior with additional parameters:
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = [
-          new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
+          new BetaUserMessageParam { Content = "Create a simple command line calculator app using Python" }
       ],
       Tools = [
           new BetaToolTextEditor20250728 { MaxCharacters = 10000 },
@@ -798,9 +796,7 @@ Use thinking block clearing to manage context and prompt caching in conversation
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 16000,
-      Messages = [
-          new() { Role = Role.User, Content = "Hello" }
-      ],
+      Messages = [new BetaUserMessageParam { Content = "Hello" }],
       Betas = [AnthropicBeta.ContextManagement2025_06_27],
       ContextManagement = new BetaContextManagementConfig
       {
@@ -1029,9 +1025,7 @@ Keep thinking blocks from the last 3 assistant turns:
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 16000,
-      Messages = [
-          new() { Role = Role.User, Content = "Hello" }
-      ],
+      Messages = [new BetaUserMessageParam { Content = "Hello" }],
       Betas = [AnthropicBeta.ContextManagement2025_06_27],
       ContextManagement = new BetaContextManagementConfig
       {
@@ -1235,9 +1229,7 @@ Keep all thinking blocks (maximizes cache hits):
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 16000,
-      Messages = [
-          new() { Role = Role.User, Content = "Hello" }
-      ],
+      Messages = [new BetaUserMessageParam { Content = "Hello" }],
       Betas = [AnthropicBeta.ContextManagement2025_06_27],
       ContextManagement = new BetaContextManagementConfig
       {
@@ -1525,7 +1517,7 @@ You can use both thinking block clearing and tool result clearing together:
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 16000,
       Messages = [
-          new() { Role = Role.User, Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
+          new BetaUserMessageParam { Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
       ],
       Tools = [
           new BetaWebSearchTool20250305 { MaxUses = 5 }
@@ -1927,7 +1919,7 @@ The [token counting](./build-with-claude-token-counting.md) endpoint supports co
   var parameters = new MessageCountTokensParams
   {
       Model = Messages::Model.ClaudeOpus5_5,
-      Messages = [new() { Role = Role.User, Content = "Continue our conversation..." }],
+      Messages = [new BetaUserMessageParam { Content = "Continue our conversation..." }],
       Betas = [AnthropicBeta.ContextManagement2025_06_27],
       ContextManagement = new BetaContextManagementConfig
       {
@@ -2198,9 +2190,7 @@ To use both features together, enable them in your API request:
   {
       Model = Messages::Model.ClaudeOpus5_5,
       MaxTokens = 4096,
-      Messages = [
-          new() { Role = Role.User, Content = "Hello" }
-      ],
+      Messages = [new BetaUserMessageParam { Content = "Hello" }],
       Tools = [
           new BetaMemoryTool20250818()
       ],

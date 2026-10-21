@@ -32,9 +32,9 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### October 14, 2026
 
-* We've launched [OpenTelemetry export](../manage-claude/manage-claude-opentelemetry.md) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability backend. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](../manage-claude/manage-claude-opentelemetry-api.md#add-a-destination) in the Claude Console.
-
-- Claude Managed Agents [scheduled deployments](../managed-agents/managed-agents-scheduled-deployments.md) are now available on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#claude-managed-agents).
+* We've launched [OpenTelemetry export](../manage-claude/manage-claude-opentelemetry.md) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability platform. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](../manage-claude/manage-claude-opentelemetry-api.md#add-a-destination) in the Claude Console.
+* Claude Managed Agents [scheduled deployments](../managed-agents/managed-agents-scheduled-deployments.md) are now available on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#claude-managed-agents).
+* In Claude Managed Agents, the [`web_search` tool](../managed-agents/managed-agents-tools.md#available-tools) now follows your organization's web search domain restrictions set in the Claude Console. The agent receives only the search results that both the organization's domain restrictions and the `allowed_domains` or `blocked_domains` list on the agent's `web_search` tool allow. Sessions have followed the organization's **Allow web search** setting since October 6. See [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools-web-restrictions.md).
 
 ### October 9, 2026
 

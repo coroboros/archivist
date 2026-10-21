@@ -348,12 +348,10 @@ This sample follows a session from your message to the agent's answer. It opens 
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
               Content =
               [
                   new BetaManagedAgentsTextBlock
                   {
-                      Type = BetaManagedAgentsTextBlockType.Text,
                       Text = "Which contracts in /contracts have a change-of-control clause?",
                   },
               ],
@@ -404,16 +402,8 @@ This sample follows a session from your message to the agent's answer. It opens 
                   [
                       new BetaManagedAgentsUserCustomToolResultEventParams
                       {
-                          Type = BetaManagedAgentsUserCustomToolResultEventParamsType.UserCustomToolResult,
                           CustomToolUseID = toolUse.ID,
-                          Content =
-                          [
-                              new BetaManagedAgentsTextBlock
-                              {
-                                  Type = BetaManagedAgentsTextBlockType.Text,
-                                  Text = result,
-                              },
-                          ],
+                          Content = [new BetaManagedAgentsTextBlock { Text = result }],
                       },
                   ],
               });
@@ -554,7 +544,6 @@ This sample follows a session from your message to the agent's answer. It opens 
           sessionId,
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Which contracts in /contracts have a change-of-control clause?")
                   .build())
               .build()
@@ -598,7 +587,6 @@ This sample follows a session from your message to the agent's answer. It opens 
                           sessionId,
                           EventSendParams.builder()
                               .addEvent(BetaManagedAgentsUserCustomToolResultEventParams.builder()
-                                  .type(BetaManagedAgentsUserCustomToolResultEventParams.Type.USER_CUSTOM_TOOL_RESULT)
                                   .customToolUseId(toolUse.id())
                                   .addTextContent(result)
                                   .build())

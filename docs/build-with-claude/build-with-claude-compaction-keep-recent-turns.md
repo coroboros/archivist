@@ -209,7 +209,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
   foreach (var (index, question) in questions.Index())
   {
       var turn = index + 1;
-      history.Add(new() { Role = Role.User, Content = question });
+      history.Add(new BetaUserMessageParam { Content = question });
       var response = await client.Beta.Messages.Create(new MessageCreateParams
       {
           Model = Model.ClaudeOpus5_5,
@@ -218,9 +218,8 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
           Betas = [AnthropicBeta.Compact2026_09_04],
           Messages = history,
       });
-      history.Add(new()
+      history.Add(new BetaAssistantMessageParam
       {
-          Role = Role.Assistant,
           Content = response.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
       });
 
@@ -244,9 +243,8 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
           {
               history =
               [
-                  new()
+                  new BetaAssistantMessageParam
                   {
-                      Role = Role.Assistant,
                       Content = summary.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
                   },
                   .. recent,
@@ -348,10 +346,7 @@ The following program is the loop from [Compact in a loop](./build-with-claude-c
 
       var history = new ArrayList<BetaMessageParam>();
       for (int turn = 1; turn <= questions.size(); turn++) {
-          history.add(BetaMessageParam.builder()
-              .role(BetaMessageParam.Role.USER)
-              .content(questions.get(turn - 1))
-              .build());
+          history.add(BetaMessageParam.ofUser(questions.get(turn - 1)));
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(8192)

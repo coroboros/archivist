@@ -234,13 +234,12 @@ The following request declares `get_weather` in `tools`, then withdraws it after
       ],
       Messages =
       [
-          new() { Role = Role.User, Content = "Say OK." },
+          new BetaUserMessageParam { Content = "Say OK." },
           // Withdraw get_weather from this point onward. The block references
           // the tool by name instead of editing `Tools`, so earlier turns stay
           // byte-identical and the cache still hits.
-          new()
+          new BetaSystemMessageParam
           {
-              Role = Role.System,
               Content = new(
               [
                   new BetaRequestToolRemovalBlock
@@ -313,10 +312,9 @@ The following request declares `get_weather` in `tools`, then withdraws it after
 
   ```java Java
   import com.anthropic.models.beta.AnthropicBeta;
-  import com.anthropic.models.beta.messages.BetaContentBlockParam;
   import com.anthropic.models.beta.messages.BetaMessage;
-  import com.anthropic.models.beta.messages.BetaMessageParam;
   import com.anthropic.models.beta.messages.BetaRequestToolRemovalBlock;
+  import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
   import com.anthropic.models.beta.messages.BetaTool;
   import com.anthropic.models.beta.messages.MessageCreateParams;
   // ...
@@ -346,13 +344,10 @@ The following request declares `get_weather` in `tools`, then withdraws it after
           // Withdraw get_weather from this point onward. The block references
           // the tool by name instead of editing `tools`, so earlier turns stay
           // byte-identical and the cache still hits.
-          .addMessage(BetaMessageParam.builder()
-              .role(BetaMessageParam.Role.SYSTEM)
-              .contentOfBetaContentBlockParams(List.of(
-                  BetaContentBlockParam.ofToolRemoval(BetaRequestToolRemovalBlock.builder()
-                      .referenceTool("get_weather")
-                      .build())))
-              .build())
+          .addSystemMessageOfBlocks(List.of(
+              SystemMessageContentBlock.ofToolRemoval(BetaRequestToolRemovalBlock.builder()
+                  .referenceTool("get_weather")
+                  .build())))
           .build();
 
       BetaMessage response = client.beta().messages().create(params);
@@ -725,12 +720,11 @@ The following request keeps `get_weather` in `tools` and defines `db_query` afte
       ],
       Messages =
       [
-          new() { Role = Role.User, Content = "How many orders shipped yesterday?" },
+          new BetaUserMessageParam { Content = "How many orders shipped yesterday?" },
           // Define db_query by value from this point onward. `Tools` and the
           // earlier messages stay exactly as sent, so the cache still hits.
-          new()
+          new BetaSystemMessageParam
           {
-              Role = Role.System,
               Content = new(
               [
                   new BetaRequestToolAdditionBlock
@@ -826,9 +820,9 @@ The following request keeps `get_weather` in `tools` and defines `db_query` afte
 
   ```java Java
   import com.anthropic.models.beta.AnthropicBeta;
-  import com.anthropic.models.beta.messages.BetaContentBlockParam;
   import com.anthropic.models.beta.messages.BetaMessage;
   import com.anthropic.models.beta.messages.BetaRequestToolAdditionBlock;
+  import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
   import com.anthropic.models.beta.messages.BetaTool;
   import com.anthropic.models.beta.messages.MessageCreateParams;
   // ...
@@ -870,8 +864,8 @@ The following request keeps `get_weather` in `tools` and defines `db_query` afte
           .addUserMessage("How many orders shipped yesterday?")
           // Define db_query by value from this point onward. `tools` and the
           // earlier messages stay exactly as sent, so the cache still hits.
-          .addSystemMessageOfBetaContentBlockParams(List.of(
-              BetaContentBlockParam.ofToolAddition(BetaRequestToolAdditionBlock.builder()
+          .addSystemMessageOfBlocks(List.of(
+              SystemMessageContentBlock.ofToolAddition(BetaRequestToolAdditionBlock.builder()
                   .definitionTool(dbQueryTool)
                   .build())))
           .build();
@@ -1308,12 +1302,11 @@ The following request keeps `get_weather` in `tools`, lists the calendar server 
       ],
       Messages =
       [
-          new() { Role = Role.User, Content = "What's on my calendar tomorrow?" },
+          new BetaUserMessageParam { Content = "What's on my calendar tomorrow?" },
           // Make the calendar server's tools available from this point onward.
           // The block names the server; it never holds a URL or token.
-          new()
+          new BetaSystemMessageParam
           {
-              Role = Role.System,
               Content = new(
               [
                   new BetaRequestToolAdditionBlock
@@ -1413,12 +1406,12 @@ The following request keeps `get_weather` in `tools`, lists the calendar server 
 
   ```java Java
   import com.anthropic.models.beta.AnthropicBeta;
-  import com.anthropic.models.beta.messages.BetaContentBlockParam;
   import com.anthropic.models.beta.messages.BetaMcpTool;
   import com.anthropic.models.beta.messages.BetaMcpToolset;
   import com.anthropic.models.beta.messages.BetaMessage;
   import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
   import com.anthropic.models.beta.messages.BetaRequestToolAdditionBlock;
+  import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
   import com.anthropic.models.beta.messages.BetaTool;
   import com.anthropic.models.beta.messages.MessageCreateParams;
   // ...
@@ -1453,8 +1446,8 @@ The following request keeps `get_weather` in `tools`, lists the calendar server 
           .addUserMessage("What's on my calendar tomorrow?")
           // Make the calendar server's tools available from this point onward.
           // The block names the server; it never holds a URL or token.
-          .addSystemMessageOfBetaContentBlockParams(List.of(
-              BetaContentBlockParam.ofToolAddition(BetaRequestToolAdditionBlock.builder()
+          .addSystemMessageOfBlocks(List.of(
+              SystemMessageContentBlock.ofToolAddition(BetaRequestToolAdditionBlock.builder()
                   .definitionTool(BetaMcpToolset.builder()
                       .mcpServerName("calendar")
                       .build())
@@ -1793,28 +1786,18 @@ A `role: "system"` message can also carry `output_config.effort` to change the [
       System = "You are a code review assistant. Be concise.",
       Messages =
       [
-          new()
+          new UserMessageParam { Content = "Review process() in utils.py for performance issues." },
+          new AssistantMessageParam
           {
-              Role = Role.User,
-              Content = "Review process() in utils.py for performance issues."
-          },
-          new()
-          {
-              Role = Role.Assistant,
               Content = "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list."
           },
-          new()
-          {
-              Role = Role.User,
-              Content = "Now review the calling code that invokes process()."
-          },
+          new UserMessageParam { Content = "Now review the calling code that invokes process()." },
           // The reviewer realizes mid-session that all suggestions must also pass
           // the team's strict typing policy. Appending the instruction here keeps
           // earlier turns byte-identical, so the prefix cached by the previous
           // request is still read from cache.
-          new()
+          new SystemMessageParam
           {
-              Role = Role.System,
               Content = "From now on, every suggestion must include explicit type annotations."
           }
       ]
@@ -1865,8 +1848,6 @@ A `role: "system"` message can also carry `output_config.effort` to change the [
   ```java Java
   import com.anthropic.models.messages.CacheControlEphemeral;
   // ...
-  import com.anthropic.models.messages.MessageParam;
-  // ...
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
@@ -1883,10 +1864,7 @@ A `role: "system"` message can also carry `output_config.effort` to change the [
           // the team's strict typing policy. Appending the instruction here keeps
           // earlier turns byte-identical, so the prefix cached by the previous
           // request is still read from cache.
-          .addMessage(MessageParam.builder()
-              .role(MessageParam.Role.SYSTEM)
-              .content("From now on, every suggestion must include explicit type annotations.")
-              .build())
+          .addSystemMessage("From now on, every suggestion must include explicit type annotations.")
           .build();
 
       Message response = client.messages().create(params);
@@ -2222,11 +2200,10 @@ Through the SDK, set `clear_at` (csharp, go: `ClearAt`; java: `.clearAt()`; php:
       MaxTokens = 4096,
       Messages =
       [
-          new() { Role = Role.User, Content = "Draft a short status update on the database migration for the team channel." },
+          new BetaUserMessageParam { Content = "Draft a short status update on the database migration for the team channel." },
           // Turn-scoped reminder: renders for this turn, then clears once a later user message exists.
-          new()
+          new BetaSystemMessageParam
           {
-              Role = Role.System,
               ClearAt = ClearAt.NextUserMessage,
               Content = "The reader is on call: keep this reply under 50 words.",
           },
@@ -2274,7 +2251,7 @@ Through the SDK, set `clear_at` (csharp, go: `ClearAt`; java: `.clearAt()`; php:
   ```java Java
   import com.anthropic.models.beta.AnthropicBeta;
   import com.anthropic.models.beta.messages.BetaMessage;
-  import com.anthropic.models.beta.messages.BetaMessageParam;
+  import com.anthropic.models.beta.messages.BetaSystemMessageParam;
   import com.anthropic.models.beta.messages.MessageCreateParams;
   import com.anthropic.models.messages.Model;
 
@@ -2287,9 +2264,8 @@ Through the SDK, set `clear_at` (csharp, go: `ClearAt`; java: `.clearAt()`; php:
           .addBeta(AnthropicBeta.MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21)
           .addUserMessage("Draft a short status update on the database migration for the team channel.")
           // Turn-scoped reminder: renders for this turn, then clears once a later user message exists.
-          .addMessage(BetaMessageParam.builder()
-              .role(BetaMessageParam.Role.SYSTEM)
-              .clearAt(BetaMessageParam.ClearAt.NEXT_USER_MESSAGE)
+          .addMessage(BetaSystemMessageParam.builder()
+              .clearAt(BetaSystemMessageParam.ClearAt.NEXT_USER_MESSAGE)
               .content("The reader is on call: keep this reply under 50 words.")
               .build())
           .build();

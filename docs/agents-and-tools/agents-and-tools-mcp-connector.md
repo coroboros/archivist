@@ -166,7 +166,7 @@ This example enables all tools from an MCP server with default configuration:
       MaxTokens = 1000,
       Messages = new List<BetaMessageParam>
       {
-          new() { Role = Role.User, Content = "What tools do you have available?" }
+          new BetaUserMessageParam { Content = "What tools do you have available?" }
       },
       McpServers = new List<BetaRequestMcpServerUrlDefinition>
       {
@@ -325,7 +325,7 @@ Each MCP server in the `mcp_servers` array defines the connection details:
 | Property              | Type   | Required | Description                                                                                                                                                                                                                                                                                                            |
 | --------------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                | string | Yes      | Currently only "url" is supported.                                                                                                                                                                                                                                                                                     |
-| `url`                 | string | Yes      | The URL of the MCP server. Must start with https\://.                                                                                                                                                                                                                                                                  |
+| `url`                 | string | Yes      | The URL of the MCP server. Must start with `https://`.                                                                                                                                                                                                                                                                 |
 | `name`                | string | Yes      | A unique identifier for this MCP server. Must be referenced by exactly one MCPToolset in the `tools` array.                                                                                                                                                                                                            |
 | `authorization_token` | string | No       | OAuth authorization token if required by the MCP server. See [Authentication](./agents-and-tools-mcp-connector.md#authentication) for how to obtain one, or the [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) for protocol details. |
 
@@ -841,7 +841,7 @@ The following example sends one request with an unpinned toolset, copies the ret
   ];
   List<BetaMessageParam> messages =
   [
-      new() { Role = Role.User, Content = "What tools do you have available?" },
+      new BetaUserMessageParam { Content = "What tools do you have available?" },
   ];
 
   // First request: the toolset isn't pinned, so the API asks the server for
@@ -889,7 +889,7 @@ The following example sends one request with an unpinned toolset, copies the ret
   });
 
   // With a pinned toolset, the response has no mcp_tool_listing block.
-  Console.WriteLine(string.Join(", ", second.Content.Select(block => block.Type)));
+  Console.WriteLine(string.Join(", ", second.Content.Select(block => block.Type.Raw())));
   ```
 
   ```go Go
@@ -1282,8 +1282,8 @@ Install both the Anthropic SDK and the MCP SDK:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:2.75.0")
-        implementation("com.anthropic:anthropic-java-mcp:2.75.0")
+        implementation("com.anthropic:anthropic-java:3.0.0")
+        implementation("com.anthropic:anthropic-java-mcp:3.0.0")
         ```
       </Tab>
 
@@ -1292,12 +1292,12 @@ Install both the Anthropic SDK and the MCP SDK:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>2.75.0</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-mcp</artifactId>
-            <version>2.75.0</version>
+            <version>3.0.0</version>
         </dependency>
         ```
       </Tab>
@@ -1472,14 +1472,7 @@ Convert MCP tools for use with the SDK's [tool runner](./agents-and-tools-tool-u
       {
           Model = Messages::Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages =
-          [
-              new BetaMessageParam
-              {
-                  Role = Role.User,
-                  Content = "What tools do you have available?",
-              },
-          ],
+          Messages = [new BetaUserMessageParam { Content = "What tools do you have available?" }],
       },
       tools
   );
@@ -1815,10 +1808,9 @@ Convert MCP resources into content blocks to include in messages, or into file o
           MaxTokens = 1024,
           Messages =
           [
-              new BetaMessageParam
+              new BetaUserMessageParam
               {
-                  Role = Role.User,
-                  Content = new BetaMessageParamContent(
+                  Content = new BetaMessageContentParam(
                       [
                           BetaMcp.ResourceToContent(resource),
                           new BetaTextBlockParam { Text = "Summarize this document" },
@@ -1909,7 +1901,7 @@ Convert MCP resources into content blocks to include in messages, or into file o
   BetaMessage response = anthropic.beta().messages().create(MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024L)
-          .addUserMessageOfBetaContentBlockParams(content)
+          .addUserMessageOfContentBlockParams(content)
           .build());
 
   IO.println(response);
@@ -1925,9 +1917,7 @@ Convert MCP resources into content blocks to include in messages, or into file o
   MultipartField.Builder<InputStream> fileField = MultipartField.<InputStream>builder()
           .value(new ByteArrayInputStream(resourceFile.content()))
           .filename(resourceFile.filename());
-  if (resourceFile.mimeType() != null) {
-      fileField.contentType(resourceFile.mimeType());
-  }
+  resourceFile.mimeType().ifPresent(fileField::contentType);
 
   var uploaded = anthropic.files().upload(FileUploadParams.builder()
           .file(fileField.build())

@@ -244,7 +244,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -670,7 +670,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 2048,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           foreach (var block in message.Content)
           {
@@ -1186,7 +1186,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -1712,7 +1712,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 2048,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -1732,7 +1732,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = tonePrompt }],
+              Messages = [new UserMessageParam { Content = tonePrompt }],
           });
           return int.Parse(ContentText(response).Trim());
       }
@@ -2208,7 +2208,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -2238,7 +2238,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = binaryPrompt }],
+              Messages = [new UserMessageParam { Content = binaryPrompt }],
           });
           return ContentText(response).Trim().ToLowerInvariant() == "no";
       }
@@ -2812,11 +2812,10 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [.. conversation.Select(turn => new MessageParam
-              {
-                  Role = turn.Role == "user" ? Role.User : Role.Assistant,
-                  Content = turn.Content,
-              })],
+              Messages = [.. conversation.Select<Turn, MessageParam>(turn =>
+                  turn.Role == "user"
+                      ? new UserMessageParam { Content = turn.Content }
+                      : new AssistantMessageParam { Content = turn.Content })],
           });
           return ContentText(message);
       }
@@ -2841,7 +2840,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = ordinalPrompt }],
+              Messages = [new UserMessageParam { Content = ordinalPrompt }],
           });
           return int.Parse(ContentText(response).Trim());
       }
@@ -3385,7 +3384,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
         {
             Model = Model.ClaudeOpus5_5,
             MaxTokens = 2048,
-            Messages = [new() { Role = Role.User, Content = BuildGraderPrompt(output, goldenAnswer) }],
+            Messages = [new UserMessageParam { Content = BuildGraderPrompt(output, goldenAnswer) }],
         });
         return ContentText(graderResponse).ToLowerInvariant().Contains("<result>correct</result>")
             ? "correct"
@@ -3407,7 +3406,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
         {
             Model = Model.ClaudeOpus5_5,
             MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = prompt }],
+            Messages = [new UserMessageParam { Content = prompt }],
         });
         return ContentText(message);
     }

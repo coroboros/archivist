@@ -78,7 +78,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
       EnvironmentID = environment.ID,
       Budget = new()
       {
-          Type = BetaManagedAgentsBudgetLimitType.Limit,
           MaxListCost = new() { Amount = "125", Currency = BetaCurrency.Usd },
       },
   });
@@ -110,7 +109,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
       .agent(agent.id())
       .environmentId(environment.id())
       .budget(BetaManagedAgentsBudgetLimit.builder()
-          .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
           .maxListCost(BetaMonetaryAmount.builder()
               .amount("125")
               .currency(BetaCurrency.USD)
@@ -250,7 +248,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   {
       Budget = new()
       {
-          Type = BetaManagedAgentsBudgetLimitType.Limit,
           MaxListCost = new() { Amount = "500", Currency = BetaCurrency.Usd },
       },
   });
@@ -276,7 +273,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   ```java Java
   var updatedSession = client.beta().sessions().update(session.id(), SessionUpdateParams.builder()
       .budget(BetaManagedAgentsBudgetLimit.builder()
-          .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
           .maxListCost(BetaMonetaryAmount.builder()
               .amount("500")
               .currency(BetaCurrency.USD)

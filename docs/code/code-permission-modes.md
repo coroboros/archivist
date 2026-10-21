@@ -242,7 +242,7 @@ The JetBrains plugin runs Claude Code in the IDE terminal, so switching permissi
 * **Auto**: appears when [auto mode is available](#eliminate-prompts-with-auto-mode)
 * **Bypass permissions**: requires the **Allow bypass permissions mode** toggle in Desktop settings on Pro and Max plans; on Team and Enterprise plans, organization policy controls it instead
 
-The Cowork tab doesn't use these modes. Cowork has its own permission modes, enabled separately, and the Cowork tab shows no mode selector at all until a mode beyond its default is enabled for your account. See the [Cowork docs](https://claude.com/docs/cowork/overview).
+Cowork doesn't use these modes. It has its own permission modes, enabled separately, and shows no mode selector at all until a mode beyond its default is enabled for your account. See the [Cowork docs](https://claude.com/docs/cowork/overview).
 
 For desktop-specific details, see [Choose a permission mode](/docs/en/desktop#choose-a-permission-mode) in the Desktop guide.
 
@@ -585,7 +585,7 @@ The following sections cover the order Claude Code evaluates an action in, how t
 >
 > A [mod](/docs/en/plugins/mods/overview) you install that handles `tool.check` can also approve an action. For the cases where its approval doesn't get past your rules and hooks, see [Extend permissions with hooks](/docs/en/permissions#precedence-among-rules-hooks-and-mods).
 >
-> In the VS Code extension, how [Claude in Chrome](/docs/en/chrome) browser actions get approved depends on how the session connected to the browser: see [Permission prompts in VS Code sessions](/docs/en/chrome#permission-prompts-in-vs-code-sessions).
+> For how [Claude in Chrome](/docs/en/chrome) browser actions get approved in the VS Code extension, see [Permission prompts in VS Code sessions](/docs/en/chrome#permission-prompts-in-vs-code-sessions).
 >
 > On entering auto mode, broad allow rules that grant arbitrary code execution are dropped:
 >

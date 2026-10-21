@@ -115,7 +115,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello!" }]
+      Messages = [new UserMessageParam { Content = "Hello!" }]
   });
 
   if (response.StopReason == "end_turn")
@@ -329,18 +329,16 @@ The most common stop reason. Indicates Claude finished its response naturally.
     // INCORRECT: Adding text immediately after tool_result
     List<MessageParam> messages =
     [
-        new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-        new()
+        new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
             Content = new List<ContentBlockParam>
             {
                 new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
             }
         },
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" },
@@ -352,18 +350,16 @@ The most common stop reason. Indicates Claude finished its response naturally.
     // CORRECT: Send tool results directly without additional text
     messages =
     [
-        new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-        new()
+        new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
             Content = new List<ContentBlockParam>
             {
                 new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
             }
         },
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             // Just the tool_result, no additional text
             Content = new List<ContentBlockParam>
             {
@@ -414,31 +410,25 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
     // INCORRECT: Adding text immediately after tool_result
     List<MessageParam> messages = List.of(
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .content("Calculate the sum of 1234 and 5678").build(),
-        MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-            .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .contentOfBlockParams(List.of(
-                ContentBlockParam.ofToolResult(
-                    ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
-                // Don't add text after tool_result
-                ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
-            )).build()
+        MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+        MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
+        MessageParam.ofUserOfContentBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
+            // Don't add text after tool_result
+            ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
+        ))
     );
 
     // CORRECT: Send tool results directly without additional text
     messages = List.of(
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .content("Calculate the sum of 1234 and 5678").build(),
-        MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-            .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
+        MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+        MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
         // Just the tool_result, no additional text
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .contentOfBlockParams(List.of(
-                ContentBlockParam.ofToolResult(
-                    ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
-            )).build()
+        MessageParam.ofUserOfContentBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
+        ))
     );
     ```
 
@@ -609,7 +599,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         if (response.StopReason == "end_turn" && response.Content.Count == 0)
         {
             // CORRECT: Add a continuation prompt in a NEW user message
-            messages.Add(new() { Role = Role.User, Content = "Please continue" });
+            messages.Add(new UserMessageParam { Content = "Please continue" });
 
             response = await client.Messages.Create(new MessageCreateParams
             {
@@ -668,10 +658,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         if (isEndTurn && response.content().isEmpty()) {
             // CORRECT: Add a continuation prompt in a NEW user message
             List<MessageParam> extended = new ArrayList<>(messages);
-            extended.add(MessageParam.builder()
-                .role(MessageParam.Role.USER)
-                .content("Please continue")
-                .build());
+            extended.add(MessageParam.ofUser("Please continue"));
 
             response = client.messages().create(
                 MessageCreateParams.builder()
@@ -807,7 +794,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 10,
-      Messages = [new() { Role = Role.User, Content = "Explain quantum physics" }]
+      Messages = [new UserMessageParam { Content = "Explain quantum physics" }]
   });
 
   if (response.StopReason == "max_tokens")
@@ -1117,7 +1104,7 @@ Claude encountered one of your custom stop sequences.
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       StopSequences = ["END", "STOP"],
-      Messages = [new() { Role = Role.User, Content = "Generate text until you say END" }]
+      Messages = [new UserMessageParam { Content = "Generate text until you say END" }]
   });
 
   if (response.StopReason == "stop_sequence")
@@ -1338,7 +1325,7 @@ Claude is calling a tool and expects you to run it.
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Tools = [weatherTool],
-      Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco?" }]
+      Messages = [new UserMessageParam { Content = "What is the weather in San Francisco?" }]
   });
 
   if (response.StopReason == "tool_use")
@@ -1619,7 +1606,7 @@ When this happens, the response may contain a `server_tool_use` block without a 
 
   ```csharp C#
   List<ToolUnion> tools = [new ToolUnion(new WebSearchTool20250305())];
-  MessageParam userMessage = new() { Role = Role.User, Content = "Search for latest AI news" };
+  MessageParam userMessage = new UserMessageParam { Content = "Search for latest AI news" };
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
@@ -1640,9 +1627,8 @@ When this happens, the response may contain a `server_tool_use` block without a 
           Messages =
           [
               userMessage,
-              new()
+              new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               }
           ]
@@ -1822,7 +1808,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "[Unsafe request]" }]
+      Messages = [new UserMessageParam { Content = "[Unsafe request]" }]
   });
 
   if (response.StopReason == "refusal")
@@ -1981,7 +1967,7 @@ Claude stopped because it reached the model's context window limit. This lets yo
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 20000,
-      Messages = [new() { Role = Role.User, Content = "Large input that uses most of context window..." }]
+      Messages = [new BetaUserMessageParam { Content = "Large input that uses most of context window..." }]
   });
 
   if (response.StopReason?.Value() == BetaStopReason.ModelContextWindowExceeded)
@@ -2416,7 +2402,7 @@ When using [server tools](../agents-and-tools/agents-and-tools-tool-use-server-t
       List<ToolUnion> tools,
       int maxContinuations = 5)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+      List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
       Message response = null!;
 
       for (var i = 0; i < maxContinuations; i++)
@@ -2438,10 +2424,9 @@ When using [server tools](../agents-and-tools/agents-and-tools-tool-use-server-t
           // pause_turn: replace the full message list to maintain alternating roles
           messages =
           [
-              new() { Role = Role.User, Content = userQuery },
-              new()
+              new UserMessageParam { Content = userQuery },
+              new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               }
           ];
@@ -2695,7 +2680,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Hello!" }]
+          Messages = [new UserMessageParam { Content = "Hello!" }]
       });
 
       // Handle successful response with stop_reason
@@ -2885,7 +2870,7 @@ When using streaming, `stop_reason` is:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello!" }]
+      Messages = [new UserMessageParam { Content = "Hello!" }]
   };
 
   await foreach (var streamEvent in client.Messages.CreateStreaming(parameters))
@@ -3046,7 +3031,7 @@ When using streaming, `stop_reason` is:
       string userQuery,
       List<ToolUnion> tools)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+      List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
 
       while (true)
       {
@@ -3062,12 +3047,11 @@ When using streaming, `stop_reason` is:
           {
               // Execute tools and continue
               var toolResults = ExecuteTools(response.Content);
-              messages.Add(new()
+              messages.Add(new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               });
-              messages.Add(new() { Role = Role.User, Content = toolResults });
+              messages.Add(new UserMessageParam { Content = toolResults });
           }
           else
           {
@@ -3121,7 +3105,7 @@ When using streaming, `stop_reason` is:
       List<Tool> tools
   ) {
       List<MessageParam> messages = new ArrayList<>();
-      messages.add(MessageParam.builder().role(MessageParam.Role.USER).content(userQuery).build());
+      messages.add(MessageParam.ofUser(userQuery));
 
       while (true) {
           MessageCreateParams.Builder params = MessageCreateParams.builder()
@@ -3140,10 +3124,8 @@ When using streaming, `stop_reason` is:
           // Execute tools and continue
           List<ToolResultBlockParam> toolResults = executeTools(response.content());
           messages.add(response.toParam());
-          messages.add(MessageParam.builder()
-              .role(MessageParam.Role.USER)
-              .contentOfBlockParams(toolResults.stream().map(ContentBlockParam::ofToolResult).toList())
-              .build());
+          messages.add(MessageParam.ofUserOfContentBlockParams(
+              toolResults.stream().map(ContentBlockParam::ofToolResult).toList()));
       }
   }
   ```
@@ -3266,7 +3248,7 @@ When using streaming, `stop_reason` is:
   ```csharp C#
   static async Task<string> GetCompleteResponse(AnthropicClient client, string prompt, int maxAttempts = 3)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = prompt }];
+      List<MessageParam> messages = [new UserMessageParam { Content = prompt }];
       var fullResponse = "";
 
       for (var i = 0; i < maxAttempts; i++)
@@ -3295,9 +3277,9 @@ When using streaming, `stop_reason` is:
           // Continue from where it left off
           messages =
           [
-              new() { Role = Role.User, Content = prompt },
-              new() { Role = Role.Assistant, Content = fullResponse },
-              new() { Role = Role.User, Content = "Please continue from where you left off." }
+              new UserMessageParam { Content = prompt },
+              new AssistantMessageParam { Content = fullResponse },
+              new UserMessageParam { Content = "Please continue from where you left off." }
           ];
       }
 
@@ -3345,9 +3327,7 @@ When using streaming, `stop_reason` is:
 
   ```java Java
   static String getCompleteResponse(AnthropicClient client, String prompt, int maxAttempts) {
-      List<MessageParam> messages = List.of(
-          MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build()
-      );
+      List<MessageParam> messages = List.of(MessageParam.ofUser(prompt));
       StringBuilder fullResponse = new StringBuilder();
 
       for (int i = 0; i < maxAttempts; i++) {
@@ -3370,9 +3350,9 @@ When using streaming, `stop_reason` is:
 
           // Continue from where it left off
           messages = List.of(
-              MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build(),
-              MessageParam.builder().role(MessageParam.Role.ASSISTANT).content(fullResponse.toString()).build(),
-              MessageParam.builder().role(MessageParam.Role.USER).content("Please continue from where you left off.").build()
+              MessageParam.ofUser(prompt),
+              MessageParam.ofAssistant(fullResponse.toString()),
+              MessageParam.ofUser("Please continue from where you left off.")
           );
       }
 
@@ -3515,7 +3495,7 @@ With the `model_context_window_exceeded` stop reason, you can request the maximu
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 20000,
-          Messages = [new() { Role = Role.User, Content = prompt }]
+          Messages = [new BetaUserMessageParam { Content = prompt }]
       });
 
       var tokens = response.Usage.OutputTokens;

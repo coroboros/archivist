@@ -272,9 +272,8 @@ Once uploaded, reference the file by passing the `id` from the upload response a
           MaxTokens = 1024,
           Messages =
           [
-              new MessageParam
+              new UserMessageParam
               {
-                  Role = Role.User,
                   Content = new List<ContentBlockParam>
                   {
                       new TextBlockParam { Text = "Please summarize this document for me." },
@@ -315,7 +314,7 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   MessageCreateParams params = MessageCreateParams.builder()
       .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024)
-      .addUserMessageOfBlockParams(List.of(
+      .addUserMessageOfContentBlockParams(List.of(
           ContentBlockParam.ofText(TextBlockParam.builder()
               .text("Please summarize this document for me.")
               .build()),
@@ -549,9 +548,8 @@ The following examples read a text file and send its contents as plain text:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new()
+      Messages = [new UserMessageParam
       {
-          Role = Role.User,
           Content = $"Here's the document content:\n\n{textContent}\n\nPlease summarize this document."
       }]
   };

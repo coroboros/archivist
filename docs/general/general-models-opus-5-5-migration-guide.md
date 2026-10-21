@@ -121,8 +121,7 @@ The following request satisfies every item in the list: effort is set, and there
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = [
-          new() {
-              Role = Role.User,
+          new UserMessageParam {
               Content = "Analyze the trade-offs between microservices and monolithic architectures"
           }
       ],
@@ -423,7 +422,7 @@ Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with 
       Model = Model.ClaudeOpus5,
       MaxTokens = 16000,
       Thinking = new ThinkingConfigDisabled(),
-      Messages = [new() { Role = Role.User, Content = "..." }],
+      Messages = [new UserMessageParam { Content = "..." }],
   });
   ```
 
@@ -520,7 +519,7 @@ After:
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 16000,
       OutputConfig = new() { Effort = Effort.Low }, // thinking is always on; effort is the control
-      Messages = [new() { Role = Role.User, Content = "..." }],
+      Messages = [new UserMessageParam { Content = "..." }],
   });
   ```
 
@@ -658,7 +657,7 @@ Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with 
       MaxTokens = 1024,
       Tools = [.. tools],
       ToolChoice = new ToolChoiceTool { Name = "get_weather" },
-      Messages = [new() { Role = Role.User, Content = "What's the weather in Paris?" }],
+      Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }],
   });
   ```
 
@@ -810,11 +809,7 @@ After:
       ToolChoice = new ToolChoiceAuto(),
       Messages =
       [
-          new()
-          {
-              Role = Role.User,
-              Content = "What's the weather in Paris? Use the get_weather tool.",
-          },
+          new UserMessageParam { Content = "What's the weather in Paris? Use the get_weather tool." },
       ],
   });
   ```
@@ -980,7 +975,7 @@ Before. Claude Opus 5 accepts this request, and on the Claude API and Google Clo
               DisplayHeightPx = 768,
           },
       ],
-      Messages = [new() { Role = Role.User, Content = "Open the display settings." }],
+      Messages = [new BetaUserMessageParam { Content = "Open the display settings." }],
   });
   ```
 
@@ -1101,7 +1096,7 @@ After:
       MaxTokens = 4096,
       // no beta header; the toolset entry takes no name or display size
       Tools = [new ComputerToolset20260801()],
-      Messages = [new() { Role = Role.User, Content = "Open the display settings." }],
+      Messages = [new UserMessageParam { Content = "Open the display settings." }],
   });
   ```
 
@@ -1290,7 +1285,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
          Model = Model.ClaudeOpus4_6,
          MaxTokens = 16000,
          Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
-         Messages = [new() { Role = Role.User, Content = "..." }]
+         Messages = [new UserMessageParam { Content = "..." }]
      };
 
      var response = await client.Messages.Create(parameters);
@@ -1428,7 +1423,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
          MaxTokens = 16000,
          Thinking = new ThinkingConfigAdaptive(),
          OutputConfig = new OutputConfig { Effort = Effort.High }, // or Max, Xhigh, Medium, Low
-         Messages = [new() { Role = Role.User, Content = "..." }]
+         Messages = [new UserMessageParam { Content = "..." }]
      };
 
      var response = await client.Messages.Create(parameters);

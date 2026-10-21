@@ -51,20 +51,20 @@ First, install Anthropic's [client SDK](../general/general-cli-sdks-libraries-ov
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.75.0")
-      implementation("com.anthropic:anthropic-java-vertex:2.75.0")
+      implementation("com.anthropic:anthropic-java:3.0.0")
+      implementation("com.anthropic:anthropic-java-vertex:3.0.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.75.0</version>
+          <version>3.0.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.75.0</version>
+          <version>3.0.0</version>
       </dependency>
       ```
 
@@ -244,7 +244,7 @@ The following examples show how to generate text from Claude on Agent Platform:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 100,
-      Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+      Messages = [new UserMessageParam { Content = "Hey Claude!" }]
   };
 
   var message = await client.Messages.Create(parameters);
@@ -516,7 +516,7 @@ Set the `region` parameter to `"global"` when initializing the client:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 100,
-      Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+      Messages = [new UserMessageParam { Content = "Hey Claude!" }]
   };
 
   var message = await client.Messages.Create(parameters);
@@ -702,7 +702,7 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 100,
-      Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+      Messages = [new UserMessageParam { Content = "Hey Claude!" }]
   };
 
   var message = await client.Messages.Create(parameters);
@@ -892,7 +892,7 @@ Specify a specific region such as `"us-east5"` or `"europe-west1"`:
       // Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
       Model = Model.ClaudeSonnet4_6,
       MaxTokens = 100,
-      Messages = [new() { Role = Role.User, Content = "Hey Claude!" }]
+      Messages = [new UserMessageParam { Content = "Hey Claude!" }]
   };
 
   var message = await client.Messages.Create(parameters);

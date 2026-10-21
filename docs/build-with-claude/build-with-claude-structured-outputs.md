@@ -266,8 +266,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() {
-            Role = Role.User,
+        Messages = [new UserMessageParam {
             Content = "Extract the key information from this email: "
                 + "John Smith (john@example.com) is interested in our Enterprise plan "
                 + "and wants to schedule a demo for next Tuesday at 2pm."
@@ -947,8 +946,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() {
-            Role = Role.User,
+        Messages = [new UserMessageParam {
             Content = "Extract the key information from this email: "
                 + "John Smith (john@example.com) is interested in our Enterprise plan "
                 + "and wants to schedule a demo for next Tuesday at 2pm."
@@ -1357,7 +1355,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
                   },
               },
           },
-          Messages = [new() { Role = Role.User, Content = $"Extract invoice data from: {invoiceText}" }]
+          Messages = [new UserMessageParam { Content = $"Extract invoice data from: {invoiceText}" }]
       };
 
       var message = await client.Messages.Create(parameters);
@@ -1659,7 +1657,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = $"Classify this feedback: {feedbackText}" }],
+          Messages = [new UserMessageParam { Content = $"Classify this feedback: {feedbackText}" }],
           OutputConfig = new OutputConfig
           {
               Format = new JsonOutputFormat
@@ -1945,7 +1943,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Process this request: ..." }],
+          Messages = [new UserMessageParam { Content = "Process this request: ..." }],
           OutputConfig = new OutputConfig
           {
               Format = new JsonOutputFormat
@@ -2363,7 +2361,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris departing May 15, 2026" }],
+      Messages = [new UserMessageParam { Content = "Help me plan a trip to Paris departing May 15, 2026" }],
       // JSON outputs: structured response format
       OutputConfig = new OutputConfig
       {

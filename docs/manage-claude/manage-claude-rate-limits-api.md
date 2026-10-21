@@ -77,7 +77,7 @@ List the rate limits configured for your organization:
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
           Console.WriteLine($"  {limit.Type}: {limit.Value}");
@@ -214,7 +214,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
           Console.WriteLine($"  {limit.Type}: {limit.Value}");
@@ -292,6 +292,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
 {
   "data": [
     {
+      "id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "rate_limit",
       "group_type": "model_group",
       "group": {
@@ -307,6 +308,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
       ]
     },
     {
+      "id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "rate_limit",
       "group_type": "model_group",
       "group": {
@@ -328,6 +330,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
       ]
     },
     {
+      "id": "rlt_01EyY8kq14eviKJPgepbgBH4",
       "type": "rate_limit",
       "group_type": "batch",
       "group": { "type": "batch", "id": "rlg_01Wn3pBz6kCg9vHtQ7mLxD5a" },
@@ -393,7 +396,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
           Console.WriteLine($"  {limit.Type}: {limit.Value}");
@@ -551,7 +554,7 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
           Console.WriteLine($"  {limit.Type}: {limit.Value}");
@@ -637,6 +640,8 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
 {
   "data": [
     {
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "rate_limit_id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "workspace_rate_limit",
       "group_type": "model_group",
       "group": {
@@ -661,6 +666,8 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
       ]
     },
     {
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "rate_limit_id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "workspace_rate_limit",
       "group_type": "model_group",
       "group": {
@@ -759,10 +766,10 @@ To read a workspace's applicable limits in one request, add the optional `includ
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
-          Console.WriteLine($"  {limit.Type}: {limit.Value} ({limit.Source.Type.GetString()})");
+          Console.WriteLine($"  {limit.Type}: {limit.Value} ({limit.Source.Type.Raw()})");
       }
   }
   ```
@@ -856,6 +863,8 @@ To read a workspace's applicable limits in one request, add the optional `includ
 {
   "data": [
     {
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "rate_limit_id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "workspace_rate_limit",
       "group_type": "model_group",
       "group": {
@@ -886,6 +895,8 @@ To read a workspace's applicable limits in one request, add the optional `includ
       ]
     },
     {
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "rate_limit_id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "workspace_rate_limit",
       "group_type": "model_group",
       "group": {
@@ -922,6 +933,8 @@ To read a workspace's applicable limits in one request, add the optional `includ
       ]
     },
     {
+      "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+      "rate_limit_id": "rlt_01EyY8kq14eviKJPgepbgBH4",
       "type": "workspace_rate_limit",
       "group_type": "batch",
       "group": { "type": "batch", "id": "rlg_01Wn3pBz6kCg9vHtQ7mLxD5a" },
@@ -994,7 +1007,7 @@ Both endpoints accept an optional `group_type` query parameter that restricts th
   await foreach (var entry in rateLimits.Paginate())
   {
       var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
-      Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+      Console.WriteLine($"{entry.Group.Type.Raw()}{models}");
       foreach (var limit in entry.Limits)
       {
           Console.WriteLine($"  {limit.Type}: {limit.Value}");

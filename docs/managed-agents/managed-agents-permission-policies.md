@@ -120,10 +120,9 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
       [
           new BetaManagedAgentsAgentToolset20260401Params
           {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
               DefaultConfig = new()
               {
-                  PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                  PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
               },
           },
       ],
@@ -164,14 +163,9 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
-                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
                   .defaultConfig(
                       BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
-                          .permissionPolicy(
-                              BetaManagedAgentsAlwaysAskPolicy.builder()
-                                  .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                                  .build()
-                          )
+                          .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                           .build()
                   )
                   .build()
@@ -190,9 +184,8 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
       model: 'claude-opus-5-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
-              type: 'agent_toolset_20260401',
               defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
-                  permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                  permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
               ),
           ),
       ],
@@ -326,24 +319,19 @@ This example connects a GitHub MCP server and allows its tools to run without co
       [
           new()
           {
-              Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
               Name = "github",
               Url = "https://mcp.example.com/github",
           },
       ],
       Tools =
       [
-          new BetaManagedAgentsAgentToolset20260401Params
-          {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-          },
+          new BetaManagedAgentsAgentToolset20260401Params(),
           new BetaManagedAgentsMcpToolsetParams
           {
-              Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
               McpServerName = "github",
               DefaultConfig = new()
               {
-                  PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy { Type = "always_allow" },
+                  PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy(),
               },
           },
       ],
@@ -397,27 +385,17 @@ This example connects a GitHub MCP server and allows its tools to run without co
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
-                  .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
                   .name("github")
                   .url("https://mcp.example.com/github")
                   .build()
           )
-          .addTool(
-              BetaManagedAgentsAgentToolset20260401Params.builder()
-                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                  .build()
-          )
+          .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
           .addTool(
               BetaManagedAgentsMcpToolsetParams.builder()
-                  .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
                   .mcpServerName("github")
                   .defaultConfig(
                       BetaManagedAgentsMcpToolsetDefaultConfigParams.builder()
-                          .permissionPolicy(
-                              BetaManagedAgentsAlwaysAllowPolicy.builder()
-                                  .type(BetaManagedAgentsAlwaysAllowPolicy.Type.ALWAYS_ALLOW)
-                                  .build()
-                          )
+                          .permissionPolicy(BetaManagedAgentsAlwaysAllowPolicy.builder().build())
                           .build()
                   )
                   .build()
@@ -438,20 +416,16 @@ This example connects a GitHub MCP server and allows its tools to run without co
       model: 'claude-opus-5-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
-              type: 'url',
               name: 'github',
               url: 'https://mcp.example.com/github',
           ),
       ],
       tools: [
-          BetaManagedAgentsAgentToolset20260401Params::with(
-              type: 'agent_toolset_20260401',
-          ),
+          BetaManagedAgentsAgentToolset20260401Params::with(),
           BetaManagedAgentsMCPToolsetParams::with(
-              type: 'mcp_toolset',
               mcpServerName: 'github',
               defaultConfig: BetaManagedAgentsMCPToolsetDefaultConfigParams::with(
-                  permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(type: 'always_allow'),
+                  permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(),
               ),
           ),
       ],
@@ -576,16 +550,15 @@ Use the `configs` (csharp, go: `Configs`) array to override the default for indi
   [
       new BetaManagedAgentsAgentToolset20260401Params
       {
-          Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
           DefaultConfig = new()
           {
-              PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy { Type = "always_allow" },
+              PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy(),
           },
           Configs =
           [
               new BetaManagedAgentsBashToolConfigParams
               {
-                  PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                  PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
               },
           ],
       },
@@ -624,23 +597,14 @@ Use the `configs` (csharp, go: `Configs`) array to override the default for indi
   var tools = List.of(
       AgentCreateParams.Tool.ofAgentToolset20260401(
           BetaManagedAgentsAgentToolset20260401Params.builder()
-              .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
               .defaultConfig(
                   BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
-                      .permissionPolicy(
-                          BetaManagedAgentsAlwaysAllowPolicy.builder()
-                              .type(BetaManagedAgentsAlwaysAllowPolicy.Type.ALWAYS_ALLOW)
-                              .build()
-                      )
+                      .permissionPolicy(BetaManagedAgentsAlwaysAllowPolicy.builder().build())
                       .build()
               )
               .addConfig(
                   BetaManagedAgentsBashToolConfigParams.builder()
-                      .permissionPolicy(
-                          BetaManagedAgentsAlwaysAskPolicy.builder()
-                              .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                              .build()
-                      )
+                      .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                       .build()
               )
               .build()
@@ -657,13 +621,12 @@ Use the `configs` (csharp, go: `Configs`) array to override the default for indi
 
   $tools = [
       BetaManagedAgentsAgentToolset20260401Params::with(
-          type: 'agent_toolset_20260401',
           defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
-              permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(type: 'always_allow'),
+              permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(),
           ),
           configs: [
               BetaManagedAgentsBashToolConfigParams::with(
-                  permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                  permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
               ),
           ],
       ),
@@ -832,7 +795,6 @@ The following example sets `auto` as the default for the agent toolset and for t
       [
           new()
           {
-              Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
               Name = "github",
               Url = "https://mcp.example.com/github",
           },
@@ -841,7 +803,6 @@ The following example sets `auto` as the default for the agent toolset and for t
       [
           new BetaManagedAgentsAgentToolset20260401Params
           {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
               DefaultConfig = new()
               {
                   PermissionPolicy = new BetaManagedAgentsAutoPolicy(),
@@ -850,13 +811,12 @@ The following example sets `auto` as the default for the agent toolset and for t
               [
                   new BetaManagedAgentsBashToolConfigParams
                   {
-                      PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                      PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
                   },
               ],
           },
           new BetaManagedAgentsMcpToolsetParams
           {
-              Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
               McpServerName = "github",
               DefaultConfig = new()
               {
@@ -926,14 +886,12 @@ The following example sets `auto` as the default for the agent toolset and for t
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
-                  .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
                   .name("github")
                   .url("https://mcp.example.com/github")
                   .build()
           )
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
-                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
                   .defaultConfig(
                       BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
                           .permissionPolicy(BetaManagedAgentsAutoPolicy.builder().build())
@@ -941,18 +899,13 @@ The following example sets `auto` as the default for the agent toolset and for t
                   )
                   .addConfig(
                       BetaManagedAgentsBashToolConfigParams.builder()
-                          .permissionPolicy(
-                              BetaManagedAgentsAlwaysAskPolicy.builder()
-                                  .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                                  .build()
-                          )
+                          .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                           .build()
                   )
                   .build()
           )
           .addTool(
               BetaManagedAgentsMcpToolsetParams.builder()
-                  .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
                   .mcpServerName("github")
                   .defaultConfig(
                       BetaManagedAgentsMcpToolsetDefaultConfigParams.builder()
@@ -980,25 +933,22 @@ The following example sets `auto` as the default for the agent toolset and for t
       model: 'claude-opus-5-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
-              type: 'url',
               name: 'github',
               url: 'https://mcp.example.com/github',
           ),
       ],
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
-              type: 'agent_toolset_20260401',
               defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
                   permissionPolicy: BetaManagedAgentsAutoPolicy::with(),
               ),
               configs: [
                   BetaManagedAgentsBashToolConfigParams::with(
-                      permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                      permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
                   ),
               ],
           ),
           BetaManagedAgentsMCPToolsetParams::with(
-              type: 'mcp_toolset',
               mcpServerName: 'github',
               defaultConfig: BetaManagedAgentsMCPToolsetDefaultConfigParams::with(
                   permissionPolicy: BetaManagedAgentsAutoPolicy::with(),
@@ -1227,7 +1177,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       [
           new BetaManagedAgentsUserToolConfirmationEventParams
           {
-              Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
               ToolUseID = agentToolUseEvent.ID,
               Result = "allow",
           },
@@ -1241,7 +1190,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       [
           new BetaManagedAgentsUserToolConfirmationEventParams
           {
-              Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
               ToolUseID = mcpToolUseEvent.ID,
               Result = "deny",
               DenyMessage = "Don't create issues in the production project. Use the staging project.",
@@ -1288,7 +1236,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       EventSendParams.builder()
           .addEvent(
               BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                  .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                   .toolUseId(agentToolUseEvent.id())
                   .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                   .build()
@@ -1302,7 +1249,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       EventSendParams.builder()
           .addEvent(
               BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                  .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                   .toolUseId(mcpToolUseEvent.id())
                   .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.DENY)
                   .denyMessage("Don't create issues in the production project. Use the staging project.")
@@ -1320,7 +1266,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       $session->id,
       events: [
           ManagedAgentsUserToolConfirmationEventParams::with(
-              type: 'user.tool_confirmation',
               toolUseID: $agentToolUseEvent->id,
               result: 'allow',
           ),
@@ -1332,7 +1277,6 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
       $session->id,
       events: [
           ManagedAgentsUserToolConfirmationEventParams::with(
-              type: 'user.tool_confirmation',
               toolUseID: $mcpToolUseEvent->id,
               result: 'deny',
               denyMessage: "Don't create issues in the production project. Use the staging project.",

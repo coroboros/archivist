@@ -314,7 +314,7 @@ The following loop shows this placement. Each assistant turn goes back exactly a
 
   List<BetaMessageParam> messages =
   [
-      new() { Role = Role.User, Content = "Summarize pyproject.toml and README.md." },
+      new BetaUserMessageParam { Content = "Summarize pyproject.toml and README.md." },
   ];
 
   BetaMessage response;
@@ -329,9 +329,8 @@ The following loop shows this placement. Each assistant turn goes back exactly a
           Messages = messages,
       });
       // Append the assistant turn exactly as returned, thinking blocks included.
-      messages.Add(new()
+      messages.Add(new BetaAssistantMessageParam
       {
-          Role = Role.Assistant,
           Content = response.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
       });
       if (response.StopReason != BetaStopReason.ToolUse)
@@ -365,10 +364,9 @@ The following loop shows this placement. Each assistant turn goes back exactly a
       // Send the tool results as the user turn, then a fresh copy of the nudge as a
       // turn-scoped system message. Leave earlier copies in place: the API clears them,
       // so the model sees only the newest one.
-      messages.Add(new() { Role = Role.User, Content = toolResults });
-      messages.Add(new()
+      messages.Add(new BetaUserMessageParam { Content = toolResults });
+      messages.Add(new BetaSystemMessageParam
       {
-          Role = Role.System,
           Content = BatchNudge,
           ClearAt = ClearAt.NextUserMessage,
       });
@@ -497,6 +495,7 @@ The following loop shows this placement. Each assistant turn goes back exactly a
   import com.anthropic.models.beta.messages.BetaMessage;
   import com.anthropic.models.beta.messages.BetaMessageParam;
   import com.anthropic.models.beta.messages.BetaStopReason;
+  import com.anthropic.models.beta.messages.BetaSystemMessageParam;
   import com.anthropic.models.beta.messages.BetaTool;
   import com.anthropic.models.beta.messages.BetaTool.InputSchema;
   import com.anthropic.models.beta.messages.BetaToolResultBlockParam;
@@ -534,10 +533,7 @@ The following loop shows this placement. Each assistant turn goes back exactly a
               .build())
           .build();
       List<BetaMessageParam> messages = new ArrayList<>();
-      messages.add(BetaMessageParam.builder()
-          .role(BetaMessageParam.Role.USER)
-          .content("Summarize pyproject.toml and README.md.")
-          .build());
+      messages.add(BetaMessageParam.ofUser("Summarize pyproject.toml and README.md."));
 
       BetaMessage response;
       while (true) {
@@ -580,15 +576,11 @@ The following loop shows this placement. Each assistant turn goes back exactly a
           // Send the tool results as the user turn, then a fresh copy of the nudge as a
           // turn-scoped system message. Leave earlier copies in place: the API clears them,
           // so the model sees only the newest one.
-          messages.add(BetaMessageParam.builder()
-              .role(BetaMessageParam.Role.USER)
-              .contentOfBetaContentBlockParams(toolResults)
-              .build());
-          messages.add(BetaMessageParam.builder()
-              .role(BetaMessageParam.Role.SYSTEM)
+          messages.add(BetaMessageParam.ofUserOfContentBlockParams(toolResults));
+          messages.add(BetaMessageParam.ofSystem(BetaSystemMessageParam.builder()
               .content(BATCH_NUDGE)
-              .clearAt(BetaMessageParam.ClearAt.NEXT_USER_MESSAGE)
-              .build());
+              .clearAt(BetaSystemMessageParam.ClearAt.NEXT_USER_MESSAGE)
+              .build()));
       }
 
       String finalText = response.content().stream()

@@ -310,8 +310,8 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
       System = "You are a financial analysis agent.",
       Skills =
       [
-          new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
-          new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
+          new BetaManagedAgentsAnthropicSkillParams { SkillID = "xlsx" },
+          new BetaManagedAgentsCustomSkillParams { SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
       ],
   });
   ```
@@ -351,13 +351,11 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
           .system("You are a financial analysis agent.")
           .addSkill(
               BetaManagedAgentsAnthropicSkillParams.builder()
-                  .type(BetaManagedAgentsAnthropicSkillParams.Type.ANTHROPIC)
                   .skillId("xlsx")
                   .build()
           )
           .addSkill(
               BetaManagedAgentsCustomSkillParams.builder()
-                  .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
                   .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
                   .version("latest")
                   .build()
@@ -508,7 +506,6 @@ To load skills from a repository, create a session that mounts it. This is the s
       [
           new BetaManagedAgentsGitHubRepositoryResourceParams
           {
-              Type = "github_repository",
               Url = "https://github.com/org/repo",
               MountPath = "/workspace/repo",
               AuthorizationToken = "ghp_your_github_token",
@@ -542,7 +539,6 @@ To load skills from a repository, create a session that mounts it. This is the s
       .agent(agent.id())
       .environmentId(environment.id())
       .addResource(BetaManagedAgentsGitHubRepositoryResourceParams.builder()
-          .type(BetaManagedAgentsGitHubRepositoryResourceParams.Type.GITHUB_REPOSITORY)
           .url("https://github.com/org/repo")
           .mountPath("/workspace/repo")
           .authorizationToken("ghp_your_github_token")

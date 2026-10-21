@@ -406,15 +406,9 @@ The following examples create a [session](./managed-agents-sessions.md) for an e
       [
           new BetaManagedAgentsUserDefineOutcomeEventParams
           {
-              Type = BetaManagedAgentsUserDefineOutcomeEventParamsType.UserDefineOutcome,
               Description = "Build a DCF model for Costco in .xlsx",
-              Rubric = new BetaManagedAgentsTextRubricParams
-              {
-                  Type = BetaManagedAgentsTextRubricParamsType.Text,
-                  Content = Rubric,
-              },
-              // or: Rubric = new BetaManagedAgentsFileRubricParams
-              //     { Type = BetaManagedAgentsFileRubricParamsType.File, FileID = rubric.ID },
+              Rubric = new BetaManagedAgentsTextRubricParams { Content = Rubric },
+              // or: Rubric = new BetaManagedAgentsFileRubricParams { FileID = rubric.ID },
               MaxIterations = 5, // optional; default 3, max 20
           },
       ],
@@ -471,14 +465,11 @@ The following examples create a [session](./managed-agents-sessions.md) for an e
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserDefineOutcomeEventParams.builder()
-              .type(BetaManagedAgentsUserDefineOutcomeEventParams.Type.USER_DEFINE_OUTCOME)
               .description("Build a DCF model for Costco in .xlsx")
               .rubric(BetaManagedAgentsTextRubricParams.builder()
-                  .type(BetaManagedAgentsTextRubricParams.Type.TEXT)
                   .content(RUBRIC)
                   .build())
-              // or: .rubric(BetaManagedAgentsFileRubricParams.builder()
-              //     .type(BetaManagedAgentsFileRubricParams.Type.FILE).fileId(rubric.id()).build())
+              // or: .rubric(BetaManagedAgentsFileRubricParams.builder().fileId(rubric.id()).build())
               .maxIterations(5) // optional; default 3, max 20
               .build())
           .build());

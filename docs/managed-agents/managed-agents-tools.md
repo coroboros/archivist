@@ -125,7 +125,6 @@ The following example enables the toolset and disables `web_fetch`:
       [
           new BetaManagedAgentsAgentToolset20260401Params
           {
-              Type = "agent_toolset_20260401",
               Configs =
               [
                   new BetaManagedAgentsWebFetchToolConfigParams { Enabled = false },
@@ -165,7 +164,6 @@ The following example enables the toolset and disables `web_fetch`:
       .name("Coding Assistant")
       .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
       .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-          .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
           .addConfig(BetaManagedAgentsWebFetchToolConfigParams.builder()
               .enabled(false)
               .build())
@@ -182,7 +180,6 @@ The following example enables the toolset and disables `web_fetch`:
       model: 'claude-opus-5-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
-              type: 'agent_toolset_20260401',
               configs: [
                   BetaManagedAgentsWebFetchToolConfigParams::with(enabled: false),
               ],
@@ -369,13 +366,9 @@ The following example creates an agent with the built-in toolset and one custom 
       Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       Tools =
       [
-          new BetaManagedAgentsAgentToolset20260401Params
-          {
-              Type = "agent_toolset_20260401",
-          },
+          new BetaManagedAgentsAgentToolset20260401Params(),
           new BetaManagedAgentsCustomToolParams
           {
-              Type = "custom",
               Name = "get_weather",
               Description = "Get current weather for a location",
               InputSchema = new()
@@ -433,11 +426,8 @@ The following example creates an agent with the built-in toolset and one custom 
   var agent = client.beta().agents().create(AgentCreateParams.builder()
       .name("Weather Agent")
       .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-      .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-          .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-          .build())
+      .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
       .addTool(BetaManagedAgentsCustomToolParams.builder()
-          .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
           .name("get_weather")
           .description("Get current weather for a location")
           .inputSchema(BetaManagedAgentsCustomToolInputSchema.builder()
@@ -461,11 +451,8 @@ The following example creates an agent with the built-in toolset and one custom 
       name: 'Weather Agent',
       model: 'claude-opus-5-5',
       tools: [
-          BetaManagedAgentsAgentToolset20260401Params::with(
-              type: 'agent_toolset_20260401',
-          ),
+          BetaManagedAgentsAgentToolset20260401Params::with(),
           BetaManagedAgentsCustomToolParams::with(
-              type: 'custom',
               name: 'get_weather',
               description: 'Get current weather for a location',
               inputSchema: BetaManagedAgentsCustomToolInputSchema::with(
