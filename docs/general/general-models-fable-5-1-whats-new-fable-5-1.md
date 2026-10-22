@@ -10,9 +10,9 @@ url: https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1
 description: Overview of new features, breaking changes, and capability improvements in Claude Fable 5.1 and Claude Mythos 5.1.
 ---
 
-Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../about-claude/about-claude-models-choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still fall short. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
+Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../about-claude/about-claude-models-choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don't meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 
-If you already call Claude Fable 5, three changes are breaking: [forced tool use returns an error](./general-models-fable-5-1-whats-new-fable-5-1.md#forced-tool-use-is-not-supported), [only Claude Fable 5.1 and Claude Mythos 5.1 can read Claude Fable 5.1's thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them), and [editing earlier turns invalidates thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks). Five are additive: [per-message effort](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta), [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta), [readable progress updates between tool calls](./general-models-fable-5-1-whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta), a [lower cache read price](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing), and [content provenance](./general-models-fable-5-1-whats-new-fable-5-1.md#content-provenance).
+If you already call Claude Fable 5, four changes are breaking: [forced tool use returns an error](./general-models-fable-5-1-whats-new-fable-5-1.md#forced-tool-use-is-not-supported), only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them), [editing earlier turns invalidates thinking blocks](./general-models-fable-5-1-whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks), and [some advisor tool pairings are not supported](./general-models-fable-5-1-whats-new-fable-5-1.md#advisor-tool-pairings). Five are additive: [mid-conversation effort changes](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta), [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta), [readable progress updates between tool calls](./general-models-fable-5-1-whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta), a [lower cache read price](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing), and [content provenance](./general-models-fable-5-1-whats-new-fable-5-1.md#content-provenance).
 
 ## Models
 
@@ -26,7 +26,7 @@ Claude Fable 5.1 and Claude Mythos 5.1 share specs and pricing:
 * **Context window and output:** a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) (default and maximum) at standard per-token pricing across the whole window, and 128k max output tokens.
 * **Thinking:** [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) is always on. Use the [effort parameter](../build-with-claude/build-with-claude-effort.md) to control thinking depth.
 * **Pricing:** the same as Claude Fable 5, except for a [lower cache read price](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing).
-* **Tokenizer:** the same as Claude Fable 5 (introduced with Claude Opus 4.7). Compared with models older than Claude Opus 4.7, the same text produces roughly 30% more tokens. See [Token counting](../build-with-claude/build-with-claude-token-counting.md).
+* **Tokenizer:** the same as Claude Fable 5 (introduced with Claude Opus 4.7). Compared with models older than Claude Opus 4.7, the same text produces roughly 30 percent more tokens. See [Token counting](../build-with-claude/build-with-claude-token-counting.md).
 
 For all current models, see the [models overview](./general-models-overview.md).
 
@@ -48,7 +48,7 @@ Thinking is always on for these models, and a forced tool call would skip it. Th
 
 Every thinking block records which model produced it. Claude Fable 5.1 reads earlier models' thinking blocks, but only Claude Fable 5.1 and Claude Mythos 5.1 read Claude Fable 5.1's. A conversation that moves onto Claude Fable 5.1 (from Claude Opus 5, Claude Fable 5, or any earlier Claude model) keeps its reasoning. A conversation that moves from Claude Fable 5.1 to any other model loses it for the turns that run there.
 
-When a request carries a block the target model can't read (a router or fallback that switches models mid-conversation, for example), the API drops the block before the model sees it. Dropped blocks don't count toward `input_tokens` and aren't billed. With the `thinking-binding-controls-2026-08-01` beta header, the drop is reported in a top-level `input_transformations` array. Without it, the drop is silent. See [Switching models mid-conversation](../build-with-claude/build-with-claude-preserved-thinking.md#switching-models).
+When a request carries a block the target model can't read (a router or fallback that switches models mid-conversation, for example), the API drops the block before the model receives it. Dropped blocks don't count toward `input_tokens` and aren't billed. With the `thinking-binding-controls-2026-08-01` beta header, the drop is reported in a top-level `input_transformations` array. Without it, the drop is silent. See [Switching models mid-conversation](../build-with-claude/build-with-claude-preserved-thinking.md#switching-models).
 
 ### Editing earlier turns invalidates thinking blocks
 
@@ -56,16 +56,20 @@ Modifying anything before a Claude Fable 5.1 thinking block (the `system` prompt
 
 These patterns invalidate every later thinking block:
 
-* Editing, reordering, or removing an earlier turn while keeping later ones.
-* Injecting per-request text into an earlier turn (a reminder or status line) that you remove on the next request.
-* Rebuilding the top-level `system` prompt or `tools` array between requests in the same conversation.
-* An image or document URL that serves different bytes on a later request (the check covers the bytes, not the URL, so a rotating signed URL for the same file is fine).
+* Editing, reordering, or removing an earlier turn while keeping later ones
+* Injecting per-request text into an earlier turn (a reminder or status line) that you remove on the next request
+* Rebuilding the top-level `system` prompt or `tools` array between requests in the same conversation
+* Using an image or document URL that serves different bytes on a later request (the check covers the bytes, not the URL, so a rotating signed URL for the same file is fine)
 
 These keep later blocks valid: removing a leading run of thinking blocks (oldest first), letting server-side compaction or context editing trim the history, moving `cache_control` markers, and changing `effort` between requests. Removing a thinking block from anywhere other than the start of the run invalidates every thinking block after it.
 
 Where the check is enforced, a request that replays an invalidated block is rejected with a 400 whose message says `The block is bound to a different conversation`. To drop the block and continue instead, send the `thinking-binding-controls-2026-08-01` beta header with `thinking.block_binding.prefix_mismatch_behavior: "drop_block"`. The drop is reported in `input_transformations` with `reason: "prefix_binding_mismatch"`.
 
-To keep thinking valid across a long session, treat the conversation as append-only. Add instructions with a [mid-conversation system message](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) ([turn-scoped](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta) if it should apply to one turn only) and change tools with [mid-conversation tool changes](../build-with-claude/build-with-claude-mid-conversation-system-messages.md#mid-conversation-tool-changes) rather than editing `system` or `tools`. Trim context with server-side [context editing](../build-with-claude/build-with-claude-context-editing.md) or [compaction](../build-with-claude/build-with-claude-compaction.md), which don't count as edits. These patterns also keep the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md) warm. To find out whether your integration edits history, run a session with `prefix_mismatch_behavior: "drop_block"` and log `input_transformations`: the [migration guide](./general-models-fable-5-1-migration-guide.md#fable-5-1-preserved-thinking) has the three-step check. See [Keeping the prefix unchanged](../build-with-claude/build-with-claude-preserved-thinking.md#prefix-check) for the full rules.
+To keep thinking valid across a long session, treat the conversation as append-only. Add instructions with a [mid-conversation system message](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) (a [turn-scoped system message](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta) if it should apply to one turn only) and change tools with [mid-conversation tool changes](../build-with-claude/build-with-claude-mid-conversation-system-messages.md#mid-conversation-tool-changes) rather than editing `system` or `tools`. Trim context with server-side [context editing](../build-with-claude/build-with-claude-context-editing.md) or [compaction](../build-with-claude/build-with-claude-compaction.md), which don't count as edits. These patterns also keep the [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md) warm. To find out whether your integration edits history, run a session with `prefix_mismatch_behavior: "drop_block"` and log `input_transformations`: the migration guide has the three-step [history-editing check](./general-models-fable-5-1-migration-guide.md#fable-5-1-preserved-thinking). See [Keeping the prefix unchanged](../build-with-claude/build-with-claude-preserved-thinking.md#prefix-check) for the full rules.
+
+### Some advisor tool pairings are not supported
+
+With the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md) (beta), the advisor must be at least as capable as the executor. Claude Mythos 5, Claude Fable 5, Claude Opus 5.5, and Claude Opus 5 advisors work with a Claude Fable 5 or Claude Mythos 5 executor. With a Claude Fable 5.1 or Claude Mythos 5.1 executor, they return a 400 `invalid_request_error`. See the advisor tool's [Model compatibility](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md#model-compatibility).
 
 ## New features
 
@@ -95,7 +99,8 @@ On Claude Fable 5.1 you can change the [effort](../build-with-claude/build-with-
   ```
 
   ```bash CLI
-  ant beta:messages create --beta mid-conversation-output-config-2026-07-01 <<'YAML'
+  ant beta:messages create \
+    --beta mid-conversation-output-config-2026-07-01 <<'YAML'
   model: claude-fable-5-1
   max_tokens: 4096
   output_config:
@@ -320,7 +325,7 @@ On Claude Fable 5.1 you can change the [effort](../build-with-claude/build-with-
   client = Anthropic::Client.new
 
   response = client.beta.messages.create(
-    model: "claude-fable-5-1",
+    model: Anthropic::Model::CLAUDE_FABLE_5_1,
     max_tokens: 4096,
     output_config: {effort: :high},
     messages: [
@@ -343,7 +348,7 @@ See [Per-message effort](../build-with-claude/build-with-claude-effort.md#change
 
 ### Turn-scoped system messages (beta)
 
-A [mid-conversation system message](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) can be scoped to one turn. Set `clear_at: "next_user_message"` on a `role: "system"` message and its text carries system-prompt authority for the current turn, then stops rendering once a later `user` message exists. The message stays in `messages` and you keep sending it back verbatim, so nothing earlier in the conversation changes. The [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md) keeps matching, later [thinking blocks stay valid](../build-with-claude/build-with-claude-thinking.md#preserved-in-conversation), and a cleared message costs no input tokens. Use it for per-turn reminders in a tool loop ("check your inbox before running more code", "the user can't see that tool output") instead of injecting text into the history and deleting it on the next request. Turn-scoped system messages are in beta: include the `mid-conversation-system-clear-at-2026-08-21` beta header. See [Turn-scoped system messages](../build-with-claude/build-with-claude-mid-conversation-system-messages.md#turn-scoped-system-messages).
+A [mid-conversation system message](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) can be scoped to one turn. Set `clear_at: "next_user_message"` on a `role: "system"` message and its text carries system-prompt authority for the current turn, then stops rendering once a later `user` message exists. The message stays in `messages` and you keep sending it back verbatim, so nothing earlier in the conversation changes. The [prompt cache](../build-with-claude/build-with-claude-prompt-caching.md) keeps matching, later [thinking blocks stay valid](../build-with-claude/build-with-claude-thinking.md#preserved-in-conversation), and a cleared message costs no input tokens. Use it for per-turn reminders in a tool loop ("check your inbox before running more code," "the user can't see that tool output") instead of injecting text into the history and deleting it on the next request. Turn-scoped system messages are in beta: include the `mid-conversation-system-clear-at-2026-08-21` beta header. See [how turn-scoped system messages work](../build-with-claude/build-with-claude-mid-conversation-system-messages.md#turn-scoped-system-messages) in Mid-conversation system messages and tool changes.
 
 ```json
 {
@@ -369,7 +374,7 @@ The watermark doesn't change the meaning, quality, or readability of the output.
 
 Claude Fable 5.1 differs from Claude Fable 5 in several ways that show up without any code change. Each has a prompting fix in [Prompting Claude Fable 5.1](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md):
 
-* **Parallel tool calling is more variable.** Claude Fable 5.1 may issue one tool call per turn where Claude Fable 5 batched several. This shows up in long agent loops where the next independent reads are only implied: custom coding agents, bash-and-editor harnesses, computer use. The extra turns cost tokens, round trips, and wall-clock time but don't reduce answer quality. Requests naming several things to fetch still run in parallel. Add the one-line batching instruction from [Batch independent tool calls in agent loops](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#batch-independent-tool-calls-in-agent-loops).
+* **Parallel tool calling is more variable.** Claude Fable 5.1 might issue one tool call in each turn where Claude Fable 5 batched several. This shows up in long agent loops where the next independent reads are only implied: custom coding agents, bash-and-editor harnesses, computer use. The extra turns cost tokens, round trips, and wall-clock time but don't reduce answer quality. Requests naming several things to fetch still run in parallel. Add the one-line batching instruction from [Batch independent tool calls in agent loops](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#batch-independent-tool-calls-in-agent-loops).
 * **Fewer progress updates during long tool runs.** The model writes less user-facing text between tool calls, especially at higher effort. Set `thinking.display` to `"updates"` (beta) to receive the [progress updates](../build-with-claude/build-with-claude-thinking.md#progress-updates) it does write, and remove any prompt line that tells it to hold findings for the final response. If your UI depends on narration, ask explicitly for an opening line, periodic updates, and a closing recap. See [Ask for user-facing progress updates](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#ask-for-user-facing-progress-updates).
 * **Answers from memory more often at `low` effort.** At the lowest effort level the model calls a search or retrieval tool less often. Raise effort for turns that need fresh information, including [mid-conversation](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta), or add the verification nudge from [Search triggering at low effort](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#search-triggering-at-low-effort).
 * **Denser prose in places.** In some cases its prose is denser than Claude Fable 5's, with longer sentences and fewer paragraph breaks. See [Writing density](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md#writing-density).
@@ -385,7 +390,7 @@ These Messages API behaviors carry over from Claude Fable 5 unchanged:
 * `thinking.display` defaults to `"omitted"`. `"summarized"` is available, and the raw chain of thought is never returned.
 * Reasoning between tool calls appears in thinking blocks rather than text, and [interleaved thinking](../build-with-claude/build-with-claude-thinking.md#interleaved-thinking) is automatic with no beta header.
 * Prefilling the assistant response returns a 400 error.
-* Non-default `temperature`, `top_p`, or `top_k` values return a 400 error.
+* Setting `temperature`, `top_p`, or `top_k` returns a 400 error.
 * The minimum cacheable prompt length is 512 tokens.
 * [Mid-conversation system messages](../build-with-claude/build-with-claude-mid-conversation-system-messages.md) and tool changes are supported.
 
@@ -393,14 +398,14 @@ These Messages API behaviors carry over from Claude Fable 5 unchanged:
 
 Claude Fable 5.1 improves on Claude Fable 5, and the gap is widest at higher [effort](../build-with-claude/build-with-claude-effort.md) levels. The gains concentrate in six areas:
 
-* **Agentic coding over long sessions**, including multi-file features, large refactors and migrations, debugging, and code review across sessions that run for hours.
-* **Knowledge work with documents, spreadsheets, and slides**, taking an analysis from a first question to a finished document, live-formula spreadsheet, or slide deck built from a blank page.
-* **Research and search**, with higher accuracy on multistep web research and deep-research tasks that follow up on what they find.
-* **Vision**, reading dense charts, filings, and tables nested in PDFs, including with crop-and-zoom tools on charts.
-* **Long-context work**, reasoning over and connecting details across the full [1M token context window](../build-with-claude/build-with-claude-context-windows.md).
-* **Computer use**, operating a browser and desktop applications more reliably and recovering from failed steps.
+* **Agentic coding over long sessions**, including multifile features, large refactors and migrations, debugging, and code review across sessions that run for hours
+* **Knowledge work with documents, spreadsheets, and slides**, taking an analysis from a first question to a finished document, live-formula spreadsheet, or slide deck built from a blank page
+* **Research and search**, with higher accuracy on multistep web research and deep-research tasks that follow up on what they find
+* **Vision**, reading dense charts, filings, and tables nested in PDFs, including with crop-and-zoom tools on charts
+* **Long-context work**, reasoning over and connecting details across the full [1M token context window](../build-with-claude/build-with-claude-context-windows.md)
+* **Computer use**, operating a browser and desktop applications more reliably and recovering from failed steps
 
-Multilingual performance is on par with Claude Fable 5.
+Multilingual performance is comparable to Claude Fable 5.
 
 ## Refusals, fallback, and billing
 
@@ -420,7 +425,7 @@ Claude Fable 5.1 and Claude Mythos 5.1 are priced the same as Claude Fable 5, ex
 
 Cache reads (hits and refreshes) cost 0.025 times the base input price on these models, compared with 0.05 on Claude Opus 5.5 and Claude Sonnet 5.5, and 0.1 on other Claude models. Long agentic sessions that re-read a cached prefix pay a quarter of the Claude Fable 5 rate. Cache writes and the [512-token minimum cacheable prompt length](../build-with-claude/build-with-claude-prompt-caching.md#cache-limitations) are unchanged.
 
-[Batch processing](../build-with-claude/build-with-claude-batch-processing.md) is $5 USD per million input tokens and $25 USD per million output tokens. See [Pricing](../about-claude/about-claude-pricing.md) for data residency and tool pricing.
+[Batch processing](../build-with-claude/build-with-claude-batch-processing.md) is $5 USD per million input tokens and $25 USD per million output tokens. See [Claude pricing](../about-claude/about-claude-pricing.md) for data residency and tool pricing.
 
 ## Availability
 
@@ -479,10 +484,11 @@ To migrate from Claude Fable 5, update your model ID:
 Then review these items:
 
 1. Remove any `tool_choice` of type `any` or `tool`. Move schema enforcement to [strict tool use](../agents-and-tools/agents-and-tools-tool-use-strict-tool-use.md) with `tool_choice: {"type": "auto"}` or to [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md).
-2. Pass thinking blocks back unchanged and keep the history append-only. If your code builds the `messages` array itself, run the [history-editing check](./general-models-fable-5-1-migration-guide.md#fable-5-1-preserved-thinking): move per-turn reminders you currently inject and delete to [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta), move `system` and `tools` changes to mid-conversation system messages, trim context server-side or strip thinking blocks from turns you carry across a client-side summary, then pick a production [`prefix_mismatch_behavior`](../build-with-claude/build-with-claude-thinking.md#preserved-thinking-controls) and monitor `input_transformations`.
-3. Re-tune effort from the default (`high`), and consider [changing it mid-conversation](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) instead of holding one level for the whole session.
-4. In agent loops, watch for one tool call per turn where Claude Fable 5 batched several, and add the per-turn note from [Prompting Claude Fable 5.1](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md).
-5. Re-run your evals. Refusal handling, fallback, fallback credit, and the tokenizer carry over unchanged. Cache reads cost less (see [Pricing](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing)), and default behavior differs in the ways listed under [Changed from Claude Fable 5](./general-models-fable-5-1-whats-new-fable-5-1.md#changed-from-claude-fable-5).
+2. If you use the advisor tool (beta), choose an advisor at least as capable as Claude Fable 5.1. See [Some advisor tool pairings are not supported](./general-models-fable-5-1-whats-new-fable-5-1.md#advisor-tool-pairings).
+3. Pass thinking blocks back unchanged and keep the history append-only. If your code builds the `messages` array itself, run the [history-editing check](./general-models-fable-5-1-migration-guide.md#fable-5-1-preserved-thinking): move per-turn reminders you currently inject and delete to [turn-scoped system messages](./general-models-fable-5-1-whats-new-fable-5-1.md#turn-scoped-system-messages-beta), move `system` and `tools` changes to mid-conversation system messages, trim context server-side or strip thinking blocks from turns you carry across a client-side summary, then pick a production [`prefix_mismatch_behavior`](../build-with-claude/build-with-claude-thinking.md#preserved-thinking-controls) and monitor `input_transformations`.
+4. Re-tune effort from the default (`high`), and consider [changing it mid-conversation](./general-models-fable-5-1-whats-new-fable-5-1.md#change-effort-mid-conversation-beta) instead of holding one level for the whole session.
+5. In agent loops, watch for one tool call in each turn where Claude Fable 5 batched several, and add the per-turn note from [Prompting Claude Fable 5.1](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5-1.md).
+6. Re-run your evals. Refusal handling, fallback, fallback credit, and the tokenizer carry over unchanged. Cache reads cost less (see [cache read prices](./general-models-fable-5-1-whats-new-fable-5-1.md#pricing)), and default behavior differs in the ways listed under [Changed from Claude Fable 5](./general-models-fable-5-1-whats-new-fable-5-1.md#changed-from-claude-fable-5).
 
 See the [migration guide](./general-models-fable-5-1-migration-guide.md) for step-by-step instructions, including from Claude Opus 5 and earlier models.
 

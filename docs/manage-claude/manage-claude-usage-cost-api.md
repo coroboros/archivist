@@ -16,12 +16,12 @@ description: Programmatically access your organization's API usage and cost data
 
 The Usage and Cost Admin API provides programmatic and granular access to historical API usage and cost data for your organization. This data is similar to the information available on the [Usage](https://platform.claude.com/usage) page (`platform.claude.com/usage`) and the [Cost](https://platform.claude.com/cost) page (`platform.claude.com/cost`) in the Claude Console.
 
-This API enables you to better monitor, analyze, and optimize your Claude implementations:
+This API allows you to better monitor, analyze, and optimize your Claude implementations:
 
 * **Accurate usage tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
 * **Cost reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
 * **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or set up alerting
-* **[Rate limit](../api/api-rate-limits.md) optimization:** Optimize features like [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) or specific prompts to make the most of your allocated capacity.
+* **[Rate limit](../api/api-rate-limits.md) optimization:** Optimize features such as [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) or specific prompts to use your allocated capacity efficiently.
 * **Advanced analysis:** Perform deeper data analysis than what's available in Console
 
 <Check>
@@ -108,10 +108,10 @@ Track token consumption across your organization with detailed breakdowns by mod
 
 ### Key concepts
 
-* **Time buckets:** Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
-* **Token tracking:** Measure uncached input, cached input, cache creation, and output tokens
-* **Filtering & grouping:** Filter by API key, workspace, model, service tier, context window, [data residency](./manage-claude-data-residency.md), or speed, and group results by these dimensions
-* **Server tool usage:** Track usage of server-side tools such as web search
+* **Time buckets:** Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`).
+* **Token tracking:** Measure uncached input, cached input, cache creation, and output tokens.
+* **Filtering & grouping:** Filter by API key, workspace, model, service tier, context window, [data residency](./manage-claude-data-residency.md), or speed, and group results by these dimensions.
+* **Server tool usage:** Track usage of server-side tools such as web search.
 
 For complete parameter details and response schemas, see the [Usage API reference](../api/api-beta-organization-usage_report-retrieve_messages.md).
 
@@ -238,10 +238,10 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 
 ### Key concepts
 
-* **Currency:** All costs in USD, reported as decimal strings in lowest units (cents)
-* **Cost types:** Track token usage, web search, and code execution costs
-* **Grouping:** Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields such as `model` and `inference_geo`
-* **Time buckets:** Daily granularity only (`1d`)
+* **Currency:** All costs are in USD, reported as decimal strings in lowest units (cents).
+* **Cost types:** Track token usage, web search, and code execution costs.
+* **Grouping:** Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields such as `model` and `inference_geo`.
+* **Time buckets:** Only daily granularity (`1d`) is available.
 
 For complete parameter details and response schemas, see the [Cost API reference](../api/api-beta-organization-cost_report-retrieve.md).
 
@@ -292,7 +292,7 @@ page=page_xyz..." \
 
 ## Common use cases
 
-Explore detailed implementations in [Claude Cookbook](https://platform.claude.com/cookbook):
+Explore detailed implementations in the [Claude Cookbook](https://platform.claude.com/cookbook):
 
 * **Daily usage reports:** Track token consumption trends
 * **Cost attribution:** Allocate expenses by workspace for chargebacks
@@ -304,7 +304,7 @@ Explore detailed implementations in [Claude Cookbook](https://platform.claude.co
 
 ### How fresh is the data?
 
-Usage and cost data typically appears within 5 minutes of API request completion, though delays may occasionally be longer.
+Usage and cost data typically appears within 5 minutes of API request completion, though delays might occasionally be longer.
 
 ### What's the recommended polling frequency?
 
@@ -320,7 +320,7 @@ Filter or group by `service_tier` in the usage endpoint and look for the `priori
 
 ### What happens with playground usage?
 
-API usage from playground in the Claude Console (and from the legacy Workbench before it) is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
+API usage from playground in the Claude Console (and from the legacy Anthropic Workbench before it) is not associated with an API key, so `api_key_id` is `null` even when grouping by that dimension.
 
 ### How is the default workspace represented?
 
@@ -339,7 +339,7 @@ Use the Usage and Cost APIs to deliver a better experience for your users, manag
 * [Analytics APIs](./manage-claude-analytics-api.md) - Which analytics API and key type your organization needs
 * [Pricing](../about-claude/about-claude-pricing.md)
 * [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) - Optimize costs with caching
-* [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) - 50% discount on batch requests
+* [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) - 50 percent discount on batch requests
 * [Rate limits](../api/api-rate-limits.md) - Understand usage tiers
 * [Rate Limits API](./manage-claude-rate-limits-api.md) - Read your configured rate limits
 * [Data residency](./manage-claude-data-residency.md) - Control inference geography

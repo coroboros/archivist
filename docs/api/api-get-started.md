@@ -12,7 +12,7 @@ description: Make your first API call to Claude and build a simple web search as
 
 ## Prerequisites
 
-* A [Claude Console account](https://platform.claude.com)
+* A [Claude Console account](https://platform.claude.com/)
 * An [API key](../general/general-get-api-key.md)
 
 ## Call the API
@@ -21,7 +21,7 @@ description: Make your first API call to Claude and build a simple web search as
   <Tab title="cURL">
     <Steps>
       <Step title="Set your API key">
-        Export your API key as an environment variable. The cURL command below reads it from `$ANTHROPIC_API_KEY`.
+        Export your API key as an environment variable. The cURL command in the following step reads it from `$ANTHROPIC_API_KEY`.
 
         ```bash
         export ANTHROPIC_API_KEY="your-api-key-here"
@@ -50,7 +50,7 @@ description: Make your first API call to Claude and build a simple web search as
 
         Claude returns a JSON response containing the assistant's message:
 
-        ```json Output
+        ```text Output
         {
           "model": "claude-opus-5-5",
           "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
@@ -118,7 +118,7 @@ description: Make your first API call to Claude and build a simple web search as
 
         The CLI prints the JSON response:
 
-        ```json Output
+        ```text Output
         {
           "model": "claude-opus-5-5",
           "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
@@ -441,7 +441,7 @@ description: Make your first API call to Claude and build a simple web search as
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:3.0.0")
+                implementation("com.anthropic:anthropic-java:3.1.0")
             }
 
             application {
@@ -467,7 +467,7 @@ description: Make your first API call to Claude and build a simple web search as
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>3.0.0</version>
+                  <version>3.1.0</version>
                 </dependency>
               </dependencies>
             </project>

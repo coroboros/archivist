@@ -13,10 +13,6 @@ description: Install and configure the Anthropic PHP SDK with value objects and 
 The Anthropic PHP library provides convenient access to the Claude API from any PHP 8.1.0+ application.
 
 <Info>
-  The PHP SDK is currently in beta. APIs might change between versions.
-</Info>
-
-<Info>
   For API feature documentation with code examples, see the [API reference](../api/api-overview.md). This page covers PHP-specific SDK features and configuration.
 </Info>
 
@@ -49,11 +45,11 @@ $textBlock = array_find($message->content, static fn ($block): bool => $block->t
 echo $textBlock->text;
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md). If your API key is a [personal or service account key](../manage-claude/manage-claude-authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../manage-claude/manage-claude-authentication.md#select-a-workspace) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md). If your API key is a [personal or service account key](../manage-claude/manage-claude-authentication.md#key-types) that isn't scoped to a workspace, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../manage-claude/manage-claude-authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ## Value objects
 
-It is recommended to use the static `with` constructor `Base64ImageSource::with(data: "U3RhaW5sZXNzIHJvY2tz", ...)` and named parameters to initialize value objects.
+The recommended way to initialize value objects is the static `with` constructor `Base64ImageSource::with(data: "U3RhaW5sZXNzIHJvY2tz", ...)` with named parameters.
 
 However, builders are also provided `(new Base64ImageSource)->withData("U3RhaW5sZXNzIHJvY2tz")`.
 
@@ -113,7 +109,7 @@ try {
 
 Error codes are as follows:
 
-| Cause            | Error Type                     |
+| Cause            | Error type                     |
 | ---------------- | ------------------------------ |
 | HTTP 400         | `BadRequestException`          |
 | HTTP 401         | `AuthenticationException`      |
@@ -244,7 +240,9 @@ Use `MantleClient` for new projects; `Anthropic\Bedrock\Client` remains for exis
 
 ## Semantic versioning
 
-This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs might change at any time.
+Each major version of this SDK sends one API version in the `anthropic-version` header by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 1.0.0; see [Upgrade to 2026-10-21](../api/api-migration-2026-10-21.md#upgrade).
+
+This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions.
 
 This package considers improvements to the (non-runtime) PHPDoc type definitions to be non-breaking changes.
 

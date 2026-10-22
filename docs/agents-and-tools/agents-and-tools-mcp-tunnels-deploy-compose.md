@@ -16,11 +16,11 @@ description: Install the MCP tunnel stack on a VM using Docker Compose.
 
 This guide deploys the [tunnel stack](./agents-and-tools-mcp-tunnels-concepts.md#components) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
-## Before you begin
+## Before you start
 
 You need:
 
-* **A tunnel.** With programmatic access, the [setup component](./agents-and-tools-mcp-tunnels-concepts.md#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](./agents-and-tools-mcp-tunnels-console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
+* **A tunnel.** With programmatic access, the [setup component](./agents-and-tools-mcp-tunnels-concepts.md#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Claude Console](./agents-and-tools-mcp-tunnels-console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
 
 * **A way for the host to authenticate to the Tunnels API.**
 
@@ -250,7 +250,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cd mcp-tunnel
         ```
 
-        The proxy listens on `:8080` over plain WebSocket; the [inner TLS](./agents-and-tools-mcp-tunnels-concepts.md#components) handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` per the [certificate requirements](./agents-and-tools-mcp-tunnels-reference.md#certificate-requirements).
+        The proxy listens on `:8080` over plain WebSocket; the [inner TLS](./agents-and-tools-mcp-tunnels-concepts.md#components) handshake occurs **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` as described in the [certificate requirements](./agents-and-tools-mcp-tunnels-reference.md#certificate-requirements).
 
         ```bash
         # Self-signed CA. Explicit extensions so it satisfies the certificate
@@ -288,7 +288,7 @@ This guide provides one reference approach using Docker Compose. You are respons
       </Step>
 
       <Step title="Register the CA certificate in the Console">
-        On the tunnel detail page, scroll to the **Certificates** section and click **Add certificate**. Upload `data/ca.crt` directly with **Choose file** (the modal accepts `.pem`, `.crt`, and `.cer`), or paste its contents:
+        On the tunnel detail page, scroll to the **Certificates** section and click **Add certificate**. Upload `data/ca.crt` directly with **Choose file** (the modal window accepts `.pem`, `.crt`, and `.cer`), or paste its contents:
 
         ```bash
         cat data/ca.crt
@@ -415,8 +415,8 @@ With programmatic access, increment `--token-version` in the `setup` service com
 export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
 export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
 # export ANTHROPIC_WORKSPACE_ID=wrkspc_...   # if your rule is workspace-scoped
-# Re-mint ANTHROPIC_IDENTITY_TOKEN per the WIF provider guide for your
-# environment (it will have expired since install).
+# Re-mint ANTHROPIC_IDENTITY_TOKEN as described in the WIF provider guide for
+# your environment (it will have expired since install).
 export ANTHROPIC_IDENTITY_TOKEN=...
 
 docker compose run --rm setup

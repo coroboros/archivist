@@ -1,5 +1,5 @@
 ---
-title: "Before you begin"
+title: "Before you start"
 source: "https://platform.claude.com/docs/en/manage-claude/organization-webhooks"
 category: "manage-claude"
 generated: true
@@ -23,7 +23,7 @@ An organization webhook endpoint receives an event when Anthropic restricts or b
 
 Any member of your organization can list and view organization webhook endpoints with the API, but only members with the admin, owner, or primary owner role can create, change, or delete them, or replace their signing secret.
 
-## Before you begin
+## Before you start
 
 You need the following:
 
@@ -37,7 +37,7 @@ You need the following:
 
 ## Event types
 
-Organization webhook endpoints accept two event types. Both are about enforcement actions on user profiles. An enforcement action is a restriction or a ban that Anthropic places on the end customer a profile represents.
+Organization webhook endpoints accept two event types. Both are about [enforcement actions](./manage-claude-user-profiles.md#check-whether-anthropic-has-restricted-or-banned-a-profile) on user profiles.
 
 | Event                                      | Trigger                                                                             |
 | ------------------------------------------ | ----------------------------------------------------------------------------------- |
@@ -48,9 +48,9 @@ Deleting a profile ends its open actions without a `user_profile.enforcement_act
 
 ### Before your first event
 
-Your profiles won't have the `enforcement_status` and `enforcement_actions` fields until enforcement actions are on for your organization. Until then, and in any request whose `anthropic-beta` header has `user-profiles-2026-09-04` or an earlier value, responses leave the fields out and the `enforcement_status[]` list filter returns a `400`. To get the fields, remove that value from your requests.
+In any request whose `anthropic-beta` header has `user-profiles-2026-09-04` or an earlier value, responses leave out the `enforcement_status` and `enforcement_actions` fields and the `enforcement_status[]` list filter returns a `400`. To get the fields, remove that value from your requests.
 
-If an enforcement action opened before Anthropic turned on enforcement actions and event delivery for your organization, or before you registered your endpoint, you don't get a `user_profile.enforcement_action_opened` event for it. The action still appears on the profile. To find these actions, [list your profiles](../api/api-user_profiles-list.md) with `enforcement_status[]=restricted` and `enforcement_status[]=banned`. A response might return fewer profiles than `limit`, or none, before the list ends, so keep requesting pages until `next_page` is `null`.
+If an enforcement action opened before Anthropic turned on event delivery for your organization, or before you registered your endpoint, you don't get a `user_profile.enforcement_action_opened` event for it. The action still appears on the profile. To find these actions, [list your profiles](../api/api-user_profiles-list.md) with `enforcement_status[]=restricted` and `enforcement_status[]=banned`. A response might return fewer profiles than `limit`, or none, before the list ends, so keep requesting pages until `next_page` is `null`.
 
 ### What an event contains
 
@@ -91,7 +91,7 @@ An organization webhook endpoint has these fields:
 | `updated_at`      | string           | When the endpoint last changed. Set by Anthropic.                                                                                                                                         |
 | `signing_secret`  | string           | A `whsec_`-prefixed secret, created with the endpoint. Only the responses that create the endpoint or replace the secret include it, so store it securely.                                |
 
-```json
+```text wrap
 {
   "id": "wep_011CZkZDf8HnUq2mTxRbVn4s",
   "url": "https://example.com/anthropic-webhooks",
@@ -238,7 +238,7 @@ Send the `anthropic-beta: webhooks-2026-10-07` header with every request. The SD
 
 With no endpoints, the API returns an empty list:
 
-```json
+```text wrap
 {
   "data": [],
   "has_more": false

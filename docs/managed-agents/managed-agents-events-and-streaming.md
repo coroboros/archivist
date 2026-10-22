@@ -7,7 +7,7 @@ generated: true
 ---
 title: Session event stream
 url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-description: Send events, stream responses, and interrupt or redirect your session mid-execution.
+description: Send events, stream responses, and interrupt or redirect your session while it runs.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -282,7 +282,7 @@ Stream events from the session to receive real-time updates as the agent works. 
 
 The session reports errors through the `session.error` event. See [Event types](./managed-agents-reference.md#event-types) for its fields.
 
-The agent's response text arrives as buffered `agent.message` events, each emitted only after the model request that produced it finishes. To render the text while the model is still generating it, see [Preview responses with event deltas](./managed-agents-event-deltas.md).
+The agent's response text arrives as buffered `agent.message` events, each emitted only after the model request that produced it completes. To render the text while the model is still generating it, see [Preview responses with event deltas](./managed-agents-event-deltas.md).
 
 ### Reconnect without missing events
 
@@ -490,7 +490,7 @@ To reconnect to an existing session without missing events, combine a new stream
   seen_event_ids = Set.new
   client.beta.sessions.events.list(session.id).auto_paging_each { seen_event_ids << it.id }
 
-  # Tail live events, skipping anything already seen — Set#add? returns nil for duplicates
+  # Tail live events, skipping anything already seen (Set#add? returns nil for duplicates)
   stream.each do |event|
     next unless seen_event_ids.add?(event.id)
     case event
@@ -669,7 +669,7 @@ No event you send resumes a session paused at its budget. The work that the budg
 
 ## Answer tool calls that pause the session
 
-A session pauses when the agent invokes a [custom tool](./managed-agents-tools.md#custom-tools), and when a tool call needs your confirmation under a [permission policy](./managed-agents-permission-policies.md). Both pauses follow the same sequence:
+A session pauses when the agent calls a [custom tool](./managed-agents-tools.md#custom-tools), and when a tool call needs your confirmation under a [permission policy](./managed-agents-permission-policies.md). Both pauses follow the same sequence:
 
 1. The session emits the tool call as an `agent.custom_tool_use`, `agent.tool_use`, or `agent.mcp_tool_use` event.
 2. The session pauses with a `session.status_idle` event whose `stop_reason.type` is `requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
@@ -1254,7 +1254,7 @@ Sessions persist between interactions. To resume a session, send a `user.message
   ```
 
   ```ruby Ruby
-  # Resuming a session is just sending the next event to it. In production,
+  # To resume a session, send it the next event. In production,
   # pass the session ID you stored when the session was created.
   client.beta.sessions.events.send_(
     session.id,
@@ -1278,7 +1278,7 @@ Conversation history is preserved unless the session is explicitly deleted. When
 
 ## Interrupt the agent
 
-Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
+Send a `user.interrupt` event to stop the agent while it runs, then follow up with a `user.message` event to redirect it:
 
 <CodeGroup>
   ```bash cURL
@@ -1460,7 +1460,7 @@ The call returns as soon as the events are queued. The interrupt then takes effe
 2. The `user.interrupt` event appears on the stream, and the interrupted turn ends with a `session.status_idle` event.
 3. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
-The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that finishes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](./managed-agents-workflow-runs.md#interrupt-a-session-with-runs-open).
+The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that completes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](./managed-agents-workflow-runs.md#interrupt-a-session-with-runs-open).
 
 ## List past events
 
@@ -1633,7 +1633,7 @@ Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to r
 
 On a [supported model](./managed-agents-events-and-streaming.md#supported-models), send a `system.message` event to give the agent privileged system-level context. The context applies to the accompanying turn and all subsequent turns. Use it when the agent needs updated system-level guidance mid-session, for example a different persona, revised constraints, or context fetched at runtime.
 
-The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
+The event's `content` (csharp, go: `Content`) accepts 1–1,000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
 
 <CodeGroup>
   ```bash cURL
@@ -1806,7 +1806,7 @@ While the session is idle with a `requires_action` stop reason, a `system.messag
   </Card>
 
   <Card title="Subscribe to webhooks" icon="link" href="./managed-agents-webhooks.md">
-    Get notified when major events happen without polling.
+    Get notified when major events occur without polling.
   </Card>
 
   <Card title="Event types" icon="book" href="./managed-agents-reference.md">

@@ -18,7 +18,7 @@ This page covers managing the people in your **Claude Enterprise** (claude.ai) o
 
 ## Which endpoints can your organization use?
 
-The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](./manage-claude-admin-api-keys.md) and each have access to a different subset of the endpoints:
+The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with different [Admin API keys](./manage-claude-admin-api-keys.md) and each have access to a different subset of the endpoints:
 
 | Endpoints                                                                                                                                                                                                                                                                                                                                                     | Claude Console (Claude Platform)                                                                          | Claude Enterprise (claude.ai)                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ Custom roles and their group attachments are managed in [claude.ai organization 
 
 ## Quick start
 
-Set the `ANTHROPIC_API_KEY` environment variable to your Admin API key. The examples on this page read the key from it. The SDK and the `ant` CLI send the `x-api-key` and `anthropic-version` headers for you.
+Set the `ANTHROPIC_API_KEY` environment variable to your Admin API key. The examples on this page read the key from it. The SDK and the `ant` CLI send the `Authorization` and `anthropic-version` headers for you.
 
 List the organization's members, newest first:
 
@@ -153,7 +153,7 @@ List the organization's members, newest first:
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "data": [
     {
@@ -195,7 +195,7 @@ If your organization's plan draws members from a finite pool of purchased seats,
 
 ### Groups and roles
 
-Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `role_ids` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](./manage-claude-user-management.md#custom-roles), noting that the role catalog is per-organization while groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles. Two deprecated fields are still returned: `roles` on groups, always equal to `role_ids`, and `group_id` on group members, always equal to `rbac_group_id`.
+Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `role_ids` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](./manage-claude-user-management.md#custom-roles), noting that the role catalog is per-organization whereas groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
 
 ## Versioning
 
@@ -207,13 +207,13 @@ Admin API endpoints share a per-organization limit of **100 requests per minute*
 
 ## Pagination
 
-Member and invite lists use ID-based pagination: pass `limit` (default 20, max 1000) plus at most one of `before_id` or `after_id`, and page using the `first_id` and `last_id` fields of each response until `has_more` is `false`. Group and custom-role lists use an **opaque cursor** instead: the response's `next_page` value is passed unchanged as the `page` parameter on the next request, until `next_page` is `null`.
+Member and invite lists use ID-based pagination: pass `limit` (default 20, max 1000) plus at most one of `before_id` or `after_id`, and page using the `first_id` and `last_id` fields of each response until `has_more` is `false`. Group and custom-role lists use an **opaque cursor** instead: pass the response's `next_page` value unchanged as the `page` parameter on the next request, until `next_page` is `null`.
 
 When you iterate over the results, the SDK fetches more pages for you, so `limit` sets the page size, not the total. In the CLI, `--limit` sets the total number of results for member and invite lists. For group and role lists, it sets the page size.
 
 ## Error responses
 
-Error responses follow the standard shape documented in [Errors](../api/api-errors.md).
+Error responses follow the standard shape documented in [Claude API errors](../api/api-errors.md).
 
 ## Members
 
@@ -610,7 +610,7 @@ For complete parameter details and response schemas, see [Remove user](../api/ap
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "type": "user_deleted",
   "id": "user_01AbCdEfGhIjKlMnOpQrSt"
@@ -770,7 +770,7 @@ For complete parameter details and response schemas, see [Create invite](../api/
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "type": "invite",
   "id": "invite_01QrStUvWxYzAbCdEfGhIj",
@@ -1167,7 +1167,7 @@ For complete parameter details and response schemas, see [List groups](../api/ap
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "data": [
     {
@@ -1386,7 +1386,7 @@ For complete parameter details and response schemas, see [Create group](../api/a
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "type": "rbac_group",
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1601,7 +1601,7 @@ For complete parameter details and response schemas, see [Delete group](../api/a
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "type": "rbac_group_deleted"
@@ -1728,7 +1728,7 @@ For complete parameter details and response schemas, see [List group members](..
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "data": [
     {
@@ -1862,7 +1862,7 @@ For complete parameter details and response schemas, see [Add group member](../a
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "type": "rbac_group_member",
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1981,7 +1981,7 @@ For complete parameter details and response schemas, see [Remove group member](.
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1994,7 +1994,7 @@ For complete parameter details and response schemas, see [Remove group member](.
 
 Custom roles are read-only through the API: these endpoints catalog your organization's custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization's own.
 
-Read a role's name from its `display_name` field. The deprecated `name` field is still returned, always equal to `display_name`. For a role provisioned by Anthropic, `display_name` can differ from the label claude.ai shows, and Anthropic might change the name. To keep a lasting reference to a role, store its `id`.
+Read a role's name from its `display_name` field. For a role provisioned by Anthropic, `display_name` can differ from the label claude.ai shows, and Anthropic might change the name. To keep a lasting reference to a role, store its `id`.
 
 ### List roles
 
@@ -2097,7 +2097,7 @@ For complete parameter details and response schemas, see [List roles](../api/api
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "data": [
     {
@@ -2327,7 +2327,7 @@ For complete parameter details and response schemas, see [List role permissions]
   ```
 </CodeGroup>
 
-```json
+```text wrap
 {
   "data": [
     {
@@ -2480,7 +2480,7 @@ No. The API assigns only `user` and `managed`, on invite creation and role updat
 
 ### Can I create or modify groups through the API?
 
-Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and custom roles, which are managed in claude.ai organization settings (the API [reads them](./manage-claude-user-management.md#custom-roles)).
+Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and [custom roles](./manage-claude-user-management.md#custom-roles), which are managed in claude.ai organization settings (the API reads them).
 
 ### Does an unaccepted invite consume a seat?
 

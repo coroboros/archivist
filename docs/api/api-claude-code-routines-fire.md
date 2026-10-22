@@ -33,7 +33,7 @@ The routine fire endpoint belongs to the Claude Code product surface, which diff
 | Path namespace | `/v1/claude_code/...`                                                                                                                       | `/v1/...`                                                                                       |
 | Stability      | Experimental                                                                                                                                | Stable or standard beta                                                                         |
 
-## Before you begin
+## Before you start
 
 To call this endpoint, you need:
 
@@ -53,7 +53,7 @@ The Claude Code web UI provides the full URL alongside the token when you add an
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/claude_code/routines/$ROUTINE_ID/fire \
   -H "Authorization: Bearer $ROUTINE_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "Content-Type: application/json" \
   -d '{"text": "Sentry alert SEN-4521 fired in prod. Stack trace attached."}'
 ```
@@ -66,7 +66,7 @@ curl -X POST https://api.anthropic.com/v1/claude_code/routines/$ROUTINE_ID/fire 
   run: |
     curl -X POST "$ROUTINE_FIRE_URL" \
       -H "Authorization: Bearer $ROUTINE_FIRE_TOKEN" \
-      -H "anthropic-version: 2023-06-01" \
+      -H "anthropic-version: 2026-10-21" \
       -H "Content-Type: application/json" \
       -d "{\"text\": \"CI failed: $GITHUB_WORKFLOW run $GITHUB_RUN_ID on $GITHUB_REF\"}"
 ```
@@ -75,11 +75,11 @@ The request returns once the session is created. It does not stream session outp
 
 ### Headers
 
-| Name                | Required             | Description                                                                                                     |
-| ------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `Authorization`     | Yes                  | `Bearer <token>`. The per-routine token created in the Claude Code web UI, prefixed `sk-ant-oat01-`.            |
-| `anthropic-version` | Yes                  | The [API version](./api-versioning.md). `2023-06-01` is the only accepted value. |
-| `Content-Type`      | When body is present | `application/json`.                                                                                             |
+| Name                | Required             | Description                                                                                                                                                                        |
+| ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Authorization`     | Yes                  | `Bearer <token>`. The per-routine token created in the Claude Code web UI, prefixed `sk-ant-oat01-`.                                                                               |
+| `anthropic-version` | Yes                  | The [API version](./api-versioning.md), such as `2026-10-21`. The endpoint accepts every version from `2023-06-01` on and behaves the same in each. |
+| `Content-Type`      | When body is present | `application/json`.                                                                                                                                                                |
 
 Older integrations that send an `anthropic-beta: experimental-cc-routine-2026-04-01` header are unaffected: the endpoint accepts requests with and without it.
 
@@ -101,7 +101,7 @@ The body is optional. Unknown fields in the body are ignored.
 
 A successful request returns `200 OK` with the new session details:
 
-```json
+```text
 {
   "type": "routine_fire",
   "claude_code_session_id": "session_01HJKLMNOPQRSTUVWXYZ",
@@ -119,7 +119,7 @@ A successful request returns `200 OK` with the new session details:
 
 Errors use the standard Anthropic [error envelope](./api-errors.md):
 
-```json
+```text wrap
 {
   "type": "error",
   "error": {
@@ -162,4 +162,4 @@ This endpoint is not in the Anthropic SDKs. Its token model differs from API key
 ## See also
 
 * [Automate work with routines](https://code.claude.com/docs/en/routines) in the Claude Code documentation
-* [Errors](./api-errors.md)
+* [Claude API errors](./api-errors.md)

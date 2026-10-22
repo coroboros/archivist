@@ -38,7 +38,7 @@ This endpoint returns an `invalid_request_error` for a few inputs that the Messa
 <Note>
   The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
-  Token counts may include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
+  Token counts might include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
 </Note>
 
 ### Supported models
@@ -181,7 +181,7 @@ All [active models](../general/general-models-overview.md) support token countin
   client = Anthropic::Client.new
 
   response = client.messages.count_tokens(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     system: "You are a scientist",
     messages: [
       { role: "user", content: "Hello, Claude" }
@@ -192,7 +192,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 { "input_tokens": 14 }
 ```
 
@@ -449,7 +449,7 @@ All [active models](../general/general-models-overview.md) support token countin
   client = Anthropic::Client.new
 
   response = client.messages.count_tokens(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     tools: [
       {
         name: "get_weather",
@@ -475,7 +475,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 { "input_tokens": 403 }
 ```
 
@@ -509,7 +509,8 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 
   ```bash CLI
-  curl -s "https://platform.claude.com/docs/images/vision-example.jpg" -o ./vision-example.jpg
+  curl -s "https://platform.claude.com/docs/images/vision-example.jpg" \
+    -o ./vision-example.jpg
 
   ant messages count-tokens <<'YAML'
   model: claude-opus-5-5
@@ -757,7 +758,7 @@ All [active models](../general/general-models-overview.md) support token countin
   client = Anthropic::Client.new
 
   response = client.messages.count_tokens(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     messages: [
       {
         role: "user",
@@ -779,7 +780,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 { "input_tokens": 1028 }
 ```
 
@@ -790,8 +791,8 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
 <Note>
   See [Thinking and the context window](./build-with-claude-thinking.md#thinking-and-the-context-window) for more details.
 
-  * Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](./build-with-claude-thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count
-  * **Current** assistant turn thinking **does** count toward your input tokens
+  * Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](./build-with-claude-thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count.
+  * **Current** assistant turn thinking **does** count toward your input tokens.
 </Note>
 
 <CodeGroup>
@@ -1104,7 +1105,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 { "input_tokens": 88 }
 ```
 
@@ -1360,7 +1361,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   pdf_base64 = Base64.strict_encode64(File.binread("/path/to/document.pdf"))
 
   response = client.messages.count_tokens(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     messages: [
       {
         role: "user",
@@ -1386,7 +1387,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 { "input_tokens": 2188 }
 ```
 

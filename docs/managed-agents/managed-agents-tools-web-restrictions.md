@@ -29,6 +29,8 @@ Each tool carries its own list, so `web_search` and `web_fetch` can have differe
 
 Your organization's web search settings on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console also apply to `web_search` in a session. If an administrator disables web search, `web_search` calls return an error result to the agent, and the session continues. If the organization restricts web search domains, the agent receives only the search results that both the organization's domain restrictions and the agent's per-tool lists allow.
 
+Your organization's web fetch settings on the same page also apply to `web_fetch` in a session. If an administrator turns off web fetch, `web_fetch` calls return an error result to the agent, and the session continues. If the organization sets allowed or blocked domains for web fetch, a URL must pass the organization's list and the agent's per-tool lists, and so must any URL a redirect leads to. A `web_fetch` call for a URL that any of them excludes also returns an error result to the agent.
+
 ## Set domain lists on an agent
 
 The following example creates an agent that limits `web_search` to two sites and blocks one host for `web_fetch`. It also sets `user_location` (java, php: `userLocation`; csharp, go: `UserLocation`) and `max_content_tokens` (java, php: `maxContentTokens`; csharp, go: `MaxContentTokens`), which [Settings](./managed-agents-tools-web-restrictions.md#settings) describes. The response echoes the `configs` (csharp, go: `Configs`) array.
@@ -386,17 +388,17 @@ In addition to `enabled` (csharp, go: `Enabled`) and `permission_policy` (java, 
 | `max_content_tokens` (java, php: `maxContentTokens`; csharp, go: `MaxContentTokens`) | `web_fetch`               | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md#content-limits). |
 | `user_location` (java, php: `userLocation`; csharp, go: `UserLocation`)              | `web_search`              | Localizes search results. An object with the same fields as the Messages API [`user_location`](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md#localization) parameter.           |
 
-For how the SDKs type these entries, see [Config entry types in the SDKs](./managed-agents-tools.md#config-entry-types-in-the-sdks).
+For the types the SDK uses for these entries, see [Config entry types in the SDKs](./managed-agents-tools.md#config-entry-types-in-the-sdks).
 
-## When a domain is not permitted
+## When a domain is not allowed
 
-`web_search` omits results that its domain list does not permit. A `web_fetch` call for a URL that its domain list does not permit returns an error result to the agent. The `agent.tool_result` event has `is_error: true`, and its content names the error code `url_not_allowed`.
+`web_search` omits results that its domain list does not allow. A `web_fetch` call for a URL that its domain list does not allow returns an error result to the agent. The `agent.tool_result` event has `is_error: true`, and its content names the error code `url_not_allowed`.
 
 ## Domain list rules
 
 These rules apply to `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) alike. A request that breaks one is rejected, as [Validation errors](./managed-agents-tools-web-restrictions.md#validation-errors) describes.
 
-* **One list per entry:** Set either `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) or `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) on an entry, not both.
+* **One list for each entry:** Set either `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) or `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) on an entry, not both.
 * **List size:** Each list holds 1 to 64 domains, each 1 to 255 characters.
 * **No empty lists:** To apply no restriction, omit the field or send `null`.
 * **No duplicates:** A domain can appear only once in a list. `www.example.com` and `example.com` count as different domains.
@@ -411,7 +413,7 @@ Hostnames are compared without regard to case.
 
 ### Domain format
 
-Each domain is a registrable domain name, or a subdomain of one, written as a plain hostname. It can contain ASCII letters, digits, hyphens, underscores, and dots. A single trailing `/` is ignored.
+Each domain is a registrable domain name, or a subdomain of one, written as a plain hostname. It can contain ASCII letters, digits, hyphens, underscores, and dots. A single trailing `/` is ignored. A `web_search` domain can also carry a path, as [Path suffixes on web search domains](./managed-agents-tools-web-restrictions.md#path-suffixes-on-web-search-domains) describes.
 
 | Not accepted                                                                   | Example                  | Use instead                           |
 | ------------------------------------------------------------------------------ | ------------------------ | ------------------------------------- |
@@ -424,7 +426,7 @@ Each domain is a registrable domain name, or a subdomain of one, written as a pl
 | A single-label name                                                            | `intranet`               | A full domain such as `example.co.uk` |
 | Non-ASCII characters, as in an internationalized domain name                   |                          | The `xn--` (Punycode) form            |
 
-A domain is also rejected if it contains credentials or whitespace, or if one of its labels begins or ends with a hyphen. `localhost` and hosts ending in `.localhost`, `.local`, `.internal`, `.localdomain`, or `.invalid` are rejected too.
+A domain is also rejected if it contains credentials or whitespace, or if one of its labels starts or ends with a hyphen. `localhost` and hosts ending in `.localhost`, `.local`, `.internal`, `.localdomain`, or `.invalid` are rejected too.
 
 ### Path suffixes on web search domains
 
@@ -446,7 +448,7 @@ Format and limit violations are rejected with a 400 `invalid_request_error`:
 
 On the same requests, the API also rejects three settings that depend on the search and fetch providers:
 
-* A domain in `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) that Anthropic's crawler is not permitted to access.
+* A domain in `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) that Anthropic's crawler is not allowed to access.
 * A `user_location.country` that the search provider does not support. The message ends in `user_location.country: not a country the search provider supports`.
 * A `user_location.timezone` that is not a valid IANA name.
 
@@ -466,7 +468,7 @@ To continue the session:
 
 In a [multiagent session](./managed-agents-multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time. An agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) is bound by three sets of per-tool lists:
 
-* Its own `allowed_domains` and `blocked_domains`
+* Its own `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`)
 * Those of any agent that called it
 * The current lists of the agent that the session runs
 
@@ -480,12 +482,12 @@ The settings combine as follows:
 
 A listed agent can therefore narrow what a tool reaches but never widen it:
 
-* A listed agent that sets `blocked_domains` keeps the `allowed_domains` of the session's agent and blocks those hosts within it.
-* A listed agent that sets its own `allowed_domains` can reach only the hosts that both its list and the list of the session's agent cover.
+* A listed agent that sets `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) keeps the `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) of the session's agent and blocks those hosts within it.
+* A listed agent that sets its own `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) can reach only the hosts that both its list and the list of the session's agent cover.
 
 A `{"type": "self"}` entry in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) has no web settings of its own and follows the current settings of the session's agent.
 
-If the combined `allowed_domains` lists have no domain in common, the tool stays available to that agent but every call fails. Each call returns a `url_not_allowed` error stating that no domain is permitted. The tool description tells the model the same. To avoid this, keep each listed agent's `allowed_domains` inside the `allowed_domains` of the session's agent.
+If the combined `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) lists have no domain in common, the tool stays available to that agent, but every call fails. Each call returns a `url_not_allowed` error stating that no domain is allowed. The tool description tells the model the same. To avoid this, keep each listed agent's `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) inside the `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) of the session's agent.
 
 The grader in [outcome-driven sessions](./managed-agents-define-outcomes.md) runs without `web_search` and `web_fetch`, regardless of these settings.
 
@@ -512,7 +514,7 @@ These settings use the same `allowed_domains` (java, php: `allowedDomains`; csha
   </Card>
 
   <Card title="Permission policies" icon="lock" href="./managed-agents-permission-policies.md">
-    Control when agent and MCP tools execute.
+    Control when agent and MCP tools run.
   </Card>
 
   <Card title="Cloud environment setup" icon="settings" href="./managed-agents-environments.md">

@@ -24,7 +24,7 @@ The session viewer is only accessible to Developers and Admins. To open it, go t
 
 The session viewer shows:
 
-* **Timeline minimap:** A zoomable overview of the session's activity over time, with one lane per thread in [multiagent](./managed-agents-multiagent-orchestration.md) sessions. Select a lane to view that thread, or select a mark to jump to its event.
+* **Timeline minimap:** A zoomable overview of the session's activity over time, with one lane for each thread in [multiagent](./managed-agents-multiagent-orchestration.md) sessions. Select a lane to view that thread, or select a mark to jump to its event.
 * **Transcript:** The conversation grouped by model request, including thinking, tool calls with their inputs and results, and message text as it streams. You can filter the events and copy or download them as JSON.
 * **Inspector:** A resizable side panel with details about the session, in five tabs.
 
@@ -44,7 +44,7 @@ With `ant beta:sessions connect`, you can open the same viewer from the `ant` CL
 
 The session object includes a `usage` field with the session's cumulative usage: token counts, server tool use, active time, and the tracked list cost. Fetch the session after it goes idle to read the latest totals.
 
-```json
+```text wrap
 {
   "id": "sesn_01...",
   "status": "idle",
@@ -85,7 +85,7 @@ The session's `stats` object has its own `active_seconds`, which sums each threa
 
 ### Per-thread usage
 
-Each [session thread](./managed-agents-session-threads.md)'s own `usage` carries `list_cost` and `active_seconds` too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost`. The session figure is the authoritative one.
+Each [session thread](./managed-agents-session-threads.md)'s own `usage` (csharp, go: `Usage`) carries `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) and `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost` (java, php: `listCost`; csharp, go: `ListCost`). The session figure is the authoritative one.
 
 ### Read usage from the stream
 
@@ -103,7 +103,7 @@ To enforce a spend limit, set a session budget rather than polling usage and sto
 ## Debugging tips
 
 * **Check session events:** The session reports errors through [`session.error`](./managed-agents-reference.md#event-types) events.
-* **Review tool results:** Tool execution failures often explain unexpected agent behavior. The Inspector's **Tools** tab shows each tool's failures.
+* **Review tool results:** Tool failures often explain unexpected agent behavior. The Inspector's **Tools** tab shows each tool's failures.
 * **Use system prompts:** Add logging instructions to the system prompt so the agent summarizes what it did and what it found.
 * **Troubleshoot previews:** If a stream that opts in to event deltas doesn't behave as you expect, see [Troubleshoot previews](./managed-agents-event-deltas.md#troubleshoot-previews).
 
@@ -111,7 +111,7 @@ To enforce a spend limit, set a session budget rather than polling usage and sto
 
 <CardGroup cols={2}>
   <Card title="Session event stream" icon="lightning" href="./managed-agents-events-and-streaming.md">
-    Send events, stream responses, and interrupt or redirect your session mid-execution.
+    Send events, stream responses, and interrupt or redirect your session while it runs.
   </Card>
 
   <Card title="Session budgets" icon="coins" href="./managed-agents-budgets.md">

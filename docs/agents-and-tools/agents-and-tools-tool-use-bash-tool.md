@@ -23,7 +23,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 ## Use cases
 
 * **Development workflows:** Run build commands, tests, and development tools
-* **System automation:** Execute scripts, manage files, automate tasks
+* **System automation:** Run scripts, manage files, automate tasks
 * **Data processing:** Process files, run analysis scripts, manage datasets
 * **Environment setup:** Install packages, configure environments
 
@@ -172,7 +172,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     tools: [{type: "bash_20250124", name: "bash"}],
     messages: [
@@ -186,7 +186,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 
 Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that contains the command for your application to run:
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
   "model": "claude-opus-5-5",
@@ -222,7 +222,7 @@ Each tool call is one round trip between Claude and your application:
 
 Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](./agents-and-tools-tool-use-parallel-tool-use.md).
 
-The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).
+The API is stateless. Nothing about your shell session travels between requests, so your application determines when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).
 
 ## Parameters
 
@@ -685,7 +685,7 @@ Claude determines which command to run. Your application owns everything else: t
       ```
     </CodeGroup>
 
-    The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](./agents-and-tools-tool-use-bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
+    The session interleaves stderr with stdout, so error messages land where they occurred. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](./agents-and-tools-tool-use-bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
   </Step>
 
   <Step title="Process Claude's tool calls">
@@ -834,7 +834,7 @@ Claude determines which command to run. Your application owns everything else: t
   </Step>
 
   <Step title="Return the result to Claude">
-    Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or finishes its answer:
+    Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or completes its answer:
 
     <CodeGroup>
       ```bash cURL
@@ -1153,7 +1153,7 @@ Claude determines which command to run. Your application owns everything else: t
       client = Anthropic::Client.new
 
       response = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         tools: [{type: "bash_20250124", name: "bash"}],
         messages: [
@@ -1438,11 +1438,11 @@ Claude determines which command to run. Your application owns everything else: t
 
 ### Handle errors
 
-When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](./agents-and-tools-tool-use-handle-tool-calls.md#handling-errors-with-is-error).
+When a command fails or the session breaks, tell Claude what occurred. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](./agents-and-tools-tool-use-handle-tool-calls.md#handling-errors-with-is-error).
 
 <AccordionGroup>
   <Accordion title="Command execution timeout">
-    If a command takes too long to execute:
+    If a command takes too long to run:
 
     ```json
     {
@@ -1500,7 +1500,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
 
 <AccordionGroup>
   <Accordion title="Use command timeouts">
-    A command that never finishes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
+    A command that never completes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
 
     <CodeGroup exclude="shell">
       ```python Python
@@ -1809,7 +1809,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
   </Accordion>
 
   <Accordion title="Log all commands">
-    Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it finishes. A command that hangs or breaks the session still leaves a record:
+    Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it completes. A command that hangs or breaks the session still leaves a record:
 
     <CodeGroup exclude="shell">
       ```python Python
@@ -1935,9 +1935,9 @@ See [tool use pricing](./agents-and-tools-tool-use-overview.md#pricing) for comp
 
 * Running tests: `pytest && coverage report`
 * Building projects: `npm install && npm run build`
-* Git operations: `git status && git add . && git commit -m "message"`
+* Running Git operations: `git status && git add . && git commit -m "message"`
 
-For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#state-management-best-practices).
+For guidance on using Git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#state-management-best-practices).
 
 ### File operations
 
@@ -1948,8 +1948,8 @@ For guidance on using git as a checkpoint-and-recovery mechanism in long-running
 ### System tasks
 
 * Checking resources: `df -h && free -m`
-* Process management: `ps aux | grep python`
-* Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
+* Managing processes: `ps aux | grep python`
+* Setting up the environment: `export PATH=$PATH:/new/path && echo $PATH`
 
 ## Limitations
 
@@ -1975,6 +1975,6 @@ The bash tool pairs well with the [Text editor tool](./agents-and-tools-tool-use
   </Card>
 
   <Card title="Tool use with Claude" icon="tool" href="./agents-and-tools-tool-use-overview.md">
-    Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+    Connect Claude to external tools and APIs. See where tools run, when Claude calls them, and which tool fits your task.
   </Card>
 </CardGroup>

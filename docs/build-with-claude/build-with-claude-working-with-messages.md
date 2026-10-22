@@ -26,7 +26,7 @@ This guide covers common patterns for working with the Messages API, including b
 ## Basic request and response
 
 <Note>
-  The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](../general/general-models-opus-5-5-migration-guide.md#opus-46-breaking-changes).
+  The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview, or on any model starting with [API version `2026-10-21`](../api/api-migration-2026-10-21.md#sampling-parameters). Setting them to a non-default value returns a 400 error, and starting with `2026-10-21` any value does. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [breaking changes in the migration guide](../general/general-models-opus-5-5-migration-guide.md#opus-46-breaking-changes).
 </Note>
 
 <CodeGroup>
@@ -129,7 +129,7 @@ This guide covers common patterns for working with the Messages API, including b
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       { role: "user", content: "Hello, Claude" }
@@ -139,7 +139,7 @@ This guide covers common patterns for working with the Messages API, including b
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -294,7 +294,7 @@ The Messages API is stateless, which means that you always send the full convers
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       { role: "user", content: "Hello, Claude" },
@@ -306,7 +306,7 @@ The Messages API is stateless, which means that you always send the full convers
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 {
   "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
   "type": "message",
@@ -337,7 +337,7 @@ See [Mid-conversation system messages](./build-with-claude-mid-conversation-syst
 
 ## Prefilling Claude's response
 
-You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
   Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for migration patterns.
@@ -470,7 +470,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-sonnet-4-5",
+    model: Anthropic::Model::CLAUDE_SONNET_4_5,
     max_tokens: 1,
     messages: [
       {
@@ -484,7 +484,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
   ```
 </CodeGroup>
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -507,7 +507,7 @@ You can pre-fill part of Claude's response in the last position of the input mes
 
 ## Vision
 
-Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](./build-with-claude-files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](./build-with-claude-vision.md) for more details.
+Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](./build-with-claude-files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [Vision](./build-with-claude-vision.md) guide for more details.
 
 <CodeGroup>
   ```bash cURL
@@ -559,7 +559,8 @@ Claude can read both text and images in requests. You can supply images using th
 
   ```bash CLI
   # Option 1: Base64-encoded image (CLI auto-encodes binary @file refs)
-  curl -s "https://platform.claude.com/docs/images/vision-example.jpg" -o ./vision-example.jpg
+  curl -s "https://platform.claude.com/docs/images/vision-example.jpg" \
+    -o ./vision-example.jpg
 
   ant messages create <<'YAML'
   model: claude-opus-5-5
@@ -1010,7 +1011,7 @@ Claude can read both text and images in requests. You can supply images using th
   ```
 </CodeGroup>
 
-```json Output
+```text Output
 {
   "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",

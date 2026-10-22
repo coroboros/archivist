@@ -10,9 +10,9 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
 description: Pair a faster executor model with a higher-intelligence advisor model that provides strategic guidance mid-generation.
 ---
 
-The advisor tool lets a faster, lower-cost **executor model** consult a higher-intelligence **advisor model** mid-generation for strategic guidance. The advisor reads the full conversation, produces a plan or course correction, and the executor continues with the task.
+The advisor tool lets a faster, lower-cost **executor model** consult a higher-intelligence **advisor model** mid-generation for strategic guidance. The advisor reads the full conversation and produces a plan or course correction, and the executor continues with the task.
 
-This pattern fits long-horizon agentic workloads (coding agents, computer use, multistep research pipelines) where most turns are mechanical but having an excellent plan is crucial. You get close to advisor-solo quality while the bulk of token generation happens at executor-model rates. For measured results, including how the benefit shrinks as the executor's own capability approaches the advisor's, see [Optimizing for cost and intelligence](../about-claude/about-claude-models-optimizing-for-cost-and-intelligence.md).
+This pattern fits long-horizon agentic workloads (coding agents, computer use, multistep research pipelines) where most turns are mechanical but having an excellent plan is crucial. You get close to advisor-solo quality while the bulk of token generation occurs at executor-model rates. For measured results, including how the benefit shrinks as the executor's own capability approaches the advisor's, see [Optimizing for cost and intelligence](../about-claude/about-claude-models-optimizing-for-cost-and-intelligence.md).
 
 ```mermaid
 sequenceDiagram
@@ -298,7 +298,7 @@ The advisor itself runs without tools and without context management. Its thinki
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker. It is an on/off switch. The server determines where cache boundaries go.
 
-The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)). See the [Tool reference](./agents-and-tools-tool-use-tool-reference.md#tool-definition-properties) for their semantics.
+The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)). See [Tool definition properties](./agents-and-tools-tool-use-tool-reference.md#tool-definition-properties) in the Tool reference for their semantics.
 
 ## Response structure
 
@@ -306,7 +306,7 @@ The advisor tool also accepts the generic properties available on any tool defin
 
 When the advisor is called, a `server_tool_use` block is followed by an `advisor_tool_result` block in the assistant's content. The following example shows the plaintext `advisor_result` variant returned by a Claude Opus 4.8 advisor. The [Quick start](./agents-and-tools-tool-use-advisor-tool.md#quick-start) uses Claude Opus 5.5, which returns the encrypted `advisor_redacted_result` variant instead; see [Result variants](./agents-and-tools-tool-use-advisor-tool.md#result-variants) for both shapes side by side.
 
-```json
+```text
 {
   "role": "assistant",
   "content": [
@@ -355,7 +355,7 @@ Here is the same request sent twice, identical except for the advisor `model` in
 
 With `"model": "claude-opus-4-8"`, the advice is plaintext:
 
-```json
+```text
 {
   "type": "advisor_tool_result",
   "tool_use_id": "srvtoolu_abc123",
@@ -368,7 +368,7 @@ With `"model": "claude-opus-4-8"`, the advice is plaintext:
 
 With `"model": "claude-opus-5-5"`, the advice is encrypted:
 
-```json
+```text
 {
   "type": "advisor_tool_result",
   "tool_use_id": "srvtoolu_abc123",
@@ -389,7 +389,7 @@ In both cases, round-trip the content verbatim on subsequent turns. If you switc
 
 If the advisor call fails, the result carries an error:
 
-```json
+```text wrap
 {
   "type": "advisor_tool_result",
   "tool_use_id": "srvtoolu_abc123",
@@ -400,7 +400,7 @@ If the advisor call fails, the result carries an error:
 }
 ```
 
-The executor sees the error and continues without further advice. The request itself does not fail.
+The executor receives the error and continues without further advice. The request itself does not fail.
 
 | `error_code`              | Meaning                                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -1187,7 +1187,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   end
 
   tools = [
-    { type: "advisor_20260301", name: "advisor", model: "claude-opus-5-5" }
+    { type: "advisor_20260301", name: "advisor", model: Anthropic::Model::CLAUDE_OPUS_5_5 }
     # ... your other tools
   ]
   task = "Build a concurrent worker pool in Go with graceful shutdown."
@@ -1196,7 +1196,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   (1..MAX_TURNS).each do |turn|
     response = client.beta.messages.create(
-      model: "claude-haiku-5-5",
+      model: Anthropic::Model::CLAUDE_HAIKU_5_5,
       max_tokens: 4096,
       tools: tools,
       messages: messages,
@@ -1231,7 +1231,7 @@ To force a consult on a specific request instead of nudging, set `tool_choice` t
 
 The advisor sub-inference does not stream. The executor's stream pauses while the advisor runs; then the full result arrives in a single event.
 
-The `server_tool_use` block with `name: "advisor"` signals that an advisor call is starting. The pause begins when that block closes (`content_block_stop`). During the pause, the stream is quiet except for standard SSE `ping` keepalives emitted roughly every 30 seconds. Short advisor calls might show no pings.
+The `server_tool_use` block with `name: "advisor"` signals that an advisor call is starting. The pause starts when that block closes (`content_block_stop`). During the pause, the stream is quiet except for standard SSE `ping` keepalives emitted roughly every 30 seconds. Short advisor calls might show no pings.
 
 When the advisor finishes, the `advisor_tool_result` arrives fully formed in a single `content_block_start` event (no deltas). Executor output then resumes streaming.
 
@@ -1241,7 +1241,7 @@ A `message_delta` event follows with the updated `usage.iterations` array reflec
 
 Advisor calls run as a separate sub-inference billed at the advisor model's rates. Usage is reported in the `usage.iterations[]` array:
 
-```json
+```text wrap
 {
   "usage": {
     "input_tokens": 1760,
@@ -1384,12 +1384,12 @@ Set `caching` on the tool definition to enable prompt caching for the advisor's 
 
 The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry, and the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become non-zero on the second and later `advisor_message` iterations.
 
-**When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times per conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops, and keep it off for short tasks.
+**When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times in each conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops, and keep it off for short tasks.
 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
 <Warning>
-  [`clear_thinking`](../build-with-claude/build-with-claude-context-editing.md) with a `keep` value other than `"all"` shifts the advisor's quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When thinking is on without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus and Sonnet models and on Haiku models through Claude Haiku 4.5; on Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, and Claude Haiku 5.5, the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
+  [`clear_thinking`](../build-with-claude/build-with-claude-context-editing.md) with a `keep` value other than `"all"` shifts the advisor's quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When thinking is on without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus and Sonnet models and on Haiku models through Claude Haiku 4.5, whereas on Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, and Claude Haiku 5.5, the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
 </Warning>
 
 ## Combining with other tools
@@ -1561,12 +1561,12 @@ The advisor tool composes with other server-side and client-side tools. Add them
 
 The executor can search the web, call the advisor, and use your custom tools in the same turn. The advisor's plan can inform which tools the executor reaches for next.
 
-| Feature                                                                                    | Interaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| [Token counting](../build-with-claude/build-with-claude-token-counting.md)     | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `client.beta.messages.count_tokens()` (typescript: `client.beta.messages.countTokens()`; go, csharp: `client.Beta.Messages.CountTokens()`; java: `client.beta().messages().countTokens()`; php: `$client->beta->messages->countTokens()`; cli: `ant beta:messages count-tokens`; curl: `POST /v1/messages/count_tokens`) with `model` set to the advisor model and the same messages.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| [Context editing](../build-with-claude/build-with-claude-context-editing.md)   | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `pause_turn`                                                                               | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and a `server_tool_use` block with no result when no client `tool_use` block is awaiting your result in the same turn. The advisor runs on resumption. If the executor also called one of your tools in that turn, the response ends with `stop_reason: "tool_use"` instead, and the pending advisor call runs at the start of your next request, after you send the `tool_result` blocks. See [Resuming a paused turn](./agents-and-tools-tool-use-advisor-tool.md#resuming-a-paused-turn), [Mixing server tools and client tools in one turn](./agents-and-tools-tool-use-server-tools.md#mixing-server-tools-and-client-tools-in-one-turn), and [Server tools](./agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn). |
+| Feature                                                                                    | Interaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Token counting](../build-with-claude/build-with-claude-token-counting.md)     | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `client.beta.messages.count_tokens()` (typescript: `client.beta.messages.countTokens()`; go, csharp: `client.Beta.Messages.CountTokens()`; java: `client.beta().messages().countTokens()`; php: `$client->beta->messages->countTokens()`; cli: `ant beta:messages count-tokens`; curl: `POST /v1/messages/count_tokens`) with `model` set to the advisor model and the same messages.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [Context editing](../build-with-claude/build-with-claude-context-editing.md)   | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `pause_turn`                                                                               | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and a `server_tool_use` block with no result when no client `tool_use` block is awaiting your result in the same turn. The advisor runs on resumption. If the executor also called one of your tools in that turn, the response ends with `stop_reason: "tool_use"` instead, and the pending advisor call runs at the start of your next request, after you send the `tool_result` blocks. See [Resuming a paused turn](./agents-and-tools-tool-use-advisor-tool.md#resuming-a-paused-turn), [Mixing server tools and client tools in one turn](./agents-and-tools-tool-use-server-tools.md#mixing-server-tools-and-client-tools-in-one-turn), and [The server-side loop and pause\_turn](./agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn). |
 
 ## Best practices
 
@@ -1610,7 +1610,7 @@ If you've already retrieved data pointing one way and the advisor points another
 
 #### Alternative system prompt for Haiku on coding workloads
 
-Claude Haiku 4.5 applies the default advisor guidance conservatively. That keeps its call rate appropriately low on research and lookup workloads but gives up quality on coding workloads, where an early advisor consult reliably pays for itself. On an internal coding benchmark, a close variant of the following block (the read-only carve-out in the Hard rule was added after measurement) raised Haiku pass rates by roughly 7.5 percentage points over the built-in default.
+Claude Haiku 4.5 applies the default advisor guidance conservatively. That keeps its call rate appropriately low on research and lookup workloads but gives up quality on coding workloads, where an early advisor consult is reliably worth its cost. On an internal coding benchmark, a close variant of the following block (the read-only carve-out in the Hard rule was added after measurement) raised Haiku pass rates by roughly 7.5 percentage points over the built-in default.
 
 Use this block in place of the earlier timing and advice blocks when your Haiku executor runs predominantly coding or write-task workloads:
 
@@ -1653,7 +1653,7 @@ Hard rule: your first write_file, edit_file, or state-changing bash call on a ta
 
 #### Trimming advisor output length
 
-Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
+Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor receives both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
 
 ```text wrap
 (Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
@@ -1669,7 +1669,7 @@ Pair this approach with the timing guidance in [Suggested system prompt for codi
 
 ### Capping advisor output
 
-Set `max_tokens` on the tool definition to cap the advisor's total output (thinking plus text) per call:
+Set `max_tokens` on the tool definition to cap the advisor's total output (thinking plus text) for each call:
 
 <CodeGroup exclude="shell">
   ```python Python
@@ -1756,7 +1756,7 @@ The minimum value is 1024. Setting `max_tokens` above the advisor model's own ou
 
 This is not a hard truncation alone. The server also passes the advisor its remaining-token budget, so the advisor shapes its response to fit.
 
-**Recommended starting point:** `max_tokens: 2048`. In Anthropic's testing on a hard reasoning benchmark (n = 40 per configuration), this reduced mean advisor output by roughly 7x compared with leaving the cap unset, with near-zero truncation and no detectable quality degradation. The minimum value of 1024 reduced output roughly 10x but truncated around 10 percent of calls. Accuracy differences across all configurations were within noise at this sample size. Validate on your own workload.
+**Recommended starting point:** `max_tokens: 2048`. In Anthropic's testing on a hard reasoning benchmark (n = 40 for each configuration), this reduced mean advisor output by roughly 7x compared with leaving the cap unset, with near-zero truncation and no detectable quality degradation. The minimum value of 1024 reduced output roughly 10x but truncated around 10 percent of calls. Accuracy differences across all configurations were within noise at this sample size. Validate on your own workload.
 
 | `max_tokens` | Mean advisor output tokens | Calls truncated |
 | ------------ | -------------------------- | --------------- |
@@ -1766,9 +1766,9 @@ This is not a hard truncation alone. The server also passes the advisor its rema
 
 Hard reasoning tasks elicit substantially longer advisor output than the [typical 1,400 to 1,800 tokens](./agents-and-tools-tool-use-advisor-tool.md#usage-and-billing) quoted earlier for lighter workloads. Use this table to size the savings ratio, not as a universal baseline for advisor output.
 
-When the advisor does hit the cap, the result block carries `stop_reason: "max_tokens"` on both [result variants](./agents-and-tools-tool-use-advisor-tool.md#result-variants), whichever advisor model you use. Use `stop_reason` to detect truncated advice and decide whether to raise the cap or let the executor proceed with partial guidance. The API also appends `[Advisor output truncated at max_tokens=2048.]` (naming your cap) to the advice text, so the executor sees the truncation in its own context; with a plaintext `advisor_result` advisor that marker is visible to your client as well. Both signals appear only when you set `max_tokens` on the tool definition.
+When the advisor does hit the cap, the result block carries `stop_reason: "max_tokens"` on both [result variants](./agents-and-tools-tool-use-advisor-tool.md#result-variants), whichever advisor model you use. Use `stop_reason` to detect truncated advice and decide whether to raise the cap or let the executor proceed with partial guidance. The API also appends `[Advisor output truncated at max_tokens=2048.]` (naming your cap) to the advice text, so the executor receives the truncation notice in its own context; with a plaintext `advisor_result` advisor that marker is visible to your client as well. Both signals appear only when you set `max_tokens` on the tool definition.
 
-```json
+```text
 {
   "type": "advisor_tool_result",
   "tool_use_id": "srvtoolu_abc123",
@@ -1832,7 +1832,7 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   </Card>
 
   <Card title="Server tools" icon="tool" href="./agents-and-tools-tool-use-server-tools.md">
-    Work with Anthropic-executed tools: server\_tool\_use blocks, pause\_turn continuation, and domain filtering.
+    Work with tools that Anthropic runs: `server_tool_use` blocks, `pause_turn` continuation, and domain filtering.
   </Card>
 
   <Card title="Tool reference" icon="book" href="./agents-and-tools-tool-use-tool-reference.md">
@@ -1840,6 +1840,6 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
   </Card>
 
   <Card title="Effort" icon="gauge" href="../build-with-claude/build-with-claude-effort.md">
-    Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+    Control how many tokens Claude uses when responding with the `effort` parameter, trading off between response thoroughness and token efficiency.
   </Card>
 </CardGroup>

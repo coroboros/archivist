@@ -221,7 +221,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` (c
 </CodeGroup>
 
 <Tip>
-  The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [permission policies](./managed-agents-permission-policies.md) to configure this behavior.
+  The MCP toolset defaults to a permission policy of `always_ask`, which requires user approval before each tool call. See [Permission policies](./managed-agents-permission-policies.md) to configure this behavior.
 </Tip>
 
 ### `mcp_servers` field reference
@@ -372,10 +372,10 @@ Credentials are matched by URL, so the vault must contain a credential whose `mc
 
 Session creation does not validate MCP connectivity or credentials. It does check each declared server's host against the environment's networking: with a `limited` environment, session creation fails with a 400 error when a host is not allowed, as described under [Provide authentication at session creation](./managed-agents-mcp-connector.md#provide-authentication-at-session-creation). If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A [`session.error`](./managed-agents-reference.md#event-types) event is emitted with the `mcp_server_name` (java, php: `mcpServerName`; csharp: `McpServerName`; go: `MCPServerName`) of the affected server and a `retry_status` (java, php: `retryStatus`; csharp, go: `RetryStatus`):
 
-| Error type                        | Meaning                                                                                                                                                                                                      |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `mcp_connection_failed_error`     | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure).                                                                                                            |
-| `mcp_authentication_failed_error` | Authentication with the MCP server failed: the server rejected the credential from the attached vault, required authentication when no matching credential was configured, or an OAuth token refresh failed. |
+| Error type                        | Meaning                                                                                                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mcp_connection_failed_error`     | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure).                                                                                                                       |
+| `mcp_authentication_failed_error` | Authentication with the MCP server failed: the server rejected the credential from the attached vault, the server required authentication when no matching credential was configured, or an OAuth token refresh failed. |
 
 You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition.
 
@@ -387,7 +387,7 @@ You can decide whether to block further interaction on this error, trigger a cre
   </Card>
 
   <Card title="Session event stream" icon="lightning" href="./managed-agents-events-and-streaming.md">
-    Send events, stream responses, and interrupt or redirect your session mid-execution.
+    Send events, stream responses, and interrupt or redirect your session while it runs.
   </Card>
 
   <Card title="Supported MCP server types" icon="book" href="./managed-agents-reference.md">

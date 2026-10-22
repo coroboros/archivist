@@ -27,7 +27,7 @@ The [proxy](./agents-and-tools-mcp-tunnels-concepts.md#components) reads its con
 | `tls.cert_file`                   | Path to the server TLS certificate.                                                                                                                                                                             | Required                                        |
 | `tls.key_file`                    | Path to the server TLS private key.                                                                                                                                                                             | Required                                        |
 | `routes`                          | Map of subdomain or full hostname to upstream URL. See [Route matching](./agents-and-tools-mcp-tunnels-reference.md#route-matching).                                             | Required                                        |
-| `upstream.allowed_ips`            | IPv4 CIDR ranges or single addresses the proxy is permitted to connect to. Mutually exclusive with `disable_ip_validation`.                                                                                     | RFC1918 private ranges                          |
+| `upstream.allowed_ips`            | IPv4 CIDR ranges or single addresses the proxy is allowed to connect to. Mutually exclusive with `disable_ip_validation`.                                                                                       | RFC1918 private ranges                          |
 | `upstream.disable_ip_validation`  | Disable upstream IP validation entirely. Mutually exclusive with `allowed_ips`.                                                                                                                                 | `false`                                         |
 | `upstream.tls.ca_file`            | CA bundle for validating upstream TLS.                                                                                                                                                                          | None                                            |
 | `upstream.tls.include_system_cas` | Also trust the system CA bundle for upstream TLS.                                                                                                                                                               | `false`                                         |
@@ -68,7 +68,7 @@ The [setup component](./agents-and-tools-mcp-tunnels-concepts.md#components) gen
 
 Upload with `POST /v1/tunnels/{tunnel_id}/certificates`. A tunnel can hold up to two active CA certificates at a time, which allows zero-downtime rotation.
 
-* PEM-encoded, single certificate, up to 8 kB.
+* PEM-encoded, single certificate, up to 8 kB.
 * `BasicConstraints` extension present with `CA:TRUE`, marked critical.
 * `SubjectKeyIdentifier` extension present.
 * `KeyUsage` includes `keyCertSign`.
@@ -86,7 +86,7 @@ Presented by the proxy during [inner TLS](./agents-and-tools-mcp-tunnels-concept
 * Within its validity period.
 * RSA 2048-bit or larger, or ECDSA P-256 or larger, with a SHA-256 or stronger signature.
 
-The setup component generates an ECDSA P-256 CA with five-year validity and an RSA 4096-bit server certificate with a wildcard SAN and 90-day validity.
+The setup component generates an ECDSA P-256 CA with 5-year validity and an RSA 4096-bit server certificate with a wildcard SAN and 90-day validity.
 
 ## Setup component
 

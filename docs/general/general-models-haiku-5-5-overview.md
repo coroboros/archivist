@@ -7,7 +7,7 @@ generated: true
 ---
 title: Claude Haiku 5.5
 url: https://platform.claude.com/docs/en/models/haiku-5-5/overview
-description: "Claude Haiku 5.5 at a glance: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and the guides and resources for building with it."
+description: "An overview of Claude Haiku 5.5: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and the guides and resources for building with it."
 ---
 
 **Latest.** Released October 7, 2026.
@@ -22,7 +22,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: From $0.1
 
 ## Overview
 
-Claude Haiku 5.5 is built for high-volume, latency-sensitive work such as classification, routing, extraction, and subagent tasks. It supports adaptive thinking with the effort parameter, a 1M token context window, and up to 128k output tokens. It uses the same newer tokenizer as Claude 4.7 and later models, so the same text counts as approximately 30% more tokens than on Claude Haiku 4.5. Its thinking blocks work only in the account that produced them, or in an account linked to it.
+Claude Haiku 5.5 is built for high-volume, latency-sensitive work such as classification, routing, extraction, and subagent tasks. It supports adaptive thinking with the effort parameter, a 1M token context window, and up to 128k output tokens. It uses the same newer tokenizer as Claude 4.7 and later models, so the same text counts as approximately 30 percent more tokens than on Claude Haiku 4.5. Its thinking blocks work only in the account that produced them, or in an account linked to it.
 
 For code changes, see the [migration guide](./general-models-haiku-5-5-migration-guide.md). For model IDs, pricing, and limits, see the [Claude Haiku 5.5 overview](./general-models-haiku-5-5-overview.md). For prompting guidance, see [Prompting Claude Haiku 5.5](../build-with-claude/build-with-claude-prompt-engineering-prompting-claude-haiku-5-5.md).
 
@@ -96,7 +96,7 @@ For code changes, see the [migration guide](./general-models-haiku-5-5-migration
 ## Good to know
 
 * Adaptive thinking is on by default. Control thinking depth with the [effort parameter](../build-with-claude/build-with-claude-effort.md).
-* Omit `temperature`, `top_p`, and `top_k`. See [Remove sampling parameters](./general-models-haiku-5-5-migration-guide.md#remove-sampling-parameters) for the values that return a 400 error.
+* Omit `temperature`, `top_p`, and `top_k`.
 * On the [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md#extended-output-beta), Claude Haiku 5.5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
 * The minimum cacheable prompt length is 512 tokens. See [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md#cache-limitations).
 * Query limits and capabilities programmatically with the [Models API](../api/api-models-list.md).

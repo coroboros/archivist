@@ -7,7 +7,7 @@ generated: true
 ---
 title: Claude Opus 5.5
 url: https://platform.claude.com/docs/en/models/opus-5-5/overview
-description: "Claude Opus 5.5 at a glance: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and the guides and resources for building with it."
+description: "An overview of Claude Opus 5.5: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and the guides and resources for building with it."
 ---
 
 **Latest.** Released September 22, 2026.
@@ -106,7 +106,7 @@ Claude Opus 5.5 is built for long-running agentic coding and knowledge work, pri
   </Card>
 
   <Card title="Effort" icon="sliders" href="../build-with-claude/build-with-claude-effort.md">
-    The control for thinking depth, latency, and cost. Choose a level per workload.
+    The control for thinking depth, latency, and cost. Choose a level for each workload.
   </Card>
 
   <Card title="Adaptive thinking" icon="brain" href="../build-with-claude/build-with-claude-thinking.md">

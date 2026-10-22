@@ -87,7 +87,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok
 ## Good to know
 
 * On the [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md#extended-output-beta), Claude Sonnet 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
-* Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error.
+* Setting `temperature`, `top_p`, or `top_k` returns a 400 error.
 * Query limits and capabilities programmatically with the [Models API](../api/api-models-list.md).
 
 ## Resources
@@ -110,11 +110,11 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok
   </Card>
 
   <Card title="Effort" icon="sliders" href="../build-with-claude/build-with-claude-effort.md">
-    Effort defaults to `high` on the Claude API and Claude Code. Choose a level per workload.
+    Effort defaults to `high` on the Claude API and Claude Code. Choose a level for each workload.
   </Card>
 
   <Card title="Context windows" icon="stack" href="../build-with-claude/build-with-claude-context-windows.md">
-    1M tokens by default. How the window is counted and managed.
+    Holds 1M tokens by default. How the window is counted and managed.
   </Card>
 </CardGroup>
 

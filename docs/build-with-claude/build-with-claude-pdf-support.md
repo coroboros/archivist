@@ -1,5 +1,5 @@
 ---
-title: "Before you begin"
+title: "Before you start"
 source: "https://platform.claude.com/docs/en/build-with-claude/pdf-support"
 category: "build-with-claude"
 generated: true
@@ -25,20 +25,20 @@ You can ask Claude about any text, pictures, charts, and tables in PDFs you prov
 
 * Analyzing financial reports and understanding charts/tables
 * Extracting key information from legal documents
-* Assisting with document translation
+* Helping with document translation
 * Converting document information into structured formats
 
-## Before you begin
+## Before you start
 
 ### Check PDF requirements
 
 Claude works with any standard PDF. Ensure your request size meets these requirements:
 
-| Requirement               | Limit                                                                                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------- |
-| Maximum request size      | 32 MB ([varies by platform](../api/api-overview.md#request-size-limits)) |
-| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)                                     |
-| Format                    | Standard PDF (no passwords/encryption)                                                             |
+| Requirement               | Limit                                                                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Maximum request size      | 32 MB (varies by platform; see [request size limits](../api/api-overview.md#request-size-limits)) |
+| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)                                                              |
+| Format                    | Standard PDF (no passwords/encryption)                                                                                      |
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](./build-with-claude-files.md) and referencing by `file_id` to keep request payloads small.
 
@@ -122,20 +122,20 @@ The simplest approach is to reference a PDF directly from a URL:
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{
-          "role": "user",
-          "content": [{
-              "type": "document",
-              "source": {
-                  "type": "url",
-                  "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-              }
-          },
-          {
-              "type": "text",
-              "text": "What are the key findings in this document?"
-          }]
+        "role": "user",
+        "content": [{
+          "type": "document",
+          "source": {
+            "type": "url",
+            "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+          }
+        },
+        {
+          "type": "text",
+          "text": "What are the key findings in this document?"
+        }]
       }]
-  }'
+    }'
   ```
 
   ```bash CLI
@@ -355,7 +355,7 @@ The simplest approach is to reference a PDF directly from a URL:
 
 The response returns Claude's analysis as text blocks in `content`, with token consumption in `usage`:
 
-```json Output
+```text Output
 {
   "id": "msg_01Hfp8YuFjQ55VgWbpdHDehB",
   "type": "message",
@@ -417,9 +417,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
   ```
 
   ```bash CLI
-  ant messages create \
-    --model claude-opus-5-5 \
-    --max-tokens 1024 <<'YAML'
+  ant messages create --model claude-opus-5-5 --max-tokens 1024 <<'YAML'
   messages:
     - role: user
       content:
@@ -483,7 +481,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
   // Method 2: Load from a local file
   // import { readFile } from "node:fs/promises";
-  // const pdfBase64 = (await readFile('document.pdf')).toString('base64');
+  // const pdfBase64 = (await readFile("document.pdf")).toString("base64");
 
   // Send the API request with base64-encoded PDF
   const anthropic = new Anthropic();
@@ -687,7 +685,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
   # Send to Claude using base64 encoding
   anthropic = Anthropic::Client.new
   message = anthropic.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {
@@ -750,8 +748,7 @@ For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use
 
   ```bash CLI
   # First, upload your PDF to the Files API
-  ant files upload \
-    --file ./document.pdf
+  ant files upload --file ./document.pdf
 
   # Then use the file_id from the upload response in your message
   ant messages create <<YAML
@@ -991,7 +988,7 @@ For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use
 
   # Use the uploaded file in a message
   message = anthropic.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {
@@ -1021,7 +1018,7 @@ When you send a PDF to Claude, the following steps occur:
     * The text from each page is extracted and provided alongside each page's image.
   </Step>
 
-  <Step title="Claude analyzes both the text and images to better understand the document.">
+  <Step title="Claude analyzes both the text and images.">
     * Documents are provided as a combination of text and images for analysis.
     * This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
   </Step>
@@ -1030,7 +1027,7 @@ When you send a PDF to Claude, the following steps occur:
     Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
     * [Use prompt caching](./build-with-claude-pdf-support.md#use-prompt-caching): To improve performance for repeated analysis.
-    * [Process document batches](./build-with-claude-pdf-support.md#process-document-batches): For high-volume document processing.
+    * [Process document batches](./build-with-claude-pdf-support.md#process-document-batches): To process documents at high volume.
     * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md): To extract specific information from documents for use as tool inputs.
   </Step>
 </Steps>
@@ -1350,7 +1347,7 @@ Cache PDFs with [prompt caching](./build-with-claude-prompt-caching.md) to impro
   anthropic = Anthropic::Client.new
 
   message = anthropic.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {
@@ -1897,7 +1894,7 @@ Use the [Message Batches API](./build-with-claude-batch-processing.md) to proces
       {
         custom_id: "my-first-request",
         params: {
-          model: "claude-opus-5-5",
+          model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
           messages: [
             {
@@ -1923,7 +1920,7 @@ Use the [Message Batches API](./build-with-claude-batch-processing.md) to proces
       {
         custom_id: "my-second-request",
         params: {
-          model: "claude-opus-5-5",
+          model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
           messages: [
             {
@@ -1959,7 +1956,7 @@ Batches process asynchronously. To check progress and retrieve results once proc
 
 <CardGroup cols={2}>
   <Card title="Vision" icon="image" href="./build-with-claude-vision.md">
-    Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
+    Claude's vision capabilities allow it to process and analyze images, opening up exciting possibilities for multimodal interaction.
   </Card>
 
   <Card title="Try PDF examples" icon="file" href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision">
