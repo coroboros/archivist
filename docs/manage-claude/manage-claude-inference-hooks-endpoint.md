@@ -20,7 +20,7 @@ To turn Inference hooks on and point them at your endpoint, see [Configure Infer
 
 ## Get a first verdict round trip
 
-The smallest working integration is a server that reads each request and allows it. Run one of the following servers, expose it at a public `https://` URL (for example, behind a TLS-terminating reverse proxy on a host you control, not a reverse-tunnel service; see [Receive a request](./manage-claude-inference-hooks-endpoint.md#receive-a-request)), then have your administrator [set it as the endpoint and test the connection](./manage-claude-inference-hooks-configuration.md): the **Test connection** result reports the allow verdict your server returned.
+The smallest working integration is a server that reads each request and allows it. Run one of the following servers and expose it at a public `https://` URL. For example, put it behind a TLS-terminating reverse proxy on a host you control, not a reverse-tunnel service (see [Receive a request](./manage-claude-inference-hooks-endpoint.md#receive-a-request)). Then have your administrator [set it as the endpoint and test the connection](./manage-claude-inference-hooks-configuration.md). The **Test connection** result reports the allow verdict your server returned.
 
 <CodeGroup exclude="shell">
   ```python Python
@@ -154,7 +154,7 @@ The smallest working integration is a server that reads each request and allows 
 
 Anthropic sends an HTTPS `POST` to the URL your administrator configures. The whole configured URL is the endpoint: there is no fixed path suffix, so choose any path that suits your server.
 
-Host your AI security server where Anthropic can reach it: an `https://` URL on port 443, on a publicly routable host (private, loopback, and carrier-grade NAT ranges are refused at connect time), with a certificate that validates against the public CA trust store, responding without redirects. The host must have an IPv4 address, which Anthropic uses even when the host also has IPv6 addresses; a URL whose host is `localhost` or an IPv6 address is refused. The configured URL must be the final destination. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Host your server on a domain you control. [Configure Inference hooks](./manage-claude-inference-hooks-configuration.md) covers how your administrator sets and tests the URL.
+Host your AI security server where Anthropic can reach it: an `https://` URL on port 443, on a publicly routable host. Private, loopback, and carrier-grade NAT ranges are refused at connect time. The server must have a certificate that validates against the public CA trust store, and it must respond without redirects. The host must have an IPv4 address, which Anthropic uses even when the host also has IPv6 addresses; a URL whose host is `localhost` or an IPv6 address is refused. The configured URL must be the final destination. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Host your server on a domain you control. [Configure Inference hooks](./manage-claude-inference-hooks-configuration.md) covers how your administrator sets and tests the URL.
 
 Every request carries these fixed headers, along with any [custom request headers](./manage-claude-inference-hooks-configuration.md) your administrator configured and, once your organization has a signing secret, the `webhook-*` signature headers described in [Verify the signature](./manage-claude-inference-hooks-endpoint.md#verify-the-signature):
 

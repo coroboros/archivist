@@ -91,7 +91,7 @@ For example, you ask the [contract-review agent](./managed-agents-multiagent-orc
 
 The run's first event lists its phases:
 
-```text
+```json
 {
   "type": "workflow_run.created",
   "id": "sevt_01abc...",
@@ -112,7 +112,7 @@ The run's first event lists its phases:
 
 Each phase event names its phase by `workflow_run_phase_id`. That is an `id` in `phases`, but the API doesn't guarantee it:
 
-```text wrap
+```json
 {
   "type": "workflow_run.phase_started",
   "id": "sevt_01def...",
@@ -124,7 +124,7 @@ Each phase event names its phase by `workflow_run_phase_id`. That is an `id` in 
 
 The run's last event reports how it ended:
 
-```text wrap
+```json
 {
   "type": "workflow_run.status_ended",
   "id": "sevt_01ghi...",

@@ -181,20 +181,20 @@ Install the package that provides the client:
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java:3.1.0")
-    implementation("com.anthropic:anthropic-java-google-cloud:3.1.0")
+    implementation("com.anthropic:anthropic-java:3.2.0")
+    implementation("com.anthropic:anthropic-java-google-cloud:3.2.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.1.0</version>
+      <version>3.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-google-cloud</artifactId>
-      <version>3.1.0</version>
+      <version>3.2.0</version>
     </dependency>
     ```
   </Tab>
@@ -510,9 +510,9 @@ The following features work on Claude Models on Google Cloud (Anthropic managed)
 
 * **Fast mode:** [Fast mode](./build-with-claude-fast-mode.md) for Claude Opus 5.5.
 
-- **Beta features:** If a beta is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
+* **Beta features:** If a beta is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
 
-- **Tools:** [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including:
+* **Tools:** [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including:
 
   * Web search
   * Web fetch
@@ -521,9 +521,9 @@ The following features work on Claude Models on Google Cloud (Anthropic managed)
   * The advisor tool
   * The MCP connector
 
-- **Skills and files:** [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and the [Files API](./build-with-claude-files.md).
+* **Skills and files:** [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and the [Files API](./build-with-claude-files.md).
 
-- **Model capabilities:**
+* **Model capabilities:**
 
   * [Prompt caching](./build-with-claude-prompt-caching.md)
   * [Extended thinking](./build-with-claude-thinking.md)
@@ -532,11 +532,11 @@ The following features work on Claude Models on Google Cloud (Anthropic managed)
   * [Structured outputs](./build-with-claude-structured-outputs.md)
   * [Token counting](./build-with-claude-token-counting.md)
 
-- **Batches and models:** The [Message Batches API](./build-with-claude-batch-processing.md) and the Models API.
+* **Batches and models:** The [Message Batches API](./build-with-claude-batch-processing.md) and the Models API.
 
 To turn the [Compliance API](../manage-claude/manage-claude-compliance-api.md) on or off for the Anthropic organization that setup creates, [open the Claude Console](./build-with-claude-claude-models-on-google-cloud-anthropic-managed.md#using-the-claude-console), go to **Settings > Compliance**, and use the **Compliance API** toggle.
 
-Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys. To activate CMEK for the Anthropic organization that setup creates, see [Customer-managed encryption keys](../manage-claude/manage-claude-cmek.md). To set up a key, follow [Configure Google Cloud KMS for CMEK](../manage-claude/manage-claude-cmek-google-cloud-kms.md). Then register, verify, and attach the key in the [Claude Console](./build-with-claude-claude-models-on-google-cloud-anthropic-managed.md#using-the-claude-console), as the setup page's **Claude Console** tab describes.
+Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys. To activate CMEK for the Anthropic organization that setup creates, see [Who can use CMEK](../manage-claude/manage-claude-cmek.md#availability). To set up a key, follow [Set up CMEK with Google Cloud KMS](../manage-claude/manage-claude-cmek-google-cloud-kms.md). Then register, verify, and attach the key in the [Claude Console](./build-with-claude-claude-models-on-google-cloud-anthropic-managed.md#using-the-claude-console), as the setup page's **Claude Platform** tab describes.
 
 ### Claude Managed Agents
 

@@ -21,7 +21,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
 <Tabs>
   <Tab title="Gradle">
     ```kotlin
-    implementation("com.anthropic:anthropic-java:3.1.0")
+    implementation("com.anthropic:anthropic-java:3.2.0")
     ```
   </Tab>
 
@@ -30,7 +30,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
     <dependency>
         <groupId>com.anthropic</groupId>
         <artifactId>anthropic-java</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
     </dependency>
     ```
   </Tab>
@@ -825,7 +825,7 @@ Because each class is immutable, builder modification never affects already buil
 
 To send a request to the Claude API, build an instance of some `Params` class and pass it to the corresponding client method. When the response is received, it is deserialized into an instance of a Java class.
 
-For example, `client.messages().create(...)` should be called with an instance of `MessageCreateParams`, and it returns an instance of `Message`.
+For example, `client.messages().create(...)` takes an instance of `MessageCreateParams` and returns an instance of `Message`.
 
 ### Undocumented parameters
 

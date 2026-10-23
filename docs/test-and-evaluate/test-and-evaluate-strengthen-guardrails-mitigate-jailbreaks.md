@@ -169,7 +169,7 @@ Structure your application so that Claude can reliably distinguish untrusted con
 
   [browser use tool](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md)
 
-  , Anthropic runs additional classifiers that scan what the tools return, such as screenshots or page text, for potential prompt injections and steer Claude to check whether the instruction really came from you before acting. See those pages for details and opt-out information.
+  , Anthropic runs additional classifiers on what the tools return, such as screenshots or page text. The classifiers scan this content for potential prompt injections and steer Claude to check whether the instruction really came from you before acting. See those pages for details and opt-out information.
 </Note>
 
 ## Continuous monitoring

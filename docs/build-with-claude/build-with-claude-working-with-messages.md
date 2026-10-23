@@ -139,7 +139,7 @@ This guide covers common patterns for working with the Messages API, including b
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -306,7 +306,7 @@ The Messages API is stateless, which means that you always send the full convers
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 {
   "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
   "type": "message",
@@ -484,7 +484,7 @@ You can prefill part of Claude's response in the last position of the input mess
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -1013,7 +1013,7 @@ Claude can read both text and images in requests. You can supply images using th
   ```
 </CodeGroup>
 
-```text Output
+```json Output
 {
   "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",

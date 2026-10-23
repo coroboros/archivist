@@ -10,7 +10,16 @@ url: https://platform.claude.com/docs/en/manage-claude/user-management
 description: "Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles."
 ---
 
-This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/api-beta-organization.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](./manage-claude-admin-api.md).
+This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/api-beta-organization.md):
+
+* List members and look them up by email address
+* Change a member's role
+* Remove members
+* Send and withdraw invites
+* Manage your enterprise's groups and their membership
+* Read your organization's custom roles
+
+For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](./manage-claude-admin-api.md).
 
 <Note>
   Group and custom-role requests don't require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](../api/api-beta-headers.md). Requests that still send it are accepted and behave identically.
@@ -153,7 +162,7 @@ List the organization's members, newest first:
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -610,7 +619,7 @@ For complete parameter details and response schemas, see [Remove user](../api/ap
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "type": "user_deleted",
   "id": "user_01AbCdEfGhIjKlMnOpQrSt"
@@ -770,7 +779,7 @@ For complete parameter details and response schemas, see [Create invite](../api/
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "type": "invite",
   "id": "invite_01QrStUvWxYzAbCdEfGhIj",
@@ -1167,7 +1176,7 @@ For complete parameter details and response schemas, see [List groups](../api/ap
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -1386,7 +1395,7 @@ For complete parameter details and response schemas, see [Create group](../api/a
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "type": "rbac_group",
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1601,7 +1610,7 @@ For complete parameter details and response schemas, see [Delete group](../api/a
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "type": "rbac_group_deleted"
@@ -1728,7 +1737,7 @@ For complete parameter details and response schemas, see [List group members](..
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -1862,7 +1871,7 @@ For complete parameter details and response schemas, see [Add group member](../a
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "type": "rbac_group_member",
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1981,7 +1990,7 @@ For complete parameter details and response schemas, see [Remove group member](.
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -2097,7 +2106,7 @@ For complete parameter details and response schemas, see [List roles](../api/api
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -2327,7 +2336,7 @@ For complete parameter details and response schemas, see [List role permissions]
   ```
 </CodeGroup>
 
-```text wrap
+```json
 {
   "data": [
     {

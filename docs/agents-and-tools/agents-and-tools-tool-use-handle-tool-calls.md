@@ -29,7 +29,7 @@ The response has a `stop_reason` of `tool_use` and one or more `tool_use` conten
 A `tool_use` block for a member of the [computer use](./agents-and-tools-tool-use-computer-use-tool.md) or [browser use](./agents-and-tools-tool-use-browser-use-tool.md) toolset also carries a `toolset_name` field (`"computer"` or `"browser"`). Its `name` is the member tool Claude is calling, such as `screenshot` or `navigate`, so dispatch those blocks on both fields.
 
 <Accordion title="Example API response with a `tool_use` content block">
-  ```text JSON wrap
+  ```json JSON
   {
     "id": "msg_01Aq9w938a90dw8q",
     "model": "claude-opus-5-5",

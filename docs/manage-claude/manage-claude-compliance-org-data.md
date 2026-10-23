@@ -35,7 +35,7 @@ curl --fail-with-body -sS \
   -H "anthropic-version: 2023-06-01"
 ```
 
-```text Response wrap
+```json Response
 {
   "data": [
     {
@@ -86,11 +86,11 @@ curl --fail-with-body -sS -G \
   --data-urlencode "limit=500"
 ```
 
-```text Response wrap
+```json Response
 {
   "data": [
     {
-      "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "full_name": "Priya Sharma",
       "email": "priya@example.com",
       "organization_role": "admin",
@@ -102,7 +102,7 @@ curl --fail-with-body -sS -G \
 }
 ```
 
-The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](./manage-claude-compliance-activity-feed.md) `actor_ids[]` filter and the `user_ids[]` filters on [Retrieve chats and messages](./manage-claude-compliance-content-data.md#retrieve-chats-and-messages) and the [remote session list](./manage-claude-compliance-sessions.md#retrieve-remote-sessions); the [local session list](./manage-claude-compliance-sessions.md#retrieve-local-sessions) has no user filter, so attribute local sessions by the `user.id` on each session object. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](./manage-claude-compliance-org-data.md#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
+The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](./manage-claude-compliance-activity-feed.md) `actor_ids[]` filter. The `user_ids[]` filters on [Retrieve chats and messages](./manage-claude-compliance-content-data.md#retrieve-chats-and-messages) and the [remote session list](./manage-claude-compliance-sessions.md#retrieve-remote-sessions) accept the same identifiers. The [local session list](./manage-claude-compliance-sessions.md#retrieve-local-sessions) has no user filter, so attribute local sessions by the `user.id` on each session object. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](./manage-claude-compliance-org-data.md#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
@@ -121,12 +121,12 @@ curl --fail-with-body -sS \
   -H "anthropic-version: 2023-06-01"
 ```
 
-```text Response wrap
+```json Response
 {
   "data": [
     {
       "user": {
-        "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "priya@example.com"
       },
       "conversation_preferences": "Keep answers brief and cite sources.",
@@ -151,7 +151,7 @@ curl --fail-with-body -sS \
   -H "anthropic-version: 2023-06-01"
 ```
 
-```text Response
+```json Response
 {
   "data": [
     {
@@ -186,7 +186,7 @@ curl --fail-with-body -sS -G \
   -H "anthropic-version: 2023-06-01"
 ```
 
-```text Response wrap
+```json Response
 {
   "data": [
     {
@@ -213,11 +213,11 @@ curl --fail-with-body -sS -G \
   -H "anthropic-version: 2023-06-01"
 ```
 
-```text Response wrap
+```json Response
 {
   "data": [
     {
-      "user_id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "email": "priya@example.com",
       "created_at": "2025-06-01T10:00:00Z",
       "updated_at": "2025-06-15T14:30:00Z"
@@ -234,7 +234,14 @@ See the [List Compliance Group Members](../api/api-compliance-groups-members-lis
 
 The [Get effective organization settings](../api/api-compliance-organizations-settings-retrieve.md) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
 
-This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](./manage-claude-compliance-errors.md#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
+This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. All of the following return the same [404 Not Found](./manage-claude-compliance-errors.md#404-not-found):
+
+* An unknown organization
+* An organization ID that is not a valid UUID
+* An organization outside your parent's tree
+* A parent organization that does not yet have access to this endpoint
+
+A 404 therefore does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
 
 <Note>
   Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden). Create a new Compliance Access Key with `read:compliance_org_data` instead.
@@ -249,7 +256,7 @@ curl --fail-with-body -sS \
 
 The response is a list of typed setting rows, and which rows appear varies by organization: a setting the organization's administrators cannot change, because it is controlled by Anthropic policy or not available to the organization, is omitted from the list. Treat a missing row as "not controllable by this organization's administrators", not as "off". The following abridged example shows three of the rows a response can contain:
 
-```text Response wrap
+```json Response
 {
   "type": "effective_organization_settings",
   "organization_id": "91012d09-e48b-438e-a489-1bebfd8fa6f9",
@@ -297,7 +304,11 @@ The `api_keys` array lists every Compliance Access Key configured for your paren
 
 The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the [organization identifier table](./manage-claude-compliance-org-data.md#list-organizations)).
 
-Rows reflect the enforced state rather than the last-stored configuration: for example, `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled, `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range, and `code_execution_network_egress_enabled` is `false` whenever code execution is off.
+Rows reflect the enforced state rather than the last-stored configuration, as in these examples:
+
+* `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled.
+* `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range.
+* `code_execution_network_egress_enabled` is `false` whenever code execution is off.
 
 The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](./manage-claude-compliance-activity-feed.md); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
 

@@ -1185,7 +1185,7 @@ You can also provide search results directly in user messages. This is useful fo
 
 Regardless of how search results are provided, Claude automatically includes citations when using information from them:
 
-```text
+```json
 {
   "role": "assistant",
   "content": [
@@ -1272,7 +1272,7 @@ Search results can contain multiple text blocks in the `content` array:
 
 A citation referencing the rate limits block looks like:
 
-```text wrap
+```json
 {
   "type": "search_result_location",
   "cited_text": "Rate Limits: The API allows 1000 requests per hour per key.",
@@ -2011,7 +2011,7 @@ The following example replays a complete conversation. The first user message ca
 
 The response cites both sources. The pre-fetched result is `search_result_index: 0` and the tool-returned result is `search_result_index: 1`, matching the order the `search_result` blocks appear in the conversation:
 
-```text
+```json
 {
   "role": "assistant",
   "content": [

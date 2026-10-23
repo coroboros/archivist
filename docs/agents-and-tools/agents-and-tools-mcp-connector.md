@@ -504,7 +504,7 @@ When Claude uses MCP tools, the response includes two new content block types:
 
 ### MCP tool use block
 
-```text wrap
+```json
 {
   "type": "mcp_tool_use",
   "id": "mcptoolu_014Q35RayjACSWkSj4X2yov1",
@@ -516,7 +516,7 @@ When Claude uses MCP tools, the response includes two new content block types:
 
 ### MCP tool result block
 
-```text wrap
+```json
 {
   "type": "mcp_tool_result",
   "tool_use_id": "mcptoolu_014Q35RayjACSWkSj4X2yov1",
@@ -536,7 +536,7 @@ An MCP server can change its tools at any time. The `mcp-client-2026-09-15` beta
 
 When the API asks an MCP server for its tools while producing a response, the response starts with an `mcp_tool_listing` block for that server, one block for each server it asked:
 
-```text wrap
+```json
 {
   "type": "mcp_tool_listing",
   "mcp_server_name": "example-mcp",
@@ -1282,8 +1282,8 @@ Install both the Anthropic SDK and the MCP SDK:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.1.0")
-        implementation("com.anthropic:anthropic-java-mcp:3.1.0")
+        implementation("com.anthropic:anthropic-java:3.2.0")
+        implementation("com.anthropic:anthropic-java-mcp:3.2.0")
         ```
       </Tab>
 
@@ -1292,12 +1292,12 @@ Install both the Anthropic SDK and the MCP SDK:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-mcp</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.0</version>
         </dependency>
         ```
       </Tab>

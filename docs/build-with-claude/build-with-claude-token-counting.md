@@ -33,7 +33,13 @@ Token counting lets you determine the number of tokens in a message before you s
 
 The [token counting](../api/api-messages-count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/agents-and-tools-tool-use-overview.md), [images](./build-with-claude-vision.md), and [PDFs](./build-with-claude-pdf-support.md). The response contains the total number of input tokens.
 
-This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts: [server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md)), the [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md), and `image` or `document` blocks with a `url` or `file` source. Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
+This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts:
+
+* [Server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/agents-and-tools-tool-use-advisor-tool.md))
+* The [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md)
+* `image` or `document` blocks with a `url` or `file` source
+
+Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
 
 <Note>
   The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
@@ -192,7 +198,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 { "input_tokens": 14 }
 ```
 
@@ -475,7 +481,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 { "input_tokens": 403 }
 ```
 
@@ -784,7 +790,7 @@ All [active models](../general/general-models-overview.md) support token countin
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 { "input_tokens": 1028 }
 ```
 
@@ -1109,7 +1115,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 { "input_tokens": 88 }
 ```
 
@@ -1395,7 +1401,7 @@ An embedded image block that sets [`"oversized_image": "error"`](./build-with-cl
   ```
 </CodeGroup>
 
-```text Output wrap
+```json Output
 { "input_tokens": 2188 }
 ```
 

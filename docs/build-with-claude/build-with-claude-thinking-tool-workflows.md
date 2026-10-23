@@ -293,7 +293,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including Claude Opus 5.5, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](./build-with-claude-thinking.md#controlling-thinking-display).
     </Note>
 
-    ```text Output
+    ```json Output
     {
       "content": [
         {
@@ -759,7 +759,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
   <Step title="Read the final response">
     You should see Claude complete the turn with text. Because [interleaved thinking](./build-with-claude-thinking.md#interleaved-thinking) is automatic in adaptive mode, the continuation can also open with a new thinking block before the final text:
 
-    ```text Output wrap
+    ```json Output
     {
       "content": [
         {

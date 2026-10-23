@@ -116,7 +116,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
     Claude returns JSON like this in the response's text content block:
 
-    ```text Output wrap
+    ```json Output
     {
       "name": "John Smith",
       "email": "john@example.com",
@@ -154,7 +154,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
     Claude returns JSON like this in the response's text content block:
 
-    ```text Output wrap
+    ```json Output
     {
       "name": "John Smith",
       "email": "john@example.com",
@@ -380,7 +380,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
     The previous example outputs:
 
-    ```text Output wrap
+    ```json Output
     {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
     ```
 
@@ -469,7 +469,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       The JSON output has this nested structure:
 
-      ```text Output wrap
+      ```json Output
       {
         "composedA": { "a": "hello" },
         "composedB": { "b": "world" }
@@ -490,7 +490,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       The JSON output has this flat structure:
 
-      ```text Output wrap
+      ```json Output
       {
         "a": "hello",
         "b": "world"
@@ -797,7 +797,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
 
     Claude returns JSON like this in the response's text content block:
 
-    ```text Output wrap
+    ```json Output
     {
       "name": "John Smith",
       "email": "john@example.com",
@@ -835,7 +835,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
 
     Claude returns JSON like this in the response's text content block:
 
-    ```text Output wrap
+    ```json Output
     {
       "name": "John Smith",
       "email": "john@example.com",
@@ -989,7 +989,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
 
     The previous example outputs:
 
-    ```text Output wrap
+    ```json Output
     {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
     ```
   </Tab>
@@ -1103,7 +1103,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
 
     The previous example outputs:
 
-    ```text Output wrap
+    ```json Output
     {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise"}
     ```
 

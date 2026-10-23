@@ -944,7 +944,7 @@ The code execution tool can return two types of results depending on the operati
 
 ### Bash command response
 
-```text Output
+```json Output
 {
   "type": "server_tool_use",
   "id": "srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3",
@@ -970,7 +970,7 @@ The code execution tool can return two types of results depending on the operati
 
 **View file:**
 
-```text Output wrap
+```json Output
 {
   "type": "server_tool_use",
   "id": "srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4",
@@ -996,7 +996,7 @@ The code execution tool can return two types of results depending on the operati
 
 **Create file:**
 
-```text Output wrap
+```json Output
 {
   "type": "server_tool_use",
   "id": "srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5",
@@ -1019,7 +1019,7 @@ The code execution tool can return two types of results depending on the operati
 
 **Edit file (str\_replace):**
 
-```text Output wrap
+```json Output
 {
   "type": "server_tool_use",
   "id": "srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6",
@@ -1066,7 +1066,7 @@ Each tool type can return specific errors:
 
 **Common errors (all tools):**
 
-```text Output wrap
+```json Output
 {
   "type": "bash_code_execution_tool_result",
   "tool_use_id": "srvtoolu_01VfmxgZ46TiHbmXgy928hQR",
@@ -1106,10 +1106,10 @@ The code execution tool runs in a secure, containerized environment designed spe
 
 ### Resource limits
 
-* **Memory:** 5 GiB RAM
-* **Disk space:** 5 GiB workspace storage
-* **CPU:** 1 CPU
-* **Execution time:** A tool call that runs past the maximum execution time returns an `execution_time_exceeded` [error](./agents-and-tools-tool-use-code-execution-tool.md#errors). With [programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md), each REPL cell also has a 90-second wall-clock limit
+* **Memory:** The container has 5 GiB of RAM.
+* **Disk space:** The container has 5 GiB of workspace storage.
+* **CPU:** The container has 1 CPU.
+* **Execution time:** A tool call that runs past the maximum execution time returns an `execution_time_exceeded` [error](./agents-and-tools-tool-use-code-execution-tool.md#errors). With [programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md), each REPL cell also has a 90-second wall-clock limit.
 
 ### Networking and security
 
@@ -1117,8 +1117,8 @@ The code execution tool runs in a secure, containerized environment designed spe
 * **External connections:** No outbound network requests allowed
 * **Sandbox isolation:** Full isolation from host system and other containers
 * **File access:** Limited to workspace directory only
-* **Workspace scoping:** Like the [Files API](../build-with-claude/build-with-claude-files.md), containers are scoped to the request's workspace
-* **Expiration:** Containers expire 30 days after creation
+* **Workspace scoping:** Scoped to the request's workspace, like the [Files API](../build-with-claude/build-with-claude-files.md)
+* **Expiration:** 30 days after creation
 
 ### Pre-installed libraries
 
@@ -1449,7 +1449,7 @@ When Claude calls one of your client tools alongside code execution, the API ret
 
 With [streaming](../build-with-claude/build-with-claude-streaming.md) enabled (`"stream": true`), you'll receive code execution events as they occur. The sub-tool input streams as `input_json_delta` events, and each result block arrives whole in a single `content_block_start` event:
 
-```text
+```sse
 event: content_block_start
 data: {"type": "content_block_start", "index": 1, "content_block": {"type": "server_tool_use", "id": "srvtoolu_xyz789", "name": "bash_code_execution"}}
 
@@ -1481,7 +1481,7 @@ When used without these tools, code execution is billed by execution time, track
 
 Code execution usage is tracked in the response:
 
-```text wrap
+```json
 {
   "usage": {
     "input_tokens": 105,
